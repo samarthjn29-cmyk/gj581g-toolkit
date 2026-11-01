@@ -104,8 +104,8 @@ for s in SL:
 if not 240 <= RUNTIME <= 720: issues.append(f'Runtime {RUNTIME}s outside 4-12 min')
 nwc = sum(1 for s in SL if s['layout'] == 'word-card'); nmap = sum(1 for s in SL if s['layout'] == 'map'); nhold = sum(1 for s in SL if s.get('hold'))
 if nwc < 2: issues.append(f'Only {nwc} word-card slides: plan 2-4 single-word beats at the climaxes')
-if nmap < 2: issues.append(f'Only {nmap} map slides: return to the chapter map at each chapter (current item highlighted, twist as ??????)')
-if nhold < 2: issues.append(f'Only {nhold} silent holds: give the twist and the answer a 3-6 s silent beat (hold)')
+if nmap < 2 and not g('ROUTE_ICONS', False): issues.append(f'Only {nmap} map slides: return to the chapter map at each chapter (current item highlighted, twist as ??????)')
+if nhold and str(g('STYLE', '')).upper() != 'S7': issues.append('Silent holds found: since 1 Nov 2026 hold must be 0 outside a video essay (S7)')
 hyp = [s for s in SL if s['layout'] == 'hypotheses']; sc = [s for s in SL if s['layout'] == 'scorecard']
 if hyp and not any(c['n'] > hyp[0]['n'] for c in sc): issues.append(f"Slide {hyp[0]['n']:02d}: hypotheses slide but no later scorecard: rank the theories by the evidence before the end")
 if hyp and sc:
