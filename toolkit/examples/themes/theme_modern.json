@@ -1,0 +1,26 @@
+{
+ "theme": {
+  "name": "Modern minimal",
+  "head_font": "Bahnschrift",
+  "body_font": "Segoe UI",
+  "radius": 0.12,
+  "deco": "bar"
+ },
+ "texture": "dots",
+ "palette": {
+  "name": "Graphite & Cobalt",
+  "primary": "16181D",
+  "secondary": "5D6470",
+  "panel": "F1F3F5",
+  "rule": "D9DDE3",
+  "accent": "3B5BDB",
+  "callout": "12B886",
+  "negative": "E03131",
+  "light_accent": "A5B4FC",
+  "mid": "2B2F38",
+  "line_on_media": "9AA3B2"
+ },
+ "look": {
+  "grade": "none"
+ }
+}

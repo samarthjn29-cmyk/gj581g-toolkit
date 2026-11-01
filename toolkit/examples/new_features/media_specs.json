@@ -1,0 +1,4 @@
+{"primary": "2B1B3F", "clips": {
+ "map_bg": {"src": "media/mk/3428.mp4", "slide": 1, "w": 13.333, "h": 7.5, "tint": 0.78},
+ "cuts_bg": {"src": ["media/mk/44468.mp4", "media/mk/750.mp4", "media/mk/4401.mp4"], "slide": 3, "w": 13.333, "h": 7.5, "tint": 0.72},
+ "hold_bg": {"src": "media/mk/4257.mp4", "slide": 4, "w": 13.333, "h": 7.5, "tint": 0.75}}}

@@ -1,0 +1,27 @@
+{
+ "theme": {
+  "name": "Retro 70s",
+  "head_font": "Rockwell",
+  "body_font": "Century Gothic",
+  "radius": 0.15,
+  "deco": "stripes"
+ },
+ "texture": "paper",
+ "palette": {
+  "name": "Espresso & Mustard",
+  "primary": "3B2F2A",
+  "secondary": "7A6A58",
+  "panel": "F3E6CC",
+  "rule": "DCC8A5",
+  "accent": "2A7F7A",
+  "callout": "E0892E",
+  "negative": "B23A2E",
+  "light_accent": "F2C46D",
+  "mid": "5A4636",
+  "line_on_media": "C9B48F"
+ },
+ "look": {
+  "grade": "warm",
+  "grain": 8
+ }
+}

@@ -1,0 +1,2635 @@
+[
+ {
+  "n": 1,
+  "name": "Boston, 2 a.m.",
+  "chapter": "Cold open",
+  "layout": "media-bleed",
+  "dur": 17,
+  "start": 0.0,
+  "tracker": "Boston, 1995",
+  "head": "He ran right past a beating, and swore he saw nothing",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Chabris et al., i-Perception (2011)",
+  "caveat": "Generic stock footage, not the 1995 scene.",
+  "visual": "Full-screen night street footage under heavy tint (generic, labelled). Lines build one by one, large white type: '25 January 1995, 2 a.m.' / 'A police officer chases a suspect past a brutal beating' / 'He swears he saw nothing' / 'Convicted of perjury' (Callout tag) / 'Could you miss it?' [S18]",
+  "media": "VIDEO cut sequence (3 clips): night street, police lights, dark alley; full screen under heavy tint; generic footage label",
+  "trans": "fade",
+  "energy": "low, intrigued",
+  "style": "Storyteller",
+  "delivery": "Quiet and close; let the last question hang",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   8.5
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.02,
+    "effect": "fade",
+    "desc": "Date line (fade)"
+   },
+   {
+    "t": 3.38,
+    "end": 4.4,
+    "effect": "fade",
+    "desc": "Line 2 (fade)"
+   },
+   {
+    "t": 6.65,
+    "end": 7.67,
+    "effect": "fade",
+    "desc": "Line 3 (fade)"
+   },
+   {
+    "t": 10.2,
+    "end": 11.22,
+    "effect": "wipe-from-left",
+    "desc": "Perjury tag (wipe-from-left)"
+   },
+   {
+    "t": 13.6,
+    "end": 14.62,
+    "effect": "fade",
+    "desc": "Question (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Boston. Two in the morning. [beat] A police officer chases a suspect over a fence... and runs right past a brutal beating. [pause] He swore he saw nothing. [beat] He was convicted of lying about it. [pause] Could you miss something like that? [beat] Let's find out."
+  ],
+  "vo_plain": "Boston. Two in the morning. A police officer chases a suspect over a fence... and runs right past a brutal beating.\n\nHe swore he saw nothing. He was convicted of lying about it.\n\nCould you miss something like that? Let's find out.",
+  "sources": [
+   "S18"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 2,
+  "name": "Try it yourself",
+  "chapter": "Cold open",
+  "layout": "video-full",
+  "dur": 47,
+  "start": 17.0,
+  "tracker": null,
+  "head": "Try it yourself: count the white squares' bounces",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Most et al. (2001), as described in Simons, Noba Project; original recreation",
+  "caveat": "Original recreation, not the study's materials.",
+  "visual": "Full-screen original animation (Blindness_try_it_clip.mp4, 47 s): instruction card with 3-2-1 countdown; grey arena with 4 white and 4 black bouncing squares and a red cross crossing the middle for 5 s; answer card (17 bounces); reveal of the cross's path; closing card '~30% failed to see a bright red cross...' [S8]. Narration is built into the clip's timeline.",
+  "media": "ANIM; Full screen, 47 s; \"Try it yourself\" counting test with the red cross (Done)",
+  "trans": "fade",
+  "energy": "medium, playful",
+  "style": "Quiz host",
+  "delivery": "Brisk setup; warm reveal",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.88,
+    "effect": "fade",
+    "desc": "Video plays full screen (fade)"
+   },
+   {
+    "t": 8.93,
+    "end": 9.87,
+    "effect": "fade",
+    "desc": "Test starts (fade)"
+   },
+   {
+    "t": 18.8,
+    "end": 19.74,
+    "effect": "fade",
+    "desc": "Cross enters (fade)"
+   },
+   {
+    "t": 24.91,
+    "end": 25.85,
+    "effect": "fade",
+    "desc": "Answer card (fade)"
+   },
+   {
+    "t": 30.55,
+    "end": 31.49,
+    "effect": "fade",
+    "desc": "Cross reveal (fade)"
+   },
+   {
+    "t": 37.6,
+    "end": 38.54,
+    "effect": "fade",
+    "desc": "Stat card (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Quick test before we go on. [beat] Count how many times the *white* squares bounce off the walls. [beat] Ignore the black ones. [beat] Ready?",
+   "[pause:13] How many bounces did you count? [pause] Hold your number.",
+   "[pause:1] Now the real question. [beat] Did you see the red cross? [pause] It went straight across the middle, in plain sight.",
+   "[beat] In a version of this test, about thirty percent of people never saw it. [beat] If you missed it too... welcome to inattentional blindness."
+  ],
+  "vo_plain": "Quick test before we go on. Count how many times the white squares bounce off the walls. Ignore the black ones. Ready?\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\nHow many bounces did you count?\n\nHold your number.\n\n...\n\nNow the real question. Did you see the red cross?\n\nIt went straight across the middle, in plain sight. In a version of this test, about thirty percent of people never saw it. If you missed it too... welcome to inattentional blindness.",
+  "sources": [
+   "S8"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 3,
+  "name": "Would you notice?",
+  "chapter": "Cold open",
+  "layout": "kpi-tiles",
+  "dur": 22,
+  "start": 64.0,
+  "tracker": null,
+  "head": "Most people think they'd notice the unexpected. About half miss a gorilla.",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Simons, Noba Project chapter 'Failures of Awareness'; Nartker et al., eLife (2025)",
+  "caveat": "Survey figure is secondhand (via Noba).",
+  "visual": "Two KPI tiles on light grey. Tile 1 (navy): '78%' label 'in a national survey agreed people generally notice when something unexpected enters their field of view' [S1]. Tile 2 (teal): '~50%' label 'of observers missed a person in a gorilla suit walking through a ball-passing video' [S3]. Thin slate arrow between tiles labelled 'reality'. Footnote: 'Survey figure as reported in Simons's Noba chapter (citing Simons and Chabris, 2010).'",
+  "media": "PHOTO; Photo right half, tiles left; A gorilla's face (wildlife photo): \"gorilla portrait\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium, curious",
+  "style": "Warm, a little teasing",
+  "delivery": "Let 'about half' land",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.32,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.2,
+    "end": 3.52,
+    "effect": "fade",
+    "desc": "Small grey tag 'Picture a gorilla in the video' (fade)"
+   },
+   {
+    "t": 6.6,
+    "end": 7.92,
+    "effect": "fade",
+    "desc": "Tile 1 (fade)"
+   },
+   {
+    "t": 11.0,
+    "end": 12.32,
+    "effect": "fade",
+    "desc": "Tile 2 box and label (fade)"
+   },
+   {
+    "t": 18.39,
+    "end": 19.71,
+    "effect": "fade",
+    "desc": "Footnote (fade)"
+   },
+   {
+    "t": 13.64,
+    "end": 14.96,
+    "effect": "zoom",
+    "desc": "Tile 2 value (zoom)"
+   }
+  ],
+  "vo_marked": [
+   "Picture a person in a gorilla suit walking straight through a video you're watching.",
+   "[beat] You'd notice. [beat] Of course you would. [pause] In a national survey, seventy-eight percent of people agreed that people generally notice when something unexpected appears in front of them.",
+   "[pause] In the actual experiment? [beat] About *half* the viewers missed the gorilla."
+  ],
+  "vo_plain": "Picture a person in a gorilla suit walking straight through a video you're watching. You'd notice. Of course you would.\n\nIn a national survey, seventy-eight percent of people agreed that people generally notice when something unexpected appears in front of them.\n\nIn the actual experiment? About half the viewers missed the gorilla.",
+  "sources": [
+   "S1",
+   "S3"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 4,
+  "name": "Title",
+  "chapter": "Cold open",
+  "layout": "title-slide",
+  "dur": 8,
+  "start": 86.0,
+  "tracker": null,
+  "head": "Why you don't see what's right in front of you",
+  "sup": "Inattentional blindness: the basics, four studies, and a 2025 twist",
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Dark navy title slide. Title white 44pt bold. Subtitle light grey 22pt. Thin teal rule and 'Decked out Data' bottom-left.",
+  "media": "VIDEO; Full screen under plum tint; Busy crowd crossing a street, slow motion: \"crowd crossing street slow motion\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Confident",
+  "delivery": "Lift slightly on 'twist'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.8,
+    "effect": "fade",
+    "desc": "Title (fade)"
+   },
+   {
+    "t": 2.8,
+    "end": 4.0,
+    "effect": "fade",
+    "desc": "Subtitle (fade)"
+   },
+   {
+    "t": 5.6,
+    "end": 6.4,
+    "effect": "fade",
+    "desc": "Teal rule and channel name (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So how do we miss something that big? [beat] And did those people really see *nothing*?",
+   "[beat] The research has a surprising answer."
+  ],
+  "vo_plain": "So how do we miss something that big? And did those people really see nothing? The research has a surprising answer.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 5,
+  "name": "Four suspects",
+  "chapter": "Cold open",
+  "layout": "hypotheses",
+  "dur": 18,
+  "start": 94.0,
+  "tracker": "Four suspects",
+  "head": "Four possible explanations, and we will score each against the evidence",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Numbered list on the grid texture: four Callout circles, theories 1-3 named, the fourth shown as '??????????' until chapter 5. A small note bottom-left: 'Scored at the end'.",
+  "media": "none (grid texture; plain slide between two footage slides)",
+  "trans": "fade",
+  "energy": "medium, curious",
+  "style": "Detective",
+  "delivery": "Count them off crisply; slow down on the hidden one",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": [
+   "You weren't looking at it",
+   "Some people just don't notice",
+   "Attention filtered it out",
+   "It got in, but you weren't sure"
+  ],
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.08,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 3.15,
+    "end": 4.23,
+    "effect": "wipe-from-left",
+    "desc": "Theory 1 (wipe-from-left)"
+   },
+   {
+    "t": 5.72,
+    "end": 6.8,
+    "effect": "wipe-from-left",
+    "desc": "Theory 2 (wipe-from-left)"
+   },
+   {
+    "t": 8.3,
+    "end": 9.38,
+    "effect": "wipe-from-left",
+    "desc": "Theory 3 (wipe-from-left)"
+   },
+   {
+    "t": 10.87,
+    "end": 11.95,
+    "effect": "wipe-from-left",
+    "desc": "Theory 4 hidden (wipe-from-left)"
+   },
+   {
+    "t": 14.36,
+    "end": 15.44,
+    "effect": "fade",
+    "desc": "Scored-at-the-end note (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So what's going on? [beat] There are four suspects.",
+   "[beat] One: you just weren't looking at it. [beat] Two: some people simply don't notice things. [beat] Three: your attention filtered it out.",
+   "[pause] And four... [beat] I'll keep it hidden for now. [beat] At the end, we'll score all four against the evidence."
+  ],
+  "vo_plain": "So what's going on? There are four suspects. One: you just weren't looking at it. Two: some people simply don't notice things. Three: your attention filtered it out.\n\nAnd four... I'll keep it hidden for now. At the end, we'll score all four against the evidence.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 6,
+  "name": "Map 1 (agenda)",
+  "chapter": "Agenda",
+  "layout": "map",
+  "dur": 17,
+  "start": 112.0,
+  "tracker": "Where we are",
+  "head": "Chapter 1: The basics: attention as a filter",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 1 highlighted in Callout, past chapters dimmed, the twist chapter hidden as ??????????; rows appear one by one with the narration; over dusk footage",
+  "media": "VIDEO; full screen under tint; street with people walking at dusk (Mixkit #3428)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 0,
+  "map_hidden": [
+   4
+  ],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.02,
+    "effect": "fade",
+    "desc": "Map title (fade)"
+   },
+   {
+    "t": 1.7,
+    "end": 3.4,
+    "effect": "fade",
+    "desc": "Row 1 (fade)"
+   },
+   {
+    "t": 5.44,
+    "end": 7.14,
+    "effect": "fade",
+    "desc": "Rows 2-3 (fade)"
+   },
+   {
+    "t": 8.5,
+    "end": 10.2,
+    "effect": "fade",
+    "desc": "Row 4 (fade)"
+   },
+   {
+    "t": 11.22,
+    "end": 12.92,
+    "effect": "fade",
+    "desc": "Row 5 hidden (fade)"
+   },
+   {
+    "t": 14.62,
+    "end": 15.98,
+    "effect": "fade",
+    "desc": "Row 6 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "First, the basics: how attention decides what you see. [beat] Then the research. Doctors who missed a gorilla in a lung scan... runners who missed a fight... and a question about who's most at risk. [beat] And then a twist. [beat] That's where suspect number four is hiding."
+  ],
+  "vo_plain": "First, the basics: how attention decides what you see. Then the research. Doctors who missed a gorilla in a lung scan... runners who missed a fight... and a question about who's most at risk. And then a twist. That's where suspect number four is hiding.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 7,
+  "name": "Attention is a filter",
+  "chapter": "1 | The basics",
+  "layout": "process-flow",
+  "dur": 26,
+  "start": 129.0,
+  "tracker": "1 | The basics",
+  "head": "Attention works like a filter: we're aware of what it lets through",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Simons, 'Failures of Awareness: The Case of Inattentional Blindness', Noba Project",
+  "caveat": null,
+  "visual": "Three-step chevron flow: 'Everything your eyes and ears take in' (slate) -> 'Attention selects' (navy) -> 'What you're aware of' (teal, narrow). Below, a definition panel: 'We appear able to process only one stream of information at a time, effectively filtering other information from awareness.' [S5] with attribution 'Daniel Simons, Noba Project'.",
+  "media": "VIDEO; Full screen under tint, chevrons on top; Busy caf\u00e9 or city street, with focus pulling to one person: \"rack focus crowd\", \"busy cafe\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "calm",
+  "style": "Clear teacher",
+  "delivery": "Slow on 'filter'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   11.0,
+   21.5
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.56,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.6,
+    "end": 4.16,
+    "effect": "wipe-from-left",
+    "desc": "Chevron 1 (wipe-from-left)"
+   },
+   {
+    "t": 7.31,
+    "end": 8.87,
+    "effect": "wipe-from-left",
+    "desc": "Chevron 2 (wipe-from-left)"
+   },
+   {
+    "t": 12.01,
+    "end": 13.57,
+    "effect": "wipe-from-left",
+    "desc": "Chevron 3 (wipe-from-left)"
+   },
+   {
+    "t": 17.0,
+    "end": 18.56,
+    "effect": "fade",
+    "desc": "Definition panel (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Start with attention. [beat] Your eyes take in far more than your mind can handle. [beat] So attention acts like a *filter*. It picks what matters for the task in front of you... and quietly drops the rest. [beat] It's more ruthless than my email's spam folder, which, honestly, is saying a lot about my... [beat] anyway. [pause] That's useful. It's how you read in a noisy caf\u00e9. [beat] But it has a cost."
+  ],
+  "vo_plain": "Start with attention. Your eyes take in far more than your mind can handle. So attention acts like a filter. It picks what matters for the task in front of you... and quietly drops the rest. It's more ruthless than my email's spam folder, which, honestly, is saying a lot about my... anyway.\n\nThat's useful. It's how you read in a noisy caf\u00e9. But it has a cost.",
+  "sources": [
+   "S5"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 8,
+  "name": "The gorilla experiment",
+  "chapter": "1 | The basics",
+  "layout": "definition",
+  "dur": 25,
+  "start": 155.0,
+  "tracker": "1 | The basics",
+  "head": "Inattentional blindness: missing the unexpected while focused on something else",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Simons, Noba Project; Simons and Chabris (1999), as described there",
+  "caveat": "Schematic, not the original video.",
+  "visual": "Definition layout. Left: term 'Inattentional blindness' and Noba definition 'The surprising failure to notice an unexpected object or event when attention is focused on something else.' [S4]. Right: simple schematic of the 1999 experiment as three numbered steps (no video stills): '1 Count passes by the team in white' / '2 A person in a gorilla suit walks through' / '3 Asked: did you notice anything unusual?'. Result strip: 'About half missed the gorilla' [S3].",
+  "media": "ANIM; Right side, captions built in; Original diagram of the 1999 experiment: players passing, gorilla walking through (Done)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Storyteller",
+  "delivery": "Paint the scene; land 'half'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.5,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.5,
+    "end": 4.0,
+    "effect": "fade",
+    "desc": "Term and definition (fade)"
+   },
+   {
+    "t": 7.5,
+    "end": 9.0,
+    "effect": "fade",
+    "desc": "Step 1 (fade)"
+   },
+   {
+    "t": 11.25,
+    "end": 12.75,
+    "effect": "fade",
+    "desc": "Step 2 (fade)"
+   },
+   {
+    "t": 15.0,
+    "end": 16.5,
+    "effect": "fade",
+    "desc": "Step 3 (fade)"
+   },
+   {
+    "t": 20.0,
+    "end": 21.5,
+    "effect": "fade",
+    "desc": "Result strip (fade)"
+   }
+  ],
+  "vo_marked": [
+   "That cost has a name: *inattentional blindness*. [beat] Missing something unexpected because your attention is busy elsewhere.",
+   "[pause] The famous test came in the late nineties. Viewers counted passes between players in white shirts.",
+   "[beat] Midway through, a person in a gorilla suit walked into the middle of the scene, thumped their chest, and walked off.",
+   "[pause] About half the viewers never saw it."
+  ],
+  "vo_plain": "That cost has a name: inattentional blindness. Missing something unexpected because your attention is busy elsewhere.\n\nThe famous test came in the late nineties. Viewers counted passes between players in white shirts. Midway through, a person in a gorilla suit walked into the middle of the scene, thumped their chest, and walked off.\n\nAbout half the viewers never saw it.",
+  "sources": [
+   "S3",
+   "S4"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 9,
+  "name": "Looking isn't seeing",
+  "chapter": "1 | The basics",
+  "layout": "word-card",
+  "dur": 4,
+  "start": 180.0,
+  "tracker": null,
+  "head": "Looking isn't seeing",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Word card on Primary: 'Looking.' then 'isn't seeing.' in light Accent",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "low",
+  "style": "Reflective",
+  "delivery": "Slow; a real pause between the two halves",
+  "hold": null,
+  "lines": [
+   "Looking.",
+   "isn't seeing."
+  ],
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.4,
+    "effect": "fade",
+    "desc": "Line 1 (fade)"
+   },
+   {
+    "t": 1.8,
+    "end": 2.2,
+    "effect": "fade",
+    "desc": "Line 2 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Looking... [pause] is not the same as seeing."
+  ],
+  "vo_plain": "Looking...\n\nis not the same as seeing.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 10,
+  "name": "What makes you miss",
+  "chapter": "1 | The basics",
+  "layout": "driver-tree",
+  "dur": 27,
+  "start": 184.0,
+  "tracker": "1 | The basics",
+  "head": "You miss more when the task is harder or the surprise blends in",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Simons, Noba Project (citing Simons and Chabris, 1999; Most et al., 2001)",
+  "caveat": null,
+  "visual": "Driver tree. Root 'Chance of missing the unexpected' (navy). Branch 1: 'A harder task' with example 'Keeping separate counts of bounce passes and aerial passes made viewers less likely to notice the gorilla' [S6]. Branch 2: 'It resembles what you're ignoring' with example 'Viewers counting the team in white missed the dark gorilla more than those counting the team in black' [S7]. Bottom note: 'Even unique items get missed: about 30% failed to see a bright red cross crossing the screen for five seconds' [S8].",
+  "media": "VIDEO; full screen under tint; basketball one-on-one (Mixkit #44468)",
+  "trans": "fade",
+  "energy": "calm",
+  "style": "Explainer",
+  "delivery": "Two clear beats",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   18.09,
+   24.0
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.62,
+    "effect": "fade",
+    "desc": "Action title and root (fade)"
+   },
+   {
+    "t": 2.7,
+    "end": 4.32,
+    "effect": "wipe-from-left",
+    "desc": "Branch 1 label (wipe-from-left)"
+   },
+   {
+    "t": 6.48,
+    "end": 8.1,
+    "effect": "fade",
+    "desc": "Branch 1 example (fade)"
+   },
+   {
+    "t": 11.34,
+    "end": 12.96,
+    "effect": "wipe-from-left",
+    "desc": "Branch 2 label (wipe-from-left)"
+   },
+   {
+    "t": 15.12,
+    "end": 16.74,
+    "effect": "fade",
+    "desc": "Branch 2 example (fade)"
+   },
+   {
+    "t": 20.98,
+    "end": 22.6,
+    "effect": "fade",
+    "desc": "Bottom note (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Two things make it worse. [beat] First, a harder task. [beat] When viewers kept separate counts of bounce passes and air passes, they were even less likely to see the gorilla.",
+   "[pause] Second, if the surprise looks like the stuff you're ignoring. [beat] People counting the team in white missed the dark gorilla more often.",
+   "[pause] Even a bright red cross, the only coloured thing on screen, went unseen by about thirty percent of people."
+  ],
+  "vo_plain": "Two things make it worse. First, a harder task. When viewers kept separate counts of bounce passes and air passes, they were even less likely to see the gorilla.\n\nSecond, if the surprise looks like the stuff you're ignoring. People counting the team in white missed the dark gorilla more often.\n\nEven a bright red cross, the only coloured thing on screen, went unseen by about thirty percent of people.",
+  "sources": [
+   "S6",
+   "S7",
+   "S8"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 11,
+  "name": "How it's measured",
+  "chapter": "1 | The basics",
+  "layout": "definition",
+  "dur": 17,
+  "start": 211.0,
+  "tracker": "1 | The basics",
+  "head": "Researchers measure it with one question: did you notice anything unusual?",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Nartker et al., eLife (2025), describing the standard method",
+  "caveat": null,
+  "visual": "Definition layout. Large grey panel with the question in quote style: 'Did you notice anything unusual on the last trial which wasn't there on previous trials?' [S9]. Below, a two-box flow: 'Answer: no' -> 'Counted as inattentionally blind: assumed to have seen nothing'. An amber tag at right: 'Hold that thought'.",
+  "media": "VIDEO; full screen under tint; hand writing notes (Mixkit #99890)",
+  "trans": "fade",
+  "energy": "calm, a little conspiratorial",
+  "style": "Teacher planting a clue",
+  "delivery": "Slow on the question; wink on 'hold that thought'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   4.69,
+   9.71
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.02,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.19,
+    "end": 3.21,
+    "effect": "fade",
+    "desc": "Question panel (fade)"
+   },
+   {
+    "t": 7.14,
+    "end": 8.16,
+    "effect": "wipe-from-left",
+    "desc": "Answer flow (wipe-from-left)"
+   },
+   {
+    "t": 12.26,
+    "end": 13.28,
+    "effect": "fade",
+    "desc": "'Hold that thought' tag (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Last basic: how do scientists know you missed it? [beat] They ask.",
+   "[pause] Did you notice anything unusual? [beat] Say no, and you're counted as blind to it. Assumed to have seen *nothing*.",
+   "[beat] That simple question will matter later. Hold that thought."
+  ],
+  "vo_plain": "Last basic: how do scientists know you missed it? They ask.\n\nDid you notice anything unusual? Say no, and you're counted as blind to it. Assumed to have seen nothing. That simple question will matter later. Hold that thought.",
+  "sources": [
+   "S9"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 12,
+  "name": "Map 2",
+  "chapter": "2 | Experts",
+  "layout": "map",
+  "dur": 3,
+  "start": 228.0,
+  "tracker": "Where we are",
+  "head": "Chapter 2: Experts: radiologists and a gorilla",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 2 highlighted in Callout, past chapters dimmed, the twist chapter hidden as ??????????",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 1,
+  "map_hidden": [
+   4
+  ],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.3,
+    "effect": "fade",
+    "desc": "Map rows (fade)"
+   },
+   {
+    "t": 0.3,
+    "end": 0.75,
+    "effect": "wipe-from-left",
+    "desc": "Current chapter marker (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "Chapter two. [beat] The experts."
+  ],
+  "vo_plain": "Chapter two. The experts.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 13,
+  "name": "Drew profile",
+  "chapter": "2 | Experts",
+  "layout": "paper-profile",
+  "dur": 15,
+  "start": 231.0,
+  "tracker": "2 | Experts",
+  "head": "Drew, V\u00f5 and Wolfe tested whether trained experts also miss the unexpected",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Drew, V\u00f5 and Wolfe, Psychological Science (2013)",
+  "caveat": "Sample counts for untrained observers differ between the method and results sections.",
+  "visual": "Paper profile. Left: 'The invisible gorilla strikes again: Sustained inattentional blindness in expert observers'; Trafton Drew, Melissa L.-H. V\u00f5, Jeremy M. Wolfe; Psychological Science 24(9), 2013; status 'Peer-reviewed'. Right: 'Sample: 24 radiologists; 24-25 untrained observers' [S10, S14]; 'Task: search five lung CT scans for nodules while eye-tracked' [S10]; 'The twist: a gorilla inserted in the last scan'.",
+  "media": "PHOTO; Right panel; No suitable free clip found (only a dental x-ray): kept as a slide (Skipped)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Storyteller",
+  "delivery": "Curious on 'experts'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.9,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.51,
+    "end": 3.41,
+    "effect": "fade",
+    "desc": "Left column (fade)"
+   },
+   {
+    "t": 6.75,
+    "end": 7.65,
+    "effect": "fade",
+    "desc": "Right column (fade)"
+   },
+   {
+    "t": 10.8,
+    "end": 11.7,
+    "effect": "fade",
+    "desc": "'24 radiologists' highlights teal (fade)"
+   }
+  ],
+  "vo_marked": [
+   "But surely experts are different? [beat] People trained for years to spot small things in images?",
+   "[pause] In twenty thirteen, Trafton Drew, Melissa V\u00f5 and Jeremy Wolfe put that to the test. With radiologists."
+  ],
+  "vo_plain": "But surely experts are different? People trained for years to spot small things in images?\n\nIn twenty thirteen, Trafton Drew, Melissa V\u00f5 and Jeremy Wolfe put that to the test. With radiologists.",
+  "sources": [
+   "S10",
+   "S14"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 14,
+  "name": "A gorilla in the lungs",
+  "chapter": "2 | Experts",
+  "layout": "kpi-tiles",
+  "dur": 20,
+  "start": 246.0,
+  "tracker": "2 | Experts",
+  "head": "A gorilla 48 times bigger than a typical nodule: 20 of 24 radiologists missed it",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Drew, V\u00f5 and Wolfe (2013)",
+  "caveat": null,
+  "visual": "Three KPI tiles. Tile 1: '48x' label 'Gorilla size vs the average lung nodule in the scans' [S11]. Tile 2: '~matchbook' label 'Size of the gorilla, inside a scan of 239 slices' [S11]. Tile 3 (teal): '20 of 24' label 'Radiologists who did not report the gorilla (83%)' [S12].",
+  "media": "VIDEO; full screen under tint, labelled generic; hospital corridor (Mixkit #4745)",
+  "trans": "fade",
+  "energy": "medium-high",
+  "style": "Reveal",
+  "delivery": "Build to 'twenty'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   16.2
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.2,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 3.0,
+    "end": 4.2,
+    "effect": "fade",
+    "desc": "Tile 1 (fade)"
+   },
+   {
+    "t": 7.6,
+    "end": 8.8,
+    "effect": "fade",
+    "desc": "Tile 2 (fade)"
+   },
+   {
+    "t": 12.4,
+    "end": 13.6,
+    "effect": "fade",
+    "desc": "Tile 3 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "They hid a gorilla in the final lung scan. [beat] It was about forty-eight times the size of an average nodule. Roughly a matchbook.",
+   "[pause] The radiologists scrolled through it, searching for cancer.",
+   "[pause] Afterwards, the researchers asked all twenty-four what they'd seen. [beat] Twenty never mentioned a gorilla."
+  ],
+  "vo_plain": "They hid a gorilla in the final lung scan. It was about forty-eight times the size of an average nodule. Roughly a matchbook.\n\nThe radiologists scrolled through it, searching for cancer.\n\nAfterwards, the researchers asked all twenty-four what they'd seen. Twenty never mentioned a gorilla.",
+  "sources": [
+   "S11",
+   "S12"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 15,
+  "name": "Looked right at it",
+  "chapter": "2 | Experts",
+  "layout": "quote-panel",
+  "dur": 30,
+  "start": 266.0,
+  "tracker": "2 | Experts",
+  "head": "Eye-tracking showed most radiologists who missed it looked straight at it",
+  "sup": null,
+  "snippet": {
+   "sid": "S16",
+   "text": "83% of radiologists did not see the gorilla.",
+   "attribution": "Drew, V\u00f5 and Wolfe, Psychological Science (2013), abstract",
+   "words": 8
+  },
+  "receipt": "Source: Drew, V\u00f5 and Wolfe (2013), abstract, Results and Discussion",
+  "caveat": "Small sample; one gorilla, one scan.",
+  "visual": "Top: verbatim snip of the abstract sentence, shown as a cropped image from the paper with an amber highlight over the sentence, in a light grey frame with the citation underneath [S16]. Bottom: two KPI strips: '12 of the 20 who missed it looked directly at its location' [S13] and 'Told where to look, untrained observers detected it 88% of the time' [S15]. Footnote: 'The authors suggest a light-coloured gorilla, closer to the bright nodules they hunted, might have been noticed more.'",
+  "media": "SLIDE (snip); ;  ()",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Quietly astonished",
+  "delivery": "Slow on 'looked straight at it'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.56,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.61,
+    "end": 4.17,
+    "effect": "fade",
+    "desc": "Snip image (fade)"
+   },
+   {
+    "t": 6.24,
+    "end": 7.8,
+    "effect": "wipe-from-left",
+    "desc": "Snip highlight (wipe-from-left)"
+   },
+   {
+    "t": 11.01,
+    "end": 12.57,
+    "effect": "fade",
+    "desc": "Eye-tracking strip box and number (fade)"
+   },
+   {
+    "t": 16.11,
+    "end": 17.67,
+    "effect": "wipe-from-left",
+    "desc": "Control-test strip (wipe-from-left)"
+   },
+   {
+    "t": 21.0,
+    "end": 22.56,
+    "effect": "fade",
+    "desc": "Footnote (fade)"
+   },
+   {
+    "t": 13.5,
+    "end": 15.06,
+    "effect": "fade",
+    "desc": "Eye-tracking strip text (fade)"
+   },
+   {
+    "t": 24.75,
+    "end": 26.25,
+    "effect": "fade",
+    "desc": "Suspect 1 pill (fade)"
+   },
+   {
+    "t": 27.48,
+    "end": 28.98,
+    "effect": "fade",
+    "desc": "Suspect 1 verdict (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Here's the strangest part. [beat] The eye-tracker showed that twelve of the radiologists who missed it looked *directly* at it. [pause] And it wasn't too hard to see. When told where to look, untrained viewers spotted it eighty-eight percent of the time. [beat] Remember the second basic? Their filter was tuned for small, bright dots. The gorilla was dark. [beat] It didn't match what they were looking for.",
+   "[beat] So suspect one: they just weren't looking? [beat] That doesn't hold up."
+  ],
+  "vo_plain": "Here's the strangest part. The eye-tracker showed that twelve of the radiologists who missed it looked directly at it.\n\nAnd it wasn't too hard to see. When told where to look, untrained viewers spotted it eighty-eight percent of the time. Remember the second basic? Their filter was tuned for small, bright dots. The gorilla was dark. It didn't match what they were looking for. So suspect one: they just weren't looking? That doesn't hold up.",
+  "sources": [
+   "S13",
+   "S15",
+   "S16"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 16,
+  "name": "Map 3",
+  "chapter": "3 | The real world",
+  "layout": "map",
+  "dur": 4,
+  "start": 296.0,
+  "tracker": "Where we are",
+  "head": "Chapter 3: The real world: a staged fight",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 3 highlighted in Callout, past chapters dimmed, the twist chapter hidden as ??????????",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 2,
+  "map_hidden": [
+   4
+  ],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.4,
+    "effect": "fade",
+    "desc": "Map rows (fade)"
+   },
+   {
+    "t": 0.4,
+    "end": 1.0,
+    "effect": "wipe-from-left",
+    "desc": "Current chapter marker (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "Chapter three. [beat] The real world."
+  ],
+  "vo_plain": "Chapter three. The real world.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 17,
+  "name": "The Boston case",
+  "chapter": "3 | The real world",
+  "layout": "timeline",
+  "dur": 24,
+  "start": 300.0,
+  "tracker": "3 | The real world",
+  "head": "A Boston officer was jailed for saying he didn't see a beating he ran past",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Chabris, Weinberger, Fontaine and Simons, i-Perception (2011), pp. 150, 153",
+  "caveat": "The appeal decision did not rely on inattentional blindness.",
+  "visual": "Horizontal timeline. Point 1 '25 Jan 1995, 2 a.m.': 'Officer Kenny Conley chases a suspect over a fence, past where fellow officer Michael Cox is being beaten'. Point 2: 'Conley says he didn't see it'. Point 3: 'Convicted of perjury and obstruction; sentenced to 34 months'. Point 4 (teal): 'Wins on appeal; not retried'. [S18]",
+  "media": "PHOTO; Full screen under tint, timeline on top; City street at night, police lights: \"city street night police lights\" (generic, not the real scene) (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium, serious",
+  "style": "Storyteller",
+  "delivery": "Measured; serious on the sentence",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   10.3,
+   15.89
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.44,
+    "effect": "fade",
+    "desc": "Action title and axis (fade)"
+   },
+   {
+    "t": 2.9,
+    "end": 4.34,
+    "effect": "fade",
+    "desc": "Point 1 (fade)"
+   },
+   {
+    "t": 7.68,
+    "end": 9.12,
+    "effect": "fade",
+    "desc": "Point 2 (fade)"
+   },
+   {
+    "t": 13.01,
+    "end": 14.45,
+    "effect": "fade",
+    "desc": "Point 3 (fade)"
+   },
+   {
+    "t": 19.2,
+    "end": 20.64,
+    "effect": "fade",
+    "desc": "Point 4 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Lab videos are one thing. [beat] So back to the officer from the start. [pause] Boston, nineteen ninety-five. Kenny Conley chased a suspect over a fence... right past a spot where another officer was being brutally beaten. [beat] Conley said he never saw it. Nobody believed him. [pause] He was convicted of perjury. [beat] He eventually won on appeal."
+  ],
+  "vo_plain": "Lab videos are one thing. So back to the officer from the start.\n\nBoston, nineteen ninety-five. Kenny Conley chased a suspect over a fence... right past a spot where another officer was being brutally beaten. Conley said he never saw it. Nobody believed him.\n\nHe was convicted of perjury. He eventually won on appeal.",
+  "sources": [
+   "S18"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 18,
+  "name": "Chabris profile",
+  "chapter": "3 | The real world",
+  "layout": "paper-profile",
+  "dur": 15,
+  "start": 324.0,
+  "tracker": "3 | The real world",
+  "head": "Chabris and colleagues staged a fight beside a running route to test it",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Chabris et al., i-Perception (2011)",
+  "caveat": "Small samples.",
+  "visual": "Paper profile. Left: 'You do not talk about Fight Club if you do not notice Fight Club: Inattentional blindness for a simulated real-world assault'; Christopher Chabris, Adam Weinberger, Matthew Fontaine, Daniel Simons; i-Perception 2, 2011; status 'Peer-reviewed short report'. Right: 'Task: follow a runner 9.1 m behind and count his head-touches, on a 400 m route' / 'The surprise: three people staging a fight, 8 m off the path' / 'Sample: 94 students across three studies' [S19].",
+  "media": "VIDEO; Right panel; Person jogging at night: \"jogging at night\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Storyteller",
+  "delivery": "A little relish on 'fight club'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.9,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.51,
+    "end": 3.41,
+    "effect": "fade",
+    "desc": "Left column (fade)"
+   },
+   {
+    "t": 6.75,
+    "end": 7.65,
+    "effect": "fade",
+    "desc": "Right column (fade)"
+   },
+   {
+    "t": 10.8,
+    "end": 11.7,
+    "effect": "fade",
+    "desc": "'staging a fight' highlights teal (fade)"
+   }
+  ],
+  "vo_marked": [
+   "In twenty eleven, Christopher Chabris and his colleagues recreated it.",
+   "[beat] Students jogged behind a runner and counted how often he touched his head.",
+   "[beat] Along the route, three people staged a fight. [beat] Shouting, grunting, the lot."
+  ],
+  "vo_plain": "In twenty eleven, Christopher Chabris and his colleagues recreated it. Students jogged behind a runner and counted how often he touched his head. Along the route, three people staged a fight. Shouting, grunting, the lot.",
+  "sources": [
+   "S19"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 19,
+  "name": "Night and day",
+  "chapter": "3 | The real world",
+  "layout": "column-chart",
+  "dur": 17,
+  "start": 339.0,
+  "tracker": "3 | The real world",
+  "head": "Only 35% noticed the fight at night, and just 56% in daylight",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Chabris et al. (2011), studies 1 and 2",
+  "caveat": "Small samples (20 and 16).",
+  "visual": "Two columns, axis 0-100%, 'Share of runners who noticed the fight'. Column 1 (navy): 'Night: 35% (7 of 20)' [S20]. Column 2 (teal): 'Day: 56% (9 of 16)' [S21]. Note: 'In daylight the fight was visible for at least 30 seconds.'",
+  "media": "PHOTO x2; Small images above each column; Night run and daytime run (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Reveal",
+  "delivery": "Pause before 'in broad daylight'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.02,
+    "effect": "fade",
+    "desc": "Action title and axis (fade)"
+   },
+   {
+    "t": 3.89,
+    "end": 4.91,
+    "effect": "wipe-from-bottom",
+    "desc": "Night column (wipe-from-bottom)"
+   },
+   {
+    "t": 8.16,
+    "end": 9.18,
+    "effect": "wipe-from-bottom",
+    "desc": "Day column (wipe-from-bottom)"
+   },
+   {
+    "t": 12.75,
+    "end": 13.77,
+    "effect": "fade",
+    "desc": "Visibility note (fade)"
+   }
+  ],
+  "vo_marked": [
+   "At night, only thirty-five percent of runners noticed the fight.",
+   "[pause] Fine, it was dark. [beat] So they ran it again in broad daylight, with the fight in view for at least half a minute.",
+   "[beat] Fifty-six percent noticed. [beat] Nearly half still ran right past it."
+  ],
+  "vo_plain": "At night, only thirty-five percent of runners noticed the fight.\n\nFine, it was dark. So they ran it again in broad daylight, with the fight in view for at least half a minute. Fifty-six percent noticed. Nearly half still ran right past it.",
+  "sources": [
+   "S20",
+   "S21"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 20,
+  "name": "Load matters",
+  "chapter": "3 | The real world",
+  "layout": "bar-chart",
+  "dur": 25,
+  "start": 356.0,
+  "tracker": "3 | The real world",
+  "head": "A harder counting task cut noticing from 72% to 42%",
+  "sup": null,
+  "snippet": {
+   "sid": "S23",
+   "text": "Conley could have been telling the truth",
+   "attribution": "Chabris et al., i-Perception (2011), p. 150",
+   "words": 7
+  },
+  "receipt": "Source: Chabris et al. (2011), study 3",
+  "caveat": "Random assignment; small sample.",
+  "visual": "Horizontal bars, axis 0-100%, 'Share who noticed the fight, daytime'. Bar 1 (navy): 'Just follow the runner: 72% (18 of 25)'. Bar 2 (teal): 'Keep separate counts for each hand: 42% (14 of 33)' [S22]. Right: verbatim snip cropped from the paper with an amber highlight, citation underneath [S23].",
+  "media": "SLIDE (snip); ;  ()",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Payoff",
+  "delivery": "Callback tone on 'remember'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.25,
+    "effect": "fade",
+    "desc": "Action title and axis (fade)"
+   },
+   {
+    "t": 3.52,
+    "end": 4.8,
+    "effect": "wipe-from-left",
+    "desc": "Bar 1 (wipe-from-left)"
+   },
+   {
+    "t": 8.05,
+    "end": 9.32,
+    "effect": "wipe-from-left",
+    "desc": "Bar 2 (wipe-from-left)"
+   },
+   {
+    "t": 12.85,
+    "end": 14.1,
+    "effect": "fade",
+    "desc": "Snip image (fade)"
+   },
+   {
+    "t": 17.65,
+    "end": 18.9,
+    "effect": "wipe-from-left",
+    "desc": "Snip highlight (wipe-from-left)"
+   },
+   {
+    "t": 20.55,
+    "end": 21.8,
+    "effect": "fade",
+    "desc": "Suspect 3 pill (fade)"
+   },
+   {
+    "t": 22.85,
+    "end": 24.1,
+    "effect": "fade",
+    "desc": "Suspect 3 verdict (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Remember the harder task? [beat] Here's the filter under load, in the real world. [beat] Runners who just followed along noticed the fight seventy-two percent of the time. [beat] Make them keep separate counts for each hand, and it fell to forty-two. [pause] The authors' conclusion about the Boston officer: [beat] Conley could have been telling the truth.",
+   "[beat] That's a big point for suspect three: the filter."
+  ],
+  "vo_plain": "Remember the harder task? Here's the filter under load, in the real world. Runners who just followed along noticed the fight seventy-two percent of the time. Make them keep separate counts for each hand, and it fell to forty-two.\n\nThe authors' conclusion about the Boston officer: \u2014 Conley could have been telling the truth. That's a big point for suspect three: the filter.",
+  "sources": [
+   "S22",
+   "S23"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 21,
+  "name": "Map 4",
+  "chapter": "4 | Is it just some people?",
+  "layout": "map",
+  "dur": 4,
+  "start": 381.0,
+  "tracker": "Where we are",
+  "head": "Chapter 4: Is it just some people?",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 4 highlighted in Callout, past chapters dimmed, the twist chapter hidden as ??????????",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 3,
+  "map_hidden": [
+   4
+  ],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.4,
+    "effect": "fade",
+    "desc": "Map rows (fade)"
+   },
+   {
+    "t": 0.4,
+    "end": 1.0,
+    "effect": "wipe-from-left",
+    "desc": "Current chapter marker (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "Chapter four. [beat] Is it just some people?"
+  ],
+  "vo_plain": "Chapter four. Is it just some people?",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 22,
+  "name": "Kreitz profile",
+  "chapter": "4 | Is it just some people?",
+  "layout": "paper-profile",
+  "dur": 13,
+  "start": 385.0,
+  "tracker": "4 | Is it just some people?",
+  "head": "Kreitz and colleagues tested whether brainpower predicts who notices",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Kreitz, Furley, Memmert and Simons, PLOS ONE (2015)",
+  "caveat": "Students only.",
+  "visual": "Paper profile. Left: 'Inattentional Blindness and Individual Differences in Cognitive Abilities'; Carina Kreitz, Philip Furley, Daniel Memmert, Daniel Simons; PLOS ONE 10(8), 2015; status 'Peer-reviewed, open access'. Right: 'Sample: university students, 116 in study 1 and 198 in study 2' [S24] / 'Measures: working memory, breadth of attention, and more' / 'Test: several inattentional blindness tasks each'.",
+  "media": "PHOTO; Right panel; Students taking a test: \"students exam hall\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Curious",
+  "delivery": "Genuine question",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.78,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 1.3,
+    "end": 2.08,
+    "effect": "fade",
+    "desc": "Left column (fade)"
+   },
+   {
+    "t": 4.8,
+    "end": 5.58,
+    "effect": "fade",
+    "desc": "Study row 1 (fade)"
+   },
+   {
+    "t": 7.5,
+    "end": 8.28,
+    "effect": "fade",
+    "desc": "Study row 2 (fade)"
+   },
+   {
+    "t": 10.0,
+    "end": 10.78,
+    "effect": "fade",
+    "desc": "Study row 3 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So is it just certain people? [beat] Maybe some of us are natural noticers.",
+   "[pause] Carina Kreitz and colleagues tested that, measuring students' working memory and how widely they spread their attention."
+  ],
+  "vo_plain": "So is it just certain people? Maybe some of us are natural noticers.\n\nCarina Kreitz and colleagues tested that, measuring students' working memory and how widely they spread their attention.",
+  "sources": [
+   "S24"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 23,
+  "name": "Not a trait",
+  "chapter": "4 | Is it just some people?",
+  "layout": "does-doesnt",
+  "dur": 25,
+  "start": 398.0,
+  "tracker": "4 | Is it just some people?",
+  "head": "Brainpower barely predicted noticing: it depends on the situation, not the person",
+  "sup": null,
+  "snippet": {
+   "sid": "S26",
+   "text": "the ability to notice unexpected objects in general is not a stable individual-difference trait",
+   "attribution": "Kreitz et al., PLOS ONE (2015), Conclusion",
+   "words": 14
+  },
+  "receipt": "Source: Kreitz et al. (2015), Abstract and Conclusion",
+  "caveat": "University students; later work should test wider samples.",
+  "visual": "Two columns. 'Predicted noticing' (teal): 'Working memory, weakly, in one of four task versions' [S25]. 'Did not predict noticing' (slate): 'Working memory in the other tasks' / 'Breadth of attention' / 'Noticing in one task barely predicted noticing in another' [S25]. Below: verbatim snip from the Conclusion as a cropped image with amber highlight [S26].",
+  "media": "SLIDE (snip); ;  ()",
+  "trans": "fade",
+  "energy": "calm",
+  "style": "Reassuring",
+  "delivery": "Warm on 'it's not you'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.3,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 3.25,
+    "end": 4.55,
+    "effect": "fade",
+    "desc": "Left column (fade)"
+   },
+   {
+    "t": 8.05,
+    "end": 9.38,
+    "effect": "fade",
+    "desc": "Right column (fade)"
+   },
+   {
+    "t": 12.0,
+    "end": 13.25,
+    "effect": "fade",
+    "desc": "Snip image (fade)"
+   },
+   {
+    "t": 16.5,
+    "end": 17.75,
+    "effect": "wipe-from-left",
+    "desc": "Snip highlight (wipe-from-left)"
+   },
+   {
+    "t": 21.25,
+    "end": 22.5,
+    "effect": "fade",
+    "desc": "Students-only note (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Short answer: [beat] not really.",
+   "[beat] Working memory predicted noticing only weakly, and only in one version of the task. Attention breadth didn't predict it at all.",
+   "[pause] Even noticing in one task barely predicted noticing in the next.",
+   "[beat] Their verdict: it isn't a stable trait. [beat] It's the filter we all share.",
+   "[beat] But those were students. [beat] Would it hold up in a much bigger crowd?"
+  ],
+  "vo_plain": "Short answer: \u2014 not really. Working memory predicted noticing only weakly, and only in one version of the task. Attention breadth didn't predict it at all.\n\nEven noticing in one task barely predicted noticing in the next. Their verdict: it isn't a stable trait. It's the filter we all share. But those were students. Would it hold up in a much bigger crowd?",
+  "sources": [
+   "S25",
+   "S26"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 24,
+  "name": "The biggest test",
+  "chapter": "4 | Is it just some people?",
+  "layout": "bar-chart",
+  "dur": 26,
+  "start": 423.0,
+  "tracker": "4 | Is it just some people?",
+  "head": "The largest test yet, 2,000 people, still couldn't predict who notices",
+  "sup": null,
+  "snippet": {
+   "sid": "S40",
+   "text": "we could not reliably identify \u201cnoticers\u201d and \u201cmissers\u201d",
+   "attribution": "Simons, Ding, Hults and Roberts, Royal Society Open Science (2026), Conclusion",
+   "words": 8
+  },
+  "receipt": "Source: Simons, Ding, Hults and Roberts, R. Soc. Open Sci. 13: 260708 (2026), registered report, CC BY 4.0; quote from the accepted manuscript (OSF)",
+  "caveat": "Online sample; the authors note their harder task may not have been hard enough. Small task-to-task consistency (r = 0.13) leaves open a short-term state.",
+  "visual": "Two horizontal bars at exact scale: '2026 registered report, each study: 1,000 people' [S36] and 'Typical earlier sample (median): 44 people' [S37]. Below: verbatim snip cropped from the accepted manuscript with Callout highlight [S40]. Amber strip: 'Same study: a harder counting task didn't lower noticing, about 45% either way' [S39]. Suspect 2 pill and verdict 'Mostly cleared' [S38].",
+  "media": "none (grid texture; a white data slide between the map and the snip-heavy chapter)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Clear, a little impressed",
+  "delivery": "Lean on 'two thousand'; slower on the surprise",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.3,
+    "effect": "fade",
+    "desc": "Action title and axis (fade)"
+   },
+   {
+    "t": 4.68,
+    "end": 5.98,
+    "effect": "wipe-from-left",
+    "desc": "Bar 2026 (wipe-from-left)"
+   },
+   {
+    "t": 8.32,
+    "end": 9.62,
+    "effect": "wipe-from-left",
+    "desc": "Bar median (wipe-from-left)"
+   },
+   {
+    "t": 11.96,
+    "end": 13.26,
+    "effect": "fade",
+    "desc": "Snip image (fade)"
+   },
+   {
+    "t": 15.08,
+    "end": 16.38,
+    "effect": "wipe-from-left",
+    "desc": "Snip highlight (wipe-from-left)"
+   },
+   {
+    "t": 18.2,
+    "end": 19.5,
+    "effect": "fade",
+    "desc": "Load strip (fade)"
+   },
+   {
+    "t": 22.36,
+    "end": 23.4,
+    "effect": "fade",
+    "desc": "Suspect 2 pill (fade)"
+   },
+   {
+    "t": 23.92,
+    "end": 24.96,
+    "effect": "fade",
+    "desc": "Suspect 2 verdict (fade)"
+   }
+  ],
+  "vo_marked": [
+   "[beat] In twenty twenty-six, a team led by Daniel Simons ran the biggest test yet.",
+   "[beat] Two thousand people took part. [beat] Most earlier studies had a few dozen.",
+   "[pause] Memory, reasoning, personality... [beat] none of it reliably predicted who would notice.",
+   "[pause] One surprise, though: [beat] here, a harder counting task didn't lower noticing at all.",
+   "[pause] Suspect two? [beat] Mostly cleared."
+  ],
+  "vo_plain": "\u2014 In twenty twenty-six, a team led by Daniel Simons ran the biggest test yet. Two thousand people took part. Most earlier studies had a few dozen.\n\nMemory, reasoning, personality... none of it reliably predicted who would notice.\n\nOne surprise, though: \u2014 here, a harder counting task didn't lower noticing at all.\n\nSuspect two? Mostly cleared.",
+  "sources": [
+   "S36",
+   "S37",
+   "S38",
+   "S39",
+   "S40"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 25,
+  "name": "Map 5",
+  "chapter": "5 | The twist",
+  "layout": "map",
+  "dur": 3,
+  "start": 449.0,
+  "tracker": "Where we are",
+  "head": "Chapter 5: The twist: did they really see nothing?",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 5 highlighted in Callout, past chapters dimmed, the twist now revealed",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 4,
+  "map_hidden": [],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.3,
+    "effect": "fade",
+    "desc": "Map rows (fade)"
+   },
+   {
+    "t": 0.3,
+    "end": 0.75,
+    "effect": "wipe-from-left",
+    "desc": "Current chapter marker (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "And now... [beat] the twist."
+  ],
+  "vo_plain": "And now... the twist.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 26,
+  "name": "Nartker profile",
+  "chapter": "5 | The twist",
+  "layout": "paper-profile",
+  "dur": 18,
+  "start": 452.0,
+  "tracker": "5 | The twist",
+  "head": "In 2025 a Johns Hopkins team questioned the one-question test itself",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Nartker, Firestone, Egeth and Phillips, eLife (2025)",
+  "caveat": null,
+  "visual": "Paper profile. Left: 'Sensitivity to visual features in inattentional blindness'; Makaela Nartker, Chaz Firestone, Howard Egeth, Ian Phillips; eLife, Version of Record 19 May 2025; status 'Peer-reviewed (eLife assessment: convincing)'. Right: 'Sample: over 25,000 online participants, five pre-registered experiments' [S28] / 'Authors call it the largest ever set of IB studies'.",
+  "media": "VIDEO; Right panel; Person doing an online task on a laptop: \"person laptop night typing\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "medium-high",
+  "style": "Plot twist",
+  "delivery": "Pick up pace",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.08,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.3,
+    "end": 3.38,
+    "effect": "fade",
+    "desc": "Left column (fade)"
+   },
+   {
+    "t": 6.26,
+    "end": 7.34,
+    "effect": "fade",
+    "desc": "Right column (fade)"
+   },
+   {
+    "t": 10.3,
+    "end": 11.38,
+    "effect": "fade",
+    "desc": "'over 25,000' highlights amber (fade)"
+   },
+   {
+    "t": 14.4,
+    "end": 15.48,
+    "effect": "fade",
+    "desc": "'largest ever' tag (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Now, remember that one question? [beat] Did you notice anything unusual?",
+   "[pause] In twenty twenty-five, a team at Johns Hopkins asked whether 'no' really means 'saw nothing'.",
+   "[beat] They tested over twenty-five thousand people. The authors call it the largest set of these studies ever run."
+  ],
+  "vo_plain": "Now, remember that one question? Did you notice anything unusual?\n\nIn twenty twenty-five, a team at Johns Hopkins asked whether 'no' really means 'saw nothing'. They tested over twenty-five thousand people. The authors call it the largest set of these studies ever run.",
+  "sources": [
+   "S28"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 27,
+  "name": "The extra question",
+  "chapter": "5 | The twist",
+  "layout": "process-flow",
+  "dur": 18,
+  "start": 470.0,
+  "tracker": "5 | The twist",
+  "head": "After 'did you notice?', they asked people to guess what it looked like",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Nartker et al. (2025), Experiment 1 and Box 1",
+  "caveat": null,
+  "visual": "Thought experiment on the grid texture: a cross with one longer arm and the pill 'Which arm is longer?'; a red line flashes at the side with a Callout pill 'Surprise'; an arrow to the pill 'Notice anything unusual?' with YES / NO pills; then the Accent pill 'Even if no: left or right? Guess.'; a tag 'Some people were shown nothing at all, but asked anyway' [S31].",
+  "media": "none (thought-experiment diagram drawn with pills on the grid texture)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Explainer",
+  "delivery": "Even; lift on 'guess anyway'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.08,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 1.8,
+    "end": 2.88,
+    "effect": "zoom",
+    "desc": "Cross and pill (zoom)"
+   },
+   {
+    "t": 4.68,
+    "end": 5.76,
+    "effect": "zoom",
+    "desc": "Surprise line and pill (zoom)"
+   },
+   {
+    "t": 7.56,
+    "end": 8.64,
+    "effect": "fade",
+    "desc": "Arrow, question and yes/no pills (fade)"
+   },
+   {
+    "t": 10.94,
+    "end": 12.02,
+    "effect": "zoom",
+    "desc": "Guess pill (zoom)"
+   },
+   {
+    "t": 14.26,
+    "end": 15.34,
+    "effect": "fade",
+    "desc": "Absent-trial tag (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Their trick was simple. [beat] People judged which arm of a cross was longer, while a surprise line flashed off to the side.",
+   "[beat] Then the usual question. Did you notice anything?",
+   "[pause] But then they added another: [beat] even if you didn't, was it on the left or the right? Guess anyway."
+  ],
+  "vo_plain": "Their trick was simple. People judged which arm of a cross was longer, while a surprise line flashed off to the side. Then the usual question. Did you notice anything?\n\nBut then they added another: \u2014 even if you didn't, was it on the left or the right? Guess anyway.",
+  "sources": [
+   "S31"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 28,
+  "name": "They saw more than they said",
+  "chapter": "5 | The twist",
+  "layout": "column-chart",
+  "dur": 19,
+  "start": 488.0,
+  "tracker": "5 | The twist",
+  "head": "People who said they saw nothing still located it 63.6% of the time",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Nartker et al. (2025), Experiment 1",
+  "caveat": "Group-level result; Experiment 1 sample of 374.",
+  "visual": "Three columns, axis 0-100%. Column 1 (slate): 'Said they noticed it: 71.4%' [S29]. Column 2 (navy): 'Located it correctly: 87.4%' [S29]. Column 3 (teal): 'Non-noticers who located it: 63.6%' [S30], with a dashed line at 50% labelled 'pure guessing'.",
+  "media": "SLIDE; ;  ()",
+  "trans": "fade",
+  "energy": "high",
+  "style": "Twist reveal",
+  "delivery": "Slow before the last number",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.14,
+    "effect": "fade",
+    "desc": "Action title and axis (fade)"
+   },
+   {
+    "t": 2.28,
+    "end": 3.42,
+    "effect": "wipe-from-bottom",
+    "desc": "Column 1 (wipe-from-bottom)"
+   },
+   {
+    "t": 6.57,
+    "end": 7.71,
+    "effect": "wipe-from-bottom",
+    "desc": "Column 2 (wipe-from-bottom)"
+   },
+   {
+    "t": 10.45,
+    "end": 11.59,
+    "effect": "fade",
+    "desc": "50% guessing line (fade)"
+   },
+   {
+    "t": 14.69,
+    "end": 15.83,
+    "effect": "wipe-from-bottom",
+    "desc": "Column 3 (wipe-from-bottom)"
+   }
+  ],
+  "vo_marked": [
+   "The results were striking. [beat] Only about seventy-one percent said they'd noticed the line.",
+   "[beat] But about eighty-seven percent got its location right.",
+   "[pause] And the people who said 'no, nothing'? [beat] Guessing blindly, they'd be right half the time.",
+   "[beat] They were right sixty-three point six percent of the time."
+  ],
+  "vo_plain": "The results were striking. Only about seventy-one percent said they'd noticed the line. But about eighty-seven percent got its location right.\n\nAnd the people who said 'no, nothing'? Guessing blindly, they'd be right half the time. They were right sixty-three point six percent of the time.",
+  "sources": [
+   "S29",
+   "S30"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 29,
+  "name": "Playing it safe",
+  "chapter": "5 | The twist",
+  "layout": "kpi-tiles",
+  "dur": 25,
+  "start": 507.0,
+  "tracker": "5 | The twist",
+  "head": "People are cautious about saying 'yes', even when they saw something",
+  "sup": null,
+  "snippet": {
+   "sid": "S34",
+   "text": "essentially \u2018playing it safe\u2019 in reporting their sensitivity",
+   "attribution": "Nartker et al., eLife (2025), abstract",
+   "words": 8
+  },
+  "receipt": "Source: Nartker et al. (2025), abstract, Box 1 and Experiment 3",
+  "caveat": null,
+  "visual": "Two KPI tiles: '7.2%' label 'said yes when nothing was shown at all (Experiment 5)' [S31]; 'Above chance' label 'even people who were highly confident they saw nothing (N = 204)' [S32]. Below: verbatim snip from the abstract as a cropped image with amber highlight [S34].",
+  "media": "SLIDE (snip); ;  ()",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "Explainer",
+  "delivery": "Light smile on 'playing it safe'",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.5,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 3.0,
+    "end": 4.5,
+    "effect": "fade",
+    "desc": "Tile 1 (fade)"
+   },
+   {
+    "t": 7.5,
+    "end": 9.0,
+    "effect": "fade",
+    "desc": "Tile 1 note (fade)"
+   },
+   {
+    "t": 12.5,
+    "end": 14.0,
+    "effect": "fade",
+    "desc": "Tile 2 (fade)"
+   },
+   {
+    "t": 17.5,
+    "end": 19.0,
+    "effect": "fade",
+    "desc": "Snip image (fade)"
+   },
+   {
+    "t": 21.5,
+    "end": 23.0,
+    "effect": "wipe-from-left",
+    "desc": "Snip highlight (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "Why would people say no? [beat] Because they're cautious. [beat] When nothing was shown at all, only about seven percent said yes. One likely reason: people don't like to claim they saw something they can't describe. [pause] Even those who were *highly* confident they'd seen nothing did better than chance. [beat] The authors' phrase: essentially playing it safe. [beat] The filter lets through more than we admit."
+  ],
+  "vo_plain": "Why would people say no? Because they're cautious. When nothing was shown at all, only about seven percent said yes. One likely reason: people don't like to claim they saw something they can't describe.\n\nEven those who were highly confident they'd seen nothing did better than chance. The authors' phrase: essentially playing it safe. The filter lets through more than we admit.",
+  "sources": [
+   "S31",
+   "S32",
+   "S34"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 30,
+  "name": "Not nothing",
+  "chapter": "5 | The twist",
+  "layout": "word-card",
+  "dur": 9,
+  "start": 532.0,
+  "tracker": null,
+  "head": "Not nothing, just not sure",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Word card on Primary: 'Not nothing.' then 'Just not sure.' in light Accent; 4 s silent hold",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "low",
+  "style": "Reflective",
+  "delivery": "Let it land, then silence",
+  "hold": 4,
+  "lines": [
+   "Not nothing.",
+   "Just not sure."
+  ],
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.9,
+    "effect": "fade",
+    "desc": "Line 1 (fade)"
+   },
+   {
+    "t": 2.7,
+    "end": 3.6,
+    "effect": "fade",
+    "desc": "Line 2 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So 'I saw nothing'... [beat] often means 'I'm not sure what I saw.'"
+  ],
+  "vo_plain": "So 'I saw nothing'... often means 'I'm not sure what I saw.'",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 31,
+  "name": "What it doesn't show",
+  "chapter": "5 | The twist",
+  "layout": "does-doesnt",
+  "dur": 29,
+  "start": 541.0,
+  "tracker": "5 | The twist",
+  "head": "The finding softens 'blindness' but doesn't erase it",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Nartker et al. (2025), Experiment 4 and Discussion",
+  "caveat": null,
+  "visual": "Does / doesn't. Shows (teal): 'As a group, people pick up location, colour and shape of things they deny seeing' / 'The yes/no question undercounts awareness'. Doesn't show (slate): 'That every individual saw it (results are group-level)' [S35] / 'That missing things is a myth: with a moving object on screen for five seconds, 57.3% still said they noticed nothing' [S33].",
+  "media": "VIDEO; full screen under tint; magnifying glass over a book (Mixkit #13807)",
+  "trans": "fade",
+  "energy": "calm",
+  "style": "Fair-minded",
+  "delivery": "Balanced",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   8.99,
+   14.91,
+   20.91
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.45,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.41,
+    "end": 3.83,
+    "effect": "fade",
+    "desc": "Shows 1 (fade)"
+   },
+   {
+    "t": 6.24,
+    "end": 7.69,
+    "effect": "fade",
+    "desc": "Shows 2 (fade)"
+   },
+   {
+    "t": 11.51,
+    "end": 12.93,
+    "effect": "fade",
+    "desc": "Doesn't 1 (fade)"
+   },
+   {
+    "t": 17.81,
+    "end": 19.26,
+    "effect": "fade",
+    "desc": "Doesn't 2 (fade)"
+   },
+   {
+    "t": 23.05,
+    "end": 24.5,
+    "effect": "fade",
+    "desc": "Suspect 4 pill (fade)"
+   },
+   {
+    "t": 25.43,
+    "end": 26.88,
+    "effect": "fade",
+    "desc": "Suspect 4 verdict (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So is the gorilla effect wrong? [beat] No.",
+   "[beat] These are group results. They don't prove every individual saw the thing.",
+   "[pause] And people still miss a lot. With a shape moving across the screen for several seconds, about fifty-seven percent said they noticed nothing.",
+   "[beat] What changes is the story. Often it's not *seeing nothing*. It's seeing a little, and not trusting it.",
+   "[beat] And that's our hidden suspect, number four: it got in, but you weren't sure."
+  ],
+  "vo_plain": "So is the gorilla effect wrong? No. These are group results. They don't prove every individual saw the thing.\n\nAnd people still miss a lot. With a shape moving across the screen for several seconds, about fifty-seven percent said they noticed nothing. What changes is the story. Often it's not seeing nothing. It's seeing a little, and not trusting it. And that's our hidden suspect, number four: it got in, but you weren't sure.",
+  "sources": [
+   "S33",
+   "S35"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 32,
+  "name": "Map 6",
+  "chapter": "6 | What this means",
+  "layout": "map",
+  "dur": 3,
+  "start": 570.0,
+  "tracker": "Where we are",
+  "head": "Chapter 6: What this means for you",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Chapter map: 6 chapters, chapter 6 highlighted in Callout, past chapters dimmed, the twist now revealed",
+  "media": "none (Primary background)",
+  "trans": "fade",
+  "energy": "medium",
+  "style": "clear explainer",
+  "delivery": "",
+  "hold": null,
+  "lines": null,
+  "map_items": [
+   "The basics: attention as a filter",
+   "Experts: radiologists and a gorilla",
+   "The real world: a staged fight",
+   "Is it just some people?",
+   "The twist: did they really see nothing?",
+   "What this means for you"
+  ],
+  "map_current": 5,
+  "map_hidden": [],
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 0.3,
+    "effect": "fade",
+    "desc": "Map rows (fade)"
+   },
+   {
+    "t": 0.3,
+    "end": 0.75,
+    "effect": "wipe-from-left",
+    "desc": "Current chapter marker (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "So what does this mean for you?"
+  ],
+  "vo_plain": "So what does this mean for you?",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 33,
+  "name": "The verdict",
+  "chapter": "6 | What this means",
+  "layout": "scorecard",
+  "dur": 38,
+  "start": 573.0,
+  "tracker": "The verdict",
+  "head": "The evidence points to the filter, with a twist about what slips through",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Sources: Drew et al. (2013); Kreitz et al. (2015); Simons et al. (2026); Chabris et al. (2011); Nartker et al. (2025)",
+  "caveat": "Scores are our reading of the evidence, not the papers' own ranking.",
+  "visual": "Verdict scorecard on the grid texture: four rows ranked by evidence (0-3 Callout dots) with a one-line reason each [S13] [S25] [S38] [S22] [S39] [S30] [S35]; rows fill in as the narration scores each suspect; footnote: our reading of the evidence.",
+  "media": "none (grid texture)",
+  "trans": "fade",
+  "energy": "medium, decisive",
+  "style": "Judge summing up",
+  "delivery": "One beat per verdict word; warm on \"my read\"",
+  "hold": 0,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": [
+   {
+    "theory": "You weren't looking at it",
+    "score": 1,
+    "note": "12 of 20 who missed it looked right at it"
+   },
+   {
+    "theory": "Some people just don't notice",
+    "score": 1,
+    "note": "2,000-person test: ability and personality barely predicted it"
+   },
+   {
+    "theory": "Attention filtered it out",
+    "score": 3,
+    "note": "Load cut noticing 72% to 42%; a 2026 study saw no drop"
+   },
+   {
+    "theory": "It got in, but you weren't sure",
+    "score": 2,
+    "note": "Located it 63.6% vs 50% chance; group-level"
+   }
+  ],
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 2.05,
+    "effect": "fade",
+    "desc": "Action title and header (fade)"
+   },
+   {
+    "t": 2.62,
+    "end": 4.67,
+    "effect": "wipe-from-left",
+    "desc": "Suspect 1 name (wipe-from-left)"
+   },
+   {
+    "t": 4.83,
+    "end": 6.92,
+    "effect": "fade",
+    "desc": "Suspect 1 dots and note (fade)"
+   },
+   {
+    "t": 9.35,
+    "end": 11.4,
+    "effect": "wipe-from-left",
+    "desc": "Suspect 2 name (wipe-from-left)"
+   },
+   {
+    "t": 12.31,
+    "end": 14.4,
+    "effect": "fade",
+    "desc": "Suspect 2 dots and note (fade)"
+   },
+   {
+    "t": 14.93,
+    "end": 16.99,
+    "effect": "wipe-from-left",
+    "desc": "Suspect 3 name (wipe-from-left)"
+   },
+   {
+    "t": 16.8,
+    "end": 18.85,
+    "effect": "fade",
+    "desc": "Suspect 3 dots and note (fade)"
+   },
+   {
+    "t": 21.28,
+    "end": 23.37,
+    "effect": "wipe-from-left",
+    "desc": "Suspect 4 name (wipe-from-left)"
+   },
+   {
+    "t": 26.22,
+    "end": 28.27,
+    "effect": "fade",
+    "desc": "Suspect 4 dots and note (fade)"
+   },
+   {
+    "t": 30.74,
+    "end": 32.79,
+    "effect": "fade",
+    "desc": "Footnote (fade)"
+   },
+   {
+    "t": 31.81,
+    "end": 33.86,
+    "effect": "wipe-from-left",
+    "desc": "Winner outline (wipe-from-left)"
+   },
+   {
+    "t": 34.88,
+    "end": 36.78,
+    "effect": "zoom",
+    "desc": "Twist pill (zoom)"
+   }
+  ],
+  "vo_marked": [
+   "So let's score the four suspects.",
+   "[beat] Suspect one, you weren't looking? [beat] Weak. Most radiologists who missed the gorilla looked right at it.",
+   "[beat] Suspect two, some people just don't notice? [beat] Also weak. Even in two thousand people, ability barely predicted it.",
+   "[beat] Suspect three, the filter? [beat] Strong. It explains the radiologists and the runners... though one big study found no load effect.",
+   "[beat] And suspect four, it got in but you weren't sure? [beat] Promising. One big set of studies, measured as a group.",
+   "[pause] My read: [beat] the filter wins... but what it lets through isn't always zero."
+  ],
+  "vo_plain": "So let's score the four suspects. Suspect one, you weren't looking? Weak. Most radiologists who missed the gorilla looked right at it. Suspect two, some people just don't notice? Also weak. Even in two thousand people, ability barely predicted it. Suspect three, the filter? Strong. It explains the radiologists and the runners... though one big study found no load effect. And suspect four, it got in but you weren't sure? Promising. One big set of studies, measured as a group.\n\nMy read: \u2014 the filter wins... but what it lets through isn't always zero.",
+  "sources": [
+   "S13",
+   "S22",
+   "S25",
+   "S30",
+   "S35",
+   "S38",
+   "S39"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 34,
+  "name": "What helps",
+  "chapter": "6 | What this means",
+  "layout": "scenario",
+  "dur": 25,
+  "start": 611.0,
+  "tracker": "6 | What this means",
+  "head": "You can't stop the filter, but you can change the situation",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Chabris et al. (2011); Drew et al. (2013); Simons, Noba Project; Simons et al. (2026)",
+  "caveat": "Row 2 is a presumption by the authors. Row 1: a large 2026 study found no drop with a harder counting task [S39].",
+  "visual": "Three scenario rows, each 'If you...' -> 'Then...': 'Lighten the load' -> 'Runners who didn't count noticed the fight 72% of the time, vs 42% with two counts (Chabris)' [S22]; 'Expect the unexpected' -> 'The radiologists' authors think they would have done much better if told to look for it' [S17]; 'Doubt \u201cI would have noticed\u201d' -> 'Most people overestimate what they notice' [S1, S2]. Footnote: 'Expectation effect is the authors' presumption, not tested in the study.'",
+  "media": "VIDEO; full screen under tint; man texting while walking (Mixkit #32617)",
+  "trans": "fade",
+  "energy": "warm",
+  "style": "Practical",
+  "delivery": "Friendly, concrete",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   12.28,
+   18.4
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.5,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 4.75,
+    "end": 6.25,
+    "effect": "wipe-from-left",
+    "desc": "Row 1 (wipe-from-left)"
+   },
+   {
+    "t": 9.5,
+    "end": 11.0,
+    "effect": "fade",
+    "desc": "Load note (fade)"
+   },
+   {
+    "t": 13.75,
+    "end": 15.25,
+    "effect": "wipe-from-left",
+    "desc": "Row 2 (wipe-from-left)"
+   },
+   {
+    "t": 17.5,
+    "end": 19.0,
+    "effect": "fade",
+    "desc": "Footnote (fade)"
+   },
+   {
+    "t": 21.0,
+    "end": 22.5,
+    "effect": "wipe-from-left",
+    "desc": "Row 3 (wipe-from-left)"
+   }
+  ],
+  "vo_marked": [
+   "So what can you do? [beat] You can't switch off the filter. You need it.",
+   "[beat] But you can try to lighten the load. Runners who didn't have to count noticed the fight far more often... at least in that study.",
+   "[beat] You can tell yourself what to watch for. The radiology team thinks their experts would have done much better if warned.",
+   "[beat] And you can be humbler about the words 'I would have noticed'."
+  ],
+  "vo_plain": "So what can you do? You can't switch off the filter. You need it. But you can try to lighten the load. Runners who didn't have to count noticed the fight far more often... at least in that study. You can tell yourself what to watch for. The radiology team thinks their experts would have done much better if warned. And you can be humbler about the words 'I would have noticed'.",
+  "sources": [
+   "S1",
+   "S17",
+   "S2",
+   "S22"
+  ],
+  "sfx": []
+ },
+ {
+  "n": 35,
+  "name": "Attention decides",
+  "chapter": "6 | What this means",
+  "layout": "word-card",
+  "dur": 10,
+  "start": 636.0,
+  "tracker": null,
+  "head": "Attention decides",
+  "sup": null,
+  "snippet": null,
+  "receipt": null,
+  "caveat": null,
+  "visual": "Word card over a slow tinted clip: 'Attention' then 'decides.'; 4 s silent hold",
+  "media": "VIDEO: slow calm footage (sky or water) under heavy tint",
+  "trans": "fade",
+  "energy": "low, warm",
+  "style": "Reflective",
+  "delivery": "Ask the question, pause, then answer softly",
+  "hold": 4,
+  "lines": [
+   "Attention",
+   "decides."
+  ],
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.0,
+    "effect": "fade",
+    "desc": "Line 1 (fade)"
+   },
+   {
+    "t": 4.5,
+    "end": 5.5,
+    "effect": "fade",
+    "desc": "Line 2 (fade)"
+   }
+  ],
+  "vo_marked": [
+   "So why don't we see what's right in front of us? [long pause] Attention decides."
+  ],
+  "vo_plain": "So why don't we see what's right in front of us?\n\n...\n\nAttention decides.",
+  "sources": [],
+  "sfx": []
+ },
+ {
+  "n": 36,
+  "name": "The answer",
+  "chapter": "6 | What this means",
+  "layout": "key-takeaways",
+  "dur": 25,
+  "start": 646.0,
+  "tracker": "6 | What this means",
+  "head": "Your eyes take in more than you notice, but you notice what you're looking for",
+  "sup": null,
+  "snippet": null,
+  "receipt": "Source: Simons (Noba); Drew et al. (2013); Chabris et al. (2011); Kreitz et al. (2015); Nartker et al. (2025)",
+  "caveat": null,
+  "visual": "Key-takeaways. Left navy panel 'THE ANSWER': 'Why don't we see what's right in front of us? Because attention filters it out, and we under-report the little that gets through.' Right: four numbered takeaways: '1 About half missed the gorilla' / '2 Experts aren't immune' / '3 It's the situation, not your IQ' / '4 We often see more than we say'. Bottom teal banner: 'You don't see with your eyes. You see with your attention.'",
+  "media": "VIDEO; Full screen under tint, banner on top; Close-up of an eye focusing: \"eye close up macro\" (Done (Mixkit))",
+  "trans": "fade",
+  "energy": "warm, slowing",
+  "style": "Thoughtful close",
+  "delivery": "Slow; long pause before the last line",
+  "hold": null,
+  "lines": null,
+  "map_items": null,
+  "map_current": null,
+  "map_hidden": null,
+  "theories": null,
+  "verdicts": null,
+  "cuts": [
+   17.5
+  ],
+  "builds": [
+   {
+    "t": 0.0,
+    "end": 1.5,
+    "effect": "fade",
+    "desc": "Action title (fade)"
+   },
+   {
+    "t": 2.0,
+    "end": 3.5,
+    "effect": "fade",
+    "desc": "Answer panel (fade)"
+   },
+   {
+    "t": 7.0,
+    "end": 8.5,
+    "effect": "fade",
+    "desc": "Takeaway 1 (fade)"
+   },
+   {
+    "t": 9.5,
+    "end": 11.0,
+    "effect": "fade",
+    "desc": "Takeaway 2 (fade)"
+   },
+   {
+    "t": 12.0,
+    "end": 13.5,
+    "effect": "fade",
+    "desc": "Takeaway 3 (fade)"
+   },
+   {
+    "t": 15.0,
+    "end": 16.5,
+    "effect": "fade",
+    "desc": "Takeaway 4 (fade)"
+   },
+   {
+    "t": 20.0,
+    "end": 21.5,
+    "effect": "fade",
+    "desc": "Banner (fade)"
+   }
+  ],
+  "vo_marked": [
+   "Attention decides what reaches awareness. And even what slips through, we're slow to admit. [pause] So was Kenny Conley lying? [beat] Maybe not. Chasing a suspect is about as heavy a load as it gets. [pause] The gorilla isn't invisible. Your eyes catch it. [beat] Your attention just has other plans. [long pause] You don't see with your eyes. [beat] You see with your attention."
+  ],
+  "vo_plain": "Attention decides what reaches awareness. And even what slips through, we're slow to admit.\n\nSo was Kenny Conley lying? Maybe not. Chasing a suspect is about as heavy a load as it gets.\n\nThe gorilla isn't invisible. Your eyes catch it. Your attention just has other plans.\n\n...\n\nYou don't see with your eyes. You see with your attention.",
+  "sources": [],
+  "sfx": []
+ }
+]

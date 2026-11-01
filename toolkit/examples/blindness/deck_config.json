@@ -1,0 +1,40 @@
+{
+ "title": "Why you don't see what's right in front of you",
+ "slides_json": "story/slides.json",
+ "out_dir": "deck",
+ "audio": "deck/Blindness_narration_track.mp3",
+ "media_manifest": "media/prepared/manifest.json",
+ "snips_dir": "snips",
+ "snip_px": {
+  "drew": [
+   1621,
+   104
+  ],
+  "nartker": [
+   1755,
+   161
+  ],
+  "kreitz": [
+   1625,
+   162
+  ],
+  "chabris": [
+   1752,
+   107
+  ]
+ },
+ "offset": 1,
+ "palette": {
+  "name": "Plum and Coral",
+  "primary": "2B1B3F",
+  "secondary": "6E6680",
+  "panel": "F4F1F8",
+  "rule": "DCD6E5",
+  "accent": "7A4FB5",
+  "callout": "E07A5F",
+  "negative": "B5303A",
+  "light_accent": "C9B6EE",
+  "mid": "4B3A66",
+  "line_on_media": "A89BB8"
+ }
+}

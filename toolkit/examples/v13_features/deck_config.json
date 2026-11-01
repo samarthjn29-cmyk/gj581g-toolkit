@@ -1,0 +1,23 @@
+{
+ "title": "Toolkit v1.3 test",
+ "slides_json": "story/slides.json",
+ "out_dir": "deck",
+ "audio": "deck/a.mp3",
+ "snips_dir": "snips",
+ "snip_px": {},
+ "offset": 0,
+ "palette": {
+  "name": "Plum and Coral",
+  "primary": "2B1B3F",
+  "secondary": "6E6680",
+  "panel": "F4F1F8",
+  "rule": "DCD6E5",
+  "accent": "7A4FB5",
+  "callout": "E07A5F",
+  "negative": "B5303A",
+  "light_accent": "C9B6EE",
+  "mid": "4B3A66",
+  "line_on_media": "A89BB8"
+ },
+ "texture": "grid"
+}

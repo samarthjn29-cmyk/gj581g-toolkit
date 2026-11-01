@@ -1,0 +1,157 @@
+{
+ "primary": "2B1B3F",
+ "clips": {
+  "opener": {
+   "src": "media/clips/Blindness_try_it_clip.mp4",
+   "slide": 1,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0,
+   "offset": 0
+  },
+  "s1_gorilla": {
+   "src": "media/mk/4177.mp4",
+   "slide": 2,
+   "w": 5.63,
+   "h": 3.95,
+   "tint": 0,
+   "offset": 0
+  },
+  "s2_crowd": {
+   "src": "media/mk/4401.mp4",
+   "slide": 3,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.62,
+   "offset": 0
+  },
+  "s4_street": {
+   "src": "media/mk/4000.mp4",
+   "slide": 5,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.72,
+   "offset": 0
+  },
+  "s5_anim": {
+   "src": "media/clips/gorilla_anim.mp4",
+   "slide": 6,
+   "w": 6.13,
+   "h": 3.065,
+   "tint": 0,
+   "offset": 0
+  },
+  "s11_night": {
+   "src": "media/mk/41161.mp4",
+   "slide": 12,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.6,
+   "offset": 0
+  },
+  "s12_jog": {
+   "src": "media/mk/721.mp4",
+   "slide": 13,
+   "w": 5.43,
+   "h": 3.95,
+   "tint": 0,
+   "offset": 0
+  },
+  "s13_night": {
+   "src": "media/mk/608.mp4",
+   "slide": 14,
+   "w": 2.1,
+   "h": 1.3,
+   "tint": 0,
+   "offset": 0
+  },
+  "s13_day": {
+   "src": "media/mk/723.mp4",
+   "slide": 14,
+   "w": 2.1,
+   "h": 1.3,
+   "tint": 0,
+   "offset": 0
+  },
+  "s15_study": {
+   "src": "media/mk/4531.mp4",
+   "slide": 16,
+   "w": 5.43,
+   "h": 3.95,
+   "tint": 0,
+   "offset": 0
+  },
+  "s17_office": {
+   "src": "media/mk/39839.mp4",
+   "slide": 18,
+   "w": 5.43,
+   "h": 3.95,
+   "tint": 0,
+   "offset": 0
+  },
+  "s3_dusk": {
+   "src": "media/mk/3428.mp4",
+   "slide": 4,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.72,
+   "offset": 0
+  },
+  "s6_court": {
+   "src": "media/mk/44468.mp4",
+   "slide": 7,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.72,
+   "offset": 0
+  },
+  "s7_notes": {
+   "src": "media/mk/99890.mp4",
+   "slide": 8,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.72,
+   "offset": 0
+  },
+  "s9_hall": {
+   "src": "media/mk/4745.mp4",
+   "slide": 10,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.7,
+   "offset": 0
+  },
+  "s18_laptop": {
+   "src": "media/mk/100321.mp4",
+   "slide": 19,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.74,
+   "offset": 0
+  },
+  "s21_glass": {
+   "src": "media/mk/13807.mp4",
+   "slide": 22,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.8,
+   "offset": 0
+  },
+  "s23_park": {
+   "src": "media/mk/32617.mp4",
+   "slide": 24,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.7,
+   "offset": 0
+  },
+  "s24_eye": {
+   "src": "media/mk/4257.mp4",
+   "slide": 25,
+   "w": 13.333,
+   "h": 7.5,
+   "tint": 0.66,
+   "offset": 0
+  }
+ }
+}

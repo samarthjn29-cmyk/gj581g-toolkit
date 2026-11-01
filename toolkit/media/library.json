@@ -1,0 +1,369 @@
+{
+ "archive:Aroundth1940": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 20.0,
+  "first_second": "ok",
+  "h": 480,
+  "id": "Aroundth1940",
+  "kind": "video",
+  "licence": "Public domain / CC0",
+  "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+  "page": "https://archive.org/details/Aroundth1940",
+  "proof": "licence read from the source API at download",
+  "source": "archive",
+  "tags": [
+   "around",
+   "world",
+   "york"
+  ],
+  "title": "Around the World in New York",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 640
+ },
+ "archive:CityTheP1939": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 20.1,
+  "first_second": "ok",
+  "h": 480,
+  "id": "CityTheP1939",
+  "kind": "video",
+  "licence": "Public domain / CC0",
+  "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+  "page": "https://archive.org/details/CityTheP1939",
+  "proof": "licence read from the source API at download",
+  "source": "archive",
+  "tags": [
+   "city"
+  ],
+  "title": "City, The (Part I)",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 640
+ },
+ "archive:Summersc1941": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 20.1,
+  "first_second": "ok",
+  "h": 480,
+  "id": "Summersc1941",
+  "kind": "video",
+  "licence": "Public domain / CC0",
+  "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+  "page": "https://archive.org/details/Summersc1941",
+  "proof": "licence read from the source API at download",
+  "source": "archive",
+  "tags": [
+   "amateur",
+   "california",
+   "collection",
+   "film",
+   "francisco",
+   "summers"
+  ],
+  "title": "[Amateur film: Summers collection: San Francisco, California, 1941] (Part I)",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 640
+ },
+ "mixkit:100321": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 8.6,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "100321",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "hands",
+   "laptop",
+   "typing"
+  ],
+  "title": "Hands typing on a laptop",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:1618": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 23.2,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "1618",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "aerial",
+   "city",
+   "during",
+   "sunrise"
+  ],
+  "title": "Aerial view of a city during the sunrise",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:2167": {
+  "added": "2026-10-28",
+  "credit": "",
+  "dur": 21.5,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "2167",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Free (not Restricted) on https://mixkit.co/free-stock-video/boat-sailing-on-the-sea-at-sunset-2167/ on 2026-10-28",
+  "source": "mixkit",
+  "tags": [
+   "boat",
+   "sailing",
+   "sunset"
+  ],
+  "title": "Boat sailing on the sea at sunset",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:28342": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 15.4,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "28342",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "aerial",
+   "covered",
+   "forest",
+   "mist",
+   "slow",
+   "through",
+   "tour"
+  ],
+  "title": "Slow aerial tour through a mist-covered forest",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:39841": {
+  "added": "2026-10-28",
+  "credit": "",
+  "dur": 10.3,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "39841",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Free (not Restricted) on https://mixkit.co/free-stock-video/young-man-working-in-an-office-overtime-39841/ on 2026-10-28",
+  "source": "mixkit",
+  "tags": [
+   "office",
+   "overtime",
+   "working",
+   "young"
+  ],
+  "title": "Young man working in an office overtime",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:41180": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 12.6,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "41180",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "looking",
+   "tablet",
+   "woman"
+  ],
+  "title": "Eye of a woman looking at a tablet",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:4180": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 9.3,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "4180",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "central",
+   "commuters",
+   "grand",
+   "station",
+   "york"
+  ],
+  "title": "Commuters at New York's grand central station",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:4747": {
+  "added": "2026-10-27",
+  "credit": "",
+  "dur": 13.2,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "4747",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Licence read from the item page by mixkit.py (videoFree)",
+  "source": "mixkit",
+  "tags": [
+   "corridor",
+   "scientist",
+   "walking"
+  ],
+  "title": "Scientist walking down a corridor",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:4891": {
+  "added": "2026-10-28",
+  "credit": "",
+  "dur": 9.1,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "4891",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Free (not Restricted) on https://mixkit.co/free-stock-video/woman-walking-down-the-street-watching-her-cell-phone-4891/ on 2026-10-28",
+  "source": "mixkit",
+  "tags": [
+   "cell",
+   "phone",
+   "street",
+   "walking",
+   "watching",
+   "woman"
+  ],
+  "title": "Woman walking down the street watching her cell phone",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:719": {
+  "added": "2026-10-28",
+  "credit": "",
+  "dur": 13.3,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "719",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Free (not Restricted) on https://mixkit.co/free-stock-video/man-running-on-trail-in-the-park-719/ on 2026-10-28",
+  "source": "mixkit",
+  "tags": [
+   "park",
+   "running",
+   "trail"
+  ],
+  "title": "Man running on trail in the park",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "mixkit:720": {
+  "added": "2026-10-28",
+  "credit": "",
+  "dur": 19.2,
+  "first_second": "ok",
+  "h": 1080,
+  "id": "720",
+  "kind": "video",
+  "licence": "Mixkit Stock Video Free License",
+  "licence_url": "",
+  "page": "",
+  "proof": "Free (not Restricted) on https://mixkit.co/free-stock-video/man-jogging-on-trail-in-the-park-720/ on 2026-10-28",
+  "source": "mixkit",
+  "tags": [
+   "jogging",
+   "park",
+   "trail"
+  ],
+  "title": "Man jogging on trail in the park",
+  "used_in": [
+   "Blindness"
+  ],
+  "w": 1920
+ },
+ "unsplash:i3srrRDsJEs": {
+  "added": "2026-10-27",
+  "credit": "Photo: Greg Gollin on Unsplash",
+  "id": "i3srrRDsJEs",
+  "kind": "photo",
+  "licence": "Unsplash License (free commercial use, no attribution required)",
+  "licence_url": "",
+  "page": "",
+  "proof": "downloaded via the Unsplash connector (download_asset) on 2026-10-27; premium=false",
+  "source": "unsplash",
+  "tags": [
+   "gorilla",
+   "mountain"
+  ],
+  "title": "Mountain gorilla",
+  "used_in": [
+   "Blindness"
+  ]
+ }
+}
