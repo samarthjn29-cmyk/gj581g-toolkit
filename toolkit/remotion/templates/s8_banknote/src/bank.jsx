@@ -107,5 +107,6 @@ export const Captions = () => { const f = useCurrentFrame(); const s = f / FPS; 
   const k = l.words && l.words.length === ws.length ? Math.max(0, l.words.filter((w) => w[1] <= s).length - 1) : Math.floor(((s - l.start) / (l.end - l.start)) * ws.length);
   return <div style={{position: 'absolute', left: 0, right: 0, top: 990, display: 'flex', justifyContent: 'center'}}>
     <div style={{background: 'rgba(28,36,34,0.88)', padding: '8px 22px', borderRadius: 10, fontFamily: IN, fontWeight: 650, fontSize: 38, color: C.ground, whiteSpace: 'nowrap'}}>
-      {ws.map((w, i) => <span key={i} style={{color: i === Math.min(k, ws.length - 1) ? '#E2B65A' : C.ground}}>{w}{i < ws.length - 1 ? ' ' : ''}</span>)}
+      {(() => { const kk = Math.min(Math.max(k, 0), ws.length - 1); const N = 8; const a = Math.floor(kk / N) * N; const part = ws.slice(a, a + N);  // at most 8 words on screen (long lines ran off the frame)
+        return part.map((w, j) => <span key={a + j} style={{color: a + j === kk ? '#E2B65A' : C.ground}}>{w}{j < part.length - 1 ? ' ' : ''}</span>); })()}
     </div></div>; };

@@ -104,12 +104,13 @@ def main():
             T = json.load(open(get('timing'))); full = f'{root}/build/full.mp4'; os.makedirs(f'{root}/build/frames', exist_ok=True)
             pts = sorted({l['end'] - 0.1 for l in T['lines'] if l['id'] in P.get('check_lines', ids[::max(1, len(ids) // 8)])})
             for k, t in enumerate(pts): subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t:.2f}', '-i', full, '-frames:v', '1', '-vf', 'scale=640:-1', f'{root}/build/frames/f{k:02d}.png'])
-            n = len(pts); cols = 4; rows = (n + cols - 1) // cols
-            ins = sum([['-i', f'{root}/build/frames/f{k:02d}.png'] for k in range(n)], [])
-            pad = ''.join(f'[{k}]' for k in range(n)) + ''.join('color=c=black:s=640x360:d=1[e%d];' % k for k in range(0))
-            fc = ';'.join(f"{''.join(f'[{r * cols + c}]' for c in range(cols) if r * cols + c < n)}hstack=inputs={min(cols, n - r * cols)}[r{r}]" if min(cols, n - r * cols) > 1 else f'[{r * cols}]null[r{r}]' for r in range(rows))
-            fc += ';' + ''.join(f'[r{r}]' for r in range(rows)) + (f'vstack=inputs={rows}[o]' if rows > 1 else 'null[o]')
-            rc = subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', fc, '-map', '[o]', f'{root}/build/frames_sheet.png']).returncode if n else 0
+            n = len(pts); rc = 0
+            if n:  # tile with Pillow (the ffmpeg hstack graph broke on a short last row)
+                from PIL import Image
+                ims = [Image.open(f'{root}/build/frames/f{k:02d}.png') for k in range(n)]; w, h = ims[0].size; cols = 4; rows = (n + cols - 1) // cols
+                sheet = Image.new('RGB', (w * cols, h * rows), 'white')
+                for k, im in enumerate(ims): sheet.paste(im, ((k % cols) * w, (k // cols) * h))
+                sheet.save(f'{root}/build/frames_sheet.png')
             lu = subprocess.run(['ffmpeg', '-i', full, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
             I = next((x.split()[1] for x in reversed(lu.splitlines()) if x.strip().startswith('I:')), '?')
             mark(st, rc == 0, f'{n} frames in build/frames_sheet.png; loudness {I} LUFS (look at the sheet before sending)')
