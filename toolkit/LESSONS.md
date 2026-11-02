@@ -45,3 +45,4 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 | 20 | Renders wasted on takes that were then redone | Render started before the voice was settled | Build stops at `voice`/`align` for review; render only after every scene passes |
 | 21 | An hour of babysitting per build | Ad-hoc commands | `toolkit/build/build.py` one command, resumable |
 | 22 | Script changes after voicing are slow | Sam edits best while watching | Workflow: animatic (quick voice) -> lock script -> clip-by-clip clone voice |
+| 23 | Skills described a Kokoro animatic mode and a fact-check gate in `build.py` that didn't exist; music level -24 vs -16 LUFS couldn't meet the 12 dB rule; 26 cross-skill clashes in all | Skills rewritten one by one, never read together against the toolkit | `build.py` now has `voice_mode: kokoro`, the `factcheck` gate and `render_scale`; after any skill change an independent reviewer reads all nine skills and the toolkit for clashes |
