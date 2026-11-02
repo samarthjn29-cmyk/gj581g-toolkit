@@ -1,4 +1,6 @@
-"""Decked out Data: narration in Sam's cloned voice (Chatterbox, MIT), v2 after Sam's pilot notes (1 Nov 2026).
+"""SUPERSEDED 2 Nov 2026: use clone_scenes.py with the voice profile voice_sample/sam_voice_v1 (temp 0.8, breaths kept, word check).
+Kept only to rebuild Tokens/LongChat. Its debreath and temperature 0.6 made the Raise pilot sound fake (Sam, 2 Nov).
+Decked out Data: narration in Sam's cloned voice (Chatterbox, MIT), v2 after Sam's pilot notes (1 Nov 2026).
 Usage: clone_all.py slides.json ref.wav outdir [scene numbers...]
 - One steady pace for the whole video (Sam: "keep the pace same"); 'fast' scenes are only a touch livelier.
 - Text is voiced in chunks of about 12-28 words (whole sentences), so the clone neither drifts on long passages
