@@ -15,6 +15,7 @@ TRIES = int(os.environ.get('TRIES', '8')); OKR, OKS = 0.93, 0.80
 ALIAS = {'anne': 'ann', 'barbra': 'barbara', 'babra': 'barbara', 'rays': 'raise'}
 def toks(s):
     s = s.lower().replace('%', ' percent ').replace('’', "'").replace('pay slip', 'payslip').replace('pay-slip', 'payslip').replace('take away', 'takeaway').replace('take-away', 'takeaway')
+    s = re.sub(r'(\d+)\.(\d+)', lambda x: num2words(int(x.group(1))) + ' point ' + ' '.join('oh' if d == '0' else num2words(int(d)) for d in x.group(2)), s)  # whisper writes 'one point oh five' as 1.05
     s = re.sub(r"(\d+)s\b", lambda x: num2words(int(x.group(1))) + 's', s)
     s = re.sub(r'\d+', lambda x: num2words(int(x.group()), to='year') if len(x.group()) == 4 else num2words(int(x.group())), s)
     return [ALIAS.get(w, w) for w in re.sub(r"[^a-z' ]", ' ', s.replace('-', ' ')).split()]
