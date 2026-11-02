@@ -18,6 +18,7 @@
     "topojson-client": "3.1.0",
     "us-atlas": "3.0.1",
     "world-atlas": "2.0.2",
-    "react-peeps": "0.1.10"
+    "react-peeps": "0.1.10",
+    "react-open-doodles": "1.0.5"
   }
 }

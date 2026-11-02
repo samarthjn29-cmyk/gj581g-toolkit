@@ -1,0 +1,13 @@
+{
+  "name": "gj581g-vectors",
+  "private": true,
+  "description": "Free vector libraries for GJ 581g videos (install per machine: npm install)",
+  "dependencies": {
+    "@phosphor-icons/core": "^2.1.1",
+    "@tabler/icons": "^3.50.0",
+    "humaaans": "^1.7.0",
+    "lucide-static": "^1.66.0",
+    "react-open-doodles": "^1.0.5",
+    "undraw-svg": "^2.0.0"
+  }
+}
