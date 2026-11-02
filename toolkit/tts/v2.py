@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tokens v2 pipeline with guard rails (written after the 1 Nov 2026 audit).
+"""Tokens v2 pipeline (Tokens only; superseded by clips/clip.py in toolkit 2.3). Written after the 1 Nov 2026 audit.
 
   v2.py voice N [N...]      hand-off -> clone scene N into tts/takes/<N>/ -> whisper transcript -> word diff vs the script
   v2.py accept N [N...]     copy the take into tts/vo2, merge durations, align words (never skipped again)
