@@ -2,7 +2,7 @@
 # and speaker-similar. Resumable: lines already in takes/lines/<id>.wav with a passing check are skipped.
 # Usage: cbx/bin/python3 clone_lines.py script.json ref.wav outdir [line ids...]
 import sys, os, json, re, subprocess, difflib, numpy as np, soundfile as sf, torch, librosa
-sys.path.insert(0, '/home/claude/gj581g-toolkit/toolkit/tts')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from clone_all import trim, squeeze_gaps, debreath
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
