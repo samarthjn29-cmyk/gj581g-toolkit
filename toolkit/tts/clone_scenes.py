@@ -39,6 +39,7 @@ def gaps(a, db=-38, min_s=0.12):
             i = j
         else: i += 1
     return res
+MAXWPS = float(os.environ.get('MAXWPS', '3.9'))
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
 for si, sc in enumerate(scenes):
@@ -65,8 +66,17 @@ for si, sc in enumerate(scenes):
         hw_all = [x[0] for x in H]
         ok_m = all(any(hw_all[j:j + len(mm)] == mm for j in range(len(hw_all))) for mm in must)
         ok_t = ok_t and ok_m
+        # pace: no line of 5+ words faster than MAXWPS spoken words/s (Sam on clip A: "Barbara's only buys..." far too fast, 4.3 w/s)
+        sm = difflib.SequenceMatcher(None, exp, [x[0] for x in H], autojunk=False); e2h = {}
+        for bl in sm.get_matching_blocks():
+            for q in range(bl.size): e2h[bl.a + q] = bl.b + q
+        fast = []; pos = 0
+        for l in L:
+            n = len(toks(l.get('say', l['text']))); idx = [e2h[q] for q in range(pos, pos + n) if q in e2h]; pos += n
+            if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s")
+        ok_p = not fast; ok_t = ok_t and ok_p
         score = r + 0.5 * s + (0.3 if ok_t else 0)
-        print(f"{sc} try {k}: words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
+        print(f"{sc} try {k}: words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
         if r >= OKR and s >= OKS and ok_t: break
     _, a, h, r, s, ok_t = best

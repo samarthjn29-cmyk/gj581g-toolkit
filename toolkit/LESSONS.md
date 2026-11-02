@@ -49,3 +49,9 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 | 24 | Footage shot blurred late in a scene (animatic v1, closing grocery clip) | OffthreadVideo plays from its Sequence start, not from when the shot appears | Wrap a late `Window` in `<Sequence from={at}>`; check a still at the shot's middle |
 | 25 | Animatic render refused: height 720.036 | render_scale 0.6667 is not a whole-pixel scale | build.py snaps the scale to round(1080*s)/1080 |
 | 26 | Pace lint failed every change word on the Kokoro animatic | Kokoro timing has no per-word times | pace_lint spreads words over the line by character position |
+| 27 | Clip A came out 49 s of 52: the last line was cut | ffmpeg amix ended early; the mux used -shortest | Mix padded to the timeline (apad + atrim); mux without -shortest |
+| 28 | Stale frame (UK chart) in clip A's check sheet | Frame files from an older build were reused | The check stage clears build/frames first |
+| 29 | "payslip" -> "baselet", "raise" -> "race" passed at word score 0.94 | One wrong word in a long scene still clears the 0.93 threshold | Every line with "raise" must-hears it; question-final "raise" is read as "pay raise" (`say`); reword a word that fails twice |
+| 30 | "Barbara's only buys one percent more" far too fast (Sam, clip A) | No pace check; the clone speeds through short sentences in a scene | clone_scenes rejects a take with any 5+-word line over 3.9 spoken words/s (MAXWPS) |
+| 31 | "Meet Ann" heard as "At" (Sam, clip A) | A one-syllable name after a short verb blurs in the clone | "This is Ann." with `must` on the name; avoid one-syllable names alone at the start of a scene |
+| 32 | Source lines unreadable on the note border (Sam, clip A) | Source text placed inside the engraved border band | Source lines sit below the note (y about 942), above the captions |
