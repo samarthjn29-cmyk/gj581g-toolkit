@@ -36,6 +36,11 @@ def times(S, T):
     for l in S:
         if T and l['id'] in T:
             tl = T[l['id']]; ws = tl.get('words') or []
+            if not ws:  # line-level timing only (Kokoro animatic): spread the words by character position, as the scenes' tw() does
+                raw = l['text'].split(); ch = [len(w) + 1 for w in raw]; tot = sum(ch); acc = 0
+                for w, n in zip(raw, ch):
+                    if norm(w): ws.append((norm(w), tl['start'] + (tl['end'] - tl['start']) * acc / tot))
+                    acc += n
             out.append(dict(l, start=tl['start'], end=tl['end'], wt=[(w[0], w[1]) for w in ws])); continue
         ws = [norm(w) for w in l.get('say', l['text']).split() if norm(w)]; d = len(ws) / 2.6
         out.append(dict(l, start=t, end=t + d, wt=[(w, t + d * i / len(ws)) for i, w in enumerate(ws)])); t += d + 0.3
