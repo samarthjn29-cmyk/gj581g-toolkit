@@ -18,7 +18,14 @@ def toks(s):
     s = re.sub(r"(\d+)s\b", lambda x: num2words(int(x.group(1))) + 's', s)
     s = re.sub(r'\d+', lambda x: num2words(int(x.group()), to='year') if len(x.group()) == 4 else num2words(int(x.group())), s)
     return [ALIAS.get(w, w) for w in re.sub(r"[^a-z' ]", ' ', s.replace('-', ' ')).split()]
-m = ChatterboxTTS.from_pretrained(device='cpu'); sr = m.sr; m.prepare_conditionals(ref, exaggeration=EXAG)
+m = ChatterboxTTS.from_pretrained(device='cpu'); sr = m.sr
+if os.path.isdir(ref):  # a saved voice profile (e.g. voice_sample/sam_voice_v1): identical voice, settings from profile.json unless set in env
+    from chatterbox.tts import Conditionals
+    prof = json.load(open(f'{ref}/profile.json'))['settings']
+    EXAG = float(os.environ.get('EXAG', prof['exaggeration'])); CFG = float(os.environ.get('CFG', prof['cfg_weight'])); TEMP = float(os.environ.get('TEMP', prof['temperature']))
+    m.conds = Conditionals.load(f'{ref}/conds.pt').to('cpu'); ref = f'{ref}/ref.wav'
+else:
+    m.prepare_conditionals(ref, exaggeration=EXAG)
 ref_emb = m.ve.embeds_from_wavs([librosa.load(ref, sr=16000)[0]], sample_rate=16000, as_spk=True)
 wm = WhisperModel('small.en', device='cpu', compute_type='int8')
 def gaps(a, db=-38, min_s=0.12):

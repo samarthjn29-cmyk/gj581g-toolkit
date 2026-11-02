@@ -55,8 +55,8 @@ def main():
                 if L.get(sc, {}).get('ok') and sc not in lines: continue
                 for attempt in range(3):
                     rc = run([PY, f'{TK}/tts/clone_scenes.py', get('script'), P['voice_ref'] if os.path.isabs(P['voice_ref']) else get('voice_ref'), takes, sc],
-                             env=dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1', EXAG=str(V.get('exag', 0.5)), CFG=str(V.get('cfg', 0.5)), TEMP=str(V.get('temp', 0.8)),
-                                      SEED_OFFSET=str(attempt * 1000 + int(os.environ.get('SEED_OFFSET', '0')))))
+                             env=dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1', SEED_OFFSET=str(attempt * 1000 + int(os.environ.get('SEED_OFFSET', '0'))),
+                                      **{k: str(V[v]) for k, v in (('EXAG', 'exag'), ('CFG', 'cfg'), ('TEMP', 'temp')) if v in V}))
                     if rc == 0: break
                     log(f'scene {sc}: voice process exited {rc}, retry {attempt + 1}')
                 L = json.load(open(lj)) if os.path.exists(lj) else {}; r = L.get(sc, {})
