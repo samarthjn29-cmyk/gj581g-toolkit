@@ -42,14 +42,14 @@ def gaps(a, db=-38, min_s=0.12):
 MAXWPS = float(os.environ.get('MAXWPS', '3.9'))
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
-for si, sc in enumerate(scenes):
-    if (want and sc not in want) or (not want and log.get(sc, {}).get('ok')): continue
-    L = [l for l in S if l['scene'] == sc]; text = ' '.join(l.get('say', l['text']) for l in L); exp = toks(text)
+MAXLINES = int(os.environ.get('MAXLINES', '4'))  # long scenes are voiced in parts of <= 4 lines and joined: an 8-line passage rushed (4-5 w/s) and ran out of memory (clip B real, 3 Nov)
+def voice_part(L, si, pi):
+    text = ' '.join(l.get('say', l['text']) for l in L); exp = toks(text)
     tight = [toks(l.get('say', l['text'])) for l in L if l.get('tight')]
     must = [toks(x) for l in L for x in l.get('must', [])]  # meaning-carrying phrases that must be heard exactly (e.g. "pay slip")
     best = None; slow_down = False
     for k in range(TRIES):
-        torch.manual_seed(7000 + si * 61 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
+        torch.manual_seed(7000 + si * 61 + pi * 13 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
         cfg = CFG if k < 3 or not slow_down else (0.3 if k < 5 else 0.2)  # rushed takes: step the guidance down (lower cfg = slower delivery), Sam's settings first
         w = m.generate(text, exaggeration=EXAG, cfg_weight=cfg, temperature=TEMP)
         a = squeeze_gaps(trim(w.squeeze(0).cpu().numpy().astype(np.float64), sr), sr, maxgap=0.40, keep=0.30)
@@ -77,11 +77,18 @@ for si, sc in enumerate(scenes):
             if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s")
         ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or bool(fast)
         score = r + 0.5 * s + (0.3 if ok_t else 0)
-        print(f"{sc} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
+        print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
         del w, segs; import gc; gc.collect()  # long scenes were OOM-killed (-9) part-way through 8 tries (clip B infl, real)
         if r >= OKR and s >= OKS and ok_t: break
-    _, a, h, r, s, ok_t = best
+    return best
+for si, sc in enumerate(scenes):
+    if (want and sc not in want) or (not want and log.get(sc, {}).get('ok')): continue
+    LL = [l for l in S if l['scene'] == sc]; n = -(-len(LL) // MAXLINES); per = -(-len(LL) // n)
+    parts = [voice_part(LL[i:i + per], si, i // per) for i in range(0, len(LL), per)]
+    gap = np.zeros(int(sr * 0.35))
+    a = np.concatenate([x for p_ in parts for x in (p_[1], gap)][:-1]); h = ' '.join(p_[2] for p_ in parts)
+    r = float(np.mean([p_[3] for p_ in parts])); s = min(p_[4] for p_ in parts); ok_t = all(p_[5] for p_ in parts)
     sf.write(f'{out}/{sc}.wav', a, sr)  # breaths kept (Sam: removing them made it sound fake)
-    log[sc] = dict(heard=h, words=round(r, 3), sim=round(s, 3), tight_ok=ok_t, ok=bool(r >= OKR and s >= OKS and ok_t)); json.dump(log, open(lj, 'w'), indent=1)
+    log[sc] = dict(heard=h, words=round(r, 3), sim=round(s, 3), tight_ok=ok_t, ok=bool(min(p_[3] for p_ in parts) >= OKR and s >= OKS and ok_t), parts=len(parts)); json.dump(log, open(lj, 'w'), indent=1)
 print('DONE', sum(v['ok'] for v in log.values()), '/', len(scenes), 'scenes passing')
