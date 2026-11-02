@@ -11,7 +11,7 @@ from faster_whisper import WhisperModel
 from num2words import num2words
 S = json.load(open(sys.argv[1])); ref, out = sys.argv[2], sys.argv[3]; want = set(sys.argv[4:]); os.makedirs(out, exist_ok=True)
 EXAG, CFG, TEMP = (float(os.environ.get(k, d)) for k, d in (('EXAG', '0.5'), ('CFG', '0.5'), ('TEMP', '0.8')))
-TRIES = int(os.environ.get('TRIES', '6')); OKR, OKS = 0.93, 0.80
+TRIES = int(os.environ.get('TRIES', '8')); OKR, OKS = 0.93, 0.80
 ALIAS = {'anne': 'ann', 'barbra': 'barbara', 'babra': 'barbara', 'rays': 'raise'}
 def toks(s):
     s = s.lower().replace('%', ' percent ').replace('’', "'").replace('pay slip', 'payslip').replace('pay-slip', 'payslip').replace('take away', 'takeaway').replace('take-away', 'takeaway')
@@ -47,10 +47,11 @@ for si, sc in enumerate(scenes):
     L = [l for l in S if l['scene'] == sc]; text = ' '.join(l.get('say', l['text']) for l in L); exp = toks(text)
     tight = [toks(l.get('say', l['text'])) for l in L if l.get('tight')]
     must = [toks(x) for l in L for x in l.get('must', [])]  # meaning-carrying phrases that must be heard exactly (e.g. "pay slip")
-    best = None
+    best = None; slow_down = False
     for k in range(TRIES):
         torch.manual_seed(7000 + si * 61 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
-        w = m.generate(text, exaggeration=EXAG, cfg_weight=CFG, temperature=TEMP)
+        cfg = CFG if k < 3 or not slow_down else (0.3 if k < 5 else 0.2)  # rushed takes: step the guidance down (lower cfg = slower delivery), Sam's settings first
+        w = m.generate(text, exaggeration=EXAG, cfg_weight=cfg, temperature=TEMP)
         a = squeeze_gaps(trim(w.squeeze(0).cpu().numpy().astype(np.float64), sr), sr, maxgap=0.40, keep=0.30)
         segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)  # a generator: read it once
         h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w_.start, w_.end) for s_ in segs for w_ in s_.words for tk in toks(w_.word)]
@@ -74,9 +75,9 @@ for si, sc in enumerate(scenes):
         for l in L:
             n = len(toks(l.get('say', l['text']))); idx = [e2h[q] for q in range(pos, pos + n) if q in e2h]; pos += n
             if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s")
-        ok_p = not fast; ok_t = ok_t and ok_p
+        ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or bool(fast)
         score = r + 0.5 * s + (0.3 if ok_t else 0)
-        print(f"{sc} try {k}: words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
+        print(f"{sc} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
         if r >= OKR and s >= OKS and ok_t: break
     _, a, h, r, s, ok_t = best
