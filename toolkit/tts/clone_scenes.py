@@ -38,6 +38,7 @@ for si, sc in enumerate(scenes):
     if (want and sc not in want) or (not want and log.get(sc, {}).get('ok')): continue
     L = [l for l in S if l['scene'] == sc]; text = ' '.join(l.get('say', l['text']) for l in L); exp = toks(text)
     tight = [toks(l.get('say', l['text'])) for l in L if l.get('tight')]
+    must = [toks(x) for l in L for x in l.get('must', [])]  # meaning-carrying phrases that must be heard exactly (e.g. "pay slip")
     best = None
     for k in range(TRIES):
         torch.manual_seed(7000 + si * 61 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
@@ -54,8 +55,11 @@ for si, sc in enumerate(scenes):
                 if hw[j:j + len(tt)] == tt:
                     t_a, t_b = H[j][1], H[j + len(tt) - 1][2]
                     if any(t_a + 0.05 < g0 and g1 < t_b - 0.05 for g0, g1 in gaps(a, min_s=0.10)): ok_t = False
+        hw_all = [x[0] for x in H]
+        ok_m = all(any(hw_all[j:j + len(mm)] == mm for j in range(len(hw_all))) for mm in must)
+        ok_t = ok_t and ok_m
         score = r + 0.5 * s + (0.3 if ok_t else 0)
-        print(f"{sc} try {k}: words {r:.2f} sim {s:.2f}{'' if ok_t else ' PAUSE-IN-TIGHT'} | {h}", flush=True)
+        print(f"{sc} try {k}: words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
         if r >= OKR and s >= OKS and ok_t: break
     _, a, h, r, s, ok_t = best
