@@ -120,10 +120,10 @@ def main():
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
             rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={round(1080 * float(P['render_scale'])) / 1080!r}"] if P.get('render_scale') else []), cwd=get('remotion'))  # scale snapped so 1080*scale is a whole pixel (Remotion refuses 720.036)
-            if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent, '-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', f'{root}/build/full.mp4'])
+            if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent, '-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', f'{root}/build/full.mp4'])  # no -shortest: the mix is padded to the timeline (a short mix cut the last line, clip A 2 Nov)
             mark(st, rc == 0)
         elif st == 'check':
-            T = json.load(open(get('timing'))); full = f'{root}/build/full.mp4'; os.makedirs(f'{root}/build/frames', exist_ok=True)
+            T = json.load(open(get('timing'))); full = f'{root}/build/full.mp4'; shutil.rmtree(f'{root}/build/frames', ignore_errors=True); os.makedirs(f'{root}/build/frames', exist_ok=True)  # no stale frames from an earlier build
             pts = sorted({l['end'] - 0.1 for l in T['lines'] if l['id'] in P.get('check_lines', ids[::max(1, len(ids) // 8)])})
             for k, t in enumerate(pts): subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t:.2f}', '-i', full, '-frames:v', '1', '-vf', 'scale=640:-1', f'{root}/build/frames/f{k:02d}.png'])
             n = len(pts); rc = 0
