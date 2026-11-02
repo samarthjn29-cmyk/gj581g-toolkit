@@ -43,7 +43,7 @@ for si, sc in enumerate(scenes):
         torch.manual_seed(7000 + si * 61 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
         w = m.generate(text, exaggeration=EXAG, cfg_weight=CFG, temperature=TEMP)
         a = squeeze_gaps(trim(w.squeeze(0).cpu().numpy().astype(np.float64), sr), sr, maxgap=0.40, keep=0.30)
-        segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True)
+        segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)  # a generator: read it once
         h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w_.start, w_.end) for s_ in segs for w_ in s_.words for tk in toks(w_.word)]
         r = difflib.SequenceMatcher(None, exp, [x[0] for x in H], autojunk=False).ratio()
         s = float(m.ve.voice_similarity(m.ve.embeds_from_wavs([librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000)], sample_rate=16000, as_spk=True), ref_emb))

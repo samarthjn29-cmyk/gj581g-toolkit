@@ -19,7 +19,7 @@ for d in SC:
     a, _ = librosa.load(f"{takes}/{d['scene']}.wav", sr=SR)
     e = librosa.feature.rms(y=a, frame_length=1200, hop_length=600)[0]; on = int(np.argmax(e > 0.25 * e.max())) * 600
     a = a[max(0, on - int(0.08 * SR)):]; _, (i0, i1) = librosa.effects.trim(a, top_db=38); a = a[:i1 + int(0.1 * SR)]
-    segs, _ = wm.transcribe(librosa.resample(a, orig_sr=SR, target_sr=16000), language='en', word_timestamps=True)
+    segs, _ = wm.transcribe(librosa.resample(a, orig_sr=SR, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)
     H = [(tk, w.start, w.end) for s_ in segs for w in s_.words for tk in toks(w.word)]
     L = [l for l in S if l['scene'] == d['scene']]
     E = [(li, wi, tk) for li, l in enumerate(L) for wi, w in enumerate(l.get('say', l['text']).split()) for tk in toks(w)]
