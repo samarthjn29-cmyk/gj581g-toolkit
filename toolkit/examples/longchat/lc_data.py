@@ -28,7 +28,7 @@ G, g = {}, 0.0
 for d in S[:LAST]:
     n = int(d['n']); G[n] = g; g += dur(n) + 0.35 + float(d.get('hold') or 0)
 clip0 = G[FIRST]
-cues = [(a, fpath, off) for a, fpath, off in MUSIC if a <= LAST]
+cues = [(a, fpath, off) for i, (a, fpath, off) in enumerate(MUSIC) if a <= LAST and (i + 1 == len(MUSIC) or MUSIC[i + 1][0] > FIRST)]  # drop cues already replaced before this clip
 segs = []
 for i, (a, fpath, off) in enumerate(cues):
     s0 = starts.get(a, 0.0) if a >= FIRST else 0.0
