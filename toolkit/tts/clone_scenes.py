@@ -79,6 +79,7 @@ for si, sc in enumerate(scenes):
         score = r + 0.5 * s + (0.3 if ok_t else 0)
         print(f"{sc} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
+        del w, segs; import gc; gc.collect()  # long scenes were OOM-killed (-9) part-way through 8 tries (clip B infl, real)
         if r >= OKR and s >= OKS and ok_t: break
     _, a, h, r, s, ok_t = best
     sf.write(f'{out}/{sc}.wav', a, sr)  # breaths kept (Sam: removing them made it sound fake)
