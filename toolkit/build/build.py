@@ -18,7 +18,7 @@ Writes build/status.json (stage, time, result) and build/build.log; prints one l
 import json, os, sys, subprocess, time, shutil
 TK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY = os.environ.get('CBX_PY', '/home/claude/cbx/bin/python3')
-STAGES = ['voice', 'align', 'lint', 'mix', 'render', 'check', 'deliver']
+STAGES = ['voice', 'align', 'mix', 'lint', 'render', 'check', 'deliver']  # mix before lint: the lint reads the fresh sfx cues
 
 def main():
     a = sys.argv[1:]; pj = os.path.abspath(a[0]); root = os.path.dirname(pj); P = json.load(open(pj))
