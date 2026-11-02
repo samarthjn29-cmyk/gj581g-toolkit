@@ -3,7 +3,9 @@ import json, subprocess, sys
 D = '/home/claude/raise'
 tim = json.load(open(f'{D}/tts/timing.json')); L = {l['id']: l for l in tim['lines']}; TOTAL = tim['total']
 def tw(i, word, k=0):
-    l = L[i]; ws = l['text'].split(' '); n = -1; idx = 0
+    l = L[i]
+    if 'words' in l: return [w for w in l['words'] if w[0].startswith(word.lower())][k][1]
+    ws = l['text'].split(' '); n = -1; idx = 0
     for j, w in enumerate(ws):
         ww = ''.join(c for c in w.lower() if c.isalnum() or c in "-'")
         if n < k and ww.startswith(word.lower()):
@@ -17,7 +19,7 @@ cues = [
  ('paper', 0.05, -18), ('typewriter', tw('a2', 'two') - 14 * F, -24), ('typewriter', tw('a3', 'prices') - 6 * F, -24), ('stamp', tw('a3', 'zero'), -16),
  ('paper', t0('b1') - 0.35, -18), ('typewriter', tw('b1', 'five') - 14 * F, -24), ('typewriter', tw('b2', 'prices') - 6 * F, -24), ('stamp', tw('b2', 'four'), -16),
  ('paper', t0('d1') - 0.35, -20), ('coin', tw('d3', 'one'), -18),
- ('paper', t0('p1') - 0.35, -20), ('ding', tw('p1', 'seventy') + 0.7, -19), ('ding', tw('p3', 'sixty') + 0.7, -21),
+ ('paper', t0('p1') - 0.35, -20), ('ding', tw('p1', 'seventy') + 0.7, -19), ('ding', tw('p3', 'sixty') + 0.7, -21), ('stamp', tw('p4', 'twenty', 0) + 4 * F, -17), ('stamp', tw('p4', 'twenty', 2) + 4 * F, -17),
  ('whoosh', t0('s1') - 0.35, -18), ('stamp', tw('s2', 'four'), -15),
  ('stamp', t0('i1') - 0.2, -18), ('paper', tw('i2', 'number') - 0.2, -20),
  ('paper', t0('u1') - 0.35, -20), ('ding', t0('u3') - 0.45, -18), ('coin', t0('u3') + 0.2, -19),

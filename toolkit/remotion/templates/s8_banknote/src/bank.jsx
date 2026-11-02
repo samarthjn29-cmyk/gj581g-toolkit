@@ -16,8 +16,11 @@ if (typeof document !== 'undefined') { const h = delayRender('fonts');
 // ---- timing: seconds of a line, or of a word inside a line (k = which occurrence)
 const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
 export const t0 = (id) => L[id].start;
-export const tw = (id, word, k = 0) => { const l = L[id]; const ws = l.text.split(' '); let n = -1, idx = 0;
-  ws.forEach((w, i) => { if (n < k && w.toLowerCase().replace(/[^a-z0-9-']/g, '').startsWith(word.toLowerCase())) { n++; if (n === k) idx = i; } });
+// aligned word times (clone + Whisper) when present; otherwise estimated from character position
+export const tw = (id, word, k = 0) => { const l = L[id]; const key = word.toLowerCase();
+  if (l.words) { const hits = l.words.filter((w) => w[0].startsWith(key)); if (hits.length > k) return hits[k][1]; throw new Error(`cue word "${word}" (${k}) not heard in ${id}`); }
+  const ws = l.text.split(' '); let n = -1, idx = 0;
+  ws.forEach((w, i) => { if (n < k && w.toLowerCase().replace(/[^a-z0-9-']/g, '').startsWith(key)) { n++; if (n === k) idx = i; } });
   if (n < k) throw new Error(`cue word "${word}" (${k}) not in ${id}`);
   const chars = ws.map((w) => w.length + 1); const before = chars.slice(0, idx).reduce((a, b) => a + b, 0); const tot = chars.reduce((a, b) => a + b, 0);
   return l.start + (l.end - l.start) * before / tot; };
@@ -100,7 +103,8 @@ export const Window = ({x, y, w, h, src, from = 0, rate = 1, f, at, tint = C.gre
 
 // burnt-in captions: the current line, word highlighted
 export const Captions = () => { const f = useCurrentFrame(); const s = f / FPS; const l = LINES.find((x) => s >= x.start - 0.05 && s <= x.end + 0.25);
-  if (!l) return null; const ws = l.text.split(' '); const k = Math.floor(((s - l.start) / (l.end - l.start)) * ws.length);
+  if (!l) return null; const ws = l.text.split(' ');
+  const k = l.words && l.words.length === ws.length ? Math.max(0, l.words.filter((w) => w[1] <= s).length - 1) : Math.floor(((s - l.start) / (l.end - l.start)) * ws.length);
   return <div style={{position: 'absolute', left: 0, right: 0, top: 990, display: 'flex', justifyContent: 'center'}}>
     <div style={{background: 'rgba(28,36,34,0.88)', padding: '8px 22px', borderRadius: 10, fontFamily: IN, fontWeight: 650, fontSize: 38, color: C.ground, whiteSpace: 'nowrap'}}>
       {ws.map((w, i) => <span key={i} style={{color: i === Math.min(k, ws.length - 1) ? '#E2B65A' : C.ground}}>{w}{i < ws.length - 1 ? ' ' : ''}</span>)}

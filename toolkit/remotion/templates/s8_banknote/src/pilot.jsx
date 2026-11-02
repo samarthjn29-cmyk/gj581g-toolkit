@@ -97,7 +97,7 @@ const Bar = ({y, q, pct, who, color, at, f}) => { const p = ease(f, at, 22); con
     <T x={1356} y={y + 160} s={30} f={FI} w={400} c={color} style={{opacity: p}}>said {who}</T>
   </>; };
 
-const Poll = () => { const {f, at} = useS('poll');
+const Poll = () => { const {f, at} = useS('poll'); const r4 = at(t0('p4')) + 30, a21 = at(tw('p4', 'twenty', 0)) + 4, a24 = at(tw('p4', 'twenty', 2)) + 4;
   return <AbsoluteFill>
     <svg width={1920} height={1080} style={{position: 'absolute'}}>
       <NoteFrame x={200} y={110} w={1520} h={820} color={C.green} draw={ease(f, 0, 10)} fill={C.paper} />
@@ -107,7 +107,11 @@ const Poll = () => { const {f, at} = useS('poll');
     <Bar y={290} q="WHO IS BETTER OFF ECONOMICALLY?" pct={71} who="Ann" color={C.green} at={at(tw('p1', 'seventy'))} f={f} />
     <Bar y={560} q="WHO IS HAPPIER?" pct={64} who="Barbara" color={C.ox} at={at(tw('p3', 'sixty'))} f={f} />
     {f >= at(t0('p2')) && f < at(tw('p3', 'sixty')) - 10 && <T x={330} y={560} s={34} f={OS} w={500} c={C.ink} ls={3} style={pop(f, at(t0('p2')))}>WHO IS HAPPIER?</T>}
-    <T x={330} y={830} s={22} f={IN} w={500} c={C.mute} style={pop(f, 6)}>Shafir, Diamond &amp; Tversky (1997), "Money Illusion", Quarterly Journal of Economics 112(2). Each question asked of a separate group.</T>
+    {f >= r4 && <div style={{position: 'absolute', inset: 0, background: 'rgba(247,243,232,0.78)', opacity: ease(f, r4, 8)}} />}
+    <Stamp x={470} y={420} color={C.green} f={f} at={a21} s={50} bg={C.paper}>RETESTED 2021 · SAME RESULT</Stamp>
+    <Stamp x={560} y={570} color={C.green} f={f} at={a24} s={50} bg={C.paper}>RETESTED 2024 · BRAZIL · SAME RESULT</Stamp>
+    <T x={330} y={830} s={22} f={IN} w={500} c={C.mute} style={pop(f, 6)}>{f < a21 ? 'Shafir, Diamond & Tversky (1997), "Money Illusion", Quarterly Journal of Economics 112(2). Each question asked of a separate group.'
+      : 'Replications: Ziano et al. (2021), J. Economic Psychology 83 · Ferreira et al. (2024), J. Economic Psychology 104'}</T>
     <Serial />
   </AbsoluteFill>; };
 
@@ -121,7 +125,7 @@ const Shop = () => { const {f, at} = useS('shop'); const st = at(tw('s2', 'four'
     <Serial />
   </AbsoluteFill>; };
 
-const Illusion = () => { const {f, at} = useS('illusion'); const b = at(tw('i2', 'number')), c = at(tw('i2', 'buy'));
+const Illusion = () => { const {f, at} = useS('illusion'); const b = at(tw('i2', 'number')), c = at(tw('i2', 'not'));
   return <AbsoluteFill>
     <svg width={1920} height={1080} style={{position: 'absolute'}}>
       {[180, 1740].map((cx) => [0, 1, 2].map((k) => <path key={cx + '_' + k} d={rosette(cx, 300, 120 - k * 16, 23 + k * 4, 44 - k * 6)} stroke={k === 1 ? C.gold : C.green} strokeWidth="0.8" fill="none" opacity={0.55 * ease(f, 0, 14)} />))}
