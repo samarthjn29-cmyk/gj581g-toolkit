@@ -56,7 +56,8 @@ def voice_part(L, si, pi):
         segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)  # a generator: read it once
         h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w_.start, w_.end) for s_ in segs for w_ in s_.words for tk in toks(w_.word)]
         for j in range(len(H) - 1, 0, -1):  # whisper gives words one by one, so 'take' 'away' never became 'takeaway' (take1 scored 0.87 on a clean take)
-            if H[j - 1][0] == 'take' and H[j][0] == 'away': H[j - 1:j + 1] = [('takeaway', H[j - 1][1], H[j][2])]
+            pair = (H[j - 1][0], H[j][0])
+            if pair in (('take', 'away'), ('pay', 'slip')): H[j - 1:j + 1] = [(''.join(pair), H[j - 1][1], H[j][2])]
         r = difflib.SequenceMatcher(None, exp, [x[0] for x in H], autojunk=False).ratio()
         s = float(m.ve.voice_similarity(m.ve.embeds_from_wavs([librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000)], sample_rate=16000, as_spk=True), ref_emb))
         ok_t = True
