@@ -119,7 +119,7 @@ def main():
             mark(st, rc == 0, P.get('music', ''))
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
-            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={P['render_scale']}"] if P.get('render_scale') else []), cwd=get('remotion'))
+            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={round(1080 * float(P['render_scale'])) / 1080!r}"] if P.get('render_scale') else [])  # snapped so 1080*scale is a whole pixel (Remotion refuses 720.036), cwd=get('remotion'))
             if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent, '-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', f'{root}/build/full.mp4'])
             mark(st, rc == 0)
         elif st == 'check':
