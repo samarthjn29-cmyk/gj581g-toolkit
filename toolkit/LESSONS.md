@@ -46,3 +46,6 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 | 21 | An hour of babysitting per build | Ad-hoc commands | `toolkit/build/build.py` one command, resumable |
 | 22 | Script changes after voicing are slow | Sam edits best while watching | Workflow: animatic (quick voice) -> lock script -> clip-by-clip clone voice |
 | 23 | Skills described a Kokoro animatic mode and a fact-check gate in `build.py` that didn't exist; music level -24 vs -16 LUFS couldn't meet the 12 dB rule; 26 cross-skill clashes in all | Skills rewritten one by one, never read together against the toolkit | `build.py` now has `voice_mode: kokoro`, the `factcheck` gate and `render_scale`; after any skill change an independent reviewer reads all nine skills and the toolkit for clashes |
+| 24 | Footage shot blurred late in a scene (animatic v1, closing grocery clip) | OffthreadVideo plays from its Sequence start, not from when the shot appears | Wrap a late `Window` in `<Sequence from={at}>`; check a still at the shot's middle |
+| 25 | Animatic render refused: height 720.036 | render_scale 0.6667 is not a whole-pixel scale | build.py snaps the scale to round(1080*s)/1080 |
+| 26 | Pace lint failed every change word on the Kokoro animatic | Kokoro timing has no per-word times | pace_lint spreads words over the line by character position |
