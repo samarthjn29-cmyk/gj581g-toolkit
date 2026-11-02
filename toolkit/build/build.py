@@ -71,7 +71,7 @@ def main():
                 json.dump(L, open(lj, 'w'))
             for sc in scenes:
                 L = json.load(open(lj)) if os.path.exists(lj) else {}
-                if L.get(sc, {}).get('ok') and sc not in lines: continue
+                if (lines and sc not in lines) or (not lines and L.get(sc, {}).get('ok')): continue  # --lines voices only those scenes (it re-voiced every CHECK scene too, 3 Nov)
                 for attempt in range(3):
                     rc = run([PY, f'{TK}/tts/clone_scenes.py', get('script'), P['voice_ref'] if os.path.isabs(P['voice_ref']) else get('voice_ref'), takes, sc],
                              env=dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1', SEED_OFFSET=str(attempt * 1000 + int(os.environ.get('SEED_OFFSET', '0'))),
