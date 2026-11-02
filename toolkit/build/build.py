@@ -8,7 +8,12 @@
   * Never `pkill -f <pattern>` from a shell whose own command line contains the pattern (it kills itself, exit 144).
 Resumable: lines already passing the word check are skipped; `--from STAGE` restarts later; `--lines a1 b2` re-voices lines.
 
-Usage: build.py project.json [--from voice|align|lint|mix|render|check|deliver] [--only STAGE] [--lines ID ...]
+Usage: build.py project.json [--from voice|align|mix|lint|render|check|deliver] [--only STAGE] [--lines ID ...]
+  --lines takes SCENE ids in scene mode and LINE ids in line mode (re-voices only those).
+Modes (project.json "voice_mode"): "kokoro" = animatic (Kokoro at natural speed, no fact-check needed; set "render_scale": 0.6667
+for a 720p draft); "scene" = Sam's clone, one passage per scene (default for final clips); "line" = clone line by line (fixes only).
+Fact-check gate (clone modes): "factcheck": "<csv>" whose every `verdict` is OK, or "factcheck_waiver": "<reason>" for a pilot whose
+figures are labelled pending or already checked. Without either, the voice stage refuses to run the clone.
 project.json (paths relative to the file):
   {"name": "Raise_v1_pilot", "script": "story/pilot_script.json", "voice_ref": ".../ref_take2_opener.wav",
    "voice": {"exag": 0.48, "cfg": 0.46}, "takes": "voice/linesA", "vo": "tts/vo.wav", "timing": "tts/timing.json",
@@ -37,14 +42,28 @@ def main():
         status[stage] = dict(ok=ok, at=time.strftime('%Y-%m-%d %H:%M:%S'), note=note); json.dump(status, open(stj, 'w'), indent=1)
         log(f"{'OK  ' if ok else 'FAIL'} {stage} {note}")
         if not ok: sys.exit(f'build stopped at {stage}: see build/build.log')
-    busy = subprocess.run(['bash', '-c', "ps -eo args | grep -E '^[^ ]*python3 [^ ]*clone_(lines|all)\\.py|remotion render' | grep -v grep"], capture_output=True, text=True).stdout.strip()
+    busy = subprocess.run(['bash', '-c', "ps -eo args | grep -E '^[^ ]*python3 [^ ]*clone_(lines|scenes|all)\\.py|remotion render' | grep -v grep"], capture_output=True, text=True).stdout.strip()
     if busy: sys.exit(f'another voice or render job is running (memory):\n{busy}')
     S = json.load(open(get('script'))); ids = [l['id'] for l in S]
     todo = STAGES[STAGES.index(only):STAGES.index(only) + 1] if only else STAGES[STAGES.index(start):]
     takes = get('takes'); os.makedirs(takes, exist_ok=True)
     for st in todo:
         t0 = time.time(); log(f'---- {st}')
-        if st == 'voice' and P.get('voice_mode') == 'scene':  # one passage per scene (more natural; Sam 2 Nov 2026)
+        if st == 'voice' and P.get('voice_mode', 'line') in ('scene', 'line'):  # fact-check gate before any clone voicing
+            fc = P.get('factcheck'); waiver = P.get('factcheck_waiver')
+            if fc:
+                import csv
+                rows = list(csv.DictReader(open(os.path.join(root, fc), newline='', encoding='utf-8')))
+                bad = [r for r in rows if (r.get('verdict') or '').strip().upper() != 'OK']
+                if bad: mark(st, False, f"fact-check: {len(bad)} of {len(rows)} rows not OK (e.g. row {bad[0].get('row', '?')}): no clone voicing")
+                log(f'fact-check: all {len(rows)} rows OK')
+            elif waiver: log(f'fact-check waived: {waiver}')
+            else: mark(st, False, 'no "factcheck" csv and no "factcheck_waiver" in project.json: clone voicing refused (use voice_mode "kokoro" for the animatic)')
+        if st == 'voice' and P.get('voice_mode') == 'kokoro':  # animatic: quick computer voice straight to vo + timing
+            rc = run([sys.executable, f'{TK}/tts/kokoro_lines.py', get('script'), P.get('kokoro_voice', 'am_michael'), get('vo'), get('timing')],
+                     env=dict(KOKORO_DIR=os.environ.get('KOKORO_DIR', '/home/claude/kokoro')))
+            mark(st, rc == 0, 'kokoro animatic voice')
+        elif st == 'voice' and P.get('voice_mode') == 'scene':  # one passage per scene (more natural; Sam 2 Nov 2026)
             lj = f'{takes}/log.json'; scenes = list(dict.fromkeys(l['scene'] for l in S)); V = P.get('voice', {})
             if lines:
                 L = json.load(open(lj)) if os.path.exists(lj) else {}
@@ -84,6 +103,9 @@ def main():
             L = json.load(open(lj)); bad = [i for i in ids if not L.get(i, {}).get('ok')]
             missing = [i for i in ids if not os.path.exists(f'{takes}/{i}.wav')]
             mark(st, not missing, f"{len(ids) - len(bad)}/{len(ids)} lines pass the word check" + (f"; to listen to: {', '.join(bad)}" if bad else ''))
+        elif st == 'align' and P.get('voice_mode') == 'kokoro':  # timing already written by kokoro_lines.py
+            if P.get('remotion'): shutil.copy(get('timing'), os.path.join(get('remotion'), 'src/data/timing.json'))
+            mark(st, True, f"total {json.load(open(get('timing')))['total']:.1f} s (kokoro)")
         elif st == 'align':
             rc = run([PY, f"{TK}/tts/{'assemble_scenes' if P.get('voice_mode') == 'scene' else 'assemble_lines'}.py", get('script'), takes, get('vo'), get('timing')])
             if rc == 0 and P.get('remotion'): shutil.copy(get('timing'), os.path.join(get('remotion'), 'src/data/timing.json'))
@@ -97,7 +119,7 @@ def main():
             mark(st, rc == 0, P.get('music', ''))
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
-            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'], cwd=get('remotion'))
+            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={P['render_scale']}"] if P.get('render_scale') else []), cwd=get('remotion'))
             if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent, '-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', f'{root}/build/full.mp4'])
             mark(st, rc == 0)
         elif st == 'check':
