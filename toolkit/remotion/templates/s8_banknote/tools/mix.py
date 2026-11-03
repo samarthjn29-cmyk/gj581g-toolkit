@@ -1,3 +1,4 @@
+import os
 # Pilot audio: voice (loudnorm -16) + music cue (about -27 LUFS, ducked under voice) + self-made SFX at on-screen frames.
 import json, subprocess, sys
 D = '/home/claude/raise'
@@ -28,7 +29,7 @@ cues = [
 json.dump(cues, open(f'{D}/sfx_cues.json', 'w'), indent=0)
 music = sys.argv[1] if len(sys.argv) > 1 else '/mnt/user-data/uploads/Decked out Data/media/music/Investigations.mp3'
 inp = ['-i', f'{D}/tts/vo.wav', '-i', music] + sum([['-i', f'{D}/sfx/{s}.wav'] for s, _, _ in cues], [])
-fc = [f'[0:a]aresample=48000,apad=pad_dur=3,loudnorm=I=-16:TP=-1.5:LRA=11,asplit=2[vo][key]',
+fc = [f'[0:a]aresample=48000,' + (os.environ['VOICE_FX'] + ',' if os.environ.get('VOICE_FX') else '') + 'apad=pad_dur=3,loudnorm=I=-16:TP=-1.5:LRA=11,asplit=2[vo][key]',
       f'[1:a]aresample=48000,atrim=0:{TOTAL},loudnorm=I=-24:TP=-6,afade=t=in:d=1.2,afade=t=out:st={TOTAL - 2.2}:d=2.2[m0]',
       '[m0][key]sidechaincompress=threshold=0.03:ratio=6:attack=40:release=500:makeup=1[mus]']
 labs = []

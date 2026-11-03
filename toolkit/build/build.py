@@ -120,7 +120,9 @@ def main():
             r = subprocess.run(args, capture_output=True, text=True); logf.write(r.stdout); print(r.stdout.strip().splitlines()[-1])
             mark(st, r.returncode == 0 or P.get('lint_soft', False), 'pace lint ' + ('clean' if r.returncode == 0 else 'has failures (lint_soft)' if P.get('lint_soft') else 'FAILED'))
         elif st == 'mix':
-            rc = run([sys.executable, get('mix')] + ([get('music')] if P.get('music') else []))
+            ref = P.get('voice_ref'); ref = (ref if os.path.isabs(ref) else get('voice_ref')) if ref else None
+            fx = json.load(open(f'{ref}/profile.json'))['settings'].get('post_fx', '') if ref and os.path.exists(f'{ref}/profile.json') and P.get('voice_mode') != 'kokoro' else ''
+            rc = run([sys.executable, get('mix')] + ([get('music')] if P.get('music') else []), env=dict(VOICE_FX=fx) if fx else None)  # the profile's finishing filter (Sam picked option B, 3 Nov: a little deeper and warmer)
             mark(st, rc == 0, P.get('music', ''))
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
