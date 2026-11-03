@@ -70,9 +70,15 @@ def main():
             if fc:
                 import csv
                 rows = list(csv.DictReader(open(os.path.join(root, fc), newline='', encoding='utf-8')))
-                bad = [r for r in rows if (r.get('verdict') or '').strip().upper() != 'OK']
-                if bad: mark(st, False, f"fact-check: {len(bad)} of {len(rows)} rows not OK (e.g. row {bad[0].get('row', '?')}): no clone voicing")
-                log(f'fact-check: all {len(rows)} rows OK')
+                if any('hash' in r for r in rows):  # fingerprinted table (factcheck_sync.py, 3 Nov 2026): each row must match the script's wording now
+                    sys.path.insert(0, f'{TK}/story'); import factcheck_sync as fcs
+                    res = fcs.check(S, rows); bad = {k: v for k, v in res.items() if v and k != 'removed'}
+                    if bad: mark(st, False, 'fact-check: ' + '; '.join(f"{k} {', '.join(v[:6])}" for k, v in bad.items()) + ' -> run story/factcheck_sync.py --update, check, --stamp')
+                    log(f'fact-check: all {len(rows)} rows OK and match the script wording')
+                else:
+                    bad = [r for r in rows if (r.get('verdict') or '').strip().upper() != 'OK']
+                    if bad: mark(st, False, f"fact-check: {len(bad)} of {len(rows)} rows not OK (e.g. row {bad[0].get('row', '?')}): no clone voicing")
+                    log(f'fact-check: all {len(rows)} rows OK (old-style table without fingerprints: run factcheck_sync.py --update)')
             elif waiver: log(f'fact-check waived: {waiver}')
             else: mark(st, False, 'no "factcheck" csv and no "factcheck_waiver" in project.json: clone voicing refused (use voice_mode "kokoro" for the animatic)')
             ref = P['voice_ref'] if os.path.isabs(P['voice_ref']) else get('voice_ref')
