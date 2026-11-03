@@ -11,7 +11,8 @@ import {Rig} from './rig';
 const IN = "'Inter', sans-serif";
 if (typeof document !== 'undefined' && !window.__k) { window.__k = 1; const {delayRender, continueRender, staticFile} = require('remotion'); const h = delayRender('kalam');
   new FontFace('Kalam', `url(${staticFile('fonts/Kalam-Bold.ttf')})`).load().then((f) => { document.fonts.add(f); continueRender(h); }).catch(() => continueRender(h)); }
-const BARB = {skin: '#EDBE98', hair: 'curly', hairColor: '#3B2417', top: 'blazer', topColor: C.ox};
+const BARB = {hair: 'curly', hairColor: '#1E1A18', skin: '#8D5B3E', top: 'sweater', topColor: '#C4623F'};  // the video's Barbara (Raise_v1)
+const ANN = {hair: 'bob', hairColor: '#3A2A22', skin: '#F1C7A4', top: 'blazer', topColor: '#2E4A5E'};
 const shadow = '0 18px 40px rgba(30,20,10,0.35)';
 
 // small line icons for the pattern bed
@@ -72,7 +73,7 @@ export const TS10 = () => <AbsoluteFill style={{background: '#1C2422'}}>
   <svg width={1280} height={720} style={{position: 'absolute'}}>
     <g transform="rotate(-3 640 360)">
       <NoteFrame x={90} y={110} w={1100} h={500} color={C.green} />
-      <Portrait cx={420} cy={360} rx={150} ry={180}><Folk x={420} y={540} h={360} {...BARB} face="worried" /></Portrait>
+      <Portrait cx={420} cy={360} rx={150} ry={180}><Folk x={420} y={540} h={360} {...BARB} face="surprised" /></Portrait>
       <path d={rosette(980, 300, 120, 34, 46, 1600)} stroke={C.green} strokeWidth="0.9" fill="none" opacity="0.5" />
       <text x="980" y="370" textAnchor="middle" fontFamily={FR} fontWeight="700" fontSize="210" fill={C.green}>5%</text>
       <line x1="830" y1="390" x2="1130" y2="250" stroke={C.ox} strokeWidth="16" strokeLinecap="round" />
@@ -192,3 +193,22 @@ export const RaiseTS22 = () => <AbsoluteFill style={{background: C.ox}}>
   <div style={{position: 'absolute', left: 0, right: 0, top: 34, textAlign: 'center', fontFamily: OS, fontWeight: 700, fontSize: 26, letterSpacing: 10, color: '#E8C9B6'}}>THE DOLLAR YARDSTICK · NO. 1</div>
   <div style={{position: 'absolute', left: 0, right: 0, top: 572, textAlign: 'center', fontFamily: "'FrauncesI', serif", fontWeight: 700, fontSize: 80, color: C.ground}}>The money illusion</div>
 </AbsoluteFill>;
+
+// ---------------- Raise_v1 final set (3 Nov 2026) ----------------
+const Series = ({c = C.ground}) => <div style={{position: 'absolute', left: 0, right: 0, top: 26, textAlign: 'center', fontFamily: OS, fontWeight: 700, fontSize: 24, letterSpacing: 10, color: c}}>THE DOLLAR YARDSTICK · NO. 1</div>;
+// A: TS03 split x TS10 banknote: the video's opening test, two notes meeting at the seam
+export const RaiseSplit = () => { const side = (x, col, who, face, name, pay, prices, pc) => <g>
+    <rect x={x} y={0} width={640} height={720} fill={col} />
+    {Array.from({length: 16}, (_, i) => <path key={i} d={wave(x - 10, 30 + i * 46, 660, 22, 7, i * 0.7)} stroke="#FFFFFF" strokeWidth="1.2" fill="none" opacity="0.10" />)}
+    <Portrait cx={x + 175} cy={300} rx={120} ry={146} color={C.paper}><Folk x={x + 175} y={446} h={290} {...who} face={face} /></Portrait>
+    <text x={x + 175} y={500} textAnchor="middle" fontFamily={OS} fontWeight="700" fontSize="40" letterSpacing="8" fill={C.paper}>{name}</text>
+    <text x={x + 455} y={330} textAnchor="middle" fontFamily={FR} fontWeight="700" fontSize="138" fill={C.paper}>{pay}</text>
+    <text x={x + 455} y={390} textAnchor="middle" fontFamily={OS} fontWeight="700" fontSize="34" letterSpacing="4" fill={pc}>{prices}</text></g>;
+  return <AbsoluteFill style={{background: C.ink}}>
+    <svg width={1280} height={720} style={{position: 'absolute'}}>
+      {side(0, C.green, ANN, 'smile', 'ANN', '+2%', 'PRICES 0%', '#BFD6C7')}
+      {side(640, C.ox, BARB, 'happy', 'BARBARA', '+5%', 'PRICES +4%', '#F0C2B0')}
+    </svg>
+    <Series c="#EFE9DA" />
+    <div style={{position: 'absolute', left: 640, top: 590, transform: 'translate(-50%,-50%) rotate(-2deg)', whiteSpace: 'nowrap', padding: '8px 30px 14px', background: C.paper, border: `6px solid ${C.ink}`, fontFamily: FR, fontWeight: 700, fontSize: 78, color: C.ink, boxShadow: '0 14px 34px rgba(0,0,0,0.45)'}}>Who's better off?</div>
+  </AbsoluteFill>; };
