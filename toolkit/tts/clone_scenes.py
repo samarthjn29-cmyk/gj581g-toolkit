@@ -90,10 +90,20 @@ def voice_part(L, si, pi):
 for si, sc in enumerate(scenes):
     if (want and sc not in want) or (not want and log.get(sc, {}).get('ok')): continue
     LL = [l for l in S if l['scene'] == sc]; n = -(-len(LL) // MAXLINES); per = -(-len(LL) // n)
-    parts = [voice_part(LL[i:i + per], si, i // per) for i in range(0, len(LL), per)]
+    parts = []
+    for i in range(0, len(LL), per):  # each part is saved as it finishes, so a retry after a memory kill resumes instead of starting over
+        pf, pj = f'{out}/{sc}.part{i // per}.wav', f'{out}/{sc}.part{i // per}.json'
+        key = ' '.join(l.get('say', l['text']) for l in LL[i:i + per])
+        if os.path.exists(pf) and os.path.exists(pj) and json.load(open(pj)).get('text') == key:
+            d = json.load(open(pj)); parts.append((0, sf.read(pf)[0], d['h'], d['r'], d['s'], d['ok'])); print(f'{sc} part {i // per}: kept from the last run', flush=True); continue
+        b = voice_part(LL[i:i + per], si, i // per); parts.append(b)
+        sf.write(pf, b[1], sr); json.dump(dict(text=key, h=b[2], r=b[3], s=b[4], ok=b[5]), open(pj, 'w'))
     gap = np.zeros(int(sr * 0.35))
     a = np.concatenate([x for p_ in parts for x in (p_[1], gap)][:-1]); h = ' '.join(p_[2] for p_ in parts)
     r = float(np.mean([p_[3] for p_ in parts])); s = min(p_[4] for p_ in parts); ok_t = all(p_[5] for p_ in parts)
     sf.write(f'{out}/{sc}.wav', a, sr)  # breaths kept (Sam: removing them made it sound fake)
+    for i in range(len(parts)):
+        for ext in ('wav', 'json'):
+            if os.path.exists(f'{out}/{sc}.part{i}.{ext}'): os.remove(f'{out}/{sc}.part{i}.{ext}')
     log[sc] = dict(heard=h, words=round(r, 3), sim=round(s, 3), tight_ok=ok_t, ok=bool(min(p_[3] for p_ in parts) >= OKR and s >= OKS and ok_t), parts=len(parts)); json.dump(log, open(lj, 'w'), indent=1)
 print('DONE', sum(v['ok'] for v in log.values()), '/', len(scenes), 'scenes passing')
