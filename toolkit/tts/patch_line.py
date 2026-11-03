@@ -12,6 +12,7 @@ import re
 from num2words import num2words
 def toks(s):  # same normalisation as clone_scenes.py
     s = s.lower().replace('%', ' percent ').replace('’', "'").replace('pay slip', 'payslip').replace('take away', 'takeaway')
+    s = re.sub(r'(?<=\d),(?=\d{3}\b)', '', s)  # '54,500' -> '54500' (whisper writes thousands with a comma; it was read as 'fifty-four five hundred', 3 Nov)
     s = re.sub(r'(\d+)\.(\d+)', lambda x: num2words(int(x.group(1))) + ' point ' + ' '.join('oh' if d == '0' else num2words(int(d)) for d in x.group(2)), s)
     s = re.sub(r'\d+', lambda x: num2words(int(x.group()), to='year') if len(x.group()) == 4 else num2words(int(x.group())), s)
     s = re.sub(r'\bone (hundred|thousand)\b', r'a \1', s)
