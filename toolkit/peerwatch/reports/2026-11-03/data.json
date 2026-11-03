@@ -1,0 +1,5528 @@
+{
+"rows": [
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "Fd2jzWdcOHY",
+"title": "401k Explained with Bananas",
+"views": 112000,
+"age_days": 7,
+"length_s": 605,
+"x_median": 0.25,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "HjlVexL2Lxk",
+"title": "Options Trading Explained with Bananas (No AI)",
+"views": 137000,
+"age_days": 30.4,
+"length_s": 615,
+"x_median": 0.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "dB10EUmjHyc",
+"title": "The Biggest Ponzi Scheme Explained with Bananas",
+"views": 134000,
+"age_days": 60.8,
+"length_s": 663,
+"x_median": 0.29,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "nCS1BIIx7nw",
+"title": "Money Laundering Explained with Bananas",
+"views": 312000,
+"age_days": 91.19999999999999,
+"length_s": 671,
+"x_median": 0.68,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "OKYYpBcpqxw",
+"title": "Recession Explained with Bananas",
+"views": 167000,
+"age_days": 91.19999999999999,
+"length_s": 719,
+"x_median": 0.37,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "14CS2T6Kz6E",
+"title": "Oil Explained with Bananas",
+"views": 154000,
+"age_days": 152.0,
+"length_s": 695,
+"x_median": 0.34,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "8UE7bPkt1NE",
+"title": "Financial Terms Explained with Bananas",
+"views": 265000,
+"age_days": 212.79999999999998,
+"length_s": 828,
+"x_median": 0.58,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "37C7fXr8XSY",
+"title": "Financial Bubbles Explained with Bananas",
+"views": 1100000,
+"age_days": 273.59999999999997,
+"length_s": 673,
+"x_median": 2.41,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"dramatic",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "iWrLYpTv6GU",
+"title": "How To Buy A House Explained with Bananas",
+"views": 457000,
+"age_days": 304.0,
+"length_s": 430,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "zszKDZwYYV0",
+"title": "The Great Depression Explained with Bananas",
+"views": 922000,
+"age_days": 334.4,
+"length_s": 737,
+"x_median": 2.02,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "lW29lVYi2uI",
+"title": "Investing Explained with Bananas",
+"views": 453000,
+"age_days": 365,
+"length_s": 492,
+"x_median": 0.99,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "LYsqkGRpv_k",
+"title": "Tax Explained with Bananas",
+"views": 1600000,
+"age_days": 365,
+"length_s": 562,
+"x_median": 3.5,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "QvaHDxdxQFg",
+"title": "Credit Cards Explained with Bananas",
+"views": 1200000,
+"age_days": 365,
+"length_s": 511,
+"x_median": 2.63,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "VL-SzuA_pYE",
+"title": "Crypto Explained with Bananas",
+"views": 857000,
+"age_days": 365,
+"length_s": 388,
+"x_median": 1.88,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "lRV6U82vgjI",
+"title": "Tariffs Explained with Bananas",
+"views": 1400000,
+"age_days": 365,
+"length_s": 332,
+"x_median": 3.06,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "DZG89lilGr0",
+"title": "Stocks Explained with Bananas",
+"views": 996000,
+"age_days": 365,
+"length_s": 239,
+"x_median": 2.18,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"id": "MAvHgmewRDM",
+"title": "Inflation Explained with Bananas",
+"views": 1700000,
+"age_days": 365,
+"length_s": 151,
+"x_median": 3.72,
+"new": false,
+"outlier": true,
+"patterns": [
+"explained",
+"format-hook"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "Y1lfJCKdLQA",
+"title": "Is the AI Boom Just Another Bubble?",
+"views": 65000,
+"age_days": 273.59999999999997,
+"length_s": 846,
+"x_median": 0.2,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "HnRslDPlkg4",
+"title": "How Banks Create Money From Nothing (Fractional Reserve Banking)",
+"views": 73000,
+"age_days": 304.0,
+"length_s": 811,
+"x_median": 0.22,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "I00Ff7_0hNs",
+"title": "How Private Equity Keeps Killing Your Favorite Brands",
+"views": 62000,
+"age_days": 304.0,
+"length_s": 925,
+"x_median": 0.19,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"you/your",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "eJqLWKNQ8_A",
+"title": "Why Japan Is Stuck (And Still Rich Anyway)",
+"views": 101000,
+"age_days": 334.4,
+"length_s": 947,
+"x_median": 0.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "bqdPtjxzQaE",
+"title": "Why Nobody Can Afford a Home Anymore",
+"views": 551000,
+"age_days": 365,
+"length_s": 823,
+"x_median": 1.66,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "vb40abxV_KU",
+"title": "Credit Cards EXPLAINED: The Traps, Rewards, and Hidden Truths",
+"views": 228000,
+"age_days": 365,
+"length_s": 709,
+"x_median": 0.69,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "k6Kbk4lGjHg",
+"title": "Why the Rich Pretend to Be Poor (And Why You Should Too)",
+"views": 337000,
+"age_days": 365,
+"length_s": 781,
+"x_median": 1.02,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"you/your"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "7uO5e_8YxG8",
+"title": "How Scammers Rig the Stock Market",
+"views": 116000,
+"age_days": 365,
+"length_s": 1045,
+"x_median": 0.35,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "snhyJ3vk_j8",
+"title": "What Happens When a Country Goes Bankrupt?",
+"views": 431000,
+"age_days": 365,
+"length_s": 981,
+"x_median": 1.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"what-if",
+"country"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "7Ehv__ySyx4",
+"title": "Why Markets Panic When Central Banks Speak",
+"views": 128000,
+"age_days": 365,
+"length_s": 1277,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "E3N2MTwfRKI",
+"title": "Iran Was Meant to Be a Superpower. What Went Wrong?",
+"views": 132000,
+"age_days": 365,
+"length_s": 1049,
+"x_median": 0.4,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "jHLlHKHz644",
+"title": "7 Levels of Wealth They Never Taught You",
+"views": 327000,
+"age_days": 365,
+"length_s": 853,
+"x_median": 0.98,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"you/your",
+"format-hook"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "J1Uk0L4QIjM",
+"title": "CBDC Explained: Can Your Money Really Expire?",
+"views": 121000,
+"age_days": 365,
+"length_s": 1068,
+"x_median": 0.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"explained",
+"you/your"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "0D0wTqpohEw",
+"title": "Why Nobody Can Afford Canada Anymore",
+"views": 632000,
+"age_days": 365,
+"length_s": 994,
+"x_median": 1.9,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "hO8j-Y1yke4",
+"title": "Why Do Countries Want Weaker Currencies?",
+"views": 518000,
+"age_days": 365,
+"length_s": 1011,
+"x_median": 1.56,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"country"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "dbHXWnxwZcI",
+"title": "Do Sanctions Work, or Just Hurt the People?",
+"views": 111000,
+"age_days": 365,
+"length_s": 955,
+"x_median": 0.33,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "_0COXK-LXfg",
+"title": "Stock Market Crash? Don\u2019t Panic, Get Rich Instead",
+"views": 934000,
+"age_days": 365,
+"length_s": 1090,
+"x_median": 2.81,
+"new": false,
+"outlier": true,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "npX2aZymRvg",
+"title": "Why Every Country Is in Debt? And Who Do They Owe?",
+"views": 2700000,
+"age_days": 365,
+"length_s": 1023,
+"x_median": 8.13,
+"new": false,
+"outlier": true,
+"patterns": [
+"question",
+"why",
+"country",
+"format-hook"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "5B5gLMZ6gl0",
+"title": "Tariffs Explained: Who Really Pays the Price?",
+"views": 619000,
+"age_days": 365,
+"length_s": 1116,
+"x_median": 1.86,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "EIqxtJRRgZA",
+"title": "America's Most Powerful Weapon Is Not Nukes, It\u2019s the Petrodollar",
+"views": 102000,
+"age_days": 365,
+"length_s": 937,
+"x_median": 0.31,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "7GZrpVlLXRA",
+"title": "GDP Fully Explained: Per Capita, PPP, Nominal",
+"views": 471000,
+"age_days": 365,
+"length_s": 1073,
+"x_median": 1.42,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "TesUsFavats",
+"title": "Tax Havens Explained: How the Rich Avoid Taxes",
+"views": 130000,
+"age_days": 365,
+"length_s": 942,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "-SdpOESEcM8",
+"title": "Why Paper Money Has Value? Fiat Money Explained",
+"views": 178000,
+"age_days": 365,
+"length_s": 851,
+"x_median": 0.54,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "BxNxnj_JWTY",
+"title": "Mutual Funds vs Index Funds vs ETFs vs Hedge Funds Explained",
+"views": 402000,
+"age_days": 365,
+"length_s": 912,
+"x_median": 1.21,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "2Sr8jOBB8QI",
+"title": "What If Inflation Goes Negative? Deflation Explained",
+"views": 623000,
+"age_days": 365,
+"length_s": 1020,
+"x_median": 1.88,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"what-if",
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "np_M42Yi8jY",
+"title": "Why Prices Won't Stop Rising? Inflation Explained",
+"views": 661000,
+"age_days": 365,
+"length_s": 1321,
+"x_median": 1.99,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"explained"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "Zoz9gvhLgpM",
+"title": "What is Cryptocurrency and How Does it Work?",
+"views": 1300000,
+"age_days": 730,
+"length_s": 999,
+"x_median": 3.92,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "ZzlHtQZ3Zlk",
+"title": "How to Use Trusts to Protect Your Wealth",
+"views": 121000,
+"age_days": 730,
+"length_s": 900,
+"x_median": 0.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"you/your",
+"country"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "js3ujSZPKrk",
+"title": "Why Different Currencies Have Different Values?",
+"views": 2300000,
+"age_days": 730,
+"length_s": 782,
+"x_median": 6.93,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"id": "irKaCaqirA8",
+"title": "The Fastest Way To Get Poor",
+"views": 471000,
+"age_days": 730,
+"length_s": 919,
+"x_median": 1.42,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "j4Rmn3VfyVw",
+"title": "How to Destroy an Economic Miracle",
+"views": 1200000,
+"age_days": 3,
+"length_s": 1154,
+"x_median": 5.47,
+"new": false,
+"outlier": true,
+"patterns": [
+"how",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "MsGh6mPYXks",
+"title": "Why France's Debt Crisis is About to Break Europe",
+"views": 325000,
+"age_days": 8,
+"length_s": 1104,
+"x_median": 1.48,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "W4w4ug3kBG4",
+"title": "Why the Dollar is (Finally) Dying",
+"views": 239000,
+"age_days": 14,
+"length_s": 1295,
+"x_median": 1.09,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "D3fi5dfqhMc",
+"title": "The (Overdue) Collapse of Saudi Megaprojects",
+"views": 468000,
+"age_days": 21,
+"length_s": 1331,
+"x_median": 2.13,
+"new": false,
+"outlier": true,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "-AU8-Vg6f2M",
+"title": "If Every Country is having a Debt Crisis... Who's Lending the Money",
+"views": 2100000,
+"age_days": 30.4,
+"length_s": 1092,
+"x_median": 9.57,
+"new": false,
+"outlier": true,
+"patterns": [
+"country",
+"dramatic",
+"format-hook"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "9LyWuPL-gUs",
+"title": "How the Federal Reserve Broke America",
+"views": 80000,
+"age_days": 30.4,
+"length_s": 1259,
+"x_median": 0.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "HREbyWS94AY",
+"title": "How China Consumed Germany's Economy",
+"views": 358000,
+"age_days": 30.4,
+"length_s": 1348,
+"x_median": 1.63,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "PeuT7kkcZXE",
+"title": "How One Man took a British Colony and Made it Worse",
+"views": 206000,
+"age_days": 60.8,
+"length_s": 1125,
+"x_median": 0.94,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "VRFJ91Im9-c",
+"title": "The Economic Genius of the World's most Ruthless Dictator",
+"views": 187000,
+"age_days": 60.8,
+"length_s": 1138,
+"x_median": 0.85,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "kwe6tu9AbtM",
+"title": "Why Russia Doesn't Want to Win the War",
+"views": 599000,
+"age_days": 60.8,
+"length_s": 1296,
+"x_median": 2.73,
+"new": false,
+"outlier": true,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "1A_lSYFvAtk",
+"title": "Why Japan Has an Unsolvable Debt Crisis",
+"views": 380000,
+"age_days": 60.8,
+"length_s": 1255,
+"x_median": 1.73,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "ZPe7tbysc2g",
+"title": "Why Education is Destroying East Asia",
+"views": 1200000,
+"age_days": 91.19999999999999,
+"length_s": 1248,
+"x_median": 5.47,
+"new": false,
+"outlier": true,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "R8tOELXGg3w",
+"title": "The (Overdue) Collapse of India and the Philippines",
+"views": 621000,
+"age_days": 91.19999999999999,
+"length_s": 845,
+"x_median": 2.83,
+"new": false,
+"outlier": true,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "_Y0C_ACzyj4",
+"title": "Israel's Desperate Plan to Survive without America",
+"views": 98000,
+"age_days": 91.19999999999999,
+"length_s": 1064,
+"x_median": 0.45,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "lMfTSgQvYmI",
+"title": "Why North Korea will Outlast the South",
+"views": 160000,
+"age_days": 121.6,
+"length_s": 971,
+"x_median": 0.73,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "NbFI5vbIGfI",
+"title": "Why Starmer Could Never Fix Britain",
+"views": 79000,
+"age_days": 121.6,
+"length_s": 1237,
+"x_median": 0.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "GMOmhmhLXtg",
+"title": "The Iran Oil Shock is About to hit U.S Debt",
+"views": 182000,
+"age_days": 152.0,
+"length_s": 845,
+"x_median": 0.83,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "itoZRqM2Nrs",
+"title": "No... Living in America Isn't Better than Europe",
+"views": 649000,
+"age_days": 152.0,
+"length_s": 899,
+"x_median": 2.96,
+"new": false,
+"outlier": true,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "2PSnaEzRtrk",
+"title": "WTF is Happening to the Job Market",
+"views": 97000,
+"age_days": 152.0,
+"length_s": 894,
+"x_median": 0.44,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "OB6ACYzmXyI",
+"title": "Europe's Plan to Ditch American Companies",
+"views": 53000,
+"age_days": 152.0,
+"length_s": 1036,
+"x_median": 0.24,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "JtAhJ3j0hG8",
+"title": "What Actually Happens if the U.S. Economy Crashes",
+"views": 233000,
+"age_days": 182.39999999999998,
+"length_s": 1044,
+"x_median": 1.06,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "oRx8AQwqTHY",
+"title": "How the U.S Spends $1.5 Trillion on it's Military",
+"views": 64000,
+"age_days": 182.39999999999998,
+"length_s": 1454,
+"x_median": 0.29,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"number"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "CtrhU7GOjOg",
+"title": "America is Losing Control of the Petrodollar",
+"views": 603000,
+"age_days": 212.79999999999998,
+"length_s": 1316,
+"x_median": 2.75,
+"new": false,
+"outlier": true,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "Elx3Ji9yzJk",
+"title": "Something's Going Seriously Wrong in Dubai",
+"views": 200000,
+"age_days": 212.79999999999998,
+"length_s": 947,
+"x_median": 0.91,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "cELVb6vqLXM",
+"title": "Why America Can NEVER Win in Iran",
+"views": 141000,
+"age_days": 243.2,
+"length_s": 1398,
+"x_median": 0.64,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "ey58kFxx5mA",
+"title": "Would Uniting Africa Finally Make it Rich?",
+"views": 64000,
+"age_days": 243.2,
+"length_s": 937,
+"x_median": 0.29,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "A6DsqLQzQT8",
+"title": "What Happens if Everyone Starts Selling US Debt",
+"views": 420000,
+"age_days": 273.59999999999997,
+"length_s": 1023,
+"x_median": 1.91,
+"new": false,
+"outlier": false,
+"patterns": [
+"what-if",
+"country"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "uAt_ekwL16E",
+"title": "Why Living in Japan is Actually Awful",
+"views": 54000,
+"age_days": 273.59999999999997,
+"length_s": 1007,
+"x_median": 0.25,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "lTOjT6F6f8w",
+"title": "The Real Reason Trump Will Invade Greenland",
+"views": 349000,
+"age_days": 273.59999999999997,
+"length_s": 732,
+"x_median": 1.59,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"id": "raZsIw4BiJU",
+"title": "Why the World's Richest Country is Falling Apart",
+"views": 93000,
+"age_days": 304.0,
+"length_s": 933,
+"x_median": 0.42,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "p0kjMwPesko",
+"title": "Why Everything Is Getting More Expensive (Inflation Explained)",
+"views": 1000,
+"age_days": 14,
+"length_s": 515,
+"x_median": 1.03,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"explained"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "hpTnTffp9z8",
+"title": "Why a Booming Stock Market Is Making Americans Broke",
+"views": 595,
+"age_days": 14,
+"length_s": 272,
+"x_median": 0.61,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "LqcSGYG21Oo",
+"title": "What If World Stops Using US Dollar?",
+"views": 18000,
+"age_days": 28,
+"length_s": 382,
+"x_median": 18.54,
+"new": false,
+"outlier": true,
+"patterns": [
+"question",
+"what-if",
+"country"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "oMGV1m5ANko",
+"title": "America's $40 Trillion Debt Explained Like You're 5",
+"views": 243000,
+"age_days": 60.8,
+"length_s": 353,
+"x_median": 250.26,
+"new": false,
+"outlier": true,
+"patterns": [
+"number",
+"explained",
+"you/your",
+"country"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "8HVxY1wTC5Q",
+"title": "The 2008 Financial Crisis: How the Entire System Collapsed",
+"views": 942,
+"age_days": 60.8,
+"length_s": 738,
+"x_median": 0.97,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"dramatic",
+"format-hook"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "aIx_FcMnbz4",
+"title": "AI Is Quietly Replacing Millions of Workers",
+"views": 201,
+"age_days": 60.8,
+"length_s": 605,
+"x_median": 0.21,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "A97uhxaUh6o",
+"title": "How Banks Create Money Out of Thin Air?",
+"views": 363,
+"age_days": 60.8,
+"length_s": 365,
+"x_median": 0.37,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"id": "VlUBnNXLQ1I",
+"title": "Is a Strong Currency Always Better? The Truth About Money",
+"views": 1300,
+"age_days": 91.19999999999999,
+"length_s": 667,
+"x_median": 1.34,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"dramatic"
+]
+},
+{
+"peer": "@xplainedInminutess",
+"tier": "rising",
+"id": "l_JwgbWx-BI",
+"title": "Entire Finance in 25 mins",
+"views": 760000,
+"age_days": 121.6,
+"length_s": 1481,
+"x_median": 0.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"format-hook"
+]
+},
+{
+"peer": "@xplainedInminutess",
+"tier": "rising",
+"id": "HGe-SUyPZ38",
+"title": "Entire INDIAN Economics in 18 Mins",
+"views": 2500000,
+"age_days": 212.79999999999998,
+"length_s": 1095,
+"x_median": 1.53,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"country",
+"format-hook"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "deQXeIhyhc4",
+"title": "Why Argentina Wants the World\u2019s Corrupt Billionaires",
+"views": 301000,
+"age_days": 2,
+"length_s": 991,
+"x_median": 0.53,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "vQodCxq7b9g",
+"title": "How China Is Restarting Its Economy",
+"views": 681000,
+"age_days": 6,
+"length_s": 830,
+"x_median": 1.19,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "2a0veEb3znU",
+"title": "How Old Money Kills Economies",
+"views": 745000,
+"age_days": 13,
+"length_s": 922,
+"x_median": 1.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "FZWLIOKUcIo",
+"title": "Living Paycheck to Paycheck? So Is Everyone Else",
+"views": 861000,
+"age_days": 14,
+"length_s": 1051,
+"x_median": 1.51,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "ZRNQ1QgbDj4",
+"title": "What Happens When AI Is Free ... South Korea Tried It",
+"views": 589000,
+"age_days": 14,
+"length_s": 750,
+"x_median": 1.03,
+"new": false,
+"outlier": false,
+"patterns": [
+"what-if"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "b64TPQDSpYQ",
+"title": "Can $55,000 Solve The Population Crisis?",
+"views": 705000,
+"age_days": 28,
+"length_s": 978,
+"x_median": 1.23,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"number",
+"dramatic"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "QtZfbWOkoIY",
+"title": "Australia May Have Just Solved The Housing Crisis",
+"views": 1700000,
+"age_days": 30.4,
+"length_s": 849,
+"x_median": 2.97,
+"new": false,
+"outlier": true,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "rqlDPfdXQOk",
+"title": "Why Europe's GDP Growth Is Crippling Its Economy",
+"views": 984000,
+"age_days": 30.4,
+"length_s": 933,
+"x_median": 1.72,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "G2b0JOgLpeg",
+"title": "Has Inequality Ever Been Worse?",
+"views": 807000,
+"age_days": 30.4,
+"length_s": 1184,
+"x_median": 1.41,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "jknb1YE6zdY",
+"title": "Finally a Country Is Taxing Its Billionaires",
+"views": 1400000,
+"age_days": 30.4,
+"length_s": 810,
+"x_median": 2.45,
+"new": false,
+"outlier": true,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "TsfsoaNFyTQ",
+"title": "Economics Is A Junk Science",
+"views": 1200000,
+"age_days": 30.4,
+"length_s": 1027,
+"x_median": 2.1,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "4kSd7zyXGo0",
+"title": "Why New Zealand Is the Only Safe Haven Left",
+"views": 1100000,
+"age_days": 60.8,
+"length_s": 799,
+"x_median": 1.92,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "i_kzsY5Msbw",
+"title": "Unfortunately, AI Might Be Turning Us Into Peasants",
+"views": 570000,
+"age_days": 60.8,
+"length_s": 1397,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "iI3tT6CCVH8",
+"title": "Almost No One Realizes This About AI Data Centers",
+"views": 574000,
+"age_days": 60.8,
+"length_s": 1101,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "-OI7CL_kyUo",
+"title": "How Kim Jong Un \"Accidentally\" Fixed North Korea's Economy",
+"views": 738000,
+"age_days": 60.8,
+"length_s": 1076,
+"x_median": 1.29,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "RYdGEYkYCQ4",
+"title": "The End Game of UK Economics",
+"views": 549000,
+"age_days": 60.8,
+"length_s": 1236,
+"x_median": 0.96,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "PRJra_9RLf0",
+"title": "Where Has Venezuela's Oil Gone?",
+"views": 257000,
+"age_days": 91.19999999999999,
+"length_s": 961,
+"x_median": 0.45,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "72pGczK3j7s",
+"title": "Cuba Was Barely Holding On\u2026 And Then The Oil Ran Out",
+"views": 236000,
+"age_days": 91.19999999999999,
+"length_s": 1262,
+"x_median": 0.41,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "b665H_Tywg0",
+"title": "Why Is the World In So Much Debt",
+"views": 339000,
+"age_days": 121.6,
+"length_s": 1736,
+"x_median": 0.59,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "Efwafl87Yb8",
+"title": "How Has Nepal Been Going?",
+"views": 501000,
+"age_days": 121.6,
+"length_s": 1328,
+"x_median": 0.88,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "J9PzjUlyzAY",
+"title": "The Economy Gave Up On Young People ... It's Starting To Show",
+"views": 1100000,
+"age_days": 121.6,
+"length_s": 1200,
+"x_median": 1.92,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "Figev-6iaE0",
+"title": "How AI Will Play Out, Explained",
+"views": 424000,
+"age_days": 121.6,
+"length_s": 2852,
+"x_median": 0.74,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"explained"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "6gSfq7kGZhE",
+"title": "Iran's Economy Was Collapsing \u2026 And Then The War Started",
+"views": 336000,
+"age_days": 152.0,
+"length_s": 972,
+"x_median": 0.59,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "JwklXWLy2UA",
+"title": "Get Rich Or Die Tryin' ... Literally",
+"views": 150000,
+"age_days": 152.0,
+"length_s": 1159,
+"x_median": 0.26,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "OkiZE8n5Jdo",
+"title": "Dubai Was An Economic Miracle, Then They Got Bombed",
+"views": 858000,
+"age_days": 152.0,
+"length_s": 1241,
+"x_median": 1.5,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "rId69udDbwM",
+"title": "No One Is Talking About the \"Winners\" of the Iran War",
+"views": 239000,
+"age_days": 152.0,
+"length_s": 1198,
+"x_median": 0.42,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "wDAY1NNFtTg",
+"title": "Why Are Countries Abandoning OPEC?",
+"views": 355000,
+"age_days": 152.0,
+"length_s": 828,
+"x_median": 0.62,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "vhD3IEpIAAk",
+"title": "The Iran War Looks Very Different from Europe",
+"views": 417000,
+"age_days": 152.0,
+"length_s": 1062,
+"x_median": 0.73,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "3xWGfniQMdQ",
+"title": "Does Taiwan Have Dutch Disease?",
+"views": 402000,
+"age_days": 182.39999999999998,
+"length_s": 1009,
+"x_median": 0.7,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"id": "qDVPFAuBSXw",
+"title": "Uruguay Has No Resources, But They're Rich",
+"views": 426000,
+"age_days": 182.39999999999998,
+"length_s": 1220,
+"x_median": 0.74,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "OAVin6xxd8E",
+"title": "If You Were TRYING To Destroy The Economy...",
+"views": 951000,
+"age_days": 3,
+"length_s": 1060,
+"x_median": 1.16,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "EhbkCW3iTvA",
+"title": "How American Real Estate Is Delaying The Inevitable... For Now",
+"views": 1500000,
+"age_days": 10,
+"length_s": 1234,
+"x_median": 1.84,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "xWLCnTcyYAI",
+"title": "tHe pOpULaTiOn iS CoLlapSiNg!",
+"views": 836000,
+"age_days": 14,
+"length_s": 1288,
+"x_median": 1.02,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "gcvpN6Zh-WE",
+"title": "How Sports Predicted \"The Everything Bubble\"",
+"views": 701000,
+"age_days": 30.4,
+"length_s": 1148,
+"x_median": 0.86,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "W6xkZy9nkaI",
+"title": "Canada Is Joining The EU... But WTF Does That Even Mean?!",
+"views": 1200000,
+"age_days": 30.4,
+"length_s": 1019,
+"x_median": 1.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "p73d6sL8gVo",
+"title": "Why Are We Doing This To Canada?",
+"views": 1500000,
+"age_days": 30.4,
+"length_s": 988,
+"x_median": 1.84,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "QmWyQ-BCD8E",
+"title": "Why A National Debt Default Now Looks Genuinely Possible... (sort of)",
+"views": 3000000,
+"age_days": 30.4,
+"length_s": 1118,
+"x_median": 3.67,
+"new": false,
+"outlier": true,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "4rmkiGMknpg",
+"title": "Can Meta Actually Survive This?",
+"views": 1800000,
+"age_days": 60.8,
+"length_s": 1151,
+"x_median": 2.2,
+"new": false,
+"outlier": true,
+"patterns": [
+"question",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "6BOxK_JrghY",
+"title": "\"Dude I'm Broke\" Why Is My Data Worth Harvesting?",
+"views": 571000,
+"age_days": 60.8,
+"length_s": 1100,
+"x_median": 0.7,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "D-uK2Xs6D9s",
+"title": "The \"Stay-At-Home Boyfriend\" Epidemic - Women Now Outnumber Men In The Workforce",
+"views": 583000,
+"age_days": 60.8,
+"length_s": 1096,
+"x_median": 0.71,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "THodtjsCTSI",
+"title": "Is America Chasing Away All Of Its Smart People?",
+"views": 580000,
+"age_days": 60.8,
+"length_s": 1281,
+"x_median": 0.71,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "Sx-lddna-qg",
+"title": "WTF Is Happening To The Video Game Industry?",
+"views": 1200000,
+"age_days": 91.19999999999999,
+"length_s": 1168,
+"x_median": 1.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "qmZmKZR8S5U",
+"title": "How Long Can The Stock Market Ignore Reality?",
+"views": 794000,
+"age_days": 91.19999999999999,
+"length_s": 1027,
+"x_median": 0.97,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "_W3qPymBEBA",
+"title": "WTF Does Peter Thiel Actually Want?",
+"views": 808000,
+"age_days": 91.19999999999999,
+"length_s": 1266,
+"x_median": 0.99,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "swtfbef3HhM",
+"title": "Big Tech Cut 950,000 Jobs... And Then Hired Them All Back",
+"views": 1100000,
+"age_days": 91.19999999999999,
+"length_s": 1331,
+"x_median": 1.35,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "e-2GoFws3yE",
+"title": "Why Haven't We Had That Oil Crisis... Yet?",
+"views": 485000,
+"age_days": 91.19999999999999,
+"length_s": 1175,
+"x_median": 0.59,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "5aBW_VGT130",
+"title": "So... Is Private Equity Collapsing Yet?",
+"views": 747000,
+"age_days": 91.19999999999999,
+"length_s": 1217,
+"x_median": 0.91,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "QGjXQwUmGTI",
+"title": "bUt ThAt\"s mY NeSt eGG!",
+"views": 1300000,
+"age_days": 121.6,
+"length_s": 1467,
+"x_median": 1.59,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "Ts26T7AEHS8",
+"title": "Why We (Probably) Shouldn't Give Iran $300 Billion Dollars",
+"views": 292000,
+"age_days": 121.6,
+"length_s": 1181,
+"x_median": 0.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"number"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "Ac25_v32dNE",
+"title": "How Much Longer Can We \"Hide\" The Inflation?",
+"views": 650000,
+"age_days": 121.6,
+"length_s": 1315,
+"x_median": 0.8,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "mUBBqAjVuco",
+"title": "WTF Is Happening To The Car Market?",
+"views": 2200000,
+"age_days": 121.6,
+"length_s": 1373,
+"x_median": 2.69,
+"new": false,
+"outlier": true,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "ShGT-fY7S98",
+"title": "Silicon Valley's Strange New Obsession",
+"views": 731000,
+"age_days": 152.0,
+"length_s": 998,
+"x_median": 0.9,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "fQOQuge0dfw",
+"title": "America's \"Unsolvable\" Problem",
+"views": 656000,
+"age_days": 152.0,
+"length_s": 1637,
+"x_median": 0.8,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "O53HJcDA8v4",
+"title": "The End Of Budget Tourism",
+"views": 1600000,
+"age_days": 152.0,
+"length_s": 1140,
+"x_median": 1.96,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "UgDEyQ1h-EA",
+"title": "bUt wE cAn\"T lEt cHinA WiN tHe AI aRmS rAcE!!",
+"views": 467000,
+"age_days": 152.0,
+"length_s": 1166,
+"x_median": 0.57,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "DGLw0Y3F9uk",
+"title": "WTF is Going On at The FED?",
+"views": 825000,
+"age_days": 182.39999999999998,
+"length_s": 1142,
+"x_median": 1.01,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "r4fQzqtqdPo",
+"title": "Have We Made The World Too Convenient?",
+"views": 408000,
+"age_days": 182.39999999999998,
+"length_s": 1007,
+"x_median": 0.5,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "aRLxcx79OvE",
+"title": "bUt ThAt's PeOpLeS ReTiReMeNT!",
+"views": 947000,
+"age_days": 182.39999999999998,
+"length_s": 1233,
+"x_median": 1.16,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "3UO-gl-N6rY",
+"title": "America Added 178,000 New Jobs Last Month... But How Is That Possible?!",
+"views": 747000,
+"age_days": 182.39999999999998,
+"length_s": 1029,
+"x_median": 0.91,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"number",
+"country"
+]
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"id": "w-DVTHH1ux8",
+"title": "50% Of AI Data Centers Have Quietly Been Cancelled Or \"Delayed\"",
+"views": 1700000,
+"age_days": 182.39999999999998,
+"length_s": 1013,
+"x_median": 2.08,
+"new": false,
+"outlier": true,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "iP6Jvva2OjQ",
+"title": "How Korea built a world class defence industry from scratch",
+"views": 13000,
+"age_days": 0.16666666666666666,
+"length_s": 1752,
+"x_median": 0.06,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "bWQe2IHpJ3M",
+"title": "Why is a normal life so hard to afford?",
+"views": 208000,
+"age_days": 14,
+"length_s": 1211,
+"x_median": 0.9,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "suiU5b9tmoE",
+"title": "Why 98% of economists support a land value tax",
+"views": 355000,
+"age_days": 21,
+"length_s": 1273,
+"x_median": 1.53,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"number"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "9S7wwmJtuac",
+"title": "How Vienna solved the housing crisis",
+"views": 225000,
+"age_days": 30.4,
+"length_s": 1067,
+"x_median": 0.97,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "IabDOXf7Acs",
+"title": "Why you should stop worrying about the birth rate collapse",
+"views": 310000,
+"age_days": 60.8,
+"length_s": 981,
+"x_median": 1.34,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"you/your",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "ZbZfmNVFeE0",
+"title": "How long can the US keep borrowing so much?",
+"views": 270000,
+"age_days": 60.8,
+"length_s": 921,
+"x_median": 1.17,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how",
+"country"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "yoT76zITRx8",
+"title": "Why do 90% of economists oppose rent control?",
+"views": 400000,
+"age_days": 60.8,
+"length_s": 1154,
+"x_median": 1.73,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"number"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "PZd5tcGdQqc",
+"title": "Why Japan industrialized before China",
+"views": 342000,
+"age_days": 91.19999999999999,
+"length_s": 1986,
+"x_median": 1.48,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "DoXvZtfrLns",
+"title": "How is Spain\u2019s mass migration experiment going?",
+"views": 185000,
+"age_days": 91.19999999999999,
+"length_s": 1133,
+"x_median": 0.8,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "Y9LOOvJ7hKw",
+"title": "What happens when you stop taxing billionaires?",
+"views": 530000,
+"age_days": 121.6,
+"length_s": 1186,
+"x_median": 2.29,
+"new": false,
+"outlier": true,
+"patterns": [
+"question",
+"what-if",
+"you/your"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "1N2C72OdOxo",
+"title": "What happened to China's property collapse?",
+"views": 415000,
+"age_days": 121.6,
+"length_s": 795,
+"x_median": 1.79,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "kJttqFCWtQM",
+"title": "What happened when Norway raised taxes on the wealthy?",
+"views": 249000,
+"age_days": 121.6,
+"length_s": 907,
+"x_median": 1.08,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "hLwSSGM6tzc",
+"title": "Why Japan isn\u2019t broke yet",
+"views": 314000,
+"age_days": 152.0,
+"length_s": 1300,
+"x_median": 1.36,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "fWF0ZwzGoho",
+"title": "Iran's crumbling economy",
+"views": 144000,
+"age_days": 152.0,
+"length_s": 829,
+"x_median": 0.62,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "Yx-s-yY5AnI",
+"title": "Why do right-wing populists keep coming back?",
+"views": 97000,
+"age_days": 152.0,
+"length_s": 1314,
+"x_median": 0.42,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "wXbuiTrnqXY",
+"title": "The PetroDollar is a myth. The Iran war confirmed it.",
+"views": 203000,
+"age_days": 182.39999999999998,
+"length_s": 1094,
+"x_median": 0.88,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "uqSwRHc-1MQ",
+"title": "Who will pay for 100 million boomer pensions?",
+"views": 387000,
+"age_days": 182.39999999999998,
+"length_s": 1063,
+"x_median": 1.67,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"number"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "_RKESHFcm54",
+"title": "Why Hungary's election may soon disappoint",
+"views": 88000,
+"age_days": 182.39999999999998,
+"length_s": 647,
+"x_median": 0.38,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "an9cWefN8q8",
+"title": "If the strait opens, what happens to the economy?",
+"views": 101000,
+"age_days": 182.39999999999998,
+"length_s": 1003,
+"x_median": 0.44,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"what-if"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "jwEYTEbfprw",
+"title": "A massive food crisis is coming",
+"views": 221000,
+"age_days": 182.39999999999998,
+"length_s": 756,
+"x_median": 0.95,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "01V3IEn2MsY",
+"title": "The Gulf economies are in BIG trouble",
+"views": 238000,
+"age_days": 212.79999999999998,
+"length_s": 1568,
+"x_median": 1.03,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "6uXaeZgxHRw",
+"title": "Why are economists not more worried about inequality?",
+"views": 134000,
+"age_days": 212.79999999999998,
+"length_s": 1351,
+"x_median": 0.58,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "T6BjSW4FrE4",
+"title": "How bad will the energy crisis get?",
+"views": 295000,
+"age_days": 212.79999999999998,
+"length_s": 1172,
+"x_median": 1.27,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "bufMa2Oscok",
+"title": "Is the Dollar finally on the way out?",
+"views": 477000,
+"age_days": 212.79999999999998,
+"length_s": 1654,
+"x_median": 2.06,
+"new": false,
+"outlier": true,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "ATWd6K7Wxho",
+"title": "Are immigrants actually making Europe far less safe?",
+"views": 195000,
+"age_days": 243.2,
+"length_s": 1238,
+"x_median": 0.84,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "g37E9ztzxkE",
+"title": "Why the new world order will be worse than you think",
+"views": 331000,
+"age_days": 243.2,
+"length_s": 1496,
+"x_median": 1.43,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"you/your",
+"country"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "KgZzr8Y05BU",
+"title": "The distorted economics of mass media",
+"views": 91000,
+"age_days": 273.59999999999997,
+"length_s": 1004,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "aZB7vcVXCVc",
+"title": "The 5 megatrends that will dominate 2026",
+"views": 326000,
+"age_days": 304.0,
+"length_s": 1135,
+"x_median": 1.41,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "F-9RCKKvoJw",
+"title": "How scientists radically reduced US gun violence (no gun ban)",
+"views": 126000,
+"age_days": 304.0,
+"length_s": 1085,
+"x_median": 0.54,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"id": "dASaGYbN0dw",
+"title": "Why China's mineral monopoly can still be broken",
+"views": 143000,
+"age_days": 304.0,
+"length_s": 1112,
+"x_median": 0.62,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "h3ajVyC5vJc",
+"title": "Breaking Down My Investment Portfolio",
+"views": 478000,
+"age_days": 14,
+"length_s": 1137,
+"x_median": 2.0,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "E7pl0tqzIUQ",
+"title": "The Truth About Leveraged ETFs",
+"views": 436000,
+"age_days": 30.4,
+"length_s": 1264,
+"x_median": 1.83,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "TdKK1f21xvA",
+"title": "Who You Marry Is a Financial Decision",
+"views": 377000,
+"age_days": 30.4,
+"length_s": 933,
+"x_median": 1.58,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "skc2T5fcoLY",
+"title": "When Compounding Works Against You",
+"views": 214000,
+"age_days": 60.8,
+"length_s": 898,
+"x_median": 0.9,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "3u-mP3C26mg",
+"title": "The Biggest Myths in Personal Finance",
+"views": 713000,
+"age_days": 91.19999999999999,
+"length_s": 1249,
+"x_median": 2.99,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "16eA5ebWMQQ",
+"title": "Renting vs. Buying a Home: The Case for Owning",
+"views": 231000,
+"age_days": 91.19999999999999,
+"length_s": 1551,
+"x_median": 0.97,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "WEClhtPD5Ko",
+"title": "The Truth About Investing at All-Time Highs",
+"views": 206000,
+"age_days": 121.6,
+"length_s": 537,
+"x_median": 0.86,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "2tkXhYsGge0",
+"title": "SpaceX IPO Situation is Crazy",
+"views": 293000,
+"age_days": 121.6,
+"length_s": 1211,
+"x_median": 1.23,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "of9_wpOhGWw",
+"title": "The Biggest Problem in Investing Right Now",
+"views": 250000,
+"age_days": 152.0,
+"length_s": 1311,
+"x_median": 1.05,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "S9InNdQhFwc",
+"title": "Using Your Money To Be Happier",
+"views": 1100000,
+"age_days": 182.39999999999998,
+"length_s": 1282,
+"x_median": 4.61,
+"new": false,
+"outlier": true,
+"patterns": [
+"you/your",
+"country"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "Yts3o2EDO-Y",
+"title": "Canada's New Evidence-Based ETFs",
+"views": 234000,
+"age_days": 182.39999999999998,
+"length_s": 1253,
+"x_median": 0.98,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "iOyFja87uyw",
+"title": "SpaceX and OpenAI: The Mega IPO Grift",
+"views": 363000,
+"age_days": 182.39999999999998,
+"length_s": 1124,
+"x_median": 1.52,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "N5v2b42i_2g",
+"title": "This Paper Could Change How You Invest",
+"views": 352000,
+"age_days": 212.79999999999998,
+"length_s": 1157,
+"x_median": 1.48,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "9TAGlknXYW8",
+"title": "The Problem with Private Markets",
+"views": 240000,
+"age_days": 212.79999999999998,
+"length_s": 1552,
+"x_median": 1.01,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "aU7v87EhDBI",
+"title": "Renting vs. Buying a Home: The Reckoning",
+"views": 234000,
+"age_days": 243.2,
+"length_s": 880,
+"x_median": 0.98,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "d7wnAw7ufG4",
+"title": "The Biggest Mistakes in Personal Finance",
+"views": 469000,
+"age_days": 243.2,
+"length_s": 937,
+"x_median": 1.97,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "xu7kMpLbJJs",
+"title": "The Problem with Equal Weight Index Funds",
+"views": 160000,
+"age_days": 273.59999999999997,
+"length_s": 931,
+"x_median": 0.67,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "14V7q4gHKFo",
+"title": "The Rise of ETF Slop",
+"views": 576000,
+"age_days": 273.59999999999997,
+"length_s": 1131,
+"x_median": 2.42,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "1sV_3OvQyFI",
+"title": "11 Investing Lessons From a Crazy Year (2025)",
+"views": 101000,
+"age_days": 304.0,
+"length_s": 1122,
+"x_median": 0.42,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "7xPlZUzJbJc",
+"title": "The \"AI Bubble\"",
+"views": 350000,
+"age_days": 304.0,
+"length_s": 1077,
+"x_median": 1.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "G-HYSrR8-J4",
+"title": "The best introduction to personal finance I have ever read",
+"views": 218000,
+"age_days": 304.0,
+"length_s": 1329,
+"x_median": 0.91,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "1Ob-hAYCnJE",
+"title": "Investing 101",
+"views": 428000,
+"age_days": 334.4,
+"length_s": 1212,
+"x_median": 1.79,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "K3sYY3T7V8k",
+"title": "Covered Calls: What People (Still) Get Wrong",
+"views": 138000,
+"age_days": 365,
+"length_s": 983,
+"x_median": 0.58,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "xzDFbv_JSks",
+"title": "Was I Wrong About Covered Calls?",
+"views": 113000,
+"age_days": 365,
+"length_s": 960,
+"x_median": 0.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "ygVObRx9X68",
+"title": "Covered Calls: A Devil's Bargain",
+"views": 237000,
+"age_days": 365,
+"length_s": 973,
+"x_median": 0.99,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "OguTXEnxJqk",
+"title": "Canadian Bank Financial Advice",
+"views": 69000,
+"age_days": 365,
+"length_s": 771,
+"x_median": 0.29,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "gV9r3ISZrws",
+"title": "The Most Important Quotes in Investing",
+"views": 150000,
+"age_days": 365,
+"length_s": 973,
+"x_median": 0.63,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "lMdGA0ePXzI",
+"title": "Comparing U.S. Equity ETFs: VTI vs. DFUS",
+"views": 102000,
+"age_days": 365,
+"length_s": 882,
+"x_median": 0.43,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "gJLZRnfstpM",
+"title": "I (almost) got scammed so you don't have to",
+"views": 79000,
+"age_days": 365,
+"length_s": 910,
+"x_median": 0.33,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your",
+"dramatic"
+]
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"id": "lBG-g1CKfgs",
+"title": "20 Years of Renting vs. Buying a Home in Canada (2005 to 2024)",
+"views": 265000,
+"age_days": 365,
+"length_s": 1272,
+"x_median": 1.11,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "QEVTeJtzJFo",
+"title": "Why the Average New Car Costs $50,000",
+"views": 187000,
+"age_days": 91.19999999999999,
+"length_s": 988,
+"x_median": 0.65,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"number"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "Jz5L3X453Jw",
+"title": "How America\u2019s 4,488 Banks Work",
+"views": 210000,
+"age_days": 121.6,
+"length_s": 964,
+"x_median": 0.74,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"number",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "j2QEieIiiXg",
+"title": "The Entry-Level Job Crisis",
+"views": 205000,
+"age_days": 121.6,
+"length_s": 1180,
+"x_median": 0.72,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "Y2v6rAK6pZs",
+"title": "Can Switzerland Stay Neutral?",
+"views": 114000,
+"age_days": 152.0,
+"length_s": 1050,
+"x_median": 0.4,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "t9PF8V132Y4",
+"title": "Walmart\u2019s New Plan to Defeat Amazon",
+"views": 369000,
+"age_days": 182.39999999999998,
+"length_s": 1189,
+"x_median": 1.29,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "uQTosk4xLT8",
+"title": "China is Not a Socialist Utopia.",
+"views": 377000,
+"age_days": 182.39999999999998,
+"length_s": 1012,
+"x_median": 1.32,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "tFjvMTtbGHw",
+"title": "Why Puerto Rico\u2019s Economy Doesn\u2019t Work",
+"views": 143000,
+"age_days": 212.79999999999998,
+"length_s": 1014,
+"x_median": 0.5,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "vEH4yo7PqzM",
+"title": "America\u2019s Self-Inflicted Doctor Shortage",
+"views": 163000,
+"age_days": 243.2,
+"length_s": 1106,
+"x_median": 0.57,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "EZTWK5fjHnk",
+"title": "Taiwan is Not Venezuela",
+"views": 160000,
+"age_days": 243.2,
+"length_s": 1285,
+"x_median": 0.56,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "GpflQtqkQZ0",
+"title": "Are America\u2019s Students Falling Behind?",
+"views": 124000,
+"age_days": 273.59999999999997,
+"length_s": 765,
+"x_median": 0.43,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "HznjX-i3sqQ",
+"title": "The European Country Putin Stubbornly Refuses to Invade",
+"views": 150000,
+"age_days": 304.0,
+"length_s": 944,
+"x_median": 0.53,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "E8e2sKgMbJA",
+"title": "Why Nepal Just Overthrew its Government",
+"views": 139000,
+"age_days": 334.4,
+"length_s": 901,
+"x_median": 0.49,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "PoQvXW9QAPg",
+"title": "Why China Banned Weird Architecture",
+"views": 207000,
+"age_days": 365,
+"length_s": 854,
+"x_median": 0.73,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "-JbIOGGTRTY",
+"title": "Why Apple Can\u2019t Leave China (yet)",
+"views": 434000,
+"age_days": 365,
+"length_s": 1093,
+"x_median": 1.52,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "KXvVyd2wmdQ",
+"title": "Why Singapore Elects the Losers of its Elections",
+"views": 465000,
+"age_days": 365,
+"length_s": 1388,
+"x_median": 1.63,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "bThPluSzlDU",
+"title": "Why \u201cLearn to Code\u201d Failed",
+"views": 476000,
+"age_days": 365,
+"length_s": 1526,
+"x_median": 1.67,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "GL-MPhghHRI",
+"title": "How China Accidentally Created a Billion Dollar Scam Industry",
+"views": 326000,
+"age_days": 365,
+"length_s": 1522,
+"x_median": 1.14,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "np-6guCkH-I",
+"title": "Why the Average Japanese Farmer is 70 Years Old",
+"views": 232000,
+"age_days": 365,
+"length_s": 1188,
+"x_median": 0.81,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"number",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "uaKN006y0tI",
+"title": "How China Killed Hong Kong's Economy",
+"views": 589000,
+"age_days": 365,
+"length_s": 1142,
+"x_median": 2.06,
+"new": false,
+"outlier": true,
+"patterns": [
+"how",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "OzfJZYsc_sk",
+"title": "Why Russia and Kazakhstan Pretend to be Allies",
+"views": 370000,
+"age_days": 365,
+"length_s": 1089,
+"x_median": 1.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "A5Phoh0eRUc",
+"title": "The College Enrollment Crisis",
+"views": 956000,
+"age_days": 365,
+"length_s": 1046,
+"x_median": 3.35,
+"new": false,
+"outlier": true,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "OceYCEexDqQ",
+"title": "The Surprising Way Credit Cards Make Money",
+"views": 494000,
+"age_days": 365,
+"length_s": 1263,
+"x_median": 1.73,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "-Iqdm8jOzHU",
+"title": "The Return of Nuclear Weapons",
+"views": 193000,
+"age_days": 365,
+"length_s": 741,
+"x_median": 0.68,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "Di5rmpD03iM",
+"title": "What Xi Jinping Fears More than America",
+"views": 747000,
+"age_days": 365,
+"length_s": 1276,
+"x_median": 2.62,
+"new": false,
+"outlier": true,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "kAIwWGhzgiw",
+"title": "How America Became the World\u2019s #1 Oil Producer",
+"views": 245000,
+"age_days": 730,
+"length_s": 1329,
+"x_median": 0.86,
+"new": false,
+"outlier": false,
+"patterns": [
+"how",
+"number",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "HlHKC844le8",
+"title": "America\u2019s Birth Rate \u201cCrisis\u201d",
+"views": 595000,
+"age_days": 730,
+"length_s": 1744,
+"x_median": 2.08,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "KuWAdYl5icY",
+"title": "Why There Are No Flights Between India and China",
+"views": 907000,
+"age_days": 730,
+"length_s": 1170,
+"x_median": 3.18,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "jO_Ho229wqw",
+"title": "Are We in a Cold War with China?",
+"views": 356000,
+"age_days": 730,
+"length_s": 1349,
+"x_median": 1.25,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "-10LuhWGbVk",
+"title": "Why the United States is Suing Apple",
+"views": 184000,
+"age_days": 730,
+"length_s": 1152,
+"x_median": 0.64,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"id": "CXfNGcMSwzU",
+"title": "Russia is Running Out of People",
+"views": 963000,
+"age_days": 730,
+"length_s": 1067,
+"x_median": 3.37,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "hX21ctsGhNc",
+"title": "Why a Language Map of the World is Impossible",
+"views": 5500000,
+"age_days": 30.4,
+"length_s": 960,
+"x_median": 1.67,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "6zq5XtyV3yg",
+"title": "Where do hills come from?",
+"views": 1300000,
+"age_days": 121.6,
+"length_s": 736,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "3mQKM8tE8-E",
+"title": "The first TWO voyages around the world",
+"views": 1500000,
+"age_days": 121.6,
+"length_s": 958,
+"x_median": 0.45,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "knCojy_3bmk",
+"title": "The world's most annoying road",
+"views": 1300000,
+"age_days": 212.79999999999998,
+"length_s": 802,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "-tO2FiyjCbE",
+"title": "Map Men vs Geoguessr 2: Mark's Revenge?",
+"views": 936000,
+"age_days": 212.79999999999998,
+"length_s": 2206,
+"x_median": 0.28,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"number"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "DQzqmV7t6_0",
+"title": "The English divide nobody talks about",
+"views": 2100000,
+"age_days": 304.0,
+"length_s": 784,
+"x_median": 0.64,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "eq-kgUpd-5E",
+"title": "This country is 17% fake",
+"views": 2500000,
+"age_days": 365,
+"length_s": 871,
+"x_median": 0.76,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "zte_vg0D8Z4",
+"title": "Twin Towns: What Went Wrong?",
+"views": 1700000,
+"age_days": 365,
+"length_s": 770,
+"x_median": 0.52,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "zDsqJTD5LL0",
+"title": "Map Men vs. Geoguessr",
+"views": 2100000,
+"age_days": 730,
+"length_s": 1687,
+"x_median": 0.64,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "cwBslntC3xg",
+"title": "Weird maps win elections - Gerrymandering explained",
+"views": 2300000,
+"age_days": 730,
+"length_s": 700,
+"x_median": 0.7,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "3nB688xBYdY",
+"title": "There are NOT 195 countries",
+"views": 3900000,
+"age_days": 730,
+"length_s": 736,
+"x_median": 1.18,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "PVemGumEEgo",
+"title": "The Phantom Island of Google Maps",
+"views": 3100000,
+"age_days": 730,
+"length_s": 746,
+"x_median": 0.94,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "cD4hxKkqR4E",
+"title": "You'll never guess the most popular internet country code",
+"views": 2900000,
+"age_days": 730,
+"length_s": 674,
+"x_median": 0.88,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "pJU-KYMREbQ",
+"title": "Internet Vs Ocean: the essential wires we never think about",
+"views": 3300000,
+"age_days": 1095,
+"length_s": 619,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "Whqs8v1svyo",
+"title": "Why British cities make no sense",
+"views": 4600000,
+"age_days": 1095,
+"length_s": 674,
+"x_median": 1.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "B14Gtm2Z_70",
+"title": "Why is North up?",
+"views": 3700000,
+"age_days": 1095,
+"length_s": 597,
+"x_median": 1.12,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "jaEhvWXmLyk",
+"title": "What went wrong with the Tube Map?",
+"views": 3300000,
+"age_days": 1095,
+"length_s": 755,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "cTLCfl01zuE",
+"title": "The Tube Map nearly looked very different",
+"views": 2600000,
+"age_days": 1460,
+"length_s": 684,
+"x_median": 0.79,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "pWZ9ZVRQ0Nw",
+"title": "Why are there no bridges in East London?",
+"views": 8600000,
+"age_days": 1460,
+"length_s": 797,
+"x_median": 2.61,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "szUjnEZcp68",
+"title": "Tower Bridge could have looked very different",
+"views": 2600000,
+"age_days": 1460,
+"length_s": 614,
+"x_median": 0.79,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "u5CguqywlBk",
+"title": "What happened to Old London Bridge?",
+"views": 5400000,
+"age_days": 1460,
+"length_s": 576,
+"x_median": 1.64,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "hCc0OsyMbQk",
+"title": "English counties explained",
+"views": 6300000,
+"age_days": 1825,
+"length_s": 619,
+"x_median": 1.91,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "3mHC-Pf8-dU",
+"title": "The longitude problem: history's deadliest riddle",
+"views": 2900000,
+"age_days": 1825,
+"length_s": 556,
+"x_median": 0.88,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "hrsxRJdwfM0",
+"title": "How many continents are there?",
+"views": 4300000,
+"age_days": 1825,
+"length_s": 520,
+"x_median": 1.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "hX4s1ZLW_PI",
+"title": "How do you start a new country?",
+"views": 3800000,
+"age_days": 1825,
+"length_s": 572,
+"x_median": 1.15,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how",
+"you/your",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "DfXoUaeLcDU",
+"title": "Where is America?",
+"views": 3400000,
+"age_days": 1825,
+"length_s": 498,
+"x_median": 1.03,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "8mrNEVUuZdk",
+"title": "The mystery of the squarest country",
+"views": 5100000,
+"age_days": 1825,
+"length_s": 494,
+"x_median": 1.55,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "Eg1ScKoBnHA",
+"title": "Who Owns Antarctica?",
+"views": 3300000,
+"age_days": 1825,
+"length_s": 535,
+"x_median": 1.0,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "Nlzehe4mta4",
+"title": "What will the world look like in 250 million years?",
+"views": 4200000,
+"age_days": 1825,
+"length_s": 523,
+"x_median": 1.27,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"number",
+"country"
+]
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"id": "_bqzwsM6eoQ",
+"title": "Why does Russia have the best maps of Britain?",
+"views": 4200000,
+"age_days": 1825,
+"length_s": 529,
+"x_median": 1.27,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"country"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "gilHqKNTkUQ",
+"title": "Why Podcasts Are Destroying Humanity",
+"views": 373000,
+"age_days": 2,
+"length_s": 2896,
+"x_median": 1.67,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "p--6AMILAe8",
+"title": "Why We Are Indifferent To Mass Suffering",
+"views": 116000,
+"age_days": 9,
+"length_s": 605,
+"x_median": 0.52,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "YJrhBwGw7Ac",
+"title": "Why \u201cDon\u2019t You Understand Economics?\u201d Is a Con",
+"views": 173000,
+"age_days": 14,
+"length_s": 1070,
+"x_median": 0.77,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"why",
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "e87vZZBvwSI",
+"title": "The Game Is Rigged. That\u2019s the Best News You\u2019ll Hear All Year",
+"views": 639000,
+"age_days": 21,
+"length_s": 2573,
+"x_median": 2.86,
+"new": false,
+"outlier": true,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "mt0jf2VdCdQ",
+"title": "The Rich Think You're Jealous. The Science Says You're Not",
+"views": 297000,
+"age_days": 28,
+"length_s": 1480,
+"x_median": 1.33,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "n_lgy337KiA",
+"title": "Your Actions Ripple Further Than You Think",
+"views": 112000,
+"age_days": 30.4,
+"length_s": 727,
+"x_median": 0.5,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "RyOFDfpjR9U",
+"title": "Jurassic Park Explains Why Nobody Is Going To Stop AI",
+"views": 213000,
+"age_days": 30.4,
+"length_s": 2101,
+"x_median": 0.95,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"explained",
+"dramatic"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "0uwfOWYchpI",
+"title": "The Psychology Of Slow Horses: Why It Actually Works",
+"views": 476000,
+"age_days": 30.4,
+"length_s": 516,
+"x_median": 2.13,
+"new": false,
+"outlier": true,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "Dqh17U3tymU",
+"title": "Diary Of A CEO Responded To My Takedown. I Wasn't Ready For This",
+"views": 1300000,
+"age_days": 30.4,
+"length_s": 3617,
+"x_median": 5.82,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "jIv1f2AwFCI",
+"title": "Harry Potter Trained You To Blame The Wrong People",
+"views": 835000,
+"age_days": 30.4,
+"length_s": 1871,
+"x_median": 3.74,
+"new": false,
+"outlier": true,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "O0HG7EimeAY",
+"title": "The Dark Side of Meritocracy: Why 'Hustling' is a Trap",
+"views": 351000,
+"age_days": 60.8,
+"length_s": 2116,
+"x_median": 1.57,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"dramatic"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "JeRd91a14V8",
+"title": "Why The Rich Think The Poor Are Lazy",
+"views": 532000,
+"age_days": 60.8,
+"length_s": 2032,
+"x_median": 2.38,
+"new": false,
+"outlier": true,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "tO57SThgdoE",
+"title": "Why The Rich Need You To Believe The Titanic Was An Accident",
+"views": 447000,
+"age_days": 60.8,
+"length_s": 1881,
+"x_median": 2.0,
+"new": false,
+"outlier": true,
+"patterns": [
+"why",
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "_OWqzhwsWXM",
+"title": "The Science Of The Immigration Grift",
+"views": 113000,
+"age_days": 60.8,
+"length_s": 1966,
+"x_median": 0.51,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "CTTQqLFj_Ng",
+"title": "I've Watched Genius Comedians Vanish - Here's Why",
+"views": 293000,
+"age_days": 91.19999999999999,
+"length_s": 1580,
+"x_median": 1.31,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "fE7B8sJTKj8",
+"title": "The Psychological Trick That Kills Every Wealth Tax",
+"views": 64000,
+"age_days": 91.19999999999999,
+"length_s": 1055,
+"x_median": 0.29,
+"new": false,
+"outlier": false,
+"patterns": [
+"format-hook"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "eaWEeMqgqa4",
+"title": "Hard Work Is Not Why People Get Rich (You've Been Trained To Think It Is)",
+"views": 67000,
+"age_days": 91.19999999999999,
+"length_s": 1917,
+"x_median": 0.3,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "gKVovqhfCzY",
+"title": "Gary Stevenson Explains Why You're Getting Poorer",
+"views": 155000,
+"age_days": 91.19999999999999,
+"length_s": 2144,
+"x_median": 0.69,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"explained",
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "2Fer855GgQQ",
+"title": "The Economics Of Getting Filthy Rich",
+"views": 180000,
+"age_days": 91.19999999999999,
+"length_s": 1833,
+"x_median": 0.81,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "ApSH0fCIjTY",
+"title": "The Psychological Trick That Keeps you Obedient",
+"views": 407000,
+"age_days": 121.6,
+"length_s": 2029,
+"x_median": 1.82,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "xkp2dlLFI4Y",
+"title": "Nigel Farage: The Real Reason He Can't Be Stopped",
+"views": 69000,
+"age_days": 121.6,
+"length_s": 1696,
+"x_median": 0.31,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "S417CrSWNEQ",
+"title": "The Naming Game: Why the Powerful Control the Narrative",
+"views": 56000,
+"age_days": 121.6,
+"length_s": 726,
+"x_median": 0.25,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "-XgCFn6Vbnw",
+"title": "The Real Reason For The Zombie Boom? Follow The Money",
+"views": 262000,
+"age_days": 121.6,
+"length_s": 2234,
+"x_median": 1.17,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "F4SmgrAmdUQ",
+"title": "Everything Banksy Gives Away - The Rich Take",
+"views": 278000,
+"age_days": 152.0,
+"length_s": 1402,
+"x_median": 1.24,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "fchrqBL-8B0",
+"title": "Elon Musk: The Tragedy of the World's First Trillionaire",
+"views": 323000,
+"age_days": 152.0,
+"length_s": 2054,
+"x_median": 1.45,
+"new": false,
+"outlier": false,
+"patterns": [
+"country"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "_luCGP5pKjw",
+"title": "The Wealth Tax Debate Is A Trap",
+"views": 130000,
+"age_days": 152.0,
+"length_s": 719,
+"x_median": 0.58,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "ZzOMmMFQZWs",
+"title": "You Are Living In An Economic Fairy Tale",
+"views": 234000,
+"age_days": 152.0,
+"length_s": 1744,
+"x_median": 1.05,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "LqMzrQgl71s",
+"title": "This Activist Comedian Pulled Off the Impossible",
+"views": 41000,
+"age_days": 182.39999999999998,
+"length_s": 1159,
+"x_median": 0.18,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "FVtvr-LgD_M",
+"title": "Why Politicians Keep Getting It So Wrong",
+"views": 50000,
+"age_days": 182.39999999999998,
+"length_s": 1088,
+"x_median": 0.22,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"id": "Nm_L9VCBJ_E",
+"title": "The Psychology Behind Rory Stewart Dismissing Gary Stevenson",
+"views": 181000,
+"age_days": 182.39999999999998,
+"length_s": 1282,
+"x_median": 0.81,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "Do_55I-LzfE",
+"title": "The Toddlers Have Bazookas Now",
+"views": 1300000,
+"age_days": 21,
+"length_s": 833,
+"x_median": 0.72,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "LoakcQM-Dk8",
+"title": "If We Ever Live Forever",
+"views": 572000,
+"age_days": 60.8,
+"length_s": 879,
+"x_median": 0.32,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "y894m7joEBc",
+"title": "maybe I'm the alien",
+"views": 787000,
+"age_days": 152.0,
+"length_s": 2099,
+"x_median": 0.44,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "BUtzl6b0uKU",
+"title": "a pointless ad for my pointless new book",
+"views": 161000,
+"age_days": 365,
+"length_s": 102,
+"x_median": 0.09,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "Ctwc8t5CsQs",
+"title": "Chess is When You Microdose Infinity",
+"views": 1500000,
+"age_days": 365,
+"length_s": 1180,
+"x_median": 0.83,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "0y6wiBzPMSI",
+"title": "everybody is a total mess (and you should be one too)",
+"views": 1900000,
+"age_days": 365,
+"length_s": 891,
+"x_median": 1.06,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "o1OsDWT_DUc",
+"title": "Then Next Comes",
+"views": 1600000,
+"age_days": 730,
+"length_s": 1072,
+"x_median": 0.89,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "8HzIlKe--NU",
+"title": "How Long is Now? | Introduction to Metaphysics \ud83e\ude90",
+"views": 1500000,
+"age_days": 730,
+"length_s": 854,
+"x_median": 0.83,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "VQjPKqE39No",
+"title": "How Will We Know When AI is Conscious?",
+"views": 2600000,
+"age_days": 1095,
+"length_s": 1358,
+"x_median": 1.44,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"how"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "sKouPOhh_9I",
+"title": "Big Oxygen",
+"views": 1700000,
+"age_days": 1095,
+"length_s": 1486,
+"x_median": 0.94,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "O0EKaSmtpA0",
+"title": "Ether/Or \u2014 The story of black holes, and how I temporarily lost my mind over an Amazon review",
+"views": 1900000,
+"age_days": 1095,
+"length_s": 1218,
+"x_median": 1.06,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "Jv79l1b-eoI",
+"title": "Absurdism | How to Party at the End of Meaning \u2604\ufe0f",
+"views": 4700000,
+"age_days": 1095,
+"length_s": 681,
+"x_median": 2.61,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "VztEcSYXQr0",
+"title": "the existence forecast",
+"views": 1000000,
+"age_days": 1460,
+"length_s": 374,
+"x_median": 0.56,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "Fzhkwyoe5vI",
+"title": "Don't Hex the Water",
+"views": 1900000,
+"age_days": 1460,
+"length_s": 1575,
+"x_median": 1.06,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "P9Q3crLWQY8",
+"title": "How the Frogs Cooked Dinner",
+"views": 845000,
+"age_days": 1460,
+"length_s": 262,
+"x_median": 0.47,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "3IT_rnV1LBw",
+"title": "Red Dead No Redemption",
+"views": 2500000,
+"age_days": 1460,
+"length_s": 969,
+"x_median": 1.39,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "9uhURpEbK40",
+"title": "exam for humans",
+"views": 1400000,
+"age_days": 1460,
+"length_s": 265,
+"x_median": 0.78,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "DvkUo05xtFM",
+"title": "8 Million Species of Aliens",
+"views": 2100000,
+"age_days": 1825,
+"length_s": 1284,
+"x_median": 1.17,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "H1rN-gdkgfU",
+"title": "so you want to build a nuke",
+"views": 3200000,
+"age_days": 1825,
+"length_s": 386,
+"x_median": 1.78,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "F8uaqdeN5qA",
+"title": "I've written a new book and I hope you hate it",
+"views": 696000,
+"age_days": 1825,
+"length_s": 111,
+"x_median": 0.39,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "i2wLyhgeYsw",
+"title": "Buddhism is Kinda Out There, Man",
+"views": 5800000,
+"age_days": 1825,
+"length_s": 1192,
+"x_median": 3.22,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "WX0xWJpr0FY",
+"title": "There's No Such Thing As Orange",
+"views": 2900000,
+"age_days": 2190,
+"length_s": 1005,
+"x_median": 1.61,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "DJiGuFCzaFo",
+"title": "How to Be Correct About Everything All the Time",
+"views": 7200000,
+"age_days": 2190,
+"length_s": 991,
+"x_median": 4.0,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "hS_AXRRnIzM",
+"title": "The Rememberer",
+"views": 2700000,
+"age_days": 2190,
+"length_s": 1671,
+"x_median": 1.5,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "K3X2Fv-c3Fc",
+"title": "The Moon is a Door to Forever",
+"views": 3800000,
+"age_days": 2190,
+"length_s": 809,
+"x_median": 2.11,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "Et6itTuJSYY",
+"title": "The Ants",
+"views": 1300000,
+"age_days": 2190,
+"length_s": 162,
+"x_median": 0.72,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "-mu780uB7mI",
+"title": "Sleep is Just Death Being Shy",
+"views": 9400000,
+"age_days": 2555,
+"length_s": 649,
+"x_median": 5.22,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "B01HWsilRqs",
+"title": "Upsilon Dies Backwards",
+"views": 2500000,
+"age_days": 2555,
+"length_s": 887,
+"x_median": 1.39,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "0R7EN_GTAlw",
+"title": "Letter to Marble 3",
+"views": 966000,
+"age_days": 2555,
+"length_s": 318,
+"x_median": 0.54,
+"new": false,
+"outlier": false,
+"patterns": [
+"number"
+]
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"id": "MANyX7woDPA",
+"title": "thoughts about writing",
+"views": 1000000,
+"age_days": 2555,
+"length_s": 669,
+"x_median": 0.56,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "O233t0qFTP8",
+"title": "Dan Toomey made videos no one asked for | Best of Luck",
+"views": 16000,
+"age_days": 0.16666666666666666,
+"length_s": 2903,
+"x_median": 0.17,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "QfXQHt1qOII",
+"title": "Why Trump\u2019s base still believes Republicans can win | America, Actually",
+"views": 55000,
+"age_days": 1,
+"length_s": 2702,
+"x_median": 0.57,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "wrelotZoMP8",
+"title": "How Silicon Valley learned to love war | The Gray Area",
+"views": 47000,
+"age_days": 1,
+"length_s": 2896,
+"x_median": 0.49,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "F68AdaKgwOU",
+"title": "Inside Nevada\u2019s Trump slump | America, Actually",
+"views": 80000,
+"age_days": 3,
+"length_s": 1713,
+"x_median": 0.83,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "EogeI7sRtwU",
+"title": "Talarico vs. Paxton: What Texas voters have to say",
+"views": 89000,
+"age_days": 3,
+"length_s": 1369,
+"x_median": 0.93,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "9ensf6V2Uyk",
+"title": "Why younger Americans can\u2019t get ahead",
+"views": 76000,
+"age_days": 4,
+"length_s": 2741,
+"x_median": 0.79,
+"new": false,
+"outlier": false,
+"patterns": [
+"why",
+"country"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "KVYNwthBcgM",
+"title": "Elite universities are losing Black students",
+"views": 338000,
+"age_days": 6,
+"length_s": 518,
+"x_median": 3.52,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "L_r6Gtb-_Os",
+"title": "Your world, explained by Vox: Download our new app",
+"views": 47000,
+"age_days": 6,
+"length_s": 159,
+"x_median": 0.49,
+"new": false,
+"outlier": false,
+"patterns": [
+"explained",
+"you/your",
+"country"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "vXjcd99EMME",
+"title": "Pablo Torre on what sports reveal about Trump\u2019s America | America, Actually",
+"views": 69000,
+"age_days": 6,
+"length_s": 1927,
+"x_median": 0.72,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "3kh_dRtXquc",
+"title": "What The U.S. Quits Rate Means For Your Job | Best of Luck",
+"views": 116000,
+"age_days": 7,
+"length_s": 2211,
+"x_median": 1.21,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "W3Zn_sjdHxM",
+"title": "Inside the secret race to build artificial intelligence | The Gray Area",
+"views": 100000,
+"age_days": 8,
+"length_s": 2506,
+"x_median": 1.04,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "w5HRDzH_EE4",
+"title": "Can Trump steal the midterms? | America, Actually",
+"views": 143000,
+"age_days": 10,
+"length_s": 1752,
+"x_median": 1.49,
+"new": false,
+"outlier": false,
+"patterns": [
+"question",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "NB93ARM7GVY",
+"title": "Can Democrats finally pass affordable child care for all?",
+"views": 73000,
+"age_days": 11,
+"length_s": 1711,
+"x_median": 0.76,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "annnR8zAdbY",
+"title": "A nice life is closer than you think | The Gray Area",
+"views": 72000,
+"age_days": 11,
+"length_s": 2535,
+"x_median": 0.75,
+"new": false,
+"outlier": false,
+"patterns": [
+"you/your"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "62aBuDKsiDc",
+"title": "Introducing Best of Luck with Kyla Scanlon",
+"views": 212000,
+"age_days": 14,
+"length_s": 104,
+"x_median": 2.21,
+"new": false,
+"outlier": true,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "F8Mm4FgIwBg",
+"title": "Democrats need new faces  | America, Actually",
+"views": 105000,
+"age_days": 14,
+"length_s": 2823,
+"x_median": 1.09,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "L39YZQFuKb0",
+"title": "The GOP\u2019s midterm advantage | America, Actually",
+"views": 143000,
+"age_days": 14,
+"length_s": 1942,
+"x_median": 1.49,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "fqWG_jIHsvg",
+"title": "Can we end campus sexual assault?",
+"views": 92000,
+"age_days": 14,
+"length_s": 1823,
+"x_median": 0.96,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "AZ6awe3KF1I",
+"title": "Can prediction markets be good for society? | The Gray Area",
+"views": 62000,
+"age_days": 14,
+"length_s": 2814,
+"x_median": 0.65,
+"new": false,
+"outlier": false,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "EfbNa3TBy6M",
+"title": "Are young men and women giving up on each other? | The Gray Area",
+"views": 223000,
+"age_days": 21,
+"length_s": 2670,
+"x_median": 2.32,
+"new": false,
+"outlier": true,
+"patterns": [
+"question"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "siI_2q_Umhs",
+"title": "Wisconsin is a test of the blue wave | America, Actually",
+"views": 116000,
+"age_days": 21,
+"length_s": 1884,
+"x_median": 1.21,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "Vq7UR2FuYDk",
+"title": "The problem with the death penalty | The Gray Area",
+"views": 111000,
+"age_days": 21,
+"length_s": 3371,
+"x_median": 1.16,
+"new": false,
+"outlier": false,
+"patterns": []
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "d4ANQuNszYM",
+"title": "If Dems take Congress, what can they actually do?",
+"views": 484000,
+"age_days": 21,
+"length_s": 1128,
+"x_median": 5.04,
+"new": false,
+"outlier": true,
+"patterns": [
+"question",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "17y58f_P82M",
+"title": "Democrats need a stronger message on abortion | America, Actually",
+"views": 90000,
+"age_days": 21,
+"length_s": 2335,
+"x_median": 0.94,
+"new": false,
+"outlier": false,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "Fp5v5Rz5dFc",
+"title": "Why it\u2019s okay to want more money | The Gray Area",
+"views": 86000,
+"age_days": 28,
+"length_s": 2934,
+"x_median": 0.9,
+"new": false,
+"outlier": false,
+"patterns": [
+"why"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "9MRpUg4jizI",
+"title": "The GOP strategy: Ignore Trump | America, Actually",
+"views": 336000,
+"age_days": 30.4,
+"length_s": 1153,
+"x_median": 3.5,
+"new": false,
+"outlier": true,
+"patterns": [
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "5VxI0nFnsQw",
+"title": "The ethics of killing bugs | The Gray Area",
+"views": 87000,
+"age_days": 30.4,
+"length_s": 2100,
+"x_median": 0.91,
+"new": false,
+"outlier": false,
+"patterns": [
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "B9tbTY6dtG8",
+"title": "How new wearable tech is changing horse racing",
+"views": 129000,
+"age_days": 30.4,
+"length_s": 585,
+"x_median": 1.34,
+"new": false,
+"outlier": false,
+"patterns": [
+"how"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "zLK4HT6Ksec",
+"title": "Democrats could win 2026 and still lose the bigger fight | America, Actually",
+"views": 114000,
+"age_days": 30.4,
+"length_s": 2418,
+"x_median": 1.19,
+"new": false,
+"outlier": false,
+"patterns": [
+"number",
+"country",
+"dramatic"
+]
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"id": "JysbLAm7uL4",
+"title": "The dark side of modern therapy culture | The Gray Area",
+"views": 400000,
+"age_days": 30.4,
+"length_s": 2323,
+"x_median": 4.17,
+"new": false,
+"outlier": true,
+"patterns": []
+}
+],
+"cadence": [
+{
+"peer": "@Primateeconomics",
+"tier": "rising",
+"subs": 577000,
+"median_views": 457000,
+"uploads_90d": 3,
+"median_gap_days": 30.4,
+"median_length_min": 10.1
+},
+{
+"peer": "@Explains101",
+"tier": "rising",
+"subs": 353000,
+"median_views": 332000,
+"uploads_90d": 0,
+"median_gap_days": null,
+"median_length_min": 15.8
+},
+{
+"peer": "@TheInvisibleHandCo",
+"tier": "rising",
+"subs": 304000,
+"median_views": 219500,
+"uploads_90d": 11,
+"median_gap_days": 0.0,
+"median_length_min": 18.3
+},
+{
+"peer": "@Econsketch1",
+"tier": "rising",
+"subs": 678,
+"median_views": 971,
+"uploads_90d": 7,
+"median_gap_days": 0.0,
+"median_length_min": 7.5
+},
+{
+"peer": "@xplainedInminutess",
+"tier": "rising",
+"subs": 128000,
+"median_views": 1630000,
+"uploads_90d": 0,
+"median_gap_days": null,
+"median_length_min": 21.5
+},
+{
+"peer": "@EconomicsExplained",
+"tier": "incumbent",
+"subs": 2890000,
+"median_views": 572000,
+"uploads_90d": 16,
+"median_gap_days": 0.0,
+"median_length_min": 17.6
+},
+{
+"peer": "@HowMoneyWorks",
+"tier": "incumbent",
+"subs": 1760000,
+"median_views": 816500,
+"uploads_90d": 11,
+"median_gap_days": 0.0,
+"median_length_min": 19.3
+},
+{
+"peer": "@MoneyMacro",
+"tier": "incumbent",
+"subs": 680000,
+"median_views": 231500,
+"uploads_90d": 7,
+"median_gap_days": 3.5,
+"median_length_min": 18.9
+},
+{
+"peer": "@BenFelixCSI",
+"tier": "incumbent",
+"subs": 655000,
+"median_views": 238500,
+"uploads_90d": 4,
+"median_gap_days": 23.4,
+"median_length_min": 18.7
+},
+{
+"peer": "@PolyMatter",
+"tier": "incumbent",
+"subs": 1930000,
+"median_views": 285500,
+"uploads_90d": 0,
+"median_gap_days": 30.4,
+"median_length_min": 18.7
+},
+{
+"peer": "@JayAndMark",
+"tier": "craft",
+"subs": 1830000,
+"median_views": 3300000,
+"uploads_90d": 1,
+"median_gap_days": 45.6,
+"median_length_min": 11.3
+},
+{
+"peer": "@BarrysEconomics",
+"tier": "craft",
+"subs": 236000,
+"median_views": 223500,
+"uploads_90d": 14,
+"median_gap_days": 0.0,
+"median_length_min": 29.8
+},
+{
+"peer": "@exurb1a",
+"tier": "craft",
+"subs": 2990000,
+"median_views": 1800000,
+"uploads_90d": 2,
+"median_gap_days": 65.5,
+"median_length_min": 14.7
+},
+{
+"peer": "@Vox",
+"tier": "craft",
+"subs": 12700000,
+"median_views": 96000,
+"uploads_90d": 30,
+"median_gap_days": 0.0,
+"median_length_min": 35.9
+}
+],
+"growth": []
+}
