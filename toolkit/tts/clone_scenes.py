@@ -30,6 +30,14 @@ else:
     m.prepare_conditionals(ref, exaggeration=EXAG)
 ref_emb = m.ve.embeds_from_wavs([librosa.load(ref, sr=16000)[0]], sample_rate=16000, as_spk=True)
 wm = WhisperModel('small.en', device='cpu', compute_type='int8')
+def joinnum(ws):
+    """Whisper's word timestamps split decimals ("1" + ".09"), so "1.09" became "one nine" and a correct take failed its
+    must phrase (Twice shrink_3, 8 tries, 3 Nov 2026). Rejoin a word that starts with a decimal point or digit-comma to the previous number."""
+    out = []
+    for w, a0, a1 in ws:
+        if out and re.match(r'^[.,]\d', w.strip()) and re.search(r'\d$', out[-1][0].strip()): out[-1] = (out[-1][0].rstrip() + w.strip(), out[-1][1], a1)
+        else: out.append((w, a0, a1))
+    return out
 def gaps(a, db=-38, min_s=0.12):
     F = int(sr * 0.01); e = 20 * np.log10(np.array([np.sqrt(np.mean(a[i*F:(i+1)*F]**2) + 1e-12) for i in range(len(a) // F)]))
     q = e < e.max() + db; res, i = [], 0
@@ -56,7 +64,7 @@ def voice_part(L, si, pi):
         w = m.generate(text, exaggeration=EXAG, cfg_weight=cfg, temperature=TEMP)
         a = squeeze_gaps(trim(w.squeeze(0).cpu().numpy().astype(np.float64), sr), sr, maxgap=0.40, keep=0.30)
         segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)  # a generator: read it once
-        h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w_.start, w_.end) for s_ in segs for w_ in s_.words for tk in toks(w_.word)]
+        h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w0, w1) for wd, w0, w1 in joinnum([(w_.word, w_.start, w_.end) for s_ in segs for w_ in s_.words]) for tk in toks(wd)]
         for j in range(len(H) - 1, 0, -1):  # whisper gives words one by one, so 'take' 'away' never became 'takeaway' (take1 scored 0.87 on a clean take)
             pair = (H[j - 1][0], H[j][0])
             if pair in (('take', 'away'), ('pay', 'slip')): H[j - 1:j + 1] = [(''.join(pair), H[j - 1][1], H[j][2])]
