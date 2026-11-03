@@ -59,6 +59,11 @@ def main():
                 log(f'fact-check: all {len(rows)} rows OK')
             elif waiver: log(f'fact-check waived: {waiver}')
             else: mark(st, False, 'no "factcheck" csv and no "factcheck_waiver" in project.json: clone voicing refused (use voice_mode "kokoro" for the animatic)')
+            ref = P['voice_ref'] if os.path.isabs(P['voice_ref']) else get('voice_ref')
+            if os.path.isdir(ref):  # voice lint: phrasings the clone is known to garble (profile.json "hazards"); allow approved lines with "voice_lint_allow"
+                r = subprocess.run([sys.executable, f'{TK}/story/voice_lint.py', get('script'), ref] + P.get('voice_lint_allow', []), capture_output=True, text=True); logf.write(r.stdout)
+                for x in r.stdout.splitlines(): print(x)
+                if r.returncode: mark(st, False, 'voice lint: rephrase the FAIL lines (see the log) or list approved ones in "voice_lint_allow"')
         if st == 'voice' and P.get('voice_mode') == 'kokoro':  # animatic: quick computer voice straight to vo + timing
             rc = run([sys.executable, f'{TK}/tts/kokoro_lines.py', get('script'), P.get('kokoro_voice', 'am_michael'), get('vo'), get('timing')],
                      env=dict(KOKORO_DIR=os.environ.get('KOKORO_DIR', '/home/claude/kokoro')))
@@ -135,7 +140,15 @@ def main():
                 sheet.save(f'{root}/build/frames_sheet.png')
             lu = subprocess.run(['ffmpeg', '-i', full, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
             I = next((x.split()[1] for x in reversed(lu.splitlines()) if x.strip().startswith('I:')), '?')
-            mark(st, rc == 0, f'{n} frames in build/frames_sheet.png; loudness {I} LUFS (look at the sheet before sending)')
+            # every line's last word must be audible in the final file (loudnorm silently cut the last words of clips A-C, 3 Nov)
+            import numpy as np
+            pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', full, '-vn', '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], capture_output=True).stdout
+            a = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768; mute = []
+            for l in T['lines']:
+                w = (l.get('words') or [[None, l['end'] - 0.4, l['end']]])[-1]; seg = a[int(w[1] * 16000):int(max(w[2], w[1] + 0.1) * 16000)]
+                if not len(seg) or 20 * np.log10(np.sqrt(np.mean(seg ** 2)) + 1e-9) < -45: mute.append(l['id'])
+            if mute: rc = 1
+            mark(st, rc == 0, (f'SILENT at the end of: {", ".join(mute)} (audio cut?); ' if mute else 'every line ends audibly; ') + f'{n} frames in build/frames_sheet.png; loudness {I} LUFS (look at the sheet before sending)')
         elif st == 'deliver':
             out = get('out'); os.makedirs(os.path.dirname(out), exist_ok=True); lim = P.get('laptop_mb', 30)
             for crf in (27, 30, 33):
