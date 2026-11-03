@@ -8,7 +8,7 @@
   * Never `pkill -f <pattern>` from a shell whose own command line contains the pattern (it kills itself, exit 144).
 Resumable: lines already passing the word check are skipped; `--from STAGE` restarts later; `--lines a1 b2` re-voices lines.
 
-Usage: build.py project.json [--from voice|align|mix|listen|lint|render|check|deliver] [--to STAGE] [--only STAGE] [--keep] [--lines ID ...]
+Usage: build.py project.json [--from voice|align|mix|listen|qa|lint|render|check|deliver] [--to STAGE] [--only STAGE] [--keep] [--lines ID ...]
   --lines takes SCENE ids in scene mode and LINE ids in line mode (re-voices only those).
 Modes (project.json "voice_mode"): "kokoro" = animatic (Kokoro at natural speed, no fact-check needed; set "render_scale": 0.6667
 for a 720p draft); "scene" = Sam's clone, one passage per scene (default for final clips); "line" = clone line by line (fixes only).
@@ -23,7 +23,7 @@ Writes build/status.json (stage, time, result) and build/build.log; prints one l
 import json, os, sys, subprocess, time, shutil
 TK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY = os.environ.get('CBX_PY', '/home/claude/cbx/bin/python3')
-STAGES = ['voice', 'align', 'mix', 'listen', 'lint', 'render', 'check', 'deliver']  # listen: the mixed narration as an MP3 for Sam's voice-only review (3 Nov 2026)  # mix before lint: the lint reads the fresh sfx cues
+STAGES = ['voice', 'align', 'mix', 'listen', 'qa', 'lint', 'render', 'check', 'deliver']  # listen: the mixed narration as an MP3 for Sam's voice-only review (3 Nov 2026)  # mix before lint: the lint reads the fresh sfx cues
 
 def main():
     a = sys.argv[1:]; pj = os.path.abspath(a[0]); root = os.path.dirname(pj); P = json.load(open(pj))
@@ -164,6 +164,11 @@ def main():
             mp3 = os.path.splitext(get('out'))[0] + '_voice.mp3'; os.makedirs(os.path.dirname(mp3), exist_ok=True)
             rc = run(['ffmpeg', '-v', 'error', '-y', '-i', get('mix_out'), '-ac', '1', '-b:a', '128k', mp3])
             mark(st, rc == 0, mp3)
+        elif st == 'qa':  # the finished file, checked before Sam hears it (3 Nov 2026): words, clipped starts, missing ends, pace, gaps, loudness, peaks, voice finish
+            qdir = os.path.join(os.path.dirname(get('out')), 'qa')
+            rc = run([PY, f'{TK}/tts/qa_final.py', get('timing'), get('mix_out'), qdir, '--title', P.get('name', 'Narration')])
+            ck = os.path.join(qdir, os.path.splitext(os.path.basename(get('mix_out')))[0].replace('_mix', '') + '_listening_checklist.md')
+            mark(st, rc == 0, (f'checklist {ck}' if rc == 0 else f'HARD FAULTS: fix them before Sam listens (see {qdir}); checklist {ck}'))
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
             rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={round(1080 * float(P['render_scale'])) / 1080!r}"] if P.get('render_scale') else []), cwd=get('remotion'))  # scale snapped so 1080*scale is a whole pixel (Remotion refuses 720.036)

@@ -35,7 +35,7 @@ fc = [f'[0:a]aresample=48000,' + (os.environ['VOICE_FX'] + ',' if os.environ.get
 labs = []
 for i, (s, t, g) in enumerate(cues):
     fc.append(f'[{i + 2}:a]aresample=48000,volume={g}dB,adelay={int(max(0, t) * 1000)}:all=1[s{i}]'); labs.append(f'[s{i}]')
-fc.append(f'[vo][mus]{"".join(labs)}amix=inputs={len(cues) + 2}:normalize=0:duration=first,alimiter=limit=0.9[out]')
+fc.append(f'[vo][mus]{"".join(labs)}amix=inputs={len(cues) + 2}:normalize=0:duration=first,alimiter=limit=0.8:level=false[out]')
 subprocess.run(['ffmpeg', '-v', 'error', '-y', *inp, '-filter_complex', ';'.join(fc), '-map', '[out]', '-ar', '48000', '-ac', '2', f'{D}/pilot_mix.wav'], check=True)
 r = subprocess.run(['ffmpeg', '-i', f'{D}/pilot_mix.wav', '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
 print([l for l in r.splitlines() if 'I:' in l][-1])

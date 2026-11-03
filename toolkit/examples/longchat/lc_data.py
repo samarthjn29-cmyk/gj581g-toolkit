@@ -53,7 +53,7 @@ if segs:
     mix = ''.join(f'[m{i}]' for i in range(len(segs)))
     mfl.append(f"{mix}amix=inputs={len(segs)}:normalize=0,apad,atrim=0:{t:.3f}[bed]")
     vi = len(segs)
-    mfl.append(f"[{vi}:a]asplit=2[v1][v2];[bed][v1]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=500[duck];[v2][duck]amix=inputs=2:normalize=0,alimiter=limit=0.95[o]")
+    mfl.append(f"[{vi}:a]asplit=2[v1][v2];[bed][v1]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=500[duck];[v2][duck]amix=inputs=2:normalize=0,alimiter=limit=0.8:level=false[o]")
     subprocess.run(['ffmpeg', '-y', '-v', 'error', *mins, '-i', f'{R}/out/voice.wav', '-filter_complex', ';'.join(mfl), '-map', '[o]', '-ac', '2', '-ar', '48000', f'{R}/out/narration.wav'], check=True)
 else:
     shutil.copy(f'{R}/out/voice.wav', f'{R}/out/narration.wav')

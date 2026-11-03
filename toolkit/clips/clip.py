@@ -104,7 +104,7 @@ def data(FIRST, LAST):
         if fout: fx += f',afade=t=out:st={L - 1.5:.3f}:d=1.5'
         mfl.append(fx + f",adelay={int(s0 * 1000)}:all=1[m{i}]")
     mfl.append(''.join(f'[m{i}]' for i in range(len(segs))) + f'amix=inputs={len(segs)}:normalize=0,apad,atrim=0:{t:.3f}[bed]')
-    mfl.append(f"[{len(segs)}:a]asplit=2[v1][v2];[bed][v1]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=500[duck];[v2][duck]amix=inputs=2:normalize=0,alimiter=limit=0.95[o]")
+    mfl.append(f"[{len(segs)}:a]asplit=2[v1][v2];[bed][v1]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=500[duck];[v2][duck]amix=inputs=2:normalize=0,alimiter=limit=0.8:level=false[o]")
     subprocess.run(['ffmpeg', '-y', '-v', 'error', *mins, '-i', f'{R}/out/voice.wav', '-filter_complex', ';'.join(mfl), '-map', '[o]', '-ac', '2', '-ar', '48000', f'{R}/out/narration.wav'], check=True)
     print('scenes', [(d['n'], d['start'], d['dur']) for d in out], 'total', round(t, 2)); return t
 
