@@ -69,6 +69,7 @@ def main():
         n = 0
         for r in rows:
             if r.get('hash') and r['hash'] != fp(text.get(r['line'], '')): continue  # wording changed since the check: --update and re-check first, never stamp over it
+            if not r.get('hash') and ' '.join(r.get('text', '').split()) != ' '.join(text.get(r['line'], '').split()): continue  # no fingerprint yet (older table): the checked wording in `text` must match the script now
             if r['line'] in text and (ids is None or r['line'] in ids) and (r.get('verdict') or '').strip().upper() in PASS:
                 r['hash'] = fp(text[r['line']]); r['text'] = text[r['line']]; r['checked'] = r.get('checked') or time.strftime('%Y-%m-%d'); n += 1
         save(p, rows); print(f'stamped {n} rows'); return
