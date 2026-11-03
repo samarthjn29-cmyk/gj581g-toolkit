@@ -1,6 +1,6 @@
 import re, json, sys, urllib.parse, subprocess, csv
-def search(q):
-    u = 'https://www.youtube.com/results?search_query=' + urllib.parse.quote(q) + '&hl=en&gl=US'
+def search(q, gl='US'):
+    u = 'https://www.youtube.com/results?search_query=' + urllib.parse.quote(q) + '&hl=en&gl=' + gl
     s = subprocess.run(['curl','-s','-m','25','-H','Accept-Language: en-US','-b','CONSENT=YES+1',u],capture_output=True,text=True).stdout
     m = re.search(r'var ytInitialData = (\{.*?\});</script>', s)
     if not m: return []
