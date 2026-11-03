@@ -69,7 +69,7 @@ def voice_part(L, si, pi):
                 if hw[j:j + len(tt)] == tt:
                     t_a, t_b = H[j][1], H[j + len(tt) - 1][2]
                     if any(t_a + 0.05 < g0 and g1 < t_b - 0.05 for g0, g1 in gaps(a, db=-28, min_s=0.09)): ok_t = False  # stricter: Sam heard a 0.13 s dip (-28 dB) after "Barbara's" as a pause (3 Nov)
-        hw_all = [x[0] for x in H]
+        hw_all = [x[0][:-2] if x[0].endswith("'s") and not any("'s" in t for mm in must for t in mm) else x[0] for x in H]  # a must 'sam' also matches "Sam's" (name test, 3 Nov)
         ok_m = all(any(hw_all[j:j + len(mm)] == mm for j in range(len(hw_all))) for mm in must)
         ok_t = ok_t and ok_m
         # pace: no line of 5+ words faster than MAXWPS spoken words/s (Sam on clip A: "Barbara's only buys..." far too fast, 4.3 w/s)
