@@ -1,0 +1,23 @@
+<!doctype html><html><head><style>html,body{margin:0;background:transparent}</style>
+<script type="importmap">{"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}</script></head><body>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const W=1600,H=1600; const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+r.setSize(W,H); r.setClearColor(0x000000,0); r.toneMapping=THREE.ACESFilmicToneMapping; r.toneMappingExposure=1.15; r.outputColorSpace=THREE.SRGBColorSpace; r.shadowMap.enabled=true; document.body.appendChild(r.domElement);
+const sc=new THREE.Scene(); const pm=new THREE.PMREMGenerator(r); sc.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;
+const cam=new THREE.PerspectiveCamera(30,W/H,0.1,100); cam.position.set(1.2,3.8,17); cam.lookAt(1.8,3.1,0);
+const gold=new THREE.MeshStandardMaterial({color:0xFFC94D,metalness:0.85,roughness:0.28,envMapIntensity:2.6});
+const goldDark=new THREE.MeshStandardMaterial({color:0xE0A83A,metalness:0.85,roughness:0.35,envMapIntensity:2.2});
+const red=new THREE.MeshPhysicalMaterial({color:0xD9382E,metalness:0.2,roughness:0.2,transmission:0.0,clearcoat:1,transparent:true,opacity:0.92});
+function coin(mat,rim){const g=new THREE.Group(); const c=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,0.22,96),[rim,mat,mat]); c.castShadow=true; g.add(c);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(0.95,0.05,16,96),rim); ring.rotation.x=Math.PI/2; ring.position.y=0.115; g.add(ring); return g;}
+const N=9; for(let i=0;i<N;i++){const k=coin(gold,goldDark); k.position.set(Math.sin(i*1.7)*0.05,0.11+i*0.23,Math.cos(i*2.1)*0.05); k.rotation.y=i; sc.add(k);}
+// four coins flying off, red
+const fly=[[2.1,2.9,0,0.35,0.6],[3.9,3.7,0,-0.45,0.25],[2.5,5.0,0,0.6,-0.35],[4.4,5.9,0,-0.15,0.8]];
+fly.forEach(([x,y,z,a,b])=>{const k=coin(red,red); k.position.set(x,y,z); k.rotation.set(a,0,b); sc.add(k);});
+const dl=new THREE.DirectionalLight(0xffffff,2.2); dl.position.set(-4,9,6); dl.castShadow=true; dl.shadow.mapSize.set(2048,2048); sc.add(dl);
+sc.add(new THREE.AmbientLight(0xffffff,0.3));
+const pl=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.ShadowMaterial({opacity:0.22})); pl.rotation.x=-Math.PI/2; pl.receiveShadow=true; sc.add(pl);
+r.render(sc,cam); window.DONE=r.domElement.toDataURL('image/png');
+</script></body></html>

@@ -1,0 +1,8 @@
+@font-face{font-family:Inter;src:url(fonts/Inter.ttf);font-weight:100 900}
+@font-face{font-family:FrI;src:url(fonts/fraunces-latin-700-italic.woff2);font-weight:700}
+@font-face{font-family:FrI4;src:url(fonts/fraunces-latin-400-italic.woff2)}
+@font-face{font-family:Fr;src:url(fonts/fraunces-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:Kalam;src:url(fonts/Kalam-Bold.ttf)}
+@font-face{font-family:Osw;src:url(fonts/oswald-latin-700-normal.woff2)}
+*{box-sizing:border-box}html,body{margin:0;width:1280px;height:720px;overflow:hidden}
+.abs{position:absolute}
