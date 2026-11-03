@@ -68,6 +68,7 @@ def main():
         ids = None if '--stamp-all-ok' in a else set(a[a.index('--stamp') + 1:])
         n = 0
         for r in rows:
+            if r.get('hash') and r['hash'] != fp(text.get(r['line'], '')): continue  # wording changed since the check: --update and re-check first, never stamp over it
             if r['line'] in text and (ids is None or r['line'] in ids) and (r.get('verdict') or '').strip().upper() in PASS:
                 r['hash'] = fp(text[r['line']]); r['text'] = text[r['line']]; r['checked'] = r.get('checked') or time.strftime('%Y-%m-%d'); n += 1
         save(p, rows); print(f'stamped {n} rows'); return
