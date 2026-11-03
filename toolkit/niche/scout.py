@@ -43,7 +43,7 @@ def suggest(q, gl='US'):
     g = get(f'https://suggestqueries.google.com/complete/search?client=firefox&hl=en&gl={gl}&q=' + urllib.parse.quote(q))
     try: gs = json.loads(g)[1]
     except Exception: gs = []
-    return dict(youtube=re.findall(r'\["([^"]+)",0', yt)[:10], google=gs[:10])
+    return dict(youtube=[json.loads(f'"{x}"') for x in re.findall(r'\["([^"]+)",0', yt)][:10], google=gs[:10])
 def rss(u, n=15):
     try: root = ET.fromstring(get(u))
     except Exception: return []
@@ -70,13 +70,19 @@ def peer_videos(u):
     return out
 def comments(vid, n=20):
     """top comments of a video through YouTube's own web API (no key, no login)"""
-    s = get(f'https://www.youtube.com/watch?v={vid}&hl=en'); key = re.search(r'"INNERTUBE_API_KEY":"([^"]+)"', s); ver = re.search(r'"INNERTUBE_CLIENT_VERSION":"([^"]+)"', s)
+    for k in range(3):  # YouTube sometimes answers a burst of requests with a 400-byte stub page: wait and retry
+        s = get(f'https://www.youtube.com/watch?v={vid}&hl=en')
+        if len(s) > 20000: break
+        time.sleep(4 + 4 * k)
+    key = re.search(r'"INNERTUBE_API_KEY":"([^"]+)"', s); ver = re.search(r'"INNERTUBE_CLIENT_VERSION":"([^"]+)"', s)
     toks = [c['token'] for c in walk(initial(s), 'continuationCommand') if c.get('request') == 'CONTINUATION_REQUEST_TYPE_WATCH_NEXT']
     if not (key and ver and toks): return []
-    j = get(f'https://www.youtube.com/youtubei/v1/next?key={key.group(1)}', json.dumps({'context': {'client': {'clientName': 'WEB', 'clientVersion': ver.group(1), 'hl': 'en'}}, 'continuation': toks[-1]}))
-    try: j = json.loads(j)
-    except Exception: return []
-    out = [dict(text=p['properties']['content']['content'], likes=num(p.get('toolbar', {}).get('likeCountNotliked', '0'))) for p in walk(j, 'commentEntityPayload')]
+    out = []
+    for tok in reversed(toks):  # the comments token is usually the last one, but not always (comments came back empty for 10 of 16 videos)
+        try: j = json.loads(get(f'https://www.youtube.com/youtubei/v1/next?key={key.group(1)}', json.dumps({'context': {'client': {'clientName': 'WEB', 'clientVersion': ver.group(1), 'hl': 'en'}}, 'continuation': tok})))
+        except Exception: continue
+        out = [dict(text=p['properties']['content']['content'], likes=num(p.get('toolbar', {}).get('likeCountNotliked', '0'))) for p in walk(j, 'commentEntityPayload')]
+        if out: break
     return [c for c in out if not re.search(r'sponsor|promo code|use code|link in|http', c['text'], re.I)][:n]
 PAT = [('question', r'\?'), ('why', r'^\s*why\b|\bwhy\b'), ('how', r'^\s*how\b'), ('what-if', r'\bwhat (if|happens)\b'), ('number', r'\d'),
        ('explained', r'explain'), ('you/your', r"\byou(r|'re)?\b"), ('country', r'\b(america|us|uk|britain|canada|australia|india|china|japan|europe|germany|france|world)\b'),

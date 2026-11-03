@@ -1,0 +1,1076 @@
+{
+ "updated": "2026-11-03",
+ "window": {
+  "from": "2026-11-04",
+  "to": "2027-06-30"
+ },
+ "events": [
+  {
+   "date": "2026-11-04",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (Oct 2026), Eurostat",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/statscal/ges/html/sthicp.en.html",
+   "note": "Eurostat calendar is JavaScript-only; date taken from the ECB statistical calendar, which publishes its seasonally adjusted flash HICP on the Eurostat flash day. Eurostat calendar: https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar"
+  },
+  {
+   "date": "2026-11-05",
+   "end": null,
+   "region": "CA",
+   "type": "budget",
+   "name": "Canada federal Budget 2026 tabled",
+   "status": "confirmed",
+   "source": "https://www.budget.canada.ca/",
+   "note": "Date announced by Finance Minister Champagne in the House on 20 Oct 2026 (reported by Advisor.ca, Investment Executive, BNN Bloomberg); canada.ca timed out for us. Canada now budgets in the fall."
+  },
+  {
+   "date": "2026-11-05",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision + Monetary Policy Report",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2026-11-06",
+   "end": null,
+   "region": "CA",
+   "type": "jobs",
+   "name": "Canada Labour Force Survey (Oct 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2026-11-06",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Oct 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2026-11-10",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Oct 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2026-11-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Oct 2026), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2026-11-16",
+   "end": null,
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI (Oct 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2026-11-18",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (October 2026), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukoctober2026"
+  },
+  {
+   "date": "2026-11-25",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Oct 2026), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2026-11-26",
+   "end": null,
+   "region": "US",
+   "type": "other",
+   "name": "US Thanksgiving (federal holiday)",
+   "status": "confirmed",
+   "source": "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/"
+  },
+  {
+   "date": "2026-11-27",
+   "end": "2026-11-30",
+   "region": "Global",
+   "type": "other",
+   "name": "Black Friday (day after US Thanksgiving): holiday spending peg; Cyber Monday 30 Nov",
+   "status": "confirmed",
+   "source": "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/",
+   "note": "Date derives from Thanksgiving (OPM). No official retail calendar; NRF publishes holiday sales forecasts/results around it."
+  },
+  {
+   "date": "2026-12-01",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (Nov 2026), Eurostat",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/statscal/ges/html/sthicp.en.html",
+   "note": "Eurostat calendar is JavaScript-only; date taken from the ECB statistical calendar, which publishes its seasonally adjusted flash HICP on the Eurostat flash day. Eurostat calendar: https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar"
+  },
+  {
+   "date": "2026-12-04",
+   "end": null,
+   "region": "CA",
+   "type": "jobs",
+   "name": "Canada Labour Force Survey (Nov 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2026-12-04",
+   "end": null,
+   "region": "IN",
+   "type": "rates",
+   "name": "RBI MPC repo rate decision (meeting Dec 2-4)",
+   "status": "confirmed",
+   "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+  },
+  {
+   "date": "2026-12-04",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Nov 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2026-12-08",
+   "end": null,
+   "region": "AU",
+   "type": "rates",
+   "name": "RBA Monetary Policy Board cash rate decision (meeting 12-07 to 12-08)",
+   "status": "confirmed",
+   "source": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+  },
+  {
+   "date": "2026-12-09",
+   "end": null,
+   "region": "CA",
+   "type": "rates",
+   "name": "Bank of Canada interest rate announcement",
+   "status": "confirmed",
+   "source": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+  },
+  {
+   "date": "2026-12-09",
+   "end": null,
+   "region": "NZ",
+   "type": "rates",
+   "name": "RBNZ OCR decision + Monetary Policy Statement",
+   "status": "confirmed",
+   "source": "https://www.rbnz.govt.nz/news-and-events/how-we-release-information/schedule-of-ocr-mps-and-fsr-announcements",
+   "note": "Date from RBNZ release 'Monetary policy and Financial Stability Report dates August 2026 to February 2027' (Oct 2025)."
+  },
+  {
+   "date": "2026-12-09",
+   "end": null,
+   "region": "US",
+   "type": "rates",
+   "name": "Fed FOMC rate decision (meeting 12-08 to 12-09, with SEP projections)",
+   "status": "confirmed",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+  },
+  {
+   "date": "2026-12-10",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Nov 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2026-12-11",
+   "end": null,
+   "region": "US",
+   "type": "budget",
+   "name": "US government funding (FY2027 continuing resolution) expires: shutdown risk",
+   "status": "confirmed",
+   "source": "https://www.everycrsreport.com/reports/R49353.html",
+   "note": "CRS report R49353: P.L. 119-103 Division A funds government Oct 1 to Dec 11, 2026."
+  },
+  {
+   "date": "2026-12-14",
+   "end": null,
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI (Nov 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2026-12-14",
+   "end": "2026-12-15",
+   "region": "Global",
+   "type": "meeting",
+   "name": "G20 Leaders' Summit, Miami (US presidency)",
+   "status": "confirmed",
+   "source": "https://www.g20.org/"
+  },
+  {
+   "date": "2026-12-14",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Nov 2026), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2026-12-16",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (November 2026), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationuknovember2026"
+  },
+  {
+   "date": "2026-12-17",
+   "end": null,
+   "region": "EU",
+   "type": "rates",
+   "name": "ECB Governing Council monetary policy decision + press conference",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+  },
+  {
+   "date": "2026-12-17",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2026-12-18",
+   "end": null,
+   "region": "JP",
+   "type": "rates",
+   "name": "Bank of Japan policy decision (MPM 12-17 to 12-18)",
+   "status": "confirmed",
+   "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2027-01-06",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Nov 2026), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2027-01-06",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (Dec 2026), Eurostat",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/statscal/ges/html/sthicp.en.html",
+   "note": "Eurostat calendar is JavaScript-only; date taken from the ECB statistical calendar, which publishes its seasonally adjusted flash HICP on the Eurostat flash day. Eurostat calendar: https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar"
+  },
+  {
+   "date": "2027-01-08",
+   "end": null,
+   "region": "CA",
+   "type": "jobs",
+   "name": "Canada Labour Force Survey (Dec 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-01-08",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Dec 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-01-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Dec 2026), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-01-13",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Dec 2026), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-01-18",
+   "end": null,
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI (Dec 2026), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-01-18",
+   "end": "2027-01-22",
+   "region": "Global",
+   "type": "meeting",
+   "name": "World Economic Forum Annual Meeting, Davos",
+   "status": "expected",
+   "source": "https://www.weforum.org/meetings/",
+   "note": "18-22 Jan 2027 per Davos destination site (davos.ch) and event listings; weforum.org blocked our fetch."
+  },
+  {
+   "date": "2027-01-20",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (December 2026), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukdecember2026"
+  },
+  {
+   "date": "2027-01-22",
+   "end": null,
+   "region": "JP",
+   "type": "rates",
+   "name": "Bank of Japan policy decision (MPM 01-21 to 01-22) + Outlook Report",
+   "status": "confirmed",
+   "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2027-01-27",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Dec 2026, quarter-end month), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2027-01-27",
+   "end": null,
+   "region": "CA",
+   "type": "rates",
+   "name": "Bank of Canada interest rate announcement + Monetary Policy Report",
+   "status": "confirmed",
+   "source": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+  },
+  {
+   "date": "2027-01-27",
+   "end": null,
+   "region": "US",
+   "type": "rates",
+   "name": "Fed FOMC rate decision (meeting 01-26 to 01-27)",
+   "status": "confirmed",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "note": "Fed: each meeting date is tentative until confirmed at the preceding meeting."
+  },
+  {
+   "date": "2027-01-31",
+   "end": null,
+   "region": "UK",
+   "type": "tax",
+   "name": "UK Self Assessment online filing + payment deadline (2025-26 tax year)",
+   "status": "confirmed",
+   "source": "https://www.gov.uk/self-assessment-tax-returns/deadlines",
+   "note": "Falls on a Sunday; HMRC still states 11:59pm 31 January 2027."
+  },
+  {
+   "date": "2027-02-01",
+   "end": null,
+   "region": "IN",
+   "type": "budget",
+   "name": "India Union Budget 2027-28",
+   "status": "expected",
+   "source": "https://www.indiabudget.gov.in/",
+   "note": "Presented on 1 Feb by convention since 2017 (FY27 budget was on a Sunday, 1 Feb 2026). Pre-budget meetings for 2027-28 began 12 Oct 2026."
+  },
+  {
+   "date": "2027-02-02",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (Jan 2027), Eurostat",
+   "status": "expected",
+   "source": "https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar",
+   "note": "Listed as confirmed on a secondary tracker (financecalendar.com) citing Eurostat; not verified on Eurostat's own page."
+  },
+  {
+   "date": "2027-02-04",
+   "end": null,
+   "region": "EU",
+   "type": "rates",
+   "name": "ECB Governing Council monetary policy decision + press conference",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+  },
+  {
+   "date": "2027-02-04",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision + Monetary Policy Report",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2027-02-05",
+   "end": null,
+   "region": "CA",
+   "type": "jobs",
+   "name": "Canada Labour Force Survey (Jan 2027), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-02-05",
+   "end": null,
+   "region": "IN",
+   "type": "rates",
+   "name": "RBI MPC repo rate decision (meeting Feb 3-5)",
+   "status": "confirmed",
+   "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+  },
+  {
+   "date": "2027-02-05",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Jan 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-02-09",
+   "end": null,
+   "region": "AU",
+   "type": "rates",
+   "name": "RBA Monetary Policy Board cash rate decision (meeting 02-08 to 02-09)",
+   "status": "confirmed",
+   "source": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+  },
+  {
+   "date": "2027-02-10",
+   "end": null,
+   "region": "NZ",
+   "type": "rates",
+   "name": "RBNZ OCR decision",
+   "status": "expected",
+   "source": "https://www.rbnz.govt.nz/news-and-events/how-we-release-information/schedule-of-ocr-mps-and-fsr-announcements",
+   "note": "RBNZ moves to 8 decisions a year from 2027 and moved Feb 2027 one week earlier (from 17 Feb). RBNZ site blocks automated access; date agrees across two secondary listings (financecalendar.com, squirrel.co.nz). Verify on RBNZ page."
+  },
+  {
+   "date": "2027-02-11",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Jan 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-02-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Jan 2027), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-02-16",
+   "end": null,
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI (Jan 2027), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-02-17",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (January 2027), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukjanuary2027"
+  },
+  {
+   "date": "2027-02-24",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Jan 2027), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2027-03-02",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (Feb 2027), Eurostat",
+   "status": "expected",
+   "source": "https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar",
+   "note": "Listed as confirmed on a secondary tracker (financecalendar.com) citing Eurostat; not verified on Eurostat's own page."
+  },
+  {
+   "date": "2027-03-03",
+   "end": null,
+   "region": "CA",
+   "type": "rates",
+   "name": "Bank of Canada interest rate announcement",
+   "status": "confirmed",
+   "source": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+  },
+  {
+   "date": "2027-03-05",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Feb 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-03-10",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Feb 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-03-12",
+   "end": null,
+   "region": "CA",
+   "type": "jobs",
+   "name": "Canada Labour Force Survey (Feb 2027), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-03-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Feb 2027), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-03-15",
+   "end": null,
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI (Feb 2027), StatCan 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "date": "2027-03-17",
+   "end": null,
+   "region": "NZ",
+   "type": "rates",
+   "name": "RBNZ OCR decision",
+   "status": "expected",
+   "source": "https://www.rbnz.govt.nz/news-and-events/how-we-release-information/schedule-of-ocr-mps-and-fsr-announcements",
+   "note": "RBNZ moves to 8 decisions a year from 2027 and moved Feb 2027 one week earlier (from 17 Feb). RBNZ site blocks automated access; date agrees across two secondary listings (financecalendar.com, squirrel.co.nz). Verify on RBNZ page."
+  },
+  {
+   "date": "2027-03-17",
+   "end": null,
+   "region": "US",
+   "type": "rates",
+   "name": "Fed FOMC rate decision (meeting 03-16 to 03-17, with SEP projections)",
+   "status": "confirmed",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "note": "Fed: each meeting date is tentative until confirmed at the preceding meeting."
+  },
+  {
+   "date": "2027-03-18",
+   "end": null,
+   "region": "EU",
+   "type": "rates",
+   "name": "ECB Governing Council monetary policy decision + press conference",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+  },
+  {
+   "date": "2027-03-18",
+   "end": null,
+   "region": "JP",
+   "type": "rates",
+   "name": "Bank of Japan policy decision (MPM 03-17 to 03-18)",
+   "status": "confirmed",
+   "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2027-03-18",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2027-03-23",
+   "end": null,
+   "region": "AU",
+   "type": "rates",
+   "name": "RBA Monetary Policy Board cash rate decision (meeting 03-22 to 03-23)",
+   "status": "confirmed",
+   "source": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+  },
+  {
+   "date": "2027-03-24",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Feb 2027), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2027-03-24",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (February 2027), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukfebruary2027"
+  },
+  {
+   "date": "2027-04-02",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Mar 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-04-06",
+   "end": null,
+   "region": "UK",
+   "type": "tax",
+   "name": "UK new tax year 2027-28 starts (new allowances/rates take effect)",
+   "status": "confirmed",
+   "source": "https://www.gov.uk/self-assessment-tax-returns/deadlines"
+  },
+  {
+   "date": "2027-04-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Mar 2027), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-04-13",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Mar 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-04-15",
+   "end": null,
+   "region": "US",
+   "type": "tax",
+   "name": "US federal tax filing deadline (2026 returns)",
+   "status": "expected",
+   "source": "https://www.irs.gov/filing/individuals/when-to-file",
+   "note": "Statutory rule: April 15 for calendar-year filers, moved if it falls on a weekend/holiday; 15 Apr 2027 is a Thursday. IRS page currently shows the 2026 date."
+  },
+  {
+   "date": "2027-04-21",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (March 2027), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukmarch2027"
+  },
+  {
+   "date": "2027-04-28",
+   "end": null,
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (Mar 2027, quarter-end month), ABS 11:30 AEST/AEDT",
+   "status": "confirmed",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "date": "2027-04-28",
+   "end": null,
+   "region": "CA",
+   "type": "rates",
+   "name": "Bank of Canada interest rate announcement + Monetary Policy Report",
+   "status": "confirmed",
+   "source": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+  },
+  {
+   "date": "2027-04-28",
+   "end": null,
+   "region": "JP",
+   "type": "rates",
+   "name": "Bank of Japan policy decision (MPM 04-27 to 04-28) + Outlook Report",
+   "status": "confirmed",
+   "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2027-04-28",
+   "end": null,
+   "region": "US",
+   "type": "rates",
+   "name": "Fed FOMC rate decision (meeting 04-27 to 04-28)",
+   "status": "confirmed",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "note": "Fed: each meeting date is tentative until confirmed at the preceding meeting."
+  },
+  {
+   "date": "2027-04-29",
+   "end": null,
+   "region": "EU",
+   "type": "rates",
+   "name": "ECB Governing Council monetary policy decision + press conference",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+  },
+  {
+   "date": "2027-04-29",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision + Monetary Policy Report",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2027-04-30",
+   "end": null,
+   "region": "CA",
+   "type": "tax",
+   "name": "Canada personal income tax filing + payment deadline (2026 returns)",
+   "status": "expected",
+   "source": "https://www.canada.ca/en/revenue-agency.html",
+   "note": "CRA rule: April 30 (Friday in 2027); self-employed filing deadline June 15 with payment still due April 30. canada.ca not reachable from our workspace."
+  },
+  {
+   "date": "2027-05-04",
+   "end": null,
+   "region": "AU",
+   "type": "rates",
+   "name": "RBA Monetary Policy Board cash rate decision (meeting 05-03 to 05-04)",
+   "status": "confirmed",
+   "source": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+  },
+  {
+   "date": "2027-05-05",
+   "end": null,
+   "region": "NZ",
+   "type": "rates",
+   "name": "RBNZ OCR decision",
+   "status": "expected",
+   "source": "https://www.rbnz.govt.nz/news-and-events/how-we-release-information/schedule-of-ocr-mps-and-fsr-announcements",
+   "note": "RBNZ moves to 8 decisions a year from 2027 and moved Feb 2027 one week earlier (from 17 Feb). RBNZ site blocks automated access; date agrees across two secondary listings (financecalendar.com, squirrel.co.nz). Verify on RBNZ page."
+  },
+  {
+   "date": "2027-05-07",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (Apr 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-05-11",
+   "end": null,
+   "region": "AU",
+   "type": "budget",
+   "name": "Australia federal Budget 2027-28",
+   "status": "expected",
+   "source": "https://budget.gov.au/",
+   "note": "Convention: second Tuesday of May (2026-27 Budget was Tue 12 May 2026); BDO lists 11 May 2027 as expected. Not yet set by Treasury."
+  },
+  {
+   "date": "2027-05-12",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (Apr 2027), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-05-12",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (Apr 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-05-19",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (April 2027), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukapril2027"
+  },
+  {
+   "date": "2027-06-01",
+   "end": null,
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP (May 2027), Eurostat",
+   "status": "expected",
+   "source": "https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar",
+   "note": "Listed as confirmed on a secondary tracker (financecalendar.com) citing Eurostat; not verified on Eurostat's own page."
+  },
+  {
+   "date": "2027-06-02",
+   "end": null,
+   "region": "CA",
+   "type": "rates",
+   "name": "Bank of Canada interest rate announcement",
+   "status": "confirmed",
+   "source": "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
+  },
+  {
+   "date": "2027-06-04",
+   "end": null,
+   "region": "US",
+   "type": "jobs",
+   "name": "US jobs report / Employment Situation (May 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+  },
+  {
+   "date": "2027-06-09",
+   "end": null,
+   "region": "US",
+   "type": "rates",
+   "name": "Fed FOMC rate decision (meeting 06-08 to 06-09, with SEP projections)",
+   "status": "confirmed",
+   "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "note": "Fed: each meeting date is tentative until confirmed at the preceding meeting."
+  },
+  {
+   "date": "2027-06-10",
+   "end": null,
+   "region": "EU",
+   "type": "rates",
+   "name": "ECB Governing Council monetary policy decision + press conference",
+   "status": "confirmed",
+   "source": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+  },
+  {
+   "date": "2027-06-10",
+   "end": null,
+   "region": "US",
+   "type": "cpi",
+   "name": "US CPI (May 2027), 08:30 ET",
+   "status": "confirmed",
+   "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+  },
+  {
+   "date": "2027-06-11",
+   "end": null,
+   "region": "JP",
+   "type": "rates",
+   "name": "Bank of Japan policy decision (MPM 06-10 to 06-11)",
+   "status": "confirmed",
+   "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2027-06-14",
+   "end": null,
+   "region": "IN",
+   "type": "cpi",
+   "name": "India CPI (May 2027), MoSPI 16:00 IST",
+   "status": "expected",
+   "source": "https://www.mospi.gov.in/advance-release-calendar",
+   "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
+  },
+  {
+   "date": "2027-06-15",
+   "end": null,
+   "region": "CA",
+   "type": "tax",
+   "name": "Canada self-employed filing deadline (2026 returns)",
+   "status": "expected",
+   "source": "https://www.canada.ca/en/revenue-agency.html",
+   "note": "CRA rule: June 15 for self-employed individuals and their spouses (Tuesday in 2027)."
+  },
+  {
+   "date": "2027-06-16",
+   "end": null,
+   "region": "NZ",
+   "type": "rates",
+   "name": "RBNZ OCR decision",
+   "status": "expected",
+   "source": "https://www.rbnz.govt.nz/news-and-events/how-we-release-information/schedule-of-ocr-mps-and-fsr-announcements",
+   "note": "RBNZ moves to 8 decisions a year from 2027 and moved Feb 2027 one week earlier (from 17 Feb). RBNZ site blocks automated access; date agrees across two secondary listings (financecalendar.com, squirrel.co.nz). Verify on RBNZ page."
+  },
+  {
+   "date": "2027-06-16",
+   "end": null,
+   "region": "UK",
+   "type": "cpi",
+   "name": "UK CPI (May 2027), ONS 07:00",
+   "status": "confirmed",
+   "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukmay2027"
+  },
+  {
+   "date": "2027-06-17",
+   "end": null,
+   "region": "UK",
+   "type": "rates",
+   "name": "Bank of England MPC Bank Rate decision",
+   "status": "confirmed",
+   "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2027-06-22",
+   "end": null,
+   "region": "AU",
+   "type": "rates",
+   "name": "RBA Monetary Policy Board cash rate decision (meeting 06-21 to 06-22)",
+   "status": "confirmed",
+   "source": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+  },
+  {
+   "date": "2027-06-30",
+   "end": null,
+   "region": "AU",
+   "type": "tax",
+   "name": "Australia financial year ends (EOFY); tax-time season starts 1 July",
+   "status": "confirmed",
+   "source": "https://www.ato.gov.au/",
+   "note": "Individual returns (self-lodged) due 31 Oct 2027, outside this calendar."
+  }
+ ],
+ "undated": [
+  {
+   "region": "UK",
+   "type": "budget",
+   "name": "UK Spring Statement / Spring Forecast 2027",
+   "basis": "Expected March 2027 (2026 Spring Statement was 3 Mar 2026; its date was announced in Dec 2025). Not yet announced. Autumn Budget 2026 already happened on 28 Oct 2026.",
+   "source": "https://www.gov.uk/government/organisations/hm-treasury"
+  },
+  {
+   "region": "NZ",
+   "type": "budget",
+   "name": "New Zealand Budget 2027",
+   "basis": "Usually late May; Budget 2026 was 28 May 2026, date set by the Finance Minister in late January. Not yet announced.",
+   "source": "https://www.budget.govt.nz/"
+  },
+  {
+   "region": "CA",
+   "type": "other",
+   "name": "Canada Immigration Levels Plan 2027-2029",
+   "basis": "IRPA requires tabling by 1 Nov (or within 30 sitting days after if the House is not sitting). Reports pointed to 1 Nov 2026; could not confirm whether it has been released or will come with the 5 Nov Budget.",
+   "source": "https://www.canada.ca/en/immigration-refugees-citizenship/news.html"
+  },
+  {
+   "region": "CA",
+   "type": "budget",
+   "name": "Canada Spring Economic Update 2027",
+   "basis": "With budgets moved to the fall, Ottawa issues a spring economic update; 2027 date not announced.",
+   "source": "https://www.budget.canada.ca/"
+  },
+  {
+   "region": "Global",
+   "type": "meeting",
+   "name": "IMF/World Bank Spring Meetings 2027",
+   "basis": "Usually mid-April in Washington (2026: 13-18 April). 2027 dates not found on an official page; imf.org blocked our fetch.",
+   "source": "https://meetings.imf.org/en"
+  },
+  {
+   "region": "IN",
+   "type": "rates",
+   "name": "RBI MPC decisions April and June 2027",
+   "basis": "FY2027-28 MPC schedule not yet published (FY27 schedule was released 23 Mar 2026); expect early April and early June.",
+   "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+  },
+  {
+   "region": "CA",
+   "type": "cpi",
+   "name": "Canada CPI and LFS April-June 2027",
+   "basis": "StatCan key-indicator schedule currently runs to March 2027; CPI is usually the third week of the month, LFS the first or second Friday.",
+   "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
+  },
+  {
+   "region": "AU",
+   "type": "cpi",
+   "name": "Australia CPI (April and May 2027 months)",
+   "basis": "ABS future-release list currently runs to the March 2027 month (28 Apr 2027); monthly CPI is usually the last Wednesday of the month.",
+   "source": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia"
+  },
+  {
+   "region": "EU",
+   "type": "cpi",
+   "name": "Euro area flash HICP for Mar and Apr 2027",
+   "basis": "Usually the last working day of the month or the first working days of the next. Not verified.",
+   "source": "https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar"
+  },
+  {
+   "region": "US",
+   "type": "budget",
+   "name": "US debt ceiling",
+   "basis": "No debt-limit deadline found in this window. Appropriations deadline is 11 Dec 2026 (in events).",
+   "source": "https://www.everycrsreport.com/reports/R49353.html"
+  },
+  {
+   "region": "AU/IN",
+   "type": "tax",
+   "name": "Australia 31 Oct and India 31 Jul tax deadlines",
+   "basis": "Both fall outside 4 Nov 2026 to 30 Jun 2027. The next ones are 31 Oct 2027 (AU) and 31 Jul 2027 (IN, non-audit ITR).",
+   "source": "https://www.incometax.gov.in/iec/foportal/"
+  }
+ ]
+}
