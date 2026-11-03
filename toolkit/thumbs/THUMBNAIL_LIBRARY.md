@@ -1,6 +1,6 @@
 # GJ 581g: thumbnail style library
 
-The catalogue of thumbnail styles we can use, chosen per video by what the topic and the title need. Started 3 Nov 2026 from Sam's six reference thumbnails and a YouTube study of 55 high-performing thumbnails (15 searches: economics, prices, inflation, personal finance, how money works, history of money, business case studies, science animation, psychology, AI, behavioural economics, video essays, India's economy). References are kept as links only; no other creator's images are stored.
+The catalogue of thumbnail styles we can use, chosen per video by what the topic and the title need. Started 3 Nov 2026 from Sam's six reference thumbnails and two YouTube studies: 55 high-performing thumbnails from 15 money, business, science, psychology and AI searches, and 50 more from 15 art, abstract art, philosophy, video-essay and science searches (art history, famous paintings, abstract art, art documentaries, philosophy, stoicism, existentialism, consciousness, science documentaries, physics, space, biology, mathematics). References are kept as links only; no other creator's images are stored.
 
 **How to use it:** at the angle stage, pick 2-3 styles that fit the angle (`decked-out-youtube-packaging`); in the full pass, make four thumbnails in four different styles, check them in the dark feed mock, and send three to YouTube's Test & compare. Record the winner's style ID in the post-publish review below, so the library learns what our audience clicks.
 
@@ -27,6 +27,17 @@ The catalogue of thumbnail styles we can use, chosen per video by what the topic
 | TS15 | Big word behind the subject | Built | One character and one question | `thumbs.jsx` TS15 |
 | TS16 | Loud collage | Not for us | (brand-heavy meme collages) | - |
 | TS17 | Annotated chart + meme panel | Idea | Commentary on a real statistic | - |
+| TS18 | Painting detail + loupe | Built | Art, history, "look closer" stories | `thumbs.jsx` TS18 |
+| TS19 | Lone figure in vast space | Built | Existential, philosophical, quiet topics | `thumbs.jsx` TS19 |
+| TS20 | Classical bust + word on a brush stroke | Built | Philosophy, ideas, "what the ancients knew" | `thumbs.jsx` TS20 |
+| TS21 | Engraved plate grid | Built (money series) | Types, archetypes, "which one are you?" | `thumbs.jsx` TS21 |
+| TS22 | Two-tone poster symbol | Built | One named idea or concept | `thumbs.jsx` TS22 |
+| TS23 | Cosmic or cinematic scale + tracked caps | Idea | Scale, time, the universe, the future | - |
+| TS24 | Minimal diagram on black | Built | Maths, one elegant curve or law | `thumbs.jsx` TS24 |
+| TS25 | Lineup with one different + arrow | Idea | Levels, stages, "most people are here" | - |
+| TS26 | Iceberg / levels | Idea | Deep dives, "level 1 to 100" | - |
+| TS27 | Slate doodle | Idea (S3 kit) | Life advice, simple ideas, hand-drawn videos | - |
+| TS28 | Specimen on black | Idea | Biology, anatomy, "the insane biology of" | - |
 
 ### TS01 Editorial minimal
 - **Look:** light paper ground, a heavy grotesk line with one italic serif word for contrast, a small data device (ruler, progress bar, tiny chart) and a hand-written note with an arrow.
@@ -96,11 +107,59 @@ The catalogue of thumbnail styles we can use, chosen per video by what the topic
 - **Look:** a clean chart of a real statistic on one side, a two-panel meme comparison (drawn with our Folk characters) on the other.
 - **Seen in:** Cole Hastings, "The Affordability Crisis" (CPI chart + "my parents in their 20s" panel, 499K).
 
+### TS18 Painting detail + loupe
+- **Look:** a dramatic crop of a public-domain painting (museum open access: The Met, Rijksmuseum, NGA; CC0), a magnifier circle on the one detail that matters, a cream label with 2-4 words. Our mock uses Petrus Christus, *A Goldsmith in his Shop* (1449, The Met, CC0): the loupe on his coin scale.
+- **Seen in:** Inspiraggio, "This Is Considered The Most Mysterious Painting Ever Created" (2.1M) and others (tight painting crops, no text); Great Art Explained, "Nighthawks" (3.7M); Art Deco, "This Painting Isn't As Innocent As It Seems" (circle loupe on a face, 3.4M).
+
+### TS19 Lone figure in vast space
+- **Look:** a pale, empty space (a wall, a slope, a desert), one tiny figure with a long shadow, at most one quiet serif line. Mood over information.
+- **Seen in:** exurb1a, "Absurdism | How to Party at the End of Meaning" (4.7M); Clark Elieson, "The Desire to Not Exist" (pencil figure on blank, 7.6M).
+
+### TS20 Classical bust + word on a brush stroke
+- **Look:** a marble bust photo (free stock or museum CC0) lit dramatically on one side, one word in a serif on a painted brush stroke, a small tracked caps subtitle.
+- **Seen in:** Aperture, "Stoicism: Become Undefeatable" (bust + red stroke, 14M); The School of Life, "PLATO" (bust on flat yellow, 7.7M); Veritasium, "The Oldest Unsolved Problem in Math" (painted classical figure, 21.7M).
+
+### TS21 Engraved plate grid
+- **Look:** a row or grid of engraved portrait ovals (our Folk busts in guilloché frames), a label under each, a serif question on top. Our banknote look, used as a taxonomy.
+- **Seen in:** Smarter While You Sleep, "Level 1 to 100 Philosophy Concepts" (engraved portraits grid, 5.9M); Thought Potato, "Vampire Biology" (vintage anatomical plates, 4.6M).
+
+### TS22 Two-tone poster symbol
+- **Look:** two or three flat colours (red, black, cream), one bold symbol that carries the idea (an eye, a mask, a figure), a serif or script title.
+- **Seen in:** Horses, "Marcus Aurelius: The Man Who Solved the Universe" (red and black illustration, 11.1M) and "NIETZSCHE: Burn it All Down" (red script, 1.6M); Pursuit of Wonder, "The Paradox of Being a Good Person - George Orwell's Warning" (eye symbol, 5.1M); Aperture, "Nihilism" (mask, 7.3M).
+
+### TS23 Cosmic or cinematic scale + tracked caps
+- **Look:** a dark, cinematic image of something huge (space, a landscape, a machine), a short line in widely tracked caps, centred low. Understated.
+- **Seen in:** NullSpace, "VOYAGER 1: The Story of the Next 10 Trillion Years" ("LONG AFTER US", 2.2M); Veritasium, "The Closest Thing We Have to Alien Technology" ("This shouldn't exist.", 65M) and "The Selfish Gene" (9.2M).
+
+### TS24 Minimal diagram on black
+- **Look:** black ground, one elegant curve or diagram in white with a few gradient bars, a classic serif title. If the curve stands for a real relationship, it must match the evidence (the income-happiness curve is contested: Killingsworth 2021 found no plateau), so keep it labelled as conceptual or draw the real data.
+- **Seen in:** 3Blue1Brown, "The essence of calculus" (11.9M); A Well-Rested Dog, "The LORE Behind Calculus" (4.2M).
+
+### TS25 Lineup with one different + arrow
+- **Look:** a row of identical figures or objects, one coloured differently, an arrow and a short label ("most people stuck here").
+- **Seen in:** Aperture, "Every Level of Consciousness" (3.5M).
+
+### TS26 Iceberg / levels
+- **Look:** an iceberg or a ladder of levels with small labels getting stranger as they go down; a heavy title.
+- **Seen in:** Alex O'Connor, "The Existential Crisis Iceberg" (5.9M); Duncan Clarke, "The Psychological Experiment Iceberg" (1.8M).
+
+### TS27 Slate doodle
+- **Look:** a dark slate ground, a simple white line doodle of one character doing one thing, two words in chalky caps. Our S3 hand-drawn kit fits it.
+- **Seen in:** Einzelgänger, "When Life Hurts, Care Less About It" ("DON'T CARE", 4.8M).
+
+### TS28 Specimen on black
+- **Look:** one creature or organ rendered as an x-ray or glowing specimen on black, a stacked heavy title with one coloured line.
+- **Seen in:** Real Science, "The Insane Biology of: The Octopus" (15.2M); Aperture, "The Quantum Theory That Says Your Brain Creates Reality" (glowing brain, 1.8M).
+
 ## Patterns from the study
 - Economics and money channels lean on four moves: one giant word (TS05), a document or price as evidence (TS09), a dramatic chart (TS08) and then/now or country splits (TS03, TS12).
 - Science and psychology channels lean on a big expressive character (TS07) and icon grids (TS06).
 - Faceless channels with millions of views (Kurzgesagt, EverythingProfessor, Wacky Science, LITTLE BIT BETTER, PsychToons) show a face is not required: a character or one strong word does the job.
 - Text is short: most use 1-3 words; titles carry the rest.
+- Art channels often use **no text at all**: a dramatic crop of the painting itself is the hook (TS18). When they add text it is a small serif title or a circle on the detail.
+- Philosophy channels rely on **mood and symbol**: two-tone posters (TS22), marble busts (TS20), a tiny figure in empty space (TS19), and a famous face for the thinker (we use busts or our own characters instead).
+- Science channels split in two: **vivid illustrated scenes** (Kurzgesagt, TS07) and **cinematic understatement** (Veritasium, NullSpace: TS23), plus maps and grids of a whole field (Domain of Science, "The Map of Mathematics", 16.3M, a TS05/TS06 hybrid).
+- Across these genres serif type is far more common than in money videos; it signals depth. A heavy grotesk signals news and money.
 
 ## Post-publish log (Test & compare winners)
 | Video | Styles tested | Winner | Watch-time share | Note |

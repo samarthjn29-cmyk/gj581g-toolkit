@@ -4,6 +4,9 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {C, OS, FR, NoteFrame, Portrait, rosette, wave} from './bank';
 import {Folk} from './folk';
+import {Img, staticFile} from 'remotion';
+import {Rig} from './rig';
+
 
 const IN = "'Inter', sans-serif";
 if (typeof document !== 'undefined' && !window.__k) { window.__k = 1; const {delayRender, continueRender, staticFile} = require('remotion'); const h = delayRender('kalam');
@@ -101,3 +104,73 @@ export const TS15 = () => <AbsoluteFill style={{background: C.ox}}>
   </svg>
   <div style={{position: 'absolute', right: 60, top: 520, background: '#F4E3D3', color: C.ox, fontFamily: OS, fontWeight: 700, fontSize: 60, padding: '4px 22px', transform: 'rotate(-4deg)', boxShadow: shadow}}>or +1%?</div>
 </AbsoluteFill>;
+
+// ---------------- art, philosophy and science styles (3 Nov 2026) ----------------
+
+// TS18 painting detail + loupe (public-domain painting: Petrus Christus, A Goldsmith in his Shop, 1449, The Met, CC0)
+export const TS18 = () => { const X0 = 1000, Y0 = 2300, k = 1280 / 2400, cx = 2080, cy = 3070, Lx = 980, Ly = 300, R = 210, z = 3;
+  return <AbsoluteFill style={{background: '#111', overflow: 'hidden'}}>
+    <Img src={staticFile('goldsmith.jpg')} style={{position: 'absolute', left: -X0 * k, top: -Y0 * k, width: 3469 * k, height: 4000 * k}} />
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse at 45% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%)'}} />
+    <svg width={1280} height={720} style={{position: 'absolute'}}><line x1={(cx - X0) * k} y1={(cy - Y0) * k} x2={Lx - R * 0.7} y2={Ly + R * 0.7} stroke="#F4E9D0" strokeWidth="4" /></svg>
+    <div style={{position: 'absolute', left: Lx - R, top: Ly - R, width: R * 2, height: R * 2, borderRadius: R, overflow: 'hidden', border: '10px solid #F4E9D0', boxShadow: '0 20px 50px rgba(0,0,0,0.6)'}}>
+      <Img src={staticFile('goldsmith.jpg')} style={{position: 'absolute', width: 3469 * k * z, height: 4000 * k * z, left: R - (cx * k * z), top: R - (cy * k * z)}} /></div>
+    <div style={{position: 'absolute', left: 50, top: 520, background: '#F4E9D0', padding: '8px 28px 12px', fontFamily: FR, fontWeight: 700, fontSize: 84, color: '#1C2422', boxShadow: shadow}}>Weigh <i style={{fontFamily: "'FrauncesI', serif"}}>your</i> raise</div>
+  </AbsoluteFill>; };
+
+// TS19 a lone figure in vast space
+export const TS19 = () => <AbsoluteFill style={{background: 'linear-gradient(180deg,#E9E6DF 0%,#D7D2C8 100%)'}}>
+  <svg width={1280} height={720} style={{position: 'absolute'}}>
+    <path d="M 0 470 L 1280 300 L 1280 720 L 0 720 Z" fill="#C9C3B7" />
+    <path d="M 750 418 L 1240 560 L 1262 548 L 800 410 Z" fill="#000" opacity="0.18" />
+    <Rig x={770} y={420} s={0.26} look={{skin: '#EDBE98', hair: 'curly', hairColor: '#3B2417', top: '#7A2333', bottom: '#2F3A48'}} pose={{fa: 14, fb: 16, ba: 14, bb: 16}} walk={0.9} />
+  </svg>
+  <div style={{position: 'absolute', left: 0, right: 0, top: 120, textAlign: 'center', fontFamily: FR, fontSize: 84, color: '#2A2A2A', letterSpacing: 2}}><i style={{fontFamily: "'FrauncesI', serif"}}>more</i> is not <i style={{fontFamily: "'FrauncesI', serif"}}>enough</i></div>
+</AbsoluteFill>;
+
+// TS20 classical bust + one word on a brush stroke (photo: Unsplash, Andres Hernandez)
+export const TS20 = () => <AbsoluteFill style={{background: '#06110D', overflow: 'hidden'}}>
+  <Img src={staticFile('bust.jpg')} style={{position: 'absolute', right: -60, top: -110, height: 1000, WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, #000 30%)', maskImage: 'linear-gradient(90deg, transparent 0%, #000 30%)'}} />
+  <svg width={1280} height={720} style={{position: 'absolute'}}>
+    <path d="M 40 330 C 200 290 420 300 640 286 C 700 282 760 300 740 330 C 720 360 680 372 620 380 C 430 404 220 410 60 420 C 20 422 10 400 20 380 Z" fill="#B3262B" />
+    <path d="M 70 300 C 260 280 520 276 700 270" stroke="#B3262B" strokeWidth="10" fill="none" opacity="0.7" />
+    <path d="M 80 430 C 300 418 520 410 660 396" stroke="#B3262B" strokeWidth="6" fill="none" opacity="0.6" />
+  </svg>
+  <div style={{position: 'absolute', left: 80, top: 286, fontFamily: FR, fontWeight: 700, fontSize: 118, color: '#F4EFE6', letterSpacing: 6}}>ENOUGH?</div>
+  <div style={{position: 'absolute', left: 92, top: 440, fontFamily: OS, fontSize: 30, letterSpacing: 8, color: '#C9D6CF'}}>WHAT A RAISE CAN'T BUY</div>
+</AbsoluteFill>;
+
+// TS21 engraved plates grid (our Folk busts in guilloché ovals)
+export const TS21 = () => { const P = [['THE SAVER', 'bun', '#24493A', 'smile'], ['THE SPENDER', 'curly', '#7A2333', 'happy'], ['THE WORRIER', 'bob', '#35609E', 'sad'], ['THE INVESTOR', 'short', '#B98B2E', 'smug']];
+  return <AbsoluteFill style={{background: C.ground}}>
+    <svg width={1280} height={720} style={{position: 'absolute'}}>
+      {P.map(([lab, hair, col, face], i) => { const cx = 175 + i * 310, cy = 385; return <g key={lab}>
+        <Portrait cx={cx} cy={cy} rx={110} ry={140}><Folk x={cx} y={cy + 150} h={280} hair={hair} topColor={col} top="blazer" face={face} skin={['#9A6343', '#EDBE98', '#D8A07A', '#C68A64'][i]} /></Portrait>
+        <text x={cx} y={cy + 200} textAnchor="middle" fontFamily={OS} fontWeight="700" fontSize="30" letterSpacing="4" fill={C.ink}>{lab}</text></g>; })}
+    </svg>
+    <div style={{position: 'absolute', left: 0, right: 0, top: 36, textAlign: 'center', fontFamily: FR, fontWeight: 700, fontSize: 104, color: C.green}}>Which one <i style={{fontFamily: "'FrauncesI', serif", color: C.ox}}>are you?</i></div>
+  </AbsoluteFill>; };
+
+// TS22 two-tone poster: one symbol (an eye whose iris is a coin), red and black
+export const TS22 = () => <AbsoluteFill style={{background: '#B3262B'}}>
+  <svg width={1280} height={720} style={{position: 'absolute'}}>
+    <path d="M 330 320 Q 640 60 950 320 Q 640 580 330 320 Z" fill="#F2E6D6" />
+    <circle cx="640" cy="320" r="140" fill="#111" />
+    <circle cx="640" cy="320" r="110" fill="#B98B2E" /><circle cx="640" cy="320" r="90" fill="none" stroke="#8A6420" strokeWidth="6" />
+    <text x="640" y="358" textAnchor="middle" fontFamily={FR} fontWeight="700" fontSize="110" fill="#5E4310">%</text>
+    <circle cx="600" cy="280" r="22" fill="#FFFFFF" opacity="0.7" />
+  </svg>
+  <div style={{position: 'absolute', left: 0, right: 0, top: 545, textAlign: 'center', fontFamily: "'FrauncesI', serif", fontWeight: 700, fontSize: 84, color: '#111'}}>The money illusion</div>
+</AbsoluteFill>;
+
+// TS24 minimal diagram on black (conceptual curve of diminishing returns)
+export const TS24 = () => { const pts = Array.from({length: 60}, (_, i) => { const x = i / 59; return [140 + x * 1000, 620 - Math.log(1 + x * 12) / Math.log(13) * 380]; });
+  return <AbsoluteFill style={{background: '#0B0B0D'}}>
+    <svg width={1280} height={720} style={{position: 'absolute'}}>
+      <defs><linearGradient id="bar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stopColor="#1F5E52" /><stop offset="1" stopColor="#58C4A8" /></linearGradient></defs>
+      {pts.filter((_, i) => i % 5 === 2).map(([x, y], i) => <rect key={i} x={x - 30} y={y} width="60" height={620 - y} fill="url(#bar)" opacity="0.85" />)}
+      <path d={pts.map(([x, y], i) => `${i ? 'L' : 'M'} ${x} ${y}`).join(' ')} stroke="#F4F1EA" strokeWidth="6" fill="none" />
+      <line x1="140" y1="620" x2="1160" y2="620" stroke="#8A8A8A" strokeWidth="3" /><line x1="140" y1="620" x2="140" y2="200" stroke="#8A8A8A" strokeWidth="3" />
+    </svg>
+    <div style={{position: 'absolute', left: 140, top: 60, fontFamily: FR, fontSize: 96, color: '#F4F1EA'}}>The Curve <i style={{fontFamily: "'FrauncesI', serif"}}>of Enough</i></div>
+  </AbsoluteFill>; };
