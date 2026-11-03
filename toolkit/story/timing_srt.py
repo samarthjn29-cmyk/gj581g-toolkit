@@ -1,11 +1,13 @@
 # YouTube captions (.srt) from a build timing.json (scene/line voicing): shows each line's caption `text`
 # (numbers as digits) timed by the spoken `say` word times. Chunks of <= 8 words, split at punctuation.
 # Usage: python3 timing_srt.py timing.json out.srt
+# The Heckler's lines (who: heckler) are left out: she is never captioned or subtitled (Sam, 3 Nov 2026).
 import json, re, sys
 T = json.load(open(sys.argv[1]))
 def ts(t): t = max(0, t); return f"{int(t // 3600):02d}:{int(t % 3600 // 60):02d}:{int(t % 60):02d},{int(round((t % 1) * 1000)) % 1000:03d}"
 caps = []
 for l in T['lines']:
+    if l.get('who') == 'heckler' or str(l.get('id', '')).startswith('H_'): continue  # the Heckler is never captioned (Sam, 3 Nov 2026)
     tw = l['text'].split(); W = l.get('words') or [[None, l['start'], l['end']]]; n, m = len(tw), len(W)
     chunks, cur = [], []
     for i, w in enumerate(tw):

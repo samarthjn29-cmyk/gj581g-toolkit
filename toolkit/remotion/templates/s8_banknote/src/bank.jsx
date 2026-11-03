@@ -102,7 +102,7 @@ export const Window = ({x, y, w, h, src, from = 0, rate = 1, f, at, tint = C.gre
   </div>; };
 
 // burnt-in captions: the current line, word highlighted
-export const Captions = () => { const f = useCurrentFrame(); const s = f / FPS; const l = LINES.find((x) => s >= x.start - 0.05 && s <= x.end + 0.25);
+export const Captions = () => { const f = useCurrentFrame(); const s = f / FPS; const l = LINES.find((x) => x.who !== 'heckler' && s >= x.start - 0.05 && s <= x.end + 0.25);  // the Heckler is never captioned (Sam, 3 Nov 2026)
   if (!l) return null; const ws = l.text.split(' ');
   const k = l.words && l.words.length === ws.length ? Math.max(0, l.words.filter((w) => w[1] <= s).length - 1) : Math.floor(((s - l.start) / (l.end - l.start)) * ws.length);
   return <div style={{position: 'absolute', left: 0, right: 0, top: 990, display: 'flex', justifyContent: 'center'}}>
