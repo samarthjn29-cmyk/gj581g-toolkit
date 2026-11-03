@@ -4,7 +4,7 @@ import {AbsoluteFill} from 'remotion';
 import {Ground, Grain, NoteFrame, C, OS, FR, IN} from './bank';
 import {Rig} from './rig';
 
-export const HECK = {skin: '#C98B62', hair: 'bob', hairColor: '#2B1E1A', top: C.gold, bottom: '#2F3A48', shoe: '#2A2522', earrings: '#E7C46A'};
+export const HECK = {skin: '#C98B62', hair: 'bun', hairColor: '#2B1E1A', top: C.gold, bottom: '#2F3A48', shoe: '#2A2522', earrings: '#E7C46A'};
 
 // waist-up moods: face, mouth (Rhubarb shape or X), pose
 export const MOODS = [
@@ -24,7 +24,7 @@ const Bust = ({w, h, mood, bg}) => { const [face, , mouth, pose] = mood;
 
 export const HecklerSheet = () => <AbsoluteFill style={{background: C.ground, fontFamily: IN}}>
   <div style={{position: 'absolute', left: 70, top: 46, fontFamily: FR, fontWeight: 700, fontSize: 64, color: C.green}}>The Heckler</div>
-  <div style={{position: 'absolute', left: 74, top: 128, fontSize: 26, color: '#5A544A', width: 1700}}>Folk style, next to Ann and Barbara: bob haircut, mustard-gold jumper, gold hoops. Her face and pose follow the mood tag on each line.</div>
+  <div style={{position: 'absolute', left: 74, top: 128, fontSize: 26, color: '#5A544A', width: 1700}}>Folk style, next to Ann and Barbara: hair in a bun, mustard-gold jumper, gold hoops. Her face and pose follow the mood tag on each line.</div>
   <div style={{position: 'absolute', left: 70, top: 190, display: 'grid', gridTemplateColumns: 'repeat(4, 420px)', gap: 26}}>
     {MOODS.map((m, i) => <div key={i} style={{background: '#fff', borderRadius: 14, overflow: 'hidden', boxShadow: '0 2px 8px #0002'}}>
       <Bust w={420} h={340} mood={m} bg={i % 2 ? '#E7DFC9' : '#EAE3D0'} />

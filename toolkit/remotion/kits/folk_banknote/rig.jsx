@@ -35,6 +35,9 @@ const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
   if (style === 'curly') return part === 'back'
     ? <g fill={d}>{[[-60, -40, 30], [-40, -72, 30], [0, -86, 32], [40, -72, 30], [60, -40, 30], [-66, 0, 24], [66, 0, 24]].map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} />)}</g>
     : <g fill={color}>{[[-44, -56, 22], [-16, -70, 24], [16, -70, 24], [44, -56, 22], [-58, -30, 16], [58, -30, 16]].map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} />)}</g>;
+  if (style === 'short') return part === 'back'
+    ? <path d="M -66 -14 C -70 -64 -34 -88 2 -88 C 40 -88 70 -64 66 -14 L 62 10 L -62 10 Z" fill={d} />
+    : <path d="M -66 -12 C -70 -70 -30 -94 6 -90 C 44 -88 72 -64 66 -14 C 58 -40 36 -56 6 -58 C -24 -56 -48 -42 -66 -12 Z" fill={color} />;
   return null; };
 
 const Eyes = ({type, ink, blink, look}) => { const E = (x) => {
