@@ -1,14 +1,14 @@
 # Voice the Heckler's lines (second voice) for the scene build: Chatterbox conditioned on her synthetic reference
 # (voice_sample/heckler_isabella/ref.wav, made from Kokoro bf_isabella: no real person cloned), one mood setting per line,
 # 4 seeds per line, the first take that passes the word check wins (short lines blur: "Lucky sod" -> "lucky sword").
-# Her lines alone are played 30% faster (atempo 1.3, Sam 3 Nov 2026); the narrator is never sped up.
+# Her lines alone are played 20% faster (atempo 1.2; Sam changed it from 1.3 on 3 Nov 2026); the narrator is never sped up.
 # Usage: cbx/bin/python3 heckler_lines.py voice_script.json heckler_ref.wav takesdir UNIT [UNIT ...]   (UNIT = H_<line id>)
 import sys, os, re, json, difflib, subprocess, tempfile, numpy as np, soundfile as sf, torch, librosa
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
 from num2words import num2words
 S = json.load(open(sys.argv[1])); ref, out = sys.argv[2], sys.argv[3]; want = sys.argv[4:]; os.makedirs(out, exist_ok=True)
-TEMPO = float(os.environ.get('HECKLER_TEMPO', '1.3')); SEEDS = int(os.environ.get('HECKLER_SEEDS', '4'))
+TEMPO = float(os.environ.get('HECKLER_TEMPO', '1.2')); SEEDS = int(os.environ.get('HECKLER_SEEDS', '4'))
 MOOD = {'impatient': (0.7, 0.45), 'pushy': (0.85, 0.35), 'deflated': (0.3, 0.6), 'exasperated': (0.95, 0.3), 'groan': (0.55, 0.5),
         'envious': (0.75, 0.4), 'grudging warm': (0.4, 0.55), 'grudgingly warm': (0.4, 0.55), 'wary': (0.45, 0.5),
         'resigned': (0.3, 0.6), 'suspicious': (0.6, 0.45)}
