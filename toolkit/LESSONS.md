@@ -55,3 +55,7 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 | 30 | "Barbara's only buys one percent more" far too fast (Sam, clip A) | No pace check; the clone speeds through short sentences in a scene | clone_scenes rejects a take with any 5+-word line over 3.9 spoken words/s (MAXWPS) |
 | 31 | "Meet Ann" heard as "At" (Sam, clip A) | A one-syllable name after a short verb blurs in the clone | "This is Ann." with `must` on the name; avoid one-syllable names alone at the start of a scene |
 | 32 | Source lines unreadable on the note border (Sam, clip A) | Source text placed inside the engraved border band | Source lines sit below the note (y about 942), above the captions |
+| 33 | Clip C ended without "and feelings need a check" (Sam); clips A and B also lost their last words | ffmpeg `loudnorm` drops the last second or so of a stream; the mix then padded silence over it | Voice is padded (`apad=pad_dur=3`) before `loudnorm`, then trimmed to the timeline; check the last line is heard in every clip |
+| 34 | Long scenes rushed (4-5 w/s) and were OOM-killed | One 8-12 line passage per generate call | clone_scenes voices parts of <= 4 lines, saves each part, resumes after a kill |
+| 35 | Takes rejected for "take away", "pay slip", "1.05", "100" | Whisper writes words and numbers differently from the script | Checker merges word pairs, reads decimals and "a hundred" |
+| 36 | "race" for "raise" at the end of a phrase, again | Clone weakness | Write "pay raise" where "raise" ends a phrase (not "Barbara raise") |
