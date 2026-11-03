@@ -174,3 +174,21 @@ export const TS24 = () => { const pts = Array.from({length: 60}, (_, i) => { con
     </svg>
     <div style={{position: 'absolute', left: 140, top: 60, fontFamily: FR, fontSize: 96, color: '#F4F1EA'}}>The Curve <i style={{fontFamily: "'FrauncesI', serif"}}>of Enough</i></div>
   </AbsoluteFill>; };
+
+// Raise_v1 thumbnail, TS22 two-tone poster in the Dollar Yardstick identity (3 Nov 2026)
+export const RaiseTS22 = () => <AbsoluteFill style={{background: C.ox}}>
+  <svg width={1280} height={720} style={{position: 'absolute'}}>
+    {Array.from({length: 18}, (_, i) => <path key={i} d={wave(-20, 20 + i * 40, 1320, 26, 8, i * 0.6)} stroke="#8A2C3C" strokeWidth="1.4" fill="none" />)}
+    <path d="M 290 290 Q 640 40 990 290 Q 640 620 290 290 Z" fill={C.ground} />
+    <circle cx="640" cy="290" r="146" fill={C.ink} />
+    <circle cx="640" cy="290" r="118" fill={C.gold} />
+    <path d={rosette(640, 290, 112, 33, 44, 1800)} stroke="#8F6A1F" strokeWidth="1.1" fill="none" opacity="0.9" />
+    <circle cx="640" cy="290" r="80" fill={C.gold} stroke="#8F6A1F" strokeWidth="5" />
+    <text x="640" y="326" textAnchor="middle" fontFamily={FR} fontWeight="700" fontSize="100" fill="#4E3A10">5%</text>
+    <ellipse cx="600" cy="238" rx="26" ry="18" fill="#FFFFFF" opacity="0.55" transform="rotate(-30 600 238)" />
+    <path d="M 700 520 C 676 560 668 584 668 600 C 668 624 688 640 708 640 C 728 640 748 624 748 600 C 748 584 740 560 708 520 Z" fill={C.ink} transform="translate(-6 -100)" />
+    <text x="702" y="530" textAnchor="middle" fontFamily={OS} fontWeight="700" fontSize="30" fill={C.ground}>1%</text>
+  </svg>
+  <div style={{position: 'absolute', left: 0, right: 0, top: 34, textAlign: 'center', fontFamily: OS, fontWeight: 700, fontSize: 26, letterSpacing: 10, color: '#E8C9B6'}}>THE DOLLAR YARDSTICK · NO. 1</div>
+  <div style={{position: 'absolute', left: 0, right: 0, top: 572, textAlign: 'center', fontFamily: "'FrauncesI', serif", fontWeight: 700, fontSize: 80, color: C.ground}}>The money illusion</div>
+</AbsoluteFill>;
