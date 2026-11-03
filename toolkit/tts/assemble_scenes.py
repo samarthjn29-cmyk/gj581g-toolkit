@@ -21,7 +21,8 @@ for d in SC:
         fxw = f"{takes}/.fx_{d['scene']}.wav"; subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', os.environ['NARR_FX'], fxw], check=True); src = fxw
     a, _ = librosa.load(src, sr=SR)
     e = librosa.feature.rms(y=a, frame_length=1200, hop_length=600)[0]; on = int(np.argmax(e > 0.25 * e.max())) * 600
-    a = a[max(0, on - int(0.08 * SR)):]; _, (i0, i1) = librosa.effects.trim(a, top_db=38); a = a[:i1 + int(0.1 * SR)]
+    # keep 0.2 s before the first loud frame: 0.08 s left a soft first consonant right at the cut ("Last" heard as "ast", 3 Nov 2026)
+    a = a[max(0, on - int(0.2 * SR)):]; _, (i0, i1) = librosa.effects.trim(a, top_db=38); a = a[:i1 + int(0.1 * SR)]
     segs, _ = wm.transcribe(librosa.resample(a, orig_sr=SR, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)
     H = [(tk, w.start, w.end) for s_ in segs for w in s_.words for tk in toks(w.word)]
     L = [l for l in S if l['scene'] == d['scene']]

@@ -42,11 +42,21 @@ for lid in ids:
     t0 = 0.0 if k == 0 else quiet_point(a, sr, span(SL[k - 1:k])[1], +1)
     t1 = len(a) / sr if k == len(SL) - 1 else quiet_point(a, sr, span(SL[k + 1:k + 2])[0], -1)
     # voice the line alone, with every check, as a one-line scene
-    tmp = tempfile.mkdtemp(); one = dict(L, scene='patch'); json.dump([one], open(f'{tmp}/s.json', 'w'))
+    LEAD = os.environ.get('PATCH_LEAD', '')  # e.g. "Right." -- a throwaway run-up word, cut off afterwards: Chatterbox can swallow the first sound of a take ("Last" heard as "ast", Twice call1, 3 Nov 2026)
+    one = dict(L, scene='patch')
+    if LEAD: one['say'] = LEAD + ' ' + L.get('say', L['text']); one['must'] = (L.get('must') or [])
+    tmp = tempfile.mkdtemp(); json.dump([one], open(f'{tmp}/s.json', 'w'))
     rc = subprocess.run([PY, f'{HERE}/clone_scenes.py', f'{tmp}/s.json', ref, tmp, 'patch'], env=dict(os.environ, PYTHONUNBUFFERED='1')).returncode
     if rc or not os.path.exists(f'{tmp}/patch.wav'): sys.exit(f'{lid}: voicing failed')
     lg = json.load(open(f'{tmp}/log.json'))['patch']; b, sr2 = sf.read(f'{tmp}/patch.wav')
     if sr2 != sr: b = librosa.resample(b.astype(np.float32), orig_sr=sr2, target_sr=sr).astype(np.float64)
+    if LEAD:  # cut the run-up word: find the line's first word in the new take and cut at the quietest point just before it
+        sg, _ = wm.transcribe(librosa.resample(b.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True)
+        W_ = [(tk, w.start) for s_ in sg for w in s_.words for tk in toks(w.word)]; first = toks(L.get('say', L['text']))[0]; nl = len(toks(LEAD))
+        st0 = next((t for k_, (tk, t) in enumerate(W_) if k_ >= nl and tk == first), None)
+        if st0 is None: sys.exit(f'{lid}: could not find "{first}" after the run-up word')
+        cut = quiet_point(b, sr, st0, -1, span=0.35); b = b[int(cut * sr):]
+        b = b * np.minimum(1, np.arange(len(b)) / (0.01 * sr))  # 10 ms fade-in at the cut
     old = a[int(t0 * sr):int(t1 * sr)]; rms = lambda x: float(np.sqrt(np.mean(x ** 2)) + 1e-9)
     b = b * (rms(old) / rms(b))  # match the scene's loudness
     pad = lambda d: np.zeros(int(sr * d))
