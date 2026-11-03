@@ -68,7 +68,7 @@ def voice_part(L, si, pi):
             for j in range(len(hw) - len(tt) + 1):
                 if hw[j:j + len(tt)] == tt:
                     t_a, t_b = H[j][1], H[j + len(tt) - 1][2]
-                    if any(t_a + 0.05 < g0 and g1 < t_b - 0.05 for g0, g1 in gaps(a, min_s=0.10)): ok_t = False
+                    if any(t_a + 0.05 < g0 and g1 < t_b - 0.05 for g0, g1 in gaps(a, db=-28, min_s=0.09)): ok_t = False  # stricter: Sam heard a 0.13 s dip (-28 dB) after "Barbara's" as a pause (3 Nov)
         hw_all = [x[0] for x in H]
         ok_m = all(any(hw_all[j:j + len(mm)] == mm for j in range(len(hw_all))) for mm in must)
         ok_t = ok_t and ok_m
