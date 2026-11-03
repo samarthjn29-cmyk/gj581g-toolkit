@@ -41,7 +41,7 @@ def gaps(a, db=-38, min_s=0.12):
             i = j
         else: i += 1
     return res
-MAXWPS = float(os.environ.get('MAXWPS', '3.9'))
+MAXWPS = float(os.environ.get('MAXWPS', '3.9')); PACE_TRIES = int(os.environ.get('PACE_TRIES', '3'))
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
 MAXLINES = int(os.environ.get('MAXLINES', '4'))  # long scenes are voiced in parts of <= 4 lines and joined: an 8-line passage rushed (4-5 w/s) and ran out of memory (clip B real, 3 Nov)
@@ -76,16 +76,20 @@ def voice_part(L, si, pi):
         sm = difflib.SequenceMatcher(None, exp, [x[0] for x in H], autojunk=False); e2h = {}
         for bl in sm.get_matching_blocks():
             for q in range(bl.size): e2h[bl.a + q] = bl.b + q
-        fast = []; pos = 0
+        fast = []; pos = 0; worst = 0.0
         for l in L:
             n = len(toks(l.get('say', l['text']))); idx = [e2h[q] for q in range(pos, pos + n) if q in e2h]; pos += n
-            if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s")
+            if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s"); worst = max(worst, n / (H[idx[-1]][2] - H[idx[0]][1]) - MAXWPS)
+        ok_core = ok_t  # words that must be heard and tight phrases are fine; only the pace may still fail
         ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or bool(fast)
-        score = r + 0.5 * s + (0.3 if ok_t else 0)
+        score = r + 0.5 * s + (0.2 if ok_core else 0) + (0.1 if ok_p else 0) - 0.05 * worst  # among rushed takes, prefer the least rushed
         print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
-        if best is None or score > best[0]: best = (score, a, h, r, s, ok_t)
+        if best is None or score > best[0]: best = (score, a, h, r, s, ok_t, ok_core)
         del w, segs; import gc; gc.collect()  # long scenes were OOM-killed (-9) part-way through 8 tries (clip B infl, real)
         if r >= OKR and s >= OKS and ok_t: break
+        # pace-only failures: lowering cfg rarely fixed them (Raise_v1: 4 clean of 71 takes at 0.3), so stop after PACE_TRIES
+        # once the best take is right in every other way, and keep the least rushed one (flagged for Sam's ear)
+        if k + 1 >= PACE_TRIES and best[3] >= OKR and best[4] >= OKS and best[6]: break
     return best
 for si, sc in enumerate(scenes):
     if (want and sc not in want) or (not want and log.get(sc, {}).get('ok')): continue
