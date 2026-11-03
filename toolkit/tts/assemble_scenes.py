@@ -1,7 +1,7 @@
 # Join scene takes (clone_all VO-NN.mp3), Whisper word timestamps -> per-line and per-word times for the script,
 # plus a word-check report per scene. Numbers are compared as words on both sides ("71%" == "seventy-one percent").
 # Usage: cbx/bin/python3 assemble_scenes.py script.json takesdir vo.wav timing.json   (takes: <scene>.wav from clone_scenes.py)
-import sys, re, json, difflib, numpy as np, soundfile as sf, librosa
+import sys, os, subprocess, re, json, difflib, numpy as np, soundfile as sf, librosa
 from faster_whisper import WhisperModel
 from num2words import num2words
 S = json.load(open(sys.argv[1])); takes = sys.argv[2]; out_wav, out_json = sys.argv[3], sys.argv[4]
@@ -16,7 +16,10 @@ norm = lambda w: re.sub(r"[^a-z0-9']", '', w.lower().replace('’', "'"))
 wm = WhisperModel('small.en', device='cpu', compute_type='int8')
 pieces = [np.zeros(int(LEAD * SR), np.float32)]; t = LEAD; lines = []; report = {}
 for d in SC:
-    a, _ = librosa.load(f"{takes}/{d['scene']}.wav", sr=SR)
+    src = f"{takes}/{d['scene']}.wav"
+    if os.environ.get('NARR_FX') and not d['scene'].startswith('H_'):  # the narrator's voice finish (profile post_fx) on Sam's units only, not the Heckler's (3 Nov 2026)
+        fxw = f"{takes}/.fx_{d['scene']}.wav"; subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', os.environ['NARR_FX'], fxw], check=True); src = fxw
+    a, _ = librosa.load(src, sr=SR)
     e = librosa.feature.rms(y=a, frame_length=1200, hop_length=600)[0]; on = int(np.argmax(e > 0.25 * e.max())) * 600
     a = a[max(0, on - int(0.08 * SR)):]; _, (i0, i1) = librosa.effects.trim(a, top_db=38); a = a[:i1 + int(0.1 * SR)]
     segs, _ = wm.transcribe(librosa.resample(a, orig_sr=SR, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)
