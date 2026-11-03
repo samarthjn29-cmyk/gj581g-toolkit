@@ -15,6 +15,14 @@ const FACE = {
   thinking: {brow: [[-30, -27, -14, -27], [14, -22, 30, -26]], eye: 'side', mouth: 'M -6 33 L 12 31'},
   surprised: {brow: [[-30, -31, -14, -35], [14, -35, 30, -31]], eye: 'wide', mouth: 'O'},
   smug: {brow: [[-30, -23, -14, -25], [14, -27, 30, -24]], eye: 'lid', mouth: 'M -12 31 Q 4 38 16 27'},
+  // Heckler moods (3 Nov 2026)
+  impatient: {brow: [[-31, -25, -13, -19], [13, -19, 31, -25]], eye: 'lid', mouth: 'M -12 34 L 12 32'},
+  pushy: {brow: [[-32, -29, -12, -17], [12, -17, 32, -29]], eye: 'dot', mouth: 'M -15 26 Q 0 50 15 26 Z'},
+  deflated: {brow: [[-30, -19, -14, -26], [14, -26, 30, -19]], eye: 'lid', mouth: 'M -12 37 Q 0 31 12 37'},
+  exasperated: {brow: [[-30, -35, -14, -39], [14, -39, 30, -35]], eye: 'roll', mouth: 'M -16 26 Q 0 52 16 26 Z'},
+  groan: {brow: [[-30, -18, -14, -25], [14, -25, 30, -18]], eye: 'shut', mouth: 'M -13 35 Q 0 30 13 35'},
+  envious: {brow: [[-30, -22, -14, -22], [14, -33, 30, -27]], eye: 'side', mouth: 'M -12 35 Q 2 30 14 37'},
+  warm: {brow: [[-30, -25, -14, -28], [14, -28, 30, -25]], eye: 'smile', mouth: 'M -14 30 Q 0 40 14 30'},
 };
 
 const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
@@ -31,6 +39,8 @@ const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
 
 const Eyes = ({type, ink, blink, look}) => { const E = (x) => {
     if (blink > 0.5) return <path key={x} d={`M ${x - 8} -5 L ${x + 8} -5`} stroke={ink} strokeWidth="4" strokeLinecap="round" />;
+    if (type === 'roll') return <g key={x}><ellipse cx={x} cy={-6} rx={8.5} ry={9.5} fill="#FFFFFF" /><circle cx={x} cy={-11.5} r={4.6} fill={ink} /></g>;
+    if (type === 'shut') return <path key={x} d={`M ${x - 9} -6 Q ${x} 0 ${x + 9} -6`} stroke={ink} strokeWidth="4.5" fill="none" strokeLinecap="round" />;
     if (type === 'smile') return <path key={x} d={`M ${x - 8} -6 Q ${x} -14 ${x + 8} -6`} stroke={ink} strokeWidth="4.5" fill="none" strokeLinecap="round" />;
     if (type === 'wide') return <g key={x}><ellipse cx={x} cy={-6} rx={8.5} ry={9.5} fill="#FFFFFF" /><circle cx={x + look} cy={-5} r={4.8} fill={ink} /></g>;
     if (type === 'side') return <g key={x}><ellipse cx={x} cy={-6} rx={7} ry={7.5} fill="#FFFFFF" /><circle cx={x + 3} cy={-8} r={4} fill={ink} /></g>;
@@ -82,7 +92,7 @@ const Leg = ({side, a, b, color, shoe}) => { const hx = side * 26, hy = -250;
 // pose: {fa, fb, ba, bb} arm angles (front/back arm), tilt (deg), lean (deg)
 // walk: phase in radians or null; turn: -1..1 (scaleX, 1 = facing right, -1 = facing left)
 export const Rig = ({x, y, s = 1, look, face = 'neutral', mouth = 'X', blink = 0, pose = {}, walk = null, turn = 1, bob = 0, eyeLook = 0, frontItem, backItem}) => {
-  const {skin, hair, hairColor, top, bottom, shoe = '#2A2522', ink = '#1F1B16', glasses} = look;
+  const {skin, hair, hairColor, top, bottom, shoe = '#2A2522', ink = '#1F1B16', glasses, earrings} = look;
   const td = shade(top, 0.78), tl = tint(top, 0.12), bd = shade(bottom, 0.8), sk = shade(skin, 0.86);
   let {fa = 8, fb = 10, ba = 8, bb = 10, tilt = 0, lean = 0} = pose;
   let la = 0, lb = 0, ra = 0, rb = 0, lift = 0;
@@ -113,6 +123,7 @@ export const Rig = ({x, y, s = 1, look, face = 'neutral', mouth = 'X', blink = 0
         <g transform={`translate(0 -528) rotate(${tilt})`}>
           <Hair style={hair} color={hairColor} part="back" />
           <ellipse cx="-62" cy="6" rx="12" ry="16" fill={skin} /><ellipse cx="62" cy="6" rx="12" ry="16" fill={skin} />
+          {earrings && <g fill="none" stroke={earrings} strokeWidth="4"><circle cx="-63" cy="30" r="9" /><circle cx="63" cy="30" r="9" /></g>}
           <ellipse cx="0" cy="0" rx="62" ry="72" fill={skin} />
           <path d="M 30 -60 C 70 -36 72 34 26 68 C 56 64 64 -30 30 -60 Z" fill={sk} opacity="0.35" />
           <Hair style={hair} color={hairColor} part="front" />

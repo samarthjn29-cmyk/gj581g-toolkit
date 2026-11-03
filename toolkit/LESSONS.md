@@ -59,3 +59,6 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 | 34 | Long scenes rushed (4-5 w/s) and were OOM-killed | One 8-12 line passage per generate call | clone_scenes voices parts of <= 4 lines, saves each part, resumes after a kill |
 | 35 | Takes rejected for "take away", "pay slip", "1.05", "100" | Whisper writes words and numbers differently from the script | Checker merges word pairs, reads decimals and "a hundred" |
 | 36 | "race" for "raise" at the end of a phrase, again | Clone weakness | Write "pay raise" where "raise" ends a phrase (not "Barbara raise") |
+| 37 | "second ruler" heard as "second router" in Sam's clone (heckler test) | Clone weakness on "ruler" | Added warn hazard `\brulers?\b` to the profile; add a `must` on "ruler" lines |
+| 38 | Heckler takes: "Get there faster" -> "yet they're faster", "Lucky sod" -> "lucky sword" | Short, high-exaggeration lines blur | Voice 4 seeds per short heckler line and keep the first that passes the word check (`tts/heckler/reroll.py`) |
+| 39 | Killing a voicing job with `pgrep -f`/`kill` on a pattern ended the shell (exit 144) | The pattern matched the shell's own command line | Stop jobs with TaskStop or by PID from `ps aux | grep "[c]bmood"` (bracket trick) |
