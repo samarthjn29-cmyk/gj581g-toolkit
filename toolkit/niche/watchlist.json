@@ -1,0 +1,12 @@
+{
+ "_note": "Edit freely. niches: what the channel serves or is testing; seeds: YouTube/Google queries; peers: channels whose outliers we study; news: Google News queries; trends_geo: Google Trends daily feeds.",
+ "niches": {
+  "money-measured": {"status": "core", "seeds": ["rupee vs dollar", "why is the rupee falling", "why is everything so expensive", "is india rich or poor", "indian middle class", "why salaries in india are low", "why is the dollar so strong", "inflation explained", "purchasing power parity", "cost of living crisis"]},
+  "money-across-borders": {"status": "testing", "seeds": ["india vs canada salary", "nri tax", "moving to canada from india", "send money to india", "salary in india vs usa"]},
+  "ai-and-work": {"status": "paused", "seeds": ["ai jobs india", "ai salaries", "how chatgpt works", "ai subscription worth it"]}
+ },
+ "peers": ["/@Primateeconomics", "/@Explains101", "/@xplainedInminutess", "/@TheInvisibleHandCo", "/@EconomicsExplained", "/@HowMoneyWorks", "/@MoneyMacro", "/@BenFelixCSI", "/@ThePlainBagel", "/@mohak_mangal", "/@aevytv"],
+ "news": ["rupee dollar", "RBI policy", "India inflation", "US Federal Reserve rates", "dollar dominance", "cost of living", "India Canada immigration", "remittances India", "Japan yen", "Turkey lira"],
+ "trends_geo": ["IN", "US", "CA", "GB"],
+ "subreddits": ["IndiaInvestments", "personalfinanceindia", "india", "PersonalFinanceCanada", "ImmigrationCanada", "economics", "AskEconomics", "explainlikeimfive"]
+}
