@@ -8,7 +8,7 @@
   * Never `pkill -f <pattern>` from a shell whose own command line contains the pattern (it kills itself, exit 144).
 Resumable: lines already passing the word check are skipped; `--from STAGE` restarts later; `--lines a1 b2` re-voices lines.
 
-Usage: build.py project.json [--from voice|align|mix|listen|lint|render|check|deliver] [--to STAGE] [--only STAGE] [--lines ID ...]
+Usage: build.py project.json [--from voice|align|mix|listen|lint|render|check|deliver] [--to STAGE] [--only STAGE] [--keep] [--lines ID ...]
   --lines takes SCENE ids in scene mode and LINE ids in line mode (re-voices only those).
 Modes (project.json "voice_mode"): "kokoro" = animatic (Kokoro at natural speed, no fact-check needed; set "render_scale": 0.6667
 for a 720p draft); "scene" = Sam's clone, one passage per scene (default for final clips); "line" = clone line by line (fixes only).
@@ -99,7 +99,8 @@ def main():
                 json.dump(L, open(lj, 'w'))
             for sc in scenes:
                 L = json.load(open(lj)) if os.path.exists(lj) else {}
-                if (lines and sc not in lines) or (not lines and L.get(sc, {}).get('ok')): continue  # --lines voices only those scenes (it re-voiced every CHECK scene too, 3 Nov)
+                if (lines and sc not in lines) or (not lines and L.get(sc, {}).get('ok')): continue
+                if not lines and '--keep' in a and os.path.exists(f'{takes}/{sc}.wav'): continue  # --keep: a resumed run keeps CHECK takes for Sam's listen instead of re-voicing them (a 2-hour job limit stopped video 2 mid-way, 3 Nov)  # --lines voices only those scenes (it re-voiced every CHECK scene too, 3 Nov)
                 if sc.startswith('H_'):
                     if not hecref: mark(st, False, 'script has Heckler lines but project.json has no "heckler_ref"')
                     for attempt in range(3):
