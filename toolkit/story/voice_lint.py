@@ -2,7 +2,7 @@
 # Usage: python3 voice_lint.py script.json profile_dir [allow_id ...]   exit 1 if any 'fail' hazard is not allowed.
 # Hazards are regexes run on each line's spoken text ('say' or 'text'); add one to profile.json every time Sam hears a new garble.
 import sys, json, re
-S = json.load(open(sys.argv[1])); H = json.load(open(f'{sys.argv[2]}/profile.json')).get('hazards', []); allow = set(sys.argv[3:])
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; H = json.load(open(f'{sys.argv[2]}/profile.json')).get('hazards', []); allow = set(sys.argv[3:])
 bad = 0
 for l in S:
     t = l.get('say', l['text'])

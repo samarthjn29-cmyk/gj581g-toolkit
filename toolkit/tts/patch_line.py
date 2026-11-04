@@ -8,7 +8,7 @@
 # so nothing after the line moves and clips already rendered stay valid. Never time-stretch a take instead.
 import sys, os, json, shutil, subprocess, difflib, tempfile, numpy as np, soundfile as sf, librosa
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-S = json.load(open(sys.argv[1])); ref, takes = sys.argv[2], sys.argv[3]; ids = sys.argv[4:]
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; ref, takes = sys.argv[2], sys.argv[3]; ids = sys.argv[4:]
 HERE = os.path.dirname(os.path.abspath(__file__)); PY = sys.executable
 import re
 from num2words import num2words

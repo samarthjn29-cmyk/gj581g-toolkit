@@ -1,7 +1,7 @@
 # Join per-line takes (lines/<id>.wav), transcribe with word timestamps, map to the script -> vo.wav + timing.json (lines + word times) + diff report.
 import sys, os, json, re, subprocess, difflib, numpy as np, soundfile as sf, librosa
 from faster_whisper import WhisperModel
-S = json.load(open(sys.argv[1])); takes = sys.argv[2]; out_wav = sys.argv[3]; out_json = sys.argv[4]
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; takes = sys.argv[2]; out_wav = sys.argv[3]; out_json = sys.argv[4]
 SR = 24000; LEAD, GAP, TAIL = 0.5, 0.5, 1.6
 NUMW = {'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'zero': '0'}
 norm = lambda w: re.sub(r"[^a-z0-9']", '', w.lower().replace('’', "'"))

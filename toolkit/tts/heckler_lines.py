@@ -7,7 +7,7 @@ import sys, os, re, json, difflib, subprocess, tempfile, numpy as np, soundfile 
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
 from num2words import num2words
-S = json.load(open(sys.argv[1])); ref, out = sys.argv[2], sys.argv[3]; want = sys.argv[4:]; os.makedirs(out, exist_ok=True)
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; ref, out = sys.argv[2], sys.argv[3]; want = sys.argv[4:]; os.makedirs(out, exist_ok=True)
 TEMPO = float(os.environ.get('HECKLER_TEMPO', '1.2')); SEEDS = int(os.environ.get('HECKLER_SEEDS', '4'))
 MOOD = {'impatient': (0.7, 0.45), 'pushy': (0.85, 0.35), 'deflated': (0.3, 0.6), 'exasperated': (0.95, 0.3), 'groan': (0.55, 0.5),
         'envious': (0.75, 0.4), 'grudging warm': (0.4, 0.55), 'grudgingly warm': (0.4, 0.55), 'wary': (0.45, 0.5),

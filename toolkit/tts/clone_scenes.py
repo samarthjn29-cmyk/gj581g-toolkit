@@ -9,7 +9,7 @@ from clone_all import trim, squeeze_gaps
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
 from num2words import num2words
-S = json.load(open(sys.argv[1])); ref, out = sys.argv[2], sys.argv[3]; want = set(sys.argv[4:]); os.makedirs(out, exist_ok=True)
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; ref, out = sys.argv[2], sys.argv[3]; want = set(sys.argv[4:]); os.makedirs(out, exist_ok=True)
 EXAG, CFG, TEMP = (float(os.environ.get(k, d)) for k, d in (('EXAG', '0.5'), ('CFG', '0.5'), ('TEMP', '0.8')))
 TRIES = int(os.environ.get('TRIES', '8')); OKR, OKS = 0.93, 0.80
 ALIAS = {'anne': 'ann', 'barbra': 'barbara', 'babra': 'barbara', 'rays': 'raise'}

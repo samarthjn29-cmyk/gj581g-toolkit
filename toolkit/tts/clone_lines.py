@@ -7,7 +7,7 @@ from clone_all import trim, squeeze_gaps, debreath
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
 from num2words import num2words
-S = json.load(open(sys.argv[1])); ref = sys.argv[2]; out = sys.argv[3]; want = set(sys.argv[4:]); os.makedirs(out, exist_ok=True)
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; ref = sys.argv[2]; out = sys.argv[3]; want = set(sys.argv[4:]); os.makedirs(out, exist_ok=True)
 TRIES = int(os.environ.get('TRIES', '6')); OKR, OKS = 0.93, 0.78
 EXAG, CFG = float(os.environ.get('EXAG', '0.48')), float(os.environ.get('CFG', '0.46'))
 m = ChatterboxTTS.from_pretrained(device='cpu'); sr = m.sr; m.prepare_conditionals(ref, exaggeration=EXAG)

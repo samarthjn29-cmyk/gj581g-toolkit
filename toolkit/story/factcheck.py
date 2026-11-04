@@ -10,7 +10,7 @@ The agent fills verdict (OK / WRONG / UNSUPPORTED / OVERSTATED / CHECK) and fix;
 WRONG, UNSUPPORTED or OVERSTATED. Also prints the rows that cite nothing."""
 import sys, json, re, csv, runpy
 
-S = json.load(open(sys.argv[1])); proj = runpy.run_path(sys.argv[2]); out = sys.argv[3]
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; proj = runpy.run_path(sys.argv[2]); out = sys.argv[3]
 SRC = {s[0]: s for s in proj.get('SOURCES', [])}
 SMALL = r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\s+(in|out of|of every|of (the|them|us|those)|percent|times|hundred|thousand|million|billion|seconds?|minutes?|hours?|days?|weeks?|months?|years?|people|participants|observers|radiologists|subjects|studies)\b"
 NUMW = r"\b(zero|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion|half|third|quarter|percent|per cent|twice|double|triple|times|dozen)\b"

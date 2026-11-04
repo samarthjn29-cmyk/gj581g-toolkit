@@ -4,7 +4,7 @@
 import sys, os, subprocess, re, json, difflib, numpy as np, soundfile as sf, librosa
 from faster_whisper import WhisperModel
 from num2words import num2words
-S = json.load(open(sys.argv[1])); takes = sys.argv[2]; out_wav, out_json = sys.argv[3], sys.argv[4]
+S = json.load(open(sys.argv[1])); S = S["lines"] if isinstance(S, dict) else S; takes = sys.argv[2]; out_wav, out_json = sys.argv[3], sys.argv[4]
 SC = [dict(scene=sc) for sc in dict.fromkeys(l['scene'] for l in S)]
 SR = 24000; LEAD, GAP, TAIL = 0.5, 0.45, 1.6
 def toks(s):
