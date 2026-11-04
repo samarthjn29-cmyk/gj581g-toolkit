@@ -4,6 +4,8 @@
 # so it works even when the line's wording changed. The new take goes through the same checks as clone_scenes.py.
 # Usage: cbx/bin/python3 patch_line.py script.json voice_profile_dir takes_dir LINE_ID [LINE_ID ...]
 # Then: build.py project.json --from align   (re-times the scene, re-mixes, renders)
+# FIT=1 (4 Nov 2026): keep the line's old slot length, padding the new take with silence (or refusing if it is longer),
+# so nothing after the line moves and clips already rendered stay valid. Never time-stretch a take instead.
 import sys, os, json, shutil, subprocess, difflib, tempfile, numpy as np, soundfile as sf, librosa
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 S = json.load(open(sys.argv[1])); ref, takes = sys.argv[2], sys.argv[3]; ids = sys.argv[4:]
@@ -61,6 +63,10 @@ for lid in ids:
     b = b * (rms(old) / rms(b))  # match the scene's loudness
     pad = lambda d: np.zeros(int(sr * d))
     lead = 0.0 if k == 0 else 0.12; tail = 0.0 if k == len(SL) - 1 else 0.12  # breathing room at the cut points
+    if os.environ.get('FIT') == '1':  # fit to the old slot: same total length, so later lines keep their times
+        slot = int((t1 - t0) * sr); body = len(b) + int(sr * lead) + int(sr * tail)
+        if body > slot: sys.exit(f'{lid}: new take {len(b) / sr:.2f} s does not fit the {slot / sr:.2f} s slot (FIT=1); try another seed or drop FIT')
+        extra = slot - body; tail += (extra - int(extra * 0.4)) / sr; lead += int(extra * 0.4) / sr
     new = np.concatenate([a[:int(t0 * sr)], pad(lead), b, pad(tail), a[int(t1 * sr):]])
     sf.write(wav, new, sr)
     print(f"{lid}: replaced {t0:.2f}-{t1:.2f} s of {sc}.wav with a {len(b) / sr:.2f} s take | words {lg['words']} sim {lg['sim']} ok {lg['ok']} | {lg['heard']}")

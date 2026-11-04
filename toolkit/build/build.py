@@ -8,7 +8,7 @@
   * Never `pkill -f <pattern>` from a shell whose own command line contains the pattern (it kills itself, exit 144).
 Resumable: lines already passing the word check are skipped; `--from STAGE` restarts later; `--lines a1 b2` re-voices lines.
 
-Usage: build.py project.json [--from voice|align|mix|listen|qa|lint|render|check|deliver] [--to STAGE] [--only STAGE] [--keep] [--lines ID ...]
+Usage: build.py project.json [--from voice|align|mix|listen|qa|lint|render|check|deliver|avcheck] [--to STAGE] [--only STAGE] [--keep] [--lines ID ...]
   --lines takes SCENE ids in scene mode and LINE ids in line mode (re-voices only those).
 Modes (project.json "voice_mode"): "kokoro" = animatic (Kokoro at natural speed, no fact-check needed; set "render_scale": 0.6667
 for a 720p draft); "scene" = Sam's clone, one passage per scene (default for final clips); "line" = clone line by line (fixes only).
@@ -23,7 +23,7 @@ Writes build/status.json (stage, time, result) and build/build.log; prints one l
 import json, os, sys, subprocess, time, shutil
 TK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY = os.environ.get('CBX_PY', '/home/claude/cbx/bin/python3')
-STAGES = ['voice', 'align', 'mix', 'listen', 'qa', 'lint', 'render', 'check', 'deliver']  # listen: the mixed narration as an MP3 for Sam's voice-only review (3 Nov 2026)  # mix before lint: the lint reads the fresh sfx cues
+STAGES = ['voice', 'align', 'mix', 'listen', 'qa', 'lint', 'render', 'check', 'deliver', 'avcheck']  # avcheck: av_check.py on the copy Sam watches (4 Nov 2026)  # listen: the mixed narration as an MP3 for Sam's voice-only review (3 Nov 2026)  # mix before lint: the lint reads the fresh sfx cues
 
 def main():
     a = sys.argv[1:]; pj = os.path.abspath(a[0]); root = os.path.dirname(pj); P = json.load(open(pj))
@@ -49,7 +49,7 @@ def main():
     if '--to' in a: todo = todo[:todo.index(a[a.index('--to') + 1]) + 1]  # e.g. --to listen: voice the whole script and stop at the MP3 for Sam
     takes = get('takes'); os.makedirs(takes, exist_ok=True)
     # Voice units (3 Nov 2026, Heckler from video 2): each scene is split at the Heckler's lines; her lines become units "H_<id>"
-    # voiced in her own synthetic voice (tts/heckler_lines.py, played x1.3), the narrator's runs stay Sam's clone. Without heckler
+    # voiced in her own synthetic voice (tts/heckler_lines.py, played x1.2), the narrator's runs stay Sam's clone. Without heckler
     # lines every unit is just its scene, so older projects build exactly as before.
     def units(S):
         out, n, prev, cur = [], {}, None, None
@@ -171,8 +171,8 @@ def main():
             mark(st, rc == 0, (f'checklist {ck}' if rc == 0 else f'HARD FAULTS: fix them before Sam listens (see {qdir}); checklist {ck}'))
         elif st == 'render':
             silent = f'{root}/build/silent.mp4'
-            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={round(1080 * float(P['render_scale'])) / 1080!r}"] if P.get('render_scale') else []), cwd=get('remotion'))  # scale snapped so 1080*scale is a whole pixel (Remotion refuses 720.036)
-            if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent, '-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', f'{root}/build/full.mp4'])  # no -shortest: the mix is padded to the timeline (a short mix cut the last line, clip A 2 Nov)
+            rc = run(['npx', 'remotion', 'render', 'src/index.jsx', P['composition'], silent, '--codec=h264', '--crf=18', '--log=error'] + ([f"--scale={round(1080 * float(P['render_scale'])) / 1080!r}"] if P.get('render_scale') else []) + ([f"--frames={P['frames']}"] if P.get('frames') else []), cwd=get('remotion'))  # "frames": "a-b" renders one clip of a full-video composition (4 Nov 2026)  # scale snapped so 1080*scale is a whole pixel (Remotion refuses 720.036)
+            if rc == 0: rc = run(['ffmpeg', '-v', 'error', '-y', '-i', silent] + (['-ss', f"{int(P['frames'].split('-')[0]) / 30:.4f}"] if P.get('frames') else []) + ['-i', get('mix_out'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k'] + (['-shortest'] if P.get('frames') else []) + [f'{root}/build/full.mp4'])  # no -shortest: the mix is padded to the timeline (a short mix cut the last line, clip A 2 Nov)
             mark(st, rc == 0)
         elif st == 'check':
             T = json.load(open(get('timing'))); full = f'{root}/build/full.mp4'; shutil.rmtree(f'{root}/build/frames', ignore_errors=True); os.makedirs(f'{root}/build/frames', exist_ok=True)  # no stale frames from an earlier build
@@ -198,10 +198,17 @@ def main():
             mark(st, rc == 0, (f'SILENT at the end of: {", ".join(mute)} (audio cut?); ' if mute else 'every line ends audibly; ') + f'{n} frames in build/frames_sheet.png; loudness {I} LUFS (look at the sheet before sending)')
         elif st == 'deliver':
             out = get('out'); os.makedirs(os.path.dirname(out), exist_ok=True); lim = P.get('laptop_mb', 30)
-            for crf in (27, 30, 33):
-                run(['ffmpeg', '-v', 'error', '-y', '-i', f'{root}/build/full.mp4', '-vf', 'scale=1280:720,hqdn3d=2:2:3:3', '-c:v', 'libx264', '-preset', 'medium', '-crf', str(crf), '-c:a', 'aac', '-b:a', '160k', out])
+            dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f'{root}/build/full.mp4'], capture_output=True, text=True).stdout or 60)
+            for k in (0.92, 0.8, 0.68):  # a bitrate cap from the length, not a CRF: the grainy S8 ground made CRF copies 40 MB (4 Nov 2026)
+                vb = max(600, int((lim * 8e3 * k) / dur - 130))
+                run(['ffmpeg', '-v', 'error', '-y', '-i', f'{root}/build/full.mp4', '-c:v', 'libx264', '-preset', 'veryfast', '-b:v', f'{vb}k', '-maxrate', f'{vb}k', '-bufsize', f'{2 * vb}k', '-c:a', 'aac', '-b:a', '128k', out])
                 if os.path.getsize(out) < lim * 1e6: break
             mark(st, os.path.getsize(out) < lim * 1e6, f'{out} ({os.path.getsize(out) / 1e6:.1f} MB)')
+        elif st == 'avcheck':  # post-render check of the finished file: hard faults stop the clip from being sent (4 Nov 2026)
+            args = [sys.executable, f'{TK}/build/av_check.py', get('out'), '--timing', get('timing'), '--mix', get('mix_out'), '--start', str(P.get('clip_start', int(P['frames'].split('-')[0]) / 30 if P.get('frames') else 0)), '--out', f'{root}/build/avcheck']
+            for k, flag in (('factcheck', '--factcheck'), ('script', '--script'), ('numbers_ok', '--numbers-ok')):
+                if P.get(k): args += [flag, get(k)]
+            rc = run(args); mark(st, rc == 0, f'{root}/build/avcheck/report.md' + ('' if rc == 0 else ' HAS HARD FAULTS'))
         log(f'     {st} took {time.time() - t0:.0f} s')
     log('BUILD DONE')
 
