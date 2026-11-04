@@ -59,7 +59,7 @@ def check(S, rows):
     return res
 
 def main():
-    a = sys.argv[1:]; S = json.load(open(a[0])); p = a[1]; rows = load(p); cur = items(S); text = {k: t for k, _, t in cur}
+    a = sys.argv[1:]; S = json.load(open(a[0])); S = S["lines"] if isinstance(S, dict) else S; p = a[1]; rows = load(p); cur = items(S); text = {k: t for k, _, t in cur}
     if '--fresh' in a:
         for k, w, t in cur:
             if w != 'heckler' and FRESH.search(t): print(f'{k:16s} {t}')

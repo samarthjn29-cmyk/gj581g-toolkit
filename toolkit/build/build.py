@@ -44,7 +44,7 @@ def main():
         if not ok: sys.exit(f'build stopped at {stage}: see build/build.log')
     busy = subprocess.run(['bash', '-c', "ps -eo args | grep -E '^[^ ]*python3 [^ ]*clone_(lines|scenes|all)\\.py|remotion render' | grep -v grep"], capture_output=True, text=True).stdout.strip()
     if busy: sys.exit(f'another voice or render job is running (memory):\n{busy}')
-    S = json.load(open(get('script'))); ids = [l['id'] for l in S]
+    S = json.load(open(get('script'))); META = S if isinstance(S, dict) else {}; S = S['lines'] if isinstance(S, dict) else S; ids = [l['id'] for l in S]
     todo = STAGES[STAGES.index(only):STAGES.index(only) + 1] if only else STAGES[STAGES.index(start):]
     if '--to' in a: todo = todo[:todo.index(a[a.index('--to') + 1]) + 1]  # e.g. --to listen: voice the whole script and stop at the MP3 for Sam
     takes = get('takes'); os.makedirs(takes, exist_ok=True)
