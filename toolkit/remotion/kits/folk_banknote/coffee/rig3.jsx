@@ -6,7 +6,7 @@ import React from 'react';
 export const shade = (hex, k = 0.82) => { const n = parseInt(hex.slice(1), 16); const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v * k)); return `rgb(${c.join(',')})`; };
 export const tint = (hex, k = 0.25) => { const n = parseInt(hex.slice(1), 16); const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v + (255 - v) * k)); return `rgb(${c.join(',')})`; };
 
-const FACE = {
+export const FACE = {
   neutral: {brow: [[-30, -22, -14, -24], [14, -24, 30, -22]], eye: 'dot', mouth: 'M -11 32 Q 0 36 11 32'},
   happy: {brow: [[-30, -25, -14, -28], [14, -28, 30, -25]], eye: 'smile', mouth: 'M -16 27 Q 0 46 16 27 Z'},
   smile: {brow: [[-30, -24, -14, -26], [14, -26, 30, -24]], eye: 'dot', mouth: 'M -14 29 Q 0 41 14 29'},
@@ -25,7 +25,7 @@ const FACE = {
   warm: {brow: [[-30, -25, -14, -28], [14, -28, 30, -25]], eye: 'smile', mouth: 'M -14 30 Q 0 40 14 30'},
 };
 
-const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
+export const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
   if (style === 'bob') return part === 'back'
     ? <path d="M -74 -10 C -80 -70 -40 -92 0 -92 C 40 -92 80 -70 74 -10 L 76 52 C 60 64 40 62 30 54 L -30 54 C -40 62 -60 64 -76 52 Z" fill={d} />
     : <path d="M -66 -8 C -70 -64 -34 -86 6 -84 C 44 -82 70 -60 66 -10 C 50 -30 30 -44 -4 -46 C -26 -40 -48 -26 -66 -8 Z" fill={color} />;
@@ -52,7 +52,7 @@ const Hair = ({style, color, part}) => { const d = shade(color, 0.8);
   return null; };
 
 // headwear, drawn over the hair (head space, head centre at 0,0)
-const Hat = ({kind, color = '#1C1A18'}) => { const d = shade(color, 0.75);
+export const Hat = ({kind, color = '#1C1A18'}) => { const d = shade(color, 0.75);
   if (kind === 'top') return <g><rect x="-50" y="-210" width="100" height="140" rx="6" fill={color} /><rect x="-50" y="-100" width="100" height="18" fill="#7A2333" /><ellipse cx="0" cy="-70" rx="86" ry="14" fill={d} /></g>;
   if (kind === 'bowler') return <g><path d="M -58 -60 C -58 -130 58 -130 58 -60 Z" fill={color} /><ellipse cx="0" cy="-58" rx="80" ry="12" fill={d} /></g>;
   if (kind === 'wig') return <g fill="#ECE7DA" stroke="#C9C1AE" strokeWidth="2.5">{[-48, -24, 0, 24, 48].map((x) => <ellipse key={x} cx={x} cy={-64} rx="16" ry="14" />)}{[-62, 62].map((x) => <g key={x}>{[-40, -18, 4].map((y) => <ellipse key={y} cx={x} cy={y} rx="13" ry="11" />)}</g>)}</g>;
@@ -62,12 +62,12 @@ const Hat = ({kind, color = '#1C1A18'}) => { const d = shade(color, 0.75);
   if (kind === 'veil') return <g><ellipse cx="0" cy="-70" rx="74" ry="14" fill={color} /><path d="M -40 -72 C -40 -112 40 -112 40 -72 Z" fill={color} /><path d="M -70 -64 L 70 -64 L 60 -4 L -60 -4 Z" fill={color} opacity="0.35" /></g>;
   return null; };
 
-const Beard = ({kind, color}) => {
+export const Beard = ({kind, color}) => {
   if (kind === 'moustache') return <path d="M -24 22 C -12 14 -4 18 0 22 C 4 18 12 14 24 22 C 16 30 6 28 0 25 C -6 28 -16 30 -24 22 Z" fill={color} />;
   if (kind === 'beard') return <path d="M -58 6 C -56 60 -30 86 0 88 C 30 86 56 60 58 6 C 50 40 30 50 14 46 C 8 44 -8 44 -14 46 C -30 50 -50 40 -58 6 Z" fill={color} />;
   return null; };
 
-const Eyes = ({type, ink, blink, look}) => { const E = (x) => {
+export const Eyes = ({type, ink, blink, look}) => { const E = (x) => {
     if (blink > 0.5) return <path key={x} d={`M ${x - 8} -5 L ${x + 8} -5`} stroke={ink} strokeWidth="4" strokeLinecap="round" />;
     if (type === 'roll') return <g key={x}><ellipse cx={x} cy={-6} rx={8.5} ry={9.5} fill="#FFFFFF" /><circle cx={x} cy={-11.5} r={4.6} fill={ink} /></g>;
     if (type === 'shut') return <path key={x} d={`M ${x - 9} -6 Q ${x} 0 ${x + 9} -6`} stroke={ink} strokeWidth="4.5" fill="none" strokeLinecap="round" />;
@@ -79,7 +79,7 @@ const Eyes = ({type, ink, blink, look}) => { const E = (x) => {
   return <g>{E(-22)}{E(22)}</g>; };
 
 // Rhubarb mouth shapes, drawn around (0, 33) in head space
-const Mouth = ({v, face, skin}) => { const dark = shade(skin, 0.4), lip = shade(skin, 0.45);
+export const Mouth = ({v, face, skin}) => { const dark = shade(skin, 0.4), lip = shade(skin, 0.45);
   const O = (rx, ry, teeth, tongue) => <g><ellipse cx="0" cy="34" rx={rx} ry={ry} fill={dark} />
     {teeth && <path d={`M ${-rx * 0.8} ${34 - ry * 0.55} Q 0 ${34 - ry * 0.9} ${rx * 0.8} ${34 - ry * 0.55}`} stroke="#FFFFFF" strokeWidth={Math.min(5, ry * 0.6)} fill="none" strokeLinecap="round" />}
     {tongue && <ellipse cx="0" cy={34 + ry * 0.45} rx={rx * 0.55} ry={ry * 0.35} fill="#D9706A" />}</g>;
