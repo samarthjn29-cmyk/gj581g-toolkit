@@ -174,7 +174,7 @@ if P and float(P[-1]) > -1.0: review(f'true peak {P[-1]} dBFS (limit -1)')
 small = subprocess.run(['ffmpeg', '-v', 'error', '-i', A.mp4, '-vf', 'fps=10,scale=192:108,format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
 fr = np.frombuffer(small, dtype=np.uint8).reshape(-1, 108, 192).astype(np.float32)[:, :int(108 * CAP_Y[0] / 1080), :]
 hh, ww = fr.shape[1] // 8 * 8, 192; cells = np.abs(np.diff(fr[:, :hh, :ww], axis=0)).reshape(len(fr) - 1, 8, hh // 8, 12, ww // 12).mean(axis=(2, 4))
-dif = cells.max(axis=(1, 2)); base = float(np.median(dif)); thr = max(base * 3, 1.5)  # a change anywhere on screen (one cell of a 12 x 8 grid) counts
+dif = cells.max(axis=(1, 2)); thr = 1.5  # a change anywhere on screen (one cell of a 12 x 8 grid) counts; fixed, so a clip and the joined video give the same answer (a median-based threshold missed a 9 s still in clip D)
 ch = np.where(dif > thr)[0] / 10.0
 last = 0.0
 for c in list(ch) + [D]:
