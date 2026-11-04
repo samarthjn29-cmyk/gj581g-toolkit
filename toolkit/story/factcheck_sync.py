@@ -79,7 +79,7 @@ def main():
         by = {r['line']: r for r in rows}; new = []; carried = []
         # a passed row whose exact wording reappears under another id (a line moved, a script was reordered) keeps its
         # verdict: the check was on the words, not the id (Trial_v1 -> Coffee rewrite, 5 Nov 2026, lost 45 verdicts)
-        passed = {fp(r.get('text', '')): r for r in rows if (r.get('verdict') or '').strip().upper() in PASS and r.get('hash') == fp(r.get('text', ''))}
+        passed = {fp(r.get('text', '')): dict(r) for r in rows if (r.get('verdict') or '').strip().upper() in PASS and r.get('hash') == fp(r.get('text', ''))}
         for k, w, t in cur:
             r = by.get(k)
             if k in res['missing']:
@@ -87,7 +87,7 @@ def main():
             elif k in res['changed']:
                 r['first_verdict'] = r.get('first_verdict') or r.get('verdict', ''); r['fix'] = (r.get('fix', '') + f" | was: {r.get('text', '')[:200]}").strip(' |')
                 r['text'] = t; r['verdict'] = ''; r['hash'] = ''
-            if (r.get('verdict') or '').strip().upper() not in PASS and fp(t) in passed and passed[fp(t)] is not r:
+            if (r.get('verdict') or '').strip().upper() not in PASS and fp(t) in passed:
                 o = passed[fp(t)]; r.update(verdict=o['verdict'], hash=fp(t), checked=o.get('checked', ''),
                                             fix=f"carried from {o['line']} (identical wording): " + (o.get('fix') or '')[:300]); carried.append(k)
             new.append(r)
