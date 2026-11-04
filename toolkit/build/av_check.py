@@ -55,6 +55,10 @@ else:
         if m < sr: continue
         cc = float(np.dot(x[:m], y[:m]) / (np.linalg.norm(x[:m]) * np.linalg.norm(y[:m]) + 1e-9))
         if cc > best: best, lag = cc, L
+    for L in range(lag - 16, lag + 17):  # refine to the sample: a 1 ms error wrecks the correlation of the Heckler's higher voice
+        x, y = (clip[max(0, L):], ref[max(0, -L):]); m = min(len(x), len(y), sr * 20)
+        cc = float(np.dot(x[:m], y[:m]) / (np.linalg.norm(x[:m]) * np.linalg.norm(y[:m]) + 1e-9))
+        if cc > best: best, lag = cc, L
     off = lag / sr; info(f'audio offset vs mix {off * 1000:+.0f} ms (corr {best:.3f})')
     if abs(off) > 0.06: hard(f'audio is {off * 1000:+.0f} ms off the mix')  # AAC encoder priming adds 20-45 ms; more than 60 ms is a real shift
     x, y = (clip[max(0, lag):], ref[max(0, -lag):]); m = min(len(x), len(y)); worst = (1, 0)
@@ -112,8 +116,8 @@ brief = []
 for k, ts in tok_times.items():
     if len(k) < 4: continue
     for s, e in spans(ts, gap=2.0):  # OCR misses a reading now and then; only a label gone for good counts
-        dur = e - s + 1 / FPS_OCR
-        if dur < MIN_ON and s > 0.6 and e < D - 0.6: brief.append((s, dur, k))
+        dur = e - s + 1 / FPS_OCR; reads = sum(1 for x in ts if s <= x <= e)
+        if dur < MIN_ON and reads >= 2 and s > 0.6 and e < D - 0.6: brief.append((s, dur, k))  # a single reading is OCR flicker
 brief.sort()
 for s, dur, k in brief[:40]: review(f'{s:6.2f} s  "{k}" readable for only {dur:.2f} s (minimum {MIN_ON} s)')
 info(f'{len(brief)} brief text spans (first 40 listed)')
@@ -128,9 +132,8 @@ def ok_num(num, raw):
     cands = [num, num.lstrip('0')] + ([num[1:]] if len(num) > 4 and raw[:1] in '2%' else [])  # a rupee sign read as '2' or '%'
     for c in cands:
         if c in known: return True
-        if '.' in c:  # on-screen rounding of a checked figure (+0.84% shown as +0.8%)
-            d = len(c.split('.')[1])
-            if any(re.fullmatch(r'\d+\.\d+', k) and len(k.split('.')[1]) > d and round(float(k), d) == float(c) for k in known): return True
+        d = len(c.split('.')[1]) if '.' in c else 0  # on-screen rounding of a checked figure (+0.84% shown as +0.8%, $382.02 as $382)
+        if re.fullmatch(r'\d+(\.\d+)?', c) and any(re.fullmatch(r'\d+\.\d+', k) and len(k.split('.')[1]) > d and round(float(k), d) == float(c) for k in known): return True
     return False
 for num, hits in sorted(numbers.items(), key=lambda kv: kv[1][0][0]):
     if not ok_num(num, hits[0][1]):
@@ -151,7 +154,7 @@ for t, txt in cap.items():
 rate = len(miss) / max(1, checked); info(f'captions: {checked} spoken moments checked, {len(miss)} without the spoken word ({rate:.0%}); {blank} moments with no readable caption')
 if blank > 0.3 * max(1, checked + blank): hard(f'no readable caption at {blank} spoken moments: captions missing?')
 if rate > 0.15: hard(f'captions miss the spoken word {rate:.0%} of the time: captions may be drifting')
-for t, w, txt in miss[:12]: review(f'{t:6.2f} s  spoken "{w}", caption reads "{txt}"')
+for t, w, txt in (miss[:12] if rate > 0.08 else []): review(f'{t:6.2f} s  spoken "{w}", caption reads "{txt}"')
 for t, txt in heck_cap: hard(f'{t:6.2f} s  caption shown while only the Heckler speaks: "{txt}"')
 
 # ---- 6. layout
