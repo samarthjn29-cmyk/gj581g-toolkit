@@ -58,7 +58,8 @@ for term in JARGON:
     if not d: warns.append(f'jargon "{term}" never defined in plain words')
     elif d.start() > first.start() + 200: warns.append(f'jargon "{term}" used before it is defined')
     else: defined.append(term)
-if len(defined) > 3: warns.append(f'{len(defined)} new terms ({", ".join(defined)}): target one per chapter, three at most')
+MAXT = 4 if isinstance(S, dict) and S.get('template') == 'A' else 3  # template A deep dive (12-15 min) may hold 4
+if len(defined) > MAXT: warns.append(f'{len(defined)} new terms ({", ".join(defined)}): target one per chapter, {MAXT} at most')
 # ---- script craft (4 Nov 2026)
 mins = dur / 60
 short = sum(1 for x in sents if len(words(x)) < 8) / max(len(sents), 1)
