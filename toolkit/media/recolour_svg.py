@@ -55,7 +55,8 @@ def main():
     s = re.sub(r'((?:fill|stroke|stop-color|flood-color)\s*[:=]\s*"?)#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b', hexc, s)
     # baked raster pieces: tone them toward the palette (desaturate, warm, slight green cast)
     if '<image' in s:
-        filt = '<filter id="palTone"><feColorMatrix type="matrix" values="0.55 0.35 0.08 0 0.02  0.18 0.62 0.15 0 0.02  0.15 0.35 0.42 0 0.01  0 0 0 1 0"/></filter>'
+        filt = ('<filter id="palTone" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.55"/>'
+                '<feColorMatrix type="matrix" values="0.96 0.04 0 0 0.03  0.02 0.94 0.02 0 0.02  0.02 0.06 0.84 0 0.02  0 0 0 1 0"/></filter>')
         s = re.sub(r'(<svg[^>]*>)', r'\1<defs>' + filt + '</defs>', s, count=1)
         s = re.sub(r'<image ', '<image filter="url(#palTone)" ', s)
     open(out, 'w', encoding='utf-8').write(s)
