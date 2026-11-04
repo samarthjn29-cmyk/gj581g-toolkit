@@ -8,7 +8,8 @@ that was checked. A row counts as passed only when its verdict is OK (or "no cla
   factcheck_sync.py script.json factcheck.csv            report: new / changed / removed / not-OK rows; exit 1 if any
   factcheck_sync.py script.json factcheck.csv --update   add rows for new lines and changed wording as PENDING (verdict
                                                           cleared, old verdict kept in first_verdict), drop removed lines,
-                                                          then write <csv>.todo.md: just the rows a checker must look at
+                                                          then write <csv>.todo.md: just the rows a checker must look at.
+                                                          A line whose exact wording passed under another id keeps that verdict.
   factcheck_sync.py script.json factcheck.csv --stamp ID [ID ...] | --stamp-all-ok
                                                           after the checker passes rows: record the current hash
   factcheck_sync.py script.json factcheck.csv --fresh    list time-sensitive lines (rates, "this year", records, "latest")
@@ -75,7 +76,10 @@ def main():
         save(p, rows); print(f'stamped {n} rows'); return
     res = check(S, rows)
     if '--update' in a:
-        by = {r['line']: r for r in rows}; new = []
+        by = {r['line']: r for r in rows}; new = []; carried = []
+        # a passed row whose exact wording reappears under another id (a line moved, a script was reordered) keeps its
+        # verdict: the check was on the words, not the id (Trial_v1 -> Coffee rewrite, 5 Nov 2026, lost 45 verdicts)
+        passed = {fp(r.get('text', '')): r for r in rows if (r.get('verdict') or '').strip().upper() in PASS and r.get('hash') == fp(r.get('text', ''))}
         for k, w, t in cur:
             r = by.get(k)
             if k in res['missing']:
@@ -83,8 +87,12 @@ def main():
             elif k in res['changed']:
                 r['first_verdict'] = r.get('first_verdict') or r.get('verdict', ''); r['fix'] = (r.get('fix', '') + f" | was: {r.get('text', '')[:200]}").strip(' |')
                 r['text'] = t; r['verdict'] = ''; r['hash'] = ''
+            if (r.get('verdict') or '').strip().upper() not in PASS and fp(t) in passed and passed[fp(t)] is not r:
+                o = passed[fp(t)]; r.update(verdict=o['verdict'], hash=fp(t), checked=o.get('checked', ''),
+                                            fix=f"carried from {o['line']} (identical wording): " + (o.get('fix') or '')[:300]); carried.append(k)
             new.append(r)
         save(p, new)
+        if carried: print(f'carried {len(carried)} verdicts by identical wording: {", ".join(carried)}')
         todo = [r for r in new if (r.get('verdict') or '').strip().upper() not in PASS]
         with open(p + '.todo.md', 'w') as f:
             f.write(f'# Rows to check ({len(todo)})\n\nApply toolkit/story/FACTCHECK_CHECKLIST.md to each. Give: line | verdict (OK / no claim / FIX / OVERSTATED / WRONG) | evidence | replacement.\n\n')
