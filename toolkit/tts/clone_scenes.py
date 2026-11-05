@@ -54,6 +54,17 @@ MAXWPS = float(os.environ.get('MAXWPS', '3.9')); PACE_TRIES = int(os.environ.get
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
 MAXLINES = int(os.environ.get('MAXLINES', '4'))  # long scenes are voiced in parts of <= 4 lines and joined: an 8-line passage rushed (4-5 w/s) and ran out of memory (clip B real, 3 Nov)
+def repeats(exp, heard, n=3):
+    """Stretches of 3+ words heard more often than the script says them, e.g. the clone looping 'because everyone else
+    swaps through' twice (video 3, 5 Nov 2026: three such loops passed the word check at 0.98). Returns the repeated texts."""
+    out = []
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, exp, heard, autojunk=False).get_opcodes():
+        extra = heard[j1:j2]
+        if op in ('insert', 'replace') and (j2 - j1) - (i2 - i1) >= n:
+            near = ' ' + ' '.join(exp[max(0, i1 - 25):i1 + 25]) + ' '
+            grams = [' '.join(extra[q:q + n]) for q in range(len(extra) - n + 1)]
+            if grams and sum((' ' + g + ' ') in near for g in grams) >= max(1, len(grams) // 2): out.append(' '.join(extra))
+    return out
 def voice_part(L, si, pi):
     text = ' '.join(l.get('say', l['text']) for l in L); exp = toks(text)
     tight = [toks(l.get('say', l['text'])) for l in L if l.get('tight')]
@@ -80,6 +91,7 @@ def voice_part(L, si, pi):
                     if any(t_a + 0.05 < g0 and g1 < t_b - 0.05 for g0, g1 in gaps(a, db=-28, min_s=0.09)): ok_t = False  # stricter: Sam heard a 0.13 s dip (-28 dB) after "Barbara's" as a pause (3 Nov)
         hw_all = [x[0][:-2] if x[0].endswith("'s") and not any("'s" in t for mm in must for t in mm) else x[0] for x in H]  # a must 'sam' also matches "Sam's" (name test, 3 Nov)
         ok_m = all(any(hw_all[j:j + len(mm)] == mm for j in range(len(hw_all))) for mm in must)
+        rep = repeats(exp, [x[0] for x in H]); ok_m = ok_m and not rep  # a looped stretch fails like a missing must-word
         ok_t = ok_t and ok_m
         # pace: no line of 5+ words faster than MAXWPS spoken words/s (Sam on clip A: "Barbara's only buys..." far too fast, 4.3 w/s)
         sm = difflib.SequenceMatcher(None, exp, [x[0] for x in H], autojunk=False); e2h = {}
@@ -92,7 +104,7 @@ def voice_part(L, si, pi):
         ok_core = ok_t  # words that must be heard and tight phrases are fine; only the pace may still fail
         ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or bool(fast)
         score = r + 0.5 * s + (0.2 if ok_core else 0) + (0.1 if ok_p else 0) - 0.05 * worst  # among rushed takes, prefer the least rushed
-        print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else (' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
+        print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else ((' REPEAT: ' + ' | '.join(rep)) if rep else ' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t, ok_core)
         del w, segs; import gc; gc.collect()  # long scenes were OOM-killed (-9) part-way through 8 tries (clip B infl, real)
         if r >= OKR and s >= OKS and ok_t: break

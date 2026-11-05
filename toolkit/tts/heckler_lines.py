@@ -19,8 +19,10 @@ m = ChatterboxTTS.from_pretrained(device='cpu'); sr = m.sr; m.prepare_conditiona
 wm = WhisperModel('small.en', device='cpu', compute_type='int8')
 lj = f'{out}/log.json'
 for u in want:
-    L = [l for l in S if l['scene'] == u]; assert len(L) == 1 and L[0].get('who') == 'heckler', f'{u}: not a single heckler line'
-    l = L[0]; text = l.get('say', l['text']); ex, cfg = MOOD.get(l.get('mood', ''), (0.6, 0.45)); best = None
+    L = [l for l in S if l['scene'] == u]; assert len(L) == 1 and L[0].get('who') not in (None, 'narrator'), f'{u}: not a single second-voice line'
+    l = L[0]; text = l.get('say', l['text']); ex, cfg = MOOD.get(l.get('mood', ''), (0.6, 0.45))
+    if os.environ.get('VOICE_EXAG'): ex, cfg = float(os.environ['VOICE_EXAG']), float(os.environ.get('VOICE_CFG', '0.5'))  # character voices (build.py P['voices'])
+    best = None
     for k in range(SEEDS):
         torch.manual_seed(200 + 17 * k + int(os.environ.get('SEED_OFFSET', '0'))); m.conds = conds
         a = m.generate(text, exaggeration=ex, cfg_weight=cfg, temperature=0.8).squeeze().numpy()
@@ -34,5 +36,5 @@ for u in want:
     tmp = tempfile.mktemp(suffix='.wav'); sf.write(tmp, a, sr)
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tmp, '-af', f'atempo={TEMPO}', '-ar', str(sr), f'{out}/{u}.wav'], check=True); os.remove(tmp)
     log = json.load(open(lj)) if os.path.exists(lj) else {}
-    log[u] = dict(ok=r >= 0.9, words=round(r, 3), sim=None, heard=heard, voice='heckler', mood=l.get('mood'), tempo=TEMPO)
+    log[u] = dict(ok=r >= 0.9, words=round(r, 3), sim=None, heard=heard, voice=l.get('who'), mood=l.get('mood'), tempo=TEMPO)
     json.dump(log, open(lj, 'w'), indent=1)

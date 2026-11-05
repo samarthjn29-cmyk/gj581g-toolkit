@@ -54,9 +54,9 @@ def main():
     def units(S):
         out, n, prev, cur = [], {}, None, None
         for l in S:
-            if l.get('who') == 'heckler': u = 'H_' + l['id']
+            if l.get('who') not in (None, 'narrator'): u = 'H_' + l['id']  # any second voice (Heckler, or a character in P['voices'], 5 Nov 2026)
             else:
-                if prev is None or prev['scene'] != l['scene'] or prev.get('who') == 'heckler':
+                if prev is None or prev['scene'] != l['scene'] or prev.get('who') not in (None, 'narrator'):
                     n[l['scene']] = n.get(l['scene'], 0) + 1; cur = l['scene'] if n[l['scene']] == 1 else f"{l['scene']}_{n[l['scene']]}"
                 u = cur
             out.append(dict(l, scene=u, scene0=l['scene'])); prev = l
@@ -102,12 +102,17 @@ def main():
                 if (lines and sc not in lines) or (not lines and L.get(sc, {}).get('ok')): continue
                 if not lines and '--keep' in a and os.path.exists(f'{takes}/{sc}.wav'): continue  # --keep: a resumed run keeps CHECK takes for Sam's listen instead of re-voicing them (a 2-hour job limit stopped video 2 mid-way, 3 Nov)  # --lines voices only those scenes (it re-voiced every CHECK scene too, 3 Nov)
                 if sc.startswith('H_'):
-                    if not hecref: mark(st, False, 'script has Heckler lines but project.json has no "heckler_ref"')
+                    who = next(l.get('who') for l in VS if l['scene'] == sc); vc = P.get('voices', {}).get(who, {})
+                    vref = hecref if who == 'heckler' else vc.get('ref')
+                    if vref and not os.path.isabs(vref): vref = os.path.join(root, vref)
+                    if not vref: mark(st, False, f'script has {who} lines but project.json has no ' + ('"heckler_ref"' if who == 'heckler' else f'"voices": {{"{who}": {{"ref": ...}}}}'))
+                    venv = dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1')
+                    if who != 'heckler': venv.update(HECKLER_TEMPO=str(vc.get('tempo', 1.0)), VOICE_EXAG=str(vc.get('exag', 0.5)), VOICE_CFG=str(vc.get('cfg', 0.5)))  # a character voice: own speed and emotion, no Heckler mood table
                     for attempt in range(3):
-                        rc = run([PY, f'{TK}/tts/heckler_lines.py', vscript, hecref, takes, sc], env=dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1', SEED_OFFSET=str(attempt * 1000)))
+                        rc = run([PY, f'{TK}/tts/heckler_lines.py', vscript, vref, takes, sc], env=dict(venv, SEED_OFFSET=str(attempt * 1000)))
                         if rc == 0: break
                     L = json.load(open(lj)) if os.path.exists(lj) else {}; r = L.get(sc, {})
-                    log(f"heckler {sc}: {'pass' if r.get('ok') else 'CHECK'} words {r.get('words')} | {r.get('heard')}"); continue
+                    log(f"{who} {sc}: {'pass' if r.get('ok') else 'CHECK'} words {r.get('words')} | {r.get('heard')}"); continue
                 for attempt in range(6):  # parts resume after a memory kill, so more retries cost little
                     rc = run([PY, f'{TK}/tts/clone_scenes.py', vscript, P['voice_ref'] if os.path.isabs(P['voice_ref']) else get('voice_ref'), takes, sc],
                              env=dict(PYTHONUNBUFFERED='1', TQDM_DISABLE='1', SEED_OFFSET=str(attempt * 1000 + int(os.environ.get('SEED_OFFSET', '0'))),
@@ -144,7 +149,7 @@ def main():
             mark(st, True, f"total {json.load(open(get('timing')))['total']:.1f} s (kokoro)")
         elif st == 'align':
             scn = P.get('voice_mode') == 'scene'
-            hec = any(l.get('who') == 'heckler' for l in S); ref = P.get('voice_ref'); ref = (ref if os.path.isabs(ref) else get('voice_ref')) if ref else None
+            hec = any(l.get('who') not in (None, 'narrator') for l in S); ref = P.get('voice_ref'); ref = (ref if os.path.isabs(ref) else get('voice_ref')) if ref else None
             nfx = json.load(open(f'{ref}/profile.json'))['settings'].get('post_fx', '') if hec and ref and os.path.exists(f'{ref}/profile.json') else ''
             rc = run([PY, f"{TK}/tts/{'assemble_scenes' if scn else 'assemble_lines'}.py", vscript if scn else get('script'), takes, get('vo'), get('timing')], env=dict(NARR_FX=nfx) if nfx else None)  # with a Heckler, the narrator's finish is applied per unit here, not in the mix
             if rc == 0 and scn:  # timing lines carry their real scene again (units were only for voicing)
@@ -157,7 +162,7 @@ def main():
             mark(st, r.returncode == 0 or P.get('lint_soft', False), 'pace lint ' + ('clean' if r.returncode == 0 else 'has failures (lint_soft)' if P.get('lint_soft') else 'FAILED'))
         elif st == 'mix':
             ref = P.get('voice_ref'); ref = (ref if os.path.isabs(ref) else get('voice_ref')) if ref else None
-            fx = json.load(open(f'{ref}/profile.json'))['settings'].get('post_fx', '') if ref and os.path.exists(f'{ref}/profile.json') and P.get('voice_mode') != 'kokoro' and not any(l.get('who') == 'heckler' for l in S) else ''  # with a Heckler the finish was applied to Sam's units in align
+            fx = json.load(open(f'{ref}/profile.json'))['settings'].get('post_fx', '') if ref and os.path.exists(f'{ref}/profile.json') and P.get('voice_mode') != 'kokoro' and not any(l.get('who') not in (None, 'narrator') for l in S) else ''  # with a second voice the finish was applied to Sam's units in align
             rc = run([sys.executable, get('mix')] + ([get('music')] if P.get('music') else []), env=dict(VOICE_FX=fx) if fx else None)  # the profile's finishing filter (Sam picked option B, 3 Nov: a little deeper and warmer)
             mark(st, rc == 0, P.get('music', ''))
         elif st == 'listen':  # whole narration (voice finish applied) as an MP3: Sam approves the voice before any picture is rendered

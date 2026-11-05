@@ -75,7 +75,7 @@ rows, hard = [], []
 pos = 0
 for li, l in enumerate(L):
     n = len(toks(l.get('say', l['text']))); idx = [k for k in range(pos, pos + n)]; pos += n
-    got = [hit[k] for k in idx if k in hit]; who = 'heckler' if l.get('who') == 'heckler' else 'narrator'
+    got = [hit[k] for k in idx if k in hit]; who = l.get('who') or 'narrator'
     r = dict(id=l['id'], who=who, start=l['start'], end=l['end'], text=l['text'], flags=[])
     frac = len(got) / max(n, 1)
     if frac < 0.6: r['flags'].append(f'MOSTLY MISSING: only {len(got)} of {n} words heard'); hard.append(l['id'])
@@ -105,7 +105,7 @@ for li, l in enumerate(L):
         g = L[li + 1]['start'] - l['end']; r['gap_after'] = round(g, 2)
         if g > 1.6: r['flags'].append(f'long gap after ({g:.1f} s)')
         if g < 0.12: r['flags'].append(f'lines run together ({g:.2f} s gap)')
-        if who != ('heckler' if L[li + 1].get('who') == 'heckler' else 'narrator'): r['handover'] = f'{g:.2f} s to the next speaker'
+        if who != (L[li + 1].get('who') or 'narrator'): r['handover'] = f'{g:.2f} s to the next speaker'
     rows.append(r)
 # second opinion: a hard fault from the whole-file transcript is re-checked on the line alone (Whisper drops words at
 # section starts like "Question three" when it reads 7 minutes in one go); it stays a fault only if the line alone fails too
@@ -124,7 +124,7 @@ for r in rows:
         r['flags'] = [f for f in r['flags'] if not f.startswith(('MOSTLY', 'FIRST WORD', 'LAST WORD'))] + [f"line alone heard fine: '{' '.join(h2)[:80]}'"]
         hard[:] = [h for h in hard if h != r['id']]
     else: r['flags'].append(f"line alone heard: '{' '.join(h2)[:80]}'")
-for who in ('narrator', 'heckler'):
+for who in sorted(set(r['who'] for r in rows)):
     dbs = [r['db'] for r in rows if r['who'] == who and r['db'] is not None]
     if not dbs: continue
     med = st.median(dbs)
@@ -134,6 +134,14 @@ lv = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', mix, '-af', 'eb
 I = re.findall(r'I:\s+(-?[\d.]+) LUFS', lv); TP = re.findall(r'Peak:\s+(-?[\d.]+) dBFS', lv)
 overall = dict(lufs=float(I[-1]) if I else None, true_peak=float(TP[-1]) if TP else None)
 if overall['true_peak'] is not None and overall['true_peak'] > -1.0: hard.append(f"true peak {overall['true_peak']} dBTP")
+# repeated stretches: the clone sometimes loops 3+ words ("because everyone else swaps through" twice; video 3, 5 Nov 2026)
+EW = [e[1] for e in E]; HW = [h[0] for h in H]
+for op, i1, i2, j1, j2 in sm.get_opcodes():
+    extra = HW[j1:j2]
+    if op in ('insert', 'replace') and (j2 - j1) - (i2 - i1) >= 3:
+        near = ' ' + ' '.join(EW[max(0, i1 - 25):i1 + 25]) + ' '; grams = [' '.join(extra[q:q + 3]) for q in range(len(extra) - 2)]
+        if grams and sum((' ' + g + ' ') in near for g in grams) >= max(1, len(grams) // 2):
+            li = E[min(i1, len(E) - 1)][0]; rows[li]['flags'].insert(0, f"REPEATED: '{' '.join(extra)}' said again (heard at {fmt(H[j1][1])})"); hard.append(L[li]['id'])
 pn = [p for p in (pitch(a[int(r['start'] * SR):int(r['end'] * SR)]) for r in [r for r in rows if r['who'] == 'narrator'][:20]) if p]
 ph = [p for p in (pitch(a[int(r['start'] * SR):int(r['end'] * SR)]) for r in rows if r['who'] == 'heckler') if p]
 overall['pitch_narrator_hz'] = round(st.median(pn), 1) if pn else None; overall['pitch_heckler_hz'] = round(st.median(ph), 1) if ph else None
@@ -150,7 +158,7 @@ M = [f'# {title}: listening checklist', '',
      ]
 n = 0
 def kind(f):
-    if f.startswith(('MOSTLY', 'FIRST WORD', 'LAST WORD')): return 0
+    if f.startswith(('MOSTLY', 'FIRST WORD', 'LAST WORD', 'REPEATED')): return 0
     if f.startswith('words:'): return 1
     if f.startswith(("first word '", 'sound right before', 'first word heard at')): return 2
     if f.startswith(('unsure key words', 'level', 'long gap', 'lines run together')): return 3
