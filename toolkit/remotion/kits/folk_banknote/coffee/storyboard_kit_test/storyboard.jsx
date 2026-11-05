@@ -129,5 +129,56 @@ const F5 = () => <Frame>
   <Card x={1260} y={640} w={560} head="MADE IN INDIA" body="Parts priced in dollars" sub="on their way in" hc={P.green} />
   <Tag n="01" t="The" it="swap" words={1} /><Kind k="ILLUSTRATIVE" src="PROPS: FLUENT EMOJI (MIT), RECOLOURED" /></Frame>;
 
-export const frames = {F1, F2, F3, F4, F5};
+
+// ---- v2 (5 Nov 2026): Storyset "bro" (Freepik licence, credit required) + Illlustrations legacy (CC0), recoloured ----
+const Art = ({n, x, y, w, h, o = 1}) => <image href={`kit2/${n}.svg`} x={x} y={y} width={w} height={h} opacity={o} preserveAspectRatio="xMidYMid meet" />;
+const G1 = () => <Frame>
+  <rect x={0} y={0} width={960} height={H} fill={P.wall} /><rect x={960} y={0} width={960} height={H} fill="url(#sky)" />
+  <rect x={0} y={860} width={W} height={220} fill={P.sage} opacity={0.55} />
+  <Art n="ill_city" x={-40} y={200} w={720} h={720} o={0.35} />
+  <Art n="ill_cafe" x={60} y={250} w={700} h={700} />
+  <Art n="ill_farm" x={1020} y={240} w={880} h={720} />
+  <Rig x={600} y={1010} s={0.95} look={SAM} face="neutral" turn={1} pose={{fa: 55, fb: 40}} frontItem={hold('₹', P.green)} />
+  <Rig x={1340} y={1010} s={0.95} look={MARINA} face="neutral" turn={-1} pose={{fa: 55, fb: 40}} frontItem={hold('R$', P.ox, true)} />
+  <path d="M800 560 C 880 480 1080 480 1160 560" fill="none" stroke={P.ink} strokeWidth={6} strokeDasharray="14 12" markerEnd="url(#arr)" />
+  <Prop n="snail" x={920} y={490} s={80} /><Prop n="cross_mark" x={1050} y={495} s={70} />
+  <Card x={985} y={150} w={520} head="DIRECT SWAP" body="Rupees ⇄ Brazilian money" sub="few people want either: slow, costly" hc={P.ox} />
+  <g transform="translate(110 150)"><rect width={150} height={44} fill={P.ox} /><text x={75} y={32} textAnchor="middle" fontFamily={OS} fontWeight={700} fontSize={26} letterSpacing={4} fill={P.cream}>PUNE</text></g>
+  <g transform="translate(1530 120)"><rect width={340} height={44} fill={P.green} /><text x={170} y={32} textAnchor="middle" fontFamily={OS} fontWeight={700} fontSize={24} letterSpacing={3} fill={P.cream}>MINAS GERAIS, BRAZIL</text></g>
+  <Tag n="01" t="The" it="swap" /><Kind k="ILLUSTRATIVE" src="SETS: ILLLUSTRATIONS (CC0), RECOLOURED · CAST: FOLK II" /></Frame>;
+const G2 = () => <Frame>
+  <Art n="ss_international-trade" x={560} y={130} w={800} h={800} />
+  <g transform="translate(120 330)"><Note x={90} y={0} sym="₹" c={P.green} w={170} /><text x={90} y={90} textAnchor="middle" fontFamily={OS} fontWeight={700} fontSize={24} letterSpacing={2} fill={P.ink}>SAM, PUNE</text></g>
+  <g transform="translate(1620 330)"><Note x={90} y={0} sym="R$" c={P.ox} w={170} /><text x={90} y={90} textAnchor="middle" fontFamily={OS} fontWeight={700} fontSize={24} letterSpacing={2} fill={P.ink}>MARINA, BRAZIL</text></g>
+  <path d="M330 300 C 480 200 700 190 840 230" fill="none" stroke={P.gold} strokeWidth={10} markerEnd="url(#arrG)" />
+  <path d="M1080 230 C 1220 190 1440 200 1600 300" fill="none" stroke={P.gold} strokeWidth={10} markerEnd="url(#arrG)" />
+  <g transform="translate(960 190)"><circle r={70} fill={P.gold} filter="url(#lift)" /><text y={26} textAnchor="middle" fontFamily={FR} fontWeight={700} fontSize={80} fill={P.ink}>$</text></g>
+  <Card x={330} y={560} w={260} head="SWAP 1 · QUICK" body="₹ → $" hc={P.green} /><Card x={1330} y={560} w={260} head="SWAP 2 · QUICK" body="$ → R$" hc={P.green} />
+  <Tag n="01" t="The" it="swap" /><Kind k="ILLUSTRATIVE" src="ILLUSTRATION: STORYSET (FREEPIK), RECOLOURED" /></Frame>;
+const G3 = () => <Frame>
+  <Art n="ss_currency" x={860} y={110} w={900} h={900} />
+  <g transform="translate(70 360)"><rect width={600} height={250} fill={P.night} filter="url(#lift)" />
+    <text x={28} y={50} fontFamily={MONO} fontSize={18} fill={P.gold}>WORD 01</text>
+    <text x={28} y={110} fontFamily={FR} fontWeight={700} fontSize={50} fill={P.cream}>Go-between currency</text>
+    <text x={28} y={160} fontFamily={FR} fontSize={24} fill={P.pale}>The money everyone swaps through,</text>
+    <text x={28} y={194} fontFamily={FR} fontSize={24} fill={P.pale}>because everyone else swaps through it.</text></g>
+  <Tag n="01" t="The" it="swap" words={1} /><Kind k="ILLUSTRATIVE" src="ILLUSTRATION: STORYSET (FREEPIK), RECOLOURED" /></Frame>;
+const G4 = () => <Frame>
+  <Art n="ss_coins" x={120} y={140} w={860} h={860} />
+  <g transform="translate(1180 300)"><rect width={560} height={360} fill={P.cream} filter="url(#lift)" /><rect width={560} height={42} fill={P.gold} />
+    <text x={20} y={29} fontFamily={MONO} fontWeight={700} fontSize={18} fill={P.ink}>SWAPS WITH THE DOLLAR ON ONE SIDE</text>
+    <text x={36} y={170} fontFamily={FR} fontWeight={700} fontSize={100} fill={P.ink}>almost 9</text>
+    <text x={36} y={275} fontFamily={FR} fontWeight={700} fontSize={100} fill={P.ink}>in 10</text>
+    <text x={36} y={330} fontFamily={MONO} fontSize={17} fill={P.mute}>SOURCE: BIS TRIENNIAL SURVEY, 2025</text></g>
+  <Tag n="01" t="The" it="swap" words={1} /><Kind k="ILLUSTRATIVE" src="ILLUSTRATION: STORYSET (FREEPIK), RECOLOURED" /></Frame>;
+const G5 = () => <Frame>
+  <Art n="ss_container-ship" x={40} y={260} w={980} h={720} />
+  <Art n="ss_mobile-payments" x={1060} y={250} w={760} h={760} />
+  <path d="M900 520 C 980 470 1040 470 1110 520" fill="none" stroke={P.ink} strokeWidth={6} strokeDasharray="14 12" markerEnd="url(#arr)" />
+  {[[300, 330], [700, 300]].map(([x, y], i) => <g key={i}><rect x={x - 90} y={y - 26} width={180} height={52} rx={26} fill={P.gold} />
+    <text x={x} y={y + 11} textAnchor="middle" fontFamily={OS} fontWeight={700} fontSize={26} fill={P.ink}>PRICED IN $</text></g>)}
+  <Card x={1180} y={130} w={560} head="MADE IN INDIA" body="Parts priced in dollars" sub="on their way in" hc={P.green} />
+  <Tag n="01" t="The" it="swap" words={1} /><Kind k="ILLUSTRATIVE" src="ILLUSTRATIONS: STORYSET (FREEPIK), RECOLOURED" /></Frame>;
+
+export const frames = {F1, F2, F3, F4, F5, G1, G2, G3, G4, G5};
 export const render = (k) => renderToStaticMarkup(React.createElement(frames[k]));
