@@ -53,6 +53,21 @@ def main():
         if k not in cache: cache[k] = fmt(mapc(hx(k), P))
         return m.group(1) + cache[k]
     s = re.sub(r'((?:fill|stroke|stop-color|flood-color)\s*[:=]\s*"?)#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b', hexc, s)
+    # named white/black in paint attributes (Fluent Emoji and Figma exports use stop-color="white")
+    named = {'white': 'FFFFFF', 'black': '000000'}
+    s = re.sub(r'((?:fill|stroke|stop-color|flood-color)\s*=\s*")(white|black)"',
+               lambda m: m.group(1) + '#' + (cache.setdefault(named[m.group(2)], fmt(mapc(hx(named[m.group(2)]), P)))).lstrip('#') + '"', s)
+    # colours hidden in filters (5 Nov 2026: Fluent Emoji inner glows): a feColorMatrix whose RGB rows ignore the input
+    # paints a flat colour from its offset column; recolour that colour like any fill
+    def fcm(m):
+        v = m.group(2).split()
+        if len(v) == 20 and all(float(v[r * 5 + k]) == 0 for r in range(3) for k in range(4)):
+            c = tuple(float(v[r * 5 + 4]) for r in range(3)); k = fmt(c)
+            if c == (0.0, 0.0, 0.0): return m.group(0)  # alpha-only helper (hardAlpha), leave it
+            if k not in cache: cache[k] = fmt(mapc(c, P))
+            n = hx(cache[k]); v[4], v[9], v[14] = (f'{n[0]:.4f}', f'{n[1]:.4f}', f'{n[2]:.4f}')
+        return m.group(1) + ' '.join(v) + m.group(3)
+    s = re.sub(r'(<feColorMatrix[^>]*type="matrix"[^>]*values=")([^"]+)(")', fcm, s)
     # baked raster pieces: tone them toward the palette (desaturate, warm, slight green cast)
     if '<image' in s:
         filt = ('<filter id="palTone" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.55"/>'

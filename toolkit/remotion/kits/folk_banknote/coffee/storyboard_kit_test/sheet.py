@@ -1,0 +1,14 @@
+import html
+B=[('F1','swap2','Sam could swap his rupees straight for Brazilian money. But hardly anyone in Brazil wants rupees, and hardly anyone in India wants Brazilian money…','Both notes lift; the snail crawls along the dashed arc; the cross stamps down at the middle. Card lands on "hardly anyone".','snail, cross mark, cup, plant, receipt, house, trees, seedlings'),
+('F2','swap3','Or he swaps his rupees for dollars, and Marina swaps the dollars for her own money. Almost everyone, everywhere, takes dollars, so both swaps are quick…','Café and farm dim. The ₹ note flies up the gold arc into the dollar bundle (lightning flash), then a $ flies down and turns into R$ in Marina\'s hand.','classical building, dollar banknote, high voltage'),
+('F3','swap4','Think of it as a go-between currency: the money everyone swaps through, because everyone else swaps through it.','Word card slides in; the WORDS counter ticks 0 → 1. Spokes draw on one by one, each currency pops onto its plate, the $ hub pulses last.','yen, euro, pound banknotes, coin (rupee and real are ours)'),
+('F4','swap5','…when one money is swapped for another, it\'s nearly always the dollar on one side. Almost 9 times in every 10.','Ten cards deal in left to right; a $ tag drops onto nine of them; the tenth gets € and ¥ and stays pale. The number card lands on "9 times in every 10".','handshake, dollar, euro, yen banknotes'),
+('F5','swap7','Even if your phone was made in India, many of the parts inside it were probably priced in dollars on their way in.','Ship, plane and parcel travel their dashed paths into the phone; a PRICED IN $ tag stamps on each as it arrives.','mobile phone, ship, airplane, package')]
+rows=''.join(f'''<div class=r><img src="out/{f}.png"><div class=t><div class=h>{f} · line {l}</div><p class=q>“{html.escape(q)}”</p>
+<p><b>Motion:</b> {html.escape(m)}</p><p><b>Kit props:</b> {k}</p></div></div>''' for f,l,q,m,k in B)
+open('sheet.html','w').write(f'''<html><head><style>@font-face{{font-family:Fraunces;font-weight:700;src:url(fraunces-latin-700-normal.woff2)}}
+@font-face{{font-family:Oswald;font-weight:700;src:url(oswald-latin-700-normal.woff2)}}
+body{{margin:0;background:#EFE9DA;font:20px/1.45 Georgia,serif;color:#1F1B16;width:1800px}} .top{{padding:36px 48px 8px}} h1{{font-family:Fraunces;font-size:44px;margin:0}}
+.sub{{font-family:monospace;font-size:17px;color:#6E665A;margin-top:6px}} .r{{display:flex;gap:32px;padding:20px 48px;border-top:2px solid #D8CDB4}}
+.r img{{width:960px;height:540px;box-shadow:0 6px 18px rgba(0,0,0,.18)}} .t{{flex:1}} .h{{font-family:Oswald;font-size:24px;letter-spacing:2px;color:#7A2333}} .q{{font-style:italic;font-size:22px}}</style></head>
+<body><div class=top><h1>Video 3 · stop 1 “The swap” — storyboard from an open kit</h1><div class=sub>PROPS: FLUENT EMOJI (MICROSOFT, MIT), RECOLOURED TO BANKNOTE · CAST: OUR FOLK II RIG · DEVICES: OURS · TEST, 5 NOV 2026</div></div>{rows}</body></html>''')
