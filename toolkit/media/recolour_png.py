@@ -2,7 +2,8 @@
 """Recolour a rendered illustration (PNG) into a series palette, pixel by pixel (5 Nov 2026).
 Same rules as recolour_svg.py (hue family -> palette ramp, lightness kept), but it also reaches gradients and baked
 raster pieces that the SVG route misses. Family weights are blended softly across hue so gradients don't band.
-Usage: recolour_png.py in.png out.png [--sat 1.0] [--keep 0.15]
+Usage: recolour_png.py in.png out.png [--palette banknote|ember|dawn] [--keep 0.15] [--cutout 0.93]
+  --cutout  make near-white, unsaturated pixels transparent (an opening to light that we relight behind)
   --keep  how much of the original colour to mix back in (0 = pure palette)."""
 import sys, numpy as np
 from PIL import Image
@@ -17,7 +18,7 @@ def apply_ramp(L, ramp):
     ls, rs = ramp_lut(ramp); return np.stack([np.interp(L, ls, rs[:, k]) for k in range(3)], -1)
 def main():
     a = sys.argv; src, out = a[1], a[2]; keep = float(a[a.index('--keep') + 1]) if '--keep' in a else 0.15
-    P = PAL['banknote']; im = Image.open(src).convert('RGBA'); A = np.asarray(im).astype(np.float32) / 255
+    P = PAL[a[a.index('--palette') + 1] if '--palette' in a else 'banknote']; im = Image.open(src).convert('RGBA'); A = np.asarray(im).astype(np.float32) / 255
     rgb, alpha = A[..., :3], A[..., 3:]
     mx, mn = rgb.max(-1), rgb.min(-1); l = (mx + mn) / 2; d = mx - mn
     s = np.where(d < 1e-6, 0, d / np.where(l < 0.5, mx + mn + 1e-6, 2 - mx - mn + 1e-6))
@@ -34,6 +35,9 @@ def main():
     for f in CENT: outc += (W[f] / tot)[..., None] * apply_ramp(L, P[f])
     outc = (1 - greyw[..., None]) * outc + greyw[..., None] * apply_ramp(L, P['grey'])
     outc = (1 - keep) * outc + keep * rgb
+    if '--cutout' in a:
+        thr = float(a[a.index('--cutout') + 1]); m = np.clip((L[..., None] - thr) / 0.04, 0, 1) * np.clip(1 - d[..., None] / 0.06, 0, 1)  # chroma, not HLS saturation (which blows up near white)
+        alpha = alpha * (1 - m)
     o = np.concatenate([np.clip(outc, 0, 1), alpha], -1)
     Image.fromarray((o * 255).astype(np.uint8), 'RGBA').save(out); print('recoloured ->', out)
 if __name__ == '__main__': main()

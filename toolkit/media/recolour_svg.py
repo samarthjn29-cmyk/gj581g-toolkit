@@ -12,7 +12,23 @@ PAL = {'banknote': {
   'red':   ['#3E121B', '#7A2333', '#9C3F4C', '#C98A8F', '#EBCFCB'],
   'gold':  ['#5E4313', '#9C7324', '#B98B2E', '#E2B54A', '#F1DDA0'],
   'blue':  ['#18292F', '#2E4A55', '#5E7C84', '#A9BDBE', '#DCE6E0'],
-  'grey':  ['#1C2422', '#4A4A44', '#8A8070', '#CFC6B4', '#EFE9DA', '#F7F3E8']}}
+  'grey':  ['#1C2422', '#4A4A44', '#8A8070', '#CFC6B4', '#EFE9DA', '#F7F3E8']},
+ # Ember (7 Nov 2026, vector-world pilot: Plato's Cave): fire-lit cave, browns and ochres
+ 'ember': {
+  'grey':  ['#0B0807', '#17110E', '#271C17', '#3D2C22', '#5E4535', '#8C6C52', '#C9AE8C'],
+  'wood':  ['#140D0A', '#2E1C14', '#553320', '#8A5530', '#C98445', '#F2C487'],
+  'gold':  ['#4A2E10', '#8F5719', '#D88A2E', '#F2B85A', '#FBE3B0'],
+  'red':   ['#240C0A', '#521A13', '#8C3320', '#C25E36', '#E9A982'],
+  'green': ['#0E1714', '#1A2A25', '#2B443B', '#557264', '#9FB7A8'],
+  'blue':  ['#0B101B', '#172133', '#2A3A55', '#55698A', '#A3B2C8']},
+ # Dawn (7 Nov 2026): the world outside the cave
+ 'dawn': {
+  'blue':  ['#101B27', '#1E3246', '#355670', '#6E91A3', '#B6CDD0', '#E4EDE7'],
+  'green': ['#0E1C19', '#1A342D', '#2B5446', '#5A866E', '#A6C3A3'],
+  'wood':  ['#38200F', '#7A4223', '#C47039', '#EBA266', '#F7D4A8'],
+  'gold':  ['#7A4A16', '#C67E26', '#EFAE45', '#F8D48A', '#FDF0CF'],
+  'red':   ['#3A181C', '#783036', '#B65A4E', '#E3968A', '#F5D0C4'],
+  'grey':  ['#121A1F', '#38444A', '#788486', '#C5CCC7', '#EEF1EA', '#FBF7EE']}}
 def hx(h): h = h.lstrip('#'); h = ''.join(c * 2 for c in h) if len(h) == 3 else h; return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
 def lum(c): return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
 def ramp_at(ramp, L):
