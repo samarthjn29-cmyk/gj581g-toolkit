@@ -17,7 +17,11 @@ Checks
   SFX        at most SFX_PER_MIN in any 60 s window, at least SFX_GAP s apart
 Usage: pace_lint.py storyboard.json [timing.json] [sfx_cues.json]   (exit 1 on any FAIL)"""
 import json, re, sys
-TREATMENTS = {'character', 'document', 'chart', 'number', 'map', 'typography', 'evidence-footage', 'montage', 'archive', 'photo', 'motion-graphic', 'title'}
+TREATMENTS = {'character', 'document', 'chart', 'number', 'map', 'typography', 'evidence-footage', 'montage', 'archive', 'photo', 'motion-graphic', 'title',
+              # vector-world treatments (7 Nov 2026, gj581g-vector-world): one set per story, the camera travels over it
+              'world-travel', 'pov', 'panel-chart', 'surface-data', 'portrait-badge', 'lexicon', 'meta'}
+WORLD = {'world-travel', 'pov', 'map', 'meta', 'motion-graphic'}   # a run of these may last a whole story set (MAX_RUN_WORLD), scene by scene
+MAX_RUN_WORLD = 60.0
 MAX_STILL, WARN_STILL, MAX_RUN, SFX_PER_MIN, SFX_GAP = 6.0, 4.5, 20.0, 8, 1.5
 norm = lambda w: re.sub(r"[^a-z0-9']", '', w.lower().replace('’', "'"))
 
@@ -72,9 +76,10 @@ def main(argv):
     # treatment runs
     run = [L[0]] if L else []
     for l in L[1:] + [None]:
-        if l is not None and l.get('treatment') == run[0].get('treatment'): run.append(l); continue
+        same = l is not None and l.get('treatment') == run[0].get('treatment') and (run[0].get('treatment') not in WORLD or l.get('scene') == run[0].get('scene'))
+        if same: run.append(l); continue
         dur = run[-1]['end'] - run[0]['start']; tr = run[0].get('treatment')
-        if dur > MAX_RUN: rep('SAMEY', 'FAIL', f"{dur:4.1f} s of '{tr}' ({run[0]['id']}..{run[-1]['id']}): vary the picture")
+        if dur > (MAX_RUN_WORLD if tr in WORLD else MAX_RUN): rep('SAMEY', 'FAIL', f"{dur:4.1f} s of '{tr}' ({run[0]['id']}..{run[-1]['id']}): vary the picture")
         if tr == 'montage' and dur > 20: rep('MONTAGE', 'FAIL', f"{dur:4.1f} s of montage without evidence ({run[0]['id']}..{run[-1]['id']})")
         if l is not None: run = [l]
     # sound effects
