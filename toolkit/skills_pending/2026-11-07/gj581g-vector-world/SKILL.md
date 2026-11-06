@@ -46,6 +46,7 @@ Sam, 7 Nov 2026, after the Emergence channel study (`styles/EMERGENCE_CHANNEL_ST
 
 ## 7. Sound
 - **Narration:** Sam's clone as before (scene mode, word check, `must` on phrases the checker mishears, repeat guard). Emergence uses a fully synthetic voice; ours stays Sam's.
+- **Pace:** the clone reads at about 190-200 words a minute; Emergence runs 152-171. Give it room with `toolkit/tts/breathe.py vo.wav timing.json vo_b.wav timing_b.json --sentence 0.45 --scene 0.9` (silence at sentence ends and chapter changes, word times shifted; nothing stretched). The pilot went from 192 to 159 words a minute. Render on `timing_b.json`.
 - **Music bed under the whole video** (Emergence: the bed never drops below about -35 dB): about 12-14 dB under the voice, swelling at chapter turns, ducking under speech. Sources: in-house beds from `toolkit/media/ambient_bed.py <ember|glass|pulse> <sec> <out> --changes <chapter starts>` (no licence), or free YouTube Audio Library / Pixabay tracks Sam picks. **Sam still picks from a sampler** (2-3 beds under the real narration) before the first render of each video; record the pick.
 - Sound effects: at most 8 a minute, each tied to an action (fire crackle, chain clink, wind at the cave mouth).
 
@@ -55,7 +56,7 @@ Sam, 7 Nov 2026, after the Emergence channel study (`styles/EMERGENCE_CHANNEL_ST
 - A pinned comment with a debate question; title A/B test on every upload.
 
 ## 9. Pipeline (per video)
-1. Topic -> script (section 2) -> independent fact-check (`factcheck_sync.py`) -> MP3 in Sam's clone (`build.py --to listen`) **plus the music-bed sampler** -> Sam approves.
+1. Topic -> script (section 2) -> independent fact-check (`factcheck_sync.py`) -> MP3 in Sam's clone (`build.py --to listen`) -> `breathe.py` -> **the paced MP3 plus the music-bed sampler** (voice ducked under each bed with `sidechaincompress`) and a listening checklist -> Sam approves and picks a bed.
 2. Creative direction: palette name, the sets, the camera path per line, the device moments; source and recolour art (section 1).
 3. Build scenes in `remotion/kits/vector_world/` style (`vw.jsx` kit + `<topic>.jsx` sets and scenes); style frames (stills at the key moments) to Sam while the voice runs.
 4. After MP3 approval: render 720p draft -> Sam's notes -> final render, mix with the chosen bed (`mix.py <bed>`), captions, packaging.
