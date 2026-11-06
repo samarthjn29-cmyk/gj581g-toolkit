@@ -10,7 +10,7 @@ const ts = (id) => LN[id].start, te = (id) => LN[id].end;
 const tw = (id, word, k = 0) => { const w = LN[id].words.filter((x) => x[0].replace(/[^a-z0-9']/g, '') === word.toLowerCase()); return (w[k] || w[0] || [0, LN[id].start])[1]; };
 const SCENES = [['wall', 'wall1'], ['climb', 'climb1'], ['return', 'return1'], ['end', 'end1']];
 const sceneStart = (i) => (i === 0 ? 0 : ts(SCENES[i][1]) - (i === 2 ? 0.05 : 0.25));
-export const CAVE_DUR = Math.ceil((timing.total) * FPS);
+export const CAVE_DUR = Math.ceil((timing.total + 2.2) * FPS);  // 2.2 s for the end title, under the bed
 
 const EMB = '#E39A3A', GOLD = '#F2B85A', CREAM = '#FBE3B0';
 const sil = <filter id="sil"><feColorMatrix type="matrix" values="0 0 0 0 0.07  0 0 0 0 0.045  0 0 0 0 0.035  0 0 0 1 0" /></filter>;
