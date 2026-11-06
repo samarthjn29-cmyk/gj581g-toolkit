@@ -1,9 +1,0 @@
-[
- {"id":"l1","who":"barb","text":"Ann! Guess what? I got a five percent raise!","gap":0.35},
- {"id":"l2","who":"ann","text":"Nice. Mine was only two.","gap":0.45},
- {"id":"l3","who":"barb","text":"Ha! So I win.","gap":0.7},
- {"id":"l4","who":"ann","text":"Did you check the prices this year?","gap":0.5},
- {"id":"l5","who":"barb","text":"Four percent higher? Wait. So I only got one percent richer?","gap":0.45},
- {"id":"l6","who":"ann","text":"And my prices didn't move. So I got two.","gap":0.6},
- {"id":"l7","who":"barb","text":"Then why do I still feel richer?","gap":0.3}
-]

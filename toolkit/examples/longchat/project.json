@@ -1,3 +1,0 @@
-{"prefix": "LongChat", "version": "v1", "remotion": "LongChat_remotion", "slides": "story/slides.json",
- "voice_ref": "voice_sample/ref_take2.wav", "scenes": "LongChat_remotion/src/scenes_custom.jsx",
- "music": [[1, "media/music/Investigations.mp3", 0.0], [12, "media/music/Thinking Music.mp3", 0.0], [21, "media/music/Inspired.mp3", 0.0]]}

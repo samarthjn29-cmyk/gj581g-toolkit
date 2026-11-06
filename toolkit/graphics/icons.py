@@ -9,7 +9,11 @@ Rendered with the pre-installed Playwright Chromium (no extra installs). Icons a
 experiments, process steps, pills and section markers; one style (one set, one stroke width) per deck."""
 import sys, os, json, subprocess, datetime, urllib.request, tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'media'))
-from openvideo import log_row
+import csv
+def log_row(row, path=os.environ.get('LICENCE_LOG', 'media/licence_log.csv')):  # was openvideo.log_row (removed 7 Nov 2026)
+    new = not os.path.exists(path); os.makedirs(os.path.dirname(path) or '.', exist_ok=True)
+    with open(path, 'a', newline='', encoding='utf-8') as f:
+        w = csv.DictWriter(f, fieldnames=list(row)); new and w.writeheader(); w.writerow(row)
 SETS = {'lucide': ('https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/{n}.svg', 'ISC (Lucide)', 'https://lucide.dev/license'),
         'tabler': ('https://raw.githubusercontent.com/tabler/tabler-icons/main/icons/outline/{n}.svg', 'MIT (Tabler Icons)', 'https://github.com/tabler/tabler-icons/blob/main/LICENSE'),
         'phosphor': ('https://raw.githubusercontent.com/phosphor-icons/core/main/assets/{w}/{n}{s}.svg', 'MIT (Phosphor Icons)', 'https://github.com/phosphor-icons/core/blob/main/LICENSE')}
@@ -38,5 +42,5 @@ f = tempfile.NamedTemporaryFile('w', suffix='.js', delete=False); f.write(js); f
 env = dict(os.environ, NODE_PATH=subprocess.run(['npm', 'root', '-g'], capture_output=True, text=True).stdout.strip() + ':/opt/npm-tools/node_modules')
 subprocess.run(['node', f.name], check=True, env=env); os.unlink(f.name)
 if jobs:
-    log_row(dict(date=datetime.date.today().isoformat(), file=out + f'/{st}_*.png', source=st + ' icons', title=', '.join(names), licence=SETS[st][1], licence_url=SETS[st][2], proof='open-source licence; credit in deck notes'))
+    log_row(dict(date=datetime.date.today().isoformat(), file=out + f'/{st}_*.png', source=st + ' icons', title=', '.join(names), licence=SETS[st][1], licence_url=SETS[st][2], proof='open-source licence; credit in the description'))
 for _, o in jobs: print(o)
