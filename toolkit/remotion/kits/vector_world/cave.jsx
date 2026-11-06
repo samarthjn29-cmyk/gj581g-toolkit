@@ -101,8 +101,8 @@ const SideSet = ({t, cam, heat = 1, dim = 0, freed = null, objT = 0, laugh = 0, 
     {red > 0 && <AbsoluteFill style={{background: '#5E1410', mixBlendMode: 'multiply', opacity: 0.35 * red}} />}
     {/* near: dark rocks drifting past */}
     <Layer cam={cam} p={1.35}><svg width={6000} height={1600} style={{overflow: 'visible'}}>
-      {[[700, 1330], [2350, 1360], [3900, 1340], [5100, 1330]].map(([x, y], i) => { const r = (k) => random(`nr${i}${k}`);
-        const pts = Array.from({length: 9}, (_, j) => { const u = j / 8; return `${x - 420 + u * 840},${y - Math.sin(u * Math.PI) * (90 + r(j) * 80)}`; }).join(' ');
+      {[[700, 1420], [2350, 1450], [3900, 1430], [5100, 1420]].map(([x, y], i) => { const r = (k) => random(`nr${i}${k}`);
+        const pts = Array.from({length: 9}, (_, j) => { const u = j / 8; return `${x - 420 + u * 840},${y - Math.sin(u * Math.PI) * (40 + r(j) * 60)}`; }).join(' ');
         return <polygon key={i} points={`${x - 460},${y + 400} ${pts} ${x + 460},${y + 400}`} fill="#050302" />; })}</svg></Layer>
     <Motes n={22} seed="sa" color={GOLD} />
   </AbsoluteFill>;
@@ -196,7 +196,7 @@ const Climb = () => { const t = useT(), c1 = ts('climb1') - sceneStart(1), c2 = 
   const mouth = ramp(t, day - 0.35, day + 0.05), mcam = camAt([{t: day - 0.35, x: 1350, y: 1900, z: 0.42}, {t: c2 + 0.5, x: 900, y: 1500, z: 1.1}], t);
   const lake = ramp(t, c2 + 0.3, c2 + 0.65);
   const s1 = T('climb2', 'reflections'), s2 = T('climb2', 'things'), s3 = T('climb2', 'sun');
-  const lcam = camAt([{t: c2 + 0.3, x: 3150, y: 1960, z: 1.6}, {t: s1 - 0.4, x: 3000, y: 1920, z: 1.45}, {t: s1 + 0.9, x: 2150, y: 1600, z: 1.05}, {t: s2 - 0.2, x: 2150, y: 1560, z: 1.0},
+  const lcam = camAt([{t: c2 + 0.3, x: 3150, y: 1820, z: 1.6}, {t: s1 - 0.4, x: 3000, y: 1800, z: 1.5}, {t: s1 + 0.9, x: 2150, y: 1600, z: 1.05}, {t: s2 - 0.2, x: 2150, y: 1560, z: 1.0},
     {t: s2 + 1.2, x: 1900, y: 820, z: 0.78}, {t: s3 - 0.2, x: 1600, y: 860, z: 0.7}, {t: s3 + 1.0, x: SUN.x + 120, y: SUN.y + 20, z: 1.25}], t);
   return <AbsoluteFill>
     <SideSet t={t + 20} cam={cam} freed={freed} objT={t + 20} heat={1 + glare} />
@@ -204,7 +204,7 @@ const Climb = () => { const t = useT(), c1 = ts('climb1') - sceneStart(1), c2 = 
     {mouth > 0 && <AbsoluteFill style={{opacity: mouth}}><MouthSet t={t} cam={mcam} walkers={ramp(t, day - 0.35, c2 + 0.2)} white={ramp(t, c2 - 0.1, c2 + 0.4)} /></AbsoluteFill>}
     {lake > 0 && <AbsoluteFill style={{opacity: lake}}><LakeSet t={t} cam={lcam} sun={ramp(t, s3 - 0.2, s3 + 1.0)} white={ramp(t, s3 + 0.9, s3 + 1.6, 0, 0.5)} /></AbsoluteFill>}
     <Chapter t={t} at={0.35} dur={4.4} n="II" title="The climb" />
-    <Lexicon t={t} at={s2 - 0.1} dur={4.6} n={2} term="The Forms" def="Plato's name for the perfect originals that everyday things only copy." />
+    <Lexicon t={t} at={s2 - 0.1} dur={3.4} n={2} term="The Forms" def="Plato's name for the perfect originals that everyday things only copy." />
     <Kind t={t} at={0} dur={c2 + 0.2} text="Illustration · Republic 515c–e" />
     <Kind t={t} at={c2 + 0.3} dur={20} text="Illustration · Republic 516a–b" />
     <Grain /><Vignette a={0.45} />
