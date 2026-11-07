@@ -30,6 +30,7 @@ if os.environ.get('PRON'):
     import json as _json
     CUSTOM.update({k.lower(): v for k, v in _json.load(open(os.environ['PRON'])).items()})
 _dict = None
+_alts = {}  # ('read', 2) -> 'R IY1 D': cmudict's other pronunciations, picked in the text as read#2 (7 Nov 2026)
 def load():
     global _dict
     if _dict is None:
@@ -38,8 +39,9 @@ def load():
             line = line.split('#')[0].strip()
             if not line: continue
             w, *ph = line.split()
-            w = re.sub(r'\(\d+\)$', '', w)
+            m_ = re.search(r'\((\d+)\)$', w); w = re.sub(r'\(\d+\)$', '', w)
             _dict.setdefault(w, ' '.join(ph))
+            if m_: _alts[(w, int(m_.group(1)))] = ' '.join(ph)
     return _dict
 
 def arpa_to_k(arpa):
@@ -58,6 +60,10 @@ def arpa_to_k(arpa):
 
 def word(w, missing):
     d = load(); lw = w.lower().replace('’', "'")
+    if '#' in lw:  # homographs: 'read#2' = cmudict read(2) R IY1 D; the dictionary alone always gives the first ('red', 'LIVE simply')
+        b, n = lw.split('#'); n = int(n)
+        if (b, n) in _alts: return arpa_to_k(_alts[(b, n)])
+        missing.add(lw); lw = b
     if w == 'US': return arpa_to_k('Y UW1 EH1 S')
     if lw in CUSTOM: return arpa_to_k(CUSTOM[lw])
     if lw in d: return arpa_to_k(d[lw])
@@ -72,7 +78,7 @@ def phonemize(text, missing=None):
     missing = set() if missing is None else missing
     text = text.replace('Võ', 'Vo').replace('café', 'cafe').replace('—', ' — ').replace('...', ' … ').replace(':', ',').replace(';', ',')
     out = []
-    for tok in re.findall(r"[A-Za-z][A-Za-z'’\-]*|[.,!?—…\"“”()]", text):
+    for tok in re.findall(r"[A-Za-z][A-Za-z'’\-]*(?:#\d)?|[.,!?—…\"“”()]", text):
         if re.match(r'[A-Za-z]', tok): out.append(word(tok.strip("'"), missing))
         else: out.append(tok)
     s = ' '.join(out)
@@ -126,6 +132,10 @@ if _os.environ.get('DIALECT') == 'gb':
     _us_word = word
     def word(w, missing):
         d = load(); lw = w.lower().replace('’', "'")
+        if '#' in lw:
+            b, n = lw.split('#'); n = int(n)
+            if (b, n) in _alts: return arpa_to_gb(_alts[(b, n)], b)
+            missing.add(lw); lw = b
         if w == 'US': return arpa_to_gb('Y UW1 EH1 S', 'us')
         if lw in CUSTOM: return arpa_to_gb(CUSTOM[lw], lw)
         if lw in d: return arpa_to_gb(d[lw], lw)
