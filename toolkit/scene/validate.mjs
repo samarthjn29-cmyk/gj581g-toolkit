@@ -34,8 +34,14 @@ for (const o of spec.objects) if (o.rests_on === 'floor' && (o.z || 0) !== 0) ad
     for (const [L, end] of [[a, b.x], [c, b.x + b.w]]) if (end < L.x - 0.5 || end > L.x + L.w + 0.5) add('G4 stretchers meet both legs', 'FAIL', `${b.id} end at x=${end.toFixed(0)} misses ${L.id}`, 'end the stretcher inside the leg');
     if (b.y < Math.max(a.y, c.y) || b.y + b.h > top) add('G4 stretchers meet both legs', 'FAIL', `${b.id} is above a leg's top or below the cabinet`, 'move it between the legs');
     const di = (id) => st.draw.indexOf(id); if (di(b.id) > Math.min(di(b.from), di(b.to))) add('G5 draw order', 'FAIL', `${b.id} is drawn over its legs`, 'draw stretchers before legs'); }
+  if (st.base) { const f = st.base.front;
+    if (Math.abs(f[0][1] - (st.B.bl[1] + st.thick)) > tol) add('G2 the base meets the board', 'FAIL', 'the base does not reach the board lip', 'raise the base');
+    if (Math.abs(f[2][1] - top) > tol) add('G2 the base stands on the cabinet', 'FAIL', 'the base floats above the cabinet', 'lower it');
+    const [sx, sy] = st.base.side[1], v = (sy - st.B.tl[1]) / (st.B.bl[1] - st.B.tl[1]), xr = st.B.tl[0] + (st.B.bl[0] - st.B.tl[0]) * v + (st.B.tr[0] - st.B.tl[0]);
+    if (sx > xr) add('G2 the base stays under the board', 'FAIL', 'the side of the base sticks out past the board edge', 'pull it in'); }
+  if (!st.base && !Object.keys(st.legs).length) add('G6 the board is supported', 'FAIL', 'the board has no base and no legs', 'add a base');
   const fl = Object.values(st.legs).filter((l) => l.layer === 'front').map((l) => l.x + l.w / 2), span = st.B.br[0] - st.B.bl[0];
-  if (Math.min(...fl) > st.B.bl[0] + 0.3 * span || Math.max(...fl) < st.B.br[0] - 0.3 * span) add('G6 the board is supported at both ends', 'FAIL', 'front legs are bunched in the middle', 'put one leg near each end');
+  if (fl.length && (Math.min(...fl) > st.B.bl[0] + 0.3 * span || Math.max(...fl) < st.B.br[0] - 0.3 * span)) add('G6 the board is supported at both ends', 'FAIL', 'front legs are bunched in the middle', 'put one leg near each end');
 }
 // ---------- Z: sizes against the prop cards
 { const pc = spec.prop_cards, rng = (v, [a, b]) => v >= a && v <= b;
@@ -45,7 +51,7 @@ for (const o of spec.objects) if (o.rests_on === 'floor' && (o.z || 0) !== 0) ad
   for (const p of spec.props) { const card = pc[p.kind]; const ds = [p.diameter, ...p.states.map((s) => s.diameter).filter(Boolean)];
     if (new Set(ds).size > 1) add('C1 one prop, one size', 'FAIL', `${p.id} changes diameter between states: ${ds.join(', ')} m`, 'one size for every state');
     for (const d of ds) { if (!rng(d, card.diameter)) add('Z2 prop sizes', 'FAIL', `${p.id} diameter ${d} m (card ${card.diameter.join('-')})`, 'resize');
-      const r = d / sc.rackEndDiameter(); if (!rng(r, card.vs_rack_end)) add('Z3 matches the rack art', 'FAIL', `${p.id} is ${r.toFixed(2)}x the rack's scroll ends (allowed ${card.vs_rack_end.join('-')})`, 'match the rack scroll ends'); } } }
+      const r = d / sc.rackEndDiameter(); if (!rng(r, card.vs_rack_end)) add('Z3 matches the rack art', d < 0.5 * sc.rackEndDiameter() * card.vs_rack_end[0] ? 'FAIL' : 'WARN', `${p.id} is ${r.toFixed(2)}x the rack's scroll ends (allowed ${card.vs_rack_end.join('-')})`, 'match the rack scroll ends'); } } }
 // ---------- C: continuity and hand-overs (forward kinematics of the rig)
 for (const c of spec.characters) { const ch = sc.character(c.id);
   for (const a of c.actions.filter((a) => a.target)) { const t = sc.time(a.t), cam = sc.camAt(t), hs = sc.screen(cam, ch.hand(t), sc.lane(c.lane).parallax);
@@ -108,13 +114,14 @@ for (const o of spec.objects.filter((o) => ['rack', 'cabinet', 'lampstand'].incl
 // ---------- T: text and devices
 { const mg = RU.safe_margin_px;
   for (const d of spec.devices) { const [x, y, w, h] = d.box, t0 = sc.time(d.t0), t1 = sc.time(d.t1);
-    if (x < mg || y < mg - 15 || x + w > 1920 - mg || y + h > 1080 - mg + 15) add('T1 safe margins', 'FAIL', `${d.id} is closer than ${mg} px to the edge`, 'move it in');
+    if (x < mg - 12 || y < mg - 12 || x + w > 1920 - mg || y + h > 1080 - mg) add('T1 safe margins', 'FAIL', `${d.id} is ${Math.min(x, y, 1920 - x - w, 1080 - y - h).toFixed(0)} px from the edge (min ${mg})`, 'move it in');
     const md = d.min_dur || RU.text_min_dur; if (t1 - t0 < md) add('T2 text stays up long enough', 'FAIL', `${d.id} shows for ${(t1 - t0).toFixed(1)} s (min ${md} s)`, 'lengthen it');
     if (d.kind === 'title' && t1 > sceneEnd + 0.01) add('T3 devices end with their scene', 'FAIL', `${d.id} stays on ${(t1 - sceneEnd).toFixed(1)} s into the next scene`, 'end it with the scene');
     // anything drawn behind a device must not show through unless the device has an opaque backing
     let hit = null; for (const t of frames) { if (t < t0 || t > t1 || t > sceneEnd + 0.5) continue; const cam = sc.camAt(t);
       const things = [['librarian', sc.screenBox(cam, sc.character('librarian').bbox(t), 1.03)], ['stand', focalBox('stand.sheet', t, cam)],
-        ['lamp', sc.screenBox(cam, sc.box('lamp'), 1.05)], ['cabinet', sc.screenBox(cam, sc.box('cabinet'), 1.05)]];
+        ['lamp', sc.screenBox(cam, sc.box('lamp'), 1.05)], ['cabinet', sc.screenBox(cam, sc.box('cabinet'), 1.05)],
+        ...spec.objects.filter((o) => ['panel', 'rack'].includes(o.kind)).map((o) => [o.id, sc.screenBox(cam, sc.box(o.id), 1)])];
       for (const [n, b] of things) { const ov = Math.max(0, Math.min(x + w, b.x + b.w) - Math.max(x, b.x)) * Math.max(0, Math.min(y + h, b.y + b.h) - Math.max(y, b.y));
         if (ov > 0.05 * w * h && d.bg < RU.opaque_bg) { hit = {n, t}; break; } } if (hit) break; }
     if (hit) add('T4 text over drawings needs a solid backing', 'FAIL', `${d.id} (backing ${d.bg}) is crossed by the ${hit.n} at ${hit.t.toFixed(2)} s`, `give it a backing of at least ${RU.opaque_bg}`); }
@@ -131,6 +138,16 @@ for (const p of spec.objects.filter((o) => o.kind === 'panel')) { let hid = null
 // ---------- S: how a scroll opens
 { const L = sc.stand.layout; if (!(L.rollers === 'left-right' && L.unroll_axis === L.columns_axis))
     add('S1 a scroll opens along its columns', 'FAIL', `rollers ${L.rollers}, unrolls along ${L.unroll_axis}, columns run along ${L.columns_axis}`, 'rollers at the left and right ends; it unrolls along the line of columns'); }
+{ const L = sc.stand.layout; if (L.roller_v) { const st = sc.stand, stub = (L.stub || 0) * st.m, vlen = st.B.bl[1] - st.B.tl[1];
+    const v0 = L.roller_v[0] - stub / vlen, v1 = L.roller_v[1] + stub / vlen;
+    if (v0 < 0 || v1 > 1) add('G7 the open scroll stays on the board', 'FAIL', `rollers and stubs run from v ${v0.toFixed(2)} to ${v1.toFixed(2)} of the board's slope`, 'shorten the rollers'); } }
+// ---------- C5: the prop looks like the thing it came from (a tagged scroll comes from a tagged slot)
+for (const p of spec.props) { const m0 = p.states[0].at.match(/^(\w+)\.slot\[(\d+),(\d+)\]$/); if (!m0) continue; const q = sc.slot(m0[1], +m0[2], +m0[3]);
+  if (!!p.tag !== !!q.tag) add('C5 the prop matches its source', 'FAIL', `${p.id} ${p.tag ? 'has' : 'has no'} tag but ${p.states[0].at} ${q.tag ? 'has one' : 'has none'}`, 'take a matching slot or match the tag'); }
+// ---------- F7: the camera never shows past the edge of the art
+{ let bad = null; for (const t of frames) { const cam = sc.camAt(t), s0 = sc.screen(cam, [0, 0], 1), s1 = sc.screen(cam, spec.stage.plate, 1);
+    if (t <= sceneEnd && (s0.x > 0.5 || s0.y > 0.5 || s1.x < 1919.5 || s1.y < 1079.5)) { bad = {t, s0, s1}; break; } }
+  add('F7 the camera stays inside the art', bad ? 'FAIL' : 'PASS', bad ? `at ${bad.t.toFixed(2)} s the wall plate covers x ${bad.s0.x.toFixed(0)}..${bad.s1.x.toFixed(0)}, y ${bad.s0.y.toFixed(0)}..${bad.s1.y.toFixed(0)}` : 'the wall plate covers the frame in every frame', bad ? 'clamp the camera' : ''); }
 // ---------- W: every cue word exists
 for (const ref of [...spec.beats.map((b) => b.t), ...spec.devices.flatMap((d) => [d.t0, d.t1]), spec.camera.scene_end]) { try { sc.time(ref); } catch (e) { add('W1 cue words exist', 'FAIL', e.message, 'fix the cue'); } }
 

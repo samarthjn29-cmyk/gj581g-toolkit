@@ -49,23 +49,28 @@ export const makeScene = (spec, words, rigs, place) => {
 
   // ---- objects in plate px (x is the centre in metres, the box rests at height z on its lane's floor)
   const box = (id) => { const o = objs[id], sc = lane(o.lane).scale, w = o.w * PXM * sc, h = o.h * PXM * sc;
-    const z = o.z || 0; return {x: X(o.x, o.lane) - w / 2, y: Y(z + o.h, o.lane), w, h, lane: o.lane}; };
+    const z = o.z || 0; return {x: X(o.x, o.lane) - w / 2, y: Y(z + o.h, o.lane) + (o.drop_px || 0), w, h, lane: o.lane}; };
 
   // ---- the stand on the cabinet: board quad, legs, stretchers (plate px), and a point on the board at (u, v)
   const stand = (() => { const st = objs.stand, cab = box(st.on), m = PXM * lane(st.lane).scale, cx = cab.x + cab.w / 2, top = cab.y;
     const b = st.board, BY = top - b.z * m, TY = BY - b.h * m, BX0 = cx + b.x0 * m, BW = b.w * m, SL = b.slant * m;
     const B = {bl: [BX0, BY], br: [BX0 + BW, BY], tl: [BX0 + SL, TY], tr: [BX0 + SL + BW, TY]};
     const at = (u, v) => [B.tl[0] + (B.tr[0] - B.tl[0]) * u + (B.bl[0] - B.tl[0]) * v, B.tl[1] + (B.bl[1] - B.tl[1]) * v];
-    const legs = Object.fromEntries(st.legs.map((l) => [l.id, {...l, x: cx + l.x * m - l.w * m / 2, w: l.w * m, y: top - l.z1 * m, h: (l.z1 - l.z0) * m, bottom: top - l.z0 * m}]));
-    const bars = Object.fromEntries(st.stretchers.map((s) => { const a = legs[s.from], c = legs[s.to], x0 = a.x + a.w / 2, x1 = c.x + c.w / 2;
+    const legs = Object.fromEntries((st.legs || []).map((l) => [l.id, {...l, x: cx + l.x * m - l.w * m / 2, w: l.w * m, y: top - l.z1 * m, h: (l.z1 - l.z0) * m, bottom: top - l.z0 * m}]));
+    const bars = Object.fromEntries((st.stretchers || []).map((s) => { const a = legs[s.from], c = legs[s.to], x0 = a.x + a.w / 2, x1 = c.x + c.w / 2;
       return [s.id, {...s, x: Math.min(x0, x1), w: Math.abs(x1 - x0), y: top - s.z * m - s.h * m / 2, h: s.h * m}]; }));
-    return {B, at, legs, bars, top, cab, m, thick: b.thick * m, sheet: at(0.5, 0.5), draw: st.draw, layout: st.scroll_layout}; })();
+    // a solid wedge base: its front face runs from the cabinet top up to the board's front edge (under the lip), its side face
+    // from the cabinet top up the board's slanted right edge; it is inset from the board's ends so the board overhangs a little
+    const base = st.base && st.base.type ? (() => { const i = st.base.inset * m, x0 = B.bl[0] + i, x1 = B.br[0] - i, yF = BY + b.thick * m;
+      return {front: [[x0, yF], [x1, yF], [x1, top], [x0, top]], side: [[x1, yF], [B.br[0] + (B.tr[0] - B.br[0]) * 0.85 - i, BY - (BY - TY) * 0.85], [B.br[0] + (B.tr[0] - B.br[0]) * 0.85 - i, top], [x1, top]], x0, x1, yF}; })() : null;
+    return {B, at, legs, bars, base, top, cab, m, thick: b.thick * m, sheet: at(0.5, 0.5), draw: st.draw, layout: st.scroll_layout}; })();
 
   // ---- rack slots: the scroll ends found in the rack art, sorted into the rack's grid (rows top to bottom)
   const slot = (rackId, r, c) => { const rb = box(rackId), [R, C] = objs[rackId].grid;
     const ds = [...place.discs].sort((a, b) => a[1] - b[1]); const rows = [];
     for (let i = 0; i < R; i++) rows.push(ds.slice(i * C, i * C + C).sort((a, b) => a[0] - b[0]));
-    const d = rows[r][c]; return {x: rb.x + d[0], y: rb.y + d[1], rx: d[2], ry: d[3], index: place.discs.indexOf(d)}; };
+    const d = rows[r][c], tag = (place.tags || []).find((g) => Math.abs(g[0] - d[0]) < d[2] && g[1] > d[1] - d[3] - 40 && g[1] < d[1]);
+    return {x: rb.x + d[0], y: rb.y + d[1], rx: d[2], ry: d[3], index: place.discs.indexOf(d), tag: tag ? {x: rb.x + tag[0], y: rb.y + tag[1]} : null}; };
   const rackEndDiameter = () => (place.discs.reduce((s, d) => s + 2 * d[2], 0) / place.discs.length) / PXM;   // metres
 
   // ---- characters: position along the lane, walk, poses from the actions, FK of the rig
@@ -118,6 +123,10 @@ export const makeScene = (spec, words, rigs, place) => {
     for (const sh of spec.camera.shots) { const w = sh.linear ? lin(t, time(sh.t0), time(sh.t1)) : ramp(t, time(sh.t0), time(sh.t1));
       const tgt = sh.follow ? {x: Math.max(sh.min_x || 0, X(character(sh.follow).xAt(t), chars[sh.follow].lane) + sh.lead), y: sh.y, z: sh.z} : target(sh.to);
       c = mix(c, tgt, w); }
+    // never show past the edge of the art: the wall plate (parallax 1) must cover the whole frame
+    const hw = 960 / (BASE * c.z), hh = 540 / (BASE * c.z), [PW, PH] = S.plate;
+    if (spec.camera.clamp === false) return c;
+    c.x = hw * 2 >= PW ? PW / 2 : Math.min(PW - hw, Math.max(hw, c.x)); c.y = hh * 2 >= PH ? PH / 2 : Math.min(PH - hh, Math.max(hh, c.y));
     return c; };
   const screen = (cam, P, p = 1) => { const s = BASE * Math.pow(cam.z, p); return {x: 960 + (P[0] - cam.x) * s, y: 540 + (P[1] - cam.y) * s, s}; };
   const screenBox = (cam, b, p = 1) => { const a = screen(cam, [b.x, b.y], p), c = screen(cam, [b.x + b.w, b.y + b.h], p); return {x: a.x, y: a.y, w: c.x - a.x, h: c.y - a.y}; };

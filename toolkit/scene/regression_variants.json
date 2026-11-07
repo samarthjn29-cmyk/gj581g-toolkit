@@ -2,14 +2,126 @@
  "stand_legs_v8": {
   "note": "Sam, v8: 'the legs and the things supporting the table look weird' (legs not meeting the board, rails meeting nothing); reviewer #14: the rear post sticks out above the board",
   "set": {
-   "objects.7.legs.2.z1": 0.15,
-   "objects.7.stretchers.1.z": 0.4,
-   "objects.7.legs.1.z1": 0.75
+   "objects.7.base": null,
+   "objects.7.legs": [
+    {
+     "id": "legBL",
+     "x": -0.2824,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.6913,
+     "layer": "back"
+    },
+    {
+     "id": "legBR",
+     "x": 0.5724,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.75,
+     "layer": "back"
+    },
+    {
+     "id": "legFL",
+     "x": -0.4764,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.15,
+     "layer": "front"
+    },
+    {
+     "id": "legFR",
+     "x": 0.3264,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.2197,
+     "layer": "front"
+    }
+   ],
+   "objects.7.stretchers": [
+    {
+     "id": "barB",
+     "from": "legBL",
+     "to": "legBR",
+     "z": 0.1,
+     "h": 0.026,
+     "layer": "back"
+    },
+    {
+     "id": "barF",
+     "from": "legFL",
+     "to": "legFR",
+     "z": 0.4,
+     "h": 0.026,
+     "layer": "front"
+    }
+   ],
+   "objects.7.draw": [
+    "barB",
+    "legBL",
+    "legBR",
+    "barF",
+    "legFL",
+    "legFR",
+    "board"
+   ]
   }
  },
  "rails_over_legs": {
   "note": "reviewer #13: the lower rail is drawn over the legs",
   "set": {
+   "objects.7.base": null,
+   "objects.7.legs": [
+    {
+     "id": "legBL",
+     "x": -0.2824,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.6913,
+     "layer": "back"
+    },
+    {
+     "id": "legBR",
+     "x": 0.5724,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.6913,
+     "layer": "back"
+    },
+    {
+     "id": "legFL",
+     "x": -0.4764,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.2197,
+     "layer": "front"
+    },
+    {
+     "id": "legFR",
+     "x": 0.3264,
+     "w": 0.035,
+     "z0": 0.0,
+     "z1": 0.2197,
+     "layer": "front"
+    }
+   ],
+   "objects.7.stretchers": [
+    {
+     "id": "barB",
+     "from": "legBL",
+     "to": "legBR",
+     "z": 0.1,
+     "h": 0.026,
+     "layer": "back"
+    },
+    {
+     "id": "barF",
+     "from": "legFL",
+     "to": "legFR",
+     "z": 0.1,
+     "h": 0.026,
+     "layer": "front"
+    }
+   ],
    "objects.7.draw": [
     "legBL",
     "legBR",
@@ -24,8 +136,9 @@
  "wrong_slot": {
   "note": "reviewer #3: he reaches for one scroll and a different slot empties",
   "set": {
-   "props.0.states.0.at": "rackC.slot[0,0]",
-   "characters.0.actions.2.target": "rackC.slot[0,0]"
+   "props.0.states.0.at": "rackC.slot[2,1]",
+   "characters.0.actions.2.target": "rackC.slot[2,1]",
+   "props.0.tag": false
   }
  },
  "pencil_scroll": {
@@ -141,6 +254,69 @@
     "y": 1150,
     "z": 1.0
    }
+  }
+ },
+ "camera_past_art": {
+  "note": "reviewer v10 #1: a black strip down the right edge where the background runs out (now prevented by the core's camera clamp; this variant turns the clamp off)",
+  "set": {
+   "camera.shots.4.to": {
+    "target": "stand.sheet",
+    "dx": 900,
+    "dy": 40,
+    "z": 1.7
+   },
+   "camera.clamp": false
+  }
+ },
+ "tag_from_nowhere": {
+  "note": "reviewer v10 #3: the scroll he takes has a tag, but its slot had none",
+  "set": {
+   "props.0.states.0.at": "rackC.slot[1,0]",
+   "characters.0.actions.2.target": "rackC.slot[1,0]"
+  }
+ },
+ "card_semi_transparent": {
+  "note": "reviewer v10 #11: the stretcher shows through the 92% word card",
+  "set": {
+   "devices.2.bg": 0.92
+  }
+ },
+ "credits_too_low": {
+  "note": "reviewer v10 #15: the bottom labels sit 28 px from the edge (min 40)",
+  "set": {
+   "devices.3.box": [
+    64,
+    1028,
+    300,
+    24
+   ],
+   "devices.4.box": [
+    1640,
+    1028,
+    216,
+    24
+   ]
+  }
+ },
+ "scroll_off_board": {
+  "note": "reviewer v10 #14: the roll's ends stick out past the board",
+  "set": {
+   "objects.7.scroll_layout": {
+    "rollers": "left-right",
+    "unroll_axis": "u",
+    "columns_axis": "u",
+    "roller_v": [
+     0.03,
+     0.97
+    ],
+    "stub": 0.04
+   }
+  }
+ },
+ "no_base": {
+  "note": "reviewer v10 #8: the board's back corner had nothing under it",
+  "set": {
+   "objects.7.base": null
   }
  }
 }

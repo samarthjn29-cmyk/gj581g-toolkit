@@ -15,6 +15,7 @@ import WORDS from './pilot8_words.json';
 import SPEC from './scene/room.scene.json';
 import {makeScene, ramp, lin, fade} from './scene/core.mjs';
 const SC = makeScene(SPEC, WORDS, {'walker_rig8.json': WR}, PL), LIB = SC.character('librarian');
+const CAPS = SPEC.characters[0].caps.map((c) => ({...c, fill: SPEC.palette[c.fill] || c.fill}));
 // both legs drawn in the same colours (Sam, 7 Nov 2026): the far leg is no longer darkened
 // walker_rig8: no darkened far limbs, shoulder pivot at the top of the sleeve so the sleeve follows the raised arm
 
@@ -48,28 +49,33 @@ const End = ({cx, cy, d}) => <g><ellipse cx={cx} cy={cy} rx={d * 0.3} ry={d / 2}
   <circle cx={cx} cy={cy} r={d * 0.13} fill="none" stroke="#3a2a22" strokeWidth={2.5} /><circle cx={cx} cy={cy} r={d * 0.05} fill="#3a2a22" /></g>;
 const vdir = (() => { const a = at(0, 0), b = at(0, 1), L = Math.hypot(b[0] - a[0], b[1] - a[1]); return [(b[0] - a[0]) / L, (b[1] - a[1]) / L, L]; })();
 // a roller lies along the board's slope at position u (the scroll lies across the board and opens sideways); d = diameter
-const Roller = ({u, d}) => { const a = at(u, 0.06), b = at(u, 0.94), ang = Math.atan2(vdir[1], vdir[0]) * 180 / Math.PI, L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+const [RV0, RV1] = SPEC.objects.find((o) => o.id === 'stand').scroll_layout.roller_v, STUB = SPEC.objects.find((o) => o.id === 'stand').scroll_layout.stub * SC.stand.m;
+const Roller = ({u, d}) => { const a = at(u, RV0), b = at(u, RV1), ang = Math.atan2(vdir[1], vdir[0]) * 180 / Math.PI, L = Math.hypot(b[0] - a[0], b[1] - a[1]);
   return <g transform={`translate(${a[0]} ${a[1]}) rotate(${ang})`}>
-    <rect x={-18} y={-5} width={L + 36} height={10} fill={WOOD2} stroke="#000" strokeWidth={2.5} />
+    <rect x={-STUB} y={-5} width={L + 2 * STUB} height={10} fill={WOOD2} stroke="#000" strokeWidth={2.5} />
     <rect x={0} y={-d / 2} width={L} height={d} rx={d * 0.3} fill={SHEET} stroke="#000" strokeWidth={3} />
     <ellipse cx={0} cy={0} rx={d * 0.3} ry={d / 2} fill={SHEET} stroke="#000" strokeWidth={2.5} />
     <circle cx={0} cy={0} r={d * 0.13} fill="none" stroke="#3a2a22" strokeWidth={2.5} /><circle cx={0} cy={0} r={d * 0.05} fill="#3a2a22" /></g>; };
+const TAGC = `rgb(${PL.tag_bgr.slice().reverse().map(Math.round).join(',')})`;
 const Tag = ({x, y, s = 1}) => <g><line x1={x} y1={y} x2={x} y2={y + 14 * s} stroke="#3a2a22" strokeWidth={2 * s} />
-  <rect x={x - 6 * s} y={y + 14 * s} width={12 * s} height={26 * s} fill="#B8322B" stroke="#000" strokeWidth={2 * s} /></g>;
+  <rect x={x - 6 * s} y={y + 14 * s} width={12 * s} height={26 * s} fill={TAGC} stroke="#000" strokeWidth={2 * s} /></g>;
 const Stand = ({laid, unroll}) => { const u0 = 0.06, ur = u0 + 0.88 * unroll, dL = SD * (1 - 0.38 * unroll), dR = SD * 0.62 * Math.min(1, unroll * 3);
   const parts = {...Object.fromEntries(Object.values(SC.stand.legs).map((l) => [l.id, <rect key={l.id} x={l.x} y={l.y} width={l.w} height={l.h} fill={l.layer === 'back' ? WOOD2 : WOOD} stroke="#000" strokeWidth={2.5} />])),
     ...Object.fromEntries(Object.values(SC.stand.bars).map((b) => [b.id, <rect key={b.id} x={b.x} y={b.y} width={b.w} height={b.h} fill={b.layer === 'back' ? WOOD2 : WOOD} stroke="#000" strokeWidth={2.5} />])),
+    base: SC.stand.base && <g key="base"><polygon points={poly(SC.stand.base.side)} fill={WOOD2} stroke="#000" strokeWidth={3} strokeLinejoin="round" />
+      <polygon points={poly(SC.stand.base.front)} fill={WOOD} stroke="#000" strokeWidth={3} strokeLinejoin="round" />
+      <line x1={SC.stand.base.x0 + 8} x2={SC.stand.base.x1 - 8} y1={SC.stand.base.yF + 14} y2={SC.stand.base.yF + 14} stroke={WOOD2} strokeWidth={4} /></g>,
     board: <g key="board"><polygon points={poly([B.bl, B.br, [B.br[0], B.br[1] + SC.stand.thick], [B.bl[0], B.bl[1] + SC.stand.thick]])} fill={WOOD2} stroke="#000" strokeWidth={3} strokeLinejoin="round" />
       <polygon points={poly([B.tl, B.tr, B.br, B.bl])} fill={WOOD} stroke="#000" strokeWidth={3} strokeLinejoin="round" /></g>};
   return <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
-    <defs><clipPath id="sheet10"><polygon points={poly([at(u0, 0.08), at(ur, 0.08), at(ur, 0.92), at(u0, 0.92)])} /></clipPath></defs>
+    <defs><clipPath id="sheet10"><polygon points={poly([at(u0, RV0 + 0.02), at(ur, RV0 + 0.02), at(ur, RV1 - 0.02), at(u0, RV1 - 0.02)])} /></clipPath></defs>
     {SC.stand.draw.map((id) => parts[id])}
     {laid > 0 && <g opacity={laid}>
-      {unroll > 0 && <polygon points={poly([at(u0, 0.08), at(ur, 0.08), at(ur, 0.92), at(u0, 0.92)])} fill={SHEET} stroke="#000" strokeWidth={2.5} />}
+      {unroll > 0 && <polygon points={poly([at(u0, RV0 + 0.02), at(ur, RV0 + 0.02), at(ur, RV1 - 0.02), at(u0, RV1 - 0.02)])} fill={SHEET} stroke="#000" strokeWidth={2.5} />}
       {unroll > 0 && <g clipPath="url(#sheet10)">{MARKS.map((m, i) => <polygon key={i} points={poly([at(m.u, m.v), at(m.u + m.wl, m.v), at(m.u + m.wl, m.v + m.hh), at(m.u, m.v + m.hh)])} fill={INK} />)}</g>}
       {unroll > 0.02 && <Roller u={ur} d={dR} />}
       <Roller u={u0} d={dL} />
-      <Tag x={at(u0, 0.06)[0]} y={at(u0, 0.06)[1] - 4} /></g>}
+      <Tag x={at(u0, RV0)[0]} y={at(u0, RV0)[1] - 4} /></g>}
   </svg>; };
 
 // the cabinet under the stand, drawn here: closed storage in the background of the story, so its scroll ends are muted
@@ -88,7 +94,7 @@ const TAKE_SLOT = (() => { const m = SPEC.props[0].states[0].at.match(/slot\[(\d
 export const camAt = SC.camAt;
 
 // ---- devices
-const ChapterTag = ({o = 1}) => <div style={{position: 'absolute', left: 64, top: 52, opacity: o, display: 'flex', alignItems: 'baseline', gap: 14, textShadow: '0 1px 8px rgba(0,0,0,0.6)'}}>
+const ChapterTag = ({o = 1}) => <div style={{position: 'absolute', left: 52, top: 36, opacity: o, display: 'flex', alignItems: 'baseline', gap: 14, padding: '8px 14px', background: `rgba(10,14,20,${SPEC.devices[0].bg})`}}>
   <span style={{fontFamily: MO, fontSize: 16, letterSpacing: 3, color: '#D9C6A2'}}>I ·</span>
   <span style={{fontFamily: SR, fontWeight: 600, fontSize: 30, color: '#F4E6C8'}}>The library by the <span style={{fontFamily: SI, color: GOLD}}>sea</span></span></div>;
 const PlaceTag = ({t, at: a, dur = 99, text}) => <div style={{position: 'absolute', right: 64, top: 56, opacity: fade(t, a, dur, 0.6, 0.4), fontFamily: MO, fontSize: 15, letterSpacing: 3,
@@ -97,10 +103,10 @@ const WordCard = ({t, at: a, dur}) => { const o = fade(t, a, dur, 0.6, 0.5), dy 
   return <div style={{position: 'absolute', left: 64, bottom: 90, width: 470, opacity: o, transform: `translateY(${dy}px)`, padding: '14px 20px', background: 'rgba(10,14,20,0.92)', borderLeft: `3px solid ${GOLD}`}}>
     <div style={{fontFamily: MO, fontSize: 14, letterSpacing: 3, color: '#C9B48E'}}>WORD 01</div>
     <div style={{fontFamily: SR, fontWeight: 600, fontSize: 44, color: CREAM, lineHeight: 1.1, marginTop: 2}}>Papyrus</div>
-    <div style={{fontFamily: IN, fontSize: 19, color: '#DCCDB2', lineHeight: 1.35, marginTop: 4}}>Paper made from a river reed, rolled into scrolls.</div></div>; };
+    <div style={{fontFamily: IN, fontSize: 19, color: '#DCCDB2', lineHeight: 1.35, marginTop: 4}}>Paper made from a reed of the Nile marshes, rolled into scrolls.</div></div>; };
 const Foot = ({left, right}) => <>
-  {left && <div style={{position: 'absolute', left: 64, bottom: 28, fontFamily: MO, fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: `rgba(8,10,14,${DEV.credit_l.bg})`, padding: '4px 8px'}}>{left}</div>}
-  <div style={{position: 'absolute', right: 64, bottom: 28, fontFamily: MO, fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: `rgba(8,10,14,${DEV.credit_r.bg})`, padding: '4px 8px'}}>{right}</div></>;
+  {left && <div style={{position: 'absolute', left: 64, bottom: 40, fontFamily: MO, fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: `rgba(8,10,14,${DEV.credit_l.bg})`, padding: '4px 8px'}}>{left}</div>}
+  <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: MO, fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: `rgba(8,10,14,${DEV.credit_r.bg})`, padding: '4px 8px'}}>{right}</div></>;
 
 // ---- FG: the front wall and its arch; the camera passes through it on "Walk inside"
 const Arch = ({t}) => { const g = Math.pow(ramp(t, 0.25, 2.1), 1.5), s = 1 + 3.2 * g; if (s > 4.1) return null;
@@ -121,7 +127,9 @@ const Room = ({t}) => {
     <ellipse cx={600} cy={905} rx={cd * 0.3} ry={cd / 2} fill={SHEET} stroke="#000" strokeWidth={5} />
     <circle cx={600} cy={905} r={cd * 0.13} fill="none" stroke="#3a2a22" strokeWidth={5} /><circle cx={600} cy={905} r={cd * 0.05} fill="#3a2a22" />
     <line x1={600} y1={905 + cd / 2} x2={600} y2={905 + cd / 2 + 26} stroke="#3a2a22" strokeWidth={4} />
-    <rect x={589} y={905 + cd / 2 + 26} width={22} height={48} fill="#B8322B" stroke="#000" strokeWidth={4} /></g>;
+    <rect x={589} y={905 + cd / 2 + 26} width={22} height={48} fill={TAGC} stroke="#000" strokeWidth={4} />
+    {/* his fingers wrap the near side of the roll, so he visibly holds it */}
+    {[0, 1, 2, 3].map((k) => <rect key={k} x={505 + k * 22} y={905 - cd / 2 - 14} width={20} height={cd * 0.55} rx={10} fill={SKIN} stroke="#000" strokeWidth={4} />)}</g>;
   // light and focus cues
   const fl = scr(cam, PL.flame[0], PL.flame[1], 1.05), pool = scr(cam, (PL.flame[0] + SHEET_C[0]) / 2 - 60, PL.flame[1] + 40, 1.05);
   const glint = ramp(t, tBooks - 0.6, tBooks - 0.1) * (1 - ramp(t, tBooks + 0.6, tBooks + 1.2));
@@ -132,9 +140,8 @@ const Room = ({t}) => {
   return <AbsoluteFill style={{background: '#0B0F16'}}>
     <Plate cam={cam} p={1} style={{filter: `blur(${4 * closeO}px)`}}>
       <Pic src="back.jpg" w={PW} h={PH} />
-      {t > T.grab && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}><ellipse cx={take.x} cy={take.y} rx={take.rx + 3} ry={take.ry + 3} fill={cub} /></svg>}
-      {glint > 0 && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}>{PL.discs.map(([x, y], i) =>
-        <circle key={i} cx={RC.x + x} cy={RC.y + y} r={30} fill="#FFF0C8" opacity={glint * 0.3 * (0.5 + 0.5 * Math.sin(t * 7 + i * 1.7))} style={{mixBlendMode: 'screen'}} />)}</svg>}
+      {t > T.grab && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}><ellipse cx={take.x} cy={take.y} rx={take.rx + 7} ry={take.ry + 7} fill={cub} />{take.tag && <rect x={take.tag.x - 22} y={take.tag.y - 34} width={44} height={70} fill={cub} />}</svg>}
+      
     </Plate>
     <Plate cam={cam} p={1.05}>
       <Shadow x={CBC} y={FLOOR + 90} w={CBW * 1.1} />
@@ -146,7 +153,7 @@ const Room = ({t}) => {
     <Plate cam={cam} p={1.03}>
       <Shadow x={wx} y={wy} w={280} /><Shadow x={wx - 30} y={wy} w={200} />
       <Puppet rig={WR} dir="scrolls/pilot6/walker_parts2" pose={wp} offset={wOff} x={wx} y={wy} scale={WS} anchor={[520, 1523]} attach={{forearm: carried}}
-        caps={[{part: 'near_thigh', at: [493, 1131], r: 28, fill: SKIN, z: 3.5}, {part: 'far_thigh', at: [519, 1131], r: 28, fill: SKIN, z: 1.5}, {part: 'upper_arm', at: [475, 625], r: 22, fill: SKIN, z: 7.5}, {part: 'torso', at: [500, 372], r: 40, fill: 'rgb(220,198,174)', z: 6.5}]} />
+        caps={CAPS} />
     </Plate>
     {/* the lamp is the only light: everything outside its pool sinks into a dark teal */}
     <AbsoluteFill style={{background: `radial-gradient(circle at ${pool.x}px ${pool.y}px, rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${R0}px, rgba(8,22,34,${(0.86 - 0.24 * lit) * (1 - 0.8 * closeO)}) ${R1}px)`, mixBlendMode: 'multiply'}} />

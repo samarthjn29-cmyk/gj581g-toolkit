@@ -30,12 +30,26 @@ Each scene is written once as data in `<scene>.scene.json`. That one file holds:
 | T1-T5 | text: safe margins, minimum duration, ends with its scene, a solid backing when drawings pass behind it, no overlaps |
 | L1 | nothing hides a wall painting |
 | S1 | a scroll opens along its line of columns, with its rollers at the left and right ends |
+| G7 | the open scroll's rollers and stubs stay on the board |
+| C5 | a tagged prop comes from a tagged slot |
+| F7 | the camera never shows past the edge of the art |
 | W1 | every cue word exists in the aligned narration |
 
 ## Tools
 - **Tuning:** `tune.mjs` searches spec values (stop position, reach pose, walk cycle) that make the contact and slip checks pass.
-- **Regression:** `regression_variants.json` holds the mistakes from the scroll-room pilots, each as a small patch to the spec. Every one of them must fail. Run them all with:
+- **Regression:** `regression_variants.json` holds the mistakes from the scroll-room pilots, including the v10 independent review, each as a small patch to the spec (22 so far). Every one of them must fail. Run them all with:
   `for v in $(python3 -c "import json;print(' '.join(json.load(open('regression_variants.json'))))"); do node validate.mjs room.scene.json --variant $v >/dev/null || echo "caught $v"; done`
+
+## Rig test (holes and seams in every pose the scene uses)
+- **Setup:** `PoseSheet.jsx` draws the character in every pose the scene uses (sampled from the core) on magenta, with the caps from the spec.
+- **Joints:** `node pose_joints.mjs joints.json` writes where each joint sits.
+- **Find the gaps:** `python3 rig_holes.py sheet.png 6 2 <rest cell> joints.json` reports:
+  - enclosed holes, where the background shows through: these FAIL;
+  - new notches at joints compared with the rest pose: these are CHECK, because they may be the natural gap between two limbs.
+- **Caps:** they live in the spec (`characters[].caps`), each with its reason, so the scene and the test use the same ones.
+
+## Prevented by construction
+- **Camera:** the core clamps it so the wall plate always covers the frame. F7 still checks this, and the `camera_past_art` variant turns the clamp off to prove the check works.
 
 ## Not covered here
 These problems are caught by the other gates:

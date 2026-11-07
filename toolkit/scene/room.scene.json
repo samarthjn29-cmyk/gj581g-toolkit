@@ -63,7 +63,8 @@
   "tunic": "rgb(220,198,174)",
   "tag": "#B8322B",
   "gold": "#F2B85A",
-  "cream": "#FBE3B0"
+  "cream": "#FBE3B0",
+  "tunic_shade": "rgb(196,174,150)"
  },
  "strokes": {
   "outline": 3,
@@ -82,7 +83,9 @@
     6,
     3
    ],
-   "job": "scroll shelves: 'lined with shelves'"
+   "job": "scroll shelves: 'lined with shelves'",
+   "drop_px": 30,
+   "shadow": true
   },
   {
    "id": "rackB",
@@ -96,7 +99,9 @@
     6,
     3
    ],
-   "job": "scroll shelves"
+   "job": "scroll shelves",
+   "drop_px": 30,
+   "shadow": true
   },
   {
    "id": "rackC",
@@ -110,7 +115,9 @@
     6,
     3
    ],
-   "job": "the rack he takes the scroll from"
+   "job": "the rack he takes the scroll from",
+   "drop_px": 30,
+   "shadow": true
   },
   {
    "id": "panelA",
@@ -166,71 +173,23 @@
     "h": 0.45,
     "thick": 0.03
    },
-   "legs": [
-    {
-     "id": "legBL",
-     "x": -0.2824,
-     "w": 0.035,
-     "z0": 0.0,
-     "z1": 0.6913,
-     "layer": "back"
-    },
-    {
-     "id": "legBR",
-     "x": 0.5724,
-     "w": 0.035,
-     "z0": 0.0,
-     "z1": 0.6913,
-     "layer": "back"
-    },
-    {
-     "id": "legFL",
-     "x": -0.4764,
-     "w": 0.035,
-     "z0": 0.0,
-     "z1": 0.2197,
-     "layer": "front"
-    },
-    {
-     "id": "legFR",
-     "x": 0.3264,
-     "w": 0.035,
-     "z0": 0.0,
-     "z1": 0.2197,
-     "layer": "front"
-    }
-   ],
-   "stretchers": [
-    {
-     "id": "barB",
-     "from": "legBL",
-     "to": "legBR",
-     "z": 0.1,
-     "h": 0.026,
-     "layer": "back"
-    },
-    {
-     "id": "barF",
-     "from": "legFL",
-     "to": "legFR",
-     "z": 0.1,
-     "h": 0.026,
-     "layer": "front"
-    }
-   ],
    "draw": [
-    "barB",
-    "legBL",
-    "legBR",
-    "barF",
-    "legFL",
-    "legFR",
+    "base",
     "board"
    ],
    "scroll_layout": {
     "rollers": "left-right",
     "unroll_axis": "u",
-    "columns_axis": "u"
+    "columns_axis": "u",
+    "roller_v": [
+     0.1,
+     0.9
+    ],
+    "stub": 0.02
+   },
+   "base": {
+    "type": "wedge",
+    "inset": 0.05
    }
   },
   {
@@ -250,12 +209,12 @@
    "kind": "scroll",
    "diameter": 0.145,
    "length": 0.3,
-   "tag": "parchment-or-red",
+   "tag": true,
    "states": [
     {
      "from": 0,
      "to": "action:grab",
-     "at": "rackC.slot[0,1]"
+     "at": "rackC.slot[2,0]"
     },
     {
      "from": "action:grab",
@@ -316,12 +275,12 @@
      "t0": 0.6,
      "t1": 4.5,
      "x0": 0.2,
-     "x1": 3.825
+     "x1": 3.45
     },
     {
      "t0": 6.7,
      "t1": 8.0,
-     "x0": 3.825,
+     "x0": 3.45,
      "x1": 5.15
     }
    ],
@@ -336,14 +295,14 @@
      "t": 4.5,
      "to": "action:grab",
      "pose": {
-      "upper_arm": -114,
-      "forearm": -12
+      "upper_arm": -68,
+      "forearm": 10
      }
     },
     {
      "name": "grab",
      "t": 5.55,
-     "target": "rackC.slot[0,1]",
+     "target": "rackC.slot[2,0]",
      "prop": "scroll1"
     },
     {
@@ -379,14 +338,115 @@
    "rules": {
     "limb_tint": false,
     "shoulder_pivot_top_frac": 0.25
-   }
+   },
+   "caps": [
+    {
+     "part": "near_thigh",
+     "at": [
+      499,
+      1131
+     ],
+     "r": 34,
+     "fill": "skin",
+     "z": 3.5,
+     "why": "knee seam"
+    },
+    {
+     "part": "far_thigh",
+     "at": [
+      525,
+      1131
+     ],
+     "r": 34,
+     "fill": "skin",
+     "z": 1.5,
+     "why": "knee seam"
+    },
+    {
+     "part": "upper_arm",
+     "at": [
+      475,
+      625
+     ],
+     "r": 22,
+     "fill": "skin",
+     "z": 7.5,
+     "why": "elbow seam"
+    },
+    {
+     "part": "torso",
+     "at": [
+      500,
+      372
+     ],
+     "r": 40,
+     "fill": "tunic",
+     "z": 6.5,
+     "why": "shoulder under the raised sleeve"
+    },
+    {
+     "part": "torso",
+     "at": [
+      575,
+      292
+     ],
+     "r": 28,
+     "fill": "skin",
+     "z": 5.5,
+     "why": "front of the neck when the torso leans (reviewer v10 #7)"
+    },
+    {
+     "part": "torso",
+     "at": [
+      483,
+      968
+     ],
+     "r": 36,
+     "fill": "tunic",
+     "z": 3.9,
+     "why": "hole in the tunic above the swinging thigh (rig hole test)"
+    },
+    {
+     "part": "torso",
+     "at": [
+      480,
+      1015
+     ],
+     "r": 24,
+     "fill": "tunic_shade",
+     "z": 3.8,
+     "why": "the tunic's front slit showed the background between the legs (rig hole test)"
+    },
+    {
+     "part": "near_shin",
+     "at": [
+      468,
+      1172
+     ],
+     "r": 24,
+     "fill": "skin",
+     "z": 3.2,
+     "why": "back-of-knee notch when the knee bends (rig hole test)"
+    },
+    {
+     "part": "far_shin",
+     "at": [
+      494,
+      1172
+     ],
+     "r": 24,
+     "fill": "skin",
+     "z": 1.2,
+     "why": "back-of-knee notch, far leg"
+    }
+   ]
   }
  ],
  "camera": {
   "start": {
    "x": 1920,
-   "y": 940,
-   "z": 1.0
+   "y": 960,
+   "z": 1.1
   },
   "shots": [
    {
@@ -414,7 +474,7 @@
     "t0": 4.3,
     "t1": 5.3,
     "to": {
-     "wall_x": 4.25,
+     "wall_x": 4.0,
      "y": 960,
      "z": 1.6
     }
@@ -459,14 +519,14 @@
   {
    "id": "chapter",
    "box": [
-    64,
-    40,
-    470,
-    48
+    52,
+    36,
+    500,
+    52
    ],
    "t0": 1.6,
    "t1": 8.0,
-   "bg": 0.0,
+   "bg": 0.97,
    "kind": "title"
   },
   {
@@ -492,7 +552,7 @@
    ],
    "t0": "lib5.not",
    "t1": "lib6.reed+0.1",
-   "bg": 0.92,
+   "bg": 0.97,
    "kind": "card",
    "min_dur": 3.0
   },
@@ -500,26 +560,26 @@
    "id": "credit_l",
    "box": [
     64,
-    1030,
+    1016,
     300,
     24
    ],
    "t0": 0,
    "t1": "lib6.reed-0.1",
-   "bg": 0.85,
+   "bg": 0.95,
    "kind": "credit"
   },
   {
    "id": "credit_r",
    "box": [
     1640,
-    1030,
+    1016,
     216,
     24
    ],
    "t0": 0,
    "t1": 15.3,
-   "bg": 0.85,
+   "bg": 0.95,
    "kind": "credit"
   }
  ],
@@ -557,8 +617,8 @@
     0.18
    ],
    "vs_rack_end": [
-    0.4,
-    1.0
+    0.8,
+    1.25
    ]
   },
   "stand": {
@@ -596,7 +656,7 @@
   "safe_margin_px": 40,
   "min_action_gap": 0.2,
   "text_min_dur": 1.5,
-  "opaque_bg": 0.85,
+  "opaque_bg": 0.95,
   "wide_z": 1.35,
   "floor_share_max": 0.22,
   "figure_share": [

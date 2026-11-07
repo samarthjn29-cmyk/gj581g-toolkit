@@ -5,12 +5,12 @@ const words = J('pilot8_words.json'), place = J('pilot8_place.json'), rigs = {'w
 const clone = () => JSON.parse(JSON.stringify(base));
 // 1) the reach: walker stop x and reach pose so the hand lands on rackC slot [0,1]
 let best = null;
-for (let x1 = 3.7; x1 <= 4.05; x1 += 0.025) for (let ua = -120; ua <= -90; ua += 2) for (let fa = -40; fa <= 0; fa += 2) {
+for (let x1 = 3.2; x1 <= 3.9; x1 += 0.025) for (let ua = -110; ua <= -20; ua += 2) for (let fa = -60; fa <= 10; fa += 2) {
   const s = clone(); const c = s.characters[0]; c.moves[0].x1 = x1; c.moves[1].x0 = x1; c.actions.find((a) => a.name === 'reach').pose = {upper_arm: ua, forearm: fa};
-  s.camera.shots.find((q) => q.id === 'books').to = {wall_x: 4.25, y: 960, z: 1.6};
+  
   const sc = makeScene(s, words, rigs, place), ch = sc.character('librarian'), t = sc.time('action:grab'), cam = sc.camAt(t);
-  const h = sc.screen(cam, ch.hand(t), 1.03), q = sc.slot('rackC', 0, 1), p = sc.screen(cam, [q.x, q.y], 1), d = Math.hypot(h.x - p.x, h.y - p.y) / (p.s * sc.PXM);
-  if (!best || d < best.d) best = {d, x1, ua, fa}; }
+  const h = sc.screen(cam, ch.hand(t), 1.03), q = sc.slot('rackC', 2, 0), p = sc.screen(cam, [q.x, q.y], 1), d = Math.hypot(h.x - p.x, h.y - p.y) / (p.s * sc.PXM);
+  const cost = d + 0.002 * Math.abs(ua + 75); if (!best || cost < best.cost) best = {cost, d, x1, ua, fa}; }
 console.log('reach', JSON.stringify(best));
 // 2) the walk cycle length that keeps the planted foot still
 let bc = null;
