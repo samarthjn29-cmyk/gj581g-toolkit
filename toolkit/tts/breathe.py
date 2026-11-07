@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Give the narration room to breathe without touching the speech (7 Nov 2026, vector-world pilot: the clone read Plato's Cave
 at about 200 words a minute; Emergence runs 152-171, with a music bed filling the pauses).
-Inserts silence at sentence ends (after . ? ! :) and longer silence at scene changes, cutting only inside the existing
+Inserts silence at sentence ends, a short breath at commas (0.12 s, 7 Nov 2026: reads as thinking, not reading) (after . ? ! :) and longer silence at scene changes, cutting only inside the existing
 gap between two words, then shifts every word time in timing.json to match. Nothing is stretched or sped up.
-Usage: breathe.py vo.wav timing.json out.wav out_timing.json [--sentence 0.35] [--comma 0.0] [--scene 0.8]"""
+Usage: breathe.py vo.wav timing.json out.wav out_timing.json [--sentence 0.35] [--comma 0.12] [--scene 0.8]"""
 import sys, json, re, wave, numpy as np
 a = sys.argv; vo, tj, out, otj = a[1:5]
 opt = lambda k, d: float(a[a.index(k) + 1]) if k in a else d
-SENT, COMMA, SCENE = opt('--sentence', 0.35), opt('--comma', 0.0), opt('--scene', 0.8)
+SENT, COMMA, SCENE = opt('--sentence', 0.35), opt('--comma', 0.12), opt('--scene', 0.8)
 w = wave.open(vo); sr = w.getframerate(); ch = w.getnchannels(); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, ch); w.close()
 T = json.load(open(tj)); cuts = []   # (time, seconds to insert)
 prev_scene = None

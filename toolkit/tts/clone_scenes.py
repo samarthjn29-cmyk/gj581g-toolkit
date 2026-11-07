@@ -50,7 +50,10 @@ def gaps(a, db=-38, min_s=0.12):
             i = j
         else: i += 1
     return res
-MAXWPS = float(os.environ.get('MAXWPS', '3.9')); PACE_TRIES = int(os.environ.get('PACE_TRIES', '3'))
+# pace band (7 Nov 2026, Emergence study: 152-171 wpm overall, narrow; our Cave clone read 187 wpm inside lines, 144-242 line to line):
+# every line of 5+ words must be spoken at MINWPS-MAXWPS words/s, measured first word to last word (2.65-2.95 = 159-177 wpm)
+MAXWPS = float(os.environ.get('MAXWPS', '2.95')); MINWPS = float(os.environ.get('MINWPS', '2.3')); PACE_TRIES = int(os.environ.get('PACE_TRIES', '6'))
+SLOW_EXAG = float(os.environ.get('SLOW_EXAG', '0.4'))  # rushed takes also calm down: lower exaggeration speaks slower in Chatterbox
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
 MAXLINES = int(os.environ.get('MAXLINES', '4'))  # long scenes are voiced in parts of <= 4 lines and joined: an 8-line passage rushed (4-5 w/s) and ran out of memory (clip B real, 3 Nov)
@@ -72,8 +75,9 @@ def voice_part(L, si, pi):
     best = None; slow_down = False
     for k in range(TRIES):
         torch.manual_seed(7000 + si * 61 + pi * 13 + k * 97 + int(os.environ.get('SEED_OFFSET', '0')))
-        cfg = CFG if k < 3 or not slow_down else (0.3 if k < 5 else 0.2)  # rushed takes: step the guidance down (lower cfg = slower delivery), Sam's settings first
-        w = m.generate(text, exaggeration=EXAG, cfg_weight=cfg, temperature=TEMP)
+        cfg = CFG if not slow_down else (0.3 if k < 4 else 0.2)  # rushed takes: step the guidance down at once (lower cfg = slower delivery), Sam's settings first
+        ex = EXAG if not slow_down else min(EXAG, SLOW_EXAG)
+        w = m.generate(text, exaggeration=ex, cfg_weight=cfg, temperature=TEMP)
         a = squeeze_gaps(trim(w.squeeze(0).cpu().numpy().astype(np.float64), sr), sr, maxgap=0.40, keep=0.30)
         segs, _ = wm.transcribe(librosa.resample(a.astype(np.float32), orig_sr=sr, target_sr=16000), language='en', word_timestamps=True); segs = list(segs)  # a generator: read it once
         h = ' '.join(s_.text.strip() for s_ in segs); H = [(tk, w0, w1) for wd, w0, w1 in joinnum([(w_.word, w_.start, w_.end) for s_ in segs for w_ in s_.words]) for tk in toks(wd)]
@@ -100,9 +104,12 @@ def voice_part(L, si, pi):
         fast = []; pos = 0; worst = 0.0
         for l in L:
             n = len(toks(l.get('say', l['text']))); idx = [e2h[q] for q in range(pos, pos + n) if q in e2h]; pos += n
-            if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1] and n / (H[idx[-1]][2] - H[idx[0]][1]) > MAXWPS: fast.append(f"{l['id']} {n / (H[idx[-1]][2] - H[idx[0]][1]):.1f}w/s"); worst = max(worst, n / (H[idx[-1]][2] - H[idx[0]][1]) - MAXWPS)
+            if n >= 5 and len(idx) >= 2 and H[idx[-1]][2] > H[idx[0]][1]:
+                v = n / (H[idx[-1]][2] - H[idx[0]][1])
+                if v > MAXWPS: fast.append(f"{l['id']} {v:.2f}w/s"); worst = max(worst, v - MAXWPS)
+                elif v < MINWPS: fast.append(f"{l['id']} slow {v:.2f}w/s"); worst = max(worst, MINWPS - v)
         ok_core = ok_t  # words that must be heard and tight phrases are fine; only the pace may still fail
-        ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or bool(fast)
+        ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or any(' slow ' not in f for f in fast)  # only rushed takes slow the next try
         score = r + 0.5 * s + (0.2 if ok_core else 0) + (0.1 if ok_p else 0) - 0.05 * worst  # among rushed takes, prefer the least rushed
         print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else ((' REPEAT: ' + ' | '.join(rep)) if rep else ' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t, ok_core)
