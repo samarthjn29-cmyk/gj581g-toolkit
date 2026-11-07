@@ -53,7 +53,7 @@ def gaps(a, db=-38, min_s=0.12):
 # pace band (7 Nov 2026, Emergence study: 152-171 wpm overall, narrow; our Cave clone read 187 wpm inside lines, 144-242 line to line):
 # every line of 5+ words must be spoken at MINWPS-MAXWPS words/s, measured first word to last word (2.65-2.95 = 159-177 wpm)
 MAXWPS = float(os.environ.get('MAXWPS', '2.95')); MINWPS = float(os.environ.get('MINWPS', '2.3')); PACE_TRIES = int(os.environ.get('PACE_TRIES', '6'))
-SLOW_EXAG = float(os.environ.get('SLOW_EXAG', '0.4')); FLOWGAP = float(os.environ.get('FLOWGAP', '0.30'))  # rushed takes also calm down: lower exaggeration speaks slower in Chatterbox
+SLOW_EXAG = float(os.environ.get('SLOW_EXAG', '0.4')); FLOWGAP = float(os.environ.get('FLOWGAP', '0.30')); MINVOICED = float(os.environ.get('MINVOICED', '0.68'))  # rushed takes also calm down: lower exaggeration speaks slower in Chatterbox
 lj = f'{out}/log.json'; log = json.load(open(lj)) if os.path.exists(lj) else {}
 scenes = list(dict.fromkeys(l['scene'] for l in S))
 MAXLINES = int(os.environ.get('MAXLINES', '4'))  # long scenes are voiced in parts of <= 4 lines and joined: an 8-line passage rushed (4-5 w/s) and ran out of memory (clip B real, 3 Nov)
@@ -114,8 +114,17 @@ def voice_part(L, si, pi):
                 v = n / (H[idx[-1]][2] - H[idx[0]][1])
                 if v > MAXWPS: fast.append(f"{l['id']} {v:.2f}w/s"); worst = max(worst, v - MAXWPS)
                 elif v < MINWPS: fast.append(f"{l['id']} slow {v:.2f}w/s"); worst = max(worst, MINWPS - v)
+        # breathiness (7 Nov 2026, Sam: Cave climb take "sounds really bad"): share of speech frames with a clear pitch;
+        # Sam's normal takes 0.72-0.74, the bad cfg 0.3 / exaggeration 0.4 take 0.49 (0.63 by this frame test, others 0.71-0.74). Below MINVOICED the take fails.
+        Fv = int(sr * 0.03); vv = []
+        for i0 in range(0, len(a) - Fv, Fv):
+            fr = a[i0:i0 + Fv]
+            if 20 * np.log10(np.sqrt(np.mean(fr ** 2)) + 1e-12) < -40: continue
+            w_ = fr - fr.mean(); ac = np.correlate(w_, w_, 'full')[Fv - 1:]; vv.append(ac[int(sr / 400):int(sr / 70)].max() / (ac[0] + 1e-12) > 0.45)
+        vfrac = float(np.mean(vv)) if vv else 0.0
+        if vfrac < MINVOICED: fast.append(f'breathy {vfrac:.2f}'); chop += (MINVOICED - vfrac) * 2
         ok_core = ok_t  # words that must be heard and tight phrases are fine; only the pace may still fail
-        ok_p = not fast; ok_t = ok_t and ok_p; slow_down = slow_down or any(' slow ' not in f and not f.startswith('choppy') for f in fast)  # only rushed takes slow the next try
+        ok_p = not fast; ok_t = ok_t and ok_p; slow_down = (slow_down or any(' slow ' not in f and not f.startswith(('choppy', 'breathy')) for f in fast)) and not any(f.startswith('breathy') for f in fast)  # a breathy take goes back to Sam's own settings  # only rushed takes slow the next try
         score = r + 0.5 * s + (0.2 if ok_core else 0) + (0.1 if ok_p else 0) - 0.05 * worst - 0.5 * chop  # a choppy take loses to a slightly rushed one  # among rushed takes, prefer the least rushed
         print(f"{sc}{'.' + str(pi) if pi else ''} try {k} (cfg {cfg}): words {r:.2f} sim {s:.2f}{'' if ok_t else ((' REPEAT: ' + ' | '.join(rep)) if rep else ' MISSING-MUST' if not ok_m else ' TOO-FAST ' + ','.join(fast) if not ok_p else ' PAUSE-IN-TIGHT')} | {h}", flush=True)
         if best is None or score > best[0]: best = (score, a, h, r, s, ok_t, ok_core)

@@ -30,11 +30,11 @@ for li, l in enumerate(T['lines']):
         if tgt is None:
             if g > INW: tgt = INW
             else: continue
-        G.append((W[i][2], W[i + 1][1], tgt))
+        G.append((W[i][2], W[i + 1][1], tgt) if W[i + 1][2] - W[i + 1][1] < 0.6 else (W[i][2], W[i][2] + 0.001, tgt, W[i + 1][2]))  # a word stretched over 0.6 s hides the real gap (Cave 'turns, and')
     prev = l
 # room tone: the quietest 0.25 s between words
 F = int(sr * 0.25); best = None; cands = []
-for e0, s1, _ in G:
+for e0, s1, *_ in G:
     i0, i1 = int((e0 + 0.03) * sr), int((s1 - 0.03) * sr)
     for j in range(i0, i1 - F, F // 4):
         r = np.sqrt(np.mean(x[j:j + F] ** 2))
@@ -60,11 +60,12 @@ FD = int(sr * 0.012); ramp = np.linspace(0, 1, FD)[:, None]
 def quiet(i, w=0.006):
     w = int(sr * w); s = np.abs(x[max(0, i - w):i + w].sum(1)); return max(0, i - w) + int(np.argmin(s)) if len(s) else i
 ops = []  # (sample index, delta samples) : +n insert room tone, -n remove n samples starting there
-for e0, s1, tgt in G:
+for gg in G:
+    e0, s1, tgt = gg[:3]; lim = gg[3] if len(gg) > 3 else None
     g = max(0.0, s1 - e0); d = tgt - g
     if abs(d) < 0.02: continue
     if s1 - e0 < 0.08:  # the aligner can butt two words together (cfg 0.2 take, 'daylight'/'first'): find the real gap by energy
-        lo, hi = int((min(e0, s1) - 0.25) * sr), int((max(e0, s1) + 0.25) * sr); Fq = int(sr * 0.03)
+        lo, hi = int((min(e0, s1) - 0.25) * sr), int(((lim - 0.1) if lim else (max(e0, s1) + 0.25)) * sr); Fq = int(sr * 0.03)
         rms = [(np.sqrt(np.mean(x[j:j + Fq] ** 2)), j + Fq // 2) for j in range(max(0, lo), max(lo + 1, hi - Fq), Fq // 3)]
         mid = min(rms)[1] if rms else quiet(int((e0 + s1) / 2 * sr))
         if rms:  # measure the real gap: the run of frames below -38 dB around the quietest one
