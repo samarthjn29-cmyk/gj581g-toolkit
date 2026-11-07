@@ -4,6 +4,7 @@
 // the unwrapping, the crackle and the word, the beamline. Devices from vw.jsx. One frame per index (composition frame = index).
 import React from 'react';
 import {AbsoluteFill, Img, staticFile, useCurrentFrame, random} from 'remotion';
+import {RomanReader, RomanWalker, DiggerTorch, DiggerCrouch, Priest, BackView, Contact} from './people.jsx';
 import {Layer, toScreen, flick, Glow, Dark, Grain, Vignette, Motes, Chapter, Lexicon, Kind, DateTag, Figure, POSE, Back, SR, SI, MO, IN} from '../cave/vw.jsx';
 
 const W = 3840, H = 2195;
@@ -42,6 +43,46 @@ const Rack = ({x, y, cols, rows, cell, seed, lit = 1}) => <g>
         return <ScrollEnd key={k} x={cx + cell * (0.27 + 0.46 * ((k % 2) + R(seed + i, k + 9) * 0.1))} y={cy + cell - 12 - rr - (k > 1 ? rr * 1.7 : 0)} r={rr} seed={`${seed}${i}${k}`} tag={k === 0} lit={lit} />; })}
       <rect x={cx} y={cy + cell - 10} width={cell} height={14} fill="#5A3A22" /></g>; })}
   <rect x={x - 22} y={y - 34} width={cols * cell + 44} height={20} fill="#6B4528" /></g>;
+
+
+// a wooden armarium (book cabinet) standing on the floor against the back wall, in the room's perspective.
+// back face at the wall: x0..x1, top..floor; the front face is projected toward the viewer from the vanishing point.
+const VP = {x: 1960, y: 1150};
+const proj = (x, y, k) => ({x: VP.x + (x - VP.x) / k, y: VP.y + (y - VP.y) / k});
+const Armarium = ({x0, x1, top, floor, rows = 4, cols = 3, seed, k = 0.9}) => {
+  const A = proj(x0, top, k), B = proj(x1, floor, k), fx0 = A.x, fy0 = A.y, fx1 = B.x, fy1 = B.y, W_ = fx1 - fx0, H_ = fy1 - fy0;
+  const innerRight = (x0 + x1) / 2 < VP.x;             // left cabinet shows its right side, right cabinet its left side
+  const bi = innerRight ? x1 : x0, fi = innerRight ? fx1 : fx0;
+  const crown = H_ * 0.075, plinth = H_ * 0.07, fr = W_ * 0.04, dv = W_ * 0.025;
+  const ix0 = fx0 + fr, ix1 = fx1 - fr, iy0 = fy0 + crown, iy1 = fy1 - plinth, cw = (ix1 - ix0) / cols, ch = (iy1 - iy0) / rows;
+  const gid = `ag${seed}`;
+  return <g>
+    <defs><linearGradient id={gid} x1={innerRight ? 0 : 1} y1="0" x2={innerRight ? 1 : 0} y2="0"><stop offset="0" stopColor="#000" stopOpacity="0.5" /><stop offset="1" stopColor="#000" stopOpacity="0" /></linearGradient>
+      <linearGradient id={`${gid}h`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0E0805" /><stop offset="1" stopColor="#2A190E" /></linearGradient></defs>
+    {/* floor shadow */}
+    <path d={`M${fx0 - 20},${fy1} L${fx1 + 20},${fy1} L${fx1 + 60},${fy1 + 46} L${fx0 - 60},${fy1 + 46} Z`} fill="#000" opacity={0.35} style={{filter: 'blur(10px)'}} />
+    {/* the inner side face, lit by the lamp */}
+    <path d={`M${fi},${fy0} L${bi},${top} L${bi},${floor} L${fi},${fy1} Z`} fill="#8A5A34" />
+    <path d={`M${fi},${fy0} L${bi},${top} L${bi},${top + (floor - top) * 0.08} L${fi},${fy0 + crown} Z`} fill="#B07A48" />
+    {/* front frame */}
+    <rect x={fx0} y={fy0} width={W_} height={H_} fill="#5A3A22" />
+    {Array.from({length: rows * cols}, (_, i) => { const c = i % cols, r = Math.floor(i / cols), cx = ix0 + c * cw, cy = iy0 + r * ch;
+      const rr = Math.min(cw, ch) * 0.155, n0 = Math.max(2, Math.floor((cw - dv * 2) / (rr * 2.05))), full = R(seed + 'f', i);
+      const stack = []; for (let row = 0; row < 3; row++) { const n = n0 - row; if (n <= 0 || (row === 2 && full < 0.35) || (row === 1 && full < 0.12)) break;
+        for (let j = 0; j < n; j++) stack.push({x: cx + cw / 2 + (j - (n - 1) / 2) * rr * 2.05 + (R(seed + 'j' + i, row * 9 + j) - 0.5) * 4, y: cy + ch - dv - rr - row * rr * 1.75, r: rr * (0.92 + R(seed + 'r' + i, row * 9 + j) * 0.12)}); }
+      return <g key={i}>
+        <rect x={cx + dv / 2} y={cy + dv / 2} width={cw - dv} height={ch - dv} fill={`url(#${gid}h)`} />
+        {stack.map((q, j) => <ScrollEnd key={j} x={q.x} y={q.y} r={q.r} seed={`${seed}${i}-${j}`} tag={j === 0 && R(seed + 't', i) > 0.45} />)}
+        <rect x={cx + dv / 2} y={cy + dv / 2} width={cw - dv} height={ch * 0.12} fill="#000" opacity={0.35} /></g>; })}
+    {/* dividers and shelf lips */}
+    {Array.from({length: cols + 1}, (_, c) => <rect key={`v${c}`} x={ix0 + c * cw - dv / 2} y={iy0} width={dv} height={iy1 - iy0} fill="#6B4528" />)}
+    {Array.from({length: rows + 1}, (_, r) => <rect key={`h${r}`} x={ix0 - dv / 2} y={iy0 + r * ch - dv / 2} width={ix1 - ix0 + dv} height={dv} fill="#7A5030" />)}
+    {/* crown and plinth mouldings */}
+    <rect x={fx0 - fr * 0.6} y={fy0 - crown * 0.25} width={W_ + fr * 1.2} height={crown} fill="#6B4528" /><rect x={fx0 - fr * 0.6} y={fy0 - crown * 0.25} width={W_ + fr * 1.2} height={crown * 0.25} fill="#B07A48" />
+    <rect x={fx0 - fr * 0.4} y={fy1 - plinth} width={W_ + fr * 0.8} height={plinth} fill="#4A2E1A" /><rect x={fx0 - fr * 0.4} y={fy1 - plinth} width={W_ + fr * 0.8} height={plinth * 0.18} fill="#8A5A34" />
+    {/* light falloff across the front, darker on the side away from the lamp */}
+    <rect x={fx0 - fr} y={fy0 - crown * 0.3} width={W_ + fr * 2} height={H_ + crown * 0.3} fill={`url(#${gid})`} />
+  </g>; };
 
 // an open scroll: two rollers and the sheet between with columns of writing
 const OpenScroll = ({x, y, w, h, cols = 3, glowAmt = 0, seed = 'os', burnt = false}) => <g>
@@ -147,8 +188,8 @@ const F_Villa = ({t}) => { const cam = {x: 2150, y: 1180, z: 0.6};
   return <AbsoluteFill style={{background: '#101226'}}>
     <BG cam={cam} src="villa" filter="saturate(1.12)" />
     <World cam={cam}><Defs />
-      <Roman x={3000} y={1730} s={1.75} flip rim={GOLD} rimDx={6} fill="#1A1222" />
-      <ellipse cx={3010} cy={1735} rx={120} ry={18} fill="#000" opacity={0.3} />
+      <Contact x={3150} y={1642} w={60} a={0.4} />
+      <RomanWalker x={3150} y={1642} s={1.2} flip rim="#F6B784" light="front" shade={0.38} />
     </World>
     <Glow {...toScreen(cam, 3250, 1300)} r={420} color={GOLD} a={0.35} />
     <Motes n={30} seed="vf" color="#FFE6A8" y0={400} h={600} />
@@ -157,16 +198,17 @@ const F_Villa = ({t}) => { const cam = {x: 2150, y: 1180, z: 0.6};
     <Kind t={t} text="Illustration · Villa of the Papyri, Herculaneum" /><Grain /><Vignette a={0.5} /></AbsoluteFill>; };
 
 // 5. The scroll room: racks of scrolls, a reader unrolling one by the lamp
-const F_Room = ({t}) => { const cam = {x: 1930, y: 1080, z: 0.58};
+const F_Room = ({t}) => { const cam = {x: 1960, y: 1230, z: 0.56};
   return <AbsoluteFill style={{background: '#0B0A12'}}>
     <BG cam={cam} src="room" filter="brightness(0.8) saturate(1.1)" />
     <World cam={cam}><Defs />
-      <Rack x={420} y={600} cols={4} rows={3} cell={210} seed="rl" />
-      <Rack x={2620} y={600} cols={4} rows={3} cell={210} seed="rr" />
-      {/* the open scroll on the table, the reader beside it */}
-      <OpenScroll x={1700} y={1612} w={560} h={66} cols={4} seed="tbl" />
-      <RomanReading x={1430} y={1980} s={2.3} rim={GOLD} rimDx={6} fill="#1A1222" />
-      <ellipse cx={1440} cy={1985} rx={150} ry={22} fill="#000" opacity={0.3} />
+      <Armarium x0={930} x1={1540} top={930} floor={1610} rows={4} cols={3} seed="al" />
+      <Armarium x0={2290} x1={2840} top={930} floor={1610} rows={4} cols={3} seed="ar" />
+      {/* two closed scrolls on the table */}
+      <g transform="rotate(-6 1700 1712)"><rect x={1640} y={1696} width={190} height={34} rx={17} fill="#E3CFA2" /><ellipse cx={1640} cy={1713} rx={9} ry={17} fill="#B08A5A" /></g>
+      <g transform="rotate(4 1780 1745)"><rect x={1700} y={1730} width={170} height={32} rx={16} fill="#D9C390" /><ellipse cx={1870} cy={1746} rx={9} ry={16} fill="#B08A5A" /></g>
+      <Contact x={2620} y={2084} w={110} a={0.45} />
+      <RomanReader x={2620} y={2084} s={2.15} flip rim={GOLD} light="front" shade={0.4} />
     </World>
     <Dark lights={[{...toScreen(cam, 1900, 900), r: 1000, a: 1}]} a={0.55} />
     <Glow {...toScreen(cam, 1950, 700)} r={520 * flick(t, 2, 0.06)} color={GOLD} a={0.55} />
@@ -207,46 +249,54 @@ const F_Erupt = ({t}) => { const cam = {x: 2000, y: 760, z: 0.62}, peak = {x: 20
 
 // 7. Chapter II, 1752: diggers in the tunnel with torches, a heap of black lumps
 const F_Tunnel = ({t}) => { const cam = {x: 1920, y: 1250, z: 0.6};
-  const lumps = Array.from({length: 13}, (_, i) => ({x: 1700 + R('lx', i) * 460, y: 1880 - R('ly', i) * 70 - (i > 8 ? 70 : 0), l: 110 + R('ll', i) * 70, a: (R('la', i) - 0.5) * 50}));
+  const lumps = Array.from({length: 13}, (_, i) => ({x: 1760 + R('lx', i) * 360, y: 1930 - R('ly', i) * 50 - (i > 8 ? 55 : 0), l: 110 + R('ll', i) * 70, a: (R('la', i) - 0.5) * 50}));
   return <AbsoluteFill style={{background: '#0A0807'}}>
     <BG cam={cam} src="tunnel" filter="brightness(0.7) saturate(1.1)" />
     <World cam={cam}><Defs />
-      <Digger x={1380} y={1990} s={2.3} torch t={t} rim={EMB} rimDx={6} fill="#120C0A" />
-      <Digger x={2480} y={1990} s={2.3} lump flip rim={EMB} rimDx={6} fill="#120C0A" />
       {lumps.map((l, i) => <g key={i} transform={`translate(${l.x},${l.y}) rotate(${l.a})`}><rect x={-l.l / 2} y={-30} width={l.l} height={60} rx={28} fill="#16100D" />
         <ellipse cx={-l.l / 2 + 6} cy={0} rx={18} ry={28} fill="#2A201B" /><path d={`M${-l.l / 2 + 10},-12 L${l.l / 2 - 20},-18`} stroke="#3A2E28" strokeWidth={3} /></g>)}
+      <Contact x={1480} y={1890} w={120} a={0.5} /><Contact x={2380} y={1930} w={150} a={0.5} />
+      <DiggerTorch x={1480} y={1890} s={2.1} t={t} rim={EMB} light="front" shade={0.45} />
+      <DiggerCrouch x={2380} y={1930} s={2.2} flip rim={EMB} light="front" shade={0.45} />
     </World>
-    <Dark lights={[{...toScreen(cam, 1580, 1240), r: 950, a: 1}, {...toScreen(cam, 2600, 900), r: 420, a: 1}, {...toScreen(cam, 900, 900), r: 380, a: 1}]} a={0.6} />
-    <Glow {...toScreen(cam, 1590, 1230)} r={600 * flick(t, 5, 0.1)} color={EMB} a={0.65} />
+    <Dark lights={[{...toScreen(cam, 1660, 1000), r: 1000, a: 1}, {...toScreen(cam, 2600, 900), r: 420, a: 1}, {...toScreen(cam, 900, 900), r: 380, a: 1}]} a={0.6} />
+    <Glow {...toScreen(cam, 1655, 930)} r={620 * flick(t, 5, 0.1)} color={EMB} a={0.7} />
     <Motes n={40} seed="tn" color="#FFB36A" x0={500} w={900} y0={300} h={600} />
     <Chapter t={1} at={0} dur={99} n="II" title="Lumps of charcoal" />
     <DateTag t={1} at={0} dur={99} text="HERCULANEUM · 1752" x={72} y={150} />
     <Kind t={t} text="Illustration" /><Grain a={0.1} /><Vignette a={0.6} /></AbsoluteFill>; };
 
 // 8. Piaggio's machine: silk threads lift the scroll open a sliver at a time
-const F_Piaggio = ({t}) => { const cam = {x: 1990, y: 1330, z: 0.98};
-  const rollX = 1700, rollY = 1610, topY = 820;
+const F_Piaggio = ({t}) => { const cam = {x: 1990, y: 1400, z: 0.9};
+  const L = 1560, Rp = 2380, base = 1700, topY = 1170, sc = {x: 1800, y: 1638, r: 54, len: 300};
+  const strip = (u) => ({x: sc.x + 110 + u * 380, y: sc.y - sc.r - 6 - Math.sin(u * 1.4) * 150});
   return <AbsoluteFill style={{background: '#0A0B18'}}>
-    <BG cam={cam} src="workshop" filter="brightness(0.72) saturate(1.05)" />
+    <BG cam={cam} src="workshop" filter="brightness(0.7) saturate(1.05)" />
     <World cam={cam}><Defs />
-      {/* the frame: two posts, a top bar with turning screws */}
-      <rect x={1380} y={topY} width={34} height={rollY - topY + 120} fill="#5A3A22" /><rect x={2540} y={topY} width={34} height={rollY - topY + 120} fill="#5A3A22" />
-      <rect x={1360} y={topY - 30} width={1236} height={46} rx={6} fill="#6B4528" /><rect x={1360} y={topY - 30} width={1236} height={10} fill="#A06A3C" opacity={0.7} />
-      {Array.from({length: 9}, (_, i) => { const x = 1520 + i * 115; return <g key={i}><rect x={x - 12} y={topY - 70} width={24} height={46} rx={4} fill="#B08A4A" /><rect x={x - 22} y={topY - 82} width={44} height={14} rx={4} fill="#D9B46A" />
-        <line x1={x} y1={topY + 16} x2={rollX + 80 + i * 70} y2={1320 + Math.sin(i * 0.9) * 18} stroke="#F4E7C6" strokeWidth={2.4} opacity={0.9} /></g>; })}
-      {/* the opened strip rising from the scroll (dark, cracked), glued to thin skin */}
-      <path d={`M${rollX + 60},${rollY - 70} C${rollX + 240},1460 ${rollX + 500},1340 ${rollX + 700},1320 L${rollX + 720},1360 C${rollX + 520},1390 ${rollX + 280},1490 ${rollX + 90},${rollY - 30} Z`} fill="#2B2420" stroke="#C98A4A" strokeWidth={3} />
-      {Array.from({length: 14}, (_, i) => { const u = i / 13; return <rect key={i} x={rollX + 140 + u * 520} y={1490 - u * 150} width={30} height={5} rx={2} fill="#0E0B0A" opacity={0.8} transform={`rotate(${-14 + u * 8} ${rollX + 140 + u * 520} ${1490 - u * 150})`} />; })}
-      {Array.from({length: 7}, (_, i) => <path key={`c${i}`} d={`M${rollX + 160 + i * 75},${1470 - i * 18} l18,40 l-12,22`} stroke="#4A3E36" strokeWidth={2} fill="none" />)}
-      {/* the scroll itself, lying on the bench */}
-      <rect x={rollX - 260} y={rollY - 80} width={400} height={150} rx={70} fill="#1A1412" />
-      <ellipse cx={rollX - 260} cy={rollY - 5} rx={40} ry={75} fill="#2A201B" />
-      <Spiral cx={rollX - 260} cy={rollY - 5} r0={5} r1={36} turns={6} squash={1.8} color="#4A3A30" w={3} seed="pg" />
-      {/* falling flakes */}
-      {Array.from({length: 16}, (_, i) => <rect key={`k${i}`} x={rollX + 100 + R('kx', i) * 600} y={1560 + R('ky', i) * 140} width={8 + R('kw', i) * 12} height={5} fill="#2A201B" transform={`rotate(${R('kr', i) * 90} ${rollX + 100 + R('kx', i) * 600} ${1560 + R('ky', i) * 140})`} />)}
+      {/* base board on the bench, two posts, the top bar with its screws */}
+      <rect x={L - 40} y={base} width={Rp - L + 110} height={34} rx={4} fill="#4A2E1A" /><rect x={L - 40} y={base} width={Rp - L + 110} height={7} fill="#8A5A34" />
+      <rect x={L} y={topY} width={30} height={base - topY} fill="#5A3A22" /><rect x={L + 22} y={topY} width={8} height={base - topY} fill="#2E1C10" />
+      <rect x={Rp} y={topY} width={30} height={base - topY} fill="#5A3A22" /><rect x={Rp} y={topY} width={8} height={base - topY} fill="#A06A3C" />
+      <rect x={L - 30} y={topY - 34} width={Rp - L + 90} height={40} rx={5} fill="#6B4528" /><rect x={L - 30} y={topY - 34} width={Rp - L + 90} height={9} fill="#B07A48" />
+      {Array.from({length: 7}, (_, i) => { const x = L + 110 + i * 105, p = strip(0.12 + i * 0.13); return <g key={i}>
+        <rect x={x - 9} y={topY - 66} width={18} height={34} rx={3} fill="#B08A4A" /><rect x={x - 18} y={topY - 78} width={36} height={12} rx={4} fill="#E2BE74" />
+        <line x1={x} y1={topY + 6} x2={p.x} y2={p.y} stroke="#F6EBD0" strokeWidth={2} opacity={0.9} /></g>; })}
+      {/* the crank on the right post */}
+      <circle cx={Rp + 15} cy={1610} r={26} fill="#B08A4A" /><rect x={Rp + 13} y={1584} width={60} height={10} rx={4} fill="#8A6A3A" /><circle cx={Rp + 73} cy={1589} r={11} fill="#D9B46A" />
+      {/* the cradle and the scroll lying in it, end towards us */}
+      <path d={`M${sc.x - 30},${base} L${sc.x + 10},${sc.y + 30} L${sc.x + 270},${sc.y + 30} L${sc.x + 310},${base} Z`} fill="#3A2416" />
+      <rect x={sc.x} y={sc.y - sc.r} width={sc.len} height={sc.r * 2} rx={sc.r} fill="#1A1412" />
+      <ellipse cx={sc.x} cy={sc.y} rx={sc.r * 0.5} ry={sc.r} fill="#2A201B" /><Spiral cx={sc.x} cy={sc.y} r0={4} r1={sc.r * 0.45} turns={7} squash={2} color="#5A4A3E" w={2.4} seed="pg" />
+      {/* the opened strip, lifting off the top of the roll, its edge caught by the candle */}
+      <path d={`M${strip(0).x},${strip(0).y + 8} ${Array.from({length: 21}, (_, i) => { const p = strip(i / 20); return `L${p.x},${p.y}`; }).join(' ')} ${Array.from({length: 21}, (_, i) => { const p = strip(1 - i / 20); return `L${p.x + 14},${p.y + 62}`; }).join(' ')} Z`} fill="#2B2420" stroke="#D9964E" strokeWidth={3} />
+      {Array.from({length: 12}, (_, i) => { const p = strip(0.08 + i * 0.075); return <rect key={i} x={p.x + 4} y={p.y + 18 + (i % 2) * 14} width={18} height={4} rx={2} fill="#0E0B0A" />; })}
+      {/* flakes on the base */}
+      {Array.from({length: 18}, (_, i) => <rect key={`k${i}`} x={sc.x + 80 + R('kx', i) * 420} y={base - 6 - R('ky', i) * 8} width={6 + R('kw', i) * 12} height={4} fill="#241C18" transform={`rotate(${R('kr', i) * 40 - 20} ${sc.x + 80 + R('kx', i) * 420} ${base - 6})`} />)}
+      {/* Piaggio in the foreground, backlit by the candle behind him */}
+      <Priest x={2650} y={2300} s={2.6} flip rim="#F2B85A" rimW={6} light="back" shade={0.5} />
     </World>
-    <Dark lights={[{...toScreen(cam, 2050, 1400), r: 1000, a: 1}, {...toScreen(cam, 1950, 700), r: 700, a: 1}]} a={0.45} />
-    <Glow {...toScreen(cam, 2650, 1300)} r={500 * flick(t, 8, 0.06)} color={GOLD} a={0.4} />
+    <Dark lights={[{...toScreen(cam, 2000, 1450), r: 900, a: 1}, {...toScreen(cam, 2680, 1350), r: 500, a: 1}]} a={0.42} />
+    <Glow {...toScreen(cam, 2680, 1300)} r={420 * flick(t, 8, 0.06)} color={GOLD} a={0.45} />
     <MonoBadge mono="AP" name="ANTONIO PIAGGIO" role="priest and inventor" y={60} side="left" />
     <Kind t={t} text="Illustration" /><Grain /><Vignette a={0.55} /></AbsoluteFill>; };
 
@@ -264,7 +314,7 @@ const F_Scan = ({t}) => { const cam = {x: 2080, y: 1050, z: 0.62}, scr = {x: 124
       <text x={scr.x + 40} y={scr.y + 60} fill={CYAN} fontFamily="JetBrains Mono" fontSize={30} opacity={0.8}>SLICE 0412 / 1920</text>
     </World>
     <Glow {...toScreen(cam, scr.x + 860, scr.y + 420)} r={900} color="#3FB7D9" a={0.35} />
-    <svg width={1920} height={1080} style={{position: 'absolute'}}><Back x={1010} y={1180} s={1.9} fill="#05070C" rim="#7FE3F0" /></svg>
+    <svg width={1920} height={1080} style={{position: 'absolute'}}><BackView x={1250} y={1290} s={2.4} rim="#7FE3F0" /></svg>
     <Chapter t={1} at={0} dur={99} n="IV" title="The man who wouldn't cut" />
     <MonoBadge mono="BS" name="BRENT SEALES" role="computer scientist · University of Kentucky" y={250} />
     <Kind t={t} text="Illustration · scan view schematic" /><Grain /><Vignette a={0.55} /></AbsoluteFill>; };
