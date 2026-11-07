@@ -59,7 +59,8 @@ const Roller = ({u, d}) => { const a = at(u, RV0), b = at(u, RV1), ang = Math.at
 const TAGC = `rgb(${PL.tag_bgr.slice().reverse().map(Math.round).join(',')})`;
 const Tag = ({x, y, s = 1}) => <g><line x1={x} y1={y} x2={x} y2={y + 14 * s} stroke="#3a2a22" strokeWidth={2 * s} />
   <rect x={x - 6 * s} y={y + 14 * s} width={12 * s} height={26 * s} fill={TAGC} stroke="#000" strokeWidth={2 * s} /></g>;
-const Stand = ({laid, unroll}) => { const u0 = 0.06, ur = u0 + 0.88 * unroll, dL = SD * (1 - 0.38 * unroll), dR = SD * 0.62 * Math.min(1, unroll * 3);
+const [U0, U1] = SPEC.objects.find((o) => o.id === 'stand').scroll_layout.u_open;
+const Stand = ({laid, unroll}) => { const u0 = U0, ur = U0 + (U1 - U0) * unroll, dL = SD * (1 - 0.38 * unroll), dR = SD * 0.62 * Math.min(1, unroll * 3);
   const parts = {...Object.fromEntries(Object.values(SC.stand.legs).map((l) => [l.id, <rect key={l.id} x={l.x} y={l.y} width={l.w} height={l.h} fill={l.layer === 'back' ? WOOD2 : WOOD} stroke="#000" strokeWidth={2.5} />])),
     ...Object.fromEntries(Object.values(SC.stand.bars).map((b) => [b.id, <rect key={b.id} x={b.x} y={b.y} width={b.w} height={b.h} fill={b.layer === 'back' ? WOOD2 : WOOD} stroke="#000" strokeWidth={2.5} />])),
     base: SC.stand.base && <g key="base"><polygon points={poly(SC.stand.base.side)} fill={WOOD2} stroke="#000" strokeWidth={3} strokeLinejoin="round" />
@@ -94,13 +95,13 @@ const TAKE_SLOT = (() => { const m = SPEC.props[0].states[0].at.match(/slot\[(\d
 export const camAt = SC.camAt;
 
 // ---- devices
-const ChapterTag = ({o = 1}) => <div style={{position: 'absolute', left: 52, top: 36, opacity: o, display: 'flex', alignItems: 'baseline', gap: 14, padding: '8px 14px', background: `rgba(10,14,20,${SPEC.devices[0].bg})`}}>
+const ChapterTag = ({o = 1}) => <div style={{position: 'absolute', left: 52, top: 40, opacity: o, display: 'flex', alignItems: 'baseline', gap: 14, padding: '8px 14px', background: `rgba(10,14,20,${SPEC.devices[0].bg})`}}>
   <span style={{fontFamily: MO, fontSize: 16, letterSpacing: 3, color: '#D9C6A2'}}>I ·</span>
   <span style={{fontFamily: SR, fontWeight: 600, fontSize: 30, color: '#F4E6C8'}}>The library by the <span style={{fontFamily: SI, color: GOLD}}>sea</span></span></div>;
 const PlaceTag = ({t, at: a, dur = 99, text}) => <div style={{position: 'absolute', right: 64, top: 56, opacity: fade(t, a, dur, 0.6, 0.4), fontFamily: MO, fontSize: 15, letterSpacing: 3,
   color: '#F1E2C4', border: '1px solid #C9B48E77', padding: '6px 12px', background: 'rgba(10,14,20,0.6)'}}>{text}</div>;
 const WordCard = ({t, at: a, dur}) => { const o = fade(t, a, dur, 0.6, 0.5), dy = (1 - ramp(t, a, a + 0.7)) * 16;
-  return <div style={{position: 'absolute', left: 64, bottom: 90, width: 470, opacity: o, transform: `translateY(${dy}px)`, padding: '14px 20px', background: 'rgba(10,14,20,0.92)', borderLeft: `3px solid ${GOLD}`}}>
+  return <div style={{position: 'absolute', left: 64, bottom: 110, width: 470, opacity: o, transform: `translateY(${dy}px)`, padding: '14px 20px', background: `rgba(10,14,20,${SPEC.devices[2].bg})`, borderLeft: `3px solid ${GOLD}`}}>
     <div style={{fontFamily: MO, fontSize: 14, letterSpacing: 3, color: '#C9B48E'}}>WORD 01</div>
     <div style={{fontFamily: SR, fontWeight: 600, fontSize: 44, color: CREAM, lineHeight: 1.1, marginTop: 2}}>Papyrus</div>
     <div style={{fontFamily: IN, fontSize: 19, color: '#DCCDB2', lineHeight: 1.35, marginTop: 4}}>Paper made from a reed of the Nile marshes, rolled into scrolls.</div></div>; };
@@ -127,9 +128,7 @@ const Room = ({t}) => {
     <ellipse cx={600} cy={905} rx={cd * 0.3} ry={cd / 2} fill={SHEET} stroke="#000" strokeWidth={5} />
     <circle cx={600} cy={905} r={cd * 0.13} fill="none" stroke="#3a2a22" strokeWidth={5} /><circle cx={600} cy={905} r={cd * 0.05} fill="#3a2a22" />
     <line x1={600} y1={905 + cd / 2} x2={600} y2={905 + cd / 2 + 26} stroke="#3a2a22" strokeWidth={4} />
-    <rect x={589} y={905 + cd / 2 + 26} width={22} height={48} fill={TAGC} stroke="#000" strokeWidth={4} />
-    {/* his fingers wrap the near side of the roll, so he visibly holds it */}
-    {[0, 1, 2, 3].map((k) => <rect key={k} x={505 + k * 22} y={905 - cd / 2 - 14} width={20} height={cd * 0.55} rx={10} fill={SKIN} stroke="#000" strokeWidth={4} />)}</g>;
+    <rect x={589} y={905 + cd / 2 + 26} width={22} height={48} fill={TAGC} stroke="#000" strokeWidth={4} /></g>;
   // light and focus cues
   const fl = scr(cam, PL.flame[0], PL.flame[1], 1.05), pool = scr(cam, (PL.flame[0] + SHEET_C[0]) / 2 - 60, PL.flame[1] + 40, 1.05);
   const glint = ramp(t, tBooks - 0.6, tBooks - 0.1) * (1 - ramp(t, tBooks + 0.6, tBooks + 1.2));
@@ -140,7 +139,7 @@ const Room = ({t}) => {
   return <AbsoluteFill style={{background: '#0B0F16'}}>
     <Plate cam={cam} p={1} style={{filter: `blur(${4 * closeO}px)`}}>
       <Pic src="back.jpg" w={PW} h={PH} />
-      {t > T.grab && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}><ellipse cx={take.x} cy={take.y} rx={take.rx + 7} ry={take.ry + 7} fill={cub} />{take.tag && <rect x={take.tag.x - 22} y={take.tag.y - 34} width={44} height={70} fill={cub} />}</svg>}
+      {t > T.grab && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}><defs><clipPath id="cell10"><rect x={take.x - take.rx - 4} y={take.y - take.ry - 4} width={2 * take.rx + 8} height={2 * take.ry + 8} /></clipPath></defs><g clipPath="url(#cell10)"><ellipse cx={take.x} cy={take.y} rx={take.rx + 3} ry={take.ry + 3} fill={cub} />{take.tag && <rect x={take.tag.x - 9} y={take.tag.y - 20} width={18} height={44} fill={cub} />}</g></svg>}
       
     </Plate>
     <Plate cam={cam} p={1.05}>

@@ -318,5 +318,25 @@
   "set": {
    "objects.7.base": null
   }
+ },
+ "scroll_half_off_desk": {
+  "note": "reviewer v11 #4 and #17: the scroll was laid on the board's left edge, half over nothing; the rollers sat on the side edges in the close-up",
+  "set": {
+   "objects.7.scroll_layout.u_open": [
+    0.06,
+    0.94
+   ]
+  }
+ },
+ "title_under_margin": {
+  "note": "reviewer v11 #20: the chapter box's top edge at y 36, under the 40 px margin",
+  "set": {
+   "devices.0.box": [
+    52,
+    36,
+    500,
+    52
+   ]
+  }
  }
 }

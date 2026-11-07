@@ -55,7 +55,7 @@ for (const o of spec.objects) if (o.rests_on === 'floor' && (o.z || 0) !== 0) ad
 // ---------- C: continuity and hand-overs (forward kinematics of the rig)
 for (const c of spec.characters) { const ch = sc.character(c.id);
   for (const a of c.actions.filter((a) => a.target)) { const t = sc.time(a.t), cam = sc.camAt(t), hs = sc.screen(cam, ch.hand(t), sc.lane(c.lane).parallax);
-    let tgt, tp; const mm = a.target.match(/^(\w+)\.slot\[(\d+),(\d+)\]$/); if (mm) { const q = sc.slot(mm[1], +mm[2], +mm[3]); tgt = [q.x, q.y]; tp = 1; } else if (a.target === 'stand.top') { tgt = sc.stand.at(0.06, 0.5); tp = 1.05; }
+    let tgt, tp; const mm = a.target.match(/^(\w+)\.slot\[(\d+),(\d+)\]$/); if (mm) { const q = sc.slot(mm[1], +mm[2], +mm[3]); tgt = [q.x, q.y]; tp = 1; } else if (a.target === 'stand.top') { tgt = sc.stand.at(sc.stand.layout.u_open[0], 0.5); tp = 1.05; }
     const ts = sc.screen(cam, tgt, tp), h = hs; const d = Math.hypot(hs.x - ts.x, hs.y - ts.y) / (ts.s * sc.PXM), lim = RU.contact_m[a.name];
     add('C2 hands touch what they take', d <= lim ? 'PASS' : 'FAIL', `${a.name} at ${t.toFixed(2)} s: hand is ${d.toFixed(2)} m from ${a.target} (limit ${lim})`, d <= lim ? '' : 'move the target or the reach pose');
     if (mm) { let best = null; const [R0, C0] = sc.objs[mm[1]].grid; for (let r = 0; r < R0; r++) for (let k = 0; k < C0; k++) { const q = sc.screen(cam, [sc.slot(mm[1], r, k).x, sc.slot(mm[1], r, k).y], 1), dd = Math.hypot(h.x - q.x, h.y - q.y); if (!best || dd < best.d) best = {r, k, d: dd}; }
@@ -114,7 +114,7 @@ for (const o of spec.objects.filter((o) => ['rack', 'cabinet', 'lampstand'].incl
 // ---------- T: text and devices
 { const mg = RU.safe_margin_px;
   for (const d of spec.devices) { const [x, y, w, h] = d.box, t0 = sc.time(d.t0), t1 = sc.time(d.t1);
-    if (x < mg - 12 || y < mg - 12 || x + w > 1920 - mg || y + h > 1080 - mg) add('T1 safe margins', 'FAIL', `${d.id} is ${Math.min(x, y, 1920 - x - w, 1080 - y - h).toFixed(0)} px from the edge (min ${mg})`, 'move it in');
+    if (x < mg || y < mg || x + w > 1920 - mg || y + h > 1080 - mg) add('T1 safe margins', 'FAIL', `${d.id} is ${Math.min(x, y, 1920 - x - w, 1080 - y - h).toFixed(0)} px from the edge (min ${mg})`, 'move it in');
     const md = d.min_dur || RU.text_min_dur; if (t1 - t0 < md) add('T2 text stays up long enough', 'FAIL', `${d.id} shows for ${(t1 - t0).toFixed(1)} s (min ${md} s)`, 'lengthen it');
     if (d.kind === 'title' && t1 > sceneEnd + 0.01) add('T3 devices end with their scene', 'FAIL', `${d.id} stays on ${(t1 - sceneEnd).toFixed(1)} s into the next scene`, 'end it with the scene');
     // anything drawn behind a device must not show through unless the device has an opaque backing
@@ -140,6 +140,9 @@ for (const p of spec.objects.filter((o) => o.kind === 'panel')) { let hid = null
     add('S1 a scroll opens along its columns', 'FAIL', `rollers ${L.rollers}, unrolls along ${L.unroll_axis}, columns run along ${L.columns_axis}`, 'rollers at the left and right ends; it unrolls along the line of columns'); }
 { const L = sc.stand.layout; if (L.roller_v) { const st = sc.stand, stub = (L.stub || 0) * st.m, vlen = st.B.bl[1] - st.B.tl[1];
     const v0 = L.roller_v[0] - stub / vlen, v1 = L.roller_v[1] + stub / vlen;
+    if (L.u_open) { const uw = st.B.br[0] - st.B.bl[0], r = (s0 => s0)(spec.props[0].diameter * st.m / 2) / uw;
+      if (L.u_open[0] - r < 0.02 || L.u_open[1] + r > 0.98) add('G7 the open scroll stays on the board', 'FAIL', `rollers at u ${L.u_open.join('-')} with radius ${r.toFixed(3)} reach the board's side edges`, 'move the rollers in'); }
+    else add('G7 the open scroll stays on the board', 'FAIL', 'no u_open range for the rollers', 'set scroll_layout.u_open');
     if (v0 < 0 || v1 > 1) add('G7 the open scroll stays on the board', 'FAIL', `rollers and stubs run from v ${v0.toFixed(2)} to ${v1.toFixed(2)} of the board's slope`, 'shorten the rollers'); } }
 // ---------- C5: the prop looks like the thing it came from (a tagged scroll comes from a tagged slot)
 for (const p of spec.props) { const m0 = p.states[0].at.match(/^(\w+)\.slot\[(\d+),(\d+)\]$/); if (!m0) continue; const q = sc.slot(m0[1], +m0[2], +m0[3]);

@@ -94,8 +94,8 @@ export const makeScene = (spec, words, rigs, place) => {
       const pose = {...walk.pose,
         upper_arm: (arm * (1 - lay) + P('lay', 'upper_arm') * lay) * (1 - rest) + (walk.pose.upper_arm || 0) * rest,
         forearm: (fore * (1 - lay) + P('lay', 'forearm') * lay) * (1 - rest) + (walk.pose.forearm || 0) * rest,
-        torso: (walk.pose.torso || 0) + 4 * reach * (1 - lower) + 5 * lay * (1 - rest),
-        head: (walk.pose.head || 0) - 12 * look + 6 * lay * (1 - rest)};
+        torso: (walk.pose.torso || 0) + 4 * reach * (1 - lower) + 2 * lay * (1 - rest),
+        head: (walk.pose.head || 0) - 12 * look + 3 * lay * (1 - rest)};
       const breathe = Math.sin(t * 2.1) * 3 * (1 - speed);
       const offset = {torso: [0, walk.bob * speed + breathe - 14 * reach * (1 - lower)]};
       return {x, speed, WS, pose, offset, px: X(x, c.lane), py: FLOOR + lane(c.lane).drop,
@@ -136,7 +136,7 @@ export const makeScene = (spec, words, rigs, place) => {
     const st = pr.states.find((s) => t >= time(s.from) && t < time(s.to)) || pr.states[pr.states.length - 1];
     const where = (ref) => { let m = ref.match(/^(\w+)\.slot\[(\d+),(\d+)\]$/); if (m) { const q = slot(m[1], +m[2], +m[3]); return [q.x, q.y]; }
       if (ref.endsWith('.hand')) return character(ref.split('.')[0]).hand(t);
-      if (ref === 'stand.top') return stand.at(0.06, 0.5); throw new Error(`unknown place ${ref}`); };
+      if (ref === 'stand.top') return stand.at(stand.layout.u_open ? stand.layout.u_open[0] : 0.06, 0.5); throw new Error(`unknown place ${ref}`); };
     return {state: st, at: st.at, pos: where(st.at), diameter: st.diameter || pr.diameter}; };
 
   return {spec, PXM, FLOOR, BASE, lane, X, Y, time, box, stand, slot, rackEndDiameter, character, camAt, screen, screenBox, propAt, objs, chars};

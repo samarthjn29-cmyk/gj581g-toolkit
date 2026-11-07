@@ -185,7 +185,11 @@
      0.1,
      0.9
     ],
-    "stub": 0.02
+    "stub": 0.02,
+    "u_open": [
+     0.13,
+     0.87
+    ]
    },
    "base": {
     "type": "wedge",
@@ -281,7 +285,7 @@
      "t0": 6.7,
      "t1": 8.0,
      "x0": 3.45,
-     "x1": 5.15
+     "x1": 5.25
     }
    ],
    "actions": [
@@ -332,7 +336,7 @@
     {
      "name": "rest",
      "t": 8.9,
-     "dur": 0.7
+     "dur": 1.0
     }
    ],
    "rules": {
@@ -383,17 +387,6 @@
      "fill": "tunic",
      "z": 6.5,
      "why": "shoulder under the raised sleeve"
-    },
-    {
-     "part": "torso",
-     "at": [
-      575,
-      292
-     ],
-     "r": 28,
-     "fill": "skin",
-     "z": 5.5,
-     "why": "front of the neck when the torso leans (reviewer v10 #7)"
     },
     {
      "part": "torso",
@@ -520,7 +513,7 @@
    "id": "chapter",
    "box": [
     52,
-    36,
+    40,
     500,
     52
    ],
@@ -546,13 +539,13 @@
    "id": "wordcard",
    "box": [
     64,
-    840,
+    820,
     470,
     150
    ],
    "t0": "lib5.not",
    "t1": "lib6.reed+0.1",
-   "bg": 0.97,
+   "bg": 1.0,
    "kind": "card",
    "min_dur": 3.0
   },
@@ -566,7 +559,7 @@
    ],
    "t0": 0,
    "t1": "lib6.reed-0.1",
-   "bg": 0.95,
+   "bg": 1.0,
    "kind": "credit"
   },
   {
@@ -579,7 +572,7 @@
    ],
    "t0": 0,
    "t1": 15.3,
-   "bg": 0.95,
+   "bg": 1.0,
    "kind": "credit"
   }
  ],
