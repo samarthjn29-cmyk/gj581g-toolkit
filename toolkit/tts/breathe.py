@@ -1,54 +1,107 @@
 #!/usr/bin/env python3
-"""Give the narration room to breathe without touching the speech (7 Nov 2026, vector-world pilot: the clone read Plato's Cave
-at about 200 words a minute; Emergence runs 152-171, with a music bed filling the pauses).
-Inserts silence at sentence ends, a short breath at commas (0.12 s, 7 Nov 2026: reads as thinking, not reading) (after . ? ! :) and longer silence at scene changes, cutting only inside the existing
-gap between two words, then shifts every word time in timing.json to match. Nothing is stretched or sped up.
-Usage: breathe.py vo.wav timing.json out.wav out_timing.json [--sentence 0.35] [--comma 0.12] [--scene 0.8]"""
+"""Even out the pauses in a narration without touching the speech (7 Nov 2026).
+Every gap between two words is set to a TARGET length, not added to:
+  sentence end (. ? ! :)  -> --sentence (0.50 s)      comma or ; -> --comma (0.22 s)
+  no punctuation          -> left alone unless longer than --inword (0.16 s), then shortened to it
+  between scenes          -> --scene (0.90 s)
+A gap that is too short gets looped room tone (the quietest stretch between words, never digital silence);
+a gap that is too long loses its middle. All joins are cross-faded (12 ms) at the quietest nearby sample.
+Word times in timing.json are shifted to match. Nothing is stretched or sped up.
+History: v1 ADDED silence on top of the clone's own gaps, so sentence breaks ran to 1.2 s and commas sounded like
+breaks, and digital silence switched the noise floor on and off (Sam, 7 Nov: "weird pauses", "weird breaks").
+Usage: breathe.py vo.wav timing.json out.wav out_timing.json [--sentence 0.5] [--comma 0.22] [--inword 0.16] [--scene 0.9]"""
 import sys, json, re, wave, numpy as np
 a = sys.argv; vo, tj, out, otj = a[1:5]
 opt = lambda k, d: float(a[a.index(k) + 1]) if k in a else d
-SENT, COMMA, SCENE = opt('--sentence', 0.35), opt('--comma', 0.12), opt('--scene', 0.8)
-w = wave.open(vo); sr = w.getframerate(); ch = w.getnchannels(); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, ch); w.close()
-T = json.load(open(tj)); cuts = []   # (time, seconds to insert)
-prev_scene = None
+SENT, COMMA, INW, SCENE = opt('--sentence', 0.50), opt('--comma', 0.22), opt('--inword', 0.16), opt('--scene', 0.90)
+w = wave.open(vo); sr = w.getframerate(); ch = w.getnchannels(); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, ch).astype(np.float64); w.close()
+T = json.load(open(tj))
+# gaps: (end of word A, start of word B, target)
+G = []; prev = None
 for li, l in enumerate(T['lines']):
     toks = re.findall(r"[A-Za-z0-9']+[.,?!:;]?", l['text']); W = l['words']
-    if len(toks) != len(W): print('word count differs, skipping pauses in', l['id']); toks = [''] * len(W)
-    if prev_scene is not None and l.get('scene') != prev_scene: cuts.append(((T['lines'][li - 1]['end'] + l['start']) / 2, SCENE))
-    elif li: cuts.append(((T['lines'][li - 1]['end'] + l['start']) / 2, SENT))
+    if len(toks) != len(W): print('word count differs, only sentence/line gaps in', l['id']); toks = [''] * len(W)
+    if prev is not None:
+        pl = T['lines'][li - 1]; G.append((pl['words'][-1][2], W[0][1], SCENE if l.get('scene') != pl.get('scene') else SENT))
     for i in range(len(W) - 1):
         p = toks[i][-1:] if toks[i] else ''
-        add = SENT if p in '.?!:' and p else COMMA if p in ',;' and p else 0
-        if add: cuts.append(((W[i][2] + W[i + 1][1]) / 2, add))
-    prev_scene = l.get('scene')
-cuts.sort(); parts = []; last = 0
-# room tone, not digital silence (7 Nov 2026, Sam heard "background disturbances": the faint noise under the voice
-# switched off and on at every inserted pause). Take the quietest 0.25 s between words and loop it, with 12 ms fades.
-xf = x.astype(np.float64); F = int(sr * 0.25); best = None
-for l in T['lines']:
-    for a_, b_ in zip(l['words'], l['words'][1:]):
-        i0, i1 = int((a_[2] + 0.02) * sr), int((b_[1] - 0.02) * sr)
-        for j in range(i0, i1 - F, F // 2):
-            r = np.sqrt(np.mean(xf[j:j + F] ** 2))
-            if r > 0 and (best is None or r < best[0]): best = (r, xf[j:j + F])
-tone = best[1] if best else np.zeros((F, ch))
+        tgt = SENT if p and p in '.?!:' else COMMA if p and p in ',;' else None
+        g = W[i + 1][1] - W[i][2]
+        if tgt is None:
+            if g > INW: tgt = INW
+            else: continue
+        G.append((W[i][2], W[i + 1][1], tgt))
+    prev = l
+# room tone: the quietest 0.25 s between words
+F = int(sr * 0.25); best = None; cands = []
+for e0, s1, _ in G:
+    i0, i1 = int((e0 + 0.03) * sr), int((s1 - 0.03) * sr)
+    for j in range(i0, i1 - F, F // 4):
+        r = np.sqrt(np.mean(x[j:j + F] ** 2))
+        if r > 0: cands.append((r, j))
+# the tone: a between-word stretch at the voice's own noise floor (about the 20th percentile of the quiet stretches),
+# never digital zeros (the clone's joins) and never a breath
+cands = [c for c in cands if np.abs(x[c[1]:c[1] + F]).max(1).min() >= 1 or c[0] > 20]
+if cands: rs = sorted(c[0] for c in cands); tgt_r = rs[len(rs) // 5]; r0, j0 = min(cands, key=lambda c: abs(c[0] - tgt_r)); tone = x[j0:j0 + F].copy()
+else: tone = np.zeros((F, ch))
+print(f'room tone level {20 * np.log10(np.sqrt(np.mean(tone ** 2)) / 32768 + 1e-12):.0f} dBFS')
+def pad(n): return np.concatenate([tone[::1 if k % 2 == 0 else -1] for k in range(-(-n // len(tone)) or 1)])[:n]
 FD = int(sr * 0.012); ramp = np.linspace(0, 1, FD)[:, None]
-def pad(n):
-    reps = -(-n // len(tone)); t = np.concatenate([tone[::1 if k % 2 == 0 else -1] for k in range(reps)])[:n]  # mirrored loop: no seam
-    return t
-def zc(i):  # nudge a cut to the quietest sample within 5 ms, so it never lands mid-wave
-    w = int(sr * 0.005); seg = np.abs(xf[max(0, i - w):i + w].sum(1)); return max(0, i - w) + int(np.argmin(seg)) if len(seg) else i
-for tc, add in cuts:
-    i = zc(int(tc * sr)); n = int(add * sr); a_ = xf[last:i].copy(); g = pad(n).copy()
-    if len(a_) > FD: a_[-FD:] = a_[-FD:] * (1 - ramp) + (tone[:FD] if len(tone) >= FD else 0) * ramp  # cross-fade voice -> room tone
-    parts += [a_, g]; last = i
-parts.append(xf[last:]); y = np.clip(np.concatenate(parts), -32768, 32767).astype(np.int16)
+def quiet(i, w=0.006):
+    w = int(sr * w); s = np.abs(x[max(0, i - w):i + w].sum(1)); return max(0, i - w) + int(np.argmin(s)) if len(s) else i
+ops = []  # (sample index, delta samples) : +n insert room tone, -n remove n samples starting there
+for e0, s1, tgt in G:
+    g = max(0.0, s1 - e0); d = tgt - g
+    if abs(d) < 0.02: continue
+    if s1 - e0 < 0.08:  # the aligner can butt two words together (cfg 0.2 take, 'daylight'/'first'): find the real gap by energy
+        lo, hi = int((min(e0, s1) - 0.25) * sr), int((max(e0, s1) + 0.25) * sr); Fq = int(sr * 0.03)
+        rms = [(np.sqrt(np.mean(x[j:j + Fq] ** 2)), j + Fq // 2) for j in range(max(0, lo), max(lo + 1, hi - Fq), Fq // 3)]
+        mid = min(rms)[1] if rms else quiet(int((e0 + s1) / 2 * sr))
+        if rms:  # measure the real gap: the run of frames below -38 dB around the quietest one
+            db = [(20 * np.log10(r_ / 32768 + 1e-12), c) for r_, c in rms]; k = min(range(len(db)), key=lambda q: db[q][0]); a_, b_ = k, k
+            while a_ > 0 and db[a_ - 1][0] < -38: a_ -= 1
+            while b_ < len(db) - 1 and db[b_ + 1][0] < -38: b_ += 1
+            g = (db[b_][1] - db[a_][1]) / sr + 0.03; d = tgt - g
+            if abs(d) < 0.02: continue
+            if d < 0:  # too long: remove from the middle of the measured gap
+                n = int(-d * sr); ops.append((mid - n // 2, -n)); continue
+    else: mid = quiet(int((e0 + s1) / 2 * sr))
+    if d > 0: ops.append((mid, int(d * sr)))
+    else:
+        n = int(-d * sr); st = max(int((e0 + 0.03) * sr), mid - n // 2); st = min(st, int((s1 - 0.03) * sr) - n)
+        if st > int(e0 * sr): ops.append((st, -n))
+ops.sort(); parts = []; last = 0; shifts = []
+def xfade(tail, head):  # cross-fade the end of tail into the start of head
+    if len(tail) > FD and len(head) > FD: tail = tail.copy(); tail[-FD:] = tail[-FD:] * (1 - ramp) + head[:FD] * ramp; head = head[FD:]
+    return tail, head
+for i, n in ops:
+    if i < last: continue
+    seg = x[last:i]
+    if n > 0:
+        g = pad(n); seg, g = xfade(seg, g); parts += [seg, g]; last = i
+    else:
+        nxt = x[i - n:]; seg, _ = xfade(seg, nxt[:FD * 2]); parts.append(seg); last = i - n + FD
+    shifts.append((i / sr, n / sr if n > 0 else (n - FD) / sr))
+parts.append(x[last:]); yf = np.concatenate(parts)
+# any stretch of digital silence left by the clone's own joins (scene parts, squeezed gaps) also gets room tone
+q = np.abs(yf).max(1) < 2; i = 0; MIN = int(sr * 0.03); filled = 0
+while i < len(q):
+    if q[i]:
+        j = i
+        while j < len(q) and q[j]: j += 1
+        if j - i >= MIN:
+            g = pad(j - i).copy(); f = min(FD, (j - i) // 2); r_ = np.linspace(0, 1, f)[:, None]
+            g[:f] *= r_; g[len(g) - f:] *= r_[::-1]; yf[i:j] = g; filled += 1
+        i = j
+    else: i += 1
+if filled: print(f'{filled} digital-silence stretches filled with room tone')
+y = np.clip(yf, -32768, 32767).astype(np.int16)
 o = wave.open(out, 'wb'); o.setnchannels(ch); o.setsampwidth(2); o.setframerate(sr); o.writeframes(y.tobytes()); o.close()
-shift = lambda t: t + sum(add for tc, add in cuts if tc < t)
+shift = lambda t: t + sum(d for tc, d in shifts if tc < t)
 for l in T['lines']:
     l['start'], l['end'] = round(shift(l['start']), 3), round(shift(l['end']), 3)
     l['words'] = [[ww, round(shift(s), 3), round(shift(e), 3)] for ww, s, e in l['words']]
-T['total'] = round(len(y) / sr, 3); T['breathe'] = {'sentence': SENT, 'comma': COMMA, 'scene': SCENE}
+T['total'] = round(len(y) / sr, 3); T['breathe'] = {'sentence': SENT, 'comma': COMMA, 'inword': INW, 'scene': SCENE, 'mode': 'target'}
 json.dump(T, open(otj, 'w'), indent=1)
-n = sum(len(l['words']) for l in T['lines'])
-print(f"{len(cuts)} pauses added, {len(x) / sr:.1f} s -> {len(y) / sr:.1f} s; {n / (T['lines'][-1]['end'] - T['lines'][0]['start']) * 60:.0f} words a minute")
+nw = sum(len(l['words']) for l in T['lines'])
+print(f"{sum(1 for _, n in ops if n > 0)} gaps lengthened, {sum(1 for _, n in ops if n < 0)} shortened; {len(x) / sr:.1f} s -> {len(y) / sr:.1f} s; {nw / (T['lines'][-1]['end'] - T['lines'][0]['start']) * 60:.0f} words a minute")

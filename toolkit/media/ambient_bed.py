@@ -4,7 +4,9 @@ Synthesised here, so there is nothing to license or credit. Three characters, ea
   ember  - warm low drone (detuned saws through a slow low-pass), soft fire crackle
   glass  - airy pad with a high shimmer, slow swells
   pulse  - pad plus a soft low heartbeat pulse at 60 bpm
-Usage: ambient_bed.py <ember|glass|pulse> <seconds> <out.wav> [--changes 0,18.5,40.2] [--key D]
+  keys   - soft felt-piano notes picking out the chord over a quiet sine pad, long room tail (7 Nov 2026)
+  drift  - warm string-like pad with slow vibrato, airy wind and a rare soft bell (7 Nov 2026)
+Usage: ambient_bed.py <ember|glass|pulse|keys|drift> <seconds> <out.wav> [--changes 0,18.5,40.2] [--key D]
 The bed is written at about -28 LUFS; mix.py lays it under the narration (about 12-14 dB below the voice)."""
 import sys, numpy as np, subprocess, os
 SR = 48000
@@ -33,11 +35,14 @@ def main():
         k = int(2 * SR); c = np.cumsum(np.pad(f, (k, 0), mode='edge')); f = ((c[k:] - c[:-k]) / k)[:n]  # moving average (np.convolve with a 2 s kernel took minutes)
         phase = np.cumsum(f) / SR
         for det, pan in ((-0.004, 0.2), (0.005, 0.8)):
-            w = 2 * ((phase * (1 + det) + rng.random()) % 1) - 1 if kind != 'glass' else np.sin(2 * np.pi * phase * (1 + det))
-            g = (0.22 if v == 0 else 0.15)
+            if kind in ('glass', 'keys'): w = np.sin(2 * np.pi * phase * (1 + det))
+            elif kind == 'drift': vib = 0.003 * np.sin(2 * np.pi * t * (4.8 + v * 0.3)); w = 2 * ((np.cumsum(f * (1 + det + vib)) / SR + rng.random()) % 1) - 1
+            else: w = 2 * ((phase * (1 + det) + rng.random()) % 1) - 1
+            g = (0.22 if v == 0 else 0.15) * (0.45 if kind == 'keys' else 1)
             L += w * g * (1 - pan); R += w * g * pan
-    cut = 380 + 260 * np.sin(2 * np.pi * t / 23) ** 2 if kind != 'glass' else 2400 + 900 * np.sin(2 * np.pi * t / 17)
+    cut = {'glass': 2400 + 900 * np.sin(2 * np.pi * t / 17), 'keys': 900 + 0 * t, 'drift': 1100 + 500 * np.sin(2 * np.pi * t / 19) ** 2}.get(kind, 380 + 260 * np.sin(2 * np.pi * t / 23) ** 2)
     L = lowpass(L, cut); R = lowpass(R, cut)
+    if kind == 'drift': L = lowpass(lowpass(L, cut), cut * 1.3); R = lowpass(lowpass(R, cut), cut * 1.3)  # 18 dB/oct: string-soft, not buzzy
     if kind == 'glass':  # shimmer: two octaves up, slow tremolo
         sh = np.sin(2 * np.pi * hz(root + 36 + 7) * t) * 0.03 * (0.5 + 0.5 * np.sin(2 * np.pi * t / 7)); L += sh; R += np.roll(sh, 2400)
     if kind == 'ember':  # crackle: sparse filtered clicks
@@ -49,6 +54,25 @@ def main():
                 i = int((b + off) * SR); m = min(n - i, int(0.25 * SR))
                 if m > 0: tt = np.arange(m) / SR; p[i:i + m] += amp * np.sin(2 * np.pi * 48 * tt) * np.exp(-tt * 18)
         L += p * 0.35; R += p * 0.35
+    if kind == 'keys':  # felt-piano notes: chord tones an octave or two up, every ~1.6 s, soft attack, long decay, room tail
+        pk = np.zeros(n); tt = np.arange(int(4 * SR)) / SR
+        for j, b in enumerate(np.arange(1.0, dur - 1, 1.6)):
+            s_ = int(np.searchsorted(ch, b, side='right') - 1); mm = root + 24 + prog[s_ % 4][[1, 2, 3, 2][j % 4]] - 12 * (j % 5 == 4)
+            i = int((b + rng.normal(0, 0.04)) * SR); m = min(n - i, len(tt))
+            note = (np.sin(2 * np.pi * hz(mm) * tt[:m]) + 0.3 * np.sin(4 * np.pi * hz(mm) * tt[:m]) * np.exp(-tt[:m] * 3)) * (1 - np.exp(-tt[:m] * 120)) * np.exp(-tt[:m] * 1.1)
+            pk[i:i + m] += note * (0.5 + 0.2 * rng.random())
+        pk = lowpass(pk, 2600); ir = rng.normal(0, 1, int(2.2 * SR)) * np.exp(-np.arange(int(2.2 * SR)) / SR * 2.6)
+        from scipy.signal import fftconvolve
+        wet = fftconvolve(pk, ir)[:n]; wet /= np.abs(wet).max() + 1e-9; pk /= np.abs(pk).max() + 1e-9
+        L += 0.30 * pk + 0.16 * wet; R += 0.30 * np.roll(pk, 180) + 0.16 * np.roll(wet, 900)
+    if kind == 'drift':  # wind: slow-swelling filtered noise; a soft bell every 7-11 s
+        wn = lowpass(rng.normal(0, 1, n), 700) * (0.5 + 0.5 * np.sin(2 * np.pi * t / 13) ** 2) * 0.08; L += wn; R += np.roll(wn, 2000)
+        b = 2.0
+        while b < dur - 2:
+            s_ = int(np.searchsorted(ch, b, side='right') - 1); mm = root + 36 + prog[s_ % 4][2]
+            i = int(b * SR); m = min(n - i, int(3.5 * SR)); tt = np.arange(m) / SR
+            bell = (np.sin(2 * np.pi * hz(mm) * tt) + 0.4 * np.sin(2 * np.pi * hz(mm) * 2.76 * tt) * np.exp(-tt * 4)) * np.exp(-tt * 1.4) * 0.06
+            L[i:i + m] += bell; R[i:i + m] += bell * 0.8; b += 7 + 4 * rng.random()
     # swell envelope: fade in 3 s, out 3 s, breathe a little at each change
     env = np.clip(t / 3, 0, 1) * np.clip((dur - t) / 3, 0, 1)
     for c in ch[1:]: env *= 1 - 0.25 * np.exp(-((t - c) / 0.9) ** 2)
