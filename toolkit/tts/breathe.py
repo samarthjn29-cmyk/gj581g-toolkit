@@ -22,9 +22,27 @@ for li, l in enumerate(T['lines']):
         if add: cuts.append(((W[i][2] + W[i + 1][1]) / 2, add))
     prev_scene = l.get('scene')
 cuts.sort(); parts = []; last = 0
+# room tone, not digital silence (7 Nov 2026, Sam heard "background disturbances": the faint noise under the voice
+# switched off and on at every inserted pause). Take the quietest 0.25 s between words and loop it, with 12 ms fades.
+xf = x.astype(np.float64); F = int(sr * 0.25); best = None
+for l in T['lines']:
+    for a_, b_ in zip(l['words'], l['words'][1:]):
+        i0, i1 = int((a_[2] + 0.02) * sr), int((b_[1] - 0.02) * sr)
+        for j in range(i0, i1 - F, F // 2):
+            r = np.sqrt(np.mean(xf[j:j + F] ** 2))
+            if r > 0 and (best is None or r < best[0]): best = (r, xf[j:j + F])
+tone = best[1] if best else np.zeros((F, ch))
+FD = int(sr * 0.012); ramp = np.linspace(0, 1, FD)[:, None]
+def pad(n):
+    reps = -(-n // len(tone)); t = np.concatenate([tone[::1 if k % 2 == 0 else -1] for k in range(reps)])[:n]  # mirrored loop: no seam
+    return t
+def zc(i):  # nudge a cut to the quietest sample within 5 ms, so it never lands mid-wave
+    w = int(sr * 0.005); seg = np.abs(xf[max(0, i - w):i + w].sum(1)); return max(0, i - w) + int(np.argmin(seg)) if len(seg) else i
 for tc, add in cuts:
-    i = int(tc * sr); parts += [x[last:i], np.zeros((int(add * sr), ch), np.int16)]; last = i
-parts.append(x[last:]); y = np.concatenate(parts)
+    i = zc(int(tc * sr)); n = int(add * sr); a_ = xf[last:i].copy(); g = pad(n).copy()
+    if len(a_) > FD: a_[-FD:] = a_[-FD:] * (1 - ramp) + (tone[:FD] if len(tone) >= FD else 0) * ramp  # cross-fade voice -> room tone
+    parts += [a_, g]; last = i
+parts.append(xf[last:]); y = np.clip(np.concatenate(parts), -32768, 32767).astype(np.int16)
 o = wave.open(out, 'wb'); o.setnchannels(ch); o.setsampwidth(2); o.setframerate(sr); o.writeframes(y.tobytes()); o.close()
 shift = lambda t: t + sum(add for tc, add in cuts if tc < t)
 for l in T['lines']:
