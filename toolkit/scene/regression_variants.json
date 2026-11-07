@@ -1,0 +1,146 @@
+{
+ "stand_legs_v8": {
+  "note": "Sam, v8: 'the legs and the things supporting the table look weird' (legs not meeting the board, rails meeting nothing); reviewer #14: the rear post sticks out above the board",
+  "set": {
+   "objects.7.legs.2.z1": 0.15,
+   "objects.7.stretchers.1.z": 0.4,
+   "objects.7.legs.1.z1": 0.75
+  }
+ },
+ "rails_over_legs": {
+  "note": "reviewer #13: the lower rail is drawn over the legs",
+  "set": {
+   "objects.7.draw": [
+    "legBL",
+    "legBR",
+    "barB",
+    "legFL",
+    "legFR",
+    "barF",
+    "board"
+   ]
+  }
+ },
+ "wrong_slot": {
+  "note": "reviewer #3: he reaches for one scroll and a different slot empties",
+  "set": {
+   "props.0.states.0.at": "rackC.slot[0,0]",
+   "characters.0.actions.2.target": "rackC.slot[0,0]"
+  }
+ },
+ "pencil_scroll": {
+  "note": "reviewer #1: the carried scroll is far too small (reads as a pencil) and changes size on the stand",
+  "set": {
+   "props.0.states.1.diameter": 0.03
+  }
+ },
+ "old_rig": {
+  "note": "Sam, v8: one leg light and the other dark; reviewer #2: the sleeve stays down when the arm goes up",
+  "set": {
+   "characters.0.rig": "walker_rig.json"
+  }
+ },
+ "card_too_short": {
+  "note": "Sam, v8: 'Make the Papyrus word card long' (it showed for about 1.2 s)",
+  "set": {
+   "devices.2.t0": "lib6.papyrus-0.1",
+   "devices.2.t1": "lib6.paper-0.1"
+  }
+ },
+ "card_see_through": {
+  "note": "reviewer #6 and #12: the stand's rail shows through the semi-transparent card; the card fades in over the busy rack",
+  "set": {
+   "devices.2.bg": 0.72,
+   "devices.2.t0": "lib5.papyrus"
+  }
+ },
+ "credits_no_backing": {
+  "note": "reviewer #9-#11: feet, legs and the lamp cross the credit lines",
+  "set": {
+   "devices.3.bg": 0.0,
+   "devices.4.bg": 0.0
+  }
+ },
+ "title_over_nile": {
+  "note": "reviewer #17: 'The library by the sea' still on screen over the Nile",
+  "set": {
+   "devices.0.t1": 15.3
+  }
+ },
+ "feet_cut": {
+  "note": "reviewer #24: the feet are cut off at the bottom edge while he carries the scroll",
+  "set": {
+   "camera.shots.3.y": 930
+  }
+ },
+ "rollers_top_bottom": {
+  "note": "found while planning scene 2: the scroll on the stand opened top-to-bottom, so its columns ran the wrong way",
+  "set": {
+   "objects.7.scroll_layout": {
+    "rollers": "top-bottom",
+    "unroll_axis": "v",
+    "columns_axis": "u"
+   }
+  }
+ },
+ "walker_from_scrolls": {
+  "note": "Sam, v6: 'the man walking in seems to be coming from inside of the scrolls'",
+  "set": {
+   "characters.0.moves.0.x0": 2.9
+  }
+ },
+ "stool_too_big": {
+  "note": "Sam, v6: 'the stool is too big'",
+  "set": {
+   "objects.9": {
+    "id": "stool",
+    "kind": "stool",
+    "lane": "mid",
+    "x": 5.0,
+    "w": 0.6,
+    "h": 0.85,
+    "rests_on": "floor"
+   },
+   "prop_cards.stool": {
+    "h": [
+     0.4,
+     0.55
+    ]
+   }
+  }
+ },
+ "scroll_hides_painting": {
+  "note": "Sam, v6: 'the open scroll is hiding the painting behind' (v6 hung the paintings low, at reading height)",
+  "set": {
+   "objects.6.x": 4.4,
+   "objects.5.z": 1.3,
+   "objects.5.h": 0.8
+  }
+ },
+ "reader_too_small": {
+  "note": "Sam, v6: 'the man reading the scroll just seems too small'",
+  "set": {
+   "camera.shots.1.z": 0.75,
+   "camera.shots.0.to": {
+    "x": 1800,
+    "y": 900,
+    "z": 0.75
+   },
+   "camera.start": {
+    "x": 1920,
+    "y": 900,
+    "z": 0.75
+   }
+  }
+ },
+ "floor_too_big": {
+  "note": "v7 review: the floor took about a third of the wide shot",
+  "set": {
+   "camera.start": {
+    "x": 1920,
+    "y": 1150,
+    "z": 1.0
+   }
+  }
+ }
+}
