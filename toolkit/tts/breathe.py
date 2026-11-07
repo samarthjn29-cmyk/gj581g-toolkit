@@ -39,13 +39,23 @@ for e0, s1, _ in G:
     for j in range(i0, i1 - F, F // 4):
         r = np.sqrt(np.mean(x[j:j + F] ** 2))
         if r > 0: cands.append((r, j))
-# the tone: a between-word stretch at the voice's own noise floor (about the 20th percentile of the quiet stretches),
-# never digital zeros (the clone's joins) and never a breath
+# the tone: SYNTHESISED noise with the spectrum and level of the voice's own noise floor (the quietest fifth of the
+# between-word stretches), random phase, so it never repeats. v2 looped a real 0.25 s snippet and Sam's file carried
+# a faint blip every half second (7 Nov 2026).
 cands = [c for c in cands if np.abs(x[c[1]:c[1] + F]).max(1).min() >= 1 or c[0] > 20]
-if cands: rs = sorted(c[0] for c in cands); tgt_r = rs[len(rs) // 5]; r0, j0 = min(cands, key=lambda c: abs(c[0] - tgt_r)); tone = x[j0:j0 + F].copy()
+rng = np.random.default_rng(3)
+if cands:
+    rs = sorted(c[0] for c in cands); quiet_set = [c for c in cands if c[0] <= rs[max(0, len(rs) // 5)]][:12]
+    spec = np.mean([np.abs(np.fft.rfft(x[j:j + F, 0] * np.hanning(F))) for _, j in quiet_set], 0)
+    level = np.median([r for r, _ in quiet_set])
+    N = int(sr * 8); S = np.interp(np.fft.rfftfreq(N, 1 / sr), np.fft.rfftfreq(F, 1 / sr), spec)
+    nz = np.fft.irfft(S * np.exp(2j * np.pi * rng.random(len(S))), N); nz *= level / (np.sqrt(np.mean(nz ** 2)) + 1e-12)
+    tone = np.repeat(nz[:, None], ch, 1)
 else: tone = np.zeros((F, ch))
 print(f'room tone level {20 * np.log10(np.sqrt(np.mean(tone ** 2)) / 32768 + 1e-12):.0f} dBFS')
-def pad(n): return np.concatenate([tone[::1 if k % 2 == 0 else -1] for k in range(-(-n // len(tone)) or 1)])[:n]
+def pad(n):
+    o = rng.integers(0, max(1, len(tone) - n)) if n < len(tone) else 0
+    return tone[o:o + n] if n <= len(tone) else np.concatenate([tone] * (-(-n // len(tone))))[:n]
 FD = int(sr * 0.012); ramp = np.linspace(0, 1, FD)[:, None]
 def quiet(i, w=0.006):
     w = int(sr * w); s = np.abs(x[max(0, i - w):i + w].sum(1)); return max(0, i - w) + int(np.argmin(s)) if len(s) else i
