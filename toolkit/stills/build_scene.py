@@ -22,7 +22,9 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('plan'); ap.add_argument('timing'); ap.add_argument('vo'); ap.add_argument('out'); ap.add_argument('--pad', type=float, default=0.4)
     a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
     P = json.load(open(a.plan)); T = {x['id']: x for x in json.load(open(a.timing))['lines']}
-    ids = [x for x in T if T[x]['scene'] == P['scene']]
+    if P.get('lines'):   # a scene can be part of a chapter: "lib1-lib10"
+        a0, a1 = P['lines'].split('-'); order = list(T); ids = order[order.index(a0):order.index(a1) + 1]
+    else: ids = [x for x in T if T[x]['scene'] == P['scene']]
     t0 = max(0, T[ids[0]]['start'] - a.pad); t1 = T[ids[-1]]['end'] + a.pad
     mp3 = f'{a.out}/vo.mp3'
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', str(t0), '-t', str(t1 - t0), '-i', a.vo, '-c:a', 'libmp3lame', '-b:a', '192k', mp3], check=True)
