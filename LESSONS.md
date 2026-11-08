@@ -1,3 +1,0 @@
-89. Real pictures first (Sam, 8 Nov 2026): every stills scene uses real photos, scans, engravings and public-domain paintings wherever one shows the line, AI only for the rest. Wikimedia downloads from the workspace work only at standard thumbnail widths (1920px-...); originals and odd widths give 429. Fit them with toolkit/stills/fit_real.py (it upscales: PIL thumbnail() only shrinks, which left small scans as postage stamps).
-90. On-screen text (Sam, 8 Nov 2026): StillsScene card kind 'text' = one key line low on the picture in the end-title serif; words verbatim from a fact-checked line.
-91. A chapter voiced by clone_scenes.py can die part-way (memory) and the shell loop still prints DONE: check that <scene>.wav exists, and retry (parts resume).
