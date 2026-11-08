@@ -13,7 +13,7 @@ export const worldMatrices = (pose, offset = {}) => { const by = Object.fromEntr
 
 // x, y: plate position of the anchor (ground under the hip); scale: plate px per rig unit
 // prop: (world, layer) => svg in rig units; layer 'under' is drawn between the palm and the fingers, 'over' after the fingers
-export const Puppet2 = ({pose, offset, x, y, scale, hand = 'relaxed', farHand = 'relaxed', prop, opacity = 1}) => {
+export const Puppet2 = ({pose, offset, x, y, scale, hand = 'relaxed', farHand = 'relaxed', prop, opacity = 1, dir = 1, style}) => {
   const W = worldMatrices(pose, offset), S = SHAPES(hand, farHand);
   const shapesOf = (g, pick) => Object.entries(g.parts).flatMap(([part, list]) => (list === 'image' ? [] : list).filter(pick).map((s, i) => ({part, s, i})));
   const tr = (part) => css(W[part]);
@@ -30,7 +30,8 @@ export const Puppet2 = ({pose, offset, x, y, scale, hand = 'relaxed', farHand = 
   // three layers so the Recraft head (an <Img>, which Remotion waits for) sits between the body and the near arm
   const b = 2000, svg = (gs, k) => <svg key={k} width={b * 2 * scale} height={b * 2 * scale} viewBox={`${-b} ${-b * 1.5} ${b * 2} ${b * 2}`} style={{position: 'absolute', left: x - b * scale, top: y - b * 1.5 * scale, overflow: 'visible'}}>{gs.map(group)}</svg>;
   const front = S.groups.filter((g) => g.id === 'near_arm'), back = S.groups.filter((g) => g.id !== 'near_arm'), H = POINTS.headImg;
-  return <div style={{position: 'absolute', left: 0, top: 0, opacity}}>
+  // dir -1 mirrors the whole figure about the anchor (he faces left); the rig itself is always drawn facing right
+  return <div style={{position: 'absolute', left: 0, top: 0, opacity, transformOrigin: `${x}px 0px`, transform: dir < 0 ? 'scaleX(-1)' : undefined, ...style}}>
     {svg(back, 'back')}
     <div style={{position: 'absolute', left: 0, top: 0, transformOrigin: '0 0', transform: `translate(${x}px, ${y}px) scale(${scale}) ${css(W.head)}`}}>
       <Img src={HEAD_PNG} style={{position: 'absolute', left: H.x, top: H.y, width: H.w, height: H.h}} /></div>

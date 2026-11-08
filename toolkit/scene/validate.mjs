@@ -73,10 +73,10 @@ for (const c of spec.characters) { const ch = sc.character(c.id);
   // ---------- M: motion
   let back = 0, slide = 0, slideT = 0, jump = 0, jumpT = 0;
   for (let i = 1; i < frames.length; i++) { const t = frames[i], t0 = frames[i - 1], s = ch.state(t), s0 = ch.state(t0);
-    if ((s.x - s0.x) * (c.facing === 'right' ? 1 : -1) < -1e-4) back++;
+    if ((s.x - s0.x) * (s.dir || (c.facing === 'right' ? 1 : -1)) < -1e-4) back++;   // against the way he faces right now
     if (s.speed > 0.3) { const f = ch.feet(t), f0 = ch.feet(t0); const d = Math.min(...[0, 1].map((k) => Math.abs(m(f[k][0] - f0[k][0], c.lane)))); if (d > slide) { slide = d; slideT = t; } }
     const h = ch.hand(t), h0 = ch.hand(t0), dh = m(Math.hypot(h[0] - h0[0], h[1] - h0[1]), c.lane); if (dh > jump) { jump = dh; jumpT = t; } }
-  add('M1 screen direction', back ? 'FAIL' : 'PASS', back ? `${c.id} steps backwards in ${back} frames` : `${c.id} moves ${c.facing} only`);
+  add('M1 screen direction', back ? 'FAIL' : 'PASS', back ? `${c.id} steps backwards in ${back} frames` : `${c.id} always walks the way he faces`);
   add('M2 feet do not slide', slide <= RU.foot_slide_m ? 'PASS' : 'WARN', `largest planted-foot slip ${(slide * 100).toFixed(1)} cm/frame at ${slideT.toFixed(2)} s (limit ${RU.foot_slide_m * 100} cm)`, slide <= RU.foot_slide_m ? '' : 'tie the cycle length to stride');
   add('M3 hands move at human speed', jump <= RU.max_step_m_per_frame ? 'PASS' : 'FAIL', `fastest hand move ${(jump * 100).toFixed(1)} cm/frame = ${(jump * 30).toFixed(1)} m/s at ${jumpT.toFixed(2)} s (limit ${(RU.max_step_m_per_frame * 30).toFixed(1)} m/s)`, jump <= RU.max_step_m_per_frame ? '' : 'give the move more time');
   const starts = c.actions.map((a) => ({n: a.name, t: sc.time(a.t)})).sort((a, b) => a.t - b.t);
@@ -92,6 +92,8 @@ const focalBox = (id, t, cam) => { if (id === 'librarian') { const ch = sc.chara
   if (id === 'librarian.hand') { const h = sc.character('librarian').hand(t); return sc.screenBox(cam, {x: h[0] - 40, y: h[1] - 40, w: 80, h: 80}, 1.03); }
   if (id === 'scroll1') { const p = sc.propAt('scroll1', t).pos; return sc.screenBox(cam, {x: p[0] - 60, y: p[1] - 40, w: 120, h: 80}, 1.03); }
   if (id === 'stand.sheet') { const B = sc.stand.B; return sc.screenBox(cam, {x: B.bl[0], y: B.tl[1], w: B.tr[0] - B.bl[0], h: B.bl[1] - B.tl[1]}, 1.05); }
+  if (id.startsWith('stand.at:')) { const [u, v, du, dv] = id.slice(9).split(',').map(Number), q = [[u - du / 2, v - dv / 2], [u + du / 2, v - dv / 2], [u - du / 2, v + dv / 2], [u + du / 2, v + dv / 2]].map(([a, b]) => sc.stand.at(a, b));   // a patch of the board, e.g. one column
+    const xs = q.map((p) => p[0]), ys = q.map((p) => p[1]); return sc.screenBox(cam, {x: Math.min(...xs), y: Math.min(...ys), w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys)}, 1.05); }
   const o = sc.objs[id]; return sc.screenBox(cam, sc.box(id), sc.lane(o.lane).parallax); };
 for (const b of spec.beats) { const t = sc.time(b.t), cam = sc.camAt(t), fb = focalBox(b.focal, t, cam);
   const inFrame = fb.x >= -2 && fb.y >= -2 && fb.x + fb.w <= 1922 && fb.y + fb.h <= 1082;
@@ -118,10 +120,11 @@ for (const o of spec.objects.filter((o) => ['rack', 'cabinet', 'lampstand'].incl
     if (vis > 0 && vis < 0.1) { sl = {t, vis}; break; } }
   if (sl) add('F6 no slivers at the frame edge', 'WARN', `only ${(sl.vis * 100).toFixed(0)}% of ${o.id} shows at the edge at ${sl.t.toFixed(2)} s`, 'show more of it or none'); }
 // F6 for characters: a strip of a person at the frame edge (an arm and a hem beside the close-up) reads as a stray shape; it fails
-for (const c of spec.characters) { const ch = sc.character(c.id); let sl = null;
+for (const c of spec.characters) { const ch = sc.character(c.id); let sl = null, run = null;
   for (const t of frames) { const cam = sc.camAt(t), cn = sc.camAt(t + 1 / spec.fps); if (t > sceneEnd || (cam.z < 2.2 && (Math.abs(cn.z / cam.z - 1) > 0.004 || Math.abs(cn.x - cam.x) > 3))) continue;   // close shots count even while the camera moves (v13 frame 280)
     const b = sc.screenBox(cam, ch.bbox(t), sc.lane(c.lane).parallax), vis = Math.max(0, Math.min(1920, b.x + b.w) - Math.max(0, b.x)) / b.w;
-    if (vis > 0 && vis < 0.25) { sl = {t, vis, px: Math.max(0, Math.min(1920, b.x + b.w) - Math.max(0, b.x))}; break; } }
+    // a reveal sweeps past the edge in a few frames and is fine; a sliver that lingers 0.3 s or more is the defect
+    if (vis > 0 && vis < 0.25) { run = run || {t, vis, px: Math.max(0, Math.min(1920, b.x + b.w) - Math.max(0, b.x)), n: 0}; run.n++; if (run.n >= Math.round(0.3 * spec.fps)) { sl = run; break; } } else run = null; }
   add('F6 no character slivers at the frame edge', sl ? 'FAIL' : 'PASS', sl ? `only ${(sl.vis * 100).toFixed(0)}% (${sl.px.toFixed(0)} px) of ${c.id} shows at the edge at ${sl.t.toFixed(2)} s` : 'characters are in frame or out of it', sl ? 'frame him out or show more of him' : ''); }
 // ---------- T: text and devices
 { const mg = RU.safe_margin_px;

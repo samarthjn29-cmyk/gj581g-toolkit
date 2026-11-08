@@ -86,7 +86,9 @@ export const makeScene = (spec, words, rigs, place) => {
     const legSpeed = (t, W) => { const q = lin(t, W.t0, W.t1); return q > 0 && q < 1 ? (q < 0.15 ? q / 0.15 : q > 0.85 ? (1 - q) / 0.15 : 1) : 0; };
     const moveAt = (t) => { let i = 0; while (i < c.moves.length - 1 && t >= c.moves[i + 1].t0) i++; return i; };
     const xAt = (t) => legX(t, c.moves[moveAt(t)]);
-    const distAt = (t) => { const i = moveAt(t); let d = 0; for (let k = 0; k < i; k++) d += c.moves[k].x1 - c.moves[k].x0; return d + xAt(t) - c.moves[i].x0; };
+    const distAt = (t) => { const i = moveAt(t); let d = 0; for (let k = 0; k < i; k++) d += Math.abs(c.moves[k].x1 - c.moves[k].x0); return d + Math.abs(xAt(t) - c.moves[i].x0); };   // distance walked, either way
+    // facing: +1 right, -1 left; a character turns to face each move it makes (one-frame turn at the move's start)
+    const dirAt = (t) => { let d = c.facing === 'left' ? -1 : 1; for (const m of c.moves) if (t >= m.t0 && m.x1 !== m.x0) d = Math.sign(m.x1 - m.x0); return d; };
     // the walk phase advances by distance / (cycle x amplitude): shorter steps when easing in and out, so the stride the
     // legs take always matches the ground covered (with the foot lock this keeps the planted foot still)
     let PH = null;
@@ -94,7 +96,7 @@ export const makeScene = (spec, words, rigs, place) => {
         for (let f = 1; f <= N; f++) { const t1 = f / spec.fps, t0 = (f - 1) / spec.fps, sp = legSpeed(t1, c.moves[moveAt(t1)]), a = Math.max(0.3, Math.min(1, Math.pow(sp, 0.6)));
           PH.push(PH[f - 1] + (distAt(t1) - distAt(t0)) * PXM / (CYC * a)); } }
       const fi = t * spec.fps, i = Math.max(0, Math.min(PH.length - 2, Math.floor(fi))), u = fi - i; return PH[i] * (1 - u) + PH[i + 1] * u; };
-    const at_ = (name) => time(A[name].t), end_ = (name) => A[name].to ? time(A[name].to) : at_(name) + (A[name].dur || 0.5);
+    const at_ = (name) => A[name] ? time(A[name].t) : 1e9, end_ = (name) => !A[name] ? 1e9 + 1 : A[name].to ? time(A[name].to) : at_(name) + (A[name].dur || 0.5);   // a scene may use any subset of the actions
     const state = (t) => { const s0 = state0(t), fx = footLock(t); return {...s0, px: s0.px + fx}; };
     const state0 = (t) => { const sc = lane(c.lane).scale, x = xAt(t), speed = legSpeed(t, c.moves[moveAt(t)]);
       const WS = c.height * PXM * sc / c.rig_height, CYC = c.walk.cycle_rig_px * WS * c.walk.stride;
@@ -102,7 +104,7 @@ export const makeScene = (spec, words, rigs, place) => {
       const look = ramp(t, at_('look'), end_('look')) * (1 - ramp(t, 6.0, 6.6));
       const reach = ramp(t, at_('reach'), end_('reach')), lower = ramp(t, at_('lower'), end_('lower'));
       const lay = ramp(t, at_('lay'), end_('lay')), rest = ramp(t, at_('rest'), end_('rest'));
-      const P = (n, k) => A[n].pose[k];
+      const P = (n, k) => (A[n] && A[n].pose && A[n].pose[k]) || 0;
       const arm = (walk.pose.upper_arm || 0) * (1 - reach) + P('reach', 'upper_arm') * reach * (1 - lower) + P('lower', 'upper_arm') * lower;
       const fore = (walk.pose.forearm || 0) * (1 - reach) + P('reach', 'forearm') * reach * (1 - lower) + P('lower', 'forearm') * lower;
       const hp = (n) => (A[n] && A[n].pose && A[n].pose.hand) || 0;
@@ -114,7 +116,7 @@ export const makeScene = (spec, words, rigs, place) => {
         head: (walk.pose.head || 0) - 12 * look + 3 * lay * (1 - rest)};
       const breathe = Math.sin(t * 2.1) * 3 * (1 - speed);
       const offset = {torso: [0, walk.bob * speed + breathe - 14 * reach * (1 - lower)]};
-      return {x, speed, WS, pose, offset, px: X(x, c.lane), py: FLOOR + lane(c.lane).drop,
+      return {x, speed, WS, pose, offset, dir: dirAt(t), px: X(x, c.lane), py: FLOOR + lane(c.lane).drop,
         held: t > at_('grab') && t < at_('release'), laid: t >= at_('release') ? 1 : 0,
         handShape: t >= at_('grab') && t < at_('release') ? 'grip' : (t >= at_('reach') && t < at_('grab')) ? 'reach' : 'relaxed',
         propYaw: 90 * ramp(t, at_('grab'), at_('grab') + 0.55)}; };
@@ -131,14 +133,14 @@ export const makeScene = (spec, words, rigs, place) => {
           const vx = c.feet.map((q, i) => (apply(M1(q.part), q.at)[0] - c.anchor[0]) * s1.WS - fl[i][0]);
           let k = foot < 0 ? (vx[0] < vx[1] ? 0 : 1) : (vx[1 - foot] < vx[foot] - 2 ? 1 - foot : foot); const w = Math.min(1, s.speed / 0.35);
           if (w <= 0) { plant = null; foot = -1; LOCK.push(0); continue; }
-          if (k !== foot || plant === null) { foot = k; plant = s.px + fl[k][0] + (LOCK.length ? LOCK[LOCK.length - 1] : 0); }
-          LOCK.push(w * (plant - (s.px + fl[k][0]))); } }
+          if (k !== foot || plant === null) { foot = k; plant = s.px + s.dir * fl[k][0] + (LOCK.length ? LOCK[LOCK.length - 1] : 0); }
+          LOCK.push(w * (plant - (s.px + s.dir * fl[k][0]))); } }
       const fi = t * spec.fps, i = Math.max(0, Math.min(LOCK.length - 2, Math.floor(fi))), u = fi - i; return LOCK[i] * (1 - u) + LOCK[i + 1] * u; };
     const world = (t) => { const s = state(t), by = Object.fromEntries(rig.parts.map((p) => [p.name, p])), W = {};
       const M = (n) => { if (W[n]) return W[n]; const p = by[n], local = mul(Tm(...(s.offset[n] || [0, 0])), about(p.pivot, s.pose[n] || 0));
         return (W[n] = p.parent ? mul(M(p.parent), local) : local); };
       rig.parts.forEach((p) => M(p.name));
-      const toPlate = (m, pt) => { const q = apply(m, pt); return [s.px + s.WS * (q[0] - c.anchor[0]), s.py + s.WS * (q[1] - c.anchor[1])]; };
+      const toPlate = (m, pt) => { const q = apply(m, pt); return [s.px + s.dir * s.WS * (q[0] - c.anchor[0]), s.py + s.WS * (q[1] - c.anchor[1])]; };
       return {s, W, toPlate, by}; };
     const point = (t, part, pt) => { const w = world(t); return w.toPlate(w.W[part], pt); };
     const hand = (t) => point(t, c.hand.part, c.hand.at);
@@ -147,11 +149,12 @@ export const makeScene = (spec, words, rigs, place) => {
       for (const p of rig.parts) for (const q of [[p.x, p.y], [p.x + p.w, p.y], [p.x, p.y + p.h], [p.x + p.w, p.y + p.h]]) {
         const [a, b] = w.toPlate(w.W[p.name], q); x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, a); y1 = Math.max(y1, b); }
       return {x: x0, y: y0, w: x1 - x0, h: y1 - y0}; };
-    return {spec: c, rig, state, world, point, hand, feet, bbox, at: at_, end: end_, xAt}; };
+    return {spec: c, rig, state, world, point, hand, feet, bbox, at: at_, end: end_, xAt, dirAt}; };
 
   // ---- camera: a chain of shots, each blended into the next
   const mix = (a, b, w) => ({x: a.x + (b.x - a.x) * w, y: a.y + (b.y - a.y) * w, z: a.z * Math.pow(b.z / a.z, w)});
   const target = (to) => { if (to.target === 'stand.sheet') return {x: stand.sheet[0] + (to.dx || 0), y: stand.sheet[1] + (to.dy || 0), z: to.z};
+    if (to.target === 'stand.at') { const q = stand.at(to.u, to.v); return {x: q[0] + (to.dx || 0), y: q[1] + (to.dy || 0), z: to.z}; }   // a point on the board, e.g. one column
     if (to.wall_x !== undefined) return {x: X(to.wall_x, 'wall'), y: to.y, z: to.z}; return to; };
   const camAt = (t) => { let c = {...spec.camera.start};
     for (const sh of spec.camera.shots) { const w = sh.linear ? lin(t, time(sh.t0), time(sh.t1)) : ramp(t, time(sh.t0), time(sh.t1));
