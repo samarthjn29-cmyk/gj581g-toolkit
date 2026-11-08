@@ -14,3 +14,12 @@ Run after the gaze check, on full-size stills (render at `--scale=1`), never on 
 5. **Then render.**
 
 Gaze check: `gaze/bin/python study/gaze.py <out_dir> <frames...>` (DeepGaze IIE). The 50% region should sit on what the narration names at that moment.
+
+## Real-world check (Sam, 8 Nov 2026: "pay attention to how things actually work in real life")
+Before a set or effect is drawn, write down how the real thing works (two or three lines, with a source when it isn't common knowledge), then check every still against it:
+- **Support and contact:** what does each thing stand on? Buildings stand on ground (a terrace, a wall on rock, a beach), never straight on water. Feet on floors, props on surfaces, hands closed on what they hold.
+- **Water and shorelines:** water lies below land at the shore, meets it along a beach, rocks or a wall that itself stands on ground; the sea's far edge is the horizon.
+- **Natural forms:** smoke and ash columns leave a vent narrow and widen as they rise (umbrella at the top); ground-hugging flows (surges, floods, fog) keep their base on the ground and lead with a low front; clouds don't have flat bottoms unless at a condensation level; light comes from a source and colours what it reaches.
+- **Scale:** a person, a building, a mountain and a cloud keep their real proportions within one view, or the shot says it's schematic.
+- **Cause and order:** events happen in the order and direction they really did (the surge comes from the mountain toward the town; rock buries in layers from below upward).
+The reviewer brief always includes this section.
