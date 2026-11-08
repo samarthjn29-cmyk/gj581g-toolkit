@@ -4,7 +4,7 @@
 // crops, hand-overs and timing, not art.
 import React from 'react';
 import {AbsoluteFill, Audio, staticFile, useCurrentFrame, interpolate, Easing} from 'remotion';
-import {Room, Plate, MARKS, CURE, COLS_U, COL_W, CURE_COL, CURE_L0, LINE_V0, LINE_DV, LEAN} from './pilot_room10.jsx';
+import {Room, Plate, Nile, PILOT_END, MARKS, CURE, COLS_U, COL_W, CURE_COL, CURE_L0, LINE_V0, LINE_DV, LEAN} from './pilot_room10.jsx';
 import {Back, RoomAndMap, Badge} from './scene2_animatic.jsx';
 import {Puppet2} from './kit/Puppet2.jsx';
 import {makeScene} from './scene/core.mjs';
@@ -135,25 +135,81 @@ const Cast = ({t, final}) => { const st = LIB.state(t);
   return <><div style={{position: 'absolute', left: st.px - 140, top: st.py - 20, width: 280, height: 40, borderRadius: '50%', background: 'rgba(0,0,0,0.35)', filter: 'blur(7px)'}} />
     <Puppet2 pose={st.pose} offset={st.offset} x={st.px} y={st.py} scale={st.WS} hand={t >= TAKE_T ? 'grip' : st.handShape} prop={t >= TAKE_T ? heldRoll : null} dir={st.dir} style={final ? undefined : {filter: 'grayscale(1) brightness(1.1) contrast(0.8)'}} /></>; };
 
-const Source = ({t}) => { const o = R(t, T.philosophy, T.philosophy + 0.4) * (1 - R(t, BADGE0 - 0.3, BADGE0)); const d = SPEC.devices[0];
+const Source = ({t}) => { const o = R(t, T.philosophy, T.philosophy + 0.4) * (1 - R(t, BADGE0 - 0.25, BADGE0 - 0.1)); const d = SPEC.devices[0];
   return <div style={{position: 'absolute', left: d.box[0], top: d.box[1], width: d.box[2], height: d.box[3], boxSizing: 'border-box', opacity: o, background: `rgba(10,14,20,${d.bg})`,
     color: '#F1E2C4', fontFamily: 'monospace', fontSize: 15, letterSpacing: 3, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{d.text}</div>; };
+
+
+// ---- T1: the pilot's last image played back. It opens on exactly the pilot's final Nile frame; the reeds lie down into the
+// two crossed layers of a papyrus sheet inside the magnifier, which shrinks back onto the open sheet on the stand. The lens is
+// clipped to the sheet, so the weave never spills onto the wood; the Nile has faded before the lens lands.
+const T1 = ({t, cam}) => { if (t > 1.35) return null; const PE = PILOT_END(), grow = 1 - R(t, 0.1, 0.9), nileO = 1 - R(t, 0.15, 0.6), lensO = R(t, 0, 0.3) * (1 - R(t, 0.95, 1.3));   // the pilot's last frame has no lens: it fades in, as it faded out there
+  const c = SC.screen(cam, SC.stand.sheet, 1.05), r = 190 * (1 + 7 * grow), sq = (u, v) => { const p = SC.screen(cam, at(u, v), 1.05); return [p.x, p.y]; };
+  const g = R(grow, 0.15, 0.7), col = `rgb(${[226, 197, 140].map((v, i) => Math.round(v + ([154, 169, 131][i] - v) * g)).join(',')})`, st = 1 + 2.5 * grow;
+  return <AbsoluteFill>
+    {nileO > 0 && <AbsoluteFill style={{opacity: nileO}}><Nile t={PE.t + t} t0={PE.t0} /></AbsoluteFill>}
+    <div style={{position: 'absolute', right: 64, top: 56, opacity: 1 - R(t, 0, 0.3), fontFamily: 'monospace', fontSize: 15, letterSpacing: 3, color: '#F1E2C4', border: '1px solid #C9B48E77', padding: '6px 12px', background: 'rgba(10,14,20,0.6)'}}>NILE · EGYPT</div>
+    <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0, opacity: lensO}}><defs>
+      <clipPath id="lensT1"><circle cx={c.x} cy={c.y} r={r} /></clipPath>
+      <clipPath id="sheetT1"><polygon points={poly([sq(U0, V0), sq(U1, V0), sq(U1, V1), sq(U0, V1)])} /></clipPath></defs>
+      <g clipPath={grow > 0.25 ? undefined : 'url(#sheetT1)'}><g clipPath="url(#lensT1)">
+        <rect x={c.x - r} y={c.y - r} width={2 * r} height={2 * r} fill="#9E8556" opacity={1 - grow} />
+        {Array.from({length: 44}, (_, i) => { const x = c.x - r + i * 34 * (1 + grow); return <rect key={`v${i}`} x={x} y={c.y + r - 2 * r * st} width={26 * (1 + grow * 0.4)} height={2 * r * st} fill={col} stroke="#111" strokeWidth={2} />; })}
+        {Array.from({length: 44}, (_, i) => <rect key={`h${i}`} x={c.x - r} y={c.y - r + 6 + i * 34} width={2 * r} height={20} fill="#F4DDB0" stroke="#111" strokeWidth={2} opacity={0.95 * (1 - R(grow, 0, 0.45))} />)}</g></g>
+      <circle cx={c.x} cy={c.y} r={r} fill="none" stroke="#7E4A3B" strokeWidth={16} opacity={1 - R(grow, 0.2, 0.6)} />
+      <circle cx={c.x} cy={c.y} r={r + 8} fill="none" stroke="#111" strokeWidth={3} opacity={1 - R(grow, 0.2, 0.6)} /></svg>
+  </AbsoluteFill>; };
+
+// ---- 2D-2: the map. The room has shrunk into Herculaneum's pin; famous libraries whose books are lost appear as hollow rings on
+// "Greek or Roman library"; on "books" Herculaneum's pin fills with scroll ends, and the tag lands on "still in it". One marker per
+// place, labels placed clear of each other, every label on a solid backing. Then the dive into the pin.
+const LIBS = [['Rome', -1, -1], ['Pergamon', 1, -1], ['Ephesus', 1, 1], ['Alexandria', 1, 0]];
+const MapShot = ({t}) => { const tLib = W('lib9', 'greek'), tBooks = W('lib9', 'books'), tStill = W('lib9', 'still');
+  const mapO = R(t, MAP0 + 0.5, MAP0 + 1.4), dive = R(t, 20.2, 21.3, 0, 1), mz = 1 + 60 * dive * dive, [hx, hy] = MAP.pins.Herculaneum;
+  const lab = (x, y, text, sx, sy, col, bold) => { const w = text.length * 15 + 20, X = sx < 0 ? x - 26 - w : x + 26, Y = y + (sy < 0 ? -44 : sy > 0 ? 12 : -16);
+    return <g><rect x={X} y={Y} width={w} height={32} fill="#0b1a24" opacity={0.92} /><text x={X + 10} y={Y + 23} fontFamily="monospace" fontSize={22} fontWeight={bold ? 700 : 400} letterSpacing={1} fill={col}>{text}</text></g>; };
+  return <AbsoluteFill style={{background: '#123447'}}>
+    <div style={{position: 'absolute', inset: 0, opacity: mapO, transformOrigin: `${hx}px ${hy}px`, transform: `scale(${mz})`}}>
+      <svg width={1920} height={1080} style={{position: 'absolute'}}>
+        {MAP.rings.map((d, i) => <path key={i} d={d} fill="#c8b894" stroke="#3a3326" strokeWidth={2} />)}
+        {LIBS.map(([k, sx, sy], i) => { const [x, y] = MAP.pins[k], o = R(t, tLib + i * 0.25, tLib + 0.3 + i * 0.25);
+          return <g key={k} opacity={o}><circle cx={x} cy={y} r={13} fill="none" stroke="#0b1a24" strokeWidth={5} /><circle cx={x} cy={y} r={13} fill="none" stroke="#F4E6C8" strokeWidth={2} />{lab(x, y, k.toUpperCase(), sx, sy, '#F4E6C8')}</g>; })}
+        <circle cx={hx} cy={hy} r={16} fill="#F2B85A" stroke="#0b1a24" strokeWidth={4} />
+        {[[-6, -4], [6, -4], [0, 6]].map(([dx, dy], k) => <circle key={k} cx={hx + dx} cy={hy + dy} r={4.5} fill="#FFF0C8" stroke="#3a2a22" strokeWidth={1.5} opacity={R(t, tBooks + k * 0.08, tBooks + 0.2 + k * 0.08)} />)}
+        {lab(hx, hy, 'HERCULANEUM', 1, 1, '#F2B85A', true)}
+</svg>
+      <div style={{position: 'absolute', right: 1920 - (hx - 26), top: hy + 52, fontFamily: 'monospace', fontSize: 20, letterSpacing: 3, color: '#F1E2C4', background: 'rgba(10,14,20,0.96)', borderRight: '3px solid #F2B85A', padding: '6px 12px', opacity: R(t, tStill, tStill + 0.5) * (1 - R(dive, 0, 0.15))}}>THE ONLY ONE FOUND WITH ITS BOOKS</div>
+      {dive > 0.7 && <div style={{position: 'absolute', inset: 0, background: SHEET, opacity: R(dive, 0.7, 1)}} />}
+    </div></AbsoluteFill>; };
+
+// ---- T2: the name carries across the cut. "PHILODEMUS" lifts out of the source tag, the sheet darkens to night blue, and the
+// name settles under a monogram medallion (no face: no likeness of him survives), ready for lib11.
+const BadgeMorph = ({t}) => { const u = R(t, BADGE0 - 0.2, BADGE0 + 0.5), dark = R(t, BADGE0 - 0.1, BADGE0 + 0.35), med = R(t, BADGE0 + 0.15, BADGE0 + 0.6);
+  const d = SPEC.devices[0], x0 = d.box[0] + 20, y0 = d.box[1] + 8, x1 = 960 - 5 * 33, y1 = 640;
+  return <AbsoluteFill>
+    <AbsoluteFill style={{background: '#1b2230', opacity: dark}} />
+    <div style={{position: 'absolute', left: 960 - 110, top: 360 - 110, width: 220, height: 220, borderRadius: 110, background: '#efe3c8', border: '6px solid #c9b48e', opacity: med, transform: `scale(${0.7 + 0.3 * med})`,
+      display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Noto Serif", "DejaVu Serif", serif', fontSize: 120, color: '#7a2333'}}>Φ</div>
+    <div style={{position: 'absolute', left: x0 + (x1 - x0) * u, top: y0 + (y1 - y0) * u, fontFamily: 'monospace', fontSize: 15 + 33 * u, letterSpacing: 3 + 5 * u, color: '#F1E2C4', whiteSpace: 'nowrap', opacity: R(t, BADGE0 - 0.25, BADGE0 - 0.15)}}>PHILODEMUS</div>
+  </AbsoluteFill>; };
 
 export const Scene2StandIn = ({final = false}) => { const f = useCurrentFrame(), t = f / SPEC.fps, cam = SC.camAt(t);
   const holding = t >= LIFT0 && t < BACK1;   // one-frame hand-overs: the roll is either on the board or in your hands, never both
   const gate = {cam, laid: holding ? 0 : 1, unroll: 1, wallBlur: t >= POV0 && t < 13.4 ? 30 : 4, midBlur: 8 * R(t, LIFT0, LIFT1) * (1 - R(t, BACK0, BACK1)), cast: <Cast t={t} final={final} />, mid: <SheetCues t={t} />, wall: <><Ripple t={t} /><Gap t={t} /></>};
   return <AbsoluteFill style={{background: '#000'}}>
     <Audio src={staticFile('scrolls/scene2/vo.mp3')} />
-    {t < MAP0 || (t >= COL0 && t < BADGE0) ? <Room t={0} gate={gate} /> : t < COL0 ? <RoomAndMap t={t} /> : <Badge t={t} />}
+    {t < MAP0 || (t >= COL0 && t < BADGE0 + 0.4) ? <Room t={0} gate={gate} /> : t < COL0 ? (final ? <MapShot t={t} /> : <RoomAndMap t={t} />) : null}
+    {final && t >= BADGE0 - 0.25 && <BadgeMorph t={t} />}
+    {!final && t >= BADGE0 && <Badge t={t} />}
     {t >= MAP0 && t < MAP0 + 1.4 && (() => { // the rise out of the room: the SAME locked room (with him in it) shrinks into the Herculaneum pin
       const up = R(t, MAP0, MAP0 + 1.4), z = 1 - 0.985 * up, [hx, hy] = MAP.pins.Herculaneum, bw = 1920 * z, bh = 1080 * z, bx = hx + (960 - hx) * (1 - up) - bw / 2, by = hy + (540 - hy) * (1 - up) - bh / 2;
       return <div style={{position: 'absolute', left: bx, top: by, width: 1920, height: 1080, transformOrigin: '0 0', transform: `scale(${z})`, overflow: 'hidden', boxShadow: '0 0 0 3px #000'}}><Room t={0} gate={gate} /></div>; })()}
-    {t < 1.35 && <AbsoluteFill><Back t={t} /></AbsoluteFill>}
+    {t < 1.35 && (final ? <T1 t={t} cam={cam} /> : <AbsoluteFill><Back t={t} /></AbsoluteFill>)}
     <HeldRoll t={t} cam={cam} />
     <Hands t={t} cam={cam} final={final} />
     {t >= COL0 && t < BADGE0 && (() => { const c = SC.screen(cam, at(0.4483, 0.5038), 1.05), m = `radial-gradient(ellipse 330px 300px at ${c.x}px ${c.y}px, transparent 62%, black 100%)`;
       return <div style={{position: 'absolute', inset: 0, backdropFilter: `blur(${6 * R(t, COL0 + 0.3, COL0 + 1.0)}px)`, WebkitMaskImage: m, maskImage: m}} />; })()}
     <Source t={t} />
-    {final ? <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: 'monospace', fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: 'rgba(8,10,14,1)', padding: '4px 8px'}}>AI-GENERATED ILLUSTRATION</div>
+    {final ? <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: 'monospace', fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: 'rgba(8,10,14,1)', padding: '4px 8px'}}>{t >= MAP0 + 0.6 && t < COL0 ? 'MAP · NATURAL EARTH' : 'AI-GENERATED ILLUSTRATION'}</div>
       : <div style={{position: 'absolute', left: 24, top: 20, fontFamily: 'monospace', fontSize: 20, color: '#fff', background: 'rgba(0,0,0,0.55)', padding: '4px 10px'}}>STAND-IN PASS · gate 3 · {(85.4 + t).toFixed(1)} s</div>}
   </AbsoluteFill>; };
