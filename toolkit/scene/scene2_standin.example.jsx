@@ -46,7 +46,7 @@ const pov = (t, cam) => { const lift = R(t, LIFT0, LIFT1), narrow = R(t, LIFT1, 
   const ucW = ((U0 + U1) / 2) * (1 - narrow) + uc * narrow;
   const k = 1500 / 0.74 * (1 - narrow) + 2765 * narrow;   // the whole roll height (28 cm) fits the frame with room for the hands
   const wa = ucW - half, wb = ucW + half;
-  const bm = boardMap(cam), fm = front(ucW, k, 960, 600);
+  const bm = boardMap(cam), fm = front(ucW, k, 960, 540);
   const M = mix(mix(bm, fm, lift), bm, back);           // lifts toward you, later lowers back onto the board
   return {M, wa: wa * (1 - back) + U0 * back, wb: wb * (1 - back) + U1 * back, lift, back, out, s1, s2}; };
 const HeldRoll = ({t, cam}) => { if (t < LIFT0 || t > BACK1) return null; const {M, wa, wb} = pov(t, cam);
@@ -59,27 +59,49 @@ const HeldRoll = ({t, cam}) => { if (t < LIFT0 || t > BACK1) return null; const 
       <g transform={`matrix(${[M[0] / 1000, M[1] / 1000, M[2] / 1000, M[3] / 1000, M[4], M[5]].join(',')})`}>{CURE.map((ln, l) => { const L = CURE_L0 + l;
         return <text key={l} x={(COLS_U[CURE_COL] - L * LEAN) * 1000} y={(LINE_V0 + L * LINE_DV + 0.0088) * 1000} fontFamily="Inter" fontWeight={700} fontSize={12.2} fill={INK}
           textLength={COL_W * 1000 * ln.length / 11.5} lengthAdjust="spacingAndGlyphs">{ln}</text>; })}</g></g>
-    {[wa, wb].map((u, i) => { const a = q(u, V0 - 0.03), b = q(u, V1 + 0.03), dd = d * (i ? 1.0 : 0.55 + 0.1 * (pov(t, cam).s1 + pov(t, cam).s2)), ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, L = Math.hypot(b[0] - a[0], b[1] - a[1]);
-      const k0 = q(u, V0 - 0.075), k1 = q(u, V1 + 0.075);
-      return <g key={i}><line x1={k0[0]} y1={k0[1]} x2={k1[0]} y2={k1[1]} stroke="#000" strokeWidth={dd * 0.28 + 6} strokeLinecap="round" /><line x1={k0[0]} y1={k0[1]} x2={k1[0]} y2={k1[1]} stroke="#8a5a34" strokeWidth={dd * 0.28} strokeLinecap="round" />
-        <g transform={`translate(${a[0]} ${a[1]}) rotate(${ang})`}><rect x={0} y={-dd / 2} width={L} height={dd} rx={dd * 0.18} fill="#E6D2AE" stroke="#000" strokeWidth={4} />
-          {[0.25, 0.5, 0.75].map((f) => <line key={f} x1={0} x2={L} y1={-dd / 2 + dd * f} y2={-dd / 2 + dd * f} stroke="#b99a6a" strokeWidth={2} />)}</g></g>; })}
+    {[wa, wb].map((u, i) => { const P = pov(t, cam), dd = d * (i ? 1.0 : 0.55 + 0.1 * (P.s1 + P.s2)), a = q(u, RV0), b = q(u, RV1), s0 = q(u, RV0 - 0.045), s1 = q(u, RV1 + 0.045);
+      const ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI, L = Math.hypot(b[0] - a[0], b[1] - a[1]), ow = Math.max(3, dd * 0.035);
+      return <g key={i}><line x1={s0[0]} y1={s0[1]} x2={s1[0]} y2={s1[1]} stroke="#000" strokeWidth={dd * 0.3 + 2 * ow} /><line x1={s0[0]} y1={s0[1]} x2={s1[0]} y2={s1[1]} stroke="rgb(168,99,55)" strokeWidth={dd * 0.3} />
+        <g transform={`translate(${a[0]} ${a[1]}) rotate(${ang})`}><rect x={0} y={-dd / 2} width={L} height={dd} rx={dd * 0.3} fill={SHEET} stroke="#000" strokeWidth={ow} />
+          <ellipse cx={0} cy={0} rx={dd * 0.3} ry={dd / 2} fill={SHEET} stroke="#000" strokeWidth={ow} />
+          <circle cx={0} cy={0} r={dd * 0.13} fill="none" stroke="#3a2a22" strokeWidth={ow} /><circle cx={0} cy={0} r={dd * 0.05} fill="#3a2a22" /></g>
+        {i === 0 && <g><line x1={a[0]} y1={a[1]} x2={a[0] - dd * 0.25} y2={a[1] + dd * 0.4} stroke="#3a2a22" strokeWidth={ow} />
+          <rect x={a[0] - dd * 0.25 - dd * 0.17} y={a[1] + dd * 0.4} width={dd * 0.34} height={dd * 0.8} fill="#B8322B" stroke="#000" strokeWidth={ow} /></g>}</g>; })}
   </svg>; };
 // YOUR hands: grey mittens on the rollers, forearms coming in from the bottom corners. Before the lift they reach for the
 // rollers on the board; after the roll is set back down they withdraw out of frame.
-const Hands = ({t, cam}) => { if (t < POV0 || t > OUT1) return null;
+// capsule path (tapered), as in the kit
+const cap = (p0, p1, r0, r1) => { const dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L, a = Math.asin(Math.max(-1, Math.min(1, (r0 - r1) / L))), nx = -uy, ny = ux, c = Math.cos(a), sn = Math.sin(a);
+  const n1 = [nx * c + ux * sn, ny * c + uy * sn], n2 = [-nx * c + ux * sn, -ny * c + uy * sn], P = (p, n, r) => `${(p[0] + n[0] * r).toFixed(1)},${(p[1] + n[1] * r).toFixed(1)}`;
+  return `M${P(p0, n1, r0)} L${P(p1, n1, r1)} A${r1},${r1} 0 0 0 ${P(p1, n2, r1)} L${P(p0, n2, r0)} A${r0},${r0} 0 0 0 ${P(p0, n1, r0)} Z`; };
+const SKIN = 'rgb(200,151,106)', SKIN_D = 'rgb(176,128,88)';
+// YOUR hands. Final: bare forearms in the warm skin of the room, each hand closed round a roller from the outside, the thumb
+// lying across the front of the roller (what you see of your own grip); sized from the roller so hand and roll keep true scale
+// (a hand ~1.3x a 7 cm roll). Stand-in: grey mittens. Before the lift they reach for the rollers; after, they withdraw.
+const Hands = ({t, cam, final}) => { if (t < POV0 || t > OUT1) return null;
   const inn = R(t, T.you - 0.1, LIFT0), {M, wa, wb, out, s1, s2} = pov(t, cam);
   const turn = -6 * (R(t, T.unrolled - 0.18, T.unrolled) * (1 - s1) + R(t, T.column - 0.18, T.column) * (1 - s2)) + 14 * (s1 > 0 && s1 < 1 ? Math.sin(s1 * Math.PI) : 0) + 14 * (s2 > 0 && s2 < 1 ? Math.sin(s2 * Math.PI) : 0);
   const vm = (V0 + V1) / 2, grip = [ap(M, wa, vm), ap(M, wb, vm)], rest = [[160, 1300], [1760, 1300]], drop = 700 * out;
-  return <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
+  const dR = Math.hypot(M[2], M[3]) * 0.07 / 0.45, size = 230 * (1 - inn) + Math.max(dR, 40) * inn;
+  if (!final) return <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
     {grip.map((g, i) => { const h = [rest[i][0] + (g[0] - rest[i][0]) * inn, rest[i][1] + (g[1] - rest[i][1]) * inn + drop], elbow = [i ? 1980 : -60, 1220 + drop * 0.3];
-      const r = i ? turn : 0;
       return <g key={i}><line x1={elbow[0]} y1={elbow[1]} x2={h[0]} y2={h[1] + 30} stroke="#000" strokeWidth={118} strokeLinecap="round" />
         <line x1={elbow[0]} y1={elbow[1]} x2={h[0]} y2={h[1] + 30} stroke={GREY} strokeWidth={106} strokeLinecap="round" />
-        <g transform={`rotate(${r} ${h[0]} ${h[1]})`}><rect x={h[0] - 62} y={h[1] - 70} width={124} height={150} rx={52} fill={GREY} stroke="#000" strokeWidth={6} />
-          <rect x={h[0] + (i ? -78 : 34)} y={h[1] - 36} width={44} height={86} rx={22} fill={GREY_D} stroke="#000" strokeWidth={5} /></g></g>; })}
-    <text x={960} y={1050} textAnchor="middle" fontFamily="monospace" fontSize={18} fill="#fff" opacity={inn * (1 - out)}>STAND-IN · YOUR HANDS</text>
-  </svg>; };
+        <g transform={`rotate(${i ? turn : 0} ${h[0]} ${h[1]})`}><rect x={h[0] - 62} y={h[1] - 70} width={124} height={150} rx={52} fill={GREY} stroke="#000" strokeWidth={6} /></g></g>; })}</svg>;
+  return <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
+    {grip.map((g, i) => { const sgn = i ? 1 : -1, S = size, h = [rest[i][0] + (g[0] - rest[i][0]) * inn, rest[i][1] + (g[1] - rest[i][1]) * inn + drop], ow = Math.max(4, S * 0.04);
+      // palm on the outer side of the roller, wrist below it; the forearm is ~1.6 hands long and its elbow sits just below the frame
+      const palmC = [h[0] + sgn * S * 0.45, h[1] + S * 0.05], wrist = [h[0] + sgn * S * 0.55, h[1] + S * 0.55];
+      const dirv = [sgn * 0.42, 0.91], elbow = [wrist[0] + dirv[0] * S * 1.7, wrist[1] + dirv[1] * S * 1.7], shoulder = [elbow[0] + sgn * S * 0.2, elbow[1] + 1400];
+      const palm = cap([palmC[0], palmC[1] - S * 0.28], [palmC[0], palmC[1] + S * 0.3], S * 0.34, S * 0.36);
+      const arm = cap(wrist, elbow, S * 0.3, S * 0.4), upper = cap(elbow, shoulder, S * 0.42, S * 0.5);
+      const fingers = [-0.27, -0.09, 0.09, 0.26].map((dy, k) => cap([palmC[0] - sgn * S * 0.05, h[1] + dy * S], [h[0] - sgn * S * (0.22 - Math.abs(k - 1.5) * 0.05), h[1] + dy * S + S * 0.02], S * 0.1, S * 0.085));
+      return <g key={i} transform={`rotate(${i ? turn : 0} ${h[0]} ${h[1]})`} strokeLinejoin="round">
+        {[upper, arm, palm].map((d, k) => <path key={`o${k}`} d={d} fill="#000" stroke="#000" strokeWidth={ow * 2} />)}
+        {[upper, arm, palm].map((d, k) => <path key={`f${k}`} d={d} fill={SKIN} />)}
+        {fingers.map((d, k) => <path key={`fo${k}`} d={d} fill="#000" stroke="#000" strokeWidth={ow * 1.6} />)}
+        {fingers.map((d, k) => <path key={`ff${k}`} d={d} fill={SKIN} />)}
+        {[-0.18, 0, 0.18].map((dy, k) => <path key={`kn${k}`} d={`M${palmC[0] - sgn * S * 0.02},${h[1] + dy * S} l${-sgn * S * 0.1},0`} stroke={SKIN_D} strokeWidth={ow * 0.7} strokeLinecap="round" />)}</g>; })}</svg>; };
 
 // ---- 2A/2B on the stand: the joins between sheets glow on "glued ... end", the columns light up left to right on "columns"
 const JOINS = [0.315, 0.5, 0.685];   // ~17.5 cm sheets (kollemata), in u
@@ -100,17 +122,26 @@ const Ripple = ({t}) => { if (t < T.hundreds - 0.2 || t > T.hundreds + 1.6) retu
     const a = R(t, T.hundreds + x / 3840 * 0.9, T.hundreds + 0.25 + x / 3840 * 0.9) * (1 - R(t, T.hundreds + 0.6 + x / 3840 * 0.6, T.hundreds + 1.0 + x / 3840 * 0.6));
     return a > 0.01 ? <circle key={`${k}${i}`} cx={x} cy={y} r={q.d / 2} fill="#FFF0C8" opacity={0.7 * a} style={{mixBlendMode: 'screen'}} /> : null; }))}</svg>; };
 
-const Cast = ({t}) => { const st = LIB.state(t);
+// he takes down another roll: at the end of his reach the top roll of the cubby under his hand leaves the rack (one-frame
+// hand-over, the cubby gap drawn on the wall layer) and is in his grip from then on
+const TAKE_T = LIB.end('reach');
+const TAKEN = (() => { const hp = LIB.hand(TAKE_T); let best = null; for (const q of PL.scrolls.C) { if (!q.top) continue; const x = PL.rackC[0] + q.x, y = PL.rackC[1] + q.y, dd = Math.hypot(x - hp[0], y - hp[1]); if (!best || dd < best.dd) best = {x, y, r: q.d / 2, dd}; } return best; })();
+const CUB = `rgb(${PL.cubby_bgr.slice().reverse().map(Math.round).join(',')})`;
+const Gap = ({t}) => t >= TAKE_T ? <svg width={3840} height={2160} style={{position: 'absolute', left: 0, top: 0}}><circle cx={TAKEN.x} cy={TAKEN.y} r={TAKEN.r + 1.5} fill={CUB} /></svg> : null;
+const heldRoll = (W, layer) => { if (layer !== 'under') return null; const m = W.hand, P0 = [6, -781], cd = 70, cl = 300;
+  return <g transform={`matrix(${m.join(',')})`}><rect x={P0[0] - cl * 0.28} y={P0[1] - cd / 2} width={cl} height={cd} rx={cd * 0.3} fill={SHEET} stroke="#000" strokeWidth={7} />
+    <ellipse cx={P0[0] + cl * 0.72} cy={P0[1]} rx={cd * 0.18} ry={cd / 2} fill={SHEET} stroke="#000" strokeWidth={7} /></g>; };
+const Cast = ({t, final}) => { const st = LIB.state(t);
   return <><div style={{position: 'absolute', left: st.px - 140, top: st.py - 20, width: 280, height: 40, borderRadius: '50%', background: 'rgba(0,0,0,0.35)', filter: 'blur(7px)'}} />
-    <Puppet2 pose={st.pose} offset={st.offset} x={st.px} y={st.py} scale={st.WS} hand={st.handShape} dir={st.dir} style={{filter: 'grayscale(1) brightness(1.1) contrast(0.8)'}} /></>; };
+    <Puppet2 pose={st.pose} offset={st.offset} x={st.px} y={st.py} scale={st.WS} hand={t >= TAKE_T ? 'grip' : st.handShape} prop={t >= TAKE_T ? heldRoll : null} dir={st.dir} style={final ? undefined : {filter: 'grayscale(1) brightness(1.1) contrast(0.8)'}} /></>; };
 
 const Source = ({t}) => { const o = R(t, T.philosophy, T.philosophy + 0.4) * (1 - R(t, BADGE0 - 0.3, BADGE0)); const d = SPEC.devices[0];
   return <div style={{position: 'absolute', left: d.box[0], top: d.box[1], width: d.box[2], height: d.box[3], boxSizing: 'border-box', opacity: o, background: `rgba(10,14,20,${d.bg})`,
     color: '#F1E2C4', fontFamily: 'monospace', fontSize: 15, letterSpacing: 3, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{d.text}</div>; };
 
-export const Scene2StandIn = () => { const f = useCurrentFrame(), t = f / SPEC.fps, cam = SC.camAt(t);
+export const Scene2StandIn = ({final = false}) => { const f = useCurrentFrame(), t = f / SPEC.fps, cam = SC.camAt(t);
   const holding = t >= LIFT0 && t < BACK1;   // one-frame hand-overs: the roll is either on the board or in your hands, never both
-  const gate = {cam, laid: holding ? 0 : 1, unroll: 1, wallBlur: t >= POV0 && t < 13.4 ? 30 : 4, cast: <Cast t={t} />, mid: <SheetCues t={t} />, wall: <Ripple t={t} />};
+  const gate = {cam, laid: holding ? 0 : 1, unroll: 1, wallBlur: t >= POV0 && t < 13.4 ? 30 : 4, midBlur: 8 * R(t, LIFT0, LIFT1) * (1 - R(t, BACK0, BACK1)), cast: <Cast t={t} final={final} />, mid: <SheetCues t={t} />, wall: <><Ripple t={t} /><Gap t={t} /></>};
   return <AbsoluteFill style={{background: '#000'}}>
     <Audio src={staticFile('scrolls/scene2/vo.mp3')} />
     {t < MAP0 || (t >= COL0 && t < BADGE0) ? <Room t={0} gate={gate} /> : t < COL0 ? <RoomAndMap t={t} /> : <Badge t={t} />}
@@ -119,7 +150,10 @@ export const Scene2StandIn = () => { const f = useCurrentFrame(), t = f / SPEC.f
       return <div style={{position: 'absolute', left: bx, top: by, width: 1920, height: 1080, transformOrigin: '0 0', transform: `scale(${z})`, overflow: 'hidden', boxShadow: '0 0 0 3px #000'}}><Room t={0} gate={gate} /></div>; })()}
     {t < 1.35 && <AbsoluteFill><Back t={t} /></AbsoluteFill>}
     <HeldRoll t={t} cam={cam} />
-    <Hands t={t} cam={cam} />
+    <Hands t={t} cam={cam} final={final} />
+    {t >= COL0 && t < BADGE0 && (() => { const c = SC.screen(cam, at(0.4483, 0.5038), 1.05), m = `radial-gradient(ellipse 330px 300px at ${c.x}px ${c.y}px, transparent 62%, black 100%)`;
+      return <div style={{position: 'absolute', inset: 0, backdropFilter: `blur(${6 * R(t, COL0 + 0.3, COL0 + 1.0)}px)`, WebkitMaskImage: m, maskImage: m}} />; })()}
     <Source t={t} />
-    <div style={{position: 'absolute', left: 24, top: 20, fontFamily: 'monospace', fontSize: 20, color: '#fff', background: 'rgba(0,0,0,0.55)', padding: '4px 10px'}}>STAND-IN PASS · gate 3 · {(85.4 + t).toFixed(1)} s</div>
+    {final ? <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: 'monospace', fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: 'rgba(8,10,14,1)', padding: '4px 8px'}}>AI-GENERATED ILLUSTRATION</div>
+      : <div style={{position: 'absolute', left: 24, top: 20, fontFamily: 'monospace', fontSize: 20, color: '#fff', background: 'rgba(0,0,0,0.55)', padding: '4px 10px'}}>STAND-IN PASS · gate 3 · {(85.4 + t).toFixed(1)} s</div>}
   </AbsoluteFill>; };

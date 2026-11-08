@@ -288,6 +288,17 @@
       "hand": 0
      },
      "note": "takes down another roll at rack C while you read"
+    },
+    {
+     "name": "lower",
+     "t": 14.5,
+     "dur": 0.7,
+     "pose": {
+      "upper_arm": -15,
+      "forearm": -35,
+      "hand": 25
+     },
+     "note": "draws the roll out of the cubby and brings it in"
     }
    ],
    "rules": {
