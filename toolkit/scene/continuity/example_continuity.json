@@ -159,7 +159,8 @@
     "open on the stand (pilot, scene 2)",
     "in your hands (scene 2)",
     "back on the stand (scene 2)",
-    "carbonised on the stand (lib17-lib18)"
+    "carbonised on the stand (lib17-lib18)",
+    "found again in 1752: black, among the lumps on the buried stand (ch5, labelled Illustrative); from here it is drawn as the lump"
    ]
   },
   {
@@ -167,7 +168,7 @@
    "drawing": "one carbonised-roll drawing: black, cracked, slightly crushed, same 7 cm scale",
    "states": [
     "whole, on the table, in your hand (open1-open5, end8-end9)",
-    "stacks in the buried room (ch5)",
+    "stacks in the buried room, the scene-2 roll among them on the stand (ch5)",
     "cut in half like a log, layers scraped (ch10-ch12)",
     "edge glued to skin, silk threads, on Piaggio's frame (ch15-ch18)",
     "flakes and fragments (ch18, br5)",
@@ -317,10 +318,7 @@
   "the ESRF ring and beamline layout",
   "En-Gedi scroll's look"
  ],
- "decisions_for_sam": [
-  "Should the roll we read in scene 2 be the one we follow into the eruption and find again, black, among the lumps in 1752 (labelled Illustrative)? Recommended: yes, it gives the viewer one object to follow.",
-  "Keep Ephesus on the map (its library was built about 30-50 years after 79 AD), or swap it for a library that existed in 79 AD?"
- ],
+ "decisions_for_sam": [],
  "scenes": [
   {
    "id": "pilot",
@@ -354,5 +352,10 @@
    "diameter": 0.07,
    "length": 0.3
   }
- }
+ },
+ "status": "APPROVED by Sam, 8 Nov 2026 (frozen; changes go to Sam)",
+ "decided": [
+  "8 Nov 2026: the roll read in scene 2 is the one followed through the eruption and found again, black, among the lumps in 1752 (labelled Illustrative)",
+  "8 Nov 2026: Ephesus stays on the map (its library was built about 30-50 years after 79 AD; the narration covers every ancient library)"
+ ]
 }

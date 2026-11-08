@@ -25,6 +25,6 @@ table{{border-collapse:collapse;width:100%;background:#fff;font-size:13.6px}}td,
 <h2>Characters</h2><table><tr><th>Who</th><th>How they're drawn</th><th>Where they appear</th></tr>{chars}</table>
 <h2>Rules for every scene</h2><ul>{rules}</ul>
 <h2>Looked up before each set is drawn</h2>{ul(C['to_check_before_drawing'])}
-<h2>Decisions for you</h2><ol class=dec>{''.join(f'<li>{e(d)}</li>' for d in C['decisions_for_sam'])}</ol>
+<h2>Decided</h2><ul>{''.join(f'<li>{e(d)}</li>' for d in C.get('decided', []))}</ul><p class=mut>{e(C.get('status', ''))}</p>
 </div></body></html>"""
 open('continuity.html', 'w').write(page)
