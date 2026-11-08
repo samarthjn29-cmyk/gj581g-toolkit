@@ -1,0 +1,154 @@
+{
+ "name": "librarian_v2",
+ "anchor": [
+  0,
+  0
+ ],
+ "height": 1700,
+ "parts": [
+  {
+   "name": "torso",
+   "parent": null,
+   "pivot": [
+    8,
+    -760
+   ],
+   "x": -140,
+   "y": -1440,
+   "w": 270,
+   "h": 805
+  },
+  {
+   "name": "head",
+   "parent": "torso",
+   "pivot": [
+    42,
+    -1437
+   ],
+   "x": -82,
+   "y": -1700,
+   "w": 214,
+   "h": 275
+  },
+  {
+   "name": "upper_arm",
+   "parent": "torso",
+   "pivot": [
+    6,
+    -1345
+   ],
+   "x": -50,
+   "y": -1400,
+   "w": 112,
+   "h": 360
+  },
+  {
+   "name": "forearm",
+   "parent": "upper_arm",
+   "pivot": [
+    6,
+    -1075
+   ],
+   "x": -28,
+   "y": -1110,
+   "w": 68,
+   "h": 270
+  },
+  {
+   "name": "hand",
+   "parent": "forearm",
+   "pivot": [
+    6,
+    -845
+   ],
+   "x": -30,
+   "y": -850,
+   "w": 80,
+   "h": 135
+  },
+  {
+   "name": "far_upper_arm",
+   "parent": "torso",
+   "pivot": [
+    22,
+    -1350
+   ],
+   "x": -34,
+   "y": -1405,
+   "w": 112,
+   "h": 360
+  },
+  {
+   "name": "far_forearm",
+   "parent": "far_upper_arm",
+   "pivot": [
+    22,
+    -1080
+   ],
+   "x": -12,
+   "y": -1115,
+   "w": 68,
+   "h": 270
+  },
+  {
+   "name": "far_hand",
+   "parent": "far_forearm",
+   "pivot": [
+    22,
+    -850
+   ],
+   "x": -14,
+   "y": -855,
+   "w": 80,
+   "h": 135
+  },
+  {
+   "name": "near_thigh",
+   "parent": "torso",
+   "pivot": [
+    8,
+    -760
+   ],
+   "x": -56,
+   "y": -825,
+   "w": 132,
+   "h": 480
+  },
+  {
+   "name": "near_shin",
+   "parent": "near_thigh",
+   "pivot": [
+    10,
+    -400
+   ],
+   "x": -50,
+   "y": -452,
+   "w": 196,
+   "h": 462
+  },
+  {
+   "name": "far_thigh",
+   "parent": "torso",
+   "pivot": [
+    28,
+    -760
+   ],
+   "x": -36,
+   "y": -825,
+   "w": 132,
+   "h": 480
+  },
+  {
+   "name": "far_shin",
+   "parent": "far_thigh",
+   "pivot": [
+    30,
+    -400
+   ],
+   "x": -30,
+   "y": -452,
+   "w": 196,
+   "h": 462
+  }
+ ]
+}

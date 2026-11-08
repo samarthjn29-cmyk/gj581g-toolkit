@@ -192,7 +192,11 @@
    "objects.7.scroll_layout": {
     "rollers": "top-bottom",
     "unroll_axis": "v",
-    "columns_axis": "u"
+    "columns_axis": "u",
+    "u_open": [
+     0.13,
+     0.87
+    ]
    }
   }
  },
@@ -309,7 +313,11 @@
      0.03,
      0.97
     ],
-    "stub": 0.04
+    "stub": 0.04,
+    "u_open": [
+     0.13,
+     0.87
+    ]
    }
   }
  },
@@ -337,6 +345,27 @@
     500,
     52
    ]
+  }
+ },
+ "closeup_char_sliver_v13": {
+  "note": "reviewer v13: a strip of the librarian (arm, hem) at the left edge of the close-up",
+  "set": {
+   "camera.shots.4.to.dx": -20,
+   "camera.shots.5.to.dx": -20
+  }
+ },
+ "big_prop_v13": {
+  "note": "reviewer v13: the carried scroll twice the size of the rack's scroll ends",
+  "set": {
+   "props.0.diameter": 0.145
+  }
+ },
+ "closeup_push_sliver_v13": {
+  "note": "reviewer v13 #9/B: during the push into the close-up his arm and face filled the left edge and his hand covered the word card",
+  "set": {
+   "camera.shots.4.t0": 8.35,
+   "camera.shots.4.t1": 9.8,
+   "camera.shots.4.to.dx": -20
   }
  }
 }

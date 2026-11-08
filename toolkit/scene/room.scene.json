@@ -182,8 +182,8 @@
     "unroll_axis": "u",
     "columns_axis": "u",
     "roller_v": [
-     0.1,
-     0.9
+     0.167,
+     0.833
     ],
     "stub": 0.02,
     "u_open": [
@@ -211,7 +211,7 @@
   {
    "id": "scroll1",
    "kind": "scroll",
-   "diameter": 0.145,
+   "diameter": 0.07,
    "length": 0.3,
    "tag": true,
    "states": [
@@ -236,42 +236,42 @@
  "characters": [
   {
    "id": "librarian",
-   "rig": "walker_rig8.json",
-   "parts_dir": "scrolls/pilot6/walker_parts2",
+   "rig": "kit/librarian_rig.json",
+   "parts_dir": null,
    "anchor": [
-    520,
-    1523
+    0,
+    0
    ],
-   "rig_height": 1452,
+   "rig_height": 1700,
    "lane": "near",
    "height": 1.7,
    "facing": "right",
    "entrance": "frame-left",
    "hand": {
-    "part": "forearm",
+    "part": "hand",
     "at": [
-     560,
-     905
+     6,
+     -781
     ]
    },
    "feet": [
     {
      "part": "near_shin",
      "at": [
-      533,
-      1515
+      50,
+      0
      ]
     },
     {
      "part": "far_shin",
      "at": [
-      559,
-      1515
+      68,
+      0
      ]
     }
    ],
    "walk": {
-    "cycle_rig_px": 900,
+    "cycle_rig_px": 1550,
     "stride": 0.8
    },
    "moves": [
@@ -279,13 +279,13 @@
      "t0": 0.6,
      "t1": 4.5,
      "x0": 0.2,
-     "x1": 3.45
+     "x1": 3.5
     },
     {
      "t0": 6.7,
      "t1": 8.0,
-     "x0": 3.45,
-     "x1": 5.25
+     "x0": 3.5,
+     "x1": 5.35
     }
    ],
    "actions": [
@@ -299,8 +299,9 @@
      "t": 4.5,
      "to": "action:grab",
      "pose": {
-      "upper_arm": -68,
-      "forearm": 10
+      "upper_arm": -70,
+      "forearm": -8,
+      "hand": 0
      }
     },
     {
@@ -314,8 +315,9 @@
      "t": 5.9,
      "dur": 0.7,
      "pose": {
-      "upper_arm": -28,
-      "forearm": -70
+      "upper_arm": -10,
+      "forearm": -25,
+      "hand": 35
      }
     },
     {
@@ -323,8 +325,9 @@
      "t": 8.0,
      "to": "action:release",
      "pose": {
-      "upper_arm": -78,
-      "forearm": -22
+      "upper_arm": -50,
+      "forearm": -52,
+      "hand": 36
      }
     },
     {
@@ -335,104 +338,15 @@
     },
     {
      "name": "rest",
-     "t": 8.9,
-     "dur": 1.0
+     "t": 8.65,
+     "dur": 0.6
     }
    ],
    "rules": {
     "limb_tint": false,
     "shoulder_pivot_top_frac": 0.25
    },
-   "caps": [
-    {
-     "part": "near_thigh",
-     "at": [
-      499,
-      1131
-     ],
-     "r": 34,
-     "fill": "skin",
-     "z": 3.5,
-     "why": "knee seam"
-    },
-    {
-     "part": "far_thigh",
-     "at": [
-      525,
-      1131
-     ],
-     "r": 34,
-     "fill": "skin",
-     "z": 1.5,
-     "why": "knee seam"
-    },
-    {
-     "part": "upper_arm",
-     "at": [
-      475,
-      625
-     ],
-     "r": 22,
-     "fill": "skin",
-     "z": 7.5,
-     "why": "elbow seam"
-    },
-    {
-     "part": "torso",
-     "at": [
-      500,
-      372
-     ],
-     "r": 40,
-     "fill": "tunic",
-     "z": 6.5,
-     "why": "shoulder under the raised sleeve"
-    },
-    {
-     "part": "torso",
-     "at": [
-      483,
-      968
-     ],
-     "r": 36,
-     "fill": "tunic",
-     "z": 3.9,
-     "why": "hole in the tunic above the swinging thigh (rig hole test)"
-    },
-    {
-     "part": "torso",
-     "at": [
-      480,
-      1015
-     ],
-     "r": 24,
-     "fill": "tunic_shade",
-     "z": 3.8,
-     "why": "the tunic's front slit showed the background between the legs (rig hole test)"
-    },
-    {
-     "part": "near_shin",
-     "at": [
-      468,
-      1172
-     ],
-     "r": 24,
-     "fill": "skin",
-     "z": 3.2,
-     "why": "back-of-knee notch when the knee bends (rig hole test)"
-    },
-    {
-     "part": "far_shin",
-     "at": [
-      494,
-      1172
-     ],
-     "r": 24,
-     "fill": "skin",
-     "z": 1.2,
-     "why": "back-of-knee notch, far leg"
-    }
-   ]
+   "caps": []
   }
  ],
  "camera": {
@@ -468,7 +382,7 @@
     "t1": 5.3,
     "to": {
      "wall_x": 4.0,
-     "y": 960,
+     "y": 975,
      "z": 1.6
     }
    },
@@ -478,29 +392,30 @@
     "t1": 7.3,
     "follow": "librarian",
     "lead": 380,
-    "y": 985,
+    "y": 1000,
     "z": 1.6,
     "min_x": 1600
    },
    {
     "id": "sheet",
-    "t0": 8.35,
-    "t1": 9.8,
+    "t0": 9.0,
+    "t1": 9.01,
     "to": {
      "target": "stand.sheet",
-     "dx": -20,
+     "dx": 30,
      "dy": 40,
      "z": 5.4
-    }
+    },
+    "note": "cut-in on the close-up once his hand has left the scroll"
    },
    {
     "id": "drift",
-    "t0": 9.8,
+    "t0": 9.01,
     "t1": 15.0,
     "linear": true,
     "to": {
      "target": "stand.sheet",
-     "dx": -20,
+     "dx": 30,
      "dy": 40,
      "z": 5.7
     }

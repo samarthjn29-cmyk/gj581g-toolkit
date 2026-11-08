@@ -26,7 +26,7 @@ export const apply = (m, p) => [m[0] * p[0] + m[2] * p[1] + m[4], m[1] * p[0] + 
 export const walkPose = (phase, amp) => { const a = 2 * Math.PI * phase, s = Math.sin(a), c = Math.cos(a);
   const knee = (v) => 42 * Math.pow(Math.max(0, v), 1.4);
   return {pose: {near_thigh: -24 * s * amp, far_thigh: 24 * s * amp, near_shin: (knee(c) + 4) * amp, far_shin: (knee(-c) + 4) * amp,
-    upper_arm: 16 * s * amp, forearm: (-10 - 8 * s) * amp, torso: (2.5 + 1.2 * Math.sin(2 * a)) * amp, head: (-1.5 - 0.8 * Math.sin(2 * a)) * amp},
+    upper_arm: 24 * s * amp, forearm: (-10 - 8 * s) * amp, far_upper_arm: -24 * s * amp, far_forearm: (-10 + 8 * s) * amp, torso: (2.5 + 1.2 * Math.sin(2 * a)) * amp, head: (-1.5 - 0.8 * Math.sin(2 * a)) * amp},
     bob: -9 * amp * Math.abs(Math.cos(a)) + 4 * amp}; };
 
 export const makeScene = (spec, words, rigs, place) => {
@@ -66,12 +66,18 @@ export const makeScene = (spec, words, rigs, place) => {
     return {B, at, legs, bars, base, top, cab, m, thick: b.thick * m, sheet: at(0.5, 0.5), draw: st.draw, layout: st.scroll_layout}; })();
 
   // ---- rack slots: the scroll ends found in the rack art, sorted into the rack's grid (rows top to bottom)
-  const slot = (rackId, r, c) => { const rb = box(rackId), [R, C] = objs[rackId].grid;
+  const slot = (rackId, r, c) => { const rb = box(rackId), L = rackId.replace(/^rack/, '');
+    if (place.scrolls && place.scrolls[L]) {   // kit racks: the top scroll of cubby (r, c) is the one a hand takes
+      const q = place.scrolls[L].find((s) => s.row === r && s.col === c && s.top); if (!q) throw new Error(`no scroll in ${rackId} cubby ${r},${c}`);
+      const cell = place.cells[L].find((e) => e.row === r && e.col === c);
+      return {x: rb.x + q.x, y: rb.y + q.y, rx: q.d / 2, ry: q.d / 2, tag: q.tag ? {x: rb.x + q.x, y: rb.y + q.y + q.d * 0.3} : null, cell: {x0: rb.x + cell.x0, y0: rb.y + cell.y0, x1: rb.x + cell.x1, y1: rb.y + cell.y1}}; }
+    const [R, C] = objs[rackId].grid;
     const ds = [...place.discs].sort((a, b) => a[1] - b[1]); const rows = [];
     for (let i = 0; i < R; i++) rows.push(ds.slice(i * C, i * C + C).sort((a, b) => a[0] - b[0]));
     const d = rows[r][c], tag = (place.tags || []).find((g) => Math.abs(g[0] - d[0]) < d[2] && g[1] > d[1] - d[3] - 40 && g[1] < d[1]);
     return {x: rb.x + d[0], y: rb.y + d[1], rx: d[2], ry: d[3], index: place.discs.indexOf(d), tag: tag ? {x: rb.x + tag[0], y: rb.y + tag[1]} : null}; };
-  const rackEndDiameter = () => (place.discs.reduce((s, d) => s + 2 * d[2], 0) / place.discs.length) / PXM;   // metres
+  const rackEndDiameter = () => place.scrolls ? (() => { const all = Object.values(place.scrolls).flat(); return all.reduce((s, q) => s + q.d, 0) / all.length / PXM; })()
+    : (place.discs.reduce((s, d) => s + 2 * d[2], 0) / place.discs.length) / PXM;   // metres
 
   // ---- characters: position along the lane, walk, poses from the actions, FK of the rig
   const character = (id) => { const c = chars[id], rig = rigs[c.rig], A = Object.fromEntries(c.actions.map((a) => [a.name, a]));
@@ -81,17 +87,27 @@ export const makeScene = (spec, words, rigs, place) => {
     const moveAt = (t) => { let i = 0; while (i < c.moves.length - 1 && t >= c.moves[i + 1].t0) i++; return i; };
     const xAt = (t) => legX(t, c.moves[moveAt(t)]);
     const distAt = (t) => { const i = moveAt(t); let d = 0; for (let k = 0; k < i; k++) d += c.moves[k].x1 - c.moves[k].x0; return d + xAt(t) - c.moves[i].x0; };
+    // the walk phase advances by distance / (cycle x amplitude): shorter steps when easing in and out, so the stride the
+    // legs take always matches the ground covered (with the foot lock this keeps the planted foot still)
+    let PH = null;
+    const phaseAt = (t, CYC) => { if (!PH) { PH = [0]; const N = Math.ceil(spec.duration * spec.fps) + 2;
+        for (let f = 1; f <= N; f++) { const t1 = f / spec.fps, t0 = (f - 1) / spec.fps, sp = legSpeed(t1, c.moves[moveAt(t1)]), a = Math.max(0.3, Math.min(1, Math.pow(sp, 0.6)));
+          PH.push(PH[f - 1] + (distAt(t1) - distAt(t0)) * PXM / (CYC * a)); } }
+      const fi = t * spec.fps, i = Math.max(0, Math.min(PH.length - 2, Math.floor(fi))), u = fi - i; return PH[i] * (1 - u) + PH[i + 1] * u; };
     const at_ = (name) => time(A[name].t), end_ = (name) => A[name].to ? time(A[name].to) : at_(name) + (A[name].dur || 0.5);
-    const state = (t) => { const sc = lane(c.lane).scale, x = xAt(t), speed = legSpeed(t, c.moves[moveAt(t)]);
+    const state = (t) => { const s0 = state0(t), fx = footLock(t); return {...s0, px: s0.px + fx}; };
+    const state0 = (t) => { const sc = lane(c.lane).scale, x = xAt(t), speed = legSpeed(t, c.moves[moveAt(t)]);
       const WS = c.height * PXM * sc / c.rig_height, CYC = c.walk.cycle_rig_px * WS * c.walk.stride;
-      const walk = walkPose(distAt(t) * PXM / CYC, c.walk.stride * Math.min(1, Math.pow(speed, 0.6)));
+      const amp = Math.min(1, Math.pow(speed, 0.6)), walk = walkPose(phaseAt(t, CYC), c.walk.stride * amp);
       const look = ramp(t, at_('look'), end_('look')) * (1 - ramp(t, 6.0, 6.6));
       const reach = ramp(t, at_('reach'), end_('reach')), lower = ramp(t, at_('lower'), end_('lower'));
       const lay = ramp(t, at_('lay'), end_('lay')), rest = ramp(t, at_('rest'), end_('rest'));
       const P = (n, k) => A[n].pose[k];
       const arm = (walk.pose.upper_arm || 0) * (1 - reach) + P('reach', 'upper_arm') * reach * (1 - lower) + P('lower', 'upper_arm') * lower;
       const fore = (walk.pose.forearm || 0) * (1 - reach) + P('reach', 'forearm') * reach * (1 - lower) + P('lower', 'forearm') * lower;
-      const pose = {...walk.pose,
+      const hp = (n) => (A[n] && A[n].pose && A[n].pose.hand) || 0;
+      const handA = hp('reach') * reach * (1 - lower) + hp('lower') * lower;
+      const pose = {...walk.pose, hand: (handA * (1 - lay) + hp('lay') * lay) * (1 - rest),
         upper_arm: (arm * (1 - lay) + P('lay', 'upper_arm') * lay) * (1 - rest) + (walk.pose.upper_arm || 0) * rest,
         forearm: (fore * (1 - lay) + P('lay', 'forearm') * lay) * (1 - rest) + (walk.pose.forearm || 0) * rest,
         torso: (walk.pose.torso || 0) + 4 * reach * (1 - lower) + 2 * lay * (1 - rest),
@@ -99,7 +115,25 @@ export const makeScene = (spec, words, rigs, place) => {
       const breathe = Math.sin(t * 2.1) * 3 * (1 - speed);
       const offset = {torso: [0, walk.bob * speed + breathe - 14 * reach * (1 - lower)]};
       return {x, speed, WS, pose, offset, px: X(x, c.lane), py: FLOOR + lane(c.lane).drop,
-        held: t > at_('grab') && t < at_('release'), laid: ramp(t, at_('release') - 0.08, at_('release') + 0.05)}; };
+        held: t > at_('grab') && t < at_('release'), laid: t >= at_('release') ? 1 : 0,
+        handShape: t >= at_('grab') && t < at_('release') ? 'grip' : (t >= at_('reach') && t < at_('grab')) ? 'reach' : 'relaxed',
+        propYaw: 90 * ramp(t, at_('grab'), at_('grab') + 0.55)}; };
+    // foot lock (precomputed per frame): while walking, the lower foot is planted; the body offset keeps it still,
+    // fading out as the walk eases in and out so every stop still lands on its planned mark
+    let LOCK = null;
+    const footLock = (t) => { if (c.foot_lock === false) return 0;
+      if (!LOCK) { LOCK = []; const by = Object.fromEntries(rig.parts.map((p) => [p.name, p])); let plant = null, foot = -1;
+        for (let f = 0; f <= Math.ceil(spec.duration * spec.fps) + 1; f++) { const tt = f / spec.fps, s = state0(tt);
+          const W = {}; const M = (n) => { if (W[n]) return W[n]; const p = by[n], local = mul(Tm(...(s.offset[n] || [0, 0])), about(p.pivot, s.pose[n] || 0)); return (W[n] = p.parent ? mul(M(p.parent), local) : local); };
+          const fl = c.feet.map((q) => apply(M(q.part), q.at).map((v, k) => (v - c.anchor[k]) * s.WS));
+          // the stance foot is the one travelling backwards under the body (its leg is pushing); keep it until the other one is
+          const s1 = state0(tt + 1 / spec.fps), W1 = {}; const M1 = (n) => { if (W1[n]) return W1[n]; const p = by[n], local = mul(Tm(...(s1.offset[n] || [0, 0])), about(p.pivot, s1.pose[n] || 0)); return (W1[n] = p.parent ? mul(M1(p.parent), local) : local); };
+          const vx = c.feet.map((q, i) => (apply(M1(q.part), q.at)[0] - c.anchor[0]) * s1.WS - fl[i][0]);
+          let k = foot < 0 ? (vx[0] < vx[1] ? 0 : 1) : (vx[1 - foot] < vx[foot] - 2 ? 1 - foot : foot); const w = Math.min(1, s.speed / 0.35);
+          if (w <= 0) { plant = null; foot = -1; LOCK.push(0); continue; }
+          if (k !== foot || plant === null) { foot = k; plant = s.px + fl[k][0] + (LOCK.length ? LOCK[LOCK.length - 1] : 0); }
+          LOCK.push(w * (plant - (s.px + fl[k][0]))); } }
+      const fi = t * spec.fps, i = Math.max(0, Math.min(LOCK.length - 2, Math.floor(fi))), u = fi - i; return LOCK[i] * (1 - u) + LOCK[i + 1] * u; };
     const world = (t) => { const s = state(t), by = Object.fromEntries(rig.parts.map((p) => [p.name, p])), W = {};
       const M = (n) => { if (W[n]) return W[n]; const p = by[n], local = mul(Tm(...(s.offset[n] || [0, 0])), about(p.pivot, s.pose[n] || 0));
         return (W[n] = p.parent ? mul(M(p.parent), local) : local); };

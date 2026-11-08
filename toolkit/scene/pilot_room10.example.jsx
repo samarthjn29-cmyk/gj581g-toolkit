@@ -8,14 +8,13 @@
 import React from 'react';
 import {AbsoluteFill, Img, Audio, staticFile, useCurrentFrame, random, getInputProps} from 'remotion';
 import {flick, Grain, SR, SI, MO, IN} from '../cave/vw.jsx';
-import {Puppet} from './puppet.jsx';
-import WR from './walker_rig8.json';
+import {Puppet2} from './kit/Puppet2.jsx';
+import WR from './kit/librarian_rig.json';
 import PL from './pilot8_place.json';
 import WORDS from './pilot8_words.json';
 import SPEC from './scene/room.scene.json';
 import {makeScene, ramp, lin, fade} from './scene/core.mjs';
-const SC = makeScene(SPEC, WORDS, {'walker_rig8.json': WR}, PL), LIB = SC.character('librarian');
-const CAPS = SPEC.characters[0].caps.map((c) => ({...c, fill: SPEC.palette[c.fill] || c.fill}));
+const SC = makeScene(SPEC, WORDS, {'kit/librarian_rig.json': WR}, PL), LIB = SC.character('librarian');
 // both legs drawn in the same colours (Sam, 7 Nov 2026): the far leg is no longer darkened
 // walker_rig8: no darkened far limbs, shoulder pivot at the top of the sleeve so the sleeve follows the raised arm
 
@@ -118,17 +117,28 @@ const Arch = ({t}) => { const g = Math.pow(ramp(t, 0.25, 2.1), 1.5), s = 1 + 3.2
     <path d={`M-4000,-4000 H6000 V6000 H-4000 Z ${arch(w + 2 * j, top - j)}`} fill="url(#fw)" fillRule="evenodd" stroke="#000" strokeWidth={4} />
     <path d={`${arch(w + 2 * j, top - j)} ${arch(w, top)}`} fill="#2c3546" fillRule="evenodd" stroke="#000" strokeWidth={3} /></svg>; };
 
+const CUT = SC.time(SPEC.camera.shots.find((s) => s.id === 'sheet').t0);   // the scroll opens on screen, after the cut-in
 const Room = ({t}) => {
   const tRoom = tw('lib4', 'room'), tBooks = tw('lib4', 'books');
   const cam = camAt(t), lit = ramp(t, tRoom - 0.5, tRoom + 0.5);
   const st = LIB.state(t), wx = st.px, wy = st.py, WS = st.WS, wp = st.pose, wOff = st.offset, held = st.held, laid = st.laid;
-  const T = {grab: LIB.at('grab'), unrollA: LIB.at('release') + 0.08, unrollB: LIB.at('release') + 1.28};
-  const cd = SD / WS, cl = 0.3 * PXM / WS;   // scroll diameter and length in rig px
-  const carried = () => held && <g transform="rotate(95 560 905)"><rect x={600 - cl} y={905 - cd / 2} width={cl} height={cd} rx={cd * 0.3} fill={SHEET} stroke="#000" strokeWidth={5} />
-    <ellipse cx={600} cy={905} rx={cd * 0.3} ry={cd / 2} fill={SHEET} stroke="#000" strokeWidth={5} />
-    <circle cx={600} cy={905} r={cd * 0.13} fill="none" stroke="#3a2a22" strokeWidth={5} /><circle cx={600} cy={905} r={cd * 0.05} fill="#3a2a22" />
-    <line x1={600} y1={905 + cd / 2} x2={600} y2={905 + cd / 2 + 26} stroke="#3a2a22" strokeWidth={4} />
-    <rect x={589} y={905 + cd / 2 + 26} width={22} height={48} fill={TAGC} stroke="#000" strokeWidth={4} /></g>;
+  const T = {grab: LIB.at('grab'), unrollA: CUT + 0.3, unrollB: CUT + 1.6};
+  // the held scroll, in the hand's frame (rig mm) between the palm and the wrapping fingers. It comes out of the rack
+  // end-on (a disc) and turns side-on as he lowers it; the tag always hangs straight down from its end
+  const P0 = [6, -781], cd = SPEC.props[0].diameter * 1000, cl = SPEC.props[0].length * 1000;
+  // the hand closes round the roll a quarter of the way from its back end, so most of the scroll shows in front of the fist.
+  // End-on (just out of the rack) the near end faces the camera and is drawn over the fist ('over'); side-on everything is behind it.
+  const carried = (W, layer) => { if (!held) return null; const yaw = st.propYaw * Math.PI / 180, Lv = cl * Math.sin(yaw), rx = Math.max(cd / 2 * Math.cos(yaw), cd * 0.16);
+    const endOver = Math.cos(yaw) > 0.7; if ((layer === 'over') !== endOver && layer === 'over') return null;
+    const m = W.hand, ang = Math.atan2(m[1], m[0]) * 180 / Math.PI, ex = P0[0] + Lv * 0.72, sw = 7;
+    const end = <g key="end"><ellipse cx={ex} cy={P0[1]} rx={rx} ry={cd / 2} fill={SHEET} stroke="#000" strokeWidth={sw} />
+      <circle cx={ex} cy={P0[1]} r={cd * 0.14 * Math.max(0.35, Math.cos(yaw))} fill="none" stroke="#3a2a22" strokeWidth={5} />
+      <g transform={`rotate(${-ang} ${ex} ${P0[1]})`}><line x1={ex} y1={P0[1] + cd * 0.3} x2={ex} y2={P0[1] + cd * 0.75} stroke="#3a2a22" strokeWidth={5} />
+        <rect x={ex - cd * 0.18} y={P0[1] + cd * 0.75} width={cd * 0.36} height={cd * 0.62} fill={TAGC} stroke="#000" strokeWidth={5} /></g></g>;
+    if (layer === 'over') return <g transform={`matrix(${m.join(',')})`}>{end}</g>;
+    return <g transform={`matrix(${m.join(',')})`}>
+      {Lv > 2 && <rect x={P0[0] - Lv * 0.28} y={P0[1] - cd / 2} width={Lv} height={cd} rx={Math.min(cd * 0.3, Lv / 2)} fill={SHEET} stroke="#000" strokeWidth={sw} />}
+      {!endOver && end}</g>; };
   // light and focus cues
   const fl = scr(cam, PL.flame[0], PL.flame[1], 1.05), pool = scr(cam, (PL.flame[0] + SHEET_C[0]) / 2 - 60, PL.flame[1] + 40, 1.05);
   const glint = ramp(t, tBooks - 0.6, tBooks - 0.1) * (1 - ramp(t, tBooks + 0.6, tBooks + 1.2));
@@ -139,7 +149,7 @@ const Room = ({t}) => {
   return <AbsoluteFill style={{background: '#0B0F16'}}>
     <Plate cam={cam} p={1} style={{filter: `blur(${4 * closeO}px)`}}>
       <Pic src="back.jpg" w={PW} h={PH} />
-      {t > T.grab && <svg width={PW} height={PH} style={{position: 'absolute', left: 0, top: 0}}><defs><clipPath id="cell10"><rect x={take.x - take.rx - 4} y={take.y - take.ry - 4} width={2 * take.rx + 8} height={2 * take.ry + 8} /></clipPath></defs><g clipPath="url(#cell10)"><ellipse cx={take.x} cy={take.y} rx={take.rx + 3} ry={take.ry + 3} fill={cub} />{take.tag && <rect x={take.tag.x - 9} y={take.tag.y - 20} width={18} height={44} fill={cub} />}</g></svg>}
+      {t > T.grab && PL.taken_patch && <Pic src="rack_taken_patch.png" x={PL.taken_patch[0]} y={PL.taken_patch[1]} w={PL.taken_patch[2]} h={PL.taken_patch[3]} />}
       
     </Plate>
     <Plate cam={cam} p={1.05}>
@@ -151,8 +161,7 @@ const Room = ({t}) => {
     </Plate>
     <Plate cam={cam} p={1.03}>
       <Shadow x={wx} y={wy} w={280} /><Shadow x={wx - 30} y={wy} w={200} />
-      <Puppet rig={WR} dir="scrolls/pilot6/walker_parts2" pose={wp} offset={wOff} x={wx} y={wy} scale={WS} anchor={[520, 1523]} attach={{forearm: carried}}
-        caps={CAPS} />
+      <Puppet2 pose={wp} offset={wOff} x={wx} y={wy} scale={WS} hand={st.handShape} prop={carried} />
     </Plate>
     {/* the lamp is the only light: everything outside its pool sinks into a dark teal */}
     <AbsoluteFill style={{background: `radial-gradient(circle at ${pool.x}px ${pool.y}px, rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${R0}px, rgba(8,22,34,${(0.86 - 0.24 * lit) * (1 - 0.8 * closeO)}) ${R1}px)`, mixBlendMode: 'multiply'}} />
