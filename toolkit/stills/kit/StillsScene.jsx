@@ -29,6 +29,10 @@ const Shot = ({s, t, dir}) => {
 const Card = ({c, t}) => { const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
   if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(0,0,0,${0.35 * o})`}}>
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 84, letterSpacing: 6, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.1, textShadow: '0 4px 24px rgba(0,0,0,0.7)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
+  // on-screen text (Sam, 8 Nov 2026: "putting text on the screen where it makes sense"): a key line in the end-title look,
+  // set low so the picture stays visible; words verbatim from a fact-checked line
+  if (c.kind === 'text') return <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', opacity: o, background: `linear-gradient(to top, rgba(0,0,0,${0.62 * o}) 0%, rgba(0,0,0,0) 45%)`}}>
+    <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 66, letterSpacing: 3, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.15, marginBottom: 110, textShadow: '0 4px 24px rgba(0,0,0,0.8)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // info box: what a term means (kept on screen at Sam's request)
   return <div style={{position: 'absolute', left: 96, bottom: 120, width: 640, opacity: o, transform: `translateY(${(1 - o) * 14}px)`, background: 'rgba(14,16,20,0.82)', borderLeft: '6px solid #C9A86A', padding: '22px 28px', backdropFilter: 'blur(6px)'}}>
     {c.label && <div style={{fontFamily: 'Inter, sans-serif', fontSize: 18, letterSpacing: 4, color: '#C9A86A', marginBottom: 8}}>{c.label}</div>}
