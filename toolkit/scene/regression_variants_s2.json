@@ -1,0 +1,26 @@
+{
+ "reach_takes_nothing_v1": {
+  "note": "reviewer scene2 v1 #8: the librarian reaches into the rack and takes nothing",
+  "set": {
+   "characters.0.actions.0.result": null
+  }
+ },
+ "map_credit_wrong_v2": {
+  "note": "scene2 v2: the map carried the AI-GENERATED label instead of its Natural Earth credit",
+  "set": {
+   "credits.1.text": "AI-GENERATED ILLUSTRATION"
+  }
+ },
+ "credit_gap": {
+  "note": "a stretch of the scene with no credit",
+  "set": {
+   "credits.2.t0": 22.0
+  }
+ },
+ "closeup_sliver_s2": {
+  "note": "gate 3: the push on the sheet let the librarian sliver into frame",
+  "set": {
+   "camera.shots.0.to.dx": -60
+  }
+ }
+}

@@ -7,7 +7,8 @@ import {makeScene} from './core.mjs';
 const args = process.argv.slice(2), file = args[0], dir = path.dirname(file);
 const vi = args.indexOf('--variant'), variant = vi > 0 ? args[vi + 1] : null, ji = args.indexOf('--json'), jout = ji > 0 ? args[ji + 1] : null;
 let spec = JSON.parse(fs.readFileSync(file, 'utf8'));
-if (variant) { const V = JSON.parse(fs.readFileSync(path.join(dir, 'regression_variants.json'), 'utf8'))[variant];
+const vfi = args.indexOf('--variants'), vfile = vfi > 0 ? args[vfi + 1] : path.join(dir, 'regression_variants.json');
+if (variant) { const V = JSON.parse(fs.readFileSync(vfile, 'utf8'))[variant];
   for (const [p, v] of Object.entries(V.set)) { const ks = p.split('.'); let o = spec; for (const k of ks.slice(0, -1)) o = o[isNaN(k) ? k : +k]; o[ks.at(-1)] = v; } }
 const R = (f) => JSON.parse(fs.readFileSync(path.join(dir, '..', f), 'utf8'));
 const words = R(spec.words.file), place = R('pilot8_place.json'), rigs = Object.fromEntries(spec.characters.map((c) => [c.rig, R(c.rig)]));
@@ -126,6 +127,13 @@ for (const c of spec.characters) { const ch = sc.character(c.id); let sl = null,
     // a reveal sweeps past the edge in a few frames and is fine; a sliver that lingers 0.3 s or more is the defect
     if (vis > 0 && vis < 0.25) { run = run || {t, vis, px: Math.max(0, Math.min(1920, b.x + b.w) - Math.max(0, b.x)), n: 0}; run.n++; if (run.n >= Math.round(0.3 * spec.fps)) { sl = run; break; } } else run = null; }
   add('F6 no character slivers at the frame edge', sl ? 'FAIL' : 'PASS', sl ? `only ${(sl.vis * 100).toFixed(0)}% (${sl.px.toFixed(0)} px) of ${c.id} shows at the edge at ${sl.t.toFixed(2)} s` : 'characters are in frame or out of it', sl ? 'frame him out or show more of him' : ''); }
+// A1: an action must change something on screen. A reach that grabs nothing must say what it results in, or be marked a gesture
+for (const c of spec.characters) for (const a of c.actions.filter((x) => x.name === 'reach')) { const grab = c.actions.find((x) => x.name === 'grab');
+  add('A1 every reach changes something', grab || a.result || a.gesture ? 'PASS' : 'FAIL', grab ? 'reach ends in a grab' : a.result ? `reach -> ${a.result}` : a.gesture ? 'marked as a gesture' : `${c.id}'s reach at ${a.t} s takes nothing (reviewer v1 #8)`, grab || a.result || a.gesture ? '' : 'give it a result (and draw it) or mark it a gesture'); }
+// K1: credits come from the spec, cover the whole scene with no gap, and a map or other sourced art carries its own credit
+if (spec.credits) { const cr = [...spec.credits].sort((a, b) => a.t0 - b.t0); let gap = null; if (cr[0].t0 > 0.01) gap = 0; for (let i = 1; i < cr.length; i++) if (cr[i].t0 - cr[i - 1].t1 > 0.01) gap = cr[i - 1].t1; if (cr[cr.length - 1].t1 < spec.duration - 0.05) gap = cr[cr.length - 1].t1;
+  const SRC = {natural_earth: 'NATURAL EARTH'}; const bad = cr.filter((c) => c.source && !c.text.toUpperCase().includes(SRC[c.source] || '?'));
+  add('K1 credits cover the scene and name their source', gap !== null || bad.length ? 'FAIL' : 'PASS', gap !== null ? `no credit from ${gap.toFixed(2)} s` : bad.length ? `${bad[0].covers}: "${bad[0].text}" does not name ${bad[0].source}` : `${cr.length} credit ranges`, gap !== null || bad.length ? 'fix spec.credits' : ''); }
 // ---------- T: text and devices
 { const mg = RU.safe_margin_px;
   // the stand's whole drawn body (board and wedge base), not only its sheet: the v13 cut-in puts the word card over the base

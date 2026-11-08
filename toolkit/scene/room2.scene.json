@@ -287,7 +287,8 @@
       "forearm": -10,
       "hand": 0
      },
-     "note": "takes down another roll at rack C while you read"
+     "note": "takes down another roll at rack C while you read",
+     "result": "the top roll of the cubby under his hand leaves the rack and is in his grip"
     },
     {
      "name": "lower",
@@ -498,5 +499,26 @@
    "grab": 0.15,
    "release": 0.25
   }
- }
+ },
+ "credits": [
+  {
+   "t0": 0,
+   "t1": 16.0,
+   "text": "AI-GENERATED ILLUSTRATION",
+   "covers": "the room art"
+  },
+  {
+   "t0": 16.0,
+   "t1": 21.3,
+   "text": "MAP · NATURAL EARTH",
+   "covers": "the map",
+   "source": "natural_earth"
+  },
+  {
+   "t0": 21.3,
+   "t1": 26.0,
+   "text": "AI-GENERATED ILLUSTRATION",
+   "covers": "the room art"
+  }
+ ]
 }

@@ -210,6 +210,6 @@ export const Scene2StandIn = ({final = false}) => { const f = useCurrentFrame(),
     {t >= COL0 && t < BADGE0 && (() => { const c = SC.screen(cam, at(0.4483, 0.5038), 1.05), m = `radial-gradient(ellipse 330px 300px at ${c.x}px ${c.y}px, transparent 62%, black 100%)`;
       return <div style={{position: 'absolute', inset: 0, backdropFilter: `blur(${6 * R(t, COL0 + 0.3, COL0 + 1.0)}px)`, WebkitMaskImage: m, maskImage: m}} />; })()}
     <Source t={t} />
-    {final ? <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: 'monospace', fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: 'rgba(8,10,14,1)', padding: '4px 8px'}}>{t >= MAP0 + 0.6 && t < COL0 ? 'MAP · NATURAL EARTH' : 'AI-GENERATED ILLUSTRATION'}</div>
+    {final ? <div style={{position: 'absolute', right: 64, bottom: 40, fontFamily: 'monospace', fontSize: 12, letterSpacing: 2, color: '#B8AC96', background: 'rgba(8,10,14,1)', padding: '4px 8px'}}>{(SPEC.credits.find((c) => t >= c.t0 && t < c.t1) || SPEC.credits[SPEC.credits.length - 1]).text}</div>
       : <div style={{position: 'absolute', left: 24, top: 20, fontFamily: 'monospace', fontSize: 20, color: '#fff', background: 'rgba(0,0,0,0.55)', padding: '4px 10px'}}>STAND-IN PASS · gate 3 · {(85.4 + t).toFixed(1)} s</div>}
   </AbsoluteFill>; };

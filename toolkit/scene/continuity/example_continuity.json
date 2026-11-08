@@ -1,0 +1,358 @@
+{
+ "video": "Scrolls_v1",
+ "about": "Whole-video continuity sheet (8 Nov 2026). Decided once, before scenes are built; every scene spec is built against it and the validator checks scene specs against it (toolkit scene/continuity_check.mjs). A change here after Sam's OK is a decision for Sam, not a scene fix.",
+ "chapters": [
+  {
+   "id": "open",
+   "lines": "open1-open9",
+   "sets": [
+    "table"
+   ],
+   "light": "single cool key on the lump, dark around"
+  },
+  {
+   "id": "library",
+   "lines": "lib1-lib19",
+   "sets": [
+    "villa",
+    "room"
+   ],
+   "light": "warm afternoon outside; lamp-lit room (warm from screen right); red then black in the eruption; dark, then heat glow as the books carbonise"
+  },
+  {
+   "id": "charcoal",
+   "lines": "ch1-ch20",
+   "sets": [
+    "tunnels",
+    "room",
+    "workshop"
+   ],
+   "light": "amber torchlight, smoky, underground; then cool daylight in the workshop"
+  },
+  {
+   "id": "breaking",
+   "lines": "br1-br13",
+   "sets": [
+    "workshop"
+   ],
+   "light": "workshop daylight, changing apparatus per era (1819 gases, 1980s gelatine)"
+  },
+  {
+   "id": "seales",
+   "lines": "se1-se14",
+   "sets": [
+    "lab"
+   ],
+   "light": "blue screen glow; scanner white"
+  },
+  {
+   "id": "crackle",
+   "lines": "cr1-cr23",
+   "sets": [
+    "screens"
+   ],
+   "light": "many small screen glows around the world; one warm reveal on 'purple'"
+  },
+  {
+   "id": "read",
+   "lines": "rd1-rd22",
+   "sets": [
+    "synchrotron",
+    "lab",
+    "villa"
+   ],
+   "light": "cool white beamline; the villa today under modern ground"
+  },
+  {
+   "id": "end",
+   "lines": "end1-end9",
+   "sets": [
+    "villa",
+    "room",
+    "tunnels",
+    "workshop",
+    "lab",
+    "screens",
+    "table"
+   ],
+   "light": "reprise of each set's own light, ending at dawn over the bay, then the table light of the opening"
+  }
+ ],
+ "sets": [
+  {
+   "id": "table",
+   "what": "a dark table top with one lit lump on it; your hands (POV) pick it up",
+   "status": "to build",
+   "reuses": [
+    "hands_pov",
+    "lump"
+   ]
+  },
+  {
+   "id": "villa",
+   "what": "the Villa of the Papyri on the Bay of Naples, Vesuvius behind: terraces, long pool, bronze statues, sea wall",
+   "states": [
+    "79 AD afternoon (lib1-lib3)",
+    "eruption: gas and ash clouds roll down (lib14-lib15)",
+    "cross-section under more than 20 m of volcanic rock (lib16)",
+    "today: modern ground over it, parts never dug out (rd20-rd21)",
+    "dawn over the bay (end)"
+   ],
+   "status": "to build",
+   "note": "one wide world; the camera travels it in every state, same layout in all of them"
+  },
+  {
+   "id": "room",
+   "what": "the library room: racks A/B/C on the back wall, the case with the slanted stand, the lampstand",
+   "states": [
+    "lamp-lit, 79 AD (pilot, scene 2)",
+    "dark, heat: every scroll end turns black, the lamp out (lib17-lib18)",
+    "buried and filled, reached by a tunnel in 1752, torchlight, stacks of black lumps (ch5)"
+   ],
+   "status": "LOCKED (scene 2, gate 2)",
+   "spec": "twice/remotion/src/scrolls/scene/room.scene.json"
+  },
+  {
+   "id": "tunnels",
+   "what": "narrow tunnels cut through rock, 1752, smoky torches, a bronze statue being hauled out",
+   "status": "to build"
+  },
+  {
+   "id": "workshop",
+   "what": "the papyrus workshop in Naples: one long table and window; its apparatus changes with the era (knife and scraper; Piaggio's frame; Davy's gas jars; a 1980s lab bench with gelatine)",
+   "status": "to build",
+   "note": "one room reused across 230 years: the era is told by the apparatus and a date tag, the walls stay"
+  },
+  {
+   "id": "lab",
+   "what": "a scanning lab: a scanner, a screen showing the 3D spiral of a scroll, a flattened layer; also the hospital-scan comparison and the En-Gedi scroll",
+   "status": "to build"
+  },
+  {
+   "id": "screens",
+   "what": "screens around the world on a night map (the crowd), then one screen close: the crackle texture, the marked strokes, the training loop, the word",
+   "status": "to build",
+   "reuses": [
+    "map"
+   ]
+  },
+  {
+   "id": "synchrotron",
+   "what": "the ring of magnets at Grenoble seen from above, the beamline, the core on its mount",
+   "status": "to build"
+  },
+  {
+   "id": "map",
+   "what": "Natural Earth map of the Mediterranean, sea navy, land sand; one marker per place, labels on backings",
+   "status": "built (scene 2)",
+   "credit": "MAP · NATURAL EARTH"
+  }
+ ],
+ "props": [
+  {
+   "id": "roll",
+   "drawing": "one roll drawing for every state (stand Roller, held roll, carried roll share the same design: sheet-coloured body, umbilicus end, short wooden stubs, red tag)",
+   "size": "7 cm across, 30 cm long (open sheet 28 cm tall)",
+   "states": [
+    "on the shelf (pilot)",
+    "carried (pilot)",
+    "open on the stand (pilot, scene 2)",
+    "in your hands (scene 2)",
+    "back on the stand (scene 2)",
+    "carbonised on the stand (lib17-lib18)"
+   ]
+  },
+  {
+   "id": "lump",
+   "drawing": "one carbonised-roll drawing: black, cracked, slightly crushed, same 7 cm scale",
+   "states": [
+    "whole, on the table, in your hand (open1-open5, end8-end9)",
+    "stacks in the buried room (ch5)",
+    "cut in half like a log, layers scraped (ch10-ch12)",
+    "edge glued to skin, silk threads, on Piaggio's frame (ch15-ch18)",
+    "flakes and fragments (ch18, br5)",
+    "scanned: grey spiral on screen (se4-se5)"
+   ]
+  },
+  {
+   "id": "core_1667",
+   "drawing": "PHerc. 1667: a black stub, small enough to sit in your palm",
+   "states": [
+    "in your palm (rd3)",
+    "on its mount in the beamline (rd6-rd7)",
+    "unwrapped on screen, about 20 column bottoms with gaps (rd8-rd11)"
+   ],
+   "check": "its real size and shape from the 2026 team's images before drawing"
+  },
+  {
+   "id": "piaggio_frame",
+   "drawing": "a wooden frame, a turning screw, silk threads to skin glued on the roll's edge",
+   "states": [
+    "opening a roll a sliver at a time (ch15-ch17)"
+   ],
+   "check": "period drawings of Piaggio's machine (public domain) for its shape"
+  },
+  {
+   "id": "lamp",
+   "drawing": "the room's lampstand (pilot)",
+   "states": [
+    "lit (79)",
+    "out (lib17)"
+   ]
+  },
+  {
+   "id": "torch",
+   "drawing": "a smoky pitch torch",
+   "states": [
+    "carried in the tunnels (ch3-ch5)"
+   ]
+  },
+  {
+   "id": "statue",
+   "drawing": "a bronze statue, generic (not a copy of a real Villa bronze)",
+   "states": [
+    "in the villa garden (lib2)",
+    "hauled out of a tunnel (ch2)"
+   ]
+  },
+  {
+   "id": "screen",
+   "drawing": "one flat monitor drawing for every screen in the video",
+   "states": [
+    "the 3D spiral (se4)",
+    "a flattened layer (se5)",
+    "Leviticus lines (se8)",
+    "crackle texture (cr5-cr7)",
+    "marked strokes and training rounds (cr9-cr11)",
+    "the word (cr12-cr14)"
+   ]
+  }
+ ],
+ "characters": [
+  {
+   "id": "librarian",
+   "kind": "kit rig (code-drawn body, Recraft head)",
+   "appears": [
+    "pilot",
+    "scene 2"
+   ],
+   "marks": {
+    "pilot end": "L3 at the stand, x 5.35 m",
+    "scene 2 end": "L4 at rack C, x 4.45 m, holding a roll"
+   },
+   "rule": "79 AD only; not shown in the eruption"
+  },
+  {
+   "id": "you",
+   "kind": "POV hands (kit): bare forearms, fingers over the held object, elbows just below frame",
+   "appears": [
+    "open1-open5 (the lump)",
+    "lib8 (the roll)",
+    "ch4 (holding a torch in the tunnel)",
+    "rd3 (the core in your palm)",
+    "end8-end9 (the lump again)"
+   ],
+   "rule": "the same hands every time; sized from the object they hold"
+  },
+  {
+   "id": "workmen",
+   "kind": "kit rig with a 1750s costume (shirt, breeches, cap); 2-3 variants by costume and head",
+   "appears": [
+    "ch2-ch5",
+    "ch8"
+   ],
+   "rule": "small in frame, mostly silhouetted against torchlight"
+  },
+  {
+   "id": "artists",
+   "kind": "kit rig, seated drawing pose (new pose for the kit)",
+   "appears": [
+    "ch19-ch20"
+   ]
+  },
+  {
+   "id": "named_dead",
+   "kind": "medallion badges",
+   "who": [
+    "Philodemus (monogram: no likeness survives)",
+    "Epicurus (posterised public-domain bust)",
+    "Antonio Piaggio (portrait if a public-domain one exists, else monogram)",
+    "Humphry Davy (posterised public-domain portrait)",
+    "Chrysippus (posterised public-domain bust)"
+   ]
+  },
+  {
+   "id": "named_living",
+   "kind": "monogram badges only, never drawn",
+   "who": [
+    "Brent Seales",
+    "Casey Handmer",
+    "Luke Farritor",
+    "Youssef Nader",
+    "Julian Schilliger"
+   ],
+   "rule": "their work is shown through screens and anonymous hands labelled Illustrative"
+  }
+ ],
+ "rules": {
+  "screen_direction": "time and journeys move left to right in every chapter; a deliberate reversal is noted in the scene's blocking plan",
+  "writing": "Greek capitals, rounded sigma, no spaces; only fact-checked real text is ever legible (PHerc. 1005 four-part cure; the word on cr14 and the title on rd16 after their checks); everything else is ink blocks",
+  "tags": "red hanging tags on shelved rolls are a look, never claimed as found at Herculaneum",
+  "scale": "a roll is 7 cm across in every shot; a hand is about 1.3x a roll",
+  "people_harm": "the eruption is shown through the villa and the room, never through victims",
+  "credits": "AI-GENERATED ILLUSTRATION on AI art; MAP · NATURAL EARTH on maps; Illustrative/Recreation kind labels where a scene is not a record",
+  "plants": [
+   "open1 lump -> end8 lump",
+   "lib19 'ruined it and kept it' -> rd17-rd18",
+   "br12 battered cores -> rd5",
+   "ch13 'the reading that destroys' -> br6 -> end5",
+   "end6 'the reading that waits'"
+  ]
+ },
+ "to_check_before_drawing": [
+  "PHerc. 1667's real size and shape",
+  "Piaggio's machine (period drawing)",
+  "the Greek of the word on cr14 as read from the scan",
+  "what the 1752 tunnels and the 'stacks' looked like (dig diary, Gell)",
+  "the ESRF ring and beamline layout",
+  "En-Gedi scroll's look"
+ ],
+ "decisions_for_sam": [
+  "Should the roll we read in scene 2 be the one we follow into the eruption and find again, black, among the lumps in 1752 (labelled Illustrative)? Recommended: yes, it gives the viewer one object to follow.",
+  "Keep Ephesus on the map (its library was built about 30-50 years after 79 AD), or swap it for a library that existed in 79 AD?"
+ ],
+ "scenes": [
+  {
+   "id": "pilot",
+   "lines": "lib4-lib6",
+   "spec": "twice/remotion/src/scrolls/scene/room.scene.json"
+  },
+  {
+   "id": "scene2",
+   "lines": "lib7-lib10",
+   "spec": "twice/remotion/src/scrolls/scene/room2.scene.json"
+  }
+ ],
+ "locked_sets": {
+  "room": {
+   "from": "twice/remotion/src/scrolls/scene/room.scene.json",
+   "objects": [
+    "rackA",
+    "rackB",
+    "rackC",
+    "panelA",
+    "panelB",
+    "panelC",
+    "cabinet",
+    "stand",
+    "lamp"
+   ]
+  }
+ },
+ "prop_sizes": {
+  "scroll": {
+   "diameter": 0.07,
+   "length": 0.3
+  }
+ }
+}
