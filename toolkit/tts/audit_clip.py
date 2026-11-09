@@ -9,7 +9,7 @@ Listens to the RENDERED clip (what the viewer hears), not the line takes, with f
   LEVEL   loudness (LUFS) and true peak
 Usage: audit_clip.py CLIP.mp4 SCRIPT.json LINE_FIRST-LINE_LAST [--names Seales,Farritor] [--out report.md]
 Exit code 1 when any WORDS or PAUSES or NOISE problem is found, so a build can stop on it."""
-import sys, re, json, difflib, subprocess, tempfile, argparse, numpy as np, soundfile as sf
+import unicodedata, sys, re, json, difflib, subprocess, tempfile, argparse, numpy as np, soundfile as sf
 from num2words import num2words
 ap = argparse.ArgumentParser(); ap.add_argument('clip'); ap.add_argument('script'); ap.add_argument('lines')
 ap.add_argument('--names', default='Seales,Handmer,Farritor,Youssef,Nader,Schilliger,Philodemus,Piaggio,Herculaneum,Porphyras,Gedi,Humphry,Leviticus,Vesuvius,Ercolano')
@@ -22,7 +22,9 @@ def toks(s):
     s = re.sub(r'(?<=\d),(?=\d{3})', '', s.lower().replace('%', ' percent ').replace('’', "'"))   # 2,000 -> 2000
     s = re.sub(r'(\d+)(s\b)?', lambda x: (lambda w: (w[:-1] + 'ies' if w.endswith('y') else w + 's') if x.group(2) else w)(
         num2words(int(x.group(1)), to='year') if len(x.group(1)) == 4 else num2words(int(x.group(1)))), s)
-    return ' '.join(SAME.get(t, t) for t in re.sub(r"[^a-z ]", ' ', s.replace('-', ' ').replace("'", '')).split()).split()
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode()   # café = cafe (Zeigarnik, 9 Nov 2026)
+    ise = lambda t: re.sub(r'(?<=[a-z]{3})iz(e|es|ed|ing|ation|ations)$', r'is\1', t)   # organized = organised, alphabetizes = alphabetises
+    return ' '.join(ise(SAME.get(t, t)) for t in re.sub(r"[^a-z ]", ' ', s.replace('-', ' ').replace("'", '')).split()).split()
 S = json.load(open(a.script)); L = S['lines'] if isinstance(S, dict) else S
 ids = [l['id'] for l in L]; i0, i1 = (ids.index(x) for x in a.lines.split('-')); L = L[i0:i1 + 1]
 with tempfile.TemporaryDirectory() as td:
