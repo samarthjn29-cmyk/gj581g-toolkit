@@ -1,10 +1,30 @@
 {
- "updated": "2026-11-03",
+ "updated": "2026-11-09",
  "window": {
-  "from": "2026-11-04",
-  "to": "2027-06-30"
+  "from": "2026-09-12",
+  "to": "2028-02-06"
  },
  "events": [
+  {
+   "date": "2026-09-12",
+   "end": "2027-01-17",
+   "region": "EU",
+   "type": "exhibition",
+   "name": "Stedelijk Amsterdam: Yayoi Kusama retrospective (final stop)",
+   "status": "confirmed",
+   "source": "https://www.mocomuseum.com/news/amsterdam/yayoi-kusama-exhibition-amsterdam-museumplein-guide-2026",
+   "note": ""
+  },
+  {
+   "date": "2026-10-01",
+   "end": "2027-01-03",
+   "region": "UK",
+   "type": "exhibition",
+   "name": "Tate Modern: 'Frida: The Making of an Icon' (until 3 Jan 2027)",
+   "status": "confirmed",
+   "source": "https://www.wallpaper.com/art/exhibitions-shows/london-art-exhibitions",
+   "note": "start date approximate; end date confirmed"
+  },
   {
    "date": "2026-11-04",
    "end": null,
@@ -72,6 +92,16 @@
    "note": "Rule: CPI is released at 4 pm on the 12th; if the 12th is a holiday, the next working day (moved for weekends here; Indian public holidays not checked). MoSPI calendar PDF could not be fetched."
   },
   {
+   "date": "2026-11-12",
+   "end": null,
+   "region": "US",
+   "type": "ideas-event",
+   "name": "NYU Center for Mind, Ethics and Policy: 'Inter-AI Morality' talk (AI minds debate)",
+   "status": "confirmed",
+   "source": "https://wp.nyu.edu/consciousness/",
+   "note": ""
+  },
+  {
    "date": "2026-11-16",
    "end": null,
    "region": "CA",
@@ -81,6 +111,16 @@
    "source": "https://www150.statcan.gc.ca/n1/dai-quo/cal1-eng.htm"
   },
   {
+   "date": "2026-11-17",
+   "end": null,
+   "region": "US",
+   "type": "auction",
+   "name": "Christie's 20th Century Evening Sale, New York (lost O'Keeffe 'Near Abiquiu, New Mexico I', found in a closet, est. $2-3m); Phillips evening sale same day",
+   "status": "confirmed",
+   "source": "https://news.artnet.com/market/lost-georgia-okeeffe-abiquiu-christies-2832664",
+   "note": ""
+  },
+  {
    "date": "2026-11-18",
    "end": null,
    "region": "UK",
@@ -88,6 +128,46 @@
    "name": "UK CPI (October 2026), ONS 07:00",
    "status": "confirmed",
    "source": "https://www.ons.gov.uk/releases/consumerpriceinflationukoctober2026"
+  },
+  {
+   "date": "2026-11-18",
+   "end": null,
+   "region": "US",
+   "type": "auction",
+   "name": "Sotheby's 'Legendary: The Blaquier-Arrieta Collection': Van Gogh 'Chataigniers en fleurs' (1890) est. ~$180m vs record $117.2m; Cezanne 'Arlequin' ~$120m",
+   "status": "confirmed",
+   "source": "https://www.theartnewspaper.com/2026/11/02/a-van-gogh-hidden-away-for-over-50-years-and-a-vibrant-cezanne-harlequin-our-pick-of-the-november-auctions",
+   "note": "Peg for 'what makes a painting priceless'. Result is news on 18-19 Nov."
+  },
+  {
+   "date": "2026-11-21",
+   "end": "2027-04-11",
+   "region": "UK",
+   "type": "exhibition",
+   "name": "National Gallery London: 'Van Eyck: The Portraits'",
+   "status": "confirmed",
+   "source": "https://www.nationalgallery.org.uk/",
+   "note": ""
+  },
+  {
+   "date": "2026-11-21",
+   "end": null,
+   "region": "EU",
+   "type": "space",
+   "name": "BepiColombo capture burn into Mercury orbit (ESA/JAXA); Mio deploys 9-10 Dec",
+   "status": "expected",
+   "source": "https://spacecalendar.com/events",
+   "note": ""
+  },
+  {
+   "date": "2026-11-24",
+   "end": null,
+   "region": "WORLD",
+   "type": "anniversary",
+   "name": "Darwin's 'On the Origin of Species' published, 24 Nov 1859",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
   },
   {
    "date": "2026-11-25",
@@ -108,6 +188,16 @@
    "source": "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/"
   },
   {
+   "date": "2026-11-26",
+   "end": null,
+   "region": "WORLD",
+   "type": "anniversary",
+   "name": "Carter and Carnarvon open Tutankhamun's tomb ('wonderful things'), 26 Nov 1922",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
+  },
+  {
    "date": "2026-11-27",
    "end": "2026-11-30",
    "region": "Global",
@@ -126,6 +216,16 @@
    "status": "confirmed",
    "source": "https://www.ecb.europa.eu/press/calendars/statscal/ges/html/sthicp.en.html",
    "note": "Eurostat calendar is JavaScript-only; date taken from the ECB statistical calendar, which publishes its seasonally adjusted flash HICP on the Eurostat flash day. Eurostat calendar: https://ec.europa.eu/eurostat/news/euro-indicators/release-calendar"
+  },
+  {
+   "date": "2026-12-02",
+   "end": null,
+   "region": "US",
+   "type": "anniversary",
+   "name": "Chicago Pile-1, first self-sustaining chain reaction, 2 Dec 1942",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
   },
   {
    "date": "2026-12-04",
@@ -201,6 +301,16 @@
    "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
   },
   {
+   "date": "2026-12-10",
+   "end": null,
+   "region": "WORLD",
+   "type": "science",
+   "name": "Nobel Prize award ceremonies, Stockholm and Oslo (10 Dec, Nobel's death day)",
+   "status": "confirmed",
+   "source": "https://www.nobelprize.org/",
+   "note": ""
+  },
+  {
    "date": "2026-12-11",
    "end": null,
    "region": "US",
@@ -266,6 +376,16 @@
    "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
   },
   {
+   "date": "2026-12-17",
+   "end": null,
+   "region": "US",
+   "type": "anniversary",
+   "name": "Wright brothers' first powered flight, 17 Dec 1903",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
+  },
+  {
    "date": "2026-12-18",
    "end": null,
    "region": "JP",
@@ -273,6 +393,36 @@
    "name": "Bank of Japan policy decision (MPM 12-17 to 12-18)",
    "status": "confirmed",
    "source": "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+  },
+  {
+   "date": "2026-12-21",
+   "end": null,
+   "region": "WORLD",
+   "type": "science",
+   "name": "December solstice (Newgrange, Stonehenge sunrise/sunset alignments)",
+   "status": "confirmed",
+   "source": "https://spacecalendar.com/events",
+   "note": ""
+  },
+  {
+   "date": "2026-12-25",
+   "end": null,
+   "region": "WORLD",
+   "type": "anniversary",
+   "name": "Isaac Newton born 25 Dec 1642 (Julian) = 4 Jan 1643 (Gregorian): calendar-change peg",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
+  },
+  {
+   "date": "2027-01-01",
+   "end": null,
+   "region": "WORLD",
+   "type": "calendar",
+   "name": "New Year: why the year starts on 1 January (Julian reform 46/45 BC; Britain moved New Year from 25 March in 1752)",
+   "status": "confirmed",
+   "source": "",
+   "note": ""
   },
   {
    "date": "2027-01-06",
@@ -499,6 +649,16 @@
    "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
   },
   {
+   "date": "2027-02-11",
+   "end": "2027-05-23",
+   "region": "UK",
+   "type": "exhibition",
+   "name": "National Portrait Gallery: 'Peter Blake: Pop Art Life'",
+   "status": "confirmed",
+   "source": "https://www.npg.org.uk/about/press/national-portrait-gallery-reveals-its-programme-of-major-exhibitions-for-2027",
+   "note": ""
+  },
+  {
    "date": "2027-02-12",
    "end": null,
    "region": "IN",
@@ -646,6 +806,16 @@
    "name": "Bank of England MPC Bank Rate decision",
    "status": "confirmed",
    "source": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates"
+  },
+  {
+   "date": "2027-03-18",
+   "end": "2027-08-01",
+   "region": "UK",
+   "type": "exhibition",
+   "name": "National Gallery: 'German Expressionism: Modern Painting 1900-1918'",
+   "status": "confirmed",
+   "source": "https://www.nationalgallery.org.uk/",
+   "note": ""
   },
   {
    "date": "2027-03-23",
@@ -992,6 +1162,16 @@
    "status": "confirmed",
    "source": "https://www.ato.gov.au/",
    "note": "Individual returns (self-lodged) due 31 Oct 2027, outside this calendar."
+  },
+  {
+   "date": "2027-11-07",
+   "end": "2028-02-06",
+   "region": "US",
+   "type": "exhibition",
+   "name": "The Met: 'Rembrandt and the Ancients' (with the Louvre)",
+   "status": "confirmed",
+   "source": "https://www.metmuseum.org/press-releases/rembrandt-ancients",
+   "note": ""
   }
  ],
  "undated": [

@@ -1,25 +1,198 @@
 {
- "_note": "GJ 581g is a GLOBAL channel (Sam, 3 Nov 2026): target viewers in the US, UK, Ireland and Europe, Canada, Australia, New Zealand and other English-speaking countries. India is one lens among several, never the frame. Statuses: core / testing / paused. Edit freely as runs teach things.",
- "search_geos": ["US", "GB", "CA", "AU", "IN"],
- "trends_geo": ["US", "GB", "CA", "AU", "IE", "NZ"],
+ "_note": "GJ 581g is a GLOBAL channel (US, UK, Ireland and Europe, Canada, Australia, New Zealand, India). Since 7 Nov 2026 it 'just explores new ideas': one big idea per video, one true story per chapter, Emergence-style illustrated animation. Idea lanes are core; money is one lane among many. Statuses: core / testing / paused. Broadened 9 Nov 2026 by the weekly idea scout.",
+ "search_geos": [
+  "US",
+  "GB",
+  "CA",
+  "AU",
+  "IN"
+ ],
+ "trends_geo": [
+  "US",
+  "GB",
+  "CA",
+  "AU",
+  "IE",
+  "NZ"
+ ],
  "niches": {
-  "money-measured": {"status": "core", "seeds": [
-   "why is everything so expensive", "cost of living crisis explained", "is my salary keeping up with inflation",
-   "why is the dollar so strong", "why the world uses the dollar", "how exchange rates work", "purchasing power parity",
-   "why can't young people afford a house", "where does inflation come from", "why are wages so low", "is the middle class shrinking",
-   "which country is actually richest", "national debt explained"]},
-  "money-across-borders": {"status": "testing", "seeds": [
-   "cost of living uk vs us", "moving to canada worth it", "salary in australia vs usa", "why is europe poorer than america",
-   "remote work salary different countries", "best country to live financially"]},
-  "ai-and-work": {"status": "paused", "seeds": ["will ai take my job", "ai and wages", "how chatgpt works"]}
+  "money-measured": {
+   "status": "testing",
+   "seeds": [
+    "why is everything so expensive",
+    "why the world uses the dollar",
+    "where does inflation come from",
+    "what is money actually",
+    "why does paper money have value"
+   ]
+  },
+  "money-across-borders": {
+   "status": "paused",
+   "seeds": [
+    "cost of living uk vs us",
+    "moving to canada worth it",
+    "salary in australia vs usa",
+    "why is europe poorer than america",
+    "remote work salary different countries",
+    "best country to live financially"
+   ]
+  },
+  "ai-and-work": {
+   "status": "paused",
+   "seeds": [
+    "will ai take my job",
+    "ai and wages",
+    "how chatgpt works"
+   ]
+  },
+  "philosophy-thought-experiments": {
+   "status": "core",
+   "seeds": [
+    "plato's cave explained",
+    "ship of theseus",
+    "trolley problem explained",
+    "is free will an illusion",
+    "what is consciousness",
+    "the problem of evil",
+    "stoicism explained"
+   ]
+  },
+  "art-and-artists": {
+   "status": "core",
+   "seeds": [
+    "why is the mona lisa so famous",
+    "what makes art good",
+    "van gogh story",
+    "art forgery story",
+    "what makes a painting valuable",
+    "the mona lisa theft"
+   ]
+  },
+  "mind-and-psychology": {
+   "status": "core",
+   "seeds": [
+    "why do we dream",
+    "why do we procrastinate",
+    "cognitive biases explained",
+    "why do we forget",
+    "placebo effect explained",
+    "aphantasia explained",
+    "the libet experiment"
+   ]
+  },
+  "science-history": {
+   "status": "core",
+   "seeds": [
+    "how did we measure the earth",
+    "history of the calendar",
+    "how did we discover germs",
+    "why did we skip 11 days in 1752",
+    "why does the year start in january"
+   ]
+  },
+  "technology-and-ai-ideas": {
+   "status": "core",
+   "seeds": [
+    "can machines think",
+    "turing test explained",
+    "how the internet works",
+    "who invented the computer",
+    "will ai become conscious",
+    "will ai become self aware",
+    "how would we know if ai is conscious",
+    "people feared the printing press"
+   ]
+  },
+  "history-big-ideas": {
+   "status": "core",
+   "seeds": [
+    "why did rome fall",
+    "history of writing",
+    "how maps lie",
+    "why do we have 7 days in a week"
+   ]
+  }
  },
- "peers": ["/@Primateeconomics", "/@Explains101", "/@TheInvisibleHandCo", "/@EconomicsExplained", "/@HowMoneyWorks", "/@MoneyMacro",
-           "/@BenFelixCSI", "/@ThePlainBagel", "/@littlebitbetter7", "/@Degenerocity", "/@TypeAshton", "/@xplainedInminutess"],
- "news": ["cost of living", "inflation report", "Federal Reserve interest rates", "Bank of England rates", "ECB interest rates", "Bank of Canada rates",
-          "Reserve Bank of Australia", "dollar strength", "currency record low", "housing affordability", "wage growth", "national debt", "tariffs prices"],
- "subreddits": ["personalfinance", "UKPersonalFinance", "PersonalFinanceCanada", "AusFinance", "eupersonalfinance", "economics", "AskEconomics",
-                "explainlikeimfive", "povertyfinance", "IWantOut"],
- "alerts": {"currencies": ["USD", "GBP", "EUR", "JPY", "CAD", "AUD", "NZD", "INR", "CNY", "TRY", "CHF"], "move_1d_pct": 1.5, "move_5d_pct": 3.0,
-            "news_phrases": ["currency record low", "surprise rate cut", "surprise rate hike", "emergency rate", "currency crisis", "devaluation",
-                             "inflation surprise", "recession confirmed", "sovereign default", "tariffs announced"]}
+ "peers": [
+  "/@EmergenceYT",
+  "/@TEDEd",
+  "/@TheSchoolofLifeTV",
+  "/@PursuitofWonder",
+  "/@Einzelganger",
+  "/@GreatArtExplained",
+  "/@Nerdwriter1",
+  "/@veritasium",
+  "/@kurzgesagt",
+  "/@Vsauce",
+  "/@aperture",
+  "/@ScienceExplainedOfficial",
+  "/@Primateeconomics",
+  "/@HowMoneyWorks",
+  "/@EconomicsExplained",
+  "/@TheInvisibleHandCo",
+  "/@PhilosophyTube",
+  "/@CrashCourse"
+ ],
+ "news": [
+  "philosophy",
+  "art auction record",
+  "museum exhibition",
+  "consciousness study",
+  "artificial intelligence consciousness",
+  "history discovery archaeology",
+  "space mission",
+  "Nobel Prize",
+  "cost of living",
+  "inflation report",
+  "dollar strength",
+  "Sotheby's Christie's auction",
+  "aphantasia"
+ ],
+ "subreddits": [
+  "philosophy",
+  "askphilosophy",
+  "ArtHistory",
+  "AskHistorians",
+  "askscience",
+  "AskEconomics",
+  "explainlikeimfive",
+  "history",
+  "psychology",
+  "cogsci",
+  "Futurology",
+  "NoStupidQuestions",
+  "TrueAskReddit"
+ ],
+ "alerts": {
+  "currencies": [
+   "USD",
+   "GBP",
+   "EUR",
+   "JPY",
+   "CAD",
+   "AUD",
+   "NZD",
+   "INR",
+   "CNY",
+   "TRY",
+   "CHF"
+  ],
+  "move_1d_pct": 1.5,
+  "move_5d_pct": 3.0,
+  "news_phrases": [
+   "currency record low",
+   "surprise rate cut",
+   "surprise rate hike",
+   "emergency rate",
+   "currency crisis",
+   "devaluation",
+   "inflation surprise",
+   "recession confirmed",
+   "sovereign default",
+   "tariffs announced"
+  ]
+ },
+ "_changelog": [
+  "2026-11-09: idea lanes added as core (philosophy, art, mind, science history, technology/AI, history); money-measured -> testing, money-across-borders paused; peers broadened to illustrated idea channels (Emergence first); dead seeds retired; HistoryMatters and wisecrack handles returned nothing (dropped)."
+ ]
 }
