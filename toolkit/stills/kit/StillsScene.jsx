@@ -2,6 +2,8 @@
 // Props = the timeline.json written by toolkit/stills/build_scene.py, plus `dir` (the scene's folder under public/).
 // Shot fields: img (file in dir), move: push | pullback | pan | panL | tilt | drift | hold, focus [x, y] (0-1, where a push
 // heads), fade (s of dissolve into this shot; default 0 = cut), layers (folder with far/mid/near.png from stills/layers.py).
+// Gags (9 Nov 2026): move 'punch' (snap zoom at punch_at s toward focus, size punch), freeze + freeze_img on video shots,
+// gag: true marks the shot for the music dip at the mix. Gags carry no caption or label (Sam: "no labels").
 // Cards: kind 'title' (big centred line) or 'info' (term + definition box, e.g. WORD 01 · Papyrus); dur (s, default 4.5).
 // No image-source labels on screen (Sam, 8 Nov 2026): credits and the AI disclosure live in the description.
 import React from 'react';
@@ -17,10 +19,15 @@ const MOVES = {   // [scale from, scale to, x from, x to, y from, y to] in % of 
 };
 
 const Shot = ({s, t, dir}) => { const {fps} = useVideoConfig();
-  const [s0, s1, x0, x1, y0, y1] = MOVES[s.move || 'drift'], k = lin(t, s.t, s.t + s.dur + (s.tail || 0));
-  const sc = s0 + (s1 - s0) * k, x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
+  const [s0, s1, x0, x1, y0, y1] = MOVES[s.move === 'punch' ? 'hold' : (s.move || 'drift')], k = lin(t, s.t, s.t + s.dur + (s.tail || 0));
+  let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
+  // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
+  if (s.move === 'punch') { const p0 = s.t + (s.punch_at ?? 0.5); sc += (s.punch || 0.22) * interpolate(t, [p0, p0 + 0.18], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }
+  // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
+  const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
   const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra}%, ${y * extra}%) scale(${1 + (sc - 1) * extra})`, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
-    {s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
+    {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
+      : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
       : <Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />}</AbsoluteFill>;
   if (!s.layers) return frame(1, s.img);
