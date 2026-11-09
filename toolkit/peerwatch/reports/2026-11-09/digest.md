@@ -1,0 +1,495 @@
+# Peer watch 2026-11-09
+
+21 channels, 576 videos on their /videos pages; 10 learn cards in `learn/`, thumbnails in `thumbs/`.
+
+## New uploads since the last run
+
+- **The Dark Knowledge of AI** (@EmergenceYT, 279k views, 49.82x median, 19.0 min) `A9psCzGqvfs` 
+- **Is It Just a Fancy Dictionary, or Is Something Emerging?** (@EmergenceYT, 71k views, 12.68x median, 20.1 min) `IKZJraZ0WFE` question
+- **The Quantum Theory of Dreams and Consciousness** (@ApertureThinking, 2.3M views, 10.45x median, 47.8 min) `DAN9mpLnOqA` 
+- **The Map of Engineering** (@DomainofScience, 3.6M views, 9.73x median, 22.1 min) `pQgxiQAMTTo` 
+- **4 ways to fix your attention span - Shannon Odell** (@TEDEd, 4.6M views, 9.26x median, 5.4 min) `N2uQWfV6Jr4` number, you/your
+- **Game Theory: A Simple Strategy That Will Change Your Life Forever** (@PursuitofWonder, 2.7M views, 9.02x median, 17.8 min) `ivfw_TcsHbw` you/your
+- **The Terrifying Quantum Entanglement Theory That Breaks Reality** (@ApertureThinking, 1.6M views, 7.27x median, 32.6 min) `hV-blfKF4Po` 
+- **The Map of Quantum Computing - Quantum Computing Explained** (@DomainofScience, 2.3M views, 6.22x median, 33.5 min) `-UlxHPIEVqA` explained
+- **The Surprising Map of Plants** (@DomainofScience, 2.1M views, 5.68x median, 19.9 min) `ONVpFtiD-fo` 
+- **You Are Losing the Ability to Think, and an MIT Study Shows How** (@ApertureThinking, 1.2M views, 5.45x median, 33.7 min) `jexg0umv_yo` you/your
+- **A Journey Through The Darién Gap: The World's Deadliest Jungle** (@CogitoEdu, 3.2M views, 5.25x median, 43.8 min) `szicR4CwqlU` country
+- **Who Are The Tamil People** (@CogitoEdu, 3.2M views, 5.25x median, 26.2 min) `fh4RNP4bMWk` 
+- **Great Art Explained: The Last Supper by Leonardo da Vinci** (@GreatArtExplained, 1.0M views, 5.13x median, 36.2 min) `eKyYPSpiC9g` explained
+- **5 Mind-Bending Philosophies About Reality** (@PhilosophyVibe, 33k views, 5.08x median, 12.4 min) `RiXPJT_Ikqc` number
+- **The Quantum Theory of Consciousness That’s Terrifying Scientists** (@PursuitofWonder, 1.5M views, 5.01x median, 19.8 min) `gm8Bj2kCkfs` 
+- **Top 10 Philosophy Books - The ultimate philosophy reading list** (@PhilosophyVibe, 32k views, 4.92x median, 13.1 min) `p2wjwQug2Y0` number
+- **The Map of Particle Physics | The Standard Model Explained** (@DomainofScience, 1.8M views, 4.86x median, 31.8 min) `mYcLuWHzfmE` explained
+- **The Word That Breaks an AI** (@EmergenceYT, 27k views, 4.82x median, 20.1 min) `srqEA2vlI0M` 
+- **The Existential Elk Theory - The Darkest Philosophical Essay Ever Written** (@PursuitofWonder, 1.4M views, 4.67x median, 15.8 min) `2mY_YUUdRBk` 
+- **The theory of time that proves your past self still exists** (@ApertureThinking, 1.0M views, 4.55x median, 29.7 min) `Hv7f1bedXOE` you/your
+- **You are the Universe Experiencing Itself | Spinoza's God** (@ApertureThinking, 1.0M views, 4.55x median, 48.7 min) `NRTH809cCIs` you/your
+- **Quantum Computing and the end of the Internet as we know it** (@ApertureThinking, 1.0M views, 4.55x median, 37.4 min) `ZvO5kikFVOk` 
+- **love cannot fix you** (@Sisyphus55, 311k views, 4.35x median, 7.9 min) `8Krn_7GltBY` you/your
+- **AI Just Crossed the Terrifying Line - Now What?** (@kurzgesagt, 23.0M views, 4.26x median, 21.7 min) `ujkD4SxPKOI` question
+- **The Map of Quantum Physics** (@DomainofScience, 1.5M views, 4.05x median, 21.3 min) `gAFAj3pzvAA` 
+- **The Magnetic Shadow Effect** (@minutephysics, 2.0M views, 4.04x median, 5.9 min) `MuvuxHXLzls` 
+- **Synchronicity: Carl Jung’s Most Disturbing Theory About Reality** (@PursuitofWonder, 1.2M views, 4.01x median, 14.4 min) `hgzOsvrbYU8` 
+- **Buddhism Explained** (@CogitoEdu, 2.4M views, 3.93x median, 19.9 min) `lNdgT6VCuu0` explained
+- **This Woman Cured Her Cancer with an Insane Method** (@kurzgesagt, 21.0M views, 3.89x median, 15.2 min) `0NY2gAftzJE` dramatic
+- **The Moon's Orbit is WEIRD** (@minutephysics, 1.9M views, 3.84x median, 5.5 min) `KBcxuM-qXec` 
+- **Nozick's Entitlement Theory: The Philosophy of the Free Market - Debate** (@PhilosophyVibe, 24k views, 3.69x median, 14.5 min) `aQ6JVCWtOUU` 
+- **SOCRATES: THE GREATEST RAGE BAITER OF ALL TIME** (@Sisyphus55, 261k views, 3.65x median, 8.5 min) `FlHVU71z0-k` 
+- **What Can You Do With a Philosophy Degree?** (@PhilosophyVibe, 23k views, 3.54x median, 10.6 min) `9hk-k8nIcGA` question, you/your
+- **The Doctrine of Double Effect - Explained & Debated** (@PhilosophyVibe, 22k views, 3.38x median, 10.1 min) `OFtrill_3HA` explained
+- **The School of Athens by Raphael: Great Art Explained** (@GreatArtExplained, 649k views, 3.33x median, 24.0 min) `9x0tsuS4dk0` explained
+- **Why Some Breakups Hurt So Much More Than Others** (@theschooloflifetv, 297k views, 3.32x median, 4.1 min) `G_ATGHMKEZA` why
+- **Puerto Rico Is Dying: Here's Why** (@CogitoEdu, 2.0M views, 3.28x median, 42.9 min) `6sPRFvWOBwo` why, dramatic
+- **Why Do Wind Turbines Have Three Blades?** (@minutephysics, 1.6M views, 3.24x median, 4.1 min) `pgqkti7yePk` question, why
+- **Top 5 Modern Philosophical Novels - fiction books all philosophers must read** (@PhilosophyVibe, 21k views, 3.23x median, 12.8 min) `X8l2yPYpkSg` number
+- **Why do some people have a better sense of direction than others? - Oliver Baumann** (@TEDEd, 1.6M views, 3.22x median, 5.9 min) `I8XaYkRW1tA` question, why
+- **This Simple Tool Will Improve Your Critical Thinking** (@PursuitofWonder, 950k views, 3.17x median, 15.3 min) `gxglts0Sw5I` you/your
+- **Moral Realism - Explained and Debated** (@PhilosophyVibe, 20k views, 3.08x median, 16.9 min) `3pr4twpK1cM` explained
+- **Great Art Explained: Bernini's Apollo and Daphne** (@GreatArtExplained, 599k views, 3.07x median, 30.1 min) `H8fGd3fCJbg` explained
+- **René Magritte: Great Art Explained** (@GreatArtExplained, 568k views, 2.91x median, 18.7 min) `NZCE3ot6lf8` explained
+- **The Physics Of Dissonance** (@minutephysics, 1.4M views, 2.83x median, 28.0 min) `tCsl6ZcY9ag` 
+- **Which Planet Has the Best Eclipse?** (@minutephysics, 1.4M views, 2.83x median, 8.7 min) `CikPFdZdY4k` question
+- **Why We Don’t Have Much Choice in Dating (Despite the Apps)** (@theschooloflifetv, 243k views, 2.72x median, 2.8 min) `Q3qLo_kGi10` why
+- **The Fascinating Map of Fungi** (@DomainofScience, 1.0M views, 2.7x median, 23.2 min) `5FqFg-rjzPo` 
+- **The Comprehensive Map of Medicine** (@DomainofScience, 1.0M views, 2.7x median, 51.8 min) `CkwSeMrOPjc` 
+- **Why didn't Castro try to retake Guantanamo Bay from America?** (@HistoryMatters, 2.4M views, 2.67x median, 8.1 min) `QdmJsqDceV4` question, why, country
+- **WW2 - OverSimplified (Part 1)** (@OverSimplified, 105.0M views, 2.66x median, 13.8 min) `_uk_6vfqwTA` number
+- **Great Art Explained: Las Meninas by Diego Velázquez** (@GreatArtExplained, 519k views, 2.66x median, 31.0 min) `YFI6cQF1ros` explained
+- **Strings Don't Vibrate The Way You Think** (@minutephysics, 1.3M views, 2.63x median, 4.7 min) `sYdXa_yp0fc` you/your
+- **Brain in a Vat - Explained and Debated** (@PhilosophyVibe, 17k views, 2.62x median, 9.1 min) `rLZ9M7xLsMg` explained
+- **Don't Despair** (@theschooloflifetv, 234k views, 2.61x median, 2.7 min) `1bmUWt9wejI` 
+- **Van Gogh's Last Painting: Great Art Explained** (@GreatArtExplained, 496k views, 2.54x median, 16.2 min) `lAjVuUB9AkI` explained
+- **The Desire To Escape From Yourself** (@Sisyphus55, 179k views, 2.5x median, 7.8 min) `6VdKrNl552I` 
+- **Shintoism Explained** (@CogitoEdu, 1.5M views, 2.46x median, 22.7 min) `mX8cz1LEeXw` explained
+- **The Andromeda Paradox: A Theory That Proves Your Future Self Already Exists** (@PursuitofWonder, 724k views, 2.42x median, 22.1 min) `jDU6kdoBegc` you/your
+- **What if you didn’t brush your teeth for a year? - Justin Merritt** (@TEDEd, 1.2M views, 2.42x median, 5.5 min) `8RPK5KwYhgA` question, what-if, you/your
+- **Why Smart People Struggle With Feelings** (@Sisyphus55, 169k views, 2.36x median, 6.4 min) `XmsKvzivDjA` why
+- **This Al Minecraft Simulation Is Terrifying Scientists** (@PursuitofWonder, 708k views, 2.36x median, 20.6 min) `u7U6nIsJrHM` 
+- **Who Are The Bengali People?** (@CogitoEdu, 1.4M views, 2.3x median, 66.3 min) `MDoI0BO8cmo` question
+- **We Finally Know More About Humanity’s First Civilization** (@kurzgesagt, 12.0M views, 2.22x median, 17.5 min) `_y9JuojAIg0` 
+- **3 things to never do with a credit card** (@TEDEd, 1.1M views, 2.22x median, 6.0 min) `av3zdxYvCp8` number
+- **Common Moon Mistakes** (@minutephysics, 1.1M views, 2.22x median, 5.1 min) `yY7ZUIbWTyc` 
+- **i changed my mind about god** (@Sisyphus55, 158k views, 2.21x median, 8.5 min) `ujXDmtQGfuY` 
+- **Jackson Pollock Part One: The Myth of the Modern Artist** (@GreatArtExplained, 422k views, 2.16x median, 26.3 min) `0sQ_cfZ8q9k` 
+- **Top 10 Metaphysical Movies - Films all Philosophers should watch** (@PhilosophyVibe, 14k views, 2.15x median, 18.9 min) `nlBEXTrIQPc` number
+- **The Day the AI Math Stopped Working** (@EmergenceYT, 12k views, 2.14x median, 29.7 min) `n7GTSD4mwxQ` 
+- **This Nobel Prize Winner Has a Really Strange Theory About the Mind** (@PursuitofWonder, 641k views, 2.14x median, 14.8 min) `BrxheXPuCJ4` 
+- **the fear of enjoying your life** (@Sisyphus55, 152k views, 2.13x median, 10.2 min) `PJ_rGO7wdew` you/your
+- **What Years of Heartbreak Actually Teach Us** (@theschooloflifetv, 188k views, 2.1x median, 5.7 min) `3_uOA2K78M8` country, dramatic
+- **The Map of Doom | Apocalypses Ranked** (@DomainofScience, 770k views, 2.08x median, 21.5 min) `Htf0XR6W9WQ` 
+- **there is no right way to live** (@Sisyphus55, 147k views, 2.06x median, 12.1 min) `R182h3Z-D24` 
+- **The Childish Behavior That Ruins Adult Relationships** (@theschooloflifetv, 184k views, 2.06x median, 3.9 min) `uk3wUnCEghw` 
+- **The Fascinating Map of Board Games** (@DomainofScience, 762k views, 2.06x median, 21.0 min) `fH4MaSJ8gXU` 
+- **AI Slop Is Destroying The Internet** (@kurzgesagt, 11.0M views, 2.04x median, 9.9 min) `_zfN9wnPvU0` dramatic
+- **Do *you* understand ISO?** (@minutephysics, 1.0M views, 2.02x median, 11.6 min) `ZWSvHBG7X0w` question, you/your
+- **You Were Let Go Because You Were Too Good** (@theschooloflifetv, 178k views, 1.99x median, 4.9 min) `tv6WwOFQIY0` you/your
+- **Microsoft's Topological Quantum Computer Explained** (@DomainofScience, 733k views, 1.98x median, 23.3 min) `ihZXl33t8So` explained
+- **Inside the World’s Most Hidden Conflict** (@CogitoEdu, 1.2M views, 1.97x median, 51.0 min) `ZWp5904RkJY` country
+- **Why India Fears a Sikh State** (@CogitoEdu, 1.2M views, 1.97x median, 62.5 min) `JAk83kdnFrQ` why, country
+- **Why Heartbreak Can Be the Making of You** (@theschooloflifetv, 175k views, 1.96x median, 3.7 min) `O4FjeAYDRMQ` why, you/your
+- **Ever walk into a room and forget what you were doing? - Gabriel Radvansky** (@TEDEd, 947k views, 1.91x median, 5.8 min) `_gP3aXvNmv8` question, you/your
+- **The Cold War - OverSimplified (Part 1)** (@OverSimplified, 75.0M views, 1.9x median, 16.1 min) `I79TpDe3t2g` number
+- **Why Humanity Will Never Leave The Solar System** (@kurzgesagt, 10.0M views, 1.85x median, 12.7 min) `Cyl3X88KEgg` why
+- **Why Every Couple Struggles With Closeness and Distance** (@theschooloflifetv, 164k views, 1.83x median, 4.9 min) `c__DMV_Clog` why, format-hook
+- **The American Civil War - OverSimplified (Part 1)** (@OverSimplified, 72.0M views, 1.82x median, 29.9 min) `tsxmyL7TUJg` number, country
+- **The Quantum theory of Synchronicity | Carl Jung's Strangest Idea** (@ApertureThinking, 394k views, 1.79x median, 33.5 min) `utrkutzLcA8` 
+- **Can Humanity Stop A Planet-Killing Asteroid?** (@kurzgesagt, 9.6M views, 1.78x median, 12.7 min) `dKm7T13X7n4` question, dramatic
+- **Egon Schiele: Great Art Explained** (@GreatArtExplained, 345k views, 1.77x median, 24.7 min) `uLHZZmTXhPM` explained
+- **This Is What a Godlike Civilization Would Look Like** (@kurzgesagt, 9.5M views, 1.76x median, 14.2 min) `QW_jlUn4gA8` 
+- **The Schrödinger Equation Explained in 60 Seconds** (@DomainofScience, 650k views, 1.76x median, 1.0 min) `AR23uxZruhE` number, explained
+- **The Napoleonic Wars  - OverSimplified (Part 1)** (@OverSimplified, 69.0M views, 1.75x median, 29.7 min) `zqllxbPWKNI` number
+- **You are God pretending to be Human | Alan Watts** (@ApertureThinking, 383k views, 1.74x median, 31.6 min) `QEEgHGtcQkI` you/your
+- **WW2 - OverSimplified (Part 2)** (@OverSimplified, 68.0M views, 1.72x median, 15.6 min) `fo2Rb9h788s` number
+- **Why You Want to Run Away From a Good Relationship** (@theschooloflifetv, 153k views, 1.71x median, 4.5 min) `_HqfzLk0QxU` why, you/your
+- **Introduction to Philosophy - What is Philosophy? What are the core topics?** (@PhilosophyVibe, 11k views, 1.69x median, 13.8 min) `gH1azN3eJZY` question
+- **Globalism vs Nationalism - The modern political divide** (@PhilosophyVibe, 11k views, 1.69x median, 27.9 min) `T32hU6kCcKk` 
+- **Inside Morocco's Secret War for Western Sahara** (@CogitoEdu, 1.0M views, 1.64x median, 36.6 min) `-T2ha4a_AuE` dramatic
+- **How Every Continent Got Its Name** (@CogitoEdu, 1.0M views, 1.64x median, 20.2 min) `Q7yfhIKyoRg` how, format-hook
+- **The Map of Black Holes | Black Holes Explained** (@DomainofScience, 605k views, 1.64x median, 27.1 min) `Wf0uxjWGwPk` explained
+- **Great Art Explained: The Wanderer Above the Sea of Fog by Caspar David Friedrich** (@GreatArtExplained, 318k views, 1.63x median, 15.1 min) `c3NmCvrUYUA` explained
+- **The American Revolution  - OverSimplified (Part 1)** (@OverSimplified, 64.0M views, 1.62x median, 15.1 min) `gzALIXcY4pg` number, country
+- **The Periodic Table in a 2D World** (@minutephysics, 794k views, 1.61x median, 4.4 min) `r4xGVk_2eT8` number, country
+- **Why Heartbroken People Make the Best Lovers** (@theschooloflifetv, 143k views, 1.6x median, 2.9 min) `iKoG1FkOnVk` why
+- **How Israel Built Nuclear Weapons (and lied about it)** (@CogitoEdu, 976k views, 1.6x median, 32.8 min) `Y5xOMO6-9dI` how, dramatic
+- **how you are ruining your brain** (@Sisyphus55, 114k views, 1.59x median, 10.3 min) `agzuLi7IHzM` how, you/your
+- **This Is the Scariest Place in The Universe** (@kurzgesagt, 8.6M views, 1.59x median, 9.2 min) `yDAAlojz8NU` 
+- **What are tariffs, and how do they work?** (@TEDEd, 786k views, 1.58x median, 5.7 min) `BSdEiOYvKpE` question
+- **Can you solve the Billy Bonka riddle? - Edwin F. Meyer** (@TEDEd, 779k views, 1.57x median, 6.2 min) `8EtdC9Bjubk` question, you/your
+- **Which is better: Buying or renting a home? - Ella Feldman** (@TEDEd, 778k views, 1.57x median, 6.1 min) `h6CmKF-mN2U` question
+- **What happens to consciousness the moment you die** (@ApertureThinking, 344k views, 1.56x median, 33.2 min) `BU84CVyr_Mc` what-if, you/your
+- **Why didn't Germany stop expanding in 1939? (Short Animated Documentary)** (@HistoryMatters, 1.4M views, 1.55x median, 8.9 min) `YuYDi5dh_70` question, why, number, country
+- **Why did France get so much of Africa? (Short Animated Documentary)** (@HistoryMatters, 1.4M views, 1.55x median, 8.9 min) `KKgpIukWJdM` question, why, country
+- **Ayn Rand's Objectivist Ethics - Explained and Debated** (@PhilosophyVibe, 10k views, 1.54x median, 15.2 min) `xeh_ZjWFYnk` explained
+- **Shopping Cart Theory - DEBATE (Is this the apex example of a bad person?)** (@PhilosophyVibe, 10k views, 1.54x median, 12.1 min) `7KdasOuc6aI` question
+- **The Most Terrifying Philosophical Theory Ever** (@ApertureThinking, 337k views, 1.53x median, 50.5 min) `0YjSHBlPm-s` 
+- **The History Of Baghdad: The Medieval World's Greatest City** (@CogitoEdu, 932k views, 1.53x median, 25.9 min) `ovbkDxYWhpY` country
+- **Why Love NEVER Lasts FOREVER** (@theschooloflifetv, 136k views, 1.52x median, 2.4 min) `OytwvZqDOX8` why
+- **How I Survived Late-Stage Cancer** (@kurzgesagt, 8.1M views, 1.5x median, 14.9 min) `5_Fayfx2NUM` how
+- **Why Earth Sucks Compared to the Planet Hestia** (@kurzgesagt, 8.1M views, 1.5x median, 14.9 min) `8qQW4LTWgtc` why
+- **Prohibition - OverSimplified** (@OverSimplified, 58.0M views, 1.47x median, 33.7 min) `AAGIi62-sAU` 
+- **What is Art? Marcel Duchamp: Great Art Explained** (@GreatArtExplained, 286k views, 1.47x median, 26.6 min) `Bj7FJGrxtXY` question, explained
+- **Why Haiti Keeps Falling Apart** (@CogitoEdu, 882k views, 1.45x median, 46.8 min) `GTpOB9bTPT8` why
+- **Why did Britain join WW1? (Short Animated Documentary)** (@HistoryMatters, 1.3M views, 1.44x median, 9.0 min) `H63wgtmW8fQ` question, why, number, country
+- **How close was the US to another Civil War in 1876? (Short Animated Documentary)** (@HistoryMatters, 1.3M views, 1.44x median, 8.6 min) `LjA1MzUuHk8` question, how, number, country
+- **why you're addicted to your own potential** (@Sisyphus55, 102k views, 1.43x median, 5.8 min) `nXTVzKaOhM8` why, you/your
+- **White Balance is Broken** (@minutephysics, 706k views, 1.43x median, 8.0 min) `WADuXiMZxq4` dramatic
+- **The Color Temperature Paradox** (@minutephysics, 698k views, 1.41x median, 4.4 min) `mqZm6u12RJA` 
+- **What if We Can't Detect Dark Matter?** (@minutephysics, 675k views, 1.37x median, 12.8 min) `QXXqSh5qAuA` question, what-if
+- **The Most Terrifying Theory Philosophers Don’t Want to Talk About** (@PursuitofWonder, 406k views, 1.36x median, 25.4 min) `PXlWKV-dFr0` 
+- **The disturbing theory that claims everything is conscious** (@ApertureThinking, 297k views, 1.35x median, 32.7 min) `FTklJbzycPo` 
+- **Stop Start in Love** (@theschooloflifetv, 120k views, 1.34x median, 4.5 min) `8W2Zw8Cijo8` 
+- **The Love Lessons We Never Learned** (@theschooloflifetv, 119k views, 1.33x median, 5.8 min) `EyHPvu4aIJY` 
+- **Why didn't the US focus on Japan first in WW2? (Short Animated Documentary)** (@HistoryMatters, 1.2M views, 1.33x median, 8.2 min) `DvVqcgBiddc` question, why, number, country
+- **Why didn't the border states join the confederacy? (Short Animated Documentary)** (@HistoryMatters, 1.2M views, 1.33x median, 8.9 min) `0n7N5HjH12Q` question, why
+- **Why didn't Saddam Hussein back down before the Gulf War? (Animated History Documentary)** (@HistoryMatters, 1.2M views, 1.33x median, 4.7 min) `3PHFGeJFa7A` question, why
+- **How to explain something complicated** (@TEDEd, 657k views, 1.32x median, 9.5 min) `EMbZ72cCAzI` how, explained
+- **Top 10 Authors of Philosophical Fiction** (@PhilosophyVibe, 8k views, 1.31x median, 16.3 min) `jT3aeBc_0M8` number
+- **Why are AI data centers using so much electricity? - Sajan Saini** (@TEDEd, 648k views, 1.31x median, 6.6 min) `z3Y-gsBKChc` question, why, country
+- **How to Make Animated Youtube Videos/Documentaries** (@CogitoEdu, 796k views, 1.3x median, 16.9 min) `9Uk9PW1_eSo` how
+- **The Uncomfortable Truth About Ozempic (Updated Version)** (@kurzgesagt, 7.0M views, 1.3x median, 15.9 min) `TYhNHX372ek` dramatic
+- **stop overthinking this** (@Sisyphus55, 92k views, 1.29x median, 9.4 min) `yJG3giOd1Mk` 
+- **Henry VIII - OverSimplified** (@OverSimplified, 51.0M views, 1.29x median, 26.8 min) `ewLpXw6uN28` 
+- **The French Revolution - OverSimplified (Part 1)** (@OverSimplified, 51.0M views, 1.29x median, 17.9 min) `8qRZcXIODNU` number
+- **Trees Are So Weird** (@kurzgesagt, 6.9M views, 1.28x median, 11.4 min) `ZSch_NgZpQs` 
+- **You're More Stressed Than Ever - Let's Change That** (@kurzgesagt, 6.8M views, 1.26x median, 12.0 min) `Mo1A45ShcMo` you/your
+- **An Argument The Moon is a PLANET!** (@minutephysics, 625k views, 1.26x median, 5.4 min) `xgFKxFX3IwY` 
+- **The Experiment That Planted a Fake Memory** (@EmergenceYT, 7k views, 1.25x median, 20.5 min) `67zugvSoV84` 
+- **Cosmic Insignificance Theory: A Simple Idea That Will Change Your Life Forever** (@PursuitofWonder, 373k views, 1.25x median, 22.3 min) `tGYMrBOPQVI` you/your
+- **The Russian Revolution - OverSimplified (Part 1)** (@OverSimplified, 49.0M views, 1.24x median, 21.1 min) `Cqbleas1mmo` number
+- **The Speed of Light is NOT Fundamental. But THIS is.** (@DomainofScience, 455k views, 1.23x median, 16.6 min) `aYIbC25GNKs` 
+- **William Blake: The Ancient of Days: Great Art Explained** (@GreatArtExplained, 239k views, 1.23x median, 16.9 min) `grxnTX9jm4E` explained
+- **The Cold War - OverSimplified (Part 2)** (@OverSimplified, 48.0M views, 1.22x median, 17.1 min) `OIYy32RuHao` number
+- **Why did Charles V split up his empire? (Short Animated Documentary)** (@HistoryMatters, 1.1M views, 1.22x median, 9.3 min) `AgaY0Zvkd8I` question, why
+- **Why was Egypt forced to give up so much of its land in 1840? (Short Animated Documentary)** (@HistoryMatters, 1.1M views, 1.22x median, 8.6 min) `_qD2qcZrFAE` question, why, number
+- **Why did Mexico lose so much territory so quickly? (Short Animated Documentary)** (@HistoryMatters, 1.1M views, 1.22x median, 4.8 min) `zM5Vr4znrKg` question, why
+- **Why did China give up so much of Siberia to Russia?** (@HistoryMatters, 1.1M views, 1.22x median, 4.4 min) `UNT90coKeZI` question, why, country
+- **Abjection: The Scariest Existential Philosophy Theory You've Never Heard Of** (@PursuitofWonder, 359k views, 1.2x median, 18.7 min) `AVpnloS-aWU` you/your
+- **Are We Rejecting Them Because They’re Wrong—or Because We’re Unwell?** (@theschooloflifetv, 107k views, 1.2x median, 5.2 min) `op77gGdFY1g` question
+- **Stop Chasing Happiness. Start Chasing Meaning** (@Sisyphus55, 85k views, 1.19x median, 6.7 min) `sHHOFyaInu4` 
+- **Every Level of Awareness** (@ApertureThinking, 261k views, 1.19x median, 33.4 min) `qW8uadCtn_s` format-hook
+- **4 ways to tell a great story** (@TEDEd, 592k views, 1.19x median, 5.1 min) `JOs-q7rXqdk` number
+- **The Most Terrifying Philosopher Who Ever Lived** (@ApertureThinking, 257k views, 1.17x median, 39.8 min) `bcmx8zh4KKY` 
+- **When did we start using passports? - Kristin Surak** (@TEDEd, 579k views, 1.17x median, 6.2 min) `JhxuP0AuRPA` question, country
+- **Why the SpaceX NASA Mission is a Landmark For Astronaut Spaceflight** (@DomainofScience, 434k views, 1.17x median, 7.1 min) `YJ_2ABImQeU` why
+- **Plato’s infamous Ship of State thought experiment - Michael Vazquez** (@TEDEd, 569k views, 1.15x median, 5.7 min) `QyRqlTV60zM` 
+- **Great Art Explained: Dorothea Tanning** (@GreatArtExplained, 225k views, 1.15x median, 15.1 min) `zTmq2hgzReQ` explained
+- **Civilization will be very different soon...** (@PursuitofWonder, 338k views, 1.13x median, 17.6 min) `E68VQpR2GY8` 
+- **The TROJAN Test** (@minutephysics, 561k views, 1.13x median, 6.7 min) `_DYZF-piKKU` 
+- **The Savers Paradox: A Common Mindset That Can Ruin Your Life** (@PursuitofWonder, 332k views, 1.11x median, 14.7 min) `zTOccll2XGM` you/your
+- **Why did Austria-Hungary do so poorly in World War One? (Short Animated Documentary)** (@HistoryMatters, 1.0M views, 1.11x median, 8.8 min) `nVFqq1a1r_s` question, why, country
+- **Matisse: The Red Studio: Great Art Explained ** (@GreatArtExplained, 216k views, 1.11x median, 24.9 min) `unla1jTwXdY` explained
+- **Why did Mao win the Chinese Civil War?** (@HistoryMatters, 989k views, 1.1x median, 8.4 min) `T_OqU3ONq3w` question, why
+- **the unbearable lightness of being** (@Sisyphus55, 78k views, 1.09x median, 6.1 min) `zUq9tk138x0` 
+- **Seeing True Reality Would (Probably) Kill You...** (@PursuitofWonder, 325k views, 1.09x median, 13.5 min) `O1S_wPl95kQ` you/your
+- **The Psychology of People Who Never Feel Good Enough** (@ApertureThinking, 239k views, 1.09x median, 35.8 min) `DMtN9yJwc3w` 
+- **how to live like Franz Kafka** (@Sisyphus55, 77k views, 1.08x median, 3.8 min) `4OZ7ZQzo3cM` how
+- **What the double-slit experiment proves about reality** (@ApertureThinking, 238k views, 1.08x median, 35.9 min) `paygsyYM3MY` 
+- **Logical Positivism - The Scientific Approach to Philosophy** (@PhilosophyVibe, 7k views, 1.08x median, 17.4 min) `9NbS7QYGzCk` 
+- **This Orbit is the WORST** (@minutephysics, 532k views, 1.08x median, 7.5 min) `R2G8Xy6hiyg` 
+- **The Deadliest War No One Is Watching** (@CogitoEdu, 649k views, 1.06x median, 34.0 min) `gqIMES53rsY` 
+- **You Will Only Like Half of This Video** (@kurzgesagt, 5.7M views, 1.06x median, 3.6 min) `PXbVn-f_wuM` you/your
+- **Find the Volume of Any Shape Using Calculus** (@DomainofScience, 391k views, 1.06x median, 14.7 min) `Lbg1M0PTy1A` country
+- **The Napoleonic Wars - OverSimplified (Part 2)** (@OverSimplified, 42.0M views, 1.06x median, 31.2 min) `mY3SEMTROas` number
+- **The Psychology of the Man Child (How To Grow Up)** (@Sisyphus55, 75k views, 1.05x median, 7.2 min) `_NEDSOX9TGw` 
+- **Those Who Are Terrified of Love** (@theschooloflifetv, 93k views, 1.04x median, 4.8 min) `yaCVfTQWhE8` 
+- **Three Kingdoms - OverSimplified** (@OverSimplified, 41.0M views, 1.04x median, 17.4 min) `26EivpCPHnQ` 
+- **Why didn't Napoleon just stop? (Short Animated Documentary)** (@HistoryMatters, 925k views, 1.03x median, 8.2 min) `rxV9Jx7fx3c` question, why
+- **UPDATED: Vincent Van Gogh's The Starry Night: Great Art Explained** (@GreatArtExplained, 201k views, 1.03x median, 20.2 min) `crCPVoPsTtk` explained
+- **Astronomy Is In Crisis...And It's Incredibly Exciting** (@kurzgesagt, 5.5M views, 1.02x median, 11.4 min) `zozEm4f_dlw` dramatic
+- **Do we actually know how magnets work? - Rachel Yang** (@TEDEd, 508k views, 1.02x median, 5.8 min) `jG7ULeWUfDw` question, dramatic
+- **Great STOLEN Art Explained; Egon Schiele** (@GreatArtExplained, 198k views, 1.02x median, 18.6 min) `M4IUt7QZh6U` explained
+- **How To Want To Live Again** (@Sisyphus55, 72k views, 1.01x median, 7.0 min) `utXoYDrl3KY` how
+- **Nihilism Is Taking Over Modern Society. Here's Why.** (@PursuitofWonder, 301k views, 1.01x median, 13.9 min) `K8e8eACAtOM` why
+- **5 sneaky ways stores get you to spend more** (@TEDEd, 502k views, 1.01x median, 6.4 min) `a_4eFB8pPwI` number, you/your
+- **The Pig War - OverSimplified** (@OverSimplified, 40.0M views, 1.01x median, 38.7 min) `QLq6GEiHqR8` 
+- **The American Revolution - OverSimplified (Part 2)** (@OverSimplified, 40.0M views, 1.01x median, 14.7 min) `rtYC2jx1LM0` number, country
+- **Why It’s So Hard to Change Your Life** (@Sisyphus55, 71k views, 0.99x median, 10.0 min) `Z-5UY0Hs90k` why, you/your
+- **Yes, You Will Die. But What Happens Next Is Worse. | The Philosophy of Blaise Pascal** (@PursuitofWonder, 298k views, 0.99x median, 11.7 min) `wMwn7_Wscb0` what-if, you/your
+- **Why is Queen Victoria so controversial? - Carolyn Harris** (@TEDEd, 491k views, 0.99x median, 6.3 min) `JjhrN0FcHpM` question, why
+- **The American Civil War  - OverSimplified (Part 2)** (@OverSimplified, 39.0M views, 0.99x median, 22.7 min) `sV6uuMAnJUE` number, country
+- **The Dumbest Animal Alive** (@kurzgesagt, 5.3M views, 0.98x median, 11.1 min) `gtDKKJq9u30` 
+- **Why is it so easy for birds to spread illness? - Benjamin Anderson** (@TEDEd, 485k views, 0.98x median, 6.5 min) `bHB5iiDDJ-s` question, why
+- **The Ambassadors: Great Art Explained** (@GreatArtExplained, 192k views, 0.98x median, 27.5 min) `ceKSyMJjniU` explained
+- **Ivan the Terrible and his Son Ivan by Ilya Repin: Great Art Explained** (@GreatArtExplained, 191k views, 0.98x median, 25.1 min) `YXOlTjObWTw` explained
+- **The Father of Impressionism:  Édouard Manet: Great Art Explained:** (@GreatArtExplained, 192k views, 0.98x median, 15.1 min) `dHEOSQjvIzc` explained
+- **The Terrible Price of Not Choosing Yourself - The Philosophy of Osamu Dazai** (@PursuitofWonder, 290k views, 0.97x median, 15.4 min) `xBsuDHDBiqc` 
+- **Why wasn't Stalin ousted? (Short Animated Documentary)** (@HistoryMatters, 876k views, 0.97x median, 5.2 min) `xlc1Mu9bGho` question, why
+- **How to See the Miraculous Beauty in Everyday Life** (@theschooloflifetv, 86k views, 0.96x median, 4.7 min) `fTrF-6hI8i8` how
+- **GERMANY IS OVER** (@kurzgesagt, 5.2M views, 0.96x median, 14.1 min) `n-gYFcVx-8Y` country
+- **Jackson Pollock Part Two:  Fame, Death, and the CIA** (@GreatArtExplained, 187k views, 0.96x median, 18.0 min) `w6WGLvs8Mhg` 
+- **Great Art Cities: Istanbul** (@GreatArtExplained, 188k views, 0.96x median, 15.2 min) `XKp6ahy2eBk` 
+- **Why did France halt its invasion of Germany in 1939? (Short Animated Documentary)** (@HistoryMatters, 852k views, 0.95x median, 4.3 min) `ruXo2Qu8EtI` question, why, number, country
+- **Vincent van Gogh's Potato Eaters: Great Art Explained** (@GreatArtExplained, 186k views, 0.95x median, 20.7 min) `2zfjf4uD94s` explained
+- **who you are is what you are when you are** (@Sisyphus55, 67k views, 0.94x median, 4.3 min) `W5uU0Fu1VVw` you/your
+- **How to Survive Being Alone** (@theschooloflifetv, 84k views, 0.94x median, 3.3 min) `KquM_52cAIE` how
+- **Why Are There Two Koreas?** (@CogitoEdu, 571k views, 0.94x median, 21.7 min) `Mukhy2Tpqc4` question, why
+- **Why Are There No Holes Around Trees?** (@kurzgesagt, 5.1M views, 0.94x median, 11.3 min) `pHJIhxZEoxg` question, why
+- **The Map of Superconductivity** (@DomainofScience, 349k views, 0.94x median, 16.4 min) `bD2M7P6dTVA` 
+- **The First Punic War - OverSimplified (Part 1)** (@OverSimplified, 37.0M views, 0.94x median, 27.6 min) `yRmOWcWdQAo` number
+- **Why did the 1945 Japanese Army coup against the Emperor fail? (Short Animated Documentary)** (@HistoryMatters, 849k views, 0.94x median, 8.6 min) `RgI-hR82Jss` question, why, number, country
+- **Why did Germany and the USSR sign the Molotov Ribbentrop Pact? (Short Animated Documentary)** (@HistoryMatters, 834k views, 0.93x median, 9.1 min) `b_H7jLFKJuU` question, why, country
+- **Caravaggio, Bernini and Pozzo: Great Art Cities: Rome** (@GreatArtExplained, 182k views, 0.93x median, 21.6 min) `mURqveHZWxc` 
+- **how to create when you hate yourself** (@Sisyphus55, 66k views, 0.92x median, 8.8 min) `kpwK71m4WeU` how, you/your
+- **The Psychological Cost of ICE** (@Sisyphus55, 66k views, 0.92x median, 12.6 min) `04ObA3nBFgQ` 
+- **The Hedgehog Theory: Why Your Favorite Smart Person Is (Probably) Full of Sh*t** (@PursuitofWonder, 276k views, 0.92x median, 16.9 min) `_7bYBL29M6U` why, you/your
+- **Learning to Speak ... Again** (@theschooloflifetv, 82k views, 0.92x median, 5.3 min) `rTZTR3qx69Q` 
+- **The 7 Levels of Intelligence** (@ApertureThinking, 202k views, 0.92x median, 47.5 min) `aH_BtZnYpCg` number, format-hook
+- **The Best Metaphysical Novels - (Books all Philosophers should read)** (@PhilosophyVibe, 6k views, 0.92x median, 11.7 min) `p1_EvD_Lahc` 
+- **Who Are The Yoruba People?** (@CogitoEdu, 560k views, 0.92x median, 24.4 min) `h3TDrwQgkEE` question
+- **Draining The Oceans Is HARD** (@minutephysics, 457k views, 0.92x median, 6.9 min) `zzWKh8W8dX8` 
+- **97% of Galaxies Are Moving Faster Than Light, HOW IS THIS POSSIBLE?** (@DomainofScience, 342k views, 0.92x median, 8.7 min) `cadNZJvfl7s` question, number
+- **Quantum Gravity Explained in 9 Slides** (@DomainofScience, 337k views, 0.91x median, 12.1 min) `d-86tNCSJsg` number, explained
+- **The War that Changed the English Language - Mini-Wars #3** (@OverSimplified, 36.0M views, 0.91x median, 12.7 min) `Jl3K63Rbygw` number
+- **Scary stories to watch in the dark (if you dare…)** (@TEDEd, 449k views, 0.9x median, 34.3 min) `nXvKDYRvTno` you/your
+- **The Teleprompter Paradox** (@minutephysics, 445k views, 0.9x median, 5.2 min) `8LkRMtWfhn4` 
+- **Hunters in the Snow: Pieter Bruegel: Great art Explained** (@GreatArtExplained, 176k views, 0.9x median, 16.9 min) `m-KLY4rmZlM` explained
+- **The Fat Problem** (@kurzgesagt, 4.8M views, 0.89x median, 11.6 min) `sOsqXKr4l30` 
+- **there will be no closure** (@Sisyphus55, 63k views, 0.88x median, 5.8 min) `kyF_zPraPiI` 
+- **Are You Neurotic or Psychotic? How to Tell the Difference** (@theschooloflifetv, 79k views, 0.88x median, 3.4 min) `LRvydNSQNsc` question, you/your
+- **5 Mind-Blowing Metaphysical Philosophies** (@PhilosophyVibe, 6k views, 0.88x median, 14.3 min) `cbrqIBQyOJI` number
+- **Understanding the Fear of Intimacy** (@theschooloflifetv, 78k views, 0.87x median, 4.3 min) `O9INMnsoUxU` 
+- **Why does this animal never age? - Raymond Adkins** (@TEDEd, 431k views, 0.87x median, 5.8 min) `NPJ9KZqrl50` question, why
+- **How does the space station never run out of oxygen? - Alvaro Romero-Calvo and Theo St Francis** (@TEDEd, 428k views, 0.86x median, 6.2 min) `5ljV0Vxu00M` question, how
+- **The Russian Revolution - OverSimplified (Part 2)** (@OverSimplified, 34.0M views, 0.86x median, 24.4 min) `b1reY72ktEc` number
+- **The French Revolution - OverSimplified (Part 2)** (@OverSimplified, 34.0M views, 0.86x median, 22.2 min) `EQmjXM4VK2U` number
+- **Wait, Tattoo Lasering Is Insane!** (@kurzgesagt, 4.6M views, 0.85x median, 12.9 min) `H4KMQuyxH_Y` dramatic
+- **You Need To Quit Weed.** (@kurzgesagt, 4.6M views, 0.85x median, 12.7 min) `Brm71uCWr-I` you/your
+- **The Wavy Window Paradox** (@minutephysics, 419k views, 0.85x median, 3.4 min) `4YvnVJRlQQs` 
+- **How To Live Like Sisyphus** (@Sisyphus55, 60k views, 0.84x median, 3.5 min) `FHrBZWWvUZE` how
+- **You're not real and none of your life actually happened** (@ApertureThinking, 185k views, 0.84x median, 35.6 min) `I5Joj1EJ-Vk` you/your, dramatic
+- **Art as Propaganda: Great Art Explained: Napoleon Crossing the Alps by Jacques-Louis David** (@GreatArtExplained, 164k views, 0.84x median, 23.4 min) `Bgo6H0tzszA` explained
+- **david lynch and the jungian shadow** (@Sisyphus55, 59k views, 0.83x median, 11.6 min) `h2f4F4j42mI` 
+- **We Found a Loophole to Survive the End of the Universe** (@kurzgesagt, 4.5M views, 0.83x median, 12.7 min) `VMm-U2pHrXE` 
+- **Why We Should Refuse to Get Into Arguments** (@theschooloflifetv, 73k views, 0.82x median, 3.6 min) `i9GrNjqPrm0` why
+- **The fastest way to board a plane, according to mathematics - Rachel Yang** (@TEDEd, 401k views, 0.81x median, 6.0 min) `-61qDRPG3to` 
+- **How a broken heart affects your body** (@TEDEd, 396k views, 0.8x median, 5.3 min) `DbEZmLoGDbk` how, you/your, dramatic
+- **Why couldn't the Mongols conquer Japan? (Short Animated Documentary)** (@HistoryMatters, 716k views, 0.8x median, 8.9 min) `uw8sjn7z0Ls` question, why, country
+- **Why did Russia give up so much land to Germany in 1918? (Short Animated Documentary)** (@HistoryMatters, 724k views, 0.8x median, 3.8 min) `4uA4xP5Gd7w` question, why, number, country
+- **Two Paradoxes of Space Navigation** (@minutephysics, 393k views, 0.79x median, 3.3 min) `dLtRtdg67PU` 
+- **Francis Bacon: Great Art Explained: Study after Velázquez** (@GreatArtExplained, 155k views, 0.79x median, 28.1 min) `hiyCTfSoH9Q` explained
+- **Philosophy Tier List Part 2 - Another 25 Philosophy theories and ideas ranked.** (@PhilosophyVibe, 5k views, 0.78x median, 30.4 min) `x8b1WjEaq2I` number
+- **Why Do Eclipses Travel WEST to EAST?** (@minutephysics, 385k views, 0.78x median, 4.0 min) `ujYYlXP12m4` question, why
+- **Hitler -  OverSimplified (Part 2)** (@OverSimplified, 31.0M views, 0.78x median, 8.6 min) `Dd1JUTA7Ijc` number
+- **Why didn't the Boers ever unite against the British? (Short Animated Documentary)** (@HistoryMatters, 703k views, 0.78x median, 8.6 min) `ynhI5fZ_Uhk` question, why
+- **José Maria Velasco: Great Art Explained** (@GreatArtExplained, 152k views, 0.78x median, 14.8 min) `3wfWuVne0LU` explained
+- **my top 5 favourite philosophers** (@Sisyphus55, 55k views, 0.77x median, 11.4 min) `wRKOJTxqaYg` number
+- **The Nobel Prize Discovery that Exposed the Secret to Mind Control** (@ApertureThinking, 170k views, 0.77x median, 33.1 min) `2p6M-BMPrP8` dramatic
+- **Psychedelics, mind control, radiation-eating: The secret superpowers of fungi - Max G. Levy** (@TEDEd, 382k views, 0.77x median, 6.2 min) `QIqKGMM8ivM` dramatic
+- **Is Perfect Prediction Possible?** (@minutephysics, 381k views, 0.77x median, 13.8 min) `8wDha-G35KA` question
+- **Was King John really such a bad king? (Short Animated Documentary)** (@HistoryMatters, 697k views, 0.77x median, 5.5 min) `6EdTyjqgu24` question
+- **The Falklands - MiniWars #1** (@OverSimplified, 30.0M views, 0.76x median, 7.5 min) `BiDvLshi9CY` number
+- **Great Art Explained: Man Ray** (@GreatArtExplained, 148k views, 0.76x median, 17.6 min) `MChhmACZk1I` explained
+- **The Flaw at the Heart of AI** (@EmergenceYT, 4k views, 0.75x median, 18.7 min) `sOD3gGGfzqw` 
+- **The Realization That Life Is Absurd Is Only the Beginning...** (@PursuitofWonder, 226k views, 0.75x median, 11.0 min) `_FgZxX2J83o` 
+- **One of the Most Unsettling Facts About Consciousness That Science Can't Solve** (@PursuitofWonder, 224k views, 0.75x median, 17.3 min) `bHUcT_LArtI` 
+- **Four-Dimensionalism Explained (Temporal Parts & Time Worms)** (@PhilosophyVibe, 5k views, 0.75x median, 16.6 min) `b35ZqTA5Zkk` explained
+- **The Quantum Wavefunction Explained** (@DomainofScience, 278k views, 0.75x median, 5.7 min) `sOI4DlWQ_1w` explained
+- **Why didn't the Dutch also scramble Africa? (Short Animated Documentary)** (@HistoryMatters, 664k views, 0.74x median, 8.2 min) `CoxRduAbxRs` question, why
+- **The Future of Sisyphus 55** (@Sisyphus55, 52k views, 0.73x median, 4.8 min) `d3TUlLlFcjQ` number
+- **Who Has The Best Quantum Computer?** (@DomainofScience, 269k views, 0.73x median, 12.2 min) `gcbMKt079l8` question
+- **How To Read Feynman Diagrams** (@DomainofScience, 269k views, 0.73x median, 9.3 min) `oBNZOOuqO6c` how
+- **The War of the Bucket - OverSimplified** (@OverSimplified, 29.0M views, 0.73x median, 18.7 min) `Cln0J87vulU` 
+- **Why wasn't Teddy Roosevelt allowed to fight in World War One? (Short Animated Documentary)** (@HistoryMatters, 654k views, 0.73x median, 8.2 min) `HZpyTTsx0xw` question, why, country
+- **Humility - Is it a good thing (debate)** (@PhilosophyVibe, 5k views, 0.72x median, 7.3 min) `f5aaC_jBQqE` 
+- **All Of Human History In One Hour** (@kurzgesagt, 3.9M views, 0.72x median, 63.4 min) `KNwMiydCYA4` 
+- **How do Maglev trains work? - Ning Zhao** (@TEDEd, 356k views, 0.72x median, 6.5 min) `2A1IEBFt6Xg` question, how
+- **Why did the Spanish choose to fight the USA in 1898? (Short Animated Documentary)** (@HistoryMatters, 651k views, 0.72x median, 8.3 min) `zIknCgPbRyc` question, why, number, country
+- **Tamara de Lempicka: Tamara in the Green Bugatti: Great Art Explained** (@GreatArtExplained, 141k views, 0.72x median, 16.3 min) `DKTMkLZ_rr0` explained
+- **Emu War - OverSimplified (Mini-Wars #4)** (@OverSimplified, 28.0M views, 0.71x median, 10.1 min) `BXpu6tbFCsI` number
+- **Why didn't the other Central Powers have to pay reparations too? (Short Animated Documentary)** (@HistoryMatters, 636k views, 0.71x median, 8.7 min) `_W91vYZETPM` question, why
+- **Something scary happens when you accept time as the 4th Dimension** (@ApertureThinking, 153k views, 0.7x median, 30.6 min) `swbBInPN5vs` number, you/your
+- **Every Level of the AI Takeover** (@ApertureThinking, 155k views, 0.7x median, 42.5 min) `Qj9--hb-prA` format-hook
+- **The History Of Beer** (@CogitoEdu, 425k views, 0.7x median, 26.4 min) `XaeW5EuZ5W8` 
+- **What Do I Project onto Other People?** (@theschooloflifetv, 62k views, 0.69x median, 4.6 min) `156C-c48ezU` question
+- **The Most Insane Megaproject You Never Heard About** (@kurzgesagt, 3.7M views, 0.69x median, 13.1 min) `h3DCdWyb0cc` you/your, dramatic
+- **Pregnancy is Insane** (@kurzgesagt, 3.7M views, 0.69x median, 13.3 min) `Zpq1GbPqhy4` dramatic
+- **The World Feels Wrong Because You're Paying Attention** (@PursuitofWonder, 204k views, 0.68x median, 16.5 min) `T_dy5n-ne6w` you/your, country
+- **The Rarest Kind of Brains on Earth** (@PursuitofWonder, 201k views, 0.67x median, 11.7 min) `gNg28y1ITFo` 
+- **How Are Memories Stored Inside Your Brain?** (@kurzgesagt, 3.6M views, 0.67x median, 13.9 min) `PqtggjVAi8M` question, how, you/your
+- **Red gold: The world's most expensive spice - Carolyn Beans** (@TEDEd, 331k views, 0.67x median, 6.7 min) `krNP8RlDsbw` country
+- **The Daily Routine of Sigmund Freud** (@Sisyphus55, 47k views, 0.66x median, 2.6 min) `M0lyXd7rbcE` 
+- **This website can predict what you’re going to do next...** (@PursuitofWonder, 199k views, 0.66x median, 15.7 min) `1l2owShGD58` you/your
+- **The scariest law in physics that destroys reality** (@ApertureThinking, 146k views, 0.66x median, 32.8 min) `Rk5ciK9NReA` dramatic
+- **How to present your ideas effectively** (@TEDEd, 320k views, 0.64x median, 6.6 min) `1uTRlM6MbMo` how, you/your
+- **Why You Can’t Force Your Mind to Change (The Toilet Philosophy)** (@theschooloflifetv, 56k views, 0.63x median, 3.1 min) `OwiuTWfFK2c` why, you/your
+- **6 ways to be more persuasive** (@TEDEd, 313k views, 0.63x median, 6.0 min) `G3hXvByzLHs` number
+- **Why wasn't Japan allowed to keep Taiwan after WW2? (Short Animated Documentary)** (@HistoryMatters, 567k views, 0.63x median, 8.8 min) `0cxMrCykadY` question, why, number, country
+- **100K Sub Q&A Video - Is Philosophy Still Relevant? What Philosophy on Reality do I believe? and more** (@PhilosophyVibe, 4k views, 0.62x median, 17.6 min) `Of80uyx1SHs` question, number
+- **Atomic Spectroscopy Explained in 9 Slides** (@DomainofScience, 228k views, 0.62x median, 8.9 min) `crWBFuUW6kI` number, explained
+- **What to think of the Rice Theory of the Japanese Character** (@theschooloflifetv, 55k views, 0.61x median, 3.8 min) `vjcGC-rRjlE` country
+- **The First Punic War - OverSimplified (Part 2)** (@OverSimplified, 24.0M views, 0.61x median, 22.1 min) `hRSGxw2AQnk` number
+- **Ethical Philosophies to Live By - TOP 5** (@PhilosophyVibe, 4k views, 0.6x median, 17.6 min) `gS986DmbFGI` number
+- **The Joy of Pessimism in Love** (@theschooloflifetv, 52k views, 0.58x median, 3.6 min) `CrD_jqgX9e8` 
+- **The Chart Missing From ALL Spreadsheet Software** (@minutephysics, 283k views, 0.57x median, 3.5 min) `5zBg9pH_6bE` 
+- **When did the Cold War actually start? (Short Animated Documentary)** (@HistoryMatters, 511k views, 0.57x median, 9.6 min) `49s1EHBzmFQ` question, dramatic
+- **Our Minds Are Weirder than You Think** (@kurzgesagt, 3.0M views, 0.56x median, 12.4 min) `dl0-TveDDGA` you/your
+- **Something Weird Happens When You See How Connected Everything Is** (@PursuitofWonder, 165k views, 0.55x median, 17.4 min) `two4InjFSLs` you/your
+- **5 Philosophical Lessons to Cure Modern Burnout** (@theschooloflifetv, 49k views, 0.55x median, 9.5 min) `O8xqi5tpD7I` number
+- **The terrifying shared hallucination theory nobody wants to be true** (@ApertureThinking, 122k views, 0.55x median, 31.2 min) `ojejxVBhVBg` dramatic
+- **VIRUSES Explained in 9 Slides** (@DomainofScience, 203k views, 0.55x median, 10.9 min) `754YnbOtmvA` number, explained
+- **The Japanese Philosophy That Turns Everyday Life Into Art** (@theschooloflifetv, 48k views, 0.54x median, 4.0 min) `FbS1hO2dQPM` country
+- **The Death of Your Free Will** (@ApertureThinking, 118k views, 0.54x median, 33.6 min) `aTPHDH0Vt7w` you/your
+- **The Daily Routine of Ernest Hemingway** (@Sisyphus55, 38k views, 0.53x median, 2.1 min) `bOXAZuYuGdk` 
+- **The Psychology of People Who Stop Talking To Their Friends** (@ApertureThinking, 117k views, 0.53x median, 26.2 min) `S18US7I0nhc` 
+- **The Second Punic War - OverSimplified (Part 2)** (@OverSimplified, 21.0M views, 0.53x median, 37.6 min) `Q-nWA0WeF98` number
+- **Why did the Treaty of Versailles Fail? (Short Animated Documentary)** (@HistoryMatters, 474k views, 0.53x median, 8.6 min) `QFrzGhlRAkw` question, why
+- **You’re Hallucinating Right Now** (@EmergenceYT, 3k views, 0.52x median, 20.1 min) `MZPeNHPfLjA` you/your
+- **Everyone feels like something strange is coming…** (@PursuitofWonder, 156k views, 0.52x median, 17.4 min) `yRRugkaEqeE` 
+- **The Greek myth of Apollo's curse - Iseult Gillespie** (@TEDEd, 256k views, 0.52x median, 4.7 min) `l29K-ZkARmE` 
+- **The Magic of Thorium Nuclear Reactors** (@minutephysics, 255k views, 0.52x median, 4.8 min) `PTO0s8YQ49o` 
+- **Is Quantum Mechanics Stopping Aliens From Contacting Us?** (@minutephysics, 258k views, 0.52x median, 5.3 min) `lZGyjR6Y9vw` question, country
+- **The Physics of Supercooling** (@minutephysics, 256k views, 0.52x median, 3.9 min) `6c7JoCZmqC4` 
+- **The Second Punic War  - OverSimplified (Part 3)** (@OverSimplified, 20.0M views, 0.51x median, 49.1 min) `1BVJzaXv3rk` number
+- **The Second Punic War - OverSimplified (Part 1)** (@OverSimplified, 20.0M views, 0.51x median, 28.2 min) `lsbcN9-jU1Y` number
+- **Football War - MiniWars #2** (@OverSimplified, 20.0M views, 0.51x median, 5.6 min) `W12vb_Crf00` number
+- **Ancient Chinese Wisdom to Calm Your Modern Mind** (@theschooloflifetv, 45k views, 0.5x median, 9.5 min) `zRp_0hc-ZgQ` you/your
+- **Why You Deserve a Tantrum: The Truth About Adult Rage** (@theschooloflifetv, 45k views, 0.5x median, 4.4 min) `7SSHksM3qrs` why, you/your, dramatic
+- **Embracing Uncertainty Through Philosophy with @Pursuit of Wonder** (@Sisyphus55, 35k views, 0.49x median, 51.6 min) `JId5VufXCpk` 
+- **The Terrifying Theory of Reality That Changes Everything** (@ApertureThinking, 108k views, 0.49x median, 36.8 min) `VEXYLXaEYIM` 
+- **Leonora Carrington: Self-Portrait (Inn of the Dawn Horse)** (@GreatArtExplained, 96k views, 0.49x median, 27.4 min) `cE0BqbS2n6M` 
+- **Does Pressure Keep the Deep Ocean From Freezing?** (@minutephysics, 232k views, 0.47x median, 1.7 min) `c2wafIzuvlI` question
+- **Quantum Simulation Explained in 9 Slides** (@DomainofScience, 173k views, 0.47x median, 13.6 min) `kD370qyxTyw` number, explained
+- **The Philosophy of David S. Pumpkins** (@Sisyphus55, 32k views, 0.45x median, 6.7 min) `GnHIsxIxTCY` 
+- **You're Too Self-Aware to Be Happy | The Psychology of Deep Thinkers** (@PursuitofWonder, 135k views, 0.45x median, 9.4 min) `Tmeg_yelhh4` you/your
+- **What Is The World's Oldest Country?** (@CogitoEdu, 273k views, 0.45x median, 25.0 min) `csHHMbGkSQ0` question, country
+- **Can we have morality without God?** (@PhilosophyVibe, 3k views, 0.43x median, 13.2 min) `isWQlzrdzq4` question
+- **Philosophical Problems with Time Travel (Popular Movie Depictions)** (@PhilosophyVibe, 3k views, 0.43x median, 22.5 min) `1RfGxW7tm8k` 
+- **The REAL Reason Asteroids Aren't Planets** (@minutephysics, 214k views, 0.43x median, 4.4 min) `kzfXBenNxeA` 
+- **The Strangest Question at the end of the Universe** (@ApertureThinking, 92k views, 0.42x median, 22.8 min) `JceXijbcgko` 
+- **We Made A New Channel!** (@kurzgesagt, 2.2M views, 0.41x median, 3.0 min) `D0WQK7cMJn8` 
+- **Why Being Immortal Would Leave You Stuck in Endless Boredom** (@ApertureThinking, 87k views, 0.4x median, 27.3 min) `jT40e4mYIcs` why, you/your
+- **The Terrifying Theory of Quantum Biology** (@ApertureThinking, 85k views, 0.39x median, 25.8 min) `bjvlGibYSoU` 
+- **The Most Militarised Place on Earth** (@CogitoEdu, 236k views, 0.39x median, 43.5 min) `98M0Gr5MEhM` 
+- **The CIA's First Latin American Coup** (@CogitoEdu, 238k views, 0.39x median, 38.9 min) `-a9xlQrcbx0` country
+- **Giuseppi di Lampedusa - The Leopard** (@theschooloflifetv, 34k views, 0.38x median, 3.6 min) `EFibYrEcrkU` 
+- **Top 10 Philosophy of Religion Movies** (@PhilosophyVibe, 2k views, 0.38x median, 23.6 min) `GQ1XEYlZAts` number
+- **Why Some Rainbows Turn White** (@minutephysics, 188k views, 0.38x median, 4.3 min) `OEQeSrXy-YA` why
+- **Your Problem Isn't Overthinking. It's Not Thinking Authentically.** (@PursuitofWonder, 112k views, 0.37x median, 10.8 min) `upbh9dmrRRQ` you/your
+- **Antimatter in Sci-Fi Rundown** (@minutephysics, 185k views, 0.37x median, 10.0 min) `WIu38oWkCTc` 
+- **The Terrifying Quantum Secrets Hiding All Over The Universe** (@ApertureThinking, 79k views, 0.36x median, 41.7 min) `u0rb3YCDPnM` dramatic
+- **Hawaii Is Dying: Here's Why** (@CogitoEdu, 214k views, 0.35x median, 44.7 min) `Q0vM4MNHeZI` why, dramatic
+- **The Flaw Inside Neuralink (How 64 Threads Read a Mind)** (@EmergenceYT, 2k views, 0.34x median, 27.4 min) `Fs007m_-AtQ` number
+- **The Best Political Philosophical Fiction Books & Authors** (@PhilosophyVibe, 2k views, 0.34x median, 15.9 min) `w1_x3eqw8Uk` 
+- **Creativity in the Age of Al Slop - Why I'm No Longer Working Anonymously** (@PursuitofWonder, 95k views, 0.32x median, 6.3 min) `FjtzCarSWgU` why
+- **The Dancing Cult At War With China** (@CogitoEdu, 185k views, 0.3x median, 38.2 min) `pCgSp5Y8neg` country
+- **The magical forest realm hiding at the bottom of the ocean - Luka Seamus Wright and Salomé Buglass** (@TEDEd, 150k views, 0.3x median, 5.8 min) `5jPCAlE0z7I` 
+- **this is your sign to learn a new language** (@Sisyphus55, 21k views, 0.29x median, 8.2 min) `hTomJyirzmI` you/your
+- **Everyone Is Quietly Giving Up (And It Makes Sense)** (@PursuitofWonder, 88k views, 0.29x median, 10.3 min) `t0FttQ4mhyI` 
+- **Top 5 Spiritual Books - Books all Philosophers Should Read** (@PhilosophyVibe, 2k views, 0.29x median, 13.9 min) `wvRWTrj1N-4` number
+- **How to effectively use visuals in your presentation** (@TEDEd, 142k views, 0.29x median, 5.0 min) `bw5tzcoEG88` how, you/your, country
+- **How AI Solved The Wrong Game** (@EmergenceYT, 2k views, 0.27x median, 18.0 min) `vAOkM1qWh8s` how
+- **The 35 to 1 Lottery You Never Chose** (@EmergenceYT, 1k views, 0.25x median, 23.7 min) `hoz_HyiqiTs` number, you/your
+- **You’re too self-aware. And that’s why things feel weird.** (@PursuitofWonder, 73k views, 0.24x median, 8.1 min) `--AoFg5xglI` why, you/your
+- **The Complete Map of All 88 Constellations** (@DomainofScience, 90k views, 0.24x median, 21.4 min) `3P2GVocbw9o` number
+- **Silphium: The Miracle Herb That Disappeared Forever** (@CogitoEdu, 143k views, 0.23x median, 22.4 min) `mgvN315zpmo` 
+- **I'm giving away 14 years of drawings** (@minutephysics, 115k views, 0.23x median, 6.4 min) `-gWHh1a5FOA` number
+- **Facing Life Without Meaning – The Stranger by Albert Camus** (@PhilosophyVibe, 1k views, 0.22x median, 6.2 min) `YG5AEGPxX_o` 
+- **The European State Where Women Are Outlawed** (@CogitoEdu, 134k views, 0.22x median, 14.9 min) `wjdLxWkjJiU` country
+- **How Washington Built A Continent-Wide Death Squad** (@CogitoEdu, 126k views, 0.21x median, 50.4 min) `PtTqtla3Jzk` how
+- **The highest levels of dreams explained in detail** (@ApertureThinking, 44k views, 0.2x median, 35.9 min) `VFzbU6wMLwM` explained, format-hook
+- **A Very Special Announcement** (@Sisyphus55, 13k views, 0.18x median, 1.3 min) `HZu30Ue-aTk` 
+- **The Struggle of the Divided Self – Steppenwolf by Hesse** (@PhilosophyVibe, 1k views, 0.18x median, 6.0 min) `g0n6JBVNbVk` 
+- **What's The Probability You Have Seen A Neutrino?** (@DomainofScience, 68k views, 0.18x median, 9.5 min) `YzMAxdSdkzo` question, you/your
+- **The Ultimate Existential Nightmare – The Metamorphosis by Kafka** (@PhilosophyVibe, 1k views, 0.15x median, 6.6 min) `pI0jsSwy-9Q` 
+- **The Map of Plastic Waste** (@DomainofScience, 54k views, 0.15x median, 8.5 min) `bL7WvdNdk3Y` 
+- **The Collapse of Hawai'i and Puerto Rico, Explained** (@CogitoEdu, 78k views, 0.13x median, 79.9 min) `RM7iEPHpy9k` explained, dramatic
+- **Who Gets Rich Off The Wars On Gaza?** (@CogitoEdu, 80k views, 0.13x median, 37.1 min) `cvsR9ojQ66E` question
+- **This Game Took Us Two Years To Make** (@kurzgesagt, 713k views, 0.13x median, 1.1 min) `XunabxHzMuM` country
+- **Great Art Explained Talk: Bangalore 8 Feb 2026** (@GreatArtExplained, 26k views, 0.13x median, 58.9 min) `tEEq5DTRXr0` number, explained
+- **Will We EVER Complete Physics?** (@DomainofScience, 39k views, 0.11x median, 14.4 min) `TcUByhu5K4I` question
+- **Who Owns America's $40 Trillion Debt? (It's Not China)** (@Econsketch1, 100 views, 0.11x median, 12.3 min) `PgpO3Rw9iSE` question, number, country
+- **Diego Garcia: America's Most Secretive Base** (@CogitoEdu, 49k views, 0.08x median, 32.5 min) `kmY-Ej1RHhM` country, dramatic
+- **How Many Galaxies Are Moving Away From Us Faster Than Light?** (@DomainofScience, 28k views, 0.08x median, 5.1 min) `ZzhCPJTKg_c` question, how, country
+- **We Made A New Journal** (@kurzgesagt, 339k views, 0.06x median, 1.3 min) `UnrtLi7YIY4` 
+- **The 8 Most Important Discoveries in Space** (@DomainofScience, 21k views, 0.06x median, 17.5 min) `6CSM_UCyBNA` number
+- **RECAP: First Punic War** (@OverSimplified, 2.5M views, 0.06x median, 2.1 min) `805SIqgDZIE` 
+- **Cuba's Medical Empire** (@CogitoEdu, 24k views, 0.04x median, 35.2 min) `8Cp0NgTxBSk` 
+
+## Outliers (2x+ their channel median, last 12 months)
+
+- 260.04x **America's $40 Trillion Debt Explained Like You're 5** (@Econsketch1, 246k, 5.9 min) `oMGV1m5ANko` number, explained, you/your, country
+- 49.82x **The Dark Knowledge of AI** (@EmergenceYT, 279k, 19.0 min) `A9psCzGqvfs` 
+- 19.03x **What If World Stops Using US Dollar?** (@Econsketch1, 18k, 6.4 min) `LqcSGYG21Oo` question, what-if, country
+- 12.68x **Is It Just a Fancy Dictionary, or Is Something Emerging?** (@EmergenceYT, 71k, 20.1 min) `IKZJraZ0WFE` question
+- 10.45x **The Quantum Theory of Dreams and Consciousness** (@ApertureThinking, 2.3M, 47.8 min) `DAN9mpLnOqA` 
+- 9.26x **4 ways to fix your attention span - Shannon Odell** (@TEDEd, 4.6M, 5.4 min) `N2uQWfV6Jr4` number, you/your
+- 9.02x **Game Theory: A Simple Strategy That Will Change Your Life Forever** (@PursuitofWonder, 2.7M, 17.8 min) `ivfw_TcsHbw` you/your
+- 8.12x **Why Every Country Is in Debt? And Who Do They Owe?** (@Explains101, 2.7M, 17.1 min) `npX2aZymRvg` question, why, country, format-hook
+- 7.27x **The Terrifying Quantum Entanglement Theory That Breaks Reality** (@ApertureThinking, 1.6M, 32.6 min) `hV-blfKF4Po` 
+- 5.45x **You Are Losing the Ability to Think, and an MIT Study Shows How** (@ApertureThinking, 1.2M, 33.7 min) `jexg0umv_yo` you/your
+- 5.13x **Great Art Explained: The Last Supper by Leonardo da Vinci** (@GreatArtExplained, 1.0M, 36.2 min) `eKyYPSpiC9g` explained
+- 5.01x **The Quantum Theory of Consciousness That’s Terrifying Scientists** (@PursuitofWonder, 1.5M, 19.8 min) `gm8Bj2kCkfs` 
+- 4.82x **The Word That Breaks an AI** (@EmergenceYT, 27k, 20.1 min) `srqEA2vlI0M` 
+- 4.67x **The Existential Elk Theory - The Darkest Philosophical Essay Ever Written** (@PursuitofWonder, 1.4M, 15.8 min) `2mY_YUUdRBk` 
+- 4.55x **The theory of time that proves your past self still exists** (@ApertureThinking, 1.0M, 29.7 min) `Hv7f1bedXOE` you/your
+- 4.55x **You are the Universe Experiencing Itself | Spinoza's God** (@ApertureThinking, 1.0M, 48.7 min) `NRTH809cCIs` you/your
+- 4.55x **Quantum Computing and the end of the Internet as we know it** (@ApertureThinking, 1.0M, 37.4 min) `ZvO5kikFVOk` 
+- 4.35x **love cannot fix you** (@Sisyphus55, 311k, 7.9 min) `8Krn_7GltBY` you/your
+- 4.26x **AI Just Crossed the Terrifying Line - Now What?** (@kurzgesagt, 23.0M, 21.7 min) `ujkD4SxPKOI` question
+- 4.04x **The Magnetic Shadow Effect** (@minutephysics, 2.0M, 5.9 min) `MuvuxHXLzls` 
+
+## Fastest growing since the last run (views per day)
+
+- 25k/day **If You Were TRYING To Destroy The Economy...** (@HowMoneyWorks, 1.34x)
+- 19k/day **How China Is Restarting Its Economy** (@EconomicsExplained, 1.39x)
+- 17k/day **How American Real Estate Is Delaying The Inevitable... For Now** (@HowMoneyWorks, 1.95x)
+- 17k/day **You'll never guess the most popular internet country code** (@JayAndMark, 0.91x)
+- 13k/day **Why Argentina Wants the World’s Corrupt Billionaires** (@EconomicsExplained, 0.66x)
+- 3k/day **How Old Money Kills Economies** (@EconomicsExplained, 1.33x)
+- 3k/day **tHe pOpULaTiOn iS CoLlapSiNg!** (@HowMoneyWorks, 1.04x)
+- 2k/day **Living Paycheck to Paycheck? So Is Everyone Else** (@EconomicsExplained, 1.52x)
+- 2k/day **Why Prices Won't Stop Rising? Inflation Explained** (@Explains101, 2.02x)
+- 2k/day **How Kim Jong Un "Accidentally" Fixed North Korea's Economy** (@EconomicsExplained, 1.3x)
+
+## Cadence and format
+
+| Channel | Tier | Subs | Median views | Uploads (90 d) | Median length (min) |
+|---|---|---|---|---|---|
+| @EmergenceYT | lead | 6k | 6k | 10 | 20.1 |
+| @Sisyphus55 | idea | 1.3M | 72k | 8 | 7.5 |
+| @PursuitofWonder | idea | 3.5M | 300k | 6 | 15.5 |
+| @theschooloflifetv | idea | 9.8M | 90k | 13 | 4.2 |
+| @ApertureThinking | idea | 2.7M | 220k | 14 | 33.6 |
+| @PhilosophyVibe | idea | 135k | 6k | 0 | 14.1 |
+| @CogitoEdu | idea | 811k | 610k | 1 | 34.6 |
+| @kurzgesagt | idea | 25.8M | 5.4M | 6 | 12.7 |
+| @TEDEd | idea | 23.0M | 496k | 23 | 6.0 |
+| @minutephysics | idea | 6.0M | 494k | 2 | 5.3 |
+| @DomainofScience | idea | 1.7M | 370k | 0 | 15.5 |
+| @OverSimplified | idea | 9.7M | 39.5M | 0 | 19.9 |
+| @HistoryMatters | idea | 1.9M | 900k | 5 | 8.6 |
+| @GreatArtExplained | idea | 1.9M | 195k | 2 | 21.2 |
+| @Explains101 | money | 353k | 332k | 0 | 15.8 |
+| @Econsketch1 | money | 691 | 946 | 7 | 8.6 |
+| @Primateeconomics | money | 577k | 458k | 3 | 10.1 |
+| @EconomicsExplained | money | 2.9M | 574k | 15 | 17.6 |
+| @HowMoneyWorks | money | 1.8M | 820k | 11 | 19.3 |
+| @JayAndMark | craft | 1.8M | 3.3M | 1 | 11.3 |
+| @exurb1a | craft | 3.0M | 1.8M | 2 | 14.7 |
+
+## Title patterns vs performance (median x-median of videos using each)
+
+- what-if: 1.47x over 8 videos
+- why: 1.11x over 89 videos
+- explained: 1.11x over 77 videos
+- question: 1.01x over 131 videos
+- format-hook: 1.0x over 25 videos
+- you/your: 0.99x over 74 videos
+- country: 0.99x over 83 videos
+- number: 0.92x over 84 videos
+- how: 0.9x over 44 videos
+- dramatic: 0.85x over 44 videos
+
+## Learn cards
+
+- `A9psCzGqvfs` The Dark Knowledge of AI (@EmergenceYT): 19.0 min, 7 chapters, sources in description: True, sponsor: False, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 19 comments
+- `IKZJraZ0WFE` Is It Just a Fancy Dictionary, or Is Something Emerging? (@EmergenceYT): 20.1 min, 9 chapters, sources in description: True, sponsor: False, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 20 comments
+- `DAN9mpLnOqA` The Quantum Theory of Dreams and Consciousness (@ApertureThinking): 47.8 min, 6 chapters, sources in description: False, sponsor: True, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 19 comments
+- `pQgxiQAMTTo` The Map of Engineering (@DomainofScience): 22.1 min, 0 chapters, sources in description: False, sponsor: False, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 0 comments
+- `N2uQWfV6Jr4` 4 ways to fix your attention span - Shannon Odell (@TEDEd): 5.4 min, 0 chapters, sources in description: False, sponsor: False, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 19 comments
+- `ivfw_TcsHbw` Game Theory: A Simple Strategy That Will Change Your Life Forever (@PursuitofWonder): 17.8 min, 0 chapters, sources in description: False, sponsor: True, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 19 comments
+- `hV-blfKF4Po` The Terrifying Quantum Entanglement Theory That Breaks Reality (@ApertureThinking): 32.6 min, 5 chapters, sources in description: False, sponsor: False, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 20 comments
+- `-UlxHPIEVqA` The Map of Quantum Computing - Quantum Computing Explained (@DomainofScience): 33.5 min, 10 chapters, sources in description: True, sponsor: True, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 20 comments
+- `ONVpFtiD-fo` The Surprising Map of Plants (@DomainofScience): 19.9 min, 14 chapters, sources in description: False, sponsor: True, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 20 comments
+- `jexg0umv_yo` You Are Losing the Ability to Think, and an MIT Study Shows How (@ApertureThinking): 33.7 min, 4 chapters, sources in description: False, sponsor: True, captions: not fetched by plain requests: use the browser method (built-in browser) or vidIQ transcript (5 credits), 19 comments
