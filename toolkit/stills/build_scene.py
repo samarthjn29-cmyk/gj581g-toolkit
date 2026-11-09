@@ -44,6 +44,9 @@ def main():
         end = shots[i + 1]['t'] if i + 1 < len(shots) else dur; s['dur'] = round(end - s['t'], 2)
         if s['dur'] > 9 and not s.get('hold'): fails.append(f"{s['id']} lasts {s['dur']} s (over 9 s): split it or add a card/move")
         if s['dur'] < 1.2: fails.append(f"{s['id']} lasts only {s['dur']} s")
+    big = sorted([c for c in cards if c.get('kind') in ('text', 'title')], key=lambda c: c['t'])   # Zeigarnik, 9 Nov 2026: two text cards drawn on top of each other
+    for c0, c1 in zip(big, big[1:]):
+        if c1['t'] < c0['t'] + c0.get('dur', 4.5): fails.append(f"text card '{c1['text'][:30]}' starts before '{c0['text'][:30]}' has gone: shorten or drop one")
     pub = os.path.abspath(a.out).split('/public/')[-1]
     json.dump({'dir': pub, 'scene': P['scene'], 't0': round(t0, 3), 'dur': dur, 'words': W, 'shots': shots, 'cards': cards}, open(f'{a.out}/timeline.json', 'w'), indent=1)
     print(f"{P['scene']}: {dur} s, {len(shots)} shots, {len(cards)} cards"); [print('FAIL', f) for f in fails]
