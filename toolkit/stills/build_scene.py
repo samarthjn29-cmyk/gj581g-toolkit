@@ -48,7 +48,7 @@ def main():
     for c0, c1 in zip(big, big[1:]):
         if c1['t'] < c0['t'] + c0.get('dur', 4.5): fails.append(f"text card '{c1['text'][:30]}' starts before '{c0['text'][:30]}' has gone: shorten or drop one")
     pub = os.path.abspath(a.out).split('/public/')[-1]
-    json.dump({'dir': pub, 'scene': P['scene'], 't0': round(t0, 3), 'dur': dur, 'words': W, 'shots': shots, 'cards': cards}, open(f'{a.out}/timeline.json', 'w'), indent=1)
+    json.dump({'dir': pub, 'scene': P['scene'], 't0': round(t0, 3), 'dur': dur, 'words': W, 'shots': shots, 'cards': cards, **({'finish': P['finish']} if P.get('finish') else {})}, open(f'{a.out}/timeline.json', 'w'), indent=1)
     print(f"{P['scene']}: {dur} s, {len(shots)} shots, {len(cards)} cards"); [print('FAIL', f) for f in fails]
     sys.exit(1 if fails else 0)
 main()

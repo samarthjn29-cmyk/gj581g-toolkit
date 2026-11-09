@@ -7,7 +7,7 @@
 // Cards: kind 'title' (big centred line) or 'info' (term + definition box, e.g. WORD 01 · Papyrus); dur (s, default 4.5).
 // No image-source labels on screen (Sam, 8 Nov 2026): credits and the AI disclosure live in the description.
 import React from 'react';
-import {AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing, delayRender, continueRender} from 'remotion';
+import {AbsoluteFill, Audio, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing, delayRender, continueRender} from 'remotion';
 // load the real fonts before the first frame (until 10 Nov 2026 the serif silently fell back to Georgia)
 const FONTS = [['Cormorant Garamond', 'cormorant-garamond-latin-500-normal.woff2'], ['Kalam', 'Kalam-Regular.ttf'], ['Inter', 'Inter.ttf'], ['JetBrains Mono', 'JetBrainsMono.ttf']];
 if (typeof document !== 'undefined' && !window.__zfonts) { window.__zfonts = 1; const h = delayRender('fonts');
@@ -130,11 +130,20 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
     <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 52, color: '#F3EBDD', lineHeight: 1}}>{c.term}</div>
     <div style={{fontFamily: 'Inter, sans-serif', fontSize: 26, color: '#D9D2C5', marginTop: 10, lineHeight: 1.35}}>{c.text}</div></div>; };
 
-export const StillsScene = ({dir, shots, cards = [], words = []}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps;
+// "Film finish" (exurb1a study, Sam 10 Nov 2026): one look over every source: a soft vignette, a light grain/dust pass
+// (finish.grain: a texture video in dir, looped) and an optional warm lift. Timeline field: finish {grain, grainOpacity, vignette}.
+const Finish = ({f, dir}) => { const {fps} = useVideoConfig(); if (!f) return null;
+  return <>{f.grain && <AbsoluteFill style={{opacity: f.grainOpacity ?? 0.22, mixBlendMode: 'overlay', pointerEvents: 'none'}}>
+      <Loop durationInFrames={Math.round((f.grainLen || 10) * fps)}><OffthreadVideo muted src={staticFile(`${dir}/${f.grain}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></Loop></AbsoluteFill>}
+    <AbsoluteFill style={{pointerEvents: 'none', background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,${f.vignette ?? 0.45}) 100%)`}} />
+    {f.warm && <AbsoluteFill style={{pointerEvents: 'none', background: 'rgba(255,170,90,0.06)', mixBlendMode: 'soft-light'}} />}</>; };
+
+export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps;
   return <AbsoluteFill style={{background: '#000'}}>
     <Audio src={staticFile(`${dir}/vo.mp3`)} />
     {shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;
       return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}
+    <Finish f={finish} dir={dir} />
     {cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}
   </AbsoluteFill>; };
