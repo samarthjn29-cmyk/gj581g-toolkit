@@ -7,7 +7,11 @@
 // Cards: kind 'title' (big centred line) or 'info' (term + definition box, e.g. WORD 01 · Papyrus); dur (s, default 4.5).
 // No image-source labels on screen (Sam, 8 Nov 2026): credits and the AI disclosure live in the description.
 import React from 'react';
-import {AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing} from 'remotion';
+import {AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing, delayRender, continueRender} from 'remotion';
+// load the real fonts before the first frame (until 10 Nov 2026 the serif silently fell back to Georgia)
+const FONTS = [['Cormorant Garamond', 'cormorant-garamond-latin-500-normal.woff2'], ['Kalam', 'Kalam-Regular.ttf'], ['Inter', 'Inter.ttf'], ['JetBrains Mono', 'JetBrainsMono.ttf']];
+if (typeof document !== 'undefined' && !window.__zfonts) { window.__zfonts = 1; const h = delayRender('fonts');
+  Promise.all(FONTS.map(([f, file]) => new FontFace(f, `url(${staticFile('fonts/' + file)})`).load().then(ff => document.fonts.add(ff)))).then(() => continueRender(h), () => continueRender(h)); }
 
 const ez = Easing.bezier(0.45, 0, 0.25, 1);
 const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: ez});
@@ -55,9 +59,10 @@ const Diagram = ({s, t, words}) => { const g = s.diagram, a = R(t, s.t, s.t + 0.
       <path d={`M ${1260 + shake} ${716} L ${1260 + shake} ${800}`} stroke={GOLD} strokeWidth={5} opacity={a * R(t, tp, tp + 0.4)} markerEnd="url(#arr)" />
       {lab(1260, 950, g.right || 'interrupted', a, 44, GOLD)}</>; }
   if (g.type === 'bars2') { const tb = wt(words, g.grow || s.word || '', s.t), p = R(t, tb, tb + 1.1), H = 560, base = 840, [v1, v2] = g.values, mx = Math.max(v1, v2);
-    const bar = (x, v, col, txt) => <><rect x={x - 110} y={base - H * v / mx * p} width={220} height={H * v / mx * p} fill={col} opacity={a} />{lab(x, base + 70, txt, a, 44, col)}</>;
-    body = <><line x1={480} y1={base} x2={1440} y2={base} stroke={DIM} strokeWidth={3} />{bar(760, v1, INK, g.labels[0])}{bar(1160, v2, GOLD, g.labels[1])}
-      {g.title && lab(960, 150, g.title, a, 52)}</>; }
+    const bar = (x, v, col, txt, num) => <><rect x={x - 110} y={base - H * v / mx * p} width={220} height={H * v / mx * p} fill={col} opacity={a} />{lab(x, base + 70, txt, a, 44, col)}
+      {num && lab(x, base - H * v / mx - 28, num, R(t, tb + 0.9, tb + 1.4), 56, col)}</>;
+    body = <><line x1={480} y1={base} x2={1440} y2={base} stroke={DIM} strokeWidth={3} />{bar(760, v1, INK, g.labels[0], (g.shown || [])[0])}{bar(1160, v2, GOLD, g.labels[1], (g.shown || [])[1])}
+      {g.title && lab(960, 130, g.title, a, 52)}</>; }
   if (g.type === 'share') { const ts = wt(words, g.grow || 'two', s.t), tc = wt(words, g.chanceWord || 'chance', s.t), p = R(t, ts, ts + 1.2), W = 1100, x0 = 410, y = 520;
     body = <><rect x={x0} y={y - 50} width={W} height={100} fill="none" stroke={DIM} strokeWidth={3} />
       <rect x={x0} y={y - 50} width={W * g.value * p} height={100} fill={GOLD} opacity={a} />
@@ -87,20 +92,36 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   return <>{frame(0.7, `${s.layers}/far.png`)}{frame(1.0, `${s.layers}/mid.png`)}{frame(1.35, `${s.layers}/near.png`)}</>;
 };
 
-const Card = ({c, t, words = []}) => { const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
+// exurb1a study (Sam, 10 Nov 2026: "Apply the study results"): key lines sit on a moving texture (rain on glass, old film,
+// dust in light) instead of a flat dark wash; chapter titles are written on one recurring story object (an index card).
+const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return null;
+  return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
+    <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
+const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
+  const FONT = c.hand ? 'Kalam, cursive' : '"Cormorant Garamond", Georgia, serif', dark = c.bg ? 0.72 : 0.5;
+  if (c.kind === 'title' && c.paper) { const [num, ...rest] = c.text.split(' · '), rot = c.rot ?? -2.5;
+    return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(8,7,6,${0.55 * o})`}}>
+      <div style={{width: 820, height: 470, background: 'linear-gradient(180deg, #F1E7D2 0%, #E8DCC2 100%)', boxShadow: '0 30px 70px rgba(0,0,0,0.65)', transform: `rotate(${rot}deg) translateY(${(1 - o) * 30}px)`, position: 'relative', overflow: 'hidden'}}>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 92, height: 3, background: '#C9786E', opacity: 0.7}} />
+        {[0, 1, 2, 3, 4, 5].map(i => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: 150 + i * 52, height: 2, background: '#9DB4C8', opacity: 0.45}} />)}
+        <div style={{position: 'absolute', left: 46, top: 30, fontFamily: '"JetBrains Mono", "Courier New", monospace', fontSize: 34, letterSpacing: 6, color: '#4A4036'}}>{num}</div>
+        <div style={{position: 'absolute', left: 0, right: 0, top: 190, textAlign: 'center', fontFamily: 'Kalam, cursive', fontSize: 104, color: '#2B2620', transform: 'rotate(-1.5deg)'}}>{rest.join(' · ').toLowerCase()}</div>
+      </div></AbsoluteFill>; }
   // big number (Sam, 10 Nov 2026): one fact-checked figure, large, with its plain-words unit underneath
   if (c.kind === 'number') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(10,9,8,${0.55 * o})`}}>
     <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 240, lineHeight: 1, color: '#F3EBDD', textShadow: '0 6px 30px rgba(0,0,0,0.7)', transform: `scale(${0.92 + 0.08 * o})`}}>{c.term}</div>
     <div style={{fontFamily: 'Inter, sans-serif', fontSize: 40, letterSpacing: 2, color: '#D9D2C5', marginTop: 18, maxWidth: 1300, textAlign: 'center'}}>{c.text}</div></AbsoluteFill>;
   // kinetic text: the spoken words appear one by one on their aligned times (verbatim from the line)
   if (c.kind === 'kinetic') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
-    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${0.5 * o})`}}>
-      <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 92, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.12, textShadow: '0 4px 24px rgba(0,0,0,0.8)'}}>
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${dark * o})`}}><Tex c={c} o={o} dir={dir} />
+      <div style={{fontFamily: FONT, fontSize: c.hand ? 84 : 92, position: 'relative', color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.12, textShadow: '0 4px 24px rgba(0,0,0,0.8)'}}>
         {ws.map((w, i) => { const p = R(t, (st[i] ?? c.t + i * 0.3) - 0.05, (st[i] ?? c.t + i * 0.3) + 0.2); return <span key={i} style={{opacity: p, display: 'inline-block', transform: `translateY(${(1 - p) * 18}px)`, marginRight: '0.28em'}}>{w}</span>; })}</div></AbsoluteFill>; }
   if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(0,0,0,${0.35 * o})`}}>
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 84, letterSpacing: 6, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, whiteSpace: 'pre-line', lineHeight: 1.1, textShadow: '0 4px 24px rgba(0,0,0,0.7)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // on-screen text (Sam, 8 Nov 2026: "putting text on the screen where it makes sense"): a key line in the end-title look,
   // set low so the picture stays visible; words verbatim from a fact-checked line
+  if (c.kind === 'text' && c.bg) return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${dark * o})`}}><Tex c={c} o={o} dir={dir} />
+    <div style={{fontFamily: FONT, fontSize: c.hand ? 78 : 80, position: 'relative', color: '#F3EBDD', textAlign: 'center', maxWidth: 1400, lineHeight: 1.2, textShadow: '0 4px 24px rgba(0,0,0,0.8)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   if (c.kind === 'text') return <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', opacity: o, background: `linear-gradient(to top, rgba(0,0,0,${0.62 * o}) 0%, rgba(0,0,0,0) 45%)`}}>
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 66, letterSpacing: 3, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.15, marginBottom: 110, textShadow: '0 4px 24px rgba(0,0,0,0.8)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // info box: what a term means (kept on screen at Sam's request)
@@ -115,5 +136,5 @@ export const StillsScene = ({dir, shots, cards = [], words = []}) => { const {fp
     {shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;
       return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}
-    {cards.map((c, i) => <Card key={i} c={c} t={t} words={words} />)}
+    {cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}
   </AbsoluteFill>; };
