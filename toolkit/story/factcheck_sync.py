@@ -14,6 +14,12 @@ that was checked. A row counts as passed only when its verdict is OK (or "no cla
                                                           after the checker passes rows: record the current hash
   factcheck_sync.py script.json factcheck.csv --fresh    list time-sensitive lines (rates, "this year", records, "latest")
                                                           to re-check right before upload
+  ... --packaging packaging/<Prefix>_packaging.md       (with any mode) also gate the packaging: one row per title
+                                                          (pack:title<n>), thumbnail (pack:thumb<X>: its words and what
+                                                          the picture shows), description paragraph (pack:desc<n>), the
+                                                          pinned comment (pack:pin) and the tags (pack:tags). Without the
+                                                          flag, pack: rows are left untouched (9 Nov 2026, after the Scrolls
+                                                          packaging needed its own end-of-line check).
 The CSV is always written to <csv>.new, re-read, then moved over the old file (a crashed write once wiped half a table).
 build.py's voice gate calls check() and refuses to voice if any row is pending, changed or missing."""
 import sys, os, csv, json, re, hashlib, shutil, time
@@ -23,14 +29,31 @@ FIELDS = ['row', 'line', 'where', 'text', 'cited', 'verdict', 'fix', 'first_verd
 FRESH = re.compile(r"\b(this (year|month|october|november|december|january|week)|last (year|month|financial year)|today|now|currently|"
                    r"record|weakest|strongest|highest|lowest|latest|so far|at the end of|cost about|costs? about|per dollar|\d{4})\b", re.I)
 
-def items(S):
-    """(key, where, text) for every line and every scene's on-screen note, in script order"""
+def pack_items(md):
+    """(key, 'packaging', text) for each title, thumbnail, description paragraph, the pinned comment and the tags"""
+    s = open(md, encoding='utf-8').read(); out = []
+    sec = lambda n: (re.search(rf'^## {n}\..*?$(.*?)(?=^## \d+\.|\Z)', s, re.S | re.M) or [None, ''])[1]
+    for m in re.finditer(r'^\|\s*(\d+)\s*\|\s*(.+?)\s*\|', sec(1), re.M):
+        out.append((f'pack:title{m.group(1)}', 'packaging', m.group(2).replace('**', '').strip()))
+    for m in re.finditer(r'^\|\s*`[^`]*?_thumb_([A-Z])\.\w+`\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|', sec(2), re.M):
+        out.append((f'pack:thumb{m.group(1)}', 'packaging', f'words {m.group(3).strip()} | picture: {m.group(2).strip()}'))
+    d = re.search(r'```(.*?)```', sec(3), re.S)
+    for i, para in enumerate([x.strip() for x in re.split(r'\n\s*\n', d.group(1) if d else '') if x.strip()], 1):
+        out.append((f'pack:desc{i}', 'packaging', para))
+    pin = ' '.join(l.lstrip('> ').strip() for l in sec(4).splitlines() if l.startswith('>'))
+    if pin: out.append(('pack:pin', 'packaging', pin))
+    tags = next((l.strip() for l in sec(5).splitlines() if l.strip()), '')
+    if tags: out.append(('pack:tags', 'packaging', tags))
+    return out
+
+def items(S, pack=None):
+    """(key, where, text) for every line and every scene's on-screen note, in script order (+ the packaging rows)"""
     out, seen = [], set()
     for l in S:
         if l['scene'] not in seen and l.get('media'):
             seen.add(l['scene']); out.append((f"media:{l['scene']}", 'screen', l['media']))
         out.append((l['id'], 'heckler' if l.get('who') == 'heckler' else 'narration', l.get('text', '')))
-    return out
+    return out + (pack_items(pack) if pack else [])
 
 def fp(text): return hashlib.sha1(re.sub(r'\s+', ' ', text.strip()).encode()).hexdigest()[:12]
 
@@ -47,10 +70,10 @@ def save(p, rows):
     if os.path.exists(p): shutil.copy(p, p + '.bak')
     os.replace(p + '.new', p)
 
-def check(S, rows):
+def check(S, rows, pack=None):
     """-> dict(missing, changed, pending, removed) lists of keys"""
-    by = {r['line']: r for r in rows}; cur = items(S); keys = {k for k, _, _ in cur}
-    res = dict(missing=[], changed=[], pending=[], removed=[k for k in by if k not in keys and not k.endswith('-screen')])
+    by = {r['line']: r for r in rows}; cur = items(S, pack); keys = {k for k, _, _ in cur}
+    res = dict(missing=[], changed=[], pending=[], removed=[k for k in by if k not in keys and not k.endswith('-screen') and (pack or not k.startswith('pack:'))])
     for k, _, t in cur:
         r = by.get(k)
         if not r: res['missing'].append(k)
@@ -60,10 +83,13 @@ def check(S, rows):
     return res
 
 def main():
-    a = sys.argv[1:]; S = json.load(open(a[0])); S = S["lines"] if isinstance(S, dict) else S; p = a[1]; rows = load(p); cur = items(S); text = {k: t for k, _, t in cur}
+    a = sys.argv[1:]; pack = None
+    if '--packaging' in a:
+        i = a.index('--packaging'); pack = a[i + 1]; del a[i:i + 2]
+    S = json.load(open(a[0])); S = S["lines"] if isinstance(S, dict) else S; p = a[1]; rows = load(p); cur = items(S, pack); text = {k: t for k, _, t in cur}
     if '--fresh' in a:
         for k, w, t in cur:
-            if w != 'heckler' and FRESH.search(t): print(f'{k:16s} {t}')
+            if w != 'heckler' and FRESH.search(t): print(f'{k:16s} {t[:160]}')
         return
     if '--stamp-all-ok' in a or '--stamp' in a:
         ids = None if '--stamp-all-ok' in a else set(a[a.index('--stamp') + 1:])
@@ -74,7 +100,7 @@ def main():
             if r['line'] in text and (ids is None or r['line'] in ids) and (r.get('verdict') or '').strip().upper() in PASS:
                 r['hash'] = fp(text[r['line']]); r['text'] = text[r['line']]; r['checked'] = r.get('checked') or time.strftime('%Y-%m-%d'); n += 1
         save(p, rows); print(f'stamped {n} rows'); return
-    res = check(S, rows)
+    res = check(S, rows, pack)
     if '--update' in a:
         by = {r['line']: r for r in rows}; new = []; carried = []
         # a passed row whose exact wording reappears under another id (a line moved, a script was reordered) keeps its
@@ -91,6 +117,7 @@ def main():
                 o = passed[fp(t)]; r.update(verdict=o['verdict'], hash=fp(t), checked=o.get('checked', ''),
                                             fix=f"carried from {o['line']} (identical wording): " + (o.get('fix') or '')[:300]); carried.append(k)
             new.append(r)
+        if not pack: new += [r for r in rows if r['line'].startswith('pack:')]  # packaging not given: keep its rows as they are
         save(p, new)
         if carried: print(f'carried {len(carried)} verdicts by identical wording: {", ".join(carried)}')
         todo = [r for r in new if (r.get('verdict') or '').strip().upper() not in PASS]
