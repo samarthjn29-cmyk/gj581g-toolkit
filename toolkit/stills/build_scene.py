@@ -38,6 +38,8 @@ def main():
     shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0
     cards = [dict(c, t=at(c)) for c in P.get('cards', [])]
     dur = round(t1 - t0, 2); fails = []
+    for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length
+        if shots[i]['t'] < shots[i - 1]['t']: fails.append(f"{shots[i]['id']} starts before {shots[i - 1]['id']}: list shots in spoken order")
     for i, s in enumerate(shots):
         end = shots[i + 1]['t'] if i + 1 < len(shots) else dur; s['dur'] = round(end - s['t'], 2)
         if s['dur'] > 9 and not s.get('hold'): fails.append(f"{s['id']} lasts {s['dur']} s (over 9 s): split it or add a card/move")
