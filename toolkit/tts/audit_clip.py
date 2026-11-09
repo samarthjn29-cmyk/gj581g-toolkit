@@ -16,13 +16,13 @@ ap.add_argument('--names', default='Seales,Handmer,Farritor,Youssef,Nader,Schill
 ap.add_argument('--midgap', type=float, default=0.75); ap.add_argument('--linegap', type=float, default=1.6)
 ap.add_argument('--noise', type=float, default=-48); ap.add_argument('--out')
 a = ap.parse_args()
-SAME = {'meters': 'metres', 'gelatin': 'gelatine', 'center': 'centre', 'cataloged': 'catalogued', 'colour': 'color', 'eightys': 'eighties'}
+SAME = {'meters': 'metres', 'gelatin': 'gelatine', 'center': 'centre', 'cataloged': 'catalogued', 'eightys': 'eighties', 'vapors': 'vapours', 'rosewater': 'rose water', 'color': 'colour', 'colors': 'colours', 'gray': 'grey'}
 NAMES = {n.lower() for n in a.names.split(',')}
 def toks(s):
     s = re.sub(r'(?<=\d),(?=\d{3})', '', s.lower().replace('%', ' percent ').replace('’', "'"))   # 2,000 -> 2000
     s = re.sub(r'(\d+)(s\b)?', lambda x: (lambda w: (w[:-1] + 'ies' if w.endswith('y') else w + 's') if x.group(2) else w)(
         num2words(int(x.group(1)), to='year') if len(x.group(1)) == 4 else num2words(int(x.group(1)))), s)
-    return [SAME.get(t, t) for t in re.sub(r"[^a-z ]", ' ', s.replace('-', ' ').replace("'", '')).split()]
+    return ' '.join(SAME.get(t, t) for t in re.sub(r"[^a-z ]", ' ', s.replace('-', ' ').replace("'", '')).split()).split()
 S = json.load(open(a.script)); L = S['lines'] if isinstance(S, dict) else S
 ids = [l['id'] for l in L]; i0, i1 = (ids.index(x) for x in a.lines.split('-')); L = L[i0:i1 + 1]
 with tempfile.TemporaryDirectory() as td:
