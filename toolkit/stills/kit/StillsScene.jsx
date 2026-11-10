@@ -98,7 +98,7 @@ const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return
   return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
     <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
 const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
-  const FONT = c.hand ? 'Kalam, cursive' : '"Cormorant Garamond", Georgia, serif', dark = c.bg ? 0.72 : 0.5;
+  const FONT = c.hand ? 'Kalam, cursive' : '"Cormorant Garamond", Georgia, serif', dark = c.bg ? 0.9 : 0.5;   // 0.9: a bright shot showed through the texture card (itch I11, spring behind the words)
   if (c.kind === 'title' && c.paper) { const [num, ...rest] = c.text.split(' · '), rot = c.rot ?? -2.5;
     return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(8,7,6,${0.55 * o})`}}>
       <div style={{width: 820, height: 470, background: 'linear-gradient(180deg, #F1E7D2 0%, #E8DCC2 100%)', boxShadow: '0 30px 70px rgba(0,0,0,0.65)', transform: `rotate(${rot}deg) translateY(${(1 - o) * 30}px)`, position: 'relative', overflow: 'hidden'}}>
