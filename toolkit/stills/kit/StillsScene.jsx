@@ -20,6 +20,7 @@ const lin = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp
 const MOVES = {   // [scale from, scale to, x from, x to, y from, y to] in % of frame
   push: [1.0, 1.12, 0, 0, 0, 0], pullback: [1.14, 1.0, 0, 0, 0, 0], pan: [1.1, 1.1, 3.5, -3.5, 0, 0], panL: [1.1, 1.1, -3.5, 3.5, 0, 0],
   tilt: [1.12, 1.12, 0, 0, 4, -4], tiltDown: [1.12, 1.12, 0, 0, -4, 4], drift: [1.04, 1.09, 1, -1, 0.5, -0.5], hold: [1.03, 1.05, 0, 0, 0, 0],
+  vdrift: [1.03, 1.1, 0.6, -0.6, 0, 0],   // footage: a slow push under the clip, so the frame keeps moving through the dissolve
 };
 
 // A real document page (Sam, 10 Nov 2026: show the actual paper): the scan on a dark desk, a highlighter sweeping each hl box
@@ -76,7 +77,7 @@ const Diagram = ({s, t, words}) => { const g = s.diagram, a = R(t, s.t, s.t + 0.
 const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.page) return <PageShot s={s} t={t} dir={dir} />;
   if (s.diagram) return <Diagram s={s} t={t} words={words} />;
-  const [s0, s1, x0, x1, y0, y1] = MOVES[s.move === 'punch' ? 'hold' : (s.move || 'drift')], k = lin(t, s.t, s.t + s.dur + (s.tail || 0));
+  const [s0, s1, x0, x1, y0, y1] = MOVES[s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift')], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
   let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
   // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
   if (s.move === 'punch') { const p0 = s.t + (s.punch_at ?? 0.5); sc += (s.punch || 0.22) * interpolate(t, [p0, p0 + 0.18], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }
@@ -85,7 +86,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra}%, ${y * extra}%) scale(${1 + (sc - 1) * extra})`, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
-      ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
+      ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
       : <Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />}</AbsoluteFill>;
   if (!s.layers) return frame(1, s.img);
   // 2.5D: the far layer moves least, the near layer most (small amounts: inpainted edges must never show)

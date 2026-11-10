@@ -44,6 +44,20 @@ def main():
         end = shots[i + 1]['t'] if i + 1 < len(shots) else dur; s['dur'] = round(end - s['t'], 2)
         if s['dur'] > 9 and not s.get('hold'): fails.append(f"{s['id']} lasts {s['dur']} s (over 9 s): split it or add a card/move")
         if s['dur'] < 1.2: fails.append(f"{s['id']} lasts only {s['dur']} s")
+    # Smooth picture changes (Sam, 10 Nov 2026: "the clip will play then stop and then will transition... abrupt"):
+    # a soft dissolve into every shot (plan 'dissolve' s; gags and 'cut': true shots keep a hard cut), and footage that is shorter
+    # than its time on screen is slowed (rate, never below 0.6) so it never freezes on its last frame before the cut.
+    dz = P.get('dissolve', 0)
+    for i, s in enumerate(shots):
+        if dz and i and not s.get('gag') and not s.get('cut') and s.get('move') != 'punch' and 'fade' not in s: s['fade'] = dz
+    for i, s in enumerate(shots):
+        if not s.get('video'): continue
+        show = s['dur'] + (shots[i + 1].get('fade', 0) if i + 1 < len(shots) else 0)
+        vlen = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f"{a.out}/{s['video']}"], capture_output=True, text=True).stdout or 0)
+        left = vlen - s.get('vstart', 0)
+        if left < show: s['rate'] = round(max(0.6, left / show), 3)
+        tail = show - left / s.get('rate', 1)
+        if tail > 0.3 and not s.get('freeze_img'): fails.append(f"{s['id']} footage ({s['video']}) runs out {tail:.1f} s before the cut even slowed to 0.6x: longer clip or split the shot")
     big = sorted([c for c in cards if c.get('kind') in ('text', 'title')], key=lambda c: c['t'])   # Zeigarnik, 9 Nov 2026: two text cards drawn on top of each other
     for c0, c1 in zip(big, big[1:]):
         if c1['t'] < c0['t'] + c0.get('dur', 4.5): fails.append(f"text card '{c1['text'][:30]}' starts before '{c0['text'][:30]}' has gone: shorten or drop one")
