@@ -1,3 +1,0 @@
-105. Texture text cards must be near-opaque (dark wash 0.9): at 0.72 a bright shot showed through and crossed the words (Zeigarnik itch, the spring behind "Remembering a thing"). Check every text card on the contact sheet for a busy picture behind it.
-106. Repeats in a chapter get replaced with free Adobe Stock video first (no Recraft cost), matched to the line literally; a stock clip whose provenance isn't in the licence log is never used, even if it is already on disk.
-107. A background render queue is stopped after 2 hours: queue at most ~3 chapters per run (chapters take 15-40 min each), and never start a second detached copy in the same public folder (two runs racing broke the end chapter's vo.f32).
