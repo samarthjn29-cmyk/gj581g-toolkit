@@ -7,7 +7,9 @@ Takes the rendered clip, keeps the picture (stream copy) and Sam's narration as 
   - then the whole mix is re-levelled with a two-pass linear loudnorm to -16 LUFS, TP -1.5;
   - an optional ambience at AMB_LUFS, faded 1.5 s / 3 s.
 Usage: mix_bed.py IN.mp4 OUT.mp4 --bed BED.wav [--amb AMB.mp3 --amb-lufs -40 --amb-from 0 --amb-to END]
-                  [--mute A:B ...] [--swell START] [--bed-lufs -35]"""
+                  [--mute A:B ...] [--swell START] [--bed-lufs -35] [--sfx FILE@T[:LUFS[:DUR]] ...]
+  --sfx: a sound effect placed at T seconds (default -24 LUFS; DUR trims it, with a 0.15 s fade out), not ducked,
+         mixed before the re-level (Aliens opening, 11 Nov 2026: boo, trombone, ka-ching, poppers, cheer, kiss)"""
 import argparse, subprocess, re, json
 
 def lufs(f):
@@ -20,7 +22,7 @@ def dur(f):
 ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
 ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--amb-to', type=float)
-ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--swell', type=float)
+ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
 a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
 # bed gain envelope: mutes ramp over 0.6 s, swell +4 dB over 2 s
@@ -41,6 +43,12 @@ if a.amb:
     ins += ['-stream_loop', '-1', '-i', a.amb]
     fc.append(f'[2:a]atrim=0:{ad:.3f},asetpts=PTS-STARTPTS,volume={ag:.2f}dB,afade=t=in:d=1.5,afade=t=out:st={max(0, ad - 3):.3f}:d=3,'
               f'adelay={int(a.amb_from * 1000)}:all=1,{F}[am]'); mix.append('[am]')
+for spec in a.sfx:
+    f, rest = spec.rsplit('@', 1); parts = rest.split(':'); at = float(parts[0])
+    lu = float(parts[1]) if len(parts) > 1 and parts[1] else -24.0; du = float(parts[2]) if len(parts) > 2 else None
+    k = len(ins) // 2 if False else sum(1 for x in ins if x == '-i'); ins += ['-i', f]
+    sg = lu - lufs(f); tr = f'atrim=0:{du:.3f},afade=t=out:st={max(0, du - 0.15):.3f}:d=0.15,' if du else ''
+    fc.append(f'[{k}:a]{tr}asetpts=PTS-STARTPTS,volume={sg:.2f}dB,adelay={int(at * 1000)}:all=1,{F}[s{k}]'); mix.append(f'[s{k}]')
 fc.append(f"{''.join(mix)}amix=inputs={len(mix)}:normalize=0:duration=first,alimiter=limit=0.89[out]")
 tmp = a.out + '.pre.wav'
 subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', ';'.join(fc), '-map', '[out]',

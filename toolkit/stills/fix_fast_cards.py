@@ -11,7 +11,7 @@ for s in sys.argv[1:]:
     T = json.load(open(f'{RM}/public/{PUB}/{s}/timeline.json'))
     P = json.load(open(f'{Z}/stills/{s}.json'))
     cuts = sorted(x['t'] for x in T['shots']) + [T['dur']]
-    full = [c for c in T['cards'] if c['kind'] in ('kinetic', 'title', 'number') or (c['kind'] == 'text' and c.get('bg'))]
+    full = [c for c in T['cards'] if (c['kind'] in ('kinetic', 'title', 'number') and c.get('style') != 'rise') or (c['kind'] == 'text' and c.get('bg'))]
     def key(c): return (c['at'], c.get('word'), c.get('k', 0), c.get('text'))
     edits = {}
     for c in T['cards']:
