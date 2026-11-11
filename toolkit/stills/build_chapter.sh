@@ -53,6 +53,7 @@ print('pictures ok')
 EOF
 python3 "$TK/stills/build_scene.py" "$PROJ/stills/$S.json" "$PROJ/voice/final/timing_$S.json" "$PROJ/voice/final/vo_$S.wav" "$OUT" --pad 0.25
 python3 "$TK/stills/visible_lint.py" "$OUT/timeline.json" || { echo "FAIL visible_lint: run fix_fast_cards.py $S first"; exit 1; }
+python3 "$TK/stills/gag_lint.py" "$PROJ/stills/$S.json" || { echo "FAIL gag_lint: a gag or move is outside the plan's chosen gag schools (\"gags\": [...])"; exit 1; }
 [ "$MODE" == "--norender" ] && exit 0
 cd "$RM"
 R="npx remotion render src/index_stills.jsx Scene"
