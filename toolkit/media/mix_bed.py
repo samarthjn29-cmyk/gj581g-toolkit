@@ -19,7 +19,7 @@ def lufs(f):
 def dur(f):
     return float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
 
-ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)
+ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)   # 'none': voice + sound effects only
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
 ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--amb-to', type=float)
 ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
@@ -32,12 +32,14 @@ for m in a.mute:
     env += f'*min(1,max(0,max(({s}-t)/0.3,(t-{e})/0.3)))'
 if a.swell is not None:
     env += f'*(1+0.585*min(1,max(0,(t-{a.swell})/2)))'
-g = a.bed_lufs - lufs(a.bed)
+NOBED = a.bed == 'none'   # Sam, Aliens opening, 11 Nov 2026: "Remove the sound bed ... only gag sounds and my voice"
+g = 0 if NOBED else a.bed_lufs - lufs(a.bed)
 fc = [f'[0:a]{F},asplit[v][sc]',
       f"[1:a]atrim=0:{D:.3f},asetpts=PTS-STARTPTS,volume={g:.2f}dB,volume='{env}':eval=frame,"
       f'afade=t=in:d=2,afade=t=out:st={D - 3:.3f}:d=3,{F}[b]',
       '[b][sc]sidechaincompress=threshold=0.05:ratio=3:attack=20:release=400[bd]']
 ins = ['-i', a.inp, '-stream_loop', '-1', '-i', a.bed]; mix = ['[v]', '[bd]']
+if NOBED: fc = [f'[0:a]{F}[v]']; ins = ['-i', a.inp]; mix = ['[v]']
 if a.amb:
     t1 = a.amb_to or D; ad = t1 - a.amb_from; ag = a.amb_lufs - lufs(a.amb)
     ins += ['-stream_loop', '-1', '-i', a.amb]
