@@ -146,6 +146,27 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
       <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 24, padding: '8px 0', borderBottom: '2px solid #1A1814', fontStyle: 'italic'}}><span>{c.kicker || 'Late edition'}</span><span>Price: one hundred million dollars</span></div>
       <div style={{fontSize: c.size || 84, fontWeight: 700, lineHeight: 1.05, textAlign: 'center', margin: '34px 0 24px'}}>{c.text}</div>
       <div style={{display: 'flex', gap: 30}}>{[0, 1, 2].map(k => <div key={k} style={{flex: 1}}>{Array.from({length: 7}).map((_, j) => <div key={j} style={{height: 12, margin: '12px 0', background: '#B9B2A2', width: `${70 + ((j * 37 + k * 11) % 30)}%`}} />)}</div>)}</div></div></AbsoluteFill>; }
+  // bars (picture-gags catalogue E6, Aliens opening 11 Nov 2026): a true-scale bar chart on the number-card ground. The small bar is
+  // drawn first, then the camera "tilts up" the big bar (scale kept honest: c.ratio x the small bar), so the big bar runs off the top
+  // for a long blurred scroll before its label lands. c.a / c.b = {label, value}; c.ratio = b / a.
+  if (c.kind === 'bars') { const q = t - c.t, oo = R(t, c.t, c.t + 0.15) * (1 - R(t, c.t + d - 0.12, c.t + d)), G = c.ground || '#FCCF3E', I = c.ink || '#0B5E2A', N = c.inkNum || '#063F1C';
+    const h0 = c.h0 || 8, H = h0 * c.ratio, base = 860, s0 = c.hold0 ?? 0.75, s1 = c.scrollEnd ?? (d - 0.45), e = R(t, c.t + s0, c.t + s1), ez = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
+    const Y = ez * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
+    const ticks = []; for (let k = 1; k * tick < H; k++) { const y = base - k * tick + Y; if (y > -60 && y < 1140) ticks.push(<div key={k} style={{position: 'absolute', left: 1180, top: y - 2, width: 60, height: 4, background: N}}><div style={{position: 'absolute', right: 80, top: -26, fontFamily: F, fontWeight: 800, fontSize: 44, color: N, whiteSpace: 'nowrap'}}>{(c.tickLabel || '$#B').replace('#', k * (c.tickStep || 50))}</div></div>); }
+    const blur = e > 0 && e < 1 ? 10 * Math.sin(Math.PI * e) : 0;   // motion blur while it scrolls
+    return <AbsoluteFill style={{background: G, opacity: oo, overflow: 'hidden'}}>
+      <div style={{position: 'absolute', inset: 0, filter: `blur(${blur}px)`}}>
+        {ticks}
+        <div style={{position: 'absolute', left: 1260, width: 260, top: Math.max(-80, top), height: Math.max(0, Math.min(1160, bot) - Math.max(-80, top)), background: I}} />
+        <div style={{position: 'absolute', left: 300, width: 260, top: bot - h0, height: h0, background: I}} />
+        <div style={{position: 'absolute', left: 120, right: 120, top: bot, height: 6, background: N}} />
+        <div style={{position: 'absolute', left: 200, width: 460, top: bot + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 40, lineHeight: 1.15}}>{c.a.label}<br /><span style={{color: N, fontWeight: 900, fontSize: 56}}>{c.a.value}</span></div>
+        <div style={{position: 'absolute', left: 1160, width: 460, top: bot + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 40, lineHeight: 1.15}}>{c.b.label}</div>
+        {q < s0 ? <div style={{position: 'absolute', left: 480, top: bot - 210, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"} ↓</div> : null}
+      </div>
+      {e > 0.08 && e < 0.92 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'still going…'}</div> : null}
+      <div style={{position: 'absolute', left: 1160, width: 460, top: top - 120, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 72, color: N, opacity: R(t, c.t + s1 - 0.1, c.t + s1 + 0.1), transform: `scale(${1 + 0.25 * (1 - R(t, c.t + s1 - 0.1, c.t + s1 + 0.2))})`}}>{c.b.value}</div>
+    </AbsoluteFill>; }
   if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || '#FFFFFF', opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
   if (c.kind === 'pip') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14);
     return <AbsoluteFill style={{opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{position: 'absolute', right: c.right ?? 70, bottom: c.bottom ?? 70, width: c.w || 560, height: (c.w || 560) * 9 / 16, transform: `scale(${b}) rotate(${c.rot ?? 4}deg)`, transformOrigin: '100% 100%',

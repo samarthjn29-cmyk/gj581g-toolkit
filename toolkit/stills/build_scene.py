@@ -51,7 +51,7 @@ def main():
     # 11 Nov 2026: "the stop watch again for a very brief moment"). Move such a change under the card, 0.3 s before it ends,
     # so the card fades out straight onto the new picture. Opaque cards only: kinetic 'short' and 'number' cover the frame.
     for c in cards:
-        if c.get('kind') not in ('kinetic', 'number') or c.get('style') in ('rise', 'roll'): continue
+        if c.get('kind') not in ('kinetic', 'number', 'bars') or c.get('style') in ('rise', 'roll'): continue
         ce = c['t'] + c.get('dur', 4.5)
         for s in shots[1:]:
             if ce - 0.3 < s['t'] <= ce + 0.6: s['t'] = round(ce - 0.3, 3); s['cut'] = True; s.pop('fade', None)   # hard cut, hidden by the card: a dissolve here still ghosted the old picture
