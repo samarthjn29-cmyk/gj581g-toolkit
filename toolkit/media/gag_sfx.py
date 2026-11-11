@@ -77,6 +77,42 @@ def kiss():
     i = int(0.05 * SR); out[i:i + len(t)] += 0.6 * bp(ah, 300, 3000)
     return norm(out, -6)
 
+def airhorn():
+    t = t_(1.3); f = 466 * (1 + 0.004 * np.sin(2 * np.pi * 7 * t))
+    x = sum(saw(f * r, t) for r in (1, 1.26, 1.5)) / 3            # three horns a chord apart
+    x = bp(x, 300, 4000) * env(len(t), 0.02, 0.15)
+    gaps = np.ones_like(t); gaps[(t > 0.28) & (t < 0.36)] = 0.05; gaps[(t > 0.64) & (t < 0.72)] = 0.05   # BWAH BWAH BWAAAH
+    return norm(np.tanh(3 * x * gaps))
+
+def scratch():
+    t = t_(0.55); f = 900 + 700 * np.sin(2 * np.pi * 3.2 * t)       # record pulled back and forth
+    x = bp(rng.standard_normal(len(t)), 600, 5000) * (0.5 + 0.5 * np.sin(np.cumsum(f) / SR * 2 * np.pi))
+    return norm(x * env(len(t), 0.005, 0.08))
+
+def drumroll(d=1.6):
+    out = np.zeros(int((d + 0.6) * SR)); n = int(0.03 * SR)
+    for i, at in enumerate(np.arange(0, d, 0.045)):
+        k = int(at * SR); hit = bp(rng.standard_normal(n), 150, 3000) * np.exp(-np.linspace(0, 7, n)); out[k:k + n] += hit * (0.4 + 0.6 * at / d)
+    k = int(d * SR); m = int(0.5 * SR); tt = t_(0.5)
+    out[k:k + m] += 1.4 * (np.sin(2 * np.pi * 60 * tt) * np.exp(-tt * 8) + 0.6 * hp(rng.standard_normal(m), 3000) * np.exp(-tt * 6))   # crash
+    return norm(out)
+
+def boom():
+    t = t_(1.8); f = 70 * np.exp(-t * 1.2) + 30
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 2.2) + 0.5 * lp(rng.standard_normal(len(t)), 400) * np.exp(-t * 3)
+    return norm(np.tanh(2 * x))
+
+def whistle():
+    t = t_(0.9); f = 600 + 1400 * (t / 0.9) ** 1.5                  # slide whistle up
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), 0.03, 0.15) * (1 + 0.05 * np.sin(2 * np.pi * 6 * t)))
+
+def dundun():
+    out = []
+    for f, d in ((98, 0.35), (92.5, 0.35), (87.3, 1.3)):              # DUN DUN DUNNN
+        t = t_(d); x = sum(saw(f * k, t) / k for k in (1, 2, 3, 4)) + 0.5 * saw(f * 0.5, t)
+        out += [lp(x, 1200) * env(len(t), 0.01, 0.2 if d < 1 else 0.8), np.zeros(int(0.08 * SR))]
+    return norm(np.concatenate(out))
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']

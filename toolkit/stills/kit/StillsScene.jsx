@@ -83,7 +83,10 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.move === 'punch') { const p0 = s.t + (s.punch_at ?? 0.5); sc += (s.punch || 0.22) * interpolate(t, [p0, p0 + 0.18], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }
   // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
-  const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra}%, ${y * extra}%) scale(${1 + (sc - 1) * extra})`, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
+  // shake (Sam, 11 Nov 2026, "most ridiculous version"): a camera shake that decays over 0.8 s from shake_at s into the shot
+  const sa = s.t + (s.shake_at ?? 0), sk = s.shake && t >= sa ? s.shake * Math.max(0, 1 - (t - sa) / 0.8) : 0;
+  const shx = sk * Math.sin(t * 71), shy = sk * Math.cos(t * 53); if (sk) sc += 0.04;
+  const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra + shx}%, ${y * extra + shy}%) scale(${1 + (sc - 1) * extra})`, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
