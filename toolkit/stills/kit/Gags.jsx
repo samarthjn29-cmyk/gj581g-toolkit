@@ -13,7 +13,7 @@ const W = 1920, H = 1080;
 
 export const gagCard = (c, t, dir) => { const f = GAGS[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
   const d = c.dur || 2, q = t - c.t; if (q < 0 || q > d) return null;
-  return f(c, q, d, 1 - R(t, c.t + d - 0.15, c.t + d), dir); };
+  return f(c, q, d, c.cutOut ? 1 : 1 - R(t, c.t + d - 0.15, c.t + d), dir); };   // cutOut: hard cut out (plans with dissolve 0, Aliens ch3)
 
 
 // Lottie animations (LottieFiles free animations, Lottie Simple License; Sam, 11 Nov 2026): c.file = a .json in the scene folder,
@@ -52,7 +52,7 @@ const GAGS = {
         return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: 170, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
           {cur ? <div style={{width: '100%', height: '100%', opacity: R(age, 0, 0.08)}}><Pic dir={dir} f={c.imgs[cur[2]]} />
             {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: 40, textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
-      <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />
+      {c.stage === false ? null : <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />}
       {c.speaker ? <Img src={staticFile(`${dir}/${c.speaker}`)} style={{position: 'absolute', left: W / 2 - 170, top: 470, width: 340, height: 420, objectFit: 'contain'}} /> : null}</AbsoluteFill>; },
 
   // ruler (South Park's crude scale diagram): a schoolroom ruler on flat yellow; c.max (ruler length in c.unit), c.marks =
@@ -241,7 +241,7 @@ const GAGS = {
 
   // loading bar that crawls, then stalls (a dry "nothing is happening")
   loading: (c, q, d, out) => { const pct = c.pct ?? 3, p = Math.min(1, q / (d * 0.5)), v = Math.round(pct * (1 - Math.pow(1 - p, 3)) * 10) / 10, sp = (q * 360 * 1.5) % 360;
-    return <AbsoluteFill style={{opacity: out, justifyContent: 'center', alignItems: 'center'}}><div style={{width: 1040, background: 'rgba(16,16,20,0.92)', borderRadius: 20, padding: '34px 44px', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', transform: `scale(${pop(q, 0.5)})`}}>
+    return <AbsoluteFill style={{opacity: out, justifyContent: 'center', alignItems: 'center'}}><div style={{width: 1040, background: 'rgba(16,16,20,0.92)', borderRadius: 20, padding: '34px 44px', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', transform: `translate(${c.dx || 0}px, ${c.dy || 0}px) scale(${pop(q, 0.5)})`}}>
       <div style={{display: 'flex', alignItems: 'center', gap: 22, fontFamily: SANS, fontWeight: 700, fontSize: 44, color: '#FFFFFF'}}>
         <svg width={50} height={50} style={{transform: `rotate(${sp}deg)`}}><circle cx={25} cy={25} r={19} fill="none" stroke="#FCCF3E" strokeWidth={7} strokeDasharray="70 60" strokeLinecap="round" /></svg>{c.text ?? 'Loading…'}</div>
       <div style={{marginTop: 26, height: 40, background: '#333', borderRadius: 20, overflow: 'hidden'}}><div style={{height: '100%', width: `${Math.max(1.2, v)}%`, background: '#FCCF3E'}} /></div>
@@ -251,7 +251,7 @@ const GAGS = {
   tag: (c, q, d, out) => { const x = (c.x ?? 0.7) * W, y = (c.y ?? 0.15) * H, sw = 14 * Math.exp(-q * 1.6) * Math.sin(q * 6) + 3;
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: x, top: y - 400 * (1 - R(q, 0, 0.3)), transformOrigin: '0 0', transform: `rotate(${sw}deg)`}}>
       <div style={{position: 'absolute', left: -2, top: 0, width: 4, height: 120, background: '#DDD'}} />
-      <div style={{position: 'absolute', left: -130, top: 116, width: 260, padding: '30px 10px 22px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 52, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
+      <div style={{position: 'absolute', left: -(c.w || 260) / 2, top: 116, width: c.w || 260, padding: '30px 10px 22px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 52, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
         <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', margin: '-12px auto 12px'}} />{c.text}{c.sub ? <div style={{fontSize: 26, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail

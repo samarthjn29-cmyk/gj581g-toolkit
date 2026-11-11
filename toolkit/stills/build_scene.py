@@ -54,6 +54,7 @@ def main():
     # so the card fades out straight onto the new picture. Opaque cards only: kinetic 'short' and 'number' cover the frame.
     for c in cards:
         if c.get('kind') not in ('kinetic', 'number', 'bars') or c.get('style') in ('rise', 'roll'): continue
+        if not P.get('dissolve', 0): continue   # hard-cut plans: the card cuts straight to the next picture on its word, nothing to hide
         ce = c['t'] + c.get('dur', 4.5)
         for s in shots[1:]:
             if ce - 0.3 < s['t'] <= ce + 0.6: s['t'] = round(ce - 0.3, 3); s['cut'] = True; s.pop('fade', None)   # hard cut, hidden by the card: a dissolve here still ghosted the old picture
@@ -64,6 +65,13 @@ def main():
     for c0, c1 in zip(opq, opq[1:]):
         gap = c1['t'] - (c0['t'] + c0.get('dur', 4.5))
         if -0.5 < gap < 0.35: c0['dur'] = round(c1['t'] - c0['t'], 3); c0['cutOut'] = True; c1['cutIn'] = True
+    # Hard cuts everywhere (plan dissolve 0, Sam 11 Nov 2026): full-screen cards cut in and out too. Their 0.15-0.4 s fades
+    # ghosted the card's words over the next picture and flashed the old picture between two cards (Aliens ch3 review).
+    if not P.get('dissolve', 0):
+        FULLK = ('kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 'triptych', 'ruler', 'advert', 'grid', 'namesake', 'variants')
+        for c in cards:
+            if c.get('kind') in FULLK and c.get('style') not in ('rise', 'roll') and not (c.get('kind') == 'title' and c['t'] < 0.5):
+                c.setdefault('cutIn', True); c.setdefault('cutOut', True)
     dur = round(t1 - t0, 2); fails = []
     for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length
         if shots[i]['t'] < shots[i - 1]['t']: fails.append(f"{shots[i]['id']} starts before {shots[i - 1]['id']}: list shots in spoken order")

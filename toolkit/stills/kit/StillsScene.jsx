@@ -92,6 +92,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   // triple zoom (Indian daily-soap reaction, Ridiculous toolkit 11 Nov 2026): three snaps at triple_at + 0 / 0.35 / 0.7 s, then a slow sink-in
   if (s.move === 'triple') { const a = s.t + (s.triple_at ?? 0.2); [0, 0.35, 0.7].forEach(o => { sc += 0.17 * interpolate(t, [a + o, a + o + 0.09], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }); sc += 0.04 * Math.max(0, t - a - 0.8); }
   if (s.move === 'dutch') rot = (s.angle ?? 8) * (q < 0.2 ? q / 0.2 : 1);
+  if (s.move === 'dutch') { const ar = Math.abs(rot) * Math.PI / 180; sc = Math.max(sc, (Math.cos(ar) + (16 / 9) * Math.sin(ar)) * 1.01); }   // a tilted picture always covers the frame: no black wedges (Aliens ch3 review)
   // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
   // shake (Sam, 11 Nov 2026, "most ridiculous version"): a camera shake that decays over 0.8 s from shake_at s into the shot
@@ -112,7 +113,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
 const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return null;
   return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
     <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
-const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (gg !== undefined) return gg; const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
+const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (gg !== undefined) return gg; const d = c.dur || 4.5, o = (c.cutIn ? (t >= c.t ? 1 : 0) : R(t, c.t, c.t + 0.4)) * (c.cutOut ? (t < c.t + d ? 1 : 0) : 1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
   // Ridiculous-mode overlays (Sam, 11 Nov 2026): stamp (a rubber stamp slammed on), rain (money falling), flash (white frame), pip (a reaction picture popping up in a corner)
   if (c.kind === 'stamp') { const p = R(t, c.t, c.t + 0.12), sh = (1 - R(t, c.t + 0.12, c.t + 0.6)) * 10 * Math.sin(t * 90);
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -12}deg) scale(${3 - 2 * p})`, opacity: p,
@@ -208,7 +209,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
     const oo = (1 - R(t, c.t + d - 0.2, c.t + d));
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo}}>
       <div style={{fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 190, color: c.color || '#FFFFFF', letterSpacing: -2, textAlign: 'center', maxWidth: 1700, lineHeight: 1,
-        textShadow: '0 0 60px rgba(0,0,0,0.7), 0 6px 30px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.5)', transform: `translateY(${(1 - e) * 820 + (c.y || 0)}px) scale(${0.9 + 0.1 * e})`}}>{c.text}</div></AbsoluteFill>; }
+        textShadow: '0 0 60px rgba(0,0,0,0.7), 0 6px 30px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.5)', whiteSpace: 'pre-line', transform: `translate(${c.x || 0}px, ${(1 - e) * 820 + (c.y || 0)}px) scale(${0.9 + 0.1 * e})`}}>{c.text}</div></AbsoluteFill>; }
   // rolling text (Sam, 11 Nov 2026, Aliens opening doc comment: "rolling into the screen from the center", dark green,
   // "fireworks at the end of the font animation"): the words grow from a point at the centre while turning one full roll,
   // overshoot a little and settle; a pale outline keeps dark green readable on a green field; then firework bursts around them
