@@ -119,6 +119,28 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo}}>
       <div style={{fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 190, color: c.color || '#FFFFFF', letterSpacing: -2, textAlign: 'center', maxWidth: 1700, lineHeight: 1,
         textShadow: '0 0 60px rgba(0,0,0,0.7), 0 6px 30px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.5)', transform: `translateY(${(1 - e) * 820 + (c.y || 0)}px) scale(${0.9 + 0.1 * e})`}}>{c.text}</div></AbsoluteFill>; }
+  // rolling text (Sam, 11 Nov 2026, Aliens opening doc comment: "rolling into the screen from the center", dark green,
+  // "fireworks at the end of the font animation"): the words grow from a point at the centre while turning one full roll,
+  // overshoot a little and settle; a pale outline keeps dark green readable on a green field; then firework bursts around them
+  if (c.kind === 'kinetic' && c.style === 'roll') { const rs = c.rise || 0.8, p = R(t, c.t, c.t + rs);
+    const back = p => { const k = 1.7; return 1 + (k + 1) * Math.pow(p - 1, 3) + k * Math.pow(p - 1, 2); };   // ease-out-back
+    const sc = p <= 0 ? 0 : back(p), rot = -360 * (1 - (1 - Math.pow(1 - p, 3))), oo = (1 - R(t, c.t + d - 0.2, c.t + d));
+    const col = c.color || '#1E5631', edge = '#F4F1E4';
+    const bursts = c.fireworks ?? [[-600, -60, 0], [600, -90, 0.1], [-150, -230, 0.2], [330, -250, 0.3], [-700, 160, 0.38], [720, 150, 0.45]];
+    const fw = bursts.map(([bx, by, dl], i) => { const t0 = c.t + rs + dl, q = (t - t0) / 0.8; if (q <= 0 || q >= 1) return null;
+      const hues = ['#FFD54A', '#FF6B5B', '#FFFFFF', '#7FE3FF', '#FFB13B'], n = 26, rr = 210 + 50 * (i % 2);
+      return <g key={i} transform={`translate(${960 + bx} ${540 + (c.y || 0) + by})`} opacity={1 - Math.pow(q, 2)}>
+        {q < 0.18 && <circle r={60 * (1 - q / 0.18)} fill="#FFF7D6" opacity={0.9} />}
+        {Array.from({length: n}).map((_, j) => { const a = (j / n) * 2 * Math.PI + i, e = 1 - Math.pow(1 - q, 2.2), r = rr * e,
+          px = Math.cos(a) * r, py = Math.sin(a) * r + 90 * q * q, tl = 0.28 * r;
+          return <g key={j}><line x1={px - Math.cos(a) * tl} y1={py - Math.sin(a) * tl - 20 * q * q} x2={px} y2={py} stroke={hues[(i + j) % 5]} strokeWidth={6} strokeLinecap="round" opacity={0.75} />
+            <circle cx={px} cy={py} r={8} fill={hues[(i + j) % 5]} /></g>; })}</g>; });
+    return <AbsoluteFill style={{opacity: oo}}>
+      <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 190, color: col, letterSpacing: -2, textAlign: 'center', maxWidth: 1700, lineHeight: 1,
+          WebkitTextStroke: `9px ${edge}`, paintOrder: 'stroke fill', textShadow: '0 0 50px rgba(255,250,230,0.8), 0 0 18px rgba(255,250,230,0.7), 0 8px 26px rgba(0,0,0,0.35)',
+          transform: `translateY(${c.y || 0}px) rotate(${rot}deg) scale(${sc})`}}>{c.text}</div></AbsoluteFill>
+      <svg width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>{fw}</svg></AbsoluteFill>; }
   // short kinetic card (gj581g-stills-world s1, Sam 10 Nov 2026, Blank Rascal study): 1-4 spoken words on the video's own
   // plain dark ground, each landing on its aligned time; colour roles: ordinary cream, accent gold (c.accent), numbers blue (c.nums)
   if (c.kind === 'kinetic' && c.style === 'short') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
