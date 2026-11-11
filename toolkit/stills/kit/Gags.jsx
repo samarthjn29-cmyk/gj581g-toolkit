@@ -49,9 +49,10 @@ const GAGS = {
   triptych: (c, q, d, out, dir) => { const sl = c.slides || [[0, 0, 0], [0.4, 1, 1], [0.8, 2, 2]], sw = 570, sh = 400, gap = 40, x0 = (W - 3 * sw - 2 * gap) / 2;
     return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: 'linear-gradient(#2E2A26 0%, #3B352E 70%, #7A5532 70%, #5E3F22 100%)'}}>
       {[0, 1, 2].map(s => { const cur = sl.filter(x => x[1] === s && q >= x[0]).pop(), age = cur ? q - cur[0] : 0;
-        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: 170, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
+        if (!cur && c.hideEmpty) return null;
+        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: c.top ?? 170, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
           {cur ? <div style={{width: '100%', height: '100%', opacity: R(age, 0, 0.08)}}><Pic dir={dir} f={c.imgs[cur[2]]} />
-            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: 40, textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
+            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: c.capSize ?? 40, textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
       {c.stage === false ? null : <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />}
       {c.speaker ? <Img src={staticFile(`${dir}/${c.speaker}`)} style={{position: 'absolute', left: W / 2 - 170, top: 470, width: 340, height: 420, objectFit: 'contain'}} /> : null}</AbsoluteFill>; },
 
@@ -241,7 +242,7 @@ const GAGS = {
 
   // loading bar that crawls, then stalls (a dry "nothing is happening")
   loading: (c, q, d, out) => { const pct = c.pct ?? 3, p = Math.min(1, q / (d * 0.5)), v = Math.round(pct * (1 - Math.pow(1 - p, 3)) * 10) / 10, sp = (q * 360 * 1.5) % 360;
-    return <AbsoluteFill style={{opacity: out, justifyContent: 'center', alignItems: 'center'}}><div style={{width: 1040, background: 'rgba(16,16,20,0.92)', borderRadius: 20, padding: '34px 44px', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', transform: `translate(${c.dx || 0}px, ${c.dy || 0}px) scale(${pop(q, 0.5)})`}}>
+    return <AbsoluteFill style={{opacity: out, justifyContent: 'center', alignItems: 'center'}}><div style={{width: 1040, background: 'rgba(16,16,20,0.92)', borderRadius: 20, padding: '34px 44px', boxShadow: '0 20px 60px rgba(0,0,0,0.6)', transform: `translate(${c.dx || 0}px, ${c.dy || 0}px) scale(${pop(q, 0.5) * (c.scale ?? 1)})`}}>
       <div style={{display: 'flex', alignItems: 'center', gap: 22, fontFamily: SANS, fontWeight: 700, fontSize: 44, color: '#FFFFFF'}}>
         <svg width={50} height={50} style={{transform: `rotate(${sp}deg)`}}><circle cx={25} cy={25} r={19} fill="none" stroke="#FCCF3E" strokeWidth={7} strokeDasharray="70 60" strokeLinecap="round" /></svg>{c.text ?? 'Loading…'}</div>
       <div style={{marginTop: 26, height: 40, background: '#333', borderRadius: 20, overflow: 'hidden'}}><div style={{height: '100%', width: `${Math.max(1.2, v)}%`, background: '#FCCF3E'}} /></div>
@@ -250,11 +251,12 @@ const GAGS = {
   // a swinging price tag hung on a string from (x, y)
   // tag: a hanging name tag. Always in the top-left corner, same place and size in every video (Sam, 12 Nov 2026: "The tags ...
   // should always come on the left hand side top corner in all the videos ... they should be equal"). c.free: true keeps c.x/c.y.
-  tag: (c, q, d, out) => { const free = c.free, L = free ? (c.x ?? 0.7) * W - 130 : 60, y = free ? (c.y ?? 0.15) * H : 0.03 * H, sw = 14 * Math.exp(-q * 1.6) * Math.sin(q * 6) + 3;
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: y - 400 * (1 - R(q, 0, 0.3)), transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+  tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
+      sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(40, Math.floor((TW - 50) / (0.7 * longest)));
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: y - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{width: 4, height: 120, background: '#DDD'}} />
-      <div style={{marginTop: -4, minWidth: 260, maxWidth: 560, width: 'max-content', boxSizing: 'border-box', padding: '30px 22px 22px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: free ? (c.size || 52) : 40, lineHeight: 1.1, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
-        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', margin: '-12px auto 12px'}} />{c.text}{c.sub ? <div style={{fontSize: 26, color: '#444', fontWeight: 700, marginTop: 6, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto'}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
+      <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
+        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 26, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail
   spotlight: (c, q, d, out) => { const p = R(q, 0, 0.5), r = 1400 - (1400 - (c.r ?? 0.14) * W) * p;
