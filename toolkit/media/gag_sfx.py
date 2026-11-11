@@ -171,6 +171,34 @@ def climb(d=1.6):                                                    # a long sl
     t = t_(d); f = 500 * 2 ** (2.6 * (t / d) ** 1.3)
     return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), 0.05, 0.12) * (1 + 0.06 * np.sin(2 * np.pi * 7 * t)))
 
+def bleep(d=0.6): t = t_(d); return norm(np.sin(2 * np.pi * 1000 * t) * env(len(t), 0.005, 0.01))   # TV censor bleep
+
+def static(d=0.8):                                                   # TV/VHS static burst
+    t = t_(d); x = hp(rng.standard_normal(len(t)), 800) * (0.6 + 0.4 * (rng.random(len(t)) > 0.5)); return norm(x * env(len(t), 0.01, 0.15))
+
+def ping():                                                          # phone notification: two soft bell notes
+    a = bell(1318.5, 0.35, 7); b = bell(1760, 0.6, 5); out = np.zeros(int(0.8 * SR)); out[:len(a)] += a; s = int(0.12 * SR); out[s:s + len(b)] += b; return norm(out)
+
+def error():                                                         # retro computer error: a low dissonant two-tone buzz
+    t = t_(0.5); x = (np.sign(np.sin(2 * np.pi * 220 * t)) + np.sign(np.sin(2 * np.pi * 233 * t))) / 2
+    return norm(lp(x, 2500) * env(len(t), 0.005, 0.08))
+
+def pop():                                                           # bubble pop
+    t = t_(0.12); f = 900 * np.exp(-t * 30) + 300; return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 40))
+
+def click():                                                         # camera shutter: two clicks
+    out = np.zeros(int(0.25 * SR))
+    for s0 in (0, 0.09):
+        tk = t_(0.04); c = hp(rng.standard_normal(len(tk)), 1500) * np.exp(-tk * 160); s = int(s0 * SR); out[s:s + len(c)] += c
+    return norm(out)
+
+def squeak():                                                        # marker squeak while a circle is drawn
+    t = t_(0.45); f = 2200 + 500 * np.sin(2 * np.pi * 7 * t); return norm(bp(saw(f, t), 1500, 5000) * env(len(t), 0.02, 0.06) * (0.6 + 0.4 * np.sin(2 * np.pi * 23 * t)))
+
+def fall(d=1.3):                                                     # slide whistle down (things going badly)
+    t = t_(d); f = 1800 * 2 ** (-2.4 * (t / d) ** 1.2)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), 0.03, 0.15) * (1 + 0.06 * np.sin(2 * np.pi * 7 * t)))
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
