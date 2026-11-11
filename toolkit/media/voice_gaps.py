@@ -44,6 +44,7 @@ for s in sorted(snd, key=lambda s: s['t']):
     if s['keep']: continue
     # the joke lands at the end of its phrase: first pause after the cue that ends a phrase (within 2.5 s),
     # else the nearest pause after it, else the nearest one before (within --reach)
+    if s['t'] <= W[0][1] + 0.1: plan.setdefault(-1, []).append(s); continue   # a sound at the very start plays before the first word
     after = [g for g in ends if g[2] > s['t'] + 0.1]   # pauses not yet over at the cue (a cue inside a pause uses that pause)
     g = next((g for g in after if g[1] <= s['t'] <= g[2]), None) or next((g for g in after if punct(g) and g[1] - s['t'] <= 2.5), None) or next((g for g in after if g[1] - s['t'] <= REACH), None)
     if g is None:
@@ -70,9 +71,9 @@ def quiet(a, b):
 ins = []
 for gi, ss in sorted(plan.items()):
     e, nxt = [g for g in ends if g[0] == gi][0][1:]
-    q = quiet(e - 0.15, nxt + 0.25) if gi >= 0 else quiet(0, nxt + 0.1)
-    if not q or q[1] - q[0] < 0.04: print('no clean pause for', [x['f'] for x in ss], 'at', round(e, 2), '(left as is)'); [x.update(keep=True) for x in ss]; continue
-    nxt = q[1]; p = q[0] + 0.3 * (q[1] - q[0]) if gi >= 0 else max(0.0, q[1] - 0.12)
+    q = quiet(e - 0.15, nxt + 0.25) if gi >= 0 else (0.0, max(0.0, nxt - 0.02))   # before the first word: the sound plays first, then the voice
+    if gi >= 0 and (not q or q[1] - q[0] < 0.04): print('no clean pause for', [x['f'] for x in ss], 'at', round(e, 2), '(left as is)'); [x.update(keep=True) for x in ss]; continue
+    nxt = q[1]; p = q[0] + 0.3 * (q[1] - q[0]) if gi >= 0 else 0.0
     cur = 0.0; end = 0.0
     for s in ss:
         s['at_p'] = (p, cur); end = max(end, cur + s['eff']); cur += max(0.12, s['eff'] - OVL)
