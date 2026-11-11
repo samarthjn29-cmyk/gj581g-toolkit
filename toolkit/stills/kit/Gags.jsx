@@ -137,8 +137,8 @@ const GAGS = {
 
   // chain (Casually Explained's evolution chain, study 2): pictures in a row joined by red arrows, each landing in turn; c.imgs, c.labels, c.gap s
   chain: (c, q, d, out, dir) => { const n = (c.imgs || []).length, gap = c.gap ?? 0.55, w = Math.min(c.maxW ?? 540, (W - 160 - (n - 1) * 90) / n), y0 = H / 2 - w * 0.5, x0 = (W - (n * w + (n - 1) * 90)) / 2;
-    return <AbsoluteFill style={{opacity: out, background: c.ground || '#FFFFFF'}}>{c.imgs.map((im, i) => { const qi = q - i * gap; if (qi < 0) return null; const x = x0 + i * (w + 90);
-      return <React.Fragment key={i}>{i ? <svg style={{position: 'absolute', left: x - 82, top: y0 + w * 0.32}} width={74} height={40}><path d="M4 20 L56 20 M44 8 L60 20 L44 32" stroke={RED} strokeWidth={8} fill="none" strokeLinecap="round" /></svg> : null}
+    return <AbsoluteFill style={{opacity: out, background: c.ground || '#FFFFFF'}}>{c.imgs.map((im, i) => { const qi = q - (c.times ? c.times[i] : i * gap); if (qi < 0) return null; const x = x0 + i * (w + 90);   // c.times: per-picture offsets (cue each on its word)
+      return <React.Fragment key={i}>{i && !c.noArrows ? <svg style={{position: 'absolute', left: x - 82, top: y0 + w * 0.32}} width={74} height={40}><path d="M4 20 L56 20 M44 8 L60 20 L44 32" stroke={RED} strokeWidth={8} fill="none" strokeLinecap="round" /></svg> : null}
         <div style={{position: 'absolute', left: x, top: y0, width: w, height: w * 0.8, transform: `scale(${pop(qi, 0.7)})`, boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', borderRadius: 8}}><Img src={staticFile(`${dir}/${im}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>
         {c.labels && c.labels[i] ? <div style={{position: 'absolute', left: x, width: w, top: y0 + w * 0.8 + 18, textAlign: 'center', fontFamily: HAND, fontSize: 54, color: '#111', opacity: R(qi, 0.1, 0.3)}}>{c.labels[i]}</div> : null}</React.Fragment>; })}</AbsoluteFill>; },
 
@@ -248,11 +248,13 @@ const GAGS = {
       <div style={{marginTop: 14, fontFamily: MONO, fontSize: 46, color: '#EEEEEE', textAlign: 'right'}}>{v.toFixed(1)}%{c.sub ? `  ·  ${c.sub}` : ''}</div></div></AbsoluteFill>; },
 
   // a swinging price tag hung on a string from (x, y)
-  tag: (c, q, d, out) => { const x = (c.x ?? 0.7) * W, y = (c.y ?? 0.15) * H, sw = 14 * Math.exp(-q * 1.6) * Math.sin(q * 6) + 3;
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: x, top: y - 400 * (1 - R(q, 0, 0.3)), transformOrigin: '0 0', transform: `rotate(${sw}deg)`}}>
-      <div style={{position: 'absolute', left: -2, top: 0, width: 4, height: 120, background: '#DDD'}} />
-      <div style={{position: 'absolute', left: -(c.w || 260) / 2, top: 116, width: c.w || 260, padding: '30px 10px 22px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 52, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
-        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', margin: '-12px auto 12px'}} />{c.text}{c.sub ? <div style={{fontSize: 26, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
+  // tag: a hanging name tag. Always in the top-left corner, same place and size in every video (Sam, 12 Nov 2026: "The tags ...
+  // should always come on the left hand side top corner in all the videos ... they should be equal"). c.free: true keeps c.x/c.y.
+  tag: (c, q, d, out) => { const free = c.free, L = free ? (c.x ?? 0.7) * W - 130 : 60, y = free ? (c.y ?? 0.15) * H : 0.03 * H, sw = 14 * Math.exp(-q * 1.6) * Math.sin(q * 6) + 3;
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: y - 400 * (1 - R(q, 0, 0.3)), transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{width: 4, height: 120, background: '#DDD'}} />
+      <div style={{marginTop: -4, minWidth: 260, maxWidth: 560, width: 'max-content', boxSizing: 'border-box', padding: '30px 22px 22px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: free ? (c.size || 52) : 40, lineHeight: 1.1, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
+        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', margin: '-12px auto 12px'}} />{c.text}{c.sub ? <div style={{fontSize: 26, color: '#444', fontWeight: 700, marginTop: 6, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto'}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail
   spotlight: (c, q, d, out) => { const p = R(q, 0, 0.5), r = 1400 - (1400 - (c.r ?? 0.14) * W) * p;
