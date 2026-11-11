@@ -112,6 +112,13 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
   if (c.kind === 'number') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(10,9,8,${0.55 * o})`}}>
     <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 240, lineHeight: 1, color: '#F3EBDD', textShadow: '0 6px 30px rgba(0,0,0,0.7)', transform: `scale(${0.92 + 0.08 * o})`}}>{c.term}</div>
     <div style={{fontFamily: 'Inter, sans-serif', fontSize: 40, letterSpacing: 2, color: '#D9D2C5', marginTop: 18, maxWidth: 1300, textAlign: 'center'}}>{c.text}</div></AbsoluteFill>;
+  // rising text over the picture (Sam, 11 Nov 2026, Aliens opening: "What the F**K? should rise from the bottom" of a sunny field):
+  // no ground, the shot stays visible; big bold words rise from below the frame and settle at c.y (default centre) over c.rise s
+  if (c.kind === 'kinetic' && c.style === 'rise') { const rs = c.rise || 0.8, p = R(t, c.t, c.t + rs), e = 1 - Math.pow(1 - p, 3);
+    const oo = (1 - R(t, c.t + d - 0.2, c.t + d));
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo}}>
+      <div style={{fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 190, color: c.color || '#FFFFFF', letterSpacing: -2, textAlign: 'center', maxWidth: 1700, lineHeight: 1,
+        textShadow: '0 0 60px rgba(0,0,0,0.7), 0 6px 30px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.5)', transform: `translateY(${(1 - e) * 820 + (c.y || 0)}px) scale(${0.9 + 0.1 * e})`}}>{c.text}</div></AbsoluteFill>; }
   // short kinetic card (gj581g-stills-world s1, Sam 10 Nov 2026, Blank Rascal study): 1-4 spoken words on the video's own
   // plain dark ground, each landing on its aligned time; colour roles: ordinary cream, accent gold (c.accent), numbers blue (c.nums)
   if (c.kind === 'kinetic' && c.style === 'short') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
@@ -127,7 +134,7 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${dark * o})`}}><Tex c={c} o={o} dir={dir} />
       <div style={{fontFamily: FONT, fontSize: c.hand ? 84 : 92, position: 'relative', color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.12, textShadow: '0 4px 24px rgba(0,0,0,0.8)'}}>
         {ws.map((w, i) => { const p = R(t, (st[i] ?? c.t + i * 0.3) - 0.05, (st[i] ?? c.t + i * 0.3) + 0.2); return <span key={i} style={{opacity: p, display: 'inline-block', transform: `translateY(${(1 - p) * 18}px)`, marginRight: '0.28em'}}>{w}</span>; })}</div></AbsoluteFill>; }
-  if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(0,0,0,${0.35 * o})`}}>
+  if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(10,9,8,${(c.dim ?? 0.35) * o})`}}>
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 84, letterSpacing: 6, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, whiteSpace: 'pre-line', lineHeight: 1.1, textShadow: '0 4px 24px rgba(0,0,0,0.7)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // on-screen text (Sam, 8 Nov 2026: "putting text on the screen where it makes sense"): a key line in the end-title look,
   // set low so the picture stays visible; words verbatim from a fact-checked line
