@@ -63,6 +63,39 @@ Reddit can't be searched from here (the site doesn't allow it), so these come fr
 - **Sound carries a gag without a picture.** When there's no good image, an off-screen sound does the job (a door creak on "a knock at the door", a phone ring on "voicemail").
 - **Test it on a fresh viewer.** Show a cut to someone who hasn't seen it and watch where they laugh or drift. We can use a fresh reviewer agent the same way for pacing.
 
+## 7. What viewers actually laughed at: YouTube study (11 Nov 2026)
+Method: the most-liked comments on eight videos, read in the browser (vidIQ had no credits), because viewers quote the exact moment that got them. Likes in brackets. The comments are paraphrased; we take the shape of each joke, never the line itself.
+
+| Video (views) | The moments viewers quote most | The shape behind them |
+|---|---|---|
+| Bill Wurtz, *history of the entire world, i guess* (186M) | Fear of blinking and missing a century (474K); a whole plague mentioned like a dropped plate (33K, plus repeats); the sun shouted as a "deadly laser" (many); a religion idea cut off mid-word with "no, don't" (4.7K); "except Britain, because they don't feel like it" (19K); China breaking and re-forming over and over (17K) | **Casual understatement of a catastrophe** · **one absurd line SHOUTED** · **the narrator interrupting himself** · **countries with moods** · **a running gag repeated with tiny variations** · **speed itself as the joke** |
+| OverSimplified, *WW1 Part 1* (58M) | A war caused by a driver's wrong turn (17K, 12K, 10K); a formula line that recurs ("this enraged X, who punished them severely") quoted back in its own phrasing; "spot the French soldier", a hidden visual game (6.7K) | **Huge outcome from a tiny cause** · **a recurring formula sentence** · **a hidden-object game for re-watchers** · **countries as kids in a classroom** |
+| Sam O'Nella, *Historical Misconceptions* (24M) | Mussolini saying "spaghetti" badly, followed by thunderous crowd applause (18K and a dozen repeats); God drawn as Wikipedia in front of static (2.5K); a deadpan non-sequitur aside about a band (2.5K) | **Wildly disproportionate reaction to something mundane** (applause, cheering, a choir) · **crude drawings** · **absurd visual metaphor** · **random aside said with full conviction** |
+| Casually Explained, *Is She Into You?* (23M) | Escalating evidence that always gets the same deadpan verdict, "can't really tell" (79K, 38K, 25K…); a single absurd alternative explanation ("maybe she's from Canada and just being polite", 21K) | **Escalation with a fixed deadpan answer** (the "can't tell" engine) · **an absurd innocent explanation for the obvious** |
+| Primate Economics, *Inflation Explained with Bananas* (1.8M, a first video) | Caveman-simple summary lines ("monke poor, monke sad, monke is all of us", 9.9K); the pun "really, bananas" (2K) | **One mascot + dumb-simple language for a hard idea** · **a groan pun said proudly** |
+| Pitch Meeting, *Squid Game* (4.3M) | Plot holes waved away breezily (12K, 7.7K); things reduced to blunt literal descriptions ("very angry PlayStation buttons", 2.7K; "E G G." with no context, 3.2K); a sincere admission ("I don't like how this episode makes me feel", 2.8K) | **The breezy wave-away of an obvious problem** · **the blunt literal description** · **sudden honesty in a silly frame** |
+| Tucker Osman, *Every Kurzgesagt Video Ever* (1.6M) | The genre's own clichés turned up: the calm authoritative voice saying something monstrous (10K); "space is really big, if you tried to think about it, you'd fail" (7.2K); the comforting ending flipped rude (4.1K) | **Parody of our own genre** (the explainer voice, the "thought experiment", the uplifting outro) |
+| Akinom, *Sarcasm* (1.5M, Hindi) | Character voice modulation and memes (192); one viewer was startled when the audio cut out completely mid-video | **Voices for different characters** · **a full audio dropout as a jump-scare** (use once, not more) |
+
+### The 15 gag shapes, and where each goes in the Aliens script
+1. **Casual understatement of a catastrophe.** "Oops, Arecibo fell down." In ch3 (now cut) or ch4: "And the mission to bring it home was cancelled. Oops."
+2. **One line SHOUTED.** In ch2: "and then it was gone. GONE." (big caps card + crash zoom). One per video.
+3. **The narrator interrupts himself.** In ch5: "You could build a whole religion around data centr- no. Don't."
+4. **Institutions with moods.** Congress, NASA and big tech drawn as moody characters: "Congress, who did not feel like it".
+5. **Running gag with tiny variations.** "Still no aliens" counter: a little tally card in the corner each time a search comes up empty (plane, Wow!, eight signals…), ticking up.
+6. **Huge outcome, tiny cause.** "A whole national search, switched off by one good joke."
+7. **Recurring formula sentence.** Our own: "And the universe said… nothing." after each failed search (ch1, ch2, ch6).
+8. **Hidden-object game.** The popcorn alien hidden somewhere in a picture in every chapter; one line in the description: "spot the alien".
+9. **Disproportionate reaction to the mundane.** A stadium crowd roaring at "High Resolution Microwave Survey"; a choir on "spreadsheet".
+10. **Escalation with a fixed deadpan answer.** Ch4 or ch7: "A rock with leopard spots. Minerals linked to microbes. NASA's chief calls it the closest yet. Have we found life? …Can't really tell." It's true to the evidence and funny, and the strongest fit we found.
+11. **Absurd innocent explanation.** Ch2: "Maybe the Wow! signal was just a very loud alien sneeze." Labelled as a joke, straight after the real explanations.
+12. **One mascot, dumb-simple summary.** The popcorn alien sums up each chapter in caveman-simple words ("Human have money. Human buy computer. Alien sad.").
+13. **Breezy wave-away.** In ch4 for the sample-return cancellation: "Bring the sample home? Eh. Too expensive. Next."
+14. **Blunt literal description.** Data centres as "very large warm boxes that think"; the Drake equation as "a list of shrugs".
+15. **Genre parody of ourselves.** The ch7 outro starts in full sincere-explainer voice, swerves into absurdity for one line, then lands sincere for real at Hawking.
+
+Rules from the study: the most-liked moments are almost all **writing, not effects**. The edit's job is timing: a pause before, a hard cut after, and silence where the joke needs room. Sound and zooms only sell a line that's already funny.
+
 ## Sources
 - [Bill Wurtz, TV Tropes](https://www.tvtropes.org/pmwiki/pmwiki.php/WebVideo/BillWurtz)
 - [History of the Entire World, I Guess, Know Your Meme](https://knowyourmeme.com/memes/history-of-the-entire-world)
@@ -76,3 +109,4 @@ Reddit can't be searched from here (the site doesn't allow it), so these come fr
 - [How to edit comedy without killing the joke, Dig Spaghetti](https://rosetta.to/u/digspaghetti/how-to-edit-comedy-without-killing-the-joke)
 - [How to edit a comedy clip and make your jokes land, Descript](https://descript.com/blog/article/learn-how-to-edit-a-comedy-clip-and-make-your-jokes-land)
 - [Editing tricks for funny, fast-paced videos, AIR Media-Tech](https://air.io/en/youtube-hacks/editing-tricks-for-fast-paced-funny-videos)
+- YouTube: [history of the entire world, i guess](https://www.youtube.com/watch?v=xuCn8ux2gbs) · [WW1 - Oversimplified (Part 1)](https://www.youtube.com/watch?v=dHSQAEam2yc) · [Historical Misconceptions](https://www.youtube.com/watch?v=0zMSMJZc9EA) · [Casually Explained: Is She Into You?](https://www.youtube.com/watch?v=xa-4IAR_9Yw) · [Inflation Explained with Bananas](https://www.youtube.com/watch?v=MAvHgmewRDM) · [Squid Game Pitch Meeting](https://www.youtube.com/watch?v=cWipItq_9bk) · [Every Kurzgesagt Video Ever](https://www.youtube.com/watch?v=dZmLL6fHb9Q) · [Sarcasm, Akinom](https://www.youtube.com/watch?v=4ubPt4AL2zg)
