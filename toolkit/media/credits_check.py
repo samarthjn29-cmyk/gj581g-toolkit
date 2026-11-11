@@ -17,10 +17,16 @@ Exit 1 on any FAIL. Written after Scrolls (9 Nov 2026): 4 used pictures had no l
 import csv, glob, json, os, re, sys
 
 
+MEDIA = re.compile(r'\.(jpe?g|png|webp|gif|mp4|webm|mov|mp3|wav)$', re.I)
+AI_PREFIX = ('G_', 'A_')   # AI stills and their animations (Zeigarnik naming); everything else needs a log row
+
+
 def imgs_in(obj, out):
+    """Every media file a plan uses: any string value that ends in a media extension, under any key
+    (img, vid, clip, ...). Zeigarnik (11 Nov 2026): the old img-only scan missed every V_/F_/U_ stock clip."""
     if isinstance(obj, dict):
         for k, v in obj.items():
-            if k == 'img' and isinstance(v, str):
+            if isinstance(v, str) and MEDIA.search(v):
                 out.add(os.path.basename(v))
             else:
                 imgs_in(v, out)
@@ -64,8 +70,8 @@ def main(a):
             imgs_in(json.load(open(f, encoding='utf-8')), used)
         except Exception as e:
             print(f'WARN  {f}: unreadable ({e})')
-    real = sorted(u for u in used if u.startswith('R_'))
-    ai = sorted(u for u in used if not u.startswith('R_'))
+    ai = sorted(u for u in used if u.startswith(AI_PREFIX))
+    real = sorted(u for u in used if not u.startswith(AI_PREFIX))
     rows = list(csv.DictReader(open(log, encoding='utf-8')))
     desc = description(pack)
     dl = desc.lower()
@@ -74,12 +80,15 @@ def main(a):
     stem = lambda n: os.path.splitext(n)[0]
     matched = set()
     for r in real:
-        hits = [i for i, row in enumerate(rows) if re.search(r'\b' + re.escape(stem(r)) + r'\b', row.get('used_in', ''))]
+        pat = re.compile(r'(?<![\w])' + re.escape(stem(r)) + r'(?![\w])')
+        hits = [i for i, row in enumerate(rows) if any(pat.search(v or '') for v in row.values() if isinstance(v, str))]
         if not hits:
             print(f'FAIL  {r}: used in a plan, no licence-log row names it'); fails += 1
         matched.update(hits)
 
     for i, row in enumerate(rows):
+        if row.get(None) or (not row.get('licence') and any(x in ' '.join(str(v) for v in row.values()).upper() for x in ('CC BY', 'CC0', 'PUBLIC DOMAIN', 'LICENCE', 'LICENSE'))):
+            print(f'WARN  log row "{row.get("file")}": columns look shifted (licence not in the licence column); fix the row'); warns += 1
         lic = (row.get('licence') or '').upper()
         auth = row.get('author_credit') or ''
         keys = author_keys(auth)
@@ -90,13 +99,13 @@ def main(a):
             continue
         if needs and not named:
             print(f'FAIL  {row.get("file")}: {lic} needs "{auth}" named in the description'); fails += 1
-        elif not named and auth:
+        elif not named and auth and 'adobe stock contributor' not in auth.lower():
             print(f'WARN  {row.get("file")}: {lic or "no licence"}, "{auth}" not named (courtesy)'); warns += 1
 
     if ai and not re.search(r'ai-generated|ai generated', dl):
         print(f'FAIL  {len(ai)} AI stills used but no AI disclosure line in the description'); fails += 1
 
-    print(f'\n{len(real)} real pictures, {len(ai)} AI stills, {len(rows)} log rows: {fails} FAIL, {warns} WARN')
+    print(f'\n{len(real)} real/stock files, {len(ai)} AI stills, {len(rows)} log rows: {fails} FAIL, {warns} WARN')
     return 1 if fails else 0
 
 

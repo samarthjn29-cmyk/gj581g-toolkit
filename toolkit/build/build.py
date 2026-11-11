@@ -22,7 +22,7 @@ project.json (paths relative to the file):
 Writes build/status.json (stage, time, result) and build/build.log; prints one line per stage."""
 import json, os, sys, subprocess, time, shutil
 TK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PY = os.environ.get('CBX_PY', '/home/claude/cbx/bin/python3')
+PY = os.environ.get('CBX_PY', '/home/claude/cbenv/bin/python3')
 STAGES = ['voice', 'align', 'mix', 'listen', 'qa', 'lint', 'render', 'check', 'deliver', 'avcheck']  # avcheck: av_check.py on the copy Sam watches (4 Nov 2026)  # listen: the mixed narration as an MP3 for Sam's voice-only review (3 Nov 2026)  # mix before lint: the lint reads the fresh sfx cues
 
 def main():
