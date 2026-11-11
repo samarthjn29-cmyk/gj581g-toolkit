@@ -3,6 +3,7 @@
 word). For each `file.wav@T:LUFS:DUR` in MIX, it finds the gap nearest T (within 1.5 s) that holds the sound, starting
 0.04 s after a word ends; if the gap is shorter than the sound, the sound is shortened to fit (never below 0.22 s).
 Sounds that find no gap are listed and left alone. Rewrites MIX in place (keeps MIX.bak).
+Use it while placing sounds for a NEW mix; on a dense mix Sam already approved it moves sounds away from their gags (ch1/ch2 test, 12 Nov 2026), so do not run it there.
 Usage: sfx_snap.py MIX.sh TIMELINE.json"""
 import json, re, sys, shutil, os
 mix, tl = sys.argv[1:3]; T = json.load(open(tl)); W = T['words']; D = T['dur']
