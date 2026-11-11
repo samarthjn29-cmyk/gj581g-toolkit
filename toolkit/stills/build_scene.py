@@ -41,7 +41,9 @@ def main():
     W = words(mp3, f'{a.out}/vo.f32'); os.remove(f'{a.out}/vo.f32')
     def at(shot):
         ls, le = T[shot['at']]['start'] - t0, T[shot['at']]['end'] - t0
-        if not shot.get('word'): return round(ls, 2)
+        if not shot.get('word'):   # a line-start cut snaps to just before the line's first heard word, so it never lands mid-word (Aliens ch3)
+            fw = [w for w in W if ls - 0.45 <= w[1] <= ls + 0.35]
+            return round(max(0, fw[0][1] - 0.04), 2) if fw else round(ls, 2)
         k = shot.get('k', 0); hits = [w for w in W if ls - 0.3 <= w[1] <= le + 0.3 and norm(w[0]).startswith(norm(shot['word']))]
         if len(hits) <= k: sys.exit(f"cue word '{shot['word']}' not found in {shot['at']}")
         return hits[k][1]
