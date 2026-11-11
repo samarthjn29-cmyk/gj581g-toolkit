@@ -3,13 +3,12 @@
 Sam asked: "If I ask you to use South Park gags then you should only utilize South Park gags. If I ask you to use some other type of gags then you should utilize those gags."
 
 **How it works:**
-- **One registry:** `toolkit/stills/gag_schools.json`. Every gag in the kit belongs to one or more *schools*, a style family learnt from one of our studies. This file is generated from it.
-- **Asking for a style:** when you ask for a style ("use South Park gags", "Tanmay Bhat style", "mix South Park and OverSimplified"), the chapter's plan gets `"gags": ["southpark"]`, or several school names.
-- **The check:** `gag_lint.py` runs on every build. It stops the build if any gag card, or any gag camera move (crash, whip, bounce…), doesn't belong to a chosen school.
-- **House grammar is always allowed:** chapter titles, the yellow spoken-words card, lower text, true-scale bars, and the gentle Ken Burns moves (push, pull back, pan, tilt, drift, hold). It's the frame, not a gag.
-- **No style named:** with no school named, any school may be used, and the build report shows which school each gag came from.
-- **Gags we haven't built yet:** a recipe marked *to build* is studied but not in the kit yet. Asking for that school means building it first.
-- **Adding a new style:** a new study adds a new school, with its gags, camera moves and paired sounds.
+- **One registry:** `toolkit/stills/gag_schools.json`. Every gag in the kit belongs to one or more *schools*, a style family learnt from one of our studies. This file is generated from it by `stills/gag_schools_doc.py`.
+- **Asking for a style:** a request like "use South Park gags" puts `"gags": ["southpark"]` on the chapter's plan; several schools can be listed.
+- **The check:** `gag_lint.py` runs on every build and stops it if any gag card, or any gag camera move, doesn't belong to a chosen school.
+- **House grammar is always allowed:** chapter titles, the yellow spoken-words card, lower text, true-scale bars, and the gentle Ken Burns moves.
+- **No style named:** any school may be used, and the build report shows which school each gag came from.
+- **Browsing:** the Gag Library page has a Style menu that filters by school.
 
 ## The schools
 
@@ -34,10 +33,10 @@ Study: `styles/SOUTH_PARK_STUDY.md`. Camera moves: hold, drift; hard cuts only, 
 | `SP-news` | TV-news grammar: banner + ticker | `kind: banner` | newsstab | built |
 | `SP-sting` | Spinning news title / masthead | `kind: headline` | whoosh | built |
 | `SP-live` | Live inset with REC + timecode | `kind: rec` | click | built |
-| `SP-callin` | Call-in box: static photo + phone icon + ON THE LINE | `kind: callin` | phone ring | to build |
-| `SP-triptych` | Slide-talk stage with three screens | `kind: triptych` | projector click | to build |
-| `SP-ruler` | Crude scale diagram (ruler on flat yellow) | `kind: ruler` | squeak | to build |
-| `SP-advert` | Genre switch: glossy mock advert + tagline on black | `kind: advert` | sparkle | to build |
+| `SP-callin` | Call-in box: static photo + phone icon + ON THE LINE | `kind: callin` | phone ring | built |
+| `SP-triptych` | Slide-talk stage with three screens | `kind: triptych` | projector click | built |
+| `SP-ruler` | Crude scale diagram (ruler on flat yellow) | `kind: ruler` | squeak | built |
+| `SP-advert` | Genre switch: glossy mock advert + tagline on black | `kind: advert` | sparkle | built |
 | `SP-flare` | Advert lens glint (part of the mock advert) | `kind: glint` | - | built |
 
 ### Half as Interesting  (`halfasinteresting`)
@@ -85,8 +84,8 @@ Study: `styles/PICTURE_GAG_STUDY_3.md`. Camera moves: hold, punch.
 
 | id | gag | kit card | paired sound | status |
 |---|---|---|---|---|
-| `TB-grey` | Grey-out on the subject of the joke | `kind: grey` | scratch | to build |
-| `TB-grid` | Reaction grid (our mascot / stock only) | `kind: grid` | pop per tile | to build |
+| `TB-grey` | Grey-out on the subject of the joke | `kind: grey` | scratch | built |
+| `TB-grid` | Reaction grid (our mascot / stock only) | `kind: grid` | pop per tile | built |
 | `TB-rain` | Money rain on a boast | `kind: rain` | register | built |
 | `TB-inset` | Photo inset with a name tag | `kind: pip` | pop | built |
 
@@ -102,8 +101,8 @@ Study: `styles/PICTURE_GAG_STUDY_3.md`. Camera moves: push, pullback.
 
 | id | gag | kit card | paired sound | status |
 |---|---|---|---|---|
-| `CD-namesake` | Namesake card: real portrait + stamped name | `kind: namesake` | impact | to build |
-| `CD-variants` | Variants board: same picture, named treatments | `kind: variants` | click per tile | to build |
+| `CD-namesake` | Namesake card: real portrait + stamped name | `kind: namesake` | impact | built |
+| `CD-variants` | Variants board: same picture, named treatments | `kind: variants` | click per tile | built |
 | `CD-holdup` | Hold-it-up: mascot at the bottom edge | `kind: sticker` | sparkle | built |
 | `CD-confetti` | Confetti when it works | `kind: confetti` | popper | built |
 
@@ -212,6 +211,3 @@ Study: `styles/EFFECTS_LIBRARY.md`. Camera moves: hold.
 - **OverSimplified:** the repetition gag ("after three… after FOUR"), and the pictures get the lines.
 - **The Onion / Hindi news:** a sober headline with one swapped word.
 - **Unfiltered / British / Schulz toolkits:** voice and delivery (see their own docs). They pair with any picture school.
-
-## Example
-`"gags": ["southpark"]` on chapter 1 today would refuse 18 of its 20 gags; only the CORRECTION banner and the NOTHING counter pass. It would also refuse 4 camera moves (crash, bounce, dutch, whip), because South Park's camera stays still.

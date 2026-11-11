@@ -80,6 +80,17 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `split` | Expectation vs reality | Two pictures side by side, labelled. | `{"kind": "split", "imgs": ["G_alien_radio.jpg", "R_leopard.jpg"], "labels": ["EXPECTATION", "REALITY"], "dur": 2.9}` | trombone@0.6 | expectation vs reality meme |
 | `later` | "Some time later…" card | The old documentary time-skip card. | `{"kind": "later", "text": "Thirty years later…", "dur": 2.6}` | tada@0.0 | SpongeBob-style time card |
 | `iris` | Iris out | The picture closes to a circle and goes black: "that's all, folks". | `{"kind": "iris", "x": 0.5, "y": 0.45, "dur": 2.4}` | boing@1.6 | Looney Tunes iris |
+| `count` | Running-gag counter | A plain black counter tallies a running gag each time it returns ("NOTHING · 1"). | `{"kind": "count", "text": "NOTHING · 1", "x": 0.5, "y": 0.5, "dur": 1.4}` | click@0.25 | South Park "01 OF 50" card |
+| `callin` | Call-in box | A static photo in a phone-in box, ringing phone icon, ON THE LINE strap: a picture gets a voice. | `{"kind": "callin", "img": "G_alien_popcorn.jpg", "name": "ALIEN, DEEP SPACE", "title": "Human have money.", "dur": 2.9}` | r:notify@0.1 | South Park news call-in |
+| `triptych` | Slide-talk stage | A lecture stage with three screens; pictures swap in on cues. Full-screen. | `{"kind": "triptych", "imgs": ["a.jpg", "b.jpg", "c.jpg"], "slides": [[0, 0, 0], [0.6, 1, 1], [1.2, 2, 2]], "caps": ["the cost", "the time", "the upside"], "dur": 2.9}` | click per swap | South Park slide talk |
+| `ruler` | Crude scale diagram | A ruler on flat yellow with a tiny red tick. Full-screen. | `{"kind": "ruler", "title": "One year of NASA science", "max": 365, "unit": "days", "marks": [[4, "big tech: 4 days"]], "dur": 2.9}` | squeak@0.75 | South Park crude diagram |
+| `advert` | Mock advert switch | Glossy advert: slow push, lens flare, gold serif title, then a tagline on black. Full-screen. | `{"kind": "advert", "img": "R_servers.jpg", "title": "THE CLOUD", "tagline": "Very large warm boxes.\nThat think.", "tagDur": 1.2, "dur": 2.9}` | sparkle@0.2 | South Park PSA |
+| `grey` | Grey-out | The subject of the joke drains to black and white (a box, or the whole frame). | `{"kind": "grey", "x": 0.3, "y": 0.1, "w": 0.4, "h": 0.85, "dur": 2.6}` | scratch@0.0 | Tanmay Bhat roast edit |
+| `grid` | Reaction grid | A grid of reaction pictures popping in (our mascot or stock only). Full-screen. | `{"kind": "grid", "imgs": ["a.jpg", "b.jpg", "c.jpg", "d.jpg"], "labels": ["aliens", "robots", "also aliens", "nobody"], "dur": 2.6}` | pop per tile | Tanmay Bhat reaction grid |
+| `namesake` | Namesake card | A real portrait (open licence) beside the idea named after the person, name stamped in yellow. Full-screen. | `{"kind": "namesake", "img": "R_portrait.jpg", "idea": "R_thing.jpg", "name": "DRAKE", "stampAt": 0.6, "dur": 2.9}` | r:impact@0.6 | Captain Disillusion |
+| `variants` | Variants board | The same picture several times with named treatments, lit one by one. Full-screen. | `{"kind": "variants", "img": "a.jpg", "title": "THE SAME EMPTY SKY, ACCORDING TO", "items": [["OPTIMISTS", "saturate(1.7)"], ["PESSIMISTS", "grayscale(1)"]], "gap": 0.55, "dur": 2.9}` | click per tile | Captain Disillusion |
+
+Every gag also belongs to one or more gag schools (style families): see `GAG_SCHOOLS.md` and `stills/gag_schools.json`. A plan with `"gags": ["southpark"]` uses only that school.
 
 ## Sounds (`toolkit/media/gag_sfx.py OUTDIR <names>`, in-house, no credit)
 

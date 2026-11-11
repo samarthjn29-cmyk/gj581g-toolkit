@@ -25,7 +25,95 @@ const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useS
   return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`}}>
     <Lottie animationData={data} loop={c.loop ?? false} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></div></Sequence>; };
 
+const Pic = ({dir, f, style, filter}) => <Img src={staticFile(`${dir}/${f}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: filter || 'none', ...style}} />;
 const GAGS = {
+
+  // ---- Built 11 Nov 2026 from the "to build" list in gag_schools.json (Sam: "start completing the existing gag chapters") ----
+
+  // callin (South Park call-in box): one static photo in a phone-in box with a pulsing phone icon, and an ON THE LINE lower third.
+  // c.img, c.name (caller), c.title (lower-third line). Our own mascot or anonymous stock only, never a real person's doctored face.
+  callin: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.3)), ring = 1 + 0.08 * Math.sin(q * 18) * Math.exp(-q * 1.2);
+    return <AbsoluteFill style={{opacity: out}}>
+      <div style={{position: 'absolute', right: 80, top: 90, width: 620, height: 470, transform: `translateX(${(1 - p) * 120}%)`, border: '8px solid #FFFFFF', boxShadow: '0 16px 44px rgba(0,0,0,0.55)', background: '#111', overflow: 'hidden'}}>
+        <Pic dir={dir} f={c.img} />
+        <div style={{position: 'absolute', right: 18, top: 18, width: 84, height: 84, borderRadius: 42, background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `scale(${ring})`, boxShadow: '0 4px 14px rgba(0,0,0,0.4)'}}>
+          <svg width="48" height="48" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#111" /></svg></div>
+        <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.72)', color: '#FFFFFF', fontFamily: SANS, fontWeight: 800, fontSize: 34, padding: '10px 18px'}}>{c.name || 'CALLER'}</div></div>
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 120, height: 110, display: 'flex', transform: `translateX(${(1 - p) * -110}%)`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
+        <div style={{background: '#D3121B', color: '#FFFFFF', fontFamily: SANS, fontWeight: 900, fontSize: 44, padding: '0 30px', display: 'flex', alignItems: 'center', letterSpacing: 2}}>ON THE LINE</div>
+        <div style={{flex: 1, background: '#FFFFFF', color: '#111', fontFamily: SANS, fontWeight: 800, fontSize: c.size || 50, display: 'flex', alignItems: 'center', padding: '0 30px', whiteSpace: 'nowrap', overflow: 'hidden'}}>{c.title || ''}</div></div></AbsoluteFill>; },
+
+  // triptych (South Park slide talk): a lecture stage with three framed screens; pictures swap in on cues. c.imgs = the pictures,
+  // c.slides = [[offset s, screen 0-2, picture index], ...] (a screen shows its latest slide), c.speaker = optional cut-out PNG on stage,
+  // c.caps = optional caption per picture index. Full-screen card. Sound: a projector click on each swap.
+  triptych: (c, q, d, out, dir) => { const sl = c.slides || [[0, 0, 0], [0.4, 1, 1], [0.8, 2, 2]], sw = 520, sh = 330, gap = 60, x0 = (W - 3 * sw - 2 * gap) / 2;
+    return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: 'linear-gradient(#2E2A26 0%, #3B352E 62%, #7A5532 62%, #5E3F22 100%)'}}>
+      {[0, 1, 2].map(s => { const cur = sl.filter(x => x[1] === s && q >= x[0]).pop(), age = cur ? q - cur[0] : 0;
+        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: 120, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
+          {cur ? <div style={{width: '100%', height: '100%', opacity: R(age, 0, 0.08)}}><Pic dir={dir} f={c.imgs[cur[2]]} />
+            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: 30, textAlign: 'center', padding: '6px 8px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
+      <div style={{position: 'absolute', left: W / 2 - 330, top: 760, width: 660, height: 120, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />
+      {c.speaker ? <Img src={staticFile(`${dir}/${c.speaker}`)} style={{position: 'absolute', left: W / 2 - 170, top: 470, width: 340, height: 420, objectFit: 'contain'}} /> : null}</AbsoluteFill>; },
+
+  // ruler (South Park's crude scale diagram): a schoolroom ruler on flat yellow; c.max (ruler length in c.unit), c.marks =
+  // [[value, label], ...] drawn as red ticks with labels, c.title on top. The joke is the tiny tick. Full-screen. Sound: marker squeak.
+  ruler: (c, q, d, out) => { const x0 = 160, x1 = W - 160, y = 520, mx = c.max || 100, sx = v => x0 + (x1 - x0) * v / mx, p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), n = c.ticks || 10;
+    return <AbsoluteFill style={{opacity: out, background: c.ground || '#FCCF3E'}}>
+      {c.title ? <div style={{position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: 70, color: '#111'}}>{c.title}</div> : null}
+      <svg width={W} height={H} style={{position: 'absolute', transform: `translateX(${(1 - p) * -100}%)`}}>
+        <rect x={x0 - 30} y={y} width={x1 - x0 + 60} height={150} rx={10} fill="#F2E3B3" stroke="#6B5A2A" strokeWidth={5} />
+        {Array.from({length: n * 5 + 1}, (_, i) => { const x = x0 + (x1 - x0) * i / (n * 5), big = i % 5 === 0;
+          return <g key={i}><line x1={x} y1={y} x2={x} y2={y + (big ? 64 : 32)} stroke="#3A2F12" strokeWidth={big ? 5 : 3} />
+            {big ? <text x={x} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{Math.round(mx * i / (n * 5))}</text> : null}</g>; })}
+        <text x={x1 + 10} y={y + 140} fontFamily={MONO} fontSize={28} textAnchor="end" fill="#3A2F12">{c.unit || ''}</text>
+        {(c.marks || []).map(([v, lab], i) => { const t = R(q, 0.5 + i * (c.gap ?? 0.7), 0.75 + i * (c.gap ?? 0.7)); if (t <= 0) return null; const x = sx(v);
+          return <g key={i} opacity={t}><line x1={x} y1={y - 10} x2={x} y2={y + 150} stroke={RED} strokeWidth={9} strokeLinecap="round" />
+            <line x1={x} y1={y - 20} x2={x + (i % 2 ? -1 : 1) * 60} y2={y - 150} stroke={RED} strokeWidth={6} />
+            <text x={x + (i % 2 ? -1 : 1) * 70} y={y - 160} fontFamily={HAND} fontSize={58} textAnchor={i % 2 ? 'end' : 'start'} fill={RED}>{lab}</text></g>; })}</svg></AbsoluteFill>; },
+
+  // advert (South Park genre switch): a glossy mock advert. The picture pushes in slowly under a lens flare sweep, a gold serif title
+  // rises in, and the last c.tagDur seconds cut to black with a white serif tagline. c.img, c.title, c.tagline. Full-screen.
+  advert: (c, q, d, out, dir) => { const td = c.tagDur ?? 1.4, tag = q > d - td, s = 1.06 + 0.06 * (q / d), fx = -0.3 + 1.6 * R(q, 0.1, d - td);
+    return <AbsoluteFill style={{opacity: out, background: '#000'}}>
+      {!tag ? <><div style={{position: 'absolute', inset: 0, transform: `scale(${s})`}}><Pic dir={dir} f={c.img} filter="saturate(1.15) contrast(1.05)" /></div>
+        <div style={{position: 'absolute', inset: 0, background: `radial-gradient(circle at ${fx * 100}% 30%, rgba(255,240,200,0.85) 0, rgba(255,220,150,0.25) 8%, rgba(255,255,255,0) 22%)`, mixBlendMode: 'screen'}} />
+        <div style={{position: 'absolute', left: 0, right: 0, bottom: 140, textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 96, letterSpacing: 4,
+          color: '#F4D27A', textShadow: '0 4px 24px rgba(0,0,0,0.8)', opacity: R(q, 0.3, 0.8), transform: `translateY(${(1 - R(q, 0.3, 0.8)) * 30}px)`}}>{c.title}</div></>
+        : <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}><div style={{fontFamily: SERIF, fontSize: 70, color: '#FFFFFF', letterSpacing: 2, textAlign: 'center', whiteSpace: 'pre-line', opacity: R(q, d - td, d - td + 0.3)}}>{c.tagline}</div></AbsoluteFill>}</AbsoluteFill>; },
+
+  // grey (Tanmay Bhat grey-out): the subject of the joke turns black and white while the rest stays in colour. A box (x, y, w, h,
+  // fractions) is greyed, or the whole frame when no box. Only our own characters, stock or objects: never to mock a real, named person.
+  grey: (c, q, d, out) => { const g = R(q, 0, 0.3), box = c.w ? {left: c.x * W, top: c.y * H, width: c.w * W, height: c.h * H} : {left: 0, top: 0, width: W, height: H};
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', ...box, backdropFilter: `grayscale(${g}) contrast(${1 + 0.15 * g})`, WebkitBackdropFilter: `grayscale(${g})`, borderRadius: c.r ?? 0}} /></AbsoluteFill>; },
+
+  // grid (Tanmay Bhat reaction grid): one line, then 2-6 reaction pictures pop in 0.1 s apart. c.imgs, c.labels (optional), c.cols.
+  // Our mascot's expressions or anonymous stock only. Full-screen. Sound: one pop per tile.
+  grid: (c, q, d, out, dir) => { const n = (c.imgs || []).length, cols = c.cols || (n <= 2 ? 2 : n <= 4 ? 2 : 3), rows = Math.ceil(n / cols), g = 8, w = (W - g * (cols + 1)) / cols, h = (H - g * (rows + 1)) / rows;
+    return <AbsoluteFill style={{opacity: out, background: '#0A0A0A'}}>{c.imgs.map((im, i) => { const qi = q - i * (c.gap ?? 0.1); if (qi < 0) return null;
+      return <div key={i} style={{position: 'absolute', left: g + (i % cols) * (w + g), top: g + Math.floor(i / cols) * (h + g), width: w, height: h, overflow: 'hidden', transform: `scale(${pop(qi, 0.4)})`}}>
+        <Pic dir={dir} f={im} />{c.labels && c.labels[i] ? <div style={{position: 'absolute', left: 16, bottom: 14, background: '#FFFFFF', color: '#111', fontFamily: SANS, fontWeight: 900, fontSize: 34, padding: '4px 14px'}}>{c.labels[i]}</div> : null}</div>; })}</AbsoluteFill>; },
+
+  // namesake (Captain Disillusion): when an idea is named after a person, their real portrait (open licence, never AI) slides in beside
+  // the idea and the name stamps onto it in bold yellow. c.img (portrait), c.idea (picture of the idea), c.name, c.stampAt (s).
+  // Full-screen. Sound: impact on the stamp.
+  namesake: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), st = q - (c.stampAt ?? 0.6), sb = st < 0 ? 0 : 1 + 0.5 * Math.exp(-st * 9);
+    return <AbsoluteFill style={{opacity: out, background: c.ground || '#1A2238'}}>
+      <div style={{position: 'absolute', left: 120, top: 150, width: 720, height: 780, transform: `translateX(${(1 - p) * -130}%) rotate(-2deg)`, border: '12px solid #F3EAD3', boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden', background: '#111'}}>
+        <Pic dir={dir} f={c.img} style={{objectFit: c.fit || 'cover'}} /></div>
+      {c.idea ? <div style={{position: 'absolute', right: 120, top: 230, width: 820, height: 620, transform: `translateX(${(1 - p) * 130}%)`, boxShadow: '0 20px 50px rgba(0,0,0,0.6)', overflow: 'hidden', borderRadius: 10}}><Pic dir={dir} f={c.idea} /></div> : null}
+      {st >= 0 ? <div style={{position: 'absolute', left: 120, width: 720, top: 760, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 110, color: '#FCCF3E', letterSpacing: 3,
+        textShadow: '0 6px 0 #7A5A00, 0 10px 30px rgba(0,0,0,0.8)', transform: `scale(${sb}) rotate(-4deg)`}}>{c.name}</div> : null}</AbsoluteFill>; },
+
+  // variants (Captain Disillusion variants board): the same picture shown 3-6 times, each with a named treatment, lit one by one.
+  // c.img, c.items = [[label, css filter], ...], c.gap (s between tiles). Full-screen. Sound: a click per tile.
+  variants: (c, q, d, out, dir) => { const it = c.items || [], n = it.length, cols = n <= 4 ? 2 : 3, rows = Math.ceil(n / cols), g = 26, w = (W - g * (cols + 1)) / cols, h = (H - 90 - g * (rows + 1)) / rows, gap = c.gap ?? 0.5;
+    const curI = Math.min(n - 1, Math.floor(q / gap));
+    return <AbsoluteFill style={{opacity: out, background: '#0E1A12'}}>
+      {c.title ? <div style={{position: 'absolute', top: 18, left: 0, right: 0, textAlign: 'center', fontFamily: MONO, fontSize: 44, color: '#7CFF9B', letterSpacing: 6}}>{c.title}</div> : null}
+      {it.map(([lab, f], i) => { const on = q >= i * gap;
+        return <div key={i} style={{position: 'absolute', left: g + (i % cols) * (w + g), top: 90 + g + Math.floor(i / cols) * (h + g), width: w, height: h, overflow: 'hidden', outline: i === curI ? '6px solid #7CFF9B' : '2px solid #2F4A36', opacity: on ? 1 : 0.25}}>
+          <Pic dir={dir} f={c.img} filter={on ? f : 'grayscale(1) brightness(0.4)'} />
+          <div style={{position: 'absolute', left: 0, top: 0, background: 'rgba(0,0,0,0.75)', color: '#7CFF9B', fontFamily: MONO, fontSize: 34, padding: '6px 14px', letterSpacing: 3}}>{lab}</div></div>; })}</AbsoluteFill>; },
 
   // count (South Park study, 11 Nov 2026: the "01 OF 50" black counter card + an escalating running gag): a small black box
   // with plain computer type that tallies a running gag each time it returns ("NOTHING · 1", "NOTHING · 2"...). c.text, c.x, c.y

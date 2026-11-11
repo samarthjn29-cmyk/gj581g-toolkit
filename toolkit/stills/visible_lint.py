@@ -9,7 +9,7 @@ import json, sys, os
 s0 = sys.argv[1]; MIN = float(os.environ.get('MIN', 2.0))
 path = s0 if s0.endswith('.json') else f"{os.environ.get('RM', '/home/claude/twice/remotion')}/public/{os.environ.get('PUB', 'zeig')}/{s0}/timeline.json"
 t=json.load(open(path))
-full=[c for c in t['cards'] if (c['kind'] in('kinetic','title','number','bars','chain','later','split') and c.get('style')!='rise') or (c['kind']=='text' and c.get('bg'))]   # 'rise' text sits over the picture, not a full-screen card
+full=[c for c in t['cards'] if (c['kind'] in('kinetic','title','number','bars','chain','later','split','triptych','ruler','advert','grid','namesake','variants') and c.get('style')!='rise') or (c['kind']=='text' and c.get('bg'))]   # 'rise' text sits over the picture, not a full-screen card
 ev=sorted(set([s['t'] for s in t['shots']]+[c['t'] for c in full]+[c['t']+c['dur'] for c in full]+[t['dur']]))
 def what(x):
     for c in full:
@@ -32,7 +32,7 @@ for c in t['cards']:
     if end-c['t'] < need - 0.05: bad += 1; print(f"READ {c['t']:6.2f} {c['kind']} '{str(c.get('text',c.get('img')))[:40]}' up {end-c['t']:.2f} s, needs {need:.2f} s")
 # An overlay gag must end on its own picture (Sam, Aliens ch1, 11 Nov 2026: "This red oval shouldn't come on the pilot"):
 # a circle, bubble, notify, aside, starburst, label... that runs on past a picture change lands on the wrong picture.
-OVER = ('circle', 'arrow', 'bubble', 'notify', 'aside', 'starburst', 'stamp', 'labels', 'tag', 'pip', 'lens', 'spotlight', 'censor', 'loading', 'freeze', 'sticker', 'caption', 'meter')
+OVER = ('callin', 'grey', 'count', 'circle', 'arrow', 'bubble', 'notify', 'aside', 'starburst', 'stamp', 'labels', 'tag', 'pip', 'lens', 'spotlight', 'censor', 'loading', 'freeze', 'sticker', 'caption', 'meter')
 cuts = sorted(set([s['t'] for s in t['shots']] + [c['t'] for c in full]))
 for c in t['cards']:
     if c['kind'] not in OVER or c.get('across'): continue   # across: true = deliberately spans the cut

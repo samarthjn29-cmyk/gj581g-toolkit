@@ -106,6 +106,16 @@ L = [
  ('lottie_rocket', 'Animation', 'Rocket Launch Animation Space Exploratio', 'LottieFiles animation by animoox (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='rocket.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:whoosh@0.0', 'LottieFiles'),
  ('lottie_robot', 'Animation', 'Robot', 'LottieFiles animation by iwgyi7wxx1 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='robot.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:squeaky@0.2', 'LottieFiles'),
  ('lottie_spit', 'Animation', 'Spits Coffee', 'LottieFiles animation by zzkxhjpygu (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='spit.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:splat@0.4', 'LottieFiles'),
+ # built 11 Nov 2026: the South Park, Tanmay Bhat and Captain Disillusion gags (gag_schools.json)
+ ('count', 'Picture gag', 'Running-gag counter', 'A plain black counter tallies a running gag each time it returns ("NOTHING · 1", "NOTHING · 2").', {}, dict(kind='count', text='NOTHING · 1', x=0.5, y=0.5, dur=2.2), 'click@0.25', 'South Park "01 OF 50" card'),
+ ('callin', 'Picture gag', 'Call-in box', 'One static photo in a phone-in box with a ringing phone icon and an ON THE LINE strap: give a picture a voice.', {}, dict(kind='callin', img='G_alien_popcorn.jpg', name='ALIEN, DEEP SPACE', title='Human have money. Human buy computer.', dur=2.9), 'r:notify@0.1', 'South Park news call-in'),
+ ('triptych', 'Picture gag', 'Slide-talk stage', 'A lecture stage with three screens; our pictures swap in on cue words, one point per screen.', {}, dict(kind='triptych', imgs=['R_gbt.jpg', 'R_servers.jpg', 'R_leopard.jpg'], slides=[[0, 0, 0], [0.6, 1, 1], [1.2, 2, 2]], caps=['the cost', 'the competition', 'the upside'], dur=2.9), 'click@0.0 click@0.85 click@1.45', 'South Park slide talk'),
+ ('ruler', 'Picture gag', 'Crude scale diagram', 'A schoolroom ruler on flat yellow with one tiny red tick: how small something is, shown literally.', {}, dict(kind='ruler', title='One year of NASA science', max=365, unit='days', ticks=12, marks=[[4, 'big tech: 4 days']], dur=2.9), 'squeak@0.75', 'South Park crude diagram'),
+ ('advert', 'Picture gag', 'Mock advert switch', 'Hard cut to a glossy advert: slow push, lens flare, gold serif title, then a tagline on black.', {}, dict(kind='advert', img='R_servers.jpg', title='THE CLOUD', tagline='Very large warm boxes.\nThat think.', tagDur=1.2, dur=2.9), 'sparkle@0.2', 'South Park PSA'),
+ ('grey', 'Picture gag', 'Grey-out', 'The subject of the joke drains to black and white while the rest stays in colour.', {}, dict(kind='grey', x=0.3, y=0.1, w=0.4, h=0.85, dur=2.6), 'scratch@0.0', 'Tanmay Bhat roast edit'),
+ ('grid', 'Picture gag', 'Reaction grid', 'One line, then a grid of reaction pictures popping in (our mascot or anonymous stock only).', {}, dict(kind='grid', imgs=['G_alien_popcorn.jpg', 'G_robots_react.jpg', 'G_alien_alone.jpg', 'G_alien_radio.jpg'], labels=['aliens', 'robots', 'also aliens', 'nobody'], dur=2.6), 'pop@0.0 pop@0.1 pop@0.2 pop@0.3', 'Tanmay Bhat reaction grid'),
+ ('namesake', 'Picture gag', 'Namesake card', 'An idea named after a person: their real portrait (open licence) beside the idea, the name stamped on in yellow.', {}, dict(kind='namesake', img='R_drake_portrait.jpg', idea='R_tatel_1958.jpg', name='DRAKE', stampAt=0.6, dur=2.9), 'r:impact@0.6', 'Captain Disillusion'),
+ ('variants', 'Picture gag', 'Variants board', 'The same picture several times, each with a named treatment, lit one by one.', {}, dict(kind='variants', img='G_alien_alone.jpg', title='THE SAME EMPTY SKY, ACCORDING TO', items=[['OPTIMISTS', 'saturate(1.7) brightness(1.15)'], ['PESSIMISTS', 'grayscale(1) contrast(1.3)'], ['ACCOUNTANTS', 'sepia(1)'], ['YOUR MUM', 'hue-rotate(150deg)']], gap=0.55, dur=2.9), 'click@0.0 click@0.55 click@1.1 click@1.65', 'Captain Disillusion'),
 ]
 
 SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -138,7 +148,7 @@ def timeline(od):
         if c and c['kind'] == 'kinetic' and c.get('style') == 'short':
             for j, w in enumerate(c['text'].split()): words.append([w, round(c['t'] + j * 0.35, 2), round(c['t'] + j * 0.35 + 0.3, 2)])
     dur = round(len(E) * SEG, 2)
-    for f in set(IMGS + ['G_alien_popcorn.jpg', 'G_alien_radio.jpg', 'R_leopard.jpg']):
+    for f in set(IMGS + ['G_alien_popcorn.jpg', 'G_alien_radio.jpg', 'R_leopard.jpg', 'R_drake_portrait.jpg', 'R_tatel_1958.jpg']):
         for d in ('/home/claude/aliens/public/real', '/home/claude/aliens/ai'):
             if os.path.exists(f'{d}/{f}'): shutil.copy(f'{d}/{f}', f'{od}/{f}'); break
     for d in ('/home/claude/aliens/lottie/json', '/home/claude/aliens/video/overlays'):
