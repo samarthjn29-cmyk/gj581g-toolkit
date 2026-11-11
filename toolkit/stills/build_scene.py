@@ -78,7 +78,7 @@ def main():
             ce = c['t'] + c.get('dur', 4.5)
             for s in shots[1:]:
                 if c['t'] - 0.35 < s['t'] < c['t']: s['t'] = round(c['t'], 3)
-                if ce < s['t'] < ce + 0.35: c['dur'] = round(s['t'] - c['t'], 3)
+                if ce < s['t'] < ce + 0.8: c['dur'] = round(s['t'] - c['t'], 3)
     dur = round(t1 - t0, 2); fails = []
     for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length
         if shots[i]['t'] < shots[i - 1]['t']: fails.append(f"{shots[i]['id']} starts before {shots[i - 1]['id']}: list shots in spoken order")
