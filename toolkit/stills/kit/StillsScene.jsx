@@ -145,10 +145,13 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
   // plain dark ground, each landing on its aligned time; colour roles: ordinary cream, accent gold (c.accent), numbers blue (c.nums)
   if (c.kind === 'kinetic' && c.style === 'short') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
     const oo = R(t, c.t, c.t + 0.12) * (1 - R(t, c.t + d - 0.15, c.t + d)), key = w => w.toLowerCase().replace(/[^a-z0-9']/g, '');
-    const col = w => (c.nums || []).map(key).includes(key(w)) ? '#9DB4C8' : (c.accent || []).map(key).includes(key(w)) ? '#C9A86A' : '#F3EBDD';
-    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: '#0E0C0A'}}>
-      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(60,48,36,0.55) 0%, rgba(14,12,10,0) 65%)'}} />
-      <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: ws.length > 3 ? 132 : 156, fontWeight: 500, position: 'relative', textAlign: 'center', maxWidth: 1600, lineHeight: 1.05, letterSpacing: 1}}>
+    // c.ground / c.ink (Sam, Aliens opening, 11 Nov 2026: golden-parakeet yellow ground, green text): one colour for every word,
+    // numbers a shade deeper; without them the default dark ground with cream / gold accent / blue numbers
+    const col = w => c.ink ? ((c.nums || []).map(key).includes(key(w)) ? (c.inkNum || c.ink) : c.ink)
+      : (c.nums || []).map(key).includes(key(w)) ? '#9DB4C8' : (c.accent || []).map(key).includes(key(w)) ? '#C9A86A' : '#F3EBDD';
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: c.ground || '#0E0C0A'}}>
+      <AbsoluteFill style={{background: c.ground ? 'radial-gradient(ellipse at 50% 45%, rgba(255,240,170,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(120,70,0,0.25) 100%)' : 'radial-gradient(ellipse at 50% 45%, rgba(60,48,36,0.55) 0%, rgba(14,12,10,0) 65%)'}} />
+      <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: ws.length > 3 ? 132 : 156, fontWeight: c.ink ? 600 : 500, position: 'relative', textAlign: 'center', maxWidth: 1600, lineHeight: 1.05, letterSpacing: 1}}>
         {ws.map((w, i) => { const s0 = st[i] ?? c.t + i * 0.3, p = R(t, s0 - 0.06, s0 + 0.14);
           return <span key={i} style={{color: col(w), opacity: p, display: 'inline-block', transform: `translateY(${(1 - p) * 26}px) scale(${0.96 + 0.04 * p})`, marginRight: '0.24em'}}>{w}</span>; })}</div></AbsoluteFill>; }
   // kinetic text: the spoken words appear one by one on their aligned times (verbatim from the line)
