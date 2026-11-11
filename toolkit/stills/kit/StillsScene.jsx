@@ -77,16 +77,24 @@ const Diagram = ({s, t, words}) => { const g = s.diagram, a = R(t, s.t, s.t + 0.
 const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.page) return <PageShot s={s} t={t} dir={dir} />;
   if (s.diagram) return <Diagram s={s} t={t} words={words} />;
-  const [s0, s1, x0, x1, y0, y1] = MOVES[s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift')], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
+  const SPECIAL = {whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
+  const [s0, s1, x0, x1, y0, y1] = MOVES[SPECIAL[s.move] || (s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift'))], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
   let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
   // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
   if (s.move === 'punch') { const p0 = s.t + (s.punch_at ?? 0.5); sc += (s.punch || 0.22) * interpolate(t, [p0, p0 + 0.18], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }
+  // gag moves: whip (fast blurred pan in), spin (one turn in from small), crash (zoom out from very close), bounce (springy scale), dutch (tilted)
+  const q = t - s.t, ep = (d) => Math.min(1, Math.max(0, q / d)); let rot = 0, blur = 0, xo = 0;
+  if (s.move === 'whip') { const p = ep(0.24); xo = (s.from ?? 70) * Math.pow(1 - p, 2.2); blur = 22 * (1 - p); }
+  if (s.move === 'spin') { const p = 1 - Math.pow(1 - ep(0.6), 3); rot = -360 * (1 - p); sc *= 0.2 + 0.8 * p; }
+  if (s.move === 'crash') { sc += 0.8 * Math.pow(1 - ep(0.35), 3); blur = 8 * (1 - ep(0.2)); }
+  if (s.move === 'bounce') sc *= 1 - 0.22 * Math.exp(-q * 4.5) * Math.cos(q * 15);
+  if (s.move === 'dutch') rot = (s.angle ?? 8) * (q < 0.2 ? q / 0.2 : 1);
   // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
   // shake (Sam, 11 Nov 2026, "most ridiculous version"): a camera shake that decays over 0.8 s from shake_at s into the shot
   const sa = s.t + (s.shake_at ?? 0), sk = s.shake && t >= sa ? s.shake * Math.max(0, 1 - (t - sa) / 0.8) : 0;
   const shx = sk * Math.sin(t * 71), shy = sk * Math.cos(t * 53); if (sk) sc += 0.04;
-  const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra + shx}%, ${y * extra + shy}%) scale(${1 + (sc - 1) * extra})`, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
+  const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra + shx + xo}%, ${y * extra + shy}%) scale(${1 + (sc - 1) * extra}) rotate(${rot}deg)`, filter: blur ? `blur(${blur}px)` : undefined, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
@@ -102,6 +110,20 @@ const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return
   return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
     <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
 const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t, c.t + 0.4) * (1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
+  // Ridiculous-mode overlays (Sam, 11 Nov 2026): stamp (a rubber stamp slammed on), rain (money falling), flash (white frame), pip (a reaction picture popping up in a corner)
+  if (c.kind === 'stamp') { const p = R(t, c.t, c.t + 0.12), sh = (1 - R(t, c.t + 0.12, c.t + 0.6)) * 10 * Math.sin(t * 90);
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -12}deg) scale(${3 - 2 * p})`, opacity: p,
+      fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 150, letterSpacing: 6, color: c.color || '#D11F2A', border: `14px solid ${c.color || '#D11F2A'}`, borderRadius: 18, padding: '10px 40px',
+      background: 'rgba(255,255,255,0.12)', textShadow: '0 4px 18px rgba(0,0,0,0.35)', boxShadow: '0 10px 40px rgba(0,0,0,0.35)', whiteSpace: 'nowrap'}}>{c.text}</div></AbsoluteFill>; }
+  if (c.kind === 'rain') { const n = c.n || 46, q = t - c.t;
+    return <AbsoluteFill style={{opacity: o, pointerEvents: 'none'}}><svg width={1920} height={1080}>{Array.from({length: n}).map((_, i) => { const r = (k) => ((Math.sin(i * 12.9898 + k * 78.233) * 43758.5453) % 1 + 1) % 1;
+      const x = r(1) * 1920, sp = 420 + r(2) * 520, y = -160 + (q * sp + r(3) * 1200) % 1350, a = (r(4) - 0.5) * 80 + Math.sin(q * (2 + r(5) * 3) + i) * 35;
+      return <g key={i} transform={`translate(${x} ${y}) rotate(${a}) scale(${0.7 + r(6) * 0.6})`}><rect x={-62} y={-28} width={124} height={56} rx={4} fill="#5E9B5A" stroke="#2F5D31" strokeWidth={3} />
+        <rect x={-50} y={-18} width={100} height={36} rx={3} fill="none" stroke="#CFE6C3" strokeWidth={2} /><text x={0} y={12} textAnchor="middle" fontFamily="Georgia, serif" fontWeight="700" fontSize={30} fill="#E9F5E2">$</text></g>; })}</svg></AbsoluteFill>; }
+  if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || '#FFFFFF', opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
+  if (c.kind === 'pip') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14);
+    return <AbsoluteFill style={{opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{position: 'absolute', right: c.right ?? 70, bottom: c.bottom ?? 70, width: c.w || 560, height: (c.w || 560) * 9 / 16, transform: `scale(${b}) rotate(${c.rot ?? 4}deg)`, transformOrigin: '100% 100%',
+      border: '10px solid #FFFFFF', borderRadius: 14, overflow: 'hidden', boxShadow: '0 18px 50px rgba(0,0,0,0.6)'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div></AbsoluteFill>; }
   const FONT = c.hand ? 'Kalam, cursive' : '"Cormorant Garamond", Georgia, serif', dark = c.bg ? 0.9 : 0.5;   // 0.9: a bright shot showed through the texture card (itch I11, spring behind the words)
   if (c.kind === 'title' && c.paper) { const [num, ...rest] = c.text.split(' · '), rot = c.rot ?? -2.5;
     return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(8,7,6,${0.55 * o})`}}>

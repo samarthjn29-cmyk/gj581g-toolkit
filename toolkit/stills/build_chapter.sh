@@ -39,7 +39,7 @@ for sh in P['shots']:
 fg = (P.get('finish') or {}).get('grain')
 if fg: shutil.copy(f'{proj}/video/{fg}', f'{out}/{fg}')
 for c in P.get('cards', []):
-    f = c.get('bg')
+    f = c.get('bg') or c.get('img')
     if f:
         src = find(f)
         if src: shutil.copy(src, f'{out}/{f}')
