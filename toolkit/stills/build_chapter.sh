@@ -18,7 +18,7 @@ python3 - "$S" "$OUT" "$PROJ" <<'EOF'
 import json, sys, shutil, os
 s, out, proj = sys.argv[1:]
 P = json.load(open(f'{proj}/stills/{s}.json')); miss = []
-dirs = [f'{proj}/public/real', f'{proj}/ai', f'{proj}/video']
+dirs = [f'{proj}/public/real', f'{proj}/ai', f'{proj}/video', f'{proj}/video/overlays', f'{proj}/lottie/json']
 def find(f):
     for d in dirs:
         if os.path.exists(f'{d}/{f}'): return f'{d}/{f}'
@@ -39,7 +39,7 @@ for sh in P['shots']:
 fg = (P.get('finish') or {}).get('grain')
 if fg: shutil.copy(f'{proj}/video/{fg}', f'{out}/{fg}')
 for c in P.get('cards', []):
-    f = c.get('bg') or c.get('img')
+    f = c.get('bg') or c.get('img') or c.get('file')   # file: a Lottie .json or an overlay clip
     if f:
         src = find(f)
         if src: shutil.copy(src, f'{out}/{f}')

@@ -2,7 +2,8 @@
 // can give on our pictures and videos"). Each kind is a card in the scene plan: {at, word, kind, dur, ...options}.
 // Positions x, y, w, h, r are fractions of the frame (0-1) unless noted. Every kind lists its paired sound in EFFECTS_LIBRARY.md.
 import React from 'react';
-import {AbsoluteFill, Img, staticFile, interpolate, Easing} from 'remotion';
+import {AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, interpolate, Easing, delayRender, continueRender} from 'remotion';
+import {Lottie} from '@remotion/lottie';
 
 const cl = (v) => Math.min(1, Math.max(0, v));
 const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.45, 0, 0.25, 1)});
@@ -14,7 +15,53 @@ export const gagCard = (c, t, dir) => { const f = GAGS[c.kind]; if (!f) return u
   const d = c.dur || 2, q = t - c.t; if (q < 0 || q > d) return null;
   return f(c, q, d, 1 - R(t, c.t + d - 0.15, c.t + d), dir); };
 
+
+// Lottie animations (LottieFiles free animations, Lottie Simple License; Sam, 11 Nov 2026): c.file = a .json in the scene folder,
+// placed at (x, y) (centre, 0-1), c.w = width as a share of the frame, c.loop, c.speed. Logged in media/<Prefix>_licence_log.csv.
+const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useState(null); const [h] = React.useState(() => delayRender('lottie ' + c.file));
+  React.useEffect(() => { fetch(staticFile(`${dir}/${c.file}`)).then(r => r.json()).then(j => { setData(j); continueRender(h); }).catch(() => continueRender(h)); }, []);
+  if (!data) return null; const w = (c.w ?? 0.35) * W, ar = (data.h || 1) / (data.w || 1);
+  if (inner) return <Sequence from={Math.round(c.t * 30)} layout="none"><Lottie animationData={data} loop={c.loop ?? true} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></Sequence>;
+  return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`}}>
+    <Lottie animationData={data} loop={c.loop ?? false} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></div></Sequence>; };
+
 const GAGS = {
+
+  // sticker (Indian vlog texture, edit study 11 Nov 2026): a cut-out object (PNG with transparency, or a Lottie json) with a thick
+  // white border pops in, wobbles and stays; c.img or c.file, at (x, y), c.w share of width
+  sticker: (c, q, d, out, dir) => { const s = pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = 4 * Math.sin(q * 3);
+    const edge = 'drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 14px rgba(0,0,0,0.45))';
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.75) * W - w / 2, top: (c.y ?? 0.4) * H - w / 2, width: w, height: w, transform: `scale(${s}) rotate(${(c.rot ?? -6) + wob}deg)`, filter: edge, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      {c.file ? <LottieGag c={{...c, x: 0.5, y: 0.5, w: 1}} dir={dir} out={1} inner /> : <Img src={staticFile(`${dir}/${c.img}`)} style={{maxWidth: '100%', maxHeight: '100%'}} />}</div>
+      {c.text ? <div style={{position: 'absolute', left: (c.x ?? 0.75) * W, top: (c.y ?? 0.4) * H + w * 0.55, transform: `translateX(-50%) rotate(-3deg) scale(${pop(q - 0.15)})`, background: '#FCCF3E', color: '#111', fontFamily: SANS, fontWeight: 900, fontSize: 40, padding: '4px 18px', borderRadius: 8, whiteSpace: 'nowrap'}}>{c.text}</div> : null}</AbsoluteFill>; },
+
+  // burst (gag sting, Climate Town's "DANG!" shape): 3-4 pictures slam in tilted around one big word, about a second, then gone
+  burst: (c, q, d, out, dir) => { const imgs = c.imgs || [], pos = [[0.22, 0.32, -10], [0.78, 0.3, 8], [0.25, 0.75, 6], [0.76, 0.74, -7]];
+    return <AbsoluteFill style={{opacity: out, background: `rgba(0,0,0,${0.35 * R(q, 0, 0.05)})`}}>
+      {imgs.slice(0, 4).map((im, i) => { const qi = q - i * 0.07; if (qi < 0) return null; const [x, y, r] = pos[i];
+        return <div key={i} style={{position: 'absolute', left: x * W - 330, top: y * H - 190, width: 660, height: 380, border: '10px solid #FFF', boxShadow: '0 14px 40px rgba(0,0,0,0.6)', overflow: 'hidden', transform: `rotate(${r}deg) scale(${pop(qi, 0.8)})`}}>
+          <Img src={staticFile(`${dir}/${im}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>; })}
+      <div style={{position: 'absolute', left: 0, right: 0, top: H / 2 - 130, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 220, color: c.color || '#FCCF3E', letterSpacing: 4,
+        textShadow: '8px 8px 0 #000, -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000', transform: `rotate(-6deg) scale(${pop(q - 0.2, 1.4)})`}}>{c.text}</div></AbsoluteFill>; },
+
+  // grow: the spoken line, each word bigger than the last (OverSimplified's escalation); words on a dim band over the picture.
+  // c.text; c.times = word start offsets in s (default every 0.3 s)
+  grow: (c, q, d, out) => { const ws = c.text.split(' '), tm = c.times || ws.map((_, i) => i * 0.3), base = c.size || 70, k = c.k ?? 1.18;
+    return <AbsoluteFill style={{opacity: out, justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.35)'}}><div style={{maxWidth: 1700, textAlign: 'center', lineHeight: 1.05}}>
+      {ws.map((w, i) => { const p = R(q, tm[i], tm[i] + 0.12); return <span key={i} style={{display: 'inline-block', marginRight: '0.25em', opacity: p, fontFamily: SANS, fontWeight: 900, color: i === ws.length - 1 ? (c.color || '#FCCF3E') : '#FFFFFF',
+        fontSize: base * Math.pow(k, i), transform: `scale(${0.6 + 0.4 * p})`, textShadow: '0 6px 18px rgba(0,0,0,0.7)'}}>{w}</span>; })}</div></AbsoluteFill>; },
+
+  // doc: a document slides in from the right at an angle, then its key line is lifted out as big highlighted text (Climate Town)
+  doc: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), hl = R(q, 0.7, 1.0);
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', right: 120 - (1 - p) * 900, top: 90, width: 620, height: 800, background: '#FFF', boxShadow: '0 24px 60px rgba(0,0,0,0.55)', transform: `rotate(${4 - 2 * p}deg)`, overflow: 'hidden'}}>
+        {c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /> : <div style={{padding: 50, fontFamily: 'Georgia, serif', color: '#222'}}><div style={{fontSize: 34, fontWeight: 700, marginBottom: 24}}>{c.title}</div>
+          {Array.from({length: 14}).map((_, j) => <div key={j} style={{height: 12, margin: '16px 0', background: j === (c.line ?? 6) ? `linear-gradient(90deg, #FCCF3E ${hl * 100}%, #CFCFCF ${hl * 100}%)` : '#CFCFCF', width: `${75 + ((j * 29) % 25)}%`}} />)}</div>}</div>
+      <div style={{position: 'absolute', left: 90, right: 820, bottom: 130, opacity: hl, transform: `translateY(${(1 - hl) * 30}px)`}}><span style={{background: '#FCCF3E', color: '#111', fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 58, lineHeight: 1.35, padding: '2px 12px', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone'}}>{c.quote}</span>
+        {c.source ? <div style={{marginTop: 14, fontFamily: SANS, fontSize: 28, color: '#FFF', textShadow: '0 2px 8px #000'}}>{c.source}</div> : null}</div></AbsoluteFill>; },
+  // overlay footage (Mixkit Stock Video Free License): a texture clip over the picture with a blend mode (screen for light and static)
+  overlay: (c, q, d, out, dir) => <AbsoluteFill style={{opacity: out * (c.opacity ?? 0.6), mixBlendMode: c.blend || 'screen', pointerEvents: 'none'}}>
+    <Sequence from={Math.round(c.t * 30)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${c.file}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></Sequence></AbsoluteFill>,
+  lottie: (c, q, d, out, dir) => <AbsoluteFill style={{pointerEvents: 'none'}}><LottieGag c={c} dir={dir} out={out} /></AbsoluteFill>,
   // freeze-frame caption ("Yep. That's me." / "You're probably wondering how I got here"): the picture goes grey, a label lands
   freeze: (c, q, d, out) => <AbsoluteFill style={{opacity: out}}>
     <AbsoluteFill style={{backdropFilter: `grayscale(${R(q, 0, 0.12)}) contrast(1.1)`, background: 'rgba(0,0,0,0.12)'}} />

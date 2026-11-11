@@ -70,6 +70,39 @@ L = [
  ('split', 'Picture gag', 'Expectation vs reality', 'Two pictures side by side, labelled.', {}, dict(kind='split', imgs=['G_alien_radio.jpg', 'R_leopard.jpg'], labels=['EXPECTATION', 'REALITY'], dur=2.9), 'trombone@0.6', 'expectation vs reality meme'),
  ('later', 'Picture gag', '"Some time later…" card', 'The old documentary time-skip card.', {}, dict(kind='later', text='Thirty years later…', dur=2.6), 'tada@0.0', 'SpongeBob-style time card'),
  ('iris', 'Picture gag', 'Iris out', 'The picture closes to a circle and goes black: "that\'s all, folks".', {}, dict(kind='iris', x=0.5, y=0.45, dur=2.4, t_off=0.4), 'boing@1.6', 'Looney Tunes iris'),
+ ('sticker', 'Picture gag', 'Sticker pop-in', 'A cut-out object with a white border pops in and stays (Indian vlog texture).', {}, dict(kind='sticker', file='coin.json', x=0.78, y=0.42, w=0.22, text='₹100?', dur=2.6), 'pop@0.0', 'Slayy Point (edit study)'),
+ ('burst', 'Picture gag', 'Collage sting', 'One second of tilted pictures around one big word, then straight back.', {}, dict(kind='burst', imgs=['G_bigtech_campus.jpg', 'R_servers.jpg', 'G_dc_party.jpg', 'R_capitol.jpg'], text='WOW.', dur=1.6), 'impact@0.0', 'Climate Town "DANG!" (edit study)'),
+ ('grow', 'Picture gag', 'Escalating words', 'Each spoken word bigger than the last, for a line that builds to a punch.', {'move': 'crash'}, dict(kind='grow', text='Seventy-two. Whole. MINUTES.', times=[0.0, 0.5, 1.0], dur=2.6), 'whoosh@0.0 impact@1.0', 'OverSimplified (edit study)'),
+ ('doc', 'Picture gag', 'Document slide-in', 'A document slides in, then its key line is lifted out as big highlighted text.', {}, dict(kind='doc', title='FY2026 Budget Request', quote='Mars Sample Return: terminated.', source='NASA budget request, 2026', dur=2.9), 'whoosh@0.0', 'Climate Town (edit study)'),
+ ('overlay_static', 'Picture gag', 'TV static overlay', 'Real TV static over the picture for a moment: a signal, a channel change, a glitch.', {}, dict(kind='overlay', file='ov_static_tv.mp4', opacity=0.6, dur=1.2), 'r:static@0.0', 'Mixkit footage'),
+ ('overlay_glitch', 'Picture gag', 'TV glitch overlay', 'A real glitching-screen texture over the picture.', {}, dict(kind='overlay', file='ov_glitch_tv.mp4', opacity=0.7, dur=1.6), 'r:glitch@0.0', 'Mixkit footage'),
+ ('lottie_explosion', 'Animation', 'Cartoon Explosion', 'LottieFiles animation by bejika (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='explosion.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:impact@0.0', 'LottieFiles'),
+ ('lottie_bomb', 'Animation', 'Bomb Explosion Cartoon', 'LottieFiles animation by bejika (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='bomb.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'boom@0.8', 'LottieFiles'),
+ ('lottie_headboom', 'Animation', 'Emoji Head Explosion', 'LottieFiles animation by lzt2562861buk2qd (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='headboom.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:impact@0.3', 'LottieFiles'),
+ ('lottie_fireworks', 'Animation', 'Fireworks', 'LottieFiles animation by SelvaUX (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='fireworks.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:cheer@0.0', 'LottieFiles'),
+ ('lottie_confetti', 'Animation', 'Confetti', 'LottieFiles animation by lhgfbbx7pjxaop0y (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='confetti.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:laughclap@0.0', 'LottieFiles'),
+ ('lottie_ufo', 'Animation', 'Ufo Lottie Animation', 'LottieFiles animation by smrony (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='ufo.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:sparklewhoosh@0.0', 'LottieFiles'),
+ ('lottie_alien_rocket', 'Animation', 'Alien Going To Space Emoji Animation', 'LottieFiles animation by animoox (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='alien_rocket.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:whoosh@0.2', 'LottieFiles'),
+ ('lottie_money', 'Animation', 'Money', 'LottieFiles animation by mahendra (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='money.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'register@0.3', 'LottieFiles'),
+ ('lottie_money_fall', 'Animation', 'Green Money Falling', 'LottieFiles animation by bo4qrpsi6p (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='money_fall.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:servicebell@0.0', 'LottieFiles'),
+ ('lottie_coin', 'Animation', 'Coin', 'LottieFiles animation by kpiwd93x6lik6wdr (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='coin.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:pop@0.0', 'LottieFiles'),
+ ('lottie_sparkles', 'Animation', 'Sparkle Stars', 'LottieFiles animation by jst40i3h130syma3 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='sparkles.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'sparkle@0.0', 'LottieFiles'),
+ ('lottie_question', 'Animation', 'Question Mark', 'LottieFiles animation by avh0fk3jtl (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='question.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:suspense@0.0', 'LottieFiles'),
+ ('lottie_facepalm', 'Animation', 'Facepalm', 'LottieFiles animation by zzkxhjpygu (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='facepalm.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:failpiano@0.2', 'LottieFiles'),
+ ('lottie_crying', 'Animation', 'Crying Emoji', 'LottieFiles animation by lhgfbbx7pjxaop0y (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='crying.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:sadtrombone@0.0', 'LottieFiles'),
+ ('lottie_thumbsdown', 'Animation', 'Thumbs Down', 'LottieFiles animation by jituraut (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='thumbsdown.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:wrong@0.2', 'LottieFiles'),
+ ('lottie_check', 'Animation', 'Check Mark', 'LottieFiles animation by illustratemotionstudio (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='check.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:correct@0.1', 'LottieFiles'),
+ ('lottie_cross', 'Animation', 'Cross', 'LottieFiles animation by manju (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='cross.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:wrong@0.1', 'LottieFiles'),
+ ('lottie_clock', 'Animation', 'Clock Time', 'LottieFiles animation by fsdgmitcdl32sui5 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='clock.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'ticks@0.0', 'LottieFiles'),
+ ('lottie_eyes', 'Animation', 'Eyes', 'LottieFiles animation by samedcetin (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='eyes.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:pop@0.0', 'LottieFiles'),
+ ('lottie_popcorn', 'Animation', 'Popcorn', 'LottieFiles animation by bizwbzqp7w (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='popcorn.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:crowdlaugh@0.0', 'LottieFiles'),
+ ('lottie_globe', 'Animation', 'Earth Globe Rotating With Seamless Loop ', 'LottieFiles animation by kvwizbmx6vrsy15u (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='globe.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:whooshcine@0.0', 'LottieFiles'),
+ ('lottie_skull', 'Animation', 'Haunted Skull', 'LottieFiles animation by mandysasaaa (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='skull.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:gameover@0.0', 'LottieFiles'),
+ ('lottie_alert', 'Animation', 'Alert', 'LottieFiles animation by Martov90 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='alert.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:wronglong@0.0', 'LottieFiles'),
+ ('lottie_smile', 'Animation', 'Emoji Smile Face', 'LottieFiles animation by Chondonbackla705 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='smile.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:cartoonlaugh@0.0', 'LottieFiles'),
+ ('lottie_rocket', 'Animation', 'Rocket Launch Animation Space Exploratio', 'LottieFiles animation by animoox (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='rocket.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:whoosh@0.0', 'LottieFiles'),
+ ('lottie_robot', 'Animation', 'Robot', 'LottieFiles animation by iwgyi7wxx1 (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='robot.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:squeaky@0.2', 'LottieFiles'),
+ ('lottie_spit', 'Animation', 'Spits Coffee', 'LottieFiles animation by zzkxhjpygu (Lottie Simple License). Place it on a picture as a reaction or a literal object.', {}, dict(kind='lottie', file='spit.json', x=0.5, y=0.5, w=0.42, loop=True, dur=2.9), 'r:splat@0.4', 'LottieFiles'),
 ]
 
 SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -79,6 +112,8 @@ SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd bo
  ('kazoo', 'Kazoo fanfare: mock triumph'), ('newsstab', 'News sting'), ('ding', 'Clean bell ding: a correct answer, a landing'), ('sparkle', 'Sparkle chime: shiny'),
  ('ticks', 'Stopwatch ticking faster and faster'), ('bleep', 'Censor bleep'), ('static', 'TV static burst'), ('ping', 'Phone notification'), ('error', 'Retro computer error buzz'),
  ('pop', 'Bubble pop: something appears'), ('click', 'Camera shutter'), ('squeak', 'Marker squeak while drawing')]
+
+REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open('/home/claude/aliens/sfx_real/pick.tsv')]   # (name, Mixkit title)
 
 def entries():
     out = []
@@ -103,6 +138,8 @@ def timeline(od):
     for f in set(IMGS + ['G_alien_popcorn.jpg', 'G_alien_radio.jpg', 'R_leopard.jpg']):
         for d in ('/home/claude/aliens/public/real', '/home/claude/aliens/ai'):
             if os.path.exists(f'{d}/{f}'): shutil.copy(f'{d}/{f}', f'{od}/{f}'); break
+    for d in ('/home/claude/aliens/lottie/json', '/home/claude/aliens/video/overlays'):
+        for f in os.listdir(d): shutil.copy(f'{d}/{f}', f'{od}/{f}')
     for e in E:   # the lens shows the shot's own picture
         if e['card'] and e['card']['kind'] == 'lens': e['card']['img'] = e['shotdef']['img']
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', str(dur), '-c:a', 'libmp3lame', f'{od}/vo.mp3'], check=True)
@@ -110,22 +147,23 @@ def timeline(od):
     json.dump({'dir': pub, 'scene': 'fxlib', 't0': 0, 'dur': dur, 'words': words, 'shots': shots, 'cards': cards, 'finish': {'vignette': 0.3}}, open(f'{od}/timeline.json', 'w'), indent=1)
     print(len(E), 'entries,', dur, 's')
 
-def clips(render, sfx, od):
-    os.makedirs(od, exist_ok=True)
-    for e in entries():
-        ins, fc, mix = ['-ss', str(e['t']), '-t', str(SEG), '-i', render], [], []
+def clips(render, sfx, od, first=0):
+    os.makedirs(od, exist_ok=True); E = entries(); base = E[first]['t']
+    for e in E[first:]:
+        ins, fc, mix = ['-ss', str(round(e['t'] - base, 2)), '-t', str(SEG), '-i', render], [], []
         for k, s in enumerate(e['sounds']):
-            n, off = s.split('@'); ins += ['-i', f'{sfx}/sfx_{n}.wav']
+            n, off = s.split('@'); ins += ['-i', f'{sfx}_real/mk_{n[2:]}.wav' if n.startswith('r:') else f'{sfx}/sfx_{n}.wav']
             fc.append(f'[{k + 1}:a]volume=-6dB,adelay={int(float(off) * 1000)}:all=1,aresample=48000[s{k}]'); mix.append(f'[s{k}]')
         if mix: fc.append(f"{''.join(mix)}amix=inputs={len(mix)}:normalize=0,apad,atrim=0:{SEG}[a]"); amap = ['-map', '[a]']
         else: fc.append(f'anullsrc=r=48000:cl=stereo,atrim=0:{SEG}[a]'); amap = ['-map', '[a]']
         subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', ';'.join(fc), '-map', '0:v', *amap, '-vf', 'scale=640:360',
                         '-c:v', 'libx264', '-crf', '27', '-preset', 'veryfast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', '-t', str(SEG), f'{od}/{e["id"]}.mp4'], check=True)
     for n, _ in SOUNDS: subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', f'{sfx}/sfx_{n}.wav', '-c:a', 'libmp3lame', '-b:a', '96k', f'{od}/sfx_{n}.mp3'], check=True)
+    for n, _ in REAL: subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', f'{sfx}_real/mk_{n}.mp3', '-t', '6', '-c:a', 'libmp3lame', '-b:a', '96k', f'{od}/real_{n}.mp3'], check=True)
     print('clips done')
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'timeline': timeline(sys.argv[2])
-    if cmd == 'clips': clips(*sys.argv[2:5])
-    if cmd == 'json': json.dump({'entries': [{k: v for k, v in e.items() if k not in ('shotdef', 'card', 't')} for e in entries()], 'sounds': SOUNDS}, open(sys.argv[2], 'w'), indent=1)
+    if cmd == 'clips': clips(*sys.argv[2:5], int(sys.argv[5]) if len(sys.argv) > 5 else 0)
+    if cmd == 'json': json.dump({'entries': [{k: v for k, v in e.items() if k not in ('shotdef', 'card', 't')} for e in entries()], 'sounds': SOUNDS, 'real': REAL}, open(sys.argv[2], 'w'), indent=1)
