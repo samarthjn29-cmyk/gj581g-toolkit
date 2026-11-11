@@ -152,7 +152,7 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: c.ground || '#0E0C0A'}}>
       <AbsoluteFill style={{background: c.ground ? 'radial-gradient(ellipse at 50% 45%, rgba(255,240,170,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(120,70,0,0.25) 100%)' : 'radial-gradient(ellipse at 50% 45%, rgba(60,48,36,0.55) 0%, rgba(14,12,10,0) 65%)'}} />
       <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: ws.length > 3 ? 132 : 156, fontWeight: c.ink ? 600 : 500, position: 'relative', textAlign: 'center', maxWidth: 1600, lineHeight: 1.05, letterSpacing: 1}}>
-        {ws.map((w, i) => { const s0 = st[i] ?? c.t + i * 0.3, p = R(t, s0 - 0.06, s0 + 0.14);
+        {ws.map((w, i) => { const s0 = st[i] ?? c.t + i * 0.3, p = c.static ? 1 : R(t, s0 - 0.06, s0 + 0.14);   // c.static: all words at once, no motion (Sam, 11 Nov 2026)
           return <span key={i} style={{color: col(w), opacity: p, display: 'inline-block', transform: `translateY(${(1 - p) * 26}px) scale(${0.96 + 0.04 * p})`, marginRight: '0.24em'}}>{w}</span>; })}</div></AbsoluteFill>; }
   // kinetic text: the spoken words appear one by one on their aligned times (verbatim from the line)
   if (c.kind === 'kinetic') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
