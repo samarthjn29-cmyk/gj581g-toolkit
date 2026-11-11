@@ -148,6 +148,29 @@ def newsstab():
     x = lp(x, 2500) * np.exp(-t * 2.2) + 0.6 * np.sin(2 * np.pi * 55 * t) * np.exp(-t * 5) + 0.4 * hp(rng.standard_normal(len(t)), 4000) * np.exp(-t * 12)
     return norm(np.tanh(2 * x))
 
+def bell(f, d=0.9, k=4.0):   # struck bell: inharmonic partials, fast attack
+    t = t_(d); return sum(a * np.sin(2 * np.pi * f * m * t) * np.exp(-t * k * m ** 0.5) for m, a in ((1, 1), (2.76, 0.5), (5.4, 0.25), (8.9, 0.12))) * env(len(t), 0.002, 0.05)
+
+def ding(): return norm(bell(1568, 1.2, 3.0))                         # one clean "ding!" (G6)
+
+def sparkle():                                                       # a glint: a quick rising run of tiny bells + shimmer
+    out = np.zeros(int(0.9 * SR))
+    for i, f in enumerate((2093, 2637, 3136, 3951, 4699)):
+        b = bell(f, 0.5, 9); s = int(i * 0.055 * SR); out[s:s + len(b)] += b * (0.6 + 0.1 * i)
+    t = t_(0.9); out += 0.08 * hp(rng.standard_normal(len(t)), 7000) * np.exp(-t * 6)
+    return norm(out)
+
+def ticks(d=2.6):                                                    # a stopwatch ticking faster and faster, then a click
+    out = np.zeros(int(d * SR)); t = 0.0; gap = 0.32
+    while t < d - 0.15:
+        tk = t_(0.03); c = hp(rng.standard_normal(len(tk)), 2500) * np.exp(-tk * 260) + 0.5 * np.sin(2 * np.pi * 3200 * tk) * np.exp(-tk * 300)
+        s = int(t * SR); out[s:s + len(c)] += c[:len(out) - s]; t += gap; gap = max(0.045, gap * 0.86)
+    return norm(out)
+
+def climb(d=1.6):                                                    # a long slide whistle up, for a chart bar that keeps going
+    t = t_(d); f = 500 * 2 ** (2.6 * (t / d) ** 1.3)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), 0.05, 0.12) * (1 + 0.06 * np.sin(2 * np.pi * 7 * t)))
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']

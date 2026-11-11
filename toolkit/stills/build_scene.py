@@ -55,6 +55,13 @@ def main():
         ce = c['t'] + c.get('dur', 4.5)
         for s in shots[1:]:
             if ce - 0.3 < s['t'] <= ce + 0.6: s['t'] = round(ce - 0.3, 3); s['cut'] = True; s.pop('fade', None)   # hard cut, hidden by the card: a dissolve here still ghosted the old picture
+    # Two full-screen cards back to back (Sam, Aliens opening v4, 11 Nov 2026: "at 0:23 the alien picture again come back"): the first
+    # card's fade-out and the next one's fade-in crossed, so the shot under them showed through for a few frames. Join them with a
+    # hard cut: the first runs right up to the second (cutOut), the second appears at once (cutIn).
+    opq = sorted([c for c in cards if (c.get('kind') in ('kinetic', 'number', 'bars') and c.get('style') not in ('rise', 'roll'))], key=lambda c: c['t'])
+    for c0, c1 in zip(opq, opq[1:]):
+        gap = c1['t'] - (c0['t'] + c0.get('dur', 4.5))
+        if -0.5 < gap < 0.35: c0['dur'] = round(c1['t'] - c0['t'], 3); c0['cutOut'] = True; c1['cutIn'] = True
     dur = round(t1 - t0, 2); fails = []
     for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length
         if shots[i]['t'] < shots[i - 1]['t']: fails.append(f"{shots[i]['id']} starts before {shots[i - 1]['id']}: list shots in spoken order")

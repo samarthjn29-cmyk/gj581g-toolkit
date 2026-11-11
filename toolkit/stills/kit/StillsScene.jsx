@@ -149,7 +149,7 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
   // bars (picture-gags catalogue E6, Aliens opening 11 Nov 2026): a true-scale bar chart on the number-card ground. The small bar is
   // drawn first, then the camera "tilts up" the big bar (scale kept honest: c.ratio x the small bar), so the big bar runs off the top
   // for a long blurred scroll before its label lands. c.a / c.b = {label, value}; c.ratio = b / a.
-  if (c.kind === 'bars') { const q = t - c.t, oo = R(t, c.t, c.t + 0.15) * (1 - R(t, c.t + d - 0.12, c.t + d)), G = c.ground || '#FCCF3E', I = c.ink || '#0B5E2A', N = c.inkNum || '#063F1C';
+  if (c.kind === 'bars') { const q = t - c.t, oo = (c.cutIn ? 1 : R(t, c.t, c.t + 0.15)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.12, c.t + d)), G = c.ground || '#FCCF3E', I = c.ink || '#0B5E2A', N = c.inkNum || '#063F1C';
     const h0 = c.h0 || 8, H = h0 * c.ratio, base = 860, s0 = c.hold0 ?? 0.75, s1 = c.scrollEnd ?? (d - 0.45), e = R(t, c.t + s0, c.t + s1), ez = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
     const Y = ez * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
     const ticks = []; for (let k = 1; k * tick < H; k++) { const y = base - k * tick + Y; if (y > -60 && y < 1140) ticks.push(<div key={k} style={{position: 'absolute', left: 1180, top: y - 2, width: 60, height: 4, background: N}}><div style={{position: 'absolute', right: 80, top: -26, fontFamily: F, fontWeight: 800, fontSize: 44, color: N, whiteSpace: 'nowrap'}}>{(c.tickLabel || '$#B').replace('#', k * (c.tickStep || 50))}</div></div>); }
@@ -166,6 +166,23 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
       </div>
       {e > 0.08 && e < 0.92 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'still going…'}</div> : null}
       <div style={{position: 'absolute', left: 1160, width: 460, top: top - 120, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 72, color: N, opacity: R(t, c.t + s1 - 0.1, c.t + s1 + 0.1), transform: `scale(${1 + 0.25 * (1 - R(t, c.t + s1 - 0.1, c.t + s1 + 0.2))})`}}>{c.b.value}</div>
+    </AbsoluteFill>; }
+  // counter (Aliens opening, 11 Nov 2026): a money counter in a pill that holds, then drains faster and faster to its end value,
+  // which flashes red. c.from / c.to numbers, c.prefix, c.hold s before it starts draining, c.drain s.
+  if (c.kind === 'counter') { const q = t - c.t, hold = c.hold ?? 0.6, dr = c.drain ?? 1.6, p = Math.min(1, Math.max(0, (q - hold) / dr)), e = p * p * p;
+    const v = Math.round(c.from + (c.to - c.from) * e), done = p >= 1, fl = done ? (Math.floor((q - hold - dr) * 8) % 2 === 0) : false, oo = R(t, c.t, c.t + 0.15) * (1 - R(t, c.t + d - 0.15, c.t + d));
+    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: '50%', bottom: c.bottom ?? 120, transform: `translateX(-50%) scale(${done ? 1.12 : 1})`, background: 'rgba(10,9,8,0.82)', borderRadius: 28, padding: '18px 54px',
+      border: `6px solid ${done ? '#E0261B' : '#FCCF3E'}`, fontFamily: '"JetBrains Mono", "Courier New", monospace', fontWeight: 800, fontSize: c.size || 120, color: done && fl ? '#FF3B30' : '#FCCF3E', letterSpacing: 2, whiteSpace: 'nowrap', boxShadow: '0 16px 50px rgba(0,0,0,0.6)'}}>
+      {(c.prefix ?? '$') + v.toLocaleString('en-US')}</div>
+      {c.label ? <div style={{position: 'absolute', left: '50%', bottom: (c.bottom ?? 120) + (c.size || 120) * 1.25 + 80, transform: 'translateX(-50%) rotate(-2deg)', fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: '#FFFFFF', background: 'rgba(10,9,8,0.7)', padding: '4px 26px', borderRadius: 12, whiteSpace: 'nowrap'}}>{c.label}</div> : null}</AbsoluteFill>; }
+  // glint (picture-gags catalogue: the "shiny" sparkle): a diagonal light sweep across the shot plus a few star twinkles
+  if (c.kind === 'glint') { const q = t - c.t; if (q < 0 || q > d) return null; const p = q / d, x = -40 + 140 * p;
+    const stars = c.stars || [[0.62, 0.32], [0.3, 0.45], [0.78, 0.55], [0.45, 0.25]];
+    return <AbsoluteFill style={{pointerEvents: 'none'}}>
+      <AbsoluteFill style={{background: `linear-gradient(115deg, rgba(255,255,255,0) ${x - 12}%, rgba(255,255,255,0.55) ${x}%, rgba(255,255,255,0) ${x + 12}%)`, mixBlendMode: 'screen'}} />
+      {stars.map(([sx, sy], i) => { const s0 = i * 0.12, k = Math.max(0, Math.sin(Math.PI * Math.min(1, Math.max(0, (q - s0) / 0.45)))), sz = 140 * k;
+        return <svg key={i} width={sz * 2 + 1} height={sz * 2 + 1} style={{position: 'absolute', left: sx * 1920 - sz, top: sy * 1080 - sz, transform: `rotate(${q * 90}deg)`}} viewBox="-1 -1 2 2">
+          <path d="M0,-1 C0.08,-0.08 0.08,-0.08 1,0 C0.08,0.08 0.08,0.08 0,1 C-0.08,0.08 -0.08,0.08 -1,0 C-0.08,-0.08 -0.08,-0.08 0,-1 Z" fill="#FFFFFF" opacity={0.95} /></svg>; })}
     </AbsoluteFill>; }
   if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || '#FFFFFF', opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
   if (c.kind === 'pip') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14);
@@ -216,7 +233,7 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
   // short kinetic card (gj581g-stills-world s1, Sam 10 Nov 2026, Blank Rascal study): 1-4 spoken words on the video's own
   // plain dark ground, each landing on its aligned time; colour roles: ordinary cream, accent gold (c.accent), numbers blue (c.nums)
   if (c.kind === 'kinetic' && c.style === 'short') { const ws = c.text.split(' '), st = words.filter(w => w[1] >= c.t - 0.05).slice(0, ws.length).map(w => w[1]);
-    const oo = R(t, c.t, c.t + 0.12) * (1 - R(t, c.t + d - 0.15, c.t + d)), key = w => w.toLowerCase().replace(/[^a-z0-9']/g, '');
+    const oo = (c.cutIn ? 1 : R(t, c.t, c.t + 0.12)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.15, c.t + d)), key = w => w.toLowerCase().replace(/[^a-z0-9']/g, '');
     // c.ground / c.ink (Sam, Aliens opening, 11 Nov 2026: golden-parakeet yellow ground, green text): one colour for every word,
     // numbers a shade deeper; without them the default dark ground with cream / gold accent / blue numbers
     const col = w => c.ink ? ((c.nums || []).map(key).includes(key(w)) ? (c.inkNum || c.ink) : c.ink)
