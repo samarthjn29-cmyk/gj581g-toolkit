@@ -37,6 +37,14 @@ def main():
         return hits[k][1]
     shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0
     cards = [dict(c, t=at(c)) for c in P.get('cards', [])]
+    # A picture change that lands as a full-screen card ends showed the OLD picture for the card's fade-out (Sam, Aliens opening,
+    # 11 Nov 2026: "the stop watch again for a very brief moment"). Move such a change under the card, 0.3 s before it ends,
+    # so the card fades out straight onto the new picture. Opaque cards only: kinetic 'short' and 'number' cover the frame.
+    for c in cards:
+        if c.get('kind') not in ('kinetic', 'number') or c.get('style') in ('rise', 'roll'): continue
+        ce = c['t'] + c.get('dur', 4.5)
+        for s in shots[1:]:
+            if ce - 0.3 < s['t'] <= ce + 0.6: s['t'] = round(ce - 0.3, 3); s['cut'] = True; s.pop('fade', None)   # hard cut, hidden by the card: a dissolve here still ghosted the old picture
     dur = round(t1 - t0, 2); fails = []
     for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length
         if shots[i]['t'] < shots[i - 1]['t']: fails.append(f"{shots[i]['id']} starts before {shots[i - 1]['id']}: list shots in spoken order")
