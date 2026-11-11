@@ -27,6 +27,27 @@ const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useS
 
 const GAGS = {
 
+  // meter (Sam O'Nella's rating badge, study 2): a corner badge that rates each claim as it is spoken; c.steps = [[offset s,
+  // label, colour], ...]. The rating must come from the fact-check verdict, never the joke.
+  meter: (c, q, d, out) => { const st = (c.steps || [[0, 'SOLID', '#22C55E']]).filter(x => q >= x[0]).pop() || c.steps[0], since = q - st[0], s = pop(since, 0.6);
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', right: 60, top: 60, display: 'flex', alignItems: 'center', gap: 16, background: 'rgba(14,16,20,0.88)', borderRadius: 18, padding: '12px 22px 12px 14px', transform: `scale(${s})`, transformOrigin: '100% 0', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
+      <div style={{width: 58, height: 58, borderRadius: 29, background: st[2], display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: SANS, fontWeight: 900, fontSize: 34, color: '#111'}}>{st[3] || '!'}</div>
+      <div><div style={{fontFamily: SANS, fontSize: 18, letterSpacing: 3, color: '#BBB'}}>{c.title || 'EVIDENCE'}</div><div style={{fontFamily: SANS, fontWeight: 900, fontSize: 40, color: st[2]}}>{st[1]}</div></div></div></AbsoluteFill>; },
+
+  // chain (Casually Explained's evolution chain, study 2): pictures in a row joined by red arrows, each landing in turn; c.imgs, c.labels, c.gap s
+  chain: (c, q, d, out, dir) => { const n = (c.imgs || []).length, gap = c.gap ?? 0.55, w = Math.min(380, (W - 160 - (n - 1) * 90) / n), y0 = H / 2 - w * 0.4;
+    return <AbsoluteFill style={{opacity: out, background: c.ground || '#FFFFFF'}}>{c.imgs.map((im, i) => { const qi = q - i * gap; if (qi < 0) return null; const x = 80 + i * (w + 90);
+      return <React.Fragment key={i}>{i ? <svg style={{position: 'absolute', left: x - 82, top: y0 + w * 0.32}} width={74} height={40}><path d="M4 20 L56 20 M44 8 L60 20 L44 32" stroke={RED} strokeWidth={8} fill="none" strokeLinecap="round" /></svg> : null}
+        <div style={{position: 'absolute', left: x, top: y0, width: w, height: w * 0.8, transform: `scale(${pop(qi, 0.7)})`, boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', borderRadius: 8}}><Img src={staticFile(`${dir}/${im}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>
+        {c.labels && c.labels[i] ? <div style={{position: 'absolute', left: x, width: w, top: y0 + w * 0.8 + 18, textAlign: 'center', fontFamily: HAND, fontSize: 44, color: '#111', opacity: R(qi, 0.1, 0.3)}}>{c.labels[i]}</div> : null}</React.Fragment>; })}</AbsoluteFill>; },
+
+  // labels (Sam O'Nella's stacked label arrows, study 2): short labels arrive one by one, each with an arrow to the same point (x, y)
+  labels: (c, q, d, out) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.55) * H, gap = c.gap ?? 0.6, spots = c.spots || [[0.2, 0.25], [0.8, 0.22], [0.15, 0.78], [0.85, 0.75], [0.5, 0.12]];
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
+        const ex = ax + (x - ax) * 0.82 * p, ey = ay + (y - ay) * 0.82 * p; return <path key={i} d={`M ${ax} ${ay + 30} L ${ex} ${ey}`} stroke="#FCCF3E" strokeWidth={7} strokeLinecap="round" />; })}</svg>
+      {(c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
+        return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.6)}) rotate(${(i % 2 ? 4 : -4)}deg)`, fontFamily: HAND, fontSize: c.size || 60, color: '#FCCF3E', textShadow: '0 3px 10px rgba(0,0,0,0.85)', whiteSpace: 'nowrap'}}>{t}</div>; })}</AbsoluteFill>; },
+
   // sticker (Indian vlog texture, edit study 11 Nov 2026): a cut-out object (PNG with transparency, or a Lottie json) with a thick
   // white border pops in, wobbles and stays; c.img or c.file, at (x, y), c.w share of width
   sticker: (c, q, d, out, dir) => { const s = pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = 4 * Math.sin(q * 3);
