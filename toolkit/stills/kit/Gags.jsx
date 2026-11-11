@@ -27,6 +27,13 @@ const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useS
 
 const GAGS = {
 
+  // count (South Park study, 11 Nov 2026: the "01 OF 50" black counter card + an escalating running gag): a small black box
+  // with plain computer type that tallies a running gag each time it returns ("NOTHING · 1", "NOTHING · 2"...). c.text, c.x, c.y
+  // (centre, 0-1), c.size. Pops in with a hard cut, no wobble: deadpan. Sound: one typewriter-like click or none.
+  count: (c, q, d, out) => <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: (c.x ?? 0.5) * W, top: (c.y ?? 0.8) * H,
+      transform: 'translate(-50%, -50%)', background: '#000000', color: '#FFFFFF', fontFamily: MONO, fontSize: c.size || 54, letterSpacing: 6,
+      padding: '18px 40px', whiteSpace: 'pre', boxShadow: '0 10px 30px rgba(0,0,0,0.6)'}}>{q < 0.05 ? '' : c.text}</div></AbsoluteFill>,
+
   // meter (Sam O'Nella's rating badge, study 2): a corner badge that rates each claim as it is spoken; c.steps = [[offset s,
   // label, colour], ...]. The rating must come from the fact-check verdict, never the joke.
   meter: (c, q, d, out) => { const st = (c.steps || [[0, 'SOLID', '#22C55E']]).filter(x => q >= x[0]).pop() || c.steps[0], since = q - st[0], s = pop(since, 0.6);
