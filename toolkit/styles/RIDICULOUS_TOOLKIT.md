@@ -1,5 +1,7 @@
 # Ridiculous toolkit (GJ 581g)
 
+See also `styles/PICTURE_GAGS_CATALOGUE.md`: about 180 picture gags from Edgar Wright, TV Tropes, xkcd, comics craft and meme structures, each with how to build it and where it fits the Aliens script.
+
 Study for Sam, 11 Nov 2026, after the "most ridiculous version" of the Aliens opening. The goal is to be as silly as possible while every fact stays true and the main point stays clear. We borrow **techniques** only, never other people's clips, characters, jingles or catchphrases.
 
 ## 1. The six sources and what each teaches
