@@ -250,7 +250,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${dark * o})`}}><Tex c={c} o={o} dir={dir} />
       <div style={{fontFamily: FONT, fontSize: c.hand ? 84 : 92, position: 'relative', color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.12, textShadow: '0 4px 24px rgba(0,0,0,0.8)'}}>
         {ws.map((w, i) => { const p = R(t, (st[i] ?? c.t + i * 0.3) - 0.05, (st[i] ?? c.t + i * 0.3) + 0.2); return <span key={i} style={{opacity: p, display: 'inline-block', transform: `translateY(${(1 - p) * 18}px)`, marginRight: '0.28em'}}>{w}</span>; })}</div></AbsoluteFill>; }
-  if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(10,9,8,${(c.dim ?? 0.35) * o})`, paddingTop: c.y ? 2 * c.y : 0}}>
+  if (c.kind === 'title') return <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', opacity: o, background: `rgba(10,9,8,${(c.dim ?? 0.35) * o})`, paddingTop: c.y > 0 ? 2 * c.y : 0, paddingBottom: c.y < 0 ? -2 * c.y : 0}}>
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 84, letterSpacing: 6, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, whiteSpace: 'pre-line', lineHeight: 1.1, textShadow: '0 4px 24px rgba(0,0,0,0.7)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // on-screen text (Sam, 8 Nov 2026: "putting text on the screen where it makes sense"): a key line in the end-title look,
   // set low so the picture stays visible; words verbatim from a fact-checked line
