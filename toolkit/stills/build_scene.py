@@ -13,8 +13,18 @@ def words(mp3, tmp):
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', mp3, '-ar', '16000', '-ac', '1', '-f', 'f32le', tmp], check=True)
     from faster_whisper import WhisperModel
     m = WhisperModel('small', device='cpu', compute_type='int8')
-    segs, _ = m.transcribe(np.fromfile(tmp, dtype=np.float32), word_timestamps=True, language='en')
-    return [[w.word.strip(), round(w.start, 2), round(w.end, 2)] for s in segs for w in s.words]
+    y = np.fromfile(tmp, dtype=np.float32); sr = 16000
+    tr = lambda x, off: [[w.word.strip(), round(w.start + off, 2), round(w.end + off, 2)] for s in m.transcribe(x, word_timestamps=True, language='en')[0] for w in s.words]
+    W = tr(y, 0)
+    # Whisper sometimes skips a whole spoken stretch (Aliens opening, 11 Nov 2026: "make some noise... a hundred million
+    # dollars. For ten years of it." vanished, 7 s with no words). Any gap over 2.5 s that has speech in it is transcribed again
+    # on its own and the words spliced in.
+    edges = [0.0] + [w[2] for w in W]; starts = [w[1] for w in W] + [len(y) / sr]; add = []
+    for g0, g1 in zip(edges, starts):
+        if g1 - g0 > 2.5:
+            seg = y[int(g0 * sr):int(g1 * sr)]
+            if len(seg) and np.sqrt(np.mean(seg ** 2)) > 0.02: add += [w for w in tr(seg, g0) if g0 - 0.05 <= w[1] < g1]
+    return sorted(W + add, key=lambda w: w[1])
 
 def norm(w): return re.sub(r'[^a-z0-9]', '', w.lower())
 
