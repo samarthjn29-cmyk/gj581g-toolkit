@@ -222,7 +222,7 @@ const GAGS = {
       {[0, 1, 2, 3].map(i => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: r(i) * H, height: 10 + r(i + 9) * 70, backdropFilter: `hue-rotate(${r(i + 3) * 180}deg) saturate(3)`, transform: `translateX(${(r(i + 5) - 0.5) * 120}px)`, background: 'rgba(255,0,80,0.08)'}} />)}
       <AbsoluteFill style={{boxShadow: `inset ${(r(7) - 0.5) * 30}px 0 0 rgba(0,255,255,0.25), inset ${(r(8) - 0.5) * -30}px 0 0 rgba(255,0,0,0.25)`}} />
       <div style={{position: 'absolute', left: 90, top: 70, fontFamily: MONO, fontWeight: 800, fontSize: 64, color: '#FFFFFF', textShadow: '3px 0 #f0f, -3px 0 #0ff'}}>{c.text ?? 'PLAY ▶'}</div>
-      <div style={{position: 'absolute', right: 90, bottom: 80, fontFamily: MONO, fontSize: 48, color: '#FFFFFF', textShadow: '3px 0 #f0f, -3px 0 #0ff'}}>{c.stamp ?? 'NOV 11 2026'}</div></AbsoluteFill>; },
+      <div style={{position: 'absolute', right: 90, bottom: 80, fontFamily: MONO, fontSize: 48, color: '#FFFFFF', textShadow: '3px 0 #f0f, -3px 0 #0ff'}}>{c.stamp ?? ''}</div></AbsoluteFill>; },
 
   // expectation vs reality: two pictures side by side with labels (full screen)
   split: (c, q, d, out, dir) => { const p = R(q, 0, 0.25);
@@ -256,7 +256,7 @@ const GAGS = {
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: y - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{width: 4, height: 120, background: '#DDD'}} />
       <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
-        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 26, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
+        <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 30, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail
   spotlight: (c, q, d, out) => { const p = R(q, 0, 0.5), r = 1400 - (1400 - (c.r ?? 0.14) * W) * p;
