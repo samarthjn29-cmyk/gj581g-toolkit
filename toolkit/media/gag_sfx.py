@@ -198,6 +198,32 @@ def squeak():                                                        # marker sq
 def fall(d=1.3):                                                     # slide whistle down (things going badly)
     t = t_(d); f = 1800 * 2 ** (-2.4 * (t / d) ** 1.2)
     return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), 0.03, 0.15) * (1 + 0.06 * np.sin(2 * np.pi * 7 * t)))
+def holdmusic(d=3.4):                                                # telephone hold music: Beethoven's Fur Elise opening (public-domain tune), thin and tinny like a phone line
+    E5, Ds5, B4, D5, C5, A4, C4, E4, A3 = 659.3, 622.3, 493.9, 587.3, 523.3, 440.0, 261.6, 329.6, 220.0
+    notes = [(E5, .2), (Ds5, .2), (E5, .2), (Ds5, .2), (E5, .2), (B4, .2), (D5, .2), (C5, .2), (A4, .6), (C4, .2), (E4, .2), (A4, .2), (B4, .6)]
+    out = []
+    for f, du in notes:
+        t = t_(du); x = sum(np.sign(np.sin(2 * np.pi * f * k * t)) / k for k in (1, 2)) * env(len(t), .005, .08)   # square-ish chip tone
+        out.append(x)
+    x = np.concatenate(out)[:int(d * SR)]
+    x = bp(x, 400, 3000, 3) + 0.004 * rng.standard_normal(len(x))   # phone band + line hiss
+    return norm(x, -6)
+def crickets(d=3.0):                                                 # night crickets: a lone chirping insect, for "the universe said... nothing"
+    t = t_(d); x = np.zeros_like(t)
+    for start in np.arange(0.15, d - 0.3, 0.62):
+        for p in range(3):                                           # one chirp = three fast pulses
+            s = int((start + p * 0.045) * SR); n = int(0.03 * SR); tt = np.arange(n) / SR
+            x[s:s + n] += np.sin(2 * np.pi * 4300 * tt) * np.hanning(n)
+    return norm(x * (0.85 + 0.15 * np.sin(2 * np.pi * 0.4 * t)), -6)
+def brrr(d=1.0):                                                     # teeth-chattering shiver: fast dry clicks
+    t = t_(d); x = np.zeros_like(t)
+    for s0 in np.arange(0.02, d - 0.05, 0.055):
+        s = int(s0 * SR); n = int(0.012 * SR); x[s:s + n] += rng.standard_normal(n) * np.hanning(n)
+    return norm(bp(x, 1500, 6000) * env(len(t), 0.05, 0.3), -6)
+def wind(d=2.5):                                                     # cold wind whistling around a metal box
+    t = t_(d); n = rng.standard_normal(len(t)); f = 700 + 300 * np.sin(2 * np.pi * 0.35 * t)
+    x = sum(bp(n, fc * 0.92, fc * 1.08) for fc in (600, 900)) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.5 * t))
+    return norm(x * env(len(t), 0.5, 0.8), -6)
 
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
