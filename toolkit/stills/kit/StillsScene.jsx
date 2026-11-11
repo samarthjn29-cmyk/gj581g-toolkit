@@ -77,7 +77,7 @@ const Diagram = ({s, t, words}) => { const g = s.diagram, a = R(t, s.t, s.t + 0.
 const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.page) return <PageShot s={s} t={t} dir={dir} />;
   if (s.diagram) return <Diagram s={s} t={t} words={words} />;
-  const SPECIAL = {whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
+  const SPECIAL = {triple: 'hold', whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
   const [s0, s1, x0, x1, y0, y1] = MOVES[SPECIAL[s.move] || (s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift'))], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
   let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
   // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
@@ -88,6 +88,8 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.move === 'spin') { const p = 1 - Math.pow(1 - ep(0.6), 3); rot = -360 * (1 - p); sc *= 0.2 + 0.8 * p; }
   if (s.move === 'crash') { sc += 0.8 * Math.pow(1 - ep(0.35), 3); blur = 8 * (1 - ep(0.2)); }
   if (s.move === 'bounce') sc *= 1 - 0.22 * Math.exp(-q * 4.5) * Math.cos(q * 15);
+  // triple zoom (Indian daily-soap reaction, Ridiculous toolkit 11 Nov 2026): three snaps at triple_at + 0 / 0.35 / 0.7 s, then a slow sink-in
+  if (s.move === 'triple') { const a = s.t + (s.triple_at ?? 0.2); [0, 0.35, 0.7].forEach(o => { sc += 0.17 * interpolate(t, [a + o, a + o + 0.09], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }); sc += 0.04 * Math.max(0, t - a - 0.8); }
   if (s.move === 'dutch') rot = (s.angle ?? 8) * (q < 0.2 ? q / 0.2 : 1);
   // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
@@ -120,6 +122,30 @@ const Card = ({c, t, words = [], dir}) => { const d = c.dur || 4.5, o = R(t, c.t
       const x = r(1) * 1920, sp = 420 + r(2) * 520, y = -160 + (q * sp + r(3) * 1200) % 1350, a = (r(4) - 0.5) * 80 + Math.sin(q * (2 + r(5) * 3) + i) * 35;
       return <g key={i} transform={`translate(${x} ${y}) rotate(${a}) scale(${0.7 + r(6) * 0.6})`}><rect x={-62} y={-28} width={124} height={56} rx={4} fill="#5E9B5A" stroke="#2F5D31" strokeWidth={3} />
         <rect x={-50} y={-18} width={100} height={36} rx={3} fill="none" stroke="#CFE6C3" strokeWidth={2} /><text x={0} y={12} textAnchor="middle" fontFamily="Georgia, serif" fontWeight="700" fontSize={30} fill="#E9F5E2">$</text></g>; })}</svg></AbsoluteFill>; }
+  // aside (Bill Wurtz-style tiny text pop): lowercase serif, on and off with no fade
+  if (c.kind === 'aside') { if (t < c.t || t > c.t + d) return null;
+    return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `rotate(${c.rot ?? -3}deg)`, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: c.size || 64,
+      color: c.color || '#FFFFFF', textShadow: '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></AbsoluteFill>; }
+  // breaking banner + ticker (Hindi primetime parody, our own colours, no channel branding)
+  if (c.kind === 'banner') { const p = Easing.out(Easing.cubic)(R(t, c.t, c.t + 0.25)), q = t - c.t, oo = 1 - R(t, c.t + d - 0.2, c.t + d), pulse = 0.85 + 0.15 * Math.sin(q * 12);
+    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 0, right: 0, bottom: 150, height: 150, transform: `translateX(${(1 - p) * -110}%)`, display: 'flex', alignItems: 'stretch', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
+      <div style={{background: '#FFD400', color: '#B00000', fontFamily: 'Inter, Arial, sans-serif', fontWeight: 900, fontSize: 54, padding: '0 34px', display: 'flex', alignItems: 'center', letterSpacing: 2, opacity: pulse}}>{c.label || 'BREAKING'}</div>
+      <div style={{flex: 1, background: 'linear-gradient(180deg, #D3121B, #8E0A10)', color: '#FFFFFF', fontFamily: 'Inter, Arial, sans-serif', fontWeight: 800, fontSize: c.size || 58, display: 'flex', alignItems: 'center', padding: '0 34px', whiteSpace: 'nowrap', overflow: 'hidden'}}>{c.text}</div></div>
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 96, height: 54, background: '#0B1A3A', color: '#FFFFFF', overflow: 'hidden', transform: `translateX(${(1 - p) * 110}%)`}}>
+        <div style={{position: 'absolute', top: 8, left: 1920 - q * 260, whiteSpace: 'nowrap', fontFamily: 'Inter, Arial, sans-serif', fontWeight: 700, fontSize: 34}}>{(c.ticker || '').toUpperCase()}</div></div></AbsoluteFill>; }
+  // starburst (infomercial): a spiky yellow star that pops in and wobbles, red text
+  if (c.kind === 'starburst') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.3 * Math.exp(-q * 7) * Math.sin(q * 24) - Math.exp(-q * 16), oo = 1 - R(t, c.t + d - 0.15, c.t + d), n = 18, R1 = 300, R2 = 230;
+    const pts = Array.from({length: n * 2}).map((_, i) => { const a = (i / (n * 2)) * 2 * Math.PI, r = i % 2 ? R2 : R1; return `${Math.cos(a) * r},${Math.sin(a) * r}`; }).join(' ');
+    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 960 + (c.x ?? 420) - 320, top: 540 + (c.y ?? -170) - 320, width: 640, height: 640, transform: `scale(${b}) rotate(${(c.rot ?? 12) + Math.sin(q * 5) * 4}deg)`}}>
+      <svg width={640} height={640} viewBox="-320 -320 640 640"><polygon points={pts} fill="#FFE51F" stroke="#E0261B" strokeWidth={10} /></svg>
+      <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 120, fontFamily: 'Inter, Arial, sans-serif', fontWeight: 900, fontSize: c.size || 64, lineHeight: 1.0, color: '#E0261B', whiteSpace: 'pre-line'}}>{c.text}</div></div></AbsoluteFill>; }
+  // headline (fake front page, our own masthead "THE DAILY SHRUG"): spins in like an old film newspaper, Onion-style sober headline
+  if (c.kind === 'headline') { const p = 1 - Math.pow(1 - R(t, c.t, c.t + 0.7), 3), oo = 1 - R(t, c.t + d - 0.2, c.t + d);
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: `rgba(0,0,0,${0.45 * p})`}}><div style={{width: 1180, height: 760, background: '#F4EFE2', boxShadow: '0 30px 80px rgba(0,0,0,0.7)', transform: `rotate(${-720 * (1 - p) - 3}deg) scale(${0.1 + 0.9 * p})`, padding: '40px 60px', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1A1814'}}>
+      <div style={{textAlign: 'center', fontSize: 92, fontWeight: 700, letterSpacing: 4, borderBottom: '6px double #1A1814', paddingBottom: 10}}>THE DAILY SHRUG</div>
+      <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 24, padding: '8px 0', borderBottom: '2px solid #1A1814', fontStyle: 'italic'}}><span>{c.kicker || 'Late edition'}</span><span>Price: one hundred million dollars</span></div>
+      <div style={{fontSize: c.size || 84, fontWeight: 700, lineHeight: 1.05, textAlign: 'center', margin: '34px 0 24px'}}>{c.text}</div>
+      <div style={{display: 'flex', gap: 30}}>{[0, 1, 2].map(k => <div key={k} style={{flex: 1}}>{Array.from({length: 7}).map((_, j) => <div key={j} style={{height: 12, margin: '12px 0', background: '#B9B2A2', width: `${70 + ((j * 37 + k * 11) % 30)}%`}} />)}</div>)}</div></div></AbsoluteFill>; }
   if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || '#FFFFFF', opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
   if (c.kind === 'pip') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14);
     return <AbsoluteFill style={{opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{position: 'absolute', right: c.right ?? 70, bottom: c.bottom ?? 70, width: c.w || 560, height: (c.w || 560) * 9 / 16, transform: `scale(${b}) rotate(${c.rot ?? 4}deg)`, transformOrigin: '100% 100%',

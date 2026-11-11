@@ -46,7 +46,7 @@ def main():
         if len(hits) <= k: sys.exit(f"cue word '{shot['word']}' not found in {shot['at']}")
         return hits[k][1]
     shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0
-    cards = [dict(c, t=at(c)) for c in P.get('cards', [])]
+    cards = [dict(c, t=round(at(c) + c.get('offset', 0), 2)) for c in P.get('cards', [])]   # offset: seconds after the cue (gags)
     # A picture change that lands as a full-screen card ends showed the OLD picture for the card's fade-out (Sam, Aliens opening,
     # 11 Nov 2026: "the stop watch again for a very brief moment"). Move such a change under the card, 0.3 s before it ends,
     # so the card fades out straight onto the new picture. Opaque cards only: kinetic 'short' and 'number' cover the frame.

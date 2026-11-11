@@ -113,6 +113,41 @@ def dundun():
         out += [lp(x, 1200) * env(len(t), 0.01, 0.2 if d < 1 else 0.8), np.zeros(int(0.08 * SR))]
     return norm(np.concatenate(out))
 
+def whoosh():
+    t = t_(0.45); n = rng.standard_normal(len(t)); y = np.zeros_like(n); blk = 480
+    for i in range(0, len(n), blk):
+        fc = 300 + 4000 * np.sin(np.pi * i / len(n)); y[i:i + blk] = bp(n[i:i + blk], max(80, fc * 0.6), min(20000, fc * 1.4))
+    return norm(y * np.sin(np.pi * t / 0.45) ** 2)
+
+def thunder():
+    t = t_(1.4); x = lp(rng.standard_normal(len(t)), 220) * np.exp(-t * 2.5) * (1 + 2 * (t < 0.08))
+    hit = np.sin(2 * np.pi * 55 * t) * np.exp(-t * 4)
+    return norm(np.tanh(2.5 * (x + hit)))
+
+def boing():
+    t = t_(0.7); f = 180 + 260 * np.exp(-t * 6) * np.cos(2 * np.pi * 9 * t)
+    return norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4))
+
+def tada():
+    out = []
+    for f, d in ((523.3, 0.13), (659.3, 0.13), (784.0, 0.13), (1046.5, 0.7)):   # C E G C, brassy synth
+        t = t_(d); x = sum(saw(f * k, t) / k for k in (1, 2, 3)) * 0.5 + 0.3 * np.sin(2 * np.pi * f * 2 * t)
+        out.append(lp(x, 3500) * env(len(t), 0.005, 0.05 if d < 0.5 else 0.4))
+    return norm(np.concatenate(out))
+
+def kazoo():
+    out = []
+    for f, d in ((392, 0.18), (440, 0.18), (494, 0.18), (523, 0.6)):
+        t = t_(d); vib = 1 + 0.02 * np.sin(2 * np.pi * 6 * t); x = saw(f * vib, t)
+        x = bp(x, 400, 3500) + 0.3 * bp(rng.standard_normal(len(t)), 1500, 4000)   # buzzy membrane
+        out.append(np.tanh(3 * x) * env(len(t), 0.02, 0.08))
+    return norm(np.concatenate(out))
+
+def newsstab():
+    t = t_(1.2); x = sum(saw(f, t) for f in (110, 164.8, 220, 277.2)) / 4
+    x = lp(x, 2500) * np.exp(-t * 2.2) + 0.6 * np.sin(2 * np.pi * 55 * t) * np.exp(-t * 5) + 0.4 * hp(rng.standard_normal(len(t)), 4000) * np.exp(-t * 12)
+    return norm(np.tanh(2 * x))
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
