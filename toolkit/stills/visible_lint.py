@@ -9,7 +9,7 @@ import json, sys, os
 s0 = sys.argv[1]; MIN = float(os.environ.get('MIN', 2.0))
 path = s0 if s0.endswith('.json') else f"{os.environ.get('RM', '/home/claude/twice/remotion')}/public/{os.environ.get('PUB', 'zeig')}/{s0}/timeline.json"
 t=json.load(open(path))
-full=[c for c in t['cards'] if (c['kind'] in('kinetic','title','number','bars') and c.get('style')!='rise') or (c['kind']=='text' and c.get('bg'))]   # 'rise' text sits over the picture, not a full-screen card
+full=[c for c in t['cards'] if (c['kind'] in('kinetic','title','number','bars','chain','later','split') and c.get('style')!='rise') or (c['kind']=='text' and c.get('bg'))]   # 'rise' text sits over the picture, not a full-screen card
 ev=sorted(set([s['t'] for s in t['shots']]+[c['t'] for c in full]+[c['t']+c['dur'] for c in full]+[t['dur']]))
 def what(x):
     for c in full:

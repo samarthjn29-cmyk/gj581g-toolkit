@@ -39,6 +39,10 @@ for sh in P['shots']:
 fg = (P.get('finish') or {}).get('grain')
 if fg: shutil.copy(f'{proj}/video/{fg}', f'{out}/{fg}')
 for c in P.get('cards', []):
+    for f2 in c.get('imgs', []):   # chain, burst, split: several pictures
+        src = find(f2)
+        if src: shutil.copy(src, f'{out}/{f2}')
+        else: miss.append(f2)
     f = c.get('bg') or c.get('img') or c.get('file')   # file: a Lottie .json or an overlay clip
     if f:
         src = find(f)
