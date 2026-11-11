@@ -245,7 +245,7 @@ const GAGS = {
       <div style={{display: 'flex', alignItems: 'center', gap: 22, fontFamily: SANS, fontWeight: 700, fontSize: 44, color: '#FFFFFF'}}>
         <svg width={50} height={50} style={{transform: `rotate(${sp}deg)`}}><circle cx={25} cy={25} r={19} fill="none" stroke="#FCCF3E" strokeWidth={7} strokeDasharray="70 60" strokeLinecap="round" /></svg>{c.text ?? 'Loading…'}</div>
       <div style={{marginTop: 26, height: 40, background: '#333', borderRadius: 20, overflow: 'hidden'}}><div style={{height: '100%', width: `${Math.max(1.2, v)}%`, background: '#FCCF3E'}} /></div>
-      <div style={{marginTop: 14, fontFamily: MONO, fontSize: 38, color: '#BBBBBB', textAlign: 'right'}}>{v.toFixed(1)}%{c.sub ? `  ·  ${c.sub}` : ''}</div></div></AbsoluteFill>; },
+      <div style={{marginTop: 14, fontFamily: MONO, fontSize: 46, color: '#EEEEEE', textAlign: 'right'}}>{v.toFixed(1)}%{c.sub ? `  ·  ${c.sub}` : ''}</div></div></AbsoluteFill>; },
 
   // a swinging price tag hung on a string from (x, y)
   tag: (c, q, d, out) => { const x = (c.x ?? 0.7) * W, y = (c.y ?? 0.15) * H, sw = 14 * Math.exp(-q * 1.6) * Math.sin(q * 6) + 3;

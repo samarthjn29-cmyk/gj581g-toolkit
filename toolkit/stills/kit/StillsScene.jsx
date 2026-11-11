@@ -138,7 +138,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // starburst (infomercial): a spiky yellow star that pops in and wobbles, red text
   if (c.kind === 'starburst') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.3 * Math.exp(-q * 7) * Math.sin(q * 24) - Math.exp(-q * 16), oo = 1 - R(t, c.t + d - 0.15, c.t + d), n = 18, R1 = 300, R2 = 230;
     const pts = Array.from({length: n * 2}).map((_, i) => { const a = (i / (n * 2)) * 2 * Math.PI, r = i % 2 ? R2 : R1; return `${Math.cos(a) * r},${Math.sin(a) * r}`; }).join(' ');
-    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 960 + (c.x ?? 420) - 320, top: 540 + (c.y ?? -170) - 320, width: 640, height: 640, transform: `scale(${b}) rotate(${(c.rot ?? 12) + Math.sin(q * 5) * 4}deg)`}}>
+    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 960 + (c.x ?? 420) - 320, top: 540 + (c.y ?? -170) - 320, width: 640, height: 640, transform: `scale(${b * (c.scale ?? 1)}) rotate(${(c.rot ?? 12) + Math.sin(q * 5) * 4}deg)`}}>
       <svg width={640} height={640} viewBox="-320 -320 640 640"><polygon points={pts} fill="#FFE51F" stroke="#E0261B" strokeWidth={10} /></svg>
       <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 120, fontFamily: 'Inter, Arial, sans-serif', fontWeight: 900, fontSize: c.size || 64, lineHeight: 1.0, color: '#E0261B', whiteSpace: 'pre-line'}}>{c.text}</div></div></AbsoluteFill>; }
   // headline (fake front page, our own masthead "THE DAILY SHRUG"): spins in like an old film newspaper, Onion-style sober headline
