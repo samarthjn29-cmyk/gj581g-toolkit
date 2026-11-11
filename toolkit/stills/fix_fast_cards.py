@@ -2,12 +2,13 @@
 """Sam, 10 Nov 2026: 'some stills are switching way too fast'. Short kinetic cards must not leave a sliver of the
 picture before or after them. For each short card: a sliver after it (< MIN s before the next cut) is swallowed by
 extending the card (to at most 3.0 s); a sliver before it (the shot under it started < MIN s earlier) means the card
-is dropped. Short cards themselves last at least 1.6 s. Run after build_chapter --norender. Usage: fix_fast.py s [...]"""
-import json, sys
+is dropped. Short cards themselves last at least 1.6 s. Run after build_chapter --norender. Usage: fix_fast_cards.py s [...]  (env PROJ = project folder, RM, PUB as in
+build_chapter.sh; defaults are Zeigarnik's)"""
+import json, sys, os
 MIN = 1.5
-Z = '/home/claude/zeig'
+Z = os.environ.get('PROJ', '/home/claude/zeig'); RM = os.environ.get('RM', '/home/claude/twice/remotion'); PUB = os.environ.get('PUB', 'zeig')
 for s in sys.argv[1:]:
-    T = json.load(open(f'/home/claude/twice/remotion/public/zeig/{s}/timeline.json'))
+    T = json.load(open(f'{RM}/public/{PUB}/{s}/timeline.json'))
     P = json.load(open(f'{Z}/stills/{s}.json'))
     cuts = sorted(x['t'] for x in T['shots']) + [T['dur']]
     full = [c for c in T['cards'] if c['kind'] in ('kinetic', 'title', 'number') or (c['kind'] == 'text' and c.get('bg'))]
