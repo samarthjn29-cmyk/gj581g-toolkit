@@ -46,30 +46,33 @@ const GAGS = {
   // triptych (South Park slide talk): a lecture stage with three framed screens; pictures swap in on cues. c.imgs = the pictures,
   // c.slides = [[offset s, screen 0-2, picture index], ...] (a screen shows its latest slide), c.speaker = optional cut-out PNG on stage,
   // c.caps = optional caption per picture index. Full-screen card. Sound: a projector click on each swap.
-  triptych: (c, q, d, out, dir) => { const sl = c.slides || [[0, 0, 0], [0.4, 1, 1], [0.8, 2, 2]], sw = 520, sh = 330, gap = 60, x0 = (W - 3 * sw - 2 * gap) / 2;
-    return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: 'linear-gradient(#2E2A26 0%, #3B352E 62%, #7A5532 62%, #5E3F22 100%)'}}>
+  triptych: (c, q, d, out, dir) => { const sl = c.slides || [[0, 0, 0], [0.4, 1, 1], [0.8, 2, 2]], sw = 570, sh = 400, gap = 40, x0 = (W - 3 * sw - 2 * gap) / 2;
+    return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: 'linear-gradient(#2E2A26 0%, #3B352E 70%, #7A5532 70%, #5E3F22 100%)'}}>
       {[0, 1, 2].map(s => { const cur = sl.filter(x => x[1] === s && q >= x[0]).pop(), age = cur ? q - cur[0] : 0;
-        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: 120, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
+        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: 170, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
           {cur ? <div style={{width: '100%', height: '100%', opacity: R(age, 0, 0.08)}}><Pic dir={dir} f={c.imgs[cur[2]]} />
-            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: 30, textAlign: 'center', padding: '6px 8px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
-      <div style={{position: 'absolute', left: W / 2 - 330, top: 760, width: 660, height: 120, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />
+            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: 40, textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
+      <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />
       {c.speaker ? <Img src={staticFile(`${dir}/${c.speaker}`)} style={{position: 'absolute', left: W / 2 - 170, top: 470, width: 340, height: 420, objectFit: 'contain'}} /> : null}</AbsoluteFill>; },
 
   // ruler (South Park's crude scale diagram): a schoolroom ruler on flat yellow; c.max (ruler length in c.unit), c.marks =
   // [[value, label], ...] drawn as red ticks with labels, c.title on top. The joke is the tiny tick. Full-screen. Sound: marker squeak.
-  ruler: (c, q, d, out) => { const x0 = 160, x1 = W - 160, y = 520, mx = c.max || 100, sx = v => x0 + (x1 - x0) * v / mx, p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), n = c.ticks || 10;
+  ruler: (c, q, d, out) => { const x0 = 160, x1 = W - 160, y = 520, mx = c.max || 100, st = c.step || mx / 10, sx = v => x0 + (x1 - x0) * v / mx, p = Easing.out(Easing.cubic)(R(q, 0, 0.35));
+    const big = Array.from({length: Math.floor(mx / st) + 1}, (_, i) => i * st).filter(v => mx - v > st * 0.4), small = Array.from({length: Math.floor(mx / (st / 5)) + 1}, (_, i) => i * st / 5);
     return <AbsoluteFill style={{opacity: out, background: c.ground || '#FCCF3E'}}>
       {c.title ? <div style={{position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: 70, color: '#111'}}>{c.title}</div> : null}
       <svg width={W} height={H} style={{position: 'absolute', transform: `translateX(${(1 - p) * -100}%)`}}>
         <rect x={x0 - 30} y={y} width={x1 - x0 + 60} height={150} rx={10} fill="#F2E3B3" stroke="#6B5A2A" strokeWidth={5} />
-        {Array.from({length: n * 5 + 1}, (_, i) => { const x = x0 + (x1 - x0) * i / (n * 5), big = i % 5 === 0;
-          return <g key={i}><line x1={x} y1={y} x2={x} y2={y + (big ? 64 : 32)} stroke="#3A2F12" strokeWidth={big ? 5 : 3} />
-            {big ? <text x={x} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{Math.round(mx * i / (n * 5))}</text> : null}</g>; })}
-        <text x={x1 + 10} y={y + 140} fontFamily={MONO} fontSize={28} textAnchor="end" fill="#3A2F12">{c.unit || ''}</text>
-        {(c.marks || []).map(([v, lab], i) => { const t = R(q, 0.5 + i * (c.gap ?? 0.7), 0.75 + i * (c.gap ?? 0.7)); if (t <= 0) return null; const x = sx(v);
+        {small.map((v, i) => <line key={'s' + i} x1={sx(v)} y1={y} x2={sx(v)} y2={y + 30} stroke="#3A2F12" strokeWidth={3} />)}
+        {big.map((v, i) => <g key={'b' + i}><line x1={sx(v)} y1={y} x2={sx(v)} y2={y + 64} stroke="#3A2F12" strokeWidth={5} />
+          <text x={sx(v)} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{v}</text></g>)}
+        <line x1={x1} y1={y} x2={x1} y2={y + 64} stroke="#3A2F12" strokeWidth={5} />
+        <text x={x1} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{mx}</text>
+        <text x={x1 + 10} y={y + 142} fontFamily={MONO} fontSize={28} textAnchor="end" fill="#3A2F12">{c.unit || ''}</text>
+        {(c.marks || []).map(([v, lab], i) => { const t = R(q, 0.5 + i * (c.gap ?? 0.7), 0.75 + i * (c.gap ?? 0.7)); if (t <= 0) return null; const x = sx(v), rt = x < W / 2;
           return <g key={i} opacity={t}><line x1={x} y1={y - 10} x2={x} y2={y + 150} stroke={RED} strokeWidth={9} strokeLinecap="round" />
-            <line x1={x} y1={y - 20} x2={x + (i % 2 ? -1 : 1) * 60} y2={y - 150} stroke={RED} strokeWidth={6} />
-            <text x={x + (i % 2 ? -1 : 1) * 70} y={y - 160} fontFamily={HAND} fontSize={58} textAnchor={i % 2 ? 'end' : 'start'} fill={RED}>{lab}</text></g>; })}</svg></AbsoluteFill>; },
+            <line x1={x} y1={y - 20} x2={x + (rt ? 1 : -1) * 60} y2={y - 150} stroke={RED} strokeWidth={6} />
+            <text x={x + (rt ? 1 : -1) * 70} y={y - 160} fontFamily={HAND} fontSize={64} textAnchor={rt ? 'start' : 'end'} fill={RED}>{lab}</text></g>; })}</svg></AbsoluteFill>; },
 
   // advert (South Park genre switch): a glossy mock advert. The picture pushes in slowly under a lens flare sweep, a gold serif title
   // rises in, and the last c.tagDur seconds cut to black with a white serif tagline. c.img, c.title, c.tagline. Full-screen.
@@ -77,14 +80,17 @@ const GAGS = {
     return <AbsoluteFill style={{opacity: out, background: '#000'}}>
       {!tag ? <><div style={{position: 'absolute', inset: 0, transform: `scale(${s})`}}><Pic dir={dir} f={c.img} filter="saturate(1.15) contrast(1.05)" /></div>
         <div style={{position: 'absolute', inset: 0, background: `radial-gradient(circle at ${fx * 100}% 30%, rgba(255,240,200,0.85) 0, rgba(255,220,150,0.25) 8%, rgba(255,255,255,0) 22%)`, mixBlendMode: 'screen'}} />
-        <div style={{position: 'absolute', left: 0, right: 0, bottom: 140, textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 96, letterSpacing: 4,
+        <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '45%', background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0))'}} />
+        <div style={{position: 'absolute', left: 0, right: 0, bottom: 120, textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 150, letterSpacing: 4,
           color: '#F4D27A', textShadow: '0 4px 24px rgba(0,0,0,0.8)', opacity: R(q, 0.3, 0.8), transform: `translateY(${(1 - R(q, 0.3, 0.8)) * 30}px)`}}>{c.title}</div></>
         : <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}><div style={{fontFamily: SERIF, fontSize: 70, color: '#FFFFFF', letterSpacing: 2, textAlign: 'center', whiteSpace: 'pre-line', opacity: R(q, d - td, d - td + 0.3)}}>{c.tagline}</div></AbsoluteFill>}</AbsoluteFill>; },
 
   // grey (Tanmay Bhat grey-out): the subject of the joke turns black and white while the rest stays in colour. A box (x, y, w, h,
   // fractions) is greyed, or the whole frame when no box. Only our own characters, stock or objects: never to mock a real, named person.
-  grey: (c, q, d, out) => { const g = R(q, 0, 0.3), box = c.w ? {left: c.x * W, top: c.y * H, width: c.w * W, height: c.h * H} : {left: 0, top: 0, width: W, height: H};
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', ...box, backdropFilter: `grayscale(${g}) contrast(${1 + 0.15 * g})`, WebkitBackdropFilter: `grayscale(${g})`, borderRadius: c.r ?? 0}} /></AbsoluteFill>; },
+  grey: (c, q, d, out, dir) => { const g = R(q, 0, 0.3), bx = c.w ? [c.x, c.y, c.w, c.h] : [0, 0, 1, 1], s = c.scale ?? 1.04;
+    const clip = `inset(${bx[1] * 100}% ${(1 - bx[0] - bx[2]) * 100}% ${(1 - bx[1] - bx[3]) * 100}% ${bx[0] * 100}% round ${c.r ?? 0}px)`;
+    return <AbsoluteFill style={{opacity: out * g, clipPath: clip}}><div style={{position: 'absolute', inset: 0, transform: `scale(${s})`}}><Pic dir={dir} f={c.img} filter="grayscale(1) contrast(1.15)" /></div></AbsoluteFill>; },
+  // c.img = the shot's own picture (put the shot on move "hold" so the grey copy lines up), c.scale = the shot's scale at that moment.
 
   // grid (Tanmay Bhat reaction grid): one line, then 2-6 reaction pictures pop in 0.1 s apart. c.imgs, c.labels (optional), c.cols.
   // Our mascot's expressions or anonymous stock only. Full-screen. Sound: one pop per tile.
