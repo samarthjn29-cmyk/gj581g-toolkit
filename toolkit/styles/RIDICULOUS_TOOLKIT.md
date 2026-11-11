@@ -50,6 +50,19 @@ Study for Sam, 11 Nov 2026, after the "most ridiculous version" of the Aliens op
 - **Ch 6, robots join the search:** overlong gag. The robot babies keep finding "signals", and each one turns out to be another plane.
 - **Ch 7, press release:** headline card "Update: It's Just Us". Then the music drops out entirely for the Hawking line, because the end needs to land sincere.
 
+## 6. More ideas from comedy-editing craft (11 Nov 2026)
+Reddit can't be searched from here (the site doesn't allow it), so these come from editors' guides on the open web.
+- **Instant replay.** Freeze, rewind, and replay the punchline in slow motion with a sports-commentator sting. For us: the Ozma "signal" turning out to be a plane, replayed at half speed with a circle drawn round the plane.
+- **The sudden stop.** Cut the music dead one beat before the punchline, and let the line land in silence. We already do it before "Yeah, who doesn't love data centres"; use it before "Congress switched it off" and "nobody's coming to pick it up".
+- **It was there all along.** A reveal that recasts an earlier shot. The popcorn alien could already be sitting in the "empty" cinema, tiny in the back row, before the cut to it.
+- **Focus on the minor detail.** Zoom past the subject to something small: the three coins in the busker's cup, the "Price: one hundred million dollars" line on the Daily Shrug.
+- **Arrive late, leave early.** Start each gag mid-action and cut out the moment it lands; trim the gap between setup and punchline to the frame.
+- **First line clearly funny, biggest laugh last.** Each chapter opens with a small laugh so viewers know they're allowed to laugh, and its biggest gag sits at the end of the chapter, never the middle.
+- **Stop before it runs out.** If the next beat doesn't escalate, cut the bit. The ridiculous cut is a menu to pick from, not a target.
+- **Don't let absurd and sincere bleed.** Keep a clear boundary: the chaos is on top of the facts, and the sincere moments (Hawking, the dare) get no gags at all.
+- **Sound carries a gag without a picture.** When there's no good image, an off-screen sound does the job (a door creak on "a knock at the door", a phone ring on "voicemail").
+- **Test it on a fresh viewer.** Show a cut to someone who hasn't seen it and watch where they laugh or drift. We can use a fresh reviewer agent the same way for pacing.
+
 ## Sources
 - [Bill Wurtz, TV Tropes](https://www.tvtropes.org/pmwiki/pmwiki.php/WebVideo/BillWurtz)
 - [History of the Entire World, I Guess, Know Your Meme](https://knowyourmeme.com/memes/history-of-the-entire-world)
@@ -59,3 +72,7 @@ Study for Sam, 11 Nov 2026, after the "most ridiculous version" of the Aliens op
 - [War gets a soundtrack on Hindi news channels, Loudest](https://loudest.in/news/war-gets-a-soundtrack-music-ai-images-and-ailaan-e-jung-on-hindi-news-channels-19279.html)
 - [How The Onion writes headlines, Newser](https://www.newser.com/story/73212/how-the-onion-writes-headlines.html)
 - [What makes satire funny, according to science, Science News](https://www.sciencenews.org/article/onion-headlines-could-teach-ai-what-makes-satire-funny)
+- [Tips for cutting comedy, PremiumBeat](https://www.premiumbeat.com/blog/tips-cutting-comedy-comedians-cars/)
+- [How to edit comedy without killing the joke, Dig Spaghetti](https://rosetta.to/u/digspaghetti/how-to-edit-comedy-without-killing-the-joke)
+- [How to edit a comedy clip and make your jokes land, Descript](https://descript.com/blog/article/learn-how-to-edit-a-comedy-clip-and-make-your-jokes-land)
+- [Editing tricks for funny, fast-paced videos, AIR Media-Tech](https://air.io/en/youtube-hacks/editing-tricks-for-fast-paced-funny-videos)
