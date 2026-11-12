@@ -253,7 +253,7 @@ const GAGS = {
   // expectation vs reality: two pictures side by side with labels (full screen).
   // c.grow = 0 | 1 ("the winner grows", SunnyV2, gag study 12 Nov 2026): at c.grow_at s that panel expands to fill the frame in 0.45 s
   // and pushes the other off its edge. Sound: whoosh at grow_at (+ a soft boom when it lands).
-  split: (c, q, d, out, dir) => { const p = R(q, 0, 0.25), gi = c.grow, g = gi === 0 || gi === 1 ? Easing.out(Easing.cubic)(R(q, c.grow_at ?? 1.0, (c.grow_at ?? 1.0) + 0.45)) : 0;
+  split: (c, q, d, out, dir) => { const p = c.noSlide ? 1 : R(q, 0, 0.25), gi = c.grow, g = gi === 0 || gi === 1 ? Easing.out(Easing.cubic)(R(q, c.grow_at ?? 1.0, (c.grow_at ?? 1.0) + 0.45)) : 0;
     const xb = gi === 0 ? W / 2 + (W / 2) * g : gi === 1 ? W / 2 - (W / 2) * g : W / 2;   // the divider's x
     const half = (img, lab, side) => { const left = side ? xb : 0, width = side ? W - xb : xb, shrinks = gi !== undefined && gi !== side;
       return <div style={{position: 'absolute', top: 0, bottom: 0, width, left, overflow: 'hidden', transform: `translateY(${(1 - p) * (side ? 100 : -100)}%)`}}>

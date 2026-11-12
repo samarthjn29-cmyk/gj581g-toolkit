@@ -56,6 +56,118 @@
      "match": {
       "kind": "clock"
      }
+    },
+    {
+     "id": "H-chips",
+     "name": "gag study 12 Nov 2026: chips (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "chips"
+     }
+    },
+    {
+     "id": "H-panels",
+     "name": "gag study 12 Nov 2026: panels (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "panels"
+     }
+    },
+    {
+     "id": "H-clones",
+     "name": "gag study 12 Nov 2026: clones (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "clones"
+     }
+    },
+    {
+     "id": "H-pile",
+     "name": "gag study 12 Nov 2026: pile (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "pile"
+     }
+    },
+    {
+     "id": "H-doodle",
+     "name": "gag study 12 Nov 2026: doodle (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "doodle"
+     }
+    },
+    {
+     "id": "H-jack",
+     "name": "gag study 12 Nov 2026: jack (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "jack"
+     }
+    },
+    {
+     "id": "H-outline",
+     "name": "gag study 12 Nov 2026: outline (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "outline"
+     }
+    },
+    {
+     "id": "H-scroll",
+     "name": "gag study 12 Nov 2026: scroll (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "scroll"
+     }
+    },
+    {
+     "id": "H-recap",
+     "name": "gag study 12 Nov 2026: recap (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "recap"
+     }
+    },
+    {
+     "id": "H-hand",
+     "name": "gag study 12 Nov 2026: hand (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "hand"
+     }
+    },
+    {
+     "id": "H-weather",
+     "name": "gag study 12 Nov 2026: weather (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "weather"
+     }
+    },
+    {
+     "id": "H-quote",
+     "name": "gag study 12 Nov 2026: quote (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "quote"
+     }
+    },
+    {
+     "id": "H-ots",
+     "name": "gag study 12 Nov 2026: ots (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "ots"
+     }
+    },
+    {
+     "id": "H-black",
+     "name": "gag study 12 Nov 2026: black (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "black"
+     }
+    },
+    {
+     "id": "H-route",
+     "name": "gag study 12 Nov 2026: route (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "route"
+     }
+    },
+    {
+     "id": "H-pov",
+     "name": "gag study 12 Nov 2026: pov (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "pov"
+     }
     }
    ]
   },

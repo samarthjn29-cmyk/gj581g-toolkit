@@ -129,8 +129,9 @@ export const GAGS2 = {
   // quote (Internet Historian source subtitle): the source's own sentence, word for word, in a cream strip at the bottom while the
   // picture acts it out; c.text (exact quote), c.source (small). Sound: none.
   quote: (c, q, d, out) => <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: 0, right: 0, bottom: 90, display: 'flex', justifyContent: 'center', transform: `translateY(${(1 - R(q, 0, 0.25)) * 40}px)`}}>
-    <div style={{...brushBox({maxWidth: 1500, padding: '14px 34px 18px', fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 50, lineHeight: 1.2, textAlign: 'center'})}}>“{c.text}”
-      {c.source ? <div style={{fontFamily: SANS, fontSize: 24, letterSpacing: 3, color: PAINT.red, marginTop: 6, textTransform: 'uppercase'}}>{c.source}</div> : null}</div></div></AbsoluteFill>,
+    <div style={{position: 'relative', maxWidth: 1500}}><div style={{position: 'absolute', inset: 0, background: PAINT.cream, border: `4px solid ${PAINT.ink}`, borderRadius: 6, filter: 'url(#pRough) drop-shadow(0 8px 18px rgba(20,16,10,0.45))'}} />   {/* painted paper scrap (Aliens ch5 review) */}
+      <div style={{position: 'relative', padding: '14px 38px 18px', fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, fontSize: c.size || 48, lineHeight: 1.2, textAlign: 'center', color: PAINT.ink}}>“{String(c.text).replace(/^[“"]+|[”"]+$/g, '')}”
+      {c.source ? <div style={{fontFamily: HAND, fontWeight: 700, fontSize: 30, color: PAINT.red, marginTop: 6}}>{c.source}</div> : null}</div></div></div></AbsoluteFill>,
 
   // ots (Some More News over-the-shoulder pun box): one small box in the top left holds the beat's picture and a short pun title and
   // changes on each cue: c.steps = [[offset s, img, caption], ...]. Our own pictures only, no real logos. Sound: click per change.

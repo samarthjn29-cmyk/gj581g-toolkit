@@ -280,6 +280,13 @@ def sigh(d=1.1):                                                     # a tired b
     t = t_(d); n = rng.standard_normal(len(t)); x = bp(n, 300, 1800) * np.exp(-2.2 * t / d) * np.minimum(1, t / 0.12)
     return norm(lp(x, 1400), -8)
 
+def knock(n=3, gap=0.22):                                            # knuckles on a wooden door: n dull thuds (Aliens ch5 doorbell gag)
+    d = n * gap + 0.3; t = t_(d); x = np.zeros(len(t))
+    for k in range(n):
+        i = int(k * gap * SR); m = min(len(t) - i, int(0.12 * SR)); tt = np.arange(m) / SR
+        x[i:i + m] += (bp(rng.standard_normal(m), 120, 900) * 0.6 + np.sin(2 * np.pi * 180 * tt)) * np.exp(-tt * 45)
+    return norm(lp(x, 2500), -4)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
