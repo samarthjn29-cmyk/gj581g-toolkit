@@ -4,6 +4,7 @@
 import React from 'react';
 import {AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, interpolate, Easing, delayRender, continueRender} from 'remotion';
 import {Lottie} from '@remotion/lottie';
+import {GAGS2} from './Gags2.jsx';   // gag-study cards (12 Nov 2026), painted-native
 
 const cl = (v) => Math.min(1, Math.max(0, v));
 const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.45, 0, 0.25, 1)});
@@ -11,7 +12,7 @@ const pop = (q, k = 1) => q < 0 ? 0 : 1 + 0.22 * k * Math.exp(-q * 7) * Math.sin
 const RED = '#E0261B', HAND = 'Kalam, cursive', SANS = 'Inter, "Helvetica Neue", Arial, sans-serif', MONO = '"JetBrains Mono", "Courier New", monospace', SERIF = '"Cormorant Garamond", Georgia, serif';
 const W = 1920, H = 1080;
 
-export const gagCard = (c, t, dir) => { const f = GAGS[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
+export const gagCard = (c, t, dir) => { const f = GAGS[c.kind] || GAGS2[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
   const d = c.dur || 2, q = t - c.t; if (q < 0 || q > d) return null;
   return f(c, q, d, c.cutOut ? 1 : 1 - R(t, c.t + d - 0.15, c.t + d), dir); };   // cutOut: hard cut out (plans with dissolve 0, Aliens ch3)
 
@@ -145,16 +146,26 @@ const GAGS = {
 
   // labels (Sam O'Nella's stacked label arrows, study 2): short labels arrive one by one, each with an arrow to the same point (x, y)
   labels: (c, q, d, out) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.55) * H, gap = c.gap ?? 0.6, spots = c.spots || [[0.2, 0.25], [0.8, 0.22], [0.15, 0.78], [0.85, 0.75], [0.5, 0.12]];
-    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.style === 'manicule' ? [] : c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
         const ex = ax + (x - ax) * 0.82 * p, ey = ay + (y - ay) * 0.82 * p; return <path key={i} d={`M ${ax} ${ay + 30} L ${ex} ${ey}`} stroke="#FCCF3E" strokeWidth={7} strokeLinecap="round" />; })}</svg>
-      {(c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
+      {c.style === 'manicule' ? (c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H, a = Math.atan2(y - ay, x - ax) * 180 / Math.PI;   // Map Men pointing hands (gag study 12 Nov 2026)
+        return <div key={'m' + i} style={{position: 'absolute', left: ax, top: ay, transform: `translate(-50%, -50%) scale(${pop(qi, 0.5)})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4}}>
+          <div style={{fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 50, color: '#2A2724', background: 'rgba(241,230,207,0.92)', padding: '0 16px 4px', borderRadius: 6, whiteSpace: 'nowrap'}}>{t}</div>
+          <svg width={120} height={70} viewBox="0 0 120 70" style={{transform: `rotate(${a}deg)`, overflow: 'visible'}}>{/* a drawn pointing hand (the ☞ glyph is missing from the render fonts) */}
+            <g fill="#F1E6CF" stroke="#2A2724" strokeWidth={4} strokeLinejoin="round"><path d="M 4 22 C 4 14 10 10 18 10 L 30 10 C 36 4 44 4 50 10 L 108 10 C 116 10 116 24 108 24 L 66 24 L 66 30 C 74 30 74 40 66 40 L 66 46 C 72 46 72 56 64 56 L 60 56 C 64 62 58 68 52 66 L 18 66 C 8 66 4 58 4 50 Z" />
+              <path d="M 66 24 L 50 24 M 66 40 L 52 40 M 64 56 L 50 56" fill="none" /><path d="M 2 18 L 2 60" strokeWidth={8} stroke="#2A2724" /></g></svg></div>; }) : null}
+      {c.style === 'manicule' ? null : (c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
         return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.6)}) rotate(${(i % 2 ? 4 : -4)}deg)`, fontFamily: HAND, fontSize: c.size || 60, color: '#FCCF3E', textShadow: '0 3px 10px rgba(0,0,0,0.85)', whiteSpace: 'nowrap',
           ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.62)', padding: '0 18px 6px', borderRadius: 10})}}>{t}</div>; })}</AbsoluteFill>; },   // dark chip: thin yellow handwriting was lost over busy painted dials (reviewer, Aliens ch1 v10)
 
   // sticker (Indian vlog texture, edit study 11 Nov 2026): a cut-out object (PNG with transparency, or a Lottie json) with a thick
   // white border pops in, wobbles and stays; c.img or c.file, at (x, y), c.w share of width
-  sticker: (c, q, d, out, dir) => { const s = pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = 4 * Math.sin(q * 3);
-    const edge = 'drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 14px rgba(0,0,0,0.45))';
+  // c.path = [[offset s, x, y, rot], ...] (Internet Historian puppet path, gag study 12 Nov 2026): the cut-out travels between the
+  // keyframes (eased), so one card spanning several shots carries the same object across them. c.border: false drops the white edge.
+  sticker: (c, q, d, out, dir) => { if (c.path && c.path.length) { const P = c.path, k = P.findIndex(p => p[0] > q), a = P[Math.max(0, (k < 0 ? P.length : k) - 1)], b = P[k < 0 ? P.length - 1 : k], u = a === b ? 1 : Easing.inOut(Easing.cubic)(cl((q - a[0]) / (b[0] - a[0])));
+      c = {...c, x: a[1] + (b[1] - a[1]) * u, y: a[2] + (b[2] - a[2]) * u, rot: (a[3] ?? 0) + ((b[3] ?? 0) - (a[3] ?? 0)) * u}; }
+    const s = c.path ? 1 : pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = c.path ? 0 : 4 * Math.sin(q * 3);
+    const edge = c.border === false ? 'drop-shadow(0 10px 14px rgba(0,0,0,0.45))' : 'drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 14px rgba(0,0,0,0.45))';
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.75) * W - w / 2, top: (c.y ?? 0.4) * H - w / 2, width: w, height: w, transform: `scale(${s}) rotate(${(c.rot ?? -6) + wob}deg)`, filter: edge, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
       {c.file ? <LottieGag c={{...c, x: 0.5, y: 0.5, w: 1}} dir={dir} out={1} inner /> : <Img src={staticFile(`${dir}/${c.img}`)} style={{maxWidth: '100%', maxHeight: '100%'}} />}</div>
       {c.text ? <div style={{position: 'absolute', left: (c.x ?? 0.75) * W, top: (c.y ?? 0.4) * H + w * 0.55, transform: `translateX(-50%) rotate(-3deg) scale(${pop(q - 0.15)})`, background: '#FCCF3E', color: '#111', fontFamily: SANS, fontWeight: 900, fontSize: 40, padding: '4px 18px', borderRadius: 8, whiteSpace: 'nowrap'}}>{c.text}</div> : null}</AbsoluteFill>; },
@@ -181,11 +192,17 @@ const GAGS = {
   // c.marks = SunnyV2's colour-coded highlighter on the page's lines: [[line, 'good' | 'bad', at s], ...], green for praise, red for damage.
   doc: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), hl = R(q, 0.7, 1.0), MK = {good: '#5BE37D', bad: '#FF5A4E'}, mk = {};
     (c.marks || []).forEach(([j, k, at]) => { mk[j] = [MK[k] || k, R(q, at ?? 0.5, (at ?? 0.5) + 0.35)]; });
+    // c.focus = line: Jarvis Johnson focus-blur read: every other line blurs and fades, the read line stays sharp (12 Nov 2026)
+    const fz = c.focus !== undefined ? R(q, 0.5, 0.8) : 0, lineSt = j => (c.focus !== undefined && j !== c.focus ? {filter: `blur(${4 * fz}px)`, opacity: 1 - 0.5 * fz} : {});
     const lineBg = j => j === (c.line ?? 6) && c.quote ? `linear-gradient(90deg, #FCCF3E ${hl * 100}%, #CFCFCF ${hl * 100}%)` : mk[j] ? `linear-gradient(90deg, ${mk[j][0]} ${mk[j][1] * 100}%, #CFCFCF ${mk[j][1] * 100}%)` : '#CFCFCF';
     const uq = q - (c.updateAt ?? 1.6), us = uq < 0 ? 0 : 1 + 0.35 * Math.exp(-uq * 10);
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', right: 120 - (1 - p) * 900, top: 90, width: 620, height: 800, background: '#FFF', boxShadow: '0 24px 60px rgba(0,0,0,0.55)', transform: `rotate(${4 - 2 * p}deg)`, overflow: 'hidden'}}>
         {c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /> : <div style={{padding: 50, fontFamily: 'Georgia, serif', color: '#222'}}><div style={{fontSize: 34, fontWeight: 700, marginBottom: 24}}>{c.title}</div>
-          {Array.from({length: 14}).map((_, j) => <div key={j} style={{height: mk[j] ? 18 : 12, margin: mk[j] ? '13px 0' : '16px 0', background: lineBg(j), width: `${75 + ((j * 29) % 25)}%`}} />)}</div>}</div>
+          {Array.from({length: 14}).map((_, j) => <div key={j} style={{height: mk[j] || c.focus === j ? 18 : 12, margin: mk[j] || c.focus === j ? '13px 0' : '16px 0', background: c.focus === j ? `linear-gradient(90deg, #FCCF3E ${fz * 100}%, #CFCFCF ${fz * 100}%)` : lineBg(j), width: `${75 + ((j * 29) % 25)}%`, ...lineSt(j)}} />)}</div>}</div>
+      {c.translate ? <div style={{position: 'absolute', left: 90, top: 140, width: 1000, display: 'flex', flexDirection: 'column', gap: 26}}>{c.translate.map(([orig, plain], i) => { const qi = q - 0.5 - i * (c.gap ?? 0.8); if (qi < 0) return null;   // LEMMiNO original + translation (12 Nov 2026)
+        const n = Math.min(plain.length, Math.floor(qi * 45)); return <div key={i} style={{display: 'flex', gap: 30, alignItems: 'baseline'}}>
+          <span style={{fontFamily: MONO, fontWeight: 800, fontSize: 60, color: '#F1E6CF', minWidth: 220, textShadow: '0 3px 10px #000'}}>{orig}</span>
+          <span style={{fontFamily: SERIF, fontWeight: 600, fontSize: 50, color: '#2A2724', background: '#E8C547', padding: '0 14px 4px', borderRadius: 4, whiteSpace: 'nowrap'}}>{plain.slice(0, n)}</span></div>; })}</div> : null}
       <div style={{position: 'absolute', left: 90, right: 820, bottom: 130, opacity: c.quote ? hl : 1, transform: `translateY(${(1 - (c.quote ? hl : 1)) * 30}px)`}}>{c.quote ? <span style={{background: '#FCCF3E', color: '#111', fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 58, lineHeight: 1.35, padding: '2px 12px', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone'}}>{c.quote}</span> : null}
         {c.source ? <div style={{marginTop: 14, fontFamily: SANS, fontSize: 28, color: '#FFF', textShadow: '0 2px 8px #000'}}>{c.source}</div> : null}
         {c.update && uq >= 0 ? <div style={{marginTop: 22, display: 'inline-block', transform: `scale(${us})`, transformOrigin: '0 50%', background: '#111', color: '#FF5A4E', fontFamily: SANS, fontWeight: 900, fontSize: c.updateSize || 46, letterSpacing: 4, textTransform: 'uppercase', padding: '8px 20px', boxShadow: '0 6px 20px rgba(0,0,0,0.5)'}}>{c.update}</div> : null}</div></AbsoluteFill>; },
@@ -242,7 +259,8 @@ const GAGS = {
         <Img src={staticFile(`${dir}/${img}`)} style={shrinks ? {position: 'absolute', top: 0, height: '100%', width: W / 2, maxWidth: 'none', objectFit: 'cover', left: side ? 0 : width - W / 2} : {width: '100%', height: '100%', objectFit: 'cover'}} />
         <div style={{position: 'absolute', left: 0, right: 0, top: 50, textAlign: 'center', opacity: shrinks ? 1 - g : 1, whiteSpace: 'nowrap'}}><span style={{background: side ? RED : '#FFFFFF', color: side ? '#FFFFFF' : '#111', fontFamily: SANS, fontWeight: 900, fontSize: 64 * (shrinks ? 1 : 1 + 0.25 * g), padding: '8px 30px', letterSpacing: 3}}>{lab}</span></div></div>; };
     return <AbsoluteFill style={{opacity: out, background: '#000'}}>{half(c.imgs[0], (c.labels || ['EXPECTATION'])[0], 0)}{half(c.imgs[1], (c.labels || [, 'REALITY'])[1] || 'REALITY', 1)}
-      {g < 1 ? <div style={{position: 'absolute', left: xb - 4, top: 0, bottom: 0, width: 8, background: '#FFFFFF'}} /> : null}</AbsoluteFill>; },
+      {g < 1 && !c.chevron ? <div style={{position: 'absolute', left: xb - 4, top: 0, bottom: 0, width: 8, background: '#FFFFFF'}} /> : null}
+      {g < 1 && c.chevron ? <svg width={W} height={H} style={{position: 'absolute', left: 0, top: 0}}><path d={`M ${xb - 40} 0 L ${xb + 10} 0 L ${xb + 80} ${H / 2} L ${xb + 10} ${H} L ${xb - 40} ${H} L ${xb + 30} ${H / 2} Z`} fill={c.chevronColor || '#F1E6CF'} /></svg> : null}</AbsoluteFill>; },   // chevron: Kurzgesagt before -> after notch (gag study 12 Nov 2026)
 
   // route (Internet Historian route draw, gag study 12 Nov 2026): a red line draws itself point by point over a map or photo and
   // ends in a hand-drawn circle. c.pts = [[x, y], ...] (fractions), c.draw = drawing time s (default 1.0), c.dash = dashed (a flight
@@ -308,11 +326,14 @@ const GAGS = {
   // a swinging price tag hung on a string from (x, y)
   // tag: a hanging name tag. Always in the top-left corner, same place and size in every video (Sam, 12 Nov 2026: "The tags ...
   // should always come on the left hand side top corner in all the videos ... they should be equal"). c.free: true keeps c.x/c.y.
-  tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
+  // c.swaps = [[offset s, text], ...] (label swap, Kurzgesagt / Map Men, gag study 12 Nov 2026): the tag flips over and shows the new text.
+  tag: (c, q, d, out) => { const sw0 = (c.swaps || []).filter(x => q >= x[0]).pop(); if (sw0) c = {...c, text: sw0[1], sub: sw0[2] ?? c.sub};
+    const flip = (c.swaps || []).reduce((m, x) => (q >= x[0] && q < x[0] + 0.25 ? Math.abs(Math.cos((q - x[0]) / 0.25 * Math.PI)) : m), 1);
+    const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(40, Math.floor((TW - 50) / (0.7 * longest)));
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{width: 5, height: 120 + y + 140, background: '#EEE', boxShadow: '0 0 0 1.5px rgba(0,0,0,0.55)'}} />   {/* the string starts above the frame (Sam, 12 Nov 2026) */}
-      <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
+      <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', transform: `scaleY(${flip})`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
         <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 30, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail
@@ -375,6 +396,11 @@ const GAGS = {
       return <rect key={i} x={x} y={y} width={14} height={24} fill={cols[i % cols.length]} transform={`rotate(${q * 700 * (r(3) - 0.5)} ${x} ${y})`} />; })}</svg></AbsoluteFill>; },
 
   // "x hours later" title card in the old documentary style (full screen)
-  later: (c, q, d, out) => <AbsoluteFill style={{background: c.ground || '#5B3A1E', opacity: out * R(q, 0, 0.12), justifyContent: 'center', alignItems: 'center'}}>
+  // style 'vcr' (Internet Historian fast-forward time skip, gag study 12 Nov 2026): a VCR double-arrow, small caps, two static bands
+  later: (c, q, d, out) => c.style === 'vcr' ? <AbsoluteFill style={{background: '#050505', opacity: out, justifyContent: 'center', alignItems: 'center'}}>
+    {[0.18, 0.8].map((y, i) => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: y * H, height: 46, background: 'repeating-linear-gradient(90deg, #222 0 3px, #777 3px 5px, #111 5px 9px)', opacity: 0.55 + 0.3 * Math.sin(q * 40 + i), transform: `translateX(${Math.sin(q * 23 + i) * 30}px)`}} />)}
+    <div style={{position: 'absolute', left: 110, top: 110, fontFamily: MONO, fontWeight: 900, fontSize: 110, color: '#F1E6CF', opacity: Math.floor(q * 3) % 2 ? 0.55 : 1}}>▶▶</div>
+    <div style={{fontFamily: SERIF, fontVariant: 'small-caps', fontSize: 120, color: '#F1E6CF', letterSpacing: 6}}>{c.text ?? 'three weeks later'}</div></AbsoluteFill>
+  : <AbsoluteFill style={{background: c.ground || '#5B3A1E', opacity: out * R(q, 0, 0.12), justifyContent: 'center', alignItems: 'center'}}>
     <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontWeight: 600, fontSize: 150, color: '#FCE9B0', textShadow: '0 6px 0 #2E1A0A', transform: `scale(${0.9 + 0.1 * R(q, 0, 0.4)})`}}>{c.text ?? 'Several minutes later…'}</div></AbsoluteFill>,
 };
