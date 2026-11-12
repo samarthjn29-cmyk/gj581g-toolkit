@@ -42,7 +42,7 @@ for c in t['cards']:
 # Written visuals (Sam, 12 Nov 2026: "I would like more written visuals on the screen as that will help the viewers to understand
 # the video. I think a few pictures have stayed on the clip without giving much information or visual gags."): warn on any
 # stretch of more than 3 s where a picture is up with no card, label, bubble, tag or other gag on it.
-spans = sorted([(c['t'], c['t'] + c['dur']) for c in t['cards']])
+spans = sorted([(c['t'], c['t'] + c['dur']) for c in t['cards']] + [(x['t'], x['t'] + x['dur']) for x in t['shots'] if x.get('words_in_pic')])   # words_in_pic: the picture itself carries the written words (a painted sign, YOU in the stars)
 edges = sorted(set([0.0, t['dur']] + [a for a, b in spans] + [b for a, b in spans] + [s['t'] for s in t['shots']]))
 bare = []
 for a, b in zip(edges, edges[1:]):
