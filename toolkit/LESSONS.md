@@ -163,3 +163,4 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 - `bars` takes `reverse: true` (big number shrinks to the small one); kinetic `short` takes `bgImg` (e.g. a painted money background on the yellow ground) instead of a lottie.
 - Mixing gag schools in one video is preferred (Sam, 12 Nov 2026), not one school per video.
 - Never delete clips/AL_<s>_720.mp4 before its mix script has run for the last time: the mix reads its voice track from it.
+- `bars` reverse is ONE bar really shrinking (linear, number counting down on it, dashed outline where it started); flipping the scroll read as growing (reviewer, opening v13). Asides get a dark backing chip by default (`chip: false` to drop it).

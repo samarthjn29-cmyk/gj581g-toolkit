@@ -127,7 +127,9 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // aside (Bill Wurtz-style tiny text pop): lowercase serif, on and off with no fade
   if (c.kind === 'aside') { if (t < c.t || t > c.t + d) return null;
     return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `rotate(${c.rot ?? -3}deg)`, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: c.size || 64,
-      color: c.color || '#FFFFFF', textShadow: '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></AbsoluteFill>; }
+      color: c.color || '#FFFFFF', textShadow: '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap',
+      // dark backing chip by default (reviewer, opening v13: thin white italic was lost on busy painted seats and streamers); chip: false for none
+      ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.72)', padding: '6px 26px 12px', borderRadius: 10, fontWeight: 600})}}>{c.text.toLowerCase()}</div></AbsoluteFill>; }
   // breaking banner + ticker (Hindi primetime parody, our own colours, no channel branding)
   if (c.kind === 'banner') { const p = Easing.out(Easing.cubic)(R(t, c.t, c.t + 0.25)), q = t - c.t, oo = 1 - R(t, c.t + d - 0.2, c.t + d), pulse = 0.85 + 0.15 * Math.sin(q * 12);
     return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 0, right: 0, bottom: 150, height: 150, transform: `translateX(${(1 - p) * -110}%)`, display: 'flex', alignItems: 'stretch', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
@@ -153,6 +155,21 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // for a long blurred scroll before its label lands. c.a / c.b = {label, value}; c.ratio = b / a.
   if (c.kind === 'bars') { const q = t - c.t, oo = (c.cutIn ? 1 : R(t, c.t, c.t + 0.15)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.12, c.t + d)), G = c.ground || '#FCCF3E', I = c.ink || '#0B5E2A', N = c.inkNum || '#063F1C';
     const h0 = c.h0 || 8, H = h0 * c.ratio, base = 860, s0 = c.hold0 ?? 0.75, s1 = c.scrollEnd ?? (d - 0.45), e = R(t, c.t + s0, c.t + s1), ez = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
+    // reverse (Sam, 12 Nov 2026: "play in reverse where you show coming down from 730 billion to 100 million"): ONE bar that
+    // really shrinks, its number counting down on top of it, a dashed outline left where it started; flipping the scroll
+    // only read as the bar growing (reviewer, opening v13).
+    if (c.reverse) { const F = 'Inter, "Helvetica Neue", Arial, sans-serif', vA = c.vFrom || 730e9, vB = c.vTo || 100e6, v = vA + (vB - vA) * ez;   // linear: bar height and number stay in proportion and the shrink reads smoothly (log made it vanish in 0.3 s)
+      const full = 640, hh = Math.max(h0, full * v / vA), fmt = x => x >= 1e9 ? `$${x >= 1e10 ? Math.round(x / 1e9) : (x / 1e9).toFixed(1)} billion` : `$${Math.max(100, Math.round(x / 1e6))} million`;
+      const lab = ez < 0.5 ? c.b.label : c.a.label, done = e >= 1;
+      return <AbsoluteFill style={{background: G, opacity: oo, overflow: 'hidden'}}>
+        <div style={{position: 'absolute', left: 760, width: 400, top: base - full, height: full, border: `5px dashed ${N}`, opacity: 0.35, boxSizing: 'border-box'}} />
+        <div style={{position: 'absolute', left: 760, width: 400, top: base - hh, height: hh, background: I}} />
+        <div style={{position: 'absolute', left: 120, right: 120, top: base, height: 6, background: N}} />
+        <div style={{position: 'absolute', left: 560, width: 800, top: base - hh - 110, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 84, color: N, whiteSpace: 'nowrap'}}>{done ? c.a.value : fmt(v)}</div>
+        <div style={{position: 'absolute', left: 460, width: 1000, top: base + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 44}}>{lab}</div>
+        {e > 0.05 && e < 0.95 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'going down…'}</div> : null}
+        {done ? <div style={{position: 'absolute', left: 1200, top: base - 150, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"}</div> : null}
+      </AbsoluteFill>; }
     const Y = (c.reverse ? 1 - ez : ez) * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
     const ticks = []; for (let k = 1; k * tick < H; k++) { const y = base - k * tick + Y; if (y > -60 && y < 1140) ticks.push(<div key={k} style={{position: 'absolute', left: 1180, top: y - 2, width: 60, height: 4, background: N}}><div style={{position: 'absolute', right: 80, top: -26, fontFamily: F, fontWeight: 800, fontSize: 44, color: N, whiteSpace: 'nowrap'}}>{(c.tickLabel || '$#B').replace('#', k * (c.tickStep || 50))}</div></div>); }
     const blur = e > 0 && e < 1 ? 10 * Math.sin(Math.PI * e) : 0;   // motion blur while it scrolls
