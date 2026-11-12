@@ -253,8 +253,8 @@ const GAGS = {
   // should always come on the left hand side top corner in all the videos ... they should be equal"). c.free: true keeps c.x/c.y.
   tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(40, Math.floor((TW - 50) / (0.7 * longest)));
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: y - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <div style={{width: 4, height: 120, background: '#DDD'}} />
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{width: 4, height: 120 + y + 140, background: '#DDD'}} />   {/* the string starts above the frame (Sam, 12 Nov 2026) */}
       <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
         <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 30, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 

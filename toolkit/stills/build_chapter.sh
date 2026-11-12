@@ -44,7 +44,7 @@ if dk:
 fg = (P.get('finish') or {}).get('grain')
 if fg: shutil.copy(f'{proj}/video/{fg}', f'{out}/{fg}')
 for c in P.get('cards', []):
-    for f2 in c.get('imgs', []) + [c[k] for k in ('idea', 'speaker') if c.get(k)]:   # chain, burst, split: several pictures
+    for f2 in c.get('imgs', []) + [c[k] for k in ('idea', 'speaker', 'bgImg') if c.get(k)]:   # chain, burst, split: several pictures
         src = find(f2)
         if src: shutil.copy(src, f'{out}/{f2}')
         else: miss.append(f2)

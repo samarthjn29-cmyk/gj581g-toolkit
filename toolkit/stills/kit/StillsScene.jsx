@@ -144,7 +144,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // headline (fake front page, our own masthead "THE DAILY SHRUG"): spins in like an old film newspaper, Onion-style sober headline
   if (c.kind === 'headline') { const p = 1 - Math.pow(1 - R(t, c.t, c.t + 0.7), 3), oo = 1 - R(t, c.t + d - 0.2, c.t + d);
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: `rgba(0,0,0,${0.45 * p})`}}><div style={{width: 1180, height: 760, background: '#F4EFE2', boxShadow: '0 30px 80px rgba(0,0,0,0.7)', transform: `translate(${c.dx || 0}px, ${c.dy || 0}px) rotate(${-720 * (1 - p) - 3}deg) scale(${(0.1 + 0.9 * p) * (c.scale ?? 1)})`, padding: '40px 60px', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1A1814'}}>
-      <div style={{textAlign: 'center', fontSize: 92, fontWeight: 700, letterSpacing: 4, borderBottom: '6px double #1A1814', paddingBottom: 10}}>THE DAILY SHRUG</div>
+      <div style={{textAlign: 'center', fontSize: 92, fontWeight: 700, letterSpacing: 4, borderBottom: '6px double #1A1814', paddingBottom: 10}}>{c.masthead || 'THE DAILY MESS'}</div>
       <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 24, padding: '8px 0', borderBottom: '2px solid #1A1814', fontStyle: 'italic'}}><span>{c.kicker || 'Late edition'}</span><span>Price: one hundred million dollars</span></div>
       <div style={{fontSize: c.size || 84, fontWeight: 700, lineHeight: 1.05, textAlign: 'center', margin: '34px 0 24px'}}>{c.text}</div>
       <div style={{display: 'flex', gap: 30}}>{[0, 1, 2].map(k => <div key={k} style={{flex: 1}}>{Array.from({length: 7}).map((_, j) => <div key={j} style={{height: 12, margin: '12px 0', background: '#B9B2A2', width: `${70 + ((j * 37 + k * 11) % 30)}%`}} />)}</div>)}</div></div></AbsoluteFill>; }
@@ -153,7 +153,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // for a long blurred scroll before its label lands. c.a / c.b = {label, value}; c.ratio = b / a.
   if (c.kind === 'bars') { const q = t - c.t, oo = (c.cutIn ? 1 : R(t, c.t, c.t + 0.15)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.12, c.t + d)), G = c.ground || '#FCCF3E', I = c.ink || '#0B5E2A', N = c.inkNum || '#063F1C';
     const h0 = c.h0 || 8, H = h0 * c.ratio, base = 860, s0 = c.hold0 ?? 0.75, s1 = c.scrollEnd ?? (d - 0.45), e = R(t, c.t + s0, c.t + s1), ez = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
-    const Y = ez * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
+    const Y = (c.reverse ? 1 - ez : ez) * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
     const ticks = []; for (let k = 1; k * tick < H; k++) { const y = base - k * tick + Y; if (y > -60 && y < 1140) ticks.push(<div key={k} style={{position: 'absolute', left: 1180, top: y - 2, width: 60, height: 4, background: N}}><div style={{position: 'absolute', right: 80, top: -26, fontFamily: F, fontWeight: 800, fontSize: 44, color: N, whiteSpace: 'nowrap'}}>{(c.tickLabel || '$#B').replace('#', k * (c.tickStep || 50))}</div></div>); }
     const blur = e > 0 && e < 1 ? 10 * Math.sin(Math.PI * e) : 0;   // motion blur while it scrolls
     return <AbsoluteFill style={{background: G, opacity: oo, overflow: 'hidden'}}>
@@ -164,10 +164,10 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
         <div style={{position: 'absolute', left: 120, right: 120, top: bot, height: 6, background: N}} />
         <div style={{position: 'absolute', left: 200, width: 460, top: bot + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 40, lineHeight: 1.15}}>{c.a.label}<br /><span style={{color: N, fontWeight: 900, fontSize: 56}}>{c.a.value}</span></div>
         <div style={{position: 'absolute', left: 1160, width: 460, top: bot + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 40, lineHeight: 1.15}}>{c.b.label}</div>
-        {q < s0 ? <div style={{position: 'absolute', left: 480, top: bot - 210, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"} ↓</div> : null}
+        {(c.reverse ? q > s1 : q < s0) ? <div style={{position: 'absolute', left: 480, top: bot - 210, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"} ↓</div> : null}
       </div>
       {e > 0.08 && e < 0.92 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'still going…'}</div> : null}
-      <div style={{position: 'absolute', left: 1160, width: 460, top: top - 120, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 72, color: N, opacity: R(t, c.t + s1 - 0.1, c.t + s1 + 0.1), transform: `scale(${1 + 0.25 * (1 - R(t, c.t + s1 - 0.1, c.t + s1 + 0.2))})`}}>{c.b.value}</div>
+      <div style={{position: 'absolute', left: 1160, width: 460, top: top - 120, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 72, color: N, opacity: c.reverse ? 1 : R(t, c.t + s1 - 0.1, c.t + s1 + 0.1), transform: `scale(${c.reverse ? 1 : 1 + 0.25 * (1 - R(t, c.t + s1 - 0.1, c.t + s1 + 0.2))})`}}>{c.b.value}</div>
     </AbsoluteFill>; }
   // counter (Aliens opening, 11 Nov 2026): a money counter in a pill that holds, then drains faster and faster to its end value,
   // which flashes red. c.from / c.to numbers, c.prefix, c.hold s before it starts draining, c.drain s.
@@ -241,6 +241,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
     const col = w => c.ink ? ((c.nums || []).map(key).includes(key(w)) ? (c.inkNum || c.ink) : c.ink)
       : (c.nums || []).map(key).includes(key(w)) ? '#9DB4C8' : (c.accent || []).map(key).includes(key(w)) ? '#C9A86A' : '#F3EBDD';
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: c.ground || '#0E0C0A'}}>
+      {c.bgImg ? <Img src={staticFile(`${dir}/${c.bgImg}`)} style={{position: 'absolute', width: '100%', height: '100%', objectFit: 'cover', opacity: c.bgOpacity ?? 1}} /> : null}
       <AbsoluteFill style={{background: c.ground ? 'radial-gradient(ellipse at 50% 45%, rgba(255,240,170,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(120,70,0,0.25) 100%)' : 'radial-gradient(ellipse at 50% 45%, rgba(60,48,36,0.55) 0%, rgba(14,12,10,0) 65%)'}} />
       <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: ws.length > 3 ? 132 : 156, fontWeight: c.ink ? 600 : 500, position: 'relative', textAlign: 'center', maxWidth: 1600, lineHeight: 1.05, letterSpacing: 1}}>
         {ws.map((w, i) => { const s0 = st[i] ?? c.t + i * 0.3, p = c.static ? 1 : R(t, s0 - 0.06, s0 + 0.14);   // c.static: all words at once, no motion (Sam, 11 Nov 2026)

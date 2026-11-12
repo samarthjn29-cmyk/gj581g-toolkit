@@ -52,6 +52,15 @@ def main():
     # A picture change that lands as a full-screen card ends showed the OLD picture for the card's fade-out (Sam, Aliens opening,
     # 11 Nov 2026: "the stop watch again for a very brief moment"). Move such a change under the card, 0.3 s before it ends,
     # so the card fades out straight onto the new picture. Opaque cards only: kinetic 'short' and 'number' cover the frame.
+    # meter steps may be cued on a word instead of an offset: [["Roughly", "ROUGHLY", colour, icon], ...] -> seconds after the
+    # card starts (Sam, 12 Nov 2026: "The roughly ... came in early" once pauses were added to the voice)
+    for c in cards:
+        c['steps'] = [list(x) for x in c.get('steps', [])]
+        for st in c['steps']:
+            if isinstance(st[0], str):
+                hit = [w for w in W if w[1] >= c['t'] - 0.05 and norm(w[0]).startswith(norm(st[0]))]
+                if not hit: sys.exit(f"meter step word '{st[0]}' not found after {c['t']}")
+                st[0] = round(hit[0][1] - c['t'], 2)
     for c in cards:
         if c.get('kind') not in ('kinetic', 'number', 'bars') or c.get('style') in ('rise', 'roll'): continue
         if not P.get('dissolve', 0): continue   # hard-cut plans: the card cuts straight to the next picture on its word, nothing to hide
