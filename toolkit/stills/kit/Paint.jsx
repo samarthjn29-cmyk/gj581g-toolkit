@@ -15,10 +15,11 @@ const paperShadow = 'drop-shadow(0 8px 18px rgba(20,16,10,0.45))';
 
 // paper grain + uneven wash laid over full-screen cards (kinetic, number, title, chain, ruler ...) so they read as painted paper
 export const PaperTex = ({o = 1}) => <AbsoluteFill style={{pointerEvents: 'none', opacity: o}}>
+  <Img src={staticFile('paint/paper_tex.jpg')} style={{position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover', mixBlendMode: 'multiply'}} />
   <svg width={W} height={H} style={{position: 'absolute', mixBlendMode: 'multiply'}}>
     <filter id="pTexF"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" /><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.35  0 0 0 0 0.22  0 0 0 -1.6 1.15" /></filter>
     <filter id="pWashF"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="3" seed="6" /><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.25  0 0 0 -1.2 0.75" /></filter>
-    <rect width={W} height={H} filter="url(#pWashF)" opacity={0.55} /><rect width={W} height={H} filter="url(#pTexF)" opacity={0.5} /></svg>
+    <rect width={W} height={H} filter="url(#pWashF)" opacity={0.25} /><rect width={W} height={H} filter="url(#pTexF)" opacity={0.35} /></svg>
   <AbsoluteFill style={{boxShadow: 'inset 0 0 160px rgba(70,50,25,0.45)'}} /></AbsoluteFill>;
 
 // filters, once per frame
@@ -118,6 +119,37 @@ export const PAINTED = {
           <div style={{position: 'relative', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: 34, color: INK}}>{st[3] || '!'}</div></div>
         <div><div style={{fontFamily: SERIF, fontWeight: 700, fontSize: 18, letterSpacing: 3, color: BRICK}}>{c.title || 'EVIDENCE'}</div><div style={{fontFamily: HAND, fontWeight: 700, fontSize: 44, lineHeight: 1, color: INK}}>{st[1]}</div></div></div></Scrap></div></AbsoluteFill>; },
 
+
+  // painted clock (replaces the flat clock.json Lottie): an AI-painted dial (c.img, no hands) with ink hands that sweep c.turns times
+  clock: (c, q, d, out, dir) => { const w = (c.w ?? 0.16) * W, s = pop(q, 0.6), tn = c.turns ?? 3, a = 360 * tn * Math.min(1, q / Math.max(0.4, d - 0.2)), cx = w / 2;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.85) * W - w / 2, top: (c.y ?? 0.22) * H - w / 2, width: w, height: w, transform: `scale(${s}) rotate(${c.rot ?? 0}deg)`, filter: paperShadow}}>
+      <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'contain'}} />
+      <svg width={w} height={w} style={{position: 'absolute', left: 0, top: 0}}><g filter="url(#pRough)">
+        <line x1={cx} y1={cx} x2={cx} y2={cx - w * 0.22} stroke={INK} strokeWidth={w * 0.035} strokeLinecap="round" transform={`rotate(${a / 12} ${cx} ${cx})`} />
+        <line x1={cx} y1={cx} x2={cx} y2={cx - w * 0.33} stroke={BRICK} strokeWidth={w * 0.022} strokeLinecap="round" transform={`rotate(${a} ${cx} ${cx})`} />
+        <circle cx={cx} cy={cx} r={w * 0.03} fill={INK} /></g></svg></div></AbsoluteFill>; },
+
+  // money rain with a painted note sprite (c.img), same motion as the flat rain
+  rain: (c, q, d, out, dir) => { const n = c.n || 40;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>{Array.from({length: n}).map((_, i) => { const r = (k) => ((Math.sin(i * 12.9898 + k * 78.233) * 43758.5453) % 1 + 1) % 1;
+      const x = r(1) * W, sp = 420 + r(2) * 520, y = -200 + (q * sp + r(3) * 1300) % 1450, a = (r(4) - 0.5) * 80 + Math.sin(q * (2 + r(5) * 3) + i) * 35, sc = 0.6 + r(6) * 0.6, fl = Math.cos(q * (3 + r(7) * 4) + i);
+      return <Img key={i} src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: x - 110, top: y - 55, width: 220, transform: `rotate(${a}deg) scale(${sc}, ${sc * (0.55 + 0.45 * Math.abs(fl))})`, filter: 'drop-shadow(0 6px 8px rgba(0,0,0,0.35))'}} />; })}</AbsoluteFill>; },
+
+  // TV interference as painted grain instead of video static: ink-and-cream noise that changes every frame, with a few drifting bands
+  overlay: (c, q, d, out) => { const f = Math.floor(q * 30), o = c.opacity ?? 0.5;
+    return <AbsoluteFill style={{opacity: out * Math.min(1, o + 0.2), pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <filter id={`pSt${f % 6}`}><feTurbulence type="fractalNoise" baseFrequency="0.55 0.9" numOctaves="2" seed={f % 6 + 1} /><feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.86  0 0 0 2.2 -0.9" /></filter>
+      <rect width={W} height={H} fill="rgba(38,48,42,0.35)" /><rect width={W} height={H} filter={`url(#pSt${f % 6})`} />
+      {[0, 1, 2].map(i => <rect key={i} x={0} width={W} y={((f * 37 + i * 400) % 1200) - 60} height={18 + i * 14} fill={i === 1 ? 'rgba(168,67,47,0.35)' : 'rgba(243,235,221,0.35)'} />)}</svg></AbsoluteFill>; },
+
+  glitch: (c, q, d, out) => { const n = Math.floor(q * 30), r = (k) => ((Math.sin((n + 1) * 12.9898 + k * 78.233) * 43758.5453) % 1 + 1) % 1;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      <AbsoluteFill style={{backgroundImage: 'repeating-linear-gradient(0deg, rgba(38,48,42,0.25) 0px, rgba(38,48,42,0.25) 2px, transparent 2px, transparent 6px)'}} />
+      {[0, 1, 2, 3].map(i => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: r(i) * H, height: 10 + r(i + 9) * 70, backdropFilter: 'sepia(0.8) contrast(1.2)', transform: `translateX(${(r(i + 5) - 0.5) * 120}px)`, background: i % 2 ? 'rgba(168,67,47,0.22)' : 'rgba(233,185,58,0.2)'}} />)}
+      <AbsoluteFill style={{boxShadow: `inset ${(r(7) - 0.5) * 30}px 0 0 rgba(11,94,42,0.3), inset ${(r(8) - 0.5) * -30}px 0 0 rgba(168,67,47,0.3)`}} />
+      {c.text !== '' ? <div style={{position: 'absolute', left: 90, top: 70, fontFamily: SERIF, fontWeight: 700, fontSize: 64, color: PAPER, textShadow: `3px 0 ${BRICK}, -3px 0 ${GREEN}`}}>{c.text ?? 'PLAY ▶'}</div> : null}
+      {c.stamp ? <div style={{position: 'absolute', right: 90, bottom: 80, fontFamily: SERIF, fontSize: 48, color: PAPER, textShadow: `3px 0 ${BRICK}, -3px 0 ${GREEN}`}}>{c.stamp}</div> : null}</AbsoluteFill>; },
+
   // ---- kinds that live in StillsScene.jsx (called with the absolute time t) ----
   stamp: (c, q, d) => { const p = R(q, 0, 0.12), sh = (1 - R(q, 0.12, 0.6)) * 10 * Math.sin(q * 90), col = c.color && c.color !== '#D11F2A' ? c.color : BRICK, size = (c.size || 150) * 0.85;
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(q, d - 0.2, d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -9}deg) scale(${3 - 2 * p})`, opacity: p}}>
@@ -172,5 +204,5 @@ export const PAINTED = {
 
 // timing wrapper shared with the flat kit: fade-out like gagCard (out over the last 0.2 s)
 const SCENE = ['stamp', 'aside', 'banner', 'starburst', 'headline', 'counter', 'pip'];   // default 4.5 s like StillsScene's Card
-export const paintedCard = (c, t, dir) => { const f = PAINTED[c.kind]; if (!P.on || !f) return undefined; const d = c.dur || (SCENE.includes(c.kind) ? 4.5 : 2), q = t - c.t;
+export const paintedCard = (c, t, dir) => { const f = PAINTED[c.kind]; if (!P.on || !f || (c.kind === 'rain' && !c.img)) return undefined; const d = c.dur || (SCENE.includes(c.kind) ? 4.5 : 2), q = t - c.t;
   if (q < 0 || q > d) return null; const out = c.cutOut ? 1 : 1 - R(q, d - 0.15, d); return f(c, q, d, out, dir); };
