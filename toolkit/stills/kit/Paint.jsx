@@ -14,9 +14,11 @@ const pop = (q, k = 1) => q < 0 ? 0 : 1 + 0.22 * k * Math.exp(-q * 7) * Math.sin
 const paperShadow = 'drop-shadow(0 8px 18px rgba(20,16,10,0.45))';
 
 // paper grain + uneven wash laid over full-screen cards (kinetic, number, title, chain, ruler ...) so they read as painted paper
-export const PaperTex = ({o = 1}) => <AbsoluteFill style={{pointerEvents: 'none', opacity: o}}>
-  <Img src={staticFile('paint/paper_tex.jpg')} style={{position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover', mixBlendMode: 'multiply'}} />
-  <svg width={W} height={H} style={{position: 'absolute', mixBlendMode: 'multiply'}}>
+// opacity sits on each blended child, never on the wrapper: a wrapper below 1 opacity becomes its own group, the multiply
+// blends inside it instead of with the picture, and the paper flashes near-white while the card fades (ch6 review, 12 Nov 2026)
+export const PaperTex = ({o = 1}) => o <= 0 ? null : <AbsoluteFill style={{pointerEvents: 'none'}}>
+  <Img src={staticFile('paint/paper_tex.jpg')} style={{position: 'absolute', inset: 0, width: W, height: H, objectFit: 'cover', mixBlendMode: 'multiply', opacity: o}} />
+  <svg width={W} height={H} style={{position: 'absolute', mixBlendMode: 'multiply', opacity: o}}>
     <filter id="pTexF"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" /><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.35  0 0 0 0 0.22  0 0 0 -1.6 1.15" /></filter>
     <filter id="pWashF"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="3" seed="6" /><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.25  0 0 0 -1.2 0.75" /></filter>
     <rect width={W} height={H} filter="url(#pWashF)" opacity={0.25} /><rect width={W} height={H} filter="url(#pTexF)" opacity={0.35} /></svg>
@@ -77,7 +79,7 @@ export const PAINTED = {
           <circle cx={TW / 2} cy={SL + 36} r={11} fill="none" stroke={INK} strokeWidth={4} /></g></svg>
       <div style={{position: 'absolute', left: 0, top: SL + 54, width: TW, height: TH - 64, boxSizing: 'border-box', padding: '0 22px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
         <div style={{fontFamily: SERIF, fontWeight: 700, fontSize: fs, lineHeight: 1.05, color: BRICK, letterSpacing: 1}}>{c.text}</div>
-        {c.sub ? <div style={{fontFamily: HAND, fontWeight: 700, fontSize: 30, lineHeight: 1.1, color: INK, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
+        {c.sub ? <div style={{fontFamily: HAND, fontWeight: 700, fontSize: 30 * (c.subSize || 1), lineHeight: 1.1, color: INK, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   labels: (c, q, d, out) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.55) * H, gap = c.gap ?? 0.6, spots = c.spots || [[0.2, 0.25], [0.8, 0.22], [0.15, 0.78], [0.85, 0.75], [0.5, 0.12]];
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}><g filter="url(#pBrush)">{(c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
