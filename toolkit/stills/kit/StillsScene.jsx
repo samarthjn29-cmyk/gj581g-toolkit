@@ -168,6 +168,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
       const lab = ez < 0.5 ? c.b.label : c.a.label, done = e >= 1;
       return <AbsoluteFill style={{background: G, opacity: oo, overflow: 'hidden'}}>
         <div style={{position: 'absolute', left: 760, width: 400, top: base - full, height: full, border: `5px dashed ${N}`, opacity: 0.35, boxSizing: 'border-box'}} />
+        {P.on ? <div style={{position: 'absolute', left: 760, width: 400, top: base - full + 18, textAlign: 'center', fontFamily: 'Kalam, cursive', fontWeight: 700, fontSize: 40, color: N, opacity: 0.55 * Math.min(1, e * 4)}}>{c.b.value}</div> : null}
         <div style={{position: 'absolute', left: 760, width: 400, top: base - hh, height: hh, background: I, ...(P.on ? {border: '5px solid #26302A', boxSizing: 'border-box', filter: 'url(#pRough)'} : {})}} />
         <div style={{position: 'absolute', left: 120, right: 120, top: base, height: 6, background: N, filter: P.on ? 'url(#pRough)' : undefined}} />
         <div style={{position: 'absolute', left: 560, width: 800, top: base - hh - 110, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 84, color: N, whiteSpace: 'nowrap'}}>{done ? c.a.value : fmt(v)}</div>
