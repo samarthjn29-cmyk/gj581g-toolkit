@@ -22,7 +22,7 @@ const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useS
   React.useEffect(() => { fetch(staticFile(`${dir}/${c.file}`)).then(r => r.json()).then(j => { setData(j); continueRender(h); }).catch(() => continueRender(h)); }, []);
   if (!data) return null; const w = (c.w ?? 0.35) * W, ar = (data.h || 1) / (data.w || 1);
   if (inner) return <Sequence from={Math.round(c.t * 30)} layout="none"><Lottie animationData={data} loop={c.loop ?? true} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></Sequence>;
-  return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`}}>
+  return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`, ...(c.plate ? {background: c.plate, borderRadius: '50%', boxShadow: '0 6px 20px rgba(0,0,0,0.5)'} : {})}}>
     <Lottie animationData={data} loop={c.loop ?? false} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></div></Sequence>; };
 
 const Pic = ({dir, f, style, filter}) => <Img src={staticFile(`${dir}/${f}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: filter || 'none', ...style}} />;
@@ -148,7 +148,8 @@ const GAGS = {
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
         const ex = ax + (x - ax) * 0.82 * p, ey = ay + (y - ay) * 0.82 * p; return <path key={i} d={`M ${ax} ${ay + 30} L ${ex} ${ey}`} stroke="#FCCF3E" strokeWidth={7} strokeLinecap="round" />; })}</svg>
       {(c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
-        return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.6)}) rotate(${(i % 2 ? 4 : -4)}deg)`, fontFamily: HAND, fontSize: c.size || 60, color: '#FCCF3E', textShadow: '0 3px 10px rgba(0,0,0,0.85)', whiteSpace: 'nowrap'}}>{t}</div>; })}</AbsoluteFill>; },
+        return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.6)}) rotate(${(i % 2 ? 4 : -4)}deg)`, fontFamily: HAND, fontSize: c.size || 60, color: '#FCCF3E', textShadow: '0 3px 10px rgba(0,0,0,0.85)', whiteSpace: 'nowrap',
+          ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.62)', padding: '0 18px 6px', borderRadius: 10})}}>{t}</div>; })}</AbsoluteFill>; },   // dark chip: thin yellow handwriting was lost over busy painted dials (reviewer, Aliens ch1 v10)
 
   // sticker (Indian vlog texture, edit study 11 Nov 2026): a cut-out object (PNG with transparency, or a Lottie json) with a thick
   // white border pops in, wobbles and stays; c.img or c.file, at (x, y), c.w share of width
@@ -254,7 +255,7 @@ const GAGS = {
   tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(40, Math.floor((TW - 50) / (0.7 * longest)));
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <div style={{width: 4, height: 120 + y + 140, background: '#DDD'}} />   {/* the string starts above the frame (Sam, 12 Nov 2026) */}
+      <div style={{width: 5, height: 120 + y + 140, background: '#EEE', boxShadow: '0 0 0 1.5px rgba(0,0,0,0.55)'}} />   {/* the string starts above the frame (Sam, 12 Nov 2026) */}
       <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
         <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 30, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 

@@ -44,7 +44,10 @@ def main():
         if not shot.get('word'):   # a line-start cut snaps to just before the line's first heard word, so it never lands mid-word (Aliens ch3)
             fw = [w for w in W if ls - 0.45 <= w[1] <= ls + 0.35]
             return round(max(0, fw[0][1] - 0.04), 2) if fw else round(ls, 2)
-        k = shot.get('k', 0); hits = [w for w in W if ls - 0.3 <= w[1] <= le + 0.3 and norm(w[0]).startswith(norm(shot['word']))]
+        # a cue may list spellings: "word": ["4", "four"] (whisper writes a spoken number either way, and changes its mind after
+        # silence is inserted into the voice: Aliens ch1, 12 Nov 2026)
+        alts = shot['word'] if isinstance(shot['word'], list) else [shot['word']]
+        k = shot.get('k', 0); hits = [w for w in W if ls - 0.3 <= w[1] <= le + 0.3 and any(norm(w[0]).startswith(norm(x)) for x in alts)]
         if len(hits) <= k: sys.exit(f"cue word '{shot['word']}' not found in {shot['at']}")
         return hits[k][1]
     shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0

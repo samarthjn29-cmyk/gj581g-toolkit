@@ -49,7 +49,8 @@ for s in T['shots']:
     for w in W:
         if w[1] + 0.08 < t < w[2] - 0.08: rep.append(f"CUT-MIDWORD {t:.2f}s {s['id']} lands inside '{w[0]}' ({w[1]:.2f}-{w[2]:.2f})")
     if s.get('word'):
-        near = min((w for w in W if re.sub(r'[^a-z0-9]', '', w[0].lower()).startswith(re.sub(r'[^a-z0-9]', '', s['word'].lower()))), key=lambda w: abs(w[1] - t), default=None)
+        alts = s['word'] if isinstance(s['word'], list) else [s['word']]; nz = lambda x: re.sub(r'[^a-z0-9]', '', x.lower())
+        near = min((w for w in W if any(nz(w[0]).startswith(nz(x)) for x in alts)), key=lambda w: abs(w[1] - t), default=None)
         if near and abs(near[1] - t) > 0.25: rep.append(f"CUT-{'EARLY' if t < near[1] else 'LATE'} {t:.2f}s {s['id']} cue '{s['word']}' is at {near[1]:.2f}")
 if mix:
     for f, t, rest in re.findall(r'([\w./]+\.wav)@([\d.]+)((?::[-\d.]+){0,2})', open(mix).read()):

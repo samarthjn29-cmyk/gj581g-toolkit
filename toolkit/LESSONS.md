@@ -164,3 +164,8 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 - Mixing gag schools in one video is preferred (Sam, 12 Nov 2026), not one school per video.
 - Never delete clips/AL_<s>_720.mp4 before its mix script has run for the last time: the mix reads its voice track from it.
 - `bars` reverse is ONE bar really shrinking (linear, number counting down on it, dashed outline where it started); flipping the scroll read as growing (reviewer, opening v13). Asides get a dark backing chip by default (`chip: false` to drop it).
+- Painted chapters (Aliens ch1-3, 12 Nov 2026): check card pictures too (chain `imgs`, triptych `imgs`, pip/lens `img`), not only shots; 39 repaints in all. Recraft image_edit sometimes paints a cream border (crop it off) but a cream SKY is not a border: never auto-crop by colour without looking. Firefly Gemini 3.1 repaints match Recraft's; it rate-limits ("Whoa there, speed racer!") after ~3 quick generations: space them a minute apart.
+- Repainting a CC BY-SA photo makes an adaptation: log the painting with the author and "shared under the same licence"; prefer PD / CC BY / Unsplash sources for pictures that will be repainted.
+- Extra sounds via voice_gaps can land up to 2 s after their gag (the next pause): drop any that would play after the gag has gone, or move the gag's pictures to land with the sound (chain `times`).
+- Whisper changes how it writes a spoken number after silence is inserted ("4" -> "four"): cue words may list spellings, `"word": ["4", "four"]`.
+- Leftover `fade` on a shot breaks the hard-cut style (two reviewers caught one each in ch1/ch2): grep plans for `fade` when a plan has dissolve 0.
