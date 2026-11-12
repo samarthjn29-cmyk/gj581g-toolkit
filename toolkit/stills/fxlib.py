@@ -116,6 +116,12 @@ L = [
  ('grid', 'Picture gag', 'Reaction grid', 'One line, then a grid of reaction pictures popping in (our mascot or anonymous stock only).', {}, dict(kind='grid', imgs=['G_alien_popcorn.jpg', 'G_robots_react.jpg', 'G_alien_alone.jpg', 'G_alien_radio.jpg'], labels=['aliens', 'robots', 'also aliens', 'nobody'], dur=2.6), 'pop@0.0 pop@0.1 pop@0.2 pop@0.3', 'Tanmay Bhat reaction grid'),
  ('namesake', 'Picture gag', 'Namesake card', 'An idea named after a person: their real portrait (open licence) beside the idea, the name stamped on in yellow.', {}, dict(kind='namesake', img='R_drake_portrait.jpg', idea='R_tatel_1958.jpg', name='DRAKE', stampAt=0.6, dur=2.9), 'r:impact@0.6', 'Captain Disillusion'),
  ('variants', 'Picture gag', 'Variants board', 'The same picture several times, each with a named treatment, lit one by one.', {}, dict(kind='variants', img='G_alien_alone.jpg', title='THE SAME EMPTY SKY, ACCORDING TO', items=[['OPTIMISTS', 'saturate(1.7) brightness(1.15)'], ['PESSIMISTS', 'grayscale(1) contrast(1.3)'], ['ACCOUNTANTS', 'sepia(1)'], ['YOUR MUM', 'hue-rotate(150deg)']], gap=0.55, dur=2.9), 'click@0.0 click@0.55 click@1.1 click@1.65', 'Captain Disillusion'),
+ # built 12 Nov 2026 from the daily gag study (styles/GAG_STUDY_LOG.md: Coffeezilla, Internet Historian, Danny Gonzalez, SunnyV2)
+ ('split_grow', 'Picture gag', 'The winner grows', 'Two pictures side by side; the one being talked about expands and pushes the other off screen.', {}, dict(kind='split', imgs=['G_alien_radio.jpg', 'R_servers.jpg'], labels=['ALIEN SEARCH', 'AI SPENDING'], grow=1, grow_at=1.0, dur=2.9), 'whoosh@1.25 boom@1.7', 'SunnyV2 (gag study 12 Nov 2026)'),
+ ('route', 'Picture gag', 'Route draw', 'A red line draws itself across a map or photo and ends in a circle, or stops dead under a stamp.', {}, dict(kind='route', pts=[[0.14, 0.78], [0.38, 0.52], [0.55, 0.47]], draw=1.0, end='x', stamp='CANCELLED', stampAt=1.45, text='halfway home', dur=2.9), 'squeak@0.35 squeak@0.8 boom@1.7', 'Internet Historian (gag study 12 Nov 2026)'),
+ ('pov', 'Picture gag', "The object's point of view", "We see through the machine's camera: HUD brackets, reticle, focus hunt and a typed readout.", {}, dict(kind='pov', img='R_leopard.jpg', label='NAVCAM · SOL 1217', lines=['ROCK.', 'ROCK.', 'ROCK WITH SPOTS?!'], gap=0.6, dur=2.9), 'servo@0.05 ping@1.75', 'Danny Gonzalez (gag study 12 Nov 2026)'),
+ ('doc_update', 'Picture gag', 'Update footnote', 'A quoted headline, then a red small-caps line under it saying what happened later (fact-checked).', {}, dict(kind='doc', title='Mars Sample Return', quote='Samples home by the early 2030s.', source='mission plan, 2020', update='– later shelved', updateAt=1.6, dur=2.9), 'whoosh@0.0 click@1.85', 'Coffeezilla (gag study 12 Nov 2026)'),
+ ('doc_marks', 'Picture gag', 'Colour-coded highlighter', 'A page where hopeful lines sweep green and the damage sweeps red.', {}, dict(kind='doc', title='Senate record, 1993', marks=[[3, 'good', 0.5], [5, 'good', 0.85], [9, 'bad', 1.4]], dur=2.9), 'whoosh@0.0 squeak@0.75 squeak@1.1 squeak@1.65', 'SunnyV2 (gag study 12 Nov 2026)'),
 ]
 
 SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -124,7 +130,9 @@ SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd bo
  ('dundun', 'Dun-dun-DUNNN: mock drama'), ('whoosh', 'Whoosh for fast moves and spins'), ('thunder', 'Thunder: doom'), ('boing', 'Cartoon boing'), ('tada', 'Ta-da fanfare'),
  ('kazoo', 'Kazoo fanfare: mock triumph'), ('newsstab', 'News sting'), ('ding', 'Clean bell ding: a correct answer, a landing'), ('sparkle', 'Sparkle chime: shiny'),
  ('ticks', 'Stopwatch ticking faster and faster'), ('bleep', 'Censor bleep'), ('static', 'TV static burst'), ('ping', 'Phone notification'), ('error', 'Retro computer error buzz'),
- ('pop', 'Bubble pop: something appears'), ('click', 'Camera shutter'), ('squeak', 'Marker squeak while drawing')]
+ ('pop', 'Bubble pop: something appears'), ('click', 'Camera shutter'), ('squeak', 'Marker squeak while drawing'),
+ ('modem', 'Dial-up modem screech: the wrong sound for a machine switching on'), ('choir', 'Heavenly choir "aaah": the wrong sound for something mundane'),
+ ('yelp', 'Short cartoon yelp (never a realistic scream)'), ('servo', 'Camera servo whirr: a machine looking at something')]
 
 REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open('/home/claude/aliens/sfx_real/pick.tsv')]   # (name, Mixkit title)
 
