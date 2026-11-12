@@ -287,10 +287,10 @@ export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { c
       return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}</>;
   const cardLayer = <>{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
   if (!F.desk) return <AbsoluteFill style={{background: '#000'}}>
-    <Audio src={staticFile(`${dir}/vo.mp3`)} />{pics}<Finish f={finish} dir={dir} />{F.noise ? <Grain o={F.noise} /> : null}{cardLayer}</AbsoluteFill>;
+    <Audio src={staticFile(`${dir}/vo.mp3`)} />{pics}{F.overCards ? cardLayer : null}<Finish f={finish} dir={dir} />{F.noise ? <Grain o={F.noise} /> : null}{F.overCards ? null : cardLayer}</AbsoluteFill>;   // overCards: grade-wide finish over the cards too (style 2)
   // desk: which print is on top now (a full-screen card counts as its own print), its tilt and paper
   const fc = cards.map((c, i) => [c, i]).filter(([c]) => isFull(c)).pop(), si = shots.filter(s => s.t <= t + 0.001).length - 1;
-  const key = fc ? 100 + fc[1] : si, rot = ((key * 37) % 9 - 4) * 0.45, dx = ((key * 53) % 7 - 3) * 6, dy = ((key * 29) % 5 - 2) * 5;
+  const key = fc ? 100 + fc[1] : si, rot = (F.tilt ?? 0.4) * [-1, -0.4, 0.3, 0.8, -0.7, 0.5][key % 6], dx = ((key * 53) % 5 - 2) * 4, dy = ((key * 29) % 5 - 2) * 3;   // small tilt, no big flips (style review)
   const S = F.deskScale ?? 0.84, paper = fc ? '#F7F1E1' : '#FBFAF6';
   const tape = (l, tp, r) => <div style={{position: 'absolute', left: l, top: tp, width: 190, height: 54, background: 'rgba(236,224,190,0.78)', transform: `rotate(${r}deg)`, boxShadow: '0 2px 4px rgba(0,0,0,0.15)', zIndex: 5}} />;
   return <AbsoluteFill style={{background: '#2B2620'}}>
