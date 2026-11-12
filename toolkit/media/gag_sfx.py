@@ -225,8 +225,63 @@ def wind(d=2.5):                                                     # cold wind
     x = sum(bp(n, fc * 0.92, fc * 1.08) for fc in (600, 900)) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.5 * t))
     return norm(x * env(len(t), 0.5, 0.8), -6)
 
+# Gag study 12 Nov 2026: "the wrong sound, explained away" (Danny Gonzalez) and the object's POV.
+def modem(d=2.2):                                                    # dial-up modem handshake: dial tones, a screech, warbling noise
+    t1 = t_(0.35); dial = (np.sin(2 * np.pi * 350 * t1) + np.sin(2 * np.pi * 440 * t1)) * 0.5
+    t2 = t_(0.45); scr = np.sin(2 * np.pi * (1800 + 700 * np.sin(2 * np.pi * 9 * t2)) * t2)
+    t3 = t_(max(0.3, d - 0.8)); war = np.sign(np.sin(2 * np.pi * np.cumsum(1200 + 900 * np.sign(np.sin(2 * np.pi * 37 * t3))) / SR)) * 0.6 + 0.5 * rng.standard_normal(len(t3))
+    x = np.concatenate([dial, scr, bp(war, 600, 3400)])
+    return norm(bp(x, 300, 3400, 3), -6)
+def choir(d=2.4):                                                    # heavenly "aaah": a stacked major chord of soft vowel-like voices
+    t = t_(d); x = np.zeros_like(t)
+    for f in (261.6, 329.6, 392.0, 523.3):
+        for det in (-0.6, 0, 0.6):
+            x += saw((f + det) * (1 + 0.004 * np.sin(2 * np.pi * 5.2 * t)), t, rng.random())   # gentle vibrato
+    x = bp(x, 500, 1100) + 0.5 * bp(x, 1000, 1500)                   # an "ah" formant pair
+    return norm(x * env(len(t), 0.35, 0.7), -6)
+def yelp():                                                          # a short cartoon yelp (not a realistic scream): a fast rising-falling squeal
+    t = t_(0.45); f = 700 + 1300 * np.sin(np.pi * t / 0.45) ** 0.6
+    x = saw(f, t) * env(len(t), 0.01, 0.12) * (1 + 0.3 * np.sin(2 * np.pi * 30 * t))
+    return norm(bp(x, 600, 4500), -4)
+def servo(d=0.7):                                                    # a camera servo whirr: a motor tone that spins up and settles, then a tick
+    t = t_(d); f = 180 + 260 * np.minimum(1, t / (d * 0.5)) - 80 * np.maximum(0, (t - d * 0.6) / (d * 0.4))
+    x = (saw(f, t) * 0.6 + 0.3 * saw(f * 2.01, t)) * env(len(t), 0.03, 0.12)
+    s = int((d - 0.06) * SR); x[s:s + 200] += 0.8 * np.hanning(200)
+    return norm(bp(x, 150, 3000), -6)
+
+# Gag studies 12 Nov 2026 (second and third): the quiet scream (Map Men), the hidden signal (LEMMiNO), the VCR time skip
+# (Internet Historian), the jack-in-the-box (Danny Gonzalez) and the queue (CGP Grey).
+def muffled():                                                       # a tiny muffled yelp from a still object, as if from behind glass
+    return norm(lp(yelp(), 900, 3) * 0.6, -14)
+MORSE = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--',
+         'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+         '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.'}
+def morse(text='GJ581G', wpm=20, f=700):                             # a beep "signal" that spells a text in Morse (dot 1 unit, dash 3, gaps 1/3/7)
+    u = 1.2 / wpm; out = []
+    def tone(n): t = t_(n * u); return np.sin(2 * np.pi * f * t) * env(len(t), 0.004, 0.008)
+    for w in text.upper().split():
+        for ch in w:
+            for sym in MORSE.get(ch, ''):
+                out += [tone(1 if sym == '.' else 3), np.zeros(int(u * SR))]
+            out.append(np.zeros(int(2 * u * SR)))
+        out.append(np.zeros(int(4 * u * SR)))
+    x = np.concatenate(out); x = x + 0.01 * rng.standard_normal(len(x))   # a faint hiss under it, like a radio
+    return norm(bp(x, 300, 3000), -6)
+def ffwd(d=1.0):                                                     # a VCR fast-forward: a chirpy squealing tape whir
+    t = t_(d); f = 2400 + 900 * np.sin(2 * np.pi * 13 * t) + 600 * np.sign(np.sin(2 * np.pi * 3 * t))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5 + 0.3 * bp(rng.standard_normal(len(t)), 1500, 6000)
+    return norm(x * env(len(t), 0.02, 0.1), -8)
+def creak(d=0.8):                                                    # a lid creaking open: slow, rough, falling clicks
+    t = t_(d); x = np.zeros_like(t); rate = 40 + 60 * (t / d)
+    pos = np.cumsum(rate / SR); idx = np.where(np.diff(np.floor(pos)) > 0)[0]
+    for i in idx: n = 160; x[i:i + n] += np.hanning(n)[:len(x[i:i + n])] * (0.5 + 0.5 * rng.random())
+    return norm(bp(x, 300, 2500) * env(len(t), 0.05, 0.2), -6)
+def sigh(d=1.1):                                                     # a tired breathy sigh (filtered noise, falling)
+    t = t_(d); n = rng.standard_normal(len(t)); x = bp(n, 300, 1800) * np.exp(-2.2 * t / d) * np.minimum(1, t / 0.12)
+    return norm(lp(x, 1400), -8)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
-    for n in names:
-        x = globals()[n](); wavfile.write(f'{od}/sfx_{n}.wav', SR, (x * 32767).astype(np.int16)); print(n, f'{len(x) / SR:.2f} s')
+    for n in names:   # morse_HELLO-THERE spells a text in Morse
+        x = morse(n.split('_', 1)[1].replace('-', ' ')) if n.startswith('morse_') else globals()[n](); wavfile.write(f'{od}/sfx_{n}.wav', SR, (x * 32767).astype(np.int16)); print(n, f'{len(x) / SR:.2f} s')

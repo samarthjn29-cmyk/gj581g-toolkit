@@ -303,6 +303,17 @@ const Finish = ({f, dir}) => { const {fps} = useVideoConfig(); if (!f) return nu
 //   finish.filter: one colour grade for every picture (CSS filter), finish.noise: animated film grain (0-1),
 //   finish.desk: style 1, "paper collage on a desk": every picture and card is a print lying on one desk (finish.deskImg),
 //   with a white border, tape and a shadow, a small tilt that changes with each new picture, under the camera move.
+// Painted finish for the gag cards (Sam, 12 Nov 2026: "make sure every gag is used in the AI animated painted format"): with
+// finish.painted, every card is drawn through one SVG filter: a slow brush-edge wobble that re-seeds every finish.boil frames (the
+// hand-made "animated painting" boil; 0 = still), paper grain inside the card shapes only, and a warm gouache shift (saturate down,
+// a little sepia) so pure white reads as cream and red as brick. finish.paintEdge = wobble strength (px, default 5).
+const PaintFilterDefs = ({f}) => { const fr = useCurrentFrame(), b = f.boil ?? 4, seed = b ? Math.floor(fr / b) % 3 : 0;
+  return <svg width={0} height={0} style={{position: 'absolute'}}><filter id="gjPaint" x="-2%" y="-2%" width="104%" height="104%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed={seed + 1} result="w" />
+    <feDisplacementMap in="SourceGraphic" in2="w" scale={f.paintEdge ?? 5} xChannelSelector="R" yChannelSelector="G" result="d" />
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={7} result="g" /><feColorMatrix in="g" type="saturate" values="0" result="gg" />
+    <feComponentTransfer in="gg" result="g2"><feFuncR type="linear" slope="0.25" intercept="0.8" /><feFuncG type="linear" slope="0.25" intercept="0.8" /><feFuncB type="linear" slope="0.25" intercept="0.78" /></feComponentTransfer>
+    <feBlend in="d" in2="g2" mode="multiply" result="m" /><feComposite in="m" in2="d" operator="in" /></filter></svg>; };
 const FULLK = ['kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 'triptych', 'ruler', 'advert', 'grid', 'namesake', 'variants', 'headline'];
 const Grain = ({o}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{pointerEvents: 'none', opacity: o, mixBlendMode: 'overlay'}}>
   <svg width="100%" height="100%"><filter id={`gr${f % 8}`}><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f % 8} /><feColorMatrix type="saturate" values="0" /></filter>
@@ -311,8 +322,15 @@ export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { c
   const isFull = c => FULLK.includes(c.kind) && c.style !== 'rise' && c.style !== 'roll' && t >= c.t && t < c.t + (c.dur || 2);
   const pics = <>{shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;
-      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}</>;
-  const cardLayer = <>{P.on ? <PaintDefs /> : null}{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
+      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><Shot s={s} t={t} dir={dir} words={words} />
+        {s.src && F.srcTags ? <div style={{position: 'absolute', right: 28, bottom: 22, fontFamily: 'Inter, sans-serif', fontSize: 20, letterSpacing: 1, color: 'rgba(241,230,207,0.8)', textShadow: '0 1px 4px rgba(0,0,0,0.9)'}}>{s.src}</div> : null}</AbsoluteFill>; })}</>;   // corner source tag (Defunctland, gag study 12 Nov 2026): only with finish.srcTags, because Sam's 8 Nov 2026 rule keeps source labels off screen
+  const cardLayer0 = <>{P.on ? <PaintDefs /> : null}{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
+  // cards that read the picture behind them (backdrop-filter: freeze grey-out, blur censor, VHS glitch) stay outside the painted
+  // wrapper, because a filtered parent cuts them off from the backdrop (painted test, 12 Nov 2026: the freeze stopped greying)
+  const BACK = c => c.kind === 'freeze' || c.kind === 'glitch' || (c.kind === 'censor' && c.mode === 'blur');
+  const cardLayer = F.painted ? <><PaintFilterDefs f={F} />{P.on ? <PaintDefs /> : null}<AbsoluteFill style={{filter: `url(#gjPaint) saturate(${F.paintSat ?? 0.85}) sepia(${F.paintSepia ?? 0.16})`}}>
+      {cards.map((c, i) => BACK(c) ? null : <Card key={i} c={c} t={t} words={words} dir={dir} />)}</AbsoluteFill>
+    {cards.map((c, i) => BACK(c) ? <Card key={'b' + i} c={c} t={t} words={words} dir={dir} /> : null)}</> : cardLayer0;
   if (!F.desk) return <AbsoluteFill style={{background: '#000'}}>
     <Audio src={staticFile(`${dir}/vo.mp3`)} />{pics}{F.overCards ? cardLayer : null}<Finish f={finish} dir={dir} />{F.noise ? <Grain o={F.noise} /> : null}{F.overCards ? null : cardLayer}</AbsoluteFill>;   // overCards: grade-wide finish over the cards too (style 2)
   // desk: which print is on top now (a full-screen card counts as its own print), its tilt and paper

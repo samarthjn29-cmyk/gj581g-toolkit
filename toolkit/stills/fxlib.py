@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """The GJ 581g effects library (Sam, 11 Nov 2026): one entry per camera move, card, picture gag and sound.
-  fxlib.py timeline OUTDIR   -> a demo timeline.json (every entry 3 s, in order) for kit/StillsScene.jsx, plus the pictures it needs
+  fxlib.py timeline OUTDIR [PAINTED_DIR] -> a demo timeline.json (painted finish on; pictures taken from PAINTED_DIR first, same names) (every entry 3 s, in order) for kit/StillsScene.jsx, plus the pictures it needs
   fxlib.py clips RENDER.mp4 SFXDIR OUTDIR  -> one 3 s preview mp4 per entry, its paired sound mixed in
   fxlib.py json OUT.json      -> the library as data (for the gallery page and EFFECTS_LIBRARY.md)
 Each entry: id, group, name, what it's for, the plan JSON to use it, the paired sound (with offset), and the gag shape it comes from."""
@@ -116,6 +116,48 @@ L = [
  ('grid', 'Picture gag', 'Reaction grid', 'One line, then a grid of reaction pictures popping in (our mascot or anonymous stock only).', {}, dict(kind='grid', imgs=['G_alien_popcorn.jpg', 'G_robots_react.jpg', 'G_alien_alone.jpg', 'G_alien_radio.jpg'], labels=['aliens', 'robots', 'also aliens', 'nobody'], dur=2.6), 'pop@0.0 pop@0.1 pop@0.2 pop@0.3', 'Tanmay Bhat reaction grid'),
  ('namesake', 'Picture gag', 'Namesake card', 'An idea named after a person: their real portrait (open licence) beside the idea, the name stamped on in yellow.', {}, dict(kind='namesake', img='R_drake_portrait.jpg', idea='R_tatel_1958.jpg', name='DRAKE', stampAt=0.6, dur=2.9), 'r:impact@0.6', 'Captain Disillusion'),
  ('variants', 'Picture gag', 'Variants board', 'The same picture several times, each with a named treatment, lit one by one.', {}, dict(kind='variants', img='G_alien_alone.jpg', title='THE SAME EMPTY SKY, ACCORDING TO', items=[['OPTIMISTS', 'saturate(1.7) brightness(1.15)'], ['PESSIMISTS', 'grayscale(1) contrast(1.3)'], ['ACCOUNTANTS', 'sepia(1)'], ['YOUR MUM', 'hue-rotate(150deg)']], gap=0.55, dur=2.9), 'click@0.0 click@0.55 click@1.1 click@1.65', 'Captain Disillusion'),
+ # built 12 Nov 2026 from the daily gag study (styles/GAG_STUDY_LOG.md: Coffeezilla, Internet Historian, Danny Gonzalez, SunnyV2)
+ ('split_grow', 'Picture gag', 'The winner grows', 'Two pictures side by side; the one being talked about expands and pushes the other off screen.', {}, dict(kind='split', imgs=['G_alien_radio.jpg', 'R_servers.jpg'], labels=['ALIEN SEARCH', 'AI SPENDING'], grow=1, grow_at=1.0, dur=2.9), 'whoosh@1.25 boom@1.7', 'SunnyV2 (gag study 12 Nov 2026)'),
+ ('route', 'Picture gag', 'Route draw', 'A red line draws itself across a map or photo and ends in a circle, or stops dead under a stamp.', {}, dict(kind='route', pts=[[0.14, 0.78], [0.38, 0.52], [0.55, 0.47]], draw=1.0, end='x', stamp='CANCELLED', stampAt=1.45, text='halfway home', dur=2.9), 'squeak@0.35 squeak@0.8 boom@1.7', 'Internet Historian (gag study 12 Nov 2026)'),
+ ('pov', 'Picture gag', "The object's point of view", "We see through the machine's camera: HUD brackets, reticle, focus hunt and a typed readout.", {}, dict(kind='pov', img='R_leopard.jpg', label='NAVCAM · SOL 1217', lines=['ROCK.', 'ROCK.', 'ROCK WITH SPOTS?!'], gap=0.6, dur=2.9), 'servo@0.05 ping@1.75', 'Danny Gonzalez (gag study 12 Nov 2026)'),
+ ('doc_update', 'Picture gag', 'Update footnote', 'A quoted headline, then a red small-caps line under it saying what happened later (fact-checked).', {}, dict(kind='doc', title='Mars Sample Return', quote='Samples home by the early 2030s.', source='mission plan, 2020', update='– later shelved', updateAt=1.6, dur=2.9), 'whoosh@0.0 click@1.85', 'Coffeezilla (gag study 12 Nov 2026)'),
+ ('doc_marks', 'Picture gag', 'Colour-coded highlighter', 'A page where hopeful lines sweep green and the damage sweeps red.', {}, dict(kind='doc', title='Senate record, 1993', marks=[[3, 'good', 0.5], [5, 'good', 0.85], [9, 'bad', 1.4]], dur=2.9), 'whoosh@0.0 squeak@0.75 squeak@1.1 squeak@1.65', 'SunnyV2 (gag study 12 Nov 2026)'),
+ # built 12 Nov 2026 (second and third gag studies + the rest of the first; Sam: "put the gags in the library", painted format)
+ ('puppet', 'Picture gag', 'Puppet path', 'One cut-out carried across a run of real pictures, tilting as it goes (cue one card over several shots).', {'move': 'hold'}, dict(kind='sticker', img='cut_plane.png', border=False, w=0.2, path=[[0, 0.08, 0.72, -12], [1.2, 0.48, 0.45, 0], [2.4, 0.95, 0.28, 14]], dur=2.9), 'whoosh@0.3 whoosh@1.5', 'Internet Historian (gag study 12 Nov 2026)'),
+ ('weather', 'Picture gag', 'Literal weather', 'A weather idiom becomes real weather over the picture (snow, dust, leaves, ash), the idiom behind it.', {'move': 'drift'}, dict(kind='weather', particle='snow', text='THE LONG SILENCE', size=150, dur=2.9), 'wind@0.0', 'MagnatesMedia (gag study 12 Nov 2026)'),
+ ('chips', 'Picture gag', 'Quote chips', 'Short quotes lift out as painted pills that stack side by side.', {}, dict(kind='chips', items=["it's aliens", 'a comet?', 'probably hydrogen'], gap=0.8, dur=2.9), 'pop@0.4 pop@1.2 pop@2.0', 'SunnyV2 (gag study 12 Nov 2026)'),
+ ('later_vcr', 'Picture gag', 'Fast-forward time skip', 'A VCR double arrow and "fifteen years later" on black with static bands.', {}, dict(kind='later', style='vcr', text='fifteen years later', dur=2.4), 'ffwd@0.25 static@1.2', 'Internet Historian (gag study 12 Nov 2026)'),
+ ('jack', 'Picture gag', 'Jack-in-the-box', 'A cut-out object splits open and our mascot pops up inside (never a real person).', {}, dict(kind='jack', img='cut_box.png', inner='cut_alien.png', openAt=0.7, dur=2.9), 'creak@0.3 boing@0.95', 'Danny Gonzalez (gag study 12 Nov 2026)'),
+ ('clones', 'Picture gag', 'Clone line-up', 'One cut-out repeated and tinted, one per label ("this year", "next year"...).', {}, dict(kind='clones', img='cut_figure.png', n=3, labels=['this year', 'next year', 'the year after'], dur=2.9), 'pop@0.25 pop@0.5 pop@0.75', 'MagnatesMedia (gag study 12 Nov 2026)'),
+ ('queue', 'Picture gag', 'The queue grows', 'Anonymous figures line up behind the subject one by one while it dithers.', {}, dict(kind='clones', img='cut_figure.png', queue=True, n=6, x=0.25, dur=2.9), 'pop@0.25 pop@0.65 pop@1.05 pop@1.45 pop@1.85 sigh@2.25', 'CGP Grey (gag study 12 Nov 2026)'),
+ ('quote', 'Picture gag', 'Source subtitle', "The source's own sentence, word for word, in a cream strip while the picture acts it out.", {}, dict(kind='quote', text='Demo text: put the exact quote from the fact-checked script here.', source='source name, year', dur=2.9), '', 'Internet Historian (gag study 12 Nov 2026)'),
+ ('tag_swap', 'Picture gag', 'Label swap', 'The tag flips over and shows the new text as the story changes.', {}, dict(kind='tag', text='ALIENS?', swaps=[[1.0, 'hydrogen?'], [1.9, 'no idea']], dur=2.9), 'click@1.25 click@2.15 trombone@2.25', 'Kurzgesagt / Map Men (gag study 12 Nov 2026)'),
+ ('panels', 'Picture gag', 'Accumulating panels', 'Each list item adds a vertical panel and squeezes the others.', {}, dict(kind='panels', imgs=['R_leopard.jpg', 'R_gbt.jpg', 'R_servers.jpg'], times=[0, 0.8, 1.6], caps=['rock', 'rock', 'rock with spots'], dur=2.9), 'whoosh@0.25 whoosh@1.05 whoosh@1.85', 'Kurzgesagt (gag study 12 Nov 2026)'),
+ ('hand', 'Picture gag', 'The giant hand', 'A huge hand slides in and holds the scene: scale as a joke picture, never a claim.', {'move': 'pullback'}, dict(kind='hand', img='cut_hand.png', **{'from': 'right'}, x=0.66, y=0.52, w=0.75, dur=2.9), 'whoosh@0.25 boom@0.8', 'Kurzgesagt (gag study 12 Nov 2026)'),
+ ('doodle', 'Picture gag', 'Doodle on a photo', 'A crude figure draws itself onto a real photo and holds up a sign (places and objects only).', {}, dict(kind='doodle', x=0.3, y=0.86, h=0.42, sign='HELLO?', signAt=0.9, dur=2.9), 'squeak@0.25 pop@1.15', 'Map Men (gag study 12 Nov 2026)'),
+ ('manicule', 'Picture gag', 'Manicule labels', 'Old pointing hands with small serif labels on a document or diagram.', {}, dict(kind='labels', style='manicule', items=['the signal', "the red pen", 'cost: $0'], x=0.5, y=0.5, gap=0.6, dur=2.9), 'click@0.25 click@0.85 click@1.45', 'Map Men (gag study 12 Nov 2026)'),
+ ('doc_focus', 'Picture gag', 'Focus-blur read', 'Every line of the page blurs except the one being read.', {}, dict(kind='doc', title='Senate record, 1993', focus=7, dur=2.9), 'whoosh@0.0', 'Jarvis Johnson (gag study 12 Nov 2026)'),
+ ('doc_translate', 'Picture gag', 'Original + translation', 'The original characters in one column, the plain-words meaning typed beside each.', {}, dict(kind='doc', title='Printout', translate=[['6EQUJ5', 'demo: check the meaning against the script'], ['U', 'demo: one letter, one reading']], gap=0.9, dur=2.9), 'click@0.75 click@1.65', 'LEMMiNO (gag study 12 Nov 2026)'),
+ ('outline', 'Picture gag', 'The outline stays', 'The object drains away and only its cream outline is left: "never built", "gone".', {}, dict(kind='outline', img='cut_dish.png', at=0.8, w=0.4, dur=2.9), 'pop@1.05', 'Kurzgesagt (gag study 12 Nov 2026)'),
+ ('scroll', 'Picture gag', 'Karaoke transmission', 'Message lines scroll up over the picture and light up as they are read.', {}, dict(kind='scroll', lines=['HELLO FROM EARTH', 'WE ARE LISTENING', 'PLEASE ANSWER', '...', '(NOTHING)'], times=[0.2, 0.7, 1.2, 1.8, 2.3], dur=2.9), 'ping@0.2 ping@0.7 ping@1.2', 'LEMMiNO (gag study 12 Nov 2026)'),
+ ('recap', 'Picture gag', 'Recap screen', 'The last picture shrinks into a small screen beside our mascot while the next point builds.', {}, dict(kind='recap', img='R_gbt.jpg', next='R_servers.jpg', host='cut_alien.png', text='next: the money', dur=2.9), 'whoosh@0.25', 'CGP Grey (gag study 12 Nov 2026)'),
+ ('ots', 'Picture gag', 'Over-the-shoulder pun box', 'A small box in the corner changes on every beat with a picture and a pun title.', {}, dict(kind='ots', steps=[[0, 'R_servers.jpg', 'CLOUD NINE'], [1.3, 'R_capitol.jpg', 'BUDGET CUTS']], dur=2.9), 'click@0.25 click@1.55', 'Some More News (gag study 12 Nov 2026)'),
+ ('black', 'Picture gag', 'The black beat', 'Hard cut to black and silence for 1.5-3 s after "Can I show you…?". Never twice a chapter.', {}, dict(kind='black', dur=2.0, text='we don\'t have it.', textAt=1.0), '', 'Scott The Woz (gag study 12 Nov 2026)'),
+ ('split_chevron', 'Picture gag', 'Before → after chevron', 'Two pictures joined by an arrow-shaped notch.', {}, dict(kind='split', imgs=['R_gbt.jpg', 'G_alien_alone.jpg'], labels=['BEFORE', 'AFTER'], chevron=True, dur=2.9), 'whoosh@0.25', 'Kurzgesagt (gag study 12 Nov 2026)'),
+ ('pile', 'Picture gag', 'Count-out pile', 'A number shown as that many objects (honest ratios only; over 60 say "×1000" on the label).', {}, dict(kind='pile', a={'n': 1, 'label': 'demo: one'}, b={'n': 40, 'label': 'demo: forty'}, dur=2.9), 'pop@0.2 ticks@0.55 ding@2.6', 'CGP Grey (gag study 12 Nov 2026)'),
+ ('src_tag', 'Picture gag', 'Corner source tag', 'A tiny credit on a real picture (shot field src; shows only with finish.srcTags, as Sam\'s 8 Nov rule keeps source labels off).', {'src': 'Photo: NRAO/AUI/NSF'}, None, '', 'Defunctland (gag study 12 Nov 2026)'),
+ # habits: sound or writing shapes with no card of their own (gag studies 12 Nov 2026)
+ ('wrong_sound', 'Habit', 'The wrong sound, explained away', 'An object makes a sound that doesn\'t fit (dial-up, choir, yelp), then one flat line explains it.', {}, None, 'modem@0.3', 'Danny Gonzalez (gag study 12 Nov 2026)'),
+ ('quiet_scream', 'Habit', 'The quiet scream', 'A still object makes a tiny muffled sound under the narration, never explained.', {'move': 'hold'}, None, 'muffled@1.0', 'Map Men (gag study 12 Nov 2026)'),
+ ('hidden_signal', 'Habit', 'The hidden signal', 'The "signal" beeps spell our channel name in Morse (gag_sfx.py morse / morse_TEXT). Never claimed as a real signal.', {}, None, 'morse@0.2', 'LEMMiNO (gag study 12 Nov 2026)'),
+ ('finish_sentence', 'Habit', 'The picture finishes the sentence', 'Sam stops mid-line ("…and they were like") and the next picture and its sound finish it.', {}, None, 'scratch@1.0', 'LEMMiNO (gag study 12 Nov 2026)'),
+ ('cold_open', 'Habit', 'Cold-open quote', 'The funniest line plays in the first 5 s and again in its real place, the same sting both times.', {}, None, 'dundun@0.5', 'Coffeezilla (gag study 12 Nov 2026)'),
+ ('pitch_rebuttal', 'Habit', 'Pitch, then rebuttal', 'A real pitch line held big (title card), then a hard cut to the sourced fact that undercuts it. Exact quotes only.', {}, None, 'scratch@1.4', 'Drew Gooden (gag study 12 Nov 2026)'),
+ ('bystander', 'Habit', 'The recurring bystander', 'One dull real picture cut back to three times as the story escalates elsewhere, always the same.', {}, None, '', 'Defunctland (gag study 12 Nov 2026)'),
+ ('detail_again', 'Habit', 'The background detail, again', 'The same small detail circled in every real picture it appears in, with a count the third time.', {}, None, 'squeak@0.5', 'Kurtis Conner (gag study 12 Nov 2026)'),
+ ('chatbot_line', 'Habit', 'Chatbot-voice line', 'One line in AI-assistant cadence ("You\'re not just X, you\'re redefining Y"), said flat.', {}, None, 'sparkle@0.4', 'Kurtis Conner (gag study 12 Nov 2026)'),
+ ('callback_video', 'Habit', 'Cross-video callback', 'One exact shot or line from an older GJ 581g video, with its original sound.', {}, None, '', 'CGP Grey / Scott The Woz (gag study 12 Nov 2026)'),
+ ('obsession', 'Habit', "The narrator's obsession", 'One tiny grudge that returns once per video across the channel (Sam to pick it).', {}, None, 'dundun@0.5', 'Some More News (gag study 12 Nov 2026)'),
 ]
 
 SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -124,9 +166,32 @@ SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd bo
  ('dundun', 'Dun-dun-DUNNN: mock drama'), ('whoosh', 'Whoosh for fast moves and spins'), ('thunder', 'Thunder: doom'), ('boing', 'Cartoon boing'), ('tada', 'Ta-da fanfare'),
  ('kazoo', 'Kazoo fanfare: mock triumph'), ('newsstab', 'News sting'), ('ding', 'Clean bell ding: a correct answer, a landing'), ('sparkle', 'Sparkle chime: shiny'),
  ('ticks', 'Stopwatch ticking faster and faster'), ('bleep', 'Censor bleep'), ('static', 'TV static burst'), ('ping', 'Phone notification'), ('error', 'Retro computer error buzz'),
- ('pop', 'Bubble pop: something appears'), ('click', 'Camera shutter'), ('squeak', 'Marker squeak while drawing')]
+ ('pop', 'Bubble pop: something appears'), ('click', 'Camera shutter'), ('squeak', 'Marker squeak while drawing'),
+ ('modem', 'Dial-up modem screech: the wrong sound for a machine switching on'), ('choir', 'Heavenly choir "aaah": the wrong sound for something mundane'),
+ ('yelp', 'Short cartoon yelp (never a realistic scream)'), ('servo', 'Camera servo whirr: a machine looking at something'),
+ ('muffled', 'Tiny muffled yelp from a still object (the quiet scream)'), ('morse', 'Morse beeps spelling GJ581G (morse_TEXT for any text)'), ('ffwd', 'VCR fast-forward whir'),
+ ('creak', 'A lid creaking open'), ('sigh', 'A tired sigh'), ('wind', 'Cold wind')]
 
-REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open('/home/claude/aliens/sfx_real/pick.tsv')]   # (name, Mixkit title)
+_PICK = '/home/claude/aliens/sfx_real/pick.tsv'
+REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open(_PICK)] if os.path.exists(_PICK) else []   # (name, Mixkit title)
+
+CUTS = ['cut_plane.png', 'cut_hand.png', 'cut_figure.png', 'cut_box.png', 'cut_alien.png', 'cut_dish.png']
+def cutouts(od):
+    """Demo cut-outs in the painted palette for the cut-out gags, drawn only when the video folder has none of its own (real videos
+    use AI cut-outs: generate, repaint with STYLE_PAINTED.md, then remove the background)."""
+    from PIL import Image, ImageDraw
+    G, C, Y, Rd, K = (46, 74, 51), (241, 230, 207), (232, 197, 71), (166, 67, 47), (42, 39, 36)
+    def new(): im = Image.new('RGBA', (600, 600), (0, 0, 0, 0)); return im, ImageDraw.Draw(im)
+    for f in CUTS:
+        if os.path.exists(f'{od}/{f}'): continue
+        im, d = new()
+        if f == 'cut_plane.png': d.polygon([(40, 300), (520, 270), (580, 300), (520, 330)], fill=C, outline=K, width=8); d.polygon([(260, 290), (330, 140), (380, 140), (350, 290)], fill=Rd, outline=K, width=6); d.polygon([(260, 310), (330, 460), (380, 460), (350, 310)], fill=Rd, outline=K, width=6); d.polygon([(60, 295), (40, 210), (90, 210), (120, 290)], fill=G, outline=K, width=6)
+        if f == 'cut_hand.png': d.rounded_rectangle([170, 230, 470, 560], 70, fill=(222, 178, 140), outline=K, width=8); [d.rounded_rectangle([180 + i * 72, 40 + abs(i - 1.5) * 40, 240 + i * 72, 300], 30, fill=(222, 178, 140), outline=K, width=7) for i in range(4)]; d.rounded_rectangle([60, 300, 220, 380], 36, fill=(222, 178, 140), outline=K, width=7)
+        if f == 'cut_figure.png': d.ellipse([230, 60, 370, 200], fill=(222, 178, 140), outline=K, width=7); d.rounded_rectangle([200, 200, 400, 440], 50, fill=G, outline=K, width=7); d.rectangle([225, 430, 285, 580], fill=K); d.rectangle([315, 430, 375, 580], fill=K)
+        if f == 'cut_box.png': d.rectangle([90, 160, 510, 560], fill=Rd, outline=K, width=9); d.rectangle([60, 110, 540, 200], fill=Y, outline=K, width=9); d.rectangle([270, 110, 330, 560], fill=Y)
+        if f == 'cut_alien.png': d.ellipse([170, 90, 430, 380], fill=(122, 176, 92), outline=K, width=8); d.ellipse([215, 190, 285, 260], fill=K); d.ellipse([315, 190, 385, 260], fill=K); d.arc([250, 270, 350, 330], 20, 160, fill=K, width=8); d.rounded_rectangle([220, 360, 380, 560], 40, fill=G, outline=K, width=8)
+        if f == 'cut_dish.png': d.chord([80, 60, 520, 420], 200, 340, fill=C, outline=K, width=9); d.line([300, 240, 300, 120], fill=K, width=10); d.polygon([(260, 330), (340, 330), (380, 560), (220, 560)], fill=G, outline=K, width=8)
+        im.save(f'{od}/{f}')
 
 def entries():
     out = []
@@ -140,7 +205,7 @@ def entries():
                         sounds=[x for x in snd.split() if x], source=src))
     return out
 
-def timeline(od):
+def timeline(od, painted_dir=None):
     E = entries(); os.makedirs(od, exist_ok=True); shots = [e['shotdef'] for e in E]; cards = [e['card'] for e in E if e['card']]
     words = []
     for e in E:   # kinetic cards land each word on a spoken time: fake evenly spaced "words" in the demo
@@ -149,15 +214,17 @@ def timeline(od):
             for j, w in enumerate(c['text'].split()): words.append([w, round(c['t'] + j * 0.35, 2), round(c['t'] + j * 0.35 + 0.3, 2)])
     dur = round(len(E) * SEG, 2)
     for f in set(IMGS + ['G_alien_popcorn.jpg', 'G_alien_radio.jpg', 'R_leopard.jpg', 'R_drake_portrait.jpg', 'R_tatel_1958.jpg']):
-        for d in ('/home/claude/aliens/public/real', '/home/claude/aliens/ai'):
+        for d in ([painted_dir] if painted_dir else []) + ['/home/claude/aliens/public/real', '/home/claude/aliens/ai']:   # painted repaints first (same names)
             if os.path.exists(f'{d}/{f}'): shutil.copy(f'{d}/{f}', f'{od}/{f}'); break
+    cutouts(od)
     for d in ('/home/claude/aliens/lottie/json', '/home/claude/aliens/video/overlays'):
-        for f in os.listdir(d): shutil.copy(f'{d}/{f}', f'{od}/{f}')
+        if os.path.isdir(d):
+            for f in os.listdir(d): shutil.copy(f'{d}/{f}', f'{od}/{f}')
     for e in E:   # the lens shows the shot's own picture
         if e['card'] and e['card']['kind'] in ('lens', 'grey'): e['card']['img'] = e['shotdef']['img']
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', str(dur), '-c:a', 'libmp3lame', f'{od}/vo.mp3'], check=True)
     pub = os.path.abspath(od).split('/public/')[-1]
-    json.dump({'dir': pub, 'scene': 'fxlib', 't0': 0, 'dur': dur, 'words': words, 'shots': shots, 'cards': cards, 'finish': {'vignette': 0.3}}, open(f'{od}/timeline.json', 'w'), indent=1)
+    json.dump({'dir': pub, 'scene': 'fxlib', 't0': 0, 'dur': dur, 'words': words, 'shots': shots, 'cards': cards, 'finish': {'vignette': 0.3, 'painted': True, 'boil': 4, 'srcTags': True}}, open(f'{od}/timeline.json', 'w'), indent=1)
     print(len(E), 'entries,', dur, 's')
 
 def clips(render, sfx, od, first=0):
@@ -177,6 +244,6 @@ def clips(render, sfx, od, first=0):
 
 if __name__ == '__main__':
     cmd = sys.argv[1]
-    if cmd == 'timeline': timeline(sys.argv[2])
+    if cmd == 'timeline': timeline(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)
     if cmd == 'clips': clips(*sys.argv[2:5], int(sys.argv[5]) if len(sys.argv) > 5 else 0)
     if cmd == 'json': json.dump({'entries': [{k: v for k, v in e.items() if k not in ('shotdef', 'card', 't')} for e in entries()], 'sounds': SOUNDS, 'real': REAL}, open(sys.argv[2], 'w'), indent=1)

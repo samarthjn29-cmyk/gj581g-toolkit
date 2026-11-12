@@ -4,6 +4,7 @@
 import React from 'react';
 import {AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, interpolate, Easing, delayRender, continueRender} from 'remotion';
 import {Lottie} from '@remotion/lottie';
+import {GAGS2} from './Gags2.jsx';   // gag-study cards (12 Nov 2026), painted-native
 
 const cl = (v) => Math.min(1, Math.max(0, v));
 const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.45, 0, 0.25, 1)});
@@ -12,7 +13,7 @@ const RED = '#E0261B', HAND = 'Kalam, cursive', SANS = 'Inter, "Helvetica Neue",
 const W = 1920, H = 1080;
 import {P, PAPER, INK, BRICK} from './Paint.jsx';   // painted mode (finish.gags: painted)
 
-export const gagCard = (c, t, dir) => { const f = GAGS[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
+export const gagCard = (c, t, dir) => { const f = GAGS[c.kind] || GAGS2[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
   const d = c.dur || 2, q = t - c.t; if (q < 0 || q > d) return null;
   return f(c, q, d, c.cutOut ? 1 : 1 - R(t, c.t + d - 0.15, c.t + d), dir); };   // cutOut: hard cut out (plans with dissolve 0, Aliens ch3)
 
@@ -146,16 +147,26 @@ const GAGS = {
 
   // labels (Sam O'Nella's stacked label arrows, study 2): short labels arrive one by one, each with an arrow to the same point (x, y)
   labels: (c, q, d, out) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.55) * H, gap = c.gap ?? 0.6, spots = c.spots || [[0.2, 0.25], [0.8, 0.22], [0.15, 0.78], [0.85, 0.75], [0.5, 0.12]];
-    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{(c.style === 'manicule' ? [] : c.items || []).map((t, i) => { const p = R(q, i * gap, i * gap + 0.25); if (p <= 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H;
         const ex = ax + (x - ax) * 0.82 * p, ey = ay + (y - ay) * 0.82 * p; return <path key={i} d={`M ${ax} ${ay + 30} L ${ex} ${ey}`} stroke="#FCCF3E" strokeWidth={7} strokeLinecap="round" />; })}</svg>
-      {(c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
+      {c.style === 'manicule' ? (c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length], ax = lx * W, ay = ly * H, a = Math.atan2(y - ay, x - ax) * 180 / Math.PI;   // Map Men pointing hands (gag study 12 Nov 2026)
+        return <div key={'m' + i} style={{position: 'absolute', left: ax, top: ay, transform: `translate(-50%, -50%) scale(${pop(qi, 0.5)})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4}}>
+          <div style={{fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 50, color: '#2A2724', background: 'rgba(241,230,207,0.92)', padding: '0 16px 4px', borderRadius: 6, whiteSpace: 'nowrap'}}>{t}</div>
+          <svg width={120} height={70} viewBox="0 0 120 70" style={{transform: `rotate(${a}deg)`, overflow: 'visible'}}>{/* a drawn pointing hand (the ☞ glyph is missing from the render fonts) */}
+            <g fill="#F1E6CF" stroke="#2A2724" strokeWidth={4} strokeLinejoin="round"><path d="M 4 22 C 4 14 10 10 18 10 L 30 10 C 36 4 44 4 50 10 L 108 10 C 116 10 116 24 108 24 L 66 24 L 66 30 C 74 30 74 40 66 40 L 66 46 C 72 46 72 56 64 56 L 60 56 C 64 62 58 68 52 66 L 18 66 C 8 66 4 58 4 50 Z" />
+              <path d="M 66 24 L 50 24 M 66 40 L 52 40 M 64 56 L 50 56" fill="none" /><path d="M 2 18 L 2 60" strokeWidth={8} stroke="#2A2724" /></g></svg></div>; }) : null}
+      {c.style === 'manicule' ? null : (c.items || []).map((t, i) => { const qi = q - i * gap; if (qi < 0) return null; const [lx, ly] = spots[i % spots.length];
         return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.6)}) rotate(${(i % 2 ? 4 : -4)}deg)`, fontFamily: HAND, fontSize: c.size || 60, color: '#FCCF3E', textShadow: '0 3px 10px rgba(0,0,0,0.85)', whiteSpace: 'nowrap',
           ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.62)', padding: '0 18px 6px', borderRadius: 10})}}>{t}</div>; })}</AbsoluteFill>; },   // dark chip: thin yellow handwriting was lost over busy painted dials (reviewer, Aliens ch1 v10)
 
   // sticker (Indian vlog texture, edit study 11 Nov 2026): a cut-out object (PNG with transparency, or a Lottie json) with a thick
   // white border pops in, wobbles and stays; c.img or c.file, at (x, y), c.w share of width
-  sticker: (c, q, d, out, dir) => { const s = pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = 4 * Math.sin(q * 3);
-    const edge = 'drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 14px rgba(0,0,0,0.45))';
+  // c.path = [[offset s, x, y, rot], ...] (Internet Historian puppet path, gag study 12 Nov 2026): the cut-out travels between the
+  // keyframes (eased), so one card spanning several shots carries the same object across them. c.border: false drops the white edge.
+  sticker: (c, q, d, out, dir) => { if (c.path && c.path.length) { const KP = c.path, k = KP.findIndex(p => p[0] > q), a = KP[Math.max(0, (k < 0 ? KP.length : k) - 1)], b = KP[k < 0 ? KP.length - 1 : k], u = a === b ? 1 : Easing.inOut(Easing.cubic)(cl((q - a[0]) / (b[0] - a[0])));
+      c = {...c, x: a[1] + (b[1] - a[1]) * u, y: a[2] + (b[2] - a[2]) * u, rot: (a[3] ?? 0) + ((b[3] ?? 0) - (a[3] ?? 0)) * u}; }
+    const s = c.path ? 1 : pop(q, 1.2), w = (c.w ?? 0.2) * W, wob = c.path ? 0 : 4 * Math.sin(q * 3);
+    const edge = c.border === false ? 'drop-shadow(0 10px 14px rgba(0,0,0,0.45))' : 'drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(0 10px 14px rgba(0,0,0,0.45))';
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.75) * W - w / 2, top: (c.y ?? 0.4) * H - w / 2, width: w, height: w, transform: `scale(${s}) rotate(${(c.rot ?? -6) + wob}deg)`, filter: P.on ? 'drop-shadow(3px 0 0 #26302A) drop-shadow(-3px 0 0 #26302A) drop-shadow(0 3px 0 #26302A) drop-shadow(0 -3px 0 #26302A) drop-shadow(0 10px 14px rgba(0,0,0,0.45))' : edge, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
       {c.file ? <LottieGag c={{...c, x: 0.5, y: 0.5, w: 1}} dir={dir} out={1} inner /> : <Img src={staticFile(`${dir}/${c.img}`)} style={{maxWidth: '100%', maxHeight: '100%'}} />}</div>
       {c.text ? <div style={{position: 'absolute', left: (c.x ?? 0.75) * W, top: (c.y ?? 0.4) * H + w * 0.55, transform: `translateX(-50%) rotate(-3deg) scale(${pop(q - 0.15)})`, background: '#FCCF3E', color: '#111', fontFamily: SANS, fontWeight: 900, fontSize: 40, padding: '4px 18px', borderRadius: 8, whiteSpace: 'nowrap'}}>{c.text}</div> : null}</AbsoluteFill>; },
@@ -177,12 +188,25 @@ const GAGS = {
         fontSize: base * Math.pow(k, i), transform: `scale(${0.6 + 0.4 * p})`, textShadow: '0 6px 18px rgba(0,0,0,0.7)'}}>{w}</span>; })}</div></AbsoluteFill>; },
 
   // doc: a document slides in from the right at an angle, then its key line is lifted out as big highlighted text (Climate Town)
-  doc: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), hl = R(q, 0.7, 1.0);
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', right: 120 - (1 - p) * 900, top: 90, width: 620, height: 800, background: '#FFF', boxShadow: '0 24px 60px rgba(0,0,0,0.55)', transform: `rotate(${4 - 2 * p}deg)`, overflow: 'hidden'}}>
-        {c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /> : <div style={{padding: 50, fontFamily: 'Georgia, serif', color: '#222'}}><div style={{fontSize: 34, fontWeight: 700, marginBottom: 24}}>{c.title}</div>
-          {Array.from({length: 14}).map((_, j) => <div key={j} style={{height: 12, margin: '16px 0', background: j === (c.line ?? 6) ? `linear-gradient(90deg, #FCCF3E ${hl * 100}%, #CFCFCF ${hl * 100}%)` : '#CFCFCF', width: `${75 + ((j * 29) % 25)}%`}} />)}</div>}</div>
-      <div style={{position: 'absolute', left: 90, right: 820, bottom: 130, opacity: hl, transform: `translateY(${(1 - hl) * 30}px)`}}><span style={{background: '#FCCF3E', color: '#111', fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 58, lineHeight: 1.35, padding: '2px 12px', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone'}}>{c.quote}</span>
-        {c.source ? <div style={{marginTop: 14, fontFamily: SANS, fontSize: 28, color: '#FFF', textShadow: '0 2px 8px #000'}}>{c.source}</div> : null}</div></AbsoluteFill>; },
+  // Gag study 12 Nov 2026: c.update = Coffeezilla's "update footnote", a small-caps line in red stamped under the quote at c.updateAt s
+  // (default 1.6) saying what happened later ("– cancelled the next year"). Must be a fact-checked outcome. Sound: click or typeding.
+  // c.marks = SunnyV2's colour-coded highlighter on the page's lines: [[line, 'good' | 'bad', at s], ...], green for praise, red for damage.
+  doc: (c, q, d, out, dir) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.35)), hl = R(q, 0.7, 1.0), MK = P.on ? {good: '#8DB36B', bad: '#C9654E'} : {good: '#5BE37D', bad: '#FF5A4E'}, LC = P.on ? '#C9BCA2' : LC, HY = P.on ? '#E9B93A' : HY, mk = {};
+    (c.marks || []).forEach(([j, k, at]) => { mk[j] = [MK[k] || k, R(q, at ?? 0.5, (at ?? 0.5) + 0.35)]; });
+    // c.focus = line: Jarvis Johnson focus-blur read: every other line blurs and fades, the read line stays sharp (12 Nov 2026)
+    const fz = c.focus !== undefined ? R(q, 0.5, 0.8) : 0, lineSt = j => (c.focus !== undefined && j !== c.focus ? {filter: `blur(${4 * fz}px)`, opacity: 1 - 0.5 * fz} : {});
+    const lineBg = j => j === (c.line ?? 6) && c.quote ? `linear-gradient(90deg, ${HY} ${hl * 100}%, ${LC} ${hl * 100}%)` : mk[j] ? `linear-gradient(90deg, ${mk[j][0]} ${mk[j][1] * 100}%, ${LC} ${mk[j][1] * 100}%)` : LC;
+    const uq = q - (c.updateAt ?? 1.6), us = uq < 0 ? 0 : 1 + 0.35 * Math.exp(-uq * 10);
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', right: 120 - (1 - p) * 900, top: 90, width: 620, height: 800, background: P.on ? PAPER : '#FFF', border: P.on ? `4px solid ${INK}` : 'none', boxShadow: '0 24px 60px rgba(0,0,0,0.55)', transform: `rotate(${4 - 2 * p}deg)`, overflow: 'hidden'}}>
+        {c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /> : <div style={{padding: 50, fontFamily: P.on ? 'Fraunces, Georgia, serif' : 'Georgia, serif', color: P.on ? INK : '#222'}}><div style={{fontSize: 34, fontWeight: 700, marginBottom: 24}}>{c.title}</div>
+          {Array.from({length: 14}).map((_, j) => <div key={j} style={{height: mk[j] || c.focus === j ? 18 : 12, margin: mk[j] || c.focus === j ? '13px 0' : '16px 0', background: c.focus === j ? `linear-gradient(90deg, ${HY} ${fz * 100}%, ${LC} ${fz * 100}%)` : lineBg(j), width: `${75 + ((j * 29) % 25)}%`, ...lineSt(j)}} />)}</div>}</div>
+      {c.translate ? <div style={{position: 'absolute', left: 90, top: 140, width: 1000, display: 'flex', flexDirection: 'column', gap: 26}}>{c.translate.map(([orig, plain], i) => { const qi = q - 0.5 - i * (c.gap ?? 0.8); if (qi < 0) return null;   // LEMMiNO original + translation (12 Nov 2026)
+        const n = Math.min(plain.length, Math.floor(qi * 45)); return <div key={i} style={{display: 'flex', gap: 30, alignItems: 'baseline'}}>
+          <span style={{fontFamily: MONO, fontWeight: 800, fontSize: 60, color: '#F1E6CF', minWidth: 220, textShadow: '0 3px 10px #000'}}>{orig}</span>
+          <span style={{fontFamily: SERIF, fontWeight: 600, fontSize: 50, color: '#2A2724', background: '#E8C547', padding: '0 14px 4px', borderRadius: 4, whiteSpace: 'nowrap'}}>{plain.slice(0, n)}</span></div>; })}</div> : null}
+      <div style={{position: 'absolute', left: 90, right: 820, bottom: 130, opacity: c.quote ? hl : 1, transform: `translateY(${(1 - (c.quote ? hl : 1)) * 30}px)`}}>{c.quote ? <span style={{background: HY, color: '#111', fontFamily: SERIF, fontWeight: 600, fontSize: c.size || 58, lineHeight: 1.35, padding: '2px 12px', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone'}}>{c.quote}</span> : null}
+        {c.source ? <div style={{marginTop: 14, fontFamily: SANS, fontSize: 28, color: '#FFF', textShadow: '0 2px 8px #000'}}>{c.source}</div> : null}
+        {c.update && uq >= 0 ? <div style={{marginTop: 22, display: 'inline-block', transform: `scale(${us})`, transformOrigin: '0 50%', background: '#111', color: '#FF5A4E', fontFamily: SANS, fontWeight: 900, fontSize: c.updateSize || 46, letterSpacing: 4, textTransform: 'uppercase', padding: '8px 20px', boxShadow: '0 6px 20px rgba(0,0,0,0.5)'}}>{c.update}</div> : null}</div></AbsoluteFill>; },
   // overlay footage (Mixkit Stock Video Free License): a texture clip over the picture with a blend mode (screen for light and static)
   overlay: (c, q, d, out, dir) => <AbsoluteFill style={{opacity: out * (c.opacity ?? 0.6), mixBlendMode: c.blend || 'screen', pointerEvents: 'none'}}>
     <Sequence from={Math.round(c.t * 30)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${c.file}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></Sequence></AbsoluteFill>,
@@ -226,13 +250,63 @@ const GAGS = {
       <div style={{position: 'absolute', left: 90, top: 70, fontFamily: MONO, fontWeight: 800, fontSize: 64, color: '#FFFFFF', textShadow: '3px 0 #f0f, -3px 0 #0ff'}}>{c.text ?? 'PLAY ▶'}</div>
       <div style={{position: 'absolute', right: 90, bottom: 80, fontFamily: MONO, fontSize: 48, color: '#FFFFFF', textShadow: '3px 0 #f0f, -3px 0 #0ff'}}>{c.stamp ?? ''}</div></AbsoluteFill>; },
 
-  // expectation vs reality: two pictures side by side with labels (full screen)
-  split: (c, q, d, out, dir) => { const p = R(q, 0, 0.25);
-    const half = (img, lab, side) => <div style={{position: 'absolute', top: 0, bottom: 0, width: W / 2, left: side ? W / 2 : 0, overflow: 'hidden', transform: `translateY(${(1 - p) * (side ? 100 : -100)}%)`}}>
-      <Img src={staticFile(`${dir}/${img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-      <div style={{position: 'absolute', left: 0, right: 0, top: 50, textAlign: 'center'}}><span style={{background: side ? RED : '#FFFFFF', color: side ? '#FFFFFF' : '#111', fontFamily: SANS, fontWeight: 900, fontSize: 64, padding: '8px 30px', letterSpacing: 3}}>{lab}</span></div></div>;
+  // expectation vs reality: two pictures side by side with labels (full screen).
+  // c.grow = 0 | 1 ("the winner grows", SunnyV2, gag study 12 Nov 2026): at c.grow_at s that panel expands to fill the frame in 0.45 s
+  // and pushes the other off its edge. Sound: whoosh at grow_at (+ a soft boom when it lands).
+  split: (c, q, d, out, dir) => { const p = R(q, 0, 0.25), gi = c.grow, g = gi === 0 || gi === 1 ? Easing.out(Easing.cubic)(R(q, c.grow_at ?? 1.0, (c.grow_at ?? 1.0) + 0.45)) : 0;
+    const xb = gi === 0 ? W / 2 + (W / 2) * g : gi === 1 ? W / 2 - (W / 2) * g : W / 2;   // the divider's x
+    const half = (img, lab, side) => { const left = side ? xb : 0, width = side ? W - xb : xb, shrinks = gi !== undefined && gi !== side;
+      return <div style={{position: 'absolute', top: 0, bottom: 0, width, left, overflow: 'hidden', transform: `translateY(${(1 - p) * (side ? 100 : -100)}%)`}}>
+        <Img src={staticFile(`${dir}/${img}`)} style={shrinks ? {position: 'absolute', top: 0, height: '100%', width: W / 2, maxWidth: 'none', objectFit: 'cover', left: side ? 0 : width - W / 2} : {width: '100%', height: '100%', objectFit: 'cover'}} />
+        <div style={{position: 'absolute', left: 0, right: 0, top: 50, textAlign: 'center', opacity: shrinks ? 1 - g : 1, whiteSpace: 'nowrap'}}><span style={{background: side ? (P.on ? BRICK : RED) : (P.on ? PAPER : '#FFFFFF'), color: side ? (P.on ? PAPER : '#FFFFFF') : (P.on ? INK : '#111'), fontFamily: P.on ? HAND : SANS, fontWeight: 900, border: P.on ? `3px solid ${INK}` : 'none', fontSize: 64 * (shrinks ? 1 : 1 + 0.25 * g), padding: '8px 30px', letterSpacing: 3}}>{lab}</span></div></div>; };
     return <AbsoluteFill style={{opacity: out, background: '#000'}}>{half(c.imgs[0], (c.labels || ['EXPECTATION'])[0], 0)}{half(c.imgs[1], (c.labels || [, 'REALITY'])[1] || 'REALITY', 1)}
-      <div style={{position: 'absolute', left: W / 2 - 4, top: 0, bottom: 0, width: 8, background: '#FFFFFF'}} /></AbsoluteFill>; },
+      {g < 1 && !c.chevron ? <div style={{position: 'absolute', left: xb - 4, top: 0, bottom: 0, width: 8, background: P.on ? PAPER : '#FFFFFF', filter: P.on ? 'url(#pRough)' : undefined}} /> : null}
+      {g < 1 && c.chevron ? <svg width={W} height={H} style={{position: 'absolute', left: 0, top: 0}}><path d={`M ${xb - 40} 0 L ${xb + 10} 0 L ${xb + 80} ${H / 2} L ${xb + 10} ${H} L ${xb - 40} ${H} L ${xb + 30} ${H / 2} Z`} fill={c.chevronColor || (P.on ? PAPER : '#F1E6CF')} filter={P.on ? 'url(#pRough)' : undefined} /></svg> : null}</AbsoluteFill>; },   // chevron: Kurzgesagt before -> after notch (gag study 12 Nov 2026)
+
+  // route (Internet Historian route draw, gag study 12 Nov 2026): a red line draws itself point by point over a map or photo and
+  // ends in a hand-drawn circle. c.pts = [[x, y], ...] (fractions), c.draw = drawing time s (default 1.0), c.dash = dashed (a flight
+  // path), c.end = 'circle' (default) | 'x' | 'none', c.text = scribbled label at the end, c.stamp = a verdict slammed at the end point
+  // (e.g. "CANCELLED", for a line that stops dead), c.stampAt s. Overlay on the shot. Sound: squeak while drawing, ding on the circle,
+  // boom on the stamp.
+  route: (c, q, d, out) => { const pts = (c.pts || [[0.2, 0.7], [0.5, 0.4], [0.8, 0.3]]).map(([x, y]) => [x * W, y * H]), seg = pts.slice(1).map((v, i) => Math.hypot(v[0] - pts[i][0], v[1] - pts[i][1])),
+      tot = seg.reduce((a, b) => a + b, 0), p = R(q, 0.1, 0.1 + (c.draw ?? 1.0)), col = c.color || (P.on ? BRICK : RED), done = p >= 1, [ex, ey] = pts[pts.length - 1];
+    let need = tot * p; const drawn = [pts[0]];   // the part of the polyline drawn so far
+    for (let i = 0; i < seg.length && need > 0; i++) { const k = Math.min(1, need / seg[i]); drawn.push([pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]); need -= seg[i]; }
+    const line = drawn.map(v => v.join(',')).join(' '), qe = q - 0.1 - (c.draw ?? 1.0), cr = 46, L = 2 * Math.PI * cr * 1.2, cp = R(qe, 0, 0.35), end = c.end || 'circle';
+    const st = q - (c.stampAt ?? 0.1 + (c.draw ?? 1.0) + 0.35), sb = st < 0 ? 0 : 1 + 0.6 * Math.exp(-st * 10);
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}><g filter={P.on ? 'url(#pBrush)' : undefined}>
+        <polyline points={line} fill="none" stroke={P.on ? 'rgba(243,235,221,0.85)' : 'rgba(255,255,255,0.85)'} strokeWidth={22} strokeLinejoin="round" strokeLinecap="round" strokeDasharray={c.dash ? '2 34' : undefined} />
+        <polyline points={line} fill="none" stroke={col} strokeWidth={12} strokeLinejoin="round" strokeLinecap="round" strokeDasharray={c.dash ? '26 18' : undefined} />
+        <circle cx={pts[0][0]} cy={pts[0][1]} r={14} fill={col} stroke="#FFF" strokeWidth={5} />
+        {!done ? <circle cx={drawn[drawn.length - 1][0]} cy={drawn[drawn.length - 1][1]} r={11} fill="#FFF" stroke={col} strokeWidth={5} /> : null}
+        {done && end === 'circle' ? <path d={`M ${ex + cr} ${ey} C ${ex + cr} ${ey - cr * 1.35}, ${ex - cr * 1.15} ${ey - cr * 1.2}, ${ex - cr} ${ey} C ${ex - cr} ${ey + cr * 1.3}, ${ex + cr * 1.1} ${ey + cr * 1.25}, ${ex + cr} ${ey - cr * 0.3}`}
+          fill="none" stroke={col} strokeWidth={10} strokeLinecap="round" strokeDasharray={L} strokeDashoffset={L * (1 - cp)} /> : null}
+        {done && end === 'x' ? <path d={`M ${ex - 36} ${ey - 36} L ${ex + 36} ${ey + 36} M ${ex + 36} ${ey - 36} L ${ex - 36} ${ey + 36}`} stroke={col} strokeWidth={14} strokeLinecap="round" opacity={cp} /> : null}</g></svg>
+      {done && c.text ? <div style={{position: 'absolute', left: ex + (ex > W * 0.7 ? -60 : 60), top: c.stamp ? ey + 40 : ey - 110, transform: `translateX(${ex > W * 0.7 ? '-100%' : '0'}) rotate(-5deg) scale(${pop(qe, 0.6)})`, fontFamily: HAND, fontWeight: P.on ? 700 : 400, fontSize: c.size || 64, color: col, whiteSpace: 'nowrap', textShadow: '0 2px 10px rgba(255,255,255,0.6)'}}>{c.text}</div> : null}
+      {c.stamp && st >= 0 ? <div style={{position: 'absolute', left: ex, top: ey - (c.stampLift ?? 110), transform: `translate(-50%, -50%) rotate(${c.rot ?? -10}deg) scale(${sb})`, border: `10px solid ${col}`, color: col, fontFamily: SANS, fontWeight: 900, fontSize: c.stampSize || 96, letterSpacing: 6, padding: '6px 30px', background: c.plate ?? 'rgba(255,250,240,0.9)', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.45)'}}>{c.stamp}</div> : null}</AbsoluteFill>; },
+
+  // pov (Danny Gonzalez's "object's point of view", gag study 12 Nov 2026): we see through the machine's camera. HUD corner brackets,
+  // a centre reticle, a blinking readout and scan lines over c.img (full frame, focus-hunts in: blur, then sharp) or over the shot
+  // when no c.img. c.label = top-left readout ("NAVCAM · SOL 1217"), c.lines = readout lines typed one by one at the bottom (each
+  // c.gap s apart), c.tint = 'green' | 'blue' | 'none'. Anonymous AI faces or objects only, never a real person. Sound: servo + ping.
+  pov: (c, q, d, out, dir) => { const foc = R(q, 0, 0.35), gap = c.gap ?? 0.6, tint = {green: 'rgba(60,255,140,0.10)', blue: 'rgba(80,170,255,0.12)', none: 'rgba(0,0,0,0)'}[c.tint || (P.on ? 'none' : 'green')], hud = c.hud || (P.on ? PAPER : '#B8FFD0');
+    const br = (st) => <div style={{position: 'absolute', width: 140, height: 100, borderColor: hud, borderStyle: 'solid', borderWidth: 0, opacity: 0.9, ...st}} />;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {c.img ? <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}><div style={{position: 'absolute', inset: 0, transform: `scale(${1.18 - 0.06 * foc + 0.01 * Math.sin(q * 2.2)})`}}>
+        <Pic dir={dir} f={c.img} filter={`blur(${(1 - foc) * 9}px) contrast(1.12) saturate(0.75)`} /></div></AbsoluteFill> : null}
+      <AbsoluteFill style={{background: tint, mixBlendMode: 'screen'}} />
+      <AbsoluteFill style={{backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0px, rgba(0,0,0,0.22) 2px, transparent 2px, transparent 5px)'}} />
+      <div style={{position: 'absolute', left: 0, right: 0, height: 90, top: ((q * 0.45) % 1) * H - 45, background: 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.07), rgba(255,255,255,0))'}} />
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.75) 100%)'}} />
+      {br({left: 70, top: 70, borderTopWidth: 6, borderLeftWidth: 6})}{br({right: 70, top: 70, borderTopWidth: 6, borderRightWidth: 6})}
+      {br({left: 70, bottom: 70, borderBottomWidth: 6, borderLeftWidth: 6})}{br({right: 70, bottom: 70, borderBottomWidth: 6, borderRightWidth: 6})}
+      <svg width={W} height={H} style={{position: 'absolute', opacity: 0.8}}><g filter={P.on ? 'url(#pRough)' : undefined} stroke={hud} strokeWidth={3} fill="none">
+        <circle cx={W / 2} cy={H / 2} r={64 + (1 - foc) * 60} /><path d={`M ${W / 2 - 120} ${H / 2} h 40 M ${W / 2 + 80} ${H / 2} h 40 M ${W / 2} ${H / 2 - 120} v 40 M ${W / 2} ${H / 2 + 80} v 40`} /></g></svg>
+      <div style={{position: 'absolute', left: 110, top: 100, fontFamily: P.on ? 'Fraunces, Georgia, serif' : MONO, fontSize: 40, color: hud, letterSpacing: 3, display: 'flex', alignItems: 'center', gap: 16}}>
+        <span style={{width: 22, height: 22, borderRadius: 11, background: RED, opacity: Math.floor(q * 2.5) % 2 ? 0.25 : 1}} />{c.label ?? 'CAM 01'}</div>
+      <div style={{position: 'absolute', right: 110, top: 100, fontFamily: MONO, fontSize: 32, color: hud, letterSpacing: 2}}>{foc < 1 ? 'FOCUSING…' : 'LOCK'}</div>
+      <div style={{position: 'absolute', left: 110, bottom: 100, fontFamily: MONO, fontSize: c.size || 50, color: hud, letterSpacing: 4, lineHeight: 1.3, textShadow: '0 0 10px rgba(0,0,0,0.9)'}}>
+        {(c.lines || []).map((l, i) => { const qi = q - 0.4 - i * gap; if (qi < 0) return null; const n = Math.min(l.length, Math.floor(qi * 40)); return <div key={i}>{'> ' + l.slice(0, n)}</div>; })}</div></AbsoluteFill>; },
 
   // speech or thought bubble on a picture, tail toward (tx, ty)
   bubble: (c, q, d, out) => { const x = (c.x ?? 0.62) * W, y = (c.y ?? 0.22) * H, tx = (c.tx ?? 0.5) * W, ty = (c.ty ?? 0.5) * H, s = pop(q), think = c.think;
@@ -253,11 +327,14 @@ const GAGS = {
   // a swinging price tag hung on a string from (x, y)
   // tag: a hanging name tag. Always in the top-left corner, same place and size in every video (Sam, 12 Nov 2026: "The tags ...
   // should always come on the left hand side top corner in all the videos ... they should be equal"). c.free: true keeps c.x/c.y.
-  tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
+  // c.swaps = [[offset s, text], ...] (label swap, Kurzgesagt / Map Men, gag study 12 Nov 2026): the tag flips over and shows the new text.
+  tag: (c, q, d, out) => { const sw0 = (c.swaps || []).filter(x => q >= x[0]).pop(); if (sw0) c = {...c, text: sw0[1], sub: sw0[2] ?? c.sub};
+    const flip = (c.swaps || []).reduce((m, x) => (q >= x[0] && q < x[0] + 0.25 ? Math.abs(Math.cos((q - x[0]) / 0.25 * Math.PI)) : m), 1);
+    const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(40, Math.floor((TW - 50) / (0.7 * longest)));
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{width: 5, height: 120 + y + 140, background: '#EEE', boxShadow: '0 0 0 1.5px rgba(0,0,0,0.55)'}} />   {/* the string starts above the frame (Sam, 12 Nov 2026) */}
-      <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
+      <div style={{marginTop: -4, width: TW, height: free ? 'auto' : TH, boxSizing: 'border-box', padding: '26px 22px 18px', background: '#F4EFE2', clipPath: 'polygon(20% 0, 80% 0, 100% 18%, 100% 100%, 0 100%, 0 18%)', transform: `scaleY(${flip})`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: fs, lineHeight: 1.08, color: RED, boxShadow: '0 10px 30px rgba(0,0,0,0.4)'}}>
         <div style={{width: 18, height: 18, borderRadius: 9, background: '#333', marginBottom: 10, flex: 'none'}} />{c.text}{c.sub ? <div style={{fontSize: 30, lineHeight: 1.15, color: '#444', fontWeight: 700, marginTop: 6}}>{c.sub}</div> : null}</div></div></AbsoluteFill>; },
 
   // spotlight: everything goes dark except one circle that closes on the detail
@@ -320,6 +397,11 @@ const GAGS = {
       return <rect key={i} x={x} y={y} width={14} height={24} fill={cols[i % cols.length]} transform={`rotate(${q * 700 * (r(3) - 0.5)} ${x} ${y})`} />; })}</svg></AbsoluteFill>; },
 
   // "x hours later" title card in the old documentary style (full screen)
-  later: (c, q, d, out) => <AbsoluteFill style={{background: c.ground || '#5B3A1E', opacity: out * R(q, 0, 0.12), justifyContent: 'center', alignItems: 'center'}}>
+  // style 'vcr' (Internet Historian fast-forward time skip, gag study 12 Nov 2026): a VCR double-arrow, small caps, two static bands
+  later: (c, q, d, out) => c.style === 'vcr' ? <AbsoluteFill style={{background: P.on ? '#1E2620' : '#050505', opacity: out, justifyContent: 'center', alignItems: 'center'}}>
+    {[0.18, 0.8].map((y, i) => <div key={i} style={{position: 'absolute', left: 0, right: 0, top: y * H, height: 46, background: P.on ? 'repeating-linear-gradient(90deg, #26302A 0 3px, #A89B82 3px 5px, #26302A 5px 9px)' : 'repeating-linear-gradient(90deg, #222 0 3px, #777 3px 5px, #111 5px 9px)', opacity: 0.55 + 0.3 * Math.sin(q * 40 + i), transform: `translateX(${Math.sin(q * 23 + i) * 30}px)`}} />)}
+    <div style={{position: 'absolute', left: 110, top: 110, fontFamily: MONO, fontWeight: 900, fontSize: 110, color: '#F1E6CF', opacity: Math.floor(q * 3) % 2 ? 0.55 : 1}}>▶▶</div>
+    <div style={{fontFamily: SERIF, fontVariant: 'small-caps', fontSize: 120, color: '#F1E6CF', letterSpacing: 6}}>{c.text ?? 'three weeks later'}</div></AbsoluteFill>
+  : <AbsoluteFill style={{background: c.ground || '#5B3A1E', opacity: out * R(q, 0, 0.12), justifyContent: 'center', alignItems: 'center'}}>
     <div style={{fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontWeight: 600, fontSize: 150, color: '#FCE9B0', textShadow: '0 6px 0 #2E1A0A', transform: `scale(${0.9 + 0.1 * R(q, 0, 0.4)})`}}>{c.text ?? 'Several minutes later…'}</div></AbsoluteFill>,
 };

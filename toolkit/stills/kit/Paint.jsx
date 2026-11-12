@@ -67,9 +67,10 @@ export const PAINTED = {
         {c.think ? null : <path d={bp.T} fill={PAPER} stroke="none" transform={`translate(${(x - tx) * 0.04} ${(y - ty) * 0.04})`} />}</g></svg>
       <div style={{position: 'absolute', left: x, top: y, transform: 'translate(-50%, -50%) rotate(-1.5deg)', fontFamily: HAND, fontWeight: 700, fontSize: size, lineHeight: 1.12, color: INK, textAlign: 'center', whiteSpace: 'pre'}}>{lines.join('\n')}</div></div></AbsoluteFill>; },
 
-  tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
+  tag: (c, q, d, out) => { const sw0 = (c.swaps || []).filter(x => q >= x[0]).pop(); if (sw0) c = {...c, text: sw0[1], sub: sw0[2] ?? c.sub};   // label swap (gag study 12 Nov 2026)
+    const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(42, Math.floor((TW - 56) / (0.8 * longest))), SL = 120 + y + 140;
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`}}>
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg) scaleY(${sw0 && q - sw0[0] < 0.25 ? Math.max(0.05, Math.abs(Math.cos(Math.PI * (q - sw0[0]) / 0.25))) : 1})`}}>
       <svg width={TW} height={SL + TH + 20} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
         <path d={`M ${TW / 2} 0 C ${TW / 2 + 6} ${SL * 0.4}, ${TW / 2 - 6} ${SL * 0.7}, ${TW / 2} ${SL + 36}`} stroke={STRING} strokeWidth={5} fill="none" />
         <g filter="url(#pRough)" style={{filter: `url(#pRough) ${paperShadow}`}}><path d={`M ${TW * 0.2} ${SL} L ${TW * 0.8} ${SL} L ${TW} ${SL + TH * 0.2} L ${TW} ${SL + TH} L 0 ${SL + TH} L 0 ${SL + TH * 0.2} Z`} fill={PAPER} stroke={INK} strokeWidth={4} strokeLinejoin="round" />
@@ -204,5 +205,6 @@ export const PAINTED = {
 
 // timing wrapper shared with the flat kit: fade-out like gagCard (out over the last 0.2 s)
 const SCENE = ['stamp', 'aside', 'banner', 'starburst', 'headline', 'counter', 'pip'];   // default 4.5 s like StillsScene's Card
-export const paintedCard = (c, t, dir) => { const f = PAINTED[c.kind]; if (!P.on || !f || (c.kind === 'rain' && !c.img)) return undefined; const d = c.dur || (SCENE.includes(c.kind) ? 4.5 : 2), q = t - c.t;
+export const paintedCard = (c, t, dir) => { const f = PAINTED[c.kind]; if (!P.on || !f || (c.kind === 'rain' && !c.img) || (c.kind === 'labels' && c.style === 'manicule')) return undefined;   // manicule labels are already paper and ink in Gags.jsx
+  const d = c.dur || (SCENE.includes(c.kind) ? 4.5 : 2), q = t - c.t;
   if (q < 0 || q > d) return null; const out = c.cutOut ? 1 : 1 - R(q, d - 0.15, d); return f(c, q, d, out, dir); };

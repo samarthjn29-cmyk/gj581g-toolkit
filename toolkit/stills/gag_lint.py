@@ -40,13 +40,16 @@ for c in P.get('cards', []):
 # not allowed; flat-only kinds must be given a painted variant before they are used.
 PAINTED = {'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 'count', 'meter', 'stamp', 'aside', 'banner', 'starburst', 'headline',
            'counter', 'pip', 'clock', 'rain', 'overlay', 'glitch', 'kinetic', 'title', 'number', 'bars', 'chain', 'triptych', 'ruler', 'lens',
-           'freeze', 'sticker', 'glint', 'text', 'info'}
+           'freeze', 'sticker', 'glint', 'text', 'info', 'route', 'pov', 'doc', 'split', 'later', 'chips', 'panels', 'clones', 'pile', 'doodle',
+           'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black'}
+CUTOUT = {'clones', 'jack', 'hand', 'recap', 'pile', 'sticker'}   # these carry a cut-out picture: it must be an AI-painted image (S3_*)
 unpainted = 0
 if (P.get('finish') or {}).get('gags') != 'flat':
     for c in P.get('cards', []):
         where = f"{c.get('at')}/{c.get('word', '-')}"
         if c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file')): unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
         elif c['kind'] == 'overlay' and str(c.get('file', '')).endswith(('.mp4', '.webm', '.mov')): print(f"  note       overlay {where}: the painted kit draws painted grain instead of {c.get('file')}")
+        elif c['kind'] in CUTOUT and any(str(c.get(k, '')).endswith('.png') and not str(c.get(k, '')).startswith('S3_') for k in ('img', 'host', 'cut')): print(f"  check      {c['kind']:<10} {where}  cut-out {c.get('img') or c.get('host') or c.get('cut')}: use an AI-painted cut-out (S3_*), not a flat stand-in")
         elif c['kind'] not in PAINTED: unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  this kind has no painted look yet: add one in kit/Paint.jsx first")
 if allowed:
     moves = set(m for k in allowed for m in REG[k].get('moves', []))
