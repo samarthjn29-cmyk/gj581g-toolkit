@@ -173,7 +173,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
         <div style={{position: 'absolute', left: 560, width: 800, top: base - hh - 110, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 84, color: N, whiteSpace: 'nowrap'}}>{done ? c.a.value : fmt(v)}</div>
         <div style={{position: 'absolute', left: 460, width: 1000, top: base + 26, textAlign: 'center', fontFamily: LF, color: I, fontWeight: 800, fontSize: P.on ? 52 : 44}}>{lab}</div>
         {e > 0.05 && e < 0.95 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'going down…'}</div> : null}
-        {done ? <div style={{position: 'absolute', left: 1200, top: base - 150, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"}</div> : null}
+        {done ? <div style={{position: 'absolute', left: P.on ? 1330 : 1200, top: base - 150, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"}</div> : null}
       </AbsoluteFill>; }
     const Y = (c.reverse ? 1 - ez : ez) * (H - base + 330), top = base - H + Y, bot = base + Y, F = 'Inter, "Helvetica Neue", Arial, sans-serif', tick = c.tick || 4000;
     const ticks = []; for (let k = 1; k * tick < H; k++) { const y = base - k * tick + Y; if (y > -60 && y < 1140) ticks.push(<div key={k} style={{position: 'absolute', left: 1180, top: y - 2, width: 60, height: 4, background: N}}><div style={{position: 'absolute', right: 80, top: -26, fontFamily: F, fontWeight: 800, fontSize: 44, color: N, whiteSpace: 'nowrap'}}>{(c.tickLabel || '$#B').replace('#', k * (c.tickStep || 50))}</div></div>); }
@@ -229,6 +229,10 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
   // no ground, the shot stays visible; big bold words rise from below the frame and settle at c.y (default centre) over c.rise s
   if (c.kind === 'kinetic' && c.style === 'rise') { const rs = c.rise || 0.8, p = R(t, c.t, c.t + rs), e = 1 - Math.pow(1 - p, 3);
     const oo = (1 - R(t, c.t + d - 0.2, c.t + d));
+    // painted mode: the words land on a cream paper scrap in Fraunces and fade in (no slide from below the frame)
+    if (P.on) return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo * R(t, c.t, c.t + 0.25)}}><div style={{position: 'relative', transform: `translate(${c.x || 0}px, ${c.y || 0}px) rotate(-2deg) scale(${0.94 + 0.06 * e})`}}>
+      <div style={{position: 'absolute', inset: 0, background: '#F3EBDD', border: '4px solid #26302A', borderRadius: 6, filter: 'url(#pRough) drop-shadow(0 8px 18px rgba(20,16,10,0.45))'}} />
+      <div style={{position: 'relative', padding: '14px 40px 20px', fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: c.size || 150, color: '#26302A', textAlign: 'center', lineHeight: 1, whiteSpace: 'pre-line'}}>{c.text}</div></div></AbsoluteFill>;
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo}}>
       <div style={{fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif', fontWeight: 900, fontSize: c.size || 190, color: c.color || '#FFFFFF', letterSpacing: -2, textAlign: 'center', maxWidth: 1700, lineHeight: 1,
         textShadow: '0 0 60px rgba(0,0,0,0.7), 0 6px 30px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.5)', whiteSpace: 'pre-line', transform: `translate(${c.x || 0}px, ${(1 - e) * 820 + (c.y || 0)}px) scale(${0.9 + 0.1 * e})`}}>{c.text}</div></AbsoluteFill>; }

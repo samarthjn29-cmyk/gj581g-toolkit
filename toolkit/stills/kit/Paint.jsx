@@ -68,7 +68,7 @@ export const PAINTED = {
       <div style={{position: 'absolute', left: x, top: y, transform: 'translate(-50%, -50%) rotate(-1.5deg)', fontFamily: HAND, fontWeight: 700, fontSize: size, lineHeight: 1.12, color: INK, textAlign: 'center', whiteSpace: 'pre'}}>{lines.join('\n')}</div></div></AbsoluteFill>; },
 
   tag: (c, q, d, out) => { const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
-      sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(42, Math.floor((TW - 50) / (0.66 * longest))), SL = 120 + y + 140;
+      sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(42, Math.floor((TW - 56) / (0.8 * longest))), SL = 120 + y + 140;
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg)`}}>
       <svg width={TW} height={SL + TH + 20} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
         <path d={`M ${TW / 2} 0 C ${TW / 2 + 6} ${SL * 0.4}, ${TW / 2 - 6} ${SL * 0.7}, ${TW / 2} ${SL + 36}`} stroke={STRING} strokeWidth={5} fill="none" />
@@ -125,7 +125,7 @@ export const PAINTED = {
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.85) * W - w / 2, top: (c.y ?? 0.22) * H - w / 2, width: w, height: w, transform: `scale(${s}) rotate(${c.rot ?? 0}deg)`, filter: paperShadow}}>
       <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'contain'}} />
       <svg width={w} height={w} style={{position: 'absolute', left: 0, top: 0}}><g filter="url(#pRough)">
-        <line x1={cx} y1={cx} x2={cx} y2={cx - w * 0.22} stroke={INK} strokeWidth={w * 0.035} strokeLinecap="round" transform={`rotate(${a / 12} ${cx} ${cx})`} />
+        <line x1={cx} y1={cx} x2={cx} y2={cx - w * 0.22} stroke={INK} strokeWidth={w * 0.035} strokeLinecap="round" transform={`rotate(${(c.hour ?? 4) * 30 - 30 * tn + a / 12} ${cx} ${cx})`} />
         <line x1={cx} y1={cx} x2={cx} y2={cx - w * 0.33} stroke={BRICK} strokeWidth={w * 0.022} strokeLinecap="round" transform={`rotate(${a} ${cx} ${cx})`} />
         <circle cx={cx} cy={cx} r={w * 0.03} fill={INK} /></g></svg></div></AbsoluteFill>; },
 
