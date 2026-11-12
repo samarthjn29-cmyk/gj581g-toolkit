@@ -170,3 +170,4 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 - Whisper changes how it writes a spoken number after silence is inserted ("4" -> "four"): cue words may list spellings, `"word": ["4", "four"]`.
 - Leftover `fade` on a shot breaks the hard-cut style (two reviewers caught one each in ch1/ch2): grep plans for `fade` when a plan has dissolve 0.
 - News gags (headline newspaper, breaking/correction banner) stay up until their picture cuts, ending 0.1 s before the cut (Sam, 12 Nov 2026: "update the headline gag until the picture stays on the scene").
+- Music drop on a deadpan picture (Sam, 12 Nov 2026, Aliens opening: the bed stops while the quiet data centre "(data centres love you too)" is on screen and resumes when it cuts away): `mix_bed.py --mute A:B` with A:B = the shot's start and end; ramps sit 0.3 s outside, so the music is gone by the cut.
