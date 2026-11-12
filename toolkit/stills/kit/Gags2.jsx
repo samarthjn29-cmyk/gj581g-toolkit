@@ -23,7 +23,7 @@ export const GAGS2 = {
     return <AbsoluteFill style={{opacity: out, background: `rgba(20,16,10,${(c.dim ?? 0.35) * R(q, 0, 0.3)})`}}>
       <div style={{position: 'absolute', left: 80, right: 80, top: (c.y ?? 0.5) * H, transform: 'translateY(-50%)', display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center'}}>
         {it.map((x, i) => { const qi = q - 0.15 - i * gap; if (qi < 0) return null;
-          return <div key={i} style={{...brushBox({padding: '12px 30px 16px', fontFamily: HAND, fontSize: c.size || 64, transform: `scale(${pop(qi, 0.6)}) rotate(${i % 2 ? 2 : -2}deg)`})}}>“{x}”</div>; })}</div></AbsoluteFill>; },
+          return <div key={i} style={{...brushBox({padding: '12px 30px 16px', fontFamily: HAND, fontSize: c.size || 64, transform: `scale(${pop(qi, 0.6)}) rotate(${i % 2 ? 2 : -2}deg)`})}}>{c.quotes === false ? x : `“${x}”`}</div>; })}</div></AbsoluteFill>; },
 
   // panels (Kurzgesagt accumulating panels): each list item adds a vertical panel and the earlier ones squeeze to share the width.
   // c.imgs, c.times (offsets s, default every 1.2 s), c.caps (optional captions). Full-screen. Sound: whoosh per panel.
