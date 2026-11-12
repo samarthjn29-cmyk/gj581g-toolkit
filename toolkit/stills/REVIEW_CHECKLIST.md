@@ -45,3 +45,5 @@ again until nothing certain or likely is left. Only then does the clip go to Sam
 
 The builder fixes every certain and likely finding (with `patch_render.py` for picture-only fixes) before sending,
 and lists the taste ones for Sam in one line each.
+
+- Accepted, don't flag: real photographs of people, real documents and real stock reaction pictures stay unpainted next to painted stills (Sam, 12 Nov 2026).
