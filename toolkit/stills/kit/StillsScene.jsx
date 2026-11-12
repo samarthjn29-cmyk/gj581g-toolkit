@@ -143,7 +143,7 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
       <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 120, fontFamily: 'Inter, Arial, sans-serif', fontWeight: 900, fontSize: c.size || 64, lineHeight: 1.0, color: '#E0261B', whiteSpace: 'pre-line'}}>{c.text}</div></div></AbsoluteFill>; }
   // headline (fake front page, our own masthead "THE DAILY SHRUG"): spins in like an old film newspaper, Onion-style sober headline
   if (c.kind === 'headline') { const p = 1 - Math.pow(1 - R(t, c.t, c.t + 0.7), 3), oo = 1 - R(t, c.t + d - 0.2, c.t + d);
-    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: `rgba(0,0,0,${0.45 * p})`}}><div style={{width: 1180, height: 760, background: '#F4EFE2', boxShadow: '0 30px 80px rgba(0,0,0,0.7)', transform: `rotate(${-720 * (1 - p) - 3}deg) scale(${0.1 + 0.9 * p})`, padding: '40px 60px', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1A1814'}}>
+    return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: `rgba(0,0,0,${0.45 * p})`}}><div style={{width: 1180, height: 760, background: '#F4EFE2', boxShadow: '0 30px 80px rgba(0,0,0,0.7)', transform: `translate(${c.dx || 0}px, ${c.dy || 0}px) rotate(${-720 * (1 - p) - 3}deg) scale(${(0.1 + 0.9 * p) * (c.scale ?? 1)})`, padding: '40px 60px', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1A1814'}}>
       <div style={{textAlign: 'center', fontSize: 92, fontWeight: 700, letterSpacing: 4, borderBottom: '6px double #1A1814', paddingBottom: 10}}>THE DAILY SHRUG</div>
       <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 24, padding: '8px 0', borderBottom: '2px solid #1A1814', fontStyle: 'italic'}}><span>{c.kicker || 'Late edition'}</span><span>Price: one hundred million dollars</span></div>
       <div style={{fontSize: c.size || 84, fontWeight: 700, lineHeight: 1.05, textAlign: 'center', margin: '34px 0 24px'}}>{c.text}</div>
@@ -173,10 +173,10 @@ const Card = ({c, t, words = [], dir}) => { const gg = gagCard(c, t, dir); if (g
   // which flashes red. c.from / c.to numbers, c.prefix, c.hold s before it starts draining, c.drain s.
   if (c.kind === 'counter') { const q = t - c.t, hold = c.hold ?? 0.6, dr = c.drain ?? 1.6, p = Math.min(1, Math.max(0, (q - hold) / dr)), e = p * p * p;
     const v = Math.round(c.from + (c.to - c.from) * e), done = p >= 1, fl = done ? (Math.floor((q - hold - dr) * 8) % 2 === 0) : false, oo = R(t, c.t, c.t + 0.15) * (1 - R(t, c.t + d - 0.15, c.t + d));
-    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: '50%', bottom: c.bottom ?? 120, transform: `translateX(-50%) scale(${done ? 1.12 : 1})`, background: 'rgba(10,9,8,0.82)', borderRadius: 28, padding: '18px 54px',
+    return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: c.left ?? '50%', bottom: c.bottom ?? 120, transform: `translateX(-50%) scale(${done ? 1.12 : 1})`, background: 'rgba(10,9,8,0.82)', borderRadius: 28, padding: '18px 54px',
       border: `6px solid ${done ? '#E0261B' : '#FCCF3E'}`, fontFamily: '"JetBrains Mono", "Courier New", monospace', fontWeight: 800, fontSize: c.size || 120, color: done && fl ? '#FF3B30' : '#FCCF3E', letterSpacing: 2, whiteSpace: 'nowrap', boxShadow: '0 16px 50px rgba(0,0,0,0.6)'}}>
       {(c.prefix ?? '$') + v.toLocaleString('en-US')}</div>
-      {c.label ? <div style={{position: 'absolute', left: '50%', bottom: (c.bottom ?? 120) + (c.size || 120) * 1.25 + 80, transform: 'translateX(-50%) rotate(-2deg)', fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: '#FFFFFF', background: 'rgba(10,9,8,0.7)', padding: '4px 26px', borderRadius: 12, whiteSpace: 'nowrap'}}>{c.label}</div> : null}</AbsoluteFill>; }
+      {c.label ? <div style={{position: 'absolute', left: c.left ?? '50%', bottom: (c.bottom ?? 120) + (c.size || 120) * 1.25 + 80, transform: 'translateX(-50%) rotate(-2deg)', fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: '#FFFFFF', background: 'rgba(10,9,8,0.7)', padding: '4px 26px', borderRadius: 12, whiteSpace: 'nowrap'}}>{c.label}</div> : null}</AbsoluteFill>; }
   // glint (picture-gags catalogue: the "shiny" sparkle): a diagonal light sweep across the shot plus a few star twinkles
   if (c.kind === 'glint') { const q = t - c.t; if (q < 0 || q > d) return null; const p = q / d, x = -40 + 140 * p;
     const stars = c.stars || [[0.62, 0.32], [0.3, 0.45], [0.78, 0.55], [0.45, 0.25]];
@@ -272,12 +272,34 @@ const Finish = ({f, dir}) => { const {fps} = useVideoConfig(); if (!f) return nu
     <AbsoluteFill style={{pointerEvents: 'none', background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,${f.vignette ?? 0.45}) 100%)`}} />
     {f.warm && <AbsoluteFill style={{pointerEvents: 'none', background: 'rgba(255,170,90,0.06)', mixBlendMode: 'soft-light'}} />}</>; };
 
-export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps;
-  return <AbsoluteFill style={{background: '#000'}}>
-    <Audio src={staticFile(`${dir}/vo.mp3`)} />
-    {shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
+// House-style finishes (Sam, 12 Nov 2026: "recreate the opening clip with 1, 2 and 3 style"):
+//   finish.filter: one colour grade for every picture (CSS filter), finish.noise: animated film grain (0-1),
+//   finish.desk: style 1, "paper collage on a desk": every picture and card is a print lying on one desk (finish.deskImg),
+//   with a white border, tape and a shadow, a small tilt that changes with each new picture, under the camera move.
+const FULLK = ['kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 'triptych', 'ruler', 'advert', 'grid', 'namesake', 'variants', 'headline'];
+const Grain = ({o}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{pointerEvents: 'none', opacity: o, mixBlendMode: 'overlay'}}>
+  <svg width="100%" height="100%"><filter id={`gr${f % 8}`}><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f % 8} /><feColorMatrix type="saturate" values="0" /></filter>
+  <rect width="100%" height="100%" filter={`url(#gr${f % 8})`} /></svg></AbsoluteFill>; };
+export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps, F = finish || {};
+  const isFull = c => FULLK.includes(c.kind) && c.style !== 'rise' && c.style !== 'roll' && t >= c.t && t < c.t + (c.dur || 2);
+  const pics = <>{shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;
-      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}
-    <Finish f={finish} dir={dir} />
-    {cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}
+      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><Shot s={s} t={t} dir={dir} words={words} /></AbsoluteFill>; })}</>;
+  const cardLayer = <>{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
+  if (!F.desk) return <AbsoluteFill style={{background: '#000'}}>
+    <Audio src={staticFile(`${dir}/vo.mp3`)} />{pics}<Finish f={finish} dir={dir} />{F.noise ? <Grain o={F.noise} /> : null}{cardLayer}</AbsoluteFill>;
+  // desk: which print is on top now (a full-screen card counts as its own print), its tilt and paper
+  const fc = cards.map((c, i) => [c, i]).filter(([c]) => isFull(c)).pop(), si = shots.filter(s => s.t <= t + 0.001).length - 1;
+  const key = fc ? 100 + fc[1] : si, rot = ((key * 37) % 9 - 4) * 0.45, dx = ((key * 53) % 7 - 3) * 6, dy = ((key * 29) % 5 - 2) * 5;
+  const S = F.deskScale ?? 0.84, paper = fc ? '#F7F1E1' : '#FBFAF6';
+  const tape = (l, tp, r) => <div style={{position: 'absolute', left: l, top: tp, width: 190, height: 54, background: 'rgba(236,224,190,0.78)', transform: `rotate(${r}deg)`, boxShadow: '0 2px 4px rgba(0,0,0,0.15)', zIndex: 5}} />;
+  return <AbsoluteFill style={{background: '#2B2620'}}>
+    <Audio src={staticFile(`${dir}/vo.mp3`)} />
+    {F.deskImg ? <Img src={staticFile(`${dir}/${F.deskImg}`)} style={{position: 'absolute', width: '100%', height: '100%', objectFit: 'cover'}} /> : null}
+    <AbsoluteFill style={{transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${S})`}}>
+      <AbsoluteFill style={{background: paper, boxShadow: '0 28px 60px rgba(0,0,0,0.55), 0 6px 14px rgba(0,0,0,0.35)', transform: 'scale(1.035)'}} />
+      <AbsoluteFill style={{overflow: 'hidden', background: '#111'}}>{pics}{F.noise ? <Grain o={F.noise} /> : null}{cardLayer}</AbsoluteFill>
+      {tape(-60, -48, -8)}{tape(1790, -40, 9)}
+    </AbsoluteFill>
+    <AbsoluteFill style={{pointerEvents: 'none', background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,${F.vignette ?? 0.35}) 100%)`}} />
   </AbsoluteFill>; };

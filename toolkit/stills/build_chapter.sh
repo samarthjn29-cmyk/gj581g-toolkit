@@ -36,6 +36,11 @@ for sh in P['shots']:
     if sh.get('freeze_img') and not miss:
         t = sh.get('vstart', 0) + sh['freeze']
         os.system(f"ffmpeg -v error -y -ss {t} -i {out}/{sh['video']} -frames:v 1 -q:v 2 {out}/{sh['freeze_img']}")
+dk = (P.get('finish') or {}).get('deskImg')
+if dk:
+    src = find(dk)
+    if src: shutil.copy(src, f'{out}/{dk}')
+    else: miss.append(dk)
 fg = (P.get('finish') or {}).get('grain')
 if fg: shutil.copy(f'{proj}/video/{fg}', f'{out}/{fg}')
 for c in P.get('cards', []):
