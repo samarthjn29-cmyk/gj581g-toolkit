@@ -307,7 +307,7 @@ const FULLK = ['kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 
 const Grain = ({o}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{pointerEvents: 'none', opacity: o, mixBlendMode: 'overlay'}}>
   <svg width="100%" height="100%"><filter id={`gr${f % 8}`}><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f % 8} /><feColorMatrix type="saturate" values="0" /></filter>
   <rect width="100%" height="100%" filter={`url(#gr${f % 8})`} /></svg></AbsoluteFill>; };
-export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps, F = finish || {}; P.on = F.gags === 'painted';   // painted gag kit (Paint.jsx)
+export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps, F = finish || {}; P.on = F.gags !== 'flat';   // painted gag kit (Paint.jsx) is the default from 12 Nov 2026 (Sam: "going forward whatever gags we use should be created in the painted AI format"); finish.gags: 'flat' only to rebuild an old video as it was
   const isFull = c => FULLK.includes(c.kind) && c.style !== 'rise' && c.style !== 'roll' && t >= c.t && t < c.t + (c.dur || 2);
   const pics = <>{shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;

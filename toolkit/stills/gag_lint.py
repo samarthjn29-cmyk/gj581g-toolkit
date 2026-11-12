@@ -35,10 +35,23 @@ for c in P.get('cards', []):
     if not ok: fails += 1; print(f"  OUTSIDE    {c['kind']:<10} {where}  belongs to {sorted(set(k for k, _ in hits))}"); continue
     k, r = ok[0]
     if k != 'house': print(f"  ok         {c['kind']:<10} {where}  " + ', '.join(f"{rr['id']} ({REG[kk]['name']})" for kk, rr in ok))
+# painted gags (Sam, 12 Nov 2026: "Going forward whatever gags we use should be created in the painted AI format"): every gag
+# must have a painted look (Paint.jsx, or a P.on branch in Gags.jsx / StillsScene.jsx). Flat Lottie files and video overlays are
+# not allowed; flat-only kinds must be given a painted variant before they are used.
+PAINTED = {'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 'count', 'meter', 'stamp', 'aside', 'banner', 'starburst', 'headline',
+           'counter', 'pip', 'clock', 'rain', 'overlay', 'glitch', 'kinetic', 'title', 'number', 'bars', 'chain', 'triptych', 'ruler', 'lens',
+           'freeze', 'sticker', 'glint', 'text', 'info'}
+unpainted = 0
+if (P.get('finish') or {}).get('gags') != 'flat':
+    for c in P.get('cards', []):
+        where = f"{c.get('at')}/{c.get('word', '-')}"
+        if c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file')): unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
+        elif c['kind'] == 'overlay' and str(c.get('file', '')).endswith(('.mp4', '.webm', '.mov')): print(f"  note       overlay {where}: the painted kit draws painted grain instead of {c.get('file')}")
+        elif c['kind'] not in PAINTED: unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  this kind has no painted look yet: add one in kit/Paint.jsx first")
 if allowed:
     moves = set(m for k in allowed for m in REG[k].get('moves', []))
     for s in P.get('shots', []):
         mv = s.get('move', 'drift')
         if mv not in moves: fails += 1; print(f"  MOVE       {s['id']} '{mv}' is not a move of {allowed} (allowed: {', '.join(sorted(moves))})")
-print('outside the chosen schools:', fails)
-sys.exit(1 if fails and allowed else 0)
+print('outside the chosen schools:', fails, ' not painted:', unpainted)
+sys.exit(1 if (fails and allowed) or unpainted else 0)

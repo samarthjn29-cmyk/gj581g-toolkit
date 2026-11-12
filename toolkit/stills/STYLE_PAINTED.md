@@ -18,3 +18,9 @@ Nano Banana 2 = "Gemini 3.1" in Firefly, which Sam's Firefly plan includes witho
 - Real people: never repaint a photo with a real person's face in it; those stay real photos (or get a duotone in the palette).
 - Firefly route: firefly.adobe.com/generate/image in the built-in browser on Sam's laptop, model and aspect set by JS,
   both images added as references (gj581g-stills-world section 3), result blob pushed out through a Recraft upload URL.
+
+## Gags are painted too (Sam, 12 Nov 2026: "All the visual elements in the video should be of AI painted style" and "Going forward whatever gags we use should be created in the painted AI format")
+- The kit draws every gag in the painted look by default (`kit/Paint.jsx`): cream paper scraps with ink outlines and a rough hand-cut edge, brick-red Fraunces stamps with ink texture, an ochre torn-strip banner, Kalam lettering, a paper-texture wash on full-screen cards (`public/paint/paper_tex.jpg`, AI-painted). `finish.gags: "flat"` exists only to rebuild an old video as it was.
+- Any picture inside a gag (a sticker, a clock dial, a falling banknote, a prop) is an AI-painted image made with this recipe (Firefly Gemini 3.1 first, it costs nothing; Recraft only as a fallback). No flat Lottie files, emoji, clip art or video overlays: `gag_lint.py` fails a plan that uses one.
+- A new gag kind gets its painted look in `Paint.jsx` before it is used in a video; `gag_lint.py` fails kinds without one.
+- Real photographs (real people, real documents such as the Wow! printout) stay real and unpainted.
