@@ -19,6 +19,8 @@ Then a one-line `note` (what makes it work or fail) and, if a small change would
 - A `new:` kind must be worth its build: score `cost` honestly.
 - Judge the gag as it would play over Sam's narration at that moment, not as a written joke.
 - Don't reward length or cleverness that needs a second viewing.
+- **Sam's taste file outranks your own sense of funny** in `fit`. Calibration, 12 Nov 2026: judging blind (no taste file), the judge ranked Sam's 👎 stag-do caption first and two of his 👍 gags last. Generic "relatable" comparisons score high with a judge and low with Sam.
+- **Timing:** a gag must land on the word it reacts to, not before it (the blind run caught a sax sting landing on "In the same year", before the AI priority was said). Mark early or late timing in `note` and give the right cue word in `fix`.
 
 ## Output: `scores.json`
 A JSON list, one object per candidate id:
