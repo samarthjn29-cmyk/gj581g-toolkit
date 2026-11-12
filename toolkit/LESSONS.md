@@ -169,3 +169,4 @@ Each line: what went wrong, why, and the guard now in place. Newest first. Add a
 - Extra sounds via voice_gaps can land up to 2 s after their gag (the next pause): drop any that would play after the gag has gone, or move the gag's pictures to land with the sound (chain `times`).
 - Whisper changes how it writes a spoken number after silence is inserted ("4" -> "four"): cue words may list spellings, `"word": ["4", "four"]`.
 - Leftover `fade` on a shot breaks the hard-cut style (two reviewers caught one each in ch1/ch2): grep plans for `fade` when a plan has dissolve 0.
+- News gags (headline newspaper, breaking/correction banner) stay up until their picture cuts, ending 0.1 s before the cut (Sam, 12 Nov 2026: "update the headline gag until the picture stays on the scene").
