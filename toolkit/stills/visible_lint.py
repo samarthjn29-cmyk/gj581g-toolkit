@@ -39,5 +39,20 @@ for c in t['cards']:
     a, b = c['t'], c['t'] + c['dur']
     x = [k for k in cuts if a + 0.05 < k < b - 0.12]
     if x: bad += 1; print(f"CROSS {a:6.2f} {c['kind']} '{str(c.get('text', c.get('items', '')))[:30]}' runs {b - x[0]:.2f} s past the picture change at {x[0]:.2f}")
+# Written visuals (Sam, 12 Nov 2026: "I would like more written visuals on the screen as that will help the viewers to understand
+# the video. I think a few pictures have stayed on the clip without giving much information or visual gags."): warn on any
+# stretch of more than 3 s where a picture is up with no card, label, bubble, tag or other gag on it.
+spans = sorted([(c['t'], c['t'] + c['dur']) for c in t['cards']])
+edges = sorted(set([0.0, t['dur']] + [a for a, b in spans] + [b for a, b in spans] + [s['t'] for s in t['shots']]))
+bare = []
+for a, b in zip(edges, edges[1:]):
+    m = (a + b) / 2
+    if not any(x <= m < y for x, y in spans): bare.append([a, b])
+merged = []
+for a, b in bare:
+    if merged and abs(merged[-1][1] - a) < 1e-6: merged[-1][1] = b
+    else: merged.append([a, b])
+for a, b in merged:
+    if b - a > 3.0: print(f"BARE  {a:6.2f} {b - a:.1f} s with no written text or gag on screen (add a label, tag, bubble or card)")
 print('too fast:', bad)
 sys.exit(1 if bad else 0)
