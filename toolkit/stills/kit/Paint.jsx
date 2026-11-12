@@ -13,6 +13,14 @@ const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp',
 const pop = (q, k = 1) => q < 0 ? 0 : 1 + 0.22 * k * Math.exp(-q * 7) * Math.sin(q * 22) - Math.exp(-q * 16);
 const paperShadow = 'drop-shadow(0 8px 18px rgba(20,16,10,0.45))';
 
+// paper grain + uneven wash laid over full-screen cards (kinetic, number, title, chain, ruler ...) so they read as painted paper
+export const PaperTex = ({o = 1}) => <AbsoluteFill style={{pointerEvents: 'none', opacity: o}}>
+  <svg width={W} height={H} style={{position: 'absolute', mixBlendMode: 'multiply'}}>
+    <filter id="pTexF"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" /><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.35  0 0 0 0 0.22  0 0 0 -1.6 1.15" /></filter>
+    <filter id="pWashF"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="3" seed="6" /><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.25  0 0 0 -1.2 0.75" /></filter>
+    <rect width={W} height={H} filter="url(#pWashF)" opacity={0.55} /><rect width={W} height={H} filter="url(#pTexF)" opacity={0.5} /></svg>
+  <AbsoluteFill style={{boxShadow: 'inset 0 0 160px rgba(70,50,25,0.45)'}} /></AbsoluteFill>;
+
 // filters, once per frame
 export const PaintDefs = () => <svg width={0} height={0} style={{position: 'absolute'}}>
   <filter id="pRough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3" result="n" /><feDisplacementMap in="SourceGraphic" in2="n" scale="8" /></filter>
@@ -153,13 +161,13 @@ export const PAINTED = {
     return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: c.left ?? '50%', bottom: c.bottom ?? 120, transform: `translateX(-50%) scale(${done ? 1.12 : 1}) rotate(-1deg)`}}>
       <Scrap pad="12px 54px 16px" sw={6} stroke={done ? BRICK : INK} r={12}><div style={{fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 120, color: done && fl ? BRICK : INK, letterSpacing: 2, whiteSpace: 'nowrap', lineHeight: 1.1}}>
         {(c.prefix ?? '$') + v.toLocaleString('en-US')}</div></Scrap></div>
-      {c.label ? <div style={{position: 'absolute', left: c.left ?? '50%', bottom: (c.bottom ?? 120) + (c.size || 120) * 1.25 + 80, transform: 'translateX(-50%) rotate(-2deg)'}}><Scrap pad="0 26px 6px" sw={3}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: 56, color: INK, whiteSpace: 'nowrap'}}>{c.label}</div></Scrap></div> : null}</AbsoluteFill>; },
+      {c.label ? <div style={{position: 'absolute', left: typeof c.left === 'number' && c.left < 700 ? 40 : (c.left ?? '50%'), bottom: (c.bottom ?? 120) + (c.size || 120) * 1.25 + 80, transform: `${typeof c.left === 'number' && c.left < 700 ? '' : 'translateX(-50%) '}rotate(-2deg)`}}><Scrap pad="0 26px 6px" sw={3}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: 56, color: INK, whiteSpace: 'nowrap'}}>{c.label}</div></Scrap></div> : null}</AbsoluteFill>; },
 
   pip: (c, q, d, out, dir) => { const b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14), w = c.w || 560;
     return <AbsoluteFill style={{opacity: 1 - R(q, d - 0.2, d)}}><div style={{position: 'absolute', right: c.right ?? 70, bottom: c.bottom ?? 70, width: w, height: w * 9 / 16, transform: `scale(${b}) rotate(${c.rot ?? 4}deg)`, transformOrigin: '100% 100%'}}>
       <div style={{position: 'absolute', inset: -14, background: PAPER, border: `3px solid ${INK}`, filter: `url(#pRough) ${paperShadow}`}} />
       <div style={{position: 'absolute', inset: 0, overflow: 'hidden'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>
-      <div style={{position: 'absolute', left: '50%', top: -30, width: 150, height: 40, transform: 'translateX(-50%) rotate(-3deg)', background: 'rgba(233,185,58,0.75)'}} /></div></AbsoluteFill>; },
+      <div style={{position: 'absolute', right: -40, top: -18, width: 130, height: 36, transform: 'rotate(38deg)', background: 'rgba(233,185,58,0.75)'}} /></div></AbsoluteFill>; },
 };
 
 // timing wrapper shared with the flat kit: fade-out like gagCard (out over the last 0.2 s)

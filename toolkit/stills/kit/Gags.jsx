@@ -10,6 +10,7 @@ const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp',
 const pop = (q, k = 1) => q < 0 ? 0 : 1 + 0.22 * k * Math.exp(-q * 7) * Math.sin(q * 22) - Math.exp(-q * 16);   // springy pop-in scale
 const RED = '#E0261B', HAND = 'Kalam, cursive', SANS = 'Inter, "Helvetica Neue", Arial, sans-serif', MONO = '"JetBrains Mono", "Courier New", monospace', SERIF = '"Cormorant Garamond", Georgia, serif';
 const W = 1920, H = 1080;
+import {P, PAPER, INK, BRICK} from './Paint.jsx';   // painted mode (finish.gags: painted)
 
 export const gagCard = (c, t, dir) => { const f = GAGS[c.kind]; if (!f) return undefined;   // undefined: not a gag kind
   const d = c.dur || 2, q = t - c.t; if (q < 0 || q > d) return null;
@@ -22,7 +23,7 @@ const LottieGag = ({c, dir, out, inner}) => { const [data, setData] = React.useS
   React.useEffect(() => { fetch(staticFile(`${dir}/${c.file}`)).then(r => r.json()).then(j => { setData(j); continueRender(h); }).catch(() => continueRender(h)); }, []);
   if (!data) return null; const w = (c.w ?? 0.35) * W, ar = (data.h || 1) / (data.w || 1);
   if (inner) return <Sequence from={Math.round(c.t * 30)} layout="none"><Lottie animationData={data} loop={c.loop ?? true} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></Sequence>;
-  return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`, ...(c.plate ? {background: c.plate, borderRadius: '50%', boxShadow: '0 6px 20px rgba(0,0,0,0.5)'} : {})}}>
+  return <Sequence from={Math.round(c.t * 30)} layout="none"><div style={{position: 'absolute', left: (c.x ?? 0.5) * W - w / 2, top: (c.y ?? 0.5) * H - (w * ar) / 2, width: w, height: w * ar, opacity: out, transform: `rotate(${c.rot ?? 0}deg)`, ...(c.plate ? {background: P.on ? PAPER : c.plate, borderRadius: '50%', boxShadow: '0 6px 20px rgba(0,0,0,0.5)', ...(P.on ? {border: `5px solid ${INK}`} : {})} : {}), ...(P.on ? {filter: 'url(#pRough) sepia(0.35) saturate(0.85)'} : {})}}>
     <Lottie animationData={data} loop={c.loop ?? false} playbackRate={c.speed ?? 1} style={{width: '100%', height: '100%'}} /></div></Sequence>; };
 
 const Pic = ({dir, f, style, filter}) => <Img src={staticFile(`${dir}/${f}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: filter || 'none', ...style}} />;
@@ -47,13 +48,13 @@ const GAGS = {
   // c.slides = [[offset s, screen 0-2, picture index], ...] (a screen shows its latest slide), c.speaker = optional cut-out PNG on stage,
   // c.caps = optional caption per picture index. Full-screen card. Sound: a projector click on each swap.
   triptych: (c, q, d, out, dir) => { const sl = c.slides || [[0, 0, 0], [0.4, 1, 1], [0.8, 2, 2]], sw = 570, sh = 400, gap = 40, x0 = (W - 3 * sw - 2 * gap) / 2;
-    return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: 'linear-gradient(#2E2A26 0%, #3B352E 70%, #7A5532 70%, #5E3F22 100%)'}}>
+    return <AbsoluteFill style={{opacity: out * (c.cutIn ? 1 : R(q, 0, 0.12)), background: P.on ? 'linear-gradient(#E8DCC4 0%, #EFE4CF 70%, #9A7448 70%, #7C5A34 100%)' : 'linear-gradient(#2E2A26 0%, #3B352E 70%, #7A5532 70%, #5E3F22 100%)'}}>
       {[0, 1, 2].map(s => { const cur = sl.filter(x => x[1] === s && q >= x[0]).pop(), age = cur ? q - cur[0] : 0;
         if (!cur && c.hideEmpty) return null;
-        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: c.top ?? 170, width: sw, height: sh, background: '#111', border: '10px solid #1B1B1B', outline: '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
+        return <div key={s} style={{position: 'absolute', left: x0 + s * (sw + gap), top: c.top ?? 170, width: sw, height: sh, background: P.on ? '#2B2620' : '#111', border: P.on ? `14px solid ${PAPER}` : '10px solid #1B1B1B', outline: P.on ? `3px solid ${INK}` : '4px solid #8A8A8A', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', overflow: 'hidden', transform: P.on ? `rotate(${[-1.5, 1, -0.8][s]}deg)` : undefined}}>
           {cur ? <div style={{width: '100%', height: '100%', opacity: R(age, 0, 0.08)}}><Pic dir={dir} f={c.imgs[cur[2]]} />
-            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', color: '#FFF', fontFamily: SANS, fontWeight: 800, fontSize: c.capSize ?? 40, textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
-      {c.stage === false ? null : <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: '6px solid rgba(255,255,255,0.75)'}} />}
+            {c.caps && c.caps[cur[2]] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, background: P.on ? 'rgba(243,235,221,0.92)' : 'rgba(0,0,0,0.7)', color: P.on ? INK : '#FFF', fontFamily: P.on ? HAND : SANS, fontWeight: 800, fontSize: (c.capSize ?? 40) * (P.on ? 1.1 : 1), textAlign: 'center', padding: '8px 10px'}}>{c.caps[cur[2]]}</div> : null}</div> : null}</div>; })}
+      {c.stage === false ? null : <div style={{position: 'absolute', left: W / 2 - 360, top: 830, width: 720, height: 130, borderRadius: '50%', border: P.on ? `6px solid ${INK}` : '6px solid rgba(255,255,255,0.75)', opacity: P.on ? 0.6 : 1}} />}
       {c.speaker ? <Img src={staticFile(`${dir}/${c.speaker}`)} style={{position: 'absolute', left: W / 2 - 170, top: 470, width: 340, height: 420, objectFit: 'contain'}} /> : null}</AbsoluteFill>; },
 
   // ruler (South Park's crude scale diagram): a schoolroom ruler on flat yellow; c.max (ruler length in c.unit), c.marks =
@@ -61,9 +62,9 @@ const GAGS = {
   ruler: (c, q, d, out) => { const x0 = 160, x1 = W - 160, y = 520, mx = c.max || 100, st = c.step || mx / 10, sx = v => x0 + (x1 - x0) * v / mx, p = Easing.out(Easing.cubic)(R(q, 0, 0.35));
     const big = Array.from({length: Math.floor(mx / st) + 1}, (_, i) => i * st).filter(v => mx - v > st * 0.4), small = Array.from({length: Math.floor(mx / (st / 5)) + 1}, (_, i) => i * st / 5);
     return <AbsoluteFill style={{opacity: out, background: c.ground || '#FCCF3E'}}>
-      {c.title ? <div style={{position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: 70, color: '#111'}}>{c.title}</div> : null}
+      {c.title ? <div style={{position: 'absolute', top: 110, left: 0, right: 0, textAlign: 'center', fontFamily: P.on ? HAND : SANS, fontWeight: 900, fontSize: P.on ? 80 : 70, color: P.on ? INK : '#111'}}>{c.title}</div> : null}
       <svg width={W} height={H} style={{position: 'absolute', transform: `translateX(${(1 - p) * -100}%)`}}>
-        <rect x={x0 - 30} y={y} width={x1 - x0 + 60} height={150} rx={10} fill="#F2E3B3" stroke="#6B5A2A" strokeWidth={5} />
+        <rect x={x0 - 30} y={y} width={x1 - x0 + 60} height={150} rx={10} fill="#F2E3B3" stroke={P.on ? INK : '#6B5A2A'} strokeWidth={5} filter={P.on ? 'url(#pRough)' : undefined} />
         {small.map((v, i) => <line key={'s' + i} x1={sx(v)} y1={y} x2={sx(v)} y2={y + 30} stroke="#3A2F12" strokeWidth={3} />)}
         {big.map((v, i) => <g key={'b' + i}><line x1={sx(v)} y1={y} x2={sx(v)} y2={y + 64} stroke="#3A2F12" strokeWidth={5} />
           <text x={sx(v)} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{v}</text></g>)}
@@ -71,9 +72,9 @@ const GAGS = {
         <text x={x1} y={y + 108} fontFamily={MONO} fontSize={34} textAnchor="middle" fill="#3A2F12">{mx}</text>
         <text x={x1 + 10} y={y + 142} fontFamily={MONO} fontSize={28} textAnchor="end" fill="#3A2F12">{c.unit || ''}</text>
         {(c.marks || []).map(([v, lab], i) => { const t = R(q, 0.5 + i * (c.gap ?? 0.7), 0.75 + i * (c.gap ?? 0.7)); if (t <= 0) return null; const x = sx(v), rt = x < W / 2;
-          return <g key={i} opacity={t}><line x1={x} y1={y - 10} x2={x} y2={y + 150} stroke={RED} strokeWidth={9} strokeLinecap="round" />
-            <line x1={x} y1={y - 20} x2={x + (rt ? 1 : -1) * 60} y2={y - 150} stroke={RED} strokeWidth={6} />
-            <text x={x + (rt ? 1 : -1) * 70} y={y - 160} fontFamily={HAND} fontSize={64} textAnchor={rt ? 'start' : 'end'} fill={RED}>{lab}</text></g>; })}</svg></AbsoluteFill>; },
+          return <g key={i} opacity={t}><line x1={x} y1={y - 10} x2={x} y2={y + 150} stroke={P.on ? BRICK : RED} strokeWidth={9} strokeLinecap="round" />
+            <line x1={x} y1={y - 20} x2={x + (rt ? 1 : -1) * 60} y2={y - 150} stroke={P.on ? BRICK : RED} strokeWidth={6} />
+            <text x={x + (rt ? 1 : -1) * 70} y={y - 160} fontFamily={HAND} fontWeight={700} fontSize={64} textAnchor={rt ? 'start' : 'end'} fill={P.on ? BRICK : RED}>{lab}</text></g>; })}</svg></AbsoluteFill>; },
 
   // advert (South Park genre switch): a glossy mock advert. The picture pushes in slowly under a lens flare sweep, a gold serif title
   // rises in, and the last c.tagDur seconds cut to black with a white serif tagline. c.img, c.title, c.tagline. Full-screen.
@@ -138,10 +139,10 @@ const GAGS = {
 
   // chain (Casually Explained's evolution chain, study 2): pictures in a row joined by red arrows, each landing in turn; c.imgs, c.labels, c.gap s
   chain: (c, q, d, out, dir) => { const n = (c.imgs || []).length, gap = c.gap ?? 0.55, w = Math.min(c.maxW ?? 540, (W - 160 - (n - 1) * 90) / n), y0 = H / 2 - w * 0.5, x0 = (W - (n * w + (n - 1) * 90)) / 2;
-    return <AbsoluteFill style={{opacity: out, background: c.ground || '#FFFFFF'}}>{c.imgs.map((im, i) => { const qi = q - (c.times ? c.times[i] : i * gap); if (qi < 0) return null; const x = x0 + i * (w + 90);   // c.times: per-picture offsets (cue each on its word)
-      return <React.Fragment key={i}>{i && !c.noArrows ? <svg style={{position: 'absolute', left: x - 82, top: y0 + w * 0.32}} width={74} height={40}><path d="M4 20 L56 20 M44 8 L60 20 L44 32" stroke={RED} strokeWidth={8} fill="none" strokeLinecap="round" /></svg> : null}
-        <div style={{position: 'absolute', left: x, top: y0, width: w, height: w * 0.8, transform: `scale(${pop(qi, 0.7)})`, boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', borderRadius: 8}}><Img src={staticFile(`${dir}/${im}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>
-        {c.labels && c.labels[i] ? <div style={{position: 'absolute', left: x, width: w, top: y0 + w * 0.8 + 18, textAlign: 'center', fontFamily: HAND, fontSize: 54, color: '#111', opacity: R(qi, 0.1, 0.3)}}>{c.labels[i]}</div> : null}</React.Fragment>; })}</AbsoluteFill>; },
+    return <AbsoluteFill style={{opacity: out, background: c.ground || (P.on ? PAPER : '#FFFFFF')}}>{c.imgs.map((im, i) => { const qi = q - (c.times ? c.times[i] : i * gap); if (qi < 0) return null; const x = x0 + i * (w + 90);   // c.times: per-picture offsets (cue each on its word)
+      return <React.Fragment key={i}>{i && !c.noArrows ? <svg style={{position: 'absolute', left: x - 82, top: y0 + w * 0.32}} width={74} height={40}><path d="M4 20 L56 20 M44 8 L60 20 L44 32" stroke={P.on ? BRICK : RED} strokeWidth={8} filter={P.on ? 'url(#pRough)' : undefined} fill="none" strokeLinecap="round" /></svg> : null}
+        <div style={{position: 'absolute', left: x, top: y0, width: w, height: w * 0.8, transform: `scale(${pop(qi, 0.7)})${P.on ? ` rotate(${i % 2 ? 1.5 : -1.5}deg)` : ''}`, boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', borderRadius: P.on ? 2 : 8, ...(P.on ? {border: `3px solid ${INK}`} : {})}}><Img src={staticFile(`${dir}/${im}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div>
+        {c.labels && c.labels[i] ? <div style={{position: 'absolute', left: x, width: w, top: y0 + w * 0.8 + 18, textAlign: 'center', fontFamily: HAND, fontWeight: P.on ? 700 : 400, fontSize: 54, color: P.on ? INK : '#111', opacity: R(qi, 0.1, 0.3)}}>{c.labels[i]}</div> : null}</React.Fragment>; })}</AbsoluteFill>; },
 
   // labels (Sam O'Nella's stacked label arrows, study 2): short labels arrive one by one, each with an arrow to the same point (x, y)
   labels: (c, q, d, out) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.55) * H, gap = c.gap ?? 0.6, spots = c.spots || [[0.2, 0.25], [0.8, 0.22], [0.15, 0.78], [0.85, 0.75], [0.5, 0.12]];
@@ -188,8 +189,8 @@ const GAGS = {
   lottie: (c, q, d, out, dir) => <AbsoluteFill style={{pointerEvents: 'none'}}><LottieGag c={c} dir={dir} out={out} /></AbsoluteFill>,
   // freeze-frame caption ("Yep. That's me." / "You're probably wondering how I got here"): the picture goes grey, a label lands
   freeze: (c, q, d, out) => <AbsoluteFill style={{opacity: out}}>
-    <AbsoluteFill style={{backdropFilter: `grayscale(${R(q, 0, 0.12)}) contrast(1.1)`, background: 'rgba(0,0,0,0.12)'}} />
-    <div style={{position: 'absolute', left: 90, bottom: 110, transform: `translateX(${(1 - R(q, 0.05, 0.3)) * -120}%)`, background: '#FCCF3E', color: '#111', fontFamily: SANS, fontWeight: 900,
+    <AbsoluteFill style={{backdropFilter: P.on ? `sepia(${0.7 * R(q, 0, 0.12)}) contrast(1.05)` : `grayscale(${R(q, 0, 0.12)}) contrast(1.1)`, background: 'rgba(0,0,0,0.12)'}} />
+    <div style={{position: 'absolute', left: 90, bottom: 110, transform: `translateX(${(1 - R(q, 0.05, 0.3)) * -120}%)`, background: P.on ? PAPER : '#FCCF3E', color: P.on ? INK : '#111', fontFamily: P.on ? HAND : SANS, fontWeight: 900, border: P.on ? `4px solid ${INK}` : 'none', borderRadius: P.on ? 6 : 0,
       fontSize: c.size || 70, padding: '14px 34px', boxShadow: '0 12px 40px rgba(0,0,0,0.5)', whiteSpace: 'pre-line', lineHeight: 1.05}}>{c.text}</div></AbsoluteFill>,
 
   // hand-drawn red circle around a detail (draws on in 0.45 s), optional scribbled label
@@ -288,9 +289,9 @@ const GAGS = {
 
   // magnifying lens: a round window showing the picture zoomed on (x, y); needs c.img = the shot's picture
   lens: (c, q, d, out, dir) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H, z = c.zoom || 2.6, rr = (c.r ?? 0.12) * W, s = pop(q, 0.6);
-    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: x - rr, top: y - rr, width: rr * 2, height: rr * 2, borderRadius: '50%', overflow: 'hidden', border: '14px solid #2A2520', boxShadow: '0 18px 50px rgba(0,0,0,0.6), inset 0 0 40px rgba(255,255,255,0.25)', transform: `scale(${s})`}}>
+    return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: x - rr, top: y - rr, width: rr * 2, height: rr * 2, borderRadius: '50%', overflow: 'hidden', border: P.on ? '14px solid #9C7A3C' : '14px solid #2A2520', outline: P.on ? `4px solid ${INK}` : 'none', boxShadow: '0 18px 50px rgba(0,0,0,0.6), inset 0 0 40px rgba(255,255,255,0.25)', transform: `scale(${s})`}}>
       <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', width: W * z, height: H * z, left: rr - x * z, top: rr - y * z, maxWidth: 'none', objectFit: 'cover'}} /></div>
-      <div style={{position: 'absolute', left: x + rr * 0.62, top: y + rr * 0.62, width: 30, height: rr * 0.9, background: '#2A2520', borderRadius: 14, transformOrigin: '50% 0', transform: `rotate(-45deg) scale(${s})`}} /></AbsoluteFill>; },
+      <div style={{position: 'absolute', left: x + rr * 0.62, top: y + rr * 0.62, width: 30, height: rr * 0.9, background: P.on ? '#5B3A1E' : '#2A2520', border: P.on ? `3px solid ${INK}` : 'none', borderRadius: 14, transformOrigin: '50% 0', transform: `rotate(-45deg) scale(${s})`}} /></AbsoluteFill>; },
 
   // meme caption: big white outlined words at the top and/or bottom
   caption: (c, q, d, out) => { const st = {position: 'absolute', left: 60, right: 60, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 96, color: '#FFFFFF', textShadow: '4px 4px 0 #000, -4px 4px 0 #000, 4px -4px 0 #000, -4px -4px 0 #000, 0 5px 0 #000, 0 -5px 0 #000, 5px 0 0 #000, -5px 0 0 #000', textTransform: 'uppercase', lineHeight: 1.0, transform: `scale(${pop(q, 0.3)})`};

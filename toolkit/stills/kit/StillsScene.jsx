@@ -8,7 +8,7 @@
 // No image-source labels on screen (Sam, 8 Nov 2026): credits and the AI disclosure live in the description.
 import React from 'react';
 import {gagCard} from './Gags.jsx';
-import {P, PaintDefs, paintedCard} from './Paint.jsx';
+import {P, PaintDefs, PaperTex, paintedCard} from './Paint.jsx';
 import {AbsoluteFill, Audio, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing, delayRender, continueRender} from 'remotion';
 // load the real fonts before the first frame (until 10 Nov 2026 the serif silently fell back to Georgia)
 const FONTS = [['Cormorant Garamond', 'cormorant-garamond-latin-500-normal.woff2'], ['Kalam', 'Kalam-Regular.ttf'], ['Kalam', 'Kalam-Bold.ttf', {weight: '700'}], ['Fraunces', 'fraunces-latin-700-normal.woff2', {weight: '700'}], ['Fraunces', 'fraunces-latin-400-normal.woff2', {weight: '400'}], ['Inter', 'Inter.ttf'], ['JetBrains Mono', 'JetBrainsMono.ttf']];
@@ -114,7 +114,11 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
 const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return null;
   return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
     <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
-const Card = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, dir); if (pc !== undefined) return pc; const gg = gagCard(c, t, dir); if (gg !== undefined) return gg; const d = c.dur || 4.5, o = (c.cutIn ? (t >= c.t ? 1 : 0) : R(t, c.t, c.t + 0.4)) * (c.cutOut ? (t < c.t + d ? 1 : 0) : 1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
+// painted mode: full-screen cards get a paper grain and wash on top while they are up
+const Card = (props) => { const el = <CardInner {...props} />, {c, t} = props; if (!P.on || !FULLK.includes(c.kind) || c.style === 'rise' || c.style === 'roll') return el;
+  const d = c.dur || (['kinetic', 'title', 'number', 'bars', 'headline'].includes(c.kind) ? 4.5 : 2), q = t - c.t; if (q < 0 || q > d) return el;
+  const v = (c.cutIn ? 1 : R(t, c.t, c.t + 0.3)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.3, c.t + d)); return <>{el}<PaperTex o={v} /></>; };
+const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, dir); if (pc !== undefined) return pc; const gg = gagCard(c, t, dir); if (gg !== undefined) return gg; const d = c.dur || 4.5, o = (c.cutIn ? (t >= c.t ? 1 : 0) : R(t, c.t, c.t + 0.4)) * (c.cutOut ? (t < c.t + d ? 1 : 0) : 1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
   // Ridiculous-mode overlays (Sam, 11 Nov 2026): stamp (a rubber stamp slammed on), rain (money falling), flash (white frame), pip (a reaction picture popping up in a corner)
   if (c.kind === 'stamp') { const p = R(t, c.t, c.t + 0.12), sh = (1 - R(t, c.t + 0.12, c.t + 0.6)) * 10 * Math.sin(t * 90);
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -12}deg) scale(${3 - 2 * p})`, opacity: p,
@@ -159,15 +163,15 @@ const Card = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, dir); i
     // reverse (Sam, 12 Nov 2026: "play in reverse where you show coming down from 730 billion to 100 million"): ONE bar that
     // really shrinks, its number counting down on top of it, a dashed outline left where it started; flipping the scroll
     // only read as the bar growing (reviewer, opening v13).
-    if (c.reverse) { const F = 'Inter, "Helvetica Neue", Arial, sans-serif', vA = c.vFrom || 730e9, vB = c.vTo || 100e6, v = vA + (vB - vA) * ez;   // linear: bar height and number stay in proportion and the shrink reads smoothly (log made it vanish in 0.3 s)
+    if (c.reverse) { const F = P.on ? 'Fraunces, Georgia, serif' : 'Inter, "Helvetica Neue", Arial, sans-serif', LF = P.on ? 'Kalam, cursive' : F, vA = c.vFrom || 730e9, vB = c.vTo || 100e6, v = vA + (vB - vA) * ez;   // linear: bar height and number stay in proportion and the shrink reads smoothly (log made it vanish in 0.3 s)
       const full = 640, hh = Math.max(h0, full * v / vA), fmt = x => x >= 1e9 ? `$${x >= 1e10 ? Math.round(x / 1e9) : (x / 1e9).toFixed(1)} billion` : `$${Math.max(100, Math.round(x / 1e6))} million`;
       const lab = ez < 0.5 ? c.b.label : c.a.label, done = e >= 1;
       return <AbsoluteFill style={{background: G, opacity: oo, overflow: 'hidden'}}>
         <div style={{position: 'absolute', left: 760, width: 400, top: base - full, height: full, border: `5px dashed ${N}`, opacity: 0.35, boxSizing: 'border-box'}} />
-        <div style={{position: 'absolute', left: 760, width: 400, top: base - hh, height: hh, background: I}} />
-        <div style={{position: 'absolute', left: 120, right: 120, top: base, height: 6, background: N}} />
+        <div style={{position: 'absolute', left: 760, width: 400, top: base - hh, height: hh, background: I, ...(P.on ? {border: '5px solid #26302A', boxSizing: 'border-box', filter: 'url(#pRough)'} : {})}} />
+        <div style={{position: 'absolute', left: 120, right: 120, top: base, height: 6, background: N, filter: P.on ? 'url(#pRough)' : undefined}} />
         <div style={{position: 'absolute', left: 560, width: 800, top: base - hh - 110, textAlign: 'center', fontFamily: F, fontWeight: 900, fontSize: 84, color: N, whiteSpace: 'nowrap'}}>{done ? c.a.value : fmt(v)}</div>
-        <div style={{position: 'absolute', left: 460, width: 1000, top: base + 26, textAlign: 'center', fontFamily: F, color: I, fontWeight: 800, fontSize: 44}}>{lab}</div>
+        <div style={{position: 'absolute', left: 460, width: 1000, top: base + 26, textAlign: 'center', fontFamily: LF, color: I, fontWeight: 800, fontSize: P.on ? 52 : 44}}>{lab}</div>
         {e > 0.05 && e < 0.95 ? <div style={{position: 'absolute', left: 120, top: 110, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 70, color: N, transform: 'rotate(-3deg)'}}>{c.scrollText || 'going down…'}</div> : null}
         {done ? <div style={{position: 'absolute', left: 1200, top: base - 150, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: 58, color: N, transform: 'rotate(-4deg)', whiteSpace: 'nowrap'}}>{c.aside || "(it's there. squint.)"}</div> : null}
       </AbsoluteFill>; }
