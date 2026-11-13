@@ -165,7 +165,7 @@ export const PAINTED = {
   stamp: (c, q, d) => { const p = R(q, 0, 0.12), sh = (1 - R(q, 0.12, 0.6)) * 10 * Math.sin(q * 90), col = c.color && c.color !== '#D11F2A' ? c.color : BRICK, size = (c.size || 150) * 0.85;
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(q, d - 0.2, d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -9}deg) scale(${3 - 2 * p})`, opacity: p}}>
       {/* a pale paper wash under the ink keeps it readable on dark pictures */}
-      <div style={{position: 'absolute', inset: -30, background: 'radial-gradient(closest-side, rgba(243,235,221,0.38), rgba(243,235,221,0.22) 70%, rgba(243,235,221,0))', filter: 'blur(6px)'}} />
+      <div style={{position: 'absolute', inset: -30, background: `radial-gradient(closest-side, rgba(243,235,221,${c.wash ?? 0.38}), rgba(243,235,221,${(c.wash ?? 0.38) * 0.58}) 70%, rgba(243,235,221,0))`, filter: 'blur(6px)'}} />
       <div style={{position: 'relative', filter: 'url(#pInk)', border: `${Math.round(size * 0.07)}px solid ${col}`, outline: `${Math.round(size * 0.025)}px solid ${col}`, outlineOffset: Math.round(size * 0.05), padding: `${Math.round(size * 0.04)}px ${Math.round(size * 0.28)}px`,
         fontFamily: SERIF, fontWeight: 700, fontSize: size, letterSpacing: Math.round(size * 0.065), color: col, whiteSpace: 'nowrap', lineHeight: 1.1}}>{c.text}</div></div></AbsoluteFill>; },
 

@@ -89,7 +89,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.move === 'whip') { const p = ep(0.24); xo = (s.from ?? 70) * Math.pow(1 - p, 2.2); blur = 22 * (1 - p); sc = Math.max(sc, 1 + 2 * Math.abs(xo) / 100); }   // scaled so the slide never shows a black edge (ch1 review)
   if (s.move === 'spin') { const p = 1 - Math.pow(1 - ep(0.6), 3); rot = -360 * (1 - p); sc *= 0.2 + 0.8 * p; }
   if (s.move === 'crash') { sc += 0.8 * Math.pow(1 - ep(0.35), 3); blur = 8 * (1 - ep(0.2)); }
-  if (s.move === 'bounce') sc *= 1 - 0.22 * Math.exp(-q * 4.5) * Math.cos(q * 15);
+  if (s.move === 'bounce') sc *= 1 + 0.22 * Math.exp(-q * 4.5) * (1 - Math.cos(q * 15)) / 2;   // springs up from 1 and settles: never under 1, so no black border (Aliens v7 review, 13 Nov 2026)
   // triple zoom (Indian daily-soap reaction, Ridiculous toolkit 11 Nov 2026): three snaps at triple_at + 0 / 0.35 / 0.7 s, then a slow sink-in
   if (s.move === 'triple') { const a = s.t + (s.triple_at ?? 0.2); [0, 0.35, 0.7].forEach(o => { sc += 0.17 * interpolate(t, [a + o, a + o + 0.09], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }); sc += 0.04 * Math.max(0, t - a - 0.8); }
   if (s.move === 'dutch') rot = (s.angle ?? 8) * (q < 0.2 ? q / 0.2 : 1);
