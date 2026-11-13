@@ -58,6 +58,13 @@ Study: `gj581g-stills-world skill`. Camera moves: push, pullback, pan, panL, til
 | `H-search` | gag study 13 Nov 2026 (sixth study): search (EFFECTS_LIBRARY.md) | `kind: search` | - | built |
 | `H-equation` | gag study 13 Nov 2026 (sixth study): equation (EFFECTS_LIBRARY.md) | `kind: equation` | - | built |
 | `H-hero` | gag study 13 Nov 2026 (sixth study): void as hero object (EFFECTS_LIBRARY.md) | `kind: void, act: *` | - | built |
+| `H-peel` | gag study 13 Nov 2026 (seventh study): peel (EFFECTS_LIBRARY.md) | `kind: peel` | - | built |
+| `H-rollcall` | gag study 13 Nov 2026 (seventh study): rollcall (EFFECTS_LIBRARY.md) | `kind: rollcall` | - | built |
+| `H-dust` | gag study 13 Nov 2026 (seventh study): dust (EFFECTS_LIBRARY.md) | `kind: dust` | - | built |
+| `H-nest` | gag study 13 Nov 2026 (seventh study): nest (EFFECTS_LIBRARY.md) | `kind: nest` | - | built |
+| `H-trophy` | gag study 13 Nov 2026 (seventh study): trophy (EFFECTS_LIBRARY.md) | `kind: trophy` | - | built |
+| `H-foreground` | gag study 13 Nov 2026 (seventh study): foreground (EFFECTS_LIBRARY.md) | `kind: foreground` | - | built |
+| `H-obey` | gag study 13 Nov 2026 (seventh study): clones vanish and sneak back (EFFECTS_LIBRARY.md) | `kind: clones, vanishAt: *` | - | built |
 
 ### South Park  (`southpark`)
 Study: `styles/SOUTH_PARK_STUDY.md`. Camera moves: hold, drift; hard cuts only, a cut every 2-3 s, front-on staging.

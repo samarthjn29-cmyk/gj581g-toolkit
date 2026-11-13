@@ -304,6 +304,56 @@
       "kind": "void",
       "act": "*"
      }
+    },
+    {
+     "id": "H-peel",
+     "name": "gag study 13 Nov 2026 (seventh study): peel (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "peel"
+     }
+    },
+    {
+     "id": "H-rollcall",
+     "name": "gag study 13 Nov 2026 (seventh study): rollcall (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "rollcall"
+     }
+    },
+    {
+     "id": "H-dust",
+     "name": "gag study 13 Nov 2026 (seventh study): dust (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "dust"
+     }
+    },
+    {
+     "id": "H-nest",
+     "name": "gag study 13 Nov 2026 (seventh study): nest (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "nest"
+     }
+    },
+    {
+     "id": "H-trophy",
+     "name": "gag study 13 Nov 2026 (seventh study): trophy (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "trophy"
+     }
+    },
+    {
+     "id": "H-foreground",
+     "name": "gag study 13 Nov 2026 (seventh study): foreground (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "foreground"
+     }
+    },
+    {
+     "id": "H-obey",
+     "name": "gag study 13 Nov 2026 (seventh study): clones vanish and sneak back (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "clones",
+      "vanishAt": "*"
+     }
     }
    ]
   },

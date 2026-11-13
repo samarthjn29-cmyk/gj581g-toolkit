@@ -36,8 +36,18 @@ export const GAGS2 = {
   // clones (MagnatesMedia clone line-up) and queue (CGP Grey "the queue grows"): one cut-out (PNG with transparency) repeated n times,
   // each tinted, with labels; queue: true lines them up behind the first, smaller with distance, one by one. c.img, c.n, c.labels,
   // c.gap, c.y, c.w. Our own mascot or anonymous AI figures only. Sound: pop per clone (rising), a sigh at the end of a queue.
+  // clones options (Primer "let's skip drawing the blobs", gag study 13 Nov 2026, seventh study): c.vanishAt (s) pops the whole line
+  // away when Sam says "let's not draw them", then c.returnAt (s) brings c.returnN (default 1) back, slowly and sheepishly, from the
+  // edge, when he gives in. Sound: pop as they vanish, a small squeak per one that sneaks back.
   clones: (c, q, d, out, dir) => { const n = c.n || (c.labels || []).length || 3, gap = c.gap ?? (c.queue ? 0.4 : 0.25), w0 = (c.w ?? (c.queue ? 0.2 : 0.22)) * W, y = (c.y ?? 0.62) * H;
+    const va = c.vanishAt, gone = va != null && q >= va, ra = c.returnAt, rn = c.returnN ?? 1;
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>{Array.from({length: n}).map((_, i) => { const qi = q - i * gap; if (qi < 0) return null;
+      if (gone) { const back = ra != null && i < rn ? q - ra - i * 0.6 : -1; const vq = q - va;
+        if (back < 0) { if (vq > 0.18) return null; const k0 = 1 - vq / 0.18; const xx = (W - n * w0 * 0.95) / 2 + i * w0 * 0.95 + w0 / 2;
+          return <div key={i} style={{position: 'absolute', left: xx - w0 / 2, top: y - w0 * 0.6, width: w0, transform: `scale(${k0 * 1.15})`, opacity: k0, transformOrigin: '50% 100%'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%'}} /></div>; }
+        const e = Easing.out(Easing.cubic)(R(back, 0, 1.4)), xb = W + w0 * 0.2 - e * (W * 0.22 + i * w0 * 0.8), tilt = -8 + 3 * Math.sin(back * 5);
+        return <div key={i} style={{position: 'absolute', left: xb - w0 / 2, top: y - w0 * 0.6, width: w0, transform: `rotate(${tilt}deg) scale(${0.9})`, transformOrigin: '50% 100%'}}>
+          <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', filter: 'drop-shadow(0 8px 10px rgba(0,0,0,0.4))'}} /></div>; }
       const k = c.queue ? Math.pow(0.86, i) : 1, w = w0 * k, x = c.queue ? (c.x ?? 0.3) * W + i * w0 * 0.55 * (1 - i * 0.03) : (W - n * w0 * 0.95) / 2 + i * w0 * 0.95 + w0 / 2, hue = c.queue ? 0 : (c.hues ? c.hues[i] : i * 70);
       return <div key={i} style={{position: 'absolute', left: x - w / 2, top: y - w * 0.6 - (c.queue ? i * 6 : 0), width: w, zIndex: n - i, transform: `scale(${pop(qi, 0.6)})`, transformOrigin: '50% 100%'}}>
         <Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', filter: `hue-rotate(${hue}deg) drop-shadow(0 8px 10px rgba(0,0,0,0.4))${c.queue ? ` brightness(${1 - i * 0.05})` : ''}`}} />
@@ -337,5 +347,66 @@ export const GAGS2 = {
       return <div key={i} style={st}>{it.op ? <span style={{fontFamily: SANS, fontWeight: 900, fontSize: 110, color: PAINT.ink}}>{it.op}</span>
         : it.img ? <Img src={staticFile(`${dir}/${it.img}`)} style={{width: S * 0.92, height: S * 0.92, objectFit: 'contain', filter: 'drop-shadow(0 8px 10px rgba(0,0,0,0.3))'}} />
         : <span style={{fontFamily: HAND, fontWeight: 700, fontSize: it.size || 120, color: it === items[items.length - 1] ? PAINT.red : PAINT.ink, whiteSpace: 'nowrap'}}>{it.text}</span>}</div>; })}</AbsoluteFill>; },
+  // ---- Gag study 13 Nov 2026, seventh study (RealLifeLore, Vsauce2, Primer, Ordinary Things, Nerdwriter1, Tantacrul, Kraut,
+  // Mark Rober, Veritasium, Extra History). Sam: "yes" (build them).
+
+  // peel (Mark Rober glasses under glasses): a stamp on the picture (c.text, red ink plate) peels away from a corner at each of
+  // c.times (s), curling and lifting off, and underneath is the same stamp again; c.last (text) can finally be different.
+  // c.x, c.y, c.rot. Sound: a sticky rip per peel, trombone when it is the same again.
+  peel: (c, q, d, out) => { const tm = c.times || [0.9, 1.8], k = tm.filter(x => q >= x + 0.45).length, cur = tm.find(x => q >= x && q < x + 0.45), x = (c.x ?? 0.5) * W, y = (c.y ?? 0.45) * H, rot = c.rot ?? -9;
+    const label = i => i >= tm.length && c.last ? c.last : (c.texts ? c.texts[Math.min(i, c.texts.length - 1)] : c.text || 'CANCELLED');
+    const stamp = (txt, extra = {}) => <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%, -50%) rotate(${rot}deg)`, border: `10px solid ${PAINT.red}`, color: PAINT.red, background: 'rgba(241,230,207,0.92)', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 104, letterSpacing: 6, padding: '6px 34px', whiteSpace: 'nowrap', boxShadow: '0 10px 24px rgba(0,0,0,0.45)', ...extra}}>{txt}</div>;
+    const first = q < 0.25 ? 1 + 0.6 * Math.exp(-q * 12) : 1;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {stamp(label(k + (cur != null ? 1 : 0)), cur == null && k === 0 ? {transform: `translate(-50%, -50%) rotate(${rot}deg) scale(${first})`} : {})}
+      {cur != null ? (() => { const p = Easing.in(Easing.quad)(R(q, cur, cur + 0.45));
+        return stamp(label(k), {transformOrigin: '100% 100%', transform: `translate(-50%, -50%) rotate(${rot}deg) perspective(900px) rotateX(${-p * 70}deg) rotateY(${p * 40}deg) translate(${p * 320}px, ${-p * 420}px) rotate(${p * 25}deg)`, opacity: 1 - p * 0.6, boxShadow: `0 ${10 + p * 50}px ${24 + p * 40}px rgba(0,0,0,0.5)`}); })() : null}</AbsoluteFill>; },
+
+  // rollcall (Vsauce2 roll-call montage): full-frame pictures cut hard every c.gap s (default 1.0), each with its name in bold caps
+  // at the bottom (c.items = [{img, label}]), so a list has a length you can feel. Sound: a soft click on each cut.
+  rollcall: (c, q, d, out, dir) => { const it = c.items || [], gap = c.gap ?? 1.0, i = Math.min(it.length - 1, Math.max(0, Math.floor(q / gap))), cur = it[i] || {}, iq = q - i * gap;
+    return <AbsoluteFill style={{background: '#0B0A09', opacity: out}}>{cur.img ? <Img src={staticFile(`${dir}/${cur.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.04 + iq * 0.03})`}} /> : null}
+      <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(11,10,9,0.7) 0%, rgba(11,10,9,0) 30%)'}} />
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 70, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 72, letterSpacing: 4, color: PAINT.cream, textShadow: '0 4px 14px rgba(0,0,0,0.9)', textTransform: 'uppercase'}}>{cur.label}</div></AbsoluteFill>; },
+
+  // dust (Tantacrul "blows dust off the UI"): a grey-brown dust layer lies over the picture (or c.img, a document still, shown
+  // centred); at c.at s a puff sweeps it off left to right in a cloud of particles, leaving it clean. Sound: blow, then a small cough.
+  dust: (c, q, d, out, dir) => { const at = c.at ?? 0.8, p = R(q, at, at + 0.7), id = 'gjdust' + Math.round((c.t || 0) * 100), fx = p * 1.25 * W;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {c.img ? <div style={{position: 'absolute', left: W * 0.2, top: H * 0.1, width: W * 0.6, height: H * 0.8, ...brushBox({padding: 0, overflow: 'hidden'})}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div> : null}
+      <svg width={W} height={H} style={{position: 'absolute'}}><defs><filter id={id}><feTurbulence type="fractalNoise" baseFrequency="0.9 0.6" numOctaves="3" seed="4" /><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.50  0 0 0 0 0.42  0 0 0 2.4 -0.9" /></filter>
+        <linearGradient id={id + 'm'} x1="0" x2="1"><stop offset={Math.max(0, p * 1.25 - 0.12)} stopColor="#000" /><stop offset={Math.min(1, p * 1.25)} stopColor="#fff" /></linearGradient><mask id={id + 'k'}><rect width={W} height={H} fill={`url(#${id}m)`} /></mask></defs>
+        <g mask={`url(#${id}k)`}><rect width={W} height={H} fill="rgba(150,135,110,0.55)" /><rect width={W} height={H} filter={`url(#${id})`} opacity={0.9} /></g>
+        {p > 0 && p < 1 ? Array.from({length: 70}).map((_, i) => { const r0 = rnd(i, 3), r1 = rnd(i, 7), px = fx - 140 + r0 * 260 + p * 300 * r1, py = H * (0.1 + 0.8 * r1) - p * 120 * r0;
+          return <circle key={i} cx={px} cy={py} r={4 + 14 * r0} fill="#A8987C" opacity={0.6 * (1 - p)} />; }) : null}</svg></AbsoluteFill>; },
+
+  // nest (Tantacrul menu crawl): a painted dialog box opens, then a smaller one inside it, then another (c.titles, one per window,
+  // c.gap s apart), each offset down and right, until the last is tiny; bureaucracy as a picture. c.last (text inside the last one).
+  // Sound: click per window, error on the last.
+  nest: (c, q, d, out) => { const T = c.titles || ['Application'], gap = c.gap ?? 0.5, w0 = 0.72 * W, h0 = 0.72 * H;
+    return <AbsoluteFill style={{background: 'rgba(11,10,9,0.45)', opacity: out}}>{T.map((t, i) => { const iq = q - i * gap; if (iq < 0) return null; const k = Math.pow(0.74, i), w = w0 * k, h = h0 * k, x = (W - w0) / 2 + (w0 - w) * 0.62, y = (H - h0) / 2 + (h0 - h) * 0.66, last = i === T.length - 1;
+      return <div key={i} style={{position: 'absolute', left: x, top: y, width: w, height: h, transform: `scale(${pop(iq, 0.4)})`, ...brushBox({borderRadius: 12, padding: 0, overflow: 'hidden', border: `4px solid ${PAINT.ink}`})}}>
+        <div style={{height: Math.max(26, 54 * k), background: PAINT.green, color: PAINT.cream, fontFamily: SANS, fontWeight: 800, fontSize: Math.max(14, 30 * k), display: 'flex', alignItems: 'center', padding: `0 ${18 * k}px`, gap: 10 * k}}>
+          <span style={{display: 'inline-flex', gap: 6 * k}}>{[PAINT.red, PAINT.yellow, PAINT.cream].map((col, j) => <span key={j} style={{width: 14 * k, height: 14 * k, borderRadius: '50%', background: col}} />)}</span>{t}</div>
+        {last && c.last ? <div style={{padding: 14 * k, fontFamily: HAND, fontSize: Math.max(16, 44 * k), color: PAINT.ink}}>{c.last}</div> : null}</div>; })}</AbsoluteFill>; },
+
+  // trophy (Extra History city on a plinth): a cut-out (c.img) on a painted plinth with a nameplate (c.label) and a plain flag on a
+  // pole (c.flag text on c.flagColor); at c.swapAt s the flag drops and a new one rises (c.flag2 on c.flag2Color). Our own plain
+  // flags with a word only: no real national flags or logos. Sound: whoosh as it drops, tada (or trombone) as the new one rises.
+  trophy: (c, q, d, out, dir) => { const x = (c.x ?? 0.5) * W, base = (c.y ?? 0.8) * H, ow = (c.w ?? 0.3) * W, sw = c.swapAt, down = sw != null ? R(q, sw, sw + 0.35) : 0, up = sw != null ? Easing.out(Easing.back(1.6))(R(q, sw + 0.4, sw + 0.9)) : 0, inq = pop(q, 0.4);
+    const px = x + ow * 0.62, top = base - ow * 1.05, flag = (txt, col, k) => <div style={{position: 'absolute', left: px + 6, top: top + 10 + (1 - k) * ow * 0.75, height: 70, minWidth: 150, padding: '0 22px', background: col, color: PAINT.cream, fontFamily: HAND, fontWeight: 700, fontSize: 38, display: 'flex', alignItems: 'center', borderRadius: '0 10px 10px 0', boxShadow: '0 6px 12px rgba(0,0,0,0.35)', transform: `skewY(${-3 + 2 * Math.sin(q * 4)}deg)`, opacity: k > 0.02 ? 1 : 0}}>{txt}</div>;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none', transform: `scale(${inq})`, transformOrigin: `${x}px ${base}px`}}>
+      <div style={{position: 'absolute', left: px, top, width: 8, height: ow * 1.05, background: PAINT.ink, borderRadius: 4}} />
+      {sw == null || q < sw + 0.4 ? flag(c.flag || 'OURS', c.flagColor || PAINT.green, 1 - down) : flag(c.flag2 || 'THEIRS', c.flag2Color || PAINT.red, up)}
+      <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: x - ow / 2, top: base - ow * 0.78, width: ow, height: ow * 0.7, objectFit: 'contain', filter: 'drop-shadow(0 10px 12px rgba(0,0,0,0.4))'}} />
+      <div style={{position: 'absolute', left: x - ow * 0.62, top: base - 10, width: ow * 1.24, height: 70, background: '#6B4A2E', borderRadius: '10px 10px 4px 4px', boxShadow: '0 12px 20px rgba(0,0,0,0.45)', borderTop: `6px solid #8A6440`}} />
+      {c.label ? <div style={{position: 'absolute', left: x - ow * 0.38, top: base + 6, width: ow * 0.76, textAlign: 'center', ...brushBox({padding: '2px 8px', fontFamily: SERIF, fontWeight: 700, fontSize: 32, letterSpacing: 3, background: '#D9B46A', boxShadow: 'none'})}}>{c.label}</div> : null}</AbsoluteFill>; },
+
+  // foreground (Ordinary Things over-the-shoulder): one large cut-out (c.img) at a frame edge (c.side 'left' | 'right' | 'bottom'),
+  // heavily blurred and darkened, in front of the still, so we look past something (a dish rim, the alien's shoulder) at the subject.
+  // It drifts a little against the picture for depth. c.w (share of the frame width), c.blur. Sound: none.
+  foreground: (c, q, d, out, dir) => { const side = c.side || 'right', w = (c.w ?? 0.55) * W, dx = Math.sin(q * 0.6) * 14 + q * (side === 'left' ? 6 : -6), inq = Easing.out(Easing.cubic)(R(q, 0, 0.5));
+    const pos = side === 'left' ? {left: -w * 0.35 - (1 - inq) * w * 0.3 + dx, top: H * 0.25} : side === 'bottom' ? {left: (W - w) / 2 + dx, top: H * 0.62 + (1 - inq) * H * 0.3} : {left: W - w * 0.65 + (1 - inq) * w * 0.3 + dx, top: H * 0.2};
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', ...pos, width: w, height: w, objectFit: 'contain', filter: `blur(${c.blur ?? 18}px) brightness(0.55)`, transform: side === 'left' ? 'scaleX(-1)' : undefined}} /></AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;

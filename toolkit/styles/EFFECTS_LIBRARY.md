@@ -1,6 +1,6 @@
 # Effects library: camera moves, cards, picture gags and sounds
 
-Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effects which we can give on our pictures and videos"); generated from `toolkit/stills/fxlib.py` by `toolkit/stills/fxlib_doc.py` (last on 13 Nov 2026), so the doc lists every entry in the kit (164), including the gags from the daily gag studies (`styles/GAG_STUDY_LOG.md`). Every entry works in the stills kit today (`kit/StillsScene.jsx` + `kit/Gags.jsx` + `kit/Gags2.jsx`). Regenerate the demo reel and previews with `toolkit/stills/fxlib.py`.
+Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effects which we can give on our pictures and videos"); generated from `toolkit/stills/fxlib.py` by `toolkit/stills/fxlib_doc.py` (last on 13 Nov 2026), so the doc lists every entry in the kit (173), including the gags from the daily gag studies (`styles/GAG_STUDY_LOG.md`). Every entry works in the stills kit today (`kit/StillsScene.jsx` + `kit/Gags.jsx` + `kit/Gags2.jsx`). Regenerate the demo reel and previews with `toolkit/stills/fxlib.py`.
 
 **How to use one:** add the shot fields or the card to the scene plan (`stills/<scene>.json`), cue it on a heard word, then add the paired sound to the mix with `mix_bed.py --sfx sfx/sfx_<name>.wav@<cue time + offset>:-29`. Sam's clean cuts use voice + gag sounds only (`--bed none`, 11 Nov 2026), with gag sounds on as many gags as fit.
 
@@ -13,8 +13,8 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 - What it does to the cards: a slow brush-edge wobble that re-seeds every `boil` frames (default 4: the hand-made "animated painting" boil; `0` = still), paper grain inside the card shapes only, and a warm gouache shift (`paintSat` 0.85, `paintSepia` 0.16) so white reads as cream and red as brick. `paintEdge` sets the wobble (default 5 px).
 - Cards that read the picture behind them (freeze grey-out, blur censor, VHS glitch) are kept outside the painted wrapper, so they still work.
 - The gag-study cards (`Gags2.jsx`) are painted-native: palette forest green #2E4A33, cream #F1E6CF, parakeet yellow #E8C547, brick #A6432F, charcoal #2A2724; hand-lettered labels on cream brush-shaped chips.
-- Cut-out gags (puppet path, jack-in-the-box and its sign, clones, queue, giant hand, outline, recap host, palm, void and hero object, blueprint, picture sum, mascot stand-in, call-in alien) need cut-out PNGs: generate the object, repaint it with the painted recipe, then remove the background (Recraft or Adobe). fxlib draws simple painted stand-ins only for the demo.
-- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study and the 9 of the sixth study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
+- Cut-out gags (puppet path, jack-in-the-box and its sign, clones, queue, giant hand, outline, recap host, palm, void and hero object, blueprint, picture sum, mascot stand-in, call-in alien, trophy, foreground, the clones that vanish) need cut-out PNGs: generate the object, repaint it with the painted recipe, then remove the background (Recraft or Adobe). fxlib draws simple painted stand-ins only for the demo.
+- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study, the 9 of the sixth study and the 8 of the seventh study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
 
 
 ## Camera moves
@@ -160,6 +160,14 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `hero` | Hero object on black | One object alone on black, turning slowly with glints, then swapping to the object doing its job (void options). | `{"kind": "void", "img": "cut_globe.png", "ground": "#0B0A09", "h": 0.36, "spin": 18, "glint": true, "act": {"img": "cut_dish.png", "at": 1.8}, "dur": 2.9}` | sparkle@0.3, pop@1.8 | Simple History (gag study 13 Nov 2026, sixth study) **· from the next video** |
 | `standin` | Mascot inside the picture | Our alien stands in a real photo like a weatherman for a whole explaining line, not in a corner box. | `shot {"move": "hold"} + {"kind": "sticker", "img": "cut_alien.png", "border": false, "w": 0.34, "x": 0.8, "y": 0.72, "rot": 0, "dur": 2.9}` | pop@0.25 | Jacob Geller (gag study 13 Nov 2026, sixth study) **· from the next video** |
 | `their_side` | The aliens' side | Flip the point of view: our alien on the receiving end of what Earth is doing, in the call-in box. | `{"kind": "callin", "img": "cut_alien.png", "name": "PROXIMA B, LIVE", "title": "Demo: \"Why is it raining probes?\"", "dur": 2.9}` | ping@0.1, muffled@1.2 | Real Engineering (gag study 13 Nov 2026, sixth study) **· from the next video** |
+| `obey` | The narrator argues with the picture | Sam says "let's not draw them": the line of cut-outs pops away; he gives in and one sneaks back (clones options). | `{"kind": "clones", "img": "cut_alien.png", "n": 4, "gap": 0.15, "vanishAt": 1.0, "returnAt": 1.7, "returnN": 1, "dur": 2.9}` | pop@1.0, squeak@1.75 | Primer (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `peel` | The layer under the layer | A stamp peels off to show the same stamp underneath, again; the last one can be different. | `{"kind": "peel", "text": "CANCELLED", "times": [0.9, 1.8], "last": "ALSO CANCELLED", "dur": 2.9}` | boom@0.0, rip@0.9, rip@1.8, trombone@2.3 | Mark Rober (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `rollcall` | Roll-call montage | One full-frame picture a second, each with its name in bold caps, so a list has a length you can feel. | `{"kind": "rollcall", "items": [{"img": "R_gbt.jpg", "label": "demo: project one"}, {"img": "R_servers.jpg", "label": "demo: project two"}, {"img": "R_cinema.jpg", "label": "demo: project three"}], "gap": 0.9, "dur": 2.7}` | click@0.25, click@1.15, click@2.05 | Vsauce2 (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `dust` | Dust blown off | A dust layer over an old picture or document is blown off in a puff of particles. | `{"kind": "dust", "at": 0.9, "dur": 2.9}` | blow@1.1, sigh@2.0 | Tantacrul (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `nest` | Windows inside windows | A dialog opens inside a dialog inside a dialog, each smaller: bureaucracy as a picture. | `{"kind": "nest", "titles": ["Funding Application", "Attachment B", "Form 7(c)", "Please wait"], "last": "...", "gap": 0.45, "dur": 2.9}` | click@0.25, click@0.7, click@1.15, error@1.6 | Tantacrul (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `trophy` | The trophy on a plinth | An object on a little plinth with a plain flag that changes hands (our own flags with a word, no real flags or logos). | `{"kind": "trophy", "img": "cut_box.png", "label": "DEMO PRIZE", "flag": "PLANNED", "flag2": "SHELVED", "swapAt": 1.2, "dur": 2.9}` | pop@0.25, whoosh@1.45, trombone@1.9 | Extra History (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `foreground` | Big blurred foreground | A large blurred cut-out at the frame edge in front of the still, so we look past something at the subject. | `shot {"move": "push"} + {"kind": "foreground", "img": "cut_dish.png", "side": "right", "w": 0.6, "dur": 2.9}` | - | Ordinary Things (gag study 13 Nov 2026, seventh study) **· from the next video** |
+| `match_cut` | Match dissolve | Two pictures whose main shapes line up dissolve slowly into each other (shot field fade 1.5 on the second, focus on the shared shape). | `shot {"fade": 1.5, "move": "hold"}` | - | RealLifeLore (gag study 13 Nov 2026, seventh study) **· from the next video** |
 
 ## Animations
 
@@ -210,6 +218,7 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `obsession` | The narrator's obsession | One tiny grudge that returns once per video across the channel (Sam to pick it). | - | dundun@0.5 | Some More News (gag study 12 Nov 2026) |
 | `word_sound` | The word gets its sound | Once or twice a video a literal sound lands exactly on one word ("powerful" gets an explosion, "billions" a ka-ching). | - | register@0.5 | Mustard (gag study 13 Nov 2026, fifth study) **· from the next video** |
 | `silly_unit` | The silly unit | Once a video, time or size measured in a deliberately useless unit ("two UK prime ministers later"), said flat; a later card can carry it. | - | - | Wendover Productions (gag study 13 Nov 2026, sixth study) **· from the next video** |
+| `spit` | The spit after the name | Once a video, a short dry spit ("ptoo") right after a rival's name: institutions and ideas only, never a private person. | - | spit@0.4 | Ordinary Things (gag study 13 Nov 2026, seventh study) **· from the next video** |
 
 ## Sounds (`toolkit/media/gag_sfx.py OUTDIR <names>`, in-house, no credit)
 
@@ -255,6 +264,8 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `sigh` | A tired sigh |
 | `wind` | Cold wind |
 | `rip` | Paper tearing: the picture rips open |
+| `blow` | A breathy puff: dust blown off |
+| `spit` | A short dry spit (ptoo) after a name |
 
 Real recorded sounds (Mixkit, prefix `r:` in the plans) are listed in `fxlib.py` REAL and the Gag Library page.
 

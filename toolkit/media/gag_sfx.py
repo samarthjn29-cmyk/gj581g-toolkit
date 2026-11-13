@@ -293,6 +293,16 @@ def rip(d=0.55):                                                     # paper tea
     x = hp(x, 900) + 0.25 * bp(rng.standard_normal(len(t)), 2000, 7000)
     return norm(x * env(len(t), 0.01, 0.18) * np.exp(-1.2 * t / d), -5)
 
+def blow(d=0.7):                                                     # a breathy puff, blowing dust off something
+    t = t_(d); n = rng.standard_normal(len(t)); x = bp(n, 250, 2200) * np.exp(-3.2 * t / d) * np.minimum(1, t / 0.04)
+    return norm(lp(x, 2600), -6)
+def spit(d=0.35):                                                    # a short dry "ptoo": a lip pop then a spray
+    t = t_(d); x = np.zeros(len(t)); m = int(0.03 * SR); tt = np.arange(m) / SR
+    x[:m] += np.sin(2 * np.pi * 140 * tt) * np.exp(-tt * 120)
+    i0 = int(0.04 * SR); sp = bp(rng.standard_normal(len(t) - i0), 1800, 7000) * np.exp(-np.arange(len(t) - i0) / SR * 14)
+    x[i0:] += 0.7 * sp
+    return norm(x, -5)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
