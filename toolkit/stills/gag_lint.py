@@ -41,7 +41,9 @@ for c in P.get('cards', []):
 PAINTED = {'signoff', 'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 'count', 'meter', 'stamp', 'aside', 'banner', 'starburst', 'headline',
            'counter', 'pip', 'clock', 'rain', 'overlay', 'glitch', 'kinetic', 'title', 'number', 'bars', 'chain', 'triptych', 'ruler', 'lens',
            'freeze', 'sticker', 'glint', 'text', 'info', 'route', 'pov', 'doc', 'split', 'later', 'chips', 'panels', 'clones', 'pile', 'doodle',
-           'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black'}
+           'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black',
+           # 13 Nov gag studies: drawn in the painted palette in Gags2.jsx (PAINT/HAND/paper)
+           'tear', 'void', 'tumble', 'blocks', 'smear', 'linechart', 'listening', 'blueprint', 'bossbar', 'flow', 'telemetry', 'search', 'equation'}
 CUTOUT = {'clones', 'jack', 'hand', 'recap', 'pile', 'sticker'}   # these carry a cut-out picture: it must be an AI-painted image (S3_*)
 unpainted = 0
 if (P.get('finish') or {}).get('gags') != 'flat':

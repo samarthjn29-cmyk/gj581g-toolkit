@@ -88,7 +88,7 @@ export const GAGS2 = {
 
   // outline (Kurzgesagt "the outline stays"): a cut-out (c.img, PNG) is shown solid, then at c.at s its fill drains away and only a
   // cream outline stays: "it was never built", "they're gone". c.x, c.y, c.w. Objects only. Sound: pop + silence.
-  outline: (c, q, d, out, dir) => { const w = (c.w ?? 0.36) * W, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H, k = R(q, c.at ?? 0.6, (c.at ?? 0.6) + 0.35), id = 'gjol' + Math.round((c.t || 0) * 100);
+  outline: (c, q, d, out, dir) => { const w = (c.w ?? 0.36) * W, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H, k = R(q, (typeof c.at === 'number' ? c.at : (c.drainAt ?? 0.6)), (typeof c.at === 'number' ? c.at : (c.drainAt ?? 0.6)) + 0.35), id = 'gjol' + Math.round((c.t || 0) * 100);
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
       <defs><filter id={id}><feMorphology operator="dilate" radius={5} in="SourceAlpha" result="dl" /><feComposite in="dl" in2="SourceAlpha" operator="out" result="ring" />
         <feFlood floodColor={c.color || PAINT.cream} /><feComposite in2="ring" operator="in" /></filter></defs>
@@ -220,7 +220,7 @@ export const GAGS2 = {
   // tear (fern "the wall tears open"): a ragged hole rips open in the picture from (c.x, c.y), growing to c.r (share of the frame
   // height) over c.open s (default 0.3) from c.at s, showing ink-black behind with a paper-white torn lip and a glowing cream "?"
   // (c.text) or a cut-out (c.img) inside. "But one was missing." Sound: rip, then a soft ding as the inside glows.
-  tear: (c, q, d, out, dir) => { const cx = (c.x ?? 0.5) * W, cy = (c.y ?? 0.5) * H, at = c.at ?? 0.2, p = Easing.out(Easing.back(1.4))(R(q, at, at + (c.open ?? 0.3))), r = (c.r ?? 0.24) * H * p, n = 56, gq = q - at - (c.open ?? 0.3);
+  tear: (c, q, d, out, dir) => { const cx = (c.x ?? 0.5) * W, cy = (c.y ?? 0.5) * H, at = (typeof c.at === 'number' ? c.at : (c.openAt ?? 0.2)), p = Easing.out(Easing.back(1.4))(R(q, at, at + (c.open ?? 0.3))), r = (c.r ?? 0.24) * H * p, n = 56, gq = q - at - (c.open ?? 0.3);
     if (q < at) return null;
     const pts = (k, s0) => Array.from({length: n}, (_, i) => { const a = i / n * Math.PI * 2, j = 1 + 0.12 * (rnd(i, s0) - 0.5) + 0.07 * Math.sin(i * 1.3 + s0) + 0.05 * Math.sin(i * 0.45 + 2 * s0); return `${cx + Math.cos(a) * r * k * j * 1.25},${cy + Math.sin(a) * r * k * j}`; }).join(' ');
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
