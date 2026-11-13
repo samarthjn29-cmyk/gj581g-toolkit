@@ -154,6 +154,14 @@ export const PAINTED = {
       {c.stamp ? <div style={{position: 'absolute', right: 90, bottom: 80, fontFamily: SERIF, fontSize: 48, color: PAPER, textShadow: `3px 0 ${BRICK}, -3px 0 ${GREEN}`}}>{c.stamp}</div> : null}</AbsoluteFill>; },
 
   // ---- kinds that live in StillsScene.jsx (called with the absolute time t) ----
+  // signoff (Sam, 13 Nov 2026): "Live well" in the title serif over the picture, then the brick-red eyebrow logo pops in and winks
+  // (star closes to a lid for ~0.35 s). c.text, c.logo_at (s), c.wink_at (s). Sound: a soft ting on the wink, in silence.
+  signoff: (c, q, d, out) => { const ta = R(q, 0, 0.6), la = c.logo_at ?? 1.0, wa = c.wink_at ?? 2.0, lq = q - la, wink = q >= wa && q < wa + 0.38;
+    const sq = wink ? 1 - 0.06 * Math.sin(Math.min(1, (q - wa) / 0.38) * Math.PI) : 1;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      <div style={{position: 'absolute', left: 0, right: 0, top: H * (c.y ?? 0.36), transform: `translateY(${(1 - ta) * 24}px)`, opacity: ta, textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 168, color: '#F3EBDD', letterSpacing: 2, textShadow: '0 6px 30px rgba(0,0,0,.55)'}}>{c.text || 'Live well'}</div>
+      {lq >= 0 ? <Img src={staticFile(wink ? 'paint/logo_wink.png' : 'paint/logo_open.png')} style={{position: 'absolute', width: 230, height: 230, left: W / 2 - 115, top: H * (c.logo_y ?? 0.66) - 115, transform: `scale(${pop(lq, 0.8)}) scaleY(${sq})`, filter: 'drop-shadow(0 8px 22px rgba(0,0,0,.45))'}} /> : null}
+    </AbsoluteFill>; },
   stamp: (c, q, d) => { const p = R(q, 0, 0.12), sh = (1 - R(q, 0.12, 0.6)) * 10 * Math.sin(q * 90), col = c.color && c.color !== '#D11F2A' ? c.color : BRICK, size = (c.size || 150) * 0.85;
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: 1 - R(q, d - 0.2, d)}}><div style={{transform: `translate(${(c.x || 0) + sh}px, ${c.y || 0}px) rotate(${c.rot ?? -9}deg) scale(${3 - 2 * p})`, opacity: p}}>
       {/* a pale paper wash under the ink keeps it readable on dark pictures */}

@@ -38,7 +38,7 @@ for c in P.get('cards', []):
 # painted gags (Sam, 12 Nov 2026: "Going forward whatever gags we use should be created in the painted AI format"): every gag
 # must have a painted look (Paint.jsx, or a P.on branch in Gags.jsx / StillsScene.jsx). Flat Lottie files and video overlays are
 # not allowed; flat-only kinds must be given a painted variant before they are used.
-PAINTED = {'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 'count', 'meter', 'stamp', 'aside', 'banner', 'starburst', 'headline',
+PAINTED = {'signoff', 'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 'count', 'meter', 'stamp', 'aside', 'banner', 'starburst', 'headline',
            'counter', 'pip', 'clock', 'rain', 'overlay', 'glitch', 'kinetic', 'title', 'number', 'bars', 'chain', 'triptych', 'ruler', 'lens',
            'freeze', 'sticker', 'glint', 'text', 'info', 'route', 'pov', 'doc', 'split', 'later', 'chips', 'panels', 'clones', 'pile', 'doodle',
            'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black'}

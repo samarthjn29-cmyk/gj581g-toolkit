@@ -168,6 +168,13 @@
      "match": {
       "kind": "pov"
      }
+    },
+    {
+     "id": "H-signoff",
+     "name": "Channel sign-off: 'Live well' + winking logo (Sam, 13 Nov 2026)",
+     "match": {
+      "kind": "signoff"
+     }
     }
    ]
   },
@@ -182,7 +189,7 @@
    "recipes": [
     {
      "id": "SP-counter",
-     "name": "Running-gag counter on black (\"NOTHING · 1\")",
+     "name": "Running-gag counter on black (\"NOTHING \u00b7 1\")",
      "match": {
       "kind": "count"
      },
