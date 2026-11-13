@@ -13,7 +13,7 @@ import json, sys, re
 BAND = {'calm': 0, 'thoughtful': 0, 'warmly': 0, 'gently': 0, 'sincere': 0,
         'matter-of-fact': 1, 'knowingly': 1, 'deadpan': 1, 'intrigued': 1, 'curious': 1, 'dry': 1, 'wry': 1,
         'excited': 2, 'playful': 2, 'mischievously': 2, 'laughing': 2, 'dramatic': 2, 'surprised': 2, 'exasperated': 2}
-BRIDGE = re.compile(r"^(so[,.!\s]|so here's|here's (the|where|how|what)|which brings|that brings|now[,.\s]|right[,.\s]|and (that|this|so|then|now)|"
+BRIDGE = re.compile(r"^(so[,.!\s]|so here's|here's (the|where|how|what)|which brings|that brings|now[,.\s]|right[,.\s]|and (that|this|so|then|now|it's|it is)|"
                     r"back to|meanwhile|which is where|that's where|this is where|ok(ay)?[,.\s]|but here's|here is|let's|picture this|years later|fast forward)", re.I)
 def chapters(paths):
     out = []
