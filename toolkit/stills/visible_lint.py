@@ -23,7 +23,8 @@ for a,b in zip(ev,ev[1:]):
 def floor(c): return 1.5 if (c and c['kind']=='kinetic' and c.get('style')=='short') else MIN
 bad=0
 for i,(a,b,w,c) in enumerate(segs):
-    short = b-a < floor(c) and i < len(segs)-1   # the chapter's last segment may end early on the cut
+    hold = (c or {}).get('joinhold', 0) if a < 0.01 else 0   # a chapter's first card also shows through the join breath (join_breath.py holds frame 0 for 1.2 s)
+    short = b-a + hold < floor(c) and i < len(segs)-1   # the chapter's last segment may end early on the cut
     bad += short; print(f"{a:6.2f} {b-a:5.2f}{' <<' if short else '   '}  {w}")
 for c in t['cards']:
     if c['kind'] not in ('aside','headline','banner','stamp','starburst','pip'): continue

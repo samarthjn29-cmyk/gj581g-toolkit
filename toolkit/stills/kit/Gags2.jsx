@@ -21,7 +21,7 @@ export const GAGS2 = {
   // c.items, c.y (row centre), c.dim. Sound: pop per chip.
   chips: (c, q, d, out) => { const it = c.items || [], gap = c.gap ?? 0.9;
     return <AbsoluteFill style={{opacity: out, background: `rgba(20,16,10,${(c.dim ?? 0.35) * R(q, 0, 0.3)})`}}>
-      <div style={{position: 'absolute', left: 80, right: 80, top: (c.y ?? 0.5) * H, transform: 'translateY(-50%)', display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center'}}>
+      <div style={{position: 'absolute', left: 80, right: (c.y ?? 0.5) > 0.7 ? 330 : 80, top: (c.y ?? 0.5) * H, transform: 'translateY(-50%)', display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'center'}}>
         {it.map((x, i) => { const qi = q - 0.15 - i * gap; if (qi < 0) return null;
           return <div key={i} style={{...brushBox({padding: '12px 30px 16px', fontFamily: HAND, fontSize: c.size || 64, transform: `scale(${pop(qi, 0.6)}) rotate(${i % 2 ? 2 : -2}deg)`})}}>{c.quotes === false ? x : `“${x}”`}</div>; })}</div></AbsoluteFill>; },
 
@@ -31,7 +31,7 @@ export const GAGS2 = {
     const vis = tm.map(x => R(q, x, x + 0.35)), tot = vis.reduce((a, b) => a + b, 0) || 1; let x0 = 0;
     return <AbsoluteFill style={{opacity: out, background: PAINT.ink}}>{im.map((f, i) => { const w = (W - gw * (im.length - 1)) * vis[i] / tot, left = x0; x0 += w + (vis[i] > 0 ? gw : 0); if (vis[i] <= 0) return null;
       return <div key={i} style={{position: 'absolute', top: 0, bottom: 0, left, width: w, overflow: 'hidden'}}><Pic dir={dir} f={f} style={{position: 'absolute', left: '50%', width: W, maxWidth: 'none', transform: 'translateX(-50%)'}} />
-        {c.caps && c.caps[i] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: 70, textAlign: 'center'}}><span style={{...brushBox({padding: '6px 22px 10px', fontFamily: HAND, fontSize: 52})}}>{c.caps[i]}</span></div> : null}</div>; })}</AbsoluteFill>; },
+        {c.caps && c.caps[i] ? <div style={{position: 'absolute', left: 0, right: 0, bottom: c.capBottom ?? 70, textAlign: 'center'}}><span style={{...brushBox({padding: '6px 22px 10px', fontFamily: HAND, fontSize: 52})}}>{c.caps[i]}</span></div> : null}</div>; })}</AbsoluteFill>; },
 
   // clones (MagnatesMedia clone line-up) and queue (CGP Grey "the queue grows"): one cut-out (PNG with transparency) repeated n times,
   // each tinted, with labels; queue: true lines them up behind the first, smaller with distance, one by one. c.img, c.n, c.labels,

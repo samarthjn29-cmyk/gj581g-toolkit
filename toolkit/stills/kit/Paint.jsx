@@ -173,15 +173,16 @@ export const PAINTED = {
     return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `rotate(${c.rot ?? -3}deg)`}}>
       <Scrap pad="0 26px 8px" sw={3} fill={c.chip === false ? 'transparent' : PAPER} stroke={c.chip === false ? null : INK}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 64) * 0.92, color: INK, whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></Scrap></div></AbsoluteFill>; },
 
+  // watermark corner (Sam, 13 Nov 2026): the band stops at x 1590 and the ticker sits left, so the bottom-right stays clear
   banner: (c, q, d) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.25)), oo = 1 - R(q, d - 0.2, d), L = c.label || 'Breaking', lab = L.charAt(0) + L.slice(1).toLowerCase(), txt = /^[A-Z0-9 '!?.,’-]+$/.test(c.text) ? c.text.charAt(0) + c.text.slice(1).toLowerCase() : c.text;
     const tick = c.ticker || '', y0 = 830;
     return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', inset: 0, transform: `translateX(${(1 - p) * -110}%)`}}>
       <svg width={W} height={H} style={{position: 'absolute', filter: paperShadow}}><g filter="url(#pRough)">
-        <path d={`M -20 ${y0 + 16} L 180 ${y0 + 8} L 420 ${y0 + 20} L 760 ${y0 + 6} L 1100 ${y0 + 18} L 1500 ${y0 + 4} L 1940 ${y0 + 16} L 1940 ${y0 + 142} L 1500 ${y0 + 150} L 1120 ${y0 + 136} L 760 ${y0 + 152} L 400 ${y0 + 138} L 120 ${y0 + 148} L -20 ${y0 + 140} Z`} fill={OCHRE} />
+        <path d={`M -20 ${y0 + 16} L 180 ${y0 + 8} L 420 ${y0 + 20} L 760 ${y0 + 6} L 1100 ${y0 + 18} L 1380 ${y0 + 4} L 1590 ${y0 + 12} L 1570 ${y0 + 146} L 1380 ${y0 + 150} L 1120 ${y0 + 136} L 760 ${y0 + 152} L 400 ${y0 + 138} L 120 ${y0 + 148} L -20 ${y0 + 140} Z`} fill={OCHRE} />
         <path d={`M 30 ${y0} L ${70 + lab.length * 34} ${y0 - 8} L ${80 + lab.length * 34} ${y0 + 160} L 40 ${y0 + 166} Z`} fill={BRICK} /></g></svg>
       <div style={{position: 'absolute', left: 55 + lab.length * 17, top: y0 + 76, transform: 'translate(-50%, -50%) rotate(-3deg)', fontFamily: HAND, fontWeight: 700, fontSize: 64, color: PAPER, whiteSpace: 'nowrap'}}>{lab}</div>
       <div style={{position: 'absolute', left: 120 + lab.length * 34, top: y0 + 78, transform: 'translateY(-50%)', fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 58) * 1.3, color: GREEN, whiteSpace: 'nowrap'}}>{txt}</div></div>
-      {tick ? <div style={{position: 'absolute', right: 40, top: y0 + 170, transform: `translateX(${(1 - p) * 110}%) rotate(-0.6deg)`}}><Scrap pad="2px 26px 6px" sw={0} stroke={null}>
+      {tick ? <div style={{position: 'absolute', left: 40, maxWidth: 1540, top: y0 + 170, transform: `translateX(${(1 - p) * -110}%) rotate(-0.6deg)`}}><Scrap pad="2px 26px 6px" sw={0} stroke={null}>
         <div style={{fontFamily: HAND, fontWeight: 700, fontSize: 36, color: INK, whiteSpace: 'nowrap'}}>{tick.charAt(0).toUpperCase() + tick.slice(1).toLowerCase()}</div></Scrap></div> : null}</AbsoluteFill>; },
 
   starburst: (c, q, d) => { const b = q < 0 ? 0 : 1 + 0.3 * Math.exp(-q * 7) * Math.sin(q * 24) - Math.exp(-q * 16), oo = 1 - R(q, d - 0.15, d), n = 16, R1 = 300, R2 = 235;
