@@ -204,6 +204,40 @@ Study: `styles/EFFECTS_LIBRARY.md`. Camera moves: hold.
 | `VHS-overlay` | TV static / glitch overlay | `kind: overlay` | static | built |
 | `VHS-rec` | Camcorder REC | `kind: rec` | click | built |
 
+### Daily gag studies (styles/GAG_STUDY_LOG.md, built into EFFECTS_LIBRARY.md)  (`studies`)
+Study: `styles/GAG_STUDY_LOG.md`. Camera moves: hold, drift, push, pullback.
+
+| id | gag | kit card | paired sound | status |
+|---|---|---|---|---|
+| `GS-route` | Route draw (Internet Historian (gag study 12 Nov 2026)) | `kind: route` | - | built |
+| `GS-pov` | The object's point of view (Danny Gonzalez (gag study 12 Nov 2026)) | `kind: pov` | - | built |
+| `GS-weather` | Literal weather (MagnatesMedia (gag study 12 Nov 2026)) | `kind: weather` | - | built |
+| `GS-chips` | Quote chips (SunnyV2 (gag study 12 Nov 2026)) | `kind: chips` | - | built |
+| `GS-jack` | Jack-in-the-box (Danny Gonzalez (gag study 12 Nov 2026)) | `kind: jack` | - | built |
+| `GS-clones` | Clone line-up (MagnatesMedia (gag study 12 Nov 2026)) | `kind: clones` | - | built |
+| `GS-quote` | Source subtitle (Internet Historian (gag study 12 Nov 2026)) | `kind: quote` | - | built |
+| `GS-panels` | Accumulating panels (Kurzgesagt (gag study 12 Nov 2026)) | `kind: panels` | - | built |
+| `GS-hand` | The giant hand (Kurzgesagt (gag study 12 Nov 2026)) | `kind: hand` | - | built |
+| `GS-doodle` | Doodle on a photo (Map Men (gag study 12 Nov 2026)) | `kind: doodle` | - | built |
+| `GS-outline` | The outline stays (Kurzgesagt (gag study 12 Nov 2026)) | `kind: outline` | - | built |
+| `GS-scroll` | Karaoke transmission (LEMMiNO (gag study 12 Nov 2026)) | `kind: scroll` | - | built |
+| `GS-recap` | Recap screen (CGP Grey (gag study 12 Nov 2026)) | `kind: recap` | - | built |
+| `GS-ots` | Over-the-shoulder pun box (Some More News (gag study 12 Nov 2026)) | `kind: ots` | - | built |
+| `GS-black` | The black beat (Scott The Woz (gag study 12 Nov 2026)) | `kind: black` | - | built |
+| `GS-pile` | Count-out pile (CGP Grey (gag study 12 Nov 2026)) | `kind: pile` | - | built |
+| `GS-palm` | Hold it in your palm (Cleo Abram (gag study 13 Nov 2026)) | `kind: palm` | - | built |
+| `GS-beam` | Beam strikes (Cleo Abram (gag study 13 Nov 2026)) | `kind: beam` | - | built |
+| `GS-tumble` | Tumbling words (bill wurtz (gag study 13 Nov 2026)) | `kind: tumble` | - | built |
+| `GS-blocks` | Colour-block beat card (bill wurtz (gag study 13 Nov 2026)) | `kind: blocks` | - | built |
+| `GS-smear` | Pixel-smear transition (bill wurtz (gag study 13 Nov 2026)) | `kind: smear` | - | built |
+| `GS-linechart` | Full-bleed line chart (PolyMatter (gag study 13 Nov 2026)) | `kind: linechart` | - | built |
+| `GS-tear` | The picture tears open (fern (gag study 13 Nov 2026, fifth study)) | `kind: tear` | - | built |
+| `GS-listening` | The "LISTENING..." badge (JaidenAnimations (gag study 13 Nov 2026, fifth study)) | `kind: listening` | - | built |
+| `GS-void` | Tiny thing in a blank void (JaidenAnimations (gag study 13 Nov 2026, fifth study)) | `kind: void` | - | built |
+| `GS-blueprint` | Blueprint side-by-side (Mustard (gag study 13 Nov 2026, fifth study)) | `kind: blueprint` | - | built |
+| `GS-neighbour` | The absurd neighbour headline (Mustard, gag study 13 Nov 2026) | `kind: headline, neighbour: *` | - | built |
+| `GS-jacksign` | Sign in the window (JaidenAnimations, gag study 13 Nov 2026) | `kind: jack, sign: *` | - | built |
+
 ## Writing shapes by school (script level, not checked by the build)
 - **South Park:** every beat joined by *but* or *therefore*, never *and then*. Find the take while writing. A running gag that escalates, gets banned, then comes back from the person who banned it. Same graphic, reversed meaning. A genre switch as the punchline.
 - **Casually Explained:** escalating evidence that always gets the same deadpan verdict. Hold still when the arrangement is the joke.

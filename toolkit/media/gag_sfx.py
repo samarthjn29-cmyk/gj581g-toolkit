@@ -280,6 +280,13 @@ def sigh(d=1.1):                                                     # a tired b
     t = t_(d); n = rng.standard_normal(len(t)); x = bp(n, 300, 1800) * np.exp(-2.2 * t / d) * np.minimum(1, t / 0.12)
     return norm(lp(x, 1400), -8)
 
+def rip(d=0.55):                                                     # paper tearing: crackly noise bursts that speed up then trail off
+    t = t_(d); x = np.zeros_like(t); rate = 90 + 260 * np.minimum(1, t / (d * 0.35))
+    pos = np.cumsum(rate / SR); idx = np.where(np.diff(np.floor(pos)) > 0)[0]
+    for i in idx: n = int(60 + 120 * rng.random()); seg = rng.standard_normal(n) * np.hanning(n); x[i:i + n] += seg[:len(x[i:i + n])] * (0.4 + 0.6 * rng.random())
+    x = hp(x, 900) + 0.25 * bp(rng.standard_normal(len(t)), 2000, 7000)
+    return norm(x * env(len(t), 0.01, 0.18) * np.exp(-1.2 * t / d), -5)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']

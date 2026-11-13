@@ -80,7 +80,11 @@ export const GAGS2 = {
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
       {c.inner && qi >= 0 ? <div style={{position: 'absolute', left: x - w * 0.3, top: y - w * 0.55, width: w * 0.6, height: w * 0.6, zIndex: 1, transform: `translateY(${(1 - Math.min(1, pop(qi, 1.4))) * w * 0.4}px) scale(${pop(qi, 1.2)})`}}>
         <Img src={staticFile(`${dir}/${c.inner}`)} style={{width: '100%', height: '100%', objectFit: 'contain'}} /></div> : null}
+      {c.sign && qi >= 0.15 ? <div style={{position: 'absolute', left: x - w * 0.34, top: y - w * 0.22, width: w * 0.68, zIndex: 3, ...brushBox({padding: '18px 22px', textAlign: 'center', fontFamily: HAND, fontWeight: 700, fontSize: c.signSize || 54, lineHeight: 1.05, border: `5px solid ${PAINT.ink}`}),
+        transform: `translateY(${(1 - Math.min(1, pop(qi - 0.15, 1.2))) * 120}px) rotate(${-4 + 2 * Math.sin(q * 3)}deg)`}}>{c.sign}</div> : null}
       {half(0)}{half(1)}</AbsoluteFill>; },
+  // jack option c.sign (JaidenAnimations "sign in the window", gag study 13 Nov 2026): the pop-up figure comes up holding a
+  // hand-lettered card with c.sign on it (c.signSize). Our mascot or an object only. Sound: pop + small boing.
 
   // outline (Kurzgesagt "the outline stays"): a cut-out (c.img, PNG) is shown solid, then at c.at s its fill drains away and only a
   // cream outline stays: "it was never built", "they're gone". c.x, c.y, c.w. Objects only. Sound: pop + silence.
@@ -210,5 +214,53 @@ export const GAGS2 = {
       {S.map((s, i) => { const pp = part(s.pts), [lx, ly] = pp[pp.length - 1]; return p > 0.95 ? <div key={'l' + i} style={{position: 'absolute', left: Math.min(lx + 26, Rr - 200), top: ly - 30, background: s.color || PAINT.yellow, color: PAINT.ink, fontFamily: SANS, fontWeight: 900, fontSize: 32, padding: '4px 14px', borderRadius: 6, transform: `scale(${pop(q - 0.25 - (c.draw ?? 1.1), 0.4)})`, transformOrigin: '0 50%', whiteSpace: 'nowrap'}}>{s.label}</div> : null; })}
       {c.source ? <div style={{position: 'absolute', left: L, bottom: 60, fontFamily: SANS, fontSize: 24, letterSpacing: 2, color: ink, opacity: 0.75, textTransform: 'uppercase'}}>{c.source}</div> : null}
       {c.ylabel ? <div style={{position: 'absolute', left: L, top: T - 60, fontFamily: SANS, fontSize: 28, letterSpacing: 2, color: ink, opacity: 0.8}}>{c.ylabel}</div> : null}</AbsoluteFill>; },
+  // ---- Gag study 13 Nov 2026, fifth study (Vox, fern, Hank Green, Mustard, JaidenAnimations, Answer in Progress).
+
+  // tear (fern "the wall tears open"): a ragged hole rips open in the picture from (c.x, c.y), growing to c.r (share of the frame
+  // height) over c.open s (default 0.3) from c.at s, showing ink-black behind with a paper-white torn lip and a glowing cream "?"
+  // (c.text) or a cut-out (c.img) inside. "But one was missing." Sound: rip, then a soft ding as the inside glows.
+  tear: (c, q, d, out, dir) => { const cx = (c.x ?? 0.5) * W, cy = (c.y ?? 0.5) * H, at = c.at ?? 0.2, p = Easing.out(Easing.back(1.4))(R(q, at, at + (c.open ?? 0.3))), r = (c.r ?? 0.24) * H * p, n = 56, gq = q - at - (c.open ?? 0.3);
+    if (q < at) return null;
+    const pts = (k, s0) => Array.from({length: n}, (_, i) => { const a = i / n * Math.PI * 2, j = 1 + 0.12 * (rnd(i, s0) - 0.5) + 0.07 * Math.sin(i * 1.3 + s0) + 0.05 * Math.sin(i * 0.45 + 2 * s0); return `${cx + Math.cos(a) * r * k * j * 1.25},${cy + Math.sin(a) * r * k * j}`; }).join(' ');
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <polygon points={pts(1.09, 3)} fill={PAINT.paper} style={{filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))'}} />
+      <polygon points={pts(1.0, 3)} fill="#0B0A09" /></svg>
+      {gq >= 0 ? c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: cx - r * 0.6, top: cy - r * 0.6, width: r * 1.2, height: r * 1.2, objectFit: 'contain', transform: `scale(${pop(gq, 0.5)})`, filter: `drop-shadow(0 0 24px ${PAINT.yellow})`}} />
+        : <div style={{position: 'absolute', left: cx - r, top: cy - r * 0.62, width: r * 2, textAlign: 'center', fontFamily: HAND, fontWeight: 700, fontSize: r * 1.05, lineHeight: 1, color: PAINT.cream, opacity: R(gq, 0, 0.35), textShadow: `0 0 28px ${PAINT.yellow}, 0 0 60px rgba(232,197,71,0.6)`}}>{c.text ?? '?'}</div> : null}</AbsoluteFill>; },
+
+  // listening (JaidenAnimations "LISTENING..." badge): a cream disc with a drawn mic and two slow pulsing rings, "LISTENING" with
+  // cycling dots under it, held while nothing happens. c.x, c.y, c.size (disc px, default 150), c.label, c.year (optional small
+  // date line that can tick: c.years = [[t, '1960'], [t, '1985'], ...]). A running-gag candidate. Sound: none, or a slow ping.
+  listening: (c, q, d, out) => { const x = (c.x ?? 0.78) * W, y = (c.y ?? 0.62) * H, S = c.size || 150, inq = Easing.out(Easing.cubic)(R(q, 0, 0.3)), dots = '.'.repeat(1 + Math.floor(q * 2) % 3);
+    const yr = (c.years || []).filter(v => q >= v[0]).pop(), ring = k => { const ph = ((q * 0.8 + k * 0.5) % 1); return <div key={k} style={{position: 'absolute', left: x - S / 2, top: y - S / 2, width: S, height: S, borderRadius: '50%', border: `4px solid ${PAINT.cream}`, transform: `scale(${1 + ph * 0.9})`, opacity: (1 - ph) * 0.7}} />; };
+    return <AbsoluteFill style={{opacity: out * inq, pointerEvents: 'none'}}>{ring(0)}{ring(1)}
+      <div style={{position: 'absolute', left: x - S / 2, top: y - S / 2, width: S, height: S, borderRadius: '50%', background: PAINT.cream, boxShadow: '0 8px 22px rgba(20,16,10,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <svg width={S * 0.5} height={S * 0.5} viewBox="0 0 40 40"><rect x="14" y="4" width="12" height="20" rx="6" fill={PAINT.ink} /><path d="M9 18 a11 11 0 0 0 22 0" fill="none" stroke={PAINT.ink} strokeWidth="3" strokeLinecap="round" /><line x1="20" y1="29" x2="20" y2="35" stroke={PAINT.ink} strokeWidth="3" strokeLinecap="round" /></svg></div>
+      <div style={{position: 'absolute', left: x - 260, top: y + S / 2 + 22, width: 520, textAlign: 'center', fontFamily: SANS, fontWeight: 800, fontSize: c.textSize || 36, letterSpacing: 6, color: PAINT.cream, textShadow: '0 2px 8px rgba(0,0,0,0.85)'}}>{(c.label || 'LISTENING')}<span style={{display: 'inline-block', width: 60, textAlign: 'left'}}>{dots}</span></div>
+      {yr ? <div style={{position: 'absolute', left: x - 260, top: y + S / 2 + 72, width: 520, textAlign: 'center', fontFamily: MONO, fontSize: 30, color: PAINT.yellow, textShadow: '0 2px 8px rgba(0,0,0,0.85)', transform: `scale(${pop(q - yr[0], 0.4)})`}}>{yr[1]}</div> : null}</AbsoluteFill>; },
+
+  // void (JaidenAnimations tiny figure in a blank void): cut to plain painted paper with one small cut-out (c.img) dead centre at
+  // c.h of the frame height (default 0.08), held. Loneliness by scale; no move (not pullback) and not dark (not black). c.ground,
+  // c.text (an optional tiny caption under it), c.x, c.y. Sound: the wind loop very low, or silence.
+  void: (c, q, d, out, dir) => { const h = (c.h ?? 0.08) * H, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H;
+    return <AbsoluteFill style={{background: c.ground || PAINT.paper, opacity: out}}>
+      <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: x - h, top: y - h / 2, width: h * 2, height: h, objectFit: 'contain', transform: `translateY(${Math.sin(q * 1.3) * 2}px)`}} />
+      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: 34, color: PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
+
+  // blueprint (Mustard blueprint side-by-side): two line drawings (c.items = [{img, label, note}], cut-outs drawn as cream lines by
+  // an SVG edge filter) on a forest-green ground with a cream grid, each labelled, labels landing c.gap s apart, and an optional
+  // short note under each (the one difference). A calm explainer card. Sound: click as each label lands.
+  blueprint: (c, q, d, out, dir) => { const it = c.items || [], n = it.length || 1, gap = c.gap ?? 0.5, cw = (W - 240) / n, id = 'gjbp' + Math.round((c.t || 0) * 100), G = c.ground || PAINT.green;
+    return <AbsoluteFill style={{background: G, opacity: out}}>
+      <svg width={W} height={H} style={{position: 'absolute'}}><defs><pattern id={id + 'g'} width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke={PAINT.cream} strokeOpacity="0.16" strokeWidth="2" /></pattern>
+        <filter id={id} colorInterpolationFilters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="a" /><feMorphology in="a" operator="dilate" radius="3" result="d" /><feComposite in="d" in2="a" operator="out" result="e" />
+          <feFlood floodColor={PAINT.cream} /><feComposite in2="e" operator="in" /></filter></defs>
+        <rect width={W} height={H} fill={`url(#${id}g)`} /></svg>
+      {c.title ? <div style={{position: 'absolute', top: 70, left: 0, right: 0, textAlign: 'center', fontFamily: MONO, fontSize: 34, letterSpacing: 8, color: PAINT.cream, opacity: 0.85}}>{c.title}</div> : null}
+      {it.map((v, i) => { const lq = q - 0.3 - i * gap, dr = R(q, i * gap * 0.6, i * gap * 0.6 + 0.6);
+        return <div key={i} style={{position: 'absolute', left: 120 + i * cw, top: 200, width: cw, height: 640}}>
+          <div style={{position: 'absolute', left: cw * 0.08, top: 0, width: cw * 0.84, height: 460, clipPath: `inset(0 ${(1 - dr) * 100}% 0 0)`}}><Img src={staticFile(`${dir}/${v.img}`)} style={{width: '100%', height: '100%', objectFit: 'contain', filter: `url(#${id})`}} /></div>
+          {lq >= 0 ? <div style={{position: 'absolute', top: 480, left: 0, right: 0, textAlign: 'center', transform: `scale(${pop(lq, 0.4)})`}}><div style={{fontFamily: MONO, fontWeight: 700, fontSize: 40, letterSpacing: 4, color: PAINT.cream}}>{v.label}</div>
+            {v.note ? <div style={{fontFamily: HAND, fontSize: 34, color: PAINT.yellow, marginTop: 8}}>{v.note}</div> : null}</div> : null}</div>; })}</AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;

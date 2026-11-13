@@ -156,6 +156,14 @@ L = [
  ('linechart', 'Card', 'Full-bleed line chart', 'A real series drawn full frame on a painted ground, with axis, labels and source (fact-checked numbers only).', {}, dict(kind='linechart', title='demo: two lines', series=[{'label': 'demo: rising', 'color': '#E8C547', 'pts': [[2016, 10], [2018, 14], [2020, 22], [2022, 40], [2024, 72], [2026, 100]]}, {'label': 'demo: flat', 'color': '#A6432F', 'pts': [[2016, 3], [2018, 3], [2020, 2], [2022, 2], [2024, 2], [2026, 2]]}], xticks=[2016, 2018, 2020, 2022, 2024, 2026], yticks=[0, 25, 50, 75, 100], source='demo data, not a fact', draw=1.1, dur=2.9), 'climb@0.25 ding@1.4', 'PolyMatter (gag study 13 Nov 2026)'),
  ('cohost', 'Picture gag', 'The mascot co-host', 'Our popcorn alien reacts in a corner box on a big claim, with its own short aside (never states a fact).', {}, dict(kind='ots', steps=[[0, 'cut_alien.png', 'CLAIM NOTED']], w=420, dur=2.6), 'pop@0.25', 'The Why Files (gag study 13 Nov 2026)'),
  ('duotone', 'Picture gag', 'Two-tone photo', 'One real photo pushed to two flat palette colours for a dreamy or unreal beat (shot field duotone).', {'duotone': ['#2E4A33', '#F1E6CF'], 'move': 'drift'}, None, '', 'bill wurtz (gag study 13 Nov 2026)'),
+ # built 13 Nov 2026 from the fifth gag study (Vox, fern, Hank Green, Mustard, JaidenAnimations, Answer in Progress); Sam: "Build everything"
+ ('tear', 'Picture gag', 'The picture tears open', 'A ragged hole rips open in the still with a glowing "?" (or a cut-out) inside: "but one was missing".', {}, dict(kind='tear', x=0.55, y=0.48, r=0.24, at=0.3, dur=2.6), 'rip@0.3 ding@0.75', 'fern (gag study 13 Nov 2026, fifth study)'),
+ ('neighbour', 'Picture gag', 'The absurd neighbour headline', 'The front page carries a smaller deadpan story beside the real one; nobody points at it.', {}, dict(kind='headline', text='Signal From Space?', neighbour='Local Marrow Wins County Fair', dur=2.9, size=84), 'whoosh@0.0', 'Mustard (gag study 13 Nov 2026, fifth study)'),
+ ('listening', 'Picture gag', 'The "LISTENING..." badge', 'A pulsing mic badge holds by a dish while nothing happens, the year ticking on (a running-gag candidate).', {}, dict(kind='listening', x=0.74, y=0.42, years=[[0.4, '1960'], [1.2, '1977'], [2.0, '2026']], dur=2.9), 'ping@0.4 ping@1.4', 'JaidenAnimations (gag study 13 Nov 2026, fifth study)'),
+ ('void', 'Picture gag', 'Tiny thing in a blank void', 'Cut to plain paper with one tiny cut-out dead centre, held: loneliness by scale.', {}, dict(kind='void', img='cut_globe.png', h=0.07, text='just us?', textAt=1.3, dur=2.9), 'wind@0.0', 'JaidenAnimations (gag study 13 Nov 2026, fifth study)'),
+ ('blueprint', 'Picture gag', 'Blueprint side-by-side', 'Two cut-outs drawn as cream line drawings on a green grid, labelled, with the one difference noted.', {}, dict(kind='blueprint', title='TWO WAYS TO LISTEN', items=[dict(img='cut_dish.png', label='ONE DISH', note='hears one star'), dict(img='cut_box.png', label='AN ARRAY', note='hears thousands')], gap=0.6, dur=2.9), 'click@0.3 click@0.9', 'Mustard (gag study 13 Nov 2026, fifth study)'),
+ ('peephole', 'Picture gag', 'Peephole view', 'The shot seen through a round fisheye with dark edges, like a door peephole or an eyepiece (shot field peephole).', {'peephole': True, 'move': 'drift'}, None, 'creak@0.1', 'Answer in Progress (gag study 13 Nov 2026, fifth study)'),
+ ('jack_sign', 'Picture gag', 'Sign in the window', 'The pop-up mascot comes up holding a hand-lettered sign (jack option sign).', {}, dict(kind='jack', img='cut_box.png', inner='cut_alien.png', sign='WRONG NUMBER', openAt=0.6, dur=2.9), 'creak@0.25 pop@0.8 boing@0.95', 'JaidenAnimations (gag study 13 Nov 2026, fifth study)'),
  # habits: sound or writing shapes with no card of their own (gag studies 12 Nov 2026)
  ('wrong_sound', 'Habit', 'The wrong sound, explained away', 'An object makes a sound that doesn\'t fit (dial-up, choir, yelp), then one flat line explains it.', {}, None, 'modem@0.3', 'Danny Gonzalez (gag study 12 Nov 2026)'),
  ('quiet_scream', 'Habit', 'The quiet scream', 'A still object makes a tiny muffled sound under the narration, never explained.', {'move': 'hold'}, None, 'muffled@1.0', 'Map Men (gag study 12 Nov 2026)'),
@@ -168,6 +176,7 @@ L = [
  ('chatbot_line', 'Habit', 'Chatbot-voice line', 'One line in AI-assistant cadence ("You\'re not just X, you\'re redefining Y"), said flat.', {}, None, 'sparkle@0.4', 'Kurtis Conner (gag study 12 Nov 2026)'),
  ('callback_video', 'Habit', 'Cross-video callback', 'One exact shot or line from an older GJ 581g video, with its original sound.', {}, None, '', 'CGP Grey / Scott The Woz (gag study 12 Nov 2026)'),
  ('obsession', 'Habit', "The narrator's obsession", 'One tiny grudge that returns once per video across the channel (Sam to pick it).', {}, None, 'dundun@0.5', 'Some More News (gag study 12 Nov 2026)'),
+ ('word_sound', 'Habit', 'The word gets its sound', 'Once or twice a video a literal sound lands exactly on one word ("powerful" gets an explosion, "billions" a ka-ching).', {}, None, 'register@0.5', 'Mustard (gag study 13 Nov 2026, fifth study)'),
 ]
 
 SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -180,7 +189,7 @@ SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd bo
  ('modem', 'Dial-up modem screech: the wrong sound for a machine switching on'), ('choir', 'Heavenly choir "aaah": the wrong sound for something mundane'),
  ('yelp', 'Short cartoon yelp (never a realistic scream)'), ('servo', 'Camera servo whirr: a machine looking at something'),
  ('muffled', 'Tiny muffled yelp from a still object (the quiet scream)'), ('morse', 'Morse beeps spelling GJ581G (morse_TEXT for any text)'), ('ffwd', 'VCR fast-forward whir'),
- ('creak', 'A lid creaking open'), ('sigh', 'A tired sigh'), ('wind', 'Cold wind')]
+ ('creak', 'A lid creaking open'), ('sigh', 'A tired sigh'), ('wind', 'Cold wind'), ('rip', 'Paper tearing: the picture rips open')]
 
 _PICK = '/home/claude/aliens/sfx_real/pick.tsv'
 REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open(_PICK)] if os.path.exists(_PICK) else []   # (name, Mixkit title)
