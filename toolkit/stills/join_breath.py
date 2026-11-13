@@ -34,10 +34,10 @@ I=[];F='';n=len(vids)
 for i,v in enumerate(vids):
     I+=['-i',v]; F+=(f'[{i}:v]tpad=start_duration={BR}:start_mode=clone[v{i}];' if i else f'[{i}:v]null[v{i}];')
 F+=''.join(f'[v{i}]' for i in range(n))+f'concat=n={n}:v=1:a=0[v]'
-subprocess.run(['ffmpeg','-v','error','-y',*I,'-i','clips/_join_audio.wav','-filter_complex',F,'-map','[v]','-map',f'{n}:a','-c:v','libx264','-preset','veryfast','-crf','23','-pix_fmt','yuv420p','-c:a','pcm_s16le','clips/_join_pre.mkv'],check=True)
+subprocess.run(['ffmpeg','-v','error','-y',*I,'-i','clips/_join_audio.wav','-filter_complex',F,'-map','[v]','-map',f'{n}:a','-c:v','libx264','-preset','veryfast','-crf',os.environ.get('CRF','23'),'-pix_fmt','yuv420p','-c:a','pcm_s16le','clips/_join_pre.mkv'],check=True)
 os.remove('clips/_join_audio.wav')
 j=subprocess.run(['ffmpeg','-hide_banner','-i','clips/_join_pre.mkv','-af','loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
 J=json.loads(j[j.rfind('{'):j.rfind('}')+1])
-af=f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={J['input_i']}:measured_TP={J['input_tp']}:measured_LRA={J['input_lra']}:measured_thresh={J['input_thresh']}:offset={J['target_offset']}:linear=true,aresample=192000,alimiter=limit=0.82:level=false:attack=1:release=50,aresample=48000"   # true-peak guard: linear loudnorm can't hold TP -1.5 (v8 measured +0.3 dBTP)
+af=f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={J['input_i']}:measured_TP={J['input_tp']}:measured_LRA={J['input_lra']}:measured_thresh={J['input_thresh']}:offset={J['target_offset']}:linear=true,aresample=192000,alimiter=limit=0.74:level=false:attack=1:release=50,aresample=48000"   # true-peak guard: linear loudnorm can't hold TP -1.5 (v8 measured +0.3 dBTP)
 subprocess.run(['ffmpeg','-v','error','-y','-i','clips/_join_pre.mkv','-c:v','copy','-af',af,'-c:a','aac','-b:a','192k','-movflags','+faststart',OUT],check=True)
 os.remove('clips/_join_pre.mkv'); print('wrote',OUT)
