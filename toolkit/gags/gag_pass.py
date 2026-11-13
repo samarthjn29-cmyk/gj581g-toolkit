@@ -14,10 +14,32 @@ USED = os.path.join(HERE, 'GAGS_USED.csv')
 USED_COLS = ['date', 'video', 'line', 'id', 'kind', 'twist', 'spice', 'picture', 'caption', 'sound', 'verdict']
 NO_CRUDE = {'fart', 'fart_long'}        # Sam 12 Nov 2026: crude sound 👎
 
+def fxlib():
+    """The effects library (stills/fxlib.py, every built card with its plan and paired sound) as data, without running its main."""
+    src = open(os.path.join(TK, 'stills', 'fxlib.py')).read().split("if __name__")[0]; ns = {}; exec(src, ns); return ns
+
+# Library gags start from a given video (Sam, 13 Nov 2026: the fourth gag study's gags "start using them from next video onwards").
+# An entry whose source names one of these study dates is left out of the pack for the videos listed (script file prefix).
+NOT_FOR = {'13 Nov 2026': ('Aliens',)}
+
 def sounds():
     lib = set(re.findall(r'"id":"sfx_([a-z_0-9]+)"', open(os.path.join(TK, 'media', 'sound_library.html')).read()))
     sys.path.insert(0, HERE); import sfx_synth
-    return sorted((lib | set(sfx_synth.SOUNDS)) - NO_CRUDE)
+    fx = {n for n, _ in fxlib()['SOUNDS']}   # in-house gag_sfx.py sounds (modem, choir, morse, muffled ...)
+    return sorted((lib | set(sfx_synth.SOUNDS) | fx) - NO_CRUDE)
+
+def library(prefix):
+    """Effects-library entries the writer may use: picture gags, cards, gag moves and habits from the gag studies (EFFECTS_LIBRARY.md).
+    kind = the card kind (options in the plan JSON), 'move:<name>' for camera gag moves, 'shot:<field>' for shot options, 'habit:<id>'."""
+    out = []
+    for e in fxlib()['entries']():
+        if e['group'] not in ('Picture gag', 'Card', 'Gag move', 'Habit'): continue
+        if any(d in e['source'] and any(prefix.startswith(v) for v in vids) for d, vids in NOT_FOR.items()): continue
+        card, shot = e['plan']['card'], e['plan']['shot'] or {}
+        if card and card['kind'] in ('overlay', 'lottie'): continue   # not in the painted format (Sam, 12 Nov 2026): no flat Lottie or video overlay
+        kd = card['kind'] if card else ('habit:' + e['id'] if e['group'] == 'Habit' else 'move:' + shot['move'] if 'move' in shot and e['group'] == 'Gag move' else 'shot:' + next(iter(shot), e['id']))
+        out.append(('library', e['id'], kd, f"{e['name']}: {e['use']} Plan: {json.dumps(card or shot, ensure_ascii=False)}. Sound: {' '.join(e['sounds']) or '-'}"))
+    return out
 
 def kinds(schools):
     reg = json.load(open(os.path.join(TK, 'stills', 'gag_schools.json')))['schools']
@@ -49,7 +71,7 @@ def cmd_pack(a):
     for i in range(n):
         ids = [l['id'] for l, (s, e) in zip(L, times) if edges[i] <= s < edges[i + 1] and l['id'] not in nogag]
         if ids: slots.append({'slot': len(slots) + 1, 'from': round(edges[i], 1), 'to': round(edges[i + 1], 1), 'lines': ids})
-    K = kinds(set(filter(None, (a.schools or '').split(',')))); SND = sounds()
+    K = kinds(set(filter(None, (a.schools or '').split(',')))) + library(os.path.basename(a.script)); SND = sounds()
     used = list(csv.DictReader(open(USED))) if os.path.exists(USED) else []
     taste = open(a.taste).read() if a.taste and os.path.exists(a.taste) else '(no taste file given)'
     os.makedirs(a.out, exist_ok=True)

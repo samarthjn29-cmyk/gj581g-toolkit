@@ -286,6 +286,12 @@ def knock(n=3, gap=0.22):                                            # knuckles 
         i = int(k * gap * SR); m = min(len(t) - i, int(0.12 * SR)); tt = np.arange(m) / SR
         x[i:i + m] += (bp(rng.standard_normal(m), 120, 900) * 0.6 + np.sin(2 * np.pi * 180 * tt)) * np.exp(-tt * 45)
     return norm(lp(x, 2500), -4)
+def rip(d=0.55):                                                     # paper tearing: crackly noise bursts that speed up then trail off
+    t = t_(d); x = np.zeros_like(t); rate = 90 + 260 * np.minimum(1, t / (d * 0.35))
+    pos = np.cumsum(rate / SR); idx = np.where(np.diff(np.floor(pos)) > 0)[0]
+    for i in idx: n = int(60 + 120 * rng.random()); seg = rng.standard_normal(n) * np.hanning(n); x[i:i + n] += seg[:len(x[i:i + n])] * (0.4 + 0.6 * rng.random())
+    x = hp(x, 900) + 0.25 * bp(rng.standard_normal(len(t)), 2000, 7000)
+    return norm(x * env(len(t), 0.01, 0.18) * np.exp(-1.2 * t / d), -5)
 
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)

@@ -175,6 +175,92 @@
      "match": {
       "kind": "signoff"
      }
+    },
+    {
+     "id": "H-palm",
+     "name": "gag study 13 Nov 2026 (fourth study): palm (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "palm"
+     }
+    },
+    {
+     "id": "H-beam",
+     "name": "gag study 13 Nov 2026 (fourth study): beam (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "beam"
+     }
+    },
+    {
+     "id": "H-tumble",
+     "name": "gag study 13 Nov 2026 (fourth study): tumble (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "tumble"
+     }
+    },
+    {
+     "id": "H-blocks",
+     "name": "gag study 13 Nov 2026 (fourth study): blocks (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "blocks"
+     }
+    },
+    {
+     "id": "H-smear",
+     "name": "gag study 13 Nov 2026 (fourth study): smear (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "smear"
+     }
+    },
+    {
+     "id": "H-linechart",
+     "name": "gag study 13 Nov 2026 (fourth study): linechart (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "linechart"
+     }
+    },
+    {
+     "id": "H-tear",
+     "name": "gag study 13 Nov 2026 (fifth study): tear (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "tear"
+     }
+    },
+    {
+     "id": "H-listening",
+     "name": "gag study 13 Nov 2026 (fifth study): listening (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "listening"
+     }
+    },
+    {
+     "id": "H-void",
+     "name": "gag study 13 Nov 2026 (fifth study): void (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "void"
+     }
+    },
+    {
+     "id": "H-blueprint",
+     "name": "gag study 13 Nov 2026 (fifth study): blueprint (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "blueprint"
+     }
+    },
+    {
+     "id": "H-neighbour",
+     "name": "gag study 13 Nov 2026 (fifth study): headline neighbour (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "headline",
+      "neighbour": "*"
+     }
+    },
+    {
+     "id": "H-jacksign",
+     "name": "gag study 13 Nov 2026 (fifth study): jack sign (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "jack",
+      "sign": "*"
+     }
     }
    ]
   },

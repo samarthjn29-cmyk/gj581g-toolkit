@@ -197,7 +197,9 @@ export const PAINTED = {
         <div style={{textAlign: 'center', fontSize: 92, fontWeight: 700, letterSpacing: 4, borderBottom: `6px double ${INK}`, paddingBottom: 10}}>{c.masthead || 'THE DAILY MESS'}</div>
         <div style={{display: 'flex', justifyContent: 'space-between', fontSize: 26, padding: '8px 0', borderBottom: `2px solid ${INK}`, fontFamily: HAND}}><span>{c.kicker || 'Late edition'}</span><span>Price: one hundred million dollars</span></div>
         <div style={{fontSize: c.size || 84, fontWeight: 700, lineHeight: 1.05, textAlign: 'center', margin: '34px 0 24px'}}>{c.text}</div>
-        <div style={{display: 'flex', gap: 30}}>{[0, 1, 2].map(k => <div key={k} style={{flex: 1}}>{Array.from({length: 7}).map((_, j) => <div key={j} style={{height: 10, margin: '13px 0', background: '#B7A98E', borderRadius: 4, width: `${70 + ((j * 37 + k * 11) % 30)}%`}} />)}</div>)}</div></div></div></AbsoluteFill>; },
+        <div style={{display: 'flex', gap: 30}}>{[0, 1, 2].map(k => k === 2 && c.neighbour   // the absurd neighbour headline (Mustard, gag study 13 Nov 2026): a smaller deadpan story beside the real one
+          ? <div key={k} style={{flex: 1, borderLeft: `2px solid ${INK}`, paddingLeft: 18}}><div style={{fontSize: c.nsize || 30, fontWeight: 700, lineHeight: 1.1, margin: '6px 0 10px'}}>{c.neighbour}</div>{Array.from({length: 4}).map((_, j) => <div key={j} style={{height: 10, margin: '11px 0', background: '#B7A98E', borderRadius: 4, width: `${66 + ((j * 29) % 30)}%`}} />)}</div>
+          : <div key={k} style={{flex: 1}}>{Array.from({length: 7}).map((_, j) => <div key={j} style={{height: 10, margin: '13px 0', background: '#B7A98E', borderRadius: 4, width: `${70 + ((j * 37 + k * 11) % 30)}%`}} />)}</div>)}</div></div></div></AbsoluteFill>; },
 
   counter: (c, q, d) => { const hold = c.hold ?? 0.6, dr = c.drain ?? 1.6, p = Math.min(1, Math.max(0, (q - hold) / dr)), e = p * p * p;
     const v = Math.round(c.from + (c.to - c.from) * e), done = p >= 1, fl = done ? (Math.floor((q - hold - dr) * 8) % 2 === 0) : false, oo = R(q, 0, 0.15) * (1 - R(q, d - 0.15, d));

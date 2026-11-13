@@ -22,6 +22,36 @@ Study: `gj581g-stills-world skill`. Camera moves: push, pullback, pan, panL, til
 | `H-kinetic` | Spoken words / number card (yellow) | `kind: kinetic` | - | built |
 | `H-number` | Big number | `kind: number` | - | built |
 | `H-bars` | True-scale bars | `kind: bars` | - | built |
+| `H-clock` | painted clock: AI-painted dial, ink hands sweep and land on the hour said | `kind: clock` | - | built |
+| `H-chips` | gag study 12 Nov 2026: chips (EFFECTS_LIBRARY.md) | `kind: chips` | - | built |
+| `H-panels` | gag study 12 Nov 2026: panels (EFFECTS_LIBRARY.md) | `kind: panels` | - | built |
+| `H-clones` | gag study 12 Nov 2026: clones (EFFECTS_LIBRARY.md) | `kind: clones` | - | built |
+| `H-pile` | gag study 12 Nov 2026: pile (EFFECTS_LIBRARY.md) | `kind: pile` | - | built |
+| `H-doodle` | gag study 12 Nov 2026: doodle (EFFECTS_LIBRARY.md) | `kind: doodle` | - | built |
+| `H-jack` | gag study 12 Nov 2026: jack (EFFECTS_LIBRARY.md) | `kind: jack` | - | built |
+| `H-outline` | gag study 12 Nov 2026: outline (EFFECTS_LIBRARY.md) | `kind: outline` | - | built |
+| `H-scroll` | gag study 12 Nov 2026: scroll (EFFECTS_LIBRARY.md) | `kind: scroll` | - | built |
+| `H-recap` | gag study 12 Nov 2026: recap (EFFECTS_LIBRARY.md) | `kind: recap` | - | built |
+| `H-hand` | gag study 12 Nov 2026: hand (EFFECTS_LIBRARY.md) | `kind: hand` | - | built |
+| `H-weather` | gag study 12 Nov 2026: weather (EFFECTS_LIBRARY.md) | `kind: weather` | - | built |
+| `H-quote` | gag study 12 Nov 2026: quote (EFFECTS_LIBRARY.md) | `kind: quote` | - | built |
+| `H-ots` | gag study 12 Nov 2026: ots (EFFECTS_LIBRARY.md) | `kind: ots` | - | built |
+| `H-black` | gag study 12 Nov 2026: black (EFFECTS_LIBRARY.md) | `kind: black` | - | built |
+| `H-route` | gag study 12 Nov 2026: route (EFFECTS_LIBRARY.md) | `kind: route` | - | built |
+| `H-pov` | gag study 12 Nov 2026: pov (EFFECTS_LIBRARY.md) | `kind: pov` | - | built |
+| `H-signoff` | Channel sign-off: 'Live well' + winking logo (Sam, 13 Nov 2026) | `kind: signoff` | - | built |
+| `H-palm` | gag study 13 Nov 2026 (fourth study): palm (EFFECTS_LIBRARY.md) | `kind: palm` | - | built |
+| `H-beam` | gag study 13 Nov 2026 (fourth study): beam (EFFECTS_LIBRARY.md) | `kind: beam` | - | built |
+| `H-tumble` | gag study 13 Nov 2026 (fourth study): tumble (EFFECTS_LIBRARY.md) | `kind: tumble` | - | built |
+| `H-blocks` | gag study 13 Nov 2026 (fourth study): blocks (EFFECTS_LIBRARY.md) | `kind: blocks` | - | built |
+| `H-smear` | gag study 13 Nov 2026 (fourth study): smear (EFFECTS_LIBRARY.md) | `kind: smear` | - | built |
+| `H-linechart` | gag study 13 Nov 2026 (fourth study): linechart (EFFECTS_LIBRARY.md) | `kind: linechart` | - | built |
+| `H-tear` | gag study 13 Nov 2026 (fifth study): tear (EFFECTS_LIBRARY.md) | `kind: tear` | - | built |
+| `H-listening` | gag study 13 Nov 2026 (fifth study): listening (EFFECTS_LIBRARY.md) | `kind: listening` | - | built |
+| `H-void` | gag study 13 Nov 2026 (fifth study): void (EFFECTS_LIBRARY.md) | `kind: void` | - | built |
+| `H-blueprint` | gag study 13 Nov 2026 (fifth study): blueprint (EFFECTS_LIBRARY.md) | `kind: blueprint` | - | built |
+| `H-neighbour` | gag study 13 Nov 2026 (fifth study): headline neighbour (EFFECTS_LIBRARY.md) | `kind: headline, neighbour: *` | - | built |
+| `H-jacksign` | gag study 13 Nov 2026 (fifth study): jack sign (EFFECTS_LIBRARY.md) | `kind: jack, sign: *` | - | built |
 
 ### South Park  (`southpark`)
 Study: `styles/SOUTH_PARK_STUDY.md`. Camera moves: hold, drift; hard cuts only, a cut every 2-3 s, front-on staging.

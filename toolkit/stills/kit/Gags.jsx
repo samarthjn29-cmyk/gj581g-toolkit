@@ -268,7 +268,11 @@ const GAGS = {
   // path), c.end = 'circle' (default) | 'x' | 'none', c.text = scribbled label at the end, c.stamp = a verdict slammed at the end point
   // (e.g. "CANCELLED", for a line that stops dead), c.stampAt s. Overlay on the shot. Sound: squeak while drawing, ding on the circle,
   // boom on the stamp.
-  route: (c, q, d, out) => { const pts = (c.pts || [[0.2, 0.7], [0.5, 0.4], [0.8, 0.3]]).map(([x, y]) => [x * W, y * H]), seg = pts.slice(1).map((v, i) => Math.hypot(v[0] - pts[i][0], v[1] - pts[i][1])),
+  // c.curve: true bends the path into a smooth wander (Catmull-Rom); c.end: 'question' ends it in a hand-lettered "???" (Cleo Abram's
+  // uncertain path, gag study 13 Nov 2026). Sound for the question: a small boing.
+  route: (c, q, d, out) => { const P0 = (c.pts || [[0.2, 0.7], [0.5, 0.4], [0.8, 0.3]]).map(([x, y]) => [x * W, y * H]);
+    const pts = !c.curve ? P0 : P0.slice(0, -1).flatMap((p1, i) => { const p0 = P0[i - 1] || p1, p2 = P0[i + 1], p3 = P0[i + 2] || p2;
+      return Array.from({length: 12}, (_, k) => { const t = k / 12, t2 = t * t, t3 = t2 * t; return [0, 1].map(j => 0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3)); }); }).concat([P0[P0.length - 1]]), seg = pts.slice(1).map((v, i) => Math.hypot(v[0] - pts[i][0], v[1] - pts[i][1])),
       tot = seg.reduce((a, b) => a + b, 0), p = R(q, 0.1, 0.1 + (c.draw ?? 1.0)), col = c.color || (P.on ? BRICK : RED), done = p >= 1, [ex, ey] = pts[pts.length - 1];
     let need = tot * p; const drawn = [pts[0]];   // the part of the polyline drawn so far
     for (let i = 0; i < seg.length && need > 0; i++) { const k = Math.min(1, need / seg[i]); drawn.push([pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]); need -= seg[i]; }
@@ -281,6 +285,7 @@ const GAGS = {
         {!done ? <circle cx={drawn[drawn.length - 1][0]} cy={drawn[drawn.length - 1][1]} r={11} fill="#FFF" stroke={col} strokeWidth={5} /> : null}
         {done && end === 'circle' ? <path d={`M ${ex + cr} ${ey} C ${ex + cr} ${ey - cr * 1.35}, ${ex - cr * 1.15} ${ey - cr * 1.2}, ${ex - cr} ${ey} C ${ex - cr} ${ey + cr * 1.3}, ${ex + cr * 1.1} ${ey + cr * 1.25}, ${ex + cr} ${ey - cr * 0.3}`}
           fill="none" stroke={col} strokeWidth={10} strokeLinecap="round" strokeDasharray={L} strokeDashoffset={L * (1 - cp)} /> : null}
+        {done && end === 'question' ? <text x={ex + 20} y={ey + 30} fontFamily={HAND} fontSize={c.size || 140} fill={col} transform={`rotate(-6 ${ex} ${ey})`} opacity={cp} stroke="#FFFFFF" strokeWidth={3} paintOrder="stroke">???</text> : null}
         {done && end === 'x' ? <path d={`M ${ex - 36} ${ey - 36} L ${ex + 36} ${ey + 36} M ${ex + 36} ${ey - 36} L ${ex - 36} ${ey + 36}`} stroke={col} strokeWidth={14} strokeLinecap="round" opacity={cp} /> : null}</g></svg>
       {done && c.text ? <div style={{position: 'absolute', left: ex + (ex > W * 0.7 ? -60 : 60), top: c.stamp ? ey + 40 : ey - 110, transform: `translateX(${ex > W * 0.7 ? '-100%' : '0'}) rotate(-5deg) scale(${pop(qe, 0.6)})`, fontFamily: HAND, fontWeight: P.on ? 700 : 400, fontSize: c.size || 64, color: col, whiteSpace: 'nowrap', textShadow: '0 2px 10px rgba(255,255,255,0.6)'}}>{c.text}</div> : null}
       {c.stamp && st >= 0 ? <div style={{position: 'absolute', left: ex, top: ey - (c.stampLift ?? 110), transform: `translate(-50%, -50%) rotate(${c.rot ?? -10}deg) scale(${sb})`, border: `10px solid ${col}`, color: col, fontFamily: SANS, fontWeight: 900, fontSize: c.stampSize || 96, letterSpacing: 6, padding: '6px 30px', background: c.plate ?? 'rgba(255,250,240,0.9)', whiteSpace: 'nowrap', boxShadow: '0 8px 24px rgba(0,0,0,0.45)'}}>{c.stamp}</div> : null}</AbsoluteFill>; },

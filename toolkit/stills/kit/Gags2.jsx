@@ -80,7 +80,11 @@ export const GAGS2 = {
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
       {c.inner && qi >= 0 ? <div style={{position: 'absolute', left: x - w * 0.3, top: y - w * 0.55, width: w * 0.6, height: w * 0.6, zIndex: 1, transform: `translateY(${(1 - Math.min(1, pop(qi, 1.4))) * w * 0.4}px) scale(${pop(qi, 1.2)})`}}>
         <Img src={staticFile(`${dir}/${c.inner}`)} style={{width: '100%', height: '100%', objectFit: 'contain'}} /></div> : null}
+      {c.sign && qi >= 0.15 ? <div style={{position: 'absolute', left: x - w * 0.34, top: y - w * 0.22, width: w * 0.68, zIndex: 3, ...brushBox({padding: '18px 22px', textAlign: 'center', fontFamily: HAND, fontWeight: 700, fontSize: c.signSize || 54, lineHeight: 1.05, border: `5px solid ${PAINT.ink}`}),
+        transform: `translateY(${(1 - Math.min(1, pop(qi - 0.15, 1.2))) * 120}px) rotate(${-4 + 2 * Math.sin(q * 3)}deg)`}}>{c.sign}</div> : null}
       {half(0)}{half(1)}</AbsoluteFill>; },
+  // jack option c.sign (JaidenAnimations "sign in the window", gag study 13 Nov 2026): the pop-up figure comes up holding a
+  // hand-lettered card with c.sign on it (c.signSize). Our mascot or an object only. Sound: pop + small boing.
 
   // outline (Kurzgesagt "the outline stays"): a cut-out (c.img, PNG) is shown solid, then at c.at s its fill drains away and only a
   // cream outline stays: "it was never built", "they're gone". c.x, c.y, c.w. Objects only. Sound: pop + silence.
@@ -143,5 +147,121 @@ export const GAGS2 = {
   // black (Scott The Woz black beat): hard cut to black for c.dur s (1.5-3), hard cut back; leave a matching gap in the voice track.
   // Optional c.text in small cream type. Never twice in a chapter. Sound: silence.
   black: (c, q, d) => <AbsoluteFill style={{background: '#000', justifyContent: 'center', alignItems: 'center'}}>{c.text && q > (c.textAt ?? 0.6) ? <div style={{fontFamily: SERIF, fontStyle: 'italic', fontSize: 54, color: PAINT.cream}}>{c.text}</div> : null}</AbsoluteFill>,
+
+  // ---- Gag study 13 Nov 2026 (The Why Files, bill wurtz, Joe Scott, Cleo Abram, PolyMatter). Sam: "start using them from next video onwards".
+
+  // palm (Cleo Abram hold-in-palm): an open hand (c.hand, an anonymous painted cut-out) rises in at the bottom and a small object
+  // (c.obj, a painted cut-out) floats, bobs and slowly turns just above the palm with a soft glow and a contact shadow.
+  // c.x (palm centre), c.w (hand width share), c.objW, c.glow (colour). Never a real person's hand. Sound: soft sparkle.
+  palm: (c, q, d, out, dir) => { const w = (c.w ?? 0.42) * W, x = (c.x ?? 0.5) * W, rise = Easing.out(Easing.cubic)(R(q, 0, 0.5)), oq = q - 0.35, ow = (c.objW ?? 0.14) * W;
+    const py = H - w * 0.52 * rise, bob = 10 * Math.sin(q * 2.4), oy = py - ow * 0.9 + bob;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {oq >= 0 ? <><div style={{position: 'absolute', left: x - ow * 0.9, top: oy - ow * 0.4, width: ow * 1.8, height: ow * 1.8, borderRadius: '50%', background: `radial-gradient(circle, ${c.glow || 'rgba(232,197,71,0.55)'} 0%, rgba(232,197,71,0) 65%)`, opacity: R(oq, 0, 0.4)}} />
+        <div style={{position: 'absolute', left: x - ow * 0.35, top: py - 14, width: ow * 0.7, height: 18, borderRadius: '50%', background: 'rgba(20,16,10,0.35)', filter: 'blur(6px)', transform: `scaleX(${1 - bob / 60})`}} />
+        <Img src={staticFile(`${dir}/${c.obj}`)} style={{position: 'absolute', left: x - ow / 2, top: oy, width: ow, height: ow, objectFit: 'contain', transform: `scale(${pop(oq, 0.5)}) rotate(${q * (c.spin ?? 25)}deg)`, filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.35))'}} /></> : null}
+      <Img src={staticFile(`${dir}/${c.hand}`)} style={{position: 'absolute', left: x - w / 2, top: py - w * 0.1, width: w, height: w, objectFit: 'contain', objectPosition: '50% 0'}} /></AbsoluteFill>; },
+
+  // beam (Cleo Abram beam strikes the Earth): a tapered light beam draws from (c.fx, c.fy) to (c.x, c.y) in c.draw s (default 0.45)
+  // and flashes where it lands. c.color, c.width. A signal or a capsule arriving; a picture of it, never a claim. Sound: whoosh + ding.
+  beam: (c, q, d, out) => { const x0 = (c.fx ?? 0.5) * W, y0 = (c.fy ?? -0.05) * H, x1 = (c.x ?? 0.5) * W, y1 = (c.y ?? 0.6) * H, p = Easing.in(Easing.quad)(R(q, 0, c.draw ?? 0.45)), col = c.color || '#BFE8FF';
+    const ex = x0 + (x1 - x0) * p, ey = y0 + (y1 - y0) * p, a = Math.atan2(y1 - y0, x1 - x0), wd = c.width ?? 26, nx = -Math.sin(a), ny = Math.cos(a), fl = q - (c.draw ?? 0.45);
+    const tail = Math.max(0, p - 0.55), tx = x0 + (x1 - x0) * tail, ty = y0 + (y1 - y0) * tail;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <defs><linearGradient id={'bm' + Math.round((c.t || 0) * 100)} x1={tx} y1={ty} x2={ex} y2={ey} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={col} stopOpacity={0} /><stop offset="1" stopColor="#FFFFFF" stopOpacity={1} /></linearGradient></defs>
+      <polygon points={`${tx},${ty} ${ex + nx * wd / 2},${ey + ny * wd / 2} ${ex - nx * wd / 2},${ey - ny * wd / 2}`} fill={`url(#bm${Math.round((c.t || 0) * 100)})`} style={{filter: `drop-shadow(0 0 18px ${col})`}} />
+      {fl >= 0 ? <circle cx={x1} cy={y1} r={30 + 220 * R(fl, 0, 0.35)} fill={col} opacity={0.75 * (1 - R(fl, 0, 0.5))} /> : null}
+      {fl >= 0 ? <circle cx={x1} cy={y1} r={26} fill="#FFFFFF" opacity={1 - R(fl, 0.1, 0.6)} /> : null}</svg></AbsoluteFill>; },
+
+  // tumble (bill wurtz tumbling words): the line's words land one by one at a small random tilt and offset and settle unevenly,
+  // for a line meant to feel unsure. c.text, c.times (offsets s; default every 0.32 s), c.size, c.y. Use sparingly. Sound: pop per word.
+  tumble: (c, q, d, out) => { const ws = (c.text || '').split(' '), tm = c.times || ws.map((_, i) => 0.15 + i * 0.32), base = c.size || 120;
+    return <AbsoluteFill style={{opacity: out, background: `rgba(20,16,10,${0.35 * R(q, 0, 0.2)})`, justifyContent: 'center', alignItems: 'center'}}>
+      <div style={{maxWidth: 1600, textAlign: 'center', lineHeight: 1.15, transform: `translateY(${((c.y ?? 0.5) - 0.5) * H}px)`}}>{ws.map((w, i) => { const qi = q - tm[i]; if (qi < 0) return null;
+        const r0 = (rnd(i, 1) - 0.5) * 60, r1 = (rnd(i, 2) - 0.5) * 16, dy = (rnd(i, 3) - 0.5) * 50, k = Easing.out(Easing.back(2))(R(qi, 0, 0.35)), fall = (1 - k) * -140;
+        return <span key={i} style={{display: 'inline-block', margin: '0 0.18em', fontFamily: SANS, fontWeight: 900, fontSize: base * (0.8 + rnd(i, 4) * 0.45), color: i % 3 === 2 ? PAINT.yellow : PAINT.cream,
+          transform: `translateY(${fall + dy}px) rotate(${r0 + (r1 - r0) * k}deg)`, textShadow: `0 6px 0 ${PAINT.ink}, 0 10px 24px rgba(0,0,0,0.5)`}}>{w}</span>; })}</div></AbsoluteFill>; },
+
+  // blocks (bill wurtz colour-block beat card): two or three solid painted-palette blocks snap in behind one big word on the cue,
+  // then hard cut. c.text (one or two words), c.colors, c.dur (short: 0.8-1.4). Full-screen. Sound: soft boom on the snap.
+  blocks: (c, q, d) => { const cols = c.colors || [PAINT.red, PAINT.green, PAINT.yellow], n = cols.length, gap = c.gap ?? 0.07;
+    return <AbsoluteFill style={{background: PAINT.ink}}>{cols.map((col, i) => q < i * gap ? null : <div key={i} style={{position: 'absolute', top: 0, bottom: 0, left: `${i * 100 / n}%`, width: `${100 / n + 0.2}%`, background: col}} />)}
+      {q >= n * gap ? <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}><div style={{fontFamily: SANS, fontWeight: 900, fontSize: c.size || 260, letterSpacing: 4, color: PAINT.cream, textShadow: `0 12px 0 ${PAINT.ink}`, transform: `scale(${pop(q - n * gap, 0.4)})`}}>{c.text}</div></AbsoluteFill> : null}</AbsoluteFill>; },
+
+  // smear (bill wurtz datamosh): for c.dur s (0.4-0.8) the picture melts into horizontal painted-palette pixel streaks that slide and
+  // stretch, then clear: a loud transition between a hopeful beat and a bleak one. At most one a video. Sound: static burst.
+  smear: (c, q, d) => { const n = 26, cols = [PAINT.red, PAINT.green, PAINT.yellow, PAINT.cream, PAINT.violet, PAINT.ink], env = Math.sin(Math.PI * Math.min(1, q / d)), fr = Math.floor(q * 30);
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: Math.min(1, env * 1.4)}}>{Array.from({length: n}).map((_, i) => { const r = k => rnd(i * 7 + Math.floor(fr / 2), k), h = 12 + r(1) * 70, y = r(2) * H, len = (0.2 + r(3) * 0.9) * W * env;
+      return <div key={i} style={{position: 'absolute', top: y, height: h, left: r(4) * W - len / 2 + (r(5) - 0.5) * 300 * env, width: len, background: cols[Math.floor(r(6) * cols.length)], opacity: 0.85,
+        backgroundImage: 'repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 6px, transparent 6px 18px)'}} />; })}</AbsoluteFill>; },
+
+  // linechart (PolyMatter full-bleed branded data chart): a real series drawn full frame on a flat painted ground. c.series =
+  // [{label, color, pts: [[x, y], ...]}] in data units; c.x0/x1/y0/y1 axis range (defaults from the data), c.xticks, c.yticks,
+  // c.ylabel, c.title, c.source (small, bottom), c.ground, c.draw (s, default 1.1). Numbers must be the fact-checked ones.
+  // Sound: climb while drawing, ding at the end point.
+  linechart: (c, q, d, out) => { const S = c.series || [], all = S.flatMap(s => s.pts), X0 = c.x0 ?? Math.min(...all.map(p => p[0])), X1 = c.x1 ?? Math.max(...all.map(p => p[0])),
+      Y0 = c.y0 ?? 0, Y1 = c.y1 ?? Math.max(...all.map(p => p[1])) * 1.1, L = 220, Rr = W - 200, T = 200, B = H - 190, sx = v => L + (Rr - L) * (v - X0) / (X1 - X0 || 1), sy = v => B - (B - T) * (v - Y0) / (Y1 - Y0 || 1),
+      p = R(q, 0.25, 0.25 + (c.draw ?? 1.1)), ink = c.ink || PAINT.cream;
+    const part = pts => { const n = pts.length - 1, f = p * n, k = Math.floor(f), u = f - k, out2 = pts.slice(0, k + 1).map(([a, b]) => [sx(a), sy(b)]);
+      if (k < n) { const [a0, b0] = pts[k], [a1, b1] = pts[k + 1]; out2.push([sx(a0 + (a1 - a0) * u), sy(b0 + (b1 - b0) * u)]); } return out2; };
+    return <AbsoluteFill style={{opacity: out, background: c.ground || PAINT.green}}>
+      {c.title ? <div style={{position: 'absolute', left: L, top: 70, fontFamily: SANS, fontWeight: 900, fontSize: 64, color: ink, letterSpacing: 1}}>{c.title}</div> : null}
+      <svg width={W} height={H} style={{position: 'absolute'}}>
+        {(c.yticks || []).map((v, i) => <g key={'y' + i}><line x1={L} x2={Rr} y1={sy(v)} y2={sy(v)} stroke={ink} strokeOpacity={0.22} strokeWidth={2} /><text x={L - 20} y={sy(v) + 10} textAnchor="end" fontFamily={MONO} fontSize={30} fill={ink} opacity={0.8}>{c.yfmt ? c.yfmt.replace('{}', v) : v}</text></g>)}
+        {(c.xticks || []).map((v, i) => <text key={'x' + i} x={sx(v)} y={B + 50} textAnchor="middle" fontFamily={MONO} fontSize={30} fill={ink} opacity={0.8}>{v}</text>)}
+        <line x1={L} x2={Rr} y1={B} y2={B} stroke={ink} strokeWidth={4} />
+        {S.map((s, i) => { const pp = part(s.pts), [lx, ly] = pp[pp.length - 1];
+          return <g key={i}><polyline points={pp.map(v => v.join(',')).join(' ')} fill="none" stroke={s.color || PAINT.yellow} strokeWidth={10} strokeLinejoin="round" strokeLinecap="round" />
+            <circle cx={lx} cy={ly} r={14} fill={s.color || PAINT.yellow} stroke={ink} strokeWidth={4} /></g>; })}</svg>
+      {S.map((s, i) => { const pp = part(s.pts), [lx, ly] = pp[pp.length - 1]; return p > 0.95 ? <div key={'l' + i} style={{position: 'absolute', left: Math.min(lx + 26, Rr - 200), top: ly - 30, background: s.color || PAINT.yellow, color: PAINT.ink, fontFamily: SANS, fontWeight: 900, fontSize: 32, padding: '4px 14px', borderRadius: 6, transform: `scale(${pop(q - 0.25 - (c.draw ?? 1.1), 0.4)})`, transformOrigin: '0 50%', whiteSpace: 'nowrap'}}>{s.label}</div> : null; })}
+      {c.source ? <div style={{position: 'absolute', left: L, bottom: 60, fontFamily: SANS, fontSize: 24, letterSpacing: 2, color: ink, opacity: 0.75, textTransform: 'uppercase'}}>{c.source}</div> : null}
+      {c.ylabel ? <div style={{position: 'absolute', left: L, top: T - 60, fontFamily: SANS, fontSize: 28, letterSpacing: 2, color: ink, opacity: 0.8}}>{c.ylabel}</div> : null}</AbsoluteFill>; },
+  // ---- Gag study 13 Nov 2026, fifth study (Vox, fern, Hank Green, Mustard, JaidenAnimations, Answer in Progress).
+
+  // tear (fern "the wall tears open"): a ragged hole rips open in the picture from (c.x, c.y), growing to c.r (share of the frame
+  // height) over c.open s (default 0.3) from c.at s, showing ink-black behind with a paper-white torn lip and a glowing cream "?"
+  // (c.text) or a cut-out (c.img) inside. "But one was missing." Sound: rip, then a soft ding as the inside glows.
+  tear: (c, q, d, out, dir) => { const cx = (c.x ?? 0.5) * W, cy = (c.y ?? 0.5) * H, at = c.at ?? 0.2, p = Easing.out(Easing.back(1.4))(R(q, at, at + (c.open ?? 0.3))), r = (c.r ?? 0.24) * H * p, n = 56, gq = q - at - (c.open ?? 0.3);
+    if (q < at) return null;
+    const pts = (k, s0) => Array.from({length: n}, (_, i) => { const a = i / n * Math.PI * 2, j = 1 + 0.12 * (rnd(i, s0) - 0.5) + 0.07 * Math.sin(i * 1.3 + s0) + 0.05 * Math.sin(i * 0.45 + 2 * s0); return `${cx + Math.cos(a) * r * k * j * 1.25},${cy + Math.sin(a) * r * k * j}`; }).join(' ');
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <polygon points={pts(1.09, 3)} fill={PAINT.paper} style={{filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.55))'}} />
+      <polygon points={pts(1.0, 3)} fill="#0B0A09" /></svg>
+      {gq >= 0 ? c.img ? <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: cx - r * 0.6, top: cy - r * 0.6, width: r * 1.2, height: r * 1.2, objectFit: 'contain', transform: `scale(${pop(gq, 0.5)})`, filter: `drop-shadow(0 0 24px ${PAINT.yellow})`}} />
+        : <div style={{position: 'absolute', left: cx - r, top: cy - r * 0.62, width: r * 2, textAlign: 'center', fontFamily: HAND, fontWeight: 700, fontSize: r * 1.05, lineHeight: 1, color: PAINT.cream, opacity: R(gq, 0, 0.35), textShadow: `0 0 28px ${PAINT.yellow}, 0 0 60px rgba(232,197,71,0.6)`}}>{c.text ?? '?'}</div> : null}</AbsoluteFill>; },
+
+  // listening (JaidenAnimations "LISTENING..." badge): a cream disc with a drawn mic and two slow pulsing rings, "LISTENING" with
+  // cycling dots under it, held while nothing happens. c.x, c.y, c.size (disc px, default 150), c.label, c.year (optional small
+  // date line that can tick: c.years = [[t, '1960'], [t, '1985'], ...]). A running-gag candidate. Sound: none, or a slow ping.
+  listening: (c, q, d, out) => { const x = (c.x ?? 0.78) * W, y = (c.y ?? 0.62) * H, S = c.size || 150, inq = Easing.out(Easing.cubic)(R(q, 0, 0.3)), dots = '.'.repeat(1 + Math.floor(q * 2) % 3);
+    const yr = (c.years || []).filter(v => q >= v[0]).pop(), ring = k => { const ph = ((q * 0.8 + k * 0.5) % 1); return <div key={k} style={{position: 'absolute', left: x - S / 2, top: y - S / 2, width: S, height: S, borderRadius: '50%', border: `4px solid ${PAINT.cream}`, transform: `scale(${1 + ph * 0.9})`, opacity: (1 - ph) * 0.7}} />; };
+    return <AbsoluteFill style={{opacity: out * inq, pointerEvents: 'none'}}>{ring(0)}{ring(1)}
+      <div style={{position: 'absolute', left: x - S / 2, top: y - S / 2, width: S, height: S, borderRadius: '50%', background: PAINT.cream, boxShadow: '0 8px 22px rgba(20,16,10,0.45)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <svg width={S * 0.5} height={S * 0.5} viewBox="0 0 40 40"><rect x="14" y="4" width="12" height="20" rx="6" fill={PAINT.ink} /><path d="M9 18 a11 11 0 0 0 22 0" fill="none" stroke={PAINT.ink} strokeWidth="3" strokeLinecap="round" /><line x1="20" y1="29" x2="20" y2="35" stroke={PAINT.ink} strokeWidth="3" strokeLinecap="round" /></svg></div>
+      <div style={{position: 'absolute', left: x - 260, top: y + S / 2 + 22, width: 520, textAlign: 'center', fontFamily: SANS, fontWeight: 800, fontSize: c.textSize || 36, letterSpacing: 6, color: PAINT.cream, textShadow: '0 2px 8px rgba(0,0,0,0.85)'}}>{(c.label || 'LISTENING')}<span style={{display: 'inline-block', width: 60, textAlign: 'left'}}>{dots}</span></div>
+      {yr ? <div style={{position: 'absolute', left: x - 260, top: y + S / 2 + 72, width: 520, textAlign: 'center', fontFamily: MONO, fontSize: 30, color: PAINT.yellow, textShadow: '0 2px 8px rgba(0,0,0,0.85)', transform: `scale(${pop(q - yr[0], 0.4)})`}}>{yr[1]}</div> : null}</AbsoluteFill>; },
+
+  // void (JaidenAnimations tiny figure in a blank void): cut to plain painted paper with one small cut-out (c.img) dead centre at
+  // c.h of the frame height (default 0.08), held. Loneliness by scale; no move (not pullback) and not dark (not black). c.ground,
+  // c.text (an optional tiny caption under it), c.x, c.y. Sound: the wind loop very low, or silence.
+  void: (c, q, d, out, dir) => { const h = (c.h ?? 0.08) * H, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H;
+    return <AbsoluteFill style={{background: c.ground || PAINT.paper, opacity: out}}>
+      <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: x - h, top: y - h / 2, width: h * 2, height: h, objectFit: 'contain', transform: `translateY(${Math.sin(q * 1.3) * 2}px)`}} />
+      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: 34, color: PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
+
+  // blueprint (Mustard blueprint side-by-side): two line drawings (c.items = [{img, label, note}], cut-outs drawn as cream lines by
+  // an SVG edge filter) on a forest-green ground with a cream grid, each labelled, labels landing c.gap s apart, and an optional
+  // short note under each (the one difference). A calm explainer card. Sound: click as each label lands.
+  blueprint: (c, q, d, out, dir) => { const it = c.items || [], n = it.length || 1, gap = c.gap ?? 0.5, cw = (W - 240) / n, id = 'gjbp' + Math.round((c.t || 0) * 100), G = c.ground || PAINT.green;
+    return <AbsoluteFill style={{background: G, opacity: out}}>
+      <svg width={W} height={H} style={{position: 'absolute'}}><defs><pattern id={id + 'g'} width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke={PAINT.cream} strokeOpacity="0.16" strokeWidth="2" /></pattern>
+        <filter id={id} colorInterpolationFilters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="a" /><feMorphology in="a" operator="dilate" radius="3" result="d" /><feComposite in="d" in2="a" operator="out" result="e" />
+          <feFlood floodColor={PAINT.cream} /><feComposite in2="e" operator="in" /></filter></defs>
+        <rect width={W} height={H} fill={`url(#${id}g)`} /></svg>
+      {c.title ? <div style={{position: 'absolute', top: 70, left: 0, right: 0, textAlign: 'center', fontFamily: MONO, fontSize: 34, letterSpacing: 8, color: PAINT.cream, opacity: 0.85}}>{c.title}</div> : null}
+      {it.map((v, i) => { const lq = q - 0.3 - i * gap, dr = R(q, i * gap * 0.6, i * gap * 0.6 + 0.6);
+        return <div key={i} style={{position: 'absolute', left: 120 + i * cw, top: 200, width: cw, height: 640}}>
+          <div style={{position: 'absolute', left: cw * 0.08, top: 0, width: cw * 0.84, height: 460, clipPath: `inset(0 ${(1 - dr) * 100}% 0 0)`}}><Img src={staticFile(`${dir}/${v.img}`)} style={{width: '100%', height: '100%', objectFit: 'contain', filter: `url(#${id})`}} /></div>
+          {lq >= 0 ? <div style={{position: 'absolute', top: 480, left: 0, right: 0, textAlign: 'center', transform: `scale(${pop(lq, 0.4)})`}}><div style={{fontFamily: MONO, fontWeight: 700, fontSize: 40, letterSpacing: 4, color: PAINT.cream}}>{v.label}</div>
+            {v.note ? <div style={{fontFamily: HAND, fontSize: 34, color: PAINT.yellow, marginTop: 8}}>{v.note}</div> : null}</div> : null}</div>; })}</AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;
