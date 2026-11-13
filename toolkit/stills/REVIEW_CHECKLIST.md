@@ -3,7 +3,7 @@
 Sam, 11 Nov 2026 (workflow change 4): a separate agent that has not seen the build watches each chapter as a viewer,
 so Sam's review time goes on taste, not defects. The builder never grades its own clip.
 
-**The builder gives the reviewer only:** the 720p clip path, `review_sheet.py` sheets + `_lines.txt`, the `gag_frames.py` sheets + `_timing.txt`, the
+**The builder gives the reviewer only:** the 720p clip path, the style master + all-stills contact sheet + `style_lint.py` flags sheet (4b), `review_sheet.py` sheets + `_lines.txt`, the `gag_frames.py` sheets + `_timing.txt`, the
 `visible_lint.py` output, the voice precheck/audit report, and this checklist. Not the plan, not the prompts, not the
 builder's notes.
 
@@ -21,6 +21,17 @@ Under 400 words. It never edits files.
    a period scene, the same place looking different from shot to shot.
 5. **Sound** (from the reports): bed never stops, drops only on punchlines, level about -16 LUFS, any confirmed word
    slip with its time.
+4b. **Style match (Sam, Moctar, 14 Nov 2026: "Put checks in place so that wrong type of pictures are covered by your review").**
+   Every AI still must look like the video's style master (for Moctar: `G_hero2.jpg`, flat gouache, warm cream paper,
+   green / cream / yellow / brick palette, simple shapes). The builder runs `style_lint.py MASTERS STILLS_DIR --out flags.jpg`
+   on every batch **before** the stills go into a plan and gives the reviewer the master, the all-stills contact sheet and
+   `flags.jpg`. The reviewer checks **every** still by eye against the master, not just the flagged ones:
+   - wrong rendering: detailed or glossy digital painting, photographic look, airbrushed gradients, heavy dark shading,
+     3D-render feel, a different illustration style (comic ink, watercolour wash, pixel art) from the rest;
+   - off-palette colour (saturated blues, neon, purple casts) that the master doesn't use;
+   - a still that looks fine alone but stands out in the sequence next to its neighbours.
+   Each off-style still is a MUST FIX: repaint it with the STYLE_PAINTED recipe (the still as FIRST image, the master as
+   SECOND), never ship it as is. Night scenes may be dark, but in the same flat painted way as the master.
 6. **First 15 seconds** (opening or first chapter only): does the picture and line give a reason to keep watching?
 
 7. **Gag placement on the picture** (Sam, 11 Nov 2026, Aliens ch3: "a reviewer is required which reviews the placement of

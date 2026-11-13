@@ -69,7 +69,14 @@ export const PAINTED = {
         {c.think ? null : <path d={bp.T} fill={PAPER} stroke="none" transform={`translate(${(x - tx) * 0.04} ${(y - ty) * 0.04})`} />}</g></svg>
       <div style={{position: 'absolute', left: x, top: y, transform: 'translate(-50%, -50%) rotate(-1.5deg)', fontFamily: HAND, fontWeight: 700, fontSize: size, lineHeight: 1.12, color: INK, textAlign: 'center', whiteSpace: 'pre'}}>{lines.join('\n')}</div></div></AbsoluteFill>; },
 
-  tag: (c, q, d, out) => { const sw0 = (c.swaps || []).filter(x => q >= x[0]).pop(); if (sw0) c = {...c, text: sw0[1], sub: sw0[2] ?? c.sub};   // label swap (gag study 12 Nov 2026)
+  // tape tag (Sam, Moctar, 14 Nov 2026: "Go with B"): a torn cream paper scrap held on with a strip of masking tape, top-left,
+  // hand lettering in ink, small sub line. Slaps on (scale 1.08 -> 1, 0.15 s) with a slight tilt; no string.
+  tape: (c, q, d, out) => { const L = c.free ? (c.x ?? 0.2) * W : 84, T = c.free ? (c.y ?? 0.1) * H : 0.07 * H, rot = c.rot ?? -2.5, s = 1 + 0.08 * (1 - R(q, 0, 0.15)), o = R(q, 0, 0.08);
+    return <AbsoluteFill style={{opacity: out * o}}><div style={{position: 'absolute', left: L, top: T, transformOrigin: '0 0', transform: `rotate(${rot}deg) scale(${s})`}}>
+      <Scrap pad="10px 34px 14px" sw={0}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: c.size || 54, color: INK, whiteSpace: 'nowrap', lineHeight: 1.05}}>{c.text}</div>
+        {c.sub ? <div style={{fontFamily: HAND, fontWeight: 400, fontSize: 32 * (c.subSize || 1), color: INK, opacity: 0.8, whiteSpace: 'nowrap', marginTop: 2}}>{c.sub}</div> : null}</Scrap>
+      <div style={{position: 'absolute', left: '38%', top: -18, width: 150, height: 40, background: 'rgba(226,210,158,0.82)', transform: 'rotate(7deg)', boxShadow: '0 1px 2px rgba(0,0,0,0.25)', clipPath: 'polygon(0 8%, 4% 0, 9% 10%, 14% 2%, 100% 0, 97% 20%, 100% 45%, 96% 70%, 100% 100%, 7% 96%, 0 100%, 3% 60%)'}} /></div></AbsoluteFill>; },
+  tag: (c, q, d, out) => { if (c.style === 'tape') return PAINTED.tape(c, q, d, out); const sw0 = (c.swaps || []).filter(x => q >= x[0]).pop(); if (sw0) c = {...c, text: sw0[1], sub: sw0[2] ?? c.sub};   // label swap (gag study 12 Nov 2026)
     const free = c.free, TW = 400, TH = 200, L = free ? (c.x ?? 0.7) * W - TW / 2 : 72, y = free ? (c.y ?? 0.15) * H : 0.045 * H,
       sw = 5 * Math.exp(-q * 2) * Math.sin(q * 6) + 2, longest = Math.max(...String(c.text || '').split(/\s+/).map(w => w.length), 1), fs = free ? (c.size || 52) : Math.min(42, Math.floor((TW - 56) / (0.8 * longest))), SL = 120 + y + 140;
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', left: L, top: -140 - 300 * (1 - R(q, 0, 0.25)), width: TW, transformOrigin: '50% 0', transform: `rotate(${sw}deg) scaleY(${sw0 && q - sw0[0] < 0.25 ? Math.max(0.05, Math.abs(Math.cos(Math.PI * (q - sw0[0]) / 0.25))) : 1})`}}>

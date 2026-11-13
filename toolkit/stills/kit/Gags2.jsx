@@ -262,7 +262,7 @@ export const GAGS2 = {
       {c.glint ? [0, 1, 2, 3, 4].map(i => { const a = i * 1.3 + q * 0.7, ph = (q * 1.1 + i * 0.37) % 1, gx = x + Math.cos(a) * h * 0.85, gy = y + Math.sin(a) * h * 0.55, gs = 18 + 22 * Math.sin(ph * Math.PI);
         return <svg key={i} width={gs * 2} height={gs * 2} viewBox="-10 -10 20 20" style={{position: 'absolute', left: gx - gs, top: gy - gs, opacity: Math.sin(ph * Math.PI)}}><path d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill={PAINT.yellow} /></svg>; }) : null}
       <Img src={staticFile(`${dir}/${img}`)} style={{position: 'absolute', left: x - h, top: y - h / 2, width: h * 2, height: h, objectFit: 'contain', transform: `translateY(${Math.sin(q * 1.3) * 2}px) rotate(${rot}deg) scale(${sw})`, filter: dark ? `drop-shadow(0 0 24px rgba(232,197,71,0.35))` : undefined}} />
-      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: 34, color: dark ? PAINT.cream : PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
+      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: c.size || 34, color: dark ? PAINT.cream : PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
 
   // blueprint (Mustard blueprint side-by-side): two line drawings (c.items = [{img, label, note}], cut-outs drawn as cream lines by
   // an SVG edge filter) on a forest-green ground with a cream grid, each labelled, labels landing c.gap s apart, and an optional
