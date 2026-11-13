@@ -146,6 +146,16 @@ L = [
  ('split_chevron', 'Picture gag', 'Before → after chevron', 'Two pictures joined by an arrow-shaped notch.', {}, dict(kind='split', imgs=['R_gbt.jpg', 'G_alien_alone.jpg'], labels=['BEFORE', 'AFTER'], chevron=True, dur=2.9), 'whoosh@0.25', 'Kurzgesagt (gag study 12 Nov 2026)'),
  ('pile', 'Picture gag', 'Count-out pile', 'A number shown as that many objects (honest ratios only; over 60 say "×1000" on the label).', {}, dict(kind='pile', a={'n': 1, 'label': 'demo: one'}, b={'n': 40, 'label': 'demo: forty'}, dur=2.9), 'pop@0.2 ticks@0.55 ding@2.6', 'CGP Grey (gag study 12 Nov 2026)'),
  ('src_tag', 'Picture gag', 'Corner source tag', 'A tiny credit on a real picture (shot field src; shows only with finish.srcTags, as Sam\'s 8 Nov rule keeps source labels off).', {'src': 'Photo: NRAO/AUI/NSF'}, None, '', 'Defunctland (gag study 12 Nov 2026)'),
+ # built 13 Nov 2026 from the fourth gag study (The Why Files, bill wurtz, Joe Scott, Cleo Abram, PolyMatter); Sam: "start using them from next video onwards"
+ ('palm', 'Picture gag', 'Hold it in your palm', 'An open painted hand rises in and a small object floats and turns above the palm ("this is all we have checked").', {}, dict(kind='palm', hand='cut_hand.png', obj='cut_globe.png', x=0.5, w=0.42, objW=0.14, dur=2.9), 'sparkle@0.6', 'Cleo Abram (gag study 13 Nov 2026)'),
+ ('beam', 'Picture gag', 'Beam strikes', 'A light beam draws from the sky down to a target and flashes where it lands (a signal or capsule arriving).', {}, dict(kind='beam', fx=0.72, fy=-0.05, x=0.4, y=0.62, draw=0.45, dur=2.4), 'whoosh@0.25 ding@0.75', 'Cleo Abram (gag study 13 Nov 2026)'),
+ ('route_question', 'Picture gag', 'Curved "???" path', 'A path wanders smoothly across a map and ends in a hand-lettered "???" instead of a circle.', {}, dict(kind='route', pts=[[0.12, 0.7], [0.3, 0.42], [0.48, 0.62], [0.68, 0.36]], curve=True, end='question', draw=1.1, dur=2.9), 'squeak@0.35 squeak@0.9 boing@1.5', 'Cleo Abram (gag study 13 Nov 2026)'),
+ ('tumble', 'Picture gag', 'Tumbling words', 'The words of an unsure line land one by one at a tilt and settle unevenly (sparingly).', {}, dict(kind='tumble', text='is anyone out there', dur=2.6), 'pop@0.15 pop@0.47 pop@0.79 pop@1.11', 'bill wurtz (gag study 13 Nov 2026)'),
+ ('blocks', 'Picture gag', 'Colour-block beat card', 'Painted colour blocks snap in behind one big word on the beat, then hard cut.', {}, dict(kind='blocks', text='BILLION', dur=1.2, cutOut=True), 'boom@0.45', 'bill wurtz (gag study 13 Nov 2026)'),
+ ('smear', 'Picture gag', 'Pixel-smear transition', 'The picture melts into painted pixel streaks for half a second: a loud turn from hopeful to bleak. One a video.', {}, dict(kind='smear', dur=0.7, cutOut=True), 'static@0.25', 'bill wurtz (gag study 13 Nov 2026)'),
+ ('linechart', 'Card', 'Full-bleed line chart', 'A real series drawn full frame on a painted ground, with axis, labels and source (fact-checked numbers only).', {}, dict(kind='linechart', title='demo: two lines', series=[{'label': 'demo: rising', 'color': '#E8C547', 'pts': [[2016, 10], [2018, 14], [2020, 22], [2022, 40], [2024, 72], [2026, 100]]}, {'label': 'demo: flat', 'color': '#A6432F', 'pts': [[2016, 3], [2018, 3], [2020, 2], [2022, 2], [2024, 2], [2026, 2]]}], xticks=[2016, 2018, 2020, 2022, 2024, 2026], yticks=[0, 25, 50, 75, 100], source='demo data, not a fact', draw=1.1, dur=2.9), 'climb@0.25 ding@1.4', 'PolyMatter (gag study 13 Nov 2026)'),
+ ('cohost', 'Picture gag', 'The mascot co-host', 'Our popcorn alien reacts in a corner box on a big claim, with its own short aside (never states a fact).', {}, dict(kind='ots', steps=[[0, 'cut_alien.png', 'CLAIM NOTED']], w=420, dur=2.6), 'pop@0.25', 'The Why Files (gag study 13 Nov 2026)'),
+ ('duotone', 'Picture gag', 'Two-tone photo', 'One real photo pushed to two flat palette colours for a dreamy or unreal beat (shot field duotone).', {'duotone': ['#2E4A33', '#F1E6CF'], 'move': 'drift'}, None, '', 'bill wurtz (gag study 13 Nov 2026)'),
  # habits: sound or writing shapes with no card of their own (gag studies 12 Nov 2026)
  ('wrong_sound', 'Habit', 'The wrong sound, explained away', 'An object makes a sound that doesn\'t fit (dial-up, choir, yelp), then one flat line explains it.', {}, None, 'modem@0.3', 'Danny Gonzalez (gag study 12 Nov 2026)'),
  ('quiet_scream', 'Habit', 'The quiet scream', 'A still object makes a tiny muffled sound under the narration, never explained.', {'move': 'hold'}, None, 'muffled@1.0', 'Map Men (gag study 12 Nov 2026)'),
@@ -175,7 +185,7 @@ SOUNDS = [('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd bo
 _PICK = '/home/claude/aliens/sfx_real/pick.tsv'
 REAL = [tuple(l.rstrip('\n').split('\t')[0::2]) for l in open(_PICK)] if os.path.exists(_PICK) else []   # (name, Mixkit title)
 
-CUTS = ['cut_plane.png', 'cut_hand.png', 'cut_figure.png', 'cut_box.png', 'cut_alien.png', 'cut_dish.png']
+CUTS = ['cut_plane.png', 'cut_hand.png', 'cut_figure.png', 'cut_box.png', 'cut_alien.png', 'cut_dish.png', 'cut_globe.png']
 def cutouts(od):
     """Demo cut-outs in the painted palette for the cut-out gags, drawn only when the video folder has none of its own (real videos
     use AI cut-outs: generate, repaint with STYLE_PAINTED.md, then remove the background)."""
@@ -190,6 +200,7 @@ def cutouts(od):
         if f == 'cut_figure.png': d.ellipse([230, 60, 370, 200], fill=(222, 178, 140), outline=K, width=7); d.rounded_rectangle([200, 200, 400, 440], 50, fill=G, outline=K, width=7); d.rectangle([225, 430, 285, 580], fill=K); d.rectangle([315, 430, 375, 580], fill=K)
         if f == 'cut_box.png': d.rectangle([90, 160, 510, 560], fill=Rd, outline=K, width=9); d.rectangle([60, 110, 540, 200], fill=Y, outline=K, width=9); d.rectangle([270, 110, 330, 560], fill=Y)
         if f == 'cut_alien.png': d.ellipse([170, 90, 430, 380], fill=(122, 176, 92), outline=K, width=8); d.ellipse([215, 190, 285, 260], fill=K); d.ellipse([315, 190, 385, 260], fill=K); d.arc([250, 270, 350, 330], 20, 160, fill=K, width=8); d.rounded_rectangle([220, 360, 380, 560], 40, fill=G, outline=K, width=8)
+        if f == 'cut_globe.png': d.ellipse([90, 90, 510, 510], fill=(70, 120, 170), outline=K, width=9); d.polygon([(200, 170), (300, 150), (330, 260), (250, 330), (180, 280)], fill=G); d.polygon([(340, 330), (430, 300), (450, 400), (370, 440)], fill=G); d.arc([140, 140, 460, 460], 200, 260, fill=C, width=10)
         if f == 'cut_dish.png': d.chord([80, 60, 520, 420], 200, 340, fill=C, outline=K, width=9); d.line([300, 240, 300, 120], fill=K, width=10); d.polygon([(260, 330), (340, 330), (380, 560), (220, 560)], fill=G, outline=K, width=8)
         im.save(f'{od}/{f}')
 

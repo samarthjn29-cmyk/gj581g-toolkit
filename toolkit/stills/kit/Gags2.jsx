@@ -142,5 +142,73 @@ export const GAGS2 = {
   // black (Scott The Woz black beat): hard cut to black for c.dur s (1.5-3), hard cut back; leave a matching gap in the voice track.
   // Optional c.text in small cream type. Never twice in a chapter. Sound: silence.
   black: (c, q, d) => <AbsoluteFill style={{background: '#000', justifyContent: 'center', alignItems: 'center'}}>{c.text && q > (c.textAt ?? 0.6) ? <div style={{fontFamily: SERIF, fontStyle: 'italic', fontSize: 54, color: PAINT.cream}}>{c.text}</div> : null}</AbsoluteFill>,
+
+  // ---- Gag study 13 Nov 2026 (The Why Files, bill wurtz, Joe Scott, Cleo Abram, PolyMatter). Sam: "start using them from next video onwards".
+
+  // palm (Cleo Abram hold-in-palm): an open hand (c.hand, an anonymous painted cut-out) rises in at the bottom and a small object
+  // (c.obj, a painted cut-out) floats, bobs and slowly turns just above the palm with a soft glow and a contact shadow.
+  // c.x (palm centre), c.w (hand width share), c.objW, c.glow (colour). Never a real person's hand. Sound: soft sparkle.
+  palm: (c, q, d, out, dir) => { const w = (c.w ?? 0.42) * W, x = (c.x ?? 0.5) * W, rise = Easing.out(Easing.cubic)(R(q, 0, 0.5)), oq = q - 0.35, ow = (c.objW ?? 0.14) * W;
+    const py = H - w * 0.52 * rise, bob = 10 * Math.sin(q * 2.4), oy = py - ow * 0.9 + bob;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {oq >= 0 ? <><div style={{position: 'absolute', left: x - ow * 0.9, top: oy - ow * 0.4, width: ow * 1.8, height: ow * 1.8, borderRadius: '50%', background: `radial-gradient(circle, ${c.glow || 'rgba(232,197,71,0.55)'} 0%, rgba(232,197,71,0) 65%)`, opacity: R(oq, 0, 0.4)}} />
+        <div style={{position: 'absolute', left: x - ow * 0.35, top: py - 14, width: ow * 0.7, height: 18, borderRadius: '50%', background: 'rgba(20,16,10,0.35)', filter: 'blur(6px)', transform: `scaleX(${1 - bob / 60})`}} />
+        <Img src={staticFile(`${dir}/${c.obj}`)} style={{position: 'absolute', left: x - ow / 2, top: oy, width: ow, height: ow, objectFit: 'contain', transform: `scale(${pop(oq, 0.5)}) rotate(${q * (c.spin ?? 25)}deg)`, filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.35))'}} /></> : null}
+      <Img src={staticFile(`${dir}/${c.hand}`)} style={{position: 'absolute', left: x - w / 2, top: py - w * 0.1, width: w, height: w, objectFit: 'contain', objectPosition: '50% 0'}} /></AbsoluteFill>; },
+
+  // beam (Cleo Abram beam strikes the Earth): a tapered light beam draws from (c.fx, c.fy) to (c.x, c.y) in c.draw s (default 0.45)
+  // and flashes where it lands. c.color, c.width. A signal or a capsule arriving; a picture of it, never a claim. Sound: whoosh + ding.
+  beam: (c, q, d, out) => { const x0 = (c.fx ?? 0.5) * W, y0 = (c.fy ?? -0.05) * H, x1 = (c.x ?? 0.5) * W, y1 = (c.y ?? 0.6) * H, p = Easing.in(Easing.quad)(R(q, 0, c.draw ?? 0.45)), col = c.color || '#BFE8FF';
+    const ex = x0 + (x1 - x0) * p, ey = y0 + (y1 - y0) * p, a = Math.atan2(y1 - y0, x1 - x0), wd = c.width ?? 26, nx = -Math.sin(a), ny = Math.cos(a), fl = q - (c.draw ?? 0.45);
+    const tail = Math.max(0, p - 0.55), tx = x0 + (x1 - x0) * tail, ty = y0 + (y1 - y0) * tail;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <defs><linearGradient id={'bm' + Math.round((c.t || 0) * 100)} x1={tx} y1={ty} x2={ex} y2={ey} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={col} stopOpacity={0} /><stop offset="1" stopColor="#FFFFFF" stopOpacity={1} /></linearGradient></defs>
+      <polygon points={`${tx},${ty} ${ex + nx * wd / 2},${ey + ny * wd / 2} ${ex - nx * wd / 2},${ey - ny * wd / 2}`} fill={`url(#bm${Math.round((c.t || 0) * 100)})`} style={{filter: `drop-shadow(0 0 18px ${col})`}} />
+      {fl >= 0 ? <circle cx={x1} cy={y1} r={30 + 220 * R(fl, 0, 0.35)} fill={col} opacity={0.75 * (1 - R(fl, 0, 0.5))} /> : null}
+      {fl >= 0 ? <circle cx={x1} cy={y1} r={26} fill="#FFFFFF" opacity={1 - R(fl, 0.1, 0.6)} /> : null}</svg></AbsoluteFill>; },
+
+  // tumble (bill wurtz tumbling words): the line's words land one by one at a small random tilt and offset and settle unevenly,
+  // for a line meant to feel unsure. c.text, c.times (offsets s; default every 0.32 s), c.size, c.y. Use sparingly. Sound: pop per word.
+  tumble: (c, q, d, out) => { const ws = (c.text || '').split(' '), tm = c.times || ws.map((_, i) => 0.15 + i * 0.32), base = c.size || 120;
+    return <AbsoluteFill style={{opacity: out, background: `rgba(20,16,10,${0.35 * R(q, 0, 0.2)})`, justifyContent: 'center', alignItems: 'center'}}>
+      <div style={{maxWidth: 1600, textAlign: 'center', lineHeight: 1.15, transform: `translateY(${((c.y ?? 0.5) - 0.5) * H}px)`}}>{ws.map((w, i) => { const qi = q - tm[i]; if (qi < 0) return null;
+        const r0 = (rnd(i, 1) - 0.5) * 60, r1 = (rnd(i, 2) - 0.5) * 16, dy = (rnd(i, 3) - 0.5) * 50, k = Easing.out(Easing.back(2))(R(qi, 0, 0.35)), fall = (1 - k) * -140;
+        return <span key={i} style={{display: 'inline-block', margin: '0 0.18em', fontFamily: SANS, fontWeight: 900, fontSize: base * (0.8 + rnd(i, 4) * 0.45), color: i % 3 === 2 ? PAINT.yellow : PAINT.cream,
+          transform: `translateY(${fall + dy}px) rotate(${r0 + (r1 - r0) * k}deg)`, textShadow: `0 6px 0 ${PAINT.ink}, 0 10px 24px rgba(0,0,0,0.5)`}}>{w}</span>; })}</div></AbsoluteFill>; },
+
+  // blocks (bill wurtz colour-block beat card): two or three solid painted-palette blocks snap in behind one big word on the cue,
+  // then hard cut. c.text (one or two words), c.colors, c.dur (short: 0.8-1.4). Full-screen. Sound: soft boom on the snap.
+  blocks: (c, q, d) => { const cols = c.colors || [PAINT.red, PAINT.green, PAINT.yellow], n = cols.length, gap = c.gap ?? 0.07;
+    return <AbsoluteFill style={{background: PAINT.ink}}>{cols.map((col, i) => q < i * gap ? null : <div key={i} style={{position: 'absolute', top: 0, bottom: 0, left: `${i * 100 / n}%`, width: `${100 / n + 0.2}%`, background: col}} />)}
+      {q >= n * gap ? <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}><div style={{fontFamily: SANS, fontWeight: 900, fontSize: c.size || 260, letterSpacing: 4, color: PAINT.cream, textShadow: `0 12px 0 ${PAINT.ink}`, transform: `scale(${pop(q - n * gap, 0.4)})`}}>{c.text}</div></AbsoluteFill> : null}</AbsoluteFill>; },
+
+  // smear (bill wurtz datamosh): for c.dur s (0.4-0.8) the picture melts into horizontal painted-palette pixel streaks that slide and
+  // stretch, then clear: a loud transition between a hopeful beat and a bleak one. At most one a video. Sound: static burst.
+  smear: (c, q, d) => { const n = 26, cols = [PAINT.red, PAINT.green, PAINT.yellow, PAINT.cream, PAINT.violet, PAINT.ink], env = Math.sin(Math.PI * Math.min(1, q / d)), fr = Math.floor(q * 30);
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: Math.min(1, env * 1.4)}}>{Array.from({length: n}).map((_, i) => { const r = k => rnd(i * 7 + Math.floor(fr / 2), k), h = 12 + r(1) * 70, y = r(2) * H, len = (0.2 + r(3) * 0.9) * W * env;
+      return <div key={i} style={{position: 'absolute', top: y, height: h, left: r(4) * W - len / 2 + (r(5) - 0.5) * 300 * env, width: len, background: cols[Math.floor(r(6) * cols.length)], opacity: 0.85,
+        backgroundImage: 'repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 6px, transparent 6px 18px)'}} />; })}</AbsoluteFill>; },
+
+  // linechart (PolyMatter full-bleed branded data chart): a real series drawn full frame on a flat painted ground. c.series =
+  // [{label, color, pts: [[x, y], ...]}] in data units; c.x0/x1/y0/y1 axis range (defaults from the data), c.xticks, c.yticks,
+  // c.ylabel, c.title, c.source (small, bottom), c.ground, c.draw (s, default 1.1). Numbers must be the fact-checked ones.
+  // Sound: climb while drawing, ding at the end point.
+  linechart: (c, q, d, out) => { const S = c.series || [], all = S.flatMap(s => s.pts), X0 = c.x0 ?? Math.min(...all.map(p => p[0])), X1 = c.x1 ?? Math.max(...all.map(p => p[0])),
+      Y0 = c.y0 ?? 0, Y1 = c.y1 ?? Math.max(...all.map(p => p[1])) * 1.1, L = 220, Rr = W - 200, T = 200, B = H - 190, sx = v => L + (Rr - L) * (v - X0) / (X1 - X0 || 1), sy = v => B - (B - T) * (v - Y0) / (Y1 - Y0 || 1),
+      p = R(q, 0.25, 0.25 + (c.draw ?? 1.1)), ink = c.ink || PAINT.cream;
+    const part = pts => { const n = pts.length - 1, f = p * n, k = Math.floor(f), u = f - k, out2 = pts.slice(0, k + 1).map(([a, b]) => [sx(a), sy(b)]);
+      if (k < n) { const [a0, b0] = pts[k], [a1, b1] = pts[k + 1]; out2.push([sx(a0 + (a1 - a0) * u), sy(b0 + (b1 - b0) * u)]); } return out2; };
+    return <AbsoluteFill style={{opacity: out, background: c.ground || PAINT.green}}>
+      {c.title ? <div style={{position: 'absolute', left: L, top: 70, fontFamily: SANS, fontWeight: 900, fontSize: 64, color: ink, letterSpacing: 1}}>{c.title}</div> : null}
+      <svg width={W} height={H} style={{position: 'absolute'}}>
+        {(c.yticks || []).map((v, i) => <g key={'y' + i}><line x1={L} x2={Rr} y1={sy(v)} y2={sy(v)} stroke={ink} strokeOpacity={0.22} strokeWidth={2} /><text x={L - 20} y={sy(v) + 10} textAnchor="end" fontFamily={MONO} fontSize={30} fill={ink} opacity={0.8}>{c.yfmt ? c.yfmt.replace('{}', v) : v}</text></g>)}
+        {(c.xticks || []).map((v, i) => <text key={'x' + i} x={sx(v)} y={B + 50} textAnchor="middle" fontFamily={MONO} fontSize={30} fill={ink} opacity={0.8}>{v}</text>)}
+        <line x1={L} x2={Rr} y1={B} y2={B} stroke={ink} strokeWidth={4} />
+        {S.map((s, i) => { const pp = part(s.pts), [lx, ly] = pp[pp.length - 1];
+          return <g key={i}><polyline points={pp.map(v => v.join(',')).join(' ')} fill="none" stroke={s.color || PAINT.yellow} strokeWidth={10} strokeLinejoin="round" strokeLinecap="round" />
+            <circle cx={lx} cy={ly} r={14} fill={s.color || PAINT.yellow} stroke={ink} strokeWidth={4} /></g>; })}</svg>
+      {S.map((s, i) => { const pp = part(s.pts), [lx, ly] = pp[pp.length - 1]; return p > 0.95 ? <div key={'l' + i} style={{position: 'absolute', left: Math.min(lx + 26, Rr - 200), top: ly - 30, background: s.color || PAINT.yellow, color: PAINT.ink, fontFamily: SANS, fontWeight: 900, fontSize: 32, padding: '4px 14px', borderRadius: 6, transform: `scale(${pop(q - 0.25 - (c.draw ?? 1.1), 0.4)})`, transformOrigin: '0 50%', whiteSpace: 'nowrap'}}>{s.label}</div> : null; })}
+      {c.source ? <div style={{position: 'absolute', left: L, bottom: 60, fontFamily: SANS, fontSize: 24, letterSpacing: 2, color: ink, opacity: 0.75, textTransform: 'uppercase'}}>{c.source}</div> : null}
+      {c.ylabel ? <div style={{position: 'absolute', left: L, top: T - 60, fontFamily: SANS, fontSize: 28, letterSpacing: 2, color: ink, opacity: 0.8}}>{c.ylabel}</div> : null}</AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;

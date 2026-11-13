@@ -7,6 +7,7 @@ Read the pack (`pack.md`) first: it has the chapter's lines with timings, the sl
 ## What to write
 For **every slot**, write **5 candidates**, each different in kind. Spread them across:
 - at least one straight from a catalogue shape (`styles/PICTURE_GAGS_CATALOGUE.md` codes, section M topic index, or a school recipe);
+- at least one from the **effects library** (`library / <id>` in the pack's card list: every built card from the gag studies, with its plan JSON and paired sound; `habit:<id>` kinds are sound or writing shapes, `shot:<field>` and `move:<name>` are shot options), when one fits the line;
 - at least two made with a **twist operator**:
   - `combine`: fuse two known shapes into one (unreliable voiceover + bar chart off the top of the screen);
   - `flip`: the expectation inverted (the big thing tiny, the solemn thing silly, the villain the victim);

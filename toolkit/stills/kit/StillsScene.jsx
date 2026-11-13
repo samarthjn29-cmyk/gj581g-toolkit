@@ -102,8 +102,13 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
-      : <Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} />}</AbsoluteFill>;
-  if (!s.layers) return frame(1, s.img);
+      : <Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />}</AbsoluteFill>;
+  // duotone (bill wurtz idiom-colour photo, gag study 13 Nov 2026): s.duotone = [dark, light] hex colours: the photo is pushed to two
+  // flat palette colours for a dreamy or unreal beat (e.g. ['#2E4A33', '#F1E6CF'] forest green and cream).
+  const duo = s.duotone ? (() => { const hx = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255), [a0, a1] = s.duotone.map(hx);
+    return <svg width={0} height={0} style={{position: 'absolute'}}><filter id={`duo_${s.id}`} colorInterpolationFilters="sRGB"><feColorMatrix type="saturate" values="0" />
+      {['R', 'G', 'B'].map((ch, j) => React.createElement('feComponentTransfer', {key: ch}, React.createElement(`feFunc${ch}`, {type: 'table', tableValues: `${a0[j]} ${a1[j]}`})))}</filter></svg>; })() : null;
+  if (!s.layers) return <>{duo}{frame(1, s.img)}</>;
   // 2.5D: the far layer moves least, the near layer most (small amounts: inpainted edges must never show)
   return <>{frame(0.7, `${s.layers}/far.png`)}{frame(1.0, `${s.layers}/mid.png`)}{frame(1.35, `${s.layers}/near.png`)}</>;
 };
