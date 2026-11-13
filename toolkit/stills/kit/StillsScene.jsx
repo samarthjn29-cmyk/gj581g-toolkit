@@ -115,8 +115,13 @@ const Tex = ({c, o, dir}) => { const {fps} = useVideoConfig(); if (!c.bg) return
   return <Sequence from={Math.round(c.t * fps)} layout="none"><AbsoluteFill style={{opacity: o * (c.bgOpacity ?? 0.9), mixBlendMode: c.blend || 'screen'}}>
     <OffthreadVideo muted src={staticFile(`${dir}/${c.bg}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></AbsoluteFill></Sequence>; };
 // painted mode: full-screen cards get a paper grain and wash on top while they are up
-const Card = (props) => { const el = <CardInner {...props} />, {c, t} = props; if (!P.on || !FULLK.includes(c.kind) || c.style === 'rise' || c.style === 'roll') return el;
-  const d = c.dur || (['kinetic', 'title', 'number', 'bars', 'headline'].includes(c.kind) ? 4.5 : 2), q = t - c.t; if (q < 0 || q > d) return el;
+// breathe (Sam, Aliens v8, 13 Nov 2026: "The video stopped playing at 3:51" = two dead-still yellow cards for 5 s): every full-screen
+// card drifts in by 3% over its life so the screen never freezes; c.still: true opts out.
+const BREATHE = (c) => !c.still && c.style !== 'rise' && c.style !== 'roll' && (FULLK.includes(c.kind) || c.kind === 'panels');
+const Card = (props) => { const {c, t} = props, d0 = c.dur || (['kinetic', 'title', 'number', 'bars', 'headline'].includes(c.kind) ? 4.5 : 2), q0 = t - c.t;
+  const inner = <CardInner {...props} />, el = BREATHE(c) && q0 >= 0 && q0 <= d0 ? <AbsoluteFill style={{transform: `scale(${1 + 0.03 * q0 / d0})`}}>{inner}</AbsoluteFill> : inner;
+  if (!P.on || !FULLK.includes(c.kind) || c.style === 'rise' || c.style === 'roll') return el;
+  const d = d0, q = q0; if (q < 0 || q > d) return el;
   const v = (c.cutIn ? 1 : R(t, c.t, c.t + 0.3)) * (c.cutOut ? 1 : 1 - R(t, c.t + d - 0.3, c.t + d)); return <>{el}<PaperTex o={v} /></>; };
 const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, dir); if (pc !== undefined) return pc; const gg = gagCard(c, t, dir); if (gg !== undefined) return gg; const d = c.dur || 4.5, o = (c.cutIn ? (t >= c.t ? 1 : 0) : R(t, c.t, c.t + 0.4)) * (c.cutOut ? (t < c.t + d ? 1 : 0) : 1 - R(t, c.t + d - 0.4, c.t + d)); if (o <= 0) return null;
   // Ridiculous-mode overlays (Sam, 11 Nov 2026): stamp (a rubber stamp slammed on), rain (money falling), flash (white frame), pip (a reaction picture popping up in a corner)
