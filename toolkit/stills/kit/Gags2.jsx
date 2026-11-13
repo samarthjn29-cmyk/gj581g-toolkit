@@ -243,10 +243,16 @@ export const GAGS2 = {
   // void (JaidenAnimations tiny figure in a blank void): cut to plain painted paper with one small cut-out (c.img) dead centre at
   // c.h of the frame height (default 0.08), held. Loneliness by scale; no move (not pullback) and not dark (not black). c.ground,
   // c.text (an optional tiny caption under it), c.x, c.y. Sound: the wind loop very low, or silence.
-  void: (c, q, d, out, dir) => { const h = (c.h ?? 0.08) * H, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H;
+  // void options (Simple History hero object on black, gag study 13 Nov 2026, sixth study): c.ground '#0B0A09' for black, c.spin (a slow
+  // turn, degrees a second, e.g. 20), c.glint (little sparkles round it), c.act = {img, at} swaps to a second cut-out at c.act.at s
+  // (the object doing its job). With a bigger c.h (0.3-0.4) the object is the star of the beat. Sound: sparkle, then the job's sound.
+  void: (c, q, d, out, dir) => { const h = (c.h ?? 0.08) * H, x = (c.x ?? 0.5) * W, y = (c.y ?? 0.5) * H, dark = !!c.ground && c.ground[0] === '#' && parseInt(c.ground.slice(1, 3), 16) < 80, acted = c.act && q >= c.act.at, img = acted ? c.act.img : c.img;
+    const sw = acted ? pop(q - c.act.at, 0.6) : 1, rot = c.spin && !acted ? q * c.spin : 0;
     return <AbsoluteFill style={{background: c.ground || PAINT.paper, opacity: out}}>
-      <Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', left: x - h, top: y - h / 2, width: h * 2, height: h, objectFit: 'contain', transform: `translateY(${Math.sin(q * 1.3) * 2}px)`}} />
-      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: 34, color: PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
+      {c.glint ? [0, 1, 2, 3, 4].map(i => { const a = i * 1.3 + q * 0.7, ph = (q * 1.1 + i * 0.37) % 1, gx = x + Math.cos(a) * h * 0.85, gy = y + Math.sin(a) * h * 0.55, gs = 18 + 22 * Math.sin(ph * Math.PI);
+        return <svg key={i} width={gs * 2} height={gs * 2} viewBox="-10 -10 20 20" style={{position: 'absolute', left: gx - gs, top: gy - gs, opacity: Math.sin(ph * Math.PI)}}><path d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill={PAINT.yellow} /></svg>; }) : null}
+      <Img src={staticFile(`${dir}/${img}`)} style={{position: 'absolute', left: x - h, top: y - h / 2, width: h * 2, height: h, objectFit: 'contain', transform: `translateY(${Math.sin(q * 1.3) * 2}px) rotate(${rot}deg) scale(${sw})`, filter: dark ? `drop-shadow(0 0 24px rgba(232,197,71,0.35))` : undefined}} />
+      {c.text ? <div style={{position: 'absolute', left: 0, right: 0, top: y + h * 0.7, textAlign: 'center', fontFamily: HAND, fontSize: 34, color: dark ? PAINT.cream : PAINT.ink, opacity: R(q, c.textAt ?? 1.2, (c.textAt ?? 1.2) + 0.4)}}>{c.text}</div> : null}</AbsoluteFill>; },
 
   // blueprint (Mustard blueprint side-by-side): two line drawings (c.items = [{img, label, note}], cut-outs drawn as cream lines by
   // an SVG edge filter) on a forest-green ground with a cream grid, each labelled, labels landing c.gap s apart, and an optional
@@ -263,5 +269,73 @@ export const GAGS2 = {
           <div style={{position: 'absolute', left: cw * 0.08, top: 0, width: cw * 0.84, height: 460, clipPath: `inset(0 ${(1 - dr) * 100}% 0 0)`}}><Img src={staticFile(`${dir}/${v.img}`)} style={{width: '100%', height: '100%', objectFit: 'contain', filter: `url(#${id})`}} /></div>
           {lq >= 0 ? <div style={{position: 'absolute', top: 480, left: 0, right: 0, textAlign: 'center', transform: `scale(${pop(lq, 0.4)})`}}><div style={{fontFamily: MONO, fontWeight: 700, fontSize: 40, letterSpacing: 4, color: PAINT.cream}}>{v.label}</div>
             {v.note ? <div style={{fontFamily: HAND, fontSize: 34, color: PAINT.yellow, marginTop: 8}}>{v.note}</div> : null}</div> : null}</div>; })}</AbsoluteFill>; },
+  // ---- Gag study 13 Nov 2026, sixth study (Fireship, Wendover, TierZoo, Asianometry, Not Just Bikes, Simple History, Real
+  // Engineering, Jacob Geller, ElectroBOOM, Phil Edwards). Sam: "Yes go ahead" (build them).
+
+  // bossbar (TierZoo boss health bar): a video-game boss plate at the top (c.name, small c.sub above it) with a long bar that drains
+  // in steps on cues (c.hits = [[t, remaining 0-1], ...]); each hit flashes white and shakes the bar, and a lighter "damage" bar
+  // catches up behind. Over a real picture. A running-gag candidate. Sound: a soft boom per hit, trombone when it empties.
+  bossbar: (c, q, d, out) => { const hits = c.hits || [], cur = hits.filter(h => q >= h[0]).pop(), v = cur ? cur[1] : 1, since = cur ? q - cur[0] : 9;
+    const prev = (() => { const i = hits.indexOf(cur); return i > 0 ? hits[i - 1][1] : 1; })(), lag = cur ? prev + (v - prev) * R(since, 0.25, 0.7) : 1;
+    const sh = since < 0.3 ? Math.sin(since * 90) * 10 * (1 - since / 0.3) : 0, fl = since < 0.12, bw = c.w ?? 0.62 * W, x0 = (W - bw) / 2, inq = Easing.out(Easing.cubic)(R(q, 0, 0.35));
+    return <AbsoluteFill style={{opacity: out * inq, pointerEvents: 'none'}}><div style={{position: 'absolute', left: x0, top: 46 + (1 - inq) * -40, width: bw, transform: `translateX(${sh}px)`}}>
+      {c.sub ? <div style={{textAlign: 'center', fontFamily: SANS, fontWeight: 700, fontSize: 22, letterSpacing: 6, color: PAINT.cream, textShadow: '0 2px 6px rgba(0,0,0,0.9)', textTransform: 'uppercase'}}>{c.sub}</div> : null}
+      <div style={{textAlign: 'center', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 54, letterSpacing: 3, color: PAINT.cream, textShadow: '0 3px 10px rgba(0,0,0,0.95)', fontVariant: 'small-caps', lineHeight: 1.1}}>{c.name}</div>
+      <div style={{position: 'relative', height: 34, marginTop: 10, background: 'rgba(20,16,10,0.75)', border: `4px solid ${PAINT.ink}`, borderRadius: 6, boxShadow: '0 4px 14px rgba(0,0,0,0.6)', overflow: 'hidden'}}>
+        <div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: `${lag * 100}%`, background: PAINT.cream, opacity: 0.85}} />
+        <div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: `${v * 100}%`, background: fl ? '#FFFFFF' : PAINT.red}} /></div></div></AbsoluteFill>; },
+
+  // flow (Fireship flowchart that closes into a loop): painted boxes (c.nodes = [{label, x, y, value?, color?}], fractions) appear one
+  // at a time c.gap s apart, joined by labelled arrows (c.edges = [[from, to, label]]) drawn after their second box; with c.loop the
+  // last arrow closes the circuit and a dashed ring draws round the whole thing at c.loopAt s. Values are fact-checked figures only.
+  // On a dark ground (c.ground) or over a dimmed picture. Sound: pop per box, squeak per arrow, ding when the loop closes.
+  flow: (c, q, d, out) => { const N = c.nodes || [], E = c.edges || [], gap = c.gap ?? 0.45, bw = c.bw ?? 300, bh = c.bh ?? 110, P0 = N.map(n => [n.x * W, n.y * H]);
+    const cx = P0.reduce((a, p) => a + p[0], 0) / (P0.length || 1), cy = P0.reduce((a, p) => a + p[1], 0) / (P0.length || 1), rr = Math.max(...P0.map(p => Math.hypot(p[0] - cx, (p[1] - cy) * 1.6))) + bw * 0.75;
+    const la = c.loopAt ?? (N.length * gap + 0.4), lp = c.loop ? R(q, la, la + 0.6) : 0, cols = [PAINT.green, PAINT.violet, PAINT.red, '#3F6E8C', PAINT.yellow];
+    const edge = (e, i) => { const [a, b, lab] = e, ta = Math.max(a, b) * gap + 0.25, p = R(q, ta, ta + 0.35); if (p <= 0) return null;
+      const [x0, y0] = P0[a], [x1, y1] = P0[b], ang = Math.atan2(y1 - y0, x1 - x0), sx = x0 + Math.cos(ang) * bw * 0.55, sy = y0 + Math.sin(ang) * bh * 0.8, ex = x1 - Math.cos(ang) * bw * 0.55, ey = y1 - Math.sin(ang) * bh * 0.8;
+      const px = sx + (ex - sx) * p, py = sy + (ey - sy) * p, mx = (sx + ex) / 2, my = (sy + ey) / 2;
+      return <g key={i}><line x1={sx} y1={sy} x2={px} y2={py} stroke={PAINT.cream} strokeWidth={6} strokeLinecap="round" />
+        {p >= 1 ? <polygon points="0,-12 22,0 0,12" fill={PAINT.cream} transform={`translate(${ex},${ey}) rotate(${ang * 180 / Math.PI}) translate(-20,0)`} /> : null}
+        {p >= 1 && lab ? <text x={mx - Math.sin(ang) * 34} y={my + Math.cos(ang) * 34 + 10} textAnchor="middle" fontFamily={MONO} fontWeight={700} fontSize={c.labelSize || 32} fill={PAINT.yellow} stroke="#0B0A09" strokeWidth={6} paintOrder="stroke">{lab}</text> : null}</g>; };
+    return <AbsoluteFill style={{background: c.ground || 'rgba(11,10,9,0.72)', opacity: out}}>
+      <svg width={W} height={H} style={{position: 'absolute'}}>{E.map(edge)}
+        {c.loop && lp > 0 ? <ellipse cx={cx} cy={cy} rx={rr} ry={rr / 1.6} fill="none" stroke={PAINT.yellow} strokeWidth={5} strokeDasharray="18 16" pathLength={1000} strokeDashoffset={0} style={{clipPath: `inset(0 ${(1 - lp) * 100}% 0 0)`}} /> : null}</svg>
+      {N.map((n, i) => { const nq = q - i * gap; if (nq < 0) return null; const [x, y] = P0[i];
+        return <div key={i} style={{position: 'absolute', left: x - bw / 2, top: y - bh / 2, width: bw, height: bh, transform: `scale(${pop(nq, 0.5)})`, ...brushBox({background: n.color || cols[i % cols.length], color: PAINT.cream}), display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontFamily: SANS, fontWeight: 900, fontSize: 34, letterSpacing: 2, textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.05}}>
+          {n.label}{n.value ? <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 28, color: PAINT.yellow, marginTop: 4}}>{n.value}</div> : null}</div>; })}
+      {c.loop && lp >= 1 && c.loopLabel ? <div style={{position: 'absolute', left: 0, right: 0, top: cy + rr / 1.6 + 10, textAlign: 'center', fontFamily: HAND, fontWeight: 700, fontSize: 60, color: PAINT.yellow, transform: `scale(${pop(q - la - 0.6, 0.5)})`}}>{c.loopLabel}</div> : null}</AbsoluteFill>; },
+
+  // telemetry (Real Engineering live readout): a small mono HUD block (c.x, c.y; default top-left) with 2-4 labelled rows that tick
+  // every second together (c.rows = [{label, from, to, unit, dp}]; a row with from === to never changes, e.g. MESSAGES RECEIVED 0).
+  // c.title (small header). Over a still or a render. Sound: a soft ticks loop, or none.
+  telemetry: (c, q, d, out) => { const rows = c.rows || [], k = Math.min(1, Math.floor(q) / Math.max(1, Math.floor(d) - 1)), inq = R(q, 0, 0.3), fmt = (v, dp) => Number(v).toLocaleString('en-GB', {minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0});
+    return <AbsoluteFill style={{opacity: out * inq, pointerEvents: 'none'}}><div style={{position: 'absolute', left: (c.x ?? 0.05) * W, top: (c.y ?? 0.07) * H, padding: '18px 26px', background: 'rgba(11,10,9,0.62)', border: `2px solid rgba(241,230,207,0.35)`, borderRadius: 10, fontFamily: MONO, color: PAINT.cream}}>
+      {c.title ? <div style={{fontSize: 24, letterSpacing: 5, opacity: 0.9, marginBottom: 8, color: PAINT.yellow}}>{c.title}</div> : null}
+      {rows.map((r, i) => { const v = r.from + (r.to - r.from) * k, still = r.from === r.to;
+        return <div key={i} style={{display: 'flex', gap: 36, fontSize: c.size || 38, lineHeight: 1.45}}><span style={{width: c.labelW || 420, opacity: 0.85, whiteSpace: 'nowrap'}}>{r.label}</span>
+          <span style={{color: still ? '#F07A62' : PAINT.yellow, fontWeight: 700, minWidth: 220, textAlign: 'right'}}>{fmt(v, r.dp)}{r.unit ? ' ' + r.unit : ''}</span></div>; })}</div></AbsoluteFill>; },
+
+  // search (Phil Edwards search bar that types): a cream search box (c.y) types c.query letter by letter with a blinking cursor
+  // (c.speed letters a second, default 14), then at c.resultAt s shows c.result under it (a result line, "0 results", "did you mean").
+  // Sound: a soft click per key, then ding or trombone on the result.
+  search: (c, q, d, out) => { const Q = c.query || '', sp = c.speed ?? 14, n = Math.min(Q.length, Math.max(0, Math.floor((q - 0.25) * sp))), ra = c.resultAt ?? (0.45 + Q.length / sp + 0.35), bw = c.w ?? 0.56 * W, y = (c.y ?? 0.4) * H, inq = Easing.out(Easing.cubic)(R(q, 0, 0.3));
+    return <AbsoluteFill style={{background: c.dim === false ? undefined : 'rgba(11,10,9,0.5)', opacity: out}}>
+      <div style={{position: 'absolute', left: (W - bw) / 2, top: y - 50 + (1 - inq) * 30, width: bw, height: 100, borderRadius: 50, ...brushBox({borderRadius: 50}), display: 'flex', alignItems: 'center', padding: '0 40px', boxSizing: 'border-box', gap: 26}}>
+        <svg width={44} height={44} viewBox="0 0 24 24"><circle cx="10" cy="10" r="7" fill="none" stroke={PAINT.ink} strokeWidth="2.6" /><line x1="15" y1="15" x2="22" y2="22" stroke={PAINT.ink} strokeWidth="2.8" strokeLinecap="round" /></svg>
+        <div style={{fontFamily: SANS, fontSize: 46, color: PAINT.ink, whiteSpace: 'nowrap'}}>{Q.slice(0, n)}<span style={{opacity: Math.floor(q * 2.5) % 2 ? 0 : 1, fontWeight: 300}}>|</span></div></div>
+      {q >= ra && c.result ? <div style={{position: 'absolute', left: (W - bw) / 2 + 40, top: y + 76, fontFamily: c.resultHand ? HAND : SANS, fontSize: c.resultSize || 40, fontWeight: 700, color: PAINT.cream, textShadow: '0 2px 8px rgba(0,0,0,0.9)', transform: `scale(${pop(q - ra, 0.4)})`, transformOrigin: '0 50%'}}>{c.result}</div> : null}</AbsoluteFill>; },
+
+  // equation (Phil Edwards icon sum): 2-3 painted cut-outs (c.terms = [{img} | {text}]) land one by one c.gap s apart with "+"
+  // between them, then "=" and the answer (c.answer = {img} | {text}). A picture sum for a plain point. c.y, c.size (term px).
+  // Sound: pop per term, ding (or trombone) on the answer.
+  equation: (c, q, d, out, dir) => { const gap = c.gap ?? 0.45, S = c.size || 230, y = (c.y ?? 0.5) * H;
+    const items = []; (c.terms || []).forEach((t, i) => { if (i) items.push({op: '+'}); items.push(t); }); items.push({op: '='}); items.push(c.answer || {text: '?'});
+    const wOf = it => it.op ? 110 : S, tot = items.reduce((a, it) => a + wOf(it), 0); let x = (W - tot) / 2; let k = -1;
+    return <AbsoluteFill style={{background: c.ground || 'rgba(234,223,198,0.94)', opacity: out}}>{items.map((it, i) => { const x0 = x; x += wOf(it); if (!it.op) k++; const at = (it.op ? k + 0.6 : k) * gap + (it === items[items.length - 1] ? 0.3 : 0), iq = q - at;
+      if (iq < 0) return null; const st = {position: 'absolute', left: x0, top: y - S / 2, width: wOf(it), height: S, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: `scale(${pop(iq, 0.6)})`};
+      return <div key={i} style={st}>{it.op ? <span style={{fontFamily: SANS, fontWeight: 900, fontSize: 110, color: PAINT.ink}}>{it.op}</span>
+        : it.img ? <Img src={staticFile(`${dir}/${it.img}`)} style={{width: S * 0.92, height: S * 0.92, objectFit: 'contain', filter: 'drop-shadow(0 8px 10px rgba(0,0,0,0.3))'}} />
+        : <span style={{fontFamily: HAND, fontWeight: 700, fontSize: it.size || 120, color: it === items[items.length - 1] ? PAINT.red : PAINT.ink, whiteSpace: 'nowrap'}}>{it.text}</span>}</div>; })}</AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;

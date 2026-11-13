@@ -52,6 +52,12 @@ Study: `gj581g-stills-world skill`. Camera moves: push, pullback, pan, panL, til
 | `H-blueprint` | gag study 13 Nov 2026 (fifth study): blueprint (EFFECTS_LIBRARY.md) | `kind: blueprint` | - | built |
 | `H-neighbour` | gag study 13 Nov 2026 (fifth study): headline neighbour (EFFECTS_LIBRARY.md) | `kind: headline, neighbour: *` | - | built |
 | `H-jacksign` | gag study 13 Nov 2026 (fifth study): jack sign (EFFECTS_LIBRARY.md) | `kind: jack, sign: *` | - | built |
+| `H-bossbar` | gag study 13 Nov 2026 (sixth study): bossbar (EFFECTS_LIBRARY.md) | `kind: bossbar` | - | built |
+| `H-flow` | gag study 13 Nov 2026 (sixth study): flow (EFFECTS_LIBRARY.md) | `kind: flow` | - | built |
+| `H-telemetry` | gag study 13 Nov 2026 (sixth study): telemetry (EFFECTS_LIBRARY.md) | `kind: telemetry` | - | built |
+| `H-search` | gag study 13 Nov 2026 (sixth study): search (EFFECTS_LIBRARY.md) | `kind: search` | - | built |
+| `H-equation` | gag study 13 Nov 2026 (sixth study): equation (EFFECTS_LIBRARY.md) | `kind: equation` | - | built |
+| `H-hero` | gag study 13 Nov 2026 (sixth study): void as hero object (EFFECTS_LIBRARY.md) | `kind: void, act: *` | - | built |
 
 ### South Park  (`southpark`)
 Study: `styles/SOUTH_PARK_STUDY.md`. Camera moves: hold, drift; hard cuts only, a cut every 2-3 s, front-on staging.

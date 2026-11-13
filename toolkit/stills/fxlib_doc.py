@@ -22,8 +22,8 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 - What it does to the cards: a slow brush-edge wobble that re-seeds every `boil` frames (default 4: the hand-made "animated painting" boil; `0` = still), paper grain inside the card shapes only, and a warm gouache shift (`paintSat` 0.85, `paintSepia` 0.16) so white reads as cream and red as brick. `paintEdge` sets the wobble (default 5 px).
 - Cards that read the picture behind them (freeze grey-out, blur censor, VHS glitch) are kept outside the painted wrapper, so they still work.
 - The gag-study cards (`Gags2.jsx`) are painted-native: palette forest green #2E4A33, cream #F1E6CF, parakeet yellow #E8C547, brick #A6432F, charcoal #2A2724; hand-lettered labels on cream brush-shaped chips.
-- Cut-out gags (puppet path, jack-in-the-box and its sign, clones, queue, giant hand, outline, recap host, palm, void, blueprint) need cut-out PNGs: generate the object, repaint it with the painted recipe, then remove the background (Recraft or Adobe). fxlib draws simple painted stand-ins only for the demo.
-- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study and the 8 of the 13 Nov fifth study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
+- Cut-out gags (puppet path, jack-in-the-box and its sign, clones, queue, giant hand, outline, recap host, palm, void and hero object, blueprint, picture sum, mascot stand-in, call-in alien) need cut-out PNGs: generate the object, repaint it with the painted recipe, then remove the background (Recraft or Adobe). fxlib draws simple painted stand-ins only for the demo.
+- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study and the 9 of the sixth study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
 """
 SECTIONS = [('Camera move', 'Camera moves'), ('Gag move', 'Gag moves'), ('Card', 'Cards'), ('Picture gag', 'Picture gags'), ('Animation', 'Animations'),
             ('Habit', 'Habits (sound and writing shapes, no card of their own)')]

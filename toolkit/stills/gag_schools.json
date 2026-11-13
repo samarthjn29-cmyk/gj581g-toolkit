@@ -261,6 +261,49 @@
       "kind": "jack",
       "sign": "*"
      }
+    },
+    {
+     "id": "H-bossbar",
+     "name": "gag study 13 Nov 2026 (sixth study): bossbar (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "bossbar"
+     }
+    },
+    {
+     "id": "H-flow",
+     "name": "gag study 13 Nov 2026 (sixth study): flow (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "flow"
+     }
+    },
+    {
+     "id": "H-telemetry",
+     "name": "gag study 13 Nov 2026 (sixth study): telemetry (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "telemetry"
+     }
+    },
+    {
+     "id": "H-search",
+     "name": "gag study 13 Nov 2026 (sixth study): search (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "search"
+     }
+    },
+    {
+     "id": "H-equation",
+     "name": "gag study 13 Nov 2026 (sixth study): equation (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "equation"
+     }
+    },
+    {
+     "id": "H-hero",
+     "name": "gag study 13 Nov 2026 (sixth study): void as hero object (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "void",
+      "act": "*"
+     }
     }
    ]
   },
