@@ -66,7 +66,7 @@ for li in sorted(set(x[1] for x in S)):
         elif len(ptxt) <= MAX: chunks.append(list(p))
         else: chunks += balanced(p)
     # a lone short tail joins the chunk before it
-    if len(chunks) > 1 and len(chunks[-1]) == 1 and len(' '.join(S[k][0] for k in chunks[-2] + chunks[-1])) <= 50: chunks[-2] += chunks.pop()
+    if len(chunks) > 1 and len(chunks[-1]) == 1 and len(' '.join(S[k][0] for k in chunks[-2] + chunks[-1])) <= 50: last = chunks.pop(); chunks[-1] += last   # pop first: `chunks[-2] += chunks.pop()` indexes after the pop
     for c in chunks: caps.append([t[c[0]][0], t[c[-1]][1], ' '.join(S[k][0] for k in c), L[li]['id']])
 for i in range(len(caps)):
     nxt = caps[i + 1][0] - 0.03 if i + 1 < len(caps) else caps[i][1] + 1.0
