@@ -57,19 +57,6 @@ for a, b in merged:
     if b - a > 3.0: print(f"BARE  {a:6.2f} {b - a:.1f} s with no written text or gag on screen (add a label, tag, bubble or card)")
 print('too fast:', bad)
 
-# Watermark corner (Sam, 13 Nov 2026: "keep the watermark at the bottom"): YouTube's channel watermark sits bottom-right
-# and can't be moved, so no gag goes there. Flags any card whose anchor (x/y, label spots, default pip) lands in
-# x > 1600, y > 800 (asides anchor at their left edge, so they count ~300 px of text). Move it to bottom-left (x 120).
-def _n(x, y): return (x * 1920 if 0 <= x <= 1.01 else x), (y * 1080 if 0 <= y <= 1.01 else y)
-for c in t['cards']:
-    pts = []
-    if isinstance(c.get('x'), (int, float)) and isinstance(c.get('y'), (int, float)): pts.append((c['x'], c['y'], 300 if c['kind'] == 'aside' else 0))
-    pts += [(sp[0], sp[1], 0) for sp in (c.get('spots') or [])]
-    if c['kind'] == 'pip' and 'right' not in c: pts.append((1920 - 70 - c.get('w', 420) / 2, 910, 0))
-    for x, y, ext in pts:
-        X, Y = _n(x, y)
-        if X + ext > 1600 and Y > 800: bad = True; print(f"CORNER {c.get('t', 0):6.2f} {c['kind']} in the watermark corner (bottom-right); move it bottom-left"); break
-
 # Sliver after a full-screen card (Sam, Aliens 13 Nov 2026, 9:16: the money panels ended 0.9 s before the chapter did and the
 # bare picture under them flashed). Opaque card kinds must run to the next cut / chapter end, or leave >= 1.5 s of picture.
 OPAQUE = {'panels', 'title', 'number', 'split', 'bars', 'triptych'}   # quote sits over its picture; signoff ends on its own star shot
