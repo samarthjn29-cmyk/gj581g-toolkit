@@ -350,6 +350,11 @@ export const GAGS2 = {
   // ---- Gag study 13 Nov 2026, seventh study (RealLifeLore, Vsauce2, Primer, Ordinary Things, Nerdwriter1, Tantacrul, Kraut,
   // Mark Rober, Veritasium, Extra History). Sam: "yes" (build them).
 
+  // letterbox (DRAMA_MOVES D5, Sam 14 Nov 2026: "a bit dramatic"): black cinema bars slide in from top and bottom over 0.45 s to
+  // c.ratio (default 2.39:1) for the big moment, and slide out over the card's last 0.45 s. Overlay: the picture keeps playing.
+  letterbox: (c, q, d) => { const bar = (H - W / (c.ratio || 2.39)) / 2, p = Easing.inOut(Easing.cubic)(R(q, 0, 0.45)) * (1 - Easing.inOut(Easing.cubic)(R(q, d - 0.45, d)));
+    return <AbsoluteFill style={{pointerEvents: 'none'}}><div style={{position: 'absolute', left: 0, right: 0, top: 0, height: bar * p, background: '#0B0A09'}} /><div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: bar * p, background: '#0B0A09'}} /></AbsoluteFill>; },
+
   // peel (Mark Rober glasses under glasses): a stamp on the picture (c.text, red ink plate) peels away from a corner at each of
   // c.times (s), curling and lifting off, and underneath is the same stamp again; c.last (text) can finally be different.
   // c.x, c.y, c.rot. Sound: a sticky rip per peel, trombone when it is the same again.

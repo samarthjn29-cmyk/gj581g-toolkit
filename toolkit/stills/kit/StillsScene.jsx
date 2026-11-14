@@ -80,7 +80,7 @@ const FISHEYE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDP
 const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.page) return <PageShot s={s} t={t} dir={dir} />;
   if (s.diagram) return <Diagram s={s} t={t} words={words} />;
-  const SPECIAL = {triple: 'hold', whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
+  const SPECIAL = {triple: 'hold', whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push', ramp: 'hold', vertigo: 'hold', rack: 'drift'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
   const [s0, s1, x0, x1, y0, y1] = MOVES[SPECIAL[s.move] || (s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift'))], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
   let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
   // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
@@ -95,12 +95,19 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.move === 'triple') { const a = s.t + (s.triple_at ?? 0.2); [0, 0.35, 0.7].forEach(o => { sc += 0.17 * interpolate(t, [a + o, a + o + 0.09], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }); sc += 0.04 * Math.max(0, t - a - 0.8); }
   if (s.move === 'dutch') rot = (s.angle ?? 8) * (q < 0.2 ? q / 0.2 : 1);
   if (s.move === 'dutch') { const ar = Math.abs(rot) * Math.PI / 180; sc = Math.max(sc, (Math.cos(ar) + (16 / 9) * Math.sin(ar)) * 1.01); }   // a tilted picture always covers the frame: no black wedges (Aliens ch3 review)
+  // speed ramp (DRAMA_MOVES D7, Sam 14 Nov 2026: "I want the videos to be a bit dramatic"): a slow creep, then a hard snap-in at
+  // ramp_at s (0.22 s, motion blur), then the creep goes on from the new size. ramp = snap size (default 0.3).
+  if (s.move === 'ramp') { const a = s.t + (s.ramp_at ?? 0.8), p = interpolate(t, [a, a + 0.22], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic)});
+    sc += 0.04 * Math.max(0, t - s.t) / 2 + (s.ramp ?? 0.3) * p; blur = Math.max(blur, 10 * Math.sin(Math.PI * p)); }
+  // match cut (D4): a shot can sit zoomed and shifted so its key shape lands where the previous shot's did. s.zoom (extra scale,
+  // default 1) and s.offset [x %, y %] are static and apply on top of the move.
+  if (s.zoom) sc *= s.zoom; const mo = s.offset || [0, 0];
   // freeze frame: a video gag stops on its best frame (freeze_img, cut by build_chapter.sh) freeze s into the shot
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
   // shake (Sam, 11 Nov 2026, "most ridiculous version"): a camera shake that decays over 0.8 s from shake_at s into the shot
   const sa = s.t + (s.shake_at ?? 0), sk = s.shake && t >= sa ? s.shake * Math.max(0, 1 - (t - sa) / 0.8) : 0;
   const shx = sk * Math.sin(t * 71), shy = sk * Math.cos(t * 53); if (sk) sc += 0.04;
-  const frame = (extra, src, style = {}) => <AbsoluteFill style={{transform: `translate(${x * extra + shx + xo}%, ${y * extra + shy}%) scale(${1 + (sc - 1) * extra}) rotate(${rot}deg)`, filter: blur ? `blur(${blur}px)` : undefined, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
+  const frame = (extra, src, style = {}, f2 = '') => <AbsoluteFill style={{transform: `translate(${x * extra + shx + xo + mo[0]}%, ${y * extra + shy + mo[1]}%) scale(${1 + (sc - 1) * extra}) rotate(${rot}deg)`, filter: (blur ? `blur(${blur}px) ` : '') + f2 || undefined, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
@@ -119,6 +126,16 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
       <AbsoluteFill style={{WebkitMaskImage: `radial-gradient(circle ${pr}px at ${px}% ${py}%, #000 93%, transparent 100%)`, maskImage: `radial-gradient(circle ${pr}px at ${px}% ${py}%, #000 93%, transparent 100%)`, filter: P.bulge === 0 ? undefined : `url(#${id})`}}>
         {duo}{frame(1.15, s.img)}</AbsoluteFill>
       <AbsoluteFill style={{background: `radial-gradient(circle ${pr}px at ${px}% ${py}%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 92%, rgba(0,0,0,0) 100%)`}} /></AbsoluteFill>; }
+  // colour drain (D3): from isolate_at s the picture drains to grey over 0.8 s except the object in s.isolate (a cut-out PNG of the
+  // same still, e.g. layers' near.png or an AI-painted mask), which keeps its colour. s.isolate_to = how grey (default 1).
+  if (s.isolate) { const g = (s.isolate_to ?? 1) * R(t, s.t + (s.isolate_at ?? 0.5), s.t + (s.isolate_at ?? 0.5) + 0.8);
+    return <>{frame(1, s.img, {}, `grayscale(${g}) brightness(${1 - 0.18 * g})`)}{frame(1, s.isolate)}</>; }
+  // vertigo / dolly zoom (D1): the subject (near layer) holds its size while the background (far + mid) stretches away behind it.
+  if (s.move === 'vertigo' && s.layers) { const v = R(t, s.t + (s.vertigo_at ?? 0.2), s.t + s.dur), bg = 1 + (s.vertigo ?? 0.35) * v, keep = {transform: `scale(${bg})`, transformOrigin: `${fx * 100}% ${fy * 100}%`};
+    return <><AbsoluteFill style={keep}>{frame(1, `${s.layers}/far.png`)}</AbsoluteFill><AbsoluteFill style={{...keep, transform: `scale(${1 + (bg - 1) * 0.7})`}}>{frame(1, `${s.layers}/mid.png`)}</AbsoluteFill>{frame(1, `${s.layers}/near.png`)}</>; }
+  // rack focus (D6): from rack_at s over 0.7 s the background blurs and the near layer sharpens (s.rack = 'out' does the reverse).
+  if (s.move === 'rack' && s.layers) { const r = R(t, s.t + (s.rack_at ?? 0.6), s.t + (s.rack_at ?? 0.6) + 0.7), rr = s.rack === 'out' ? 1 - r : r;
+    return <>{frame(0.7, `${s.layers}/far.png`, {}, `blur(${10 * rr}px)`)}{frame(1.0, `${s.layers}/mid.png`, {}, `blur(${6 * rr}px)`)}{frame(1.35, `${s.layers}/near.png`, {}, `blur(${7 * (1 - rr)}px)`)}</>; }
   if (!s.layers) return <>{duo}{frame(1, s.img)}</>;
   // 2.5D: the far layer moves least, the near layer most (small amounts: inpainted edges must never show)
   return <>{frame(0.7, `${s.layers}/far.png`)}{frame(1.0, `${s.layers}/mid.png`)}{frame(1.35, `${s.layers}/near.png`)}</>;

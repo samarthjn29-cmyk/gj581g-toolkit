@@ -21,6 +21,9 @@ Under 400 words. It never edits files.
    a period scene, the same place looking different from shot to shot.
 5. **Sound** (from the reports): bed never stops, drops only on punchlines, level about -16 LUFS, any confirmed word
    slip with its time.
+4d. **Nothing over a face (Sam, Moctar 14 Nov 2026: "The dialogue box shouldn't cover dog's face").** Speech bubbles, tags,
+   labels and stamps never sit on a face, a person's or an animal's (a painted dog counts). A bubble sits above or beside the
+   speaker with only its tail pointing at the mouth. The reviewer checks the first and last frame of every overlay for this.
 4c. **No flashes (Sam, Moctar, 14 Nov 2026: "At around 0:58 the screen shows a flash of mobile phone photo again").** A full-screen
    card (here `void`) ended 0.14 s before the next shot, so the old picture flashed back. Two checks now catch it: `visible_lint.py`
    (plan: every full-screen kind comes from the one shared list in `opaque.py`, which also scans the kit for new full-screen
