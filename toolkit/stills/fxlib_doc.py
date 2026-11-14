@@ -13,7 +13,7 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 
 **How to use one:** add the shot fields or the card to the scene plan (`stills/<scene>.json`), cue it on a heard word, then add the paired sound to the mix with `mix_bed.py --sfx sfx/sfx_<name>.wav@<cue time + offset>:-29`. Sam's clean cuts use voice + gag sounds only (`--bed none`, 11 Nov 2026), with gag sounds on as many gags as fit.
 
-**In the gag pass:** `toolkit/gags/gag_pass.py pack` lists every picture gag, card, gag move and habit below as `library / <id>` for the writer (Lottie animations and video overlays are left out: they are not in the painted format). **Gags from the 13 Nov 2026 studies (marked below) are in the menu from the video after Aliens** (Sam, 13 Nov 2026: "start using them from next video onwards"); the 11-12 Nov ones are in from Aliens chapter 5.
+**In the gag pass:** `toolkit/gags/gag_pass.py pack` lists every picture gag, card, gag move and habit below as `library / <id>` for the writer (Lottie animations and video overlays are left out: they are not in the painted format). **Gags from the 13 and 14 Nov 2026 studies (marked below) are in the menu from the video after Aliens** (Sam, 13 Nov 2026: "start using them from next video onwards"); the 11-12 Nov ones are in from Aliens chapter 5. The 14 Nov sound habits use `mix_bed.py --sfx FILE@T:LUFS::gapG` (the drop-out before the hit) and real laughs fetched with `toolkit/media/fetch_real_sfx.py`.
 
 **Rules:** pictures at least 2 s on screen; text gags up for 0.8 s + 0.3 s a word; one gag per beat; back-to-back full-screen cards hard-cut; sounds about 12 dB under the voice and never on top of a fact the viewer must follow; gags punch up; no real logos or AI likenesses of real people; on-screen figures and quotes are the fact-checked spoken ones ("demo" text in the plans below is a placeholder, never a fact).
 
@@ -23,7 +23,7 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 - Cards that read the picture behind them (freeze grey-out, blur censor, VHS glitch) are kept outside the painted wrapper, so they still work.
 - The gag-study cards (`Gags2.jsx`) are painted-native: palette forest green #2E4A33, cream #F1E6CF, parakeet yellow #E8C547, brick #A6432F, charcoal #2A2724; hand-lettered labels on cream brush-shaped chips.
 - Cut-out gags (puppet path, jack-in-the-box and its sign, clones, queue, giant hand, outline, recap host, palm, void and hero object, blueprint, picture sum, mascot stand-in, call-in alien, trophy, foreground, the clones that vanish) need cut-out PNGs: generate the object, repaint it with the painted recipe, then remove the background (Recraft or Adobe). fxlib draws simple painted stand-ins only for the demo.
-- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study, the 9 of the sixth study and the 8 of the seventh study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
+- Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study, the 9 of the sixth study, the 8 of the seventh study and the 4 cards of the eighth study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
 """
 SECTIONS = [('Camera move', 'Camera moves'), ('Gag move', 'Gag moves'), ('Card', 'Cards'), ('Picture gag', 'Picture gags'), ('Animation', 'Animations'),
             ('Habit', 'Habits (sound and writing shapes, no card of their own)')]

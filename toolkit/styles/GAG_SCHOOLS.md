@@ -65,6 +65,10 @@ Study: `gj581g-stills-world skill`. Camera moves: push, pullback, pan, panL, til
 | `H-trophy` | gag study 13 Nov 2026 (seventh study): trophy (EFFECTS_LIBRARY.md) | `kind: trophy` | - | built |
 | `H-foreground` | gag study 13 Nov 2026 (seventh study): foreground (EFFECTS_LIBRARY.md) | `kind: foreground` | - | built |
 | `H-obey` | gag study 13 Nov 2026 (seventh study): clones vanish and sneak back (EFFECTS_LIBRARY.md) | `kind: clones, vanishAt: *` | - | built |
+| `H-checklist` | gag study 14 Nov 2026 (eighth study): checklist (EFFECTS_LIBRARY.md) | `kind: checklist` | - | built |
+| `H-tier` | gag study 14 Nov 2026 (eighth study): tier (EFFECTS_LIBRARY.md) | `kind: tier` | - | built |
+| `H-stretch` | gag study 14 Nov 2026 (eighth study): stretch (EFFECTS_LIBRARY.md) | `kind: stretch` | - | built |
+| `H-titledrop` | gag study 14 Nov 2026 (eighth study): titledrop (EFFECTS_LIBRARY.md) | `kind: titledrop` | - | built |
 
 ### South Park  (`southpark`)
 Study: `styles/SOUTH_PARK_STUDY.md`. Camera moves: hold, drift; hard cuts only, a cut every 2-3 s, front-on staging.

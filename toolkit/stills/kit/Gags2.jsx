@@ -408,5 +408,53 @@ export const GAGS2 = {
   foreground: (c, q, d, out, dir) => { const side = c.side || 'right', w = (c.w ?? 0.55) * W, dx = Math.sin(q * 0.6) * 14 + q * (side === 'left' ? 6 : -6), inq = Easing.out(Easing.cubic)(R(q, 0, 0.5));
     const pos = side === 'left' ? {left: -w * 0.35 - (1 - inq) * w * 0.3 + dx, top: H * 0.25} : side === 'bottom' ? {left: (W - w) / 2 + dx, top: H * 0.62 + (1 - inq) * H * 0.3} : {left: W - w * 0.65 + (1 - inq) * w * 0.3 + dx, top: H * 0.2};
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{position: 'absolute', ...pos, width: w, height: w, objectFit: 'contain', filter: `blur(${c.blur ?? 18}px) brightness(0.55)`, transform: side === 'left' ? 'scaleX(-1)' : undefined}} /></AbsoluteFill>; },
+  // ---- Gag study 14 Nov 2026, eighth study (TheOdd1sOut, Ryan George, Corridor Crew, Wendigoon, Bright Sun Films, Ordinary
+  // Sausage, Technology Connections, Stuff Made Here, NileRed, Daniel Thrasher). Sam: "Yes" (build them).
+
+  // checklist (Stuff Made Here deadpan checklist): a cream clipboard (c.title) whose items (c.items) type in one by one c.gap s
+  // apart, each ticked as it lands; the last item (or any listed in c.unticked by index) stays empty, or gets a red cross with
+  // c.cross. The joke is the one odd item. Sound: click per tick, trombone (or nothing) on the last.
+  checklist: (c, q, d, out) => { const it = c.items || [], gap = c.gap ?? 0.45, un = c.unticked || [it.length - 1], x = (c.x ?? 0.5) * W, cw = c.w ?? 900, inq = Easing.out(Easing.cubic)(R(q, 0, 0.35));
+    return <AbsoluteFill style={{background: 'rgba(11,10,9,0.45)', opacity: out}}><div style={{position: 'absolute', left: x - cw / 2, top: 120 + (1 - inq) * 60, width: cw, ...brushBox({padding: '90px 56px 50px', transform: `rotate(${c.rot ?? -2}deg)`})}}>
+      <div style={{position: 'absolute', left: cw / 2 - 110, top: -26, width: 220, height: 60, background: '#8A8378', borderRadius: 12, boxShadow: '0 4px 8px rgba(0,0,0,0.4)'}} />
+      {c.title ? <div style={{position: 'absolute', left: 56, top: 40, fontFamily: SANS, fontWeight: 800, fontSize: 30, letterSpacing: 4, color: PAINT.green, textTransform: 'uppercase'}}>{c.title}</div> : null}
+      {it.map((t, i) => { const iq = q - 0.3 - i * gap; if (iq < 0) return null; const blank = un.includes(i), tk = R(iq, 0.12, 0.3);
+        return <div key={i} style={{display: 'flex', alignItems: 'center', gap: 26, margin: '14px 0', fontFamily: HAND, fontWeight: 700, fontSize: c.size || 66, color: PAINT.ink, opacity: R(iq, 0, 0.12)}}>
+          <svg width={58} height={58} viewBox="0 0 30 30"><rect x="2" y="2" width="26" height="26" rx="4" fill="none" stroke={PAINT.ink} strokeWidth="3" />
+            {!blank ? <path d="M7 16 L13 22 L24 8" fill="none" stroke={PAINT.green} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - tk} /> : c.cross ? <path d="M8 8 L22 22 M22 8 L8 22" stroke={PAINT.red} strokeWidth="4" strokeLinecap="round" opacity={tk} /> : null}</svg>
+          <span style={{color: blank ? PAINT.red : PAINT.ink}}>{t}</span></div>; })}</div></AbsoluteFill>; },
+
+  // tier (Wendigoon deadpan tier list): painted rows S A B C D F (c.rows to change them) with a coloured label block each; items
+  // (c.items = [{tier, text | img}]) drop into their rows one by one c.gap s apart, left to right. Deadpan placements; fact-checked
+  // claims only where a placement states a fact. Sound: pop per drop, ding for S, trombone for F.
+  tier: (c, q, d, out, dir) => { const rows = c.rows || ['S', 'A', 'B', 'C', 'D', 'F'], cols = ['#C8553D', '#E39B4B', PAINT.yellow, '#8DB36A', '#5E9C9A', '#6B4E8C'], it = c.items || [], gap = c.gap ?? 0.5;
+    const rh = Math.min(130, (H - 140) / rows.length), top = (H - rh * rows.length) / 2, left = 200, lw = 140, cnt = {};
+    return <AbsoluteFill style={{background: c.ground || PAINT.ink, opacity: out}}>
+      {rows.map((r, i) => <div key={r} style={{position: 'absolute', left, top: top + i * rh, width: W - 2 * left, height: rh - 8, background: 'rgba(241,230,207,0.08)', borderRadius: 8}}>
+        <div style={{position: 'absolute', left: 0, top: 0, width: lw, height: '100%', background: cols[i % cols.length], borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: SANS, fontWeight: 900, fontSize: rh * 0.5, color: PAINT.ink}}>{r}</div></div>)}
+      {it.map((v, j) => { const ri = Math.max(0, rows.indexOf(v.tier)), k = cnt[ri] = (cnt[ri] ?? -1) + 1, iq = q - 0.3 - j * gap; if (iq < 0) return null; const y = top + ri * rh, x = left + lw + 20 + k * (rh * 2.3);
+        const drop = Easing.out(Easing.back(1.5))(R(iq, 0, 0.35));
+        return <div key={j} style={{position: 'absolute', left: x, top: y + (1 - drop) * -260 + 6, height: rh - 20, minWidth: rh * 2.1, ...brushBox({padding: '0 18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: HAND, fontWeight: 700, fontSize: rh * 0.34, whiteSpace: 'nowrap'}), opacity: R(iq, 0, 0.1)}}>
+          {v.img ? <Img src={staticFile(`${dir}/${v.img}`)} style={{height: '90%', objectFit: 'contain'}} /> : v.text}</div>; })}
+      {c.title ? <div style={{position: 'absolute', top: Math.max(10, top - 70), left: 0, right: 0, textAlign: 'center', fontFamily: SANS, fontWeight: 800, fontSize: 40, letterSpacing: 4, color: PAINT.cream, textTransform: 'uppercase'}}>{c.title}</div> : null}</AbsoluteFill>; },
+
+  // stretch (NileRed stretched-word subtitle): a small subtitle (c.text) where one word (c.word, which must appear in c.text) has
+  // its vowel (c.vowel, default the first vowel) drawn out letter by letter as it is said, up to c.max copies over c.dur s.
+  // Sound: none (Sam's own drawn-out word).
+  stretch: (c, q, d, out) => { const T = c.text || '', w = c.word || '', i0 = T.indexOf(w), vm = w.match(c.vowel ? new RegExp(c.vowel) : /[aeiou]/i), vi = vm ? vm.index : 0;
+    const n = Math.round((c.max ?? 7) * R(q, c.at ?? 0.3, (c.at ?? 0.3) + (c.grow ?? 1.0)));
+    const shown = i0 < 0 ? T : T.slice(0, i0) + w.slice(0, vi + 1) + (vm ? vm[0].repeat(n) : '') + w.slice(vi + 1) + T.slice(i0 + w.length);
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: 0, right: 0, bottom: c.bottom ?? 90, textAlign: 'center'}}>
+      <span style={{fontFamily: SANS, fontWeight: 600, fontSize: c.size || 46, color: PAINT.cream, background: 'rgba(11,10,9,0.55)', padding: '6px 18px', borderRadius: 6}}>{shown}</span></div></AbsoluteFill>; },
+
+  // titledrop (TheOdd1sOut late title slam): after the cold open the video's own title slams in huge (c.text, c.sub small under
+  // it), scaling down from 3x with a quick shake and a flash, on our painted ground or over the picture (c.ground), then hard-cuts.
+  // Pair it with the drop-out before the hit in the mix (mix_bed.py --sfx boom@T::gap0.4). Sound: boom.
+  titledrop: (c, q, d, out) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.22)), sc = 3 - 2 * p, sh = q > 0.22 && q < 0.6 ? Math.sin(q * 80) * 12 * (1 - (q - 0.22) / 0.38) : 0, fl = 1 - R(q, 0.2, 0.45);
+    return <AbsoluteFill style={{background: c.ground === 'none' ? undefined : (c.ground || PAINT.green), justifyContent: 'center', alignItems: 'center', opacity: out}}>
+      <div style={{transform: `translate(${sh}px, ${sh * 0.6}px) scale(${sc}) rotate(${c.rot ?? -3}deg)`, textAlign: 'center'}}>
+        <div style={{fontFamily: SANS, fontWeight: 900, fontSize: c.size || 170, lineHeight: 0.92, letterSpacing: 2, color: PAINT.yellow, WebkitTextStroke: `6px ${PAINT.ink}`, paintOrder: 'stroke', textShadow: `0 14px 0 ${PAINT.ink}`, textTransform: 'uppercase', whiteSpace: 'pre-line'}}>{c.text}</div>
+        {c.sub ? <div style={{marginTop: 26, fontFamily: HAND, fontWeight: 700, fontSize: 64, color: PAINT.cream}}>{c.sub}</div> : null}</div>
+      <AbsoluteFill style={{background: '#FFFFFF', opacity: fl * (q > 0.18 ? 0.8 : 0)}} /></AbsoluteFill>; },
 };
 GAGS2.blackbeat = GAGS2.black;

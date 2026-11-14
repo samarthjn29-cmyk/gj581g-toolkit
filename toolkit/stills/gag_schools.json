@@ -354,6 +354,34 @@
       "kind": "clones",
       "vanishAt": "*"
      }
+    },
+    {
+     "id": "H-checklist",
+     "name": "gag study 14 Nov 2026 (eighth study): checklist (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "checklist"
+     }
+    },
+    {
+     "id": "H-tier",
+     "name": "gag study 14 Nov 2026 (eighth study): tier (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "tier"
+     }
+    },
+    {
+     "id": "H-stretch",
+     "name": "gag study 14 Nov 2026 (eighth study): stretch (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "stretch"
+     }
+    },
+    {
+     "id": "H-titledrop",
+     "name": "gag study 14 Nov 2026 (eighth study): titledrop (EFFECTS_LIBRARY.md)",
+     "match": {
+      "kind": "titledrop"
+     }
     }
    ]
   },

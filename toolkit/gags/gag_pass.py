@@ -20,7 +20,7 @@ def fxlib():
 
 # Library gags start from a given video (Sam, 13 Nov 2026: the fourth gag study's gags "start using them from next video onwards").
 # An entry whose source names one of these study dates is left out of the pack for the videos listed (script file prefix).
-NOT_FOR = {'13 Nov 2026': ('Aliens',)}
+NOT_FOR = {'13 Nov 2026': ('Aliens',), '14 Nov 2026': ('Aliens',)}   # the 14 Nov (eighth study) gags follow the same start
 
 def sounds():
     lib = set(re.findall(r'"id":"sfx_([a-z_0-9]+)"', open(os.path.join(TK, 'media', 'sound_library.html')).read()))
