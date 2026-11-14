@@ -28,7 +28,8 @@ const MOVES = {   // [scale from, scale to, x from, x to, y from, y to] in % of 
 // A real document page (Sam, 10 Nov 2026: show the actual paper): the scan on a dark desk, a highlighter sweeping each hl box
 // [x0, y0, x1, y1] (0-1 of the page) from hl_at s into the shot, the camera easing in toward the first box (zoom, default 1.7).
 // plotagraph (Sam, 14 Nov 2026): s.flow = {mask (PNG, white = flows) or y / y2 (a band, fractions), dir [dx, dy], len px, period s,
-// at s (starts flowing then, fading in over fade s)}.
+// at s (starts flowing then, fading in over fade s), img (what flows: for a reverse cinemagraph, subject.py's far.png, the still with
+// the subject painted out, so no copy of the subject ever slides at the mask's edge)}.
 // The masked part of the painting streams along dir for ever (sand off a dune, cloud, smoke, water) while the rest holds still: two
 // copies slide by len px over each period, half a period apart, cross-fading so the loop never jumps. A reverse cinemagraph = a flow
 // (or particles) everywhere except the subject: mask = the inverse of subject.py's near.png.
@@ -170,7 +171,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
       : <><Img src={staticFile(`${dir}/${src === s.img && s.parts && s.parts_base ? s.parts_base : src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />
         {src === s.img && s.flow ? (() => { const F = s.flow, Tp = F.period ?? 3, len = F.len ?? 60, [dx, dy] = F.dir || [1, 0], mk = F.mask ? `url(${staticFile(`${dir}/${F.mask}`)})` : `linear-gradient(to bottom, transparent ${((F.y ?? 0.6) - 0.08) * 100}%, #000 ${(F.y ?? 0.6) * 100}%, #000 ${(F.y2 ?? 1) * 100}%, transparent 100%)`;
           return <div style={{position: 'absolute', inset: 0, WebkitMaskImage: mk, maskImage: mk, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}}>{[0, 0.5].map(o => { const ph = ((t / Tp + o) % 1 + 1) % 1, op = (1 - Math.abs(2 * ph - 1)) * (F.at != null ? Math.min(1, Math.max(0, (q - F.at) / (F.fade ?? 0.8))) : 1);
-            return <Img key={o} src={staticFile(`${dir}/${s.parts_base && s.parts ? s.parts_base : src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: op, transform: `translate(${dx * len * (ph - 0.5)}px, ${dy * len * (ph - 0.5)}px) scale(${1 + Math.abs(len) / 1920 + 0.01})`}} />; })}</div>; })() : null}
+            return <Img key={o} src={staticFile(`${dir}/${F.img || (s.parts_base && s.parts ? s.parts_base : src)}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: op, transform: `translate(${dx * len * (ph - 0.5)}px, ${dy * len * (ph - 0.5)}px) scale(${1 + Math.abs(len) / 1920 + 0.01})`}} />; })}</div>; })() : null}
         {src === s.img && s.parts ? s.parts.map((p, i) => <React.Fragment key={i}>{p.act === 'write' && p.ink !== false ? <Ink p={p} q={q} /> : null}{p.bend ? <Bend p={p} q={q} dir={dir} sid={`${s.id}_${i}`} /> : <Img src={staticFile(`${dir}/${p.img}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', ...partMove(p, q, t)}} />}</React.Fragment>) : null}
         {src === s.img && (s.cine || s.haze) ? <Img src={staticFile(`${dir}/${src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: `url(#sh_${s.id})`,
           WebkitMaskImage: s.cine ? `url(${staticFile(`${dir}/${s.cine.mask}`)})` : `linear-gradient(to bottom, transparent ${((s.haze.y ?? 0.62) - 0.08) * 100}%, #000 ${(s.haze.y ?? 0.62) * 100}%, #000 ${((s.haze.y2 ?? 0.95)) * 100}%, transparent 100%)`,
@@ -469,13 +470,16 @@ export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { c
       if (t < s.t - 0.01 || t > end + 0.01) return null;
       return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><ShotFx s={s} t={t}><Shot s={s} t={t} dir={dir} words={words} /></ShotFx>
         {s.src && F.srcTags ? <div style={{position: 'absolute', right: 28, bottom: 22, fontFamily: 'Inter, sans-serif', fontSize: 20, letterSpacing: 1, color: 'rgba(241,230,207,0.8)', textShadow: '0 1px 4px rgba(0,0,0,0.9)'}}>{s.src}</div> : null}</AbsoluteFill>; })}</>;   // corner source tag (Defunctland, gag study 12 Nov 2026): only with finish.srcTags, because Sam's 8 Nov 2026 rule keeps source labels off screen
-  const cardLayer0 = <>{P.on ? <PaintDefs /> : null}{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
+  // atmosphere (particles) sits under every other card, so a letterbox or a full-screen card covers it and the sand stays inside
+  // the picture (Sam, Moctar ch05, 14 Nov 2026: "The wind in the black screen at the bottom doesn't look good")
+  const cardsZ = [...cards.filter(c => c.kind === 'particles'), ...cards.filter(c => c.kind !== 'particles')];
+  const cardLayer0 = <>{P.on ? <PaintDefs /> : null}{cardsZ.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
   // cards that read the picture behind them (backdrop-filter: freeze grey-out, blur censor, VHS glitch) stay outside the painted
   // wrapper, because a filtered parent cuts them off from the backdrop (painted test, 12 Nov 2026: the freeze stopped greying)
   const BACK = c => c.kind === 'freeze' || c.kind === 'glitch' || (c.kind === 'censor' && c.mode === 'blur');
   const cardLayer = F.painted ? <><PaintFilterDefs f={F} />{P.on ? <PaintDefs /> : null}<AbsoluteFill style={{filter: `url(#gjPaint) saturate(${F.paintSat ?? 0.85}) sepia(${F.paintSepia ?? 0.16})`}}>
-      {cards.map((c, i) => BACK(c) ? null : <Card key={i} c={c} t={t} words={words} dir={dir} />)}</AbsoluteFill>
-    {cards.map((c, i) => BACK(c) ? <Card key={'b' + i} c={c} t={t} words={words} dir={dir} /> : null)}</> : cardLayer0;
+      {cardsZ.map((c, i) => BACK(c) ? null : <Card key={i} c={c} t={t} words={words} dir={dir} />)}</AbsoluteFill>
+    {cardsZ.map((c, i) => BACK(c) ? <Card key={'b' + i} c={c} t={t} words={words} dir={dir} /> : null)}</> : cardLayer0;
   if (!F.desk) return <AbsoluteFill style={{background: '#000'}}>
     <Audio src={staticFile(`${dir}/vo.mp3`)} />{pics}{F.overCards ? cardLayer : null}<Finish f={finish} dir={dir} />{F.noise ? <Grain o={F.noise} /> : null}{F.overCards ? null : cardLayer}</AbsoluteFill>;   // overCards: grade-wide finish over the cards too (style 2)
   // desk: which print is on top now (a full-screen card counts as its own print), its tilt and paper

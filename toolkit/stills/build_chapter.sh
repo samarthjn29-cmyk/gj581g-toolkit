@@ -34,7 +34,7 @@ for sh in P['shots']:
         if not os.path.isdir(src): src = f"{proj}/stills/{sh['layers']}"   # subject.py / layers.py output kept with the stills
         if os.path.isdir(src): shutil.copytree(src, f"{out}/{sh['layers']}", dirs_exist_ok=True)
         else: miss.append(sh['layers'])
-    extra = [sh.get('parts_base')] + [x.get(k) for x in sh.get('parts', []) for k in ('img', 'bend')] + [(sh.get('flow') or {}).get('mask'), (sh.get('cine') or {}).get('mask')]
+    extra = [sh.get('parts_base')] + [x.get(k) for x in sh.get('parts', []) for k in ('img', 'bend')] + [(sh.get('flow') or {}).get('mask'), (sh.get('flow') or {}).get('img'), (sh.get('cine') or {}).get('mask')]
     for f in [x for x in extra if x]:   # moving parts, plotagraph and cinemagraph masks (part.py / subject.py output under stills/)
         src = f"{proj}/stills/{f}"
         if os.path.exists(src): os.makedirs(os.path.dirname(f"{out}/{f}"), exist_ok=True); shutil.copy(src, f"{out}/{f}")
