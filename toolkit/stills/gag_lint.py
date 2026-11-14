@@ -43,7 +43,7 @@ PAINTED = {'signoff', 'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 
            'freeze', 'sticker', 'glint', 'text', 'info', 'route', 'pov', 'doc', 'split', 'later', 'chips', 'panels', 'clones', 'pile', 'doodle',
            'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black',
            # 13 Nov gag studies: drawn in the painted palette in Gags2.jsx (PAINT/HAND/paper)
-           'tear', 'void', 'tumble', 'peel', 'letterbox', 'lightsweep', 'sand', 'streak', 'leak', 'halftone', 'chyron', 'credits', 'wordcut', 'flashbulb', 'flicker',
+           'tear', 'void', 'tumble', 'peel', 'letterbox', 'lightsweep', 'sand', 'streak', 'leak', 'halftone', 'chyron', 'credits', 'wordcut', 'flashbulb', 'flicker', 'flash',
            # 14 Nov 2026 (Sam: "Paint all the gags"): the older flat kinds map to the palette (PC/PF in Gags.jsx) + 8th-study cards
            'callin', 'advert', 'grey', 'grid', 'namesake', 'variants', 'burst', 'grow', 'arrow', 'censor', 'iris', 'spotlight', 'errorbox',
            'strike', 'caption', 'trend', 'rec', 'confetti', 'beam', 'dust', 'checklist', 'tier', 'titledrop', 'trophy', 'stretch', 'nest',
@@ -53,7 +53,7 @@ unpainted = 0
 if (P.get('finish') or {}).get('gags') != 'flat':
     for c in P.get('cards', []):
         where = f"{c.get('at')}/{c.get('word', '-')}"
-        if c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file')): unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
+        if (c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file'))) and not str(c.get('file', '')).endswith('_painted.json'):   # lottie_paint.py recolours a Lottie to the palette (14 Nov 2026) unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
         elif c['kind'] == 'overlay' and str(c.get('file', '')).endswith(('.mp4', '.webm', '.mov')): print(f"  note       overlay {where}: the painted kit draws painted grain instead of {c.get('file')}")
         elif c['kind'] in CUTOUT and any(str(c.get(k, '')).endswith('.png') and not str(c.get(k, '')).startswith('S3_') for k in ('img', 'host', 'cut')): print(f"  check      {c['kind']:<10} {where}  cut-out {c.get('img') or c.get('host') or c.get('cut')}: use an AI-painted cut-out (S3_*), not a flat stand-in")
         elif c['kind'] not in PAINTED: unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  this kind has no painted look yet: add one in kit/Paint.jsx first")

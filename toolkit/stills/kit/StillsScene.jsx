@@ -258,7 +258,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
         return <svg key={i} width={sz * 2 + 1} height={sz * 2 + 1} style={{position: 'absolute', left: sx * 1920 - sz, top: sy * 1080 - sz, transform: `rotate(${q * 90}deg)`}} viewBox="-1 -1 2 2">
           <path d="M0,-1 C0.08,-0.08 0.08,-0.08 1,0 C0.08,0.08 0.08,0.08 0,1 C-0.08,0.08 -0.08,0.08 -1,0 C-0.08,-0.08 -0.08,-0.08 0,-1 Z" fill="#FFFFFF" opacity={0.95} /></svg>; })}
     </AbsoluteFill>; }
-  if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || '#FFFFFF', opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
+  if (c.kind === 'flash') return <AbsoluteFill style={{background: c.color || (P.on ? '#FFF8E8' : '#FFFFFF'), opacity: 1 - R(t, c.t, c.t + (c.dur || 0.25))}} />;
   if (c.kind === 'pip') { const q = t - c.t, b = q < 0 ? 0 : 1 + 0.25 * Math.exp(-q * 6) * Math.sin(q * 20) - Math.exp(-q * 14);
     return <AbsoluteFill style={{opacity: 1 - R(t, c.t + d - 0.2, c.t + d)}}><div style={{position: 'absolute', right: c.right ?? 70, bottom: c.bottom ?? 70, width: c.w || 560, height: (c.w || 560) * 9 / 16, transform: `scale(${b}) rotate(${c.rot ?? 4}deg)`, transformOrigin: '100% 100%',
       border: '10px solid #FFFFFF', borderRadius: 14, overflow: 'hidden', boxShadow: '0 18px 50px rgba(0,0,0,0.6)'}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div></AbsoluteFill>; }
