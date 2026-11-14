@@ -13,8 +13,17 @@ F = np.frombuffer(raw, np.uint8).reshape(-1, H, W).astype(np.float32)
 d = np.abs(np.diff(F, axis=0)).mean(axis=(1, 2))            # frame-to-frame change
 # A transition = a run of changing frames (d > 4) lasting at most 6 frames whose total change is large: hard cuts and the kit's
 # quick 0.15-0.3 s card fades. Slow dissolves and camera moves spread their change thinly and are ignored.
-def corr(x, y):   # same picture before and after (a crash zoom, shake or whip on one still) is a move, not a cut
+def _c(x, y):
     x = x - x.mean(); y = y - y.mean(); return float((x * y).sum() / (np.sqrt((x * x).sum() * (y * y).sum()) + 1e-6))
+from PIL import Image as _I
+def corr(x, y):   # same picture before and after (a crash zoom, bounce, shake or whip on one still) is a move, not a cut:
+    best = _c(x, y)  # also try the after-frame zoomed in or out against the before-frame (Moctar bet 'bounce', 14 Nov 2026)
+    for z in (0.7, 0.8, 0.9, 1.12, 1.25, 1.43):
+        a, b = (x, y) if z > 1 else (y, x); zz = z if z > 1 else 1 / z
+        w, h = int(W / zz), int(H / zz); x0, y0 = (W - w) // 2, (H - h) // 2
+        crop = np.asarray(_I.fromarray(a[y0:y0 + h, x0:x0 + w].astype(np.uint8)).resize((W, H)), np.float32)
+        best = max(best, _c(crop, b))
+    return best
 ev, i = [], 0
 while i < len(d):
     if d[i] > 4:
