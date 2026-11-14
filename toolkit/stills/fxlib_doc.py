@@ -26,8 +26,8 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 - Tested: the 28 gags of 12 Nov, the 9 of the 13 Nov fourth study, the 8 of the fifth study, the 9 of the sixth study, the 8 of the seventh study and the 4 cards of the eighth study rendered in the painted finish (preview reels sent to Sam), plus 16 older cards.
 - **Every kind is painted now (Sam, 14 Nov 2026: "Paint all the gags ... and the new gags built by another chat").** The older flat cards (call-in, advert, grid, namesake, variants, burst, grow, arrow, censor, iris, spotlight, error box, strike, meme caption, trend, REC, confetti) map every colour to the gouache palette and their computer type to Fraunces / Kalam when `finish.gags` is "painted"; the eighth-study cards (checklist, tier, title drop, trophy, stretch, nest, roll call) and beam, dust, palm, foreground are listed as painted; new drama moves (vertigo, rack, ramp, colour drain, match cut, letterbox) and the painted peel are in `styles/DRAMA_MOVES.md`. `gag_lint.py` passes 96 kinds; the white `flash` turns cream in painted mode; the 28 Lottie animations have palette-recoloured copies (`stills/lottie_paint.py` writes `NAME_painted.json`), and gag_lint accepts only those. They stay flat vector cartoons in the palette, so use them sparingly; a Lottie with an embedded raster picture (one of the 28) keeps that picture.
 """
-SECTIONS = [('Camera move', 'Camera moves'), ('Gag move', 'Gag moves'), ('Card', 'Cards'), ('Picture gag', 'Picture gags'), ('Animation', 'Animations'),
-            ('Habit', 'Habits (sound and writing shapes, no card of their own)')]
+SECTIONS = [(c, c) for c in ['Camera moves', 'Gag moves', 'Picture treatments', 'Transitions', 'Atmosphere and light', 'Text and titles', 'Explainers',
+            'Reactions and characters', 'Jokes (picture gags)', 'Music moves', 'Sound moves', 'Edit and structure habits', 'Animations (flat Lottie, palette-recoloured; use sparingly)']]
 TAIL = """
 Real recorded sounds (Mixkit, prefix `r:` in the plans) are listed in `fxlib.py` REAL and the Gag Library page.
 
@@ -51,7 +51,7 @@ def main(out, date='13 Nov 2026'):
     for grp, title in SECTIONS:
         L += [f'## {title}', '', '| id | name | use it for | plan fields | paired sound | shape from |', '|---|---|---|---|---|---|']
         for e in E:
-            if e['group'] != grp: continue
+            if e['category'] != grp: continue
             mark = ' **· from the next video**' if any(d in e['source'] for d in NOT_FOR) else ''
             L.append(f"| `{e['id']}` | {e['name']} | {e['use']} | {plan(e)} | {', '.join(e['sounds']) or '-'} | {e['source'] or '-'}{mark} |")
         L.append('')

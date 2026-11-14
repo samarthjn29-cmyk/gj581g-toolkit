@@ -5,7 +5,7 @@ root is an AbsoluteFill with a background counts as opaque, so a new full-screen
 import os, re, glob
 HAND = {'panels', 'title', 'number', 'split', 'bars', 'triptych', 'chain', 'later', 'ruler', 'advert', 'grid', 'namesake',
         'variants', 'recap', 'scroll', 'linechart', 'void', 'black', 'blocks', 'blueprint', 'equation', 'nest', 'rollcall', 'search', 'credits', 'wordcut'}
-NOT = {'glitch', 'iris', 'pov', 'leak', 'lightsweep', 'halftone', 'sand', 'streak', 'letterbox', 'flashbulb', 'flicker'}   # transitions / partial overlays: the picture still shows
+NOT = {'glitch', 'iris', 'pov', 'leak', 'lightsweep', 'halftone', 'sand', 'streak', 'letterbox', 'flashbulb', 'flicker', 'wipe'}   # transitions / partial overlays: the picture still shows
 def _scan():
     here = os.path.dirname(os.path.abspath(__file__)); rm = os.environ.get('RM', '/home/claude/twice/remotion')
     files = glob.glob(f'{rm}/src/stills/*.jsx') + glob.glob(f'{here}/kit/*.jsx'); out = set()

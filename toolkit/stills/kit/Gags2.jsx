@@ -399,6 +399,83 @@ export const GAGS2 = {
     for (const [at, v] of pat) if (q >= at) o = v; o *= Math.exp(-Math.max(0, q - 0.45) * 4);
     return <AbsoluteFill style={{background: c.color || '#EAF0FF', mixBlendMode: 'screen', opacity: o * out, pointerEvents: 'none'}} />; },
 
+  // ---- painted transitions (Sam, 14 Nov 2026: library categories -> "build transitions"). Put the card on the outgoing shot, ending
+  // on the cut, with c.img = the NEXT shot's picture: the next picture is revealed over c.dur s, then the real cut lands under it.
+  // wipe: c.style 'tear' (a torn paper edge crosses the frame), 'ink' (ink blots bloom and join), 'brush' (three gouache strokes
+  // sweep across), 'page' (the old picture turns away like a page, the new one underneath), 'object' (c.obj, a painted cut-out
+  // PNG, flies across the lens and the new picture is behind it). c.dir 1 = left to right. Sound: rip / swell / whoosh / page.
+  wipe: (c, q, d, out, dir) => { const p = Easing.inOut(Easing.cubic)(Math.min(1, Math.max(0, q / d))), st = c.style || 'tear', L2R = (c.dir ?? 1) > 0, next = <Pic dir={dir} f={c.img} />;
+    if (st === 'tear') { const n = 28, x = (L2R ? p : 1 - p) * 118 - 9, pts = Array.from({length: n + 1}, (_, i) => [x + (rnd(i, 7) - 0.5) * 5, i / n * 100]);
+      const poly = L2R ? `polygon(0% 0%, ${pts.map(([a, b]) => `${a}% ${b}%`).join(', ')}, 0% 100%)` : `polygon(100% 0%, ${pts.map(([a, b]) => `${a}% ${b}%`).join(', ')}, 100% 100%)`;
+      const edge = pts.map(([a, b]) => `${a}% ${b}%`).join(', ');
+      return <AbsoluteFill style={{pointerEvents: 'none'}}><AbsoluteFill style={{clipPath: poly}}>{next}</AbsoluteFill>
+        <AbsoluteFill style={{clipPath: L2R ? `polygon(${pts.map(([a, b]) => `${a}% ${b}%`).join(', ')}, ${pts.slice().reverse().map(([a, b]) => `${a + 1.6}% ${b}%`).join(', ')})` : `polygon(${pts.map(([a, b]) => `${a}% ${b}%`).join(', ')}, ${pts.slice().reverse().map(([a, b]) => `${a - 1.6}% ${b}%`).join(', ')})`, background: PAINT.cream, filter: 'drop-shadow(0 0 6px rgba(0,0,0,0.5))'}} /></AbsoluteFill>; }
+    if (st === 'ink') { const blots = [[0.3, 0.4, 0], [0.7, 0.6, 0.12], [0.5, 0.2, 0.2], [0.2, 0.8, 0.28], [0.85, 0.25, 0.34]];
+      const m = blots.map(([x, y, o]) => `radial-gradient(circle ${Math.max(0, (p - o) / (1 - o)) * 1500}px at ${x * 100}% ${y * 100}%, #000 97%, transparent 100%)`).join(', ');
+      return <AbsoluteFill style={{pointerEvents: 'none', WebkitMaskImage: m, maskImage: m, WebkitMaskComposite: 'source-over'}}>{next}</AbsoluteFill>; }
+    if (st === 'brush') { const bands = [0, 1, 2].map(i => { const pi = Math.min(1, Math.max(0, p * 1.6 - i * 0.3)), y0 = i * 33.3 - 4, x = (L2R ? pi : 1 - pi) * 110;
+        return L2R ? `polygon(0% ${y0}%, ${x}% ${y0 + 2}%, ${x - 3}% ${y0 + 20}%, ${x + 2}% ${y0 + 38}%, 0% ${y0 + 38}%)` : `polygon(100% ${y0}%, ${x}% ${y0 + 2}%, ${x + 3}% ${y0 + 20}%, ${x - 2}% ${y0 + 38}%, 100% ${y0 + 38}%)`; });
+      return <AbsoluteFill style={{pointerEvents: 'none'}}>{bands.map((b, i) => <AbsoluteFill key={i} style={{clipPath: b, filter: 'url(#pRough)'}}>{next}</AbsoluteFill>)}</AbsoluteFill>; }
+    if (st === 'page') { return <AbsoluteFill style={{pointerEvents: 'none', perspective: 1800}}>{next}
+        <AbsoluteFill style={{transformOrigin: L2R ? '0% 50%' : '100% 50%', transform: `rotateY(${(L2R ? -1 : 1) * p * 100}deg)`, boxShadow: `0 0 ${60 * p}px rgba(0,0,0,${0.5 * p})`, opacity: p > 0.98 ? 0 : 1}}>
+          {c.prev ? <Pic dir={dir} f={c.prev} /> : <AbsoluteFill style={{background: PAINT.paper}} />}<AbsoluteFill style={{background: `linear-gradient(${L2R ? 90 : 270}deg, rgba(0,0,0,0) 60%, rgba(0,0,0,${0.35 * p}))`}} /></AbsoluteFill></AbsoluteFill>; }
+    if (st === 'object') { const x = (L2R ? -0.35 + 1.7 * p : 1.35 - 1.7 * p) * 100, edge = L2R ? x : x;
+      return <AbsoluteFill style={{pointerEvents: 'none'}}><AbsoluteFill style={{clipPath: L2R ? `inset(0 ${100 - Math.max(0, edge)}% 0 0)` : `inset(0 0 0 ${Math.min(100, edge)}%)`}}>{next}</AbsoluteFill>
+        {c.obj ? <Img src={staticFile(`${dir}/${c.obj}`)} style={{position: 'absolute', left: `${x - 30}%`, top: '-10%', height: '120%', filter: 'blur(3px) drop-shadow(0 10px 30px rgba(0,0,0,0.6))'}} /> : null}</AbsoluteFill>; }
+    return null; },
+
+  // ---- painted explainers (Sam, 14 Nov 2026: "build ... explainers") ----
+  // timeline: a hand-inked line draws across, dated ticks pop on one by one with short labels (c.items = [[label, note], ...],
+  // c.gap s apart, c.y row). Painted paper ground when c.ground. Sound: pencil while drawing, pop per tick.
+  timeline: (c, q, d, out) => { const it = c.items || [], gap = c.gap ?? 0.6, p = R(q, 0, 0.6), x0 = 160, x1 = W - 160, y = (c.y ?? 0.55) * H, n = Math.max(1, it.length - 1);
+    return <AbsoluteFill style={{opacity: out, background: c.ground || 'transparent'}}><svg width={W} height={H} style={{position: 'absolute'}}>
+      <line x1={x0} y1={y} x2={x0 + (x1 - x0) * p} y2={y} stroke={PAINT.ink} strokeWidth={9} strokeLinecap="round" /></svg>
+      {it.map(([lab, note], i) => { const qi = q - 0.5 - i * gap, x = x0 + (x1 - x0) * i / n; if (qi < 0) return null;
+        return <div key={i} style={{position: 'absolute', left: x, top: y, transform: `translate(-50%, -50%) scale(${pop(qi, 0.5)})`, textAlign: 'center'}}>
+          <div style={{width: 30, height: 30, borderRadius: 15, background: PAINT.red, border: `5px solid ${PAINT.cream}`, margin: '0 auto', boxShadow: '0 3px 8px rgba(0,0,0,0.4)'}} />
+          <div style={{position: 'absolute', left: '50%', top: i % 2 ? 40 : -110, transform: 'translateX(-50%)', ...brushBox({padding: '6px 18px 10px', whiteSpace: 'nowrap'})}}>
+            <div style={{fontFamily: SERIF, fontWeight: 700, fontSize: 44, color: PAINT.ink}}>{lab}</div>{note ? <div style={{fontFamily: HAND, fontSize: 30, color: PAINT.red}}>{note}</div> : null}</div></div>; })}</AbsoluteFill>; },
+  // sizecompare: two painted cut-outs (c.a, c.b PNGs) stand side by side on a ground line; the second grows (or shrinks) to its true
+  // ratio c.ratio over 0.8 s, labels underneath. A size you can feel. Sound: climb or fall.
+  sizecompare: (c, q, d, out, dir) => { const r = c.ratio ?? 3, p = Easing.out(Easing.cubic)(R(q, 0.3, 1.1)), hA = (c.h ?? 0.28) * H, hB = hA * (1 + (r - 1) * p), base = (c.y ?? 0.86) * H;
+    const fig = (f, h, x, lab) => <div style={{position: 'absolute', left: x, top: base - h, height: h, transform: 'translateX(-50%)', textAlign: 'center'}}>
+      <Img src={staticFile(`${dir}/${f}`)} style={{height: h, filter: 'drop-shadow(0 8px 14px rgba(0,0,0,0.45))'}} />
+      <div style={{position: 'absolute', left: '50%', top: h + 12, transform: 'translateX(-50%)', ...brushBox({padding: '4px 16px 8px', fontFamily: HAND, fontSize: 38, whiteSpace: 'nowrap'})}}>{lab}</div></div>;
+    return <AbsoluteFill style={{opacity: out, background: c.ground || 'transparent'}}>
+      <div style={{position: 'absolute', left: 120, right: 120, top: base, height: 6, background: PAINT.ink, borderRadius: 3, opacity: 0.7}} />
+      {fig(c.a, hA, W * 0.33, c.la || '')}{fig(c.b, hB, W * 0.66, c.lb || '')}</AbsoluteFill>; },
+  // diagram: 2-5 hand-lettered callouts with ink leader lines to points on the picture, drawn on one by one (c.items =
+  // [[label, x, y, lx, ly], ...]: point x,y and label position lx,ly, fractions), c.gap s apart. Never on a face. Sound: squeak each.
+  diagram: (c, q, d, out) => { const it = c.items || [], gap = c.gap ?? 0.5;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>{it.map(([lab, x, y, lx, ly], i) => { const p = R(q, i * gap, i * gap + 0.35);
+        return <g key={i}><line x1={lx * W} y1={ly * H} x2={(lx + (x - lx) * p) * W} y2={(ly + (y - ly) * p) * H} stroke={PAINT.ink} strokeWidth={5} strokeLinecap="round" />
+          {p > 0.95 ? <circle cx={x * W} cy={y * H} r={11} fill={PAINT.red} stroke={PAINT.cream} strokeWidth={4} /> : null}</g>; })}</svg>
+      {it.map(([lab, x, y, lx, ly], i) => { const qi = q - i * gap; if (qi < 0) return null;
+        return <div key={i} style={{position: 'absolute', left: lx * W, top: ly * H, transform: `translate(-50%, -50%) scale(${pop(qi, 0.5)})`, ...brushBox({padding: '6px 20px 10px', fontFamily: HAND, fontSize: c.size || 44, whiteSpace: 'nowrap'})}}>{lab}</div>; })}</AbsoluteFill>; },
+  // beforeafter: a painted slider handle sweeps across, showing c.after (picture) over the shot's own picture c.before; labels
+  // BEFORE / AFTER (c.labels). The handle stops at c.stop (0-1). Sound: a slide.
+  beforeafter: (c, q, d, out, dir) => { const p = Easing.inOut(Easing.cubic)(R(q, 0.2, 1.2)) * (c.stop ?? 1), x = p * 100, lb = c.labels || ['BEFORE', 'AFTER'];
+    return <AbsoluteFill style={{opacity: out}}><AbsoluteFill style={{clipPath: `inset(0 ${100 - x}% 0 0)`}}><Pic dir={dir} f={c.after} /></AbsoluteFill>
+      <div style={{position: 'absolute', left: `${x}%`, top: 0, bottom: 0, width: 8, marginLeft: -4, background: PAINT.cream, boxShadow: '0 0 14px rgba(0,0,0,0.6)'}} />
+      <div style={{position: 'absolute', left: `${x}%`, top: '50%', width: 70, height: 70, marginLeft: -35, marginTop: -35, borderRadius: 35, background: PAINT.cream, border: `6px solid ${PAINT.ink}`}} />
+      <div style={{position: 'absolute', right: 60, top: 50, ...brushBox({padding: '6px 18px 10px', fontFamily: SERIF, fontWeight: 700, fontSize: 40})}}>{lb[0]}</div>
+      <div style={{position: 'absolute', left: 60, top: 50, opacity: R(q, 0.5, 0.8), ...brushBox({padding: '6px 18px 10px', fontFamily: SERIF, fontWeight: 700, fontSize: 40})}}>{lb[1]}</div></AbsoluteFill>; },
+  // ---- painted puppets (character acting) ----
+  // actor: a painted cut-out figure (c.img PNG, AI-painted) placed at x, y (feet), height h, that acts: c.act 'bob' (idle breathing),
+  // 'turn' (flips to face the other way at c.at), 'shrug' (squash up and settle at c.at), 'hop' (a small jump at c.at), 'enter'
+  // (slides in from c.from 'left' | 'right'); c.imgs + c.times swaps expressions (cut on the beat). Sound: per act.
+  actor: (c, q, d, out, dir) => { const x = (c.x ?? 0.5) * W, y = (c.y ?? 0.9) * H, h = (c.h ?? 0.55) * H, at = c.at ?? 0.6, act = c.act || 'bob';
+    let sx = 1, sy = 1, dx = 0, dy = 0, rot = 0; const b = Math.sin(q * 2.4);
+    sy *= 1 + 0.012 * b; dy += -3 * b;
+    if (act === 'turn' && q >= at) sx = q < at + 0.12 ? Math.cos(Math.PI * (q - at) / 0.12) : -1;
+    if (act === 'shrug' && q >= at) { const k = q - at; sy *= 1 + 0.07 * Math.exp(-k * 5) * Math.sin(k * 14); sx *= 1 - 0.03 * Math.exp(-k * 5) * Math.sin(k * 14); }
+    if (act === 'hop' && q >= at && q < at + 0.45) dy -= Math.sin(Math.PI * (q - at) / 0.45) * h * 0.12;
+    if (act === 'enter') dx = (c.from === 'right' ? 1 : -1) * (1 - Easing.out(Easing.cubic)(R(q, 0, 0.6))) * W * 0.6;
+    if (c.lean) rot = c.lean * Math.sin(q * 1.3);
+    const im = c.imgs ? c.imgs[Math.max(0, (c.times || []).filter(tt => q >= tt).length - 1)] || c.imgs[0] : c.img;
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><Img src={staticFile(`${dir}/${im}`)} style={{position: 'absolute', left: x - h * 0.5 + dx, top: y - h + dy, height: h, transformOrigin: '50% 100%',
+      transform: `scale(${sx}, ${sy}) rotate(${rot}deg)`, filter: 'drop-shadow(0 10px 16px rgba(0,0,0,0.45))'}} /></AbsoluteFill>; },
+
   // letterbox (DRAMA_MOVES D5, Sam 14 Nov 2026: "a bit dramatic"): black cinema bars slide in from top and bottom over 0.45 s to
   // c.ratio (default 2.39:1) for the big moment, and slide out over the card's last 0.45 s. Overlay: the picture keeps playing.
   letterbox: (c, q, d) => { const bar = (H - W / (c.ratio || 2.39)) / 2, p = Easing.inOut(Easing.cubic)(R(q, 0, 0.45)) * (1 - Easing.inOut(Easing.cubic)(R(q, d - 0.45, d)));

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cut the main subject out of a still for the drama moves (DRAMA_MOVES.md: vertigo, rack focus, colour drain).
-Writes OUTDIR/near.png (the subject, RGBA), OUTDIR/far.png and mid.png (the picture with the subject painted out by
+Writes OUTDIR/near.png (the subject, RGBA, full frame), OUTDIR/cut.png (the same, trimmed to the subject), OUTDIR/far.png and mid.png (the picture with the subject painted out by
 inpainting, so a background that grows behind the subject never shows a ghost of it). rembg isnet-general-use, CPU.
 Usage: subject.py STILL.jpg OUTDIR [--grow 18]   Set the shot's layers to OUTDIR, or isolate to OUTDIR/near.png."""
 import sys, os, argparse, numpy as np, cv2
@@ -9,7 +9,8 @@ from rembg import remove, new_session
 ap = argparse.ArgumentParser(); ap.add_argument('img'); ap.add_argument('out'); ap.add_argument('--grow', type=int, default=18); a = ap.parse_args()
 os.makedirs(a.out, exist_ok=True)
 im = Image.open(a.img).convert('RGB'); cut = remove(im, session=new_session('isnet-general-use'))
-cut.save(f'{a.out}/near.png')
+cut.save(f'{a.out}/near.png'); bb = cut.getchannel('A').point(lambda v: 255 if v > 40 else 0).getbbox()
+if bb: cut.crop(bb).save(f'{a.out}/cut.png')   # trimmed cut-out for actor / sizecompare / object wipes
 m = (np.asarray(cut)[:, :, 3] > 40).astype(np.uint8) * 255
 m = cv2.dilate(m, np.ones((a.grow, a.grow), np.uint8))
 small = 4; bgr = cv2.cvtColor(np.asarray(im), cv2.COLOR_RGB2BGR)

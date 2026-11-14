@@ -224,7 +224,6 @@ L = [
  ('glow', 'Camera move', 'Practical glow', 'A lamp or screen in the still pulses softly.', {'move': 'hold', 'glow': {'x': 0.5, 'y': 0.5, 'r': 0.12}}, None, '', 'CINEMATIC C6'),
  ('cine', 'Camera move', 'Cinemagraph', 'One thing in the still moves (string, sand, cloth) while the painting holds still (cut-out mask).', {'move': 'hold', 'cine': {'mask': 'layers/X/near.png'}}, None, '', 'CINEMATIC C12'),
  ('haze', 'Camera move', 'Heat haze', 'The lower band of a desert still shimmers.', {'move': 'drift', 'haze': {'y': 0.62}}, None, '', 'CINEMATIC C3'),
- ('peel', 'Picture gag', 'Peeling stamp (painted)', 'A stamped kraft sticker peels off to show the next label, then the last one.', {}, {'kind': 'peel', 'texts': ['PAID?', 'NOT PAID'], 'last': 'NOT A SINGLE DOLLAR', 'times': [0.6, 1.4], 'dur': 2.6}, 'rip@0.6 rip@1.4 trombone@2.2', 'Mark Rober (Moctar, 14 Nov 2026)'),
  ('letterbox', 'Picture gag', 'Cinema bars', 'Black widescreen bars slide in for the big moment and out after.', {}, {'kind': 'letterbox', 'dur': 3.0}, '', 'DRAMA_MOVES D5'),
  ('lightsweep', 'Picture gag', 'Moving light', 'A soft warm light shaft drifts across the picture.', {}, {'kind': 'lightsweep', 'dur': 2.6}, '', 'CINEMATIC C1'),
  ('sand', 'Picture gag', 'Blowing sand', 'Fine ochre grains drift across the frame on the wind.', {}, {'kind': 'sand', 'dur': 2.6}, 'desert@0', 'CINEMATIC C4'),
@@ -248,6 +247,20 @@ L = [
  ('worldize', 'Habit', 'Phone-speaker music', 'The bed sounds as if from a phone speaker, then opens to full (mix_bed --worldize A:B).', {}, None, '', 'BIG_MOVES B7'),
  ('one_sound', 'Habit', 'One sound in silence', 'Everything stops and one small real sound plays, then the bed returns.', {}, None, 'pencil@0.4', 'BIG_MOVES B10'),
  ('shepard_build', 'Habit', 'Endless rise', 'A Shepard tone builds tension that never resolves, cut dead at the turn.', {}, None, 'shepard@0', 'Zimmer / Dunkirk (BIG_MOVES B1)'),
+ ('wipe_tear', 'Picture gag', 'Paper-tear wipe', 'A torn paper edge crosses the frame and the next picture is behind it.', {}, {'kind': 'wipe', 'style': 'tear', 'img': 'NEXT.jpg', 'dur': 0.8}, 'rip@0', 'painted transitions (14 Nov 2026)'),
+ ('wipe_ink', 'Picture gag', 'Ink-bleed wipe', 'Ink blots bloom and join to reveal the next picture.', {}, {'kind': 'wipe', 'style': 'ink', 'img': 'NEXT.jpg', 'dur': 0.9}, 'swell@0', 'painted transitions (14 Nov 2026)'),
+ ('wipe_brush', 'Picture gag', 'Brush-stroke wipe', 'Three gouache strokes sweep across and leave the next picture.', {}, {'kind': 'wipe', 'style': 'brush', 'img': 'NEXT.jpg', 'dur': 0.8}, 'whoosh@0', 'painted transitions (14 Nov 2026)'),
+ ('wipe_page', 'Picture gag', 'Page turn', 'The old picture turns away like a page; the new one is underneath.', {}, {'kind': 'wipe', 'style': 'page', 'img': 'NEXT.jpg', 'prev': 'THIS.jpg', 'dur': 0.8}, 'whoosh@0', 'painted transitions (14 Nov 2026)'),
+ ('wipe_object', 'Picture gag', 'Object wipe', 'A painted cut-out flies across the lens and the new picture is behind it (subject.py cut.png).', {}, {'kind': 'wipe', 'style': 'object', 'img': 'NEXT.jpg', 'obj': 'layers/X/cut.png', 'dur': 0.7}, 'doppler@0', 'painted transitions (14 Nov 2026)'),
+ ('timeline_card', 'Picture gag', 'Painted timeline', 'An ink line draws across; dated ticks pop on with short labels.', {}, {'kind': 'timeline', 'items': [['YEAR', 'note'], ['YEAR', 'note']], 'dur': 3.0}, 'pencil@0 pop@0.6', 'painted explainers (14 Nov 2026)'),
+ ('sizecompare', 'Picture gag', 'Size comparison', 'Two painted cut-outs on a ground line; the second grows to its true ratio.', {}, {'kind': 'sizecompare', 'a': 'a.png', 'b': 'b.png', 'ratio': 3, 'dur': 2.4}, 'climb@0.3', 'painted explainers (14 Nov 2026)'),
+ ('diagram', 'Picture gag', 'Labelled diagram', '2-5 hand-lettered callouts with ink leader lines drawn on one by one.', {}, {'kind': 'diagram', 'items': [['part', 0.5, 0.5, 0.2, 0.2]], 'dur': 2.4}, 'squeak@0 squeak@0.5', 'painted explainers (14 Nov 2026)'),
+ ('beforeafter', 'Picture gag', 'Before / after slider', 'A painted slider handle sweeps across to show the after picture over the before.', {}, {'kind': 'beforeafter', 'after': 'AFTER.jpg', 'dur': 2.0}, 'whoosh@0.2', 'painted explainers (14 Nov 2026)'),
+ ('actor', 'Picture gag', 'Painted puppet', 'A painted cut-out figure acts: bob, turn, shrug, hop, enter; imgs + times swap expressions on the beat.', {}, {'kind': 'actor', 'img': 'layers/X/cut.png', 'act': 'hop', 'at': 0.5, 'dur': 2.0}, 'boing@0.5', 'painted puppets (14 Nov 2026)'),
+ ('sting', 'Habit', 'In-key sting', "A chord stab in the bed's key on a punchline or reveal (music_moves.py sting).", {}, None, '', 'music moves (14 Nov 2026)'),
+ ('button', 'Habit', 'Button ending', 'The bed cuts and lands on its tonic chord with a low hit (music_moves.py button + mix_bed --button T).', {}, None, '', 'music moves (14 Nov 2026)'),
+ ('thin', 'Habit', 'Thin to one instrument', 'The bed narrows to a mid band, like one instrument left, for a sad or quiet line (mix_bed --thin A:B).', {}, None, '', 'music moves (14 Nov 2026)'),
+ ('lift', 'Habit', 'Key-change lift', 'The bed lifts a semitone at the turn (mix_bed --lift T).', {}, None, '', 'music moves (14 Nov 2026)'),
 ]
 
 SOUNDS = [('riser', 'Tension riser (ends hard; the hit goes right after)'), ('hit', 'Low cinematic hit'), ('pulse', 'Slow low tension pulse'), ('desert', 'Room tone: desert wind (20 s loop)'), ('roomhum', 'Room tone: indoor hum'), ('street', 'Room tone: night street with distant bass'), ('twang', 'Plucked guitar string'), ('buzz', 'Old keypad phone vibrating'), ('pencil', 'Pencil scratching on paper'), ('projector', 'Slide projector clack + whirr'), ('shepard', 'Shepard tone: endless rise'), ('tick', 'Watch ticking, speeding up'), ('braaam', 'Huge low brass blast'), ('swell', 'Reverse-reverb swell into a word or cut'), ('heartbeat', 'Slow close heartbeat'), ('doppler', 'Pass-by whoosh, pitch dropping'), ('radio', 'Radio tuning between stations'), ('ring', 'Ear ring after a shock'), ('flash', 'Old flashbulb pop + crackle'), ('trombone', 'Sad trombone: a failure, a let-down'), ('boo', 'Crowd boo (synthesised; a real CC0 one is sfx_boo_real)'), ('popper', 'Party popper'),
@@ -284,6 +297,25 @@ def cutouts(od):
         if f == 'cut_dish.png': d.chord([80, 60, 520, 420], 200, 340, fill=C, outline=K, width=9); d.line([300, 240, 300, 120], fill=K, width=10); d.polygon([(260, 330), (340, 330), (380, 560), (220, 560)], fill=G, outline=K, width=8)
         im.save(f'{od}/{f}')
 
+# Library categories (Sam, 14 Nov 2026: "do we need new categories ...?" -> "Sure."): what each entry is FOR, so the gag writer and
+# judge pick from the right shelf. `group` above stays as it was (gag_pass.py filters on it); the doc is organised by category.
+_C = {
+ 'Camera moves': 'push pullback pan tilt drift hold vertigo rack ramp matchcut through handheld',
+ 'Picture treatments': 'isolate silhouette freezestill blurin relight archive glow cine haze duotone peephole grey freeze lens pov',
+ 'Text and titles': 'kinetic kinetic_static rise title text banner headline neighbour aside stamp starburst tag tag_swap strike caption labels manicule quote chyron credits titledrop count tumble stretch scroll src_tag',
+ 'Explainers': 'number bars counter linechart route route_question ruler meter chain triptych split split_grow split_chevron doc doc_update doc_marks doc_focus doc_translate trend_down trend_up chips panels blueprint flow timeline_card sizecompare diagram beforeafter telemetry equation tier checklist circle arrow spotlight recap outline blocks bossbar',
+ 'Reactions and characters': 'pip bubble think notify errorbox loading callin grid namesake variants puppet jack jack_sign clones queue hand doodle ots cohost palm standin their_side obey listening sticker actor',
+ 'Transitions': 'iris later later_vcr black smear tear match_cut wordcut flashbulb leak glitch overlay_glitch wipe_tear wipe_ink wipe_brush wipe_page wipe_object',
+ 'Music moves': 'sting button thin lift worldize',
+ 'Atmosphere and light': 'rain confetti glint flash weather beam dust lightsweep sand streak halftone flicker letterbox overlay_static rec',
+ 'Sound moves': 'wrong_sound quiet_scream hidden_signal word_sound spit drop_hit dead_air mouth_sfx laugh_track villain_laugh source_sound drop_silence room_tone picture_sound muffle one_sound shepard_build',
+ 'Edit and structure habits': 'finish_sentence cold_open pitch_rebuttal bystander detail_again chatbot_line callback_video obsession silly_unit imagine long_hold withheld colour_script jcut beat_cut',
+}
+CAT = {i: c for c, ids in _C.items() for i in ids.split()}
+def category(eid, grp):
+    if eid in CAT: return CAT[eid]
+    return {'Gag move': 'Gag moves', 'Animation': 'Animations (flat Lottie, palette-recoloured; use sparingly)'}.get(grp, 'Jokes (picture gags)')
+
 def entries():
     out = []
     for i, (eid, grp, name, use, shot, card, snd, src) in enumerate(L):
@@ -292,7 +324,7 @@ def entries():
         if card:
             c = dict(card); off = c.pop('t_off', 0.25); c['t'] = round(t0 + off, 2)
         plan = {'shot': {k: v for k, v in shot.items()} or None, 'card': ({k: v for k, v in card.items() if k != 't_off'} if card else None)}
-        out.append(dict(id=eid, group=grp, name=name, use=use, t=t0, shotdef=s, card=c, plan=plan,
+        out.append(dict(id=eid, group=grp, category=category(eid, grp), name=name, use=use, t=t0, shotdef=s, card=c, plan=plan,
                         sounds=[x for x in snd.split() if x], source=src))
     return out
 

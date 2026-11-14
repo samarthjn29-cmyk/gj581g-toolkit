@@ -25,7 +25,7 @@ def dur(f):
 ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)   # 'none': voice + sound effects only
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
 ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--amb-to', type=float)
-ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--muffle', nargs='*', default=[]); ap.add_argument('--worldize', nargs='*', default=[]); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
+ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--muffle', nargs='*', default=[]); ap.add_argument('--worldize', nargs='*', default=[]); ap.add_argument('--thin', nargs='*', default=[]); ap.add_argument('--lift', type=float); ap.add_argument('--button', type=float); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
 a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
 # bed gain envelope: mutes ramp over 0.6 s, swell +4 dB over 2 s
@@ -37,8 +37,13 @@ if a.swell is not None:
     env += f'*(1+0.585*min(1,max(0,(t-{a.swell})/2)))'
 # BIG_MOVES B5 / B7 (Sam, 14 Nov 2026): --muffle A:B low-passes the bed and the ambience (the world goes muffled, like a shock);
 # --worldize A:B band-passes the bed so it sounds as if it plays from a phone speaker. Sam's voice is never touched.
-def _tr(spec, f): s0, e0 = map(float, spec.split(':')); return f",{f}:enable='between(t,{s0},{e0})'"
+def _tr(spec, f): s0, e0 = map(float, spec.split(':')); return ''.join(f",{x}:enable='between(t,{s0},{e0})'" for x in f.split(','))
 TREAT = ''.join(_tr(m, 'lowpass=f=380:p=2') for m in a.muffle) + ''.join(_tr(m, 'highpass=f=650,lowpass=f=2800') for m in a.worldize)
+# music moves (music_moves.py, 14 Nov 2026): --thin A:B leaves a narrow mid band of the bed (one instrument's worth), --lift T
+# raises the bed a semitone from T (rubberband, tempo kept), --button T cuts the bed on T with a 0.12 s tail for the button chord
+TREAT += ''.join(_tr(m, 'highpass=f=700,lowpass=f=1900') for m in a.thin)
+if a.button is not None: env += f'*min(1,max(0,({a.button}+0.12-t)/0.12))'
+
 AMBT = ''.join(_tr(m, 'lowpass=f=380:p=2') for m in a.muffle)
 NOBED = a.bed == 'none'   # Sam, Aliens opening, 11 Nov 2026: "Remove the sound bed ... only gag sounds and my voice"
 g = 0 if NOBED else a.bed_lufs - lufs(a.bed)
@@ -46,6 +51,10 @@ fc = [f'[0:a]{F},asplit[v][sc]',
       f"[1:a]atrim=0:{D:.3f},asetpts=PTS-STARTPTS,volume={g:.2f}dB,volume='{env}':eval=frame,"
       f'afade=t=in:d=2,afade=t=out:st={D - 3:.3f}:d=3,{F}' + TREAT + '[b]',
       '[b][sc]sidechaincompress=threshold=0.05:ratio=3:attack=20:release=400[bd]']
+if a.lift is not None:   # rubberband has no timeline switch: a pitched copy of the bed takes over from T (30 ms crossfade)
+    fc[1] = fc[1][:-3] + '[bp]'
+    fc.insert(2, f"[bp]asplit[bx][by];[by]rubberband=pitch=1.05946,volume='min(1,max(0,(t-{a.lift})/0.03))':eval=frame[byl];"
+                 f"[bx]volume='min(1,max(0,({a.lift}-t)/0.03))':eval=frame[bxl];[bxl][byl]amix=inputs=2:normalize=0[b]")
 ins = ['-i', a.inp, '-stream_loop', '-1', '-i', a.bed]; mix = ['[v]', '[bd]']
 if NOBED: fc = [f'[0:a]{F}[v]']; ins = ['-i', a.inp]; mix = ['[v]']
 if a.amb:
