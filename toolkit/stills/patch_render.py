@@ -31,6 +31,20 @@ else:
     ids = what.split(','); sh = [s for s in T['shots'] if s['id'] in ids]
     if len(sh) != len(ids): sys.exit(f'unknown shot id in {ids}')
     t0, t1 = min(s['t'] for s in sh), max(s['t'] + s['dur'] for s in sh)
+# Ghost guard (Sam, Moctar 14 Nov 2026: "Not a single dollar flashes for a millisecond at around 0:18 once it's already gone"):
+# a card from the clip's previous version ran past the patched range, so its tail survived the splice. The last rendered timeline
+# is kept in clips/.rendered_<scene>.json; every shot or card that differs between it and the new one must lie inside the range.
+snap = f'{PROJ}/clips/.rendered_{S}{"_final" if final else ""}.json'
+if os.path.exists(snap):
+    old = json.load(open(snap)); sig = lambda x: json.dumps(x, sort_keys=True)
+    spans = []
+    for key in ('shots', 'cards'):
+        a = {sig(x) for x in old.get(key, [])}; b = {sig(x) for x in T.get(key, [])}
+        for x in old.get(key, []) + T.get(key, []):
+            if (sig(x) in a) != (sig(x) in b): spans.append((x['t'], x['t'] + x.get('dur', 4.5), x.get('kind') or x.get('id')))
+    for a0, a1, k in spans:
+        if a0 < t0 - 0.5 or a1 > t1 + 0.5: print(f'widening: {k} changed at {a0:.2f}-{a1:.2f} s, outside the asked range'); t0, t1 = min(t0, a0), max(t1, a1)
+else: print(f'note: no {snap}; can not check for ghosts of the previous version (render the chapter once to start the record)')
 f0 = max(0, int((t0 - 0.5) * FPS)); f1 = min(nfr - 1, int((t1 + 0.5) * FPS))
 tmp = f'{PROJ}/clips/.patch_{S}.mp4'
 cmd = ['npx', 'remotion', 'render', 'src/index_stills.jsx', 'Scene', tmp, f'--props=public/{PUB}/{S}/timeline.json', f'--frames={f0}-{f1}',
@@ -53,7 +67,8 @@ shutil.move(out, clip); os.remove(tmp)
 if final:
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', clip, '-vf', 'scale=1280:720', '-c:v', 'libx264', '-crf', '26', '-preset', 'veryfast',
                     '-c:a', 'aac', '-b:a', '128k', f'{PROJ}/clips/{PREFIX}{S}_720.mp4'], check=True)
-fl = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flash_lint.py'), clip], capture_output=True, text=True)
+fl = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flash_lint.py'), clip, '--timeline', f'{RM}/public/{PUB}/{S}/timeline.json'], capture_output=True, text=True)
 print(fl.stdout.strip())
 if fl.returncode: sys.exit(f'FAIL flash_lint on {clip}: a picture flashes (Moctar 14 Nov 2026); fix the plan before sending')
+shutil.copy(f'{RM}/public/{PUB}/{S}/timeline.json', snap)
 print(f'ok: {clip} patched ({on} frames). Now re-run the mix for {S}.')

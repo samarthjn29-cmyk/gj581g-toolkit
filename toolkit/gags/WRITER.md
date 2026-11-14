@@ -16,6 +16,7 @@ For **every slot**, write **5 candidates**, each different in kind. Spread them 
   - `literal`: act out a figure of speech in the line ("joined it" = a robot signing a membership form);
   - `delay`: the payoff lands a beat late (a reaction, a sound, a second caption);
   - `callback`: pays off something set up earlier in the **same** video only.
+- for Moctar and later videos, at least one **drama move** where the line is serious or tense (`styles/DRAMA_MOVES.md`: vertigo, drop to silence, colour drain, match cut, letterbox, rack focus, speed ramp, long hold, withheld payoff; Sam, 14 Nov 2026: "I want the videos to be a bit dramatic"). Every card kind in the kit is painted now, so the whole effects library is open;
 - at least one at **spice 2** (adult: grown-up life, dark, implied innuendo), following `styles/ADULT_GAGS_TOOLKIT.md`.
 
 ## Sam's taste (read the taste file; this is the gist, the file wins)

@@ -21,6 +21,11 @@ Under 400 words. It never edits files.
    a period scene, the same place looking different from shot to shot.
 5. **Sound** (from the reports): bed never stops, drops only on punchlines, level about -16 LUFS, any confirmed word
    slip with its time.
+4e. **No ghosts of an older version (Sam, Moctar 14 Nov 2026: "Not a single dollar flashes for a millisecond ... once it's already gone").**
+   A patch re-rendered too short a range, so 0.1 s of the previous version's stamp survived after the new card. `patch_render.py`
+   now compares the clip's last rendered timeline (`clips/.rendered_<scene>.json`) with the new one and widens the range to cover
+   every changed shot or card; `flash_lint.py --timeline` WARNs on anything that shows in part of the frame for under 0.25 s outside
+   a running card. The reviewer opens every WARN time.
 4d. **Nothing over a face (Sam, Moctar 14 Nov 2026: "The dialogue box shouldn't cover dog's face").** Speech bubbles, tags,
    labels and stamps never sit on a face, a person's or an animal's (a painted dog counts). A bubble sits above or beside the
    speaker with only its tail pointing at the mouth. The reviewer checks the first and last frame of every overlay for this.

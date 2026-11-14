@@ -75,4 +75,5 @@ else
   $R "$PROJ/clips/${PREFIX}${S}_720.mp4" $A --scale=0.66666666666666666   # exactly 2/3: 0.6667 gives height 720.036 and Remotion refuses it
 fi
 ls -la "$PROJ/clips/${PREFIX}${S}"*.mp4
-python3 "$TK/stills/flash_lint.py" "$PROJ/clips/${PREFIX}${S}_720.mp4" --out "$PROJ/clips/flash_$S" || echo "FAIL flash_lint: a picture flashes on screen (see clips/flash_$S); fix before Sam sees it"
+if [ "$MODE" == "--final" ]; then cp "$OUT/timeline.json" "$PROJ/clips/.rendered_${S}_final.json"; else cp "$OUT/timeline.json" "$PROJ/clips/.rendered_${S}.json"; fi   # ghost guard for patch_render.py
+python3 "$TK/stills/flash_lint.py" "$PROJ/clips/${PREFIX}${S}_720.mp4" --timeline "$OUT/timeline.json" --out "$PROJ/clips/flash_$S" || echo "FAIL flash_lint: a picture flashes on screen (see clips/flash_$S); fix before Sam sees it"
