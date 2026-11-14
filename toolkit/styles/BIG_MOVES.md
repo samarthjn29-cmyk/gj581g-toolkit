@@ -41,3 +41,18 @@ sound design (rises, hits, drones, downers); TED "Everything you hear on film is
 One big move per beat; sounds in pauses, never over Sam's words (the muffle and the worldized bed are treatments of the bed,
 not new sounds on words); no move on a real person's face; flashes stay short and soft (no strobing: at most 3 flashes,
 each 2 frames, never more than 3 a second, for viewers with photosensitive epilepsy).
+
+## Motion inside the picture (Sam, 14 Nov 2026: "create and use these whenever we can")
+| Move | Field | Tool | Use |
+|---|---|---|---|
+| Cut-out move (hop, pull, tip, slide, bob) | shot `parts` + `parts_base` | `stills/part.py --box` (rembg in a box) | a thing in the still acts: a brick hops, a lever squeezes |
+| Puppet part (swing, wag, wave) | shot `parts`, act `swing` with `pivot` | `stills/part.py --poly` (exact shape) | an arm paints, a tail wags; best when Firefly paints the part separately |
+| Cinemagraph (one thing moves) | shot `cine` {mask} or part act `buzz` | `subject.py` / `part.py --keep` | a string shivers, steam, a flag |
+| Plotagraph (a region flows for ever) | shot `flow` {mask or y/y2, dir, len, period} | mask PNG (alpha) or a band | sand off dunes, clouds, smoke, water |
+| Reverse cinemagraph | `flow` with mask = inverse of subject.py near.png (+ particles) | subject.py, then invert the alpha | time stops for one thing: the homemade guitar still while the desert streams |
+| Painted particles | card `particles` {type sand / dust / embers / snowpaper} | none | desert shots, light beams, stage photos |
+| Distortion | shot `warp` {kind ripple / glitch, at, dur, amp} | none | ripple for memory or "years later"; glitch only for AI or screen beats |
+Rules: painted look only (no digital sparkle), small moves (the inpainted gap only survives a short reveal), never on a real photo of a person, glitch 0.2-0.5 s with no brightness change (not a flash), about one in-picture motion every two or three shots so it stays alive without becoming busy.
+Limbs bend, never slide (Sam, 14 Nov 2026, the writing hand: "It's cut out from the remaining hand"): a hand or arm part gets
+`part.py --bend ANCHOR TIP` (the joint stays pinned, the tip moves) and a Firefly clean plate (`--plate`). Every new kind of moving
+part is shown to Sam as a short test before it goes into a chapter.

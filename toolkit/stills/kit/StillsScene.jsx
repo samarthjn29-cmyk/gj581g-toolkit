@@ -27,6 +27,61 @@ const MOVES = {   // [scale from, scale to, x from, x to, y from, y to] in % of 
 
 // A real document page (Sam, 10 Nov 2026: show the actual paper): the scan on a dark desk, a highlighter sweeping each hl box
 // [x0, y0, x1, y1] (0-1 of the page) from hl_at s into the shot, the camera easing in toward the first box (zoom, default 1.7).
+// plotagraph (Sam, 14 Nov 2026): s.flow = {mask (PNG, white = flows) or y / y2 (a band, fractions), dir [dx, dy], len px, period s}.
+// The masked part of the painting streams along dir for ever (sand off a dune, cloud, smoke, water) while the rest holds still: two
+// copies slide by len px over each period, half a period apart, cross-fading so the loop never jumps. A reverse cinemagraph = a flow
+// (or particles) everywhere except the subject: mask = the inverse of subject.py's near.png.
+// moving parts (Sam, 14 Nov 2026: "Can we make the characters or things in the pictures to move?"): s.parts = [{img, act, pivot, amp,
+// freq, at, dur, every, dir}], cut with toolkit/stills/part.py, drawn over s.parts_base (the still with the parts painted out), inside
+// the camera move so they travel with the picture. Acts:
+//   swing  - rotates back and forth about pivot (a wagging tail, a waving hand, a brush stroking): amp deg (6), freq Hz (1.2)
+//   pull   - rotates to amp deg and back over dur s (0.6), once at `at` s, again every `every` s (a lever squeezed, a door nudged)
+//   tip    - rotates to amp deg and stays, with a small overshoot (something toppling, a head tilt)
+//   hop    - jumps up amp px (40) with a squash on landing, over dur s (0.5), at `at`, repeating every `every` s
+//   bob    - a slow idle rise and fall, amp px (6), freq Hz (0.5) (breathing, floating)
+//   buzz   - a fast vibration across dir [dx, dy] (a plucked string), amp px (3), dying away over dur s (1.5) from `at`
+//   slide  - eases in from offset dir [dx, dy] px over dur s (0.6) from `at` (something pushed into place)
+// Keep moves small: the painted-out gap behind a part is inpainted and only holds up for a short reveal.
+//   write  - a hand writes (Sam, 14 Nov 2026: "show this man actually writing"): the hand-and-pen part writes p.words words (3),
+//            each p.word s long (1.2) with a p.gap s lift between them (1.2, a thinking pause), travelling len px in all (80) along
+//            dir [dx, dy] (the line), in cursive humps (hump px 8, rate humps/s 2.4); an ink line grows from p.tip [x, y] (the pen
+//            point, fractions) behind it (ink colour, width). Keep len small: the gap the hand leaves is inpainted.
+const writeState = (p, a) => { const n = p.words ?? 3, wd = p.word ?? 1.2, gp = p.gap ?? 1.2, cyc = wd + gp, L = p.len ?? 80, wl = L / n;
+  if (a < 0) return {x: 0, writing: false}; const k = Math.floor(a / cyc), r = a - k * cyc;
+  if (k >= n) return {x: L, writing: false}; return {x: wl * (k + Math.min(1, r / wd)), writing: r < wd, r}; };
+const writeTip = (p, a) => { const st = writeState(p, a), [ux, uy] = p.dir || [1, 0], hu = p.hump ?? 8, h = a < 0 ? 0 : st.writing ? -hu * Math.abs(Math.sin(Math.PI * (p.rate ?? 1.3) * st.r)) : -(p.lift ?? 4);
+  return [ux * st.x - uy * h * 0.3, uy * st.x + h]; };
+const Ink = ({p, q}) => { const a = q - (p.at ?? 0); if (a <= 0) return null; const [tx, ty] = (p.tip || [0.5, 0.5]), n = Math.ceil(a * 60), segs = []; let seg = [];
+  for (let i = 0; i <= n; i++) { const ai = Math.min(a, i / 60), st = writeState(p, ai), [dx, dy] = writeTip(p, ai);
+    if (st.writing) seg.push(`${(tx * 1920 + dx).toFixed(1)},${(ty * 1080 + dy).toFixed(1)}`); else if (seg.length) { segs.push(seg); seg = []; } }
+  if (seg.length) segs.push(seg);
+  return <svg width={1920} height={1080} viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style={{position: 'absolute', inset: 0, width: '100%', height: '100%'}}>{segs.map((sg, i) => <polyline key={i} points={sg.join(' ')} fill="none" stroke={p.ink || '#3A4840'} strokeWidth={p.width ?? 3.5} strokeLinecap="round" strokeLinejoin="round" opacity={0.85} />)}</svg>; };
+// bend: instead of sliding, the part is warped by a displacement map (p.bend, from part.py --bend): 0 at the joint, 1 at the tip,
+// so a writing hand moves at the pen while the cuff stays fixed to the sleeve. Works with act 'write' (the tip path) and 'swing'.
+const Bend = ({p, q, dir, sid}) => { const a = q - (p.at ?? 0); let dx = 0, dy = 0;
+  if (p.act === 'write') [dx, dy] = writeTip(p, a); else if (p.act === 'swing') { const k = Math.sin(2 * Math.PI * (p.freq ?? 1.2) * Math.max(0, a)); [dx, dy] = (p.dir || [12, 0]).map(v => v * k); }
+  const id = `bend_${sid}`, map = staticFile(`${dir}/${p.bend}`);
+  return <><svg width={0} height={0} style={{position: 'absolute'}}><filter id={id} filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x={0} y={0} width={1920} height={1080} colorInterpolationFilters="sRGB">
+      <feImage href={map} x={0} y={0} width={1920} height={1080} preserveAspectRatio="none" result="m" />
+      <feDisplacementMap in="SourceGraphic" in2="m" scale={-2 * dx} xChannelSelector="R" yChannelSelector="B" result="d1" />
+      <feDisplacementMap in="d1" in2="m" scale={-2 * dy} xChannelSelector="B" yChannelSelector="G" /></filter></svg>
+    <Img src={map} style={{display: 'none'}} />
+    <Img src={staticFile(`${dir}/${p.img}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: `url(#${id})`}} /></>; };
+const partMove = (p, q, t) => { const a = q - (p.at ?? 0), amp = p.amp, piv = p.pivot || [0.5, 0.5], o = {transformOrigin: `${piv[0] * 100}% ${piv[1] * 100}%`};
+  const rep = (dur) => { if (a < 0) return -1; const r = p.every ? a % p.every : a; return r <= dur ? r / dur : -1; };
+  if (p.act === 'swing') return {...o, transform: `rotate(${(amp ?? 6) * Math.sin(2 * Math.PI * (p.freq ?? 1.2) * Math.max(0, a))}deg)`};
+  if (p.act === 'pull') { const u = rep(p.dur ?? 0.6); return {...o, transform: `rotate(${u < 0 ? 0 : (amp ?? 10) * Math.sin(Math.PI * u)}deg)`}; }
+  if (p.act === 'tip') { const u = Math.min(1, Math.max(0, a / (p.dur ?? 0.5))); return {...o, transform: `rotate(${(amp ?? 12) * Easing.out(Easing.back(1.6))(u)}deg)`}; }
+  if (p.act === 'hop') { const u = rep(p.dur ?? 0.5); if (u < 0) return o; const up = Math.sin(Math.PI * Math.min(1, u / 0.85)), land = u > 0.85 ? Math.sin(Math.PI * (u - 0.85) / 0.15) : 0;
+    return {...o, transform: `translateY(${-(amp ?? 40) * up}px) scale(${1 + 0.04 * land}, ${1 - 0.06 * land + 0.03 * up})`}; }
+  if (p.act === 'bob') return {...o, transform: `translateY(${(amp ?? 6) * Math.sin(2 * Math.PI * (p.freq ?? 0.5) * q)}px)`};
+  if (p.act === 'buzz') { if (a < 0 || a > (p.dur ?? 1.5)) return o; const f = Math.round(t * 30), k = (amp ?? 3) * (1 - a / (p.dur ?? 1.5)) * (f % 2 ? 1 : -1), [dx, dy] = p.dir || [0, 1];
+    return {...o, transform: `translate(${dx * k}px, ${dy * k}px)`, filter: 'blur(0.6px)'}; }
+  if (p.act === 'write') { const [dx, dy] = writeTip(p, a); return {...o, transform: `translate(${dx}px, ${dy}px)`}; }
+  if (p.act === 'slide') { const u = Easing.out(Easing.cubic)(Math.min(1, Math.max(0, a / (p.dur ?? 0.6)))), [dx, dy] = p.dir || [-60, 0];
+    return {...o, transform: `translate(${dx * (1 - u)}px, ${dy * (1 - u)}px)`}; }
+  return o; };
+
 const PageShot = ({s, t, dir}) => {
   const hl = s.hl || [], a = s.t + (s.hl_at ?? 0.6), [bx0, by0, bx1, by1] = hl[0] || [0.3, 0.3, 0.7, 0.4];
   const z = 1 + ((s.zoom ?? 1.7) - 1) * R(t, s.t + 0.2, s.t + Math.max(1.2, Math.min(s.dur, 3.2)));
@@ -111,7 +166,11 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
-      : <><Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />
+      : <><Img src={staticFile(`${dir}/${src === s.img && s.parts && s.parts_base ? s.parts_base : src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />
+        {src === s.img && s.flow ? (() => { const F = s.flow, Tp = F.period ?? 3, len = F.len ?? 60, [dx, dy] = F.dir || [1, 0], mk = F.mask ? `url(${staticFile(`${dir}/${F.mask}`)})` : `linear-gradient(to bottom, transparent ${((F.y ?? 0.6) - 0.08) * 100}%, #000 ${(F.y ?? 0.6) * 100}%, #000 ${(F.y2 ?? 1) * 100}%, transparent 100%)`;
+          return <div style={{position: 'absolute', inset: 0, WebkitMaskImage: mk, maskImage: mk, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}}>{[0, 0.5].map(o => { const ph = ((t / Tp + o) % 1 + 1) % 1, op = 1 - Math.abs(2 * ph - 1);
+            return <Img key={o} src={staticFile(`${dir}/${s.parts_base && s.parts ? s.parts_base : src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: op, transform: `translate(${dx * len * (ph - 0.5)}px, ${dy * len * (ph - 0.5)}px) scale(${1 + Math.abs(len) / 1920 + 0.01})`}} />; })}</div>; })() : null}
+        {src === s.img && s.parts ? s.parts.map((p, i) => <React.Fragment key={i}>{p.act === 'write' && p.ink !== false ? <Ink p={p} q={q} /> : null}{p.bend ? <Bend p={p} q={q} dir={dir} sid={`${s.id}_${i}`} /> : <Img src={staticFile(`${dir}/${p.img}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', ...partMove(p, q, t)}} />}</React.Fragment>) : null}
         {src === s.img && (s.cine || s.haze) ? <Img src={staticFile(`${dir}/${src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: `url(#sh_${s.id})`,
           WebkitMaskImage: s.cine ? `url(${staticFile(`${dir}/${s.cine.mask}`)})` : `linear-gradient(to bottom, transparent ${((s.haze.y ?? 0.62) - 0.08) * 100}%, #000 ${(s.haze.y ?? 0.62) * 100}%, #000 ${((s.haze.y2 ?? 0.95)) * 100}%, transparent 100%)`,
           WebkitMaskSize: '100% 100%', maskSize: '100% 100%', maskImage: s.cine ? `url(${staticFile(`${dir}/${s.cine.mask}`)})` : undefined}} /> : null}</>}</AbsoluteFill>;
@@ -178,8 +237,8 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
         <rect x={-50} y={-18} width={100} height={36} rx={3} fill="none" stroke="#CFE6C3" strokeWidth={2} /><text x={0} y={12} textAnchor="middle" fontFamily="Georgia, serif" fontWeight="700" fontSize={30} fill="#E9F5E2">$</text></g>; })}</svg></AbsoluteFill>; }
   // aside (Bill Wurtz-style tiny text pop): lowercase serif, on and off with no fade
   if (c.kind === 'aside') { if (t < c.t || t > c.t + d) return null;
-    return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `rotate(${c.rot ?? -3}deg)`, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: c.size || 64,
-      color: c.color || '#FFFFFF', textShadow: '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap',
+    return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `${c.center ? 'translate(-50%, -50%) ' : ''}rotate(${c.rot ?? -3}deg)`, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: c.size || 64,
+      color: c.color || '#FFFFFF', textShadow: c.shadow === false ? 'none' : '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap',   // center: x, y is the middle; shadow: false for text printed on a painted surface (Sam, 14 Nov 2026: poster slogan inside the poster's red box)
       // dark backing chip by default (reviewer, opening v13: thin white italic was lost on busy painted seats and streamers); chip: false for none
       ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.72)', padding: '6px 26px 12px', borderRadius: 10, fontWeight: 600})}}>{c.text.toLowerCase()}</div></AbsoluteFill>; }
   // breaking banner + ticker (Hindi primetime parody, our own colours, no channel branding)
@@ -388,8 +447,18 @@ const ShotFx = ({s, t, children}) => { const q = t - s.t; let filt = '', tr = ''
   // zoom-through (B12): over the shot's last through s the camera dives into s.focus with motion blur (the next shot gets from_zoom)
   if (s.through) { const p = Math.pow(R(t, s.t + s.dur - s.through, s.t + s.dur), 2); tr += ` scale(${1 + 2.2 * p})`; filt += ` blur(${10 * p}px)`; }
   if (s.from_zoom) { const p = R(t, s.t, s.t + 0.45); tr += ` scale(${1 + (s.from_zoom - 1) * (1 - p)})`; filt += ` blur(${8 * (1 - p)}px)`; }
+  // distortions (Sam, 14 Nov 2026: "create and use these whenever we can"): s.warp = {kind, at, dur, amp}. 'ripple': the picture
+  // wavers like heat or memory (dream, flashback, "years later"); 'glitch': a short digital tear with an RGB split and stepped jumps,
+  // for AI or screen beats only (0.2-0.5 s, no brightness change, so it never counts as a flash). Never on a real photo of a person.
+  let wdef = null; if (s.warp) { const w = s.warp, a = q - (w.at ?? 0), dd = w.dur ?? (w.kind === 'glitch' ? 0.35 : 1.6);
+    if (a >= 0 && a <= dd) { const env = Math.sin(Math.PI * a / dd), id = `wp_${s.id}`;
+      if (w.kind === 'glitch') { const f = Math.floor(t * 30), j = (w.amp ?? 10) * env; tr += ` translateX(${((f * 37) % 7 - 3) * 0.35 * env}%)`;
+        wdef = <svg width={0} height={0} style={{position: 'absolute'}}><filter id={id} x="-2%" y="-2%" width="104%" height="104%"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r" /><feOffset in="r" dx={j} result="ro" />
+          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" result="gb" /><feOffset in="gb" dx={-j * 0.6} result="go" /><feBlend in="ro" in2="go" mode="screen" /></filter></svg>; }
+      else { const fq = 0.006 + 0.0015 * Math.sin(q * 2.1); wdef = <svg width={0} height={0} style={{position: 'absolute'}}><filter id={id} x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency={`${fq} ${fq * 3}`} numOctaves={2} seed={7} result="n" /><feDisplacementMap in="SourceGraphic" in2="n" scale={(w.amp ?? 26) * env} xChannelSelector="R" yChannelSelector="G" /></filter></svg>; }
+      filt += ` url(#${id})`; } }
   const g = s.glow, gl = g ? 0.5 + 0.5 * Math.sin(q * (g.rate ?? 2.2) * Math.PI * 2) * (0.7 + 0.3 * Math.sin(q * 13)) : 0;
-  return <AbsoluteFill style={{filter: filt.trim() || undefined, transform: tr.trim() || undefined, transformOrigin: s.focus ? `${s.focus[0] * 100}% ${s.focus[1] * 100}%` : '50% 50%'}}>{children}
+  return <AbsoluteFill style={{filter: filt.trim() || undefined, transform: tr.trim() || undefined, transformOrigin: s.focus ? `${s.focus[0] * 100}% ${s.focus[1] * 100}%` : '50% 50%'}}>{wdef}{children}
     {g ? <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', background: `radial-gradient(circle ${(g.r ?? 0.12) * 1920}px at ${(g.x ?? 0.5) * 100}% ${(g.y ?? 0.5) * 100}%, ${g.color || 'rgba(255,214,140,0.55)'} 0%, rgba(0,0,0,0) 100%)`, opacity: 0.35 + 0.65 * gl}} /> : null}
     {s.archive ? <AbsoluteFill style={{pointerEvents: 'none', boxShadow: 'inset 0 0 90px 30px rgba(20,14,8,0.55)', border: '10px solid rgba(24,18,12,0.35)'}} /> : null}</AbsoluteFill>; };
 

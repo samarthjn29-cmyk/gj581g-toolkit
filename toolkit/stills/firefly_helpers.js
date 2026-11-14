@@ -1,4 +1,6 @@
 // Inject into firefly.adobe.com/generate/image (built-in browser, 1440x900). Stills workflow, 8 Nov 2026.
+// Narrow pane (14 Nov 2026): the Generate sp-button has only a label attribute, and old reference images are not sp-tags, so
+// __clearRefs misses them: reload the page between jobs that need different references.
 // One queue at a time (two queues collide and trip Firefly's rate limit: "Whoa there, speed racer!").
 // Results stay in the page as Blobs (window.__B[key]); push them out later with fresh Recraft upload URLs: __push(key, url).
 window.__deep=(sel)=>{const out=[]; const w=(root)=>{root.querySelectorAll(sel).forEach(e=>out.push(e)); root.querySelectorAll('*').forEach(e=>{if(e.shadowRoot) w(e.shadowRoot)})}; w(document); return out;};
@@ -10,7 +12,7 @@ window.__limited=()=>window.__deep('*').some(e=>e.children.length===0 && /speed 
 window.__setup=async()=>{ const set=(p,label)=>{const it=[...p.querySelectorAll('sp-menu-item')].find(i=>i.textContent.trim()===label); p.value=it.value; p.dispatchEvent(new Event('change',{bubbles:true,composed:true}));};
  let pk=window.__deep('sp-picker'); set(pk[0],'Gemini 3.1 (Nano Banana 2)'); await new Promise(r=>setTimeout(r,2500)); pk=window.__deep('sp-picker'); set(pk[1],'Widescreen (16:9)'); set(pk[2],'2K'); await new Promise(r=>setTimeout(r,800)); return window.__deep('sp-picker').map(p=>p.value); };
 window.__gen2=async(prompt, ref)=>{ await window.__clearRefs(); for(const r of [].concat(ref||[])) await window.__ref(typeof r==='string'&&window.__B[r]?window.__B[r]:r); window.__setPrompt(prompt); await new Promise(r=>setTimeout(r,700));
- const known=window.__big().map(x=>x.split('|')[0]); const b=window.__deep('sp-button').find(e=>/^Generate$/.test(e.textContent.trim())); if(!b) return 'nobutton'; const ib=(b.shadowRoot&&b.shadowRoot.querySelector('button'))||b; for(const t of ['pointerdown','mousedown','pointerup','mouseup','click']) ib.dispatchEvent(new (t.startsWith('pointer')?PointerEvent:MouseEvent)(t,{bubbles:true,composed:true})); const e0=window.__deep('firefly-error-view').length;
+ const known=window.__big().map(x=>x.split('|')[0]); const b=window.__deep('sp-button').find(e=>/^Generate$/.test(e.textContent.trim())||e.getAttribute('label')==='Generate'||e.getAttribute('aria-label')==='Generate'); if(!b) return 'nobutton'; const ib=(b.shadowRoot&&b.shadowRoot.querySelector('button'))||b; for(const t of ['pointerdown','mousedown','pointerup','mouseup','click']) ib.dispatchEvent(new (t.startsWith('pointer')?PointerEvent:MouseEvent)(t,{bubbles:true,composed:true})); const e0=window.__deep('firefly-error-view').length;
  for(let k=0;k<50;k++){ await new Promise(r=>setTimeout(r,3000)); const fresh=window.__big().filter(x=>!known.includes(x.split('|')[0]) && /2752x1536$/.test(x)); if(fresh.length) return await (await fetch(fresh[0].split('|')[0])).blob();
   if(k>2 && window.__deep('firefly-error-view').length>e0){ const ok=window.__deep('sp-button').find(e=>/^OK$/.test(e.textContent.trim())); if(ok) ok.click(); return 'limited'; } } return 'timeout'; };
 window.__R={}; window.__B=window.__B||{}; window.__stop=false;

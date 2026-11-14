@@ -196,8 +196,8 @@ export const PAINTED = {
         fontFamily: SERIF, fontWeight: 700, fontSize: size, letterSpacing: Math.round(size * 0.065), color: col, whiteSpace: 'nowrap', lineHeight: 1.1}}>{c.text}</div></div></AbsoluteFill>; },
 
   aside: (c, q, d) => { if (q < 0 || q > d) return null;
-    return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `rotate(${c.rot ?? -3}deg)`}}>
-      <Scrap pad="0 26px 8px" sw={3} fill={c.chip === false ? 'transparent' : PAPER} stroke={c.chip === false ? null : INK}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 64) * 0.92, color: INK, whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></Scrap></div></AbsoluteFill>; },
+    return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `${c.center ? 'translate(-50%, -50%) ' : ''}rotate(${c.rot ?? -3}deg)`}}>
+      <Scrap pad="0 26px 8px" sw={3} fill={c.chip === false ? 'transparent' : PAPER} stroke={c.chip === false ? null : INK}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 64) * 0.92, color: c.color || INK, whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></Scrap></div></AbsoluteFill>; },
 
   banner: (c, q, d) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.25)), oo = 1 - R(q, d - 0.2, d), L = c.label || 'Breaking', lab = L.charAt(0) + L.slice(1).toLowerCase(), txt = /^[A-Z0-9 '!?.,’-]+$/.test(c.text) ? c.text.charAt(0) + c.text.slice(1).toLowerCase() : c.text;
     const tick = c.ticker || '', y0 = 830;

@@ -461,6 +461,22 @@ export const GAGS2 = {
       <div style={{position: 'absolute', right: 60, top: 50, ...brushBox({padding: '6px 18px 10px', fontFamily: SERIF, fontWeight: 700, fontSize: 40})}}>{lb[0]}</div>
       <div style={{position: 'absolute', left: 60, top: 50, opacity: R(q, 0.5, 0.8), ...brushBox({padding: '6px 18px 10px', fontFamily: SERIF, fontWeight: 700, fontSize: 40})}}>{lb[1]}</div></AbsoluteFill>; },
   // ---- painted puppets (character acting) ----
+  // particles (CINEMATIC_STUDY C4, Sam 14 Nov 2026: "digital particle overlays"): painted dabs drifting over the shot, never digital
+  // sparkle. c.type 'sand' (fast low streaks, sideways), 'dust' (slow motes, for a light beam or a room), 'embers' (rise and fade, a
+  // stage or a fire), 'snowpaper' (soft cream flecks falling). c.count, c.dir [vx, vy] px/s, c.size px, c.colors [hex], c.area
+  // [x0, y0, x1, y1] (fractions, where they live), c.blur px, c.opacity. Overlay, not full-screen. Sound: none, or a soft wind bed.
+  particles: (c, q, d, out) => { const T = c.type || 'dust', D = {sand: {n: 70, v: [520, -18], sz: 5, cols: ['#E9B93A', '#D9A54A', '#F3EBDD'], area: [0, 0.55, 1, 1], blur: 0.6, op: 0.75, len: 5},
+      dust: {n: 45, v: [14, -9], sz: 5, cols: ['#F3EBDD', '#F6E7B0'], area: [0, 0, 1, 1], blur: 1.4, op: 0.55, len: 1},
+      embers: {n: 36, v: [6, -70], sz: 5, cols: ['#E9B93A', '#A8432F', '#F6E7B0'], area: [0.1, 0.3, 0.9, 1], blur: 0.8, op: 0.85, len: 1.6},
+      snowpaper: {n: 55, v: [8, 60], sz: 6, cols: ['#F3EBDD', '#EFE4CF'], area: [0, 0, 1, 1], blur: 0.8, op: 0.8, len: 1}}[T] || {};
+    const n = c.count ?? D.n, [vx, vy] = c.dir || D.v, cols = c.colors || D.cols, [ax0, ay0, ax1, ay1] = c.area || D.area, aw = (ax1 - ax0) * W, ah = (ay1 - ay0) * H, sz = c.size ?? D.sz, op = (c.opacity ?? D.op) * out * Math.min(1, q / 0.4);
+    const dots = Array.from({length: n}, (_, i) => { const sp = 0.6 + 0.8 * rnd(i, 1), sw = (c.sway ?? 10) * Math.sin(q * (0.8 + rnd(i, 2)) + i);
+      const x = ax0 * W + (((rnd(i, 3) * aw + vx * sp * q + sw) % aw) + aw) % aw, y = ay0 * H + (((rnd(i, 4) * ah + vy * sp * q) % ah) + ah) % ah, r = sz * (0.5 + rnd(i, 5)),
+        life = T === 'embers' ? 1 - (((rnd(i, 4) * ah + vy * sp * q) % ah + ah) % ah) / ah : 1, ang = Math.atan2(vy, vx) * 180 / Math.PI;
+      return <ellipse key={i} cx={x} cy={y} rx={r * (D.len ?? 1) * (T === 'sand' ? 0.8 + rnd(i, 6) : 1)} ry={r * (T === 'sand' ? 0.45 : 0.8)} transform={`rotate(${T === 'sand' ? ang : rnd(i, 7) * 180} ${x} ${y})`}
+        fill={cols[i % cols.length]} opacity={(0.5 + 0.5 * rnd(i, 8)) * (T === 'embers' ? 1 - Math.abs(2 * life - 1) * 0.9 : 1)} />; });
+    return <AbsoluteFill style={{opacity: op, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute', filter: `blur(${c.blur ?? D.blur}px)`}}>{dots}</svg></AbsoluteFill>; },
+
   // actor: a painted cut-out figure (c.img PNG, AI-painted) placed at x, y (feet), height h, that acts: c.act 'bob' (idle breathing),
   // 'turn' (flips to face the other way at c.at), 'shrug' (squash up and settle at c.at), 'hop' (a small jump at c.at), 'enter'
   // (slides in from c.from 'left' | 'right'); c.imgs + c.times swaps expressions (cut on the beat). Sound: per act.
