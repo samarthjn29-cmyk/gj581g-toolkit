@@ -53,7 +53,8 @@ unpainted = 0
 if (P.get('finish') or {}).get('gags') != 'flat':
     for c in P.get('cards', []):
         where = f"{c.get('at')}/{c.get('word', '-')}"
-        if (c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file'))) and not str(c.get('file', '')).endswith('_painted.json'):   # lottie_paint.py recolours a Lottie to the palette (14 Nov 2026) unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
+        # a lottie is painted only as lottie_paint.py's _painted.json copy (14 Nov 2026)
+        if (c['kind'] == 'lottie' or (c['kind'] == 'sticker' and c.get('file'))) and not str(c.get('file', '')).endswith('_painted.json'):   unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  flat Lottie {c.get('file')}: use an AI-painted image (sticker/clock/rain with img)")
         elif c['kind'] == 'overlay' and str(c.get('file', '')).endswith(('.mp4', '.webm', '.mov')): print(f"  note       overlay {where}: the painted kit draws painted grain instead of {c.get('file')}")
         elif c['kind'] in CUTOUT and any(str(c.get(k, '')).endswith('.png') and not str(c.get(k, '')).startswith('S3_') for k in ('img', 'host', 'cut')): print(f"  check      {c['kind']:<10} {where}  cut-out {c.get('img') or c.get('host') or c.get('cut')}: use an AI-painted cut-out (S3_*), not a flat stand-in")
         elif c['kind'] not in PAINTED: unpainted += 1; print(f"  NOT PAINTED {c['kind']:<10} {where}  this kind has no painted look yet: add one in kit/Paint.jsx first")
