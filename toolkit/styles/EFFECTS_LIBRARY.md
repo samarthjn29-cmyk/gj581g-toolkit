@@ -1,6 +1,6 @@
 # Effects library: camera moves, cards, picture gags and sounds
 
-Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effects which we can give on our pictures and videos"); generated from `toolkit/stills/fxlib.py` by `toolkit/stills/fxlib_doc.py` (last on 13 Nov 2026), so the doc lists every entry in the kit (184), including the gags from the daily gag studies (`styles/GAG_STUDY_LOG.md`). Every entry works in the stills kit today (`kit/StillsScene.jsx` + `kit/Gags.jsx` + `kit/Gags2.jsx`). Regenerate the demo reel and previews with `toolkit/stills/fxlib.py`.
+Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effects which we can give on our pictures and videos"); generated from `toolkit/stills/fxlib.py` by `toolkit/stills/fxlib_doc.py` (last on 13 Nov 2026), so the doc lists every entry in the kit (223), including the gags from the daily gag studies (`styles/GAG_STUDY_LOG.md`). Every entry works in the stills kit today (`kit/StillsScene.jsx` + `kit/Gags.jsx` + `kit/Gags2.jsx`). Regenerate the demo reel and previews with `toolkit/stills/fxlib.py`.
 
 **How to use one:** add the shot fields or the card to the scene plan (`stills/<scene>.json`), cue it on a heard word, then add the paired sound to the mix with `mix_bed.py --sfx sfx/sfx_<name>.wav@<cue time + offset>:-29`. Sam's clean cuts use voice + gag sounds only (`--bed none`, 11 Nov 2026), with gag sounds on as many gags as fit.
 
@@ -28,6 +28,21 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `tilt` | Tilt up / tiltDown | Climb a tall thing (a dish, a building) or come down to a detail. | `shot {"move": "tilt"}` | - | Ken Burns |
 | `drift` | Drift | Gentle float for reflective lines. | `shot {"move": "drift"}` | - | Ken Burns |
 | `hold` | Hold | Almost still: under cards, or when the picture must be read. | `shot {"move": "hold"}` | - | - |
+| `vertigo` | Vertigo (dolly zoom) | The subject holds its size while the background stretches away: unease on a tense line (needs subject.py layers). | `shot {"move": "vertigo", "layers": "layers/X"}` | hit@1.2 | Hitchcock (DRAMA_MOVES D1) |
+| `rack` | Rack focus | The background blurs as the subject sharpens (or the reverse), using subject.py layers. | `shot {"move": "rack", "layers": "layers/X"}` | - | DRAMA_MOVES D6 |
+| `ramp` | Speed ramp | A slow creep, then a hard snap-in on the key word. | `shot {"move": "ramp", "ramp_at": 0.8}` | whoosh@0.75 | DRAMA_MOVES D7 |
+| `isolate` | Colour drain | The picture drains to grey except one object (a cut-out PNG of the same still). | `shot {"move": "hold", "isolate": "layers/X/near.png"}` | - | DRAMA_MOVES D3 |
+| `matchcut` | Match cut (zoom/offset) | A shot sits zoomed and shifted so its key shape lands where the last shot's did. | `shot {"move": "hold", "zoom": 1.3, "offset": [-6, 3]}` | - | DRAMA_MOVES D4 |
+| `through` | Zoom-through | The camera dives into a detail with blur; the next shot starts from_zoom and settles. | `shot {"move": "hold", "through": 0.5}` | swell@0.5 | BIG_MOVES B12 |
+| `silhouette` | Silhouette reveal | The still starts as a dark silhouette and the light comes up. | `shot {"move": "hold", "silhouette": 1.2}` | - | BIG_MOVES B17 |
+| `freezestill` | Freeze + narrator | The picture stops dead and loses some colour while a name or note writes on. | `shot {"move": "push", "freeze_at": 0.8}` | scratch@0.8 | Scorsese (BIG_MOVES B14) |
+| `blurin` | Blur-in photo | A photo slides in from soft focus to sharp (presentation only; the photo is not changed). | `shot {"move": "hold", "blurin": 0.5}` | projector@0.1 | Johnny Harris (CINEMATIC C8) |
+| `relight` | Relight to dusk | The same still slides into dusk or night over a few seconds. | `shot {"move": "drift", "relight": {"to": "dusk", "at": 0.3, "dur": 2.2}}` | - | CINEMATIC C2 |
+| `handheld` | Handheld breath | A slow organic drift and tilt, like a person holding the camera. | `shot {"move": "hold", "handheld": 0.8}` | - | CINEMATIC C7 |
+| `archive` | Archive photo | Gate weave, a soft frame edge and flicker for old real photos. | `shot {"move": "hold", "archive": true}` | projector@0.1 | CINEMATIC C21 |
+| `glow` | Practical glow | A lamp or screen in the still pulses softly. | `shot {"move": "hold", "glow": {"x": 0.5, "y": 0.5, "r": 0.12}}` | - | CINEMATIC C6 |
+| `cine` | Cinemagraph | One thing in the still moves (string, sand, cloth) while the painting holds still (cut-out mask). | `shot {"move": "hold", "cine": {"mask": "layers/X/near.png"}}` | - | CINEMATIC C12 |
+| `haze` | Heat haze | The lower band of a desert still shimmers. | `shot {"move": "drift", "haze": {"y": 0.62}}` | - | CINEMATIC C3 |
 
 ## Gag moves
 
@@ -173,6 +188,18 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `tier` | The tier list | Painted S-F rows; words or cut-outs drop into their rows one by one, placed deadpan. | `{"kind": "tier", "title": "demo: places to look", "items": [{"tier": "S", "text": "demo: Mars"}, {"tier": "B", "text": "demo: moons"}, {"tier": "F", "text": "demo: my garden"}], "gap": 0.6, "dur": 2.9}` | pop@0.55, ding@0.6, pop@1.15, pop@1.75, trombone@1.8 | Wendigoon (gag study 14 Nov 2026, eighth study) **· from the next video** |
 | `stretch` | The stretched-word subtitle | A small subtitle where one word has its vowel drawn out as Sam says it ("looooong"). | `{"kind": "stretch", "text": "that is a long way", "word": "long", "vowel": "o", "max": 8, "dur": 2.6}` | - | NileRed (gag study 14 Nov 2026, eighth study) **· from the next video** |
 | `titledrop` | The late title slam | After the cold open, the video title slams in huge with a shake and a flash; pair with the drop-out before the hit. | `{"kind": "titledrop", "text": "Where is\neverybody?", "sub": "demo title", "dur": 1.8, "cutOut": true}` | boom@0.25 | TheOdd1sOut (gag study 14 Nov 2026, eighth study) **· from the next video** |
+| `peel` | Peeling stamp (painted) | A stamped kraft sticker peels off to show the next label, then the last one. | `{"kind": "peel", "texts": ["PAID?", "NOT PAID"], "last": "NOT A SINGLE DOLLAR", "times": [0.6, 1.4], "dur": 2.6}` | rip@0.6, rip@1.4, trombone@2.2 | Mark Rober (Moctar, 14 Nov 2026) **· from the next video** |
+| `letterbox` | Cinema bars | Black widescreen bars slide in for the big moment and out after. | `{"kind": "letterbox", "dur": 3.0}` | - | DRAMA_MOVES D5 |
+| `lightsweep` | Moving light | A soft warm light shaft drifts across the picture. | `{"kind": "lightsweep", "dur": 2.6}` | - | CINEMATIC C1 |
+| `sand` | Blowing sand | Fine ochre grains drift across the frame on the wind. | `{"kind": "sand", "dur": 2.6}` | desert@0 | CINEMATIC C4 |
+| `streak` | Anamorphic streak | A horizontal light streak flares across the brightest point. | `{"kind": "streak", "x": 0.5, "y": 0.35, "dur": 0.9}` | - | CINEMATIC C9 |
+| `leak` | Light-leak bridge | A warm painted light leak washes over a chapter join. | `{"kind": "leak", "dur": 1.0}` | - | CINEMATIC C16 |
+| `halftone` | Comic dots | A painted halftone dot screen fades over a punchline beat. | `{"kind": "halftone", "dur": 1.4}` | - | Spider-Verse / Kirby (CINEMATIC C22) |
+| `chyron` | Place stamp | A small typed place-and-year stamp low left on a new place. | `{"kind": "chyron", "text": "Agadez, Niger", "sub": "2008", "dur": 2.4}` | typeding@0.1 | CINEMATIC C23 |
+| `credits` | Credits crawl | A slow painted credits roll under the sign-off. | `{"kind": "credits", "lines": ["Title", "Narration — Sam"], "dur": 3.0}` | - | CINEMATIC C24 |
+| `wordcut` | Word match-cut montage | Quick cuts through several pictures with the same word centred in the same place, faster each cut. | `{"kind": "wordcut", "imgs": ["A.jpg", "B.jpg", "C.jpg"], "text": "phone", "dur": 1.6}` | click@0, click@0.5, click@0.9 | Johnny Harris (CINEMATIC C13) |
+| `flashbulb` | Flashbulb cut | A soft white camera-flash frame with a crackle punctuates or hides a cut (max 3 flashes). | `{"kind": "flashbulb", "n": 1, "dur": 0.5}` | flash@0 | Scorsese (BIG_MOVES B13) |
+| `flicker` | Lightning flicker | The picture flashes bright two or three times, uneven, then settles. | `{"kind": "flicker", "dur": 1.0}` | thunder@0.2 | BIG_MOVES B16 |
 
 ## Animations
 
@@ -231,11 +258,42 @@ Built 11 Nov 2026 for Sam ("a detailed library of picture gags and various effec
 | `villain_laugh` | Villain laugh | A cartoon villain laugh on an evil-plan line (real recording r:laugh_evil; fetch_real_sfx.py). | - | r:laugh_evil@0.3 | Technology Connections (gag study 14 Nov 2026, eighth study) **· from the next video** |
 | `source_sound` | Let the source sound through | In a narration pause, raise the footage sound itself for 1-2 s (a dish motor, a chart recorder) instead of a sting; only where its licence covers the sound. | - | - | Bright Sun Films / NileRed (gag study 14 Nov 2026, eighth study) **· from the next video** |
 | `imagine` | The imagination cut | A plain small picture cuts to the epic AI still of the same thing as imagined, then back to the plain one; a whoosh on each cut. | - | whoosh@0.0 | Corridor Crew (gag study 14 Nov 2026, eighth study) **· from the next video** |
+| `drop_silence` | Drop to silence + slow push | Bed and room tone cut 0.5 s before a heavy line, slow push in, one low hit after. | `shot {"move": "push"}` | hit@1.5 | DRAMA_MOVES D2 |
+| `long_hold` | Long hold | Stay on a picture 1-2 s past the line with no music. | - | - | DRAMA_MOVES D10 |
+| `withheld` | Withheld payoff | Cut away before the answer, come back to it later with the answer. | - | - | DRAMA_MOVES D9 |
+| `colour_script` | Colour per chapter | Each chapter leans on one hue through the plan's finish.filter. | - | - | CINEMATIC C5 |
+| `jcut` | J-cut ambience | The next scene's sound starts under the last second of the current picture. | - | - | CINEMATIC C15 |
+| `room_tone` | Room tone | A quiet bed of the place (desert wind, room hum, street) at -40 LUFS (mix_bed --amb). | - | desert@0 | CINEMATIC C18 |
+| `picture_sound` | The picture makes its sound | The thing on screen makes its sound in the first pause (twang, buzz, pencil, projector). | - | twang@0.5 | CINEMATIC C20 |
+| `beat_cut` | Cut on the beat | Picture changes in a window snap to the bed's beats (plan beatsnap + beats.py). | - | - | Edgar Wright (BIG_MOVES B8) |
+| `muffle` | The world goes muffled | Bed and room tone low-passed for a moment (mix_bed --muffle A:B) + an ear ring; Sam's voice untouched. | - | ring@0.2 | Sound of Metal (BIG_MOVES B5) |
+| `worldize` | Phone-speaker music | The bed sounds as if from a phone speaker, then opens to full (mix_bed --worldize A:B). | - | - | BIG_MOVES B7 |
+| `one_sound` | One sound in silence | Everything stops and one small real sound plays, then the bed returns. | - | pencil@0.4 | BIG_MOVES B10 |
+| `shepard_build` | Endless rise | A Shepard tone builds tension that never resolves, cut dead at the turn. | - | shepard@0 | Zimmer / Dunkirk (BIG_MOVES B1) |
 
 ## Sounds (`toolkit/media/gag_sfx.py OUTDIR <names>`, in-house, no credit)
 
 | name | what it is |
 |---|---|
+| `riser` | Tension riser (ends hard; the hit goes right after) |
+| `hit` | Low cinematic hit |
+| `pulse` | Slow low tension pulse |
+| `desert` | Room tone: desert wind (20 s loop) |
+| `roomhum` | Room tone: indoor hum |
+| `street` | Room tone: night street with distant bass |
+| `twang` | Plucked guitar string |
+| `buzz` | Old keypad phone vibrating |
+| `pencil` | Pencil scratching on paper |
+| `projector` | Slide projector clack + whirr |
+| `shepard` | Shepard tone: endless rise |
+| `tick` | Watch ticking, speeding up |
+| `braaam` | Huge low brass blast |
+| `swell` | Reverse-reverb swell into a word or cut |
+| `heartbeat` | Slow close heartbeat |
+| `doppler` | Pass-by whoosh, pitch dropping |
+| `radio` | Radio tuning between stations |
+| `ring` | Ear ring after a shock |
+| `flash` | Old flashbulb pop + crackle |
 | `trombone` | Sad trombone: a failure, a let-down |
 | `boo` | Crowd boo (synthesised; a real CC0 one is sfx_boo_real) |
 | `popper` | Party popper |
