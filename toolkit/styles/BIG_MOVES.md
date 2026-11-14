@@ -61,3 +61,13 @@ out is making the video bad."): the painting stays untouched. New life is painte
 white in the video's style, the still's own figures as reference), split and shadowed by `blender/add_figures.py`, and walks
 through the 2.5D shot (`depth_shot.py --figures`). Place added figures on open ground: where they cross a house or a tree they
 read as pasted on. Cut-outs (part.py, figures.py) stay for things that only wobble in place.
+
+## Standing rule: atmosphere and sound in almost every frame (Sam, 14 Nov 2026)
+"Going forward we can play with the atmosphere and sound in almost every frame to make things more interesting. For other
+changes we will discuss at the time of next video."
+- Every shot gets at least one atmosphere layer that fits the place: blowing sand / dust motes / rain / falling leaves (card
+  `particles`), cloud or smoke flow (shot `flow`), heat haze (`haze`), a glow or light change (`glow`, `relight`), a flicker of
+  lamplight. Painted look only, subtle, one main atmosphere per shot.
+- Every shot gets a sound bed that fits the place, under the voice and never on Sam's words: room tone or ambience (wind, street,
+  room hum, rain, crickets) plus one small picture sound in a pause (a bell, a bleat, a string, a page).
+- Bigger moves (added walking figures, Blender 2.5D shots, flipbooks, Kling) are discussed with Sam per video.
