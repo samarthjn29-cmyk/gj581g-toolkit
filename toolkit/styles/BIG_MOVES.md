@@ -56,3 +56,8 @@ Rules: painted look only (no digital sparkle), small moves (the inpainted gap on
 Limbs bend, never slide (Sam, 14 Nov 2026, the writing hand: "It's cut out from the remaining hand"): a hand or arm part gets
 `part.py --bend ANCHOR TIP` (the joint stays pinned, the tip moves) and a Firefly clean plate (`--plate`). Every new kind of moving
 part is shown to Sam as a short test before it goes into a chapter.
+Add, don't cut (Sam, 14 Nov 2026: "Instead of cutting things out, how about we add things to the clip? Because cutting things
+out is making the video bad."): the painting stays untouched. New life is painted separately (Firefly, flat silhouettes on plain
+white in the video's style, the still's own figures as reference), split and shadowed by `blender/add_figures.py`, and walks
+through the 2.5D shot (`depth_shot.py --figures`). Place added figures on open ground: where they cross a house or a tree they
+read as pasted on. Cut-outs (part.py, figures.py) stay for things that only wobble in place.
