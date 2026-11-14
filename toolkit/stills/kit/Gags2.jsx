@@ -5,6 +5,8 @@
 // positions are fractions of the frame (0-1) unless noted. Paired sounds are listed in EFFECTS_LIBRARY.md.
 import React from 'react';
 import {AbsoluteFill, Img, staticFile, interpolate, Easing} from 'remotion';
+import {P} from './Paint.jsx';
+const PC = (h) => !P.on || typeof h !== 'string' ? h : h.replace(/#BFE8FF|#FFFFFF/gi, (x) => ({'#BFE8FF': '#F6E7B0', '#FFFFFF': '#F3EBDD'})[x.toUpperCase()]);
 
 const R = (t, a, b) => interpolate(t, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.45, 0, 0.25, 1)});
 const pop = (q, k = 1) => q < 0 ? 0 : 1 + 0.22 * k * Math.exp(-q * 7) * Math.sin(q * 22) - Math.exp(-q * 16);
@@ -173,14 +175,14 @@ export const GAGS2 = {
 
   // beam (Cleo Abram beam strikes the Earth): a tapered light beam draws from (c.fx, c.fy) to (c.x, c.y) in c.draw s (default 0.45)
   // and flashes where it lands. c.color, c.width. A signal or a capsule arriving; a picture of it, never a claim. Sound: whoosh + ding.
-  beam: (c, q, d, out) => { const x0 = (c.fx ?? 0.5) * W, y0 = (c.fy ?? -0.05) * H, x1 = (c.x ?? 0.5) * W, y1 = (c.y ?? 0.6) * H, p = Easing.in(Easing.quad)(R(q, 0, c.draw ?? 0.45)), col = c.color || '#BFE8FF';
+  beam: (c, q, d, out) => { const x0 = (c.fx ?? 0.5) * W, y0 = (c.fy ?? -0.05) * H, x1 = (c.x ?? 0.5) * W, y1 = (c.y ?? 0.6) * H, p = Easing.in(Easing.quad)(R(q, 0, c.draw ?? 0.45)), col = c.color || PC('#BFE8FF');
     const ex = x0 + (x1 - x0) * p, ey = y0 + (y1 - y0) * p, a = Math.atan2(y1 - y0, x1 - x0), wd = c.width ?? 26, nx = -Math.sin(a), ny = Math.cos(a), fl = q - (c.draw ?? 0.45);
     const tail = Math.max(0, p - 0.55), tx = x0 + (x1 - x0) * tail, ty = y0 + (y1 - y0) * tail;
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><svg width={W} height={H} style={{position: 'absolute'}}>
-      <defs><linearGradient id={'bm' + Math.round((c.t || 0) * 100)} x1={tx} y1={ty} x2={ex} y2={ey} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={col} stopOpacity={0} /><stop offset="1" stopColor="#FFFFFF" stopOpacity={1} /></linearGradient></defs>
+      <defs><linearGradient id={'bm' + Math.round((c.t || 0) * 100)} x1={tx} y1={ty} x2={ex} y2={ey} gradientUnits="userSpaceOnUse"><stop offset="0" stopColor={col} stopOpacity={0} /><stop offset="1" stopColor={PC('#FFFFFF')} stopOpacity={1} /></linearGradient></defs>
       <polygon points={`${tx},${ty} ${ex + nx * wd / 2},${ey + ny * wd / 2} ${ex - nx * wd / 2},${ey - ny * wd / 2}`} fill={`url(#bm${Math.round((c.t || 0) * 100)})`} style={{filter: `drop-shadow(0 0 18px ${col})`}} />
       {fl >= 0 ? <circle cx={x1} cy={y1} r={30 + 220 * R(fl, 0, 0.35)} fill={col} opacity={0.75 * (1 - R(fl, 0, 0.5))} /> : null}
-      {fl >= 0 ? <circle cx={x1} cy={y1} r={26} fill="#FFFFFF" opacity={1 - R(fl, 0.1, 0.6)} /> : null}</svg></AbsoluteFill>; },
+      {fl >= 0 ? <circle cx={x1} cy={y1} r={26} fill={PC('#FFFFFF')} opacity={1 - R(fl, 0.1, 0.6)} /> : null}</svg></AbsoluteFill>; },
 
   // tumble (bill wurtz tumbling words): the line's words land one by one at a small random tilt and offset and settle unevenly,
   // for a line meant to feel unsure. c.text, c.times (offsets s; default every 0.32 s), c.size, c.y. Use sparingly. Sound: pop per word.
@@ -372,7 +374,7 @@ export const GAGS2 = {
   rollcall: (c, q, d, out, dir) => { const it = c.items || [], gap = c.gap ?? 1.0, i = Math.min(it.length - 1, Math.max(0, Math.floor(q / gap))), cur = it[i] || {}, iq = q - i * gap;
     return <AbsoluteFill style={{background: '#0B0A09', opacity: out}}>{cur.img ? <Img src={staticFile(`${dir}/${cur.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${1.04 + iq * 0.03})`}} /> : null}
       <AbsoluteFill style={{background: 'linear-gradient(to top, rgba(11,10,9,0.7) 0%, rgba(11,10,9,0) 30%)'}} />
-      <div style={{position: 'absolute', left: 0, right: 0, bottom: 70, textAlign: 'center', fontFamily: SANS, fontWeight: 900, fontSize: c.size || 72, letterSpacing: 4, color: PAINT.cream, textShadow: '0 4px 14px rgba(0,0,0,0.9)', textTransform: 'uppercase'}}>{cur.label}</div></AbsoluteFill>; },
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 70, textAlign: 'center', fontFamily: P.on ? 'Fraunces, Georgia, serif' : SANS, fontWeight: 900, fontSize: c.size || 72, letterSpacing: 4, color: PAINT.cream, textShadow: '0 4px 14px rgba(0,0,0,0.9)', textTransform: 'uppercase'}}>{cur.label}</div></AbsoluteFill>; },
 
   // dust (Tantacrul "blows dust off the UI"): a grey-brown dust layer lies over the picture (or c.img, a document still, shown
   // centred); at c.at s a puff sweeps it off left to right in a cloud of particles, leaving it clean. Sound: blow, then a small cough.
@@ -380,10 +382,10 @@ export const GAGS2 = {
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
       {c.img ? <div style={{position: 'absolute', left: W * 0.2, top: H * 0.1, width: W * 0.6, height: H * 0.8, ...brushBox({padding: 0, overflow: 'hidden'})}}><Img src={staticFile(`${dir}/${c.img}`)} style={{width: '100%', height: '100%', objectFit: 'cover'}} /></div> : null}
       <svg width={W} height={H} style={{position: 'absolute'}}><defs><filter id={id}><feTurbulence type="fractalNoise" baseFrequency="0.9 0.6" numOctaves="3" seed="4" /><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.50  0 0 0 0 0.42  0 0 0 2.4 -0.9" /></filter>
-        <linearGradient id={id + 'm'} x1="0" x2="1"><stop offset={Math.max(0, p * 1.25 - 0.12)} stopColor="#000" /><stop offset={Math.min(1, p * 1.25)} stopColor="#fff" /></linearGradient><mask id={id + 'k'}><rect width={W} height={H} fill={`url(#${id}m)`} /></mask></defs>
+        <linearGradient id={id + 'm'} x1="0" x2="1"><stop offset={Math.max(0, p * 1.25 - 0.12)} stopColor={PC('#000')} /><stop offset={Math.min(1, p * 1.25)} stopColor={PC('#fff')} /></linearGradient><mask id={id + 'k'}><rect width={W} height={H} fill={`url(#${id}m)`} /></mask></defs>
         <g mask={`url(#${id}k)`}><rect width={W} height={H} fill="rgba(150,135,110,0.55)" /><rect width={W} height={H} filter={`url(#${id})`} opacity={0.9} /></g>
         {p > 0 && p < 1 ? Array.from({length: 70}).map((_, i) => { const r0 = rnd(i, 3), r1 = rnd(i, 7), px = fx - 140 + r0 * 260 + p * 300 * r1, py = H * (0.1 + 0.8 * r1) - p * 120 * r0;
-          return <circle key={i} cx={px} cy={py} r={4 + 14 * r0} fill="#A8987C" opacity={0.6 * (1 - p)} />; }) : null}</svg></AbsoluteFill>; },
+          return <circle key={i} cx={px} cy={py} r={4 + 14 * r0} fill={PC('#A8987C')} opacity={0.6 * (1 - p)} />; }) : null}</svg></AbsoluteFill>; },
 
   // nest (Tantacrul menu crawl): a painted dialog box opens, then a smaller one inside it, then another (c.titles, one per window,
   // c.gap s apart), each offset down and right, until the last is tiny; bureaucracy as a picture. c.last (text inside the last one).
@@ -436,12 +438,12 @@ export const GAGS2 = {
     const rh = Math.min(130, (H - 140) / rows.length), top = (H - rh * rows.length) / 2, left = 200, lw = 140, cnt = {};
     return <AbsoluteFill style={{background: c.ground || PAINT.ink, opacity: out}}>
       {rows.map((r, i) => <div key={r} style={{position: 'absolute', left, top: top + i * rh, width: W - 2 * left, height: rh - 8, background: 'rgba(241,230,207,0.08)', borderRadius: 8}}>
-        <div style={{position: 'absolute', left: 0, top: 0, width: lw, height: '100%', background: cols[i % cols.length], borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: SANS, fontWeight: 900, fontSize: rh * 0.5, color: PAINT.ink}}>{r}</div></div>)}
+        <div style={{position: 'absolute', left: 0, top: 0, width: lw, height: '100%', background: cols[i % cols.length], borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: P.on ? 'Fraunces, Georgia, serif' : SANS, fontWeight: 900, fontSize: rh * 0.5, color: PAINT.ink}}>{r}</div></div>)}
       {it.map((v, j) => { const ri = Math.max(0, rows.indexOf(v.tier)), k = cnt[ri] = (cnt[ri] ?? -1) + 1, iq = q - 0.3 - j * gap; if (iq < 0) return null; const y = top + ri * rh, x = left + lw + 20 + k * (rh * 2.3);
         const drop = Easing.out(Easing.back(1.5))(R(iq, 0, 0.35));
         return <div key={j} style={{position: 'absolute', left: x, top: y + (1 - drop) * -260 + 6, height: rh - 20, minWidth: rh * 2.1, ...brushBox({padding: '0 18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: HAND, fontWeight: 700, fontSize: rh * 0.34, whiteSpace: 'nowrap'}), opacity: R(iq, 0, 0.1)}}>
           {v.img ? <Img src={staticFile(`${dir}/${v.img}`)} style={{height: '90%', objectFit: 'contain'}} /> : v.text}</div>; })}
-      {c.title ? <div style={{position: 'absolute', top: Math.max(10, top - 70), left: 0, right: 0, textAlign: 'center', fontFamily: SANS, fontWeight: 800, fontSize: 40, letterSpacing: 4, color: PAINT.cream, textTransform: 'uppercase'}}>{c.title}</div> : null}</AbsoluteFill>; },
+      {c.title ? <div style={{position: 'absolute', top: Math.max(10, top - 70), left: 0, right: 0, textAlign: 'center', fontFamily: P.on ? 'Fraunces, Georgia, serif' : SANS, fontWeight: 800, fontSize: 40, letterSpacing: 4, color: PAINT.cream, textTransform: 'uppercase'}}>{c.title}</div> : null}</AbsoluteFill>; },
 
   // stretch (NileRed stretched-word subtitle): a small subtitle (c.text) where one word (c.word, which must appear in c.text) has
   // its vowel (c.vowel, default the first vowel) drawn out letter by letter as it is said, up to c.max copies over c.dur s.
@@ -450,7 +452,7 @@ export const GAGS2 = {
     const n = Math.round((c.max ?? 7) * R(q, c.at ?? 0.3, (c.at ?? 0.3) + (c.grow ?? 1.0)));
     const shown = i0 < 0 ? T : T.slice(0, i0) + w.slice(0, vi + 1) + (vm ? vm[0].repeat(n) : '') + w.slice(vi + 1) + T.slice(i0 + w.length);
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}><div style={{position: 'absolute', left: 0, right: 0, bottom: c.bottom ?? 90, textAlign: 'center'}}>
-      <span style={{fontFamily: SANS, fontWeight: 600, fontSize: c.size || 46, color: PAINT.cream, background: 'rgba(11,10,9,0.55)', padding: '6px 18px', borderRadius: 6}}>{shown}</span></div></AbsoluteFill>; },
+      <span style={{fontFamily: P.on ? 'Fraunces, Georgia, serif' : SANS, fontWeight: 600, fontSize: c.size || 46, color: PAINT.cream, background: 'rgba(11,10,9,0.55)', padding: '6px 18px', borderRadius: 6}}>{shown}</span></div></AbsoluteFill>; },
 
   // titledrop (TheOdd1sOut late title slam): after the cold open the video's own title slams in huge (c.text, c.sub small under
   // it), scaling down from 3x with a quick shake and a flash, on our painted ground or over the picture (c.ground), then hard-cuts.
@@ -458,7 +460,7 @@ export const GAGS2 = {
   titledrop: (c, q, d, out) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.22)), sc = 3 - 2 * p, sh = q > 0.22 && q < 0.6 ? Math.sin(q * 80) * 12 * (1 - (q - 0.22) / 0.38) : 0, fl = 1 - R(q, 0.2, 0.45);
     return <AbsoluteFill style={{background: c.ground === 'none' ? undefined : (c.ground || PAINT.green), justifyContent: 'center', alignItems: 'center', opacity: out}}>
       <div style={{transform: `translate(${sh}px, ${sh * 0.6}px) scale(${sc}) rotate(${c.rot ?? -3}deg)`, textAlign: 'center'}}>
-        <div style={{fontFamily: SANS, fontWeight: 900, fontSize: c.size || 170, lineHeight: 0.92, letterSpacing: 2, color: PAINT.yellow, WebkitTextStroke: `6px ${PAINT.ink}`, paintOrder: 'stroke', textShadow: `0 14px 0 ${PAINT.ink}`, textTransform: 'uppercase', whiteSpace: 'pre-line'}}>{c.text}</div>
+        <div style={{fontFamily: P.on ? 'Fraunces, Georgia, serif' : SANS, fontWeight: 900, fontSize: c.size || 170, lineHeight: 0.92, letterSpacing: 2, color: PAINT.yellow, WebkitTextStroke: `6px ${PAINT.ink}`, paintOrder: 'stroke', textShadow: `0 14px 0 ${PAINT.ink}`, textTransform: 'uppercase', whiteSpace: 'pre-line'}}>{c.text}</div>
         {c.sub ? <div style={{marginTop: 26, fontFamily: HAND, fontWeight: 700, fontSize: 64, color: PAINT.cream}}>{c.sub}</div> : null}</div>
       <AbsoluteFill style={{background: '#FFFFFF', opacity: fl * (q > 0.18 ? 0.8 : 0)}} /></AbsoluteFill>; },
 };
