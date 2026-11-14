@@ -99,7 +99,7 @@ def main():
         for c in [c for c in cards if c.get('cutOut') and is_opaque(c)]:
             ce = c['t'] + c.get('dur', 4.5)
             for s in shots[1:]:
-                if c['t'] - 0.35 < s['t'] < c['t']: s['t'] = round(c['t'], 3)
+                if c['t'] - 0.35 < s['t'] < c['t'] + 0.05 and c['t'] > 0.1: s['t'] = round(c['t'] + 0.05, 3)   # just after the card's first frame: on the same time, frame rounding showed one frame of the new picture before the card (Sam, Moctar ch04, 14 Nov 2026: "Feels like there is a glitch when the frame changes")
                 if ce < s['t'] < ce + 0.8: c['dur'] = round(s['t'] - c['t'], 3)
     dur = round(t1 - t0, 2); fails = []
     for i in range(1, len(shots)):   # Zeigarnik, 9 Nov 2026: a shot listed out of spoken order gave a negative length

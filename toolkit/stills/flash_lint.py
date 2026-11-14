@@ -24,12 +24,16 @@ def corr(x, y):   # same picture before and after (a crash zoom, bounce, shake o
         crop = np.asarray(_I.fromarray(a[y0:y0 + h, x0:x0 + w].astype(np.uint8)).resize((W, H)), np.float32)
         best = max(best, _c(crop, b))
     return best
-ev, i = [], 0
+ev, i, sliver = [], 0, []
 while i < len(d):
     if d[i] > 4:
         j = i
         while j + 1 < len(d) and d[j + 1] > 4: j += 1
         if j - i < 6 and d[i:j + 1].sum() > a.cut and corr(F[i], F[min(j + 1, len(F) - 1)]) < 0.6: ev.append((i + 1, j + 1))   # frames i+1 .. j+1 are the new picture's first
+        # a one-or-two-frame sliver inside the run (Sam, Moctar ch04, 14 Nov 2026: one frame of the next picture before a card):
+        # a frame that matches neither side of the run is a third picture, not a blend of the two
+        for m in range(i + 1, j + 1):
+            if _c(F[m], F[i]) < 0.4 and _c(F[m], F[min(j + 1, len(F) - 1)]) < 0.4 and min(np.abs(F[m] - F[i]).mean(), np.abs(F[m] - F[min(j + 1, len(F) - 1)]).mean()) > 20 and corr(F[m], F[min(j + 1, len(F) - 1)]) < 0.5 and corr(F[m], F[i]) < 0.5: sliver.append(m)   # zoom-tolerant: a crash zoom's blurred frames are the same picture
         i = j + 1
     else: i += 1
 cuts = [e[0] for e in ev]; bad = []
@@ -58,6 +62,7 @@ if a.timeline:   # gag motion inside a running card (a sticker flying off, words
     import json as _j; _cards = _j.load(open(a.timeline)).get('cards', [])
     ghosts = [(t, s_) for t, s_ in ghosts if not any(c['t'] + 0.3 < t < c['t'] + c.get('dur', 2) - 0.05 for c in _cards)]
 for t, s_ in ghosts: print(f"WARN  {t:7.2f} s  something shows in part of the frame for {s_:.2f} s and is gone again: look (a ghost, or quick gag motion)")
+for m in sliver: print(f"WARN  {m / FPS:7.2f} s  one frame of a third picture inside a cut (a sliver before a card, or a crash zoom's first frame): look")
 for t, s, aba in bad: print(f"FLASH {t:7.2f} s  {s:.2f} s on screen{'  (old picture returns: A-B-A)' if aba else ''}")
 if bad and a.out:
     os.makedirs(a.out, exist_ok=True)

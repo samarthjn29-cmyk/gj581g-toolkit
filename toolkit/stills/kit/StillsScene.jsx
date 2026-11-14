@@ -27,7 +27,8 @@ const MOVES = {   // [scale from, scale to, x from, x to, y from, y to] in % of 
 
 // A real document page (Sam, 10 Nov 2026: show the actual paper): the scan on a dark desk, a highlighter sweeping each hl box
 // [x0, y0, x1, y1] (0-1 of the page) from hl_at s into the shot, the camera easing in toward the first box (zoom, default 1.7).
-// plotagraph (Sam, 14 Nov 2026): s.flow = {mask (PNG, white = flows) or y / y2 (a band, fractions), dir [dx, dy], len px, period s}.
+// plotagraph (Sam, 14 Nov 2026): s.flow = {mask (PNG, white = flows) or y / y2 (a band, fractions), dir [dx, dy], len px, period s,
+// at s (starts flowing then, fading in over fade s)}.
 // The masked part of the painting streams along dir for ever (sand off a dune, cloud, smoke, water) while the rest holds still: two
 // copies slide by len px over each period, half a period apart, cross-fading so the loop never jumps. A reverse cinemagraph = a flow
 // (or particles) everywhere except the subject: mask = the inverse of subject.py's near.png.
@@ -168,7 +169,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
       : <><Img src={staticFile(`${dir}/${src === s.img && s.parts && s.parts_base ? s.parts_base : src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />
         {src === s.img && s.flow ? (() => { const F = s.flow, Tp = F.period ?? 3, len = F.len ?? 60, [dx, dy] = F.dir || [1, 0], mk = F.mask ? `url(${staticFile(`${dir}/${F.mask}`)})` : `linear-gradient(to bottom, transparent ${((F.y ?? 0.6) - 0.08) * 100}%, #000 ${(F.y ?? 0.6) * 100}%, #000 ${(F.y2 ?? 1) * 100}%, transparent 100%)`;
-          return <div style={{position: 'absolute', inset: 0, WebkitMaskImage: mk, maskImage: mk, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}}>{[0, 0.5].map(o => { const ph = ((t / Tp + o) % 1 + 1) % 1, op = 1 - Math.abs(2 * ph - 1);
+          return <div style={{position: 'absolute', inset: 0, WebkitMaskImage: mk, maskImage: mk, WebkitMaskSize: '100% 100%', maskSize: '100% 100%'}}>{[0, 0.5].map(o => { const ph = ((t / Tp + o) % 1 + 1) % 1, op = (1 - Math.abs(2 * ph - 1)) * (F.at != null ? Math.min(1, Math.max(0, (q - F.at) / (F.fade ?? 0.8))) : 1);
             return <Img key={o} src={staticFile(`${dir}/${s.parts_base && s.parts ? s.parts_base : src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: op, transform: `translate(${dx * len * (ph - 0.5)}px, ${dy * len * (ph - 0.5)}px) scale(${1 + Math.abs(len) / 1920 + 0.01})`}} />; })}</div>; })() : null}
         {src === s.img && s.parts ? s.parts.map((p, i) => <React.Fragment key={i}>{p.act === 'write' && p.ink !== false ? <Ink p={p} q={q} /> : null}{p.bend ? <Bend p={p} q={q} dir={dir} sid={`${s.id}_${i}`} /> : <Img src={staticFile(`${dir}/${p.img}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', ...partMove(p, q, t)}} />}</React.Fragment>) : null}
         {src === s.img && (s.cine || s.haze) ? <Img src={staticFile(`${dir}/${src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: `url(#sh_${s.id})`,
