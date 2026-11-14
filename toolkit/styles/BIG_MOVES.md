@@ -71,3 +71,9 @@ changes we will discuss at the time of next video."
 - Every shot gets a sound bed that fits the place, under the voice and never on Sam's words: room tone or ambience (wind, street,
   room hum, rain, crickets) plus one small picture sound in a pause (a bell, a bleat, a string, a page).
 - Bigger moves (added walking figures, Blender 2.5D shots, flipbooks, Kling) are discussed with Sam per video.
+
+## Flipbook style from the next video (Sam, 14 Nov 2026: "I think we should flipbook kind of style frames from next video")
+Moving figures are held drawings cycled (on threes at 30 fps, about 10 drawings a second), not sliding cut-outs. Fastest way:
+ask Firefly for a POSE SHEET (all 4-6 poses of one figure side by side on plain white, in the video's style, with the still's
+own figure as reference) in one generation, so the poses match; split it with `blender/add_figures.py`. Reuse frames in the
+cycle (up, mid, down, mid). Example: `moctar/blender/flipbook_example.mp4` (five bird poses from one sheet).
