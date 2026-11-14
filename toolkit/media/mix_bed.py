@@ -24,7 +24,8 @@ def dur(f):
 
 ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)   # 'none': voice + sound effects only
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
-ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--amb-to', type=float)
+ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--fade-in', type=float, default=2); ap.add_argument('--fade-out', type=float, default=3);   # inner chapters of a joined video: 0.25 / 0.25, so the bed doesn't dip at the joins (Moctar full-cut review, 14 Nov 2026)
+ ap.add_argument('--amb-to', type=float)
 ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--muffle', nargs='*', default=[]); ap.add_argument('--worldize', nargs='*', default=[]); ap.add_argument('--thin', nargs='*', default=[]); ap.add_argument('--lift', type=float); ap.add_argument('--button', type=float); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
 a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
@@ -49,7 +50,7 @@ NOBED = a.bed == 'none'   # Sam, Aliens opening, 11 Nov 2026: "Remove the sound 
 g = 0 if NOBED else a.bed_lufs - lufs(a.bed)
 fc = [f'[0:a]{F},asplit[v][sc]',
       f"[1:a]atrim=0:{D:.3f},asetpts=PTS-STARTPTS,volume={g:.2f}dB,volume='{env}':eval=frame,"
-      f'afade=t=in:d=2,afade=t=out:st={D - 3:.3f}:d=3,{F}' + TREAT + '[b]',
+      f'afade=t=in:d={a.fade_in},afade=t=out:st={D - a.fade_out:.3f}:d={a.fade_out},{F}' + TREAT + '[b]',
       '[b][sc]sidechaincompress=threshold=0.05:ratio=3:attack=20:release=400[bd]']
 if a.lift is not None:   # rubberband has no timeline switch: a pitched copy of the bed takes over from T (30 ms crossfade)
     fc[1] = fc[1][:-3] + '[bp]'
@@ -60,7 +61,7 @@ if NOBED: fc = [f'[0:a]{F}[v]']; ins = ['-i', a.inp]; mix = ['[v]']
 if a.amb:
     t1 = a.amb_to or D; ad = t1 - a.amb_from; ag = a.amb_lufs - lufs(a.amb)
     ins += ['-stream_loop', '-1', '-i', a.amb]
-    fc.append(f'[2:a]atrim=0:{ad:.3f},asetpts=PTS-STARTPTS,volume={ag:.2f}dB,afade=t=in:d=1.5,afade=t=out:st={max(0, ad - 3):.3f}:d=3,'
+    fc.append(f'[2:a]atrim=0:{ad:.3f},asetpts=PTS-STARTPTS,volume={ag:.2f}dB,afade=t=in:d={min(1.5, a.fade_in)},afade=t=out:st={max(0, ad - a.fade_out):.3f}:d={a.fade_out},'
               f'adelay={int(a.amb_from * 1000)}:all=1,{F}' + AMBT + '[am]'); mix.append('[am]')
 GAPS = []   # (start, end) windows where everything but the gapped hit is silenced
 for spec in a.sfx:

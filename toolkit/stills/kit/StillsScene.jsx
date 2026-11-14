@@ -163,7 +163,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   const frozen = s.video && s.freeze_img && t >= s.t + s.freeze;
   // shake (Sam, 11 Nov 2026, "most ridiculous version"): a camera shake that decays over 0.8 s from shake_at s into the shot
   const sa = s.t + (s.shake_at ?? 0), sk = s.shake && t >= sa ? s.shake * Math.max(0, 1 - (t - sa) / 0.8) : 0;
-  const shx = sk * Math.sin(t * 71), shy = sk * Math.cos(t * 53); if (sk) sc += 0.04;
+  const shx = sk * Math.sin(t * 71), shy = sk * Math.cos(t * 53); if (sk) sc += 2 * sk / 100 + 0.01;   // scaled so a shake never shows the picture's edge (review 14 Nov 2026: red strip at the frame edge)
   const frame = (extra, src, style = {}, f2 = '') => <AbsoluteFill style={{transform: `translate(${x * extra + shx + xo + mo[0]}%, ${y * extra + shy + mo[1]}%) scale(${1 + (sc - 1) * extra}) rotate(${rot}deg)`, filter: (blur ? `blur(${blur}px) ` : '') + f2 || undefined, transformOrigin: `${fx * 100}% ${fy * 100}%`, ...style}}>
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
@@ -242,7 +242,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
     return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `${c.center ? 'translate(-50%, -50%) ' : ''}rotate(${c.rot ?? -3}deg)`, fontFamily: '"Cormorant Garamond", Georgia, serif', fontStyle: 'italic', fontSize: c.size || 64,
       color: c.color || '#FFFFFF', textShadow: c.shadow === false ? 'none' : '0 0 12px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)', whiteSpace: 'nowrap',   // center: x, y is the middle; shadow: false for text printed on a painted surface (Sam, 14 Nov 2026: poster slogan inside the poster's red box)
       // dark backing chip by default (reviewer, opening v13: thin white italic was lost on busy painted seats and streamers); chip: false for none
-      ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.72)', padding: '6px 26px 12px', borderRadius: 10, fontWeight: 600})}}>{c.text.toLowerCase()}</div></AbsoluteFill>; }
+      ...(c.chip === false ? {} : {background: 'rgba(14,12,10,0.72)', padding: '6px 26px 12px', borderRadius: 10, fontWeight: 600})}}>{c.keepCase ? c.text : c.text.toLowerCase()}</div></AbsoluteFill>; }
   // breaking banner + ticker (Hindi primetime parody, our own colours, no channel branding)
   if (c.kind === 'banner') { const p = Easing.out(Easing.cubic)(R(t, c.t, c.t + 0.25)), q = t - c.t, oo = 1 - R(t, c.t + d - 0.2, c.t + d), pulse = 0.85 + 0.15 * Math.sin(q * 12);
     return <AbsoluteFill style={{opacity: oo}}><div style={{position: 'absolute', left: 0, right: 0, bottom: 150, height: 150, transform: `translateX(${(1 - p) * -110}%)`, display: 'flex', alignItems: 'stretch', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'}}>
@@ -394,7 +394,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
   // set low so the picture stays visible; words verbatim from a fact-checked line
   if (c.kind === 'text' && c.bg) return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: o, background: `rgba(10,9,8,${dark * o})`}}><Tex c={c} o={o} dir={dir} />
     <div style={{fontFamily: FONT, fontSize: c.hand ? 78 : 80, position: 'relative', color: '#F3EBDD', textAlign: 'center', maxWidth: 1400, lineHeight: 1.2, textShadow: '0 4px 24px rgba(0,0,0,0.8)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
-  if (c.kind === 'text') return <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', opacity: o, background: `linear-gradient(to top, rgba(0,0,0,${0.62 * o}) 0%, rgba(0,0,0,0) 45%)`}}>
+  if (c.kind === 'text') return <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', opacity: o, background: `linear-gradient(to top, rgba(0,0,0,${(c.shade ?? 0.62) * o}) 0%, rgba(0,0,0,${(c.shade ?? 0.62) * 0.45 * o}) ${c.shade ? 30 : 20}%, rgba(0,0,0,0) ${c.shade ? 58 : 45}%)`}}>   {/* shade: a stronger dark under a pale caption on pale sand (review 14 Nov 2026) */}
     <div style={{fontFamily: '"Cormorant Garamond", "Noto Serif", Georgia, serif', fontSize: 66, letterSpacing: 3, color: '#F3EBDD', textAlign: 'center', maxWidth: 1500, lineHeight: 1.15, marginBottom: 110, textShadow: '0 4px 24px rgba(0,0,0,0.8)', transform: `translateY(${(1 - o) * 12}px)`}}>{c.text}</div></AbsoluteFill>;
   // info box: what a term means (kept on screen at Sam's request)
   return <div style={{position: 'absolute', left: 96, bottom: 120, width: 640, opacity: o, transform: `translateY(${(1 - o) * 14}px)`, background: 'rgba(14,16,20,0.82)', borderLeft: '6px solid #C9A86A', padding: '22px 28px', backdropFilter: 'blur(6px)'}}>
@@ -436,7 +436,7 @@ const Grain = ({o}) => { const f = useCurrentFrame(); return <AbsoluteFill style
 //  handheld: amp (C7) - a slow organic drift and tilt, like a person holding the camera (0.6 typical).
 //  archive: true (C21) - gate weave, a soft film frame edge and flicker for old real photos.
 //  glow: {x, y, r, color, rate} (C6) - a practical light in the still (lamp, screen) pulses softly.
-const RELIGHT = {dusk: 'sepia(0.5) saturate(1.3) hue-rotate(-18deg) brightness(0.62) contrast(1.12)', night: 'saturate(0.55) hue-rotate(185deg) brightness(0.55) contrast(1.1)', dawn: 'sepia(0.2) saturate(1.1) hue-rotate(8deg) brightness(1.05)'};
+const RELIGHT = {dusk: 'sepia(0.3) saturate(1.2) hue-rotate(-10deg) brightness(0.8) contrast(1.06)', night: 'saturate(0.55) hue-rotate(185deg) brightness(0.55) contrast(1.1)', dawn: 'sepia(0.2) saturate(1.1) hue-rotate(8deg) brightness(1.05)'};
 const ShotFx = ({s, t, children}) => { const q = t - s.t; let filt = '', tr = '';
   if (s.blurin) { const p = R(t, s.t, s.t + s.blurin); filt += ` blur(${(1 - p) * 26}px)`; tr += ` translateX(${(1 - p) * 2.5}%)`; }
   if (s.relight) { const L = s.relight, p = R(t, s.t + (L.at ?? 0.3), s.t + (L.at ?? 0.3) + (L.dur ?? 2.5)); if (p > 0) filt += ` ${RELIGHT[L.to || 'dusk'].replace(/([a-z-]+)\(([-\d.]+)(deg)?\)/g, (m, f, v, u) => { const base = {brightness: 1, contrast: 1, saturate: 1}[f] ?? 0; return `${f}(${base + (parseFloat(v) - base) * p}${u || ''})`; })}`; }

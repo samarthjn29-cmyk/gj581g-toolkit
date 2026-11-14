@@ -70,13 +70,13 @@ export const PAINTED = {
       <div style={{position: 'relative', filter: 'url(#pInk)', border: `${Math.round(size * 0.07)}px solid ${BRICK}`, outline: `${Math.round(size * 0.025)}px solid ${BRICK}`, outlineOffset: Math.round(size * 0.05),
         padding: `${Math.round(size * 0.04)}px ${Math.round(size * 0.28)}px`, fontFamily: SERIF, fontWeight: 700, fontSize: size, letterSpacing: Math.round(size * 0.065), color: BRICK,
         whiteSpace: 'nowrap', lineHeight: 1.1, opacity: back ? 0.12 : 1, transform: back ? 'scaleX(-1)' : 'none'}}>{txt}</div></div>;
-    const place = (el, extra = '', o = 1, inner = '') => <div style={{position: 'absolute', left: x, top: y, opacity: o, transform: `translate(-50%, -50%) rotate(${rot}deg) ${extra}`}}><div style={{transformOrigin: '100% 100%', transform: inner || 'none'}}>{el}</div></div>;   // the peel turns about its own corner inside the placed box, so it starts exactly on the sticker under it (Sam: a jump at 0:18)
+    const place = (el, extra = '', o = 1, inner = '', i = 0) => <div style={{position: 'absolute', left: x, top: y + (i >= tm.length && c.lastDy ? c.lastDy * H : 0), opacity: o, transform: `translate(-50%, -50%) rotate(${rot}deg) ${extra}`}}><div style={{transformOrigin: '100% 100%', transform: inner || 'none'}}>{el}</div></div>;   // the peel turns about its own corner inside the placed box, so it starts exactly on the sticker under it (Sam: a jump at 0:18)
     const p0 = R(q, 0, 0.14), slam = q < 0.14 ? `scale(${2.4 - 1.4 * p0})` : '';
     const under = label(k + (cur != null ? 1 : 0));
     return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
-      {place(sticker(under), cur == null && k === 0 ? slam : '', cur == null && k === 0 ? p0 : 1)}
+      {place(sticker(under), cur == null && k === 0 ? slam : '', cur == null && k === 0 ? p0 : 1, '', k + (cur != null ? 1 : 0))}
       {cur != null ? (() => { const p = interpolate(q, [cur, cur + PD], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.in(Easing.sin)}), flip = p > 0.5;   // one steady lift, no hold-then-snap (Sam: glitch at 0:18)
-        return place(sticker(label(k), flip), '', 1 - R(q, cur + PD - 0.2, cur + PD), `perspective(1100px) rotateX(${-p * 75}deg) rotateY(${p * 55}deg) translate(${p * 360}px, ${-p * 460}px) rotate(${p * 30}deg)`); })() : null}
+        return place(sticker(label(k), flip), '', 1 - R(q, cur + PD * 0.5, cur + PD * 0.75), `perspective(1100px) rotateX(${-p * 75}deg) rotateY(${p * 55}deg) translate(${p * 360}px, ${-p * 460}px) rotate(${p * 30}deg)`, k); })() : null}
     </AbsoluteFill>; },
   bubble: (c, q, d, out) => { const x = (c.x ?? 0.62) * W, y = (c.y ?? 0.22) * H, tx = (c.tx ?? 0.5) * W, ty = (c.ty ?? 0.5) * H, s = pop(q), size = c.size || 56;
     const {w, h, lines} = measure(c.text, size), bp = bubblePath(x, y, w * 1.12, h * 1.1, tx, ty);
@@ -197,7 +197,7 @@ export const PAINTED = {
 
   aside: (c, q, d) => { if (q < 0 || q > d) return null;
     return <AbsoluteFill><div style={{position: 'absolute', left: c.x ?? 120, top: c.y ?? 120, transform: `${c.center ? 'translate(-50%, -50%) ' : ''}rotate(${c.rot ?? -3}deg)`}}>
-      <Scrap pad="0 26px 8px" sw={3} fill={c.chip === false ? 'transparent' : PAPER} stroke={c.chip === false ? null : INK}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 64) * 0.92, color: c.color || INK, whiteSpace: 'nowrap'}}>{c.text.toLowerCase()}</div></Scrap></div></AbsoluteFill>; },
+      <Scrap pad="0 26px 8px" sw={3} fill={c.chip === false ? 'transparent' : PAPER} stroke={c.chip === false ? null : INK}><div style={{fontFamily: HAND, fontWeight: 700, fontSize: (c.size || 64) * 0.92, color: c.color || INK, whiteSpace: 'nowrap'}}>{c.keepCase ? c.text : c.text.toLowerCase()}</div></Scrap></div></AbsoluteFill>; },
 
   banner: (c, q, d) => { const p = Easing.out(Easing.cubic)(R(q, 0, 0.25)), oo = 1 - R(q, d - 0.2, d), L = c.label || 'Breaking', lab = L.charAt(0) + L.slice(1).toLowerCase(), txt = /^[A-Z0-9 '!?.,’-]+$/.test(c.text) ? c.text.charAt(0) + c.text.slice(1).toLowerCase() : c.text;
     const tick = c.ticker || '', y0 = 830;
