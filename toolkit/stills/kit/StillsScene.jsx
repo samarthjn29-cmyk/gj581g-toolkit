@@ -81,7 +81,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
   if (s.page) return <PageShot s={s} t={t} dir={dir} />;
   if (s.diagram) return <Diagram s={s} t={t} words={words} />;
   const SPECIAL = {triple: 'hold', whip: 'hold', spin: 'hold', crash: 'hold', bounce: 'hold', dutch: 'push', ramp: 'hold', vertigo: 'hold', rack: 'drift'};   // gag moves (Sam, 11 Nov 2026: 'bring varieties in zooms')
-  const [s0, s1, x0, x1, y0, y1] = MOVES[SPECIAL[s.move] || (s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift'))], k = lin(t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
+  const [s0, s1, x0, x1, y0, y1] = MOVES[SPECIAL[s.move] || (s.move === 'punch' ? 'hold' : (s.video && (s.move || 'hold') === 'hold' && !s.freeze_img) ? 'vdrift' : (s.move || 'drift'))], k = lin(s.freeze_at != null ? Math.min(t, s.t + s.freeze_at) : t, s.t, s.t + s.dur + (s.tail ?? 0.6));   // keeps moving through the outgoing dissolve
   let sc = s0 + (s1 - s0) * k; const x = x0 + (x1 - x0) * k, y = y0 + (y1 - y0) * k, [fx, fy] = s.focus || [0.5, 0.5];
   // gag punch-in (Zeigarnik, 9 Nov 2026 research: a fast snap zoom on the funny detail lands the beat): 0.18 s snap at punch_at s
   if (s.move === 'punch') { const p0 = s.t + (s.punch_at ?? 0.5); sc += (s.punch || 0.22) * interpolate(t, [p0, p0 + 0.18], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)}); }
@@ -381,8 +381,15 @@ const ShotFx = ({s, t, children}) => { const q = t - s.t; let filt = '', tr = ''
   if (s.relight) { const L = s.relight, p = R(t, s.t + (L.at ?? 0.3), s.t + (L.at ?? 0.3) + (L.dur ?? 2.5)); if (p > 0) filt += ` ${RELIGHT[L.to || 'dusk'].replace(/([a-z-]+)\(([-\d.]+)(deg)?\)/g, (m, f, v, u) => { const base = {brightness: 1, contrast: 1, saturate: 1}[f] ?? 0; return `${f}(${base + (parseFloat(v) - base) * p}${u || ''})`; })}`; }
   if (s.handheld) { const a = s.handheld; tr += ` translate(${a * (0.6 * Math.sin(t * 1.3) + 0.3 * Math.sin(t * 3.1 + 1))}%, ${a * (0.5 * Math.sin(t * 1.7 + 2) + 0.25 * Math.sin(t * 2.9))}%) rotate(${a * 0.35 * Math.sin(t * 0.9 + 0.5)}deg) scale(${1 + 0.02 * a})`; }
   if (s.archive) { const f = Math.floor(t * 12); tr += ` translate(${((f * 37) % 5 - 2) * 0.06}%, ${((f * 53) % 5 - 2) * 0.08}%)`; filt += ` brightness(${1 + 0.035 * Math.sin(t * 23) * Math.sin(t * 7)})`; }
+  // silhouette (B17): the still starts as a dark silhouette and the light comes up over s.silhouette s
+  if (s.silhouette) { const p = R(t, s.t + 0.2, s.t + 0.2 + s.silhouette); filt += ` brightness(${0.08 + 0.92 * p}) contrast(${1.6 - 0.6 * p}) saturate(${0.2 + 0.8 * p})`; }
+  // freeze + narrator (B14): at freeze_at s the picture stops dead (ShotFx holds the move, see Shot) and loses a little colour
+  if (s.freeze_at != null && q >= s.freeze_at) filt += ' saturate(0.55) contrast(1.08)';
+  // zoom-through (B12): over the shot's last through s the camera dives into s.focus with motion blur (the next shot gets from_zoom)
+  if (s.through) { const p = Math.pow(R(t, s.t + s.dur - s.through, s.t + s.dur), 2); tr += ` scale(${1 + 2.2 * p})`; filt += ` blur(${10 * p}px)`; }
+  if (s.from_zoom) { const p = R(t, s.t, s.t + 0.45); tr += ` scale(${1 + (s.from_zoom - 1) * (1 - p)})`; filt += ` blur(${8 * (1 - p)}px)`; }
   const g = s.glow, gl = g ? 0.5 + 0.5 * Math.sin(q * (g.rate ?? 2.2) * Math.PI * 2) * (0.7 + 0.3 * Math.sin(q * 13)) : 0;
-  return <AbsoluteFill style={{filter: filt.trim() || undefined, transform: tr.trim() || undefined}}>{children}
+  return <AbsoluteFill style={{filter: filt.trim() || undefined, transform: tr.trim() || undefined, transformOrigin: s.focus ? `${s.focus[0] * 100}% ${s.focus[1] * 100}%` : '50% 50%'}}>{children}
     {g ? <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', background: `radial-gradient(circle ${(g.r ?? 0.12) * 1920}px at ${(g.x ?? 0.5) * 100}% ${(g.y ?? 0.5) * 100}%, ${g.color || 'rgba(255,214,140,0.55)'} 0%, rgba(0,0,0,0) 100%)`, opacity: 0.35 + 0.65 * gl}} /> : null}
     {s.archive ? <AbsoluteFill style={{pointerEvents: 'none', boxShadow: 'inset 0 0 90px 30px rgba(20,14,8,0.55)', border: '10px solid rgba(24,18,12,0.35)'}} /> : null}</AbsoluteFill>; };
 

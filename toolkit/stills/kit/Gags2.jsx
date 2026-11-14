@@ -389,6 +389,16 @@ export const GAGS2 = {
       <AbsoluteFill style={{background: 'rgba(20,16,10,0.25)'}} />
       <div style={{position: 'absolute', left: 0, right: 0, top: '50%', transform: 'translateY(-50%)', textAlign: 'center'}}><span style={{...brushBox({padding: '10px 36px 16px', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 110, color: PAINT.ink})}}>{c.text}</span></div></AbsoluteFill>; },
 
+  // flashbulb (BIG_MOVES B13, Scorsese): one or two soft white camera-flash frames that punctuate or hide a cut (c.n flashes,
+  // 2 frames each, at most 3 a second: no strobing). Sound: flash crackle.
+  flashbulb: (c, q, d, out) => { const n = Math.min(3, c.n || 1), fr = Math.floor(q * 30); let o = 0;
+    for (let i = 0; i < n; i++) { const f0 = i * 12; if (fr >= f0 && fr < f0 + 2) o = fr === f0 ? 0.92 : 0.5; else if (fr >= f0 + 2 && fr < f0 + 6) o = Math.max(o, 0.25 * (1 - (fr - f0 - 2) / 4)); }
+    return o > 0 ? <AbsoluteFill style={{background: '#FFF8E8', opacity: o * out, pointerEvents: 'none'}} /> : null; },
+  // flicker (B16): lightning or a failing light: the picture flashes bright 2-3 times, uneven, then settles (no strobing).
+  flicker: (c, q, d, out) => { const pat = c.pattern || [[0.0, 0.55], [0.12, 0], [0.22, 0.85], [0.3, 0.2], [0.42, 0]]; let o = 0;
+    for (const [at, v] of pat) if (q >= at) o = v; o *= Math.exp(-Math.max(0, q - 0.45) * 4);
+    return <AbsoluteFill style={{background: c.color || '#EAF0FF', mixBlendMode: 'screen', opacity: o * out, pointerEvents: 'none'}} />; },
+
   // letterbox (DRAMA_MOVES D5, Sam 14 Nov 2026: "a bit dramatic"): black cinema bars slide in from top and bottom over 0.45 s to
   // c.ratio (default 2.39:1) for the big moment, and slide out over the card's last 0.45 s. Overlay: the picture keeps playing.
   letterbox: (c, q, d) => { const bar = (H - W / (c.ratio || 2.39)) / 2, p = Easing.inOut(Easing.cubic)(R(q, 0, 0.45)) * (1 - Easing.inOut(Easing.cubic)(R(q, d - 0.45, d)));

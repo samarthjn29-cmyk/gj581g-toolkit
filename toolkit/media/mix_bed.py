@@ -7,7 +7,7 @@ Takes the rendered clip, keeps the picture (stream copy) and Sam's narration as 
   - then the whole mix is re-levelled with a two-pass linear loudnorm to -16 LUFS, TP -1.5;
   - an optional ambience at AMB_LUFS, faded 1.5 s / 3 s.
 Usage: mix_bed.py IN.mp4 OUT.mp4 --bed BED.wav [--amb AMB.mp3 --amb-lufs -40 --amb-from 0 --amb-to END]
-                  [--mute A:B ...] [--swell START] [--bed-lufs -35] [--sfx FILE@T[:LUFS[:DUR[:gapG]]] ...]
+                  [--mute A:B ...] [--muffle A:B ...] [--worldize A:B ...] [--swell START] [--bed-lufs -35] [--sfx FILE@T[:LUFS[:DUR[:gapG]]] ...]
   --sfx: a sound effect placed at T seconds (default -24 LUFS; DUR trims it, with a 0.15 s fade out), not ducked,
          mixed before the re-level (Aliens opening, 11 Nov 2026: boo, trombone, ka-ching, poppers, cheer, kiss)
          gapG (e.g. gap0.4): the drop-out before the hit (gag study 14 Nov 2026, TheOdd1sOut measured 0.3-0.5 s):
@@ -25,7 +25,7 @@ def dur(f):
 ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)   # 'none': voice + sound effects only
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
 ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--amb-to', type=float)
-ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
+ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--muffle', nargs='*', default=[]); ap.add_argument('--worldize', nargs='*', default=[]); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
 a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
 # bed gain envelope: mutes ramp over 0.6 s, swell +4 dB over 2 s
@@ -35,11 +35,16 @@ for m in a.mute:
     env += f'*min(1,max(0,max(({s}-t)/0.3,(t-{e})/0.3)))'
 if a.swell is not None:
     env += f'*(1+0.585*min(1,max(0,(t-{a.swell})/2)))'
+# BIG_MOVES B5 / B7 (Sam, 14 Nov 2026): --muffle A:B low-passes the bed and the ambience (the world goes muffled, like a shock);
+# --worldize A:B band-passes the bed so it sounds as if it plays from a phone speaker. Sam's voice is never touched.
+def _tr(spec, f): s0, e0 = map(float, spec.split(':')); return f",{f}:enable='between(t,{s0},{e0})'"
+TREAT = ''.join(_tr(m, 'lowpass=f=380:p=2') for m in a.muffle) + ''.join(_tr(m, 'highpass=f=650,lowpass=f=2800') for m in a.worldize)
+AMBT = ''.join(_tr(m, 'lowpass=f=380:p=2') for m in a.muffle)
 NOBED = a.bed == 'none'   # Sam, Aliens opening, 11 Nov 2026: "Remove the sound bed ... only gag sounds and my voice"
 g = 0 if NOBED else a.bed_lufs - lufs(a.bed)
 fc = [f'[0:a]{F},asplit[v][sc]',
       f"[1:a]atrim=0:{D:.3f},asetpts=PTS-STARTPTS,volume={g:.2f}dB,volume='{env}':eval=frame,"
-      f'afade=t=in:d=2,afade=t=out:st={D - 3:.3f}:d=3,{F}[b]',
+      f'afade=t=in:d=2,afade=t=out:st={D - 3:.3f}:d=3,{F}' + TREAT + '[b]',
       '[b][sc]sidechaincompress=threshold=0.05:ratio=3:attack=20:release=400[bd]']
 ins = ['-i', a.inp, '-stream_loop', '-1', '-i', a.bed]; mix = ['[v]', '[bd]']
 if NOBED: fc = [f'[0:a]{F}[v]']; ins = ['-i', a.inp]; mix = ['[v]']
@@ -47,7 +52,7 @@ if a.amb:
     t1 = a.amb_to or D; ad = t1 - a.amb_from; ag = a.amb_lufs - lufs(a.amb)
     ins += ['-stream_loop', '-1', '-i', a.amb]
     fc.append(f'[2:a]atrim=0:{ad:.3f},asetpts=PTS-STARTPTS,volume={ag:.2f}dB,afade=t=in:d=1.5,afade=t=out:st={max(0, ad - 3):.3f}:d=3,'
-              f'adelay={int(a.amb_from * 1000)}:all=1,{F}[am]'); mix.append('[am]')
+              f'adelay={int(a.amb_from * 1000)}:all=1,{F}' + AMBT + '[am]'); mix.append('[am]')
 GAPS = []   # (start, end) windows where everything but the gapped hit is silenced
 for spec in a.sfx:
     pr = spec.rsplit('@', 1)[1].split(':')

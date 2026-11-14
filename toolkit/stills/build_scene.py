@@ -51,6 +51,16 @@ def main():
         if len(hits) <= k: sys.exit(f"cue word '{shot['word']}' not found in {shot['at']}")
         return hits[k][1]
     shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0
+    # cut on the beat (BIG_MOVES B8, Sam 14 Nov 2026): plan "beatsnap": {"bed": "music/x.wav", "from": s, "to": s} moves every picture
+    # change inside the window onto the nearest beat of the bed (beats.py writes BED.beats.json) when one is within 0.18 s
+    bs = P.get('beatsnap')
+    if bs:
+        bj = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(a.plan))), bs['bed']) + '.beats.json'
+        beats = json.load(open(bj))['beats']
+        for s in shots[1:]:
+            if bs.get('from', 0) <= s['t'] <= bs.get('to', 1e9):
+                nb = min(beats, key=lambda b: abs(b - s['t']))
+                if abs(nb - s['t']) <= 0.18: s['t'] = round(nb, 3); s['cut'] = True
     cards = [dict(c, t=round(at(c) + c.get('offset', 0), 2)) for c in P.get('cards', [])]   # offset: seconds after the cue (gags)
     # A picture change that lands as a full-screen card ends showed the OLD picture for the card's fade-out (Sam, Aliens opening,
     # 11 Nov 2026: "the stop watch again for a very brief moment"). Move such a change under the card, 0.3 s before it ends,

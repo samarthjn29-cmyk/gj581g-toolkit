@@ -348,6 +348,49 @@ def projector(d=1.2):                                                # a slide p
     m = int(0.05 * SR); x[:m] += bp(rng.standard_normal(m), 800, 5000) * np.exp(-np.arange(m) / SR * 80) * 3
     return norm(x * np.minimum(1, (d - t) / 0.2), -6)
 
+# ---- big moves, sound (styles/BIG_MOVES.md B1-B11, Sam 14 Nov 2026: "Search more for big cinematic moves") ----
+def shepard(d=6.0, up=True):                                         # Shepard tone: octave-stacked sines gliding up for ever (Dunkirk); cut dead at the turn
+    t = t_(d); x = np.zeros(len(t)); cyc = 6.0
+    for k in range(7):
+        ph = ((t / cyc) + k / 7) % 1 if up else (1 - ((t / cyc) + k / 7) % 1)
+        f = 55 * 2 ** (ph * 7); a = np.sin(np.pi * ph) ** 2
+        x += a * np.sin(2 * np.pi * np.cumsum(f) / SR)
+    return norm(x * np.minimum(1, t / 0.8), -6)
+def tick(d=6.0, start=1.0, end=3.5):                                 # a watch ticking, speeding up from start to end ticks a second (Dunkirk's watch)
+    t = t_(d); x = np.zeros(len(t)); tt = 0.0
+    while tt < d:
+        i0 = int(tt * SR); m = min(len(t) - i0, int(0.02 * SR))
+        if m > 0: x[i0:i0 + m] += bp(rng.standard_normal(m), 2500, 9000) * np.exp(-np.arange(m) / SR * 400)
+        rate = start + (end - start) * tt / d; tt += 1 / rate
+    return norm(x, -8)
+def braaam(d=3.0):                                                   # a huge low brass blast (trailer "braaam"): detuned saws + sub, slow swell, long tail
+    t = t_(d); e = np.minimum(1, t / 0.12) * np.exp(-np.maximum(0, t - 0.9) * 1.4)
+    x = sum(saw(f * (1 + dt), t) for f in (55, 82.4, 110) for dt in (-0.004, 0, 0.005)) / 9 + 0.7 * np.sin(2 * np.pi * 41 * t)
+    return norm(lp(x, 900, 4) * e, -2)
+def swell(d=1.4):                                                    # a reverse-reverb swell that sucks in and stops dead (lands on a word or a cut)
+    t = t_(d); n = bp(rng.standard_normal(len(t)), 300, 6000); tail = n * np.exp(-t * 3.2)
+    return norm(tail[::-1] * np.minimum(1, (d - t) / 0.005 + 0), -6)
+def heartbeat(d=4.0, bpm=58):                                        # a close, slow heartbeat: lub-dub
+    t = t_(d); x = np.zeros(len(t)); per = 60 / bpm
+    for k in np.arange(0.1, d, per):
+        for off, a, f in ((0, 1.0, 60), (0.18, 0.7, 75)):
+            i0 = int((k + off) * SR); m = min(len(t) - i0, int(0.14 * SR))
+            if m > 0: tt = np.arange(m) / SR; x[i0:i0 + m] += a * np.sin(2 * np.pi * f * tt) * np.exp(-tt * 28) * np.minimum(1, tt / 0.01)
+    return norm(lp(x, 160), -4)
+def doppler(d=1.1):                                                  # a pass-by: a whoosh whose pitch drops as it passes (mono here; pan in the mix)
+    t = t_(d); c = d / 2; g = np.exp(-((t - c) / (d / 5)) ** 2); f = 900 * (1.25 - 0.5 / (1 + np.exp(-(t - c) * 14)))
+    x = 0.6 * bp(rng.standard_normal(len(t)), 400, 5000) * g + 0.4 * np.sin(2 * np.pi * np.cumsum(f) / SR) * g
+    return norm(x, -5)
+def radio(d=1.4):                                                    # tuning a radio between stations: static with a whistling dial sweep
+    t = t_(d); st = bp(rng.standard_normal(len(t)), 500, 7000) * (0.6 + 0.4 * np.sin(2 * np.pi * 7 * t))
+    wh = 0.3 * np.sin(2 * np.pi * np.cumsum(600 + 2400 * np.abs(np.sin(np.pi * t / d))) / SR)
+    return norm((st + wh) * np.minimum(1, t / 0.05) * np.minimum(1, (d - t) / 0.1), -7)
+def ring(d=2.5, f=4100):                                             # an ear ring (tinnitus) after a shock, fading
+    t = t_(d); return norm(np.sin(2 * np.pi * f * t) * np.exp(-t * 1.1) * np.minimum(1, t / 0.05), -14)
+def flash(d=0.5):                                                    # an old flashbulb: pop + crackle + whine
+    t = t_(d); x = bp(rng.standard_normal(len(t)), 1000, 9000) * np.exp(-t * 18) + 0.15 * np.sin(2 * np.pi * (3000 + 4000 * t) * t) * np.exp(-t * 6)
+    return norm(x, -5)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']
