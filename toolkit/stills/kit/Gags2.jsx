@@ -395,7 +395,7 @@ export const GAGS2 = {
     for (let i = 0; i < n; i++) { const f0 = i * 12; if (fr >= f0 && fr < f0 + 2) o = fr === f0 ? 0.92 : 0.5; else if (fr >= f0 + 2 && fr < f0 + 6) o = Math.max(o, 0.25 * (1 - (fr - f0 - 2) / 4)); }
     return o > 0 ? <AbsoluteFill style={{background: '#FFF8E8', opacity: o * out, pointerEvents: 'none'}} /> : null; },
   // flicker (B16): lightning or a failing light: the picture flashes bright 2-3 times, uneven, then settles (no strobing).
-  flicker: (c, q, d, out) => { const pat = c.pattern || [[0.0, 0.55], [0.067, 0], [0.2, 0.7], [0.267, 0]];   // two flashes of 2 frames (photosensitivity limit: at most 3 flashes, 2 frames each; review 14 Nov 2026 found 4 bright frames) let o = 0;
+  flicker: (c, q, d, out) => { const pat = c.pattern || [[0.0, 0.55], [0.067, 0], [0.2, 0.7], [0.267, 0]]; let o = 0;   // two flashes of 2 frames (photosensitivity limit: at most 3 flashes, 2 frames each; review 14 Nov 2026 found 4 bright frames)
     for (const [at, v] of pat) if (q >= at) o = v; o *= Math.exp(-Math.max(0, q - 0.45) * 4);
     return <AbsoluteFill style={{background: c.color || '#EAF0FF', mixBlendMode: 'screen', opacity: o * out, pointerEvents: 'none'}} />; },
 

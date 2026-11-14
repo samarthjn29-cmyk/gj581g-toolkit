@@ -25,7 +25,7 @@ def dur(f):
 ap = argparse.ArgumentParser(); ap.add_argument('inp'); ap.add_argument('out'); ap.add_argument('--bed', required=True)   # 'none': voice + sound effects only
 ap.add_argument('--bed-lufs', type=float, default=-28.5); ap.add_argument('--amb'); ap.add_argument('--amb-lufs', type=float, default=-40)
 ap.add_argument('--amb-from', type=float, default=0); ap.add_argument('--fade-in', type=float, default=2); ap.add_argument('--fade-out', type=float, default=3);   # inner chapters of a joined video: 0.25 / 0.25, so the bed doesn't dip at the joins (Moctar full-cut review, 14 Nov 2026)
- ap.add_argument('--amb-to', type=float)
+ap.add_argument('--amb-to', type=float)
 ap.add_argument('--mute', nargs='*', default=[]); ap.add_argument('--muffle', nargs='*', default=[]); ap.add_argument('--worldize', nargs='*', default=[]); ap.add_argument('--thin', nargs='*', default=[]); ap.add_argument('--lift', type=float); ap.add_argument('--button', type=float); ap.add_argument('--swell', type=float); ap.add_argument('--sfx', nargs='*', default=[])
 a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
