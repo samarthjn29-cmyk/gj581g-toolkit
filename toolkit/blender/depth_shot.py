@@ -11,7 +11,7 @@ argv = sys.argv[sys.argv.index('--') + 1:]
 ap = argparse.ArgumentParser(); ap.add_argument('still'); ap.add_argument('depth'); ap.add_argument('out')
 ap.add_argument('--sec', type=float, default=6); ap.add_argument('--move', default='dolly'); ap.add_argument('--depth_amt', '--depth', type=float, default=0.35)
 ap.add_argument('--fps', type=int, default=30); ap.add_argument('--res', type=int, nargs=2, default=[1920, 1080]); ap.add_argument('--samples', type=int, default=1)
-ap.add_argument('--fg'); ap.add_argument('--fg_z', '--fg-z', type=float, default=0.15); ap.add_argument('--subdiv', type=int, default=8)
+ap.add_argument('--fg'); ap.add_argument('--fg_z', '--fg-z', type=float, default=0.15); ap.add_argument('--subdiv', type=int, default=8); ap.add_argument('--fov', type=float, default=0.8)
 a = ap.parse_args(argv)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -46,7 +46,7 @@ if a.fg:
 
 # camera: framing the plane exactly at the start (orthographic-like with a long lens), then a small move
 cam_d = 3.2; fov = 2 * math.atan(1 / cam_d)
-bpy.ops.object.camera_add(location=(0, 0, cam_d)); cam = bpy.context.object; cam.data.sensor_fit = 'VERTICAL'; cam.data.angle = fov * 0.92
+bpy.ops.object.camera_add(location=(0, 0, cam_d)); cam = bpy.context.object; cam.data.sensor_fit = 'VERTICAL'; cam.data.angle = fov * (a.fov if hasattr(a, "fov") else 0.8)
 sc.camera = cam; n = int(a.sec * a.fps); sc.frame_start, sc.frame_end = 1, n; sc.render.fps = a.fps
 def key(f, loc, rot=(0, 0, 0)):
     cam.location = loc; cam.rotation_euler = rot; cam.keyframe_insert('location', frame=f); cam.keyframe_insert('rotation_euler', frame=f)
@@ -55,12 +55,13 @@ if M == 'dolly':   key(1, (-0.10, 0, cam_d)); key(n, (0.10, 0, cam_d))          
 elif M == 'push':  key(1, (0, 0, cam_d)); key(n, (0, 0.02, cam_d - 0.55))                                   # move into the scene
 elif M == 'crane': key(1, (0, -0.10, cam_d), (math.radians(-2), 0, 0)); key(n, (0, 0.10, cam_d - 0.2), (math.radians(2), 0, 0))
 elif M == 'orbit': key(1, (-0.18, 0, cam_d), (0, math.radians(-3.2), 0)); key(n, (0.18, 0, cam_d), (0, math.radians(3.2), 0))
-for fc in cam.animation_data.action.fcurves:
-    for kp in fc.keyframe_points: kp.interpolation = 'BEZIER'; kp.easing = 'EASE_IN_OUT'
+# Bezier keys (Blender's default) already ease in and out; Blender 5 slotted actions have no action.fcurves to edit
 
 r = sc.render; r.engine = 'CYCLES'; sc.cycles.samples = a.samples; sc.cycles.use_denoising = False; sc.cycles.device = 'CPU'
 sc.cycles.max_bounces = 0; r.resolution_x, r.resolution_y = W, H; r.resolution_percentage = 100
 sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'   # colours exactly as painted (no Filmic/AgX)
-r.image_settings.file_format = 'FFMPEG'; r.ffmpeg.format = 'MPEG4'; r.ffmpeg.codec = 'H264'; r.ffmpeg.constant_rate_factor = 'HIGH'
-r.filepath = a.out
+import os, subprocess, tempfile, shutil   # PNG frames, then ffmpeg (the FFMPEG output settings moved in Blender 5)
+tmp = tempfile.mkdtemp(dir=os.path.dirname(os.path.abspath(a.out))); r.image_settings.file_format = 'PNG'; r.filepath = tmp + '/f_'
 bpy.ops.render.render(animation=True)
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(a.fps), '-i', tmp + '/f_%04d.png', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', a.out], check=True)
+shutil.rmtree(tmp)
