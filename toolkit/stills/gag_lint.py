@@ -43,7 +43,7 @@ PAINTED = {'signoff', 'bubble', 'tag', 'labels', 'circle', 'loading', 'notify', 
            'freeze', 'sticker', 'glint', 'text', 'info', 'route', 'pov', 'doc', 'split', 'later', 'chips', 'panels', 'clones', 'pile', 'doodle',
            'jack', 'outline', 'scroll', 'recap', 'hand', 'weather', 'quote', 'ots', 'black',
            # 13 Nov gag studies: drawn in the painted palette in Gags2.jsx (PAINT/HAND/paper)
-           'tear', 'void', 'tumble', 'peel', 'letterbox',
+           'tear', 'void', 'tumble', 'peel', 'letterbox', 'lightsweep', 'sand', 'streak', 'leak', 'halftone', 'chyron', 'credits', 'wordcut',
            # 14 Nov 2026 (Sam: "Paint all the gags"): the older flat kinds map to the palette (PC/PF in Gags.jsx) + 8th-study cards
            'callin', 'advert', 'grey', 'grid', 'namesake', 'variants', 'burst', 'grow', 'arrow', 'censor', 'iris', 'spotlight', 'errorbox',
            'strike', 'caption', 'trend', 'rec', 'confetti', 'beam', 'dust', 'checklist', 'tier', 'titledrop', 'trophy', 'stretch', 'nest',

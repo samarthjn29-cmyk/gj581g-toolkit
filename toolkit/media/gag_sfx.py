@@ -303,6 +303,51 @@ def spit(d=0.35):                                                    # a short d
     x[i0:] += 0.7 * sp
     return norm(x, -5)
 
+# ---- cinematic sounds (styles/CINEMATIC_STUDY.md C17-C20, Sam 14 Nov 2026: "Let's build all") ----
+def riser(d=2.0):                                                    # a tension riser: noise swell + rising tone, ends hard (put the hit right after)
+    t = t_(d); p = (t / d) ** 2.2; f = 180 + 900 * p
+    x = 0.6 * np.sin(2 * np.pi * np.cumsum(f) / SR) * p + 0.7 * bp(rng.standard_normal(len(t)), 600, 6000) * p ** 1.5
+    return norm(x * np.minimum(1, (d - t) / 0.01 + 0.0), -5)
+def hit(d=2.2):                                                      # a low cinematic hit: sub thump + body + long tail
+    t = t_(d); sub = np.sin(2 * np.pi * (48 - 14 * t) * t) * np.exp(-t * 2.2)
+    body = lp(rng.standard_normal(len(t)), 900) * np.exp(-t * 7); x = sub + 0.5 * body
+    return norm(x * np.minimum(1, t / 0.003), -3)
+def pulse(d=4.0, bpm=62):                                            # a slow low tension pulse (heartbeat-like), loops cleanly
+    t = t_(d); x = np.zeros(len(t)); per = 60 / bpm
+    for k in np.arange(0, d, per):
+        for off, a in ((0, 1.0), (0.22, 0.6)):
+            i0 = int((k + off) * SR); m = min(len(t) - i0, int(0.35 * SR))
+            if m > 0: tt = np.arange(m) / SR; x[i0:i0 + m] += a * np.sin(2 * np.pi * 52 * tt) * np.exp(-tt * 11)
+    return norm(lp(x, 200), -6)
+def desert(d=20.0):                                                  # room tone: open desert wind, slow gusts (bed under narration at about -40 LUFS)
+    t = t_(d); n = rng.standard_normal(len(t)); g = 0.55 + 0.45 * np.sin(2 * np.pi * t / 7.3) * np.sin(2 * np.pi * t / 3.1 + 1)
+    x = (bp(n, 120, 900) * 0.8 + bp(n, 1500, 4200) * 0.15) * g; f = int(0.5 * SR); x[:f] *= np.linspace(0, 1, f); x[-f:] *= np.linspace(1, 0, f)
+    return norm(x, -6)
+def roomhum(d=20.0):                                                 # room tone: an indoor hum (classroom, office): mains hum + air
+    t = t_(d); x = 0.25 * np.sin(2 * np.pi * 50 * t) + 0.1 * np.sin(2 * np.pi * 100 * t) + 0.5 * lp(rng.standard_normal(len(t)), 500)
+    f = int(0.5 * SR); x[:f] *= np.linspace(0, 1, f); x[-f:] *= np.linspace(1, 0, f); return norm(x, -6)
+def street(d=20.0):                                                  # room tone: a night street outside a club: far murmur, distant bass thump
+    t = t_(d); mur = sum(bp(rng.standard_normal(len(t)), 250 + 40 * k, 900 + 60 * k) * (0.6 + 0.4 * np.sin(2 * np.pi * t / (2.3 + k) + k)) for k in range(6)) / 6
+    th = np.zeros(len(t)); per = 60 / 118
+    for k in np.arange(0, d, per):
+        i0 = int(k * SR); m = min(len(t) - i0, int(0.18 * SR))
+        if m > 0: tt = np.arange(m) / SR; th[i0:i0 + m] += np.sin(2 * np.pi * 55 * tt) * np.exp(-tt * 18)
+    x = mur + 0.35 * lp(th, 150); f = int(0.5 * SR); x[:f] *= np.linspace(0, 1, f); x[-f:] *= np.linspace(1, 0, f); return norm(x, -6)
+def twang(f=110.0, d=2.2):                                           # a plucked guitar string (Karplus-Strong), for "the picture makes its sound"
+    n = int(d * SR); N = int(SR / f); buf = rng.uniform(-1, 1, N); out = np.zeros(n)
+    for i in range(n): out[i] = buf[i % N]; buf[i % N] = 0.996 * 0.5 * (buf[i % N] + buf[(i + 1) % N])
+    return norm(lp(out, 5000), -4)
+def buzz(d=0.9):                                                     # an old keypad phone vibrating on a table: two rattly buzzes
+    t = t_(d); on = ((t % 0.45) < 0.32).astype(float); x = np.sign(np.sin(2 * np.pi * 160 * t)) * on * (0.6 + 0.4 * np.sin(2 * np.pi * 23 * t))
+    return norm(bp(x, 120, 2500), -6)
+def pencil(d=1.0):                                                   # a pencil scratching on paper: short gritty strokes
+    t = t_(d); n = rng.standard_normal(len(t)); strokes = (np.sin(2 * np.pi * 3.2 * t) > -0.2).astype(float)
+    return norm(bp(n, 2500, 9000) * strokes * (0.5 + 0.5 * np.abs(np.sin(2 * np.pi * 37 * t))), -8)
+def projector(d=1.2):                                                # a slide projector: clack + fan whirr
+    t = t_(d); x = 0.4 * lp(rng.standard_normal(len(t)), 700) * np.minimum(1, t / 0.1)
+    m = int(0.05 * SR); x[:m] += bp(rng.standard_normal(m), 800, 5000) * np.exp(-np.arange(m) / SR * 80) * 3
+    return norm(x * np.minimum(1, (d - t) / 0.2), -6)
+
 if __name__ == '__main__':
     od = sys.argv[1]; os.makedirs(od, exist_ok=True)
     names = sys.argv[2:] or ['trombone', 'boo', 'popper', 'register', 'kiss']

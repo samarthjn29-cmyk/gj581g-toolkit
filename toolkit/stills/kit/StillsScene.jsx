@@ -111,12 +111,22 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
     {frozen ? <Img src={staticFile(`${dir}/${s.freeze_img}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} />
       : s.video  // archive or stock footage (Sam, 9 Nov 2026: "If you can find videos those works too"): muted, starts at vstart s
       ? <Sequence from={Math.round(s.t * fps)} layout="none"><OffthreadVideo muted src={staticFile(`${dir}/${s.video}`)} startFrom={Math.round((s.vstart || 0) * fps)} playbackRate={s.rate || 1} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.grade || 'none'}} /></Sequence>
-      : <Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />}</AbsoluteFill>;
+      : <><Img src={staticFile(`${dir}/${src}`)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: s.duotone ? `url(#duo_${s.id})` : undefined}} />
+        {src === s.img && (s.cine || s.haze) ? <Img src={staticFile(`${dir}/${src}`)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: `url(#sh_${s.id})`,
+          WebkitMaskImage: s.cine ? `url(${staticFile(`${dir}/${s.cine.mask}`)})` : `linear-gradient(to bottom, transparent ${((s.haze.y ?? 0.62) - 0.08) * 100}%, #000 ${(s.haze.y ?? 0.62) * 100}%, #000 ${((s.haze.y2 ?? 0.95)) * 100}%, transparent 100%)`,
+          WebkitMaskSize: '100% 100%', maskSize: '100% 100%', maskImage: s.cine ? `url(${staticFile(`${dir}/${s.cine.mask}`)})` : undefined}} /> : null}</>}</AbsoluteFill>;
   // duotone (bill wurtz idiom-colour photo, gag study 13 Nov 2026): s.duotone = [dark, light] hex colours: the photo is pushed to two
   // flat palette colours for a dreamy or unreal beat (e.g. ['#2E4A33', '#F1E6CF'] forest green and cream).
-  const duo = s.duotone ? (() => { const hx = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255), [a0, a1] = s.duotone.map(hx);
+  let duo = s.duotone ? (() => { const hx = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255), [a0, a1] = s.duotone.map(hx);
     return <svg width={0} height={0} style={{position: 'absolute'}}><filter id={`duo_${s.id}`} colorInterpolationFilters="sRGB"><feColorMatrix type="saturate" values="0" />
       {['R', 'G', 'B'].map((ch, j) => React.createElement('feComponentTransfer', {key: ch}, React.createElement(`feFunc${ch}`, {type: 'table', tableValues: `${a0[j]} ${a1[j]}`})))}</filter></svg>; })() : null;
+  // cinemagraph (CINEMATIC_STUDY C12) and heat haze (C3), Sam 14 Nov 2026 "Let's build all": a second copy of the still, masked to
+  // one moving thing (s.cine = {mask: cut-out PNG of the same still, amp, freq}) or to a band low in the frame (s.haze = {y, y2, amp}),
+  // is pushed around by animated turbulence, re-seeded every 2 frames, so only that part shimmers while the painting holds still.
+  if (s.cine || s.haze) { const C = s.cine || s.haze, fr = Math.floor(t * fps / 2), amp = C.amp ?? (s.cine ? 10 : 7), fq = C.freq ?? (s.cine ? '0.006 0.03' : '0.004 0.05');
+    const sh = <svg width={0} height={0} style={{position: 'absolute'}}><filter id={`sh_${s.id}`} x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency={fq} numOctaves={2} seed={fr % 97} />
+      <feDisplacementMap in="SourceGraphic" scale={amp} xChannelSelector="R" yChannelSelector="G" /></filter></svg>;
+    duo = <>{duo}{sh}</>; }
   // peephole (Answer in Progress, gag study 13 Nov 2026): s.peephole = true (or {x, y, r} fractions) shows the shot through a round
   // fisheye, like a door peephole or a telescope eyepiece: a circular mask with a soft dark edge, the picture bulged a little
   // (a radial displacement), black around it. For "someone is watching" beats. Sound: a soft creak.
@@ -358,11 +368,29 @@ const FULLK = ['kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 
 const Grain = ({o}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{pointerEvents: 'none', opacity: o, mixBlendMode: 'overlay'}}>
   <svg width="100%" height="100%"><filter id={`gr${f % 8}`}><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed={f % 8} /><feColorMatrix type="saturate" values="0" /></filter>
   <rect width="100%" height="100%" filter={`url(#gr${f % 8})`} /></svg></AbsoluteFill>; };
+// Shot-level cinematic finishes (styles/CINEMATIC_STUDY.md, Sam 14 Nov 2026: "Let's build all"), all optional shot fields:
+//  blurin: s (C8)  - the picture comes in from soft focus to sharp with a small slide, over blurin s (0.5 typical). Real photos too:
+//                    this is presentation, the photo itself is not changed.
+//  relight: {to: 'dusk' | 'night' | 'dawn', at, dur} (C2) - the same still slides into another time of day.
+//  handheld: amp (C7) - a slow organic drift and tilt, like a person holding the camera (0.6 typical).
+//  archive: true (C21) - gate weave, a soft film frame edge and flicker for old real photos.
+//  glow: {x, y, r, color, rate} (C6) - a practical light in the still (lamp, screen) pulses softly.
+const RELIGHT = {dusk: 'sepia(0.5) saturate(1.3) hue-rotate(-18deg) brightness(0.62) contrast(1.12)', night: 'saturate(0.55) hue-rotate(185deg) brightness(0.55) contrast(1.1)', dawn: 'sepia(0.2) saturate(1.1) hue-rotate(8deg) brightness(1.05)'};
+const ShotFx = ({s, t, children}) => { const q = t - s.t; let filt = '', tr = '';
+  if (s.blurin) { const p = R(t, s.t, s.t + s.blurin); filt += ` blur(${(1 - p) * 26}px)`; tr += ` translateX(${(1 - p) * 2.5}%)`; }
+  if (s.relight) { const L = s.relight, p = R(t, s.t + (L.at ?? 0.3), s.t + (L.at ?? 0.3) + (L.dur ?? 2.5)); if (p > 0) filt += ` ${RELIGHT[L.to || 'dusk'].replace(/([a-z-]+)\(([-\d.]+)(deg)?\)/g, (m, f, v, u) => { const base = {brightness: 1, contrast: 1, saturate: 1}[f] ?? 0; return `${f}(${base + (parseFloat(v) - base) * p}${u || ''})`; })}`; }
+  if (s.handheld) { const a = s.handheld; tr += ` translate(${a * (0.6 * Math.sin(t * 1.3) + 0.3 * Math.sin(t * 3.1 + 1))}%, ${a * (0.5 * Math.sin(t * 1.7 + 2) + 0.25 * Math.sin(t * 2.9))}%) rotate(${a * 0.35 * Math.sin(t * 0.9 + 0.5)}deg) scale(${1 + 0.02 * a})`; }
+  if (s.archive) { const f = Math.floor(t * 12); tr += ` translate(${((f * 37) % 5 - 2) * 0.06}%, ${((f * 53) % 5 - 2) * 0.08}%)`; filt += ` brightness(${1 + 0.035 * Math.sin(t * 23) * Math.sin(t * 7)})`; }
+  const g = s.glow, gl = g ? 0.5 + 0.5 * Math.sin(q * (g.rate ?? 2.2) * Math.PI * 2) * (0.7 + 0.3 * Math.sin(q * 13)) : 0;
+  return <AbsoluteFill style={{filter: filt.trim() || undefined, transform: tr.trim() || undefined}}>{children}
+    {g ? <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', background: `radial-gradient(circle ${(g.r ?? 0.12) * 1920}px at ${(g.x ?? 0.5) * 100}% ${(g.y ?? 0.5) * 100}%, ${g.color || 'rgba(255,214,140,0.55)'} 0%, rgba(0,0,0,0) 100%)`, opacity: 0.35 + 0.65 * gl}} /> : null}
+    {s.archive ? <AbsoluteFill style={{pointerEvents: 'none', boxShadow: 'inset 0 0 90px 30px rgba(20,14,8,0.55)', border: '10px solid rgba(24,18,12,0.35)'}} /> : null}</AbsoluteFill>; };
+
 export const StillsScene = ({dir, shots, cards = [], words = [], finish}) => { const {fps} = useVideoConfig(), t = useCurrentFrame() / fps, F = finish || {}; P.on = F.gags !== 'flat';   // painted gag kit (Paint.jsx) is the default from 12 Nov 2026 (Sam: "going forward whatever gags we use should be created in the painted AI format"); finish.gags: 'flat' only to rebuild an old video as it was
   const isFull = c => FULLK.includes(c.kind) && c.style !== 'rise' && c.style !== 'roll' && t >= c.t && t < c.t + (c.dur || 2);
   const pics = <>{shots.map((s, i) => { const nx = shots[i + 1], end = nx ? nx.t + (nx.fade || 0) : s.t + s.dur;
       if (t < s.t - 0.01 || t > end + 0.01) return null;
-      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><Shot s={s} t={t} dir={dir} words={words} />
+      return <AbsoluteFill key={s.id} style={{opacity: s.fade ? R(t, s.t, s.t + s.fade) : 1, filter: F.filter || undefined}}><ShotFx s={s} t={t}><Shot s={s} t={t} dir={dir} words={words} /></ShotFx>
         {s.src && F.srcTags ? <div style={{position: 'absolute', right: 28, bottom: 22, fontFamily: 'Inter, sans-serif', fontSize: 20, letterSpacing: 1, color: 'rgba(241,230,207,0.8)', textShadow: '0 1px 4px rgba(0,0,0,0.9)'}}>{s.src}</div> : null}</AbsoluteFill>; })}</>;   // corner source tag (Defunctland, gag study 12 Nov 2026): only with finish.srcTags, because Sam's 8 Nov 2026 rule keeps source labels off screen
   const cardLayer0 = <>{P.on ? <PaintDefs /> : null}{cards.map((c, i) => <Card key={i} c={c} t={t} words={words} dir={dir} />)}</>;
   // cards that read the picture behind them (backdrop-filter: freeze grey-out, blur censor, VHS glitch) stay outside the painted

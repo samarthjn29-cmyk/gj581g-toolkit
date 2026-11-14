@@ -352,6 +352,43 @@ export const GAGS2 = {
   // ---- Gag study 13 Nov 2026, seventh study (RealLifeLore, Vsauce2, Primer, Ordinary Things, Nerdwriter1, Tantacrul, Kraut,
   // Mark Rober, Veritasium, Extra History). Sam: "yes" (build them).
 
+  // ---- cinematic overlays (styles/CINEMATIC_STUDY.md, Sam 14 Nov 2026: "Let's build all"). Painted palette, never over a face. ----
+  // lightsweep (C1): a soft warm shaft of light drifts across the picture over the card (c.from, c.to x 0-1, c.angle deg, c.o strength).
+  lightsweep: (c, q, d, out) => { const p = R(q, 0, d), x = ((c.from ?? -0.3) + ((c.to ?? 1.1) - (c.from ?? -0.3)) * p) * 100, o = (c.o ?? 0.45) * Math.min(1, q / 0.4) * out;
+    return <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', opacity: o, background: `linear-gradient(${c.angle ?? 105}deg, rgba(0,0,0,0) ${x - 18}%, rgba(255,226,160,0.9) ${x}%, rgba(0,0,0,0) ${x + 18}%)`}} />; },
+  // sand (C4): fine ochre grains and dust drift across the frame on the wind (c.n grains, c.dir 1 = to the right, c.o).
+  sand: (c, q, d, out) => { const n = c.n || 140, dirn = c.dir ?? 1;
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: (c.o ?? 0.7) * Math.min(1, q / 0.5) * out}}><svg width={W} height={H}>{Array.from({length: n}).map((_, i) => {
+      const sp = 160 + rnd(i, 1) * 420, x = ((rnd(i, 2) * W + dirn * sp * q) % (W + 60) + W + 60) % (W + 60) - 30, y = rnd(i, 3) * H * 0.9 + 40 * Math.sin(q * 1.5 + i) + H * 0.08, r = 2.5 + rnd(i, 4) * 5;
+      return <ellipse key={i} cx={x} cy={y} rx={r * 2.2} ry={r} fill={i % 3 ? '#C9944E' : '#F3EBDD'} opacity={0.35 + 0.5 * rnd(i, 5)} />; })}</svg></AbsoluteFill>; },
+  // streak (C9): an anamorphic light streak flares across the brightest point (c.x, c.y), swells and fades (about 0.8 s).
+  streak: (c, q, d, out) => { const p = Math.sin(Math.PI * Math.min(1, q / (c.len ?? 0.8))), x = (c.x ?? 0.5) * W, y = (c.y ?? 0.4) * H;
+    return <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', opacity: out}}><div style={{position: 'absolute', left: x - 900 * p, top: y - 6, width: 1800 * p, height: 12, borderRadius: 6, background: 'linear-gradient(90deg, rgba(0,0,0,0), rgba(255,231,170,0.9), rgba(255,250,235,1), rgba(255,231,170,0.9), rgba(0,0,0,0))', filter: 'blur(3px)'}} />
+      <div style={{position: 'absolute', left: x - 60, top: y - 60, width: 120, height: 120, borderRadius: 60, background: 'radial-gradient(circle, rgba(255,246,220,0.95), rgba(255,210,140,0) 70%)', opacity: p}} /></AbsoluteFill>; },
+  // leak (C16): a warm painted light leak washes in from one side over the join between two chapters, then clears.
+  leak: (c, q, d, out) => { const p = Math.sin(Math.PI * Math.min(1, q / d)), side = c.side === 'left' ? 'left' : 'right';
+    return <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', opacity: p * (c.o ?? 0.85)}}>
+      <AbsoluteFill style={{background: `radial-gradient(ellipse 70% 90% at ${side === 'left' ? 8 : 92}% 40%, rgba(255,170,80,0.95), rgba(233,120,60,0.55) 40%, rgba(0,0,0,0) 75%)`}} />
+      <AbsoluteFill style={{background: `radial-gradient(ellipse 40% 60% at ${side === 'left' ? 25 : 75}% 70%, rgba(255,226,150,0.6), rgba(0,0,0,0) 70%)`}} /></AbsoluteFill>; },
+  // halftone (C22): a painted comic dot screen fades over the picture for a punchline beat (c.color, c.size dot spacing px, c.o).
+  halftone: (c, q, d, out) => { const sz = c.size || 14, o = (c.o ?? 0.42) * R(q, 0, 0.25) * out;
+    return <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'multiply', opacity: o, backgroundImage: `radial-gradient(circle, ${c.color || PAINT.red} ${sz * 0.28}px, rgba(0,0,0,0) ${sz * 0.3}px)`, backgroundSize: `${sz}px ${sz}px`}} />; },
+  // chyron (C23): a small typed place-and-year stamp low left on the first shot of a new place (c.text, c.sub), letters type on.
+  chyron: (c, q, d, out) => { const txt = c.text || '', n = Math.floor(R(q, 0.1, 0.1 + txt.length * 0.045) * txt.length + 0.0001);
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: out}}><div style={{position: 'absolute', left: 90, bottom: 96, padding: '12px 22px 14px', ...brushBox({}), opacity: R(q, 0, 0.15)}}>
+      <div style={{fontFamily: MONO, fontSize: c.size || 38, letterSpacing: 3, color: PAINT.ink, textTransform: 'uppercase'}}>{txt.slice(0, n)}<span style={{opacity: Math.floor(q * 3) % 2 ? 0 : 1}}>|</span></div>
+      {c.sub ? <div style={{fontFamily: HAND, fontSize: 30, color: PAINT.red, opacity: R(q, 0.2 + txt.length * 0.045, 0.5 + txt.length * 0.045)}}>{c.sub}</div> : null}</div></AbsoluteFill>; },
+  // credits (C24): a slow painted credits crawl (c.lines = ['Narration — Sam', ...]); full-screen ground c.ground (default dusk green).
+  credits: (c, q, d, out) => { const L = c.lines || [], y = H + 40 - (q / d) * (H + 40 + L.length * 74);
+    return <AbsoluteFill style={{opacity: out, background: c.ground || PAINT.green}}><div style={{position: 'absolute', left: 0, right: 0, top: y, textAlign: 'center'}}>
+      {L.map((l, i) => <div key={i} style={{fontFamily: i === 0 ? SERIF : HAND, fontSize: i === 0 ? 72 : 44, color: i === 0 ? PAINT.yellow : PAINT.cream, lineHeight: 1.65}}>{l}</div>)}</div></AbsoluteFill>; },
+  // wordcut (C13, Johnny Harris text match-cut): quick cuts through c.imgs, each with the same word c.text centred in the same place,
+  // each cut a little faster (c.gap first gap s, c.accel factor). Full-screen. Sound: a camera click on each cut.
+  wordcut: (c, q, d, out, dir) => { const im = c.imgs || [], g0 = c.gap ?? 0.5, ac = c.accel ?? 0.8; let tt = 0, i = 0, g = g0; while (i < im.length - 1 && tt + g <= q) { tt += g; g = Math.max(0.12, g * ac); i++; }
+    return <AbsoluteFill style={{opacity: out, background: '#0B0A09'}}>{im[i] ? <Pic dir={dir} f={im[i]} style={{transform: `scale(${1.06 + 0.02 * ((i * 7) % 3)})`}} /> : null}
+      <AbsoluteFill style={{background: 'rgba(20,16,10,0.25)'}} />
+      <div style={{position: 'absolute', left: 0, right: 0, top: '50%', transform: 'translateY(-50%)', textAlign: 'center'}}><span style={{...brushBox({padding: '10px 36px 16px', fontFamily: SERIF, fontWeight: 700, fontSize: c.size || 110, color: PAINT.ink})}}>{c.text}</span></div></AbsoluteFill>; },
+
   // letterbox (DRAMA_MOVES D5, Sam 14 Nov 2026: "a bit dramatic"): black cinema bars slide in from top and bottom over 0.45 s to
   // c.ratio (default 2.39:1) for the big moment, and slide out over the card's last 0.45 s. Overlay: the picture keeps playing.
   letterbox: (c, q, d) => { const bar = (H - W / (c.ratio || 2.39)) / 2, p = Easing.inOut(Easing.cubic)(R(q, 0, 0.45)) * (1 - Easing.inOut(Easing.cubic)(R(q, d - 0.45, d)));
