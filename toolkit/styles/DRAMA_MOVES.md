@@ -2,7 +2,7 @@
 
 Sam, 14 Nov 2026: "Are there any new type of picture or video gags which we can use. I want the videos to be a bit dramatic."
 Shapes from film and documentary editing guides (Nikon "10 tricks", PremiumBeat suspense tips, Doc Film Academy), rebuilt for
-painted stills. None is built yet unless marked; each is one camera move, card or sound habit in the stills kit.
+painted stills. Built 14 Nov 2026 (kit + build_chapter): D1 `move: vertigo` + `layers`, D3 `isolate` + `isolate_at`, D4 `zoom` + `offset`, D5 card `letterbox`, D6 `move: rack` + `layers`, D7 `move: ramp` + `ramp_at`; D2/D8-D10 are plan and mix habits. Subject cut-outs for D1/D3/D6: `stills/subject.py STILL OUTDIR` (rembg). Tested on painted stills; each is one camera move, card or sound habit in the stills kit.
 
 | # | Move | What it does on a still | Built from | Fit in Moctar |
 |---|---|---|---|---|

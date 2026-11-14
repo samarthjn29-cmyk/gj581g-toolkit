@@ -135,7 +135,7 @@ const Shot = ({s, t, dir, words = []}) => { const {fps} = useVideoConfig();
     return <><AbsoluteFill style={keep}>{frame(1, `${s.layers}/far.png`)}</AbsoluteFill><AbsoluteFill style={{...keep, transform: `scale(${1 + (bg - 1) * 0.7})`}}>{frame(1, `${s.layers}/mid.png`)}</AbsoluteFill>{frame(1, `${s.layers}/near.png`)}</>; }
   // rack focus (D6): from rack_at s over 0.7 s the background blurs and the near layer sharpens (s.rack = 'out' does the reverse).
   if (s.move === 'rack' && s.layers) { const r = R(t, s.t + (s.rack_at ?? 0.6), s.t + (s.rack_at ?? 0.6) + 0.7), rr = s.rack === 'out' ? 1 - r : r;
-    return <>{frame(0.7, `${s.layers}/far.png`, {}, `blur(${10 * rr}px)`)}{frame(1.0, `${s.layers}/mid.png`, {}, `blur(${6 * rr}px)`)}{frame(1.35, `${s.layers}/near.png`, {}, `blur(${7 * (1 - rr)}px)`)}</>; }
+    return <>{frame(0.7, `${s.layers}/far.png`, {}, `blur(${14 * rr}px)`)}{frame(1.0, `${s.layers}/mid.png`, {}, `blur(${9 * rr}px)`)}{frame(1.35, `${s.layers}/near.png`, {}, `blur(${7 * (1 - rr)}px)`)}</>; }
   if (!s.layers) return <>{duo}{frame(1, s.img)}</>;
   // 2.5D: the far layer moves least, the near layer most (small amounts: inpainted edges must never show)
   return <>{frame(0.7, `${s.layers}/far.png`)}{frame(1.0, `${s.layers}/mid.png`)}{frame(1.35, `${s.layers}/near.png`)}</>;

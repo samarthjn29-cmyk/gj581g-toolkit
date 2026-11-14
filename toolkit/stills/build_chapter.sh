@@ -31,8 +31,13 @@ for sh in P['shots']:
         else: miss.append(f)
     if sh.get('layers'):
         src = f"{proj}/public/real/{sh['layers']}"
+        if not os.path.isdir(src): src = f"{proj}/stills/{sh['layers']}"   # subject.py / layers.py output kept with the stills
         if os.path.isdir(src): shutil.copytree(src, f"{out}/{sh['layers']}", dirs_exist_ok=True)
         else: miss.append(sh['layers'])
+    if sh.get('isolate'):   # colour drain cut-out (DRAMA_MOVES D3)
+        src = f"{proj}/stills/{sh['isolate']}"
+        if os.path.exists(src): os.makedirs(os.path.dirname(f"{out}/{sh['isolate']}"), exist_ok=True); shutil.copy(src, f"{out}/{sh['isolate']}")
+        else: miss.append(sh['isolate'])
     if sh.get('freeze_img') and not miss:
         t = sh.get('vstart', 0) + sh['freeze']
         os.system(f"ffmpeg -v error -y -ss {t} -i {out}/{sh['video']} -frames:v 1 -q:v 2 {out}/{sh['freeze_img']}")
