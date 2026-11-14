@@ -53,4 +53,7 @@ shutil.move(out, clip); os.remove(tmp)
 if final:
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', clip, '-vf', 'scale=1280:720', '-c:v', 'libx264', '-crf', '26', '-preset', 'veryfast',
                     '-c:a', 'aac', '-b:a', '128k', f'{PROJ}/clips/{PREFIX}{S}_720.mp4'], check=True)
+fl = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flash_lint.py'), clip], capture_output=True, text=True)
+print(fl.stdout.strip())
+if fl.returncode: sys.exit(f'FAIL flash_lint on {clip}: a picture flashes (Moctar 14 Nov 2026); fix the plan before sending')
 print(f'ok: {clip} patched ({on} frames). Now re-run the mix for {S}.')

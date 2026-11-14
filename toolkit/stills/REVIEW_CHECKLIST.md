@@ -21,6 +21,13 @@ Under 400 words. It never edits files.
    a period scene, the same place looking different from shot to shot.
 5. **Sound** (from the reports): bed never stops, drops only on punchlines, level about -16 LUFS, any confirmed word
    slip with its time.
+4c. **No flashes (Sam, Moctar, 14 Nov 2026: "At around 0:58 the screen shows a flash of mobile phone photo again").** A full-screen
+   card (here `void`) ended 0.14 s before the next shot, so the old picture flashed back. Two checks now catch it: `visible_lint.py`
+   (plan: every full-screen kind comes from the one shared list in `opaque.py`, which also scans the kit for new full-screen
+   kinds; `build_scene.py` runs such a card on to a picture change up to 0.8 s later) and `flash_lint.py CLIP.mp4` (pixels: any
+   picture on screen under 0.5 s between two cuts; camera moves on one still don't count). `build_chapter.sh` and
+   `patch_render.py` run it after every render. The reviewer also scrubs each card's last frames: the picture after a card must be
+   the next shot, never the one before it.
 4b. **Style match (Sam, Moctar, 14 Nov 2026: "Put checks in place so that wrong type of pictures are covered by your review").**
    Every AI still must look like the video's style master (for Moctar: `G_hero2.jpg`, flat gouache, warm cream paper,
    green / cream / yellow / brick palette, simple shapes). The builder runs `style_lint.py MASTERS STILLS_DIR --out flags.jpg`

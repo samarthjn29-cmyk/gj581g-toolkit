@@ -80,13 +80,13 @@ def main():
     # Hard cuts everywhere (plan dissolve 0, Sam 11 Nov 2026): full-screen cards cut in and out too. Their 0.15-0.4 s fades
     # ghosted the card's words over the next picture and flashed the old picture between two cards (Aliens ch3 review).
     if not P.get('dissolve', 0):
-        FULLK = ('kinetic', 'title', 'number', 'bars', 'chain', 'later', 'split', 'triptych', 'ruler', 'advert', 'grid', 'namesake', 'variants')
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from opaque import is_opaque   # one shared list (void, black, ...)
         for c in cards:
-            if c.get('kind') in FULLK and c.get('style') not in ('rise', 'roll') and not (c.get('kind') == 'title' and c['t'] < 0.5):
+            if is_opaque(c) and c.get('style') not in ('rise', 'roll') and not (c.get('kind') == 'title' and c['t'] < 0.5):
                 c.setdefault('cutIn', True); c.setdefault('cutOut', True)
         # No slivers around a hard-cut card: a picture change just before a card moves onto the card's start; a card that
         # ends just before a picture change runs on to it (Aliens ch2 rebuild, 12 Nov 2026: 0.02-0.04 s slivers)
-        for c in [c for c in cards if c.get('cutOut') and c.get('kind') in FULLK]:
+        for c in [c for c in cards if c.get('cutOut') and is_opaque(c)]:
             ce = c['t'] + c.get('dur', 4.5)
             for s in shots[1:]:
                 if c['t'] - 0.35 < s['t'] < c['t']: s['t'] = round(c['t'], 3)

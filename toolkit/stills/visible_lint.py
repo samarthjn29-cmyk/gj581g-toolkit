@@ -6,10 +6,11 @@ starburst, pip) must stay up for its reading time: 0.8 s + 0.3 s a word (+0.7 s 
 Usage: visible_lint.py TIMELINE.json  (or a scene name: reads $RM/public/$PUB/<scene>/timeline.json)  [MIN=2.0 env]
 Exits 1 on any segment under the floor or any text gag under its reading time."""
 import json, sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from opaque import is_opaque
 s0 = sys.argv[1]; MIN = float(os.environ.get('MIN', 2.0))
 path = s0 if s0.endswith('.json') else f"{os.environ.get('RM', '/home/claude/twice/remotion')}/public/{os.environ.get('PUB', 'zeig')}/{s0}/timeline.json"
 t=json.load(open(path))
-full=[c for c in t['cards'] if (c['kind'] in('kinetic','title','number','bars','chain','later','split','triptych','ruler','advert','grid','namesake','variants') and c.get('style')!='rise') or (c['kind']=='text' and c.get('bg'))]   # 'rise' text sits over the picture, not a full-screen card
+full=[c for c in t['cards'] if is_opaque(c)]   # shared list in opaque.py (Moctar 14 Nov 2026: 'void' was missing)
 ev=sorted(set([s['t'] for s in t['shots']]+[c['t'] for c in full]+[c['t']+c['dur'] for c in full]+[t['dur']]))
 def what(x):
     for c in full:
@@ -59,10 +60,9 @@ print('too fast:', bad)
 
 # Sliver after a full-screen card (Sam, Aliens 13 Nov 2026, 9:16: the money panels ended 0.9 s before the chapter did and the
 # bare picture under them flashed). Opaque card kinds must run to the next cut / chapter end, or leave >= 1.5 s of picture.
-OPAQUE = {'panels', 'title', 'number', 'split', 'bars', 'triptych'}   # quote sits over its picture; signoff ends on its own star shot
 _cuts = sorted([x['t'] for x in t['shots']] + [t['dur']])
 for c in t['cards']:
-    if c['kind'] not in OPAQUE and not (c['kind'] == 'kinetic' and c.get('style') != 'rise'): continue
+    if not is_opaque(c): continue
     e = c['t'] + c.get('dur', 4.5); nx = min([x for x in _cuts if x > e - 0.01] or [t['dur']]); g = nx - e
     if 0.03 < g < 1.5: bad = True; print(f"SLIVER {e:6.2f} {c['kind']} ends {g:.2f} s before the {'chapter end' if nx == t['dur'] else 'next cut'}: extend it (cutOut) or end it earlier")
 
