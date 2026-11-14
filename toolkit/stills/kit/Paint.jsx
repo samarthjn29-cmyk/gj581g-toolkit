@@ -59,6 +59,25 @@ const bubblePath = (x, y, w, h, tx, ty) => { const l = x - w / 2, r = x + w / 2,
 const measure = (text, size) => { const lines = String(text).split('\n'); const longest = Math.max(...lines.map(s => s.length)); return {w: Math.min(820, longest * size * 0.5 + 110), h: lines.length * size * 1.15 + 70, lines}; };
 
 export const PAINTED = {
+  // peel, painted (Sam, Moctar 14 Nov 2026: "Do the peeling stamp"): an inked stamp printed on a cream paper sticker with a
+  // hand-cut edge; at each of c.times the sticker peels from its bottom-right corner, its pale paper back curling towards the
+  // camera, and underneath is the next label (c.texts[i], or c.text again, with c.last for the final one). c.x, c.y (0-1), c.rot, c.size.
+  peel: (c, q, d, out) => { const tm = c.times || [0.9, 1.8], k = tm.filter(x => q >= x + 0.5).length, cur = tm.find(x => q >= x && q < x + 0.5),
+      x = (c.x ?? 0.5) * W, y = (c.y ?? 0.45) * H, rot = c.rot ?? -9, size = c.size || 92;
+    const label = i => i >= tm.length && c.last ? c.last : (c.texts ? c.texts[Math.min(i, c.texts.length - 1)] : c.text || 'CANCELLED');
+    const sticker = (txt, back = false) => <div style={{position: 'relative', padding: `${Math.round(size * 0.22)}px ${Math.round(size * 0.34)}px`}}>
+      <div style={{position: 'absolute', inset: 0, background: back ? '#E4D8C2' : (c.paper || '#E8D2A6'), filter: `url(#pRough) ${paperShadow}`}} />
+      <div style={{position: 'relative', filter: 'url(#pInk)', border: `${Math.round(size * 0.07)}px solid ${BRICK}`, outline: `${Math.round(size * 0.025)}px solid ${BRICK}`, outlineOffset: Math.round(size * 0.05),
+        padding: `${Math.round(size * 0.04)}px ${Math.round(size * 0.28)}px`, fontFamily: SERIF, fontWeight: 700, fontSize: size, letterSpacing: Math.round(size * 0.065), color: BRICK,
+        whiteSpace: 'nowrap', lineHeight: 1.1, opacity: back ? 0.12 : 1, transform: back ? 'scaleX(-1)' : 'none'}}>{txt}</div></div>;
+    const place = (el, extra = '', o = 1, origin = '50% 50%') => <div style={{position: 'absolute', left: x, top: y, transformOrigin: origin, opacity: o, transform: `translate(-50%, -50%) rotate(${rot}deg) ${extra}`}}>{el}</div>;
+    const p0 = R(q, 0, 0.14), slam = q < 0.14 ? `scale(${2.4 - 1.4 * p0})` : '';
+    const under = label(k + (cur != null ? 1 : 0));
+    return <AbsoluteFill style={{opacity: out, pointerEvents: 'none'}}>
+      {place(sticker(under), cur == null && k === 0 ? slam : '', cur == null && k === 0 ? p0 : 1)}
+      {cur != null ? (() => { const p = Easing.inOut(Easing.cubic)(R(q, cur, cur + 0.5)), flip = p > 0.5;
+        return place(sticker(label(k), flip), `perspective(1100px) rotateX(${-p * 75}deg) rotateY(${p * 55}deg) translate(${p * 360}px, ${-p * 460}px) rotate(${p * 30}deg)`, 1 - R(q, cur + 0.35, cur + 0.5), '100% 100%'); })() : null}
+    </AbsoluteFill>; },
   bubble: (c, q, d, out) => { const x = (c.x ?? 0.62) * W, y = (c.y ?? 0.22) * H, tx = (c.tx ?? 0.5) * W, ty = (c.ty ?? 0.5) * H, s = pop(q), size = c.size || 56;
     const {w, h, lines} = measure(c.text, size), bp = bubblePath(x, y, w * 1.12, h * 1.1, tx, ty);
     return <AbsoluteFill style={{opacity: out}}><div style={{position: 'absolute', inset: 0, transform: `scale(${s})`, transformOrigin: `${tx}px ${ty}px`}}>
