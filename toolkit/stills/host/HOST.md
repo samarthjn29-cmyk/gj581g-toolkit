@@ -17,3 +17,8 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 ## Emotions (15 Nov 2026)
 - `monocle_egg_emotions.jpg` (labelled) and `emotions_1..4.jpg` (raw): smug, shocked, unimpressed, thinking / delighted, angry, sad, confused / scared, laughing hard, embarrassed, bored / facepalm, mind blown, suspicious, proud.
 - The monocle drops out in sad, laughing hard and facepalm; put it back when using those poses.
+
+## 3D talking host (Sam, 16 Nov 2026: "I like your advice and recommendation")
+- Plan: build the Monocle Egg in Blender (bpyenv in the workspace), a few mouth shapes, lip-sync from Sam's own audio with a free phoneme tool (e.g. Rhubarb), painterly shader.
+- Use him only for short speaking moments (5-10 s intro, the odd aside, sign-off); the painted stills carry the rest.
+- First step after Gods_v1: a rough 10 s test clip on one of Sam's lines for him to judge the look.
