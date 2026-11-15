@@ -13,3 +13,7 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 - The master sheet is `monocle_egg_sheet.jpg` (also on G: `brand\MildAstonishment_host_monocle_egg_sheet.jpg`). Every new pose is generated in Firefly (Nano Banana 2) with this sheet as the reference image: "Using this exact character (same egg body, monocle on his left eye, huge raised eyebrow, brick-red waistcoat, same outline and colours) ...".
 - Check each new still against the sheet: monocle on the same eye, waistcoat colour, eyebrow shape. Regenerate any drift.
 - Painted in the video's gouache style; no flat vector versions.
+
+## Emotions (15 Nov 2026)
+- `monocle_egg_emotions.jpg` (labelled) and `emotions_1..4.jpg` (raw): smug, shocked, unimpressed, thinking / delighted, angry, sad, confused / scared, laughing hard, embarrassed, bored / facepalm, mind blown, suspicious, proud.
+- The monocle drops out in sad, laughing hard and facepalm; put it back when using those poses.
