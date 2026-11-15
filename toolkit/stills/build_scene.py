@@ -50,7 +50,7 @@ def main():
         k = shot.get('k', 0); hits = [w for w in W if ls - 0.3 <= w[1] <= le + 0.3 and any(norm(w[0]).startswith(norm(x)) for x in alts)]
         if len(hits) <= k: sys.exit(f"cue word '{shot['word']}' not found in {shot['at']}")
         return hits[k][1]
-    shots = [dict(s, t=at(s)) for s in P['shots']]; shots[0]['t'] = 0.0
+    shots = [dict(s, t=round(at(s) + s.get('offset', 0), 2)) for s in P['shots']]; shots[0]['t'] = 0.0   # a shot may take offset too (Gods ch2: the cheer lands in the pause after its word)
     # cut on the beat (BIG_MOVES B8, Sam 14 Nov 2026): plan "beatsnap": {"bed": "music/x.wav", "from": s, "to": s} moves every picture
     # change inside the window onto the nearest beat of the bed (beats.py writes BED.beats.json) when one is within 0.18 s
     bs = P.get('beatsnap')

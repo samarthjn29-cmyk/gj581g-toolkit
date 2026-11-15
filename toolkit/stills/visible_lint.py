@@ -34,7 +34,7 @@ for c in t['cards']:
     if end-c['t'] < need - 0.05: bad += 1; print(f"READ {c['t']:6.2f} {c['kind']} '{str(c.get('text',c.get('img')))[:40]}' up {end-c['t']:.2f} s, needs {need:.2f} s")
 # An overlay gag must end on its own picture (Sam, Aliens ch1, 11 Nov 2026: "This red oval shouldn't come on the pilot"):
 # a circle, bubble, notify, aside, starburst, label... that runs on past a picture change lands on the wrong picture.
-OVER = ('callin', 'grey', 'count', 'circle', 'arrow', 'bubble', 'notify', 'aside', 'starburst', 'stamp', 'labels', 'tag', 'pip', 'lens', 'spotlight', 'censor', 'loading', 'freeze', 'sticker', 'caption', 'meter')
+OVER = ('fieldtag', 'callin', 'grey', 'count', 'circle', 'arrow', 'bubble', 'notify', 'aside', 'starburst', 'stamp', 'labels', 'tag', 'pip', 'lens', 'spotlight', 'censor', 'loading', 'freeze', 'sticker', 'caption', 'meter')
 cuts = sorted(set([s['t'] for s in t['shots']] + [c['t'] for c in full]))
 for c in t['cards']:
     if c['kind'] not in OVER or c.get('across'): continue   # across: true = deliberately spans the cut

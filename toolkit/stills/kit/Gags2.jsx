@@ -378,6 +378,31 @@ export const GAGS2 = {
     return <AbsoluteFill style={{pointerEvents: 'none', opacity: out}}><div style={{position: 'absolute', left: 90, bottom: 96, padding: '12px 22px 14px', ...brushBox({}), opacity: R(q, 0, 0.15)}}>
       <div style={{fontFamily: MONO, fontSize: c.size || 38, letterSpacing: 3, color: PAINT.ink, textTransform: 'uppercase'}}>{txt.slice(0, n)}<span style={{opacity: Math.floor(q * 3) % 2 ? 0 : 1}}>|</span></div>
       {c.sub ? <div style={{fontFamily: HAND, fontSize: 30, color: PAINT.red, opacity: R(q, 0.2 + txt.length * 0.045, 0.5 + txt.length * 0.045)}}>{c.sub}</div> : null}</div></AbsoluteFill>; },
+  // fieldtag (Sam, 15 Nov 2026: "Use a new type of tag. Search online to find ideas" -> the travel/landmark pin title, made as an
+  // archaeologist's find tag): a painted pin drops onto the spot (px, py), then a manila specimen tag on a string swings down from it
+  // and settles (damped swing), lettered in typed caps with an optional hand-written sub-line. The tag hangs below-right of the pin
+  // (side: -1 hangs left). Keep the pin off faces. Sound: a soft tap on the pin, a paper flick on the tag.
+  fieldtag: (c, q, d, out) => { if (c.pin === false) { const fs = c.size || 46, a = R(q, 0, 0.25), x = (c.x ?? 0.04) * W, y = (c.y ?? 0.07) * H;   // pin: false (Sam, 15 Nov 2026: "get rid of the pin and correct its alignment to horizontal"): the same tag, level, sliding in
+      return <AbsoluteFill style={{pointerEvents: 'none', opacity: out * a}}><div style={{position: 'absolute', left: x, top: y + 24 * (1 - a), padding: '16px 30px 14px 66px', borderRadius: '10px 14px 12px 40px', background: '#E5E3D2', color: '#19181E', border: '5px solid #19181E', whiteSpace: 'nowrap', boxShadow: '0 10px 24px rgba(20,16,10,0.45)'}}>
+        <div style={{position: 'absolute', left: 22, top: '50%', width: 22, height: 22, marginTop: -11, borderRadius: 11, background: '#19181E', border: '5px solid #77190D'}} />
+        <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs, letterSpacing: 2, textTransform: c.keepCase ? 'none' : 'uppercase', lineHeight: 1.1}}>{c.text}</div>
+        {c.sub ? <div style={{fontFamily: HAND, fontSize: fs * 0.72, color: '#77190D', marginTop: 4}}>{c.sub}</div> : null}</div></AbsoluteFill>; }
+    const px = (c.px ?? 0.5) * W, py = (c.py ?? 0.4) * H, side = c.side ?? 1, drop = R(q, 0, 0.22), land = q > 0.22 ? Math.exp(-(q - 0.22) * 9) * Math.sin((q - 0.22) * 30) * 6 : 0;
+    const pinY = py - 260 * (1 - drop) - land, sw = q > 0.3 ? 16 * Math.exp(-(q - 0.3) * 2.6) * Math.cos((q - 0.3) * 6.5) : 0, tg = R(q, 0.28, 0.46), str = c.string ?? 150;
+    const txt = c.text || '', fs = c.size || 48, tw = Math.max(320, Math.min(900, Math.max(txt.length, (c.sub || '').length * 0.75) * fs * 0.64 + 110));
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: out}}>
+      <div style={{position: 'absolute', left: px, top: pinY, transformOrigin: '0 0', transform: `rotate(${(side > 0 ? -1 : 1) * 18 + sw}deg)`, opacity: tg}}>
+        <svg width={4} height={str} style={{position: 'absolute', left: -2, top: 0, overflow: 'visible'}}><path d={`M 0 0 Q ${side * 14} ${str * 0.55} ${side * 6} ${str}`} stroke="#19181E" strokeWidth={4} fill="none" /></svg>
+        <div style={{position: 'absolute', top: str - 6, left: side > 0 ? -34 : -tw + 34, width: tw, padding: '18px 30px 16px 70px', borderRadius: '10px 14px 12px 40px', background: '#E5E3D2', color: '#19181E', border: '5px solid #19181E', whiteSpace: 'nowrap',
+          boxShadow: '0 10px 24px rgba(20,16,10,0.45)', filter: 'drop-shadow(0 6px 10px rgba(0,0,0,0.35))',
+          backgroundImage: 'linear-gradient(100deg, rgba(255,255,255,0.10), rgba(120,90,40,0.12))'}}>
+          <div style={{position: 'absolute', left: 22, top: '50%', width: 22, height: 22, marginTop: -11, borderRadius: 11, background: '#19181E', border: '5px solid #77190D'}} />
+          <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs, letterSpacing: 2, textTransform: c.keepCase ? 'none' : 'uppercase', lineHeight: 1.1}}>{txt}</div>
+          {c.sub ? <div style={{fontFamily: HAND, fontSize: fs * 0.72, color: '#77190D', marginTop: 4}}>{c.sub}</div> : null}</div></div>
+      <svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
+        <ellipse cx={px + 6} cy={py + 4} rx={12 * drop} ry={5 * drop} fill="rgba(0,0,0,0.35)" />
+        <line x1={px} y1={pinY} x2={px} y2={pinY - 52} stroke="#2A2A2A" strokeWidth={5} />
+        <circle cx={px} cy={pinY - 62} r={22} fill="#77190D" stroke="#3A0C06" strokeWidth={3} /><circle cx={px - 7} cy={pinY - 68} r={6} fill="rgba(255,255,255,0.55)" /></svg></AbsoluteFill>; },
   // credits (C24): a slow painted credits crawl (c.lines = ['Narration — Sam', ...]); full-screen ground c.ground (default dusk green).
   credits: (c, q, d, out) => { const L = c.lines || [], y = H + 40 - (q / d) * (H + 40 + L.length * 74);
     return <AbsoluteFill style={{opacity: out, background: c.ground || PAINT.green}}><div style={{position: 'absolute', left: 0, right: 0, top: y, textAlign: 'center'}}>
