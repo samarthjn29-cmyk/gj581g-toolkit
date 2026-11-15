@@ -7,6 +7,7 @@ For each pair of chapters: the last line of chapter N and the first line of chap
      "Now, ...", "And that's where ... comes in.") or carries `bridge: true` / a `bridge` text.
 Also warns when the first line of a chapter carries a tag different from the last line of the one before (the safest recording is
 the same tag across the join; change the tone two or three lines in).
+Banned tags (Sam): [intrigued], [serious], [warmly], [calm] (16 Nov 2026).
 Usage: transition_lint.py SCRIPT_CH0.json SCRIPT_CH1.json ...   (one file per chapter, in order; each {"lines": [...]})
        or one file with lines carrying `scene`.  Exit 1 on any FAIL."""
 import json, sys, re
