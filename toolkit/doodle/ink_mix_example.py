@@ -22,7 +22,7 @@ files = []
 for name, a, b, ink, _ in LAYERS:
     out = f'ink/{name}.webm' if ink else f'ink/{name}.mp4'
     if not os.path.exists(out) or '--redo' in sys.argv:
-        subprocess.run(['node', f'{DOODLE}/render.js', 'cards/stanford.html', f'card={name}&{PAL}' + ('&bg=none' if ink else ''), str(a), str(b), os.path.abspath(out)], cwd=DOODLE, check=True)
+        subprocess.run(['node', f'{DOODLE}/render.js', 'cards/stanford.html', f'card={name}&{PAL}' + ('&bg=none' if ink else ''), str(a if ink else a - 0.1), str(b if ink else b + 0.1), os.path.abspath(out)], cwd=DOODLE, check=True)   # cards get 0.1 s of handles so no frame of the picture under them shows at a cut (Stanford basement 1:08)
     files.append(out)
 # pencil scratches: band-passed noise bursts, about -26 dBFS peak
 dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', src], capture_output=True, text=True).stdout)
@@ -40,8 +40,8 @@ for f in files: cmd += (['-c:v', 'libvpx-vp9'] if f.endswith('.webm') else []) +
 cmd += ['-i', 'ink/scratch.wav']
 fc, last = [], '0:v'
 for i, ((name, a, b, ink, _), f) in enumerate(zip(LAYERS, files), 1):
-    fc.append(f'[{i}:v]scale={W}:{H},setpts=PTS-STARTPTS+{a}/TB,format=yuva420p[l{i}]')
-    fc.append(f"[{last}][l{i}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b - 0.01})'[v{i}]"); last = f'v{i}'
+    fc.append(f'[{i}:v]scale={W}:{H},setpts=PTS-STARTPTS+{a if ink else a - 0.1}/TB,format=yuva420p[l{i}]')
+    fc.append(f"[{last}][l{i}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b - 0.01 if ink else b + 0.05})'[v{i}]"); last = f'v{i}'
 n = len(files) + 1
 fc.append(f'[0:a][{n}:a]amix=inputs=2:normalize=0:duration=first[a]')
 out = f'clips/S_{scene}_ink.mp4' if FINAL else f'clips/S_{scene}_720_ink.mp4'
