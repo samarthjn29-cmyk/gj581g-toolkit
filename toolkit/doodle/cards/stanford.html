@@ -221,7 +221,36 @@ function boardBasement(t) { boardBase(t, 90.45); slot(1, clamp((t - 90.6) / .45)
 function boardPrisoner(t) { boardBase(t, 66.5); slot(1, 1); slot(2, clamp((t - 66.6) / .45)); slot(3, 0); slot(4, 0); next('next: the tape', 3, k(t, 67.86, .4)); }
 function boardTapes(t) { boardBase(t, 114.1); slot(1, 1); slot(2, 1); slot(3, clamp((t - 114.2) / .45)); slot(4, clamp((t - 115.36) / .45)); }
 
-const CARDS = {coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd, chalkInk, scheduleInk, kitInk, we57, bbc, communeInk, cameraInk, adInk, traits, boardBasement, boardPrisoner, boardTapes};
+// ======== end (05) ========
+// recap: the case file one last time (8.44-32.6): every pin back, each lit on its clue, then the verdict stamp
+function boardRecap(t) {
+  boardBase(t, 8.5);
+  const lit = {1: 11.28, 2: 17.5, 3: 24.04, 4: 28.08};
+  for (const n of [1, 2, 3, 4]) { const on = t >= lit[n], kk = clamp((t - 8.7 - (n - 1) * .18) / .4);
+    g.save(); if (!on) g.globalAlpha = 0.55; slot(n, kk, on ? clamp((t - lit[n]) / .5) : 0); g.restore(); }
+  const st = (t - 31.9) / .3; if (st > 0) { const sc = 1.6 - 0.6 * back(st); g.save(); g.translate(960, 820); g.rotate(-0.05); g.scale(sc, sc); g.globalAlpha = clamp(st * 2);
+    g.lineWidth = 7; g.strokeStyle = ORANGE; g.strokeRect(-470, -62, 940, 124); g.lineWidth = 3; g.strokeRect(-456, -50, 912, 100);
+    g.font = '700 74px Kalam'; g.fillStyle = ORANGE; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText("DIDN'T HAPPEN AS TOLD", 0, 6); g.restore(); }
+  margin('(but some guards still went too far)', 1500, 990, k(t, 32.15, .35), 38);
+}
+// 1971 vs 2026 (65.84-73.6)
+function then_now(t) {
+  labtag('THEN · NOW', k(t, 65.9, .4));
+  const col = (x, head, items, t0) => { txt(head, x, 250, 84, P.ink, k(t, t0, .4), 'center', 0, 'Kalam', 700); underline(x - 160, x + 160, 300, clamp((t - t0 - .2) / .35), ORANGE, 6);
+    items.forEach(([s, tt], i) => txt(s, x, 420 + i * 120, 58, P.ink, k(t, tt, .45))); };
+  col(560, '1971', [['two dozen men', 65.9], ['a basement', 66.2], ['6 days', 66.5]], 65.84);
+  col(1360, '2026', [['about 30 volunteers', 70.5], ['a real jail in Georgia', 72.26], ['6 episodes', 69.44]], 66.9);
+  line(960, 220, 960, 800, k(t, 66.6, .5), P.pencil, 3, 951);
+  txt('"unscripted"', 1360, 850, 52, ORANGE, k(t, 68.08, .45), 'center', -0.03, 'Kalam', 700);
+}
+// who wrote the script (E11 C_script, hold, 92.04 + 4.92 s)
+function creditsInk(t) { g.save(); hold(t, 92.04, 4.92);
+  htxt('written by:', 900, 560, 62, P.ink, k(t, 92.68, .4), -0.08);
+  htxt('the research team', 1010, 660, 70, ORANGE, k(t, 94.16, .45), -0.08);
+  htxt('+ the guards who ran with it', 1040, 770, 54, P.ink, k(t, 95.6, .55), -0.08);
+  g.restore(); }
+
+const CARDS = {boardRecap, then_now, creditsInk, coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd, chalkInk, scheduleInk, kitInk, we57, bbc, communeInk, cameraInk, adInk, traits, boardBasement, boardPrisoner, boardTapes};
 const which = Q.get('card') || 'calendar';
 window.render = tt => { paper(); CARDS[which](tt); };
 Promise.all([fontsReady(), ...Object.values(IMG).map(im => im.decode())]).then(() => { window.ready = true; });
