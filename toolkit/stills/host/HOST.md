@@ -5,7 +5,7 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 ## Who he is
 - An original mascot: a smug little egg-shaped professor, cream body, dark ink outline.
 - Fixed features: a monocle on his left eye, one huge dark raised eyebrow over it, tiny stubby arms and legs, a small brick-red (#77190D) waistcoat with buttons.
-- Personality: smug, sceptical, the "well, actually" voice. He raises the eyebrow at shaky claims and is quietly delighted when something holds up.
+- Personality (Sam, 16 Nov 2026: "Make the character mischievous, naughty and fun"): a cheeky little troublemaker. He smirks, winks, side-eyes, blows raspberries, schemes, mock-gasps, snickers and laughs at the story, and raises the eyebrow at shaky claims.
 - He never lip-syncs to Sam's voice. He reacts, points, holds tags and appears in about one or two shots a minute.
 - He is not Sam and not any real person; no real face is ever put on him.
 
@@ -31,3 +31,10 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 - Run: `rhubarb -f json -d line.txt --extendedShapes GHX line.wav -o mouth.json`, then `python3 rig25d.py --dir parts25d --audio line.wav --cues mouth.json --bg BG.jpg --out out.mp4 [--side right|left|center] [--height 0.66] [--brow 6.0:7.6]`. About 1 s per frame at 1080p.
 - First test: `MonocleEgg_25D_talk_test.mp4` (8 s, Gods op4-op4b "...way below my pay grade", brow up on "pay grade").
 - Rejected parts kept in the workspace only: the huge first "ah", the lipped "oo", the teeth-gritted B (read as a grimace).
+
+## Pop-ups, no talking (Sam, 16 Nov 2026: "Instead of letting him speak, let the character just do expressions. Reduce its size as compared to the screen, it's too big. Allow him to pop up from anywhere on the screen. Make the character mischievous, naughty and fun.")
+- He never talks or lip-syncs. `rig25d.py` (the talking rig) is kept only as a reference.
+- `pop25d.py`: he pops in from any edge or corner (bottom, top hanging upside down, left, right, the four corners) with a springy overshoot, pulls one face or a run of faces (each swap gets a small squash-and-stretch), and ducks out. He is about a quarter of the screen height (`size` 0.24-0.28). Events come from a JSON list; he is overlaid on the chapter clip.
+- Poses in `parts25d/`: neutral (master), EX_smirk, EX_wink, EX_sideeye, EX_tongue, EX_scheme, EX_gasp, EX_snicker, EX_laugh, plus AV_brow (eyebrow up) and AV_blink. The sheet is `expressions_sheet.jpg`.
+- Placement: inside one shot (never across a cut), never over a face, a tag or on-screen text, and never mocking a child or a sad real moment (in the demo the snicker was swapped for the mock gasp next to the crying-baby clip). About one pop-up every 45-90 s, on a beat that earns it.
+- Demo: `MonocleEgg_popups_demo.mp4` (G: `brand\host_25d\`).
