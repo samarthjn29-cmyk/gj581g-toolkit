@@ -1,0 +1,116 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Kalam;font-weight:400;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-400-normal.woff2)}
+@font-face{font-family:Kalam;font-weight:700;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-700-normal.woff2)}
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Stanford_v1 (Re-Tested 01) ink and doodle cards. Times are seconds in each chapter clip (whisper word times from the
+// chapter's timeline.json, 16 Nov 2026). Palette: Stanford cream #EDE6D6, charcoal ink, jumpsuit-orange pen #E0782A.
+// Ink layers (bg=none) sit on 'hold' shots: hold scales 1.03 -> 1.05 about the centre over dur + 0.6 s (StillsScene MOVES).
+import {Q, P, g, rc, clamp, ease, back, k, boil, seedRnd, rnd, paper, txt, margin, pen, ring, line, underline, fontsReady} from './ink.js';
+
+const CREAM = '#EDE6D6', ORANGE = P.red;
+function hold(t, t0, dur) { const s = 1.03 + 0.02 * clamp((t - t0) / (dur + 0.6)); g.translate(960, 540); g.scale(s, s); g.translate(-960, -540); }
+// handwriting on a painting: ink with a soft cream halo so it reads on any part of the picture
+function htxt(s, x, y, size, color, kk, rot = 0, weight = 700, halo = CREAM) {
+  if (kk <= 0) return; g.save(); g.font = `${weight} ${size}px Kalam`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.translate(x, y); g.rotate(rot);
+  const w = g.measureText(s).width; g.beginPath(); g.rect(-w/2 - 14, -size * 1.2, (w + 28) * clamp(kk), size * 2.4); g.clip();
+  g.lineJoin = 'round'; g.lineWidth = size * 0.22; g.strokeStyle = halo; g.globalAlpha = 0.85; g.strokeText(s, 0, 0); g.globalAlpha = 1;
+  g.fillStyle = color; g.fillText(s, 0, 0); g.restore();
+}
+function arrow(x1, y1, x2, y2, kk, color = ORANGE, w = 6) {
+  if (kk <= 0) return; const pts = []; for (let i = 0; i <= 24; i++) { const u = i / 24; pts.push([x1 + (x2 - x1) * u + Math.sin(u * Math.PI) * (y2 - y1) * 0.12, y1 + (y2 - y1) * u - Math.sin(u * Math.PI) * (x2 - x1) * 0.12]); }
+  g.save(); g.shadowColor = 'rgba(237,230,214,0.8)'; g.shadowBlur = 6; pen(pts, kk, color, w);
+  if (kk >= 0.98) { const [ax, ay] = pts[pts.length - 1], [bx, by] = pts[pts.length - 4], a = Math.atan2(ay - by, ax - bx);
+    pen([[ax - 30 * Math.cos(a - .45), ay - 30 * Math.sin(a - .45)], [ax, ay], [ax - 30 * Math.cos(a + .45), ay - 30 * Math.sin(a + .45)]], 1, color, w); }
+  g.restore();
+}
+function cross(cx, cy, r, kk, color = ORANGE, w = 7) { const a = clamp(kk * 2), b = clamp(kk * 2 - 1);
+  pen([[cx - r, cy - r], [cx - r + 2 * r * a, cy - r + 2 * r * a]], a > 0 ? 1 : 0, color, w); if (b > 0) pen([[cx + r, cy - r], [cx + r - 2 * r * b, cy - r + 2 * r * b]], 1, color, w); }
+// the video's evidence sticker: cream label, orange bar on the left, mono capitals (matches the labtag cards)
+function labtag(s, kk, x = 77, y = 76, size = 34) {
+  if (kk <= 0) return; g.save(); g.globalAlpha = clamp(kk * 1.4); g.font = `500 ${size}px JetBrains Mono`; const w = g.measureText(s).width + 64, h = size * 1.8;
+  g.translate(x, y + (1 - back(kk)) * -18); g.fillStyle = '#F4EFE3'; g.fillRect(0, 0, w, h); g.fillStyle = ORANGE; g.fillRect(0, 0, 14, h);
+  g.strokeStyle = 'rgba(43,43,43,0.35)'; g.lineWidth = 2; g.strokeRect(0, 0, w, h); g.fillStyle = P.ink; g.textBaseline = 'middle'; g.fillText(s, 36, h/2 + 2); g.restore();
+}
+
+// ---------- opening: the coin splits the students (O7 C_coin2, hold, 26.9 + 5.04 s)
+function coinInk(t) { g.save(); hold(t, 26.9, 5.04);
+  ring(956, 416, 74, 74, clamp((t - 26.95) / .45), 21, ORANGE, 6);
+  arrow(890, 460, 640, 520, clamp((t - 27.15) / .45));  htxt('guards', 540, 450, 70, P.ink, k(t, 28.04, .45));
+  arrow(1022, 460, 1290, 520, clamp((t - 28.8) / .45)); htxt('prisoners', 1400, 450, 70, P.ink, k(t, 29.22, .5));
+  g.restore(); }
+
+// ---------- basement: referee and captain are the same man (B7 C_referee, hold, 27.32 + 3.74 s)
+function refInk(t) { g.save(); hold(t, 27.32, 3.74);
+  htxt('referee', 1580, 300, 72, P.ink, k(t, 28.34, .45));   arrow(1500, 350, 1330, 520, clamp((t - 28.6) / .4));
+  htxt('captain', 470, 880, 72, P.ink, k(t, 29.32, .45));    arrow(500, 820, 520, 560, clamp((t - 29.55) / .4));
+  htxt('= same guy', 1100, 990, 72, ORANGE, k(t, 30.2, .4), -0.02);
+  g.restore(); }
+
+// ---------- prisoner: attempt 1, the stomachache (P4 C_stomach, hold, 19.04 + 3.48 s)
+function stomachInk(t) { g.save(); hold(t, 19.04, 3.48);
+  ring(1262, 878, 120, 62, clamp((t - 19.06) / .45), 31, ORANGE, 6);
+  htxt('attempt 1: stomachache', 1250, 740, 62, P.ink, k(t, 19.3, .6), -0.02);
+  cross(1262, 878, 70, clamp((t - 20.22) / .4));
+  htxt("didn't work", 1560, 1000, 58, ORANGE, k(t, 20.46, .4), -0.03);
+  htxt('attempt 2:', 560, 260, 66, P.ink, k(t, 21.2, .45), -0.03);
+  g.restore(); }
+
+// ---------- prisoner: the official reason struck out (P5b C_form, hold, 27.27 + 5.71 s)
+function formInk(t) { g.save(); hold(t, 27.27, 5.71);
+  htxt('Reason for leaving:', 860, 600, 58, P.ink, k(t, 27.3, .7), -0.03, 700, '#F3EBCF');
+  htxt('BREAKDOWN', 860, 690, 76, P.ink, k(t, 28.92, .45), -0.03, 700, '#F3EBCF');
+  const sk = clamp((t - 29.9) / .4); if (sk > 0) pen([[690, 703], [870, 683], [1040, 673]], sk, ORANGE, 9);
+  htxt('(by his account)', 900, 935, 44, '#5d5a52', k(t, 30.64, .5), -0.03, 400, '#F3EBCF');
+  htxt('revision', 990, 770, 84, ORANGE, k(t, 32.1, .45), -0.06, 700, '#F3EBCF');
+  g.restore(); }
+
+// ---------- prisoner: two versions of one story (P10 C_pages, hold, 49.75 + 6.59 s; ends under "One man. Two stories.")
+function pagesInk(t) { g.save(); hold(t, 49.75, 6.59);
+  ring(460, 580, 300, 390, clamp((t - 52.46) / .5), 41, ORANGE, 6);  htxt('version 1', 450, 960, 64, P.ink, k(t, 52.7, .45), -0.03);
+  ring(1330, 620, 330, 410, clamp((t - 52.95) / .5), 43, ORANGE, 6); htxt('version 2', 1330, 1010, 64, P.ink, k(t, 53.2, .45), -0.03);
+  htxt('(+ a few more)', 1640, 160, 46, '#5d5a52', k(t, 53.62, .5), 0.03, 400);
+  g.restore(); }
+
+// ---------- basement full card: the 14-day plan, stopped on day 6 (64.7-68.34; replaces "Six days, not fourteen.")
+function calendar(t) {
+  const b = boil(t), X0 = 340, Y0 = 380, S = 150, GAP = 26;
+  labtag('THE PLAN · 14 DAYS', k(t, 64.75, .4));
+  for (let i = 0; i < 14; i++) { const c = i % 7, r = Math.floor(i / 7), x = X0 + c * (S + GAP), y = Y0 + r * (S + GAP), ap = back((t - 64.72 - i * .018) / .25); if (ap <= 0) continue;
+    const fill = t > 64.86 + i * .07 && i < 6, w = S * ap, cx = x + S/2, cy = y + S/2;
+    rc.rectangle(cx - w/2, cy - w/2, w, w, Object.assign({seed: 600 + i + b, roughness: 1.3, stroke: P.ink, strokeWidth: 2.2}, fill ? {fill: '#9a9a8c', fillStyle: 'hachure', hachureGap: 8, fillWeight: 2} : {}));
+    txt(String(i + 1), x + 26, y + 30, 32, P.ink, ap, 'center', 0, 'Kalam', 700);
+    if (i >= 6) cross(cx, cy, 46, clamp((t - 65.66 - (i - 6) * .07) / .22), ORANGE, 6); }
+  txt('stopped on day 6', 960, 820, 80, ORANGE, k(t, 66.2, .45), 'center', -0.02, 'Kalam', 700);
+  underline(660, 1260, 872, clamp((t - 66.6) / .35), ORANGE, 6);
+  margin('(slightly ahead of schedule)', 1500, 975, k(t, 67.14, .45), 40);
+}
+
+// ---------- basement full card: 50+ outsiders, one objection (68.34-76.34; replaces the painted crowd)
+seedRnd(57); const dots = Array.from({length: 50}, (_, i) => ({c: i % 10, r: Math.floor(i / 10), jx: (rnd() - .5) * 18, jy: (rnd() - .5) * 18, seed: 700 + i}));
+function crowd(t) {
+  const b = boil(t), X0 = 470, Y0 = 330, DX = 110, DY = 98, ONE = 27;
+  labtag("ZIMBARDO'S OWN ACCOUNT", k(t, 68.56, .4));
+  txt('outsiders who saw the prison', 960, 230, 60, P.ink, k(t, 70.86, .7), 'center', 0, 'Kalam', 700);
+  for (const [i, d] of dots.entries()) { const ap = back((t - 70.16 - i * .016) / .25); if (ap <= 0) continue;
+    const x = X0 + d.c * DX + d.jx, y = Y0 + d.r * DY + d.jy, one = i === ONE && t > 73.14;
+    rc.circle(x, y, 46 * ap, {seed: d.seed + b, roughness: 1.2, stroke: P.ink, strokeWidth: 2, fill: one ? ORANGE : '#b9b5a6', fillStyle: 'solid'}); }
+  const ox = X0 + dots[ONE].c * DX + dots[ONE].jx, oy = Y0 + dots[ONE].r * DY + dots[ONE].jy;
+  ring(ox, oy, 52, 52, clamp((t - 73.54) / .4), 61, ORANGE, 6);
+  arrow(1700, 640, ox + 52, oy + 30, clamp((t - 73.94) / .4), ORANGE, 6);
+  txt('questioned it', 1700, 700, 56, ORANGE, k(t, 74.1, .45), 'center', -0.02, 'Kalam', 700);
+  txt('50+ saw it · 1 objected', 960, 900, 76, ORANGE, k(t, 74.52, .5), 'center', -0.02, 'Kalam', 700);
+  margin('(everyone else: fine, apparently)', 1490, 990, k(t, 75.36, .45), 38);
+  txt('illustration, not the real count', 1860, 1045, 26, P.pencil, k(t, 70.2, .4), 'right');
+}
+
+const CARDS = {coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd};
+const which = Q.get('card') || 'calendar';
+window.render = tt => { paper(); CARDS[which](tt); };
+fontsReady().then(() => { window.ready = true; });
+</script></body></html>

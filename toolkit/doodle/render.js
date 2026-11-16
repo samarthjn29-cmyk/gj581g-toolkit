@@ -13,8 +13,8 @@ const srv = http.createServer((q, r) => { const f = path.join(__dirname, decodeU
   await p.goto(`http://localhost:${port}/${page}?${query || ''}`); await p.waitForFunction('window.ready === true', null, {timeout: 20000});
   if (stillAt) { await p.evaluate(t => render(t), +stillAt); await p.locator('#c').screenshot({path: out, omitBackground: true}); }
   else {
-    const alpha = out.endsWith('.mov');   // .mov = transparent ink layer (qtrle with alpha) for drawing on a painted still
-    const ff = spawn('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', ...(alpha ? ['-c:v', 'qtrle', '-pix_fmt', 'argb'] : ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-pix_fmt', 'yuv420p']), out]);
+    const webm = out.endsWith('.webm'), alpha = out.endsWith('.mov') || webm;   // .webm = the same transparent layer as VP9 with alpha, a fraction of the size (Stanford, 16 Nov 2026)   // .mov = transparent ink layer (qtrle with alpha) for drawing on a painted still
+    const ff = spawn('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-', ...(webm ? ['-c:v', 'libvpx-vp9', '-pix_fmt', 'yuva420p', '-b:v', '0', '-crf', '30', '-deadline', 'good', '-cpu-used', '5', '-row-mt', '1'] : alpha ? ['-c:v', 'qtrle', '-pix_fmt', 'argb'] : ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-pix_fmt', 'yuv420p']), out]);
     const n = Math.round((+end - +start) * FPS);
     for (let i = 0; i < n; i++) { await p.evaluate(t => render(t), +start + i / FPS); ff.stdin.write(await p.locator('#c').screenshot(alpha ? {type: 'png', omitBackground: true} : {type: 'jpeg', quality: 93})); }
     ff.stdin.end(); await new Promise(r => ff.on('close', r));
