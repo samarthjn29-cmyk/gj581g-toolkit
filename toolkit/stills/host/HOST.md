@@ -20,12 +20,12 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 
 ## 3D talking host (Sam, 16 Nov 2026: "I like your advice and recommendation")
 - Plan: build the Monocle Egg in Blender (bpyenv in the workspace), a few mouth shapes, lip-sync from Sam's own audio with a free phoneme tool (e.g. Rhubarb), painterly shader.
-- Use him only for short speaking moments (5-10 s intro, the odd aside, sign-off); the painted stills carry the rest.
+- (Retired 16 Nov 2026: he never speaks; see "Pop-ups, no talking" below.) ~~Use him only for short speaking moments (5-10 s intro, the odd aside, sign-off)~~; the painted stills carry the rest.
 - First step after Gods_v1: a rough 10 s test clip on one of Sam's lines for him to judge the look.
 
 ## Format decision (Sam, 16 Nov 2026: "Let's go with 2.5D")
 - The host is 2.5D: a painted gouache cut-out split into layers (body, head, eyebrow, monocle, mouth) that move separately in a painted scene, with parallax, a small bob/tilt and an eyebrow that lifts on cue.
-- Talking: painted mouth shapes on their own layer, switched from Rhubarb lip-sync cues on Sam's audio (rhub/ in the workspace); short speaking moments only.
+- Talking (retired 16 Nov 2026, kept for reference only: he does expressions, never speaks): painted mouth shapes on their own layer, switched from Rhubarb lip-sync cues on Sam's audio (rhub/ in the workspace).
 - The 3D Blender test (host3d/egg.py) stays as a reference, not the look.
 - Built 16 Nov 2026 (Sam: "Build our channel avatar now"): `parts25d/` holds the master pose (front, plain white ground) and matched Firefly edits of it: mouths A (closed), B (friendly talking), C (ee), D (ah), E (oh; F reuses E), blink, raised brow. `rig25d.py` keys the white out, cuts each variant's changed patch (mouth patches locked to the mouth box and kept off the waistcoat), switches mouths from Rhubarb cues on Sam's audio (G->B, H->C, X = master smile), blinks every 2.5-5 s, raises the brow on `--brow start:end` cues (the outline follows the brow), bobs, tilts, squashes on open vowels, and sits him over a softened, slowly drifting painted background.
 - Run: `rhubarb -f json -d line.txt --extendedShapes GHX line.wav -o mouth.json`, then `python3 rig25d.py --dir parts25d --audio line.wav --cues mouth.json --bg BG.jpg --out out.mp4 [--side right|left|center] [--height 0.66] [--brow 6.0:7.6]`. About 1 s per frame at 1080p.

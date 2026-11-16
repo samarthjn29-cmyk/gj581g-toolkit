@@ -11,7 +11,7 @@ A short hand-drawn diagram (5-12 s) that takes the place of a number or evidence
 
 ## Our look (what makes it ours, not a Shapiro copy)
 - **The video's painted paper:** the card sits on its palette's cream with soft gouache blotches, grain and a warm vignette (`paper()`), so it belongs with the painted stills. His is flat white.
-- **Kalam lettering and the video's fieldtag:** headings in Kalam (our channel hand); the source sits in the video's tag style top-left ("Bateson et al., 2006"). His labels float in the middle.
+- **Kalam lettering and the video's own tag:** headings in Kalam (our channel hand); the source sits in the video's tag style top-left ("Bateson et al., 2006"). His labels float in the middle.
 - **The red pen verdict:** every card ends with a red-pen mark: a ring, an underline, a crossed-out box, a bracket and a handwritten verdict ("nearly 3×", "~300 years later", "\"we don't know\" is not \"no\"").
 - **A pencil margin aside:** one dry line in grey pencil in a lower corner ("(fashionably late. again.)", "(same tea. same price.)"). Callbacks to the video's own jokes work best. Asides state no new fact.
 - **Painted props only as painted:** no flat clip art of people; ink figures are dots, boxes and icons. The Monocle Egg host never appears as a doodle (he stays painted, `styles/HOST_CHARACTER.md`).
