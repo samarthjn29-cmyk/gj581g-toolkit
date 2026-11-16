@@ -22,3 +22,9 @@ Picked by Sam on 15 Nov 2026, for use from the video after Gods_v1 onwards (not 
 - Plan: build the Monocle Egg in Blender (bpyenv in the workspace), a few mouth shapes, lip-sync from Sam's own audio with a free phoneme tool (e.g. Rhubarb), painterly shader.
 - Use him only for short speaking moments (5-10 s intro, the odd aside, sign-off); the painted stills carry the rest.
 - First step after Gods_v1: a rough 10 s test clip on one of Sam's lines for him to judge the look.
+
+## Format decision (Sam, 16 Nov 2026: "Let's go with 2.5D")
+- The host is 2.5D: a painted gouache cut-out split into layers (body, head, eyebrow, monocle, mouth) that move separately in a painted scene, with parallax, a small bob/tilt and an eyebrow that lifts on cue.
+- Talking: painted mouth shapes on their own layer, switched from Rhubarb lip-sync cues on Sam's audio (rhub/ in the workspace); short speaking moments only.
+- The 3D Blender test (host3d/egg.py) stays as a reference, not the look.
+- Next: paint a clean layered master (body, eyebrow, monocle, 6-8 mouth shapes) from the character sheet, then a cut-out rig script.
