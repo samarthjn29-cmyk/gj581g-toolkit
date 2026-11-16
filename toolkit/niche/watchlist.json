@@ -19,11 +19,10 @@
   "money-measured": {
    "status": "testing",
    "seeds": [
-    "why is everything so expensive",
     "why the world uses the dollar",
     "where does inflation come from",
     "what is money actually",
-    "why does paper money have value"
+    "why paper money has value"
    ]
   },
   "money-across-borders": {
@@ -49,10 +48,10 @@
    "status": "core",
    "seeds": [
     "plato's cave explained",
-    "ship of theseus",
+    "ship of theseus paradox",
     "trolley problem explained",
     "is free will an illusion",
-    "what is consciousness",
+    "what is consciousness explained",
     "the problem of evil",
     "stoicism explained"
    ]
@@ -65,7 +64,10 @@
     "van gogh story",
     "art forgery story",
     "what makes a painting valuable",
-    "the mona lisa theft"
+    "the mona lisa theft",
+    "hilma af klint",
+    "who invented abstract art",
+    "nazi looted art"
    ]
   },
   "mind-and-psychology": {
@@ -86,8 +88,8 @@
     "how did we measure the earth",
     "history of the calendar",
     "how did we discover germs",
-    "why did we skip 11 days in 1752",
-    "why does the year start in january"
+    "1752 calendar change",
+    "history of calendar months"
    ]
   },
   "technology-and-ai-ideas": {
@@ -100,7 +102,7 @@
     "will ai become conscious",
     "will ai become self aware",
     "how would we know if ai is conscious",
-    "people feared the printing press"
+    "what was the printing press"
    ]
   },
   "history-big-ideas": {
@@ -146,7 +148,9 @@
   "inflation report",
   "dollar strength",
   "Sotheby's Christie's auction",
-  "aphantasia"
+  "aphantasia",
+  "Hilma af Klint",
+  "looted art restitution"
  ],
  "subreddits": [
   "philosophy",
@@ -161,7 +165,8 @@
   "cogsci",
   "Futurology",
   "NoStupidQuestions",
-  "TrueAskReddit"
+  "TrueAskReddit",
+  "consciousness"
  ],
  "alerts": {
   "currencies": [
@@ -193,6 +198,7 @@
   ]
  },
  "_changelog": [
-  "2026-11-09: idea lanes added as core (philosophy, art, mind, science history, technology/AI, history); money-measured -> testing, money-across-borders paused; peers broadened to illustrated idea channels (Emergence first); dead seeds retired; HistoryMatters and wisecrack handles returned nothing (dropped)."
+  "2026-11-09: idea lanes added as core (philosophy, art, mind, science history, technology/AI, history); money-measured -> testing, money-across-borders paused; peers broadened to illustrated idea channels (Emergence first); dead seeds retired; HistoryMatters and wisecrack handles returned nothing (dropped).",
+  "2026-11-16: retired zero-result seeds (why is everything so expensive, why does paper money have value, why did we skip 11 days in 1752, why does the year start in january, people feared the printing press) for phrasings autocomplete offers; ship of theseus / what is consciousness re-phrased (no results); art lane + hilma af klint, who invented abstract art, nazi looted art; news + Hilma af Klint, looted art restitution; subreddit + consciousness."
  ]
 }
