@@ -250,7 +250,21 @@ function creditsInk(t) { g.save(); hold(t, 92.04, 4.92);
   htxt('+ the guards who ran with it', 1040, 770, 54, P.ink, k(t, 95.6, .55), -0.08);
   g.restore(); }
 
-const CARDS = {boardRecap, then_now, creditsInk, coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd, chalkInk, scheduleInk, kitInk, we57, bbc, communeInk, cameraInk, adInk, traits, boardBasement, boardPrisoner, boardTapes};
+// the slate: unscripted, screened, a safe word (E8 C_clapper, hold, 73.56 + 7.78 s)
+function clapperInk(t) { g.save(); hold(t, 73.56, 7.78);
+  const SL = 'rgba(30,34,38,0.6)';
+  htxt('UNSCRIPTED*', 930, 520, 84, CREAM, k(t, 73.7, .5), -0.12, 700, SL);
+  htxt('screened', 860, 625, 56, CREAM, k(t, 74.8, .4), -0.12, 700, SL); tick(1050, 600, clamp((t - 75.1) / .3));
+  htxt('safe word', 880, 705, 56, CREAM, k(t, 75.82, .4), -0.12, 700, SL); tick(1090, 680, clamp((t - 76.2) / .3));
+  htxt('*per the producers', 1450, 980, 48, CREAM, k(t, 74.0, .5), -0.03, 400, SL);
+  g.restore(); }
+// identity leadership: WE on the chalkboard (E5b C_chalk, hold, 44.22 + 6.74 s)
+function chalkWe(t) { g.save(); hold(t, 44.22, 6.74);
+  htxt('WE', 1340, 470, 150, ORANGE, k(t, 49.36, .35), -0.05, 700, 'rgba(30,40,30,0.6)');
+  underline(1200, 1480, 560, clamp((t - 49.7) / .3), ORANGE, 8); underline(1210, 1470, 585, clamp((t - 49.95) / .3), ORANGE, 6);
+  g.restore(); }
+
+const CARDS = {clapperInk, chalkWe, boardRecap, then_now, creditsInk, coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd, chalkInk, scheduleInk, kitInk, we57, bbc, communeInk, cameraInk, adInk, traits, boardBasement, boardPrisoner, boardTapes};
 const which = Q.get('card') || 'calendar';
 window.render = tt => { paper(); CARDS[which](tt); };
 Promise.all([fontsReady(), ...Object.values(IMG).map(im => im.decode())]).then(() => { window.ready = true; });
