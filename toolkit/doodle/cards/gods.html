@@ -1,0 +1,133 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Kalam;font-weight:400;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-400-normal.woff2)}
+@font-face{font-family:Kalam;font-weight:700;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-700-normal.woff2)}
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Gods_v1 doodle cards. Times are absolute seconds in clips/Gods_full_1080p.mp4 (whisper word times, 16 Nov 2026).
+import {follow, Q, P, g, rc, clamp, ease, back, k, boil, seedRnd, rnd, paper, txt, tag, margin, pen, ring, line, underline, eye, flower, fontsReady} from './ink.js';
+
+// ---------- 1. the 400 societies (192.0-203.4): every "?" crossed out as "no"
+seedRnd(7); const cells = [];
+for (let c = 0; c < 40; c++) for (let r = 0; r < 10; r++) { const u = rnd(); cells.push({c, r, st: u < 0.22 ? 1 : u < 0.42 ? 0 : 2, d: rnd(), seed: 1 + Math.floor(rnd() * 9999)}); }
+function societies(t) {
+  const b = boil(t), X0 = 160, Y0 = 250, CELL = 34, GAP = 6;
+  tag('the 2019 study\'s data', k(t, 192.05, .5));
+  txt('400+ past societies', 960, 190, 64, P.ink, k(t, 192.2, .7), 'center', 0, 'Kalam', 700);
+  for (const e of cells) {
+    const x = X0 + e.c * 40, y = Y0 + e.r * 40, ap = back((t - 192.1 - e.c * 0.022 - e.r * 0.006) / 0.3); if (ap <= 0) continue;
+    const mk = clamp((t - 193.5 - e.c * 0.012) / 0.25), flipT = 199.14 + e.d * 2.3, fl = e.st === 2 && t > flipT;
+    const pulse = e.st === 2 && t > 194.6 && !fl ? 1 + 0.07 * Math.sin((t - 194.6) * 7 + e.d * 6) : 1;
+    const sc = ap * pulse * (fl ? 1 + 0.25 * Math.max(0, 1 - (t - flipT) / 0.22) : 1), w = CELL * sc, cx = x + CELL/2, cy = y + CELL/2;
+    const o = {seed: e.seed + b, roughness: 1.3, stroke: P.ink, strokeWidth: 1.6};
+    if (mk > 0 && e.st === 1) Object.assign(o, {fill: P.gold, fillStyle: 'solid'});
+    if (mk > 0 && e.st === 0) Object.assign(o, {fill: P.green, fillStyle: 'hachure', hachureGap: 5, fillWeight: 1.3});
+    rc.rectangle(cx - w/2, cy - w/2, w, w, o);
+    if (e.st === 2 && mk > 0 && !fl) txt('?', cx, cy + 1, 29 * sc, P.ink, 1, 'center', 0, 'Kalam', 700);
+    if (fl) { const q = clamp((t - flipT) / .16), q2 = clamp((t - flipT - .16) / .16);
+      pen([[cx - w*.32, cy - w*.32], [cx - w*.32 + w*.64*q, cy - w*.32 + w*.64*q]], 1, P.red, 3.2);
+      if (q2 > 0) pen([[cx + w*.32, cy - w*.32], [cx + w*.32 - w*.64*q2, cy - w*.32 + w*.64*q2]], 1, P.red, 3.2); }
+  }
+  const lk = k(t, 194.2, .5), ly = 712;
+  if (lk > 0) { g.save(); g.globalAlpha = lk;
+    rc.rectangle(330, ly - 20, 40, 40, {seed: 11 + b, fill: P.gold, fillStyle: 'solid', stroke: P.ink}); txt('big gods', 390, ly, 42, P.ink, 1, 'left');
+    rc.rectangle(780, ly - 20, 40, 40, {seed: 12 + b, fill: P.green, fillStyle: 'hachure', hachureGap: 5, stroke: P.ink}); txt('no big gods', 840, ly, 42, P.ink, 1, 'left');
+    rc.rectangle(1270, ly - 20, 40, 40, {seed: 13 + b, stroke: P.ink}); txt('?', 1290, ly + 1, 32, P.ink, 1, 'center', 0, 'Kalam', 700); txt('nobody knows', 1330, ly, 42, P.ink, 1, 'left');
+    g.restore(); }
+  txt('records: missing', 960, 820, 52, P.ink, k(t, 197.2, .5) * (1 - k(t, 199.0, .2)));
+  txt('every "?" counted as "no"', 960, 820, 52, P.red, k(t, 199.4, .6) * (1 - k(t, 201.7, .15)), 'center', 0, 'Kalam', 700);
+  if (t > 201.8) { const s = back((t - 201.8) / .35), sc = 1.5 - .5 * s; g.save(); g.translate(960, 820); g.rotate(-0.04); g.scale(sc, sc); g.globalAlpha = clamp(s);
+    txt('"we don\'t know" is not "no"', 0, 0, 74, P.red, 1, 'center', 0, 'Kalam', 700); g.restore();
+    underline(600, 1320, 872, clamp((t - 202.0) / .35), P.red, 6); }
+  margin('(nobody asked the ? boxes)', 1560, 960, k(t, 202.3, .5), 34);
+  txt('illustration, not the real counts', 1860, 1040, 26, P.pencil, k(t, 194.2, .5), 'right');
+}
+
+// ---------- 2. the re-test timeline (272.5-279.95): societies got big first, big gods ~300 years later
+function timeline(t) {
+  const b = boil(t), Y = 640, XA = 700, XB = 1390;
+  tag('the re-test, 2022', k(t, 272.55, .5));
+  line(180, Y, 1740, Y, k(t, 272.6, .7), P.ink, 3.5, 21 + b);
+  for (let i = 0; i < 14; i++) { const x = 230 + i * 110; line(x, Y - 12, x, Y + 12, k(t, 272.7 + i * .04, .2), P.ink, 2.5, 30 + i + b); }
+  txt('time', 1760, Y + 46, 34, P.pencil, k(t, 273.1, .4), 'right');
+  // the society grows: people dots spread from one seed
+  const gk = clamp((t - 274.0) / 1.25); seedRnd(41);
+  const N = Math.floor(3 + gk * 46);
+  for (let i = 0; i < 49; i++) { const a = rnd() * 7, r = 18 + Math.sqrt(rnd()) * 120, px = XA + Math.cos(a) * r * .95, py = Y - 150 + Math.sin(a) * r * .55; if (i >= N) continue;
+    rc.circle(px, py, 15, {fill: P.green, fillStyle: 'solid', stroke: P.ink, strokeWidth: 1.4, seed: 200 + i + b}); }
+  if (gk > 0) line(XA, Y - 60, XA, Y - 8, gk, P.ink, 2.5, 51 + b);
+  txt('society gets big', XA, Y - 300, 46, P.ink, k(t, 274.6, .5), 'center', 0, 'Kalam', 700);
+  // the big gods: a "?" first, then the eye lands
+  const qk = k(t, 275.6, .35) * (1 - k(t, 277.3, .15)); if (qk > 0) txt('?', XB, Y - 150, 120 * back(qk), P.pencil, 1, 'center', 0, 'Kalam', 700);
+  eye(XB, Y - 150, 1.25, clamp((t - 277.4) / .35), 71 + b);
+  txt('big gods turn up', XB, Y - 300, 46, P.ink, k(t, 277.6, .5), 'center', 0, 'Kalam', 700);
+  if (t > 277.4) line(XB, Y - 100, XB, Y - 8, k(t, 277.5, .25), P.ink, 2.5, 52 + b);
+  // red bracket and the gap
+  const bk = clamp((t - 278.0) / .7);
+  if (bk > 0) { const pts = []; for (let i = 0; i <= 40; i++) { const u = i / 40; pts.push([XA + (XB - XA) * u, Y + 70 + Math.sin(u * Math.PI) * 26]); } pen(pts, bk, P.red, 5);
+    pen([[XA, Y + 50], [XA, Y + 74]], bk > .05 ? 1 : 0, P.red, 5); pen([[XB, Y + 50], [XB, Y + 74]], bk > .98 ? 1 : 0, P.red, 5); }
+  txt('~300 years later', (XA + XB) / 2, Y + 150, 62, P.red, k(t, 278.26, .55), 'center', -0.02, 'Kalam', 700);
+  margin('(fashionably late. again.)', 1500, 935, k(t, 279.0, .5), 38);
+  txt('not to scale', 1860, 1040, 26, P.pencil, k(t, 273.1, .4), 'right');
+}
+
+// ---------- 3. the honesty box (362.3-367.9): eye weeks took nearly 3x the flower weeks
+function honesty(t) {
+  const b = boil(t), BASE = 860, H1 = 160, H2 = H1 * 2.76, W = 250, X1 = 640, X2 = 1100;
+  tag('Bateson et al., 2006', k(t, 362.35, .45));
+  txt('money in the honesty box', 960, 175, 58, P.ink, k(t, 362.45, .6), 'center', 0, 'Kalam', 700);
+  line(420, BASE, 1500, BASE, k(t, 362.5, .5), P.ink, 3.5, 81 + b);
+  flower(X1 + W/2, BASE + 75, .9, k(t, 362.6, .35), 90 + b); eye(X2 + W/2, BASE + 75, .75, k(t, 362.7, .35), 95 + b);
+  txt('flower weeks', X1 + W/2, BASE + 150, 40, P.ink, k(t, 362.7, .4)); txt('eye weeks', X2 + W/2, BASE + 150, 40, P.ink, k(t, 362.8, .4));
+  const g1 = ease((t - 363.2) / .7), g2 = ease((t - 363.35) / 1.05);
+  if (g1 > 0) rc.rectangle(X1, BASE - H1 * g1, W, H1 * g1, {fill: P.green, fillStyle: 'hachure', hachureGap: 7, fillWeight: 2, stroke: P.ink, strokeWidth: 2.5, seed: 101 + b});
+  if (g2 > 0) rc.rectangle(X2, BASE - H2 * g2, W, H2 * g2, {fill: P.gold, fillStyle: 'solid', stroke: P.ink, strokeWidth: 2.5, seed: 102 + b});
+  txt('nearly 3×', X2 + W + 70, BASE - H2 + 70, 70, P.red, k(t, 363.94, .45), 'left', -0.03, 'Kalam', 700);
+  ring(X2 + W/2, BASE - H2 - 4, 165, 52, clamp((t - 366.42) / .55), 7, P.red, 5);
+  margin('(same tea. same price.)', 1520, 960, k(t, 366.9, .45), 38);
+}
+
+// ---------- 4. the review (385.0-389.85): 15 experiments, bad behaviour down about a third
+function review(t) {
+  const b = boil(t), L = 330, FULL = 1100, Y1 = 600, Y2 = 760, Hb = 92;
+  tag('Dear et al., 2019', k(t, 385.05, .45));
+  for (let i = 0; i < 15; i++) { const x = 360 + i * 82, y = 250, kk = back((t - 386.05 - i * .03) / .25); if (kk <= 0) continue;
+    g.save(); g.translate(x, y); g.scale(kk, kk); g.rotate((i % 3 - 1) * .05);
+    rc.rectangle(-28, -38, 56, 76, {fill: P.tagbg, fillStyle: 'solid', stroke: P.ink, strokeWidth: 1.8, seed: 300 + i + b});
+    for (let j = 0; j < 4; j++) rc.line(-17, -22 + j * 14, 17, -22 + j * 14, {stroke: P.pencil, strokeWidth: 1.3, seed: 330 + i * 4 + j + b}); g.restore(); }
+  txt('15 experiments', 960, 360, 46, P.ink, k(t, 386.3, .4), 'center', 0, 'Kalam', 700);
+  txt('no eyes', L - 30, Y1 + Hb/2, 42, P.ink, k(t, 386.8, .35), 'right'); txt('eyes', L - 30, Y2 + Hb/2, 42, P.ink, k(t, 387.2, .35), 'right');
+  const a = ease((t - 386.9) / .55); if (a > 0) rc.rectangle(L, Y1, FULL * a, Hb, {fill: P.green, fillStyle: 'hachure', hachureGap: 7, fillWeight: 2, stroke: P.ink, strokeWidth: 2.5, seed: 401 + b});
+  const c = ease((t - 387.4) / .6) * (1 - 0.35 * ease((t - 388.0) / .6));
+  if (c > 0) rc.rectangle(L, Y2, FULL * c, Hb, {fill: P.green, fillStyle: 'hachure', hachureGap: 7, fillWeight: 2, stroke: P.ink, strokeWidth: 2.5, seed: 402 + b});
+  txt('bad behaviour', L + 20, Y1 - 40, 36, P.pencil, k(t, 386.9, .4), 'left');
+  const gk = clamp((t - 388.35) / .4);
+  if (gk > 0) { const x0 = L + FULL * .65, x1 = L + FULL; rc.rectangle(x0, Y2, (x1 - x0) * gk, Hb, {stroke: P.red, strokeWidth: 3, roughness: 1.6, seed: 403 + b, strokeLineDash: [14, 10]}); }
+  txt('about a third less', L + FULL * .825, Y2 + Hb + 60, 56, P.red, k(t, 388.6, .4), 'center', -0.02, 'Kalam', 700);
+  margin('(saints: still none)', 1560, 990, k(t, 389.1, .4), 36);
+}
+
+
+// ---------- 5. ink on paint (356.6-362.3): red pen and ink straight on the painted honesty-box still
+// The still zooms slowly about (998, 446): +1.53% a second, measured from the box corners at 357.5 and 360.5.
+function eyesInk(t) {
+  g.save(); follow(t, 998, 446, 357.5, 0.0153); const b = boil(t);
+  ring(925, 200, 175, 118, clamp((t - 356.75) / .55), 17, P.red, 6);                       // "a pair of eyes"
+  // "just staring at you": two dashed sight-lines from the eyes to the box
+  for (let i = 0; i < 2; i++) { const kk = clamp((t - 357.75 - i * .12) / .7), x0 = 990 + i * 40, y0 = 255, x1 = 1330 + i * 60, y1 = 470;
+    if (kk > 0) rc.line(x0, y0, x0 + (x1 - x0) * kk, y0 + (y1 - y0) * kk, {stroke: P.tagbg, strokeWidth: 4, roughness: 1.3, seed: 500 + i + b, strokeLineDash: [16, 12]}); }
+  txt('watching', 1235, 330, 46, P.tagbg, k(t, 358.3, .45), 'center', 0.55, 'Kalam', 700);
+  // "And in the weeks with the eyes": coins drop into the box slot, the money the next card counts
+  for (let i = 0; i < 5; i++) { const t0 = 361.66 + i * .11, u = clamp((t - t0) / .32); if (u <= 0 || u >= 1) continue;
+    const y = 360 + u * u * 130, x = 1404 + (i % 2 ? 6 : -6); rc.circle(x, y, 30, {fill: P.gold, fillStyle: 'solid', stroke: P.ink, strokeWidth: 2, seed: 520 + i + b}); }
+  g.restore();
+}
+const CARDS = {societies, timeline, honesty, review, eyesInk};
+const which = Q.get('card') || 'societies';
+window.render = tt => { paper(); CARDS[which](tt); };
+fontsReady().then(() => { window.ready = true; });
+</script></body></html>
