@@ -109,8 +109,120 @@ function crowd(t) {
   txt('illustration, not the real count', 1860, 1045, 26, P.pencil, k(t, 70.2, .4), 'right');
 }
 
-const CARDS = {coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd};
+// ======== tapes (03) ========
+// chalkboard: not a briefing, a team talk (T9 C_chalk, hold, 52.94 + 2.10 s)
+function chalkInk(t) { g.save(); hold(t, 52.94, 2.90);
+  htxt('briefing', 1180, 300, 74, CREAM, k(t, 53.4, .4), -0.03, 700, 'rgba(30,40,30,0.6)');
+  const sk = clamp((t - 54.46) / .3); if (sk > 0) pen([[1030, 312], [1180, 296], [1330, 288]], sk, ORANGE, 8);
+  htxt('TEAM TALK', 1360, 520, 96, ORANGE, k(t, 54.84, .35), -0.04, 700, 'rgba(30,40,30,0.6)');
+  underline(1150, 1570, 585, clamp((t - 55.0) / .3), ORANGE, 7);
+  g.restore(); }
+// the schedule came from the research team, copied from a dorm-room prison (T13 C_schedule, hold, 73.22 + 7.66 s)
+function scheduleInk(t) { g.save(); hold(t, 73.22, 7.66);
+  ring(1080, 440, 230, 300, clamp((t - 74.24) / .5), 71, ORANGE, 6);
+  htxt('from the research team', 1080, 830, 62, P.ink, k(t, 75.34, .55), -0.02);
+  arrow(380, 980, 830, 700, clamp((t - 77.42) / .45));
+  htxt('copied from a dorm-room prison', 560, 1010, 54, P.ink, k(t, 77.6, .6), -0.02);
+  htxt('3 months earlier', 1640, 560, 66, ORANGE, k(t, 79.68, .45), -0.04);
+  g.restore(); }
+// a uniform, a rulebook, a schedule... and a pep talk (T15 C_kit, hold, 86.36 + 6.46 s)
+function tick(x, y, kk) { if (kk <= 0) return; pen([[x - 26, y], [x - 6, y + 22], [x + 34, y - 30]], kk, ORANGE, 8); }
+function kitInk(t) { g.save(); hold(t, 86.36, 6.46);
+  tick(430, 760, clamp((t - 88.5) / .3));  htxt('uniform', 430, 860, 60, P.ink, k(t, 88.55, .35));
+  tick(830, 760, clamp((t - 89.44) / .3)); htxt('rulebook', 830, 860, 60, P.ink, k(t, 89.5, .35));
+  tick(1290, 760, clamp((t - 90.36) / .3)); htxt('schedule', 1290, 860, 60, P.ink, k(t, 90.4, .35));
+  htxt('+ a pep talk', 1640, 420, 64, ORANGE, k(t, 91.74, .4), -0.05); ring(1640, 420, 205, 85, clamp((t - 92.0) / .45), 73, ORANGE, 6);
+  g.restore(); }
+// full card: 57 "we, us, our" in 18 minutes (44.18-52.94)
+seedRnd(91); const weTicks = Array.from({length: 57}, () => rnd()).sort((a, b) => a - b);
+function we57(t) {
+  const b = boil(t), X0 = 230, X1 = 1690, Y = 520;
+  labtag('HASLAM, REICHER & VAN BAVEL, 2019', k(t, 44.2, .4));
+  txt("Jaffe's talk with the guard", 960, 250, 58, P.ink, k(t, 44.52, .6), 'center', 0, 'Kalam', 700);
+  line(X0, Y, X1, Y, k(t, 45.24, .6), P.ink, 4, 801 + b);
+  txt('0 min', X0, Y + 60, 34, P.pencil, k(t, 45.3, .3)); txt('18 min', X1, Y + 60, 34, P.pencil, k(t, 45.64, .3));
+  const n = Math.floor(57 * clamp((t - 47.0) / 2.0));
+  for (let i = 0; i < n; i++) { const x = X0 + weTicks[i] * (X1 - X0); line(x, Y - 50, x, Y - 8, 1, ORANGE, 3, 830 + i + b); }
+  if (t > 47.0) txt(`we · us · our: ${n}`, 960, 690, 64, P.ink, 1, 'center', 0, 'Kalam', 700);
+  ring(960, 690, 300, 70, clamp((t - 49.44) / .5), 81, ORANGE, 6);
+  txt('≈ once every 30 words', 960, 830, 72, ORANGE, k(t, 50.78, .5), 'center', -0.02, 'Kalam', 700);
+  margin('(we. us. our. we. we.)', 1500, 975, k(t, 51.86, .45), 40);
+  txt('tick positions are an illustration', 1860, 1045, 26, P.pencil, k(t, 47.0, .4), 'right');
+}
+
+// ======== retest (04) ========
+// full card: the BBC re-run, 15 men picked at random, cameras, ethics committee... no girlfriend (13.68-24.42)
+function bbc(t) {
+  const b = boil(t);
+  labtag('THE BBC PRISON STUDY · 2001', k(t, 13.72, .4));
+  const sp = ease((t - 16.24) / .8);
+  for (let i = 0; i < 15; i++) { const ap = back((t - 13.72 - i * .03) / .25); if (ap <= 0) continue;
+    const g0x = 330 + (i % 5) * 90, g0y = 300 + Math.floor(i / 5) * 90, guard = i < 5;
+    const tx = guard ? 240 + i * 90 : 820 + ((i - 5) % 5) * 90, ty = guard ? 330 : 300 + Math.floor((i - 5) / 5) * 90;
+    const x = g0x + (tx - g0x) * sp, y = g0y + (ty - g0y) * sp;
+    rc.circle(x, y, 52 * ap, {seed: 900 + i + b, roughness: 1.2, stroke: P.ink, strokeWidth: 2, fill: guard && sp > .5 ? ORANGE : '#b9b5a6', fillStyle: 'solid'}); }
+  txt('guards', 420, 420, 44, P.ink, k(t, 16.9, .4)); txt('prisoners', 1000, 520, 44, P.ink, k(t, 16.9, .4));
+  const row = (s, y, tt, ok) => { txt(s, 1300, y, 52, P.ink, k(t, tt, .45), 'left'); if (ok) tick(1255, y, clamp((t - tt - .3) / .3)); else cross(1255, y, 26, clamp((t - tt) / .35)); };
+  row('cameras everywhere', 330, 17.02, 1); row('ethics committee, 24/7', 450, 18.86, 1);
+  if (t > 23.94) row("the boss's girlfriend", 570, 23.94, 0);
+  margin('(this time, by the book)', 1460, 960, k(t, 24.0, .3), 40);
+  txt('15 men · picked at random', 600, 760, 56, ORANGE, k(t, 15.74, .5), 'center', -0.02, 'Kalam', 700);
+}
+// the resistance got weaker... and weaker (R8b C_commune, hold, 57.62 + 6.86 s)
+function communeInk(t) { g.save(); hold(t, 57.62, 6.86);
+  htxt('resistance', 1450, 230, 64, P.ink, k(t, 61.52, .45), -0.02);
+  const s1 = clamp((t - 61.7) / .6), s2 = clamp((t - 62.56) / .4), s3 = clamp((t - 63.64) / .4);
+  pen([[1250, 300], [1500, 300]], s1, ORANGE, 7);
+  if (s2 > 0) pen([[1500, 300], [1500, 480], [1650, 480]], s2, ORANGE, 7);
+  if (s3 > 0) pen([[1650, 480], [1650, 700], [1800, 700]], s3, ORANGE, 7);
+  g.restore(); }
+// the cameras: a fair point, noticed less as the days went on (R11 C_camera, hold, 78.40 + 8.44 s)
+function cameraInk(t) { g.save(); hold(t, 78.40, 8.44);
+  ring(1020, 650, 330, 320, clamp((t - 78.45) / .55), 91, ORANGE, 7);
+  htxt('a fair point?', 1560, 220, 70, ORANGE, k(t, 82.32, .45), -0.04, 700, 'rgba(30,30,30,0.6)');
+  htxt('noticed less as the days went on', 960, 990, 58, CREAM, k(t, 84.5, .7), -0.02, 700, 'rgba(30,30,30,0.7)');
+  g.restore(); }
+// the 1971 ad: "of prison life" ringed, then struck out for version 2 (R13b R_ad_crop, hold, 96.32 + 5.84 s)
+function adInk(t) { g.save(); hold(t, 96.32, 5.84);
+  ring(1290, 394, 230, 52, clamp((t - 97.9) / .45), 101, ORANGE, 6); ring(300, 460, 90, 44, clamp((t - 98.3) / .35), 103, ORANGE, 6);
+  htxt('version 1', 1600, 560, 58, ORANGE, k(t, 97.4, .4), -0.03);
+  const sk = clamp((t - 99.68) / .5); if (sk > 0) { pen([[1070, 398], [1500, 390]], sk, P.ink, 7); pen([[240, 462], [370, 458]], sk, P.ink, 7); }
+  htxt('version 2: the same ad, without these words', 960, 900, 56, P.ink, k(t, 100.26, .6), -0.02);
+  g.restore(); }
+// full card: who answered the "prison life" ad (102.16-111.6)
+function traits(t) {
+  labtag('CARNAHAN & MCFARLAND, 2007', k(t, 102.2, .4));
+  txt('people who answered the "prison life" ad', 960, 240, 56, P.ink, k(t, 102.3, .7), 'center', 0, 'Kalam', 700);
+  const row = (s, y, tt, up) => { txt(s, 760, y, 62, P.ink, k(t, tt, .45), 'right'); if (t > tt) { const kk = clamp((t - tt - .15) / .35), x = 900;
+      pen(up ? [[x, y + 50], [x, y + 50 - 100 * kk]] : [[x, y - 50], [x, y - 50 + 100 * kk]], 1, ORANGE, 9);
+      if (kk >= 1) pen(up ? [[x - 28, y - 22], [x, y - 52], [x + 28, y - 22]] : [[x - 28, y + 22], [x, y + 52], [x + 28, y + 22]], 1, ORANGE, 9);
+      txt(up ? 'higher' : 'lower', 980, y, 58, ORANGE, kk, 'left', 0, 'Kalam', 700); } };
+  row('aggressiveness', 420, 104.82, 1); row('authoritarianism', 590, 106.3, 1); row('empathy', 760, 110.08, 0);
+  margin('(same ad, minus three words)', 1460, 965, k(t, 110.6, .45), 40);
+  txt('direction only, not the real scores', 1860, 1045, 26, P.pencil, k(t, 104.8, .4), 'right');
+}
+
+// ======== the case board (Sam, 17 Nov 2026): a pin at each chapter end, the recap in the end chapter ========
+const PINS = {1: ['C_coin2', 'CLUE 1 · THE COIN'], 2: ['C_books_keep', 'CLUE 2 · THE BOOKS'], 3: ['C_note2', 'CLUE 3 · THE PEP TALK'], 4: ['C_recorder', '"I\'m not too tough."']};
+const SLOT = {1: [290, 520, -0.04], 2: [737, 480, 0.03], 3: [1183, 520, -0.025], 4: [1630, 480, 0.035]};
+const IMG = {}; for (const [n, [f]] of Object.entries(PINS)) { const im = new Image(); im.src = `img/${f}.jpg`; IMG[n] = im; }
+function slot(n, kk, hot = 0) { const [cx, cy, rot] = SLOT[n], W = 396, H = 221;
+  if (kk <= 0) { g.save(); g.setLineDash([14, 12]); g.strokeStyle = P.pencil; g.lineWidth = 3; g.strokeRect(cx - W/2 - 14, cy - H/2 - 14, W + 28, H + 80); g.restore(); txt('?', cx, cy, 90, P.pencil, 1, 'center', 0, 'Kalam', 700); return; }
+  const s = 1.25 - 0.25 * back(kk); g.save(); g.globalAlpha = clamp(kk * 2); g.translate(cx, cy); g.rotate(rot); g.scale(s, s);
+  g.fillStyle = '#F7F3E8'; g.shadowColor = 'rgba(0,0,0,0.25)'; g.shadowBlur = 18; g.fillRect(-W/2 - 14, -H/2 - 14, W + 28, H + 80); g.shadowBlur = 0;
+  g.drawImage(IMG[n], -W/2, -H/2, W, H); g.restore();
+  g.save(); g.translate(cx, cy); g.rotate(rot); txt(PINS[n][1], 0, H/2 + 34, n === 4 ? 34 : 30, P.ink, clamp(kk * 1.5), 'center', 0, n === 4 ? 'Kalam' : 'JetBrains Mono', n === 4 ? 700 : 500); g.restore();
+  g.beginPath(); g.arc(cx, cy - H/2 - 6, 13, 0, 7); g.fillStyle = ORANGE; g.fill();
+  if (hot > 0) ring(cx, cy + 20, 250, 190, hot, 110 + n, ORANGE, 6);
+}
+function boardBase(t, t0) { labtag('CASE FILE · WHO WROTE THE SCRIPT?', k(t, t0, .4)); }
+function next(s, n, kk) { const [cx, cy] = SLOT[n]; txt(s, cx, cy + 190, 44, ORANGE, kk, 'center', -0.03, 'Kalam', 700); }
+function boardBasement(t) { boardBase(t, 90.45); slot(1, clamp((t - 90.6) / .45)); slot(2, 0); slot(3, 0); slot(4, 0); next('next: the tape', 3, k(t, 92.5, .45)); }
+function boardPrisoner(t) { boardBase(t, 66.5); slot(1, 1); slot(2, clamp((t - 66.6) / .45)); slot(3, 0); slot(4, 0); next('next: the tape', 3, k(t, 67.86, .4)); }
+function boardTapes(t) { boardBase(t, 114.1); slot(1, 1); slot(2, 1); slot(3, clamp((t - 114.2) / .45)); slot(4, clamp((t - 115.36) / .45)); }
+
+const CARDS = {coinInk, refInk, stomachInk, formInk, pagesInk, calendar, crowd, chalkInk, scheduleInk, kitInk, we57, bbc, communeInk, cameraInk, adInk, traits, boardBasement, boardPrisoner, boardTapes};
 const which = Q.get('card') || 'calendar';
 window.render = tt => { paper(); CARDS[which](tt); };
-fontsReady().then(() => { window.ready = true; });
+Promise.all([fontsReady(), ...Object.values(IMG).map(im => im.decode())]).then(() => { window.ready = true; });
 </script></body></html>
