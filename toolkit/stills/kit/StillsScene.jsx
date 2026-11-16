@@ -377,7 +377,7 @@ const CardInner = ({c, t, words = [], dir}) => { const pc = paintedCard(c, t, di
     // c.ground / c.ink (Sam, Aliens opening, 11 Nov 2026: golden-parakeet yellow ground, green text): one colour for every word,
     // numbers a shade deeper; without them the default dark ground with cream / gold accent / blue numbers
     const col = w => c.ink ? ((c.nums || []).map(key).includes(key(w)) ? (c.inkNum || c.ink) : c.ink)
-      : (c.nums || []).map(key).includes(key(w)) ? '#9DB4C8' : (c.accent || []).map(key).includes(key(w)) ? '#C9A86A' : '#F3EBDD';
+      : (c.nums || []).map(key).includes(key(w)) ? '#9DB4C8' : (c.accent || []).map(key).includes(key(w)) ? (c.accentInk || '#C9A86A') : (c.plainInk || '#F3EBDD');
     return <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: oo, background: c.ground || '#0E0C0A'}}>
       {c.bgImg ? <Img src={staticFile(`${dir}/${c.bgImg}`)} style={{position: 'absolute', width: '100%', height: '100%', objectFit: 'cover', opacity: c.bgOpacity ?? 1}} /> : null}
       <AbsoluteFill style={{background: c.ground ? 'radial-gradient(ellipse at 50% 45%, rgba(255,240,170,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(120,70,0,0.25) 100%)' : 'radial-gradient(ellipse at 50% 45%, rgba(60,48,36,0.55) 0%, rgba(14,12,10,0) 65%)'}} />
