@@ -378,6 +378,15 @@ export const GAGS2 = {
     return <AbsoluteFill style={{pointerEvents: 'none', opacity: out}}><div style={{position: 'absolute', left: 90, bottom: 96, padding: '12px 22px 14px', ...brushBox({}), opacity: R(q, 0, 0.15)}}>
       <div style={{fontFamily: MONO, fontSize: c.size || 38, letterSpacing: 3, color: PAINT.ink, textTransform: 'uppercase'}}>{txt.slice(0, n)}<span style={{opacity: Math.floor(q * 3) % 2 ? 0 : 1}}>|</span></div>
       {c.sub ? <div style={{fontFamily: HAND, fontSize: 30, color: PAINT.red, opacity: R(q, 0.2 + txt.length * 0.045, 0.5 + txt.length * 0.045)}}>{c.sub}</div> : null}</div></AbsoluteFill>; },
+  // labtag (Sam, 16 Nov 2026, Marshmallow_v1: "Go with C"): a clean white lab label with a coloured bar on the left, a small
+  // spaced-caps heading (sub, optional) over the main line, sliding in from the left. bar = accent colour (default #2E6B5A),
+  // x/y = top-left as a share of the frame (default top-left 0.04/0.07). Keep it off faces; no pin, no string.
+  labtag: (c, q, d, out) => { const fs = c.size || 44, a = R(q, 0, 0.22), x = (c.x ?? 0.04) * W, y = (c.y ?? 0.07) * H, bar = c.bar || '#2E6B5A';
+    return <AbsoluteFill style={{pointerEvents: 'none', opacity: out * a}}><div style={{position: 'absolute', left: x - 40 * (1 - a), top: y, display: 'flex', alignItems: 'stretch', background: '#FFFFFF', borderRadius: 16, overflow: 'hidden', boxShadow: '0 10px 26px rgba(10,12,20,0.40)', whiteSpace: 'nowrap'}}>
+      <div style={{width: 20, background: bar}} />
+      <div style={{padding: `${fs * 0.36}px ${fs * 0.7}px ${fs * 0.38}px`}}>
+        {c.sub ? <div style={{fontFamily: SANS, fontWeight: 600, fontSize: fs * 0.48, letterSpacing: 4, textTransform: 'uppercase', color: bar, marginBottom: 4}}>{c.sub}</div> : null}
+        <div style={{fontFamily: SANS, fontWeight: 600, fontSize: fs, color: '#1E2A26', lineHeight: 1.1}}>{c.text}</div></div></div></AbsoluteFill>; },
   // fieldtag (Sam, 15 Nov 2026: "Use a new type of tag. Search online to find ideas" -> the travel/landmark pin title, made as an
   // archaeologist's find tag): a painted pin drops onto the spot (px, py), then a manila specimen tag on a string swings down from it
   // and settles (damped swing), lettered in typed caps with an optional hand-written sub-line. The tag hangs below-right of the pin
