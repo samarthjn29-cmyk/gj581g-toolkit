@@ -96,7 +96,7 @@ seedRnd(57); const dots = Array.from({length: 50}, (_, i) => ({c: i % 10, r: Mat
 function crowd(t) {
   const b = boil(t), X0 = 470, Y0 = 330, DX = 110, DY = 98, ONE = 27;
   labtag("ZIMBARDO'S OWN ACCOUNT", k(t, 68.56, .4));
-  txt('outsiders who saw the prison', 960, 230, 60, P.ink, k(t, 70.86, .7), 'center', 0, 'Kalam', 700);
+  txt('outsiders who saw the prison', 960, 230, 60, P.ink, k(t, 68.5, .7), 'center', 0, 'Kalam', 700);
   for (const [i, d] of dots.entries()) { const ap = back((t - 70.16 - i * .016) / .25); if (ap <= 0) continue;
     const x = X0 + d.c * DX + d.jx, y = Y0 + d.r * DY + d.jy, one = i === ONE && t > 73.14;
     rc.circle(x, y, 46 * ap, {seed: d.seed + b, roughness: 1.2, stroke: P.ink, strokeWidth: 2, fill: one ? ORANGE : '#b9b5a6', fillStyle: 'solid'}); }
@@ -138,8 +138,8 @@ seedRnd(91); const weTicks = Array.from({length: 57}, () => rnd()).sort((a, b) =
 function we57(t) {
   const b = boil(t), X0 = 230, X1 = 1690, Y = 520;
   labtag('HASLAM, REICHER & VAN BAVEL, 2019', k(t, 44.2, .4));
-  txt("Jaffe's talk with the guard", 960, 250, 58, P.ink, k(t, 44.52, .6), 'center', 0, 'Kalam', 700);
-  line(X0, Y, X1, Y, k(t, 45.24, .6), P.ink, 4, 801 + b);
+  txt("Jaffe's talk with the guard", 960, 250, 58, P.ink, k(t, 44.25, .6), 'center', 0, 'Kalam', 700);
+  line(X0, Y, X1, Y, k(t, 45.1, .6), P.ink, 4, 801 + b);
   txt('0 min', X0, Y + 60, 34, P.pencil, k(t, 45.3, .3)); txt('18 min', X1, Y + 60, 34, P.pencil, k(t, 45.64, .3));
   const n = Math.floor(57 * clamp((t - 47.0) / 2.0));
   for (let i = 0; i < n; i++) { const x = X0 + weTicks[i] * (X1 - X0); line(x, Y - 50, x, Y - 8, 1, ORANGE, 3, 830 + i + b); }
@@ -159,7 +159,7 @@ function bbc(t) {
   for (let i = 0; i < 15; i++) { const ap = back((t - 13.72 - i * .03) / .25); if (ap <= 0) continue;
     const g0x = 330 + (i % 5) * 90, g0y = 300 + Math.floor(i / 5) * 90, guard = i < 5;
     const tx = guard ? 240 + i * 90 : 820 + ((i - 5) % 5) * 90, ty = guard ? 330 : 300 + Math.floor((i - 5) / 5) * 90;
-    const x = g0x + (tx - g0x) * sp, y = g0y + (ty - g0y) * sp;
+    const lean = ease((t - 20.3) / 3.4) * (guard ? -70 : -10), x = g0x + (tx - g0x) * sp + lean, y = g0y + (ty - g0y) * sp;
     rc.circle(x, y, 52 * ap, {seed: 900 + i + b, roughness: 1.2, stroke: P.ink, strokeWidth: 2, fill: guard && sp > .5 ? ORANGE : '#b9b5a6', fillStyle: 'solid'}); }
   txt('guards', 420, 420, 44, P.ink, k(t, 16.9, .4)); txt('prisoners', 1000, 520, 44, P.ink, k(t, 16.9, .4));
   const row = (s, y, tt, ok) => { txt(s, 1300, y, 52, P.ink, k(t, tt, .45), 'left'); if (ok) tick(1255, y, clamp((t - tt - .3) / .3)); else cross(1255, y, 26, clamp((t - tt) / .35)); };
@@ -168,8 +168,18 @@ function bbc(t) {
   margin('(this time, by the book)', 1460, 960, k(t, 24.0, .3), 40);
   txt('15 men · picked at random', 600, 760, 56, ORANGE, k(t, 15.74, .5), 'center', -0.02, 'Kalam', 700);
 }
-// the resistance got weaker... and weaker (R8b C_commune, hold, 57.62 + 6.86 s)
-function communeInk(t) { g.save(); hold(t, 57.62, 6.86);
+// the commune on the blank sign, crossed out; punch-in on "the dark bit"; a harsher regime, and the resistance got weaker
+// (R8 C_commune hold 50.78 + 5.72 s, then R8b the same still at zoom 1.12, hold 56.5 + 7.98 s)
+const R8B = 56.5;
+function communeInk(t) {
+  g.save(); if (t < R8B) hold(t, 50.78, 5.72); else { const s = (1.03 + 0.02 * clamp((t - R8B) / 8.58)) * 1.12; g.translate(960, 540); g.scale(s, s); g.translate(-960, -540); }
+  htxt('COMMUNE', 1020, 322, 92, P.ink, k(t, 52.3, .5), -0.14);
+  const sk = clamp((t - 54.3) / .35); if (sk > 0) { g.save(); g.shadowColor = "rgba(237,230,214,0.9)"; g.shadowBlur = 8; pen([[820, 370], [1220, 270]], sk, P.ink, 13); g.restore(); };
+  g.restore();
+  if (t < R8B) return;
+  g.save(); hold(t, R8B, 7.98);
+  htxt('harsher regime', 560, 520, 66, ORANGE, k(t, 60.0, .45), -0.03);
+  arrow(300, 640, 300, 470, clamp((t - 60.2) / .35));
   htxt('resistance', 1450, 230, 64, P.ink, k(t, 61.52, .45), -0.02);
   const s1 = clamp((t - 61.7) / .6), s2 = clamp((t - 62.56) / .4), s3 = clamp((t - 63.64) / .4);
   pen([[1250, 300], [1500, 300]], s1, ORANGE, 7);
@@ -192,7 +202,8 @@ function adInk(t) { g.save(); hold(t, 96.32, 5.84);
 // full card: who answered the "prison life" ad (102.16-111.6)
 function traits(t) {
   labtag('CARNAHAN & MCFARLAND, 2007', k(t, 102.2, .4));
-  txt('people who answered the "prison life" ad', 960, 240, 56, P.ink, k(t, 102.3, .7), 'center', 0, 'Kalam', 700);
+  txt('people who answered the "prison life" ad', 960, 240, 56, P.ink, k(t, 102.2, .5), 'center', 0, 'Kalam', 700);
+  txt('compared with people who answered the plain ad', 960, 310, 40, P.pencil, k(t, 103.2, .6), 'center', 0, 'Kalam', 400);
   const row = (s, y, tt, up) => { txt(s, 760, y, 62, P.ink, k(t, tt, .45), 'right'); if (t > tt) { const kk = clamp((t - tt - .15) / .35), x = 900;
       pen(up ? [[x, y + 50], [x, y + 50 - 100 * kk]] : [[x, y - 50], [x, y - 50 + 100 * kk]], 1, ORANGE, 9);
       if (kk >= 1) pen(up ? [[x - 28, y - 22], [x, y - 52], [x + 28, y - 22]] : [[x - 28, y + 22], [x, y + 52], [x + 28, y + 22]], 1, ORANGE, 9);
@@ -223,14 +234,19 @@ function boardTapes(t) { boardBase(t, 114.1); slot(1, 1); slot(2, 1); slot(3, cl
 
 // ======== end (05) ========
 // recap: the case file one last time (8.44-32.6): every pin back, each lit on its clue, then the verdict stamp
+const CAM = [[8.44, 960, 540, 1], [10.85, 960, 540, 1], [11.3, 290, 520, 1.75], [16.95, 290, 520, 1.75], [17.45, 737, 480, 1.75], [23.55, 737, 480, 1.75],
+  [24.0, 1183, 520, 1.75], [27.6, 1183, 520, 1.75], [28.05, 1630, 480, 1.75], [31.2, 1630, 480, 1.75], [31.75, 960, 540, 1]];
+function cam(t) { let i = 0; while (i < CAM.length - 2 && t > CAM[i + 1][0]) i++; const [a, b] = [CAM[i], CAM[i + 1]], u = ease((t - a[0]) / (b[0] - a[0]));
+  const x = a[1] + (b[1] - a[1]) * u, y = a[2] + (b[2] - a[2]) * u, sc = a[3] + (b[3] - a[3]) * u; g.translate(960, 540); g.scale(sc, sc); g.translate(-x, -y); }
 function boardRecap(t) {
-  boardBase(t, 8.5);
+  boardBase(t, 8.5); g.save(); cam(t);
   const lit = {1: 11.28, 2: 17.5, 3: 24.04, 4: 28.08};
   for (const n of [1, 2, 3, 4]) { const on = t >= lit[n], kk = clamp((t - 8.7 - (n - 1) * .18) / .4);
     g.save(); if (!on) g.globalAlpha = 0.55; slot(n, kk, on ? clamp((t - lit[n]) / .5) : 0); g.restore(); }
   const st = (t - 31.9) / .3; if (st > 0) { const sc = 1.6 - 0.6 * back(st); g.save(); g.translate(960, 820); g.rotate(-0.05); g.scale(sc, sc); g.globalAlpha = clamp(st * 2);
     g.lineWidth = 7; g.strokeStyle = ORANGE; g.strokeRect(-470, -62, 940, 124); g.lineWidth = 3; g.strokeRect(-456, -50, 912, 100);
     g.font = '700 74px Kalam'; g.fillStyle = ORANGE; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText("DIDN'T HAPPEN AS TOLD", 0, 6); g.restore(); }
+  g.restore();
   margin('(but some guards still went too far)', 1500, 990, k(t, 32.15, .35), 38);
 }
 // 1971 vs 2026 (65.84-73.6)

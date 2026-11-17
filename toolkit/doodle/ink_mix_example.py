@@ -27,11 +27,13 @@ LAYERS = {
               ('chalkWe', 44.22, 50.96, 1, [49.36, 49.7]),
               ('clapperInk', 73.56, 81.34, 1, [73.7, 74.8, 75.82])],
  'retest':   [('bbc', 13.68, 24.42, 0, [13.72, 15.74, 16.24, 17.02, 18.86, 23.94]),
-              ('communeInk', 57.62, 64.48, 1, [61.52, 62.56, 63.64]),
+              ('communeInk', 50.78, 64.48, 1, [52.35, 54.32, 60.05, 61.52, 62.56, 63.64]),
               ('cameraInk', 78.40, 86.84, 1, [78.45, 82.32, 84.5]),
               ('adInk', 96.32, 102.16, 1, [97.4, 97.9, 99.68, 100.26]),
               ('traits', 102.16, 111.6, 0, [102.3, 104.82, 106.3, 110.08])],
 }[scene]
+# punch-ins on the base picture (no ink): (start, end, scale, centre x, centre y as frame fractions). Basement: the real 8612 photo at "On tape".
+PUNCH = {'basement': [(35.7, 40.04, 1.12, 0.5, 0.5)]}.get(scene, [])
 os.makedirs('ink', exist_ok=True)
 src = f'clips/S_{scene}.mp4' if FINAL else f'clips/S_{scene}_720_mix.mp4'
 W, H = (1920, 1080) if FINAL else (1280, 720)
@@ -56,6 +58,11 @@ cmd = ['ffmpeg', '-v', 'error', '-y', '-i', src]
 for f in files: cmd += (['-c:v', 'libvpx-vp9'] if f.endswith('.webm') else []) + ['-i', f]
 cmd += ['-i', 'ink/scratch.wav']
 fc, last = [], '0:v'
+for j, (pa, pb, ps, px, py) in enumerate(PUNCH):
+    fc.append(f"[{last}]split[pm{j}][pp{j}]")
+    cw, ch = int(W / ps) // 2 * 2, int(H / ps) // 2 * 2; cx, cy = int(W * px - cw / 2), int(H * py - ch / 2)
+    fc.append(f"[pp{j}]trim={pa}:{pb},setpts=PTS-STARTPTS+{pa}/TB,crop={cw}:{ch}:{cx}:{cy},scale={W}:{H}[pz{j}]")
+    fc.append(f"[pm{j}][pz{j}]overlay=0:0:eof_action=pass:enable='between(t,{pa},{pb - 0.01})'[pv{j}]"); last = f'pv{j}'
 for i, ((name, a, b, ink, _), f) in enumerate(zip(LAYERS, files), 1):
     fc.append(f'[{i}:v]scale={W}:{H},setpts=PTS-STARTPTS+{a if ink else a - 0.1}/TB,format=yuva420p[l{i}]')
     fc.append(f"[{last}][l{i}]overlay=0:0:eof_action=pass:enable='between(t,{a},{b - 0.01 if ink else b + 0.05})'[v{i}]"); last = f'v{i}'
