@@ -1,0 +1,239 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:Fraunces;font-weight:400;src:url(fonts/fraunces-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// The hands method (19 Nov 2026, Sam: "I want to do exactly what they are doing"), on the Stanford opening (0-52.3 s).
+// What it copies from @all-hands (styles/HANDS_CHANNEL_STUDY.md):
+//  - few, long shots; the camera travels through flat cut-paper illustrations built in depth layers (near layers move more)
+//  - the texture redraws in steps (8 a second), like hand animation; nothing else wobbles
+//  - figures hold still; only motifs move (the swinging bulb and its light, the coin, the tape reels)
+//  - a new palette per scene; a short burst of quicker shots only where the script lists things (op5)
+//  - one calm card system: primary documents in monospace on a floating dark panel with a tiny grey source line,
+//    the title in serif on paper; real places as real photos with a cream caption strip
+//  - real people are never drawn: the warden and the guard appear only as shadows on a wall; the students are anonymous types
+import {g, clamp, ease, seedRnd, rnd, fontsReady} from './ink.js';
+
+const k = (t, a, d = 0.5) => ease((t - a) / d);
+const lerp = (a, b, u) => a + (b - a) * u;
+let STEP = 0;                                         // the texture step, 8 a second
+const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+
+// ---------- flat cut shapes that redraw in steps ----------
+const base = {};
+function idNum(id) { return id.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 2147483647, 7); }
+function shape(id, pts, fill, sh = 0, amp = 0.9) {
+  if (!base[id] || base[id].src !== pts.length) { const out = [];
+    for (let i = 0; i < pts.length; i++) { const [x1, y1] = pts[i], [x2, y2] = pts[(i + 1) % pts.length], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 30));
+      for (let j = 0; j < n; j++) { const u = j / n; out.push([x1 + (x2 - x1) * u, y1 + (y2 - y1) * u]); } }
+    base[id] = {src: pts.length, pts: out}; }
+  // the points are rebuilt from pts each frame (shapes may move), the cut jitter changes only on the step
+  const n0 = idNum(id), P = []; let c = 0;
+  for (let i = 0; i < pts.length; i++) { const [x1, y1] = pts[i], [x2, y2] = pts[(i + 1) % pts.length], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 30));
+    for (let j = 0; j < n; j++, c++) { const u = j / n; P.push([x1 + (x2 - x1) * u + (hash(n0 + c, STEP) - .5) * amp * 2, y1 + (y2 - y1) * u + (hash(n0 + c + 977, STEP) - .5) * amp * 2]); } }
+  g.save(); g.beginPath(); P.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath();
+  if (sh) { g.shadowColor = 'rgba(8,8,14,0.28)'; g.shadowBlur = sh * 3; g.shadowOffsetY = sh; }
+  g.fillStyle = fill; g.fill(); g.restore();
+}
+const rect = (x, y, w, h) => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+function blob(cx, cy, rx, ry, n = 26) { const p = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; p.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return p; }
+function capsule(x, y, w, l) { const p = [], r = w / 2; for (let i = 0; i <= 8; i++) { const a = Math.PI + i / 8 * Math.PI; p.push([x + Math.cos(a) * r, y + Math.sin(a) * r]); }
+  for (let i = 0; i <= 8; i++) { const a = i / 8 * Math.PI; p.push([x + Math.cos(a) * r, y + l + Math.sin(a) * r]); } return p; }
+
+// the camera: a layer at depth d moves d times the camera's pan and push
+function layer(cam, d, fn) { g.save(); const s = 1 + cam.z * d; g.translate(960 + cam.x * d, 540 + cam.y * d); g.scale(s, s); g.translate(-960, -540); fn(); g.restore(); }
+
+// ---------- paper texture, four plates swapped on the step ----------
+const plates = [];
+function buildPlates() { for (let p = 0; p < 4; p++) { const c = document.createElement('canvas'); c.width = 1920; c.height = 1080; const x = c.getContext('2d'), id = x.createImageData(1920, 1080), d = id.data; seedRnd(31 + p * 7);
+    for (let i = 0; i < d.length; i += 4) { const v = 128 + (rnd() - .5) * 70; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 30; }
+    x.putImageData(id, 0, 0); seedRnd(90 + p);                                        // mottled ink density, like a print
+    for (let i = 0; i < 70; i++) { const px = rnd() * 1920, py = rnd() * 1080, r = 80 + rnd() * 260, gr = x.createRadialGradient(px, py, 0, px, py, r);
+      gr.addColorStop(0, rnd() < .5 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = gr; x.fillRect(px - r, py - r, 2 * r, 2 * r); }
+    plates.push(c); } }
+function texture() { g.save(); g.globalCompositeOperation = 'overlay'; g.drawImage(plates[STEP % 4], 0, 0); g.restore();
+  const v = g.createRadialGradient(960, 540, 500, 960, 540, 1200); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.28)'); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080); }
+
+const IMG = {jordan: new Image()}; IMG.jordan.src = 'img/pw/R_jordan.jpg';
+const strip = (s, kk) => { if (kk <= 0) return; g.save(); g.globalAlpha = clamp(kk * 2); g.fillStyle = 'rgba(237,230,214,0.93)'; g.fillRect(0, 966, 1920, 74);
+  g.fillStyle = '#262B38'; g.font = '400 34px Fraunces'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s, 960, 1004); g.restore(); };
+
+// ---------- A 0-4.54: the real building, desaturated, slow push, cream caption strip ----------
+function shotA(t) {
+  const im = IMG.jordan, s = 1.0 + 0.05 * (t / 4.54), ir = im.width / im.height; let w = 1920, h = 1920 / ir; if (h < 1080) { h = 1080; w = h * ir; }
+  g.save(); g.filter = 'grayscale(0.75) contrast(1.05) brightness(0.92)'; g.translate(960, 540); g.scale(s, s); g.drawImage(im, -w / 2, -h / 2 - 20, w, h); g.restore();
+  g.fillStyle = 'rgba(38,43,56,0.18)'; g.fillRect(0, 0, 1920, 1080);
+  strip('Jordan Hall, Stanford University', k(t, 0.6, 0.5));
+}
+
+// ---------- B 4.54-13.04: the basement corridor; the camera walks down it; two shadows on the end wall ----------
+const NAVY = '#232837', NAVY2 = '#2E3446', WALL = '#343B4F', TEAL = '#3F6E73', MUST = '#E3A73C', CREAM = '#EDE6D6';
+function shotB(t) {
+  const u = (t - 4.54) / 8.5, cam = {x: lerp(60, -40, ease(u)), y: lerp(0, -20, u), z: lerp(0.0, 0.55, ease(u * 0.9 + 0.05))};
+  g.fillStyle = NAVY; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.25, () => {                                                        // the end wall and the two shadows on it
+    shape('endw', rect(790, 300, 340, 330), '#3A4258');
+    const bulb = 960 + Math.sin(t * 1.6) * 10;                                     // the light pool follows the swinging bulb
+    g.save(); const gr = g.createRadialGradient(bulb, 430, 10, bulb, 430, 230); gr.addColorStop(0, 'rgba(227,167,60,0.30)'); gr.addColorStop(1, 'rgba(227,167,60,0)'); g.fillStyle = gr; g.fillRect(790, 300, 340, 330); g.restore();
+    const sx = -(bulb - 960) * 0.6, drop = t > 8.48 ? ease((t - 8.48) / 0.6) : 0, SH = 'rgba(16,18,28,0.62)';
+    shape('shB_b', capsule(1010 + sx, 420, 64, 150), SH, 0, 0.6); shape('shB_h', blob(1004 + sx, 388, 26, 30), SH, 0, 0.6);      // the tall shadow leans in
+    shape('shB_a', [[990 + sx, 440], [1004 + sx, 432], [952 + sx, 470], [944 + sx, 462]], SH, 0, 0.6);
+    shape('shG_b', capsule(915 + sx, 446 + drop * 4, 56, 126), SH, 0, 0.6); shape('shG_h', blob(918 + sx + drop * 4, 418 + drop * 12, 23, 27), SH, 0, 0.6);   // the guard's head drops at "trouble"
+    shape('flr0', [[790, 630], [1130, 630], [1400, 760], [520, 760]], '#1C202B');
+  });
+  layer(cam, 0.55, () => {                                                        // the walls, doors deeper in
+    shape('wl', [[-400, -300], [790, 300], [790, 630], [-400, 1400]], WALL); shape('wr', [[2320, -300], [1130, 300], [1130, 630], [2320, 1400]], '#2F3647');
+    shape('ceil', [[-400, -300], [2320, -300], [1130, 300], [790, 300]], '#1E2230'); shape('flr', [[-400, 1400], [2320, 1400], [1130, 630], [790, 630]], '#191C26');
+    shape('d2', [[600, 395], [700, 412], [700, 660], [600, 690]], TEAL, 2); shape('d2w', [[620, 440], [680, 448], [680, 492], [620, 486]], '#15171E');
+    shape('d5', [[1220, 412], [1320, 395], [1320, 690], [1220, 660]], TEAL, 2); shape('d5w', [[1240, 448], [1300, 440], [1300, 486], [1240, 492]], '#15171E');
+    for (let i = 0; i < 9; i++) shape('tile' + i, [[790 - i * 130, 640 + i * 85], [1130 + i * 130, 640 + i * 85], [1130 + i * 130, 645 + i * 85], [790 - i * 130, 645 + i * 85]], 'rgba(255,255,255,0.035)', 0, 0.4);
+  });
+  layer(cam, 1.0, () => {                                                         // near doors with bars
+    shape('d1', [[210, 200], [430, 250], [430, 860], [210, 960]], TEAL, 5);
+    for (let i = 0; i < 4; i++) shape('b1' + i, rect(255 + i * 42, 340, 11, 160), MUST, 0, 0.5);
+    shape('d4', [[1490, 250], [1710, 200], [1710, 960], [1490, 860]], TEAL, 5);
+    for (let i = 0; i < 4; i++) shape('b4' + i, rect(1540 + i * 42, 340, 11, 160), MUST, 0, 0.5);
+  });
+  // the bulb hangs in front; its cone stays put on screen while the camera moves
+  const sw = Math.sin(t * 1.6) * 0.06; g.save(); g.translate(960, -40); g.rotate(sw);
+  shape('cord', rect(-3, 0, 6, 250), '#14161D', 0, 0.3); shape('shade', [[-60, 250], [60, 250], [88, 300], [-88, 300]], MUST, 3); shape('bulb', blob(0, 306, 20, 16), '#FFF1C9', 0, 0.4);
+  g.globalAlpha = 0.10 + (Math.floor(t * 30) % 83 === 5 ? -0.05 : 0); shape('cone', [[-80, 300], [80, 300], [420, 1200], [-420, 1200]], MUST, 0, 0.4); g.restore();
+}
+
+// ---------- the reel-to-reel recorder (the opening's motif; seen behind the tape panel, then up close) ----------
+const BURG = '#5E2230', BURG2 = '#732B3A', ORANGE = '#E0782A';
+function recorder(t, spin, needle) {
+  shape('rbody', rect(560, 360, 800, 470), '#2A2226', 8); shape('rface', rect(590, 390, 740, 300), '#3A2F33');
+  [[770, 540], [1150, 540]].forEach(([cx, cy], i) => { shape('reel' + i, blob(cx, cy, 128, 128, 36), '#C9BFAE', 4); shape('hub' + i, blob(cx, cy, 34, 34), '#2A2226');
+    for (let s = 0; s < 3; s++) { const a = spin * (i ? 1.0 : 1.12) + s * Math.PI * 2 / 3; g.save(); g.translate(cx, cy); g.rotate(a); shape('sp' + i + s, [[18, -10], [100, -24], [100, 24], [18, 10]], '#3A2F33', 0, 0.5); g.restore(); } });
+  shape('tape', [[770, 668], [1150, 668], [1150, 676], [770, 676]], '#4A3A2E', 0, 0.4);
+  shape('vu', rect(880, 720, 160, 80), CREAM, 0); g.save(); g.translate(960, 792); g.rotate(-0.9 + needle * 1.2); shape('needle', rect(-2, -66, 4, 66), ORANGE, 0, 0.3); g.restore();
+  for (let i = 0; i < 4; i++) shape('kn' + i, blob(640 + i * 60, 760, 18, 18), MUST, 2);
+}
+
+// ---------- C 13.04-17.84: the primary document, typed in step with the voice on a floating dark panel ----------
+const W = [['every', 13.04], ['guard', 13.4], ['is', 15.06], ['going', 15.34], ['to', 15.54], ['be', 15.68], ['what', 15.8], ['we', 15.96], ['call', 16.14], ['a', 16.4], ['tough', 16.68], ['guard."', 16.96]];
+function shotC(t) {
+  g.fillStyle = '#1B1D26'; g.fillRect(0, 0, 1920, 1080);
+  g.save(); g.globalAlpha = 0.35; g.filter = 'blur(6px)'; layer({x: -30 * (t - 13), y: 0, z: 0.02 * (t - 13)}, 1, () => { g.translate(500, 120); g.scale(0.8, 0.8); recorder(t, 0, 0.2); }); g.restore();
+  const fl = Math.sin(t * 0.9) * 6;
+  shape('panel', rect(340, 300 + fl, 1240, 470), '#2B2F3C', 14, 0.4);
+  g.save(); g.font = '500 22px "JetBrains Mono"'; g.fillStyle = '#8F95A3'; g.fillText('TAPE A · 1971 · TRANSCRIPT, QUOTED IN LE TEXIER (2019), AMERICAN PSYCHOLOGIST', 390, 362 + fl); g.restore();
+  // the words appear as Sam says them; a cursor blinks while he pauses
+  const L1 = ['"[T]he guards have to know that'], typed = [];
+  W.forEach(([w, a]) => { if (t >= a) typed.push(w.length * clamp((t - a) / (w.length * 0.035))); else typed.push(0); });
+  let line2 = '', line3 = ''; W.forEach(([w], i) => { const part = w.slice(0, Math.floor(typed[i])); if (i < 6) line2 += (i ? ' ' : '') + part; else line3 += (i > 6 ? ' ' : '') + part; });
+  g.save(); g.font = '500 54px "JetBrains Mono"'; g.fillStyle = 'rgba(237,230,214,0.45)'; g.fillText(L1[0], 390, 470 + fl);
+  g.fillStyle = CREAM; g.fillText(line2, 390, 560 + fl); g.fillText(line3, 390, 650 + fl);
+  const cy = line3 ? 650 : 560, cx = 390 + g.measureText(line3 || line2).width + 8; if (Math.floor(t * 2.4) % 2 === 0 && t < 17.6) g.fillRect(cx, cy - 44, 26, 52);
+  g.restore();
+}
+
+// ---------- D 17.84-25.00: the textbook version: an open book on a desk, the camera tilts slowly down the page ----------
+const MUSTD = '#C98F2A', OCH = '#B5762A', PAPR = '#EFE6CF', BRN = '#5A3B24';
+function shotD(t) {
+  const u = (t - 17.84) / 7.16, cam = {x: lerp(-20, 30, u), y: lerp(120, -140, ease(u)), z: lerp(0.06, 0.24, u)};
+  g.fillStyle = OCH; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.3, () => { shape('desk', rect(-300, -300, 2520, 1680), MUSTD); for (let i = 0; i < 7; i++) shape('grain' + i, rect(-300, 60 + i * 150, 2520, 10), 'rgba(90,59,36,0.12)', 0, 0.5); });
+  layer(cam, 0.8, () => {
+    shape('bookL', [[360, 170], [950, 200], [950, 980], [340, 950]], PAPR, 10); shape('bookR', [[970, 200], [1560, 170], [1580, 950], [970, 980]], '#F4ECD8', 10);
+    shape('gut', rect(948, 200, 24, 780), 'rgba(90,59,36,0.18)', 0);
+    shape('hd1', rect(430, 260, 420, 34), BRN); shape('hd2', rect(430, 312, 300, 34), BRN);                   // heading
+    for (let i = 0; i < 9; i++) shape('ln' + i, rect(430, 400 + i * 52, i === 8 ? 260 : 450, 14), 'rgba(90,59,36,0.45)', 0, 0.5);
+    shape('fig', rect(1050, 260, 420, 330), '#2A2E3A', 2);                                                    // a figure: a cell with bars
+    for (let i = 0; i < 7; i++) shape('fb' + i, rect(1085 + i * 56, 270, 12, 310), MUST, 0, 0.5);
+    shape('cap', rect(1050, 612, 320, 14), 'rgba(90,59,36,0.45)', 0, 0.5);
+    for (let i = 0; i < 6; i++) shape('rn' + i, rect(1050, 680 + i * 52, i === 5 ? 200 : 450, 14), 'rgba(90,59,36,0.45)', 0, 0.5);
+  });
+  layer(cam, 1.25, () => { shape('pencil', [[1480, 1040], [1880, 880], [1900, 908], [1500, 1066]], ORANGE, 6); shape('tip', [[1880, 880], [1940, 870], [1900, 908]], PAPR, 0); });
+}
+
+// ---------- E 25.00-30.24: the famous version, the burst: students, a coin, two halves ----------
+const KHAKI = '#B9A274', PRIS = '#D8763A';
+function person(id, x, y, sc, col) { shape(id + 'b', capsule(x, y - 150 * sc, 70 * sc, 150 * sc), col, 3, 0.6); shape(id + 'h', blob(x, y - 205 * sc, 34 * sc, 38 * sc), '#2E2A2A', 2, 0.6); }
+function shotE(t) {
+  const cam = {x: 0, y: 0, z: lerp(0.12, 0.0, ease((t - 25) / 5.24))};
+  g.fillStyle = '#E9DFC6'; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.4, () => { shape('floorE', rect(-300, 760, 2520, 700), '#D8CBAE'); });
+  const split = k(t, 27.7, 0.7), cols = ['#7D8B95', '#9AA1A6', '#6D7A84', '#8C9399', '#7A858E', '#959CA2', '#6F7C86', '#889097'];
+  layer(cam, 1.0, () => { for (let i = 0; i < 8; i++) { const left = i < 4, x = 380 + i * 165 + (left ? -1 : 1) * split * 130;
+      const col = split > 0 ? (left ? KHAKI : PRIS) : cols[i];
+      g.save(); if (split > 0 && split < 1) g.globalAlpha = 1; person('st' + i, x, 820, 1.0, col); g.restore(); } });
+  // the coin: spins from 25.6, lands flat on "coin" (26.92)
+  const cA = clamp((t - 25.6) / 1.32), cy = 300 - Math.sin(cA * Math.PI) * 110, spin = cA < 1 ? Math.cos(cA * 26) : 1, fade = 1 - k(t, 27.5, 0.4);
+  if (t > 25.5 && fade > 0) { g.save(); g.globalAlpha = fade; g.translate(960, cy); g.scale(Math.max(0.08, Math.abs(spin)), 1);
+    shape('coin', blob(0, 0, 70, 70, 30), MUST, 5, 0.5); shape('coin2', blob(0, 0, 48, 48, 24), '#C98F2A', 0, 0.4); g.restore(); }
+}
+
+// ---------- F 30.24-35.30: within days: the guards on the left, barred light sweeping across the floor ----------
+function shotF(t) {
+  const u = (t - 30.24) / 5.06, cam = {x: lerp(40, -30, u), y: 0, z: lerp(0.0, 0.18, ease(u))};
+  g.fillStyle = '#3B1E26'; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.35, () => { shape('wallF', rect(-300, -300, 2520, 1060), '#4A2530'); shape('win', rect(1300, 160, 300, 220), '#E7B66A');
+    for (let i = 0; i < 5; i++) shape('wb' + i, rect(1320 + i * 60, 160, 14, 220), '#4A2530', 0, 0.4); shape('floorF', rect(-300, 760, 2520, 700), '#2A151B'); });
+  // the window light travels across the floor as the days pass; the bars ride in it
+  const sweep = lerp(1500, 300, ease(u)), dark = k(t, 34.1, 0.6);
+  layer(cam, 0.6, () => { g.save(); g.globalAlpha = 0.42 * (1 - dark * 0.7); shape('pool', [[sweep - 300, 800], [sweep + 300, 800], [sweep + 420, 1080], [sweep - 180, 1080]], '#E7B66A', 0, 0.5);
+    g.globalAlpha = 0.55 * (1 - dark * 0.7); for (let i = 0; i < 5; i++) shape('pb' + i, [[sweep - 250 + i * 110, 800], [sweep - 230 + i * 110, 800], [sweep - 120 + i * 130, 1080], [sweep - 145 + i * 130, 1080]], '#4A2530', 0, 0.4); g.restore(); });
+  layer(cam, 1.0, () => { shape('step', rect(160, 740, 760, 60), '#5A2E38', 4);
+    for (let i = 0; i < 4; i++) { const x = 300 + i * 165, len = 1 + ease(u) * 1.4;                      // the guards' shadows grow longer
+      g.save(); g.globalAlpha = 0.5; shape('gs' + i, [[x - 30, 800], [x + 30, 800], [x + 30 + 240 * len, 1080], [x - 30 + 160 * len, 1080]], '#170B10', 0, 0.5); g.restore();
+      person('gd' + i, x, 760, 1.05, KHAKI); shape('cap' + i, [[x - 38, 760 - 236], [x + 38, 760 - 236], [x + 52, 760 - 222], [x - 52, 760 - 222]], '#5C4E33', 0, 0.5); } });
+  g.save(); g.fillStyle = `rgba(10,4,6,${0.5 * dark})`; g.fillRect(0, 0, 1920, 1080); g.restore();
+}
+
+// ---------- G 35.30-40.00: along the shelf of textbooks to the television ----------
+const ICE = '#2D4A5A', ICE2 = '#3B6072';
+function shotG(t) {
+  const u = (t - 35.3) / 4.7, cam = {x: lerp(500, -560, ease(u)), y: 0, z: lerp(0.0, 0.12, u)};
+  g.fillStyle = '#1F3440'; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.45, () => { shape('wallG', rect(-900, -300, 3800, 1100), ICE); shape('floorG', rect(-900, 800, 3800, 600), '#18262E'); });
+  layer(cam, 1.0, () => {
+    shape('shelf', rect(-560, 600, 1500, 34), '#7A5A3A', 6); shape('shelf2', rect(-560, 300, 1500, 30), '#7A5A3A', 6);
+    const spine = ['#E3A73C', '#EDE6D6', '#E0782A', '#3F6E73', '#C9BFAE', '#B5762A', '#EDE6D6', '#E3A73C', '#8A3A30', '#EDE6D6', '#3F6E73', '#E0782A'];
+    for (let i = 0; i < 18; i++) { const h = 190 + (i * 37 % 60), w = 54 + (i * 13 % 26); shape('bk' + i, rect(-520 + i * 76, 600 - h, w, h), spine[i % 12], 2, 0.6); shape('bkb' + i, rect(-520 + i * 76, 600 - h + 30, w, 10), 'rgba(0,0,0,0.18)', 0, 0.4); }
+    for (let i = 0; i < 16; i++) { const h = 160 + (i * 29 % 50), w = 50 + (i * 17 % 24); shape('bu' + i, rect(-500 + i * 84, 300 - h, w, h), spine[(i + 5) % 12], 2, 0.6); }
+    // the television, its screen glowing (no channel, no logo); brighter on "Netflix" (38.54)
+    shape('tvstand', rect(1520, 640, 520, 200), '#5A3F2A', 6); shape('tv', rect(1500, 260, 560, 380), '#1A1D22', 8);
+    const glow = 0.55 + 0.35 * k(t, 38.5, 0.5) + (Math.floor(t * 8) % 5 === 2 ? 0.05 : 0);
+    g.save(); g.globalAlpha = glow; shape('scr', rect(1530, 290, 500, 320), '#8FD0D4', 0, 0.4); g.restore();
+    g.save(); g.globalAlpha = 0.18; for (let i = 0; i < 16; i++) g.fillRect(1530, 300 + i * 20, 500, 3); g.restore();
+    g.save(); const gr = g.createRadialGradient(1780, 450, 40, 1780, 450, 700); gr.addColorStop(0, `rgba(143,208,212,${0.22 * glow})`); gr.addColorStop(1, 'rgba(143,208,212,0)'); g.fillStyle = gr; g.fillRect(1000, -100, 1600, 1300); g.restore();
+  });
+}
+
+// ---------- H 40.00-47.84: the tape: the camera closes on the recorder; the reels start on "tape" (45.24) ----------
+function shotH(t) {
+  const u = (t - 40) / 7.84, cam = {x: lerp(0, -40, u), y: lerp(40, -10, u), z: lerp(0.0, 0.42, ease(u))};
+  g.fillStyle = BURG; g.fillRect(0, 0, 1920, 1080);
+  layer(cam, 0.3, () => { shape('wallH', rect(-300, -300, 2520, 1180), BURG2); shape('tbl', rect(-300, 830, 2520, 600), '#3A1820'); });
+  const run = Math.max(0, t - 45.24), spin = run * run * 0.9 + run * 2.4, needle = t > 45.24 ? 0.5 + 0.25 * Math.sin(t * 7) * clamp(run * 2) : 0.05;
+  layer(cam, 1.0, () => { recorder(t, spin, needle); g.save(); g.globalAlpha = t > 45.24 ? 1 : 0.25; shape('lamp', blob(1300, 420, 12, 12), '#FF6A3A', 0, 0.3); g.restore(); });
+}
+
+// ---------- I 47.84-52.32: the title in serif on paper; a line draws and forks into two dashed paths ----------
+function shotI(t) {
+  g.fillStyle = '#E7DDC6'; g.fillRect(0, 0, 1920, 1080);
+  g.save(); g.font = '400 96px Fraunces'; g.textAlign = 'center'; g.fillStyle = '#262B38'; const a = clamp((t - 48.7) / 0.5); g.globalAlpha = a;
+  g.fillText('Who wrote the script?', 960, 470 + (1 - ease(a)) * 16); g.restore();
+  const L = k(t, 48.0, 1.4); g.save(); g.strokeStyle = '#262B38'; g.lineWidth = 5; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(420, 620); g.lineTo(420 + 540 * L, 620); g.stroke();
+  const F = k(t, 49.5, 1.6); if (F > 0) { g.setLineDash([18, 16]); g.strokeStyle = '#E0782A';
+    g.beginPath(); g.moveTo(960, 620); g.bezierCurveTo(1120, 620, 1260, 560 - 0 * F, 960 + 560 * F, 560 - 60 * F); g.stroke();
+    g.strokeStyle = '#3F6E73'; g.beginPath(); g.moveTo(960, 620); g.bezierCurveTo(1120, 620, 1260, 680, 960 + 560 * F, 680 + 60 * F); g.stroke(); }
+  g.restore(); shape('dot', blob(420, 620, 11, 11), '#262B38', 0, 0.5);
+}
+
+window.render = function (t) {
+  STEP = Math.floor(t * 8);
+  if (t < 4.54) shotA(t); else if (t < 13.04) shotB(t); else if (t < 17.84) shotC(t); else if (t < 25.0) shotD(t);
+  else if (t < 30.24) shotE(t); else if (t < 35.3) shotF(t); else if (t < 40.0) shotG(t); else if (t < 47.84) shotH(t); else shotI(t);
+  texture();
+};
+buildPlates();
+Promise.all([fontsReady(), document.fonts.load('400 40px Fraunces'), document.fonts.load('500 40px "JetBrains Mono"'), IMG.jordan.decode()]).then(() => { window.ready = true; });
+</script></body></html>
