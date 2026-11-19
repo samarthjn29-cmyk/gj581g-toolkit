@@ -1,0 +1,118 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Option 1 (19 Nov 2026): a scene drawn by hand in code over a real photo (Unsplash, Magic Fan, "brass inkwell set on wooden desk").
+// Every object is its own shape: brush ink lines, flat print fills set slightly off the lines, flat light and shadow shapes, grain.
+// Story moves: the candles light one after the other, the light pool grows over the desk, the camera pushes in; nobody is drawn.
+import {clamp, ease, seedRnd, rnd} from './ink.js';
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+let STEP = 0, SEED = 1;
+const h2 = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+const S = 4 / 3, P = pts => pts.map(([x, y]) => [x * S, y * S]);        // traced on a 1440x810 view of the photo
+const INK = '#16121A';
+function brush(pts, w = 6, col = INK, closed = false) {
+  w *= 1.5; const id = SEED++, pp = [], P0 = closed ? [...pts, pts[0]] : pts;
+  for (let i = 0; i < P0.length - 1; i++) { const [x1, y1] = P0[i], [x2, y2] = P0[i + 1], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 9));
+    for (let j = 0; j < n; j++) { const u = j / n; pp.push([x1 + (x2 - x1) * u, y1 + (y2 - y1) * u]); } }
+  pp.push(P0[P0.length - 1]); const N = pp.length, L = [], R = [], b = STEP % 3;
+  for (let i = 0; i < N; i++) { const a = pp[Math.max(0, i - 1)], c = pp[Math.min(N - 1, i + 1)], dx = c[0] - a[0], dy = c[1] - a[1], len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+    const u = i / (N - 1), taper = closed ? 1 : Math.min(1, u * 5, (1 - u) * 5) * 0.75 + 0.25, ww = w * taper * (0.75 + 0.5 * h2(id * 97 + (i >> 2), 7)) / 2;
+    const jx = (h2(id * 131 + i, b) - .5) * 0.9, jy = (h2(id * 173 + i, b + 9) - .5) * 0.9;
+    L.push([pp[i][0] + nx * ww + jx, pp[i][1] + ny * ww + jy]); R.push([pp[i][0] - nx * ww + jx, pp[i][1] - ny * ww + jy]); }
+  g.beginPath(); L.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); for (let i = R.length - 1; i >= 0; i--) g.lineTo(R[i][0], R[i][1]); g.closePath(); g.fillStyle = col; g.fill();
+}
+function fill(pts, col, off = [-5, 4], alpha = 1) { const id = SEED++; g.save(); g.globalAlpha = alpha; g.beginPath(); const P0 = [...pts, pts[0]]; let first = true;
+  for (let i = 0; i < P0.length - 1; i++) { const [x1, y1] = P0[i], [x2, y2] = P0[i + 1], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 22));
+    for (let j = 0; j < n; j++) { const u = j / n, x = x1 + (x2 - x1) * u + off[0] + (h2(id + i * 31 + j, 3) - .5) * 2.5, y = y1 + (y2 - y1) * u + off[1] + (h2(id + i * 37 + j, 5) - .5) * 2.5; if (first) { g.moveTo(x, y); first = false; } else g.lineTo(x, y); } }
+  g.closePath(); g.fillStyle = col; g.fill(); g.restore(); }
+const shape = (pts, col, w = 6) => { fill(pts, col); brush(pts, w, INK, true); };
+const ell = (cx, cy, rx, ry, n = 36, a0 = 0, a1 = Math.PI * 2) => { const p = []; for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; p.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return p; };
+const E = (cx, cy, rx, ry, n, a0, a1) => P(ell(cx, cy, rx, ry, n, a0, a1));
+const C = {wood: '#7E2F1C', woodD: '#4C1B13', woodL: '#A9472A', cab: '#5A2016', cabD: '#2A0E0C', hole: '#140A0C', brass: '#C79A43', brassL: '#F1D88E', brassD: '#7A5722', wax: '#EFE3C2', waxD: '#C8B48A', flame: '#FFD47C', shadow: '#2C0E0B', quill: '#E8DCC0', moon: '#EFE6D2'};
+
+// ---------- layers ----------
+function back() {
+  fill(P([[0, 0], [1440, 0], [1440, 810], [0, 810]]), C.cabD, [0, 0]);
+  // the pigeonhole cabinet at the back
+  shape(P([[0, 0], [495, 0], [520, 390], [150, 285], [0, 300]]), C.cab);
+  shape(P([[130, 95], [500, 150], [505, 265], [150, 205]]), C.wood); shape(P([[150, 210], [505, 272], [510, 380], [165, 300]]), C.wood);
+  shape(E(300, 190, 9, 9, 16), C.brass, 4); shape(E(318, 285, 9, 9, 16), C.brass, 4);
+  shape(P([[210, 0], [250, 0], [262, 120], [222, 110]]), C.hole, 4); shape(P([[330, 0], [372, 0], [380, 140], [340, 130]]), C.hole, 4);
+  // the drawers on the right
+  shape(P([[495, 0], [1440, 0], [1440, 60], [495, 75]]), C.cab);
+  shape(P([[505, 85], [850, 40], [855, 140], [510, 200]]), C.wood); shape(E(655, 50, 10, 10, 16), C.brass, 4); shape(E(655, 170, 10, 10, 16), C.brass, 4);
+  shape(P([[855, 40], [1440, 75], [1440, 230], [1330, 225], [855, 140]]), C.wood); shape(E(1070, 122, 11, 11, 16), C.brass, 4);
+  shape(P([[512, 210], [1330, 230], [1320, 380], [520, 330]]), C.wood); shape(E(1062, 258, 11, 11, 16), C.brass, 4);
+  shape(P([[1340, 230], [1440, 240], [1440, 610], [1290, 610]]), C.cab);
+  shape(P([[1300, 390], [1440, 410], [1440, 520], [1290, 500]]), C.wood); shape(P([[1290, 510], [1440, 530], [1440, 640], [1275, 620]]), C.wood);
+  // the dark gap under the drawers
+  shape(P([[520, 330], [1320, 385], [1290, 610], [1050, 520], [590, 395]]), C.hole, 5);
+}
+function deskTop() {
+  shape(P([[150, 285], [540, 385], [1040, 480], [1290, 610], [1440, 650], [1440, 810], [0, 810], [0, 330]]), C.wood, 7);
+  // grain lines across the fall-front, and its edge
+  for (let i = 0; i < 9; i++) { const y = 380 + i * 46; brush(P([[0, y + 10], [300, y + 30 + i * 3], [700, y + 70 + i * 6], [1100, y + 120 + i * 8]]), 2.2, '#5A2215'); }
+  brush(P([[150, 290], [540, 390], [1040, 485], [1290, 612], [1440, 650]]), 5, C.woodL);
+  shape(P([[30, 525], [135, 545], [105, 600], [10, 580]]), C.brass, 4);                           // the hinge
+}
+function candle(x, top, bot, wid, tilt, lit, t, id) {   // x, y in the 1440 view
+  const tw = wid / 2;
+  shape(P([[x - tw + tilt, top], [x + tw + tilt, top + 6], [x + tw, bot], [x - tw, bot]]), C.wax, 6);
+  fill(P([[x + tw * 0.35 + tilt * 0.6, top + 10], [x + tw + tilt, top + 6], [x + tw, bot], [x + tw * 0.4, bot]]), C.waxD, [0, 0], 0.8);
+  brush(P([[x + tilt * 0.9, top + 2], [x + tilt * 0.9, top - 14]]), 3);                            // wick
+  if (lit > 0) { const f = 1 + 0.07 * Math.sin(t * 9 + id) + 0.05 * Math.sin(t * 23 + id * 2), fx = (x + tilt * 0.9) * S, fy = (top - 14) * S;
+    g.save(); g.globalAlpha = lit; g.globalCompositeOperation = 'screen';
+    const gr = g.createRadialGradient(fx, fy, 5, fx, fy, 520 * f); gr.addColorStop(0, 'rgba(255,200,110,0.55)'); gr.addColorStop(0.35, 'rgba(255,170,80,0.18)'); gr.addColorStop(1, 'rgba(255,170,80,0)');
+    g.fillStyle = gr; g.fillRect(fx - 600, fy - 600, 1200, 1200); g.restore();
+    g.save(); g.globalAlpha = lit; fill([[fx, fy - 60 * f], [fx + 17, fy - 10], [fx, fy + 8], [fx - 17, fy - 10]], C.flame, [0, 0]); fill([[fx, fy - 28 * f], [fx + 7, fy - 6], [fx, fy + 4], [fx - 7, fy - 6]], '#FFF4D0', [0, 0]); g.restore(); }
+}
+function stand(t, litL, litR) {
+  // cast shadows of the stand on the desk (flat, darker), stronger as the candles light
+  g.save(); g.globalAlpha = 0.35 + 0.35 * Math.max(litL, litR); fill(P([[520, 700], [940, 610], [1180, 700], [900, 810], [560, 810]]), C.shadow, [0, 0]); g.restore();
+  // left candlestick: saucer, stem, arm down to the stand
+  brush(P([[585, 280], [575, 330], [600, 360], [615, 420], [610, 480]]), 9, C.brassD); brush(P([[585, 280], [575, 330], [600, 360], [615, 420], [610, 480]]), 4, C.brass);
+  shape(E(575, 250, 72, 22), C.brass, 6); fill(E(560, 244, 40, 10), C.brassL, [0, 0], 0.8); shape(P([[555, 160], [600, 160], [605, 230], [550, 230]]), C.brass, 6);
+  candle(578, 52, 158, 48, 0, litL, t, 1);
+  // right candlestick, its arm sweeping left
+  brush(P([[1070, 445], [990, 425], [900, 420], [875, 450], [880, 480]]), 12, C.brassD); brush(P([[1070, 445], [990, 425], [900, 420], [875, 450], [880, 480]]), 5, C.brass);
+  shape(E(1130, 405, 92, 40), C.brass, 6); fill(E(1110, 395, 50, 16), C.brassL, [0, 0], 0.8); shape(P([[1110, 300], [1172, 300], [1178, 380], [1104, 380]]), C.brass, 6);
+  candle(1165, 84, 300, 72, 40, litR, t, 2);
+  // the inkstand: tray with feet, three pots, the bell, the handle loop
+  shape(P([[500, 690], [560, 600], [700, 560], [900, 560], [945, 610], [900, 700], [800, 720], [620, 700]]), C.brass, 7);
+  fill(P([[560, 640], [700, 600], [880, 600], [910, 630], [700, 640]]), C.brassD, [0, 0], 0.7);
+  [[520, 685], [800, 790], [925, 610]].forEach(([x, y]) => shape(E(x, y, 22, 14, 16), C.brass, 5));
+  shape(E(700, 455, 62, 22), C.brass, 6); shape(P([[640, 455], [760, 455], [750, 520], [650, 520]]), C.brass, 6); fill(E(700, 452, 40, 12), C.hole, [0, 0]);
+  shape(E(860, 470, 60, 22), C.brass, 6); shape(P([[800, 470], [920, 470], [910, 545], [810, 545]]), C.brass, 6); fill(E(860, 466, 36, 11), C.hole, [0, 0]);
+  shape(P([[545, 510], [695, 510], [690, 600], [555, 600]]), C.brass, 6); shape(E(620, 510, 76, 26), C.brass, 6); fill(E(620, 506, 46, 14), C.hole, [0, 0]);
+  shape(P([[770, 440], [795, 470], [830, 560], [855, 650], [690, 650], [715, 560], [750, 470]]), C.brass, 6); fill(P([[778, 470], [790, 470], [815, 630], [800, 630]]), C.brassL, [0, 0], 0.8);
+  shape(E(772, 640, 85, 30), C.brass, 6);
+  brush(P([[672, 250], [700, 235], [760, 240], [800, 275], [795, 300]]), 8, C.brassD); brush(P([[672, 250], [700, 235], [760, 240], [800, 275], [795, 300]]), 3.5, C.brassL);
+  brush(P([[735, 300], [735, 440]]), 9, C.brassD); brush(P([[735, 300], [735, 440]]), 3.5, C.brass);
+  // the quill, its vanes, standing in the left pot
+  brush(P([[630, 512], [690, 400], [770, 300], [865, 216]]), 5, C.quill);
+  fill(P([[700, 395], [760, 300], [860, 218], [800, 300], [745, 380]]), C.quill, [0, 0]); brush(P([[700, 395], [760, 300], [860, 218], [800, 300], [745, 380], [700, 395]]), 3);
+  // brass highlights catch the candle light
+  const hl = Math.max(litL, litR); g.save(); g.globalAlpha = 0.25 + 0.6 * hl;
+  [[600, 520, 10, 40], [880, 490, 8, 34], [705, 470, 8, 26], [1150, 330, 9, 40], [590, 180, 8, 40]].forEach(([x, y, w, h]) => fill(P([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]), C.brassL, [0, 0])); g.restore();
+}
+// grain
+const grains = []; let mott;
+function build() { for (let s = 0; s < 3; s++) { const c = document.createElement('canvas'); c.width = 1920; c.height = 1080; const x = c.getContext('2d'), id = x.createImageData(1920, 1080), d = id.data; seedRnd(41 + s);
+    for (let i = 0; i < d.length; i += 4) { const v = rnd() < .5 ? 255 : 0; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = rnd() < 0.26 ? 50 : 0; } x.putImageData(id, 0, 0); grains.push(c); }
+  mott = document.createElement('canvas'); mott.width = 1920; mott.height = 1080; const x = mott.getContext('2d'); x.fillStyle = '#808080'; x.fillRect(0, 0, 1920, 1080); seedRnd(77);
+  for (let i = 0; i < 420; i++) { const px = rnd() * 1920, py = rnd() * 1080, r = 30 + rnd() * 180, v = rnd() < .5 ? 255 : 0, gr = x.createRadialGradient(px, py, 0, px, py, r); gr.addColorStop(0, `rgba(${v},${v},${v},0.2)`); gr.addColorStop(1, `rgba(${v},${v},${v},0)`); x.fillStyle = gr; x.fillRect(px - r, py - r, 2 * r, 2 * r); } }
+function cam(s, cx, cy, dx, fn) { g.save(); g.translate(cx + dx, cy); g.scale(s, s); g.translate(-cx, -cy); fn(); g.restore(); }
+
+window.render = function (t) {
+  STEP = Math.floor(t * 8); SEED = 1;
+  const u = ease(clamp(t / 8)), litL = ease(clamp((t - 1.2) / 0.5)), litR = ease(clamp((t - 2.4) / 0.5));
+  const dark = 1 - 0.55 * Math.max(litL, litR);
+  cam(1.0 + 0.05 * u, 960, 540, -20 * u, back);                    // the back moves less
+  cam(1.0 + 0.09 * u, 960, 600, -45 * u, () => { deskTop(); stand(t, litL, litR); });
+  g.save(); g.fillStyle = `rgba(8,4,10,${0.55 * dark})`; g.fillRect(0, 0, 1920, 1080); g.restore();   // the room is dark until the candles light
+  cam(1.0 + 0.09 * u, 960, 600, -45 * u, () => { candle(578, 52, 158, 48, 0, litL, t, 1); candle(1165, 84, 300, 72, 40, litR, t, 2); });
+  g.save(); g.globalCompositeOperation = 'soft-light'; g.drawImage(mott, 0, 0); g.globalCompositeOperation = 'overlay'; g.drawImage(grains[STEP % 3], 0, 0); g.restore();
+};
+build(); window.ready = true;
+</script></body></html>
