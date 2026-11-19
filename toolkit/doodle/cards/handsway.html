@@ -232,8 +232,68 @@ window.render = function (t) {
   STEP = Math.floor(t * 8);
   if (t < 4.54) shotA(t); else if (t < 13.04) shotB(t); else if (t < 17.84) shotC(t); else if (t < 25.0) shotD(t);
   else if (t < 30.24) shotE(t); else if (t < 35.3) shotF(t); else if (t < 40.0) shotG(t); else if (t < 47.84) shotH(t); else shotI(t);
-  texture();
+  const textShot = (t >= 13.04 && t < 17.84) || t >= 47.84;
+  if (STYLE === 'riso') riso(textShot); else if (STYLE === 'lino') lino(textShot); else texture();
 };
-buildPlates();
+
+// ---------- print passes (?style=riso | ?style=lino), applied to the finished frame; the texture steps 8 times a second ----------
+const STYLE = new URLSearchParams(location.search).get('style');
+const WD = 1920, HT = 1080, NP = WD * HT;
+const noise = [], mott = [];
+function buildPrint() {
+  for (let p = 0; p < 4; p++) { seedRnd(201 + p * 13); const a = new Float32Array(NP); for (let i = 0; i < NP; i++) a[i] = rnd(); noise.push(a); }
+  for (let p = 0; p < 2; p++) {                                       // low-frequency ink unevenness, one per plate
+    const c = document.createElement('canvas'); c.width = WD; c.height = HT; const x = c.getContext('2d'); x.fillStyle = '#808080'; x.fillRect(0, 0, WD, HT); seedRnd(500 + p);
+    for (let i = 0; i < 260; i++) { const px = rnd() * WD, py = rnd() * HT, r = 40 + rnd() * 300, gr = x.createRadialGradient(px, py, 0, px, py, r), v = rnd() < .5 ? 255 : 0;
+      gr.addColorStop(0, `rgba(${v},${v},${v},0.16)`); gr.addColorStop(1, `rgba(${v},${v},${v},0)`); x.fillStyle = gr; x.fillRect(px - r, py - r, 2 * r, 2 * r); }
+    const d = x.getImageData(0, 0, WD, HT).data, m = new Float32Array(NP); for (let i = 0; i < NP; i++) m[i] = d[i * 4] / 255; mott.push(m); }
+}
+// Riso: two spot inks (blue, fluorescent orange) separated from the picture, each a grainy screen with uneven coverage,
+// the orange plate printed a few pixels out of register, the two multiplied over cream paper where they overlap.
+const PAPER = [242, 235, 221], BLUE = [0x2F, 0x5D, 0xA8], FLUO = [0xFF, 0x74, 0x3A];
+function riso(soft) {
+  const im = g.getImageData(0, 0, WD, HT), s = im.data, out = g.createImageData(WD, HT), o = out.data, nz = noise[STEP % 4], nz2 = noise[(STEP + 2) % 4];
+  const ox = 4 + (STEP % 3 === 1 ? 1 : 0), oy = 3;                     // the orange plate's misregistration
+  for (let y = 0, i = 0; y < HT; y++) for (let x = 0; x < WD; x++, i++) {
+    const j = i * 4, xo = Math.min(WD - 1, Math.max(0, x - ox)), yo = Math.min(HT - 1, Math.max(0, y - oy)), jo = (yo * WD + xo) * 4;
+    const R = s[j] / 255, B2 = s[jo + 2] / 255, G2 = s[jo + 1] / 255;
+    let dB = Math.min(1, Math.max(0, (1 - R) * 1.12 - 0.06)), dO = Math.min(1, Math.max(0, (1 - (B2 * 0.7 + G2 * 0.3)) * 1.05 - 0.12));
+    dB *= 0.8 + 0.4 * mott[0][i]; dO *= 0.8 + 0.4 * mott[1][xo + yo * WD];
+    const scr = 0.5 + 0.5 * Math.sin(x * 0.42 + y * 0.42) * Math.sin(x * 0.42 - y * 0.42);   // a 45° dot screen mixed with grain
+    const tB = soft ? 0.5 : nz[i] * 0.6 + scr * 0.4, tO = soft ? 0.5 : nz2[i] * 0.65 + (1 - scr) * 0.35;
+    const b = dB > tB ? 0.92 : 0, f = dO > tO ? 0.9 : 0;
+    for (let c = 0; c < 3; c++) o[j + c] = PAPER[c] * (1 - b * (1 - BLUE[c] / 255)) * (1 - f * (1 - FLUO[c] / 255));
+    o[j + 3] = 255; }
+  g.putImageData(out, 0, 0);
+}
+// Linocut: a black key block (dark areas and carved outlines) with gouge marks cut into it, over flat colour inked on cream paper.
+function lino(soft) {
+  // a black key block (dark areas and outlines) with gouge cuts showing the paper, over a few flat inks chosen by nearest colour
+  const im = g.getImageData(0, 0, WD, HT), s = im.data, out = g.createImageData(WD, HT), o = out.data, nz = noise[STEP % 4], L = new Float32Array(NP);
+  for (let i = 0; i < NP; i++) L[i] = (s[i * 4] * 0.3 + s[i * 4 + 1] * 0.59 + s[i * 4 + 2] * 0.11) / 255;
+  const ph = (STEP % 3) * 0.35, INKK = [24, 22, 24];
+  const INKS = [PAPER, [0xE0, 0x78, 0x2A], [0xE3, 0xA7, 0x3C], [0x3F, 0x6E, 0x73], [0xA3, 0x41, 0x2C], [0x8A, 0x8C, 0x92], [0xC9, 0xBF, 0xAE], [0x2E, 0x35, 0x4B], [0x6A, 0x26, 0x34], [0x24, 0x4A, 0x58]];
+  for (let y = 0, i = 0; y < HT; y++) for (let x = 0; x < WD; x++, i++) {
+    const j = i * 4, l = L[i], m = mott[0][i], m2 = mott[1][i];
+    let e = 0; if (x > 1 && y > 1 && x < WD - 2 && y < HT - 2) { const gx = L[i + 2] - L[i - 2], gy = L[i + 2 * WD] - L[i - 2 * WD]; e = Math.hypot(gx, gy); }
+    let px = null;
+    if (l < 0.13 || (!soft && e > 0.2)) {
+      px = INKK;
+      if (!soft && e <= 0.17) {                                            // gouge cuts: parallel, broken into strokes, wider where the tone is lighter
+        const patch = Math.max(0, (m2 - 0.5) * 3);                          // cuts come in patches, not as an all-over pattern
+        const wv = Math.sin((x * 0.6 - y * 0.8) / 3.2 + m * 14 + ph) * 0.5 + 0.5;
+        if (wv < patch * 0.45) px = PAPER; }
+      if (px === INKK && nz[i] > 0.975) px = PAPER;                          // the ink misses a few specks
+    } else {
+      let best = 0, bd = 1e9; for (let q = 0; q < INKS.length; q++) { const c = INKS[q], d = (c[0] - s[j]) ** 2 * 0.9 + (c[1] - s[j + 1]) ** 2 * 1.2 + (c[2] - s[j + 2]) ** 2 * 0.8; if (d < bd) { bd = d; best = q; } }
+      px = INKS[best];
+      if (best && !soft) { const patch = Math.max(0, (mott[1][i] - 0.53) * 2.5), wv = Math.sin((x * 0.6 - y * 0.8) / 3.2 + m * 14 + ph) * 0.5 + 0.5; if (wv < patch * 0.35) px = best >= 7 ? INKK : PAPER; }   // a few cuts in the colour block
+    }
+    const ink = px === PAPER ? 1 : 0.93 + 0.12 * m;
+    for (let c = 0; c < 3; c++) o[j + c] = Math.min(255, px[c] * ink);
+    o[j + 3] = 255; }
+  g.putImageData(out, 0, 0);
+}
+buildPlates(); if (STYLE) buildPrint();
 Promise.all([fontsReady(), document.fonts.load('400 40px Fraunces'), document.fonts.load('500 40px "JetBrains Mono"'), IMG.jordan.decode()]).then(() => { window.ready = true; });
 </script></body></html>
