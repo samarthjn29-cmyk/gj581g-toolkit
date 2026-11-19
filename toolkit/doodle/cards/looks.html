@@ -1,0 +1,172 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}#three{position:absolute;left:0;top:0}</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Universal-look samples (19 Nov 2026). Sam: "I need a style which can be used universally across different topics."
+// The same two scenes from the colour video in three looks: ?look=vector|line|clay&scene=eye|desk
+//  eye  = a laser reaching one cone cell in a living eye (the olo experiment, 2025)
+//  desk = a study at night, 1794: a letter, a candle, an eye kept in a jar (John Dalton asked for his eyes to be examined after his death)
+import * as THREE from '/node_modules/three/build/three.module.js';
+const Q = new URLSearchParams(location.search), LOOK = Q.get('look') || 'vector', SCENE = Q.get('scene') || 'eye';
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+
+// ---------- one scene description, drawn by any 2D look ----------
+// items: {k:'ell'|'rect'|'poly'|'line'|'circ', ...geom, fill, role}   roles: bg, body, shade, light, glass, ink, accent
+function sceneEye(t) {
+  const it = [];
+  it.push({k: 'rect', x: 0, y: 0, w: 1920, h: 1080, fill: '#1B2236', fill2: '#2C3A5A', role: 'bg'});
+  it.push({k: 'rect', x: 0, y: 820, w: 1920, h: 260, fill: '#151B2B', fill2: '#1E2740', role: 'bg'});
+  // the instrument on the left
+  it.push({k: 'rect', x: 140, y: 430, w: 420, h: 200, r: 34, fill: '#C9CCD4', fill2: '#8D93A3', role: 'body'});
+  it.push({k: 'rect', x: 520, y: 488, w: 120, h: 84, r: 18, fill: '#A9AEBB', fill2: '#6E7485', role: 'body'});
+  it.push({k: 'circ', x: 250, y: 530, r: 34, fill: '#E3A73C', fill2: '#B5762A', role: 'body'});
+  it.push({k: 'rect', x: 320, y: 506, w: 160, h: 16, r: 8, fill: '#4A5063', role: 'shade'});
+  it.push({k: 'rect', x: 320, y: 540, w: 110, h: 16, r: 8, fill: '#4A5063', role: 'shade'});
+  it.push({k: 'rect', x: 120, y: 630, w: 480, h: 190, r: 0, fill: '#3A4460', fill2: '#2A3248', role: 'body'});
+  // the beam
+  it.push({k: 'line', pts: [[640, 530], [1300, 540]], w: 6, fill: '#7FF0E0', role: 'light'});
+  // the eye
+  it.push({k: 'ell', x: 1440, y: 540, rx: 300, ry: 190, fill: '#F1ECE2', fill2: '#C9C1B4', role: 'body'});
+  it.push({k: 'circ', x: 1400, y: 540, r: 150, fill: '#5A8A84', fill2: '#2F4E4B', role: 'body'});
+  it.push({k: 'circ', x: 1400, y: 540, r: 64, fill: '#10131B', role: 'ink'});
+  it.push({k: 'circ', x: 1360, y: 495, r: 22, fill: '#FFFFFF', role: 'light', soft: true});
+  // the lens inset: the cone mosaic, one cone lit
+  it.push({k: 'circ', x: 560, y: 230, r: 170, fill: '#2A2230', fill2: '#1A1520', role: 'body', ring: '#E3A73C'});
+  let n = 0; for (let yy = -5; yy <= 5; yy++) for (let xx = -6; xx <= 6; xx++) {
+    const cx = 560 + xx * 28 + (yy & 1) * 14, cy = 230 + yy * 25; if (Math.hypot(cx - 560, cy - 230) > 150) continue;
+    const c = ['#B2574B', '#7E9C5C', '#B2574B', '#7E9C5C', '#5C6FA8'][(xx * 7 + yy * 3 + 50) % 5];
+    const lit = xx === 1 && yy === 0; it.push({k: 'circ', x: cx, y: cy, r: lit ? 13 : 11, fill: lit ? '#7FF0E0' : c, role: lit ? 'accent' : 'shade'}); n++; }
+  it.push({k: 'line', pts: [[700, 320], [1300, 520]], w: 3, fill: '#E3A73C', role: 'guide'});
+  return it;
+}
+function sceneDesk(t) {
+  const it = [];
+  it.push({k: 'rect', x: 0, y: 0, w: 1920, h: 1080, fill: '#2B2330', fill2: '#3E3140', role: 'bg'});
+  // the window, night outside
+  it.push({k: 'rect', x: 1180, y: 120, w: 520, h: 500, r: 6, fill: '#1A2238', fill2: '#2C3D63', role: 'bg', ring: '#6A5440'});
+  it.push({k: 'circ', x: 1560, y: 250, r: 56, fill: '#F2E8C8', role: 'light'});
+  it.push({k: 'rect', x: 1430, y: 120, w: 20, h: 500, fill: '#6A5440', role: 'body'}); it.push({k: 'rect', x: 1180, y: 360, w: 520, h: 20, fill: '#6A5440', role: 'body'});
+  // the desk
+  it.push({k: 'rect', x: 0, y: 700, w: 1920, h: 380, fill: '#7A4E2E', fill2: '#4E301C', role: 'body'});
+  // books
+  it.push({k: 'rect', x: 160, y: 560, w: 360, h: 60, r: 6, fill: '#8A3A30', fill2: '#5E2620', role: 'body'});
+  it.push({k: 'rect', x: 190, y: 500, w: 310, h: 60, r: 6, fill: '#3F6E73', fill2: '#2A4C50', role: 'body'});
+  it.push({k: 'rect', x: 150, y: 620, w: 390, h: 80, r: 6, fill: '#C9A45C', fill2: '#97782F', role: 'body'});
+  // the letter
+  it.push({k: 'poly', pts: [[620, 760], [1060, 730], [1100, 990], [640, 1020]], fill: '#EFE6CF', fill2: '#D8CCAE', role: 'body'});
+  for (let i = 0; i < 7; i++) it.push({k: 'line', pts: [[670, 800 + i * 28 - i * 0.5], [1030 - (i === 6 ? 160 : 0), 778 + i * 28]], w: 4, fill: '#6B5A48', role: 'shade'});
+  it.push({k: 'line', pts: [[1080, 690], [880, 960]], w: 7, fill: '#EDE6D6', role: 'body'});
+  // the candle and its flame
+  it.push({k: 'rect', x: 1200, y: 560, w: 80, h: 200, r: 10, fill: '#EFE3C8', fill2: '#C8B794', role: 'body'});
+  it.push({k: 'rect', x: 1160, y: 750, w: 160, h: 30, r: 15, fill: '#B5762A', fill2: '#7E5020', role: 'body'});
+  it.push({k: 'ell', x: 1240, y: 520, rx: 22, ry: 44, fill: '#FFD27A', role: 'light', flame: true});
+  // the jar with an eye
+  it.push({k: 'rect', x: 1440, y: 520, w: 260, h: 260, r: 30, fill: 'rgba(170,210,205,0.28)', role: 'glass'});
+  it.push({k: 'rect', x: 1430, y: 490, w: 280, h: 46, r: 12, fill: '#6B5A48', fill2: '#4A3D31', role: 'body'});
+  it.push({k: 'circ', x: 1570, y: 660, r: 64, fill: '#F1ECE2', fill2: '#C9C1B4', role: 'body'});
+  it.push({k: 'circ', x: 1590, y: 650, r: 30, fill: '#6A7A5A', fill2: '#3E4A34', role: 'body'});
+  it.push({k: 'circ', x: 1594, y: 648, r: 13, fill: '#10131B', role: 'ink'});
+  return it;
+}
+
+// ---------- look A: lit flat vector (gradients, glow, soft shadows, deep atmosphere) ----------
+function rr(x, y, w, h, r) { g.beginPath(); g.roundRect ? g.roundRect(x, y, w, h, r || 0) : g.rect(x, y, w, h); }
+function pathOf(o) {
+  if (o.k === 'rect') rr(o.x, o.y, o.w, o.h, o.r);
+  else if (o.k === 'circ') { g.beginPath(); g.arc(o.x, o.y, o.r, 0, Math.PI * 2); }
+  else if (o.k === 'ell') { g.beginPath(); g.ellipse(o.x, o.y, o.rx, o.ry, 0, 0, Math.PI * 2); }
+  else if (o.k === 'poly') { g.beginPath(); o.pts.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath(); }
+  else if (o.k === 'line') { g.beginPath(); o.pts.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); }
+}
+function bbox(o) { if (o.k === 'rect') return [o.x, o.y, o.w, o.h]; if (o.k === 'circ') return [o.x - o.r, o.y - o.r, 2 * o.r, 2 * o.r]; if (o.k === 'ell') return [o.x - o.rx, o.y - o.ry, 2 * o.rx, 2 * o.ry];
+  const xs = o.pts.map(p => p[0]), ys = o.pts.map(p => p[1]); return [Math.min(...xs), Math.min(...ys), Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)]; }
+function vector(items) {
+  for (const o of items) { g.save();
+    if (o.role === 'guide') { g.setLineDash([10, 12]); g.globalAlpha = 0.5; pathOf(o); g.strokeStyle = o.fill; g.lineWidth = o.w; g.stroke(); g.restore(); continue; }
+    if (o.k === 'line') { pathOf(o); g.strokeStyle = o.fill; g.lineWidth = o.w; g.lineCap = 'round'; if (o.role === 'light') { g.shadowColor = o.fill; g.shadowBlur = 40; g.stroke(); g.shadowBlur = 14; g.lineWidth = o.w * 0.5; g.strokeStyle = '#FFFFFF'; } g.stroke(); g.restore(); continue; }
+    const [x, y, w, h] = bbox(o); let f = o.fill;
+    if (o.fill2) { const gr = o.k === 'circ' || o.k === 'ell' ? g.createRadialGradient(x + w * 0.38, y + h * 0.32, 0, x + w / 2, y + h / 2, Math.max(w, h) * 0.62) : g.createLinearGradient(x, y, x, y + h);
+      gr.addColorStop(0, o.fill); gr.addColorStop(1, o.fill2); f = gr; }
+    if (o.role === 'body') { g.shadowColor = 'rgba(0,0,0,0.35)'; g.shadowBlur = 30; g.shadowOffsetY = 12; }
+    if (o.role === 'light' || o.role === 'accent') { g.shadowColor = o.fill; g.shadowBlur = o.soft ? 20 : 60; }
+    pathOf(o); g.fillStyle = f; g.fill();
+    if (o.role === 'light' && !o.soft) { g.shadowBlur = 0; const gr = g.createRadialGradient(o.x, o.y, 0, o.x, o.y, 420); gr.addColorStop(0, 'rgba(255,214,140,0.22)'); gr.addColorStop(1, 'rgba(255,214,140,0)'); g.fillStyle = gr; g.fillRect(o.x - 420, o.y - 420, 840, 840); }
+    if (o.ring) { g.shadowBlur = 0; g.lineWidth = 10; g.strokeStyle = o.ring; pathOf(o); g.stroke(); }
+    if (o.role === 'glass') { g.shadowBlur = 0; g.fillStyle = 'rgba(255,255,255,0.25)'; rr(o.x + 24, o.y + 20, 22, o.h - 60, 11); g.fill(); }
+    // rim light along the top edge of bodies
+    if (o.role === 'body' && o.k === 'rect') { g.shadowBlur = 0; g.shadowOffsetY = 0; g.globalAlpha = 0.25; g.fillStyle = '#FFFFFF'; rr(o.x + 6, o.y + 3, o.w - 12, 5, 3); g.fill(); }
+    g.restore(); }
+  const v = g.createRadialGradient(960, 540, 400, 960, 540, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.35)'); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080);
+}
+
+// ---------- look B: editorial monoline (one even ink line, flat tones, one accent, on a flat field) ----------
+function line(items) {
+  const INK = '#1E2430', toneMap = c => { if (!c || c.startsWith('rgba')) return c; const n = parseInt(c.slice(1), 16), r = n >> 16, gg = (n >> 8) & 255, b = n & 255, l = (r * 0.3 + gg * 0.59 + b * 0.11);
+    // flatten every colour into a calm two-tone palette, keep only the accent and the warm light in colour
+    return l > 200 ? '#F4EFE4' : l > 140 ? '#E3D8C2' : l > 90 ? '#C9B79A' : l > 50 ? '#B89A74' : '#3A3F4D'; };
+  for (const o of items) { g.save(); g.lineJoin = 'round'; g.lineCap = 'round';
+    if (o.role === 'bg') { pathOf(o); g.fillStyle = o === items[0] ? '#EDE5D3' : '#E2D7C0'; g.fill(); if (o.ring) { g.lineWidth = 5; g.strokeStyle = INK; g.stroke(); } g.restore(); continue; }
+    if (o.role === 'guide') { g.setLineDash([2, 14]); pathOf(o); g.strokeStyle = INK; g.lineWidth = 4; g.stroke(); g.restore(); continue; }
+    if (o.k === 'line') { pathOf(o); g.strokeStyle = o.role === 'light' ? '#1FA89A' : INK; g.lineWidth = o.role === 'light' ? 8 : 5; g.stroke(); g.restore(); continue; }
+    pathOf(o);
+    g.fillStyle = o.role === 'accent' ? '#1FA89A' : o.role === 'light' ? (o.soft ? '#FFFFFF' : '#F0B54A') : o.role === 'ink' ? INK : o.role === 'glass' ? 'rgba(255,255,255,0)' : toneMap(o.fill);
+    g.fill(); if (!(o.role === 'light' && o.soft)) { g.lineWidth = o.role === 'shade' ? 3.5 : 5; g.strokeStyle = INK; g.stroke(); }
+    if (o.ring) { g.lineWidth = 7; g.strokeStyle = INK; pathOf(o); g.stroke(); }
+    if (o.role === 'glass') { g.lineWidth = 4; g.strokeStyle = INK; g.beginPath(); g.moveTo(o.x + 30, o.y + 30); g.lineTo(o.x + 30, o.y + o.h - 50); g.stroke(); }
+    g.restore(); }
+  // a fine paper tooth
+  const id = g.getImageData(0, 0, 1920, 1080), d = id.data; let s = 9; for (let i = 0; i < d.length; i += 4) { s = (s * 16807) % 2147483647; const n = (s / 2147483647 - 0.5) * 8; d[i] += n; d[i + 1] += n; d[i + 2] += n; } g.putImageData(id, 0, 0);
+}
+
+// ---------- look C: soft clay diorama (simple 3D shapes, matte, soft light and shadows) ----------
+function clay() {
+  const r = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); r.setSize(1920, 1080); r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap;
+  r.toneMapping = THREE.ACESFilmicToneMapping; r.outputColorSpace = THREE.SRGBColorSpace;
+  const sc = new THREE.Scene(), cam = new THREE.PerspectiveCamera(32, 16 / 9, 0.1, 200);
+  const M = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({color: c, roughness: 0.85, metalness: 0}, o));
+  const add = (geo, mat, x, y, z, rx = 0, ry = 0, rz = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.rotation.set(rx, ry, rz); m.castShadow = m.receiveShadow = true; sc.add(m); return m; };
+  const box = (w, h, d, c, x, y, z, o) => add(new THREE.BoxGeometry(w, h, d), M(c, o), x, y + h / 2, z);
+  sc.add(new THREE.HemisphereLight(0xfff4e6, 0x3a3048, 0.9));
+  const sun = new THREE.DirectionalLight(0xfff0dd, 2.2); sun.position.set(-6, 10, 8); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.radius = 6;
+  Object.assign(sun.shadow.camera, {left: -12, right: 12, top: 12, bottom: -12}); sc.add(sun);
+  if (SCENE === 'eye') {
+    sc.background = new THREE.Color(0x2b3550);
+    box(30, 0.4, 20, 0x3a4766, 0, -0.4, 0);
+    box(3.2, 1.6, 1.8, 0xc9ccd4, -4.2, 0, 0); box(1.2, 0.8, 0.9, 0xa9aebb, -2.2, 0.4, 0);
+    add(new THREE.CylinderGeometry(0.28, 0.28, 0.2, 32), M(0xe3a73c), -4.6, 1.0, 0.95, Math.PI / 2);
+    const beam = add(new THREE.CylinderGeometry(0.05, 0.05, 4.2, 16), M(0x7ff0e0, {emissive: 0x7ff0e0, emissiveIntensity: 2.5}), 0.3, 0.8, 0, 0, 0, Math.PI / 2); beam.castShadow = false;
+    const glow = new THREE.PointLight(0x7ff0e0, 6, 6); glow.position.set(1.8, 0.9, 0.6); sc.add(glow);
+    const eye = add(new THREE.SphereGeometry(1.7, 64, 48), M(0xf1ece2, {roughness: 0.6}), 4.4, 1.0, 0);
+    add(new THREE.CylinderGeometry(0.85, 0.85, 0.12, 48), M(0x5a8a84), 2.75, 1.0, 0, 0, 0, Math.PI / 2);
+    add(new THREE.CylinderGeometry(0.36, 0.36, 0.14, 48), M(0x12141c, {roughness: 0.3}), 2.71, 1.0, 0, 0, 0, Math.PI / 2);
+    box(1.4, 1.2, 1.4, 0x8d6a4a, 4.4, -0.6, 0);
+    cam.position.set(0.4, 4.6, 15.5); cam.lookAt(0.2, 0.7, 0);
+  } else {
+    sc.background = new THREE.Color(0x2b2330);
+    box(14, 0.5, 7, 0x7a4e2e, 0, -0.5, 0);
+    box(2.4, 0.4, 1.6, 0x8a3a30, -4.2, 0, -1.4); box(2.1, 0.4, 1.5, 0x3f6e73, -4.1, 0.4, -1.4); box(2.6, 0.5, 1.7, 0xc9a45c, -4.3, 0.8, -1.4);
+    add(new THREE.BoxGeometry(2.8, 0.04, 2.0), M(0xefe6cf), -0.6, 0.02, 0.8, 0, 0.12, 0);
+    add(new THREE.CylinderGeometry(0.35, 0.35, 1.8, 32), M(0xefe3c8), 1.9, 0.9, -0.6);
+    add(new THREE.CylinderGeometry(0.7, 0.8, 0.16, 32), M(0xb5762a), 1.9, 0.08, -0.6);
+    const fl = add(new THREE.SphereGeometry(0.16, 24, 16), M(0xffd27a, {emissive: 0xffb54a, emissiveIntensity: 3}), 1.9, 2.05, -0.6); fl.scale.set(1, 1.9, 1); fl.castShadow = false;
+    const candle = new THREE.PointLight(0xffb36a, 18, 12, 1.6); candle.position.set(1.9, 2.4, -0.4); candle.castShadow = true; sc.add(candle);
+    const jar = add(new THREE.CylinderGeometry(1.0, 1.0, 2.0, 48), new THREE.MeshPhysicalMaterial({color: 0xbfe0dc, roughness: 0.1, transmission: 0.0, transparent: true, opacity: 0.35}), 4.6, 1.0, -0.4); jar.castShadow = false;
+    add(new THREE.CylinderGeometry(1.05, 1.05, 0.3, 48), M(0x6b5a48), 4.6, 2.15, -0.4);
+    add(new THREE.SphereGeometry(0.55, 48, 32), M(0xf1ece2, {roughness: 0.5}), 4.6, 0.9, -0.4);
+    add(new THREE.CylinderGeometry(0.26, 0.26, 0.08, 32), M(0x6a7a5a), 4.6, 0.95, 0.12, Math.PI / 2);
+    add(new THREE.CylinderGeometry(0.11, 0.11, 0.1, 32), M(0x12141c), 4.6, 0.95, 0.17, Math.PI / 2);
+    box(4.5, 4.5, 0.2, 0x1a2238, 3.5, 1.5, -5, {emissive: 0x1a2238, emissiveIntensity: 0.6}); box(0.2, 4.5, 0.3, 0x6a5440, 3.5, 1.5, -4.85); box(4.5, 0.2, 0.3, 0x6a5440, 3.5, 3.7, -4.85);
+    add(new THREE.SphereGeometry(0.35, 32, 16), M(0xf2e8c8, {emissive: 0xf2e8c8, emissiveIntensity: 1.5}), 4.8, 5.0, -5.1);
+    sun.intensity = 0.7; cam.position.set(0, 4.2, 13.5); cam.lookAt(0.4, 1.6, -1.0);
+  }
+  r.render(sc, cam); g.drawImage(r.domElement, 0, 0);
+}
+
+window.render = function (t) {
+  if (LOOK === 'clay') return clay();
+  const items = SCENE === 'eye' ? sceneEye(t) : sceneDesk(t);
+  if (LOOK === 'line') line(items); else vector(items);
+};
+window.ready = true;
+</script></body></html>
