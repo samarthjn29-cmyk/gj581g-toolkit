@@ -1,0 +1,189 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// The hands graphic language, drawn in code (19 Nov 2026; Sam: "I don't want such AI generated images but rather I want graphics like hands video").
+// From the frame study of @all-hands "AI's Strange Obsession with Enlightenment" (styles/HANDS_CHANNEL_STUDY.md):
+//  1 drawn scenes: confident black brush lines (steady, with a tiny 3-step boil), flat fills in a small palette sitting slightly
+//    off the lines like a print, grain on top; everyday places; crowds as coloured blobs; faces not drawn
+//  2 public-domain art (here Goethe's colour wheel, 1809)   3 real archive photos on a split card with bold sans text on cream
+//  4 primary documents in monospace on navy, cream-on-navy charts   5 one drawn motif that returns (here the prism and its beam)
+// Sample: a draft opening for the colour video, ~48 s; the draft narration shows as subtitles (it is not final script).
+import {clamp, ease, seedRnd, rnd} from './ink.js';
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const P = {ink: '#1B1A21', cream: '#EFE6D2', paper: '#E9DEC6', navy: '#17203A', navy2: '#222D4D', ochre: '#E2A33B', teal: '#3B8A8C', tealL: '#6FC3BE',
+  coral: '#E06B4E', violet: '#7E6AA8', blue: '#3D6FA8', green: '#6E9B57', red: '#C9503F', brown: '#8A5A3A', grey: '#9C9A93', olo: '#14C7B0'};
+let STEP = 0;
+const h2 = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; };
+const k = (t, a, d = 0.5) => ease((t - a) / d);
+
+// ---------- brush ink: a stroke with a living width, tapered ends; boils in 3 steps at under a pixel ----------
+let SEED = 1;
+function brush(pts, w = 7, col = P.ink, closed = false) {
+  w *= 1.55; const id = SEED++, pp = []; const P0 = closed ? [...pts, pts[0]] : pts;
+  for (let i = 0; i < P0.length - 1; i++) { const [x1, y1] = P0[i], [x2, y2] = P0[i + 1], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 10));
+    for (let j = 0; j < n; j++) { const u = j / n; pp.push([x1 + (x2 - x1) * u, y1 + (y2 - y1) * u]); } }
+  pp.push(P0[P0.length - 1]); const N = pp.length, L = [], R = [], b = STEP % 3;
+  for (let i = 0; i < N; i++) {
+    const a = pp[Math.max(0, i - 1)], c = pp[Math.min(N - 1, i + 1)], dx = c[0] - a[0], dy = c[1] - a[1], len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+    const u = i / (N - 1), taper = closed ? 1 : Math.min(1, u * 6, (1 - u) * 6) * 0.7 + 0.3;
+    const ww = w * taper * (0.8 + 0.4 * h2(id * 97 + (i >> 2), 7)) / 2;
+    const jx = (h2(id * 131 + i, b) - 0.5) * 1.1, jy = (h2(id * 173 + i, b + 9) - 0.5) * 1.1;
+    L.push([pp[i][0] + nx * ww + jx, pp[i][1] + ny * ww + jy]); R.push([pp[i][0] - nx * ww + jx, pp[i][1] - ny * ww + jy]); }
+  g.beginPath(); L.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); for (let i = R.length - 1; i >= 0; i--) g.lineTo(R[i][0], R[i][1]); g.closePath();
+  g.fillStyle = col; g.fill();
+}
+// flat fill, set a little off its lines (like a second print plate), edges slightly ragged
+function fill(pts, col, off = [-5, 4], alpha = 1) {
+  const id = SEED++; g.save(); g.globalAlpha = alpha; g.beginPath();
+  const P0 = [...pts, pts[0]]; let first = true;
+  for (let i = 0; i < P0.length - 1; i++) { const [x1, y1] = P0[i], [x2, y2] = P0[i + 1], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 24));
+    for (let j = 0; j < n; j++) { const u = j / n, x = x1 + (x2 - x1) * u + off[0] + (h2(id + i * 31 + j, 3) - .5) * 3, y = y1 + (y2 - y1) * u + off[1] + (h2(id + i * 37 + j, 5) - .5) * 3;
+      if (first) { g.moveTo(x, y); first = false; } else g.lineTo(x, y); } }
+  g.closePath(); g.fillStyle = col; g.fill(); g.restore();
+}
+const R = (x, y, w, h) => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+const shape = (pts, col, w = 7, off) => { fill(pts, col, off); brush(pts, w, P.ink, true); };
+function ell(cx, cy, rx, ry, n = 40, a0 = 0, a1 = Math.PI * 2) { const p = []; for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; p.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return p; }
+
+// ---------- print grain + paper over everything ----------
+const grains = [];
+function buildGrain() { for (let s = 0; s < 3; s++) { const c = document.createElement('canvas'); c.width = 1920; c.height = 1080; const x = c.getContext('2d'), id = x.createImageData(1920, 1080), d = id.data; seedRnd(41 + s);
+  for (let i = 0; i < d.length; i += 4) { const v = rnd() < 0.5 ? 255 : 0; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = rnd() < 0.26 ? 52 : 0; } x.putImageData(id, 0, 0); grains.push(c); } }
+let mott = null;
+function buildMott() { mott = document.createElement('canvas'); mott.width = 1920; mott.height = 1080; const x = mott.getContext('2d'); x.fillStyle = '#808080'; x.fillRect(0, 0, 1920, 1080); seedRnd(77);
+  for (let i = 0; i < 420; i++) { const px = rnd() * 1920, py = rnd() * 1080, r = 30 + rnd() * 180, v = rnd() < .5 ? 255 : 0, gr = x.createRadialGradient(px, py, 0, px, py, r);
+    gr.addColorStop(0, `rgba(${v},${v},${v},0.22)`); gr.addColorStop(1, `rgba(${v},${v},${v},0)`); x.fillStyle = gr; x.fillRect(px - r, py - r, 2 * r, 2 * r); } }
+function grain() { g.save(); g.globalCompositeOperation = 'soft-light'; g.drawImage(mott, 0, 0); g.globalCompositeOperation = 'overlay'; g.drawImage(grains[STEP % 3], 0, 0); g.restore(); }
+function cam(s, cx, cy, fn) { g.save(); g.translate(cx, cy); g.scale(s, s); g.translate(-cx, -cy); fn(); g.restore(); }
+
+// ---------- scene 1: the dark lab in Berkeley (2025): monitors, the instrument, an empty chair with a chin rest ----------
+function lab(t, t0) {
+  const u = (t - t0) / 7, s = 1 + 0.10 * ease(u);
+  g.fillStyle = P.navy; g.fillRect(0, 0, 1920, 1080);
+  cam(s, 1120, 520, () => {
+    fill(R(-100, 640, 2120, 600), '#111829', [0, 0]); brush([[-100, 640], [2020, 640]], 6);
+    // monitors on the back wall, their screens glowing
+    [[380, 210, 380, 240], [820, 250, 300, 200]].forEach(([x, y, w, h], i) => { shape(R(x, y, w, h), '#0D1220'); fill(R(x + 18, y + 18, w - 36, h - 36), i ? '#2C4F6E' : '#24506A', [0, 0]);
+      for (let j = 0; j < 6; j++) brush([[x + 40, y + 50 + j * 28], [x + 40 + (w - 120) * (0.4 + 0.6 * h2(i * 9 + j, 2)), y + 50 + j * 28]], 3, '#8FC9D2');
+      brush([[x + w / 2, y + h], [x + w / 2, y + h + 50]], 7); brush([[x + w / 2 - 50, y + h + 52], [x + w / 2 + 50, y + h + 52]], 7); });
+    // shelves with boxes
+    shape(R(1300, 150, 520, 18), P.brown); shape(R(1300, 330, 520, 18), P.brown);
+    [[1320, 70, 110, 80, P.ochre], [1450, 95, 90, 55, P.coral], [1570, 60, 120, 90, P.teal], [1340, 250, 140, 80, P.violet], [1510, 270, 160, 60, P.ochre]].forEach(([x, y, w, h, c]) => shape(R(x, y, w, h), c, 6));
+    // the bench and the instrument
+    shape(R(260, 600, 1300, 60), P.ochre); brush([[300, 660], [300, 1000]], 9); brush([[1500, 660], [1500, 1000]], 9);
+    shape(R(360, 430, 420, 170), P.grey); shape(R(780, 480, 140, 70), '#B9B6AE'); shape(R(920, 495, 60, 40), '#6E6C66');
+    shape(ell(470, 515, 42, 42), P.ochre); for (let i = 0; i < 3; i++) brush([[560, 470 + i * 34], [720, 470 + i * 34]], 5);
+    // the laser beam into an eyepiece: the motif's thin light
+    const on = k(t, t0 + 2.0, 0.6); if (on > 0) { g.save(); g.globalAlpha = on; g.shadowColor = P.olo; g.shadowBlur = 30; brush([[985, 515], [985 + 300 * on, 515]], 6, P.tealL); g.restore(); }
+    shape(R(1280, 470, 60, 90), '#2A3350'); shape(ell(1310, 470, 40, 16), '#2A3350');           // the eyepiece / chin rest
+    // the empty chair (nobody drawn)
+    shape([[1380, 560], [1520, 560], [1500, 760], [1400, 760]], P.coral); shape(R(1370, 760, 160, 30), P.coral); brush([[1400, 790], [1380, 1000]], 8); brush([[1500, 790], [1520, 1000]], 8);
+  });
+}
+// ---------- scene 2: the eye, drawn as a diagram; the beam reaches a crowd of cone cells (coloured blobs), one group lights ----------
+function eye(t, t0) {
+  const u = (t - t0) / 7; g.fillStyle = P.cream; g.fillRect(0, 0, 1920, 1080);
+  cam(1 + 0.08 * ease(u), 700, 540, () => {
+    shape(ell(700, 540, 330, 330, 60), '#F6F0E2', 8); fill(ell(700, 540, 300, 300, 60, -0.9, 0.9), '#E9B3A0', [0, 0], 0.9);   // retina (right side)
+    brush(ell(700, 540, 300, 300, 60, -0.9, 0.9), 6, P.ink); shape(ell(395, 540, 40, 120, 30), '#BFE0E8', 6);                  // lens
+    shape([[370, 400], [330, 420], [330, 660], [370, 680]], P.teal, 7);
+    const b = k(t, t0 + 1.0, 1.6); if (b > 0) { g.save(); g.shadowColor = P.olo; g.shadowBlur = 24; brush([[60, 540], [60 + 920 * b, 540]], 6, P.tealL); g.restore(); }
+  });
+  // the zoom lens: a crowd of cone cells as blobs, like the hands crowd shots
+  const z = k(t, t0 + 2.6, 0.7); if (z > 0) { g.save(); g.globalAlpha = z; shape(ell(1440, 520, 330, 330, 60), '#1E1830', 9);
+    g.save(); g.beginPath(); g.arc(1440, 520, 318, 0, Math.PI * 2); g.clip();
+    for (let yy = -7; yy <= 7; yy++) for (let xx = -7; xx <= 7; xx++) { const x = 1440 + xx * 44 + (yy & 1) * 22, y = 520 + yy * 40, r = h2(xx * 17 + 300, yy * 13 + 300);
+      const col = r < 0.12 ? P.blue : r < 0.56 ? P.red : P.green; const lit = Math.hypot(x - 1460, y - 520) < 70 && col === P.green && t > t0 + 4.0;
+      fill(ell(x, y, 15, 17, 14), lit ? P.olo : col, [0, 0]); if (lit) { g.save(); g.shadowColor = P.olo; g.shadowBlur = 26; fill(ell(x, y, 15, 17, 14), P.olo, [0, 0]); g.restore(); } }
+    g.restore(); brush(ell(1440, 520, 330, 330, 60), 9, P.ink, true); brush([[1010, 560], [1115, 545]], 5, P.ink); g.restore(); }
+}
+// ---------- the card system ----------
+function quoteCard(t, t0, big, small, src, photo) {   // bold sans on cream at left; a real photo, or a drawn swatch, at right
+  g.fillStyle = P.cream; g.fillRect(0, 0, 1920, 1080);
+  if (photo) { const im = IMG[photo], s = 1 + 0.04 * clamp((t - t0) / 5), w = 960, h = im.height * w / im.width;
+    g.save(); g.beginPath(); g.rect(960, 0, 960, 1080); g.clip(); g.filter = 'grayscale(1) contrast(1.6) brightness(0.92)'; g.translate(1440, 540); g.scale(s * 1.55, s * 1.55); g.drawImage(im, -w / 2 - 40, -h / 2 + 200, w, h); g.restore();
+    const gr = g.createLinearGradient(960, 0, 1160, 0); gr.addColorStop(0, P.cream); gr.addColorStop(1, 'rgba(239,230,210,0)'); g.fillStyle = gr; g.fillRect(958, 0, 204, 1080); }
+  else { const a = k(t, t0 + 0.2, 0.6); g.save(); g.globalAlpha = a; fill(ell(1440, 540, 300 + 8 * Math.sin(t), 280, 50), P.olo, [0, 0]);
+    g.shadowColor = P.olo; g.shadowBlur = 80; fill(ell(1440, 540, 240, 220, 50), '#19D8BF', [0, 0]); g.restore(); }
+  g.save(); g.fillStyle = P.navy; g.font = '800 96px Inter'; g.textBaseline = 'alphabetic';
+  big.forEach((l, i) => { const a = k(t, t0 + 0.3 + i * 0.25, 0.4); g.globalAlpha = a; g.fillText(l, 150, 440 + i * 110 + (1 - a) * 12); });
+  g.globalAlpha = k(t, t0 + 1.0, 0.5); g.font = '500 34px Inter'; g.fillStyle = '#3A3F55'; small.forEach((l, i) => g.fillText(l, 150, 470 + big.length * 110 + i * 46));
+  g.font = '500 20px "JetBrains Mono"'; g.fillStyle = '#8A8676'; g.fillText(src, 150, 960); g.restore();
+}
+function docPanel(t, t0, head, lines) {
+  g.fillStyle = P.navy; g.fillRect(0, 0, 1920, 1080); const fl = Math.sin(t * 0.8) * 5;
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.5)'; g.shadowBlur = 40; g.fillStyle = '#0F1629'; g.fillRect(300, 300 + fl, 1320, 460); g.restore();
+  g.save(); g.font = '500 22px "JetBrains Mono"'; g.fillStyle = '#7F8AA6'; g.fillText(head, 350, 365 + fl);
+  g.font = '500 50px "JetBrains Mono"'; g.fillStyle = P.cream; let left = Math.floor(clamp((t - t0 - 0.4) / 2.6) * lines.join('').length);
+  lines.forEach((l, i) => { g.fillText(l.slice(0, Math.max(0, left)), 350, 470 + i * 76 + fl); left -= l.length; }); g.restore();
+}
+// ---------- scene 5: Dalton's study, Manchester, 1790s: desk, candle, window at night, shelves, a jar ----------
+function study(t, t0, close) {
+  const u = (t - t0) / (close ? 5 : 7);
+  g.fillStyle = '#2B2238'; g.fillRect(0, 0, 1920, 1080);
+  const s = close ? 1.35 + 0.12 * ease(u) : 1.0 + 0.06 * ease(u), cx = close ? 1500 : 900 + 160 * ease(u);
+  cam(s, cx, 600, () => {
+    fill(R(0, 0, 1920, 760), '#3A2E4A', [0, 0]);
+    shape(R(1180, 120, 420, 420), P.navy2, 8); brush([[1390, 120], [1390, 540]], 7); brush([[1180, 330], [1600, 330]], 7); fill(ell(1500, 220, 40, 40), P.cream, [0, 0]);
+    shape(R(120, 110, 600, 20), P.brown); shape(R(120, 300, 600, 20), P.brown);
+    const sp = [P.coral, P.ochre, P.teal, P.violet, P.cream, P.green, P.red, P.ochre, P.blue, P.coral, P.teal, P.cream];
+    for (let i = 0; i < 12; i++) { const hh = 110 + (i * 37 % 60); shape(R(140 + i * 48, 300 - hh, 40, hh), sp[i], 5); }
+    for (let i = 0; i < 9; i++) { const hh = 90 + (i * 53 % 60); shape(R(150 + i * 62, 110 - hh + 0, 52, hh), sp[(i + 4) % 12], 5); }
+    // the desk
+    shape([[0, 700], [1920, 700], [1920, 760], [0, 760]], P.brown, 8); fill(R(0, 760, 1920, 320), '#3A2418', [0, 0]);
+    // papers, a quill, colour swatches and wool skeins (he compared coloured things)
+    shape([[520, 640], [820, 620], [840, 700], [540, 712]], P.cream, 6); for (let i = 0; i < 3; i++) brush([[560, 650 + i * 18], [790, 636 + i * 18]], 3);
+    brush([[760, 520], [700, 690]], 5); shape([[760, 520], [800, 470], [790, 560]], P.cream, 5);
+    [[900, P.red], [960, P.green], [1020, P.ochre], [1080, P.blue]].forEach(([x, c]) => shape(ell(x, 680, 30, 22, 20), c, 5));
+    // the candle and its pool of light (flickers)
+    const fl = 1 + 0.08 * Math.sin(t * 9) + 0.05 * Math.sin(t * 23);
+    g.save(); const gr = g.createRadialGradient(330, 560, 10, 330, 560, 420 * fl); gr.addColorStop(0, 'rgba(255,210,130,0.35)'); gr.addColorStop(1, 'rgba(255,210,130,0)'); g.fillStyle = gr; g.fillRect(-200, 100, 1100, 900); g.restore();
+    shape(R(305, 560, 50, 140), P.cream, 6); shape(ell(330, 700, 80, 16), P.ochre, 6); fill(ell(330, 530 - 2 * fl, 14, 28 * fl, 16), '#FFD27A', [0, 0]);
+    // the jar on the right end of the desk, with an eye inside
+    shape([[1440, 470], [1640, 470], [1650, 700], [1430, 700]], 'rgba(170,215,205,0.45)', 7); shape(R(1420, 440, 240, 34), P.brown, 7);
+    shape(ell(1540, 600, 52, 52, 30), '#F4EEE0', 6); shape(ell(1556, 596, 22, 22, 20), P.green, 4); fill(ell(1558, 596, 9, 9, 12), P.ink, [0, 0]);
+  });
+}
+// ---------- the motif: white light through a prism, split into colours; returns at the end ----------
+function prism(t, t0) {
+  g.fillStyle = P.navy; g.fillRect(0, 0, 1920, 1080);
+  cam(1 + 0.05 * ease((t - t0) / 7), 960, 540, () => {
+    const a = k(t, t0 + 0.3, 1.0); brush([[0, 560], [700 * a, 540]], 9, P.cream);
+    shape([[960, 300], [1180, 700], [740, 700]], 'rgba(200,230,235,0.35)', 9);
+    const b = k(t, t0 + 1.3, 1.6), cols = [P.red, P.coral, P.ochre, P.green, P.teal, P.blue, P.violet];
+    cols.forEach((c, i) => brush([[1050, 540 + i * 4], [1050 + 870 * b, 420 + i * 46]], 16, c));
+    if (t > t0 + 4.2) { const o = k(t, t0 + 4.2, 0.8); g.save(); g.globalAlpha = o; g.shadowColor = P.olo; g.shadowBlur = 30; brush([[1050, 568], [1050 + 870 * b, 760]], 16, P.olo); g.restore(); }   // and one more
+  });
+}
+function goethe(t, t0) {   // public-domain art: Goethe's colour wheel, 1809, slow push on cream
+  g.fillStyle = P.cream; g.fillRect(0, 0, 1920, 1080); const im = IMG.goethe, s = 1 + 0.06 * ease((t - t0) / 5), h = 1000, w = im.width * h / im.height;
+  g.save(); g.translate(960, 540); g.scale(s, s); g.drawImage(im, -w / 2, -h / 2, w, h); g.restore();
+  g.save(); g.font = '500 20px "JetBrains Mono"'; g.fillStyle = '#8A8676'; g.fillText('J. W. VON GOETHE · COLOUR WHEEL · 1809 · PUBLIC DOMAIN', 60, 1040); g.restore();
+}
+function sub(t, s) { if (!s) return; g.save(); g.font = '500 38px Inter'; g.textAlign = 'center'; const w = g.measureText(s).width + 50; g.fillStyle = 'rgba(10,12,20,0.62)'; g.fillRect(960 - w / 2, 966, w, 62); g.fillStyle = '#F4EFE4'; g.fillText(s, 960, 1010); g.restore(); }
+
+const IMG = {dalton: new Image(), goethe: new Image()}; IMG.dalton.src = 'img/colour/R_dalton.jpg'; IMG.goethe.src = 'img/colour/R_goethe.jpg';
+const SHOTS = [
+  [0, 7, t => lab(t, 0), 'In 2025, five people sat in a dark lab in Berkeley, California.'],
+  [7, 14, t => eye(t, 7), 'A laser was aimed at single cells at the back of their eyes.'],
+  [14, 19, t => quoteCard(t, 14, ['“A profoundly', 'saturated', 'peacock green”'], ['They named it olo.'], 'UC BERKELEY SCHOOL OF OPTOMETRY · APRIL 2025', null), 'They saw a colour, they say, that no one had seen before.'],
+  [19, 24, t => docPanel(t, 19, 'SCIENCE ADVANCES · VOL 11 · APRIL 2025', ['Novel color via stimulation of', 'individual photoreceptors', 'at population scale']), 'The team published it in Science Advances.'],
+  [24, 31, t => study(t, 24, false), 'Two centuries earlier, in Manchester, a young chemist suspected his own eyes.'],
+  [31, 36, t => quoteCard(t, 31, ['John Dalton'], ['In 1794 he told a Manchester society', 'that he saw colours differently.'], 'PORTRAIT C. 1840 · WEBSTER OF WARRINGTON · PUBLIC DOMAIN', 'dalton'), ''],
+  [36, 41, t => study(t, 36, true), 'He asked for his eyes to be examined after he died.'],
+  [41, 46, t => goethe(t, 41), 'People have argued about what colour is for centuries.'],
+  [46, 53, t => prism(t, 46), 'So what is colour, if a laser can make a new one?'],
+];
+window.render = function (t) {
+  STEP = Math.floor(t * 8); SEED = 1;
+  const s = SHOTS.find(x => t >= x[0] && t < x[1]) || SHOTS[SHOTS.length - 1]; s[2](t);
+  grain(); sub(t, s[3]);
+};
+buildGrain(); buildMott();
+Promise.all([IMG.dalton.decode(), IMG.goethe.decode(), document.fonts.load('800 40px Inter'), document.fonts.load('500 40px "JetBrains Mono"')]).then(() => { window.ready = true; });
+</script></body></html>
