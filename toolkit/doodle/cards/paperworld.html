@@ -1,0 +1,166 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Kalam;font-weight:400;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-400-normal.woff2)}
+@font-face{font-family:Kalam;font-weight:700;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-700-normal.woff2)}
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Paper world test (19 Nov 2026): paper-puppet characters (cut paper, brass-brad joints, animated on twos at 12 fps)
+// + archive collage (real photos pinned whole as prints, a monospace document panel) + doodle ink. Stanford opening 0-19.6 s.
+// Characters are anonymous types (a guard, his boss), never a drawing of a real person; real people appear only in real photos.
+import {Q, P, g, clamp, ease, back, k, seedRnd, rnd, paper, txt, pen, ring, line, fontsReady} from './ink.js';
+
+const INK = '#2B2B2B', ORANGE = '#E0782A', CREAM = '#EDE6D6', KHAKI = '#B9A47A', KHAKI_D = '#9C8860', SHIRT = '#F2EEE4',
+      SKIN = '#D8A47C', HAIR = '#3A2E26', SLATE = '#5B5E66', WALL = '#D9D2C2', WALL_D = '#BDB5A3', DOOR = '#8A5A3A', CORK = '#B4895A';
+const IMG = {jordan: new Image(), guard: new Image()};
+IMG.jordan.src = 'img/pw/R_jordan.jpg'; IMG.guard.src = 'img/pw/R_guard.jpg';
+const twos = t => Math.floor(t * 12) / 12;                 // everything moves on twos, like hand animation
+
+// ---------- cut paper ----------
+const shapes = {};
+// a paper polygon with a fixed hand-cut wobble (same every frame), a darker cut edge and a soft shadow underneath
+function cut(id, pts, fill, edge = 'rgba(0,0,0,0.28)', shadow = 7) {
+  if (!shapes[id]) { seedRnd(id.split('').reduce((a, c) => a + c.charCodeAt(0), 7)); const out = [];
+    for (let i = 0; i < pts.length; i++) { const [x1, y1] = pts[i], [x2, y2] = pts[(i + 1) % pts.length], n = Math.max(2, Math.round(Math.hypot(x2 - x1, y2 - y1) / 18));
+      for (let j = 0; j < n; j++) { const u = j / n; out.push([x1 + (x2 - x1) * u + (rnd() - .5) * 2.2, y1 + (y2 - y1) * u + (rnd() - .5) * 2.2]); } }
+    shapes[id] = out; }
+  const s = shapes[id]; g.save(); g.beginPath(); s.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath();
+  g.shadowColor = 'rgba(40,25,10,0.35)'; g.shadowBlur = shadow; g.shadowOffsetX = shadow * 0.5; g.shadowOffsetY = shadow * 0.7;
+  g.fillStyle = fill; g.fill(); g.shadowColor = 'transparent'; g.lineWidth = 2; g.strokeStyle = edge; g.stroke(); g.restore();
+}
+function circ(cx, cy, r, n = 20) { const p = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; p.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]); } return p; }
+const rect = (x, y, w, h) => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+function brad(x, y) { g.save(); g.fillStyle = '#C9A23E'; g.beginPath(); g.arc(x, y, 5, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,0.6)'; g.beginPath(); g.arc(x - 1.5, y - 1.5, 1.6, 0, 7); g.fill(); g.restore(); }
+
+// ---------- the puppet ----------
+// pose: {x, y (hip), sc, lean, head, armL:[sh, el], armR:[sh, el], legL:[hip, knee], legR:[hip, knee], bob} angles in degrees
+const R = d => d * Math.PI / 180;
+function limb(id, x, y, a1, a2, w1, l1, w2, l2, c1, c2, endFill, endR) {
+  g.save(); g.translate(x, y); g.rotate(R(a1)); cut(id + 'u', rect(-w1 / 2, -6, w1, l1 + 6), c1);
+  g.translate(0, l1); g.rotate(R(a2)); cut(id + 'l', rect(-w2 / 2, -6, w2, l2 + 6), c2);
+  if (endFill) cut(id + 'e', endR ? circ(0, l2 + endR * 0.6, endR, 14) : rect(-w2 / 2 - 4, l2 - 4, w2 + 20, 22), endFill);
+  brad(0, 0); g.restore(); brad(x, y);
+}
+function puppet(name, pose, kind) {
+  const p = Object.assign({sc: 1, lean: 0, head: 0, armL: [8, -10], armR: [-8, -10], legL: [0, 0], legR: [0, 0], bob: 0, face: 1}, pose);
+  const guard = kind === 'guard', top = guard ? KHAKI : SHIRT, sleeve = guard ? KHAKI_D : '#E2DDD0', pants = guard ? KHAKI_D : SLATE;
+  // tiny stop-motion jitter, different on every drawing
+  seedRnd(Math.floor(p.t * 12) * 31 + name.length); const jx = (rnd() - .5) * 1.6, jr = (rnd() - .5) * 0.5;
+  g.save(); g.translate(p.x + jx, p.y + p.bob); g.scale(p.sc * p.face, p.sc); g.rotate(R(p.lean + jr));
+  limb(name + 'LL', -26, 0, p.legL[0], p.legL[1], 46, 125, 40, 120, pants, pants, INK);          // back leg
+  limb(name + 'AL', -58, -188, p.armL[0], p.armL[1], 34, 108, 30, 96, sleeve, SKIN, SKIN, 19);    // back arm
+  cut(name + 'T', [[-62, 8], [62, 8], [74, -198], [40, -214], [-40, -214], [-74, -198]], top);
+  if (guard) { cut(name + 'pk', rect(-50, -160, 36, 30), KHAKI_D); cut(name + 'gl', [[18, -150], [52, -150], [50, -138], [20, -138]], '#C9CDD2'); }   // pocket, sunglasses hooked on
+  else cut(name + 'tie', [[-9, -210], [9, -210], [14, -90], [0, -70], [-14, -90]], ORANGE);
+  cut(name + 'belt', rect(-64, -6, 128, 16), INK);
+  limb(name + 'LR', 26, 0, p.legR[0], p.legR[1], 46, 125, 40, 120, pants, pants, INK);            // front leg
+  g.save(); g.translate(0, -212); g.rotate(R(p.head));                                              // head on the neck brad
+  cut(name + 'nk', rect(-16, -30, 32, 34), SKIN);
+  cut(name + 'H', [[-44, -40], [-50, -95], [-30, -128], [12, -134], [44, -112], [50, -66], [40, -34], [10, -22], [-30, -26]], SKIN);
+  cut(name + 'hr', guard ? [[-52, -92], [-40, -132], [10, -142], [50, -118], [48, -96], [10, -112], [-30, -100]] : [[-50, -96], [-34, -132], [20, -140], [52, -110], [40, -102], [0, -118], [-36, -108]], HAIR);
+  if (guard) { cut(name + 'sg', [[-6, -86], [46, -86], [44, -70], [26, -64], [10, -72], [-4, -68]], '#2E3236'); g.fillStyle = 'rgba(255,255,255,0.55)'; g.fillRect(8, -83, 12, 3); }  // mirrored glasses
+  else { g.fillStyle = INK; g.beginPath(); g.arc(24, -80, 4, 0, 7); g.fill(); }
+  brad(0, -4); g.restore(); brad(0, -212);
+  limb(name + 'AR', 58, -188, p.armR[0], p.armR[1], 34, 108, 30, 96, sleeve, SKIN, SKIN, 19);    // front arm
+  g.restore();
+}
+// a walk on twos: legs and arms swing in opposition, the body bobs
+function walk(t, speed = 1) { const ph = twos(t) * Math.PI * 2 * 1.6 * speed, s = Math.sin(ph);
+  return {legL: [-24 * s, 18 * Math.max(0, s)], legR: [24 * s, 18 * Math.max(0, -s)], armL: [20 * s, -14], armR: [-20 * s, -14], bob: -Math.abs(Math.cos(ph)) * 8}; }
+
+// ---------- collage pieces ----------
+function print(im, cx, cy, w, rot, kk, sx = 0, sw = 1) {      // a real photo as a whole print: white border, pinned, never cut or painted over
+  if (kk <= 0) return; const ih = im.height / (im.width * sw) * w; const y = cy - (1 - kk) * 900;
+  g.save(); g.translate(cx, y); g.rotate(R(rot)); g.shadowColor = 'rgba(30,20,10,0.45)'; g.shadowBlur = 18; g.shadowOffsetY = 10;
+  g.fillStyle = '#FBF8F1'; g.fillRect(-w / 2 - 16, -ih / 2 - 16, w + 32, ih + 52); g.shadowColor = 'transparent';
+  g.drawImage(im, im.width * sx, 0, im.width * sw, im.height, -w / 2, -ih / 2, w, ih); g.restore();
+}
+function pin(x, y, kk) { if (kk <= 0) return; const s = back(kk); g.save(); g.translate(x, y); g.scale(s, s);
+  g.fillStyle = 'rgba(0,0,0,0.25)'; g.beginPath(); g.arc(4, 6, 13, 0, 7); g.fill(); g.fillStyle = ORANGE; g.beginPath(); g.arc(0, 0, 13, 0, 7); g.fill();
+  g.fillStyle = 'rgba(255,255,255,0.5)'; g.beginPath(); g.arc(-4, -4, 4, 0, 7); g.fill(); g.restore(); }
+function stamp(s, x, y, kk, rot = -0.08, size = 64) { if (kk <= 0) return; const sc = 1 + (1 - back(kk)) * 0.6;
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(sc, sc); g.globalAlpha = clamp(kk * 2) * 0.9; g.strokeStyle = ORANGE; g.lineWidth = 6;
+  g.font = `700 ${size}px Kalam`; const w = g.measureText(s).width; g.strokeRect(-w / 2 - 20, -size * 0.72, w + 40, size * 1.44);
+  g.fillStyle = ORANGE; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s, 0, 4); g.restore(); }
+function docPanel(lines, x, y, w, kk, typeK, src) {   // a primary document: monospace on a dark card, tiny source line on top
+  if (kk <= 0) return; const yy = y + (1 - ease(kk)) * 60; g.save(); g.globalAlpha = clamp(kk * 1.5);
+  g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 24; g.shadowOffsetY = 12; g.fillStyle = '#1F2023'; g.fillRect(x, yy, w, 60 + lines.length * 62); g.shadowColor = 'transparent';
+  g.fillStyle = '#9A958A'; g.font = '500 20px "JetBrains Mono"'; g.fillText(src, x + 34, yy + 40);
+  g.fillStyle = CREAM; g.font = '500 40px "JetBrains Mono"'; let left = Math.floor(typeK * lines.join('').length);
+  lines.forEach((l, i) => { const s = l.slice(0, Math.max(0, left)); left -= l.length; g.fillText(s, x + 34, yy + 104 + i * 62); });
+  g.restore(); }
+
+// ---------- the set: a paper-cut basement corridor ----------
+function corridor(ox) {
+  g.save(); g.translate(ox, 0);
+  cut('cw', [[0, 0], [1920, 0], [1920, 1080], [0, 1080]], WALL, 'rgba(0,0,0,0)', 0);
+  cut('cb', [[760, 300], [1160, 300], [1160, 640], [760, 640]], WALL_D);                                  // far end wall
+  cut('cf', [[0, 1080], [1920, 1080], [1160, 640], [760, 640]], '#4A4B50');                               // floor
+  cut('cc', [[0, 0], [1920, 0], [1160, 300], [760, 300]], '#C9C1AF');                                     // ceiling
+  cut('d1', [[150, 230], [370, 270], [370, 820], [150, 900]], DOOR); cut('d1w', [[200, 330], [320, 350], [320, 460], [200, 450]], INK);
+  cut('d2', [[480, 300], [600, 320], [600, 720], [480, 760]], DOOR); cut('d2w', [[505, 360], [575, 372], [575, 430], [505, 424]], INK);
+  cut('d3', [[1550, 230], [1770, 190], [1770, 900], [1550, 820]], DOOR); cut('d3w', [[1600, 330], [1720, 310], [1720, 440], [1600, 450]], INK);
+  for (const [x1, x2] of [[215, 305], [1615, 1705]]) for (let i = 0; i < 4; i++) { const x = x1 + i * (x2 - x1) / 3; line(x, 345, x, 450, 1, '#C9A23E', 3, i + 9); }   // bars in the door windows
+  cut('lamp', [[930, 300], [990, 300], [1010, 330], [910, 330]], ORANGE);
+  g.restore();
+}
+
+window.render = function (T) {
+  const t = twos(T); paper();
+  // 0-2.4: August 1971, Jordan Hall as a pinned print, a date stamp
+  if (t < 2.6) {
+    const out = ease((t - 2.1) / 0.5);
+    g.save(); g.translate(-out * 2100, 0);
+    cut('cork', [[110, 80], [1810, 70], [1820, 1000], [100, 1010]], CORK, 'rgba(0,0,0,0.3)', 12);
+    print(IMG.jordan, 900, 500, 1180, -2.2, ease(t / 0.45));
+    pin(900, 160, k(t, 0.45, 0.18));
+    stamp('AUG 1971', 1420, 860, k(t, 0.55, 0.22));
+    txt('Building 420, formerly Jordan Hall · photo F. Schulenburg, CC BY-SA 4.0', 560, 960, 24, '#3a2e22', k(t, 0.9, 0.6), 'center', -0.01, 'Kalam', 400);
+    g.restore();
+  }
+  // 2.2-13: the basement corridor slides in; the guard walks in, the boss takes him aside
+  if (t > 2.1 && t < 13.4) {
+    const inK = ease((t - 2.1) / 0.55), outK = ease((t - 12.9) / 0.5);
+    corridor((1 - inK) * 2000 - outK * 2100);
+    g.save(); g.translate(-outK * 2100, 0);
+    if (t < 9.4) txt('the basement', 960, 248, 40, '#5a5045', k(t, 2.7, 0.5), 'center', -0.02);
+    // the guard: walks in 4.4-6.4, stops at x 820
+    const gx = 300 + 520 * ease((t - 4.4) / 2.0), walking = t > 4.4 && t < 6.4;
+    const gp = Object.assign({t: T, x: gx, y: 760, sc: 1.05, face: 1}, walking ? walk(t) : {});
+    if (t > 8.2) gp.head = 14 * ease((t - 8.2) / 0.35);                                     // "He's in trouble": head drops
+    if (t > 8.2) gp.lean = 3 * ease((t - 8.2) / 0.35);
+    if (t > 4.3) puppet('guard', gp, 'guard');
+    // the boss: walks in from the right 5.6-7.0, hand onto the guard's shoulder 6.9-7.3, finger wag 9.6-12
+    const bx = 1700 - 520 * ease((t - 5.6) / 1.4), bwalk = t > 5.6 && t < 7.0;
+    const bp = Object.assign({t: T, x: bx, y: 760, sc: 1.08, face: -1}, bwalk ? walk(t + 0.3) : {});
+    if (t > 6.9) { const u = ease((t - 6.9) / 0.4); bp.armR = [-8 - 70 * u, -10 - 25 * u]; }
+    if (t > 9.5 && t < 12.2) { const w = Math.sin(twos(t) * Math.PI * 2 * 2.2); bp.armL = [-75, -35 + 22 * w]; bp.head = -4 + 3 * w; }
+    if (t > 5.5) puppet('boss', bp, 'boss');
+    // ink: what the boss said
+    if (t > 9.6) { txt('too tough', 640, 215, 64, INK, k(t, 9.8, 0.4), 'center', -0.04, 'Kalam', 700);
+      if (t > 10.5) pen([[520, 225], [765, 197]], k(t, 10.5, 0.25), ORANGE, 8); }
+    if (t > 11.1) { txt('not tough enough', 1320, 170, 64, INK, k(t, 11.2, 0.6), 'center', 0.02, 'Kalam', 700);
+      ring(1320, 172, 300, 70, k(t, 11.9, 0.45), 4, ORANGE, 7); }
+    if (t > 8.3 && t < 9.6) { txt('!', 880, 300, 90, ORANGE, k(t, 8.35, 0.15), 'center', 0.1, 'Kalam', 700); }
+    g.restore();
+  }
+  // 12.9-19.6: the evidence board: the real guard photo pinned, the warden's words as a document, the puppet shrugs
+  if (t > 12.9) {
+    const inK = ease((t - 12.9) / 0.55);
+    g.save(); g.translate((1 - inK) * 2000, 0);
+    cut('cork2', [[90, 70], [1830, 60], [1840, 1010], [80, 1020]], CORK, 'rgba(0,0,0,0.3)', 12);
+    print(IMG.guard, 560, 540, 600, 2.5, k(t, 13.2, 0.45), 0.25, 0.5);
+    pin(560, 170, k(t, 13.6, 0.18));
+    txt('a guard, 1971 · photo P. Zimbardo, CC BY-SA 4.0', 560, 985, 24, '#2f2418', k(t, 13.9, 0.5), 'center', 0.01, 'Kalam', 400);
+    docPanel(['"Every guard is going', 'to be what we call', 'a tough guard."'], 1030, 300, 740, k(t, 14.0, 0.4), clamp((t - 14.3) / 2.6), 'THE WARDEN · RECORDED, 1971');
+    if (t > 17.6) { const u = ease((t - 17.7) / 0.35); puppet('guard2', {t: T, x: 1560, y: 1210 - 260 * u, sc: 0.8, face: -1,
+      armL: [8 + 120 * ease((t - 18.3) / 0.3), -10 - 80 * ease((t - 18.3) / 0.3)], armR: [-8 - 120 * ease((t - 18.3) / 0.3), -10 + 80 * ease((t - 18.3) / 0.3)], head: 10 * Math.sin(twos(t) * 6) * clamp(t - 18.3)}, 'guard');
+      txt('?', 1380, 760, 140, ORANGE, k(t, 18.9, 0.2), 'center', 0.12, 'Kalam', 700); }
+    g.restore();
+  }
+};
+Promise.all([fontsReady(), ...Object.values(IMG).map(im => im.decode())]).then(() => { window.ready = true; });
+</script></body></html>

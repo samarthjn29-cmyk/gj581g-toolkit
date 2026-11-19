@@ -1,0 +1,153 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Kalam;font-weight:700;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-700-normal.woff2)}
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Flat cut-paper vector test (19 Nov 2026): flat shapes, no outlines, a faint cut edge and a soft layer shadow, smooth eased motion
+// with overshoot, a small palette, paper grain on top. Real photos sit whole on flat panels. Stanford opening 0-19.7 s.
+// Characters are anonymous types (a guard, his boss), never a drawing of a real person.
+import {g, clamp, ease, back, seedRnd, rnd, fontsReady} from './ink.js';
+
+const NAVY = '#262B38', NAVY2 = '#323849', SLATE = '#4A5063', CREAM = '#EDE6D6', ORANGE = '#E0782A', MUST = '#E3A73C',
+      TEAL = '#3F6E73', KHAKI = '#B9A274', KHAKI_D = '#97825A', SHIRT = '#F2EEE4', SKIN = '#D9A27A', HAIR = '#2B231E', INKC = '#1C1E24';
+const IMG = {jordan: new Image(), guard: new Image()}; IMG.jordan.src = 'img/pw/R_jordan.jpg'; IMG.guard.src = 'img/pw/R_guard.jpg';
+const k = (t, a, d = 0.5) => ease((t - a) / d), kb = (t, a, d = 0.5) => back(clamp((t - a) / d));
+
+// ---------- flat cut shapes ----------
+const shapes = {};
+function shape(id, pts, fill, sh = 4) {        // fixed tiny cut wobble, soft shadow of the layer under it, no outline
+  if (!shapes[id]) { seedRnd(id.split('').reduce((a, c) => a * 31 + c.charCodeAt(0), 7) % 2147483647 || 7); const out = [];
+    for (let i = 0; i < pts.length; i++) { const [x1, y1] = pts[i], [x2, y2] = pts[(i + 1) % pts.length], n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1) / 26));
+      for (let j = 0; j < n; j++) { const u = j / n; out.push([x1 + (x2 - x1) * u + (rnd() - .5) * 1.2, y1 + (y2 - y1) * u + (rnd() - .5) * 1.2]); } }
+    shapes[id] = out; }
+  g.save(); g.beginPath(); shapes[id].forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath();
+  if (sh) { g.shadowColor = 'rgba(10,12,20,0.22)'; g.shadowBlur = sh * 2.5; g.shadowOffsetY = sh; }
+  g.fillStyle = fill; g.fill(); g.restore();
+}
+const rect = (x, y, w, h) => [[x, y], [x + w, y], [x + w, y + h], [x, y + h]];
+function capsule(x, y, w, l) { const p = [], r = w / 2; for (let i = 0; i <= 8; i++) { const a = Math.PI + i / 8 * Math.PI; p.push([x + Math.cos(a) * r, y + Math.sin(a) * r * 0.9]); }
+  for (let i = 0; i <= 8; i++) { const a = i / 8 * Math.PI; p.push([x + Math.cos(a) * r, y + l + Math.sin(a) * r * 0.9]); } return p; }
+function blob(cx, cy, rx, ry, n = 24) { const p = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; p.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); } return p; }
+
+// ---------- a flat character: limbs as overlapping capsules, joints hidden ----------
+const R = d => d * Math.PI / 180;
+function limb(id, x, y, a1, a2, w, l1, l2, c1, c2, end) {
+  g.save(); g.translate(x, y); g.rotate(R(a1)); shape(id + 'u', capsule(0, 0, w, l1), c1, 2);
+  g.translate(0, l1); g.rotate(R(a2)); shape(id + 'l', capsule(0, 0, w * 0.9, l2), c2, 2);
+  if (end === 'hand') shape(id + 'h', blob(0, l2 + 6, w * 0.55, w * 0.6, 14), SKIN, 1);
+  if (end === 'shoe') shape(id + 's', [[-w * 0.5, l2 - 6], [w * 0.9, l2 - 6], [w * 1.1, l2 + 14], [-w * 0.5, l2 + 14]], INKC, 1);
+  g.restore();
+}
+function person(name, p, kind) {
+  p = Object.assign({sc: 1, lean: 0, head: 0, armB: [10, -12], armF: [-10, -12], legB: [0, 0], legF: [0, 0], bob: 0, face: 1, sq: 0}, p);
+  const guard = kind === 'guard', top = guard ? KHAKI : SHIRT, sleeve = guard ? KHAKI_D : '#DCD6C8', pants = guard ? KHAKI_D : SLATE;
+  g.save(); g.translate(p.x, p.y + p.bob); g.scale(p.sc * p.face * (1 + p.sq * 0.04), p.sc * (1 - p.sq * 0.05)); g.rotate(R(p.lean));
+  limb(name + 'lb', -24, -8, p.legB[0], p.legB[1], 44, 118, 112, pants, pants, 'shoe');
+  limb(name + 'ab', -56, -196, p.armB[0], p.armB[1], 34, 102, 92, sleeve, SKIN, 'hand');
+  shape(name + 't', [[-60, 0], [60, 0], [70, -190], [52, -216], [-52, -216], [-70, -190]], top, 3);
+  if (guard) shape(name + 'pk', rect(-48, -168, 34, 26), KHAKI_D, 0); else shape(name + 'tie', [[-8, -214], [8, -214], [13, -96], [0, -78], [-13, -96]], ORANGE, 1);
+  shape(name + 'bt', rect(-62, -10, 124, 14), INKC, 0);
+  limb(name + 'lf', 24, -8, p.legF[0], p.legF[1], 44, 118, 112, pants, pants, 'shoe');
+  g.save(); g.translate(0, -214); g.rotate(R(p.head));
+  shape(name + 'nk', rect(-15, -26, 30, 30), SKIN, 0);
+  shape(name + 'hd', blob(4, -82, 50, 58, 28), SKIN, 2);
+  shape(name + 'hr', guard ? [[-50, -96], [-36, -136], [14, -146], [52, -118], [54, -92], [26, -110], [-20, -104], [-34, -76]] : [[-48, -100], [-30, -138], [24, -144], [54, -112], [44, -106], [6, -120], [-32, -110]], HAIR, 1);
+  if (guard) { shape(name + 'sg', [[-4, -92], [50, -92], [48, -74], [28, -70], [16, -78], [0, -72]], '#2F343A', 0); shape(name + 'gl', [[6, -88], [22, -88], [20, -84], [6, -84]], 'rgba(255,255,255,0.6)', 0); }
+  else { shape(name + 'ey', blob(28, -84, 5, 5, 10), INKC, 0); }
+  shape(name + 'ms', guard ? [[14, -50], [36, -50], [34, -45], [16, -45]] : [[16, -48], [34, -46], [32, -43], [17, -45]], guard ? HAIR : '#9A6A52', 0);
+  g.restore();
+  limb(name + 'af', 56, -196, p.armF[0], p.armF[1], 34, 102, 92, sleeve, SKIN, 'hand');
+  g.restore();
+}
+function walk(t, f = 1.7) { const ph = t * Math.PI * 2 * f, s = Math.sin(ph);
+  return {legB: [-22 * s, 16 * Math.max(0, s)], legF: [22 * s, 16 * Math.max(0, -s)], armB: [18 * s, -14], armF: [-18 * s, -14], bob: -Math.abs(Math.cos(ph)) * 7}; }
+
+// ---------- flat type, chips and panels ----------
+function chip(s, x, y, size, bg, fg, kk, rot = 0) { if (kk <= 0) return; const sc = back(clamp(kk)); g.save(); g.translate(x, y); g.rotate(rot); g.scale(sc, sc);
+  g.font = `700 ${size}px Kalam`; const w = g.measureText(s).width + size * 0.9, h = size * 1.45;
+  shape('chip' + s, [[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2]], bg, 3);
+  g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s, 0, 3); g.restore(); }
+function big(s, x, y, size, color, kk, font = '700 {s}px Kalam', align = 'left') { if (kk <= 0) return; g.save(); g.globalAlpha = clamp(kk * 1.4);
+  g.font = font.replace('{s}', size); g.fillStyle = color; g.textAlign = align; g.textBaseline = 'alphabetic'; g.fillText(s, x, y + (1 - ease(kk)) * 30); g.restore(); }
+function photo(im, x, y, w, h, kk, sx = 0.5) {   // a real photo, whole and untouched, cropped to its frame, sliding in from the right
+  if (kk <= 0) return; const ox = (1 - ease(kk)) * 900; const ir = im.width / im.height, fr = w / h;
+  let sw = im.width, shh = im.height; if (ir > fr) sw = im.height * fr; else shh = im.width / fr;
+  g.save(); g.beginPath(); g.rect(x + ox, y, w, h); g.clip(); g.drawImage(im, (im.width - sw) * sx, (im.height - shh) / 2, sw, shh, x + ox, y, w, h); g.restore(); }
+function mono(lines, x, y, size, kk, src) { g.save(); g.fillStyle = '#8F95A3'; g.font = '500 22px "JetBrains Mono"'; g.globalAlpha = clamp(kk * 3); g.fillText(src, x, y - 70);
+  g.globalAlpha = 1; g.fillStyle = CREAM; g.font = `500 ${size}px "JetBrains Mono"`; let left = Math.floor(kk * lines.join('').length);
+  lines.forEach((l, i) => { g.fillText(l.slice(0, Math.max(0, left)), x, y + i * size * 1.45); left -= l.length; }); g.restore(); }
+
+// ---------- paper grain over everything (fixed) ----------
+let grain = null;
+function grainLayer() { if (!grain) { grain = document.createElement('canvas'); grain.width = 1920; grain.height = 1080; const x = grain.getContext('2d'), id = x.createImageData(1920, 1080), d = id.data; seedRnd(5);
+  for (let i = 0; i < d.length; i += 4) { const v = 128 + (rnd() - .5) * 60; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 22; } x.putImageData(id, 0, 0); }
+  g.save(); g.globalCompositeOperation = 'overlay'; g.drawImage(grain, 0, 0); g.restore(); }
+
+// ---------- the set: a flat corridor with a light cone, in three depth layers ----------
+function corridor(t, ox, push) {
+  const L = (d, fn) => { g.save(); g.translate(960 + ox * d, 560); g.scale(1 + push * d, 1 + push * d); g.translate(-960, -560); fn(); g.restore(); };
+  L(0.4, () => { shape('cw0', rect(-200, -200, 2320, 1480), NAVY, 0); shape('cend', rect(780, 330, 360, 290), NAVY2, 0); shape('cflr', [[-300, 1300], [2220, 1300], [1140, 620], [780, 620]], '#1D212B', 0); });
+  L(0.7, () => { shape('wl', [[-300, -200], [780, 330], [780, 620], [-300, 1300]], '#2F3545', 0); shape('wr', [[2220, -200], [1140, 330], [1140, 620], [2220, 1300]], '#2A3040', 0);
+    shape('d2', [[520, 380], [640, 400], [640, 690], [520, 730]], TEAL, 2); shape('d2w', [[545, 430], [615, 440], [615, 490], [545, 484]], '#16181E', 0);
+    shape('d5', [[1280, 400], [1400, 380], [1400, 730], [1280, 690]], TEAL, 2); shape('d5w', [[1305, 440], [1375, 430], [1375, 484], [1305, 490]], '#16181E', 0); });
+  L(1.0, () => { shape('d1', [[120, 220], [380, 270], [380, 860], [120, 950]], TEAL, 4);
+    for (let i = 0; i < 4; i++) shape('b1' + i, rect(180 + i * 42, 330, 10, 140), MUST, 0);
+    shape('d4', [[1540, 270], [1800, 220], [1800, 950], [1540, 860]], TEAL, 4);
+    for (let i = 0; i < 4; i++) shape('b4' + i, rect(1590 + i * 42, 330, 10, 140), MUST, 0);
+    shape('lamp', [[925, 300], [995, 300], [1018, 336], [902, 336]], MUST, 2);
+    const fl = (Math.floor(t * 30) % 70 === 3) ? 0.04 : 0.11; g.save(); g.globalAlpha = fl; shape('cone', [[910, 336], [1010, 336], [1260, 900], [660, 900]], MUST, 0); g.restore(); });
+}
+
+window.render = function (t) {
+  g.fillStyle = NAVY; g.fillRect(0, 0, 1920, 1080);
+  // 0-2.3: AUGUST 1971 on the navy panel, the real building photo slides in on the right
+  if (t < 2.5) { const out = ease((t - 2.05) / 0.45); g.save(); g.translate(-out * 1920, 0);
+    shape('p1', rect(0, 0, 820, 1080), NAVY2, 0);
+    big('AUGUST', 120, 470, 64, MUST, k(t, 0.05, 0.4), '700 {s}px "JetBrains Mono"'); big('1971', 108, 690, 230, CREAM, k(t, 0.35, 0.5));
+    photo(IMG.jordan, 820, 0, 1100, 1080, k(t, 0.0, 0.6), 0.45);
+    g.fillStyle = 'rgba(237,230,214,0.75)'; g.font = '500 20px "JetBrains Mono"'; if (t > 0.9) g.fillText('BUILDING 420, FORMERLY JORDAN HALL · F. SCHULENBURG · CC BY-SA 4.0', 860, 1040);
+    g.restore(); }
+  // 2.1-13.2: the corridor, the guard, the boss
+  if (t > 2.0 && t < 13.3) {
+    const inK = ease((t - 2.0) / 0.6), outK = ease((t - 12.8) / 0.5);
+    corridor(t, (1 - inK) * 1920 - outK * 1920 + (t - 2) * -6, 0.06 * clamp((t - 2) / 11));
+    g.save(); g.translate((1 - inK) * 1920 - outK * 1920, 0);
+    chip('the basement', 960, 200, 38, CREAM, NAVY, k(t, 2.7, 0.4) * (1 - k(t, 9.2, 0.3)));
+    const gx = 260 + 590 * ease((t - 4.4) / 2.0), gw = t > 4.4 && t < 6.4;
+    const gp = Object.assign({x: gx, y: 800, sc: 1.0}, gw ? walk(t) : {});
+    if (t > 6.4 && t < 6.8) gp.sq = Math.sin((t - 6.4) / 0.4 * Math.PI);                              // settle on the stop
+    if (t > 8.2) { const u = kb(t, 8.2, 0.45); gp.head = 16 * u; gp.lean = 4 * u; gp.armF = [-4, -4]; gp.armB = [4, -4]; }
+    if (t > 4.3) person('guard', gp, 'guard');
+    const bx = 1720 - 545 * ease((t - 5.6) / 1.4), bw = t > 5.6 && t < 7.0;
+    const bp = Object.assign({x: bx, y: 800, sc: 1.04, face: -1}, bw ? walk(t + 0.25) : {});
+    if (t > 6.9) { const u = kb(t, 6.9, 0.45); bp.armF = [-10 - 58 * u, -12 - 8 * u]; }
+    if (t > 9.5 && t < 12.3) { const w = Math.sin((t - 9.5) * Math.PI * 2 * 2.2); bp.armB = [-80, -40 + 20 * w]; bp.head = -3 + 3 * w; }
+    if (t > 5.5) person('boss', bp, 'boss');
+    if (t > 8.25 && t < 9.5) chip('!', 905, 520, 70, ORANGE, CREAM, kb(t, 8.25, 0.3), 0.1);
+    if (t > 9.7) { chip('too tough', 640, 230, 52, CREAM, NAVY, kb(t, 9.8, 0.4), -0.05);
+      if (t > 10.5) { const u = k(t, 10.5, 0.25); g.save(); g.translate(640, 230); g.rotate(-0.05); shape('slash', rect(-170, -6, 340 * u, 12), ORANGE, 0); g.restore(); } }
+    if (t > 11.1) chip('not tough enough', 1330, 190, 58, ORANGE, CREAM, kb(t, 11.15, 0.45), 0.03);
+    g.restore();
+  }
+  // 12.8-17.7: the evidence: the real guard photo on the right, the warden's words typed on the navy panel
+  if (t > 12.8 && t < 17.9) { const inK = ease((t - 12.8) / 0.5), outK = ease((t - 17.45) / 0.45); g.save(); g.translate((1 - inK) * 1920 - outK * 1920, 0);
+    shape('p2', rect(0, 0, 1920, 1080), NAVY2, 0);
+    photo(IMG.guard, 1120, 0, 800, 1080, k(t, 12.9, 0.55), 0.5);
+    g.save(); const gr = g.createLinearGradient(1120, 0, 1300, 0); gr.addColorStop(0, NAVY2); gr.addColorStop(1, 'rgba(50,56,73,0)'); g.fillStyle = gr; g.fillRect(1118, 0, 184, 1080); g.restore();
+    mono(['"Every guard is going', 'to be what we call', 'a tough guard."'], 140, 470, 58, clamp((t - 14.2) / 2.8), 'THE WARDEN · RECORDED, 1971');
+    g.fillStyle = 'rgba(237,230,214,0.7)'; g.font = '500 18px "JetBrains Mono"'; if (t > 13.6) g.fillText('A GUARD, 1971 · P. ZIMBARDO · CC BY-SA 4.0', 1150, 1045);
+    g.restore(); }
+  // 17.5-19.7: back in the corridor, the guard alone: a shrug and a big question mark
+  if (t > 17.45) { const inK = ease((t - 17.45) / 0.45); g.save(); g.translate((1 - inK) * 1920, 0);
+    corridor(t, 0, 0.02);
+    const u = kb(t, 18.2, 0.4); person('guard3', {x: 960, y: 820, sc: 1.05, armB: [10 + 120 * u, -12 - 85 * u], armF: [-10 - 120 * u, -12 + 85 * u], head: 8 * Math.sin((t - 18.2) * 9) * clamp((t - 18.2) * 2) * (1 - clamp((t - 19) * 2)), sq: u * 0.4}, 'guard');
+    chip('?', 1210, 430, 120, ORANGE, CREAM, kb(t, 18.85, 0.35), 0.12);
+    g.restore(); }
+  grainLayer();
+};
+Promise.all([fontsReady(), ...Object.values(IMG).map(im => im.decode())]).then(() => { window.ready = true; });
+</script></body></html>
