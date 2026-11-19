@@ -1,0 +1,107 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// "Animate the subject itself" test (20 Nov 2026) for the colour video: every moving thing is computed from measured data.
+// Cone curves: Stockman & Sharpe (2000) 2-degree cone fundamentals, each scaled to peak 1 (conedata.json, exported with colour-science).
+// A 0-14  one cone is a colourblind counter (univariance: dim 540 nm and bright 600 nm give the same M signal)
+// B 14-27 three cones: three counts, one colour
+// C 27-41 a metamer: 580 nm alone vs 540 + 620 nm mixed give the same L and M counts (weights solved from the curves)
+// D 41-58 the mosaic: natural 540 nm light fires M and L together; a laser on M cells alone gives a signal no light can (the Oz idea)
+// The subtitle lines are placeholders for narration, not final script.
+const D = await fetch('conedata.json').then(r => r.json());
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.6) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const BG = '#0A0F1E', CREAM = '#EFE6D2', DIM = '#7F8AA6', COL = {L: '#FF6B5B', M: '#5BE08A', S: '#6B8CFF'}, SANS = 'Inter, "DejaVu Sans", sans-serif';
+const X0 = 200, X1 = 1380, YB = 760, PH = 430, W0 = 390, W1 = 700;
+const xw = w => X0 + (w - W0) / (W1 - W0) * (X1 - X0), yv = v => YB - v * PH, val = (c, w) => { const i = clamp(w - W0, 0, 310), a = Math.floor(i), f = i - a; return D[c][a] * (1 - f) + D[c][Math.min(310, a + 1)] * f; };
+const rgbw = w => { const c = D.rgb[Math.round(clamp(w - W0, 0, 310))]; return `rgb(${c[0]},${c[1]},${c[2]})`; };
+function text(s, x, y, size = 30, col = CREAM, font = SANS, weight = 500, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
+const mono = (s, x, y, a = 1, size = 20, col = DIM, align = 'left') => text(s, x, y, size, col, '"JetBrains Mono"', 500, align, a);
+
+function axes(a = 1) { g.save(); g.globalAlpha = a;
+  for (let w = W0; w <= W1; w++) { g.fillStyle = rgbw(w); g.fillRect(xw(w), YB + 14, (X1 - X0) / 310 + 1, 22); }
+  g.strokeStyle = 'rgba(127,138,166,0.35)'; g.lineWidth = 2; g.beginPath(); g.moveTo(X0, YB); g.lineTo(X1, YB); g.stroke();
+  g.restore(); for (let w = 400; w <= 700; w += 50) mono(w + '', xw(w), YB + 66, a, 20, DIM, 'center'); mono('WAVELENGTH (NM)', X1, YB + 100, a, 18, DIM, 'right'); }
+function curve(c, upto = 1, a = 1) { if (a <= 0 || upto <= 0) return; g.save(); g.globalAlpha = a; g.strokeStyle = COL[c]; g.lineWidth = 5; g.lineJoin = 'round'; g.shadowColor = COL[c]; g.shadowBlur = 22;
+  g.beginPath(); const end = W0 + 310 * upto; for (let w = W0; w <= end; w++) { const x = xw(w), y = yv(D[c][w - W0]); w === W0 ? g.moveTo(x, y) : g.lineTo(x, y); } g.stroke();
+  g.globalAlpha = a * 0.10; g.lineTo(xw(end), YB); g.lineTo(X0, YB); g.closePath(); g.fillStyle = COL[c]; g.shadowBlur = 0; g.fill(); g.restore(); }
+function light(w, bright = 1, cones = 'M', a = 1) { if (a <= 0) return; const x = xw(w), col = rgbw(w); g.save(); g.globalAlpha = a;
+  g.strokeStyle = col; g.shadowColor = col; g.shadowBlur = 30; g.lineWidth = 3 + 4 * bright; g.beginPath(); g.moveTo(x, 250); g.lineTo(x, YB); g.stroke();
+  g.fillStyle = col; g.beginPath(); g.arc(x, 222, 16 + 16 * bright, 0, 7); g.fill(); g.shadowBlur = 0;
+  for (const c of cones) { g.fillStyle = '#fff'; g.beginPath(); g.arc(x, yv(val(c, w)), 9, 0, 7); g.fill(); g.strokeStyle = COL[c]; g.lineWidth = 4; g.stroke(); }
+  g.restore(); mono(Math.round(w) + ' NM', x, 170, a, 22, CREAM, 'center'); }
+// meters at the right: [{c, v, parts?}]
+const MX = {L: 1520, M: 1640, S: 1760};
+function meter(c, v, a = 1, ghost = null, parts = null) { if (a <= 0) return; const x = MX[c], w = 70; g.save(); g.globalAlpha = a;
+  g.fillStyle = 'rgba(127,138,166,0.13)'; g.fillRect(x, yv(1), w, PH);
+  if (parts) { let y = YB; for (const [pv, pc] of parts) { const h = pv * PH; g.fillStyle = pc; g.fillRect(x, y - h, w, h - 2); y -= h; } }
+  else { g.fillStyle = COL[c]; g.shadowColor = COL[c]; g.shadowBlur = 24; g.fillRect(x, yv(v), w, v * PH); }
+  g.shadowBlur = 0; if (ghost !== null) { g.strokeStyle = CREAM; g.lineWidth = 3; g.setLineDash([8, 7]); g.beginPath(); g.moveTo(x - 14, yv(ghost)); g.lineTo(x + w + 14, yv(ghost)); g.stroke(); }
+  g.restore(); text(c, x + w / 2, YB + 50, 34, COL[c], SANS, 800, 'center', a); mono(v.toFixed(2), x + w / 2, yv(1) - 16, a, 22, CREAM, 'center'); }
+function patch(col, label, a = 1, x = 1640, y = 150, r = 62) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = col; g.shadowColor = col; g.shadowBlur = 50; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.restore(); mono(label, x, y + r + 34, a, 18, DIM, 'center'); }
+function sub(s) { if (!s) return; g.save(); g.font = `500 38px ${SANS}`; g.textAlign = 'center'; const w = g.measureText(s).width + 56; g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(960 - w / 2, 968, w, 64); g.fillStyle = '#F4EFE4'; g.fillText(s, 960, 1013); g.restore(); }
+const head = (s, a = 1) => text(s, X0, 110, 54, CREAM, SANS, 800, 'left', a);
+const src = (a = 1) => mono('CONE SENSITIVITIES: STOCKMAN & SHARPE (2000), 2° · EACH SCALED TO PEAK 1', X0, 940, a * 0.8, 16);
+
+// ---------- A: one cone, a colourblind counter ----------
+function A(t) {
+  axes(k(t, 0.2)); curve('M', ease((t - 0.8) / 2.0)); head('One cone cell', k(t, 0.4)); src(k(t, 2));
+  if (t < 8.2) { const u = (t - 3.2) / 4.6; if (u > 0) { const w = u < 0.5 ? lerp(450, 630, ease(u * 2)) : lerp(630, 540, ease(u * 2 - 1)); light(w, 0.6, 'M', k(t, 3.2, 0.4)); meter('M', 0.6 * val('M', w), k(t, 3.2, 0.4)); } }
+  else { const sA = 0.5 * val('M', 540), onB = t > 10.6, sw = k(t, 10.6, 0.5);
+    light(540, 0.5, 'M', onB ? 1 - sw : k(t, 8.2, 0.4)); light(600, D.k600, 'M', onB ? sw : 0);
+    text('dim', xw(540), 132, 30, CREAM, SANS, 500, 'center', onB ? 1 - sw : k(t, 8.6)); text('bright', xw(600), 132, 30, CREAM, SANS, 500, 'center', onB ? sw : 0);
+    meter('M', sA, 1, t > 9.6 ? sA : null);
+    text('Same signal.', 1675, 180, 46, CREAM, SANS, 800, 'center', k(t, 11.6)); }
+}
+// ---------- B: three cones, three counts, one colour ----------
+function B(t) {
+  axes(); curve('M'); curve('L', ease((t - 14.3) / 1.6)); curve('S', ease((t - 15.0) / 1.6)); head('Three kinds of cone', 1); src();
+  const u = clamp((t - 16.6) / 9.6), w = lerp(410, 670, ease(u)), a = k(t, 16.4, 0.4);
+  light(w, 0.7, 'LMS', a); for (const c of 'LMS') meter(c, 0.7 * val(c, w), a); patch(rgbw(w), 'WHAT YOU SEE', a);
+}
+// ---------- C: the metamer ----------
+function C(t) {
+  axes(); for (const c of 'LMS') curve(c, 1, 0.55); head('Two lights, one colour', 1); src();
+  const [wa, wb] = D.met, sp = k(t, 32.2, 1.2), T = {}; for (const c of 'LMS') T[c] = val(c, 580);
+  if (sp < 1) light(580, 0.7, 'LM', 1 - sp);
+  if (sp > 0) { light(lerp(580, 540, sp), 0.25 + 0.3 * wa, 'LM', sp); light(lerp(580, 620, sp), 0.25 + 0.3 * wb, 'LM', sp); }
+  for (const c of 'LMS') { if (sp >= 1) meter(c, wa * val(c, 540) + wb * val(c, 620), 1, T[c], [[wa * val(c, 540), rgbw(540)], [wb * val(c, 620), rgbw(620)]]);
+    else meter(c, lerp(T[c], wa * val(c, lerp(580, 540, sp)) + wb * val(c, lerp(580, 620, sp)), sp), 1, t > 30 ? T[c] : null); }
+  patch(rgbw(580), sp < 0.5 ? 'ONE LIGHT: 580 NM' : 'TWO LIGHTS: 540 + 620 NM', 1);
+  text('Same counts. Same yellow.', X0, 166, 36, CREAM, SANS, 800, 'left', k(t, 34.4));
+  mono('L AND M MATCH EXACTLY · S IS NEAR ZERO IN BOTH', X0, 204, k(t, 35.2), 18);
+}
+// ---------- D: the mosaic; natural light vs a laser on M cells alone ----------
+const cells = []; { let s = 12345; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  for (let yy = -11; yy <= 11; yy++) for (let xx = -12; xx <= 12; xx++) { const x = 700 + xx * 36 + (yy & 1) * 18, y = 520 + yy * 32; if (Math.hypot(x - 700, y - 520) > 380) continue; const q = r(); cells.push({x, y, c: q < 0.07 ? 'S' : q < 0.40 ? 'M' : 'L', o: r()}); } }
+const mcells = cells.filter(c => c.c === 'M').sort((a, b) => a.o - b.o);
+function Dm(t) {
+  head('The cone mosaic', 1);
+  const nat = k(t, 42.6, 0.8) * (1 - k(t, 47.6, 0.8)), las = clamp((t - 49.2) / 3.2), lit = Math.floor(las * mcells.length), R = {L: val('L', 540), M: val('M', 540), S: val('S', 540)};
+  if (nat > 0) { g.save(); g.globalAlpha = nat * 0.16; g.fillStyle = rgbw(540); g.beginPath(); g.arc(700, 520, 400, 0, 7); g.fill(); g.restore(); }
+  for (const c of cells) { let b = 0.22 + nat * 0.78 * R[c.c]; const hit = c.c === 'M' && las > 0 && mcells.indexOf(c) < lit; if (hit) b = 1;
+    g.save(); g.globalAlpha = b; g.fillStyle = COL[c.c]; if (b > 0.6) { g.shadowColor = COL[c.c]; g.shadowBlur = 18; } g.beginPath(); g.arc(c.x, c.y, 13, 0, 7); g.fill(); g.restore(); }
+  if (las > 0 && las < 1) { const c = mcells[Math.min(lit, mcells.length - 1)]; g.save(); g.strokeStyle = '#9FF7EA'; g.shadowColor = '#14C7B0'; g.shadowBlur = 20; g.lineWidth = 3; g.beginPath(); g.moveTo(60, 60); g.lineTo(c.x, c.y); g.stroke(); g.restore(); }
+  g.save(); g.strokeStyle = 'rgba(127,138,166,0.4)'; g.lineWidth = 3; g.beginPath(); g.arc(700, 520, 400, 0, 7); g.stroke(); g.restore();
+  const L = nat * R.L, M = Math.max(nat * R.M, las), S = nat * R.S, ma = k(t, 42.2);
+  meter('L', L, ma); meter('M', M, ma); meter('S', S, ma);
+  mono('540 NM LIGHT ON THE WHOLE PATCH', 700, 950, nat, 20, CREAM, 'center'); mono('LASER PULSES ON M CELLS ONLY', 700, 950, k(t, 49.2) , 20, CREAM, 'center');
+  patch('#14C7B0', 'OLO · A SCREEN CAN ONLY HINT AT IT', k(t, 53.2, 1.0), 1640, 150, 62);
+  mono('ILLUSTRATIVE MOSAIC · CONE MIX VARIES FROM PERSON TO PERSON', X0, 1000 - 950 + 950 - 950 + 60, 0);
+}
+const SUBS = [[1.0, 7.8, 'A single cone cell just counts the light it catches.'], [8.4, 13.6, 'A dim green and a bright orange give it the very same count.'],
+  [14.4, 26.4, 'So the eye uses three kinds of cone, and compares their counts.'], [27.4, 32.0, 'One pure yellow light gives these three counts.'], [32.6, 40.4, 'A green and a red light together give the same counts. Your screen does this.'],
+  [41.4, 47.6, 'In nature, any light that fires the M cones fires the L cones too.'], [48.6, 57.4, 'Aim a laser at M cells alone, and the brain gets a signal no light can send.']];
+window.render = function (t) {
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const v = g.createRadialGradient(960, 520, 300, 960, 520, 1200); v.addColorStop(0, 'rgba(40,60,110,0.20)'); v.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080);
+  if (t < 14) A(t); else if (t < 27) B(t); else if (t < 41) C(t); else Dm(t);
+  const s = SUBS.find(x => t >= x[0] && t < x[1]); sub(s && s[2]);
+};
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"')]); window.ready = true;
+</script></body></html>
