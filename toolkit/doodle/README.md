@@ -23,3 +23,13 @@ A short hand-drawn diagram (5-12 s) that takes the place of a number or evidence
 - Render: `npm i` once here, then `node render.js cards/<page>.html "card=<name>&<palette>" <start> <end> <out.mp4>`; add a last argument (a time) to write one PNG for checking.
 - Beat times come from whisper word times on Sam's audio (`faster-whisper small.en`, word_timestamps). A beat lands on its word, never before it.
 - Into the video: overlay on the chapter or full video with 0.25 s alpha fades at both ends, `eof_action=pass`; soft pencil scratches (band-passed noise, about -26 dBFS peak) on the main strokes, mixed under the voice (`amix normalize=0`).
+
+## Rendering on another computer (Sam's laptop with a graphics card)
+1. Install Git, Node.js (LTS) and ffmpeg (on PATH).
+2. `git clone https://github.com/samarthjn29-cmyk/gj581g-toolkit` then `cd gj581g-toolkit/toolkit/doodle`.
+3. `npm install` then `npm install playwright` then `npx playwright install chromium`.
+4. Render with the GPU switch (PowerShell: `$env:GPU="1"`; Mac/Linux: `GPU=1`), e.g.
+   `node render.js cards/colour_patch_d.html "" 20.2 37.6 D_full.mp4`
+   The first line printed is `WebGL: ...`. It should name the graphics card (NVIDIA, AMD, Intel, Apple); "SwiftShader" means it fell back to software.
+   A progress line every 30 frames shows the seconds per frame.
+5. Put the MP4 in `G:\My Drive\Decked out Data\projects\<Video>\clips\`; the workspace picks it up from there and adds the audio.
