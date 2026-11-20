@@ -1,0 +1,176 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+@font-face{font-family:Kalam;font-weight:400;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1 chapter 2 "There is no yellow", silent build at 148 wpm (21 Nov 2026; Sam: "Render chapter 2"), in chapter 0's design (stills-world 1d).
+// Real footage: Mixkit 258 'RGB pixels', 1168 flowers, 2408 sky, 42946 apples (free licence). Waves, screen stripes and cone lights are drawn illustrations.
+// (Built from) Colour_v1 chapter 0, opening A, timed test with no voice (Sam, 20 Nov 2026: "If we go with A, how will the video look... show the exact thing on the screen as I am
+// speaking... visuals itself should be expressive", then "Alright go ahead"). Built on the fern study (styles/DOC_CHANNELS_OPENING_STUDY.md): every noun on screen as it is
+// said, one world (pure red, green and blue light on black), words inside the scene, the camera always moving. Line times are estimates at 148 wpm until Sam records.
+// Real material: Mixkit eye clips 4257, 4058, 387, 32757, 13775 (free licence); Mixkit 42946 apples; Fong et al. 2025 Fig. 1C (CC BY 4.0); Dalton carte (PD);
+// Dalton 1798 paper p. 28 (PD); Henry 1854 p. 25 (PD); UC Berkeley campus (CC BY 4.0). The gamut triangle is our drawing after Fong et al. Fig. 2 (illustration).
+const LINES = [['So here’s the thing we all believe.', 1], ['That colour is out there, in the light, in the things we look at.', 2], ['Look at this yellow square for a moment.', 2],
+  ['Here’s a question.', 1], ['Does your screen have a yellow light in it?', 2], ['Almost certainly not.', 2], ['Your screen doesn’t use a yellow light to show you yellow.', 1],
+  ['It has red, green and blue lights, packed too tightly for you to see one by one.', 1], ['Turn the red and green on together, and your brain reports yellow.', 2], ['Yellow, with no yellow light.', 2],
+  ['That’s not a flaw in your screen.', 1], ['It’s a clue about your eyes.', 1], ['And the first clue to how five people saw olo.', 2], ['Light itself has no colour.', 2],
+  ['It comes in different wavelengths, the way sound comes in different pitches, and that’s all.', 1], ['Long waves, short waves, everything in between.', 2],
+  ['Somewhere between the light hitting your eye and you saying “yellow”, a calculation happens.', 1], ['And it turns out that calculation can be fooled.', 2],
+  ['To see how, we need to go back to a man who guessed how the eye might count.', 1]];
+const WPS = 148 / 60; let tt = 0.6; const LT = LINES.map(([s, end]) => { const n = s.split(' ').length, a = tt, b = a + n / WPS; tt = b + (end === 2 ? 0.9 : end ? 0.5 : 0.1); return [a, b, s]; });
+const END = tt + 1.6; window.END = END;
+const L = i => LT[i][0], LE = i => LT[i][1];
+
+const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
+const [P28, P25, DALTON, BERK, FIG1C, GER] = await Promise.all(['/img/colour/ch1/R_paper_p28_title.jpg', '/img/colour/ch1/R_henry1854_p25.jpg', '/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/map_iv.png', '/img/colour/ch1/R_geranium.jpg'].map(img));
+const V = Object.fromEntries(await Promise.all(['apples', 'sky', 'flower', 'pixels_rgb'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
+async function seek(v, u) { const D = v.duration - 0.05, x = ((u % D) + D) % D; if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.4) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const backOut = u => { u = clamp(u); const c = 1.9; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+const BG = '#0C1626', CREAM = '#F2EEE4', DIM = '#8C93A8', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF', OLO = '#00E0BE', GOLD = '#FFC24A';
+const SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"', HAND = 'Kalam';
+function text(s, x, y, size = 30, col = CREAM, font = SERIF, align = 'left', a = 1, glow = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `400 ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; if (glow) { g.shadowColor = col; g.shadowBlur = glow; } g.fillText(s, x, y); g.restore(); }
+function chip(x, y, w, h, a = 0.78, col = '7,9,16') { g.fillStyle = `rgba(${col},${a})`; g.beginPath(); g.roundRect(x, y, w, h, 10); g.fill(); }
+function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {
+  const [bx, by, bw, bh] = box, iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
+  const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(bx, by, bw, bh); g.clip(); g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h, iw, ih}; }
+const at = (r, px, py) => [r.x + px / r.iw * r.w, r.y + py / r.ih * r.h];
+function glow(x, y, r, col, a = 1) { if (a <= 0) return; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(0.25, col + 'CC'); gr.addColorStop(1, col + '00'); g.save(); g.globalAlpha = a; g.globalCompositeOperation = 'lighter'; g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); g.restore(); }
+function leaks(t, a = 0.5) {   // a faint wash of the three cone colours at the edges (very soft, barely moving)
+  glow(160, 120, 700, R, a * 0.12); glow(1760, 980, 760, B, a * 0.16); glow(1760, 100, 560, GR, a * 0.1); }
+function sparks(t, cx, cy, n, spread, a, col = OLO) { g.save(); g.globalCompositeOperation = 'lighter'; for (let i = 0; i < n; i++) { const f1 = (Math.sin(i * 91.7) * 43758.5) % 1, f2 = (Math.sin(i * 12.9) * 9631.1) % 1, an = Math.abs(f1) * 6.283 + t * 0.05 * (Math.abs(f2) - 0.5), r = spread * (0.3 + Math.abs(f2)) + ((t * 8 * (0.5 + Math.abs(f1))) % 140);
+  g.globalAlpha = 0.5 * a * (0.3 + 0.7 * Math.abs(f1)); g.fillStyle = col; g.beginPath(); g.arc(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1.4 + 2 * Math.abs(f2), 0, 7); g.fill(); } g.restore(); }
+const POST = []; const post = fn => POST.push(fn);
+function sub(t) {   // the script line being spoken, as subtitles (Sam's voice is not recorded yet)
+  let i = -1; for (let j = 0; j < LT.length; j++) if (t >= LT[j][0] - 0.05 && t < (j + 1 < LT.length ? LT[j + 1][0] - 0.05 : END)) i = j; if (i < 0) return;
+  post(() => { g.save(); g.font = `400 40px ${SERIF}`; const s = LT[i][2], w = g.measureText(s).width + 56; chip(960 - w / 2, 958, w, 66, 0.72); g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText(s, 960, 1004); g.restore(); }); }
+function tagTL(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAlpha = a; g.font = `500 20px ${MONO}`; const w = g.measureText(s).width + 32; chip(104, 66, w, 48, 0.7); g.fillStyle = CREAM; g.fillText(s, 120, 98); g.restore(); }); }
+function srcBR(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAlpha = a * 0.85; g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = DIM; g.fillText(s, 1816, 84); g.restore(); }); }
+
+// ---------- shots ----------
+// the cone trio: the video's icon (three cone types). states 0-1: L red, M green, S blue; mCol overrides the green light (olo teal)
+function trio(cx, cy, r, L, M, S, a = 1, mCol = GR, labels = 0) { if (a <= 0) return; const xs = [cx - r * 2.6, cx, cx + r * 2.6], st = [L, M, S], cols = [R, mCol, B], names = ['L', 'M', 'S'];
+  for (let i = 0; i < 3; i++) { const x = xs[i], v = st[i]; g.save(); g.globalAlpha = a; g.strokeStyle = 'rgba(242,238,228,0.45)'; g.lineWidth = 2; g.beginPath(); g.arc(x, cy, r, 0, 7); g.stroke(); g.restore();
+    if (v > 0) { glow(x, cy, r * 2.4, cols[i], 0.55 * v * a); g.save(); g.globalAlpha = v * a; g.fillStyle = cols[i]; g.beginPath(); g.arc(x, cy, r * 0.82, 0, 7); g.fill(); g.restore(); }
+    if (labels) text(names[i], x, cy + r + 38, 22, DIM, MONO, 'center', a * labels); } }
+function eyeIcon(cx, cy, rr, cu, lift, a = 1) {   // the eye icon (the same drawing every time the eye comes back in this video); cu draws the dotted line round the back, lift moves the back away
+  const chord = cx + rr * 0.42; g.save(); g.globalAlpha = a;
+  const eye = (part) => { g.save(); g.beginPath(); if (part === 'front') g.rect(0, 0, chord, 1080); else g.rect(chord, 0, 1920, 1080); g.clip();
+    g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke();
+    g.beginPath(); g.arc(cx - rr * 0.62, cy, rr * 0.55, 2.35, 3.93); g.stroke();
+    g.beginPath(); g.ellipse(cx - rr * 0.62, cy, rr * 0.11, rr * 0.33, 0, 0, 7); g.stroke();
+    g.strokeStyle = '#E8A15A'; g.lineWidth = 7; g.beginPath(); g.arc(cx, cy, rr - 5, -0.95, 0.95); g.stroke(); g.restore(); };
+  eye('front'); g.save(); g.translate(lift * 46, 0); g.globalAlpha = a * (1 - 0.35 * lift); eye('back'); g.restore();
+  if (cu > 0) { g.save(); g.strokeStyle = CREAM; g.globalAlpha = 0.8 * a; g.lineWidth = 2; g.setLineDash([8, 9]); const yy = Math.sqrt(rr * rr - (chord - cx) ** 2); g.beginPath(); g.moveTo(chord, cy - yy - 20); g.lineTo(chord, lerp(cy - yy - 20, cy + yy + 20, cu)); g.stroke(); g.restore(); }
+  g.restore(); }
+
+const YEL = '#FFD60A';
+function stripes(cx, cy, cw, chh, cols, rows, r, gr, b, a = 1) {   // a patch of screen: red, green and blue stripes per pixel (drawn, illustrative)
+  g.save(); g.globalAlpha = a; const sw = cw / 3;
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const x = cx - cols * cw / 2 + i * cw, y = cy - rows * chh / 2 + j * chh;
+    [[R, r], [GR, gr], [B, b]].forEach(([c, v], q) => { g.fillStyle = c; g.globalAlpha = a * (0.12 + 0.88 * v); g.fillRect(x + q * sw + 2, y + 3, sw - 4, chh - 6); }); }
+  g.restore(); }
+function wave(x0, x1, y, amp, lam0, lam1, a = 1, col = CREAM, w = 3, ph = 0) {   // a wave whose wavelength changes from lam0 to lam1 (pixels) along its length
+  if (a <= 0) return; g.save(); g.globalAlpha = a; g.strokeStyle = col; g.lineWidth = w; g.beginPath(); let p = ph;
+  for (let x = x0; x <= x1; x += 2) { const u = (x - x0) / (x1 - x0), lam = lerp(lam0, lam1, u); p += 2 * Math.PI * 2 / lam; const yy = y + amp * Math.sin(p); x === x0 ? g.moveTo(x, yy) : g.lineTo(x, yy); } g.stroke(); g.restore(); }
+async function S1(t) {   // So here's the thing we all believe: the geranium from the end of chapter 1, its pink sitting beside it
+  leaks(t, 0.5); const box = [180, 170, 900, 680], a = k(t, 0, 0.6);
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 50; g.fillStyle = '#000'; g.fillRect(...box); g.restore(); cover(GER, lerp(1.0, 1.02, clamp(t / 4)), 0.33, 0.5, a, box);
+  glow(1450, 510, 120, '#F4A6BE', 0.6 * a); g.save(); g.globalAlpha = a; g.fillStyle = '#F4A6BE'; g.beginPath(); g.arc(1450, 510, 46, 0, 7); g.fill(); g.restore();
+  text('WHAT WE ALL BELIEVE', 1450, 620, 22, DIM, MONO, 'center', k(t, L(0) + 0.6, 0.5));
+}
+async function S2(t) {   // That colour is out there, in the light, in the things we look at: three real things, each with its colour beside it, as if the colour were in them
+  leaks(t, 0.5); const a0 = L(1), items = [[V.flower, '#B23A8E', 'IN THE FLOWER'], [V.apples, '#C8302A', 'IN THE APPLE'], [V.sky, '#3D7FC4', 'IN THE SKY']];
+  for (let i = 0; i < 3; i++) { const a = k(t, a0 + i * 0.9, 0.5), x = 250 + i * 520, box = [x - 190, 180, 380, 560]; if (a <= 0) continue;
+    g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 40; g.fillStyle = '#000'; g.fillRect(...box); g.restore();
+    cover(await seek(items[i][0], 0.5 + (t - a0) * 0.3), 1.0, 0.5, 0.5, a, box);
+    g.save(); g.globalAlpha = a; g.fillStyle = items[i][1]; g.beginPath(); g.arc(x, 820, 30, 0, 7); g.fill(); g.restore(); text(items[i][2], x, 890, 20, DIM, MONO, 'center', a); }
+}
+async function S3(t) {   // Look at this yellow square for a moment. Here's a question. Does your screen have a yellow light in it? A pure yellow square, held still
+  leaks(t, 0.4); const a = k(t, L(2) - 0.1, 0.5);
+  g.save(); g.globalAlpha = a; g.fillStyle = YEL; g.fillRect(760, 300, 400, 400); g.restore();
+  // on the question, a lens comes to its corner, empty for now
+  const q = k(t, L(4), 0.5); if (q > 0) { g.save(); g.globalAlpha = q; g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(1160, 700, 110, 0, 7); g.stroke(); g.restore(); }
+}
+async function S4(t) {   // Almost certainly not: inside the lens, a real close-up of a screen: red, green and blue dots, no yellow ones
+  leaks(t, 0.4); g.fillStyle = YEL; g.fillRect(760, 300, 400, 400);
+  const a = L(5), gr = ease((t - a) / 1.4), r = lerp(110, 330, gr), cx = lerp(1160, 1240, gr), cy = lerp(700, 560, gr);
+  g.save(); g.beginPath(); g.arc(cx, cy, r, 0, 7); g.clip(); cover(await seek(V.pixels_rgb, 0.4 + (t - a) * 0.4), 1.6, 0.5, 0.5, 1, [cx - r, cy - r, r * 2, r * 2]); g.restore();
+  g.save(); g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.restore();
+  text('A REAL SCREEN, CLOSE UP', cx, cy + r + 44, 20, DIM, MONO, 'center', k(t, a + 0.6, 0.5));
+}
+async function S5(t) {   // Your screen doesn't use a yellow light... It has red, green and blue lights, packed too tightly: the stripes, drawn large, all three lit
+  leaks(t, 0.4); const a = L(6), z = ease((t - a) / (LE(7) - a));
+  const cw = lerp(150, 60, z), rows = 3, cols = Math.round(lerp(5, 13, z)); stripes(960, 500, cw, cw, cols, rows, 1, 1, 1, k(t, a - 0.1, 0.5));
+  const la = k(t, L(7) + 0.4, 0.5); text('RED', 760, 820, 24, R, MONO, 'center', la); text('GREEN', 960, 820, 24, GR, MONO, 'center', la); text('BLUE', 1160, 820, 24, B, MONO, 'center', la);
+  srcBR('SCREEN STRIPES · ILLUSTRATION', 1);
+}
+async function S6(t) {   // Turn the red and green on together, and your brain reports yellow. Yellow, with no yellow light.
+  leaks(t, 0.4); const a = L(8), on = k(t, a + 0.8, 0.6), yel = k(t, a + 2.4, 0.8);
+  stripes(700, 500, 110, 110, 4, 3, 1, 1, 1 - on, 1);
+  g.save(); g.globalAlpha = yel; g.fillStyle = YEL; g.fillRect(1180, 335, 330, 330); g.restore();
+  text('=', 1080, 525, 80, CREAM, SERIF, 'center', yel); text('YOUR BRAIN: YELLOW', 1345, 730, 22, YEL, MONO, 'center', yel);
+  text('NO YELLOW LIGHT', 700, 760, 22, DIM, MONO, 'center', k(t, L(9), 0.5));
+}
+async function S7(t) {   // That's not a flaw in your screen. It's a clue about your eyes. And the first clue to how five people saw olo.
+  leaks(t, 0.5); const a = L(10), e = k(t, L(11) - 0.1, 0.6), o = k(t, L(12) + 0.6, 0.7);
+  stripes(960, 520, 90, 90, 5, 3, 1, 1, 0, 1 - e);
+  eyeIcon(760, 500, 200, 0, 0, e); trio(1360, 500, 34, 1 - o, 1, 1 - o, e, o > 0.5 ? OLO : GR, e);   // red and green cones for the yellow; then only the middle one, as olo
+  if (o > 0) { glow(1360, 500, 120, OLO, 0.5 * o); text('OLO', 1360, 620, 22, OLO, MONO, 'center', o); }
+}
+async function S8(t) {   // Light itself has no colour: a plain beam of light, no colour in it
+  leaks(t, 0.4); const a = L(13), u = ease((t - a) / 1.2);
+  g.save(); g.strokeStyle = 'rgba(242,238,228,0.9)'; g.lineWidth = 5; g.shadowColor = '#FFFFFF'; g.shadowBlur = 24; g.beginPath(); g.moveTo(0, 540); g.lineTo(1920 * u, 540); g.stroke(); g.restore();
+  text('LIGHT', 960, 480, 26, DIM, MONO, 'center', k(t, a + 0.8, 0.5));
+}
+async function S9(t) {   // It comes in different wavelengths, the way sound comes in different pitches. Long waves, short waves, everything in between.
+  leaks(t, 0.4); const a = L(14), ph = (t - a) * 3;
+  const rows = [[700, 'LONG WAVES', 380], [550, 'IN BETWEEN', 240], [450, 'SHORT WAVES', 140]];
+  rows.forEach(([nm, lab, lam], i) => { const ra = k(t, a + 0.4 + i * 0.6, 0.6); wave(360, 1560, 330 + i * 190, 46, lam, lam, ra, CREAM, 3, ph); text(lab, 340, 336 + i * 190, 20, DIM, MONO, 'right', ra); text(nm + ' nm', 1590, 336 + i * 190, 20, DIM, MONO, 'left', ra); });
+  text('LIKE PITCHES IN SOUND', 960, 900, 20, DIM, MONO, 'center', k(t, a + 2.6, 0.5));
+  const b = L(15), m = k(t, b, 0.8); if (m > 0) { g.save(); g.globalAlpha = m; g.fillStyle = BG; g.fillRect(0, 240, 1920, 640); g.restore(); leaks(t, 0.4 * m); wave(260, 1660, 560, 60, 380, 140, m, CREAM, 3, ph); text('LONG', 260, 660, 22, DIM, MONO, 'left', m); text('SHORT', 1660, 660, 22, DIM, MONO, 'right', m); }
+}
+async function S10(t) {   // Somewhere between the light hitting your eye and you saying "yellow", a calculation happens. And it can be fooled.
+  leaks(t, 0.5); const a = L(16), u = ease((t - a) / 1.5);
+  wave(120, lerp(120, 520, u), 520, 26, 200, 200, k(t, a, 0.4), CREAM, 3, (t - a) * 3);
+  eyeIcon(680, 520, 150, 0, 0, 1);
+  const bx = k(t, a + 1.6, 0.5); g.save(); g.globalAlpha = bx; g.strokeStyle = CREAM; g.lineWidth = 2; g.beginPath(); g.roundRect(920, 450, 300, 140, 14); g.stroke(); g.restore();
+  text('A CALCULATION', 1070, 532, 22, CREAM, MONO, 'center', bx); text('→', 880, 540, 44, DIM, SERIF, 'center', bx); text('→', 1260, 540, 44, DIM, SERIF, 'center', k(t, a + 2.6, 0.5));
+  text('“yellow”', 1440, 545, 64, YEL, SERIF, 'left', k(t, a + 2.6, 0.5));
+  // can be fooled: two different lights both come out as "yellow" (one yellow wavelength; a mix of green and red light)
+  const f = L(17), fa = k(t, f + 0.3, 0.6); if (fa > 0) { text('ONE YELLOW WAVELENGTH', 160, 400, 18, DIM, MONO, 'left', fa); text('OR RED + GREEN LIGHT MIXED', 160, 660, 18, DIM, MONO, 'left', fa);
+    wave(120, 520, 630, 18, 120, 120, fa, R, 2, (t - f) * 3); wave(120, 520, 690, 18, 90, 90, fa, GR, 2, (t - f) * 3 + 1); text('SAME ANSWER', 1440, 610, 20, DIM, MONO, 'left', k(t, f + 1.2, 0.5)); }
+}
+async function S11(t) {   // To see how, we need to go back to a man who guessed how the eye might count: the cone lights count 1, 2, 3
+  leaks(t, 0.5); const a = L(18); trio(960, 500, 40, k(t, a + 1.2, 0.4), k(t, a + 1.7, 0.4), k(t, a + 2.2, 0.4), 1, GR, 0);
+  ['1', '2', '3'].forEach((n, i) => text(n, 960 + (i - 1) * 104, 600, 34, CREAM, SERIF, 'center', k(t, a + 1.2 + i * 0.5, 0.4)));
+  const e = clamp((t - (END - 1.0)) / 1.0); if (e > 0) { g.save(); g.globalAlpha = e; g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); g.restore(); }
+}
+const SHOTS = [[0, S1], [L(1) - 0.1, S2], [L(2) - 0.1, S3], [L(5) - 0.1, S4], [L(6) - 0.1, S5], [L(8) - 0.1, S6], [L(10) - 0.1, S7], [L(13) - 0.1, S8], [L(14) - 0.1, S9], [L(16) - 0.1, S10], [L(18) - 0.1, S11]];
+// camera: always moving; a new framing at each shot, with a push or a pull and a small handheld drift
+const buf = document.createElement('canvas'); buf.width = 1920; buf.height = 1080; const bg = buf.getContext('2d');
+window.render = async function (T) {
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  let si = 0; for (let j = 0; j < SHOTS.length; j++) if (T >= SHOTS[j][0]) si = j; const s0 = SHOTS[si][0], s1 = si + 1 < SHOTS.length ? SHOTS[si + 1][0] : END;
+  await SHOTS[si][1](T); sub(T);
+  const u = clamp((T - s0) / (s1 - s0)), sc = lerp(1.0, 1.025, u);   // Sam, 20 Nov 2026: 'way too much movement... slow down'
+  const fx = 960, fy = 540;
+  bg.clearRect(0, 0, 1920, 1080); bg.drawImage(cv, 0, 0); g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const W = 1920 * sc, H = 1080 * sc; g.drawImage(buf, clamp(960 - fx * sc, 1920 - W, 0), clamp(540 - fy * sc, 1080 - H, 0), W, H);
+  for (const fn of POST) fn(); POST.length = 0;
+  g.save(); g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = 'rgba(255,194,74,0.85)';  g.restore();
+  g.save(); g.globalAlpha = 0.045; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
+};
+const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
+  let s = 7; for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const q = s % 256; im.data[i] = im.data[i + 1] = im.data[i + 2] = q; im.data[i + 3] = 255; } x.putImageData(im, 0, 0); return c; })();
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"'), document.fonts.load('400 40px Fraunces'), document.fonts.load('400 40px Kalam')]); window.ready = true;
+console.log('END', END, JSON.stringify(LT.map(x => [x[0].toFixed(2), x[1].toFixed(2)])));
+</script></body></html>
