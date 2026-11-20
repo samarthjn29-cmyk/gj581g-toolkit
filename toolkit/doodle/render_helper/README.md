@@ -1,7 +1,7 @@
 # Render helper (Sam's Mac)
 
 Claude drops a job file into `Decked out Data/render_queue/jobs/` on Google Drive. The Mac renders it on its graphics chip and puts the
-video in `render_queue/out/<job>.mp4`, with `render_queue/done/<job>.result.json` (status, seconds, toolkit commit). `helper_status.json`
+video in `render_queue/out/<job>.mp4` (for scripts that also make a 16 Mbit/s copy, that copy goes to Drive and the near-lossless master stays on the Mac in `~/Movies/GJ581g_renders/`), with `render_queue/done/<job>.result.json` (status, seconds, toolkit commit). `helper_status.json`
 is rewritten every 15 s while the helper runs, and `helper_log.txt` keeps a log.
 
 Job files (JSON), one of:

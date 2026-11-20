@@ -39,7 +39,12 @@ while true; do
         (cd "$DOODLE" && node render.js "cards/$PAGE.html" "$QS" "$A" "$B" "$PART") >> "$Q/helper_log.txt" 2>&1; RC=$?
       else log "job $ID: refused card job (page/query/times not allowed)"; fi
     else log "job $ID: unknown kind '$KIND'"; fi
-    if [ $RC -eq 0 ] && [ -s "$PART" ]; then mv "$PART" "$OUT"; ST=ok; else ST=failed; rm -f "$PART"; fi
+    SMALL="${PART%.mp4}_small.mp4"
+    if [ $RC -eq 0 ] && [ -s "$PART" ]; then
+      if [ -s "$SMALL" ]; then   # scripts that make a 16 Mbit/s copy: that copy goes to Drive, the 700 MB master stays on this Mac (Movies/GJ581g_renders)
+        mkdir -p "$HOME/Movies/GJ581g_renders"; mv "$PART" "$HOME/Movies/GJ581g_renders/$ID.mp4"; mv "$SMALL" "$OUT"
+      else mv "$PART" "$OUT"; fi; ST=ok
+    else ST=failed; rm -f "$PART" "$SMALL"; fi
     printf '{"status":"%s","seconds":%s,"output":"out/%s.mp4","git":"%s"}\n' "$ST" "$(( $(date +%s) - T0 ))" "$ID" "$(git -C "$REPO" rev-parse --short HEAD)" > "$Q/done/$ID.result.json"
     mv "$J" "$Q/done/$ID.json"; log "job $ID: $ST in $(( $(date +%s) - T0 )) s"
   done
