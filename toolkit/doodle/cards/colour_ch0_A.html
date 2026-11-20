@@ -15,14 +15,15 @@ html,body{margin:0;background:#000}canvas{display:block}
 // Dalton 1798 paper p. 28 (PD); Henry 1854 p. 25 (PD); UC Berkeley campus (CC BY 4.0). The gamut triangle is our drawing after Fong et al. Fig. 2 (illustration).
 const LINES = [['In 2025,', 0], ['five people saw a colour', 0], ['no human had ever seen.', 1], ['Not a new shade.', 1], ['A completely new colour.', 1], ['They called it olo.', 1],
   ['And the story of how that happened', 0], ['starts with a man who saw fewer colours than everyone around him.', 1], ['John Dalton.', 1], ['He wanted to know why so badly,', 0],
-  ['he asked for his eyes to be cut open after he died.', 1], ['It took 151 years to get the answer.', 1], ['So, how do you see a colour your eyes can’t make?', 1]];
+  ['he asked for his eyes to be cut open after he died.', 1], ['It took 151 years to get the answer.', 1], ['So, how do you see a colour your eyes can’t make?', 1],
+  ['To answer that, we’ll start with Dalton, and a pink flower that turned blue for him.', 1], ['We’ll find out what was really going on in his eyes.', 1], ['And we’ll get as close as a screen allows to the colour called olo.', 1]];
 const WPS = 148 / 60; let tt = 0.6; const LT = LINES.map(([s, end]) => { const n = s.split(' ').length, a = tt, b = a + n / WPS; tt = b + (end ? 0.45 : 0.08); return [a, b, s]; });
 const END = tt + 1.6; window.END = END;
 const L = i => LT[i][0], LE = i => LT[i][1];
 
 const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
 const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
-const [P28, P25, DALTON, BERK, FIG1C] = await Promise.all(['/img/colour/ch1/R_paper_p28_title.jpg', '/img/colour/ch1/R_henry1854_p25.jpg', '/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/fig1C.png'].map(img));
+const [P28, P25, DALTON, BERK, FIG1C, GER] = await Promise.all(['/img/colour/ch1/R_paper_p28_title.jpg', '/img/colour/ch1/R_henry1854_p25.jpg', '/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/fig1C.png', '/img/colour/ch1/R_geranium.jpg'].map(img));
 const V = Object.fromEntries(await Promise.all(['eye', 'eyeA', 'eyeB', 'eyeC', 'eyeD', 'apples'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
 async function seek(v, u) { const D = v.duration - 0.05, x = ((u % D) + D) % D; if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
 const cv = document.getElementById('c'), g = cv.getContext('2d');
@@ -44,7 +45,7 @@ function sparks(t, cx, cy, n, spread, a, col = OLO) { g.save(); g.globalComposit
   g.globalAlpha = 0.5 * a * (0.3 + 0.7 * Math.abs(f1)); g.fillStyle = col; g.beginPath(); g.arc(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1.4 + 2 * Math.abs(f2), 0, 7); g.fill(); } g.restore(); }
 const POST = []; const post = fn => POST.push(fn);
 function sub(t) {   // the script line being spoken, as subtitles (Sam's voice is not recorded yet)
-  let i = -1; for (let j = 0; j < LT.length; j++) if (t >= LT[j][0] - 0.05 && t < (j + 1 < LT.length ? LT[j + 1][0] - 0.05 : END)) i = j; if (i < 0 || i === LT.length - 1) return;
+  let i = -1; for (let j = 0; j < LT.length; j++) if (t >= LT[j][0] - 0.05 && t < (j + 1 < LT.length ? LT[j + 1][0] - 0.05 : END)) i = j; if (i < 0 || i === 12) return;
   post(() => { g.save(); g.font = `400 40px ${SERIF}`; const s = LT[i][2], w = g.measureText(s).width + 56; chip(960 - w / 2, 958, w, 66, 0.72); g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText(s, 960, 1004); g.restore(); }); }
 function tagTL(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAlpha = a; g.font = `500 20px ${MONO}`; const w = g.measureText(s).width + 32; chip(104, 66, w, 48, 0.7); g.fillStyle = CREAM; g.fillText(s, 120, 98); g.restore(); }); }
 function srcBR(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAlpha = a * 0.85; g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = DIM; g.fillText(s, 1816, 84); g.restore(); }); }
@@ -55,6 +56,16 @@ function trio(cx, cy, r, L, M, S, a = 1, mCol = GR, labels = 0) { if (a <= 0) re
   for (let i = 0; i < 3; i++) { const x = xs[i], v = st[i]; g.save(); g.globalAlpha = a; g.strokeStyle = 'rgba(242,238,228,0.45)'; g.lineWidth = 2; g.beginPath(); g.arc(x, cy, r, 0, 7); g.stroke(); g.restore();
     if (v > 0) { glow(x, cy, r * 2.4, cols[i], 0.55 * v * a); g.save(); g.globalAlpha = v * a; g.fillStyle = cols[i]; g.beginPath(); g.arc(x, cy, r * 0.82, 0, 7); g.fill(); g.restore(); }
     if (labels) text(names[i], x, cy + r + 38, 22, DIM, MONO, 'center', a * labels); } }
+function eyeIcon(cx, cy, rr, cu, lift, a = 1) {   // the eye icon (the same drawing every time the eye comes back in this video); cu draws the dotted line round the back, lift moves the back away
+  const chord = cx + rr * 0.42; g.save(); g.globalAlpha = a;
+  const eye = (part) => { g.save(); g.beginPath(); if (part === 'front') g.rect(0, 0, chord, 1080); else g.rect(chord, 0, 1920, 1080); g.clip();
+    g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke();
+    g.beginPath(); g.arc(cx - rr * 0.62, cy, rr * 0.55, 2.35, 3.93); g.stroke();
+    g.beginPath(); g.ellipse(cx - rr * 0.62, cy, rr * 0.11, rr * 0.33, 0, 0, 7); g.stroke();
+    g.strokeStyle = '#E8A15A'; g.lineWidth = 7; g.beginPath(); g.arc(cx, cy, rr - 5, -0.95, 0.95); g.stroke(); g.restore(); };
+  eye('front'); g.save(); g.translate(lift * 46, 0); g.globalAlpha = a * (1 - 0.35 * lift); eye('back'); g.restore();
+  if (cu > 0) { g.save(); g.strokeStyle = CREAM; g.globalAlpha = 0.8 * a; g.lineWidth = 2; g.setLineDash([8, 9]); const yy = Math.sqrt(rr * rr - (chord - cx) ** 2); g.beginPath(); g.moveTo(chord, cy - yy - 20); g.lineTo(chord, lerp(cy - yy - 20, cy + yy + 20, cu)); g.stroke(); g.restore(); }
+  g.restore(); }
 async function S1(t) {   // In 2025: the year, and the three cone lights, softly
   leaks(t, k(t, 0, 0.8)); const a = k(t, 0.1, 0.6);
   text('2025', 960, 440, 150, CREAM, SERIF, 'center', a);
@@ -149,16 +160,8 @@ async function S11(t) {   // he asked for his eyes to be cut open after he died:
   const r = cover(P25, 1.6, 0.5, 0.305, 1, [140, 80, 1640, 260]); g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = GOLD; g.globalAlpha = 0.6; const sw = clamp((t - a) / 0.8);
   for (const [x0, y0, x1, y1] of [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]]) { const [X0, Y0] = at(r, x0, y0), [X1, Y1] = at(r, x0 + (x1 - x0) * sw, y1); g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); } g.restore();
   text('HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 25', 150, 370, 16, DIM, MONO);
-  // the eye icon (the same drawing every time the eye comes back in this video): the back of the eye is marked with a dotted line and gently lifts away
-  const cx = 900, cy = 690, rr = 180, cu = clamp((t - a - 0.8) / 0.8), lift = ease((t - (LE(10) - 0.9)) / 0.9), chord = cx + rr * 0.42;
-  const eye = (part) => { g.save(); g.beginPath(); if (part === 'front') g.rect(0, 0, chord, 1080); else g.rect(chord, 0, 1920, 1080); g.clip();
-    g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke();
-    g.beginPath(); g.arc(cx - rr * 0.62, cy, rr * 0.55, 2.35, 3.93); g.stroke();   // cornea
-    g.beginPath(); g.ellipse(cx - rr * 0.62, cy, rr * 0.11, rr * 0.33, 0, 0, 7); g.stroke();   // lens
-    g.strokeStyle = '#E8A15A'; g.lineWidth = 7; g.beginPath(); g.arc(cx, cy, rr - 5, -0.95, 0.95); g.stroke();   // retina
-    g.restore(); };
-  eye('front'); g.save(); g.translate(lift * 46, 0); g.globalAlpha = 1 - 0.35 * lift; eye('back'); g.restore();
-  g.save(); g.strokeStyle = CREAM; g.globalAlpha = 0.8; g.lineWidth = 2; g.setLineDash([8, 9]); const yy = Math.sqrt(rr * rr - (chord - cx) ** 2); g.beginPath(); g.moveTo(chord, cy - yy - 20); g.lineTo(chord, lerp(cy - yy - 20, cy + yy + 20, cu)); g.stroke(); g.restore();
+  eyeIcon(900, 690, 180, clamp((t - a - 0.8) / 0.8), ease((t - (LE(10) - 0.9)) / 0.9));
+  const cx = 900, cy = 690, rr = 180;
   text('THE BACK OF THE EYE', cx + rr + 90, cy + 8, 20, DIM, MONO, 'left', k(t, a + 0.6, 0.4));
 }
 async function S12(t) {   // It took 151 years to get the answer: a beam races along a timeline 1844 -> 1995, the counter to 151, the 1995 paper lands
@@ -177,7 +180,39 @@ async function S13(t) {   // So, how do you see a colour your eyes can't make? T
   g.save(); g.font = `400 70px ${SERIF}`; g.textAlign = 'center'; g.fillStyle = CREAM; g.shadowColor = '#000'; g.shadowBlur = 20;
   const l1 = w.slice(0, 5).slice(0, n).join(' '), l2 = n > 5 ? w.slice(5, n).join(' ') : ''; g.fillText(l1, 960, 790); if (l2) g.fillText(l2, 960, 880); g.restore();
 }
-const SHOTS = [[0, S1], [L(1) - 0.04, S2], [L(2) - 0.04, S3], [L(3) - 0.1, S4], [L(4) - 0.1, S5], [L(5) - 0.1, S6], [L(6) - 0.06, S7], [L(7) - 0.06, S8], [L(8) - 0.1, S9], [L(9) - 0.1, S10], [L(10) - 0.06, S11], [L(11) - 0.1, S12], [L(12) - 0.1, S13]];
+function shifted(im, hue, satMul, valMul, warm) { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+  for (let i = 0; i < p.length; i += 4) { let r = p[i] / 255, gg = p[i + 1] / 255, b = p[i + 2] / 255; const mx = Math.max(r, gg, b), mn = Math.min(r, gg, b), dl = mx - mn;
+    let h = 0; if (dl > 1e-5) { h = mx === r ? ((gg - b) / dl) % 6 : mx === gg ? (b - r) / dl + 2 : (r - gg) / dl + 4; h *= 60; if (h < 0) h += 360; }
+    const s = mx ? dl / mx : 0, v = mx; let dh = Math.abs(((h - 335 + 540) % 360) - 180);
+    let m = clamp(1 - (dh - 40) / 25) * clamp((s - 0.05) / 0.1);    // how 'pink-petal' this pixel is
+    let H = m > 0 ? hue : h, S = m > 0 ? clamp(s * lerp(1, satMul, m)) : s, V = v;
+    if (m > 0) H = (h + (((hue - h + 540) % 360) - 180) * m + 360) % 360;
+    if (warm) { V = v * valMul; }
+    const C = V * S, X = C * (1 - Math.abs((H / 60) % 2 - 1)), M = V - C; let rr, g2, bb;
+    [rr, g2, bb] = H < 60 ? [C, X, 0] : H < 120 ? [X, C, 0] : H < 180 ? [0, C, X] : H < 240 ? [0, X, C] : H < 300 ? [X, 0, C] : [C, 0, X];
+    p[i] = (rr + M) * 255; p[i + 1] = (g2 + M) * 255; p[i + 2] = (bb + M) * 255;
+    if (warm) { p[i] = Math.min(255, p[i] * 1.08 + 10); p[i + 1] *= 0.88; p[i + 2] *= 0.62; } }
+  x.putImageData(d, 0, 0); return c; }
+const GER_DAY = shifted(GER, 205, 1.15, 1, false);
+async function S14(t) {   // we'll start with Dalton, and a pink flower that turned blue for him: the real geranium, pink, then (illustration) the sky-blue he saw by day
+  leaks(t, 0.5); const a = L(13), u = clamp((t - a) / (LE(13) - a + 0.4)), turn = ease((t - a - 2.4) / 1.0), box = [170, 130, 980, 760];
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 50; g.fillStyle = '#000'; g.fillRect(...box); g.restore();
+  cover(GER, lerp(1.0, 1.04, u), 0.5, 0.45, 1, box); cover(GER_DAY, lerp(1.0, 1.04, u), 0.5, 0.45, turn, box);
+  text('A pink geranium', 1250, 470, 56, CREAM, SERIF, 'left', k(t, a + 1.2, 0.5)); text('TO DALTON, BY DAY: SKY-BLUE', 1254, 530, 20, '#9CC8FF', MONO, 'left', turn);
+  text('COLOUR SHIFT IS AN ILLUSTRATION · PHOTO: DAVID J. STANG, CC BY-SA 4.0', 1250, 580, 14, DIM, MONO, 'left', turn * 0.9);
+}
+async function S15(t) {   // We'll find out what was really going on in his eyes: the eye icon and his cone lights, the green one dark, a question mark of light where it should be
+  leaks(t, 0.5); const a = L(14); eyeIcon(760, 520, 200, 0, 0, k(t, a - 0.1, 0.5));
+  trio(1360, 520, 34, 1, 0, 1, k(t, a + 0.4, 0.5), GR, k(t, a + 0.6, 0.4));
+  text('?', 1360, 548, 64, CREAM, SERIF, 'center', k(t, a + 1.0, 0.5) * 0.85);
+}
+async function S16(t) {   // as close as a screen allows to the colour called olo: the disc, the name, and a soft fade
+  const a = L(15), e = clamp((t - (END - 1.0)) / 1.0); leaks(t, 0.6 * (1 - e)); glow(960, 470, 380, OLO, 0.55 * (1 - e));
+  g.save(); g.globalAlpha = 1 - e; g.fillStyle = OLO; g.beginPath(); g.arc(960, 470, 170, 0, 7); g.fill(); g.restore();
+  text('olo', 960, 790, 110, CREAM, SERIF, 'center', k(t, a + 1.6, 0.6) * (1 - e), 24);
+}
+const SHOTS = [[0, S1], [L(1) - 0.04, S2], [L(2) - 0.04, S3], [L(3) - 0.1, S4], [L(4) - 0.1, S5], [L(5) - 0.1, S6], [L(6) - 0.06, S7], [L(7) - 0.06, S8], [L(8) - 0.1, S9], [L(9) - 0.1, S10], [L(10) - 0.06, S11], [L(11) - 0.1, S12], [L(12) - 0.1, S13], [L(13) - 0.1, S14], [L(14) - 0.1, S15], [L(15) - 0.1, S16]];
 // camera: always moving; a new framing at each shot, with a push or a pull and a small handheld drift
 const buf = document.createElement('canvas'); buf.width = 1920; buf.height = 1080; const bg = buf.getContext('2d');
 window.render = async function (T) {
@@ -189,7 +224,7 @@ window.render = async function (T) {
   bg.clearRect(0, 0, 1920, 1080); bg.drawImage(cv, 0, 0); g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
   const W = 1920 * sc, H = 1080 * sc; g.drawImage(buf, clamp(960 - fx * sc, 1920 - W, 0), clamp(540 - fy * sc, 1080 - H, 0), W, H);
   for (const fn of POST) fn(); POST.length = 0;
-  g.save(); g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = 'rgba(255,194,74,0.85)'; g.fillText('TEST · OPENING A · NO VOICE YET', 1816, 46); g.restore();
+  g.save(); g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = 'rgba(255,194,74,0.85)';  g.restore();
   g.save(); g.globalAlpha = 0.045; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
 };
 const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
