@@ -1,0 +1,181 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+@font-face{font-family:Kalam;font-weight:400;src:url(/node_modules/@fontsource/kalam/files/kalam-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1 chapter 0: three new ways to show the first 26.6 s (Sam, 20 Nov 2026: the 3D eye "doesn't capture attention and feels boring"; "I want our own style").
+// Test only, on Sam's 00_opening (clip times, cwords00v4_shift.json). No people drawn: objects, shadows, real pages and real footage only.
+//   0.0-6.9   Idea 1, the round window: every shot is seen through one round hole (the hole Ransome cut), drifting, with words beside it.
+//   6.9-17.9  Idea 2, the shadow wall: a real candle lights a wall; the scene plays as shadows of objects, with the real 1854 line pinned up.
+//   17.9-26.6 Idea 3, his own words: Ransome's real printed account (Henry 1854, p. 202); a hole is cut in the page and we look through it at red and green.
+const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+const I = Object.fromEntries(await Promise.all(['R_henry1854_p202', 'R_henry1854_p25', 'R_map1794'].map(async n => [n, await img('/img/colour/ch1/' + n + '.jpg')])));
+const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
+const V = Object.fromEntries(await Promise.all(['candle_lit', 'apples'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
+async function seek(v, u) { const x = ((u % (v.duration - 0.1)) + (v.duration - 0.1)) % (v.duration - 0.1); if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.5) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const CREAM = '#EFE6D2', DIM = '#8A8370', GOLD = '#E9B45A', PEN = '#D8442F', OLO = '#14C7B0';
+const SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"', HAND = 'Kalam';
+function text(s, x, y, size = 30, col = CREAM, font = SERIF, weight = 400, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(10,8,6,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
+  const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
+  g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
+function idea(s) { g.save(); g.font = '500 18px "JetBrains Mono"'; g.textAlign = 'right'; const w = g.measureText(s).width + 28; chip(1816 - w, 66, w, 40, 0.55); g.fillStyle = GOLD; g.fillText(s, 1802, 93); g.restore(); }
+function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {
+  const [bx, by, bw, bh] = box, iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
+  const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
+  g.save(); g.globalAlpha = a; g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h, iw, ih}; }
+const flick = t => 0.86 + 0.07 * Math.sin(t * 13.1) + 0.05 * Math.sin(t * 29.7 + 1.3) + 0.03 * Math.sin(t * 57.3 + 0.4);
+function motes(t, cx, cy, rad, n = 70, a = 0.5) {   // dust drifting in the light
+  g.save(); for (let i = 0; i < n; i++) { const s1 = Math.sin(i * 91.7) * 43758.5, s2 = Math.sin(i * 12.9) * 9631.1, f1 = s1 - Math.floor(s1), f2 = s2 - Math.floor(s2);
+    const ang = f1 * 6.283 + t * 0.05 * (f2 - 0.5), r = rad * Math.sqrt(f2), x = cx + Math.cos(ang) * r + Math.sin(t * 0.3 + i) * 18, y = cy + Math.sin(ang) * r - ((t * (8 + 14 * f1)) % 120) + 60;
+    g.globalAlpha = a * (0.3 + 0.7 * f1) * (0.6 + 0.4 * Math.sin(t * 2 + i)); g.fillStyle = '#FFE3B0'; g.beginPath(); g.arc(x, y, 1 + 1.8 * f2, 0, 7); g.fill(); } g.restore(); }
+function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'left') { g.save(); g.font = `400 ${size}px ${font}`; const ws = s.split(' '); let line = '', lines = [];
+  for (const w of ws) { const tl = line ? line + ' ' + w : w; if (g.measureText(tl).width > maxw && line) { lines.push(line); line = w; } else line = tl; } lines.push(line); g.restore();
+  lines.forEach((l, i) => text(l, x, y + i * lh, size, col, font, 400, align, a)); return lines.length; }
+
+// ---------------- Idea 1: the round window (0-6.9) ----------------
+async function W1(t) {
+  g.fillStyle = '#050403'; g.fillRect(0, 0, 1920, 1080);
+  const open = ease(t / 0.55), drift = k(t, 0.6, 1.2), rr = lerp(4, 250, open) + 70 * drift + 6 * Math.sin(t * 1.7);
+  const cx = lerp(960, 640, drift) + 14 * Math.sin(t * 0.6), cy = 540 + 10 * Math.sin(t * 0.45 + 1);
+  // what the window shows: the candle, then (4.4) the town plan, then (5.6) Ransome's printed account
+  g.save(); g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.clip();
+  if (t < 4.4) { cover(await seek(V.candle_lit, 2 + t), 1.25 + 0.04 * t, 0.5, 0.45, 1, [cx - rr, cy - rr, rr * 2, rr * 2]); }
+  else if (t < 5.6) { const u = (t - 4.4) / 1.2; cover(I.R_map1794, lerp(1.9, 2.1, u), lerp(0.42, 0.5, u), 0.45, 1, [cx - rr, cy - rr, rr * 2, rr * 2]); g.fillStyle = `rgba(255,170,80,${0.18 * flick(t)})`; g.fillRect(cx - rr, cy - rr, rr * 2, rr * 2); }
+  else { const u = (t - 5.6) / 1.3; cover(I.R_henry1854_p202, lerp(3.2, 3.5, u), 0.5, 0.07, 1, [cx - rr, cy - rr, rr * 2, rr * 2]); g.fillStyle = `rgba(255,170,80,${0.15 * flick(t)})`; g.fillRect(cx - rr, cy - rr, rr * 2, rr * 2); }
+  const v = g.createRadialGradient(cx, cy, rr * 0.55, cx, cy, rr); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.75)'); g.fillStyle = v; g.fillRect(cx - rr, cy - rr, rr * 2, rr * 2);
+  g.restore();
+  g.save(); g.strokeStyle = `rgba(255,214,160,${0.55 * open})`; g.lineWidth = 2.5; g.shadowColor = '#FFB060'; g.shadowBlur = 30 * flick(t); g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke(); g.restore();
+  // words beside the window
+  const tx = cx + rr + 120;
+  const L = 'Manchester'; const n = Math.floor(clamp((t - 0.6) / 0.5) * L.length);
+  if (t < 5.6) { text(L.slice(0, n), tx, 520, 104, CREAM, SERIF, 400, 'left', 1);
+    if (t > 2.6) { const yr = Math.round(lerp(1794, 1844, ease((t - 2.6) / 0.9))); text('July ' + yr, tx, 610, 60, GOLD, SERIF, 400, 'left', k(t, 2.6, 0.25)); }
+    text('ENGLAND', tx + 4, 410, 22, DIM, MONO, 500, 'left', k(t, 1.2, 0.4)); }
+  else { const a = k(t, 5.6, 0.3); text('A doctor’s own record', tx, 500, 56, CREAM, SERIF, 400, 'left', a); text('PRINTED IN 1854', tx + 4, 560, 22, DIM, MONO, 500, 'left', k(t, 5.9, 0.3)); }
+  idea('IDEA 1 · THE ROUND WINDOW');
+}
+
+// ---------------- Idea 2: the shadow wall (6.9-17.9) ----------------
+const plaster = (() => { const c = document.createElement('canvas'); c.width = 1920; c.height = 1080; const x = c.getContext('2d'); x.fillStyle = '#B9A88A'; x.fillRect(0, 0, 1920, 1080);
+  let s = 11; for (let i = 0; i < 26000; i++) { s = (s * 16807) % 2147483647; const px = s % 1920; s = (s * 16807) % 2147483647; const py = s % 1080; s = (s * 16807) % 2147483647;
+    x.fillStyle = `rgba(${s % 2 ? 255 : 40},${s % 2 ? 245 : 30},${s % 2 ? 225 : 20},${0.03 + (s % 7) / 100})`; x.beginPath(); x.arc(px, py, 1 + (s % 9), 0, 7); x.fill(); } return c; })();
+function shadowOf(draw, t, sx, sy, sc, blur) {   // cast a shadow of a shape from the candle (bottom left) onto the wall: bigger, offset, soft, swaying
+  const sway = Math.sin(t * 7.3) * 4 + Math.sin(t * 17.1) * 2;
+  g.save(); g.filter = `blur(${blur}px)`; g.fillStyle = 'rgba(20,12,6,0.62)'; g.translate(sx + sway, sy + sway * 0.4); g.scale(sc, sc); draw(); g.restore(); }
+const knife = (L = 260, w = 22) => {   // a 19th-century scalpel hanging from a hook: ring, slim handle, leaf blade pointing down
+  g.lineWidth = 6; g.strokeStyle = g.fillStyle; g.beginPath(); g.arc(0, -14, 12, 0, 7); g.stroke();
+  g.beginPath(); g.moveTo(-w * 0.35, 0); g.lineTo(w * 0.35, 0); g.lineTo(w * 0.28, L * 0.58); g.lineTo(-w * 0.28, L * 0.58); g.closePath(); g.fill();
+  g.beginPath(); g.moveTo(-w * 0.22, L * 0.6); g.bezierCurveTo(-w * 0.9, L * 0.75, -w * 0.4, L * 0.92, 0, L); g.bezierCurveTo(w * 0.35, L * 0.9, w * 0.3, L * 0.72, w * 0.22, L * 0.6); g.closePath(); g.fill(); };
+async function W2(t) {
+  const fl = flick(t), lx = 360 + 8 * Math.sin(t * 9), ly = 700;
+  g.drawImage(plaster, 0, 0);
+  const lg = g.createRadialGradient(lx, ly, 40, lx, ly, 1500); lg.addColorStop(0, `rgba(255,190,110,${0.75 * fl})`); lg.addColorStop(0.45, `rgba(170,100,40,${0.35 * fl})`); lg.addColorStop(1, 'rgba(0,0,0,0.9)');
+  g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = lg; g.fillRect(0, 0, 1920, 1080); g.restore();
+  // 6.9 Joseph Ransome, a doctor: his instruments hang on the wall, as shadows
+  const a1 = k(t, 6.9, 0.4);
+  if (a1 > 0) for (let i = 0; i < 5; i++) shadowOf(() => { g.globalAlpha = a1; g.rotate(0.04 * (i - 2) + 0.03 * Math.sin(t * 1.3 + i)); knife(230 + 40 * (i % 2), 22); }, t + i, 820 + i * 105, 110, 1.25, 4);
+  // 8.05 standing over a body: the long shadow of a table with a sheet over it rises along the bottom of the wall
+  const a2 = k(t, 8.0, 0.8);
+  if (a2 > 0) shadowOf(() => { g.beginPath(); g.moveTo(-60, 0); g.bezierCurveTo(60, -120, 300, -150, 520, -110); g.bezierCurveTo(700, -80, 900, -140, 1100, -60); g.lineTo(1160, 0); g.lineTo(1160, 120); g.lineTo(-60, 120); g.closePath(); g.fill(); g.fillRect(-40, 120, 30, 200); g.fillRect(1120, 120, 30, 200); }, t, 620, lerp(1180, 900, a2), 1.0, 9);
+  // 12.3 he asked for this: the real 1854 line, a strip of the page pinned to the wall
+  const a3 = k(t, 12.3, 0.35) * (1 - k(t, 14.6, 0.4));
+  if (a3 > 0) { const sx = 760, sy = 470 + (1 - a3) * 20, sw = 1000, sh = 170, p = I.R_henry1854_p25;
+    g.save(); g.globalAlpha = a3; g.translate(sx + sw / 2, sy + sh / 2); g.rotate(-0.018 + 0.004 * Math.sin(t * 3)); g.translate(-sw / 2, -sh / 2);
+    g.save(); g.filter = 'blur(10px)'; g.fillStyle = 'rgba(15,8,3,0.55)'; g.fillRect(26, 34, sw, sh); g.restore();
+    // crop the page around 'after Dalton's death, in conformity with his strongly expressed wish' (image px [110..1920, 1130..1292])
+    g.drawImage(p, 90, 1100, 1850, 230, 0, 0, sw, sh * 1.0);
+    g.globalCompositeOperation = 'multiply'; g.fillStyle = `rgba(255,190,120,${0.35 * fl})`; g.fillRect(0, 0, sw, sh);
+    const u = clamp((t - 12.6) / 0.9); g.globalAlpha = 0.45 * a3; g.fillStyle = GOLD; g.fillRect(380, 32, 600 * u, 52); if (u >= 1) g.fillRect(10, 112, 760 * clamp((t - 13.5) / 0.7), 52);
+    g.restore();
+    g.save(); g.fillStyle = '#5A4632'; g.beginPath(); g.arc(sx + 30, sy + 22, 9, 0, 7); g.arc(sx + sw - 30, sy + 22, 9, 0, 7); g.fill(); g.restore(); }
+  // 14.8 he wanted his eyes opened: two small glass dishes on a shelf; light glints through their shadows
+  const a4 = k(t, 14.8, 0.4);
+  if (a4 > 0) for (const dx of [0, 190]) { shadowOf(() => { g.globalAlpha = a4; g.beginPath(); g.ellipse(0, 0, 80, 30, 0, 0, 7); g.fill(); g.fillRect(-90, 26, 180, 10); }, t, 880 + dx * 1.3, 470, 1.15, 6);
+    g.save(); g.globalAlpha = a4 * (0.55 + 0.3 * fl); g.fillStyle = '#FFE0A8'; g.filter = 'blur(7px)'; g.beginPath(); g.ellipse(884 + dx * 1.3, 462, 26, 9, 0, 0, 7); g.fill(); g.restore(); }
+  motes(t, lx + 300, ly - 300, 520, 60, 0.45);
+  // the real candle, bottom left, is the light
+  { const cc = document.createElement('canvas'); cc.width = 600; cc.height = 660; const x2 = cc.getContext('2d'); const vv = await seek(V.candle_lit, 1 + t * 0.9); x2.drawImage(vv, -60, -40, 720, 1157);
+    const cg = x2.createRadialGradient(300, 300, 120, 300, 330, 320); cg.addColorStop(0, 'rgba(0,0,0,0)'); cg.addColorStop(1, 'rgba(0,0,0,1)'); x2.globalCompositeOperation = 'destination-out'; x2.fillStyle = cg; x2.fillRect(0, 0, 600, 660);
+    g.save(); g.globalCompositeOperation = 'screen'; g.drawImage(cc, lx - 300, ly - 290); g.restore(); }
+  // words, in ink on the wall
+  const w = (s, x, y, t0, size = 64, col = '#2A1C10') => { const a = k(t, t0, 0.3); if (a > 0) { g.save(); g.globalAlpha = a; g.font = `400 ${size}px ${HAND}`; g.fillStyle = col; g.fillText(s, x, y + (1 - a) * 8); g.restore(); } };
+  if (t < 10.4) { w('Joseph Ransome,', 760, 610, 6.95, 76); w('a doctor', 790, 680, 7.3, 52, '#4A3420'); }
+  if (t >= 10.4 && t < 12.3) w('The man died yesterday.', 760, 630, 10.45, 72);
+  if (t >= 12.3 && t < 14.6) w('“his strongly expressed wish”', 840, 720, 13.6, 52, '#3A2614');
+  if (t >= 14.8) w('He wanted his eyes opened.', 720, 640, 15.2, 72);
+  if (a3 > 0) text('HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 25', 770, 452, 16, '#3A2C1E', MONO, 500, 'left', a3);
+  idea('IDEA 2 · THE SHADOW WALL');
+}
+
+// ---------------- Idea 3: his own words, and a hole in the page (17.9-26.6) ----------------
+// p202 image px (2288 x 4010). Lines: 'In the other eye, the posterior part being removed by' y~2392; 'a vertical section in a plane...' y~2480;
+// 'able to see objects as through a lens' y~2648 x 380-1445; 'omit to place scarlet and green together' y~2902 x 380-1405.
+const HOLE = [1180, 2740];   // the hole, in page px
+async function W3(t) {
+  g.fillStyle = '#120D08'; g.fillRect(0, 0, 1920, 1080);
+  const p = I.R_henry1854_p202, fl = flick(t);
+  const lift = k(t, 21.84, 1.1), dive = ease((t - 22.94) / 1.6);
+  // the page on the desk: a slow drift, then it is lifted towards us (the hole comes to the centre), then we go through the hole
+  const baseS = lerp(0.62, 0.66, clamp((t - 17.9) / 4)), S = baseS * lerp(1, 1.7, lift) * lerp(1, 5.5, dive);
+  const fx = lerp(0.5, HOLE[0] / 2288, lift), fy = lerp(0.62, HOLE[1] / 4010, lift);
+  const rot = lerp(-0.035, 0, lift) + 0.004 * Math.sin(t * 0.7);
+  const W = 2288 * S * 0.5, H = 4010 * S * 0.5;   // page drawn at half its pixel size times S
+  const ox = 960 - fx * W + lerp(-120, 0, lift), oy = 540 - fy * H;
+  const P2 = (px, py) => [ox + px / 2288 * W, oy + py / 4010 * H];
+  const holeR = (k(t, 19.22, 0.6) > 0 ? 210 : 0) * S * 0.5 * 1.0;   // in screen px
+  const [hx, hy] = P2(...HOLE);
+  // through the hole: red apples on green grass (real footage)
+  const cutA = k(t, 19.5, 0.5);
+  if (cutA > 0) { g.save(); g.beginPath(); g.arc(hx, hy, holeR, 0, 7); g.clip();
+    const R = Math.max(holeR, 10); cover(await seek(V.apples, 0.5 + (t - 19.5) * 0.6), 1.1 - 0.05 * dive, 0.5, 0.5, 1, [hx - R * 1.1, hy - R * 1.1, R * 2.2, R * 2.2]);
+    g.fillStyle = `rgba(0,0,0,${0.85 * (1 - cutA) + 0.25 * (1 - dive)})`; g.fillRect(hx - R, hy - R, R * 2, R * 2); g.restore(); }
+  // the page with the hole cut out of it
+  g.save(); g.translate(960, 540); g.rotate(rot); g.translate(-960, -540);
+  g.shadowColor = 'rgba(0,0,0,0.8)'; g.shadowBlur = 70; g.beginPath(); g.rect(ox, oy, W, H); if (cutA > 0) { g.moveTo(hx + holeR, hy); g.arc(hx, hy, holeR, 0, 6.2832, true); } g.fillStyle = '#E8DFC9'; g.fill(); g.shadowBlur = 0;
+  g.save(); g.beginPath(); g.rect(ox, oy, W, H); if (cutA > 0) { g.moveTo(hx + holeR, hy); g.arc(hx, hy, holeR, 0, 6.2832, true); } g.clip('evenodd'); g.drawImage(p, ox, oy, W, H);
+  // highlighter: 'the posterior part being removed by a vertical section' (18.44), 'able to see objects as through a lens' (23.2)
+  const hl = (x0, y0, x1, y1, u, col = GOLD, a = 0.42) => { if (u <= 0) return; const [X0, Y0] = P2(x0, y0), [X1, Y1] = P2(x0 + (x1 - x0) * u, y1); g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = a; g.fillStyle = col; g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); g.restore(); };
+  const u1 = clamp((t - 18.44) / 0.9); hl(830, 2350, 2200, 2430, clamp(u1 * 2)); hl(380, 2440, 1135, 2518, clamp(u1 * 2 - 1));
+  hl(380, 2606, 1445, 2690, clamp((t - 23.2) / 0.7), OLO, 0.38);
+  hl(380, 2860, 1405, 2944, clamp((t - 24.5) / 0.7), PEN, 0.33);
+  // candle light on the page
+  const lg = g.createRadialGradient(ox + W * 0.2, oy + H * 0.9, 50, ox + W * 0.3, oy + H * 0.7, Math.max(W, H)); lg.addColorStop(0, `rgba(255,190,110,${0.5 * fl})`); lg.addColorStop(1, 'rgba(60,30,10,0.55)');
+  g.globalCompositeOperation = 'multiply'; g.fillStyle = lg; g.fillRect(ox, oy, W, H); g.restore();
+  // the red pen ring that marks the cut (18.9-19.3), then the cut edge
+  const ringU = clamp((t - 18.88) / 0.4);
+  if (ringU > 0 && cutA < 1) { g.save(); g.strokeStyle = PEN; g.lineWidth = 5; g.lineCap = 'round'; g.beginPath(); g.arc(hx, hy, 210 * S * 0.5 * 1.04, -1.4, -1.4 + 6.4 * ringU); g.stroke(); g.restore(); }
+  if (cutA > 0) { g.save(); g.strokeStyle = 'rgba(70,50,30,0.9)'; g.lineWidth = 3; g.beginPath(); g.arc(hx, hy, holeR, 0, 7); g.stroke(); g.restore(); }
+  g.restore();
+  // the cut-out disc of paper lifts away (19.5-20.6)
+  const d = clamp((t - 19.5) / 1.1);
+  if (d > 0 && d < 1) { const r0 = 210 * S * 0.5; g.save(); g.globalAlpha = 1 - d; g.translate(hx + d * 300, hy - d * 380); g.rotate(d * 1.4); g.scale(1 + d * 0.6, 1 + d * 0.6);
+    g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 40 * d; g.beginPath(); g.arc(0, 0, r0, 0, 7); g.clip(); g.drawImage(p, HOLE[0] - 210, HOLE[1] - 210, 420, 420, -r0, -r0, r0 * 2, r0 * 2); g.restore(); }
+  motes(t, 760, 380, 600, 50, 0.4);
+  // words: the source and the quote, beside the page (before the dive), then labels on the view
+  const sa = 1 - k(t, 21.84, 0.4);
+  if (sa > 0) { tag('MR. RANSOME’S OWN ACCOUNT', sa * k(t, 17.95, 0.3), 'HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 202');
+    wrap('“the posterior part being removed by a vertical section”', 1340, 420, 470, 40, 52, sa * k(t, 18.6, 0.35), SERIF, CREAM); }
+  if (t > 23.2 && t < 24.8) { const a = k(t, 23.3, 0.35) * (1 - k(t, 24.4, 0.3)); g.save(); chip(560, 900, 800, 74, 0.7 * a); g.restore(); wrap('“we were able to see objects as through a lens”', 960, 948, 900, 34, 42, a, SERIF, CREAM, 'center'); }
+  if (t > 24.45) { const a = k(t, 24.6, 0.3); g.save(); g.globalAlpha = a; chip(500, 900, 920, 74, 0.7); g.restore(); wrap('“I did not omit to place scarlet and green together”', 960, 948, 900, 34, 42, a, SERIF, '#FFB3A6', 'center'); }
+  idea('IDEA 3 · HIS OWN WORDS');
+}
+
+const SHOTS = [[0, W1], [6.9, W2], [17.9, W3]];
+window.render = async function (T) {
+  g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080);
+  let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (T >= s) f = fn; await f(T);
+  g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
+};
+const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
+  let s = 7; for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const q = s % 256; im.data[i] = im.data[i + 1] = im.data[i + 2] = q; im.data[i + 3] = 255; } x.putImageData(im, 0, 0); return c; })();
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"'), document.fonts.load('400 40px Fraunces'), document.fonts.load('400 40px Kalam')]); window.ready = true;
+</script></body></html>
