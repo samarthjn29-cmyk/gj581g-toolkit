@@ -8,13 +8,13 @@ Usage: pace_gaps.py IN.mp3|wav WORDS.json OUT.wav OUT_WORDS.json --words N --wpm
   WORDS.json: [[word, start, end], ...] from faster-whisper (word_timestamps) on IN.
   --words: the script's spoken word count (numbers as words); pace = N / (last word end - first word start).
   --para: words (with their full stop) that end a paragraph, in order, e.g. "1794.|Colours.|candlelight."; each gets
-          2.5x the sentence share. Comma pauses are left alone.
+          --paraw x the sentence share (default 2.5). Comma pauses are left alone.
 Writes the new audio and the shifted word times, and prints the old and new pace."""
 import sys, json, subprocess
 import numpy as np, soundfile as sf
 a = sys.argv[1:]; src, wj, out, owj = a[:4]
 opt = lambda k, d: a[a.index(k) + 1] if k in a else d
-N = int(opt('--words', 0)); WPM = float(opt('--wpm', 148)); PARA = [p for p in opt('--para', '').split('|') if p]
+N = int(opt('--words', 0)); WPM = float(opt('--wpm', 148)); PARA = [p for p in opt('--para', '').split('|') if p]; PW = float(opt('--paraw', 2.5))
 W = json.load(open(wj))
 if src.endswith('.wav'): x, sr = sf.read(src, dtype='float32')
 else:
@@ -31,7 +31,7 @@ for i in range(len(W) - 1):
     if not w.endswith(('.', '?', '!')): continue
     para = pi < len(PARA) and w == PARA[pi]
     if para: pi += 1
-    gaps.append([i, 2.5 if para else 1.0])
+    gaps.append([i, PW if para else 1.0])
 if pi < len(PARA): sys.exit(f'paragraph word not found in order: {PARA[pi]}')
 unit = need / sum(g[1] for g in gaps)
 ins = []  # (sample position, seconds)
@@ -57,4 +57,4 @@ for j, (w, s, e) in enumerate(W):
     NW.append([w, round(s + shift, 3), round(e + shift, 3)])
 json.dump(NW, open(owj, 'w'))
 span2 = NW[-1][2] - NW[0][1]
-print(f'after: {len(ins)} pauses lengthened (sentence +{unit:.2f} s, paragraph +{2.5 * unit:.2f} s); {span2:.1f} s = {N / span2 * 60:.1f} wpm')
+print(f'after: {len(ins)} pauses lengthened (sentence +{unit:.2f} s, paragraph +{PW * unit:.2f} s); {span2:.1f} s = {N / span2 * 60:.1f} wpm')
