@@ -1,0 +1,182 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1 chapter 0 v4 "The eyes" (20 Nov 2026): the new opening (Sam's 00_opening v2, paced to 148 wpm with tts/pace_gaps.py), built on the
+// opening study (styles/OPENING_30S_STUDY.md) and Sam's rule that no photo or page sits on screen alone. Times are CLIP seconds (voice starts at 0.6 s),
+// cued on colour/voice/eleven/cwords00v4_shift.json. GAPs: 0-26.6 colour_ch0v4_3d.html (candle, through), 68.4-73.8 colour_patch_d.html 26.0-31.4.
+// Real material: Dalton's 1798 paper pp. 28 and 43 (PD); Dalton carte de visite, Webster of Warrington c.1840 (PD); UC Berkeley campus (CC BY 4.0, 4300streetcar);
+// Mixkit footage (eye, flower, screen, sky; free licence); geranium David J. Stang (CC BY-SA 4.0). Colour shifts and the cone dots are illustrative.
+const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+const N = ['R_paper_p28_title', 'R_paper_p43', 'R_geranium'];
+const I = Object.fromEntries(await Promise.all(N.map(async n => [n, await img('/img/colour/ch1/' + n + '.jpg')])));
+const [DALTON, BERKELEY] = await Promise.all(['/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg'].map(img));
+const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
+const V = Object.fromEntries(await Promise.all(['eye', 'flower', 'screen', 'sky'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
+async function seek(v, u) { const x = Math.max(0, Math.min(u, v.duration - 0.05)); if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.5) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const BG = '#0A0F1E', CREAM = '#EFE6D2', DIM = '#7F8AA6', OLO = '#14C7B0', PEN = '#FF6B5B';
+const SANS = '"DejaVu Sans", sans-serif', SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"';
+function text(s, x, y, size = 30, col = CREAM, font = SANS, weight = 500, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
+const mono = (s, x, y, a = 1, size = 20, col = DIM, align = 'left') => text(s, x, y, size, col, MONO, 500, align, a);
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function label(s, y, a, col = CREAM, size = 22, x = 960) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
+  const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(x - w / 2, yy - size - 6, w, size + 20); g.fillStyle = col; g.fillText(s, x, yy); g.restore(); }
+function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';   // top-left tag, as in chapter 0
+  const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
+  g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
+function vignette(st = 0.55) { const v = g.createRadialGradient(960, 540, 420, 960, 540, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, `rgba(0,0,0,${st})`); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080); }
+function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'center') { g.save(); g.font = `400 ${size}px ${font}`; const ws = s.split(' '); let line = '', lines = [];
+  for (const w of ws) { const tl = line ? line + ' ' + w : w; if (g.measureText(tl).width > maxw && line) { lines.push(line); line = w; } else line = tl; } lines.push(line); g.restore();
+  lines.forEach((l, i) => text(l, x, y + i * lh, size, col, font, 400, align, a)); return lines.length; }
+function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {   // fill a box with a picture, zoomed towards (fx, fy); returns where it landed
+  const [bx, by, bw, bh] = box, iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
+  const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(bx, by, bw, bh); g.clip(); g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h, iw, ih}; }
+const at = (r, px, py) => [r.x + px / r.iw * r.w, r.y + py / r.ih * r.h];
+function sweep(r, segs, u, col = OLO, a = 0.5) {   // highlighter over page words: segs in picture pixels [x0, y0, x1, y1]; u runs 0-1 over all of them in order
+  if (u <= 0) return; const L = segs.map(s => s[2] - s[0]), tot = L.reduce((p, q) => p + q, 0); let left = u * tot;
+  g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = a; g.fillStyle = col;
+  for (let i = 0; i < segs.length && left > 0; i++) { const [x0, y0, x1, y1] = segs[i], d = Math.min(left, L[i]); left -= d; const [X0, Y0] = at(r, x0 - 6, y0 - 4), [X1, Y1] = at(r, x0 + d + 6, y1 + 6); g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); }
+  g.restore(); }
+function underline(r, x0, x1, y, u, col = PEN, w = 6) { if (u <= 0) return; const [X0, Y] = at(r, x0, y), [X1] = at(r, x1, y); g.save(); g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round'; g.beginPath(); g.moveTo(X0, Y); g.lineTo(lerp(X0, X1, u), Y + 3 * Math.sin(u * 9)); g.stroke(); g.restore(); }
+function circle(x, y, r, fill, a = 1, blur = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = fill; if (blur) { g.shadowColor = fill; g.shadowBlur = blur; } g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.restore(); }
+
+// the geranium's pink petals, shifted (illustrative): to a sky-blue (how it looked to Dalton by day) and to a red under a warm, dim light (by candlelight)
+function shifted(im, hue, satMul, valMul, warm) { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+  for (let i = 0; i < p.length; i += 4) { let r = p[i] / 255, gg = p[i + 1] / 255, b = p[i + 2] / 255; const mx = Math.max(r, gg, b), mn = Math.min(r, gg, b), dl = mx - mn;
+    let h = 0; if (dl > 1e-5) { h = mx === r ? ((gg - b) / dl) % 6 : mx === gg ? (b - r) / dl + 2 : (r - gg) / dl + 4; h *= 60; if (h < 0) h += 360; }
+    const s = mx ? dl / mx : 0, v = mx; let dh = Math.abs(((h - 335 + 540) % 360) - 180);
+    let m = clamp(1 - (dh - 40) / 25) * clamp((s - 0.05) / 0.1);    // how 'pink-petal' this pixel is
+    let H = m > 0 ? hue : h, S = m > 0 ? clamp(s * lerp(1, satMul, m)) : s, V = v;
+    if (m > 0) H = (h + (((hue - h + 540) % 360) - 180) * m + 360) % 360;
+    if (warm) { V = v * valMul; }
+    const C = V * S, X = C * (1 - Math.abs((H / 60) % 2 - 1)), M = V - C; let rr, g2, bb;
+    [rr, g2, bb] = H < 60 ? [C, X, 0] : H < 120 ? [X, C, 0] : H < 180 ? [0, C, X] : H < 240 ? [0, X, C] : H < 300 ? [X, 0, C] : [C, 0, X];
+    p[i] = (rr + M) * 255; p[i + 1] = (g2 + M) * 255; p[i + 2] = (bb + M) * 255;
+    if (warm) { p[i] = Math.min(255, p[i] * 1.08 + 10); p[i + 1] *= 0.88; p[i + 2] *= 0.62; } }
+  x.putImageData(d, 0, 0); return c; }
+const GER = I.R_geranium, GER_DAY = shifted(GER, 205, 1.15, 1, false);
+
+
+// Sam, 20 Nov 2026: a photo of a place, book, person or article never fills the screen alone; text, his words or an animation sit beside it.
+const PAGEBOX = [70, 80, 1080, 920];
+function pageFrame() { const [x, y, w, h] = PAGEBOX; g.save(); g.shadowColor = 'rgba(0,0,0,0.75)'; g.shadowBlur = 60; g.fillStyle = '#E8DFC9'; g.fillRect(x, y, w, h); g.restore(); }
+function side(items, t, x = 1230, y = 380, maxw = 620) {   // words beside the picture: [startTime, text, colour, size, font]
+  let yy = y; for (const [t0, s, col, size, font] of items) { const a = k(t, t0, 0.35); if (a <= 0) { continue; }
+    const n = wrap(s, x, yy + (1 - a) * 12, maxw, size || 52, (size || 52) * 1.2, a, font || SERIF, col || CREAM, 'left'); yy += n * (size || 52) * 1.2 + 26; } }
+function sideShade() { const gr = g.createLinearGradient(1060, 0, 1500, 0); gr.addColorStop(0, 'rgba(10,15,30,0)'); gr.addColorStop(1, 'rgba(10,15,30,0.86)'); g.fillStyle = gr; g.fillRect(1060, 0, 860, 1080); }
+
+
+// ---------- shots (clip time) ----------
+function Cp(t) {   // He's testing a theory. The dead man came up with it fifty years earlier, about his own eyes. (26.6-33.9): his 1794 paper
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
+  const u = ease((t - 26.6) / 7.3), r = cover(I.R_paper_p28_title, lerp(1.25, 1.4, u), 0.62, lerp(0.31, 0.32, u), 1, PAGEBOX); vignette(0.45);
+  underline(r, 985, 1392, 1124, k(t, 30.5, 0.6));
+  side([[26.8, 'He’s testing a theory.', CREAM, 56], [29.3, 'The dead man’s own,', CREAM, 44], [30.5, 'from fifty years earlier.', OLO, 52]], t, 1200, 360, 640);
+  tag('HIS PAPER · READ IN 1794', k(t, 26.7));
+}
+function Dd(t) {   // The dead man is John Dalton. For his whole life, he saw fewer colours than the people around him. (33.9-41.6)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const a = k(t, 33.95, 0.35), sc = lerp(1.0, 1.05, ease((t - 33.9) / 7.7)), h = 780 * sc, w = h * DALTON.width / DALTON.height;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(DALTON, 560 - w / 2, 560 - h / 2, w, h); g.restore();
+  tag('JOHN DALTON', k(t, 35.1), '1766-1844');
+  side([[35.1, 'John Dalton', CREAM, 76], [36.9, 'For his whole life, he saw fewer colours than the people around him.', '#C9BFAE', 46]], t, 1060, 420, 720);
+  mono('PORTRAIT: WEBSTER OF WARRINGTON, C.1840 · PUBLIC DOMAIN', 120, 1030, a * 0.8, 16, DIM);
+}
+function Ee(t) {   // What Ransome finds that day is not the answer. The real answer will take 151 years. And it will come from a tiny piece of that same eye. (41.6-52.3)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const x0 = 300, x1 = 1620, y = 600, a0 = k(t, 41.7, 0.4), d = k(t, 45.0, 2.8);
+  g.save(); g.globalAlpha = a0 * 0.35; g.strokeStyle = DIM; g.lineWidth = 3; g.setLineDash([10, 12]); g.beginPath(); g.moveTo(x0, y); g.lineTo(x1, y); g.stroke(); g.restore();
+  if (d > 0) { g.save(); g.strokeStyle = OLO; g.lineWidth = 6; g.shadowColor = OLO; g.shadowBlur = 18; g.beginPath(); g.moveTo(x0, y); g.lineTo(lerp(x0, x1, d), y); g.stroke(); g.restore(); }
+  circle(x0, y, 14, CREAM, a0); text('1844', x0, y + 70, 44, CREAM, SERIF, 400, 'center', a0); mono('RANSOME’S TEST', x0, y + 110, a0, 20, DIM, 'center');
+  const na = k(t, 43.4, 0.3); if (na > 0) { text('not the answer', x0, y - 50, 40, PEN, SERIF, 400, 'center', na); }
+  const n = Math.round(151 * d); if (d > 0) text(n + ' years', 960, 430, 120, CREAM, SERIF, 400, 'center', k(t, 45.0, 0.3));
+  const ra = k(t, 47.9, 0.4); circle(x1, y, 14, OLO, ra, 20); text('1995', x1, y + 70, 44, OLO, SERIF, 400, 'center', ra);
+  const fa = k(t, 48.5, 0.5); if (fa > 0) { circle(x1, y - 120, lerp(4, 22, fa), '#E9C7B8', fa, 30); mono('A TINY PIECE OF THAT SAME EYE', x1 - 50, y - 112, k(t, 49.4, 0.4), 26, CREAM, 'right'); }
+  tag('THE REAL ANSWER', k(t, 45.1));
+}
+function Ff(t) {   // Now jump forward. April, 2025. (52.3-57.9): the real Berkeley campus, whipped in
+  const w = 1 - ease((t - 52.3) / 0.35); g.save(); g.translate(-700 * w * w, 0);
+  cover(BERKELEY, lerp(1.04, 1.14, ease((t - 52.3) / 5.6)), 0.466, 0.40); g.restore(); vignette(0.5); sideShade();
+  side([[52.5, 'Now, jump forward.', '#D8D2C4', 46], [55.0, 'April 2025', CREAM, 84]], t, 1250, 430, 600);
+  tag('UC BERKELEY, CALIFORNIA', k(t, 52.6));
+}
+function dots(cx, cy, a, mode, t) {   // three cone signals as dots; mode 'missing' dims M, 'plus' adds a teal light
+  const C = {L: '#FF6B5B', M: '#5BE08A', S: '#6B8CFF'}; ['L', 'M', 'S'].forEach((c, i) => { const x = cx - 150 + i * 150; let al = a;
+    if (mode === 'missing' && c === 'M') al = a * (1 - 0.8 * k(t, 62.6, 0.5));
+    circle(x, cy, 46, C[c], al, 24); mono(c, x, cy + 100, a, 26, CREAM, 'center'); });
+  if (mode === 'missing') { const s = k(t, 62.7, 0.3); if (s > 0) { g.save(); g.strokeStyle = PEN; g.lineWidth = 7; g.lineCap = 'round'; g.beginPath(); g.moveTo(cx - 40, cy - 40); g.lineTo(lerp(cx - 40, cx + 40, s), lerp(cy - 40, cy + 40, s)); g.stroke(); g.restore(); } }
+  if (mode === 'plus') { const p = k(t, 63.7, 0.4); circle(cx, cy - 170, lerp(10, 60, p), OLO, p, 70); }
+}
+function Gg(t) {   // A team at Berkeley, in California, tries the opposite. Instead of a colour going missing, they add one. (57.9-65.7)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  text('A team at Berkeley tries the opposite.', 960, 200, 56, CREAM, SERIF, 400, 'center', k(t, 58.2));
+  const a1 = k(t, 58.4), a2 = k(t, 60.4);
+  dots(520, 600, a1, 'missing', t); mono('DALTON, 1794', 520, 800, a1, 22, DIM, 'center');
+  dots(1400, 600, a2, 'plus', t); mono('BERKELEY, 2025', 1400, 800, a2, 22, DIM, 'center');
+  text('a colour going missing', 520, 900, 40, PEN, SERIF, 400, 'center', k(t, 62.4)); text('one added', 1400, 900, 40, OLO, SERIF, 400, 'center', k(t, 63.7));
+  mono('ILLUSTRATIVE', 1800, 1030, k(t, 58.4), 16, DIM, 'right');
+}
+async function Hh(t) {   // Five people look into a machine. (65.7-68.4)
+  cover(await seek(V.eye, 0.4 + (t - 65.7)), lerp(1.06, 1.14, ease((t - 65.7) / 2.7))); vignette(0.55); sideShade();
+  side([[65.9, 'Five people', CREAM, 72], [66.6, 'look into a machine.', '#D8D2C4', 48]], t, 1250, 440, 600);
+}
+function Jj(t) {   // And they see a colour that no human had ever seen. They call it olo. (73.8-80.6)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const r = lerp(30, 250, ease((t - 74.3) / 1.6)); circle(760, 520, r, OLO, k(t, 74.3, 0.5), 140);
+  side([[74.6, 'a colour no human had ever seen', CREAM, 56]], t, 1200, 470, 620);
+  const na = k(t, 78.2, 0.25); if (na > 0) { g.save(); g.globalAlpha = na; g.shadowColor = OLO; g.shadowBlur = 40; g.font = `400 220px ${SERIF}`; g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText('olo', 760, 600); g.restore(); }
+  mono('A SCREEN CAN ONLY HINT AT IT', 760, 900, k(t, 75.5), 18, DIM, 'center');
+}
+function Kk(t) {   // One man who saw fewer colours than us. Five people who saw one more. (80.6-86.9)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const a = k(t, 80.7, 0.35), h = 560, w = h * DALTON.width / DALTON.height;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 40; g.drawImage(DALTON, 520 - w / 2, 470 - h / 2, w, h); g.restore();
+  text('one man: fewer colours', 520, 860, 44, '#C9BFAE', SERIF, 400, 'center', k(t, 80.9));
+  circle(1400, 470, lerp(80, 200, ease((t - 84.0) / 1.2)), OLO, k(t, 84.0, 0.4), 110);
+  text('five people: one more', 1400, 860, 44, OLO, SERIF, 400, 'center', k(t, 84.1));
+  g.save(); g.globalAlpha = 0.4 * k(t, 84.0); g.strokeStyle = DIM; g.lineWidth = 2; g.beginPath(); g.moveTo(960, 220); g.lineTo(960, 900); g.stroke(); g.restore();
+}
+async function Ll(t) {   // So here's the question. If a laser can hand you a new colour, where do colours actually come from? (86.9-93.9)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const ts = [87.0, 87.25, 87.5], names = ['flower', 'screen', 'sky'], xs = [340, 960, 1580];
+  for (let i = 0; i < 3; i++) { const a = k(t, ts[i], 0.3); if (a <= 0) continue; const v = await seek(V[names[i]], t - ts[i] + 0.3), x = xs[i] - 280, y = 60;
+    g.save(); g.globalAlpha = a * (1 - 0.45 * k(t, 89.0, 0.6)); g.drawImage(v, x, y + (1 - a) * 20, 560, 900); g.restore(); }
+  const qa = k(t, 89.1, 0.4); if (qa > 0) { g.save(); g.globalAlpha = qa * 0.85; chip(200, 640, 1520, 280); g.restore(); wrap('If a laser can hand you a new colour, where do colours actually come from?', 960, 740, 1400, 60, 76, qa, SERIF, CREAM); }
+  label('SO HERE’S THE QUESTION', 1000, k(t, 87.3) * (1 - k(t, 88.9, 0.3)), CREAM);
+}
+function Mm(t) {   // To answer that, we'll start with Dalton, and a pink flower that turned blue for him. (93.9-99.1)
+  const u = ease((t - 93.9) / 5.2), sc = lerp(1.02, 1.12, u); cover(GER, sc, 0.33, 0.5); const m = k(t, 97.6, 1.0); if (m > 0) cover(GER_DAY, sc, 0.33, 0.5, m); vignette(0.5); sideShade();
+  side([[94.4, 'We’ll start with Dalton,', '#D8D2C4', 46], [96.6, 'and a pink flower', '#F4A6BE', 58], [97.4, 'that turned blue for him.', '#9FC8FF', 58]], t, 1250, 360, 600);
+  tag('ILLUSTRATIVE', m);
+}
+function Nn(t) {   // We'll find out what was really going on in his eyes, (99.1-101.9)
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
+  cover(I.R_paper_p43, lerp(1.7, 1.76, ease((t - 99.1) / 2.8)), 0.38, 0.39, 1, PAGEBOX); vignette(0.45);
+  side([[99.3, 'What was really going on in his eyes?', CREAM, 58]], t, 1200, 440, 640);
+}
+function Oo(t) {   // and we'll get as close as a screen allows to the colour called olo. (101.9-end)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  circle(760, 520, lerp(120, 300, ease((t - 101.9) / 5.5)), OLO, k(t, 102.0, 0.5), 150);
+  side([[102.2, 'As close as a screen allows…', '#D8D2C4', 50]], t, 1200, 420, 640);
+  const na = k(t, 104.5, 0.3); if (na > 0) { g.save(); g.globalAlpha = na; g.shadowColor = OLO; g.shadowBlur = 40; g.font = `400 220px ${SERIF}`; g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText('olo', 760, 600); g.restore(); }
+}
+function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }
+const SHOTS = [[0, GAP], [26.6, Cp], [33.9, Dd], [41.6, Ee], [52.3, Ff], [57.9, Gg], [65.7, Hh], [68.4, GAP], [73.8, Jj], [80.6, Kk], [86.9, Ll], [93.9, Mm], [99.1, Nn], [101.9, Oo]];
+window.render = async function (T) {
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (T >= s) f = fn; await f(T);
+  g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
+};
+const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
+  let s = 7; for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const q = s % 256; im.data[i] = im.data[i + 1] = im.data[i + 2] = q; im.data[i + 3] = 255; } x.putImageData(im, 0, 0); return c; })();
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"'), document.fonts.load('400 40px Fraunces')]); window.ready = true;
+</script></body></html>
