@@ -112,7 +112,7 @@ async function S7(t) {   // And the story of how that happened: the year spins b
   const a = L(6), u = clamp((t - a) / (LE(6) - a + 0.1)); const pics = [[BERK, '2025 · BERKELEY'], [FIG1C, '2025 · THE PAPER'], [P25, '1854 · HIS BIOGRAPHY'], [P28, '1794 · HIS OWN PAPER']];
   const i = Math.min(3, Math.floor(u * 4)), uu = u * 4 - i, [im, lab] = pics[i];
   cover(im, lerp(1.25, 1.05, uu), 0.5, i === 3 ? 0.2 : 0.4, 0.5); g.fillStyle = 'rgba(4,6,12,0.45)'; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.5);
-  const yr = Math.round(lerp(2025, 1794, ease(u))); text(String(yr), 960, 620, 260, CREAM, SERIF, 'center', 1, 40); text(lab, 960, 700, 24, GOLD, MONO, 'center', 1);
+  const YT = [2025, 2025, 1854, 1794], from = i ? YT[i - 1] : 2025, yr = Math.round(lerp(from, YT[i], ease(uu / 0.45)));   // the year spins to the picture's own year text(String(yr), 960, 620, 260, CREAM, SERIF, 'center', 1, 40); text(lab, 960, 700, 24, GOLD, MONO, 'center', 1);
 }
 const deut = (() => { const c = document.createElement('canvas'); c.width = 960; c.height = 1080; return c; })(), dx = deut.getContext('2d', {willReadFrequently: true});
 async function S8(t) {   // a man who saw fewer colours than everyone around him: the same real footage twice: full colour (everyone around him) and Dalton's (simulation)
