@@ -24,10 +24,13 @@ const CREAM = '#EFE6D2', DIM = '#8A8370', GOLD = '#E9B45A', PEN = '#D8442F', OLO
 const SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"', HAND = 'Kalam';
 function text(s, x, y, size = 30, col = CREAM, font = SERIF, weight = 400, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
 function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(10,8,6,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
-function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
+const POST = [];   // drawn after the camera move, so tags stay fixed in the frame
+function tag(s, a = 1, sub = null) { POST.push(() => tag_(s, a, sub)); }
+function tag_(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
   const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
   g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
-function idea(s) { g.save(); g.font = '500 18px "JetBrains Mono"'; g.textAlign = 'right'; const w = g.measureText(s).width + 28; chip(1816 - w, 66, w, 40, 0.55); g.fillStyle = GOLD; g.fillText(s, 1802, 93); g.restore(); }
+function idea(s) { POST.push(() => idea_(s)); }
+function idea_(s) { g.save(); g.font = '500 18px "JetBrains Mono"'; g.textAlign = 'right'; const w = g.measureText(s).width + 28; chip(1816 - w, 66, w, 40, 0.55); g.fillStyle = GOLD; g.fillText(s, 1802, 93); g.restore(); }
 function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {
   const [bx, by, bw, bh] = box, iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
   const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
@@ -44,6 +47,8 @@ function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'le
 // ---------------- Idea 1: the round window (0-6.9) ----------------
 async function W1(t) {
   g.fillStyle = '#050403'; g.fillRect(0, 0, 1920, 1080);
+  g.save(); g.filter = 'blur(9px) brightness(0.3) sepia(0.6)'; cover(t < 4.4 ? I.R_map1794 : I.R_henry1854_p202, 1.3 + 0.03 * t, 0.3 + 0.03 * t, 0.4 + 0.02 * t, 1); g.restore();
+  { const vg = g.createRadialGradient(960, 540, 300, 960, 540, 1150); vg.addColorStop(0, 'rgba(0,0,0,0.15)'); vg.addColorStop(1, 'rgba(0,0,0,0.75)'); g.fillStyle = vg; g.fillRect(0, 0, 1920, 1080); }
   const open = ease(t / 0.55), drift = k(t, 0.6, 1.2), rr = lerp(4, 250, open) + 70 * drift + 6 * Math.sin(t * 1.7);
   const cx = lerp(960, 640, drift) + 14 * Math.sin(t * 0.6), cy = 540 + 10 * Math.sin(t * 0.45 + 1);
   // what the window shows: the candle, then (4.4) the town plan, then (5.6) Ransome's printed account
@@ -123,6 +128,7 @@ const HOLE = [1180, 2740];   // the hole, in page px
 async function W3(t) {
   g.fillStyle = '#120D08'; g.fillRect(0, 0, 1920, 1080);
   const p = I.R_henry1854_p202, fl = flick(t);
+  g.save(); g.filter = 'blur(14px) brightness(0.3) sepia(0.7)'; cover(I.R_henry1854_p25, 1.6 + 0.04 * (t - 17.9), 0.5, 0.3 + 0.03 * (t - 17.9), 1); g.restore();
   const lift = k(t, 21.84, 1.1), dive = ease((t - 22.94) / 1.6);
   // the page on the desk: a slow drift, then it is lifted towards us (the hole comes to the centre), then we go through the hole
   const baseS = lerp(0.62, 0.66, clamp((t - 17.9) / 4)), S = baseS * lerp(1, 1.7, lift) * lerp(1, 5.5, dive);
@@ -163,16 +169,29 @@ async function W3(t) {
   // words: the source and the quote, beside the page (before the dive), then labels on the view
   const sa = 1 - k(t, 21.84, 0.4);
   if (sa > 0) { tag('MR. RANSOME’S OWN ACCOUNT', sa * k(t, 17.95, 0.3), 'HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 202');
-    wrap('“the posterior part being removed by a vertical section”', 1340, 420, 470, 40, 52, sa * k(t, 18.6, 0.35), SERIF, CREAM); }
+    wrap('“the posterior part being removed by a vertical section”', 1280, 420, 430, 40, 52, sa * k(t, 18.6, 0.35), SERIF, CREAM); }
   if (t > 23.2 && t < 24.8) { const a = k(t, 23.3, 0.35) * (1 - k(t, 24.4, 0.3)); g.save(); chip(560, 900, 800, 74, 0.7 * a); g.restore(); wrap('“we were able to see objects as through a lens”', 960, 948, 900, 34, 42, a, SERIF, CREAM, 'center'); }
   if (t > 24.45) { const a = k(t, 24.6, 0.3); g.save(); g.globalAlpha = a; chip(500, 900, 920, 74, 0.7); g.restore(); wrap('“I did not omit to place scarlet and green together”', 960, 948, 900, 34, 42, a, SERIF, '#FFB3A6', 'center'); }
   idea('IDEA 3 · HIS OWN WORDS');
 }
 
 const SHOTS = [[0, W1], [6.9, W2], [17.9, W3]];
+// Camera (Sam, 20 Nov 2026: "What would it take to hit 70%?"): the whole frame is always moving. A new framing every 1-2.5 s (a cut), and inside each framing a
+// steady push, pull or pan plus a small handheld drift. [start, scale from, scale to, focus x from, focus x to, focus y from, focus y to] (focus in frame px).
+const CAM = [[0, 1, 1.1, 960, 900, 540, 540], [1.8, 1.12, 1.04, 860, 860, 560, 520], [3.4, 1.05, 1.12, 1000, 1060, 520, 540], [4.4, 1.12, 1.06, 860, 860, 540, 520], [5.6, 1.04, 1.12, 900, 1000, 540, 560], [6.9, 1, 1.12, 900, 1000, 500, 460], [8, 1.12, 1.05, 1060, 960, 700, 640], [10.4, 1.05, 1.12, 900, 860, 620, 600], [12.3, 1.12, 1.12, 1060, 1060, 560, 540], [13.6, 1.12, 1.02, 1060, 1000, 520, 560], [14.8, 1.12, 1.1, 1000, 1000, 480, 520], [16.3, 1.04, 1.12, 860, 860, 560, 600], [17.9, 1, 1.1, 860, 860, 560, 520], [19.2, 1.12, 1.12, 860, 860, 740, 700], [20.4, 1.12, 1.04, 860, 900, 560, 560], [21.84, 1, 1.06, 960, 960, 540, 540]];
+const buf = document.createElement('canvas'); buf.width = 1920; buf.height = 1080; const bg = buf.getContext('2d');
 window.render = async function (T) {
   g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080);
   let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (T >= s) f = fn; await f(T);
+  let i = 0; for (let j = 0; j < CAM.length; j++) if (T >= CAM[j][0]) i = j;
+  const [c0, s0, s1, x0, x1, y0, y1] = CAM[i], c1 = i + 1 < CAM.length ? CAM[i + 1][0] : 26.6, u = clamp((T - c0) / (c1 - c0)), e = u * (0.4 + 0.6 * u) / 1.0;
+  const sc = lerp(s0, s1, e), fx = lerp(x0, x1, e) + 6 * Math.sin(T * 1.9) + 3 * Math.sin(T * 4.7), fy = lerp(y0, y1, e) + 5 * Math.sin(T * 1.4 + 1) + 2.5 * Math.sin(T * 5.3);
+  bg.clearRect(0, 0, 1920, 1080); bg.drawImage(cv, 0, 0);
+  g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080);
+  // keep the frame covered: scale about the focus point, clamped so no edge shows
+  const W = 1920 * sc, H = 1080 * sc, ox = clamp(960 - fx * sc, 1920 - W, 0), oy = clamp(540 - fy * sc, 1080 - H, 0);
+  g.drawImage(buf, ox, oy, W, H);
+  for (const fn of POST) fn(); POST.length = 0;
   g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
 };
 const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
