@@ -20,7 +20,10 @@ Q="$DRIVE/render_queue"; mkdir -p "$Q/jobs" "$Q/done" "$Q/out" "$Q/working"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" GPU=1
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $*" | tee -a "$Q/helper_log.txt"; }
 sync_repo() {
-  git -C "$REPO" fetch -q origin && git -C "$REPO" reset -q --hard origin/main || { log "git sync failed"; return 1; }
+  local n err ok=0; for n in 1 2 3; do   # a fetch can time out on a slow network: try three times and log git's own message
+    if err=$( { GIT_TERMINAL_PROMPT=0 git -C "$REPO" fetch -q origin && git -C "$REPO" reset -q --hard origin/main; } 2>&1 ); then ok=1; break; fi
+    log "git sync try $n failed: $(echo "$err" | tail -2 | tr '\n' ' ')"; rm -f "$REPO/.git/index.lock"; sleep 20
+  done; [ $ok -eq 1 ] || { log "git sync failed"; return 1; }
   cd "$DOODLE"
   local h; h=$(shasum package-lock.json | cut -c1-12)
   if [ "$h" != "$(cat .lockhash 2>/dev/null)" ] || [ ! -d node_modules/three ]; then npm install --no-audit --no-fund -s && echo "$h" > .lockhash; fi
