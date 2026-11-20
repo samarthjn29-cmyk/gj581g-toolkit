@@ -13,17 +13,17 @@ html,body{margin:0;background:#000}canvas{display:block}
 // said, one world (pure red, green and blue light on black), words inside the scene, the camera always moving. Line times are estimates at 148 wpm until Sam records.
 // Real material: Mixkit eye clips 4257, 4058, 387, 32757, 13775 (free licence); Mixkit 42946 apples; Fong et al. 2025 Fig. 1C (CC BY 4.0); Dalton carte (PD);
 // Dalton 1798 paper p. 28 (PD); Henry 1854 p. 25 (PD); UC Berkeley campus (CC BY 4.0). The gamut triangle is our drawing after Fong et al. Fig. 2 (illustration).
-const LINES = [['In 2025,', 0], ['five people saw a colour', 0], ['no human had ever seen.', 1], ['Not a new shade.', 1], ['A completely new colour.', 1], ['They called it olo.', 1],
-  ['And the story of how that happened', 0], ['starts with a man who saw fewer colours than everyone around him.', 1], ['John Dalton.', 1], ['He wanted to know why so badly,', 0],
-  ['he asked for his eyes to be cut open after he died.', 1], ['It took 151 years to get the answer.', 1], ['So, how do you see a colour your eyes can’t make?', 1],
-  ['To answer that, we’ll start with Dalton, and a pink flower that turned blue for him.', 1], ['We’ll find out what was really going on in his eyes.', 1], ['And we’ll get as close as a screen allows to the colour called olo.', 1]];
+const LINES = [['In 2025, scientists reported', 0], ['that five people had seen a colour', 0], ['no human had ever seen.', 1], ['Not a new shade, they say.', 1], ['A whole new colour.', 1], ['They called it olo.', 1],
+  ['And the story of how that happened', 0], ['starts with a man who saw fewer colours than almost everyone around him.', 1], ['John Dalton.', 1], ['He wanted to know why so badly,', 0],
+  ['he asked for his eyes to be cut open after he died.', 1], ['It took 151 years to get the answer.', 1], ['So, how do you see a colour your eyes can’t normally make?', 1],
+  ['To answer that, we’ll start with Dalton, and a pink flower that looked blue to him.', 1], ['We’ll find out what was really going on in his eyes.', 1], ['And we’ll get as close as a screen allows to the colour called olo.', 1]];
 const WPS = 148 / 60; let tt = 0.6; const LT = LINES.map(([s, end]) => { const n = s.split(' ').length, a = tt, b = a + n / WPS; tt = b + (end ? 0.45 : 0.08); return [a, b, s]; });
 const END = tt + 1.6; window.END = END;
 const L = i => LT[i][0], LE = i => LT[i][1];
 
 const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
 const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
-const [P28, P25, DALTON, BERK, FIG1C, GER] = await Promise.all(['/img/colour/ch1/R_paper_p28_title.jpg', '/img/colour/ch1/R_henry1854_p25.jpg', '/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/fig1C.png', '/img/colour/ch1/R_geranium.jpg'].map(img));
+const [P28, P25, DALTON, BERK, FIG1C, GER] = await Promise.all(['/img/colour/ch1/R_paper_p28_title.jpg', '/img/colour/ch1/R_henry1854_p25.jpg', '/cards/img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/map_iv.png', '/img/colour/ch1/R_geranium.jpg'].map(img));
 const V = Object.fromEntries(await Promise.all(['eye', 'eyeA', 'eyeB', 'eyeC', 'eyeD', 'apples'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
 async function seek(v, u) { const D = v.duration - 0.05, x = ((u % D) + D) % D; if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
 const cv = document.getElementById('c'), g = cv.getContext('2d');
@@ -74,13 +74,13 @@ async function S1(t) {   // In 2025: the year, and the three cone lights, softly
 async function S2(t) {   // five people saw a colour: one real eye, close and sharp, a slow push; the five volunteers named small
   const a = L(1), u = clamp((t - a) / (LE(1) - a + 0.4)); cover(await seek(V.eye, 0.3 + (t - a) * 0.5), lerp(1.0, 1.05, u), 0.51, 0.45, 1);
   const vg = g.createRadialGradient(960, 520, 300, 960, 540, 1100); vg.addColorStop(0, 'rgba(12,22,38,0)'); vg.addColorStop(1, 'rgba(12,22,38,0.7)'); g.fillStyle = vg; g.fillRect(0, 0, 1920, 1080);
-  tagTL('BERKELEY · 2025 · FIVE VOLUNTEERS', k(t, a + 0.2, 0.5));
+  tagTL('BERKELEY · REPORTED 2025 · FIVE TEST SUBJECTS', k(t, a + 0.2, 0.5));
 }
 async function S3(t) {   // no human had ever seen: of the three cone lights, only the middle one comes on, in a teal no light can make; it grows into the colour
   leaks(t, 0.6); const a = L(2), on = k(t, a + 0.1, 0.6), grow = ease((t - a - 0.8) / 1.4);
   trio(960, 560, 34, 0, 0, 0, 1 - grow);
   const r = lerp(28, 230, grow); glow(960, 560, r * 2.2, OLO, 0.6 * on); g.save(); g.globalAlpha = on; g.fillStyle = OLO; g.beginPath(); g.arc(960, 560, r, 0, 7); g.fill(); g.restore();
-  text('ONLY ONE KIND OF CONE, SWITCHED ON', 960, 900, 22, DIM, MONO, 'center', k(t, a + 0.5, 0.5) * (1 - grow * 0.6));
+  text('ONLY ONE KIND OF CONE, TARGETED', 960, 900, 22, DIM, MONO, 'center', k(t, a + 0.5, 0.5) * (1 - grow * 0.6));
 }
 const NAT = [[470, '#1F6FB0'], [480, '#1C86A8'], [490, '#1A9C9C'], [500, '#22A88C'], [510, '#3AAE73'], [520, '#5AAF55'], [530, '#7AAE3E']];
 async function S4(t) {   // Not a new shade: the colour above the natural blue-greens; a thin line looks for a match along them and finds none as rich
@@ -89,8 +89,8 @@ async function S4(t) {   // Not a new shade: the colour above the natural blue-g
   const x0 = 360, x1 = 1560, y = 720, h = 90, sa = k(t, a - 0.1, 0.5);
   g.save(); g.globalAlpha = sa; const gr = g.createLinearGradient(x0, 0, x1, 0); NAT.forEach(([nm, c], i) => gr.addColorStop(i / (NAT.length - 1), c)); g.fillStyle = gr; g.beginPath(); g.roundRect(x0, y, x1 - x0, h, 12); g.fill(); g.restore();
   NAT.forEach(([nm], i) => text(nm + ' nm', x0 + (x1 - x0) * i / (NAT.length - 1), y + h + 40, 18, DIM, MONO, 'center', sa));
-  text('THE BLUE-GREENS OF NATURAL LIGHT', 960, y - 26, 20, DIM, MONO, 'center', sa);
-  const u = ease((t - a - 0.2) / 1.2), px = lerp(x0 + 60, lerp(x0, x1, 0.5), u);   // the searching line settles near 500 nm, the closest natural match
+  text('THE BLUE-GREENS OF NATURAL LIGHT', 960, y - 26, 20, DIM, MONO, 'center', sa); srcBR('COLOURS APPROXIMATE · ILLUSTRATION', sa);
+  const u = ease((t - a - 0.2) / 1.2), px = lerp(x0 + 60, lerp(x0, x1, (505 - 470) / 60), u);   /* the searching line settles at about 505 nm: the closest matches were 501-512 nm (Fong et al. 2025), and only after olo was desaturated */
   g.save(); g.globalAlpha = sa * 0.8; g.strokeStyle = CREAM; g.lineWidth = 2; g.setLineDash([6, 8]); g.beginPath(); g.moveTo(960, 480); g.lineTo(px, y - 6); g.stroke(); g.restore();
 }
 const TRI = {L: [1480, 860], M: [960, 150], S: [440, 860]};
@@ -106,20 +106,21 @@ async function S5(t) {   // A completely new colour: the map of every colour dra
   g.save(); g.globalAlpha = d1; g.drawImage(blobCv, 0, 0); g.restore();
   g.save(); g.strokeStyle = `rgba(242,238,228,${0.8 * d1})`; g.lineWidth = 3; g.beginPath(); g.moveTo(...TRI.L); g.lineTo(...TRI.M); g.lineTo(...TRI.S); g.closePath(); g.stroke(); g.restore();
   for (const [kk, [x, y], lab] of [['L', TRI.L, 'red cones'], ['M', TRI.M, 'green cones'], ['S', TRI.S, 'blue cones']]) { text(kk, x + (kk === 'L' ? 20 : kk === 'S' ? -60 : -14), y + (kk === 'M' ? -24 : 50), 40, CREAM, SERIF, 'left', d1); text(lab, x + (kk === 'L' ? 20 : kk === 'S' ? -130 : 30), y + (kk === 'M' ? -24 : 84), 20, DIM, MONO, 'left', d1); }
-  text('every colour you have ever seen', 960, 760, 26, '#0B0E18', MONO, 'center', d1 * 0.85);
-  const x = lerp(960, TRI.M[0], fly), y = lerp(560, TRI.M[1] + 28, fly); glow(x, y, 120 + 60 * fly, OLO, 1); g.save(); g.fillStyle = '#E8FFFB'; g.beginPath(); g.arc(x, y, 12, 0, 7); g.fill(); g.restore();
+  text('every colour light can make', 960, 760, 26, '#0B0E18', MONO, 'center', d1 * 0.85);
+  const x = lerp(960, TRI.M[0], fly), y = lerp(560, 300, fly);   /* the olo the subjects saw lands just outside the natural region (Fong et al. Fig. 3F); only the ideal olo sits at the M corner */ glow(x, y, 120 + 60 * fly, OLO, 1); g.save(); g.fillStyle = '#E8FFFB'; g.beginPath(); g.arc(x, y, 12, 0, 7); g.fill(); g.restore();
   if (fly > 0 && fly < 1) { g.save(); g.strokeStyle = OLO; g.globalAlpha = 0.6; g.lineWidth = 6; g.setLineDash([4, 14]); g.beginPath(); g.moveTo(960, 560); g.lineTo(x, y); g.stroke(); g.restore(); }
-  text('OUTSIDE IT', TRI.M[0] + 60, TRI.M[1] + 40, 24, OLO, MONO, 'left', k(t, a + 1.25, 0.25), 12);
-  srcBR('DIAGRAM AFTER FONG ET AL., SCIENCE ADVANCES 2025, FIG. 2 · ILLUSTRATION', d1);
+  text('OUTSIDE IT', TRI.M[0] + 50, 310, 24, OLO, MONO, 'left', k(t, a + 1.25, 0.25), 12); text('IDEAL OLO', TRI.M[0] + 40, TRI.M[1] + 6, 16, DIM, MONO, 'left', k(t, a + 1.4, 0.3));
+  g.save(); g.globalAlpha = 0.6 * k(t, a + 1.4, 0.3); g.strokeStyle = OLO; g.lineWidth = 2; g.beginPath(); g.arc(TRI.M[0], TRI.M[1], 10, 0, 7); g.stroke(); g.restore();
+  srcBR('DIAGRAM AFTER FONG ET AL., SCIENCE ADVANCES 2025, FIGS. 2-3 · ILLUSTRATION', d1);
 }
 async function S6(t) {   // They called it olo: the letters form in the glow; the real paper's figure slides in with its title
   leaks(t, 0.5); const a = L(5); glow(560, 520, 520, OLO, 0.9); sparks(t, 560, 520, 18, 200, 0.4);
   const n = Math.floor(clamp((t - a - 0.55) / 0.35) * 3); text('olo'.slice(0, n), 560, 600, 260, '#EFFFFB', SERIF, 'center', 1, 60);
   const sl = ease((t - a - 0.1) / 0.6); const x = lerp(2000, 1060, sl);
   g.save(); g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.fillStyle = '#FBFAF6'; g.fillRect(x, 170, 740, 700); g.restore();
-  g.drawImage(FIG1C, x + 30, 300, 680, 537); text('Novel color via stimulation of individual', x + 30, 222, 26, '#111', SERIF); text('photoreceptors at population scale', x + 30, 256, 26, '#111', SERIF);
+  g.drawImage(FIG1C, x + 140, 300, 460, 460); text('FIG. 1B(iv): PER-CONE TARGET LEVELS', x + 140, 790, 14, '#666', MONO); text('Novel color via stimulation of individual', x + 30, 222, 26, '#111', SERIF); text('photoreceptors at population scale', x + 30, 256, 26, '#111', SERIF);
   text('FONG ET AL. · SCIENCE ADVANCES · 2025', x + 30, 288, 15, '#666', MONO);
-  tagTL('THE REAL PAPER · APRIL 2025', sl); srcBR('FIGURE: FONG ET AL. 2025, FIG. 1C (CC BY 4.0)', sl);
+  tagTL('THE REAL PAPER · APRIL 2025', sl); srcBR('FIGURE: FONG ET AL. 2025, FIG. 1B(iv) (CC BY 4.0)', sl);
 }
 async function S7(t) {   // And the story of how that happened: the year rolls back from 2025 to 1794, from the 2025 paper to Dalton's own (two pictures, one slow dissolve)
   const a = L(6), u = clamp((t - a) / (LE(6) - a + 0.1)), mix = ease((u - 0.35) / 0.4);
@@ -147,7 +148,7 @@ async function S9(t) {   // John Dalton: his real portrait snaps in, his name an
   leaks(t, 0.5); const a = L(8), sn = backOut((t - a + 0.05) / 0.35);
   g.save(); g.translate(720, 520); g.scale(lerp(0.6, 1, clamp(sn)), lerp(0.6, 1, clamp(sn))); g.rotate(-0.03); g.shadowColor = 'rgba(0,0,0,0.8)'; g.shadowBlur = 60;
   const h = 700, w = h * DALTON.width / DALTON.height; g.drawImage(DALTON, -w / 2, -h / 2, w, h); g.restore();
-  text('John Dalton', 1120, 500, 96, CREAM, SERIF, 'left', k(t, a + 0.1, 0.25)); text('1766 – 1844 · MANCHESTER', 1126, 560, 24, GOLD, MONO, 'left', k(t, a + 0.3, 0.25));
+  text('John Dalton', 1120, 500, 96, CREAM, SERIF, 'left', k(t, a + 0.1, 0.25)); text('1766 – 1844', 1126, 560, 24, GOLD, MONO, 'left', k(t, a + 0.3, 0.25));
 }
 async function S10(t) {   // He wanted to know why so badly: his own paper, 'Vision of Colours' highlighted
   leaks(t, 0.45); const a = L(9), u = clamp((t - a) / 2); const r = cover(P28, lerp(1.0, 1.08, u), 0.5, 0.42, 1, [260, 60, 1400, 900]);
@@ -157,9 +158,9 @@ async function S10(t) {   // He wanted to know why so badly: his own paper, 'Vis
 }
 async function S11(t) {   // he asked for his eyes to be cut open after he died: the real 1854 line; a red dotted cut across an ink eye, and it splits
   leaks(t, 0.4); const a = L(10);
-  const r = cover(P25, 1.6, 0.5, 0.305, 1, [140, 80, 1640, 260]); g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = GOLD; g.globalAlpha = 0.6; const sw = clamp((t - a) / 0.8);
+  const r = cover(P25, 1.6, 0.5, 0.302, 1, [140, 90, 1640, 190]);   /* cropped to the two highlighted lines only (the page goes on to call the fluid 'pale yellow', which Ransome's own account contradicts) */ g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = GOLD; g.globalAlpha = 0.6; const sw = clamp((t - a) / 0.8);
   for (const [x0, y0, x1, y1] of [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]]) { const [X0, Y0] = at(r, x0, y0), [X1, Y1] = at(r, x0 + (x1 - x0) * sw, y1); g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); } g.restore();
-  text('HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 25', 150, 370, 16, DIM, MONO);
+  text('HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 25', 150, 312, 16, DIM, MONO);
   eyeIcon(900, 690, 180, clamp((t - a - 0.8) / 0.8), ease((t - (LE(10) - 0.9)) / 0.9));
   const cx = 900, cy = 690, rr = 180;
   text('THE BACK OF THE EYE', cx + rr + 90, cy + 8, 20, DIM, MONO, 'left', k(t, a + 0.6, 0.4));
