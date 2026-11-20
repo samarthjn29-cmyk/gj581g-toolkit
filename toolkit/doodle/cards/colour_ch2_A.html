@@ -76,6 +76,9 @@ function eyeIcon(cx, cy, rr, cu, lift, a = 1) {   // the eye icon (the same draw
 
 
 const YEL = '#FFD60A';
+function wrap(str, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'left') { if (a <= 0) return 0; g.save(); g.font = `400 ${size}px ${font}`; const ws = str.split(' '); let line = '', lines = [];
+  for (const w of ws) { const tl = line ? line + ' ' + w : w; if (g.measureText(tl).width > maxw && line) { lines.push(line); line = w; } else line = tl; } lines.push(line); g.restore();
+  lines.forEach((l, i) => text(l, x, y + i * lh, size, col, font, align, a)); return lines.length; }
 function circle(x, y, r, fill, a = 1) { if (a <= 0 || r <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = fill; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.restore(); }
 const xo = u => { u = clamp(u); return u === 1 ? 1 : 1 - Math.pow(2, -10 * u); };   // slow-out (exponential deceleration) for every reveal and move
 const ko = (t, a, d = 0.8) => xo((t - a) / d);
@@ -185,10 +188,9 @@ async function S10(t) {   // Somewhere between the light hitting your eye and yo
 const YB = [[694, 343, 1165, 386]], YB2 = [[620, 531, 935, 565]];   // Young 1802 p. 12: 'On the Theory of Light and Colours.' / 'Read November 12, 1801.'
 async function S11(t) {   // To see how, we need to go back to a man who guessed how the eye might count: the cone lights count 1, 2, 3, and his lecture page rises behind them
   leaks(t, 0.5); const a = L(18), pa = ko(t, a + 0.8, 1.4);
-  const r = frame(YOUNG, [560, 120 + (1 - pa) * 40, 800, 700], 1.25, 0.5, 0.2, pa * 0.9); hl(r, YB, ko(t, a + 1.6, 1.0)); hl(r, YB2, ko(t, a + 2.4, 0.8), OLO, 0.36);
-  g.save(); g.globalAlpha = 0.55 * pa; g.fillStyle = BG; g.fillRect(560, 560, 800, 260); g.restore();
-  trio(960, 700, 40, ko(t, a + 1.2, 0.5), ko(t, a + 1.7, 0.5), ko(t, a + 2.2, 0.5), 1, GR, 0);
-  ['1', '2', '3'].forEach((n, i) => text(n, 960 + (i - 1) * 104, 800, 34, CREAM, SERIF, 'center', ko(t, a + 1.2 + i * 0.5, 0.5)));
+  const r = frame(YOUNG, [240, 120 + (1 - pa) * 40, 760, 700], 1.25, 0.5, 0.2, pa * 0.9); hl(r, YB, ko(t, a + 1.6, 1.0)); hl(r, YB2, ko(t, a + 2.4, 0.8), OLO, 0.36);
+  trio(1420, 440, 46, ko(t, a + 1.2, 0.5), ko(t, a + 1.7, 0.5), ko(t, a + 2.2, 0.5), 1, GR, 0);
+  ['1', '2', '3'].forEach((n, i) => text(n, 1420 + (i - 1) * 120, 560, 36, CREAM, SERIF, 'center', ko(t, a + 1.2 + i * 0.5, 0.5)));
   tagTL('THOMAS YOUNG · ROYAL SOCIETY, 1801', pa);
   const e = clamp((t - (END - 1.0)) / 1.0); if (e > 0) { g.save(); g.globalAlpha = e; g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); g.restore(); }
 }
