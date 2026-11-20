@@ -5,7 +5,14 @@
 # Safety: a job can only name a script in toolkit/doodle/jobs/ or a card page in toolkit/doodle/cards/, both from the
 # toolkit repo itself (git), with plain numbers and a short query string. Nothing else in a job file is ever run.
 # Start it:  bash ~/gj581g-toolkit/toolkit/doodle/render_helper/render_helper.sh      (leave the Terminal window open)
+# Or once:   bash ~/gj581g-toolkit/toolkit/doodle/render_helper/install_autostart.sh  (runs in the background from login, no window)
 set -u
+# run from a private copy, so the git sync between jobs can update this file safely
+if [ "${GJ_COPY:-}" != 1 ]; then T="${TMPDIR:-/tmp}/gj581g_render_helper_run.sh"; cp "$0" "$T"; GJ_COPY=1 exec bash "$T" "$@"; fi
+# one helper at a time (the Terminal one and the autostart one must not both run)
+LOCK="${TMPDIR:-/tmp}/gj581g_render_helper.pid"
+if [ -f "$LOCK" ] && kill -0 "$(cat "$LOCK")" 2>/dev/null; then echo "The render helper is already running (pid $(cat "$LOCK")). Nothing to do."; exit 0; fi
+echo $$ > "$LOCK"
 REPO="$HOME/gj581g-toolkit"; DOODLE="$REPO/toolkit/doodle"
 DRIVE=$(ls -d "$HOME"/Library/CloudStorage/GoogleDrive-*/"My Drive"/"Decked out Data" 2>/dev/null | head -1)
 if [ -z "$DRIVE" ]; then echo "Can't find 'Decked out Data' in Google Drive. Install Google Drive for desktop, sign in, and check the folder shows in Finder."; exit 1; fi
@@ -21,7 +28,7 @@ sync_repo() {
 }
 field() { node -e "const j=require(process.argv[1]); const v=j[process.argv[2]]; process.stdout.write(v===undefined?'':String(v))" "$1" "$2"; }
 log "render helper started; queue: $Q"
-caffeinate -is -w $$ &
+# the Mac is kept awake only while a job renders (caffeinate around each job), not all the time
 while true; do
   printf '{"alive":"%s","host":"%s"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$(hostname -s)" > "$Q/helper_status.json"
   for J in "$Q"/jobs/*.json; do
@@ -32,11 +39,11 @@ while true; do
     KIND=$(field "$J" kind); OUT="$Q/out/$ID.mp4"; PART="$Q/working/$ID.part.mp4"; rm -f "$PART"; T0=$(date +%s); RC=1
     if [ "$KIND" = "script" ]; then
       NAME=$(field "$J" name); S="$DOODLE/jobs/$NAME.sh"
-      if [[ "$NAME" =~ ^[a-z0-9_]{1,60}$ ]] && [ -f "$S" ]; then (cd "$DOODLE" && bash "$S" "$PART") >> "$Q/helper_log.txt" 2>&1; RC=$?; else log "job $ID: unknown script '$NAME'"; fi
+      if [[ "$NAME" =~ ^[a-z0-9_]{1,60}$ ]] && [ -f "$S" ]; then (cd "$DOODLE" && caffeinate -is bash "$S" "$PART") >> "$Q/helper_log.txt" 2>&1; RC=$?; else log "job $ID: unknown script '$NAME'"; fi
     elif [ "$KIND" = "card" ]; then
       PAGE=$(field "$J" page); QS=$(field "$J" query); A=$(field "$J" start); B=$(field "$J" end)
       if [[ "$PAGE" =~ ^[a-z0-9_]{1,60}$ ]] && [ -f "$DOODLE/cards/$PAGE.html" ] && [[ "$QS" =~ ^[A-Za-z0-9=\&._-]{0,200}$ ]] && [[ "$A" =~ ^[0-9]+(\.[0-9]+)?$ ]] && [[ "$B" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-        (cd "$DOODLE" && node render.js "cards/$PAGE.html" "$QS" "$A" "$B" "$PART") >> "$Q/helper_log.txt" 2>&1; RC=$?
+        (cd "$DOODLE" && caffeinate -is node render.js "cards/$PAGE.html" "$QS" "$A" "$B" "$PART") >> "$Q/helper_log.txt" 2>&1; RC=$?
       else log "job $ID: refused card job (page/query/times not allowed)"; fi
     else log "job $ID: unknown kind '$KIND'"; fi
     SMALL="${PART%.mp4}_small.mp4"
