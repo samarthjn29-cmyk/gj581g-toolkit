@@ -123,7 +123,7 @@ async function S6(t) {   // Turn the red and green on together, and your brain r
 async function S7(t) {   // That's not a flaw in your screen. It's a clue about your eyes. And the first clue to how five people saw olo.
   leaks(t, 0.5); const a = L(10), e = k(t, L(11) - 0.1, 0.6), o = k(t, L(12) + 0.6, 0.7);
   stripes(960, 520, 90, 90, 5, 3, 1, 1, 0, 1 - e);
-  eyeIcon(760, 500, 200, 0, 0, e); trio(1360, 500, 34, 1 - o, 1, 1 - o, e, o > 0.5 ? OLO : GR, e);   // red and green cones for the yellow; then only the middle one, as olo
+  eyeIcon(760, 500, 200, 0, 0, e); trio(1360, 500, 34, 1 - o, 1, 0, e, o > 0.5 ? OLO : GR, e);   // red and green cones for the yellow; then only the middle one, as olo
   if (o > 0) { glow(1360, 500, 120, OLO, 0.5 * o); text('OLO', 1360, 620, 22, OLO, MONO, 'center', o); }
 }
 async function S8(t) {   // Light itself has no colour: a plain beam of light, no colour in it
