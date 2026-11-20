@@ -15,7 +15,7 @@ html,body{margin:0;background:#000}canvas{display:block}
 // History Institute via DPLA, PD); geranium photo David J. Stang (CC BY-SA 4.0); candle photo Andrew Fogg (CC BY 2.0). Colour shifts on the
 // geranium are illustrative and say so.
 const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
-const N = ['R_map1794', 'R_dalton_turner', 'R_paper_p28_title', 'R_paper_p29', 'R_paper_p30', 'R_paper_p43', 'R_geranium', 'R_candle'];
+const N = ['R_map1794', 'R_dalton_turner', 'R_paper_p28_title', 'R_paper_p29', 'R_paper_p30', 'R_paper_p34', 'R_paper_p43', 'R_henry1854_p25', 'R_geranium', 'R_candle'];
 const I = Object.fromEntries(await Promise.all(N.map(async n => [n, await img('/img/colour/ch1/' + n + '.jpg')])));
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.5) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
@@ -28,6 +28,7 @@ function label(s, y, a, col = CREAM, size = 22, x = 960) { if (a <= 0.001) retur
   const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(x - w / 2, yy - size - 6, w, size + 20); g.fillStyle = col; g.fillText(s, x, yy); g.restore(); }
 function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';   // top-left tag, as in chapter 0
   const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
+  g.strokeStyle = 'rgba(239,230,210,0.28)'; g.lineWidth = 1.5; g.beginPath(); g.roundRect(104, 66, w, sub ? 78 : 48, 8); g.stroke();
   g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
 function vignette(st = 0.55) { const v = g.createRadialGradient(960, 540, 420, 960, 540, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, `rgba(0,0,0,${st})`); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080); }
 function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'center') { g.save(); g.font = `400 ${size}px ${font}`; const ws = s.split(' '); let line = '', lines = [];
@@ -65,7 +66,7 @@ const GER = I.R_geranium, GER_DAY = shifted(GER, 205, 1.15, 1, false), GER_CANDL
 
 
 // Sam, 20 Nov 2026: a photo of a place, book, person or article never fills the screen alone; text, his words or an animation sit beside it.
-const PAGEBOX = [70, 80, 1080, 920];
+const PAGEBOX = [70, 160, 1080, 860];   // below the tag, so the tag never sits on the page's text
 function pageFrame() { const [x, y, w, h] = PAGEBOX; g.save(); g.shadowColor = 'rgba(0,0,0,0.75)'; g.shadowBlur = 60; g.fillStyle = '#E8DFC9'; g.fillRect(x, y, w, h); g.restore(); }
 function side(items, t, x = 1230, y = 380, maxw = 620) {   // words beside the picture: [startTime, text, colour, size, font]
   let yy = y; for (const [t0, s, col, size, font] of items) { const a = k(t, t0, 0.35); if (a <= 0) { continue; }
@@ -83,11 +84,11 @@ function S2(t) {   // A 28-year-old teacher named John Dalton stands up to read 
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
   const im = I.R_dalton_turner, a = k(t, 6.25, 0.4), sc = lerp(1.0, 1.05, ease((t - 6.2) / 6)), h = 800 * sc, w = h * im.width / im.height;
   g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(im, 620 - w / 2, 560 - h / 2, w, h); g.restore();
-  tag('JOHN DALTON', k(t, 8.5), 'TEACHER · MANCHESTER');
-  text('John Dalton', 1080, 470, 76, CREAM, SERIF, 400, 'left', k(t, 8.5));
-  mono('28 YEARS OLD IN 1794', 1084, 525, k(t, 6.8), 22, DIM);
-  wrap('A paper about his own eyes.', 1080, 660, 720, 46, 58, k(t, 10.1), SERIF, CREAM, 'left');
-  mono('PORTRAIT FROM 1834: CHARLES TURNER AFTER JAMES LONSDALE · PUBLIC DOMAIN', 120, 1030, a * 0.8, 16, DIM);
+  tag('JOHN DALTON', k(t, 6.3, 0.2), 'TEACHER · MANCHESTER');
+  text('John Dalton', 1080, 450, 76, CREAM, SERIF, 400, 'left', k(t, 6.4));
+  mono('A TEACHER, 28 YEARS OLD IN 1794', 1084, 510, k(t, 6.8), 28, '#C9BFAE');
+  wrap('He reads a paper about his own eyes.', 1080, 650, 720, 46, 58, k(t, 9.9), SERIF, CREAM, 'left');
+  label('THIS PORTRAIT IS FROM 1834 · HE WAS IN HIS SIXTIES', 1010, a, CREAM, 22, 620);
 }
 function S3(t) {   // His audience ... the Literary and Philosophical Society. It's called "Extraordinary Facts ..." (12.2-21.5): the real title page
   g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
@@ -100,22 +101,22 @@ function S3(t) {   // His audience ... the Literary and Philosophical Society. I
 }
 function S4a(t) {   // He tells them he hadn't known his eyes were different. Not until one evening, when he looked at a flower, (21.5-28.2): p. 29
   g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
-  const u = ease((t - 21.5) / 6.7), r = cover(I.R_paper_p29, lerp(1.75, 1.86, u), 0.47, lerp(0.71, 0.73, u), 1, PAGEBOX); vignette(0.45);
-  side([[23.0, '“I was never convinced of a peculiarity in my vision,', CREAM, 46], [26.3, 'till I accidentally observed the colour of the flower of the Geranium zonale by candle-light”', OLO, 46]], t, 1200, 300, 640);
+  const u = ease((t - 21.5) / 5.8), r = cover(I.R_paper_p29, lerp(1.75, 1.86, u), 0.47, lerp(0.71, 0.73, u), 1, PAGEBOX); vignette(0.45);
+  side([[23.0, '“I was never convinced of a peculiarity in my vision,', CREAM, 46], [25.3, 'till I accidentally observed the colour of the flower of the Geranium zonale by candle-light”', OLO, 46]], t, 1200, 300, 640);
   sweep(r, [[865, 1925, 1388, 1972], [445, 1985, 882, 2032]], k(t, 23.0, 1.6));                // I was never convinced of a peculiarity in my vision,
-  sweep(r, [[445, 2045, 1388, 2092], [445, 2105, 668, 2152]], k(t, 26.3, 1.4));                // the colour of the flower of the Geranium zonale by candle-light,
-  tag('HIS OWN WORDS', k(t, 21.6), 'DALTON, 1798, PAGE 29');
+  sweep(r, [[445, 2045, 1388, 2092], [445, 2105, 668, 2152]], k(t, 25.3, 1.4));                // the colour of the flower of the Geranium zonale by candle-light,
+  tag('HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 29');
 }
 function S4b(t) {   // a geranium. By day, it looked to him almost exactly sky-blue. (28.2-34.2)
-  const u = ease((t - 28.2) / 6.2), sc = lerp(1.04, 1.16, u), fx = 0.33, fy = 0.5;
+  const u = ease((t - 27.3) / 6.9), sc = lerp(1.04, 1.16, u), fx = 0.33, fy = 0.5;
   cover(GER, sc, fx, fy); const m = k(t, 30.3, 1.4); if (m > 0) cover(GER_DAY, sc, fx, fy, m); vignette(0.5);
-  sideShade(); tag('A GERANIUM', k(t, 28.35, 0.3) * (1 - m), null); tag('TO DALTON, BY DAY · ILLUSTRATIVE', m);
-  side([[28.4, 'A geranium.', CREAM, 64], [29.8, 'By day:', '#D8D2C4', 44], [31.6, 'almost exactly sky-blue', '#9FC8FF', 64]], t, 1250, 380, 600);
+  sideShade(); tag('A GERANIUM', (1 - m), null); tag('TO DALTON, BY DAY · ILLUSTRATIVE', m);
+  side([[27.4, 'A flower.', '#D8D2C4', 44], [28.3, 'A geranium.', CREAM, 64], [29.8, 'By day:', '#D8D2C4', 44], [31.6, 'almost exactly sky-blue', '#9FC8FF', 64]], t, 1250, 380, 600);
 }
 function S4c(t) {   // By candlelight, (34.2-36.3)
   const f = 1 + 0.035 * Math.sin(t * 13.1) + 0.02 * Math.sin(t * 29.7);
   cover(I.R_candle, lerp(1.04, 1.1, ease((t - 34.2) / 2.1)), 0.62, 0.55); g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = `rgba(${Math.round(255 * clamp(f))},${Math.round(232 * f)},${Math.round(210 * f)},1)`; g.fillRect(0, 0, 1920, 1080); g.restore(); vignette(0.65);
-  sideShade(); side([[34.35, 'By candlelight…', '#FFC98A', 72]], t, 1250, 520, 600);
+  sideShade(); side([[34.35, 'By candlelight…', '#FFC98A', 72]], t, 1250, 520, 600); tag('BY CANDLELIGHT', 1);
 }
 function S4d(t) {   // he writes, it was "astonishingly changed". To him, it had turned red. (36.3-41.2): p. 30
   g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
@@ -131,10 +132,10 @@ function S5(t) {   // To his friends, it was pink, by day and by candlelight. (4
   for (let i = 0; i < 3; i++) { const [im, l1, l2, col, t0] = P[i], a = k(t, t0, 0.3); if (a <= 0) continue; const x = xs[i] - 270, y = 120 + (1 - a) * 20;
     g.save(); g.globalAlpha = a; cover(im, lerp(1.0, 1.06, ease((t - 41.2) / 5.4)), 0.33, 0.5, 1, [x, y, 540, 760]); g.restore();
     if (i === 2) { const hl = k(t, 41.9, 0.4); g.save(); g.globalAlpha = hl; g.strokeStyle = col; g.lineWidth = 6; g.strokeRect(x - 3, y - 3, 546, 766); g.restore(); }
-    mono(l1, xs[i], 935, a, 22, CREAM, 'center'); mono(l2, xs[i], 970, a, 20, col, 'center'); }
+    mono(l1, xs[i], 935, a, 28, CREAM, 'center'); mono(l2, xs[i], 978, a, 26, col, 'center'); }
   g.save(); g.globalAlpha = 0.55 * k(t, 41.9, 0.5); g.fillStyle = BG; g.fillRect(70, 110, 1160, 780); g.restore();   // the two Dalton panels step back while the friends' panel is spoken
-  label('PINK, BOTH TIMES', 1040, k(t, 43.0), '#F4A6BE', 22, 1580);
-  tag('THE SAME FLOWER · ILLUSTRATIVE', k(t, 41.3));
+  label('PINK, BOTH TIMES', 1046, k(t, 43.0), '#F4A6BE', 26, 1580);
+  tag('THE SAME FLOWER · ILLUSTRATIVE', 1);
 }
 function S6a(t) {   // And he isn't the only one. His brother, it turns out, makes the same mistakes. (46.6-51.9): p. 30 again
   g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
@@ -143,36 +144,43 @@ function S6a(t) {   // And he isn't the only one. His brother, it turns out, mak
   sweep(r, [[1185, 1065, 1542, 1117], [575, 1125, 1332, 1172]], k(t, 48.9, 1.7));               // except my brother who saw it in the same light as myself.
   tag('HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 30');
 }
-function S6b(t) {   // They both confuse scarlet with green, and pink with blue. (51.9-56.7)
-  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  const rows = [['SCARLET', '#E0321E', 'GREEN', '#3F9A3A', 53.1, 53.76], ['PINK', '#F2A0B6', 'BLUE', '#6FA6E6', 54.5, 55.0]];
-  rows.forEach(([n1, c1, n2, c2, t1, t2], j) => { const y = 400 + j * 300, a1 = k(t, t1, 0.3), a2 = k(t, t2, 0.3), m = k(t, t2 + 0.35, 0.6), x1 = lerp(700, 830, m), x2 = lerp(1220, 1090, m);
-    circle(x1, y, 110, c1, a1); circle(x2, y, 110, c2, a2);
-    mono(n1, x1, y + 170, a1, 24, CREAM, 'center'); mono(n2, x2, y + 170, a2, 24, CREAM, 'center');
-    text('=', 960, y + 22, 90, CREAM, SANS, 700, 'center', k(t, t2 + 0.7, 0.3)); });
-  tag('WHAT DALTON AND HIS BROTHER MIXED UP', k(t, 52.0), 'HUNT ET AL., SCIENCE, 1995');
+function S6b(t) {   // They both confuse scarlet with green, and pink with blue. (51.9-56.7): his own page about green looking like red
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
+  const u = ease((t - 51.9) / 4.8), r = cover(I.R_paper_p34, lerp(1.6, 1.7, u), 0.64, lerp(0.44, 0.45, u), 1, PAGEBOX); vignette(0.45);
+  sweep(r, [[1560, 1205, 1722, 1252], [750, 1265, 1552, 1312]], k(t, 52.6, 1.2));               // This appears to me very little different from red.
+  sweep(r, [[750, 1325, 1722, 1372], [750, 1385, 1428, 1432]], k(t, 54.3, 1.2), PEN, 0.38);     // a laurel-leaf ... is a good match to a stick of red sealing-wax
+  side([[52.1, 'They both confuse', '#D8D2C4', 44], [53.1, 'scarlet with green,', '#FF8A70', 60], [54.5, 'and pink with blue.', '#9FC8FF', 60]], t, 1200, 380, 640);
+  tag('HIS OWN WORDS · ON GREEN', 1, 'DALTON, 1798, PAGE 34');
 }
 function S7(t) {   // Dalton is a scientist, so he wants to know why. And he comes up with a good one. (56.7-62.6): p. 43
   g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
   const u = ease((t - 56.7) / 5.9), r = cover(I.R_paper_p43, lerp(1.7, 1.82, u), 0.38, lerp(0.385, 0.392, u), 1, PAGEBOX); vignette(0.45);
   side([[58.8, 'He wants to know why.', CREAM, 54], [60.5, '“a coloured medium, probably some modification of blue”', OLO, 52]], t, 1200, 360, 640);
   sweep(r, [[458, 1040, 1202, 1088], [255, 1100, 552, 1147]], k(t, 60.5, 1.4));                 // a coloured medium, probably some modification of blue.
-  tag('HIS GUESS, IN HIS OWN WORDS', k(t, 56.8), 'DALTON, 1798, PAGE 43');
+  tag('HIS GUESS, IN HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 43');
 }
-function S8(t) {   // It's a neat idea. It's testable. And he knows exactly how it should be tested. (72.6-79.0)
-  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  const im = I.R_dalton_turner, a = k(t, 72.65, 0.35), sc = lerp(1.0, 1.04, ease((t - 72.6) / 6.4)), h = 800 * sc, w = h * im.width / im.height;
-  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(im, 560 - w / 2, 560 - h / 2, w, h); g.restore();
-  text('A neat idea.', 1000, 420, 72, CREAM, SERIF, 400, 'left', k(t, 73.15, 0.3));
-  text('Testable.', 1000, 540, 72, OLO, SERIF, 400, 'left', k(t, 74.85, 0.3));
-  wrap('And he knows exactly how it should be tested.', 1000, 680, 760, 44, 58, k(t, 76.4, 0.4), SERIF, '#C9BFAE', 'left');
+function S8(t) {   // It's a neat idea. It's testable. And he knows exactly how it should be tested. (72.6-79.0): his page says inspection would show it
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
+  const u = ease((t - 72.6) / 6.4), r = cover(I.R_paper_p43, lerp(1.72, 1.84, u), 0.38, lerp(0.405, 0.415, u), 1, PAGEBOX); vignette(0.45);
+  sweep(r, [[440, 1155, 1202, 1197], [255, 1215, 992, 1257]], k(t, 76.3, 1.6));                 // otherwise I apprehend it might be discovered by inspection, which has not been done.
+  side([[73.1, 'A neat idea.', CREAM, 64], [74.8, 'Testable.', OLO, 64], [76.3, '“it might be discovered by inspection”', '#C9BFAE', 46]], t, 1200, 360, 640);
+  tag('HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 43');
+}
+function S9(t) {   // He leaves instructions that when he dies, his eyes are to be opened, ... (79.0-82.2): the 1854 biography, in Dalton's "strongly expressed wish"
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080); pageFrame();
+  const u = ease((t - 79.0) / 3.2), r = cover(I.R_henry1854_p25, lerp(1.1, 1.15, u), 0.45, lerp(0.30, 0.305, u), 1, PAGEBOX); vignette(0.45);
+  sweep(r, [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]], k(t, 79.4, 1.6));                // after Dalton's death, in conformity with his strongly expressed wish
+  { const [, yA] = at(r, 0, 1120), [, yB] = at(r, 0, 1300), [bx, by, bw, bh] = PAGEBOX; g.save(); g.fillStyle = 'rgba(22,18,13,0.62)';   // the rest of the page steps back: only the two lines about his wish stay bright
+    g.fillRect(bx, by, bw, Math.max(0, yA - by)); g.fillRect(bx, yB, bw, Math.max(0, by + bh - yB)); g.restore(); }
+  side([[79.2, 'He leaves instructions.', CREAM, 56], [80.4, '“his strongly expressed wish”', OLO, 52]], t, 1200, 400, 640);
+  tag('HIS FIRST BIOGRAPHY, 1854', 1, 'W. C. HENRY, MEMOIRS OF JOHN DALTON, PAGE 25');
 }
 function S10(t) {   // He would be wrong. But to understand how, we first have to get rid of something we all believe about colour. (87.5-end)
   const u = ease((t - 87.5) / 6.0); cover(GER, lerp(1.0, 1.12, u), 0.33, 0.5); vignette(lerp(0.5, 0.75, u)); sideShade();
-  side([[87.6, 'To understand how,', '#D8D2C4', 46], [89.9, 'something we all believe about colour.', CREAM, 58]], t, 1250, 400, 600);
+  side([[87.6, 'To understand how, we first have to get rid of', '#D8D2C4', 44], [89.9, 'something we all believe about colour.', CREAM, 58]], t, 1250, 380, 600);
 }
 function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }   // the 3D shots (colour_ch1_3d.html)
-const SHOTS = [[0, S1], [6.2, S2], [12.2, S3], [21.5, S4a], [28.2, S4b], [34.2, S4c], [36.3, S4d], [41.2, S5], [46.6, S6a], [51.9, S6b], [56.7, S7], [62.6, GAP], [72.6, S8], [79.0, GAP], [87.5, S10]];
+const SHOTS = [[0, S1], [6.2, S2], [12.2, S3], [21.5, S4a], [27.3, S4b], [34.2, S4c], [36.3, S4d], [41.2, S5], [46.6, S6a], [51.9, S6b], [56.7, S7], [62.6, GAP], [72.6, S8], [79.0, S9], [82.2, GAP], [87.5, S10]];
 window.SHOTS = SHOTS.map(s => s[0]);
 window.render = async function (T) {
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);

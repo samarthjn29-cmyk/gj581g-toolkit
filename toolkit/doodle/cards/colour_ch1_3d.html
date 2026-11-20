@@ -9,7 +9,8 @@ html,body{margin:0;background:#000}canvas{display:block}
 <body><canvas id="c" width="1920" height="1080"></canvas>
 <script type="module">
 // Colour_v1 chapter 1 "The geranium": the 3D shots, on the shared lab3d look. Shot-local time (s = 0 at the shot's first frame);
-// Re-timed to Sam's 01_jar.mp3 (20 Nov 2026, paced voice): filter = clip 62.6-72.6 s (10.0 s), opened = clip 79.0-87.5 s (8.5 s).
+// Re-timed to Sam's 01_jar.mp3 (20 Nov 2026, paced voice): filter = clip 62.6-72.6 s (10.0 s), opened = clip 82.2-87.5 s (5.3 s; v3 after the independent review:
+// the back wall is now dark so the clear fluid reads as clear, one beam visibly loses its red, the colour strips come in on 'Like a filter').
 //  ?shot=filter  "The fluid inside his eye, he suggests, must be tinted blue. Like a filter, it soaks up the red end of the light
 //                 before it reaches the back of the eye."  Cut-away eye; the vitreous fills with a blue tint (Beer-Lambert absorption,
 //                 which is what a tinted filter does); white light enters, splits, and the red part dies out before the retina.
@@ -43,7 +44,7 @@ function buildEye(clips) {
   const sclera = new THREE.Mesh(new THREE.SphereGeometry(R, 128, 96), new THREE.MeshPhysicalMaterial({color: '#E2DED8', roughness: 0.42, clearcoat: 0.5, clearcoatRoughness: 0.35, sheen: 0.6, sheenColor: new THREE.Color('#FFD8D0'), side: THREE.DoubleSide, clippingPlanes: cp()}));
   sclera.castShadow = true; eye.add(sclera);
   const choroid = new THREE.Mesh(new THREE.SphereGeometry(R * 0.972, 128, 96), new THREE.MeshStandardMaterial({color: '#2A0C0C', roughness: 0.9, side: THREE.BackSide, clippingPlanes: cp()})); eye.add(choroid);
-  const retina = new THREE.Mesh(new THREE.SphereGeometry(R * 0.962, 128, 96), new THREE.MeshStandardMaterial({color: '#B4473A', emissive: '#521610', emissiveIntensity: 0.8, roughness: 0.7, side: THREE.BackSide, clippingPlanes: cp([new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.5)])})); eye.add(retina);
+  const retina = new THREE.Mesh(new THREE.SphereGeometry(R * 0.962, 128, 96), new THREE.MeshStandardMaterial({color: '#4A2624', emissive: '#2A0E0C', emissiveIntensity: 0.35, roughness: 0.7, side: THREE.BackSide, clippingPlanes: cp([new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.5)])})); eye.add(retina);
   const fovea = new THREE.Mesh(new THREE.CircleGeometry(0.08, 32), new THREE.MeshStandardMaterial({color: '#7A2A20', emissive: '#7A2A20', emissiveIntensity: 0.6, clippingPlanes: cp()})); fovea.position.set(-R * 0.955, 0, 0); fovea.rotation.y = Math.PI / 2; eye.add(fovea);
   // vitreous: a clear gel; its tint is Beer-Lambert absorption over the path (attenuationColor / attenuationDistance)
   const vit = new THREE.MeshPhysicalMaterial({color: '#FFFFFF', roughness: 0.04, transmission: 1.0, thickness: 2.2, ior: 1.336, attenuationColor: new THREE.Color('#2F6BFF'), attenuationDistance: 1e6, transparent: true, side: THREE.FrontSide, clippingPlanes: cp()});
@@ -57,10 +58,11 @@ function buildEye(clips) {
   // optic nerve at the back
   const nerve = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.22, 1.4, 48, 1, true), new THREE.MeshStandardMaterial({color: '#E9D2C4', roughness: 0.6, clippingPlanes: cp()})); nerve.rotation.z = Math.PI / 2; nerve.position.set(-R - 0.55, -0.05, 0); eye.add(nerve);
   const rimS = rimShell(new THREE.SphereGeometry(R * 1.004, 96, 64), '#A9C8FF', 3.2, 0.5); rimS.material.clippingPlanes = cp(); eye.add(rimS);
-  return {eye, vit, tintGlow, sclera, retina, nerve};
+  const glass = new THREE.Mesh(new THREE.SphereGeometry(R * 0.9, 64, 48), new THREE.MeshBasicMaterial({color: '#DDE8FF', transparent: true, opacity: 0.07, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.BackSide, clippingPlanes: cp()})); eye.add(glass);   // the clear gel reads as glass
+  return {eye, vit, tintGlow, sclera, retina, nerve, glass};
 }
 const C = new THREE.Color();
-function setTint(e, u) { e.vit.attenuationDistance = lerp(1e6, 0.42, clamp(u) ** 0.35); e.tintGlow.material.opacity = 0.34 * clamp(u); e.retina.material.emissiveIntensity = lerp(0.8, 0.25, clamp(u)); e.retina.material.color.set('#B4473A').lerp(new THREE.Color('#2A2F55'), 0.7 * clamp(u)); }
+function setTint(e, u) { e.vit.attenuationDistance = lerp(1e6, 0.42, clamp(u) ** 0.35); e.tintGlow.material.opacity = 0.34 * clamp(u); e.retina.material.emissiveIntensity = lerp(0.35, 0.2, clamp(u)); e.retina.material.color.set('#4A2624').lerp(new THREE.Color('#2A2F55'), 0.7 * clamp(u)); e.glass.material.opacity = 0.07 * (1 - clamp(u)); }
 
 let update = () => {}, overlay = () => {};
 
@@ -77,12 +79,12 @@ if (SHOT === 'filter') {
     stage.bokeh.uniforms.focus.value = cam.position.distanceTo(new THREE.Vector3(0, 0, -0.2)); stage.bokeh.uniforms.aperture.value = 0.0006;
     e.eye.rotation.y = 0.02 * Math.sin(s * 1.9); e.eye.rotation.z = 0.015 * Math.sin(s * 1.4);
     setTint(e, at(s, 2.7, 1.4, SMOOTH));
-    white.set(SRC, PUP, at(s, 4.2, 0.7, IN));
-    const sp = at(s, 4.9, 1.4, SIG);
-    rg.set(PUP, ends.G, sp); rb.set(PUP, ends.B, sp);
-    const rr_u = Math.min(sp, RSTOP + 0.06), rfade = 1 - at(s, 5.9, 1.1, OUT); rr.set(PUP, ends.R, rr_u, rfade);
-    puff.material.opacity = 0.9 * at(s, 5.7, 0.3, IN) * (1 - at(s, 6.2, 1.0, OUT)); puff.scale.setScalar(0.25 + 0.35 * at(s, 5.7, 1.4, OUT));
-    const hit = at(s, 6.9, 0.3, IN); hitG.material.opacity = hitB.material.opacity = hit * (0.85 + 0.15 * Math.sin(s * 7)); hitG.scale.setScalar(0.32); hitB.scale.setScalar(0.32);
+    white.set(SRC, PUP, at(s, 4.2, 0.6, IN));
+    const sp = at(s, 4.8, 1.8, SIG), back = ends.G;   // one beam crosses the tinted fluid; its red drains out as it goes (shown by the colour strips below too)
+    rr.set(PUP, back, Math.min(sp, 0.35), 1 - at(s, 5.5, 0.9, OUT)); rg.set(PUP, back, sp * 0.999, 0.0); rb.set(PUP, back, sp);
+    rb.mat.color.set('#BFEFFF').multiplyScalar(EMIT.beam);
+    puff.position.copy(PUP.clone().lerp(back, 0.22)); puff.material.opacity = 0.9 * at(s, 5.4, 0.3, IN) * (1 - at(s, 6.2, 0.9, OUT)); puff.scale.setScalar(0.25 + 0.35 * at(s, 5.4, 1.4, OUT));
+    const hit = at(s, 6.9, 0.3, IN); hitB.position.copy(back); hitG.material.opacity = 0; hitB.material.opacity = hit * (0.85 + 0.15 * Math.sin(s * 7)); hitG.scale.setScalar(0.32); hitB.scale.setScalar(0.32);
   };
   function spectrum(y, a, killRed) { if (a <= 0.001) return; const x0 = 560, w = 800, h = 34; g.save(); g.globalAlpha = a;
     const gr = g.createLinearGradient(x0, 0, x0 + w, 0); ['#5F3CFF', '#3C7BFF', '#22C9E0', '#4FE27E', '#E8E24A', '#FF9A3A', '#FF4A3A'].forEach((c, i) => gr.addColorStop(i / 6, c));
@@ -90,15 +92,15 @@ if (SHOT === 'filter') {
     if (killRed > 0) { const kg = g.createLinearGradient(x0 + w * 0.55, 0, x0 + w, 0); kg.addColorStop(0, 'rgba(5,7,15,0)'); kg.addColorStop(0.45, `rgba(5,7,15,${0.92 * killRed})`); kg.addColorStop(1, `rgba(5,7,15,${0.92 * killRed})`); g.fillStyle = kg; g.fillRect(x0, y, w, h); }
     g.strokeStyle = 'rgba(239,230,210,0.5)'; g.lineWidth = 1.5; g.strokeRect(x0, y, w, h); g.restore(); }
   overlay = t => { const s = t - T0;
-    ui.tag([["DALTON'S GUESS · 1794 · ILLUSTRATIVE", CREAM]], at(s, 0.1, 0.4, IN));
+    ui.tag([["DALTON'S GUESS · 1794 · ILLUSTRATIVE", CREAM]], 1);
     ui.callout(new THREE.Vector3(-0.3, 0.55, -0.4), 'THE FLUID INSIDE THE EYE', at(s, 0.4, 0.45, IN) * (1 - at(s, 2.7, 0.3, OUT)), CREAM, 150, -230);
     ui.callout(new THREE.Vector3(-0.3, 0.55, -0.4), 'THE FLUID INSIDE, TINTED BLUE', at(s, 2.9, 0.45, IN) * (1 - at(s, 5.4, 0.35, OUT)), '#9FC0FF', 150, -230);
     ui.callout(SRC.clone().lerp(PUP, 0.45), 'WHITE LIGHT', at(s, 4.4, 0.4, IN), CREAM, 40, -90);
-    ui.callout(rStop, 'THE RED END, SOAKED UP', at(s, 6.0, 0.45, IN), HEX.L, 120, -170);
-    ui.callout(ends.B, 'ONLY THE REST REACHES THE BACK', at(s, 7.1, 0.45, IN), '#9FC0FF', -60, 140);
-    const sa = at(s, 7.7, 0.5, IN); if (sa > 0) { g.save(); g.globalAlpha = sa; ui.chip(520, 860, 880, 176); g.restore();
+    ui.callout(PUP.clone().lerp(ends.G, 0.22), 'THE RED END, SOAKED UP', at(s, 5.5, 0.45, IN), HEX.L, 120, -170);
+    ui.callout(ends.G, 'ONLY THE REST REACHES THE BACK', at(s, 7.0, 0.45, IN), '#9FC0FF', -60, -150);
+    const sa = at(s, 4.3, 0.5, IN); if (sa > 0) { g.save(); g.globalAlpha = sa; ui.chip(520, 860, 880, 176); g.restore();
       g.save(); g.globalAlpha = sa; g.font = '500 18px "JetBrains Mono"'; g.fillStyle = DIM; g.fillText('LIGHT GOING IN', 560, 892); g.fillText('WHAT HIS GUESS LEAVES', 560, 972); g.restore();
-      spectrum(900, sa, 0); spectrum(980, sa, at(s, 8.1, 0.8, SIG)); }
+      spectrum(900, sa, 0); spectrum(980, sa, at(s, 5.4, 1.0, SIG)); }
   };
 }
 
@@ -109,18 +111,18 @@ if (SHOT === 'opened') {
     new THREE.LineDashedMaterial({color: CREAM, dashSize: 0.07, gapSize: 0.05, transparent: true, opacity: 0})); loop.computeLineDistances(); scene.add(loop);
   const total = loop.geometry.attributes.position.count;
   update = t => { const s = t - T0;
-    const u = at(s, 0, 8.5, SMOOTH); cam.position.set(lerp(4.6, 4.2, u), lerp(1.7, 1.5, u), lerp(6.4, 6.0, u)); cam.lookAt(lerp(0.3, 1.0, u), 0.1, 0);
+    const u = at(s, 0, 5.3, SMOOTH); cam.position.set(lerp(4.6, 4.2, u), lerp(1.7, 1.5, u), lerp(6.4, 6.0, u)); cam.lookAt(lerp(0.3, 1.0, u), 0.1, 0);
     stage.bokeh.uniforms.focus.value = cam.position.distanceTo(new THREE.Vector3(0.4, 0, 0)); stage.bokeh.uniforms.aperture.value = 0.0007;
-    const tint = 1 - at(s, 6.5, 1.6, SMOOTH); setTint(back, tint); setTint(front, tint);
-    const cut = at(s, 2.9, 1.0, SIG); loop.material.opacity = 0.9 * cut * (1 - at(s, 4.3, 0.4, OUT)); loop.geometry.setDrawRange(0, Math.floor(total * cut));
-    const lift = at(s, 3.8, 1.6, SIG); front.eye.position.set(lerp(0, 2.4, lift), lerp(0, 0.9, lift), lerp(0, -0.6, lift)); front.eye.rotation.set(0, lerp(0, 2.2, lift), lerp(0, 0.2, lift)); front.eye.updateMatrixWorld(); frontPlane.copy(frontHalf).applyMatrix4(front.eye.matrixWorld);
+    const tint = 1 - at(s, 3.2, 1.4, SMOOTH); setTint(back, tint); setTint(front, tint);
+    const cut = at(s, 0.0, 0.6, SIG); loop.material.opacity = 0.9 * cut * (1 - at(s, 1.2, 0.4, OUT)); loop.geometry.setDrawRange(0, Math.floor(total * cut));
+    const lift = at(s, 0.5, 1.5, SIG); front.eye.position.set(lerp(0, 2.4, lift), lerp(0, 0.9, lift), lerp(0, -0.6, lift)); front.eye.rotation.set(0, lerp(0, 2.2, lift), lerp(0, 0.2, lift)); front.eye.updateMatrixWorld(); frontPlane.copy(frontHalf).applyMatrix4(front.eye.matrixWorld);
     back.eye.rotation.y = 0.15 * lift;
   };
   overlay = t => { const s = t - T0;
-    ui.tag([['HIS INSTRUCTIONS · ILLUSTRATIVE', CREAM]], at(s, 0.1, 0.4, IN));
-    ui.label('AFTER HIS DEATH: OPEN THE EYES', 1000, at(s, 1.3, 0.45, IN) * (1 - at(s, 3.8, 0.35, OUT)), CREAM);
-    ui.label('EXAMINE THE FLUID', 1000, at(s, 4.0, 0.45, IN) * (1 - at(s, 6.2, 0.35, OUT)), '#9FC0FF');
-    ui.callout(new THREE.Vector3(XC - 0.1, 0.0, 0.25), 'THE FLUID: CLEAR?', at(s, 7.0, 0.5, IN), CREAM, -80, 170);
+    ui.tag([['HIS INSTRUCTIONS · ILLUSTRATIVE', CREAM]], 1);
+    ui.label('OPEN THE EYES', 1000, at(s, 0.05, 0.3, IN) * (1 - at(s, 0.7, 0.25, OUT)), CREAM, 26);
+    ui.label('EXAMINE THE FLUID', 1000, at(s, 0.75, 0.3, IN) * (1 - at(s, 3.0, 0.3, OUT)), '#9FC0FF', 26);
+    ui.callout(new THREE.Vector3(XC - 0.1, 0.0, 0.25), 'THE FLUID: CLEAR?', at(s, 3.7, 0.4, IN), CREAM, -80, 170);
   };
 }
 

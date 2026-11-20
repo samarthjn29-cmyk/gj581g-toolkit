@@ -3,7 +3,7 @@
 Takes the rendered clip, keeps the picture (stream copy) and Sam's narration as is, and adds under it:
   - the chosen bed at BED_LUFS (default -28.5: about 12.5 dB under the voice in the gaps, gj581g-voice s6-7,
     Sam 10 Nov 2026 'the bed never stops'), sidechain-ducked while he speaks, 2 s fade in, 3 s fade out,
-    optional drops (--mute A:B, 0.5-1.5 s, 0.3 s ramps, before a punchline or reveal) and an end swell;
+    optional drops (--mute A:B[:dB], 0.5-1.5 s, 0.3 s ramps, before a punchline or reveal; give :-26 to dip rather than mute) and an end swell;
   - then the whole mix is re-levelled with a two-pass linear loudnorm to -16 LUFS, TP -1.5;
   - an optional ambience at AMB_LUFS, faded 1.5 s / 3 s.
 Usage: mix_bed.py IN.mp4 OUT.mp4 --bed BED.wav [--amb AMB.mp3 --amb-lufs -40 --amb-from 0 --amb-to END]
@@ -31,9 +31,9 @@ a = ap.parse_args()
 D = dur(a.inp); F = 'aformat=sample_rates=48000:channel_layouts=stereo'
 # bed gain envelope: mutes ramp over 0.6 s, swell +4 dB over 2 s
 env = '1'
-for m in a.mute:
-    s, e = map(float, m.split(':'))
-    env += f'*min(1,max(0,max(({s}-t)/0.3,(t-{e})/0.3)))'
+for m in a.mute:   # A:B mutes the bed; A:B:-26 only dips it 26 dB (Colour_v1 review, 20 Nov 2026: a full mute in a voice pause reads as a dropout)
+    q = m.split(':'); s, e = float(q[0]), float(q[1]); fl = 10 ** (float(q[2]) / 20) if len(q) > 2 else 0.0
+    env += f'*({fl}+{1 - fl}*min(1,max(0,max(({s}-t)/0.3,(t-{e})/0.3))))'
 if a.swell is not None:
     env += f'*(1+0.585*min(1,max(0,(t-{a.swell})/2)))'
 # BIG_MOVES B5 / B7 (Sam, 14 Nov 2026): --muffle A:B low-passes the bed and the ambience (the world goes muffled, like a shock);

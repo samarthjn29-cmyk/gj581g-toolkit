@@ -102,6 +102,7 @@ export function overlayKit(g, cam) {
     const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(W / 2 - w / 2, yy - size - 6, w, size + 20); g.fillStyle = color; g.fillText(s, W / 2, yy); g.restore(); };
   const tag = (lines, a) => { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
     const w = Math.max(...lines.map(([s]) => g.measureText(s).width)) + 32; chip(104, 66, w, 18 + 30 * lines.length, 0.72);
+    g.strokeStyle = 'rgba(239,230,210,0.28)'; g.lineWidth = 1.5; g.beginPath(); g.roundRect(104, 66, w, 18 + 30 * lines.length, 8); g.stroke();   // a thin edge so the tag reads on dark shots (review, 20 Nov 2026)
     lines.forEach(([s, c], i) => { g.fillStyle = c; g.fillText(s, 120, 96 + i * 30); }); g.restore(); };
   const callout = (p3, s, a, color = CREAM, dx = 90, dy = -70) => { if (a <= 0.001) return; const p = p3.clone().project(cam), x = (p.x + 1) / 2 * W, y = (1 - p.y) / 2 * H, lx = x + dx, ly = y + dy;
     g.save(); g.globalAlpha = a; g.strokeStyle = color; g.lineWidth = 2; g.beginPath(); g.moveTo(x, y); g.lineTo(lerp(x, lx, a), lerp(y, ly, a)); g.stroke();
