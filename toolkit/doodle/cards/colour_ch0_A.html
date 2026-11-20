@@ -40,8 +40,8 @@ const at = (r, px, py) => [r.x + px / r.iw * r.w, r.y + py / r.ih * r.h];
 function glow(x, y, r, col, a = 1) { if (a <= 0) return; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(0.25, col + 'CC'); gr.addColorStop(1, col + '00'); g.save(); g.globalAlpha = a; g.globalCompositeOperation = 'lighter'; g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); g.restore(); }
 function leaks(t, a = 0.5) {   // soft red, green and blue light drifting at the edges: the world is made of the three lights
   glow(200 + 80 * Math.sin(t * 0.7), 120 + 40 * Math.sin(t * 0.5), 620, R, a * 0.35); glow(1750 + 60 * Math.sin(t * 0.6 + 1), 980, 680, B, a * 0.4); glow(1700, 120 + 50 * Math.sin(t * 0.8), 520, GR, a * 0.28); }
-function sparks(t, cx, cy, n, spread, a, col = OLO) { g.save(); g.globalCompositeOperation = 'lighter'; for (let i = 0; i < n; i++) { const f1 = (Math.sin(i * 91.7) * 43758.5) % 1, f2 = (Math.sin(i * 12.9) * 9631.1) % 1, an = Math.abs(f1) * 6.283 + t * 0.25 * (Math.abs(f2) - 0.5), r = spread * (0.3 + Math.abs(f2)) + ((t * 40 * (0.5 + Math.abs(f1))) % 140);
-  g.globalAlpha = a * (0.3 + 0.7 * Math.abs(f1)); g.fillStyle = col; g.beginPath(); g.arc(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1.4 + 2 * Math.abs(f2), 0, 7); g.fill(); } g.restore(); }
+function sparks(t, cx, cy, n, spread, a, col = OLO) { g.save(); g.globalCompositeOperation = 'lighter'; for (let i = 0; i < n; i++) { const f1 = (Math.sin(i * 91.7) * 43758.5) % 1, f2 = (Math.sin(i * 12.9) * 9631.1) % 1, an = Math.abs(f1) * 6.283 + t * 0.05 * (Math.abs(f2) - 0.5), r = spread * (0.3 + Math.abs(f2)) + ((t * 8 * (0.5 + Math.abs(f1))) % 140);
+  g.globalAlpha = 0.5 * a * (0.3 + 0.7 * Math.abs(f1)); g.fillStyle = col; g.beginPath(); g.arc(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1.4 + 2 * Math.abs(f2), 0, 7); g.fill(); } g.restore(); }
 const POST = []; const post = fn => POST.push(fn);
 function sub(t) {   // the script line being spoken, as subtitles (Sam's voice is not recorded yet)
   let i = -1; for (let j = 0; j < LT.length; j++) if (t >= LT[j][0] - 0.05 && t < (j + 1 < LT.length ? LT[j + 1][0] - 0.05 : END)) i = j; if (i < 0 || i === LT.length - 1) return;
@@ -56,21 +56,23 @@ async function S1(t) {   // In 2025: one teal laser dot snaps on; '2025' writes 
   const n = Math.floor(clamp((t - L(0) - 0.15) / 0.5) * 4); text('2025'.slice(0, n), 900, 560, 120, CREAM, SERIF, 'left', 1, 30);
 }
 const EYES = [['eye', 0.51, 0.44], ['eyeA', 0.5, 0.63], ['eyeB', 0.68, 0.42], ['eyeC', 0.6, 0.38], ['eyeD', 0.6, 0.72]];
-async function S2(t) {   // five people saw a colour: five real eyes, one after another, each pupil catching a teal glint; a counter to five
-  const a = L(1), d = (LE(1) - a + 0.2) / 5, i = clamp(Math.floor((t - a) / d), 0, 4), u = (t - a - i * d) / d, [n, px, py] = EYES[i];
-  const r = cover(await seek(V[n], 0.2 + u * 0.8), 1.06 + 0.06 * u, px, py, 1);
-  const [gx, gy] = [r.x + px * r.w, r.y + py * r.h]; glow(gx, gy, 90 + 60 * u, OLO, 0.85); sparks(t, gx, gy, 18, 40, 0.5);
-  post(() => { g.save(); g.font = `400 150px ${SERIF}`; g.fillStyle = CREAM; g.shadowColor = OLO; g.shadowBlur = 30; g.fillText(String(i + 1), 120, 300); g.font = `500 22px ${MONO}`; g.shadowBlur = 0; g.fillText(i === 0 ? 'PERSON' : 'PEOPLE', 128, 340); g.restore(); });
+async function S2(t) {   // five people saw a colour: five real eyes side by side; each lights up in turn and catches a teal glint (one calm shot)
+  leaks(t, 0.45); const a = L(1), d = (LE(1) - a + 0.3) / 5, pw = 330, gap = 24, x0 = (1920 - 5 * pw - 4 * gap) / 2, y0 = 250, ph = 520;
+  for (let i = 0; i < 5; i++) { const [n, px, py] = EYES[i], on = k(t, a + i * d, 0.35), x = x0 + i * (pw + gap);
+    const r = cover(await seek(V[n], 0.3 + (t - a) * 0.4), 1.0, px, py, lerp(0.22, 1, on), [x, y0, pw, ph]);
+    if (on > 0) { const gx = clamp(r.x + px * r.w, x + 30, x + pw - 30), gy = clamp(r.y + py * r.h, y0 + 30, y0 + ph - 30); g.save(); g.beginPath(); g.rect(x, y0, pw, ph); g.clip(); glow(gx, gy, 42, OLO, 0.6 * on); g.restore(); }
+    g.save(); g.strokeStyle = `rgba(0,224,190,${0.7 * on})`; g.lineWidth = 3; g.strokeRect(x, y0, pw, ph); g.restore();
+    text(String(i + 1), x + pw / 2, y0 + ph + 70, 52, CREAM, SERIF, 'center', 0.25 + 0.75 * on); }
 }
 async function S3(t) {   // no human had ever seen: the glint blooms out of the last pupil until the screen is flooded with teal
   const a = L(2), u = ease((t - a) / (LE(2) - a + 0.3)), [n, px, py] = EYES[4];
-  const r = cover(await seek(V[n], 1.0 + (t - a) * 0.5), lerp(1.12, 2.6, u), px, py, 1); const [gx, gy] = [r.x + px * r.w, r.y + py * r.h];
+  const r = cover(await seek(V[n], 1.0 + (t - a) * 0.5), lerp(1.1, 1.45, u), px, py, 1); const [gx, gy] = [r.x + px * r.w, r.y + py * r.h];
   glow(gx, gy, lerp(150, 2400, u * u), OLO, 1); g.save(); g.globalAlpha = 0.85 * u * u; g.fillStyle = OLO; g.fillRect(0, 0, 1920, 1080); g.restore(); sparks(t, 960, 540, 60, 300 + 400 * u, 0.6);
 }
 const SW = ['#1D6F7A', '#2A8C86', '#0F7F9E', '#3BA59B', '#1E9A7E', '#4FB3A5', '#227C9D', '#5CC2B0', '#16858F', '#3D9C8E', '#2E7FA8', '#62B9A9', '#178A73', '#4AA8C2'];
 async function S4(t) {   // Not a new shade: a fan of paint swatches (every blue-green in a shop) slides past; the teal is not among them; stamp NOT A SHADE
   g.fillStyle = '#062A27'; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.4); glow(300, 170, 380, OLO, 0.55);
-  const a = L(3), s = (t - a) * 420 + 600;
+  const a = L(3), s = (t - a) * 120 + 860;
   for (let i = 0; i < SW.length; i++) { const x = 1980 - s + i * 150 - 700, y = 520 + 40 * Math.sin(i * 1.3), rot = -0.12 + 0.02 * i;
     g.save(); g.translate(x, y); g.rotate(rot); g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 24; g.fillStyle = '#F4F1EA'; g.fillRect(-70, -210, 140, 400); g.shadowBlur = 0;
     g.fillStyle = SW[i]; g.fillRect(-58, -196, 116, 300); g.font = `500 13px ${MONO}`; g.fillStyle = '#333'; g.textAlign = 'center'; g.fillText('SHADE ' + (501 + i * 7), 0, 132); g.fillText('BLUE-GREEN', 0, 152); g.restore(); }
@@ -108,12 +110,11 @@ async function S6(t) {   // They called it olo: the letters form in the glow; th
   text('FONG ET AL. · SCIENCE ADVANCES · 2025', x + 30, 288, 15, '#666', MONO);
   tagTL('THE REAL PAPER · APRIL 2025', sl); srcBR('FIGURE: FONG ET AL. 2025, FIG. 1C (CC BY 4.0)', sl);
 }
-async function S7(t) {   // And the story of how that happened: the year spins back 2025 -> 1794 through a burst of real pictures
-  const a = L(6), u = clamp((t - a) / (LE(6) - a + 0.1)); const pics = [[BERK, '2025 · BERKELEY'], [FIG1C, '2025 · THE PAPER'], [P25, '1854 · HIS BIOGRAPHY'], [P28, '1794 · HIS OWN PAPER']];
-  const i = Math.min(3, Math.floor(u * 4)), uu = u * 4 - i, [im, lab] = pics[i];
-  cover(im, lerp(1.25, 1.05, uu), 0.5, i === 3 ? 0.2 : 0.4, 0.5); g.fillStyle = 'rgba(4,6,12,0.45)'; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.5);
-  const YT = [2025, 2025, 1854, 1794], from = i ? YT[i - 1] : 2025, yr = Math.round(lerp(from, YT[i], ease(uu / 0.45)));   /* the year spins to the picture's own year */
-  text(String(yr), 960, 620, 260, CREAM, SERIF, 'center', 1, 40); text(lab, 960, 700, 24, GOLD, MONO, 'center', 1);
+async function S7(t) {   // And the story of how that happened: the year rolls back from 2025 to 1794, from the 2025 paper to Dalton's own (two pictures, one slow dissolve)
+  const a = L(6), u = clamp((t - a) / (LE(6) - a + 0.1)), mix = ease((u - 0.35) / 0.4);
+  cover(FIG1C, lerp(1.1, 1.05, u), 0.5, 0.4, 0.5 * (1 - mix)); cover(P28, lerp(1.1, 1.05, u), 0.5, 0.2, 0.5 * mix); g.fillStyle = 'rgba(4,6,12,0.45)'; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.5);
+  const yr = Math.round(lerp(2025, 1794, ease((u - 0.2) / 0.7))); text(String(yr), 960, 620, 260, CREAM, SERIF, 'center', 1, 40);
+  if (yr === 2025 || yr === 1794) text(yr === 2025 ? '2025 · THE PAPER' : '1794 · HIS OWN PAPER', 960, 700, 24, GOLD, MONO, 'center', 1);
 }
 const deut = (() => { const c = document.createElement('canvas'); c.width = 960; c.height = 1080; return c; })(), dx = deut.getContext('2d', {willReadFrequently: true});
 async function S8(t) {   // a man who saw fewer colours than everyone around him: the same real footage twice: full colour (everyone around him) and Dalton's (simulation)
@@ -180,8 +181,8 @@ window.render = async function (T) {
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
   let si = 0; for (let j = 0; j < SHOTS.length; j++) if (T >= SHOTS[j][0]) si = j; const s0 = SHOTS[si][0], s1 = si + 1 < SHOTS.length ? SHOTS[si + 1][0] : END;
   await SHOTS[si][1](T); sub(T);
-  const u = clamp((T - s0) / (s1 - s0)), push = si % 2 === 0, sc = push ? lerp(1.0, 1.07, u) : lerp(1.07, 1.0, u);
-  const fx = 960 + 10 * Math.sin(T * 1.7) + 4 * Math.sin(T * 4.3), fy = 540 + 8 * Math.sin(T * 1.3 + 1) + 3 * Math.sin(T * 5.1);
+  const u = clamp((T - s0) / (s1 - s0)), sc = lerp(1.0, 1.025, u);   // Sam, 20 Nov 2026: 'way too much movement... slow down'
+  const fx = 960, fy = 540;
   bg.clearRect(0, 0, 1920, 1080); bg.drawImage(cv, 0, 0); g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
   const W = 1920 * sc, H = 1080 * sc; g.drawImage(buf, clamp(960 - fx * sc, 1920 - W, 0), clamp(540 - fy * sc, 1080 - H, 0), W, H);
   for (const fn of POST) fn(); POST.length = 0;
