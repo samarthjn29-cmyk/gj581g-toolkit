@@ -28,7 +28,7 @@ async function seek(v, u) { const D = v.duration - 0.05, x = ((u % D) + D) % D; 
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.4) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
 const backOut = u => { u = clamp(u); const c = 1.9; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
-const BG = '#04060C', CREAM = '#F2EEE4', DIM = '#8C93A8', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF', OLO = '#00E0BE', GOLD = '#FFC24A';
+const BG = '#0C1626', CREAM = '#F2EEE4', DIM = '#8C93A8', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF', OLO = '#00E0BE', GOLD = '#FFC24A';
 const SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"', HAND = 'Kalam';
 function text(s, x, y, size = 30, col = CREAM, font = SERIF, align = 'left', a = 1, glow = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `400 ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; if (glow) { g.shadowColor = col; g.shadowBlur = glow; } g.fillText(s, x, y); g.restore(); }
 function chip(x, y, w, h, a = 0.78, col = '7,9,16') { g.fillStyle = `rgba(${col},${a})`; g.beginPath(); g.roundRect(x, y, w, h, 10); g.fill(); }
@@ -38,8 +38,8 @@ function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) 
   g.save(); g.globalAlpha = a; g.beginPath(); g.rect(bx, by, bw, bh); g.clip(); g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h, iw, ih}; }
 const at = (r, px, py) => [r.x + px / r.iw * r.w, r.y + py / r.ih * r.h];
 function glow(x, y, r, col, a = 1) { if (a <= 0) return; const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, col); gr.addColorStop(0.25, col + 'CC'); gr.addColorStop(1, col + '00'); g.save(); g.globalAlpha = a; g.globalCompositeOperation = 'lighter'; g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); g.restore(); }
-function leaks(t, a = 0.5) {   // soft red, green and blue light drifting at the edges: the world is made of the three lights
-  glow(200 + 80 * Math.sin(t * 0.7), 120 + 40 * Math.sin(t * 0.5), 620, R, a * 0.35); glow(1750 + 60 * Math.sin(t * 0.6 + 1), 980, 680, B, a * 0.4); glow(1700, 120 + 50 * Math.sin(t * 0.8), 520, GR, a * 0.28); }
+function leaks(t, a = 0.5) {   // a faint wash of the three cone colours at the edges (very soft, barely moving)
+  glow(160, 120, 700, R, a * 0.12); glow(1760, 980, 760, B, a * 0.16); glow(1760, 100, 560, GR, a * 0.1); }
 function sparks(t, cx, cy, n, spread, a, col = OLO) { g.save(); g.globalCompositeOperation = 'lighter'; for (let i = 0; i < n; i++) { const f1 = (Math.sin(i * 91.7) * 43758.5) % 1, f2 = (Math.sin(i * 12.9) * 9631.1) % 1, an = Math.abs(f1) * 6.283 + t * 0.05 * (Math.abs(f2) - 0.5), r = spread * (0.3 + Math.abs(f2)) + ((t * 8 * (0.5 + Math.abs(f1))) % 140);
   g.globalAlpha = 0.5 * a * (0.3 + 0.7 * Math.abs(f1)); g.fillStyle = col; g.beginPath(); g.arc(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1.4 + 2 * Math.abs(f2), 0, 7); g.fill(); } g.restore(); }
 const POST = []; const post = fn => POST.push(fn);
@@ -50,38 +50,38 @@ function tagTL(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAl
 function srcBR(s, a = 1) { if (a <= 0) return; post(() => { g.save(); g.globalAlpha = a * 0.85; g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = DIM; g.fillText(s, 1816, 84); g.restore(); }); }
 
 // ---------- shots ----------
-async function S1(t) {   // In 2025: one teal laser dot snaps on; '2025' writes itself in light beside it
-  leaks(t, k(t, 0.2, 0.8) * 0.6); const on = backOut((t - 0.05) / 0.35);
-  glow(820, 520, 30 + 260 * on, OLO, 0.9); g.save(); g.fillStyle = '#E8FFFB'; g.beginPath(); g.arc(820, 520, 9 * on, 0, 7); g.fill(); g.restore(); sparks(t, 820, 520, 40, 120, 0.6 * on);
-  const n = Math.floor(clamp((t - L(0) - 0.15) / 0.5) * 4); text('2025'.slice(0, n), 900, 560, 120, CREAM, SERIF, 'left', 1, 30);
+// the cone trio: the video's icon (three cone types). states 0-1: L red, M green, S blue; mCol overrides the green light (olo teal)
+function trio(cx, cy, r, L, M, S, a = 1, mCol = GR, labels = 0) { if (a <= 0) return; const xs = [cx - r * 2.6, cx, cx + r * 2.6], st = [L, M, S], cols = [R, mCol, B], names = ['L', 'M', 'S'];
+  for (let i = 0; i < 3; i++) { const x = xs[i], v = st[i]; g.save(); g.globalAlpha = a; g.strokeStyle = 'rgba(242,238,228,0.45)'; g.lineWidth = 2; g.beginPath(); g.arc(x, cy, r, 0, 7); g.stroke(); g.restore();
+    if (v > 0) { glow(x, cy, r * 2.4, cols[i], 0.55 * v * a); g.save(); g.globalAlpha = v * a; g.fillStyle = cols[i]; g.beginPath(); g.arc(x, cy, r * 0.82, 0, 7); g.fill(); g.restore(); }
+    if (labels) text(names[i], x, cy + r + 38, 22, DIM, MONO, 'center', a * labels); } }
+async function S1(t) {   // In 2025: the year, and the three cone lights, softly
+  leaks(t, k(t, 0, 0.8)); const a = k(t, 0.1, 0.6);
+  text('2025', 960, 440, 150, CREAM, SERIF, 'center', a);
+  trio(960, 640, 34, k(t, 0.5, 0.5) * 0.35, k(t, 0.6, 0.5) * 0.35, k(t, 0.7, 0.5) * 0.35, a);
 }
-const EYES = [['eye', 0.51, 0.44], ['eyeA', 0.5, 0.63], ['eyeB', 0.68, 0.42], ['eyeC', 0.6, 0.38], ['eyeD', 0.6, 0.72]];
-async function S2(t) {   // five people saw a colour: five real eyes side by side; each lights up in turn and catches a teal glint (one calm shot)
-  leaks(t, 0.45); const a = L(1), d = (LE(1) - a + 0.3) / 5, pw = 330, gap = 24, x0 = (1920 - 5 * pw - 4 * gap) / 2, y0 = 250, ph = 520;
-  for (let i = 0; i < 5; i++) { const [n, px, py] = EYES[i], on = k(t, a + i * d, 0.35), x = x0 + i * (pw + gap);
-    const r = cover(await seek(V[n], 0.3 + (t - a) * 0.4), 1.0, px, py, lerp(0.22, 1, on), [x, y0, pw, ph]);
-    if (on > 0) { const gx = clamp(r.x + px * r.w, x + 30, x + pw - 30), gy = clamp(r.y + py * r.h, y0 + 30, y0 + ph - 30); g.save(); g.beginPath(); g.rect(x, y0, pw, ph); g.clip(); glow(gx, gy, 42, OLO, 0.6 * on); g.restore(); }
-    g.save(); g.strokeStyle = `rgba(0,224,190,${0.7 * on})`; g.lineWidth = 3; g.strokeRect(x, y0, pw, ph); g.restore();
-    text(String(i + 1), x + pw / 2, y0 + ph + 70, 52, CREAM, SERIF, 'center', 0.25 + 0.75 * on); }
+async function S2(t) {   // five people saw a colour: one real eye, close and sharp, a slow push; the five volunteers named small
+  const a = L(1), u = clamp((t - a) / (LE(1) - a + 0.4)); cover(await seek(V.eye, 0.3 + (t - a) * 0.5), lerp(1.0, 1.05, u), 0.51, 0.45, 1);
+  const vg = g.createRadialGradient(960, 520, 300, 960, 540, 1100); vg.addColorStop(0, 'rgba(12,22,38,0)'); vg.addColorStop(1, 'rgba(12,22,38,0.7)'); g.fillStyle = vg; g.fillRect(0, 0, 1920, 1080);
+  tagTL('BERKELEY · 2025 · FIVE VOLUNTEERS', k(t, a + 0.2, 0.5));
 }
-async function S3(t) {   // no human had ever seen: the glint blooms out of the last pupil until the screen is flooded with teal
-  const a = L(2), u = ease((t - a) / (LE(2) - a + 0.3)), [n, px, py] = EYES[4];
-  const r = cover(await seek(V[n], 1.0 + (t - a) * 0.5), lerp(1.1, 1.45, u), px, py, 1); const [gx, gy] = [r.x + px * r.w, r.y + py * r.h];
-  glow(gx, gy, lerp(150, 2400, u * u), OLO, 1); g.save(); g.globalAlpha = 0.85 * u * u; g.fillStyle = OLO; g.fillRect(0, 0, 1920, 1080); g.restore(); sparks(t, 960, 540, 60, 300 + 400 * u, 0.6);
+async function S3(t) {   // no human had ever seen: of the three cone lights, only the middle one comes on, in a teal no light can make; it grows into the colour
+  leaks(t, 0.6); const a = L(2), on = k(t, a + 0.1, 0.6), grow = ease((t - a - 0.8) / 1.4);
+  trio(960, 560, 34, 0, 0, 0, 1 - grow);
+  const r = lerp(28, 230, grow); glow(960, 560, r * 2.2, OLO, 0.6 * on); g.save(); g.globalAlpha = on; g.fillStyle = OLO; g.beginPath(); g.arc(960, 560, r, 0, 7); g.fill(); g.restore();
+  text('ONLY ONE KIND OF CONE, SWITCHED ON', 960, 900, 22, DIM, MONO, 'center', k(t, a + 0.5, 0.5) * (1 - grow * 0.6));
 }
-const SW = ['#1D6F7A', '#2A8C86', '#0F7F9E', '#3BA59B', '#1E9A7E', '#4FB3A5', '#227C9D', '#5CC2B0', '#16858F', '#3D9C8E', '#2E7FA8', '#62B9A9', '#178A73', '#4AA8C2'];
-async function S4(t) {   // Not a new shade: a fan of paint swatches (every blue-green in a shop) slides past; the teal is not among them; stamp NOT A SHADE
-  g.fillStyle = '#062A27'; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.4); glow(300, 170, 380, OLO, 0.55);
-  const a = L(3), s = (t - a) * 120 + 860;
-  for (let i = 0; i < SW.length; i++) { const x = 1980 - s + i * 150 - 700, y = 520 + 40 * Math.sin(i * 1.3), rot = -0.12 + 0.02 * i;
-    g.save(); g.translate(x, y); g.rotate(rot); g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 24; g.fillStyle = '#F4F1EA'; g.fillRect(-70, -210, 140, 400); g.shadowBlur = 0;
-    g.fillStyle = SW[i]; g.fillRect(-58, -196, 116, 300); g.font = `500 13px ${MONO}`; g.fillStyle = '#333'; g.textAlign = 'center'; g.fillText('SHADE ' + (501 + i * 7), 0, 132); g.fillText('BLUE-GREEN', 0, 152); g.restore(); }
-  // the real thing, glowing apart from the cards
-  glow(300, 170, 160, OLO, 0.9); g.save(); g.fillStyle = "#CFFFF6"; g.beginPath(); g.arc(300, 170, 18, 0, 7); g.fill(); g.restore();
-  const sa = backOut((t - (LE(3) - 0.35)) / 0.25); if (t > LE(3) - 0.35) post(() => { g.save(); g.translate(1060, 220); g.rotate(-0.09); g.scale(lerp(2.2, 1, clamp(sa)), lerp(2.2, 1, clamp(sa))); g.globalAlpha = clamp(sa * 1.5);
-    g.strokeStyle = R; g.lineWidth = 8; g.strokeRect(-330, -70, 660, 140); g.font = `400 92px ${SERIF}`; g.fillStyle = R; g.textAlign = 'center'; g.fillText('NOT A SHADE', 0, 32); g.restore(); });
+const NAT = [[470, '#1F6FB0'], [480, '#1C86A8'], [490, '#1A9C9C'], [500, '#22A88C'], [510, '#3AAE73'], [520, '#5AAF55'], [530, '#7AAE3E']];
+async function S4(t) {   // Not a new shade: the colour above the natural blue-greens; a thin line looks for a match along them and finds none as rich
+  leaks(t, 0.6); const a = L(3);
+  glow(960, 330, 360, OLO, 0.55); g.save(); g.fillStyle = OLO; g.beginPath(); g.arc(960, 330, 150, 0, 7); g.fill(); g.restore();
+  const x0 = 360, x1 = 1560, y = 720, h = 90, sa = k(t, a - 0.1, 0.5);
+  g.save(); g.globalAlpha = sa; const gr = g.createLinearGradient(x0, 0, x1, 0); NAT.forEach(([nm, c], i) => gr.addColorStop(i / (NAT.length - 1), c)); g.fillStyle = gr; g.beginPath(); g.roundRect(x0, y, x1 - x0, h, 12); g.fill(); g.restore();
+  NAT.forEach(([nm], i) => text(nm + ' nm', x0 + (x1 - x0) * i / (NAT.length - 1), y + h + 40, 18, DIM, MONO, 'center', sa));
+  text('THE BLUE-GREENS OF NATURAL LIGHT', 960, y - 26, 20, DIM, MONO, 'center', sa);
+  const u = ease((t - a - 0.2) / 1.2), px = lerp(x0 + 60, lerp(x0, x1, 0.5), u);   // the searching line settles near 500 nm, the closest natural match
+  g.save(); g.globalAlpha = sa * 0.8; g.strokeStyle = CREAM; g.lineWidth = 2; g.setLineDash([6, 8]); g.beginPath(); g.moveTo(960, 480); g.lineTo(px, y - 6); g.stroke(); g.restore();
 }
-// the gamut triangle (after Fong et al. 2025, Fig. 2): corners L, M, S; the coloured blob is every colour normal vision makes; olo flies out to the M corner
 const TRI = {L: [1480, 860], M: [960, 150], S: [440, 860]};
 const blobCv = (() => { const c = document.createElement('canvas'); c.width = 1920; c.height = 1080; const x = c.getContext('2d'); const im = x.createImageData(1920, 1080);
   const [lx, ly] = TRI.L, [mx, my] = TRI.M, [sx, sy] = TRI.S, det = (my - sy) * (lx - sx) + (sx - mx) * (ly - sy);
@@ -102,7 +102,7 @@ async function S5(t) {   // A completely new colour: the map of every colour dra
   srcBR('DIAGRAM AFTER FONG ET AL., SCIENCE ADVANCES 2025, FIG. 2 · ILLUSTRATION', d1);
 }
 async function S6(t) {   // They called it olo: the letters form in the glow; the real paper's figure slides in with its title
-  leaks(t, 0.5); const a = L(5); glow(560, 520, 520, OLO, 0.9); sparks(t, 560, 520, 50, 200, 0.5);
+  leaks(t, 0.5); const a = L(5); glow(560, 520, 520, OLO, 0.9); sparks(t, 560, 520, 18, 200, 0.4);
   const n = Math.floor(clamp((t - a - 0.55) / 0.35) * 3); text('olo'.slice(0, n), 560, 600, 260, '#EFFFFB', SERIF, 'center', 1, 60);
   const sl = ease((t - a - 0.1) / 0.6); const x = lerp(2000, 1060, sl);
   g.save(); g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.fillStyle = '#FBFAF6'; g.fillRect(x, 170, 740, 700); g.restore();
@@ -128,11 +128,9 @@ async function S8(t) {   // a man who saw fewer colours than everyone around him
   const la = k(t, a + 1.5, 0.3), lb = k(t, a + 2.4, 0.3);
   post(() => { g.save(); g.globalAlpha = la; chip(80, 70, 470, 52, 0.7); text('EVERYONE AROUND HIM', 104, 106, 24, CREAM, MONO, 'left', la); g.restore();
     g.save(); g.globalAlpha = lb; chip(1040, 70, 520, 52, 0.7); text('HIM · A SIMULATION', 1064, 106, 24, GOLD, MONO, 'left', lb); g.restore(); });
-  // the colour chips under each side: on his side the reds and greens merge
-  const CH = ['#E5322D', '#F26B2A', '#F6C445', '#7CC242', '#22A35A', '#1C9C9A', '#2F6BFF', '#8B4FD8'];
-  const DCH = ['#9E8A3A', '#A79142', '#C9BB6A', '#B3A85B', '#8E8A4E', '#5D8BA0', '#3D6BE8', '#5A68C9'];
-  post(() => { for (let s = 0; s < 2; s++) for (let i = 0; i < 8; i++) { const x0 = s * 960 + 140 + i * 88, mm = s ? clamp((t - a - 1.6 - i * 0.12) / 0.3) : 0;
-    g.save(); g.fillStyle = s ? (mm > 0.5 ? DCH[i] : CH[i]) : CH[i]; g.globalAlpha = k(t, a + 0.5, 0.3); g.beginPath(); g.roundRect(x0, 860, 72, 72, 10); g.fill(); g.restore(); } });
+  // the cone trio under each side: everyone has all three; on his side the middle (green) cone goes out
+  const ta = k(t, a + 0.5, 0.4), off = 1 - k(t, a + 1.8, 0.6);
+  post(() => { chip(320, 840, 320, 120, 0.6 * ta); trio(480, 900, 26, 1, 1, 1, ta); chip(1280, 840, 320, 120, 0.6 * ta); trio(1440, 900, 26, 1, off, 1, ta); });
 }
 async function S9(t) {   // John Dalton: his real portrait snaps in, his name and years beside it
   leaks(t, 0.5); const a = L(8), sn = backOut((t - a + 0.05) / 0.35);
@@ -151,13 +149,17 @@ async function S11(t) {   // he asked for his eyes to be cut open after he died:
   const r = cover(P25, 1.6, 0.5, 0.305, 1, [140, 80, 1640, 260]); g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = GOLD; g.globalAlpha = 0.6; const sw = clamp((t - a) / 0.8);
   for (const [x0, y0, x1, y1] of [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]]) { const [X0, Y0] = at(r, x0, y0), [X1, Y1] = at(r, x0 + (x1 - x0) * sw, y1); g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); } g.restore();
   text('HENRY, MEMOIRS OF JOHN DALTON, 1854 · P. 25', 150, 370, 16, DIM, MONO);
-  // the eye, drawn in ink (cross-section), and the cut
-  const cx = 960, cy = 680, rr = 190, sp = ease((t - (LE(10) - 0.9)) / 0.6) * 60;
-  for (const side of [-1, 1]) { g.save(); g.translate(side * sp, 0); g.beginPath(); g.rect(side < 0 ? 0 : cx, 0, 960, 1080); g.clip();
-    g.strokeStyle = CREAM; g.lineWidth = 5; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke(); g.lineWidth = 3; g.beginPath(); g.ellipse(cx - rr + 34, cy, 20, 70, 0, 0, 7); g.stroke();
-    g.beginPath(); g.arc(cx - rr - 30, cy, 110, -0.75, 0.75); g.stroke(); g.restore(); }
-  const cu = clamp((t - a - 0.9) / 0.7); g.save(); g.strokeStyle = R; g.lineWidth = 6; g.setLineDash([16, 12]); g.beginPath(); g.moveTo(cx, cy - rr - 60); g.lineTo(cx, lerp(cy - rr - 60, cy + rr + 60, cu)); g.stroke(); g.restore();
-  text('the back of the eye', cx + rr + 40, cy + 10, 34, CREAM, HAND, 'left', k(t, a + 0.6, 0.3));
+  // the eye icon (the same drawing every time the eye comes back in this video): the back of the eye is marked with a dotted line and gently lifts away
+  const cx = 900, cy = 690, rr = 180, cu = clamp((t - a - 0.8) / 0.8), lift = ease((t - (LE(10) - 0.9)) / 0.9), chord = cx + rr * 0.42;
+  const eye = (part) => { g.save(); g.beginPath(); if (part === 'front') g.rect(0, 0, chord, 1080); else g.rect(chord, 0, 1920, 1080); g.clip();
+    g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke();
+    g.beginPath(); g.arc(cx - rr * 0.62, cy, rr * 0.55, 2.35, 3.93); g.stroke();   // cornea
+    g.beginPath(); g.ellipse(cx - rr * 0.62, cy, rr * 0.11, rr * 0.33, 0, 0, 7); g.stroke();   // lens
+    g.strokeStyle = '#E8A15A'; g.lineWidth = 7; g.beginPath(); g.arc(cx, cy, rr - 5, -0.95, 0.95); g.stroke();   // retina
+    g.restore(); };
+  eye('front'); g.save(); g.translate(lift * 46, 0); g.globalAlpha = 1 - 0.35 * lift; eye('back'); g.restore();
+  g.save(); g.strokeStyle = CREAM; g.globalAlpha = 0.8; g.lineWidth = 2; g.setLineDash([8, 9]); const yy = Math.sqrt(rr * rr - (chord - cx) ** 2); g.beginPath(); g.moveTo(chord, cy - yy - 20); g.lineTo(chord, lerp(cy - yy - 20, cy + yy + 20, cu)); g.stroke(); g.restore();
+  text('THE BACK OF THE EYE', cx + rr + 90, cy + 8, 20, DIM, MONO, 'left', k(t, a + 0.6, 0.4));
 }
 async function S12(t) {   // It took 151 years to get the answer: a beam races along a timeline 1844 -> 1995, the counter to 151, the 1995 paper lands
   leaks(t, 0.45); const a = L(11), u = ease((t - a - 0.1) / 1.3), x0 = 260, x1 = 1660, y = 480;
@@ -168,11 +170,12 @@ async function S12(t) {   // It took 151 years to get the answer: a beam races a
   const c = ease((t - a - 1.35) / 0.5); if (c > 0) { const yy = lerp(1200, 640, c); g.save(); g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 40; g.fillStyle = '#FBFAF6'; g.fillRect(560, yy, 800, 210); g.restore();
     text('SCIENCE · 1995', 590, yy + 46, 18, '#777', MONO); text('The chemistry of John Dalton’s', 590, yy + 100, 40, '#111', SERIF); text('color blindness', 590, yy + 148, 40, '#111', SERIF); text('Hunt, Dulai, Bowmaker & Mollon', 590, yy + 186, 18, '#555', MONO); }
 }
-async function S13(t) {   // So, how do you see a colour your eyes can't make? The teal glow pulses; the question in big letters
-  const a = L(12), pu = 0.85 + 0.15 * Math.sin((t - a) * 6); leaks(t, 0.6); glow(960, 420, 520 * pu, OLO, 0.95); sparks(t, 960, 420, 70, 260, 0.6);
+async function S13(t) {   // So, how do you see a colour your eyes can't make? The colour again, and the cone trio with only the middle light on
+  const a = L(12), pu = 0.95 + 0.05 * Math.sin((t - a) * 2.2); leaks(t, 0.6); glow(960, 360, 330 * pu, OLO, 0.55); g.save(); g.fillStyle = OLO; g.beginPath(); g.arc(960, 360, 130 * pu, 0, 7); g.fill(); g.restore();
+  trio(960, 600, 24, 0, 1, 0, k(t, a + 0.3, 0.5), OLO);
   const w = LT[12][2].split(' '), n = Math.floor(clamp((t - a) / (LE(12) - a)) * w.length + 0.999);
   g.save(); g.font = `400 70px ${SERIF}`; g.textAlign = 'center'; g.fillStyle = CREAM; g.shadowColor = '#000'; g.shadowBlur = 20;
-  const l1 = w.slice(0, 5).slice(0, n).join(' '), l2 = n > 5 ? w.slice(5, n).join(' ') : ''; g.fillText(l1, 960, 760); if (l2) g.fillText(l2, 960, 850); g.restore();
+  const l1 = w.slice(0, 5).slice(0, n).join(' '), l2 = n > 5 ? w.slice(5, n).join(' ') : ''; g.fillText(l1, 960, 790); if (l2) g.fillText(l2, 960, 880); g.restore();
 }
 const SHOTS = [[0, S1], [L(1) - 0.04, S2], [L(2) - 0.04, S3], [L(3) - 0.1, S4], [L(4) - 0.1, S5], [L(5) - 0.1, S6], [L(6) - 0.06, S7], [L(7) - 0.06, S8], [L(8) - 0.1, S9], [L(9) - 0.1, S10], [L(10) - 0.06, S11], [L(11) - 0.1, S12], [L(12) - 0.1, S13]];
 // camera: always moving; a new framing at each shot, with a push or a pull and a small handheld drift
