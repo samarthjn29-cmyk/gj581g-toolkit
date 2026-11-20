@@ -4,9 +4,13 @@
 //   With stillAt_s it writes one PNG at that time instead of a video (for checks).
 const { chromium } = require('playwright'); const http = require('http'); const fs = require('fs'); const path = require('path'); const { spawn } = require('child_process');
 const [page, query, start, end, out, stillAt] = process.argv.slice(2); const FPS = 30;
+const MIME = {'.html': 'text/html', '.js': 'text/javascript', '.woff2': 'font/woff2', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webm': 'video/webm', '.mp4': 'video/mp4'};
 const srv = http.createServer((q, r) => { const f = path.join(__dirname, decodeURIComponent(q.url.split('?')[0])); const ext = path.extname(f);
-  r.setHeader('Content-Type', {'.html': 'text/html', '.js': 'text/javascript', '.woff2': 'font/woff2'}[ext] || 'application/octet-stream');
-  fs.createReadStream(f).on('error', () => { r.statusCode = 404; r.end(); }).pipe(r); }).listen(0);
+  r.setHeader('Content-Type', MIME[ext] || 'application/octet-stream'); r.setHeader('Accept-Ranges', 'bytes');
+  let st; try { st = fs.statSync(f); } catch (e) { r.statusCode = 404; return r.end(); }
+  const m = /bytes=(\d*)-(\d*)/.exec(q.headers.range || '');   // range requests, so <video> can seek (footage in the canvas pages)
+  if (m) { const a = m[1] ? +m[1] : 0, b = m[2] ? +m[2] : st.size - 1; r.statusCode = 206; r.setHeader('Content-Range', `bytes ${a}-${b}/${st.size}`); r.setHeader('Content-Length', b - a + 1); return fs.createReadStream(f, {start: a, end: b}).pipe(r); }
+  r.setHeader('Content-Length', st.size); fs.createReadStream(f).pipe(r); }).listen(0);
 (async () => {
   const port = srv.address().port; const gpu = process.env.GPU === '1';   // GPU=1 on a laptop with a graphics card: real hardware WebGL instead of the software renderer
   const b = await chromium.launch(gpu ? {args: ['--enable-gpu', '--ignore-gpu-blocklist', ...(process.platform === 'win32' ? ['--use-angle=d3d11'] : process.platform === 'darwin' ? ['--use-angle=metal'] : [])]} : {});

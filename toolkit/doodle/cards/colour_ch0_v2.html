@@ -1,0 +1,288 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1, chapter 0 "The volunteer", version 2 (20 Nov 2026): real footage and pictures wherever the script allows (Sam), D-style tags, grain and vignette.
+// Colour_v1, chapter 0 "The volunteer" (20 Nov 2026). The approved subject-animation look (conelab.html): dark navy, glowing data,
+// every moving thing drawn in code. Times are seconds in Sam's trimmed 00_opening.mp3 (whisper word times); P = lead-in before his first word.
+// Cone curves: Stockman & Sharpe (2000) via conedata.json. Real material: the Science Advances paper's own title and byline (text, set by us),
+// and the public-domain carte de visite of John Dalton (Webster of Warrington, c.1840, Wikimedia Commons).
+const P = 0.6;
+const D = await fetch('conedata.json').then(r => r.json());
+const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+const [dalton, berkeley, arm, fig1C, fig2A] = await Promise.all(['img/colour/R_dalton.jpg', '/img/colour/R_berkeley.jpg', '/img/colour/U_arm.jpg', '/img/colour/fig1C.png', '/img/colour/fig2A.png'].map(img));
+// real footage (VP9, graded in prep_footage.sh); each frame is seeked to exactly, so the render stays deterministic
+const vid = src => new Promise(r => { const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = src; v.addEventListener('loadeddata', () => r(v), {once: true}); v.load(); });
+const V = Object.fromEntries(await Promise.all(['eye', 'earth', 'flower', 'screen', 'sky', 'apples', 'pixels_rgb', 'pixels_cursor'].map(async n => [n, await vid('/img/colour/v/' + n + '.webm')])));
+async function seek(v, u) { const x = clamp(u, 0, v.duration - 0.05); if (Math.abs(v.currentTime - x) < 0.004 && v.readyState >= 2) return v; await new Promise(r => { v.addEventListener('seeked', r, {once: true}); v.currentTime = x; }); return v; }
+function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1) {   // draw a picture to fill the frame, zoomed towards (fx, fy)
+  const iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(1920 / iw, 1080 / ih) * sc, w = iw * base, h = ih * base;
+  const x = clamp(960 - fx * w, 1920 - w, 0), y = clamp(540 - fy * h, 1080 - h, 0); g.save(); g.globalAlpha = a; g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h}; }
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function label(s, y, a, col = CREAM, size = 22) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
+  const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(960 - w / 2, yy - size - 6, w, size + 20); g.fillStyle = col; g.fillText(s, 960, yy); g.restore(); }
+function vignette(st = 0.55) { const v = g.createRadialGradient(960, 540, 420, 960, 540, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, `rgba(0,0,0,${st})`); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080); }
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.6) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const BG = '#0A0F1E', CREAM = '#EFE6D2', DIM = '#7F8AA6', OLO = '#14C7B0', COL = {L: '#FF6B5B', M: '#5BE08A', S: '#6B8CFF'};
+const SANS = '"DejaVu Sans", sans-serif', SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"';
+const val = (c, w) => { const i = clamp(w - 390, 0, 310), a = Math.floor(i), f = i - a; return D[c][a] * (1 - f) + D[c][Math.min(310, a + 1)] * f; };
+const rgbw = w => { const c = D.rgb[Math.round(clamp(w - 390, 0, 310))]; return `rgb(${c[0]},${c[1]},${c[2]})`; };
+function text(s, x, y, size = 30, col = CREAM, font = SANS, weight = 500, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
+const mono = (s, x, y, a = 1, size = 20, col = DIM, align = 'left') => text(s, x, y, size, col, MONO, 500, align, a);
+const serif = (s, x, y, size, a = 1, col = CREAM, align = 'center') => text(s, x, y, size, col, SERIF, 400, align, a);
+function glow(col, blur, f) { g.save(); g.shadowColor = col; g.shadowBlur = blur; f(); g.restore(); }
+function circle(x, y, r, fill, a = 1, blur = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = fill; if (blur) { g.shadowColor = fill; g.shadowBlur = blur; } g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.restore(); }
+function strike(x0, y0, x1, y1, u, col = '#FF6B5B', w = 7) { if (u <= 0) return; g.save(); g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round'; g.beginPath(); g.moveTo(x0, y0); g.lineTo(lerp(x0, x1, u), lerp(y0, y1, u)); g.stroke(); g.restore(); }
+function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'center') { g.save(); g.font = `400 ${size}px ${font}`; const ws = s.split(' '); let line = '', lines = [];
+  for (const w of ws) { const tl = line ? line + ' ' + w : w; if (g.measureText(tl).width > maxw && line) { lines.push(line); line = w; } else line = tl; } lines.push(line); g.restore();
+  lines.forEach((l, i) => text(l, x, y + i * lh, size, col, font, 400, align, a)); return lines.length; }
+function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';   // top-left tag, the same chip in every shot (as in the patch close-up)
+  const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
+  g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
+
+// a seeded cone mosaic for the patch close-up
+const cells = []; { let s = 4242; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  for (let yy = -10; yy <= 10; yy++) for (let xx = -14; xx <= 14; xx++) { const x = 960 + xx * 40 + (yy & 1) * 20, y = 540 + yy * 36; if (Math.hypot((x - 960) / 1.25, y - 540) > 360) continue; const q = r(); cells.push({x, y, c: q < 0.07 ? 'S' : q < 0.40 ? 'M' : 'L', o: r(), o2: r()}); } }
+const mcells = cells.filter(c => c.c === 'M').sort((a, b) => a.o - b.o), anyCells = cells.slice().sort((a, b) => a.o2 - b.o2);
+const nbr = (() => { const m = mcells[3]; return cells.filter(c => c.c === 'L').sort((a, b) => Math.hypot(a.x - m.x, a.y - m.y) - Math.hypot(b.x - m.x, b.y - m.y))[0]; })();
+
+// ---------- shots ----------
+function A(t) {   // the paper (0-7.6): its own title and byline, set as a page
+  tag('SCIENCE ADVANCES · 18 APRIL 2025', k(t, 3.7));
+  const y0 = lerp(600, 560, ease((t - 3.6) / 4.0)), a = k(t, 3.62, 0.35);
+  g.save(); g.globalAlpha = a; g.fillStyle = '#F2ECDF'; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 60; g.fillRect(460, y0 - 380, 1000, 760); g.restore();
+  if (a > 0) { mono('RESEARCH ARTICLE · VISION', 520, y0 - 310, a, 18, '#8A7F6A');
+    const n = wrap('Novel color via stimulation of individual photoreceptors at population scale', 520, y0 - 220, 880, 54, 66, a, SERIF, '#1B1A21', 'left');
+    // highlighter sweep on "Novel color" as the narration says "experiment"
+    const hu = k(t, 4.4, 0.9); if (hu > 0) { g.save(); g.globalAlpha = 0.45 * a; g.fillStyle = OLO; g.fillRect(512, y0 - 270, 300 * hu, 64); g.restore(); }
+    text('James Fong, Hannah K. Doyle, Congli Wang, … Austin Roorda, Ren Ng', 520, y0 - 220 + n * 66 + 30, 26, '#3A3F55', SANS, 500, 'left', a);
+    mono('UNIVERSITY OF CALIFORNIA, BERKELEY', 520, y0 - 220 + n * 66 + 76, k(t, 2.5), 20, '#8A7F6A');
+    g.save(); g.globalAlpha = a * 0.28; g.fillStyle = '#3A3F55'; for (let i = 0; i < 6; i++) g.fillRect(520, y0 + 150 + i * 30, 880 - (i % 3) * 90, 10); g.restore(); }
+}
+function eyeSide(x, y, r, a = 1) { // a simple drawn eye in profile, looking right
+  g.save(); g.globalAlpha = a; g.strokeStyle = CREAM; g.lineWidth = 4; g.beginPath(); g.arc(x, y, r, 0, 7); g.stroke();
+  g.fillStyle = '#16213F'; g.beginPath(); g.arc(x, y, r - 2, 0, 7); g.fill();
+  g.strokeStyle = 'rgba(127,138,166,0.6)'; g.lineWidth = 3; g.beginPath(); g.arc(x, y, r - 22, Math.PI * 0.62, Math.PI * 1.38); g.stroke();   // retina, at the back
+  g.fillStyle = '#6B8CFF'; g.beginPath(); g.ellipse(x + r - 6, y, 10, 38, 0, 0, 7); g.fill(); g.restore(); }
+function B(t) {   // eye + target, then the laser (7.6-14.1)
+  tag('THE EXPERIMENT · BERKELEY', 1);
+  const ex = 620, ey = 540, r = 170; eyeSide(ex, ey, r, k(t, 7.7));
+  const ta = k(t, 8.4); g.save(); g.globalAlpha = ta; g.strokeStyle = CREAM; g.lineWidth = 4; g.beginPath(); g.moveTo(1500, 520); g.lineTo(1500, 560); g.moveTo(1480, 540); g.lineTo(1520, 540); g.stroke(); g.restore();
+  mono('TARGET', 1500, 610, ta, 20, DIM, 'center');
+  g.save(); g.globalAlpha = ta * 0.5; g.setLineDash([10, 12]); g.strokeStyle = DIM; g.lineWidth = 2; g.beginPath(); g.moveTo(ex + r, ey); g.lineTo(1470, 540); g.stroke(); g.restore();
+  const la = k(t, 11.9, 0.5); if (la > 0) { const tip = clamp((t - 11.9) / 0.6);
+    glow(OLO, 26, () => { g.globalAlpha = la; g.strokeStyle = '#9FF7EA'; g.lineWidth = 6; g.beginPath(); g.moveTo(1400, 260); g.lineTo(lerp(1400, ex - r + 40, tip), lerp(260, ey + 40, tip)); g.stroke(); });
+    if (tip >= 1) circle(ex - r + 40, ey + 40, 12 + 3 * Math.sin(t * 9), '#9FF7EA', 1, 30);
+    mono('LASER', 1400, 230, la, 20, '#9FF7EA', 'center'); }
+}
+function C(t) {   // the patch in the visual field (14.1-19.6)
+  tag('WHERE THE LASER LANDS', 1);
+  const a = k(t, 14.2); g.save(); g.globalAlpha = a; g.strokeStyle = 'rgba(127,138,166,0.45)'; g.lineWidth = 3; g.beginPath(); g.ellipse(960, 540, 640, 380, 0, 0, 7); g.stroke(); g.restore();
+  mono('WHAT THE VOLUNTEER SEES', 960, 120 + 30, a, 20, DIM, 'center');
+  g.save(); g.globalAlpha = a; g.strokeStyle = CREAM; g.lineWidth = 4; g.beginPath(); g.moveTo(960, 520); g.lineTo(960, 560); g.moveTo(940, 540); g.lineTo(980, 540); g.stroke(); g.restore();
+  const pa = k(t, 15.2), px = 1180, s = 46; glow(OLO, 30 * pa, () => { g.globalAlpha = pa; g.strokeStyle = '#9FF7EA'; g.lineWidth = 4; g.strokeRect(px - s / 2, 540 - s / 2, s, s); g.globalAlpha = pa * 0.25; g.fillStyle = OLO; g.fillRect(px - s / 2, 540 - s / 2, s, s); });
+  const la = k(t, 17.0); g.save(); g.globalAlpha = la; g.strokeStyle = CREAM; g.lineWidth = 2; g.beginPath(); g.moveTo(px, 570); g.lineTo(px + 120, 700); g.stroke(); g.restore();
+  text('about 1 cm across', px + 130, 720, 34, CREAM, SERIF, 400, 'left', la); mono('AT ARM\'S LENGTH · OFF TO ONE SIDE', px + 130, 760, la, 18, DIM);
+}
+function mosaic(t, mode) {   // the close-up of the patch: cells, tracking, pulses
+  const jx = 6 * Math.sin(t * 2.3) + 4 * Math.sin(t * 5.1), jy = 5 * Math.cos(t * 1.9) + 3 * Math.sin(t * 4.3);   // fixational drift
+  const reveal = mode.reveal || 0, inA = mode.a ?? 1;
+  for (const c of cells) { const grey = 'rgb(120,130,150)'; const col = reveal > 0 ? COL[c.c] : grey; let b = 0.22 + 0.2 * reveal;
+    if (mode.lit && mode.lit.has(c)) b = 1;
+    g.save(); g.globalAlpha = b * inA; g.fillStyle = col; if (b > 0.6) { g.shadowColor = col; g.shadowBlur = 20; } g.beginPath(); g.arc(c.x + jx, c.y + jy, 14, 0, 7); g.fill(); g.restore(); }
+  return [jx, jy];
+}
+function Dm(t) {   // 19.6-37.0
+  tag('CLOSE-UP OF THE PATCH · ILLUSTRATIVE', 1);
+  const reveal = k(t, 31.3, 0.8), lit = new Set(); let beam = null;
+  if (t > 25.9 && t < 31.3) { const n = Math.floor((t - 25.9) * 3.2); anyCells.slice(0, n).forEach(c => lit.add(c)); beam = anyCells[Math.max(0, n - 1)]; }   // pulses, one cell at a time
+  if (t >= 31.3) { const n = Math.floor(clamp((t - 31.8) / 3.0) * mcells.length); mcells.slice(0, n).forEach(c => lit.add(c)); beam = mcells[Math.min(n, mcells.length - 1)]; if (t > 34.8) beam = null; }
+  const [jx, jy] = mosaic(t, {reveal, lit, a: k(t, 19.7)});
+  // infrared tracking: a crosshair grid that follows the drift
+  const ta = k(t, 20.2) * (1 - k(t, 25.6)); if (ta > 0) { g.save(); g.globalAlpha = ta * 0.55; g.strokeStyle = '#E07A5F'; g.lineWidth = 2;
+    for (let x = 600; x <= 1320; x += 120) { g.beginPath(); g.moveTo(x + jx, 200 + jy); g.lineTo(x + jx, 880 + jy); g.stroke(); }
+    for (let y = 240; y <= 840; y += 120) { g.beginPath(); g.moveTo(560 + jx, y + jy); g.lineTo(1360 + jx, y + jy); g.stroke(); } g.restore();
+    mono('INFRARED CAMERA · TRACKING EVERY CELL', 960, 960, ta, 22, '#E07A5F', 'center'); }
+  if (beam) glow(OLO, 20, () => { g.strokeStyle = '#9FF7EA'; g.lineWidth = 3; g.beginPath(); g.moveTo(1700, 120); g.lineTo(beam.x + jx, beam.y + jy); g.stroke(); });
+  mono('LASER PULSES, ONE CELL AT A TIME', 960, 960, k(t, 26.0) * (1 - k(t, 31.2)), 22, '#9FF7EA', 'center');
+  // the types
+  if (reveal > 0) { const ry = 960; for (const [i, c] of ['L', 'M', 'S'].entries()) { const x = 760 + i * 200; circle(x, ry - 8, 12, COL[c], reveal, 14); mono(c + ' CONES', x + 24, ry, reveal, 22, CREAM); } }
+  const oa = k(t, 32.0); mono('ONLY THE M CONES GET A PULSE', 960, 1020, oa * (1 - k(t, 34.2, 0.4)), 22, COL.M, 'center');
+  // the neighbour that is never aimed at
+  const na = k(t, 34.75, 0.4); if (na > 0) { const x = nbr.x + jx, y = nbr.y + jy; g.save(); g.globalAlpha = na; g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(x, y, 24, 0, 7); g.stroke(); g.restore();
+    strike(x - 16, y - 16, x + 16, y + 16, k(t, 35.0, 0.3), CREAM, 4); strike(x + 16, y - 16, x - 16, y + 16, k(t, 35.2, 0.3), CREAM, 4);
+    mono('AN L-CONE NEIGHBOUR: NEVER AIMED AT', 960, 1020, na, 22, CREAM, 'center'); }
+}
+function E(t) {   // the colour appears (37.0-43.4)
+  const ga = k(t, 38.0, 1.2), r = lerp(40, 230, ease((t - 38.0) / 1.6));
+  circle(960, 520, r, OLO, ga, 120);
+  const ca = k(t, 40.6) * (1 - k(t, 42.9, 0.4)); if (ca > 0) {
+    circle(560, 560, 70, '#FFE45C', ca, 40); mono('BRIGHT?', 560, 680, ca, 22, CREAM, 'center'); strike(490, 490, 630, 630, k(t, 41.2, 0.3));
+    circle(1360, 560, 70, '#C77DBA', ca, 40); mono('UNUSUAL?', 1360, 680, ca, 22, CREAM, 'center'); strike(1290, 490, 1430, 630, k(t, 42.2, 0.3)); }
+  mono('A SCREEN CAN ONLY HINT AT IT', 960, 860, ga * 0.9, 20, DIM, 'center');
+}
+function meter(x, v, c, a, label) { const H = 360, w = 70, yb = 760; g.save(); g.globalAlpha = a; g.fillStyle = 'rgba(127,138,166,0.13)'; g.fillRect(x, yb - H, w, H);
+  g.fillStyle = COL[c]; g.shadowColor = COL[c]; g.shadowBlur = 22; g.fillRect(x, yb - v * H, w, v * H); g.restore(); text(c, x + w / 2, yb + 48, 32, COL[c], SANS, 800, 'center', a); }
+function F(t) {   // a signal no natural light sends (43.4-49.5)
+  tag('THE IDEA · FONG ET AL. 2025', 1);
+  const a = k(t, 43.5), b = k(t, 45.4); const R = {L: val('L', 543), M: val('M', 543), S: val('S', 543)};
+  mono('ANY REAL GREEN LIGHT', 520, 300, a, 22, CREAM, 'center'); ['L', 'M', 'S'].forEach((c, i) => meter(400 + i * 90, 0.9 * R[c], c, a));
+  mono('THE LASER ON M CELLS ALONE', 1400, 300, b, 22, '#9FF7EA', 'center'); ['L', 'M', 'S'].forEach((c, i) => meter(1280 + i * 90, c === 'M' ? 0.9 : 0, c, b));
+  wrap('“a color signal to the brain that never occurs in natural vision”', 960, 900, 1400, 40, 50, k(t, 46.4), SERIF, CREAM);
+  mono('“IN PRINCIPLE”, THE PAPER SAYS', 960, 1010, k(t, 46.8), 18, DIM, 'center');
+}
+function G(t) {   // the volunteers' words (49.5-55.6)
+  tag('THE VOLUNTEERS\' DESCRIPTION', 1);
+  circle(1420, 520, 200, OLO, k(t, 49.6, 1.0), 110);
+  wrap('“blue-green of unprecedented saturation”', 640, 470, 900, 70, 84, k(t, 50.6), SERIF, CREAM);
+  mono('FONG ET AL., SCIENCE ADVANCES, 2025', 640, 680, k(t, 51.4), 20, DIM, 'center');
+  mono('YOUR SCREEN CAN ONLY HINT AT IT', 1420, 800, k(t, 52.6), 18, DIM, 'center');
+}
+function H(t) {   // the name (55.6-59.5)
+  circle(960, 540, lerp(300, 330, ease((t - 55.6) / 3.9)), OLO, 0.18 * k(t, 55.7), 160);
+  const na = k(t, 58.2, 0.25); glow(OLO, 40, () => { g.globalAlpha = na; g.font = `400 260px ${SERIF}`; g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText('olo', 960, 620); });
+  mono('THE NAME THE TEAM GAVE IT', 960, 300, k(t, 56.0), 22, DIM, 'center');
+}
+function I(t) { serif('So, how?', 960, 580, 140, k(t, 59.6, 0.3)); }   // 59.5-61.4
+function flower(x, y, a) { for (let i = 0; i < 6; i++) { const an = i * Math.PI / 3; circle(x + 34 * Math.cos(an), y + 34 * Math.sin(an), 26, '#E8789A', a); } circle(x, y, 20, '#FFD35C', a); }
+function J(t) {   // nowhere in the world (61.4-69.6)
+  wrap('How do you see a colour that does not exist anywhere in the world?', 960, 300, 1300, 64, 80, k(t, 61.5), SERIF, CREAM);
+  const xs = [560, 960, 1360], ts = [66.3, 67.3, 68.3];
+  flower(xs[0], 700, k(t, ts[0], 0.3));
+  g.save(); g.globalAlpha = k(t, ts[1], 0.3); g.strokeStyle = CREAM; g.lineWidth = 5; g.strokeRect(xs[1] - 90, 630, 180, 120); g.fillStyle = '#1F2A47'; g.fillRect(xs[1] - 86, 634, 172, 112); g.restore();
+  g.save(); g.globalAlpha = k(t, ts[2], 0.3); const sk = g.createLinearGradient(0, 620, 0, 780); sk.addColorStop(0, '#3F6EB0'); sk.addColorStop(1, '#F2B98A'); g.fillStyle = sk; g.beginPath(); g.arc(xs[2], 700, 80, 0, 7); g.fill(); g.restore();
+  ['FLOWER', 'SCREEN', 'SKY'].forEach((s, i) => mono(s, xs[i], 840, k(t, ts[i], 0.3), 22, DIM, 'center'));
+  xs.forEach((x, i) => strike(x - 100, 600, x + 100, 800, k(t, ts[i] + 0.4, 0.3)));
+}
+function Kk(t) {   // is colour out there, in things? (69.6-78.3)
+  const a = k(t, 69.7); circle(700, 560, 150, '#D9453B', a, 30); circle(745, 410, 18, '#5BAA4F', a);
+  g.save(); g.globalAlpha = k(t, 70.4); g.strokeStyle = CREAM; g.lineWidth = 3; g.setLineDash([12, 10]); g.beginPath(); g.moveTo(880, 560); g.lineTo(1180, 560); g.stroke(); g.restore();
+  text('the red is in the apple?', 1220, 575, 52, CREAM, SERIF, 400, 'left', k(t, 70.6) * (1 - k(t, 74.0)));
+  g.save(); g.globalAlpha = 1 - k(t, 74.0); strike(1210, 560, 1780, 560, k(t, 72.9, 0.5)); g.restore();
+  text('then where is it?', 1220, 575, 52, CREAM, SERIF, 400, 'left', k(t, 76.0));
+}
+function Lm(t) {   // your own screen (78.3-89.5)
+  tag('THE SCREEN YOU ARE WATCHING', 1);
+  const z = ease((t - 85.6) / 3.2), s = lerp(1, 7, z), cell = 36 * s, cx = 960, cy = 540;
+  g.save(); g.globalAlpha = k(t, 78.4); g.translate(cx, cy); g.scale(1, 1);
+  const n = Math.ceil(1100 / cell) + 1;
+  for (let j = -n; j <= n; j++) for (let i = -n; i <= n; i++) { const x = i * cell, y = j * cell * 0.9; if (Math.abs(x) > 1000 || Math.abs(y) > 600) continue;
+    const ph = (i * 0.37 + j * 0.23 + t * 0.15) % 1; const lvl = 0.35 + 0.65 * Math.abs(Math.sin(ph * 6.28));
+    ['#FF3B30', '#34E06A', '#3B6BFF'].forEach((c, q) => { g.globalAlpha = k(t, 78.4) * (0.25 + 0.75 * lvl * (q === 2 ? 0.4 : 1)); g.fillStyle = c; g.fillRect(x + q * cell / 3 + cell * 0.04, y + cell * 0.06, cell / 3 - cell * 0.08, cell * 0.78); }); }
+  g.restore();
+  const qa = k(t, 78.6) * (1 - k(t, 85.4)); if (qa > 0) { g.save(); g.globalAlpha = qa * 0.75; g.fillStyle = BG; g.fillRect(260, 380, 1400, 320); g.restore();
+    wrap('One of the strangest results in science in years.', 960, 520, 1300, 62, 78, qa, SERIF, CREAM); }
+  mono('RED, GREEN AND BLUE · NOTHING ELSE', 960, 1000, k(t, 87.0), 22, CREAM, 'center');
+}
+function M(t) {   // John Dalton (89.5-99.4)
+  tag('MANCHESTER · 1794', k(t, 89.6));
+  const a = k(t, 89.6, 0.8), sc = lerp(1.0, 1.06, ease((t - 89.5) / 9.9)), h = 760 * sc, w = h * dalton.width / dalton.height;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(dalton, 600 - w / 2, 570 - h / 2, w, h); g.restore();
+  text('John Dalton', 1060, 470, 72, CREAM, SERIF, 400, 'left', k(t, 90.6));
+  mono('CHEMIST AND TEACHER · 1766-1844', 1064, 520, k(t, 91.0), 20, DIM);
+  wrap('He asked for his eyes to be opened after he died.', 1060, 640, 760, 44, 58, k(t, 93.4), SERIF, CREAM, 'left');
+  wrap('He thought he knew what was wrong with them.', 1060, 790, 760, 44, 58, k(t, 96.9), SERIF, '#C9BFAE', 'left');
+  mono('PORTRAIT: WEBSTER OF WARRINGTON, C.1840 · PUBLIC DOMAIN', 120, 1030, a * 0.8, 16, DIM);
+}
+function N(t) {   // is it really new? (99.4-end)
+  circle(640, 520, 210, OLO, k(t, 99.5, 0.8), 110);
+  text('new?', 640, 560, 110, '#0A0F1E', SERIF, 400, 'center', k(t, 101.8, 0.4));
+  wrap('“It is not a new colour.”', 1300, 470, 800, 66, 80, k(t, 103.6, 0.4), SERIF, CREAM);
+  mono('JOHN BARBUR · VISION SCIENTIST · CITY ST GEORGE\'S, LONDON', 1300, 600, k(t, 104.0), 18, DIM, 'center');
+}
+
+function A1(t) {   // Berkeley (0-3.6): the real campus, Sather Tower, pushing in
+  const u = ease(t / 3.8); cover(berkeley, lerp(1.0, 1.16, u), 0.466, 0.40); vignette(0.5);
+  tag('UC BERKELEY, CALIFORNIA', k(t, 0.3) * (1 - k(t, 3.3, 0.3)));
+}
+async function B1(t) {   // a volunteer looks at a small target (7.6-10.9): real footage of an eye
+  cover(await seek(V.eye, t - 7.6), lerp(1.04, 1.1, ease((t - 7.6) / 3.3)), 0.5, 0.5); vignette(0.55);
+}
+function B2(t) {   // the real set-up (10.9-14.1): the paper's own drawing of the system, the laser beam marked
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const a = k(t, 10.95, 0.35), sc = lerp(0.8, 0.84, ease((t - 10.9) / 3.2)), w = fig1C.width * sc, h = fig1C.height * sc, x = 960 - w / 2, y = 600 - h / 2;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 50; g.fillStyle = '#fff'; g.fillRect(x - 14, y - 14, w + 28, h + 28); g.restore();
+  g.save(); g.globalAlpha = a; g.drawImage(fig1C, x, y, w, h); g.restore();
+  const hu = k(t, 12.3, 0.5);   // "laser": the highlighter runs over the paper's own label, then a ring on the beam
+  if (hu > 0) { g.save(); g.globalAlpha = 0.42; g.fillStyle = OLO; g.fillRect(x + 300 * sc, y + 226 * sc, 190 * sc * hu, 40 * sc); g.restore();
+    g.save(); g.globalAlpha = hu; g.strokeStyle = '#FF6B5B'; g.lineWidth = 5; g.beginPath(); g.ellipse(x + 375 * sc, y + 425 * sc, 95 * sc, 60 * sc, -0.45, -Math.PI / 2, -Math.PI / 2 + hu * Math.PI * 2); g.stroke(); g.restore(); }
+  tag('THE REAL SET-UP', a, 'Fong et al., Science Advances 2025, Fig. 1');
+}
+function C2(t) {   // a tiny patch, about a centimetre across at arm's length (14.1-19.6), on a real arm; the push at the end lands on the infrared frame
+  const z = ease((t - 19.0) / 0.6), fx = 0.61, fy = 0.33;   // just beyond the index fingertip
+  const r = cover(arm, lerp(lerp(1.0, 1.06, ease((t - 14.1) / 4.9)), 3.2, z * z), fx, fy); vignette(0.5);
+  const px = r.x + fx * r.w, py = r.y + fy * r.h, s = 34 * lerp(1, 3.2, z * z) * lerp(1, 1.06, ease((t - 14.1) / 4.9));
+  const pa = k(t, 15.2, 0.4); glow(OLO, 30 * pa, () => { g.globalAlpha = pa; g.strokeStyle = '#9FF7EA'; g.lineWidth = 4; g.strokeRect(px - s / 2, py - s / 2, s, s); g.globalAlpha = pa * 0.25; g.fillStyle = OLO; g.fillRect(px - s / 2, py - s / 2, s, s); });
+  const la = k(t, 17.0) * (1 - k(t, 18.9, 0.25)); if (la > 0) { g.save(); g.globalAlpha = la; g.strokeStyle = CREAM; g.lineWidth = 2; g.beginPath(); g.moveTo(px - 30, py + 28); g.lineTo(px - 170, py + 170); g.stroke(); g.restore();
+    g.save(); g.globalAlpha = la; chip(px - 560, py + 160, 410, 96); g.restore(); text('about 1 cm across', px - 540, py + 205, 34, CREAM, SERIF, 400, 'left', la); mono("AT ARM'S LENGTH", px - 540, py + 240, la, 18, DIM); }
+  tag('A TINY PATCH OF THEIR VISION', k(t, 14.2) * (1 - k(t, 18.9, 0.25)));
+  if (z > 0.6) { g.save(); g.globalAlpha = (z - 0.6) / 0.4; g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); g.restore(); }
+}
+function F1(t) {   // real green light vs the laser on M cells alone (43.4-46.2)
+  tag('THE IDEA', 1, 'Fong et al., Science Advances 2025');
+  const a = k(t, 43.5), b = k(t, 44.6); const R = {L: val('L', 543), M: val('M', 543), S: val('S', 543)};
+  mono('ANY REAL GREEN LIGHT', 520, 300, a, 22, CREAM, 'center'); ['L', 'M', 'S'].forEach((c, i) => meter(400 + i * 90, 0.9 * R[c], c, a));
+  mono('THE LASER ON M CELLS ALONE', 1400, 300, b, 22, '#9FF7EA', 'center'); ['L', 'M', 'S'].forEach((c, i) => meter(1280 + i * 90, c === 'M' ? 0.9 : 0, c, b));
+}
+function F2(t) {   // the paper's own map of colour signals (46.2-49.5): the coloured area is natural vision; the top corner (M alone) lies outside it
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const a = k(t, 46.25, 0.35), sc = 0.74, w = fig2A.width * sc, h = fig2A.height * sc, x = 190, y = 600 - h / 2;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 50; g.fillStyle = '#fff'; g.fillRect(x - 14, y - 14, w + 28, h + 28); g.restore();
+  g.save(); g.globalAlpha = a; g.drawImage(fig2A, x, y, w, h); g.restore();
+  const ra = k(t, 46.9, 0.5); if (ra > 0) { g.save(); g.globalAlpha = ra; g.strokeStyle = '#FF6B5B'; g.lineWidth = 5; g.beginPath(); g.arc(x + 528 * sc, y + 128 * sc, 46, -Math.PI / 2, -Math.PI / 2 + ra * Math.PI * 2); g.stroke(); g.restore(); }
+  mono('COLOURED AREA: NATURAL HUMAN COLOURS', 1120, 400, k(t, 46.5), 20, CREAM);
+  mono('RED RING: M CONES ALONE', 1120, 440, k(t, 47.0), 20, '#FF6B5B');
+  wrap('“a color signal to the brain that never occurs in natural vision”', 1120, 560, 640, 38, 50, k(t, 47.4), SERIF, CREAM, 'left');
+  mono('“IN PRINCIPLE”, THE PAPER SAYS', 1120, 760, k(t, 47.8), 18, DIM);
+  tag('THE PAPER\'S MAP OF COLOUR SIGNALS', a, 'Fong et al., Science Advances 2025, Fig. 2A');
+}
+async function J1(t) {   // anywhere in the world (61.4-65.9): real footage of Earth from the ISS (NASA)
+  cover(await seek(V.earth, t - 61.4), lerp(1.0, 1.05, ease((t - 61.4) / 4.5))); vignette(0.5);
+  const a = k(t, 61.6, 0.4); if (a > 0) { g.save(); g.globalAlpha = a * 0.8; chip(260, 830, 1400, 170); g.restore(); wrap('How do you see a colour that does not exist anywhere in the world?', 960, 900, 1300, 50, 62, a, SERIF, CREAM); }
+  tag('EARTH FROM THE SPACE STATION', k(t, 61.5), 'NASA');
+}
+async function J2(t) {   // not in any flower, any screen, any sky (65.9-69.6): three real clips, each struck out on its word
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const ts = [66.46, 67.44, 68.5], names = ['flower', 'screen', 'sky'], xs = [340, 960, 1580];
+  for (let i = 0; i < 3; i++) { const a = k(t, ts[i] - 0.05, 0.25); if (a <= 0) continue; const v = await seek(V[names[i]], t - ts[i] + 0.3), x = xs[i] - 280, y = 70;
+    g.save(); g.globalAlpha = a; g.drawImage(v, x, y + (1 - a) * 20, 560, 900); g.restore();
+    mono(names[i].toUpperCase(), xs[i], 1030, a, 22, CREAM, 'center');
+    strike(x + 40, y + 120, x + 520, y + 780, k(t, ts[i] + 0.4, 0.3), '#FF6B5B', 10); }
+  vignette(0.35);
+}
+async function Kk2(t) {   // is colour out there, in things? (69.6-78.3): real apples
+  cover(await seek(V.apples, t - 69.6), lerp(1.0, 1.08, ease((t - 69.6) / 8.7)), 0.45, 0.5); vignette(0.6);
+  const q1 = k(t, 70.6) * (1 - k(t, 74.0)), q2 = k(t, 76.0);
+  if (q1 > 0) { g.save(); g.globalAlpha = q1; chip(1060, 500, 720, 110); g.restore(); text('the red is in the apple?', 1090, 575, 52, CREAM, SERIF, 400, 'left', q1);
+    g.save(); g.globalAlpha = q1; strike(1080, 560, 1760, 560, k(t, 72.9, 0.5), '#FF6B5B', 7); g.restore(); }
+  if (q2 > 0) { g.save(); g.globalAlpha = q2; chip(1060, 500, 520, 110); g.restore(); text('then where is it?', 1090, 575, 52, CREAM, SERIF, 400, 'left', q2); }
+}
+async function L1(t) {   // one of the strangest results in science (78.3-83.3): real macro footage of screen pixels
+  cover(await seek(V.pixels_rgb, t - 78.3), lerp(1.0, 1.06, ease((t - 78.3) / 5))); vignette(0.65);
+  const qa = k(t, 78.6) * (1 - k(t, 83.0, 0.3)); if (qa > 0) { g.save(); g.globalAlpha = qa * 0.82; chip(260, 400, 1400, 260); g.restore(); wrap('One of the strangest results in science in years.', 960, 510, 1300, 62, 78, qa, SERIF, CREAM); }
+}
+async function L2(t) {   // every colour you've ever seen, including the ones on this screen (83.3-89.5)
+  cover(await seek(V.pixels_cursor, t - 83.3), lerp(1.0, 1.1, ease((t - 83.3) / 6.2))); vignette(0.5);
+  tag('A SCREEN LIKE YOURS, UP CLOSE', k(t, 83.4));
+  label('RED, GREEN AND BLUE · NOTHING ELSE', 1000, k(t, 87.0), CREAM);
+}
+function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }   // 19.6-37.0 is the patch close-up (colour_patch_d.html)
+const SHOTS = [[0, A1], [3.6, A], [7.6, B1], [10.9, B2], [14.1, C2], [19.6, GAP], [37.0, E], [43.4, F1], [46.2, F2], [49.5, G], [55.6, H], [59.5, I], [61.4, J1], [65.9, J2], [69.6, Kk2], [78.3, L1], [83.3, L2], [89.5, M], [99.4, N]];
+window.render = async function (T) {
+  const t = T - P;
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const v = g.createRadialGradient(960, 520, 300, 960, 520, 1200); v.addColorStop(0, 'rgba(40,60,110,0.20)'); v.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080);
+  let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (t >= s) f = fn; await f(t);
+  // film grain, the same in every shot
+  g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
+};
+const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
+  let s = 7; for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const q = s % 256; im.data[i] = im.data[i + 1] = im.data[i + 2] = q; im.data[i + 3] = 255; } x.putImageData(im, 0, 0); return c; })();
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"'), document.fonts.load('400 40px Fraunces')]); window.ready = true;
+</script></body></html>
