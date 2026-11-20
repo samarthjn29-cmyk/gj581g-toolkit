@@ -1,0 +1,170 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1 chapter 1 "The geranium" (20 Nov 2026): 2D cards, real pictures and Dalton's own printed pages, on Sam's 01_jar.mp3
+// (pauses lengthened to 147 wpm by tts/pace_gaps.py). Times are CLIP seconds (voice starts 0.6 s in), cued on whisper word times
+// (colour/voice/eleven/cwords01.json). The two 3D shots (GAP) are colour_ch1_3d.html ?shot=filter (62.6-72.6) and ?shot=opened (79.0-87.5).
+// Real material: William Green's plan of Manchester (1787-94, PD); John Dalton, mezzotint by Charles Turner after James Lonsdale (1834, PD);
+// Dalton, "Extraordinary Facts Relating to the Vision of Colours", Memoirs of the Lit & Phil vol 5 (1798) pp. 28, 29, 30, 43 (scans: Science
+// History Institute via DPLA, PD); geranium photo David J. Stang (CC BY-SA 4.0); candle photo Andrew Fogg (CC BY 2.0). Colour shifts on the
+// geranium are illustrative and say so.
+const img = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+const N = ['R_map1794', 'R_dalton_turner', 'R_paper_p28_title', 'R_paper_p29', 'R_paper_p30', 'R_paper_p43', 'R_geranium', 'R_candle'];
+const I = Object.fromEntries(await Promise.all(N.map(async n => [n, await img('/img/colour/ch1/' + n + '.jpg')])));
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.5) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
+const BG = '#0A0F1E', CREAM = '#EFE6D2', DIM = '#7F8AA6', OLO = '#14C7B0', PEN = '#FF6B5B';
+const SANS = '"DejaVu Sans", sans-serif', SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"';
+function text(s, x, y, size = 30, col = CREAM, font = SANS, weight = 500, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
+const mono = (s, x, y, a = 1, size = 20, col = DIM, align = 'left') => text(s, x, y, size, col, MONO, 500, align, a);
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function label(s, y, a, col = CREAM, size = 22, x = 960) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
+  const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(x - w / 2, yy - size - 6, w, size + 20); g.fillStyle = col; g.fillText(s, x, yy); g.restore(); }
+function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';   // top-left tag, as in chapter 0
+  const w = Math.max(g.measureText(s).width, sub ? g.measureText(sub).width : 0) + 32; chip(104, 66, w, sub ? 78 : 48, 0.72);
+  g.fillStyle = CREAM; g.fillText(s, 120, 98); if (sub) { g.fillStyle = DIM; g.fillText(sub, 120, 128); } g.restore(); }
+function vignette(st = 0.55) { const v = g.createRadialGradient(960, 540, 420, 960, 540, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, `rgba(0,0,0,${st})`); g.fillStyle = v; g.fillRect(0, 0, 1920, 1080); }
+function wrap(s, x, y, maxw, size, lh, a, font = SERIF, col = CREAM, align = 'center') { g.save(); g.font = `400 ${size}px ${font}`; const ws = s.split(' '); let line = '', lines = [];
+  for (const w of ws) { const tl = line ? line + ' ' + w : w; if (g.measureText(tl).width > maxw && line) { lines.push(line); line = w; } else line = tl; } lines.push(line); g.restore();
+  lines.forEach((l, i) => text(l, x, y + i * lh, size, col, font, 400, align, a)); return lines.length; }
+function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {   // fill a box with a picture, zoomed towards (fx, fy); returns where it landed
+  const [bx, by, bw, bh] = box, iw = im.width, ih = im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
+  const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(bx, by, bw, bh); g.clip(); g.drawImage(im, x, y, w, h); g.restore(); return {x, y, w, h, iw, ih}; }
+const at = (r, px, py) => [r.x + px / r.iw * r.w, r.y + py / r.ih * r.h];
+function sweep(r, segs, u, col = OLO, a = 0.5) {   // highlighter over page words: segs in picture pixels [x0, y0, x1, y1]; u runs 0-1 over all of them in order
+  if (u <= 0) return; const L = segs.map(s => s[2] - s[0]), tot = L.reduce((p, q) => p + q, 0); let left = u * tot;
+  g.save(); g.globalCompositeOperation = 'multiply'; g.globalAlpha = a; g.fillStyle = col;
+  for (let i = 0; i < segs.length && left > 0; i++) { const [x0, y0, x1, y1] = segs[i], d = Math.min(left, L[i]); left -= d; const [X0, Y0] = at(r, x0 - 6, y0 - 4), [X1, Y1] = at(r, x0 + d + 6, y1 + 6); g.fillRect(X0, Y0, X1 - X0, Y1 - Y0); }
+  g.restore(); }
+function underline(r, x0, x1, y, u, col = PEN, w = 6) { if (u <= 0) return; const [X0, Y] = at(r, x0, y), [X1] = at(r, x1, y); g.save(); g.strokeStyle = col; g.lineWidth = w; g.lineCap = 'round'; g.beginPath(); g.moveTo(X0, Y); g.lineTo(lerp(X0, X1, u), Y + 3 * Math.sin(u * 9)); g.stroke(); g.restore(); }
+function circle(x, y, r, fill, a = 1, blur = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = fill; if (blur) { g.shadowColor = fill; g.shadowBlur = blur; } g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.restore(); }
+
+// the geranium's pink petals, shifted (illustrative): to a sky-blue (how it looked to Dalton by day) and to a red under a warm, dim light (by candlelight)
+function shifted(im, hue, satMul, valMul, warm) { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+  for (let i = 0; i < p.length; i += 4) { let r = p[i] / 255, gg = p[i + 1] / 255, b = p[i + 2] / 255; const mx = Math.max(r, gg, b), mn = Math.min(r, gg, b), dl = mx - mn;
+    let h = 0; if (dl > 1e-5) { h = mx === r ? ((gg - b) / dl) % 6 : mx === gg ? (b - r) / dl + 2 : (r - gg) / dl + 4; h *= 60; if (h < 0) h += 360; }
+    const s = mx ? dl / mx : 0, v = mx; let dh = Math.abs(((h - 335 + 540) % 360) - 180);
+    let m = clamp(1 - (dh - 40) / 25) * clamp((s - 0.05) / 0.1);    // how 'pink-petal' this pixel is
+    let H = m > 0 ? hue : h, S = m > 0 ? clamp(s * lerp(1, satMul, m)) : s, V = v;
+    if (m > 0) H = (h + (((hue - h + 540) % 360) - 180) * m + 360) % 360;
+    if (warm) { V = v * valMul; }
+    const C = V * S, X = C * (1 - Math.abs((H / 60) % 2 - 1)), M = V - C; let rr, g2, bb;
+    [rr, g2, bb] = H < 60 ? [C, X, 0] : H < 120 ? [X, C, 0] : H < 180 ? [0, C, X] : H < 240 ? [0, X, C] : H < 300 ? [X, 0, C] : [C, 0, X];
+    p[i] = (rr + M) * 255; p[i + 1] = (g2 + M) * 255; p[i + 2] = (bb + M) * 255;
+    if (warm) { p[i] = Math.min(255, p[i] * 1.08 + 10); p[i + 1] *= 0.88; p[i + 2] *= 0.62; } }
+  x.putImageData(d, 0, 0); return c; }
+const GER = I.R_geranium, GER_DAY = shifted(GER, 205, 1.15, 1, false), GER_CANDLE = shifted(GER, 358, 1.6, 0.62, true);
+
+// ---------- shots (clip time) ----------
+function S1(t) {   // Manchester. The last day of October, 1794. (0-6.2): the town plan of the time, drifting
+  const u = ease(t / 6.4); cover(I.R_map1794, lerp(1.05, 1.22, u), lerp(0.42, 0.56, u), lerp(0.46, 0.5, u)); vignette(0.55);
+  g.save(); g.fillStyle = 'rgba(10,15,30,0.18)'; g.fillRect(0, 0, 1920, 1080); g.restore();
+  tag('MANCHESTER', k(t, 0.5), 'A PLAN OF THE TOWN, SURVEYED 1787-1794');
+  const da = k(t, 2.7, 0.45); if (da > 0) { g.save(); g.globalAlpha = da; chip(660, 800, 600, 120, 0.8); g.restore(); text('31 October 1794', 960, 880 + (1 - da) * 10, 58, CREAM, SERIF, 400, 'center', da); }
+}
+function S2(t) {   // A 28-year-old teacher named John Dalton stands up to read a paper about himself. (6.2-12.2)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const im = I.R_dalton_turner, a = k(t, 6.25, 0.4), sc = lerp(1.0, 1.05, ease((t - 6.2) / 6)), h = 800 * sc, w = h * im.width / im.height;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(im, 620 - w / 2, 560 - h / 2, w, h); g.restore();
+  tag('JOHN DALTON', k(t, 8.5), 'TEACHER · MANCHESTER');
+  text('John Dalton', 1080, 470, 76, CREAM, SERIF, 400, 'left', k(t, 8.5));
+  mono('28 YEARS OLD IN 1794', 1084, 525, k(t, 6.8), 22, DIM);
+  wrap('A paper about his own eyes.', 1080, 660, 720, 46, 58, k(t, 10.1), SERIF, CREAM, 'left');
+  mono('PORTRAIT FROM 1834: CHARLES TURNER AFTER JAMES LONSDALE · PUBLIC DOMAIN', 120, 1030, a * 0.8, 16, DIM);
+}
+function S3(t) {   // His audience ... the Literary and Philosophical Society. It's called "Extraordinary Facts ..." (12.2-21.5): the real title page
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080);
+  const u = ease((t - 12.2) / 9.3), r = cover(I.R_paper_p28_title, lerp(1.22, 1.42, u), 0.615, lerp(0.315, 0.3, u)); vignette(0.5);
+  underline(r, 985, 1392, 1124, k(t, 12.7, 0.6));                                              // READ OCT. 31ST, 1794.
+  sweep(r, [[848, 708, 1515, 760]], k(t, 17.2, 1.3));                                          // EXTRAORDINARY FACTS
+  sweep(r, [[950, 812, 1418, 878]], k(t, 19.4, 1.0));                                          // Vision of Colours:
+  tag('HIS PAPER, AS PRINTED IN 1798', k(t, 13.7), 'MEMOIRS OF THE LITERARY AND PHILOSOPHICAL SOCIETY OF MANCHESTER');
+}
+function S4a(t) {   // He tells them he hadn't known his eyes were different. Not until one evening, when he looked at a flower, (21.5-28.2): p. 29
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080);
+  const u = ease((t - 21.5) / 6.7), r = cover(I.R_paper_p29, lerp(1.6, 1.72, u), 0.475, lerp(0.71, 0.73, u)); vignette(0.5);
+  sweep(r, [[865, 1925, 1388, 1972], [445, 1985, 882, 2032]], k(t, 23.0, 1.6));                // I was never convinced of a peculiarity in my vision,
+  sweep(r, [[445, 2045, 1388, 2092], [445, 2105, 668, 2152]], k(t, 26.3, 1.4));                // the colour of the flower of the Geranium zonale by candle-light,
+  tag('HIS OWN WORDS', k(t, 21.6), 'DALTON, 1798, PAGE 29');
+}
+function S4b(t) {   // a geranium. By day, it looked to him almost exactly sky-blue. (28.2-34.2)
+  const u = ease((t - 28.2) / 6.2), sc = lerp(1.04, 1.16, u), fx = 0.33, fy = 0.5;
+  cover(GER, sc, fx, fy); const m = k(t, 30.3, 1.4); if (m > 0) cover(GER_DAY, sc, fx, fy, m); vignette(0.5);
+  tag('A GERANIUM', k(t, 28.35, 0.3) * (1 - m), null); tag('TO DALTON, BY DAY · ILLUSTRATIVE', m);
+  label('ALMOST EXACTLY SKY-BLUE', 1000, k(t, 31.9), '#9FC8FF');
+}
+function S4c(t) {   // By candlelight, (34.2-36.3)
+  const f = 1 + 0.035 * Math.sin(t * 13.1) + 0.02 * Math.sin(t * 29.7);
+  cover(I.R_candle, lerp(1.04, 1.1, ease((t - 34.2) / 2.1)), 0.62, 0.55); g.save(); g.globalCompositeOperation = 'multiply'; g.fillStyle = `rgba(${Math.round(255 * clamp(f))},${Math.round(232 * f)},${Math.round(210 * f)},1)`; g.fillRect(0, 0, 1920, 1080); g.restore(); vignette(0.65);
+  label('BY CANDLELIGHT', 1000, k(t, 34.35, 0.3), '#FFC98A');
+}
+function S4d(t) {   // he writes, it was "astonishingly changed". To him, it had turned red. (36.3-41.2): p. 30
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080);
+  const u = ease((t - 36.3) / 4.9), r = cover(I.R_paper_p30, lerp(1.52, 1.64, u), 0.55, lerp(0.226, 0.236, u)); vignette(0.5);
+  sweep(r, [[575, 650, 1007, 697]], k(t, 36.44, 1.3));                                         // astonishingly changed,
+  sweep(r, [[705, 708, 1147, 757]], k(t, 39.55, 0.85), PEN, 0.42);                              // being what I called red,
+  tag('HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 30');
+}
+function S5(t) {   // To his friends, it was pink, by day and by candlelight. (41.2-46.6): the same flower three ways
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const P = [[GER_DAY, 'TO DALTON', 'BY DAY', '#9FC8FF', 41.3], [GER_CANDLE, 'TO DALTON', 'BY CANDLELIGHT', '#FF8A70', 41.45], [GER, 'TO HIS FRIENDS', 'DAY OR CANDLELIGHT', '#F4A6BE', 41.8]], xs = [340, 960, 1580];
+  for (let i = 0; i < 3; i++) { const [im, l1, l2, col, t0] = P[i], a = k(t, t0, 0.3); if (a <= 0) continue; const x = xs[i] - 270, y = 120 + (1 - a) * 20;
+    g.save(); g.globalAlpha = a; cover(im, lerp(1.0, 1.06, ease((t - 41.2) / 5.4)), 0.33, 0.5, 1, [x, y, 540, 760]); g.restore();
+    if (i === 2) { const hl = k(t, 41.9, 0.4); g.save(); g.globalAlpha = hl; g.strokeStyle = col; g.lineWidth = 6; g.strokeRect(x - 3, y - 3, 546, 766); g.restore(); }
+    mono(l1, xs[i], 935, a, 22, CREAM, 'center'); mono(l2, xs[i], 970, a, 20, col, 'center'); }
+  g.save(); g.globalAlpha = 0.55 * k(t, 41.9, 0.5); g.fillStyle = BG; g.fillRect(70, 110, 1160, 780); g.restore();   // the two Dalton panels step back while the friends' panel is spoken
+  label('PINK, BOTH TIMES', 1040, k(t, 43.0), '#F4A6BE', 22, 1580);
+  tag('THE SAME FLOWER · ILLUSTRATIVE', k(t, 41.3));
+}
+function S6a(t) {   // And he isn't the only one. His brother, it turns out, makes the same mistakes. (46.6-51.9): p. 30 again
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080);
+  const u = ease((t - 46.6) / 5.3), r = cover(I.R_paper_p30, lerp(1.52, 1.62, u), 0.55, lerp(0.36, 0.372, u)); vignette(0.5);
+  sweep(r, [[1185, 1065, 1542, 1117], [575, 1125, 1332, 1172]], k(t, 48.9, 1.7));               // except my brother who saw it in the same light as myself.
+  tag('HIS OWN WORDS', 1, 'DALTON, 1798, PAGE 30');
+}
+function S6b(t) {   // They both confuse scarlet with green, and pink with blue. (51.9-56.7)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const rows = [['SCARLET', '#E0321E', 'GREEN', '#3F9A3A', 53.1, 53.76], ['PINK', '#F2A0B6', 'BLUE', '#6FA6E6', 54.5, 55.0]];
+  rows.forEach(([n1, c1, n2, c2, t1, t2], j) => { const y = 400 + j * 300, a1 = k(t, t1, 0.3), a2 = k(t, t2, 0.3), m = k(t, t2 + 0.35, 0.6), x1 = lerp(700, 830, m), x2 = lerp(1220, 1090, m);
+    circle(x1, y, 110, c1, a1); circle(x2, y, 110, c2, a2);
+    mono(n1, x1, y + 170, a1, 24, CREAM, 'center'); mono(n2, x2, y + 170, a2, 24, CREAM, 'center');
+    text('=', 960, y + 22, 90, CREAM, SANS, 700, 'center', k(t, t2 + 0.7, 0.3)); });
+  tag('WHAT DALTON AND HIS BROTHER MIXED UP', k(t, 52.0), 'HUNT ET AL., SCIENCE, 1995');
+}
+function S7(t) {   // Dalton is a scientist, so he wants to know why. And he comes up with a good one. (56.7-62.6): p. 43
+  g.fillStyle = '#16120D'; g.fillRect(0, 0, 1920, 1080);
+  const u = ease((t - 56.7) / 5.9), r = cover(I.R_paper_p43, lerp(1.5, 1.64, u), 0.38, lerp(0.385, 0.392, u)); vignette(0.5);
+  sweep(r, [[458, 1040, 1202, 1088], [255, 1100, 552, 1147]], k(t, 60.5, 1.4));                 // a coloured medium, probably some modification of blue.
+  tag('HIS GUESS, IN HIS OWN WORDS', k(t, 56.8), 'DALTON, 1798, PAGE 43');
+}
+function S8(t) {   // It's a neat idea. It's testable. And he knows exactly how it should be tested. (72.6-79.0)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  const im = I.R_dalton_turner, a = k(t, 72.65, 0.35), sc = lerp(1.0, 1.04, ease((t - 72.6) / 6.4)), h = 800 * sc, w = h * im.width / im.height;
+  g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 50; g.drawImage(im, 560 - w / 2, 560 - h / 2, w, h); g.restore();
+  text('A neat idea.', 1000, 420, 72, CREAM, SERIF, 400, 'left', k(t, 73.15, 0.3));
+  text('Testable.', 1000, 540, 72, OLO, SERIF, 400, 'left', k(t, 74.85, 0.3));
+  wrap('And he knows exactly how it should be tested.', 1000, 680, 760, 44, 58, k(t, 76.4, 0.4), SERIF, '#C9BFAE', 'left');
+}
+function S10(t) {   // He would be wrong. But to understand how, we first have to get rid of something we all believe about colour. (87.5-end)
+  const u = ease((t - 87.5) / 6.0); cover(GER, lerp(1.0, 1.12, u), 0.33, 0.5); vignette(lerp(0.5, 0.75, u));
+}
+function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }   // the 3D shots (colour_ch1_3d.html)
+const SHOTS = [[0, S1], [6.2, S2], [12.2, S3], [21.5, S4a], [28.2, S4b], [34.2, S4c], [36.3, S4d], [41.2, S5], [46.6, S6a], [51.9, S6b], [56.7, S7], [62.6, GAP], [72.6, S8], [79.0, GAP], [87.5, S10]];
+window.SHOTS = SHOTS.map(s => s[0]);
+window.render = async function (T) {
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (T >= s) f = fn; await f(T);
+  g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();   // film grain, as in chapter 0
+};
+const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
+  let s = 7; for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const q = s % 256; im.data[i] = im.data[i + 1] = im.data[i + 2] = q; im.data[i + 3] = 255; } x.putImageData(im, 0, 0); return c; })();
+await Promise.all([document.fonts.load('500 20px "JetBrains Mono"'), document.fonts.load('400 40px Fraunces')]); window.ready = true;
+</script></body></html>
