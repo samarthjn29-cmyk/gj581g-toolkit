@@ -1,4 +1,4 @@
-#!/home/claude/cbenv/bin/python3
+#!/usr/bin/env python3
 """Beat times of a music bed, for cut-on-the-beat stretches (BIG_MOVES B8, Sam 14 Nov 2026). Writes BED.beats.json next to the bed.
 Usage: beats.py BED.wav   (librosa beat tracker; the bed starts at 0 s in every chapter mix, so these are chapter times)"""
 import sys, json, librosa

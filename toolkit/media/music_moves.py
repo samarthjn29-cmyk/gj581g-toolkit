@@ -1,4 +1,4 @@
-#!/home/claude/cbenv/bin/python3
+#!/usr/bin/env python3
 """Music moves (Sam, 14 Nov 2026: library categories -> "build ... music moves"). In-house, no credit.
   key BED.wav            -> BED.wav.key.json (Krumhansl key estimate from the chroma of the first 90 s)
   sting BED.wav OUT.wav  -> a chord stab in the bed's key (tonic triad, plucked + soft brass), for a punchline or reveal

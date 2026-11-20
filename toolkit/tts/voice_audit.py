@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Audit a finished narration before Sam listens (7 Nov 2026, Scrolls v1: Sam asked for "an audit on the overall quality of
-voice and words spoken"). Run with the cbenv python (faster-whisper, librosa, soundfile).
+voice and words spoken"). Run with plain python3 (faster-whisper, librosa, soundfile; the cbenv venv was removed 20 Nov 2026).
 Checks: 1 every spoken word against the script (medium.en, word times; spelling-only differences are ignored);
 2 homographs the dictionary gets wrong unless picked (read, live, use...): lists each with its line so the voice notes can
 set read#2 etc.; 3 loudness per line (outliers > 3 dB), peak, clipping, clicks, digital-silence runs; 4 pace per line
