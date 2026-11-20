@@ -199,7 +199,7 @@ function S9(t) {   // He leaves instructions that when he dies, his eyes are to 
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.5); pageFrame();
   const u = ease((t - 79.0) / 3.2), r = cover(I.R_henry1854_p25, lerp(1.1, 1.133, u), 0.45, lerp(0.30, 0.305, u), 1, PAGEBOX); vignette(0.2);
   sweep(r, [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]], k(t, 79.4, 1.6));                // after Dalton's death, in conformity with his strongly expressed wish
-  { const [, yA] = at(r, 0, 1120), [, yB] = at(r, 0, 1300), [bx, by, bw, bh] = PAGEBOX; g.save(); g.fillStyle = 'rgba(12,22,38,0.66)';   // the rest of the page steps back: only the two lines about his wish stay bright
+  { const [, yA] = at(r, 0, 1120), [, yB] = at(r, 0, 1300), [bx, by, bw, bh] = PAGEBOX; g.save(); g.fillStyle = 'rgba(12,22,38,0.94)';   /* the rest of the page goes nearly dark: it calls the fluid 'pale yellow', which Ransome's own account contradicts */   // the rest of the page steps back: only the two lines about his wish stay bright
     g.fillRect(bx, by, bw, Math.max(0, yA - by)); g.fillRect(bx, yB, bw, Math.max(0, by + bh - yB)); g.restore(); }
   side([[79.2, 'He leaves instructions.', CREAM, 56], [80.4, '“his strongly expressed wish”', OLO, 52]], t, 1200, 400, 640);
   tag('HIS FIRST BIOGRAPHY, 1854', 1, 'W. C. HENRY, MEMOIRS OF JOHN DALTON, PAGE 25');
