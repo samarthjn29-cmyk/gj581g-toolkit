@@ -109,7 +109,7 @@ async function S5(t) {   // A completely new colour: the map of every colour dra
   text('every colour light can make', 960, 760, 26, '#0B0E18', MONO, 'center', d1 * 0.85);
   const x = lerp(960, TRI.M[0], fly), y = lerp(560, 300, fly);   /* the olo the subjects saw lands just outside the natural region (Fong et al. Fig. 3F); only the ideal olo sits at the M corner */ glow(x, y, 120 + 60 * fly, OLO, 1); g.save(); g.fillStyle = '#E8FFFB'; g.beginPath(); g.arc(x, y, 12, 0, 7); g.fill(); g.restore();
   if (fly > 0 && fly < 1) { g.save(); g.strokeStyle = OLO; g.globalAlpha = 0.6; g.lineWidth = 6; g.setLineDash([4, 14]); g.beginPath(); g.moveTo(960, 560); g.lineTo(x, y); g.stroke(); g.restore(); }
-  text('OUTSIDE IT', TRI.M[0] + 50, 310, 24, OLO, MONO, 'left', k(t, a + 1.25, 0.25), 12); text('IDEAL OLO', TRI.M[0] + 40, TRI.M[1] + 6, 16, DIM, MONO, 'left', k(t, a + 1.4, 0.3));
+  { const la = k(t, a + 1.25, 0.4); g.save(); g.globalAlpha = 0.7 * la; g.strokeStyle = OLO; g.lineWidth = 1.5; g.beginPath(); g.moveTo(982, 300); g.lineTo(lerp(982, 1150, la), 300); g.stroke(); g.restore(); text('OUTSIDE IT', 1162, 309, 24, OLO, MONO, 'left', la); }   /* label clear of the triangle's edge, with a thin leader to the dot (review, 21 Nov 2026) */ text('IDEAL OLO', TRI.M[0] + 40, TRI.M[1] + 6, 16, DIM, MONO, 'left', k(t, a + 1.4, 0.3));
   g.save(); g.globalAlpha = 0.6 * k(t, a + 1.4, 0.3); g.strokeStyle = OLO; g.lineWidth = 2; g.beginPath(); g.arc(TRI.M[0], TRI.M[1], 10, 0, 7); g.stroke(); g.restore();
   srcBR('DIAGRAM AFTER FONG ET AL., SCIENCE ADVANCES 2025, FIGS. 2-3 · ILLUSTRATION', d1);
 }
@@ -177,9 +177,11 @@ async function S12(t) {   // It took 151 years to get the answer: a beam races a
 async function S13(t) {   // So, how do you see a colour your eyes can't make? The colour again, and the cone trio with only the middle light on
   const a = L(12), pu = 0.95 + 0.05 * Math.sin((t - a) * 2.2); leaks(t, 0.6); glow(960, 360, 330 * pu, OLO, 0.55); g.save(); g.fillStyle = OLO; g.beginPath(); g.arc(960, 360, 130 * pu, 0, 7); g.fill(); g.restore();
   trio(960, 600, 24, 0, 1, 0, k(t, a + 0.3, 0.5), OLO);
-  const w = LT[12][2].split(' '), n = Math.floor(clamp((t - a) / (LE(12) - a)) * w.length + 0.999);
-  g.save(); g.font = `400 70px ${SERIF}`; g.textAlign = 'center'; g.fillStyle = CREAM; g.shadowColor = '#000'; g.shadowBlur = 20;
-  const l1 = w.slice(0, 5).slice(0, n).join(' '), l2 = n > 5 ? w.slice(5, n).join(' ') : ''; g.fillText(l1, 960, 790); if (l2) g.fillText(l2, 960, 880); g.restore();
+  const w = LT[12][2].split(' '), n = clamp((t - a) / (LE(12) - a)) * w.length;   /* both lines laid out once at their final width; words fade in place, so nothing reflows (review, 21 Nov 2026) */
+  g.save(); g.font = `400 70px ${SERIF}`; g.textAlign = 'left'; g.fillStyle = CREAM; g.shadowColor = '#000'; g.shadowBlur = 20;
+  [[0, 5, 790], [5, w.length, 880]].forEach(([i0, i1, y]) => { const ws = w.slice(i0, i1), sp = g.measureText(' ').width, W = g.measureText(ws.join(' ')).width; let x = 960 - W / 2;
+    ws.forEach((wd, q) => { g.globalAlpha = clamp((n - (i0 + q)) / 0.6); g.fillText(wd, x, y); x += g.measureText(wd).width + sp; }); });
+  g.restore();
 }
 function shifted(im, hue, satMul, valMul, warm) { const c = document.createElement('canvas'); c.width = im.width; c.height = im.height; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
   const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
