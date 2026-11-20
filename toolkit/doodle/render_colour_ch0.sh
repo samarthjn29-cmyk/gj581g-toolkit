@@ -18,4 +18,8 @@ node render.js $C "" 48.2 107.2 "$T/07.mp4"
 for i in 01 02 03 04 05 06 07; do echo "file '$T/$i.mp4'"; done > "$T/list.txt"
 ffmpeg -loglevel error -y -f concat -safe 0 -i "$T/list.txt" -c copy "$OUT"
 rm -rf "$T"
+# a small copy to attach in the chat (near-lossless renders are 700+ MB; the chat takes 400 MB at most)
+SMALL="${OUT%.mp4}_small.mp4"
+ffmpeg -loglevel error -y -i "$OUT" -c:v libx264 -crf 16 -preset slow -pix_fmt yuv420p "$SMALL"
 echo "done $OUT"
+echo "attach this one: $SMALL ($(du -h "$SMALL" | cut -f1))"
