@@ -93,6 +93,14 @@ function stripes(cx, cy, cw, chh, cols, rows, r, gr, b, a = 1, merge = 0, delay 
     const m = merge * st, xs = [x + lerp(0, sw * 0.5, m), x + sw - lerp(0, sw * 0.5, m), x + 2 * sw];
     [[PR, r], [PG, gr], [PB, b * (delay ? lerp(1, 0, 1 - st) : 1)]].forEach(([c, v], q) => { g.fillStyle = c; g.globalAlpha = a * (0.1 + 0.9 * v); g.fillRect(xs[q] + 2, y + 3, sw - 4 + (q < 2 ? m * sw * 0.5 : 0), chh - 6); }); }
   g.restore(); }
+function gridZ(cx, cy, base, sc, bw, bh, r, gr, b, a = 1, merge = 0, delay = null) {   /* one fixed 31x15 grid of screen stripes, scaled as a whole and clipped to a bw x bh window: a zoom that never re-lays out the pattern (re-layout flickered, 21 Nov 2026) */
+  if (a <= 0) return; g.save(); g.beginPath(); g.rect(cx - bw / 2, cy - bh / 2, bw, bh); g.clip(); g.translate(cx, cy); g.scale(sc, sc); g.globalCompositeOperation = 'lighter'; const sw = base / 3, ix = 2 / sc, iy = 3 / sc;
+  for (let j = -7; j <= 7; j++) for (let i = -15; i <= 15; i++) { const x = i * base - base / 2, y = j * base - base / 2, st = delay ? delay(i, j) : 1;
+    const m = merge * st, xs = [x + lerp(0, sw * 0.5, m), x + sw - lerp(0, sw * 0.5, m), x + 2 * sw];
+    [[PR, r], [PG, gr], [PB, b * (delay ? lerp(1, 0, 1 - st) : 1)]].forEach(([c, v], q) => { g.fillStyle = c; g.globalAlpha = a * (0.1 + 0.9 * v); g.fillRect(xs[q] + ix, y + iy, sw - 2 * ix + (q < 2 ? m * sw * 0.5 : 0), base - 2 * iy); }); }
+  g.restore(); }
+const eio = u => { u = clamp(u); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };   /* slow in, slow out: for the long zooms */
+const glerp = (a, b, u) => a * Math.pow(b / a, u);   /* zoom scales change geometrically, so the zoom feels even */
 function wave(x0, x1, y, amp, lam0, lam1, a = 1, col = CREAM, w = 3, ph = 0) {   // a wave drawn per frame from a sine; the wavelength can change along it (a chirp)
   if (a <= 0) return; g.save(); g.globalAlpha = a; g.strokeStyle = col; g.lineWidth = w; g.beginPath(); let p = ph;
   for (let x = x0; x <= x1; x += 2) { const u = (x - x0) / (x1 - x0), lam = lam0 * Math.pow(lam1 / lam0, u); p += 2 * Math.PI * 2 / lam; const yy = y + amp * Math.sin(p); x === x0 ? g.moveTo(x, yy) : g.lineTo(x, yy); } g.stroke(); g.restore(); }
@@ -117,24 +125,24 @@ async function S3(t) {   // Look at this yellow square. Here's a question. Does 
   const q = ko(t, L(4) + 0.2, 1.4); if (q > 0) { const cx = lerp(1500, 1160, q), cy = lerp(850, 700, q); g.save(); g.globalAlpha = q; g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, 110, 0, 7); g.stroke(); g.restore(); }
 }
 async function S4(t) {   // Almost certainly not. ... Your screen doesn't use a yellow light: one continuous move into the lens: a real close-up of a screen, then the same pattern drawn as stripes
-  leaks(t, 0.4); const a = L(5), z = xo((t - a) / 2.6), r = lerp(110, 1250, z), cx = lerp(1160, 960, z), cy = lerp(700, 540, z);
+  leaks(t, 0.4); const a = L(5), z = eio((t - a) / 3.2), r = glerp(110, 1250, z), cx = lerp(1160, 960, z), cy = lerp(700, 540, z);
   g.fillStyle = YEL; g.fillRect(760, 300, 400, 400);
   g.save(); g.beginPath(); g.arc(cx, cy, r, 0, 7); g.clip(); g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
   cover(await seek(V.pixels_rgb, 0.4 + (t - a) * 0.4), lerp(1.6, 1.25, z), 0.5, 0.5, 1 - ko(t, L(6) + 0.6, 1.2), [cx - r, cy - r, r * 2, r * 2]);
-  const sa = ko(t, L(6) + 0.6, 1.2); if (sa > 0) stripes(960, 500, 150, 150, 9, 5, 1, 1, 1, sa);
+  const sa = ko(t, L(6) + 0.6, 1.2); if (sa > 0) gridZ(960, 500, 46, 150 / 46, 1350, 750, 1, 1, 1, sa);
   g.restore(); if (z < 1) { g.save(); g.globalAlpha = 1 - z; g.strokeStyle = CREAM; g.lineWidth = 3; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.restore(); }
   text('A REAL SCREEN, CLOSE UP', 960, 900, 20, DIM, MONO, 'center', ko(t, a + 0.8, 0.6) * (1 - sa));
 }
 async function S5(t) {   // It has red, green and blue lights, packed too tightly for you to see one by one: the stripes pull back until they blur
-  leaks(t, 0.4); const a = L(7), z = xo((t - a) / (LE(7) - a + 0.6)), cw = lerp(150, 46, z), cols = Math.round(lerp(9, 30, z)), rows = Math.round(lerp(5, 15, z));
-  stripes(960, 500, cw, cw, cols, rows, 1, 1, 1, 1);
+  leaks(t, 0.4); const a = L(7), z = eio((t - a) / (LE(7) - a + 0.6));
+  gridZ(960, 500, 46, glerp(150 / 46, 1, z), lerp(1350, 1426, z), lerp(750, 690, z), 1, 1, 1, 1);
   [['RED', PR], ['GREEN', PG], ['BLUE', PB]].forEach(([s, c], i) => text(s, 760 + i * 200, 900, 24, c, MONO, 'center', ko(t, a + 0.6 + i * 0.15, 0.6) * (1 - z)));
   srcBR('SCREEN STRIPES · ILLUSTRATION', 1);
 }
 async function S6(t) {   // Turn the red and green on together, and your brain reports yellow. Yellow, with no yellow light: blue goes out, red and green slide together as light, and add up to yellow
   leaks(t, 0.4); const a = L(8), b0 = ko(t, a + 0.3, 1.0), mg = ko(t, a + 1.6, 1.6), pull = ko(t, L(9) - 0.2, 1.2);
-  const cw = lerp(46, 110, ko(t, a - 0.2, 1.0)), cols = Math.round(lerp(30, 6, ko(t, a - 0.2, 1.0))), rows = Math.round(lerp(15, 4, ko(t, a - 0.2, 1.0)));
-  const cx = lerp(960, 640, pull); stripes(cx, 500, cw, cw, cols, rows, 1, 1, 1 - b0, 1, mg, (i, j) => clamp(b0 * 1.2 - (i + j) * 0.04));
+  const zz = eio((t - (a - 0.2)) / 1.8), cx = lerp(960, 640, pull);
+  gridZ(cx, 500, 46, glerp(1, 2, zz), lerp(1426, 644, zz), lerp(690, 460, zz), 1, 1, 1 - b0, 1, mg, (i, j) => clamp(b0 * 1.4 - (i + j + 5) * 0.04));
   const yel = ko(t, L(9) - 0.2, 1.0); g.save(); g.globalAlpha = yel; g.fillStyle = YEL; g.fillRect(1160, 330, 340, 340); g.restore();
   text('=', 1040, 525, 80, CREAM, SERIF, 'center', yel); text('YOUR BRAIN: YELLOW', 1330, 740, 22, YEL, MONO, 'center', ko(t, a + 2.4, 0.6) * (1 - 0) * Math.max(yel, ko(t, a + 2.4, 0.6) * 0));
   text('YOUR BRAIN: YELLOW', 960, 820, 22, YEL, MONO, 'center', ko(t, a + 2.6, 0.6) * (1 - yel));
@@ -142,7 +150,7 @@ async function S6(t) {   // Turn the red and green on together, and your brain r
 }
 async function S7(t) {   // That's not a flaw in your screen. It's a clue about your eyes. And the first clue to how five people saw olo: the yellow square shrinks into the eye's cone lights
   leaks(t, 0.5); const a = L(10), e = ko(t, L(11) - 0.2, 1.2), o = ko(t, L(12) + 0.6, 1.0);
-  stripes(640, 500, 110, 110, 6, 4, 1, 1, 0, 1 - e, 1);
+  gridZ(640, 500, 46, 2, 644, 460, 1, 1, 0, 1 - e, 1);
   const s = 340 * (1 - e) + 0, sx = lerp(1330, 1360, e), sy = lerp(500, 500, e); if (s > 4) { g.save(); g.globalAlpha = 1 - e * 0.9; g.fillStyle = YEL; g.fillRect(sx - s / 2, sy - s / 2, s, s); g.restore(); }
   eyeIcon(760, 500, 200, 0, 0, e); trio(1360, 500, 34, 1 - o, 1, 0, e, o > 0.5 ? OLO : GR, e);
   if (o > 0) { glow(1360, 500, 120, OLO, 0.5 * o); text('OLO', 1360, 620, 22, OLO, MONO, 'center', o); }
