@@ -24,7 +24,7 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-const P = 0.6, W = 1920, H = 1080, SUB = +(new URLSearchParams(location.search).get('sub') || 4);
+const P = 0.6, W = 1920, H = 1080, SUB = +(new URLSearchParams(location.search).get('sub') || 8);
 const out = document.getElementById('c'), g = out.getContext('2d');
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
 function bez(p1x, p1y, p2x, p2y) { return x => { x = clamp(x); let lo = 0, hi = 1, t = x; for (let i = 0; i < 24; i++) { const cx = 3 * t * (1 - t) ** 2 * p1x + 3 * t * t * (1 - t) * p2x + t ** 3; if (cx < x) lo = t; else hi = t; t = (lo + hi) / 2; } return 3 * t * (1 - t) ** 2 * p1y + 3 * t * t * (1 - t) * p2y + t ** 3; }; }
@@ -165,7 +165,7 @@ function scene3d(t) {
   const lightsUp = at(t, CUE.crossA - 0.2, 1.6, SMOOTH);
   key.intensity = lerp(0.25, 2.4, lightsUp); rim.intensity = lerp(0.1, 1.6, lightsUp); amb.intensity = lerp(0.08, 0.35, lightsUp);
   // IR photo: flicker between the three real frames (the eye twitching), then fade as the cells come through it
-  const fi = Math.floor(Math.max(0, t - CUE.track) / 0.4) % 3; irMat.map = irTex[t < CUE.track ? 0 : fi];
+  const fi = Math.floor(Math.max(0, t - CUE.track) / 0.4) % 2;   // frames 1-2 only: the third frame carries the paper's scale bar irMat.map = irTex[t < CUE.track ? 0 : fi];
   irMat.opacity = 1 - at(t, CUE.crossA + 0.2, CUE.crossB - CUE.crossA - 0.2, SMOOTH); irPlane.visible = irMat.opacity > 0.002;
   const reveal = t - CUE.reveal;
   let hitAmt = 0, hitPos = null;
@@ -211,9 +211,9 @@ function pip(a) { if (a <= 0.001) return; const s = 300 * lerp(0.92, 1, a), x = 
   g.font = '500 17px "JetBrains Mono"'; g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText('THE REAL MAP OF THIS PATCH', x + s / 2, y + s + 36); g.restore(); }
 
 function overlay(t) {
-  const intro = 1 - at(t, CUE.crossB - 0.2, 0.4, OUT);
+  const intro = 1 - at(t, CUE.crossA + 0.35, 0.3, OUT);
   tagTL([['REAL INFRARED FRAMES OF THIS PATCH', CREAM], ['Fong et al., Science Advances 2025 · CC BY 4.0', DIM]], at(t, 19.6, 0.4, IN) * intro);
-  tagTL([['3D MODEL ON THE REAL CONE MAP · ILLUSTRATIVE', DIM]], at(t, CUE.crossB, 0.5, IN));
+  tagTL([['3D MODEL ON THE REAL CONE MAP · ILLUSTRATIVE', DIM]], at(t, CUE.crossA + 0.7, 0.4, IN));
   label('INFRARED CAMERA · TRACKING EVERY CELL', 1000, at(t, CUE.track + 0.15, 0.5, IN) * (1 - at(t, CUE.trackOff, 0.35, OUT)), IR);
   label('LASER PULSES, ONE CELL AT A TIME', 1000, at(t, CUE.pulses, 0.5, IN) * (1 - at(t, CUE.reveal - 0.1, 0.35, OUT)), '#A6FFF0');
   legend(at(t, CUE.reveal + 0.2, 0.6, IN) * (1 - at(t, CUE.nbr, 0.35, OUT)));
