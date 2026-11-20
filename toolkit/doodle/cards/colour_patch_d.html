@@ -23,6 +23,9 @@ import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { LUTPass } from 'three/addons/postprocessing/LUTPass.js';
+import { makeLUT } from '/cards/lab3d.js';   // the shared 32-cube grade (threejs-exposure-color-grading)
 
 const P = 0.6, W = 1920, H = 1080, SUB = +(new URLSearchParams(location.search).get('sub') || 8);
 const out = document.getElementById('c'), g = out.getContext('2d');
@@ -61,7 +64,7 @@ const prof = [[0.001, -1.8], [1.0, -1.8], [1.0, 0.1], [0.93, 0.55], [0.78, 1.0],
 const capsule = new THREE.LatheGeometry(prof, 28); capsule.rotateX(Math.PI / 2); capsule.computeVertexNormals();   // a real cone's tapered outer segment
 const aGlow = new THREE.InstancedBufferAttribute(new Float32Array(cells.length), 1); aGlow.setUsage(THREE.DynamicDrawUsage);
 capsule.setAttribute('aGlow', aGlow);
-const coneMat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.4, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.2, sheen: 0.7, sheenRoughness: 0.5, sheenColor: new THREE.Color('#ffffff')});
+const coneMat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.3, metalness: 0, clearcoat: 0.45, clearcoatRoughness: 0.18, sheen: 0.6, sheenRoughness: 0.5, sheenColor: new THREE.Color('#ffffff'), transmission: 0.35, thickness: 0.35, ior: 1.39});
 coneMat.onBeforeCompile = sh => {
   sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float aGlow; varying float vGlow;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvGlow = aGlow;');
   sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vGlow;')
@@ -69,7 +72,8 @@ coneMat.onBeforeCompile = sh => {
     .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
       float facing = clamp(dot(normalize(vNormal), normalize(vViewPosition)), 0.0, 1.0);
       float core = pow(facing, 2.2);                                     // light guided up the cell: bright core, darker rim
-      totalEmissiveRadiance += tint * core * 0.62 + mix(tint, vec3(1.0), 0.22 * min(vGlow * 2.0, 1.0)) * vGlow * (0.6 + 2.6 * core);`);
+      float rim = pow(1.0 - facing, 3.0);                               // Fresnel rim: light caught at the cell's edge
+      totalEmissiveRadiance += tint * core * 0.62 + tint * rim * 0.22 + mix(tint, vec3(1.0), 0.22 * min(vGlow * 2.0, 1.0)) * vGlow * (0.6 + 2.6 * core);`);
 };
 const inst = new THREE.InstancedMesh(capsule, coneMat, cells.length); inst.castShadow = true; inst.receiveShadow = true;
 inst.instanceMatrix.setUsage(THREE.DynamicDrawUsage); scene.add(inst);
@@ -102,19 +106,19 @@ const spark = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex, color: '#
 // ---------- post ----------
 const composer = new EffectComposer(renderer); composer.setPixelRatio(1); composer.setSize(W, H);
 composer.addPass(new RenderPass(scene, cam));
+const gtao = new GTAOPass(scene, cam, W, H); gtao.blendIntensity = 0.8; gtao.updateGtaoMaterial({radius: 0.3, distanceExponent: 1.5, thickness: 1.0, scale: 1.0, samples: 12}); composer.addPass(gtao);   // contact shadows between the cells
+{ const r0 = gtao.render.bind(gtao); gtao.render = (...a) => { const hide = [beamCore, beamSleeve, spark, irPlane].filter(o => o.visible); hide.forEach(o => o.visible = false); r0(...a); hide.forEach(o => o.visible = true); }; }   // glows and the photo plane are not surfaces: keep them out of the AO normals
 const bokeh = new BokehPass(scene, cam, {focus: 12, aperture: 0.0008, maxblur: 0.012}); composer.addPass(bokeh);
 const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 0.55, 0.6, 0.78); composer.addPass(bloom);
 composer.addPass(new OutputPass());
+composer.addPass(new LUTPass({lut: makeLUT(), intensity: 1.0}));
 const grade = new ShaderPass({uniforms: {tDiffuse: {value: null}, uTime: {value: 0}},
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
   fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
     float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233)) + uTime*37.0) * 43758.5453); }
     void main(){ vec2 d = vUv - 0.5; float r = dot(d,d);
       vec3 c; c.r = texture2D(tDiffuse, vUv + d*0.003).r; c.g = texture2D(tDiffuse, vUv).g; c.b = texture2D(tDiffuse, vUv - d*0.003).b;
-      float l = dot(c, vec3(0.299,0.587,0.114));
-      c += vec3(-0.004, 0.006, 0.020) * (1.0 - l);          // cool lift in the shadows
-      c *= mix(vec3(1.0), vec3(1.04, 1.0, 0.95), l);         // warm highlights
-      c = mix(vec3(l), c, 1.08);                              // a touch of saturation
+      // colour grade now lives in the LUT pass (one grade, after tone mapping)
       c *= 1.0 - 1.05 * r;                                    // vignette
       c += (h(vUv * 1000.0) - 0.5) * 0.04;                    // grain (same seed for every sub-frame, so it survives the blur)
       gl_FragColor = vec4(c, 1.0); }`});

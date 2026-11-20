@@ -23,6 +23,9 @@ import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { LUTPass } from 'three/addons/postprocessing/LUTPass.js';
+import { makeLUT } from '/cards/lab3d.js';
 
 const SHOT = new URLSearchParams(location.search).get('shot') || 'eye', SUB = +(new URLSearchParams(location.search).get('sub') || 8);
 const P = 0.6, W = 1920, H = 1080;
@@ -45,16 +48,19 @@ const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.from
 const cam = new THREE.PerspectiveCamera(32, W / H, 0.1, 300); cam.up.set(0, 1, 0);
 const composer = new EffectComposer(renderer); composer.setPixelRatio(1); composer.setSize(W, H);
 composer.addPass(new RenderPass(scene, cam));
+const gtao = new GTAOPass(scene, cam, W, H); gtao.blendIntensity = 0.8; gtao.updateGtaoMaterial({radius: 0.3, distanceExponent: 1.5, thickness: 1.0, scale: 1.0, samples: 12}); composer.addPass(gtao);
+{ const r0 = gtao.render.bind(gtao); gtao.render = (...a) => { const hide = []; scene.traverse(o => { if (o.visible && (o.isSprite || o.material?.blending === THREE.AdditiveBlending)) hide.push(o); }); hide.forEach(o => o.visible = false); r0(...a); hide.forEach(o => o.visible = true); }; }
 const bokeh = new BokehPass(scene, cam, {focus: 12, aperture: 0.0008, maxblur: 0.01}); composer.addPass(bokeh);
 const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 0.6, 0.6, 0.78); composer.addPass(bloom);
 composer.addPass(new OutputPass());
+composer.addPass(new LUTPass({lut: makeLUT(), intensity: 1.0}));
 const grade = new ShaderPass({uniforms: {tDiffuse: {value: null}, uTime: {value: 0}},
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
   fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
     float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233)) + uTime*37.0) * 43758.5453); }
     void main(){ vec2 d = vUv - 0.5; float r = dot(d,d);
       vec3 c; c.r = texture2D(tDiffuse, vUv + d*0.003).r; c.g = texture2D(tDiffuse, vUv).g; c.b = texture2D(tDiffuse, vUv - d*0.003).b;
-      float l = dot(c, vec3(0.299,0.587,0.114)); c += vec3(-0.004, 0.006, 0.020) * (1.0 - l); c *= mix(vec3(1.0), vec3(1.04, 1.0, 0.95), l); c = mix(vec3(l), c, 1.08);
+      // colour grade lives in the LUT pass
       c *= 1.0 - 1.05 * r; c += (h(vUv * 1000.0) - 0.5) * 0.04; gl_FragColor = vec4(c, 1.0); }`});
 composer.addPass(grade);
 
@@ -149,14 +155,14 @@ if (SHOT === 'light') {
   const prof = [[0.001, -1.8], [1.0, -1.8], [1.0, 0.1], [0.93, 0.55], [0.78, 1.0], [0.6, 1.32], [0.38, 1.54], [0.16, 1.64], [0.001, 1.66]].map(([x, y]) => new THREE.Vector2(x, y));
   const geo = new THREE.LatheGeometry(prof, 28); geo.rotateX(Math.PI / 2); geo.computeVertexNormals();
   const aGlow = new THREE.InstancedBufferAttribute(new Float32Array(cells.length), 1); geo.setAttribute('aGlow', aGlow);
-  const mat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.4, clearcoat: 0.35, clearcoatRoughness: 0.2, sheen: 0.7, sheenRoughness: 0.5});
+  const mat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.3, clearcoat: 0.45, clearcoatRoughness: 0.18, sheen: 0.6, sheenRoughness: 0.5, transmission: 0.35, thickness: 0.35, ior: 1.39});
   mat.onBeforeCompile = sh => {
     sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float aGlow; varying float vGlow;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvGlow = aGlow;');
     sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vGlow;')
       .replace('#include <color_fragment>', '#include <color_fragment>\nvec3 tint = diffuseColor.rgb; diffuseColor.rgb *= 0.30;')
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
         float facing = clamp(dot(normalize(vNormal), normalize(vViewPosition)), 0.0, 1.0); float core = pow(facing, 2.2);
-        totalEmissiveRadiance += tint * core * 0.45 + tint * vGlow * (0.7 + 2.4 * core);`);
+        totalEmissiveRadiance += tint * core * 0.45 + tint * pow(1.0 - facing, 3.0) * 0.22 + tint * vGlow * (0.7 + 2.4 * core);`);
   };
   const inst = new THREE.InstancedMesh(geo, mat, cells.length); inst.castShadow = inst.receiveShadow = true; scene.add(inst);
   const m4 = new THREE.Matrix4(), q4 = new THREE.Quaternion(), v3 = new THREE.Vector3(), s3 = new THREE.Vector3();
