@@ -1,0 +1,201 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:'Fraunces';font-weight:400;src:url(/cards/fonts/fraunces-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Colour_v1 chapter 0: two explanation shots in 3D, in the look of the patch close-up (version D).
+//  ?shot=eye    audio 10.9-14.1  "Off to one side, a laser is at work."  A cut-away eye looks at a target; the laser comes in through the
+//               pupil and lands on a small patch of retina, off to one side of where the eye is looking. The paper's own drawing sits in a corner.
+//  ?shot=light  audio 43.4-47.6  "...it sends the brain a signal that, in principle, never happens in normal vision."
+//               On the real cone map: ordinary green light lights L and M cones together (543 nm: L 0.91, M 1.00, S 0.004 of peak,
+//               Stockman & Sharpe 2000 via conedata.json); then the laser lights the M cones alone.
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const SHOT = new URLSearchParams(location.search).get('shot') || 'eye', SUB = +(new URLSearchParams(location.search).get('sub') || 8);
+const P = 0.6, W = 1920, H = 1080;
+const out = document.getElementById('c'), g = out.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
+function bez(p1x, p1y, p2x, p2y) { return x => { x = clamp(x); let lo = 0, hi = 1, t = x; for (let i = 0; i < 24; i++) { const cx = 3 * t * (1 - t) ** 2 * p1x + 3 * t * t * (1 - t) * p2x + t ** 3; if (cx < x) lo = t; else hi = t; t = (lo + hi) / 2; } return 3 * t * (1 - t) ** 2 * p1y + 3 * t * t * (1 - t) * p2y + t ** 3; }; }
+const SIG = bez(0.4, 0, 0.2, 1), IN = bez(0.05, 0.7, 0.1, 1), OUT = bez(0.3, 0, 1, 1), SMOOTH = bez(0.65, 0, 0.35, 1);
+const at = (t, a, d, f = SIG) => f((t - a) / d);
+const HEX = {L: '#FF5A48', M: '#4FE27E', S: '#5F86FF'}, COL = {L: new THREE.Color(HEX.L), M: new THREE.Color(HEX.M), S: new THREE.Color(HEX.S)};
+const CREAM = '#EFE6D2', DIM = '#8C96B0', BEAMC = new THREE.Color('#A6FFF0'), IR = '#E07A5F';
+const loadImg = s => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = s; });
+
+// ---------- renderer, post (shared with version D) ----------
+const gl = document.createElement('canvas'); gl.width = W; gl.height = H;
+const renderer = new THREE.WebGLRenderer({canvas: gl, antialias: true, preserveDrawingBuffer: true});
+renderer.setSize(W, H, false); renderer.setPixelRatio(1); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.localClippingEnabled = true;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#05070F'); scene.fog = new THREE.FogExp2('#05070F', 0.02);
+const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.45;
+const cam = new THREE.PerspectiveCamera(32, W / H, 0.1, 300); cam.up.set(0, 1, 0);
+const composer = new EffectComposer(renderer); composer.setPixelRatio(1); composer.setSize(W, H);
+composer.addPass(new RenderPass(scene, cam));
+const bokeh = new BokehPass(scene, cam, {focus: 12, aperture: 0.0008, maxblur: 0.01}); composer.addPass(bokeh);
+const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 0.6, 0.6, 0.78); composer.addPass(bloom);
+composer.addPass(new OutputPass());
+const grade = new ShaderPass({uniforms: {tDiffuse: {value: null}, uTime: {value: 0}},
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+  fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
+    float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233)) + uTime*37.0) * 43758.5453); }
+    void main(){ vec2 d = vUv - 0.5; float r = dot(d,d);
+      vec3 c; c.r = texture2D(tDiffuse, vUv + d*0.003).r; c.g = texture2D(tDiffuse, vUv).g; c.b = texture2D(tDiffuse, vUv - d*0.003).b;
+      float l = dot(c, vec3(0.299,0.587,0.114)); c += vec3(-0.004, 0.006, 0.020) * (1.0 - l); c *= mix(vec3(1.0), vec3(1.04, 1.0, 0.95), l); c = mix(vec3(l), c, 1.08);
+      c *= 1.0 - 1.05 * r; c += (h(vUv * 1000.0) - 0.5) * 0.04; gl_FragColor = vec4(c, 1.0); }`});
+composer.addPass(grade);
+
+// ---------- 2D overlay helpers (same chips as the rest of the chapter) ----------
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function label(s, y, a, color = CREAM, size = 22) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
+  const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(W / 2 - w / 2, yy - size - 6, w, size + 20); g.fillStyle = color; g.fillText(s, W / 2, yy); g.restore(); }
+function tagTL(lines, a) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
+  const w = Math.max(...lines.map(([s]) => g.measureText(s).width)) + 32; chip(104, 66, w, 18 + 30 * lines.length, 0.72);
+  lines.forEach(([s, c], i) => { g.fillStyle = c; g.fillText(s, 120, 96 + i * 30); }); g.restore(); }
+function callout(p3, s, a, color = CREAM, dx = 90, dy = -70) {   // a leader line from a 3D point to a small label
+  if (a <= 0.001) return; const p = p3.clone().project(cam), x = (p.x + 1) / 2 * W, y = (1 - p.y) / 2 * H, lx = x + dx, ly = y + dy;
+  g.save(); g.globalAlpha = a; g.strokeStyle = color; g.lineWidth = 2; g.beginPath(); g.moveTo(x, y); g.lineTo(lerp(x, lx, a), lerp(y, ly, a)); g.stroke();
+  g.fillStyle = color; g.beginPath(); g.arc(x, y, 4, 0, 7); g.fill();
+  g.font = '500 20px "JetBrains Mono"'; const w = g.measureText(s).width + 24; const bx = dx > 0 ? lx : lx - w; chip(bx, ly - 30, w, 38); g.fillStyle = color; g.fillText(s, bx + 12, ly - 4); g.restore(); }
+
+let update = () => {}, overlay = () => {};
+
+// =====================================================================================================
+if (SHOT === 'eye') {
+  const fig1C = await loadImg('/img/colour/fig1C.png');
+  scene.add(new THREE.HemisphereLight('#8DA0CC', '#1A0A08', 0.5));
+  const key = new THREE.DirectionalLight('#FFF1E0', 2.2); key.position.set(-5, 6, 8); scene.add(key);
+  const rim = new THREE.DirectionalLight('#8FB4FF', 1.4); rim.position.set(6, -2, -6); scene.add(rim);
+  // the eye: a sphere cut open on the near side (clipping plane), so we see in; the pupil faces +x (towards the target)
+  const R = 1.2, cut = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0.0);   // keep z < 0: the back half
+  const eye = new THREE.Group(); scene.add(eye);
+  const sclera = new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), new THREE.MeshPhysicalMaterial({color: '#F3EEE8', roughness: 0.35, clearcoat: 0.6, sheen: 0.5, side: THREE.DoubleSide, clippingPlanes: [cut]}));
+  eye.add(sclera);
+  const inner = new THREE.Mesh(new THREE.SphereGeometry(R * 0.965, 96, 64), new THREE.MeshStandardMaterial({color: '#2A0E10', roughness: 0.9, side: THREE.BackSide, clippingPlanes: [cut]})); eye.add(inner);
+  // retina: the inner lining at the back, warm and faintly glowing
+  const retina = new THREE.Mesh(new THREE.SphereGeometry(R * 0.955, 96, 64),   // the whole back of the inside: keep z <= 0 (cut) and x <= 0.45
+    new THREE.MeshStandardMaterial({color: '#B8443A', emissive: '#4A120C', emissiveIntensity: 0.7, roughness: 0.75, side: THREE.BackSide, clippingPlanes: [cut, new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.45)]}));
+  eye.add(retina);
+  // cornea, iris, pupil, lens at +x
+  const iris = new THREE.Mesh(new THREE.RingGeometry(0.17, 0.46, 64), new THREE.MeshStandardMaterial({color: '#4C6FA8', roughness: 0.6, side: THREE.DoubleSide}));
+  iris.rotation.y = Math.PI / 2; iris.position.x = R * 0.93; eye.add(iris);
+  const lens = new THREE.Mesh(new THREE.SphereGeometry(0.36, 48, 32), new THREE.MeshPhysicalMaterial({color: '#DDEBFF', roughness: 0.05, transmission: 0.9, thickness: 0.3, transparent: true, opacity: 0.55}));
+  lens.scale.set(0.45, 1, 1); lens.position.x = R * 0.78; eye.add(lens);
+  const cornea = new THREE.Mesh(new THREE.SphereGeometry(0.55, 64, 32, 0, Math.PI * 2, 0, Math.PI * 0.32), new THREE.MeshPhysicalMaterial({color: '#FFFFFF', roughness: 0.02, transmission: 0.95, transparent: true, opacity: 0.35, side: THREE.DoubleSide}));
+  cornea.rotation.z = -Math.PI / 2; cornea.position.x = R * 0.62; eye.add(cornea);
+  // the target the volunteer looks at, far to the right, and the sight line
+  const TGT = new THREE.Vector3(5.4, 0, 0);
+  const target = new THREE.Group(); scene.add(target); target.position.copy(TGT);
+  const tm = new THREE.MeshBasicMaterial({color: CREAM, toneMapped: false});
+  target.add(new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.5, 0.03), tm), new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.5), tm));
+  const dash = new THREE.LineDashedMaterial({color: '#8C96B0', dashSize: 0.12, gapSize: 0.1, transparent: true, opacity: 0});
+  const sight = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(R, 0, 0), TGT.clone().add(new THREE.Vector3(-0.3, 0, 0))]), dash); sight.computeLineDistances(); scene.add(sight);
+  // where the eye looks lands on the fovea (back, on the axis); the laser's patch sits off to one side of it
+  const FOV = new THREE.Vector3(-R * 0.95, 0, 0), PATCH = new THREE.Vector3(-R * 0.9, 0.36, -0.12);
+  const SRC = new THREE.Vector3(5.6, 3.3, -1.2), PUP = new THREE.Vector3(R * 0.95, 0.03, 0);
+  const beamMat = new THREE.MeshBasicMaterial({color: BEAMC.clone().multiplyScalar(3), transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false});
+  const seg = (a, b, r) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, 12, 1, true), beamMat); const mid = a.clone().add(b).multiplyScalar(0.5), len = a.distanceTo(b);
+    m.position.copy(mid); m.scale.set(1, len, 1); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize()); scene.add(m); return {m, a, b, len}; };
+  const beamOut = seg(SRC, PUP, 0.02), beamIn = seg(PUP, PATCH, 0.014);
+  const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'), gr = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.25, 'rgba(170,255,240,0.6)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = gr; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+  const spot = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false})); spot.position.copy(PATCH); scene.add(spot);
+  const box = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.5, 0.6), new THREE.MeshStandardMaterial({color: '#2B3550', roughness: 0.5, metalness: 0.4})); box.position.copy(SRC).add(new THREE.Vector3(0.45, 0.2, -0.1)); scene.add(box);
+  update = t => {   // t = audio time
+    const u = at(t, 10.9, 3.3, SMOOTH);
+    cam.position.set(lerp(2.2, 1.0, u), lerp(1.3, 1.0, u), lerp(8.6, 6.8, u)); cam.lookAt(lerp(2.6, 0.9, u), lerp(0.2, 0.15, u), 0);
+    bokeh.uniforms.focus.value = cam.position.distanceTo(new THREE.Vector3(0, 0, 0)); bokeh.uniforms.aperture.value = 0.0006;
+    eye.rotation.y = 0.03 * Math.sin(t * 2.1); eye.rotation.z = 0.02 * Math.sin(t * 1.7);   // the eye's tiny twitches
+    dash.opacity = 0.7 * at(t, 11.0, 0.5, IN);
+    const lo = at(t, 12.3, 0.35, IN), li = at(t, 12.55, 0.3, IN);   // the beam travels: to the pupil, then inside to the patch
+    beamOut.m.scale.y = Math.max(0.001, beamOut.len * lo); beamOut.m.position.copy(SRC.clone().lerp(PUP, lo / 2));
+    beamIn.m.scale.y = Math.max(0.001, beamIn.len * li); beamIn.m.position.copy(PUP.clone().lerp(PATCH, li / 2));
+    beamMat.opacity = lo > 0 ? 0.9 + 0.1 * Math.sin(t * 40) : 0;
+    spot.material.opacity = li * (0.85 + 0.15 * Math.sin(t * 9)); spot.scale.setScalar(0.35 + 0.1 * li);
+  };
+  overlay = t => {
+    tagTL([['THE SET-UP · ILLUSTRATIVE', CREAM]], at(t, 10.95, 0.4, IN));
+    callout(TGT.clone().add(new THREE.Vector3(0, 0.3, 0)), 'TARGET', at(t, 11.1, 0.4, IN), CREAM, -40, -80);
+    callout(new THREE.Vector3(-R * 0.6, -0.75, -0.6), 'RETINA', at(t, 11.4, 0.4, IN), '#F0A090', -120, 90);
+    callout(SRC.clone().lerp(PUP, 0.3), 'LASER', at(t, 12.4, 0.4, IN), '#A6FFF0', 60, -60);
+    callout(PATCH, 'A TINY PATCH, OFF TO ONE SIDE', at(t, 12.9, 0.4, IN), '#A6FFF0', 70, -190);
+    // the paper's own drawing, small, bottom-right
+    const fa = at(t, 11.6, 0.5, IN); if (fa > 0) { const w = 360, h = w * fig1C.height / fig1C.width, x = W - 110 - w, y = H - 120 - h;
+      g.save(); g.globalAlpha = fa; chip(x - 12, y - 12, w + 24, h + 56); g.drawImage(fig1C, x, y, w, h); g.font = '500 15px "JetBrains Mono"'; g.fillStyle = DIM; g.fillText("THE PAPER'S OWN DRAWING · FONG ET AL. 2025", x, y + h + 30); g.restore(); }
+  };
+}
+
+// =====================================================================================================
+if (SHOT === 'light') {
+  const cells = await (await fetch('/cards/colour_d_layout.json')).json();
+  scene.add(new THREE.HemisphereLight('#7B8DB8', '#2A0E0A', 0.35));
+  const key = new THREE.DirectionalLight('#FFE9D6', 2.2); key.position.set(-6, 5, 9); key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
+  Object.assign(key.shadow.camera, {left: -12, right: 12, top: 9, bottom: -9, near: 1, far: 40}); key.shadow.radius = 5; key.shadow.bias = -0.0004; scene.add(key);
+  const rim = new THREE.DirectionalLight('#8FB4FF', 1.5); rim.position.set(9, -2, 2.5); scene.add(rim);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 40), new THREE.MeshStandardMaterial({color: '#4A1F1A', roughness: 0.85})); floor.position.z = -0.05; floor.receiveShadow = true; scene.add(floor);
+  const prof = [[0.001, -1.8], [1.0, -1.8], [1.0, 0.1], [0.93, 0.55], [0.78, 1.0], [0.6, 1.32], [0.38, 1.54], [0.16, 1.64], [0.001, 1.66]].map(([x, y]) => new THREE.Vector2(x, y));
+  const geo = new THREE.LatheGeometry(prof, 28); geo.rotateX(Math.PI / 2); geo.computeVertexNormals();
+  const aGlow = new THREE.InstancedBufferAttribute(new Float32Array(cells.length), 1); geo.setAttribute('aGlow', aGlow);
+  const mat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.4, clearcoat: 0.35, clearcoatRoughness: 0.2, sheen: 0.7, sheenRoughness: 0.5});
+  mat.onBeforeCompile = sh => {
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float aGlow; varying float vGlow;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvGlow = aGlow;');
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vGlow;')
+      .replace('#include <color_fragment>', '#include <color_fragment>\nvec3 tint = diffuseColor.rgb; diffuseColor.rgb *= 0.30;')
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        float facing = clamp(dot(normalize(vNormal), normalize(vViewPosition)), 0.0, 1.0); float core = pow(facing, 2.2);
+        totalEmissiveRadiance += tint * core * 0.45 + tint * vGlow * (0.7 + 2.4 * core);`);
+  };
+  const inst = new THREE.InstancedMesh(geo, mat, cells.length); inst.castShadow = inst.receiveShadow = true; scene.add(inst);
+  const m4 = new THREE.Matrix4(), q4 = new THREE.Quaternion(), v3 = new THREE.Vector3(), s3 = new THREE.Vector3();
+  const surfZ = (x, y) => -(x * x + y * y) * 0.004, SZ = c => c.r * c.h * 1.75;
+  cells.forEach((c, i) => { inst.setColorAt(i, COL[c.t]); v3.set(c.x, c.y, surfZ(c.x, c.y) - 0.05); s3.set(c.r * 1.14, c.r * 1.14, SZ(c)); m4.compose(v3, q4, s3); inst.setMatrixAt(i, m4); });
+  inst.instanceColor.needsUpdate = true;
+  // ordinary green light: a broad soft wash from above; the laser: tiny points, one M cone at a time
+  const wash = new THREE.SpotLight('#7CFF9A', 0, 40, 0.5, 0.8, 1.2); wash.position.set(0, 0, 14); wash.target.position.set(0, 0, 0); scene.add(wash, wash.target);
+  const RESP = {L: 0.9067, M: 1.0, S: 0.0038};   // cone responses to 543 nm green, relative to peak (conedata.json)
+  const ms = cells.map((c, i) => c.t === 'M' && Math.abs(c.x) < 6.5 && Math.abs(c.y) < 4.2 ? i : -1).filter(i => i >= 0).sort((a, b) => Math.hypot(cells[a].x - 3.4, cells[a].y - 3.2) - Math.hypot(cells[b].x - 3.4, cells[b].y - 3.2));
+  const mt = new Map(ms.map((i, k) => [i, 45.75 + 1.1 * k / ms.length]));
+  update = t => {
+    const u = at(t, 43.4, 4.3, SMOOTH);
+    cam.position.set(lerp(0.6, 1.4, u), lerp(-6.4, -5.8, u), lerp(9.4, 8.2, u)); cam.lookAt(0.2, 0.4, 0);
+    bokeh.uniforms.focus.value = cam.position.distanceTo(new THREE.Vector3(0.2, 0.4, 0)); bokeh.uniforms.aperture.value = 0.0012;
+    const green = at(t, 43.7, 0.5, IN) * (1 - at(t, 45.2, 0.35, OUT)); wash.intensity = 260 * green;
+    for (let i = 0; i < cells.length; i++) { const c = cells[i]; let gv = 0.5 * green * RESP[c.t];
+      const k = mt.get(i); if (k !== undefined && t >= k) { const d = t - k; gv = Math.max(gv, d < 0.07 ? d / 0.07 : 0.3 + 0.7 * Math.exp(-(d - 0.07) / 0.4)); }
+      aGlow.array[i] = gv; }
+    aGlow.needsUpdate = true;
+  };
+  overlay = t => {
+    tagTL([['THE SAME REAL CONE MAP · ILLUSTRATIVE', DIM]], 1);
+    label('ORDINARY GREEN LIGHT: L AND M CONES FIRE TOGETHER', 1000, at(t, 43.8, 0.45, IN) * (1 - at(t, 45.2, 0.35, OUT)), HEX.M);
+    label('THE LASER: M CONES ALONE', 1000, at(t, 45.6, 0.45, IN), '#A6FFF0');
+    label('NO NATURAL LIGHT DOES THIS', 1050, at(t, 46.4, 0.45, IN), CREAM, 20);
+    // a small live readout: how hard L, M and S are firing
+    const ra = at(t, 43.8, 0.4, IN); if (ra > 0) { const green = at(t, 43.7, 0.5, IN) * (1 - at(t, 45.2, 0.35, OUT)), las = at(t, 45.75, 0.3, IN);
+      const v = {L: green * RESP.L, M: Math.max(green * RESP.M, las), S: green * RESP.S}, x0 = W - 380, y0 = 130;
+      g.save(); g.globalAlpha = ra; chip(x0 - 24, y0 - 40, 300, 300); g.font = '500 18px "JetBrains Mono"'; g.fillStyle = DIM; g.fillText('SIGNAL FROM EACH TYPE', x0 - 6, y0 - 12);
+      ['L', 'M', 'S'].forEach((k, i) => { const x = x0 + 18 + i * 86, hh = 170 * v[k]; g.fillStyle = 'rgba(140,150,176,0.18)'; g.fillRect(x, y0 + 10, 46, 170);
+        g.fillStyle = HEX[k]; g.shadowColor = HEX[k]; g.shadowBlur = 16; g.fillRect(x, y0 + 180 - hh, 46, hh); g.shadowBlur = 0; g.fillText(k, x + 16, y0 + 214); }); g.restore(); }
+  };
+}
+
+window.render = function (T) {
+  const t = T - P; grade.uniforms.uTime.value = Math.floor(T * 30);
+  for (let k = 0; k < SUB; k++) { const ts = t + (SUB > 1 ? (k / (SUB - 1) - 0.5) * 0.5 / 30 : 0); update(ts); composer.render(); g.globalAlpha = 1 / (k + 1); g.drawImage(gl, 0, 0); }
+  g.globalAlpha = 1; update(t); overlay(t);
+};
+await document.fonts.load('500 20px "JetBrains Mono"'); window.ready = true;
+</script></body></html>

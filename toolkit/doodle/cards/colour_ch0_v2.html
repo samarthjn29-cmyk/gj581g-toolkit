@@ -237,14 +237,12 @@ function F1(t) {   // real green light vs the laser on M cells alone (43.4-46.2)
 }
 function F2(t) {   // the paper's own map of colour signals (46.2-49.5): the coloured area is natural vision; the top corner (M alone) lies outside it
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  const a = k(t, 46.25, 0.35), sc = 0.74, w = fig2A.width * sc, h = fig2A.height * sc, x = 190, y = 600 - h / 2;
+  const a = k(t, 47.62, 0.3), sc = 0.74, w = fig2A.width * sc, h = fig2A.height * sc, x = 190, y = 600 - h / 2;
   g.save(); g.globalAlpha = a; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 50; g.fillStyle = '#fff'; g.fillRect(x - 14, y - 14, w + 28, h + 28); g.restore();
   g.save(); g.globalAlpha = a; g.drawImage(fig2A, x, y, w, h); g.restore();
-  const ra = k(t, 46.9, 0.5); if (ra > 0) { g.save(); g.globalAlpha = ra; g.strokeStyle = '#FF6B5B'; g.lineWidth = 5; g.beginPath(); g.arc(x + 528 * sc, y + 128 * sc, 46, -Math.PI / 2, -Math.PI / 2 + ra * Math.PI * 2); g.stroke(); g.restore(); }
-  mono('COLOURED AREA: NATURAL HUMAN COLOURS', 1120, 400, k(t, 46.5), 20, CREAM);
-  mono('RED RING: M CONES ALONE', 1120, 440, k(t, 47.0), 20, '#FF6B5B');
-  wrap('“a color signal to the brain that never occurs in natural vision”', 1120, 560, 640, 38, 50, k(t, 47.4), SERIF, CREAM, 'left');
-  mono('“IN PRINCIPLE”, THE PAPER SAYS', 1120, 760, k(t, 47.8), 18, DIM);
+  const ra = k(t, 47.9, 0.5); if (ra > 0) { g.save(); g.globalAlpha = ra; g.strokeStyle = '#FF6B5B'; g.lineWidth = 5; g.beginPath(); g.arc(x + 528 * sc, y + 128 * sc, 46, -Math.PI / 2, -Math.PI / 2 + ra * Math.PI * 2); g.stroke(); g.restore(); }
+  mono('COLOURED AREA: NATURAL HUMAN COLOURS', 1120, 480, k(t, 47.75), 22, CREAM);
+  mono('RED RING: M CONES ALONE, OUTSIDE IT', 1120, 530, k(t, 48.0), 22, '#FF6B5B');
   tag('THE PAPER\'S MAP OF COLOUR SIGNALS', a, 'Fong et al., Science Advances 2025, Fig. 2A');
 }
 async function J1(t) {   // anywhere in the world (61.4-65.9): real footage of Earth from the ISS (NASA)
@@ -278,7 +276,7 @@ async function L2(t) {   // every colour you've ever seen, including the ones on
   label('RED, GREEN AND BLUE · NOTHING ELSE', 1000, k(t, 87.0), CREAM);
 }
 function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }   // 19.6-37.0 is the patch close-up (colour_patch_d.html)
-const SHOTS = [[0, A1], [3.6, A], [7.6, B1], [10.9, B2], [14.1, C2], [19.6, GAP], [37.0, E0], [38.9, E], [43.4, F1], [46.2, F2], [49.5, G], [55.6, H], [59.5, I], [61.4, J1], [66.38, J2], [69.6, Kk2], [78.3, L1], [83.3, L2], [89.5, M], [99.4, N]];
+const SHOTS = [[0, A1], [3.6, A], [7.6, B1], [10.9, GAP], [14.1, C2], [19.6, GAP], [37.0, E0], [38.9, E], [43.4, GAP], [47.6, F2], [49.5, G], [55.6, H], [59.5, I], [61.4, J1], [66.38, J2], [69.6, Kk2], [78.3, L1], [83.3, L2], [89.5, M], [99.4, N]];
 window.render = async function (T) {
   const t = T - P;
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
