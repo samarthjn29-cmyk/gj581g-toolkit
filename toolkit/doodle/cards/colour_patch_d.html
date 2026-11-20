@@ -1,0 +1,244 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'JetBrains Mono';font-weight:500;src:url(/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+html,body{margin:0;background:#000}canvas{display:block}
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// Version D of the Colour_v1 ch0 patch close-up (audio 19.6-37.0 s).
+// 1) Opens on the paper's three REAL infrared frames of this patch (Fong et al., Science Advances 2025, Fig. 1A(iii), CC BY 4.0),
+//    pinned to the retina plane and flickering like the twitching eye; the cones rise out of the photo where the real cones are.
+// 2) The layout and types are the REAL classified cone map of the same patch (Fig. 1B(iv)); gaps and the surround are Poisson-filled.
+// 3) One continuous camera: straight down on the photo, tilt and dolly into the mosaic, push in with a rack focus to the neighbour.
+// 4) Lit cells: physical material with clear coat, a waveguide core glow, soft shadows, a point light that spills from every laser hit.
+// 5) Lens and film: depth of field, motion blur (4 sub-frames per frame over a half-frame shutter), bloom, a grade, grain, vignette.
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const P = 0.6, W = 1920, H = 1080, SUB = +(new URLSearchParams(location.search).get('sub') || 4);
+const out = document.getElementById('c'), g = out.getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
+function bez(p1x, p1y, p2x, p2y) { return x => { x = clamp(x); let lo = 0, hi = 1, t = x; for (let i = 0; i < 24; i++) { const cx = 3 * t * (1 - t) ** 2 * p1x + 3 * t * t * (1 - t) * p2x + t ** 3; if (cx < x) lo = t; else hi = t; t = (lo + hi) / 2; } return 3 * t * (1 - t) ** 2 * p1y + 3 * t * t * (1 - t) * p2y + t ** 3; }; }
+const SIG = bez(0.4, 0, 0.2, 1), IN = bez(0.05, 0.7, 0.1, 1), OUT = bez(0.3, 0, 1, 1), SMOOTH = bez(0.65, 0, 0.35, 1);
+const at = (t, a, d, f = SIG) => f((t - a) / d);
+const CUE = {track: 20.2, crossA: 22.7, crossB: 23.9, trackOff: 25.6, pulses: 25.9, reveal: 31.3, monly: 31.8, mdone: 34.4, nbr: 34.75, end: 37.0};
+const HEX = {L: '#FF5A48', M: '#4FE27E', S: '#5F86FF'}, COL = {L: new THREE.Color(HEX.L), M: new THREE.Color(HEX.M), S: new THREE.Color(HEX.S)};
+const PALE = new THREE.Color('#8A8C96'), IR = '#E07A5F', CREAM = '#EFE6D2', DIM = '#8C96B0', BEAMC = new THREE.Color('#A6FFF0');
+
+const cells = await (await fetch('/cards/colour_d_layout.json')).json();
+const loadImg = s => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = s; });
+const [ir0, ir1, ir2, mapImg] = await Promise.all(['/img/colour/ir0.png', '/img/colour/ir1.png', '/img/colour/ir2.png', '/img/colour/map_iv.png'].map(loadImg));
+
+// ---------- renderer and scene ----------
+const gl = document.createElement('canvas'); gl.width = W; gl.height = H;
+const renderer = new THREE.WebGLRenderer({canvas: gl, antialias: true, preserveDrawingBuffer: true});
+renderer.setSize(W, H, false); renderer.setPixelRatio(1); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#05070F'); scene.fog = new THREE.FogExp2('#05070F', 0.035);
+const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.35;
+const cam = new THREE.PerspectiveCamera(32, W / H, 0.1, 200); cam.up.set(0, 1, 0);
+
+// tissue floor with a soft procedural texture
+function noiseTex(n, seed, tint) { const c = document.createElement('canvas'); c.width = c.height = n; const x = c.getContext('2d'), im = x.createImageData(n, n); let s = seed;
+  const r = () => (s = (s * 16807) % 2147483647) / 2147483647; const v = new Float32Array(n * n).map(() => r());
+  for (let k = 0; k < 3; k++) for (let i = 0; i < n * n; i++) { const a = (i + 1) % (n * n), b = (i + n) % (n * n); v[i] = (v[i] * 2 + v[a] + v[b]) / 4; }
+  for (let i = 0; i < n * n; i++) { const q = v[i]; im.data[i * 4] = tint[0] * q; im.data[i * 4 + 1] = tint[1] * q; im.data[i * 4 + 2] = tint[2] * q; im.data[i * 4 + 3] = 255; }
+  x.putImageData(im, 0, 0); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(6, 4); t.colorSpace = THREE.SRGBColorSpace; return t; }
+const floorMat = new THREE.MeshStandardMaterial({color: '#5A2620', map: noiseTex(256, 7, [190, 120, 110]), roughness: 0.85, metalness: 0});
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 40), floorMat); floor.position.z = -0.05; floor.receiveShadow = true; scene.add(floor);
+
+// the cones: capsules standing on the floor, instanced; colour per instance, glow per instance
+const prof = [[0.001, -1.8], [1.0, -1.8], [1.0, 0.1], [0.93, 0.55], [0.78, 1.0], [0.6, 1.32], [0.38, 1.54], [0.16, 1.64], [0.001, 1.66]].map(([x, y]) => new THREE.Vector2(x, y));
+const capsule = new THREE.LatheGeometry(prof, 28); capsule.rotateX(Math.PI / 2); capsule.computeVertexNormals();   // a real cone's tapered outer segment
+const aGlow = new THREE.InstancedBufferAttribute(new Float32Array(cells.length), 1); aGlow.setUsage(THREE.DynamicDrawUsage);
+capsule.setAttribute('aGlow', aGlow);
+const coneMat = new THREE.MeshPhysicalMaterial({color: '#ffffff', roughness: 0.4, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.2, sheen: 0.7, sheenRoughness: 0.5, sheenColor: new THREE.Color('#ffffff')});
+coneMat.onBeforeCompile = sh => {
+  sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float aGlow; varying float vGlow;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvGlow = aGlow;');
+  sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vGlow;')
+    .replace('#include <color_fragment>', '#include <color_fragment>\nvec3 tint = diffuseColor.rgb; diffuseColor.rgb *= 0.30;')
+    .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+      float facing = clamp(dot(normalize(vNormal), normalize(vViewPosition)), 0.0, 1.0);
+      float core = pow(facing, 2.2);                                     // light guided up the cell: bright core, darker rim
+      totalEmissiveRadiance += tint * core * 0.62 + mix(tint, vec3(1.0), 0.22 * min(vGlow * 2.0, 1.0)) * vGlow * (0.6 + 2.6 * core);`);
+};
+const inst = new THREE.InstancedMesh(capsule, coneMat, cells.length); inst.castShadow = true; inst.receiveShadow = true;
+inst.instanceMatrix.setUsage(THREE.DynamicDrawUsage); scene.add(inst);
+for (let i = 0; i < cells.length; i++) inst.setColorAt(i, PALE);
+
+// real infrared frames on a plane just above the cell tops (pixels mapped 0.1 world units each, as in the layout)
+const irTex = [ir0, ir1, ir2].map(i => { const t = new THREE.Texture(i); t.needsUpdate = true; t.colorSpace = THREE.SRGBColorSpace; return t; });
+const irMat = new THREE.MeshBasicMaterial({map: irTex[0], transparent: true, toneMapped: false, depthWrite: false});
+const irPlane = new THREE.Mesh(new THREE.PlaneGeometry(7.0, 7.0), irMat); irPlane.position.set(-0.05, 0.05, 0.86); scene.add(irPlane);
+
+// lights
+const amb = new THREE.HemisphereLight('#7B8DB8', '#2A0E0A', 0.35); scene.add(amb);
+const key = new THREE.DirectionalLight('#FFE9D6', 2.4); key.position.set(-6, 5, 9); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, {left: -12, right: 12, top: 9, bottom: -9, near: 1, far: 40}); key.shadow.radius = 5; key.shadow.bias = -0.0004; scene.add(key);
+const rim = new THREE.DirectionalLight('#8FB4FF', 1.6); rim.position.set(9, -2, 2.5); scene.add(rim);
+const hit = new THREE.PointLight('#B8FFF2', 0, 2.2, 1.6); scene.add(hit);   // spill from each laser hit onto the neighbours
+
+// laser: a hot core, a soft haze sleeve, and a glow where it lands
+const SRC = new THREE.Vector3(8.0, 7.0, 10.0);
+const beamCore = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 1, 12, 1, true), new THREE.MeshBasicMaterial({color: BEAMC.clone().multiplyScalar(3), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false}));
+const sleeveMat = new THREE.ShaderMaterial({transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: {uA: {value: 0}, uC: {value: BEAMC}},
+  vertexShader: 'varying vec3 vN; varying vec3 vV; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }',
+  fragmentShader: 'uniform float uA; uniform vec3 uC; varying vec3 vN; varying vec3 vV; void main(){ float f = pow(abs(dot(vN, vV)), 2.5); gl_FragColor = vec4(uC * f * uA, 1.0); }'});
+const beamSleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 1, 24, 1, true), sleeveMat);
+scene.add(beamCore, beamSleeve);
+const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'), gr = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.2, 'rgba(190,255,240,0.55)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = gr; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+const spark = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex, color: '#CFFFF6', transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false})); scene.add(spark);
+
+// ---------- post ----------
+const composer = new EffectComposer(renderer); composer.setPixelRatio(1); composer.setSize(W, H);
+composer.addPass(new RenderPass(scene, cam));
+const bokeh = new BokehPass(scene, cam, {focus: 12, aperture: 0.0008, maxblur: 0.012}); composer.addPass(bokeh);
+const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 0.55, 0.6, 0.78); composer.addPass(bloom);
+composer.addPass(new OutputPass());
+const grade = new ShaderPass({uniforms: {tDiffuse: {value: null}, uTime: {value: 0}},
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+  fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
+    float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898,78.233)) + uTime*37.0) * 43758.5453); }
+    void main(){ vec2 d = vUv - 0.5; float r = dot(d,d);
+      vec3 c; c.r = texture2D(tDiffuse, vUv + d*0.003).r; c.g = texture2D(tDiffuse, vUv).g; c.b = texture2D(tDiffuse, vUv - d*0.003).b;
+      float l = dot(c, vec3(0.299,0.587,0.114));
+      c += vec3(-0.004, 0.006, 0.020) * (1.0 - l);          // cool lift in the shadows
+      c *= mix(vec3(1.0), vec3(1.04, 1.0, 0.95), l);         // warm highlights
+      c = mix(vec3(l), c, 1.08);                              // a touch of saturation
+      c *= 1.0 - 1.05 * r;                                    // vignette
+      c += (h(vUv * 1000.0) - 0.5) * 0.04;                    // grain (same seed for every sub-frame, so it survives the blur)
+      gl_FragColor = vec4(c, 1.0); }`});
+composer.addPass(grade);
+
+// ---------- timeline ----------
+const m4 = new THREE.Matrix4(), q4 = new THREE.Quaternion(), v3 = new THREE.Vector3(), s3 = new THREE.Vector3(), col = new THREE.Color();
+let s0 = 4242; const rr = () => (s0 = (s0 * 16807) % 2147483647) / 2147483647;
+const realIdx = cells.map((c, i) => c.real ? i : -1).filter(i => i >= 0);
+const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+const nbIdx = (() => { let best = -1, bs = 1e9; realIdx.forEach(i => { const c = cells[i]; if (c.t !== 'L') return;
+  const m = realIdx.find(j => cells[j].t === 'M' && dist(cells[j], c) < 0.62); if (m === undefined) return; const s = Math.hypot(c.x - 0.9, c.y + 0.4); if (s < bs) { bs = s; best = i; } }); return best; })();
+const NB = cells[nbIdx];
+const order = realIdx.filter(i => i !== nbIdx).sort(() => rr() - 0.5);
+const nPulse = Math.floor((CUE.reveal - CUE.pulses - 0.1) / 0.33), pulseAt = k => CUE.pulses + 0.15 + k * 0.33;
+const ENTRY = {x: 3.6, y: 3.4};
+const mIdx = cells.map((c, i) => (c.t === 'M' && Math.abs(c.x) < 7 && Math.abs(c.y) < 4.6) ? i : -1).filter(i => i >= 0).sort((a, b) => dist(cells[a], ENTRY) - dist(cells[b], ENTRY));
+const mAt = new Map(mIdx.map((i, k) => [i, CUE.monly + 0.12 + (CUE.mdone - CUE.monly - 0.35) * k / mIdx.length]));
+const pAt = new Map(order.slice(0, nPulse).map((i, k) => [i, pulseAt(k)]));
+const flare = (t, t0) => { if (t0 === undefined || t < t0) return 0; const u = t - t0; return u < 0.07 ? IN(u / 0.07) : Math.exp(-(u - 0.07) / 0.42); };
+const surfZ = (x, y) => -(x * x + y * y) * 0.004;
+const SZ = c => c.r * c.h * 1.75, TOP = c => surfZ(c.x, c.y) + 1.66 * SZ(c) - 0.05;   // tall tapered cells; tip height
+const noise1 = (t, s) => Math.sin(t * 1.7 + s) * 0.6 + Math.sin(t * 3.9 + s * 2.1) * 0.3 + Math.sin(t * 7.3 + s * 3.7) * 0.1;
+
+function cameraAt(t) {
+  const K = [   // time, position, look-at, f-number-ish aperture
+    [19.6, [0, -0.05, 13.4], [0, 0, 0], 0.0002],
+    [CUE.crossA, [0.05, -0.25, 12.6], [0, 0, 0], 0.0002],
+    [26.2, [0.8, -5.4, 8.4], [0.15, 0.5, 0], 0.0011],
+    [31.3, [1.5, -5.9, 7.8], [0.25, 0.35, 0], 0.0013],
+    [CUE.nbr, [1.8, -6.1, 7.5], [0.3, 0.25, 0], 0.0013],
+    [36.3, [NB.x + 0.9, NB.y - 3.1, 4.0], [NB.x, NB.y, 0.25], 0.0034],
+    [37.2, [NB.x + 0.8, NB.y - 2.9, 3.8], [NB.x, NB.y, 0.25], 0.0036]];
+  let i = 0; while (i < K.length - 2 && t > K[i + 1][0]) i++;
+  const [ta, pa, la, aa] = K[i], [tb, pb, lb, ab] = K[i + 1], u = SMOOTH(clamp((t - ta) / (tb - ta)));
+  const pos = new THREE.Vector3(...pa.map((v, k) => lerp(v, pb[k], u))), look = new THREE.Vector3(...la.map((v, k) => lerp(v, lb[k], u)));
+  const shake = 0.035 * clamp((t - CUE.crossA) / 1.5) + 0.012;        // hand-held, a little more once we are "in the room"
+  pos.x += noise1(t, 1) * shake; pos.y += noise1(t, 5) * shake; pos.z += noise1(t, 9) * shake * 0.6;
+  // the focus point: the patch centre, then a rack to the neighbour on "neighbours"
+  const rack = at(t, 35.75, 0.9, SMOOTH);
+  const fp = look.clone().lerp(new THREE.Vector3(NB.x, NB.y, 0.25), rack);
+  return {pos, look, fp, ap: lerp(aa, ab, u)};
+}
+
+function scene3d(t) {
+  const c3 = cameraAt(t); cam.position.copy(c3.pos); cam.lookAt(c3.look); cam.updateMatrixWorld();
+  bokeh.uniforms.focus.value = cam.position.distanceTo(c3.fp); bokeh.uniforms.aperture.value = c3.ap;
+  const lightsUp = at(t, CUE.crossA - 0.2, 1.6, SMOOTH);
+  key.intensity = lerp(0.25, 2.4, lightsUp); rim.intensity = lerp(0.1, 1.6, lightsUp); amb.intensity = lerp(0.08, 0.35, lightsUp);
+  // IR photo: flicker between the three real frames (the eye twitching), then fade as the cells come through it
+  const fi = Math.floor(Math.max(0, t - CUE.track) / 0.4) % 3; irMat.map = irTex[t < CUE.track ? 0 : fi];
+  irMat.opacity = 1 - at(t, CUE.crossA + 0.2, CUE.crossB - CUE.crossA - 0.2, SMOOTH); irPlane.visible = irMat.opacity > 0.002;
+  const reveal = t - CUE.reveal;
+  let hitAmt = 0, hitPos = null;
+  for (let i = 0; i < cells.length; i++) {
+    const c = cells[i], dc = Math.hypot(c.x, c.y);
+    const rise = at(t, CUE.crossA + (c.real ? 0 : 0.45) + dc * 0.045, 0.75, IN);
+    col.copy(PALE); const rv = clamp((reveal - dc * 0.055) / 0.45); if (rv > 0) col.lerp(COL[c.t], SIG(rv));
+    inst.setColorAt(i, col);
+    let gl = flare(t, pAt.get(i));
+    const mt = mAt.get(i); if (mt !== undefined && t >= mt) gl = Math.max(gl, flare(t, mt) , 0.2 * SIG((t - mt) / 0.4));
+    aGlow.array[i] = gl;
+    const breathe = 1 + 0.015 * Math.sin(t * 1.3 + c.o * 6.28);
+    const r = c.r * 1.14 * Math.max(0.001, rise) * breathe * (1 + 0.12 * gl), z = surfZ(c.x, c.y) - 0.05 - (1 - rise) * 0.8;
+    v3.set(c.x, c.y, z); s3.set(r, r, SZ(c) * Math.max(0.001, rise)); m4.compose(v3, q4, s3); inst.setMatrixAt(i, m4);
+  }
+  inst.instanceMatrix.needsUpdate = true; inst.instanceColor.needsUpdate = true; aGlow.needsUpdate = true;
+  // laser target now
+  let tgt = -1, bf = 0;
+  if (t > CUE.pulses && t < CUE.reveal) { const k = Math.floor((t - CUE.pulses - 0.15) / 0.33); if (k >= 0 && k < nPulse) { tgt = order[k]; bf = 1 - clamp((t - pulseAt(k)) / 0.18); } }
+  if (t > CUE.monly + 0.12 && t < CUE.mdone - 0.2) { const u = (t - CUE.monly - 0.12) / (CUE.mdone - CUE.monly - 0.35); const k = Math.min(mIdx.length - 1, Math.floor(clamp(u) * mIdx.length)); tgt = mIdx[k]; bf = 0.9; }
+  if (tgt >= 0 && bf > 0) { const c = cells[tgt], tp = new THREE.Vector3(c.x, c.y, TOP(c) + 0.02);
+    const mid = SRC.clone().add(tp).multiplyScalar(0.5), len = SRC.distanceTo(tp), qq = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), tp.clone().sub(SRC).normalize());
+    for (const b of [beamCore, beamSleeve]) { b.visible = true; b.position.copy(mid); b.scale.set(1, len, 1); b.quaternion.copy(qq); }
+    beamCore.material.opacity = bf; sleeveMat.uniforms.uA.value = 0.45 * bf;
+    spark.visible = true; spark.position.copy(tp); spark.scale.setScalar(0.9 + 0.5 * bf); spark.material.opacity = bf;
+    hit.position.copy(tp).add(new THREE.Vector3(0, 0, 0.35)); hit.intensity = 5.0 * bf; hit.color.copy(t > CUE.reveal ? COL.M : BEAMC);
+  } else { beamCore.visible = beamSleeve.visible = spark.visible = false; hit.intensity = 0; }
+}
+
+// ---------- 2D overlay ----------
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function label(s, y, a, color = CREAM, size = 22) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
+  const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(W / 2 - w / 2, yy - size - 6, w, size + 20); g.fillStyle = color; g.fillText(s, W / 2, yy); g.restore(); }
+function tagTL(lines, a) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';
+  const w = Math.max(...lines.map(([s]) => g.measureText(s).width)) + 32; chip(104, 66, w, 18 + 30 * lines.length, 0.72);
+  lines.forEach(([s, c], i) => { g.fillStyle = c; g.fillText(s, 120, 96 + i * 30); }); g.restore(); }
+function legend(a) { if (a <= 0.001) return; g.save(); g.globalAlpha = clamp(a * 2); chip(724, 926, 652, 46); g.restore();
+  [['L CONES', HEX.L], ['M CONES', HEX.M], ['S CONES', HEX.S]].forEach(([s, c], i) => { const x = 760 + i * 200, aa = clamp(a * 3 - i * 0.6); g.save(); g.globalAlpha = aa; g.fillStyle = c; g.shadowColor = c; g.shadowBlur = 14; g.beginPath(); g.arc(x, 952 + (1 - aa) * 8, 9, 0, 7); g.fill(); g.restore();
+    g.save(); g.globalAlpha = aa; g.font = '500 22px "JetBrains Mono"'; g.fillStyle = CREAM; g.fillText(s, x + 22, 960 + (1 - aa) * 8); g.restore(); }); }
+function pip(a) { if (a <= 0.001) return; const s = 300 * lerp(0.92, 1, a), x = W - 120 - s, y = 120;
+  g.save(); g.globalAlpha = a; chip(x - 14, y - 14, s + 28, s + 70); g.drawImage(mapImg, x, y, s, s);
+  g.strokeStyle = 'rgba(239,230,210,0.5)'; g.lineWidth = 1.5; g.strokeRect(x, y, s, s);
+  g.font = '500 17px "JetBrains Mono"'; g.fillStyle = CREAM; g.textAlign = 'center'; g.fillText('THE REAL MAP OF THIS PATCH', x + s / 2, y + s + 36); g.restore(); }
+
+function overlay(t) {
+  const intro = 1 - at(t, CUE.crossB - 0.2, 0.4, OUT);
+  tagTL([['REAL INFRARED FRAMES OF THIS PATCH', CREAM], ['Fong et al., Science Advances 2025 · CC BY 4.0', DIM]], at(t, 19.6, 0.4, IN) * intro);
+  tagTL([['3D MODEL ON THE REAL CONE MAP · ILLUSTRATIVE', DIM]], at(t, CUE.crossB, 0.5, IN));
+  label('INFRARED CAMERA · TRACKING EVERY CELL', 1000, at(t, CUE.track + 0.15, 0.5, IN) * (1 - at(t, CUE.trackOff, 0.35, OUT)), IR);
+  label('LASER PULSES, ONE CELL AT A TIME', 1000, at(t, CUE.pulses, 0.5, IN) * (1 - at(t, CUE.reveal - 0.1, 0.35, OUT)), '#A6FFF0');
+  legend(at(t, CUE.reveal + 0.2, 0.6, IN) * (1 - at(t, CUE.nbr, 0.35, OUT)));
+  pip(at(t, CUE.reveal + 0.25, 0.5, IN) * (1 - at(t, CUE.mdone - 0.6, 0.35, OUT)));
+  label('ONLY THE M CONES GET A PULSE', 1010, at(t, CUE.monly, 0.5, IN) * (1 - at(t, CUE.nbr - 0.3, 0.35, OUT)), HEX.M);
+  label('AN L-CONE NEIGHBOUR: NEVER AIMED AT', 1000, at(t, CUE.nbr + 0.3, 0.5, IN), CREAM);
+  // ring round the neighbour (it stays visible); a small cross badge sits beside it, never over it
+  const ra = at(t, CUE.nbr + 0.25, 0.55, IN); if (ra > 0) { cameraAt(t); const p = new THREE.Vector3(NB.x, NB.y, TOP(NB) - 0.15).project(cam);
+    const x = (p.x + 1) / 2 * W, y = (1 - p.y) / 2 * H, dpx = cam.position.distanceTo(new THREE.Vector3(NB.x, NB.y, 0)), R = clamp(NB.r * 1.25 / dpx * (H / 2) / Math.tan(16 * Math.PI / 180), 14, 140) * lerp(1.5, 1, ra);
+    g.save(); g.globalAlpha = ra; g.strokeStyle = CREAM; g.lineWidth = 3; g.shadowColor = 'rgba(0,0,0,0.7)'; g.shadowBlur = 8; g.beginPath(); g.arc(x, y, R, -Math.PI / 2, -Math.PI / 2 + ra * Math.PI * 2); g.stroke();
+    const bu = at(t, CUE.nbr + 0.75, 0.35, IN); if (bu > 0) { const bx = x + R * 0.78, by = y - R * 0.78, br = 15; g.globalAlpha = bu; g.fillStyle = 'rgba(7,11,23,0.9)'; g.beginPath(); g.arc(bx, by, br, 0, 7); g.fill(); g.stroke();
+      g.lineWidth = 3; g.beginPath(); g.moveTo(bx - 6, by - 6); g.lineTo(bx + 6, by + 6); g.moveTo(bx + 6, by - 6); g.lineTo(bx - 6, by + 6); g.stroke(); }
+    g.restore(); }
+}
+
+window.render = function (T) {
+  const t = T - P;
+  grade.uniforms.uTime.value = Math.floor(T * 30);
+  for (let k = 0; k < SUB; k++) {             // motion blur: average SUB sub-frames across a half-frame shutter
+    const ts = t + (SUB > 1 ? (k / (SUB - 1) - 0.5) * 0.5 / 30 : 0);
+    scene3d(ts); composer.render();
+    g.globalAlpha = 1 / (k + 1); g.drawImage(gl, 0, 0);
+  }
+  g.globalAlpha = 1; scene3d(t);
+  overlay(t);
+};
+await document.fonts.load('500 20px "JetBrains Mono"'); window.ready = true;
+</script></body></html>
