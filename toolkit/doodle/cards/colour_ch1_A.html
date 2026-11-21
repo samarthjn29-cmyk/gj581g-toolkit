@@ -26,11 +26,11 @@ function deutCopy(im) { const c = document.createElement('canvas'); c.width = im
 const LEAF = I.R_laurel, WAX = I.R_sealwax, LEAF_D = deutCopy(LEAF), WAX_D = deutCopy(WAX);
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.5) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
-const BG = '#0C1626', CREAM = '#F2EEE4', DIM = '#9EA5B8', OLO = '#00E0BE', PEN = '#FF6B5B', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF';
+const BG = '#2F2D2C'   /* warm graphite (Sam, 21 Nov 2026: 'Do a warm graphite') */, CREAM = '#F2EEE4', DIM = '#9EA5B8', OLO = '#00E0BE', PEN = '#FF6B5B', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF';
 const SANS = '"DejaVu Sans", sans-serif', SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"';
 function text(s, x, y, size = 30, col = CREAM, font = SANS, weight = 500, align = 'left', a = 1) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `${weight} ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; g.fillText(s, x, y); g.restore(); }
 const mono = (s, x, y, a = 1, size = 20, col = DIM, align = 'left') => text(s, x, y, size, col, MONO, 500, align, a);
-function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(7,11,23,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
+function chip(x, y, w, h, a = 0.78) { g.fillStyle = `rgba(22,21,20,${a})`; g.beginPath(); g.roundRect(x, y, w, h, 8); g.fill(); }
 function label(s, y, a, col = CREAM, size = 22, x = 960) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = `500 ${size}px "JetBrains Mono"`; g.textAlign = 'center';
   const w = g.measureText(s).width + 36, yy = y + (1 - a) * 10; chip(x - w / 2, yy - size - 6, w, size + 20); g.fillStyle = col; g.fillText(s, x, yy); g.restore(); }
 function tag(s, a = 1, sub = null) { if (a <= 0.001) return; g.save(); g.globalAlpha = a; g.font = '500 20px "JetBrains Mono"';   // top-left tag, as in chapter 0
@@ -76,12 +76,12 @@ const PAGEBOX = [70, 150, 1080, 780];   // ends above the subtitles   // below t
 function pageFrame() { const [x, y, w, h] = PAGEBOX; g.save(); g.shadowColor = 'rgba(0,0,0,0.75)'; g.shadowBlur = 60; g.fillStyle = '#E8DFC9'; g.fillRect(x, y, w, h); g.restore(); }
 const WIDEBOX = [0, 170, 1920, 460];   /* full-width page band: breaks the page-left / words-right layout every few shots (review, 21 Nov 2026) */
 function wide(im, sc, fx, fy) { const [x, y, w, h] = WIDEBOX; g.save(); g.shadowColor = 'rgba(0,0,0,0.75)'; g.shadowBlur = 60; g.fillStyle = '#E8DFC9'; g.fillRect(x, y, w, h); g.restore();
-  const r = cover(im, sc, fx, fy, 1, WIDEBOX); const gr = g.createLinearGradient(0, 0, 1920, 0); gr.addColorStop(0, 'rgba(12,22,38,0.55)'); gr.addColorStop(0.12, 'rgba(12,22,38,0)'); gr.addColorStop(0.88, 'rgba(12,22,38,0)'); gr.addColorStop(1, 'rgba(12,22,38,0.55)'); g.fillStyle = gr; g.fillRect(x, y, w, h); return r; }
+  const r = cover(im, sc, fx, fy, 1, WIDEBOX); const gr = g.createLinearGradient(0, 0, 1920, 0); gr.addColorStop(0, 'rgba(47,45,44,0.55)'); gr.addColorStop(0.12, 'rgba(47,45,44,0)'); gr.addColorStop(0.88, 'rgba(47,45,44,0)'); gr.addColorStop(1, 'rgba(47,45,44,0.55)'); g.fillStyle = gr; g.fillRect(x, y, w, h); return r; }
 function under(items, t, y = 730, maxw = 1500) { let yy = y; for (const [t0, s, col, size] of items) { const a = k(t, t0, 0.35); if (a <= 0) continue; const n = wrap(s, 960, yy + (1 - a) * 10, maxw, size || 46, (size || 46) * 1.2, a, SERIF, col || CREAM, 'center'); yy += n * (size || 46) * 1.2 + 18; } }
 function side(items, t, x = 1230, y = 380, maxw = 620) {   // words beside the picture: [startTime, text, colour, size, font]
   let yy = y; for (const [t0, s, col, size, font] of items) { const a = k(t, t0, 0.35); if (a <= 0) { continue; }
     const n = wrap(s, x, yy + (1 - a) * 12, maxw, size || 52, (size || 52) * 1.2, a, font || SERIF, col || CREAM, 'left'); yy += n * (size || 52) * 1.2 + 26; } }
-function sideShade() { const gr = g.createLinearGradient(1060, 0, 1500, 0); gr.addColorStop(0, 'rgba(10,15,30,0)'); gr.addColorStop(1, 'rgba(10,15,30,0.86)'); g.fillStyle = gr; g.fillRect(1060, 0, 860, 1080); }
+function sideShade() { const gr = g.createLinearGradient(1060, 0, 1500, 0); gr.addColorStop(0, 'rgba(36,34,33,0)'); gr.addColorStop(1, 'rgba(36,34,33,0.86)'); g.fillStyle = gr; g.fillRect(1060, 0, 860, 1080); }
 
 
 // ---- chapter 0's design system (shared look) ----
@@ -209,7 +209,7 @@ function S9(t) {   // He leaves instructions that when he dies, his eyes are to 
   g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); leaks(t, 0.5); pageFrame();
   const u = ease((t - 79.0) / 3.2), r = cover(I.R_henry1854_p25, lerp(1.1, 1.133, u), 0.45, lerp(0.30, 0.305, u), 1, PAGEBOX); vignette(0.2);
   sweep(r, [[798, 1130, 1920, 1204], [110, 1218, 1505, 1292]], k(t, 79.4, 1.6));                // after Dalton's death, in conformity with his strongly expressed wish
-  { const [, yA] = at(r, 0, 1120), [, yB] = at(r, 0, 1300), [bx, by, bw, bh] = PAGEBOX; g.save(); g.fillStyle = 'rgba(12,22,38,0.94)';   /* the rest of the page goes nearly dark: it calls the fluid 'pale yellow', which Ransome's own account contradicts */   // the rest of the page steps back: only the two lines about his wish stay bright
+  { const [, yA] = at(r, 0, 1120), [, yB] = at(r, 0, 1300), [bx, by, bw, bh] = PAGEBOX; g.save(); g.fillStyle = 'rgba(47,45,44,0.94)';   /* the rest of the page goes nearly dark: it calls the fluid 'pale yellow', which Ransome's own account contradicts */   // the rest of the page steps back: only the two lines about his wish stay bright
     g.fillRect(bx, by, bw, Math.max(0, yA - by)); g.fillRect(bx, yB, bw, Math.max(0, by + bh - yB)); g.restore(); }
   side([[79.2, 'He leaves instructions.', CREAM, 56], [80.4, '“his strongly expressed wish”', OLO, 52]], t, 1200, 400, 640);
   tag('HIS FIRST BIOGRAPHY, 1854', 1, 'W. C. HENRY, MEMOIRS OF JOHN DALTON, PAGE 25');
@@ -246,9 +246,21 @@ function F2(t) {   // his eyes are to be opened and the fluid examined. He would
 function GAP() { g.fillStyle = '#000'; g.fillRect(0, 0, 1920, 1080); }   // the 3D shots (colour_ch1_3d.html)
 const SHOTS = [[0, S1], [6.2, S2], [12.2, S3], [21.5, S4a], [27.3, S4b], [34.2, S4c], [36.3, S4d], [41.2, S5], [46.6, S6a], [51.9, S6b], [56.7, S7], [62.6, F1], [72.6, S8], [79.0, S9], [82.2, F2], [87.5, S10]];
 window.SHOTS = SHOTS.map(s => s[0]);
+
+/* One thing leads to another (Vox-style push-through, kept calm): for the first 0.6 s of a shot, the last shot (frozen on its final frame)
+   pushes in a little towards the anchor and fades, while the new shot grows out of that same point. Sam, 21 Nov 2026. */
+const TRD = 0.6, trA = document.createElement('canvas'), trB = document.createElement('canvas'); trA.width = trB.width = 1920; trA.height = trB.height = 1080;
+const trAx = trA.getContext('2d'), trBx = trB.getContext('2d');
+function trCompose(w, ax, ay) { const e = w < 0.5 ? 4 * w * w * w : 1 - Math.pow(-2 * w + 2, 3) / 2; g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  g.save(); g.globalAlpha = 1 - e; g.translate(ax, ay); g.scale(1 + 0.08 * e, 1 + 0.08 * e); g.translate(-ax, -ay); g.drawImage(trA, 0, 0); g.restore();
+  g.save(); g.globalAlpha = e; g.translate(ax, ay); g.scale(0.94 + 0.06 * e, 0.94 + 0.06 * e); g.translate(-ax, -ay); g.drawImage(trB, 0, 0); g.restore(); g.restore(); }
+const KEY = {1: [620, 540], 2: [610, 540], 3: [960, 400], 4: [620, 520], 5: [960, 440], 6: [610, 540], 7: [960, 440], 8: [960, 400], 9: [960, 420], 10: [610, 540], 11: [900, 520], 12: [960, 400], 13: [610, 540], 14: [900, 520], 15: [620, 520]};   /* where each new shot grows from: its key picture */
+async function drawShot(j, T) { g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); await SHOTS[j][1](T); for (const fn of POST) fn(); POST.length = 0; }
 window.render = async function (T) {
-  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  let f = SHOTS[0][1]; for (const [s, fn] of SHOTS) if (T >= s) f = fn; await f(T);
+  let si = 0; for (let j = 0; j < SHOTS.length; j++) if (T >= SHOTS[j][0]) si = j; const s0 = SHOTS[si][0];
+  await drawShot(si, T);
+  if (si > 0 && T < s0 + TRD) { trBx.clearRect(0, 0, 1920, 1080); trBx.drawImage(cv, 0, 0); await drawShot(si - 1, s0 - 1 / 30); trAx.clearRect(0, 0, 1920, 1080); trAx.drawImage(cv, 0, 0);
+    const [ax, ay] = KEY[si] || [960, 520]; trCompose((T - s0) / TRD, ax, ay); }
   subs(T); for (const fn of POST) fn(); POST.length = 0;
   g.save(); g.globalAlpha = 0.05; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();   // film grain, as in chapter 0
 };

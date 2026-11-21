@@ -29,10 +29,10 @@ async function seek(v, u) { const D = v.duration - 0.05, x = ((u % D) + D) % D; 
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = u => { u = clamp(u); return u * u * (3 - 2 * u); }, k = (t, a, d = 0.4) => ease((t - a) / d), lerp = (a, b, u) => a + (b - a) * u;
 const backOut = u => { u = clamp(u); const c = 1.9; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
-const BG = '#0C1626', CREAM = '#F2EEE4', DIM = '#9EA5B8', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF', OLO = '#00E0BE', GOLD = '#FFC24A';
+const BG = '#2F2D2C'   /* warm graphite (Sam, 21 Nov 2026: 'Do a warm graphite') */, CREAM = '#F2EEE4', DIM = '#9EA5B8', R = '#FF3B30', GR = '#30D158', B = '#2F6BFF', OLO = '#00E0BE', GOLD = '#FFC24A';
 const SERIF = 'Fraunces, Georgia, serif', MONO = '"JetBrains Mono"', HAND = 'Kalam';
 function text(s, x, y, size = 30, col = CREAM, font = SERIF, align = 'left', a = 1, glow = 0) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.font = `400 ${size}px ${font}`; g.fillStyle = col; g.textAlign = align; if (glow) { g.shadowColor = col; g.shadowBlur = glow; } g.fillText(s, x, y); g.restore(); }
-function chip(x, y, w, h, a = 0.78, col = '7,9,16') { g.fillStyle = `rgba(${col},${a})`; g.beginPath(); g.roundRect(x, y, w, h, 10); g.fill(); }
+function chip(x, y, w, h, a = 0.78, col = '22,21,20') { g.fillStyle = `rgba(${col},${a})`; g.beginPath(); g.roundRect(x, y, w, h, 10); g.fill(); }
 function cover(im, sc = 1, fx = 0.5, fy = 0.5, a = 1, box = [0, 0, 1920, 1080]) {
   const [bx, by, bw, bh] = box, iw = im.videoWidth || im.width, ih = im.videoHeight || im.height, base = Math.max(bw / iw, bh / ih) * sc, w = iw * base, h = ih * base;
   const x = bx + clamp(bw / 2 - fx * w, bw - w, 0), y = by + clamp(bh / 2 - fy * h, bh - h, 0);
@@ -73,7 +73,7 @@ async function S1(t) {   // In 2025: the year, and the three cone lights, softly
 }
 async function S2(t) {   // five people saw a colour: one real eye, close and sharp, a slow push; the five volunteers named small
   const a = L(1), u = clamp((t - a) / (LE(1) - a + 0.4)); cover(await seek(V.eye, 0.3 + (t - a) * 0.5), lerp(1.0, 1.05, u), 0.51, 0.45, 1);
-  const vg = g.createRadialGradient(960, 520, 300, 960, 540, 1100); vg.addColorStop(0, 'rgba(12,22,38,0)'); vg.addColorStop(1, 'rgba(12,22,38,0.7)'); g.fillStyle = vg; g.fillRect(0, 0, 1920, 1080);
+  const vg = g.createRadialGradient(960, 520, 300, 960, 540, 1100); vg.addColorStop(0, 'rgba(47,45,44,0)'); vg.addColorStop(1, 'rgba(47,45,44,0.7)'); g.fillStyle = vg; g.fillRect(0, 0, 1920, 1080);
   tagTL('BERKELEY · REPORTED 2025 · FIVE TEST SUBJECTS', k(t, a + 0.2, 0.5));
 }
 async function S3(t) {   // no human had ever seen: of the three cone lights, only the middle one comes on, in a teal no light can make; it grows into the colour
@@ -217,16 +217,27 @@ async function S16(t) {   // as close as a screen allows to the colour called ol
 const SHOTS = [[0, S1], [L(1) - 0.04, S2], [L(2) - 0.04, S3], [L(3) - 0.1, S4], [L(4) - 0.1, S5], [L(5) - 0.1, S6], [L(6) - 0.06, S7], [L(7) - 0.06, S8], [L(8) - 0.1, S9], [L(9) - 0.1, S10], [L(10) - 0.06, S11], [L(11) - 0.1, S12], [L(12) - 0.1, S13], [L(13) - 0.1, S14], [L(14) - 0.1, S15], [L(15) - 0.1, S16]];
 // camera: always moving; a new framing at each shot, with a push or a pull and a small handheld drift
 const buf = document.createElement('canvas'); buf.width = 1920; buf.height = 1080; const bg = buf.getContext('2d');
-window.render = async function (T) {
-  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  let si = 0; for (let j = 0; j < SHOTS.length; j++) if (T >= SHOTS[j][0]) si = j; const s0 = SHOTS[si][0], s1 = si + 1 < SHOTS.length ? SHOTS[si + 1][0] : END;
-  await SHOTS[si][1](T); sub(T);
-  const u = clamp((T - s0) / (s1 - s0)), sc = lerp(1.0, 1.025, u);   // Sam, 20 Nov 2026: 'way too much movement... slow down'
-  const fx = 960, fy = 540;
+
+/* One thing leads to another (Vox-style push-through, kept calm): for the first 0.6 s of a shot, the last shot (frozen on its final frame)
+   pushes in a little towards the anchor and fades, while the new shot grows out of that same point. Sam, 21 Nov 2026. */
+const TRD = 0.6, trA = document.createElement('canvas'), trB = document.createElement('canvas'); trA.width = trB.width = 1920; trA.height = trB.height = 1080;
+const trAx = trA.getContext('2d'), trBx = trB.getContext('2d');
+function trCompose(w, ax, ay) { const e = w < 0.5 ? 4 * w * w * w : 1 - Math.pow(-2 * w + 2, 3) / 2; g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
+  g.save(); g.globalAlpha = 1 - e; g.translate(ax, ay); g.scale(1 + 0.08 * e, 1 + 0.08 * e); g.translate(-ax, -ay); g.drawImage(trA, 0, 0); g.restore();
+  g.save(); g.globalAlpha = e; g.translate(ax, ay); g.scale(0.94 + 0.06 * e, 0.94 + 0.06 * e); g.translate(-ax, -ay); g.drawImage(trB, 0, 0); g.restore(); g.restore(); }
+const KEY = {8: [720, 520]};   /* anchor per shot index, where the new shot grows from; default the centre */
+async function drawShot(j, T) {   // one shot with its own slow camera, overlays included (subtitles are added after)
+  g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080); await SHOTS[j][1](T);
+  const s0 = SHOTS[j][0], s1 = j + 1 < SHOTS.length ? SHOTS[j + 1][0] : END, u = clamp((T - s0) / (s1 - s0)), sc = lerp(1.0, 1.025, u);
   bg.clearRect(0, 0, 1920, 1080); bg.drawImage(cv, 0, 0); g.fillStyle = BG; g.fillRect(0, 0, 1920, 1080);
-  const W = 1920 * sc, H = 1080 * sc; g.drawImage(buf, clamp(960 - fx * sc, 1920 - W, 0), clamp(540 - fy * sc, 1080 - H, 0), W, H);
-  for (const fn of POST) fn(); POST.length = 0;
-  g.save(); g.font = `500 16px ${MONO}`; g.textAlign = 'right'; g.fillStyle = 'rgba(255,194,74,0.85)';  g.restore();
+  const W = 1920 * sc, H = 1080 * sc; g.drawImage(buf, clamp(960 - 960 * sc, 1920 - W, 0), clamp(540 - 540 * sc, 1080 - H, 0), W, H);
+  for (const fn of POST) fn(); POST.length = 0; }
+window.render = async function (T) {
+  let si = 0; for (let j = 0; j < SHOTS.length; j++) if (T >= SHOTS[j][0]) si = j; const s0 = SHOTS[si][0];
+  await drawShot(si, T);
+  if (si > 0 && T < s0 + TRD) { trBx.clearRect(0, 0, 1920, 1080); trBx.drawImage(cv, 0, 0); await drawShot(si - 1, s0 - 1 / 30); trAx.clearRect(0, 0, 1920, 1080); trAx.drawImage(cv, 0, 0);
+    const [ax, ay] = KEY[si] || [960, 520]; trCompose((T - s0) / TRD, ax, ay); }
+  sub(T); for (const fn of POST) fn(); POST.length = 0;
   g.save(); g.globalAlpha = 0.045; g.drawImage(grain, -((Math.floor(T * 30) * 97) % 256), -((Math.floor(T * 30) * 61) % 256)); g.restore();
 };
 const grain = (() => { const c = document.createElement('canvas'); c.width = 1920 + 256; c.height = 1080 + 256; const x = c.getContext('2d'), im = x.createImageData(c.width, c.height);
