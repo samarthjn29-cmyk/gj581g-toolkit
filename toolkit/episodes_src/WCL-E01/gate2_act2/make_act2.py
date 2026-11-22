@@ -39,6 +39,7 @@ EAG, KEN = (858, 2795), (1985, 3825)  # Eaglesfield and Kendal on Bowen's 1760 m
 MAPSRC = "MAP · EMANUEL BOWEN · 1760 · YALE UNIVERSITY LIBRARY"
 P30 = [1920, 2934]
 CANDLE = "public/assets/sources/candle_lighting_mixkit3458.mp4"
+CANDLE_REV = "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
 FLAT = "public/assets/sources/period_stockings_flat.jpg"
 MASK = "public/assets/sources/period_stockings_flat_mask.png"
 shots = []
@@ -78,9 +79,9 @@ shot(B(2, 3, 4, 5), "PeriodMapPlate", lambda r: {
               {"atSec": r(word("northwest")), "crop": [0, 1700, 3800, 2138], "moveSec": 1.8}],
     "pins": [{"id": "eag", "x": EAG[0], "y": EAG[1], "atSec": r(word("eaglesfield"))}],
     "rings": [{"pin": "eag", "atSec": r(word("eaglesfield")), "pulses": 2}],
-    "labels": [{"text": "BORN 1766", "atSec": r(word("1766")), "untilSec": r(word("northwest")), "x": 960, "y": 860, "align": "center"},
-               {"text": "NORTH-WEST ENGLAND", "atSec": r(word("northwest")) + 0.4, "untilSec": r(word("quakers")), "x": 960, "y": 860, "align": "center"},
-               {"text": "A QUAKER FAMILY", "atSec": r(word("quakers")), "x": 960, "y": 860, "align": "center", "accent": True}],
+    "labels": [{"text": "BORN 1766", "atSec": r(word("1766")), "untilSec": 4.9, "x": 960, "y": 860, "align": "center"},
+               {"text": "NORTH-WEST ENGLAND", "atSec": 5.5, "untilSec": 6.9, "x": 960, "y": 860, "align": "center"},
+               {"text": "A QUAKER FAMILY", "atSec": 7.5, "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "EAGLESFIELD", "atSec": r(word("eaglesfield"))}, {"text": "CUMBERLAND", "atSec": r(word("cumberland"))}]}},
     transitionIn="band", transition={"dir": "down", "tone": "paper"})
 # 6-7 the Quaker advice on plainness (1691, printed 1783).
@@ -153,7 +154,7 @@ shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
     "notes": [{"text": "AS THE STORY GOES", "atSec": r(word("another"))},
               {"text": "A BIOGRAPHY", "atSec": r(word("biography"))},  # Gate 3 stillness: a change inside 56-60 s
               {"text": "1874 · 30 YEARS AFTER HE DIED", "atSec": r(word("30"))},
-              {"text": "MAY HAVE GROWN IN THE TELLING", "atSec": r(word("grown")), "accent": True}]},
+              {"text": "MAY HAVE GROWN IN THE TELLING", "atSec": 6.9, "accent": True}]},
     transitionIn="push", focus=[700, 640])
 # 25-38 the stockings, in each person's reported colour (REPORTED COLOURS on screen throughout).
 shot(B(*range(25, 39)), "ReportedColour", lambda r: {
@@ -175,35 +176,35 @@ shot(B(*range(25, 39)), "ReportedColour", lambda r: {
                {"text": "HIS MOTHER", "atSec": r(word("mother", 76)), "untilSec": r(word("cherry")), "x": 960, "y": 860, "align": "center"},
                {"text": "'AS RED AS A CHERRY'", "atSec": r(word("cherry")), "untilSec": r(word("john", 84)), "x": 960, "y": 780, "align": "center", "accent": True},
                # Gate 3 stillness (87.5-98.6 s had no visible change): the narration's own words, then her red again
-               {"text": "TO BOTH OF THEM · DARK", "atSec": r(word("both", 88)), "untilSec": r(word("two", 92)), "x": 960, "y": 860, "align": "center"},
-               {"text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS", "atSec": r(word("two", 92)), "untilSec": r(word("mother", 94)), "x": 960, "y": 860, "align": "center"},
-               {"text": "QUITE SURE SHE'S RIGHT", "atSec": r(word("quite")), "x": 960, "y": 860, "align": "center", "accent": True}],
+               {"text": "TO BOTH OF THEM · DARK", "atSec": r(word("both", 88)), "untilSec": 27.5, "x": 960, "y": 780, "align": "center"},
+               {"text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS", "atSec": r(word("two", 92)), "untilSec": r(word("mother", 94)), "x": 960, "y": 780, "align": "center"},
+               {"text": "QUITE SURE SHE'S RIGHT", "atSec": r(word("quite")), "x": 960, "y": 780, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 63)), "untilSec": r(word("mother", 76))},
                                       {"text": "EAGLESFIELD", "atSec": r(word("mother", 76))}]}},
     transitionIn="band", transition={"dir": "down", "tone": "paper"})
 # 39-44 what stays the same: the flower, the candle, the stockings; only the person looking changes.
 shot(B(*range(39, 45)), "SplitComparisonCard", lambda r: {
-    "panels": [{"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 230, 900, 900], "label": "THE FLOWER", "atSec": 0.3, "stamp": {"text": "SAME", "atSec": r(word("flower"))}},
-               {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56, "clipStartSec": 3, "label": "THE CANDLE", "atSec": 0.45, "stamp": {"text": "SAME", "atSec": r(word("candle", 100))}},
-               {"srcId": "SRC-037", "file": FLAT, "kind": "image", "size": [2600, 1622], "crop": [900, 180, 1300, 1300], "label": "THE STOCKINGS · A PERIOD PAIR", "atSec": 0.6, "stamp": {"text": "SAME", "atSec": r(word("stockings", 104))}}],
-    "lines": [{"text": "What stays the same?", "atSec": r(word("look")), "untilSec": r(word("only"))},
-              {"text": "Only the person looking changes.", "atSec": r(word("only")), "untilSec": r(word("the", 109))},
+    "panels": [{"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 230, 900, 900], "label": "THE FLOWER", "atSec": 0.3, "stamp": {"text": "SAME", "atSec": 4.97}},
+               {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56, "clipStartSec": 3, "pingPong": {"revFile": CANDLE_REV, "endSec": 10.5, "clipLenSec": 12.958}, "label": "THE CANDLE", "atSec": 0.45, "stamp": {"text": "SAME", "atSec": 5.40}},
+               {"srcId": "SRC-037", "file": FLAT, "kind": "image", "size": [2600, 1622], "crop": [900, 180, 1300, 1300], "label": "THE STOCKINGS · A PERIOD PAIR", "atSec": 0.6, "stamp": {"text": "SAME", "atSec": 7.62}}],
+    "lines": [{"text": "What stays the same?", "atSec": r(word("look")), "untilSec": 8.0},
+              {"text": "Only the person looking changes.", "atSec": r(word("only")), "untilSec": 10.84},
               {"text": "The odd thing isn't the flower.", "atSec": r(word("the", 109)) + 0.1}],
     "dimAtSec": r(word("only")),
-    "names": [{"text": "JOHN", "atSec": r(word("two", 112))}, {"text": "JONATHAN", "atSec": r(word("brothers", 112))}],
+    "names": [{"text": "JOHN", "atSec": 14.7}, {"text": "JONATHAN", "atSec": 14.9}],
     "thread": {"atSec": r(word("brothers", 112)) + 0.1, "drawSec": 1.0}},
     transitionIn="block", transition={"color": CHERRY, "side": "right"})
 # 45-54 they aren't rare: a unit dot grid (Birch 2012).
 shot(B(*range(45, 55)), "ScaleField", lambda r: {
     "source": "BIRCH 2012 · J. OPT. SOC. AM. A",
-    "lines": [{"text": "They aren't rare.", "atSec": r(word("rare")), "untilSec": r(word("colour", 118)) - 0.2},
+    "lines": [{"text": "They aren't rare.", "atSec": r(word("rare")), "untilSec": 3.9},
               {"text": "Colour blindness", "atSec": r(word("colour", 118))},
-              {"text": "RED-GREEN", "atSec": r(word("blindness")) + 0.2, "untilSec": r(word("trouble")), "size": "small"},
+              {"text": "RED-GREEN", "atSec": r(word("blindness")) + 0.2, "untilSec": 8.4, "size": "small"},
               {"text": "TROUBLE TELLING SOME REDS AND GREENS APART", "atSec": r(word("trouble")), "untilSec": r(word("women")), "size": "small"},
                             {"text": "STILL THERE", "atSec": r(word("still")), "size": "small", "row": 1, "accent": True}],
     "phases": [{"atSec": 0.2, "total": 100, "cols": 20, "lit": 8, "litAtSec": r(word("eight")), "label": {"text": "MEN OF EUROPEAN DESCENT · ABOUT 8 IN 100", "atSec": r(word("eight"))}},
-               {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": r(word("four", 127)), "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
-               {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": r(word("four", 131)), "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}},
+               {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": 15.39, "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
+               {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": 20.36, "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}},
                {"atSec": r(word("china")), "total": 100, "cols": 20, "lit": 5, "litAtSec": r(word("china")) + 0.2, "seed": 4, "label": {"text": "MEN OF CHINESE OR JAPANESE DESCENT · 4–6.5 IN 100", "atSec": r(word("china")) + 0.2}}]},
     transitionIn="slide")
 # 55-56 picture it from the inside.
@@ -222,8 +223,8 @@ shot(B(57, 58), "KineticLine", lambda r: {
 shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
     "columns": ["WHAT IT IS CALLED"],
     # Gate 3 stillness (151.5-157.8 s): the narration's words under the swatches
-    "labels": [{"text": "THE SAME COLOUR NAMES", "atSec": r(word("same", 150)), "untilSec": r(word("nobody", 153)) - 0.1, "x": 960, "y": 920, "align": "center"},
-               {"text": "NOBODY HAS EVER TOLD YOU", "atSec": r(word("nobody", 153)), "untilSec": r(word("nobody", 155)) - 0.1, "x": 960, "y": 920, "align": "center", "accent": True},
+    "labels": [{"text": "THE SAME COLOUR NAMES", "atSec": r(word("same", 150)), "untilSec": 3.12, "x": 960, "y": 920, "align": "center"},
+               {"text": "NOBODY HAS EVER TOLD YOU", "atSec": r(word("nobody", 153)), "untilSec": 6.76, "x": 960, "y": 920, "align": "center", "accent": True},
                {"text": "NOBODY ELSE CAN SEE WHAT YOU SEE", "atSec": r(word("nobody", 155)), "x": 960, "y": 920, "align": "center"}],
     "rows": [{"name": "YOU", "atSec": 0, "brightAtSec": r(word("nobody", 155)), "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
               "tag": {"text": "ILLUSTRATIVE", "atSec": 0}},
@@ -241,10 +242,11 @@ shot(B(63, 64, 65), "FootagePlate", lambda r: {
 shot(B(66, 67), "KineticLine", lambda r: {
     # SRC-004 Dalton's 1834 portrait (Turner mezzotint) beside the words: the act's one look at the man himself.
     "backdrop": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010], "layout": "card-right"},
-    "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0.3}]},
+    "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0}]},
     "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164)),
                "fill": {"word": "scientist", "atSec": r(word("scientist")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}},
-              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True}]})  # TXT-021, the act's one typed line
+              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True}]},
+    transitionIn="slide")  # gate 3: was a hard cut from the full-bleed geranium (slide: the shot before is already a push)  # TXT-021, the act's one typed line
 # 68 "He wants to know why.": the episode's BuildUpMap (VIS-048) for the first time. Acts 1 and 2 as pieces in their
 # chapter colours (LOK-026), the act 2 piece lit; a third piece, WHY?, arrives on "why". Seven places for the
 # seven acts, so later acts keep these positions. Words: act titles (on screen already) and the narration's own.
@@ -264,30 +266,30 @@ BREAK = (round(word("brothers", 112, end=True) + 0.05, 2), round(word("brothers"
 SWEEPS = [S(12), S(45)]
 DIPS = [(round(word("quite") - 0.1, 2), round(word("right", end=True) + 0.4, 2))]
 audio = [
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(2) + 0.1, 2), "volumeDb": -21.0},  # paper band down from the slate, under "John": texture
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 2.05, "volumeDb": -21.0},  # paper band down from the slate, under "John": texture
     {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(word("eaglesfield") + 0.05, 2), "volumeDb": -22.6},  # the rings settle on Eaglesfield
     {"id": "SFX-006", "atSec": round(S(6) - 0.1, 2), "volumeDb": -14.0},  # the Quaker page slides in (pause after "Quakers.")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(8) - 0.1, 2), "volumeDb": -17.6},  # flash to the 1793 title page, in the pause
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(12) + 0.1, 2), "volumeDb": -17.6},  # band back to the map
-    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -22.6},  # the route drawn on: texture under the words
+    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -29.0},  # the route drawn on: texture under the words
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(14) - 0.15, 2), "volumeDb": -16.6},  # push from Kendal into the geranium
     {"id": "SFX-014", "atSec": round(S(14), 2), "endSec": round(S(16), 2), "fadeInSec": 0.8, "fadeOutSec": 0.6, "volumeDb": -2.0},  # candle room under the geranium by candle (Kendal)
-    {"id": "SFX-006", "atSec": round(S(16) - 0.05, 2), "volumeDb": -21.0},  # slide to p.30, over "change,": texture
+    {"id": "SFX-006", "atSec": 38.85, "volumeDb": -21.0},  # slide to p.30, over "change,": texture
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(22) - 0.15, 2), "volumeDb": -16.6},  # push from "my brother" into Lonsdale
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # band into the stockings
     {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": round(word("dark", 70) - 0.05, 2), "volumeDb": -22.0},  # the stockings go dark (in John's words)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(39) - 0.08, 2), "volumeDb": -17.6},  # cherry block, after "So,"
-    {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": round(word("flower") + 0.05, 2), "volumeDb": -12.5},  # SAME stamps (paper taps), rotated
-    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(word("candle", 100) + 0.05, 2), "endSec": round(word("candle", 100) + 0.5, 2), "fadeOutSec": 0.1, "volumeDb": -18.0},
-    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("stockings", 104) + 0.05, 2), "volumeDb": -23.0},
+    {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": 103.60, "volumeDb": -12.5},  # SAME stamps (paper taps), rotated
+    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": 104.03, "endSec": 104.48, "fadeOutSec": 0.1, "volumeDb": -18.0},
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": 106.25, "volumeDb": -23.0},
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v2.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the act's one impact, as the bed returns after "brothers."
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(45) - 0.08, 2), "volumeDb": -17.6},  # slide to the dot grid
     {"id": "SFX-018", "file": K + "mechanical/ticker_run.wav", "atSec": round(word("eight"), 2), "endSec": round(word("eight") + 0.95, 2), "fadeOutSec": 0.1, "volumeDb": -23.0},  # 8 dots light (creative swap)
-    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v1.wav", "atSec": round(word("four", 127), 2), "volumeDb": -22.0},
-    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v2.wav", "atSec": round(word("four", 131), 2), "volumeDb": -22.0},
+    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v1.wav", "atSec": 130.45, "volumeDb": -22.0},
+    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v2.wav", "atSec": 135.42, "volumeDb": -22.0},
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(55) + 0.1, 2), "volumeDb": -17.6},  # band up into "Picture it from the inside"
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(63) - 0.15, 2), "volumeDb": -16.6},  # push from YOUR red into the geranium
-    {"id": "SFX-027", "file": K + "mechanical/typewriter_run_v1.wav", "atSec": round(word("enough"), 2), "volumeDb": -16.0},  # keys under the typed line (texture; the kit file sits at -27 LUFS, peak-capped)
+    {"id": "SFX-027", "file": K + "mechanical/typewriter_run_v1.wav", "atSec": round(word("enough"), 2), "volumeDb": -23.0},  # keys under the typed line (texture; the kit file sits at -27 LUFS, peak-capped)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(68) + 0.1, 2), "volumeDb": -17.6},  # paper band up into the map
     {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)
 ]

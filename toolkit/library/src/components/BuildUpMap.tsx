@@ -135,22 +135,25 @@ export const BuildUpMap: React.FC<BuildUpMapProps> = ({ title, nodes, focus, ass
         </div>
       ) : null}
       <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0 }}>
-        {/* The path: one dashed segment between each pair of shown pieces, trimmed 150 px from each piece so it
-            never runs through a label; it draws on as the later piece arrives. */}
+        {/* The path: one dashed segment between each pair of shown pieces, leaving each piece outside its icon,
+            pill and keyword block so it never runs through a label; it draws on as the later piece arrives. */}
         {pos.slice(1).map((q, k) => {
           const p0 = pos[k];
           const st = nodes[k + 1] ? sec(nodes[k + 1].atSec, fps) : null;
           if (st === null) return null;
           const dp = interpolate(frame, [st, st + sec(0.8, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: SLOW_OUT });
           if (dp <= 0) return null;
-          const dx = q.x - p0.x;
-          const dy = q.y - p0.y;
-          const len = Math.hypot(dx, dy);
-          const tr = Math.min(185, len / 3);
-          const ax = p0.x + (dx / len) * tr;
-          const ay = p0.y + (dy / len) * tr;
-          const bx = q.x - (dx / len) * tr;
-          const by = q.y - (dy / len) * tr;
+          // Each end leaves from just outside its piece's block (icon, pill, keyword lines), one line-height
+          // clear: below it when the path heads down, above the icon when it heads up (gate 3 act 2: the path ran
+          // through RED BY CANDLE).
+          const kwH = (i: number) => (nodes[i]?.keywords?.length ?? 0) * 36;
+          const end = (i: number, goingDown: boolean, c: { x: number; y: number }) => ({ x: c.x, y: goingDown ? c.y - 118 + 76 + 10 + 74 + 10 + kwH(i) + 34 : c.y - 118 - 30 });
+          const a0 = end(k, q.y > p0.y, p0);
+          const b0 = end(k + 1, p0.y > q.y, q);
+          const ax = a0.x + (q.x - p0.x) * 0.08;
+          const ay = a0.y;
+          const bx = b0.x - (q.x - p0.x) * 0.08;
+          const by = b0.y;
           return <line key={k} x1={ax} y1={ay} x2={ax + (bx - ax) * dp} y2={ay + (by - ay) * dp} stroke={ink} strokeOpacity={0.35 * (1 - ap)} strokeWidth={3} strokeDasharray="10 12" strokeLinecap="round" />;
         })}
         {nodes.map((nd, i) => {

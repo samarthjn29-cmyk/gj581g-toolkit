@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, OffthreadVideo, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Img, OffthreadVideo, Sequence, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAssets, useSourceFile } from "../registry";
 import { useTheme } from "../themes";
 import { exit, lock, reveal, rise, sec, SLOW_OUT } from "../motion";
@@ -17,6 +17,9 @@ export type ComparisonPanel = {
   crop?: Rect; // image pixels; for video the frame is covered around `focus`
   focus?: number;
   clipStartSec?: number;
+  // A video shorter than its shot (or one that fades out) plays forward to `endSec`, then the reversed copy back
+  // to clipStartSec, and so on, so the panel never runs out of lit footage (gate 3 act 2: the candle went black).
+  pingPong?: { revFile: string; endSec: number; clipLenSec: number };
   label: string;
   atSec: number;
   stamp?: { text: string; atSec: number };
@@ -36,6 +39,7 @@ const Panel: React.FC<{ p: ComparisonPanel; x: number; w: number; h: number; top
   const t = useTheme();
   const src = useSourceFile(p.srcId, p.file);
   const msk = p.mask ? useSourceFile(p.srcId, p.mask) : undefined; // eslint-disable-line react-hooks/rules-of-hooks
+  const rev = p.pingPong ? useSourceFile(p.srcId, p.pingPong.revFile) : undefined; // eslint-disable-line react-hooks/rules-of-hooks
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const a = reveal(frame, fps, p.atSec, 0.75);
@@ -45,7 +49,21 @@ const Panel: React.FC<{ p: ComparisonPanel; x: number; w: number; h: number; top
     const sc = Math.max(w / p.size[0], h / p.size[1]);
     const vw = p.size[0] * sc, vh = p.size[1] * sc;
     const topv = Math.min(0, Math.max(h - vh, h / 2 - (p.focus ?? 0.5) * vh));
-    pic = <OffthreadVideo src={src} muted startFrom={sec(p.clipStartSec ?? 0, fps)} style={{ position: "absolute", left: (w - vw) / 2, top: topv, width: vw, height: vh, maxWidth: "none", filter: "sepia(0.3) saturate(1.15)" }} />;
+    const vs: React.CSSProperties = { position: "absolute", left: (w - vw) / 2, top: topv, width: vw, height: vh, maxWidth: "none", filter: "sepia(0.3) saturate(1.15)" };
+    const c0 = p.clipStartSec ?? 0;
+    if (p.pingPong) {
+      const L = sec(p.pingPong.endSec - c0, fps);
+      if (L < fps) throw new Error("SplitComparisonCard: pingPong needs at least 1 s of footage.");
+      const k = Math.floor(frame / L);
+      const fwd = k % 2 === 0;
+      pic = (
+        <Sequence from={k * L} durationInFrames={L} layout="none">
+          <OffthreadVideo src={fwd ? src : rev!} muted startFrom={sec(fwd ? c0 : p.pingPong.clipLenSec - p.pingPong.endSec, fps)} style={vs} />
+        </Sequence>
+      );
+    } else {
+      pic = <OffthreadVideo src={src} muted startFrom={sec(c0, fps)} style={vs} />;
+    }
   } else {
     const c = p.crop ?? ([0, 0, p.size[0], p.size[1]] as const);
     const { s, ox, oy } = cropToBox(c, w, h, "cover");
