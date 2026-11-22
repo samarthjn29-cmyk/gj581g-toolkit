@@ -131,7 +131,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 62.5,
+   "atSec": 62.7,
    "volumeDb": -17.6
   },
   {
@@ -149,7 +149,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
-   "atSec": 90.17,
+   "atSec": 90.37,
    "volumeDb": -21.0
   }
  ],

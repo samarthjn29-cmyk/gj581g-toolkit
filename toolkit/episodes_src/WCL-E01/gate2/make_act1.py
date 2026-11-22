@@ -256,10 +256,10 @@ SWEEPS = [S(14), S(20)]  # MUS-011 bass drop-outs on the two busy cuts (mix-act-
 audio += [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(22) - 0.08, 2), "volumeDb": -21.0},  # pink block, over "so": texture level
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(23) - 0.1, 2), "volumeDb": -17.6},  # the flash, in the pause
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) - 0.1, 2), "volumeDb": -17.6},  # paper band, in the pause
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # paper band, in the pause; v12: on the band's first visible frames (it enters ~0.18 s after the cut)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(27) - 0.45, 2), "volumeDb": -21.6},  # texture level (review v11: two hero whooshes in one shot)  # the collage page slides in; loud part before "About"
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v1.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the one impact, as the bed returns
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(35) - 0.08, 2), "volumeDb": -21.0},  # dark band, over "to a": texture level  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(35) + 0.12, 2), "volumeDb": -21.0},  # dark band, texture level over "dark"; v12: with the band, which enters ~0.2 s after the cut  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
 ]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
