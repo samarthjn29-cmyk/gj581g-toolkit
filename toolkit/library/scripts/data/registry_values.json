@@ -1,985 +1,1012 @@
 {
-"values": [
-[
-"Asset_ID",
-"Folder",
-"Asset_Name",
-"Source_Origin",
-"File_Path_or_Token",
-"Description_&_Usage_Note",
-"Status"
-],
-[
-"VIS-001",
-"1_Visuals",
-"ArchivalScanCard",
-"",
-"src/components/ArchivalScanCard.tsx",
-"",
-"Active"
-],
-[
-"VIS-002",
-"1_Visuals",
-"MinimalDataChart",
-"",
-"src/components/MinimalDataChart.tsx",
-"",
-"Active"
-],
-[
-"VIS-003",
-"1_Visuals",
-"HeadlineMatchCut",
-"",
-"src/components/HeadlineMatchCut.tsx",
-"",
-"Active"
-],
-[
-"VIS-004",
-"1_Visuals",
-"ParallaxCutout",
-"",
-"src/components/ParallaxCutout.tsx",
-"",
-"Active"
-],
-[
-"VIS-005",
-"1_Visuals",
-"SpotlightIsolator",
-"",
-"src/components/SpotlightIsolator.tsx",
-"",
-"Active"
-],
-[
-"VIS-006",
-"1_Visuals",
-"CleanUICard",
-"",
-"src/components/CleanUICard.tsx",
-"",
-"Active"
-],
-[
-"VIS-007",
-"1_Visuals",
-"ChapterSlate",
-"",
-"src/components/ChapterSlate.tsx",
-"",
-"Active"
-],
-[
-"VIS-008",
-"1_Visuals",
-"SplitComparisonCard",
-"",
-"src/components/SplitComparisonCard.tsx",
-"",
-"Planned"
-],
-[
-"VIS-009",
-"1_Visuals",
-"BlueprintPhotoPair",
-"",
-"src/components/BlueprintPhotoPair.tsx",
-"",
-"Planned"
-],
-[
-"VIS-010",
-"1_Visuals",
-"AnalogMonitorFrame",
-"",
-"src/components/AnalogMonitorFrame.tsx",
-"",
-"Planned"
-],
-[
-"TXT-001",
-"2_Text",
-"HeadlineArchivoBold",
-"",
-"public/fonts/archivo-latin-800-normal.woff2",
-"",
-"Active"
-],
-[
-"TXT-002",
-"2_Text",
-"EditorialSerifQuote",
-"",
-"public/fonts/newsreader-latin-500-normal.woff2;public/fonts/newsreader-latin-500-italic.woff2",
-"",
-"Active"
-],
-[
-"TXT-003",
-"2_Text",
-"MonoDataCounter",
-"",
-"public/fonts/ibm-plex-mono-latin-500-normal.woff2",
-"",
-"Active"
-],
-[
-"TXT-004",
-"2_Text",
-"BodyPlusJakartaUI",
-"",
-"public/fonts/plus-jakarta-sans-latin-500-normal.woff2",
-"",
-"Active"
-],
-[
-"TXT-005",
-"2_Text",
-"CutoutCollageTitle",
-"",
-"src/components/CutoutCollageTitle.tsx",
-"",
-"Planned"
-],
-[
-"TXT-006",
-"2_Text",
-"SyncedQuoteBridge",
-"",
-"src/components/SyncedQuoteBridge.tsx",
-"",
-"Planned"
-],
-[
-"TXT-007",
-"2_Text",
-"ArchivalDateStamp",
-"",
-"src/components/ArchivalDateStamp.tsx",
-"",
-"Planned"
-],
-[
-"TXT-008",
-"2_Text",
-"EditorialLowerThird",
-"",
-"src/components/EditorialLowerThird.tsx",
-"",
-"Planned"
-],
-[
-"MOT-001",
-"3_Motion",
-"SpringCameraDrift",
-"",
-"src/motion.ts#drift",
-"",
-"Active"
-],
-[
-"MOT-002",
-"3_Motion",
-"SpringEditorialReveal",
-"",
-"src/motion.ts#reveal",
-"",
-"Active"
-],
-[
-"MOT-003",
-"3_Motion",
-"SpringSnappyLock",
-"",
-"src/motion.ts#lock",
-"",
-"Active"
-],
-[
-"MOT-004",
-"3_Motion",
-"MatchCut4FrameCadence",
-"",
-"src/components/HeadlineMatchCut.tsx",
-"",
-"Active"
-],
-[
-"MOT-005",
-"3_Motion",
-"VectorTraceConnector",
-"",
-"src/components/VectorTraceConnector.tsx",
-"",
-"Planned"
-],
-[
-"MOT-006",
-"3_Motion",
-"BlueprintCounterBar",
-"",
-"src/components/BlueprintCounterBar.tsx",
-"",
-"Planned"
-],
-[
-"MOT-007",
-"3_Motion",
-"SchematicWaveDiagram",
-"",
-"src/components/SchematicWaveDiagram.tsx",
-"",
-"Planned"
-],
-[
-"MOT-008",
-"3_Motion",
-"BoilingInkCallout",
-"",
-"src/components/BoilingInkCallout.tsx",
-"",
-"Planned"
-],
-[
-"TRN-001",
-"4_Transitions",
-"HardCutEyeTrace",
-"",
-"rules/beat-routing.md#eye-trace",
-"",
-"Active"
-],
-[
-"TRN-002",
-"4_Transitions",
-"JCutDraftingWipe",
-"",
-"src/components/ChapterSlate.tsx",
-"",
-"Planned"
-],
-[
-"TRN-003",
-"4_Transitions",
-"PhotoToCardMatchCut",
-"",
-"src/components/PhotoToCardMatchCut.tsx",
-"",
-"Planned"
-],
-[
-"TRN-004",
-"4_Transitions",
-"InfiniteCanvasGrid",
-"",
-"src/components/InfiniteCanvasGrid.tsx",
-"",
-"Planned"
-],
-[
-"TRN-005",
-"4_Transitions",
-"InkBleedTransition",
-"",
-"src/components/InkBleedTransition.tsx",
-"",
-"Planned"
-],
-[
-"LOK-001",
-"5_Look_and_Color",
-"DarkArchiveOpticalStack",
-"",
-"src/themes/archivalDesk.ts",
-"",
-"Active"
-],
-[
-"LOK-002",
-"5_Look_and_Color",
-"WarmPaperOpticalStack",
-"",
-"src/theme.ts#warmPaper",
-"",
-"Planned"
-],
-[
-"LOK-003",
-"5_Look_and_Color",
-"MinimalStageCanvas",
-"",
-"src/components/MinimalStageCanvas.tsx",
-"",
-"Planned"
-],
-[
-"LOK-004",
-"5_Look_and_Color",
-"CategorySwatchCard",
-"",
-"src/components/CategorySwatchCard.tsx",
-"",
-"Planned"
-],
-[
-"LOK-005",
-"5_Look_and_Color",
-"MattePaperGrainLoop",
-"",
-"public/textures/paper-grain-loop/",
-"",
-"Planned"
-],
-[
-"LOK-006",
-"5_Look_and_Color",
-"TornPaperTapeOverlays",
-"",
-"public/textures/torn-paper-tape/",
-"",
-"Planned"
-],
-[
-"LOK-007",
-"5_Look_and_Color",
-"HalftonePhotocopyGrit",
-"",
-"public/textures/halftone-grit.png",
-"",
-"Planned"
-],
-[
-"LOK-008",
-"5_Look_and_Color",
-"FilmGrainDustLoop16mm",
-"",
-"public/textures/16mm-grain-dust.mp4",
-"",
-"Planned"
-],
-[
-"SFX-001",
-"6_Sounds",
-"SoftWhoosh",
-"",
-"public/sfx/soft-whoosh.wav",
-"",
-"Planned"
-],
-[
-"SFX-002",
-"6_Sounds",
-"CameraFocusTick",
-"",
-"public/sfx/camera-focus-tick.wav",
-"",
-"Planned"
-],
-[
-"SFX-003",
-"6_Sounds",
-"MechanicalShutter",
-"",
-"public/sfx/mechanical-shutter.wav",
-"",
-"Planned"
-],
-[
-"SFX-004",
-"6_Sounds",
-"ChalkUnderline",
-"",
-"public/sfx/chalk-underline.wav",
-"",
-"Planned"
-],
-[
-"SFX-005",
-"6_Sounds",
-"MutedThump",
-"",
-"public/sfx/muted-thump.wav",
-"",
-"Planned"
-],
-[
-"SFX-006",
-"6_Sounds",
-"CardstockSlide",
-"",
-"public/sfx/cardstock-slide.wav",
-"",
-"Planned"
-],
-[
-"SFX-007",
-"6_Sounds",
-"SoftKeyClick",
-"",
-"public/sfx/soft-key-click.wav",
-"",
-"Planned"
-],
-[
-"SFX-008",
-"6_Sounds",
-"PizzicatoHookBed",
-"",
-"src/audio/HookBedTemplate.ts",
-"",
-"Planned"
-],
-[
-"SFX-009",
-"6_Sounds",
-"AccentBellPing",
-"",
-"src/audio/SynchresisCueMap.ts",
-"",
-"Planned"
-],
-[
-"SFX-010",
-"6_Sounds",
-"JCutRiserSwell",
-"",
-"src/audio/JCutTransitionEnvelope.ts",
-"",
-"Planned"
-],
-[
-"SFX-011",
-"6_Sounds",
-"InterviewAudioWaveform",
-"",
-"src/components/AudioQuoteWaveform.tsx",
-"",
-"Planned"
-],
-[
-"SFX-012",
-"6_Sounds",
-"TypingHighlighterCombo",
-"",
-"src/components/SearchToArticleCard.tsx",
-"",
-"Planned"
-],
-[
-"MUS-001",
-"7_Music",
-"GenreSwitchStingerSuite",
-"",
-"src/audio/GenreStingerSuite.ts",
-"",
-"Planned"
-],
-[
-"MUS-002",
-"7_Music",
-"DynamicMixBreakSwell",
-"",
-"src/audio/DynamicMixBreak.ts",
-"",
-"Planned"
-],
-[
-"MUS-003",
-"7_Music",
-"SyncopatedMontageBed",
-"",
-"src/audio/SyncopatedMontageBed.ts",
-"",
-"Planned"
-],
-[
-"MUS-004",
-"7_Music",
-"ReflectivePianoPivot",
-"",
-"src/audio/ReflectivePianoBed.ts",
-"",
-"Planned"
-],
-[
-"TEX-001",
-"8_Textures",
-"GraphPaperDeskFrame",
-"",
-"src/components/GraphPaperTextureLayer.tsx",
-"",
-"Planned"
-],
-[
-"TEX-002",
-"8_Textures",
-"AnalogScanlineGlitch",
-"",
-"src/components/AnalogScanlineOverlay.tsx",
-"",
-"Planned"
-],
-[
-"TEX-003",
-"8_Textures",
-"SketchToVectorTexture",
-"",
-"src/components/SketchToVectorTexture.tsx",
-"",
-"Planned"
-],
-[
-"TEX-004",
-"8_Textures",
-"ArchivalDeskFlatlay",
-"",
-"src/components/ArchivalDeskFlatlay.tsx",
-"",
-"Planned"
-],
-[
-"MAP-001",
-"9_Maps",
-"SatelliteTerritoryZoom",
-"",
-"src/components/SatelliteTerritoryZoom.tsx",
-"",
-"Planned"
-],
-[
-"MAP-002",
-"9_Maps",
-"ReliefWatershedFlowMap",
-"",
-"src/components/ReliefFlowMap.tsx",
-"",
-"Planned"
-],
-[
-"MAP-003",
-"9_Maps",
-"ArchivalTopoBorderTrace",
-"",
-"src/components/ArchivalTopoOverlay.tsx",
-"",
-"Planned"
-],
-[
-"MAP-004",
-"9_Maps",
-"GlobalReliefScaleMap",
-"",
-"src/components/GlobalReliefScaleMap.tsx",
-"",
-"Planned"
-],
-[
-"PKG-001",
-"10_Packaging",
-"SeriesIntroGridBumper",
-"",
-"src/components/SeriesIntroBumper.tsx",
-"",
-"Planned"
-],
-[
-"PKG-002",
-"10_Packaging",
-"InlineNumberedChapter",
-"",
-"src/components/InlineChapterStamp.tsx",
-"",
-"Planned"
-],
-[
-"PKG-003",
-"10_Packaging",
-"FramedInterviewCard",
-"",
-"src/components/FramedInterviewCard.tsx",
-"",
-"Planned"
-],
-[
-"PKG-004",
-"10_Packaging",
-"SplitCreditEndScreen",
-"",
-"src/components/SplitEndScreenLayout.tsx",
-"",
-"Planned"
-],
-[
-"LOK-009",
-"5_Look_and_Color",
-"WarmGraphiteLightLab",
-"",
-"src/themes/warmGraphite.ts",
-"",
-"Active"
-],
-[
-"TXT-009",
-"2_Text",
-"FrauncesLineSerif",
-"",
-"public/fonts/fraunces-latin-400-normal.woff2;public/fonts/fraunces-latin-400-italic.woff2;public/fonts/fraunces-latin-600-normal.woff2",
-"",
-"Active"
-],
-[
-"TXT-010",
-"2_Text",
-"JetBrainsMonoLabel",
-"",
-"public/fonts/jetbrains-mono-latin-500-normal.woff2",
-"",
-"Active"
-],
-[
-"TRN-006",
-"4_Transitions",
-"PushThrough",
-"",
-"src/components/PushThrough.tsx",
-"",
-"Active"
-],
-[
-"LOK-010",
-"5_Look_and_Color",
-"OpticalStack",
-"",
-"src/layers/OpticalStack.tsx",
-"",
-"Active"
-],
-[
-"SRC-001",
-"11_Sources",
-"Dalton1798_p29",
-"",
-"public/assets/sources/dalton1798_p29.jpg",
-"",
-"Active"
-],
-[
-"SRC-002",
-"11_Sources",
-"Dalton1798_p34",
-"",
-"public/assets/sources/dalton1798_p34.jpg",
-"",
-"Active"
-],
-[
-"SRC-003",
-"11_Sources",
-"Dalton1798_p43",
-"",
-"public/assets/sources/dalton1798_p43.jpg",
-"",
-"Active"
-],
-[
-"SRC-004",
-"11_Sources",
-"DaltonTurner1834",
-"",
-"public/assets/sources/dalton_turner1834.jpg",
-"",
-"Active"
-],
-[
-"SRC-005",
-"11_Sources",
-"NewtonOpticks1704_p90",
-"",
-"public/assets/sources/newton_opticks1704_p90.jpg",
-"",
-"Active"
-],
-[
-"SRC-006",
-"11_Sources",
-"Young1802_p12",
-"",
-"public/assets/sources/young1802_p12.jpg",
-"",
-"Active"
-],
-[
-"SRC-007",
-"11_Sources",
-"Henry1854_p25",
-"",
-"public/assets/sources/henry1854_p25.jpg",
-"",
-"Active"
-],
-[
-"VIS-011",
-"1_Visuals",
-"ColourPathMap",
-"",
-"src/components/ColourPathMap.tsx",
-"",
-"Active"
-],
-[
-"VIS-012",
-"1_Visuals",
-"ConeTrio",
-"",
-"src/components/ConeTrio.tsx",
-"",
-"Active"
-],
-[
-"VIS-013",
-"1_Visuals",
-"ConeCurveChart",
-"",
-"src/components/ConeCurveChart.tsx",
-"",
-"Active"
-],
-[
-"VIS-014",
-"1_Visuals",
-"SpectrumStrip",
-"",
-"src/components/SpectrumStrip.tsx",
-"",
-"Active"
-],
-[
-"PKG-005",
-"10_Packaging",
-"SeriesTitleCard",
-"",
-"src/components/SeriesTitleCard.tsx",
-"",
-"Active"
-],
-[
-"PKG-006",
-"10_Packaging",
-"EpisodeCard",
-"",
-"src/components/EpisodeCard.tsx",
-"",
-"Active"
-],
-[
-"MUS-005",
-"7_Music",
-"SeasonBed",
-"",
-"public/music/",
-"",
-"Planned"
-],
-[
-"MUS-006",
-"7_Music",
-"SeasonSting",
-"",
-"public/music/season_sting.wav",
-"",
-"Planned"
-],
-[
-"SRC-008",
-"11_Sources",
-"DaltonWebster_c1840",
-"",
-"public/assets/sources/dalton_webster_c1840.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-009",
-"11_Sources",
-"ManchesterPlan1794",
-"",
-"public/assets/sources/manchester_plan_1794.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-010",
-"11_Sources",
-"CandleFlame_Fogg",
-"",
-"public/assets/sources/candle_flame_fogg.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-011",
-"11_Sources",
-"CandleLighting_Mixkit3458",
-"",
-"public/assets/sources/candle_lighting_mixkit3458.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-012",
-"11_Sources",
-"CandlesClose_Mixkit3438",
-"",
-"public/assets/sources/candles_close_mixkit3438.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-013",
-"11_Sources",
-"Geranium_Stang",
-"",
-"public/assets/sources/geranium_stang.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-014",
-"11_Sources",
-"Laurel_RunicEarth",
-"",
-"public/assets/sources/laurel_runicearth.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-015",
-"11_Sources",
-"SealingWax_Petrik",
-"",
-"public/assets/sources/sealingwax_petrik.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-016",
-"11_Sources",
-"GreenEye_Mixkit4257",
-"",
-"public/assets/sources/green_eye_mixkit4257.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-017",
-"11_Sources",
-"RGBPixels_Mixkit258",
-"",
-"public/assets/sources/rgb_pixels_mixkit258.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-018",
-"11_Sources",
-"CursorPixels_Mixkit3818",
-"",
-"public/assets/sources/cursor_pixels_mixkit3818.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-019",
-"11_Sources",
-"PinkFlowers_Mixkit1168",
-"",
-"public/assets/sources/pink_flowers_mixkit1168.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-020",
-"11_Sources",
-"BlueSky_Mixkit2408",
-"",
-"public/assets/sources/blue_sky_mixkit2408.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-021",
-"11_Sources",
-"Apples_Mixkit42946",
-"",
-"public/assets/sources/apples_mixkit42946.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-022",
-"11_Sources",
-"EarthViews_NASA",
-"",
-"public/assets/sources/earth_views_nasa.webm",
-"",
-"Spec Ready"
-],
-[
-"SRC-023",
-"11_Sources",
-"Pointing_Kucinic",
-"",
-"public/assets/sources/pointing_kucinic.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-024",
-"11_Sources",
-"BerkeleyCampus_2026",
-"",
-"public/assets/sources/berkeley_campus_2026.jpg",
-"",
-"Spec Ready"
-],
-[
-"SRC-025",
-"11_Sources",
-"Fong2025_Fig1C",
-"",
-"public/assets/sources/fong2025_fig1c.png",
-"",
-"Spec Ready"
-],
-[
-"SRC-026",
-"11_Sources",
-"Fong2025_Fig1A_1B",
-"",
-"public/assets/sources/fong2025_fig1a.png;public/assets/sources/fong2025_fig1b.png",
-"",
-"Spec Ready"
-],
-[
-"SRC-027",
-"11_Sources",
-"Fong2025_Fig2A",
-"",
-"public/assets/sources/fong2025_fig2a.png",
-"",
-"Spec Ready"
-],
-[
-"SRC-028",
-"11_Sources",
-"StockmanSharpe2000_ConeFundamentals",
-"",
-"public/assets/data/ss2000_cone_fundamentals.json",
-"",
-"Active"
-]
-]
+ "values": [
+  [
+   "Asset_ID",
+   "Folder",
+   "Asset_Name",
+   "Source_Origin",
+   "File_Path_or_Token",
+   "Description_&_Usage_Note",
+   "Status"
+  ],
+  [
+   "VIS-001",
+   "1_Visuals",
+   "ArchivalScanCard",
+   "",
+   "src/components/ArchivalScanCard.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-002",
+   "1_Visuals",
+   "MinimalDataChart",
+   "",
+   "src/components/MinimalDataChart.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-003",
+   "1_Visuals",
+   "HeadlineMatchCut",
+   "",
+   "src/components/HeadlineMatchCut.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-004",
+   "1_Visuals",
+   "ParallaxCutout",
+   "",
+   "src/components/ParallaxCutout.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-005",
+   "1_Visuals",
+   "SpotlightIsolator",
+   "",
+   "src/components/SpotlightIsolator.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-006",
+   "1_Visuals",
+   "CleanUICard",
+   "",
+   "src/components/CleanUICard.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-007",
+   "1_Visuals",
+   "ChapterSlate",
+   "",
+   "src/components/ChapterSlate.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-008",
+   "1_Visuals",
+   "SplitComparisonCard",
+   "",
+   "src/components/SplitComparisonCard.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "VIS-009",
+   "1_Visuals",
+   "BlueprintPhotoPair",
+   "",
+   "src/components/BlueprintPhotoPair.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "VIS-010",
+   "1_Visuals",
+   "AnalogMonitorFrame",
+   "",
+   "src/components/AnalogMonitorFrame.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TXT-001",
+   "2_Text",
+   "HeadlineArchivoBold",
+   "",
+   "public/fonts/archivo-latin-800-normal.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-002",
+   "2_Text",
+   "EditorialSerifQuote",
+   "",
+   "public/fonts/newsreader-latin-500-normal.woff2;public/fonts/newsreader-latin-500-italic.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-003",
+   "2_Text",
+   "MonoDataCounter",
+   "",
+   "public/fonts/ibm-plex-mono-latin-500-normal.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-004",
+   "2_Text",
+   "BodyPlusJakartaUI",
+   "",
+   "public/fonts/plus-jakarta-sans-latin-500-normal.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-005",
+   "2_Text",
+   "CutoutCollageTitle",
+   "",
+   "src/components/CutoutCollageTitle.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TXT-006",
+   "2_Text",
+   "SyncedQuoteBridge",
+   "",
+   "src/components/SyncedQuoteBridge.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TXT-007",
+   "2_Text",
+   "ArchivalDateStamp",
+   "",
+   "src/components/ArchivalDateStamp.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TXT-008",
+   "2_Text",
+   "EditorialLowerThird",
+   "",
+   "src/components/EditorialLowerThird.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MOT-001",
+   "3_Motion",
+   "SpringCameraDrift",
+   "",
+   "src/motion.ts#drift",
+   "",
+   "Active"
+  ],
+  [
+   "MOT-002",
+   "3_Motion",
+   "SpringEditorialReveal",
+   "",
+   "src/motion.ts#reveal",
+   "",
+   "Active"
+  ],
+  [
+   "MOT-003",
+   "3_Motion",
+   "SpringSnappyLock",
+   "",
+   "src/motion.ts#lock",
+   "",
+   "Active"
+  ],
+  [
+   "MOT-004",
+   "3_Motion",
+   "MatchCut4FrameCadence",
+   "",
+   "src/components/HeadlineMatchCut.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "MOT-005",
+   "3_Motion",
+   "VectorTraceConnector",
+   "",
+   "src/components/VectorTraceConnector.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MOT-006",
+   "3_Motion",
+   "BlueprintCounterBar",
+   "",
+   "src/components/BlueprintCounterBar.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MOT-007",
+   "3_Motion",
+   "SchematicWaveDiagram",
+   "",
+   "src/components/SchematicWaveDiagram.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MOT-008",
+   "3_Motion",
+   "BoilingInkCallout",
+   "",
+   "src/components/BoilingInkCallout.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TRN-001",
+   "4_Transitions",
+   "HardCutEyeTrace",
+   "",
+   "rules/beat-routing.md#eye-trace",
+   "",
+   "Active"
+  ],
+  [
+   "TRN-002",
+   "4_Transitions",
+   "JCutDraftingWipe",
+   "",
+   "src/components/ChapterSlate.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TRN-003",
+   "4_Transitions",
+   "PhotoToCardMatchCut",
+   "",
+   "src/components/PhotoToCardMatchCut.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TRN-004",
+   "4_Transitions",
+   "InfiniteCanvasGrid",
+   "",
+   "src/components/InfiniteCanvasGrid.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TRN-005",
+   "4_Transitions",
+   "InkBleedTransition",
+   "",
+   "src/components/InkBleedTransition.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-001",
+   "5_Look_and_Color",
+   "DarkArchiveOpticalStack",
+   "",
+   "src/themes/archivalDesk.ts",
+   "",
+   "Active"
+  ],
+  [
+   "LOK-002",
+   "5_Look_and_Color",
+   "WarmPaperOpticalStack",
+   "",
+   "src/theme.ts#warmPaper",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-003",
+   "5_Look_and_Color",
+   "MinimalStageCanvas",
+   "",
+   "src/components/MinimalStageCanvas.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-004",
+   "5_Look_and_Color",
+   "CategorySwatchCard",
+   "",
+   "src/components/CategorySwatchCard.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-005",
+   "5_Look_and_Color",
+   "MattePaperGrainLoop",
+   "",
+   "public/textures/paper-grain-loop/",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-006",
+   "5_Look_and_Color",
+   "TornPaperTapeOverlays",
+   "",
+   "public/textures/torn-paper-tape/",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-007",
+   "5_Look_and_Color",
+   "HalftonePhotocopyGrit",
+   "",
+   "public/textures/halftone-grit.png",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-008",
+   "5_Look_and_Color",
+   "FilmGrainDustLoop16mm",
+   "",
+   "public/textures/16mm-grain-dust.mp4",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-001",
+   "6_Sounds",
+   "SoftWhoosh",
+   "",
+   "public/sfx/soft-whoosh.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-002",
+   "6_Sounds",
+   "CameraFocusTick",
+   "",
+   "public/sfx/camera-focus-tick.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-003",
+   "6_Sounds",
+   "MechanicalShutter",
+   "",
+   "public/sfx/mechanical-shutter.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-004",
+   "6_Sounds",
+   "ChalkUnderline",
+   "",
+   "public/sfx/chalk-underline.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-005",
+   "6_Sounds",
+   "MutedThump",
+   "",
+   "public/sfx/muted-thump.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-006",
+   "6_Sounds",
+   "CardstockSlide",
+   "",
+   "public/sfx/cardstock-slide.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-007",
+   "6_Sounds",
+   "SoftKeyClick",
+   "",
+   "public/sfx/soft-key-click.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-008",
+   "6_Sounds",
+   "PizzicatoHookBed",
+   "",
+   "src/audio/HookBedTemplate.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-009",
+   "6_Sounds",
+   "AccentBellPing",
+   "",
+   "src/audio/SynchresisCueMap.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-010",
+   "6_Sounds",
+   "JCutRiserSwell",
+   "",
+   "src/audio/JCutTransitionEnvelope.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-011",
+   "6_Sounds",
+   "InterviewAudioWaveform",
+   "",
+   "src/components/AudioQuoteWaveform.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "SFX-012",
+   "6_Sounds",
+   "TypingHighlighterCombo",
+   "",
+   "src/components/SearchToArticleCard.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MUS-001",
+   "7_Music",
+   "GenreSwitchStingerSuite",
+   "",
+   "src/audio/GenreStingerSuite.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "MUS-002",
+   "7_Music",
+   "DynamicMixBreakSwell",
+   "",
+   "src/audio/DynamicMixBreak.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "MUS-003",
+   "7_Music",
+   "SyncopatedMontageBed",
+   "",
+   "src/audio/SyncopatedMontageBed.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "MUS-004",
+   "7_Music",
+   "ReflectivePianoPivot",
+   "",
+   "src/audio/ReflectivePianoBed.ts",
+   "",
+   "Planned"
+  ],
+  [
+   "TEX-001",
+   "8_Textures",
+   "GraphPaperDeskFrame",
+   "",
+   "src/components/GraphPaperTextureLayer.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TEX-002",
+   "8_Textures",
+   "AnalogScanlineGlitch",
+   "",
+   "src/components/AnalogScanlineOverlay.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TEX-003",
+   "8_Textures",
+   "SketchToVectorTexture",
+   "",
+   "src/components/SketchToVectorTexture.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "TEX-004",
+   "8_Textures",
+   "ArchivalDeskFlatlay",
+   "",
+   "src/components/ArchivalDeskFlatlay.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MAP-001",
+   "9_Maps",
+   "SatelliteTerritoryZoom",
+   "",
+   "src/components/SatelliteTerritoryZoom.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MAP-002",
+   "9_Maps",
+   "ReliefWatershedFlowMap",
+   "",
+   "src/components/ReliefFlowMap.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MAP-003",
+   "9_Maps",
+   "ArchivalTopoBorderTrace",
+   "",
+   "src/components/ArchivalTopoOverlay.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "MAP-004",
+   "9_Maps",
+   "GlobalReliefScaleMap",
+   "",
+   "src/components/GlobalReliefScaleMap.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "PKG-001",
+   "10_Packaging",
+   "SeriesIntroGridBumper",
+   "",
+   "src/components/SeriesIntroBumper.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "PKG-002",
+   "10_Packaging",
+   "InlineNumberedChapter",
+   "",
+   "src/components/InlineChapterStamp.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "PKG-003",
+   "10_Packaging",
+   "FramedInterviewCard",
+   "",
+   "src/components/FramedInterviewCard.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "PKG-004",
+   "10_Packaging",
+   "SplitCreditEndScreen",
+   "",
+   "src/components/SplitEndScreenLayout.tsx",
+   "",
+   "Planned"
+  ],
+  [
+   "LOK-009",
+   "5_Look_and_Color",
+   "WarmGraphiteLightLab",
+   "",
+   "src/themes/warmGraphite.ts",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-009",
+   "2_Text",
+   "FrauncesLineSerif",
+   "",
+   "public/fonts/fraunces-latin-400-normal.woff2;public/fonts/fraunces-latin-400-italic.woff2;public/fonts/fraunces-latin-600-normal.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TXT-010",
+   "2_Text",
+   "JetBrainsMonoLabel",
+   "",
+   "public/fonts/jetbrains-mono-latin-500-normal.woff2",
+   "",
+   "Active"
+  ],
+  [
+   "TRN-006",
+   "4_Transitions",
+   "PushThrough",
+   "",
+   "src/components/PushThrough.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "LOK-010",
+   "5_Look_and_Color",
+   "OpticalStack",
+   "",
+   "src/layers/OpticalStack.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-001",
+   "11_Sources",
+   "Dalton1798_p29",
+   "",
+   "public/assets/sources/dalton1798_p29.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-002",
+   "11_Sources",
+   "Dalton1798_p34",
+   "",
+   "public/assets/sources/dalton1798_p34.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-003",
+   "11_Sources",
+   "Dalton1798_p43",
+   "",
+   "public/assets/sources/dalton1798_p43.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-004",
+   "11_Sources",
+   "DaltonTurner1834",
+   "",
+   "public/assets/sources/dalton_turner1834.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-005",
+   "11_Sources",
+   "NewtonOpticks1704_p90",
+   "",
+   "public/assets/sources/newton_opticks1704_p90.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-006",
+   "11_Sources",
+   "Young1802_p12",
+   "",
+   "public/assets/sources/young1802_p12.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "SRC-007",
+   "11_Sources",
+   "Henry1854_p25",
+   "",
+   "public/assets/sources/henry1854_p25.jpg",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-011",
+   "1_Visuals",
+   "ColourPathMap",
+   "",
+   "src/components/ColourPathMap.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-012",
+   "1_Visuals",
+   "ConeTrio",
+   "",
+   "src/components/ConeTrio.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-013",
+   "1_Visuals",
+   "ConeCurveChart",
+   "",
+   "src/components/ConeCurveChart.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "VIS-014",
+   "1_Visuals",
+   "SpectrumStrip",
+   "",
+   "src/components/SpectrumStrip.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "PKG-005",
+   "10_Packaging",
+   "SeriesTitleCard",
+   "",
+   "src/components/SeriesTitleCard.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "PKG-006",
+   "10_Packaging",
+   "EpisodeCard",
+   "",
+   "src/components/EpisodeCard.tsx",
+   "",
+   "Active"
+  ],
+  [
+   "MUS-005",
+   "7_Music",
+   "SeasonBed",
+   "",
+   "public/music/",
+   "",
+   "Planned"
+  ],
+  [
+   "MUS-006",
+   "7_Music",
+   "SeasonSting",
+   "",
+   "public/music/season_sting.wav",
+   "",
+   "Planned"
+  ],
+  [
+   "SRC-008",
+   "11_Sources",
+   "DaltonWebster_c1840",
+   "",
+   "public/assets/sources/dalton_webster_c1840.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-009",
+   "11_Sources",
+   "ManchesterPlan1794",
+   "",
+   "public/assets/sources/manchester_plan_1794.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-010",
+   "11_Sources",
+   "CandleFlame_Fogg",
+   "",
+   "public/assets/sources/candle_flame_fogg.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-011",
+   "11_Sources",
+   "CandleLighting_Mixkit3458",
+   "",
+   "public/assets/sources/candle_lighting_mixkit3458.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-012",
+   "11_Sources",
+   "CandlesClose_Mixkit3438",
+   "",
+   "public/assets/sources/candles_close_mixkit3438.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-013",
+   "11_Sources",
+   "Geranium_Stang",
+   "",
+   "public/assets/sources/geranium_stang.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-014",
+   "11_Sources",
+   "Laurel_RunicEarth",
+   "",
+   "public/assets/sources/laurel_runicearth.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-015",
+   "11_Sources",
+   "SealingWax_Petrik",
+   "",
+   "public/assets/sources/sealingwax_petrik.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-016",
+   "11_Sources",
+   "GreenEye_Mixkit4257",
+   "",
+   "public/assets/sources/green_eye_mixkit4257.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-017",
+   "11_Sources",
+   "RGBPixels_Mixkit258",
+   "",
+   "public/assets/sources/rgb_pixels_mixkit258.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-018",
+   "11_Sources",
+   "CursorPixels_Mixkit3818",
+   "",
+   "public/assets/sources/cursor_pixels_mixkit3818.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-019",
+   "11_Sources",
+   "PinkFlowers_Mixkit1168",
+   "",
+   "public/assets/sources/pink_flowers_mixkit1168.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-020",
+   "11_Sources",
+   "BlueSky_Mixkit2408",
+   "",
+   "public/assets/sources/blue_sky_mixkit2408.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-021",
+   "11_Sources",
+   "Apples_Mixkit42946",
+   "",
+   "public/assets/sources/apples_mixkit42946.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-022",
+   "11_Sources",
+   "EarthViews_NASA",
+   "",
+   "public/assets/sources/earth_views_nasa.webm",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-023",
+   "11_Sources",
+   "Pointing_Kucinic",
+   "",
+   "public/assets/sources/pointing_kucinic.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-024",
+   "11_Sources",
+   "BerkeleyCampus_2026",
+   "",
+   "public/assets/sources/berkeley_campus_2026.jpg",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-025",
+   "11_Sources",
+   "Fong2025_Fig1C",
+   "",
+   "public/assets/sources/fong2025_fig1c.png",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-026",
+   "11_Sources",
+   "Fong2025_Fig1A_1B",
+   "",
+   "public/assets/sources/fong2025_fig1a.png;public/assets/sources/fong2025_fig1b.png",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-027",
+   "11_Sources",
+   "Fong2025_Fig2A",
+   "",
+   "public/assets/sources/fong2025_fig2a.png",
+   "",
+   "Spec Ready"
+  ],
+  [
+   "SRC-028",
+   "11_Sources",
+   "StockmanSharpe2000_ConeFundamentals",
+   "",
+   "public/assets/data/ss2000_cone_fundamentals.json",
+   "",
+   "Active"
+  ],
+  [
+   "LOK-011",
+   "5_Look_and_Color",
+   "VoidTheme",
+   "Own (studied LEMMiNO; analysis only)",
+   "src/themes/void.ts",
+   "Theme: near-black #131313, crimson accent, one lit object at a time, long holds, cut to black. For cold opens and mysteries. Tokens on the Theme_Library tab.",
+   "Planned"
+  ],
+  [
+   "LOK-012",
+   "5_Look_and_Color",
+   "MapRoomTheme",
+   "Own (studied Johnny Harris; analysis only)",
+   "src/themes/mapRoom.ts",
+   "Theme: deep teal #15272A, parchment documents and drawn maps, marker red and brass, Libre Caslon. For places and journeys. Tokens on the Theme_Library tab.",
+   "Planned"
+  ],
+  [
+   "LOK-013",
+   "5_Look_and_Color",
+   "FederalPrintTheme",
+   "Own (studied Phil Edwards; analysis only)",
+   "src/themes/federalPrint.ts",
+   "Theme: black #0C0C0C, paper scans on a grid, signal red and steel blue, Inter Tight. For print, design and dye stories. Tokens on the Theme_Library tab.",
+   "Planned"
+  ]
+ ]
 }

@@ -2,7 +2,7 @@
  {
   "id": "LOK-009",
   "name": "Warm Graphite Light Lab",
-  "status": "ACTIVE \u00b7 DEFAULT",
+  "status": "ACTIVE · DEFAULT",
   "origin": "Our own look, from Colour_v1 (Sam's pick, 21 Nov 2026)",
   "vars": {
    "canvas": "#2F2D2C",
@@ -37,7 +37,7 @@
     "#FFC24A"
    ],
    [
-    "Cone red \u00b7 green \u00b7 blue",
+    "Cone red · green · blue",
     "#FF3B30 #30D158 #2F6BFF"
    ]
   ],
@@ -64,7 +64,7 @@
  {
   "id": "LOK-001",
   "name": "Archival Desk",
-  "status": "ACTIVE \u00b7 BUILT",
+  "status": "ACTIVE · BUILT",
   "origin": "From the 4-Gate Protocol guide",
   "vars": {
    "canvas": "#14171A",
@@ -124,9 +124,9 @@
   "sample": "image:../library/qa/library/render/ArchivalScanCard-LOK-001_f105.jpg"
  },
  {
-  "id": "CANDIDATE A",
+  "id": "LOK-011",
   "name": "Void",
-  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "status": "APPROVED · TO BUILD",
   "origin": "Studied: LEMMiNO, 'The Universal S' (measured: 53% of pixels near-black #181818)",
   "take": "Huge black negative space; one small object or line of type at a time; wide-tracked caps",
   "change": "Warmer crimson accent and our serif for spoken lines; no imitation of LEMMiNO's titles or logo",
@@ -188,9 +188,9 @@
   }
  },
  {
-  "id": "CANDIDATE B",
+  "id": "LOK-012",
   "name": "Map Room",
-  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "status": "APPROVED · TO BUILD",
   "origin": "Studied: Johnny Harris, 'How Europe Stole Africa so Quickly, Mapped' (teal room, parchment maps, sepia)",
   "take": "Parchment maps and documents on a dark teal ground; hand-marked annotations",
   "change": "No host on camera; our maps are drawn, not printed and filmed; brass instead of marker yellow",
@@ -253,72 +253,9 @@
   }
  },
  {
-  "id": "CANDIDATE C",
-  "name": "Night Lab",
-  "status": "CANDIDATE \u00b7 FOR REVIEW",
-  "origin": "Studied: Be Smart, 'How Do We Actually See Color?' (navy diagram ground, white line art, pure RGB)",
-  "take": "One dark navy ground for every diagram; white line drawings; pure saturated primaries only for the light itself",
-  "change": "No host or studio set; our own icon set (eye, cone trio, prism) drawn the same every time",
-  "vars": {
-   "canvas": "#171A2C",
-   "ink": "#F4F4F8",
-   "sec": "#9AA0C0",
-   "accent": "#98F858",
-   "accent2": "#2A3CC0",
-   "panel": "#20243A",
-   "hair": "rgba(244,244,248,0.14)",
-   "paper": "#EEF0F6",
-   "paperInk": "#171A2C"
-  },
-  "colors": [
-   [
-    "Canvas (navy)",
-    "#171A2C"
-   ],
-   [
-    "Ink",
-    "#F4F4F8"
-   ],
-   [
-    "Secondary",
-    "#9AA0C0"
-   ],
-   [
-    "Lime (accent)",
-    "#98F858"
-   ],
-   [
-    "Signal blue",
-    "#2A3CC0"
-   ],
-   [
-    "Light red \u00b7 yellow",
-    "#E01010 #F8F010"
-   ]
-  ],
-  "head": [
-   "Space Grotesk",
-   700
-  ],
-  "body": [
-   "Inter",
-   400
-  ],
-  "label": [
-   "Space Grotesk",
-   500
-  ],
-  "rules": {
-   "Texture and light": "Flat, no grain; light shown as glowing strokes on dark",
-   "Motion": "Diagrams build line by line; curves draw on; labels snap in",
-   "Transition": "The diagram's last element becomes the next shot's first",
-   "Best for": "Science explainers: cones, metamers, opponent colours (eps 2-3)"
-  }
- },
- {
-  "id": "CANDIDATE D",
+  "id": "LOK-013",
   "name": "Federal Print",
-  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "status": "APPROVED · TO BUILD",
   "origin": "Studied: Phil Edwards, 'How the US government got hip graphic design' (black ground, white paper scans, red and steel blue)",
   "take": "Real printed pages on black; bold modernist type; red and steel-blue labels",
   "change": "No host on camera; our own grid and labels; film-strip framing used sparingly",
