@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T15:30:02.907Z",
+ "generated": "2026-11-22T15:38:52.684Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -272,11 +272,11 @@
    "folder": "3_Motion",
    "name": "VectorTraceConnector",
    "paths": [
-    "src/components/VectorTraceConnector.tsx"
+    "src/layers/VectorTraceConnector.tsx"
    ],
-   "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: a route between two places on a map (Eaglesfield to Kendal) or a link between two named things the line says belong together (John and Jonathan). Limit: max 6 beats per episode; one trace on screen at a time. Not for: decoration, or arrows that point at what a label already names.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "MOT-006": {
@@ -1655,11 +1655,11 @@
    "folder": "3_Motion",
    "name": "LineBoil",
    "paths": [
-    "src/motion.ts"
+    "src/layers/LineBoil.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: drawn diagrams (eyes, swatches, maps) to feel handmade. Limit: only on line drawings; never on text or photos. Not for: real scans.",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: our own line drawings (map pins and rings, routes, connectors, hatched period drawings). Limit: max 16 beats per episode; amplitude <= 2 px. Not for: text, photos, real scans or data charts.",
+   "maxBeats": 16,
    "maxShare": null
   },
   "TEX-005": {
@@ -1669,8 +1669,8 @@
    "paths": [
     "src/layers/EngravingHatch.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: drawn period scenes (Kendal, Manchester, Ransome's room). Limit: max 10 beats per episode. Not for: modern scenes or photos.",
+   "status": "Active",
+   "use": "Best use: drawn period objects and scenes (a diary, a room, instruments). Limit: max 10 beats per episode. Not for: modern scenes, photos, real scans or text.",
    "maxBeats": 10,
    "maxShare": null
   },
@@ -1732,8 +1732,8 @@
    "paths": [
     "src/layers/PrintScreenOverlay.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: held full-frame stills. Limit: max 6 beats per episode; opacity <= 0.15. Not for: text, diagrams or faces.",
+   "status": "Active",
+   "use": "Best use: held full-frame photos of objects or places (the stockings photo). Limit: max 6 beats per episode; strength <= 0.15. Not for: text, scans of pages, diagrams or faces.",
    "maxBeats": 6,
    "maxShare": null
   },
@@ -1900,10 +1900,10 @@
    "folder": "3_Motion",
    "name": "ExtremeEase",
    "paths": [
-    "src/motion.ts"
+    "src/motion.ts#snap"
    ],
-   "status": "Planned",
-   "use": "Best use: one crisp move per act.",
+   "status": "Active",
+   "use": "Best use: the one crisp move of an act (a reported colour snapping to cherry red, a card locking on a reveal). Limit: max 1 per act. Not for: entrances in general (MOT-002) or camera moves.",
    "maxBeats": null,
    "maxShare": null
   },

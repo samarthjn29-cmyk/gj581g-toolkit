@@ -52,3 +52,21 @@ export function canvasAfterMove(hex: string, frame: number, endFrame: number, fr
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
   return `rgba(${r},${g},${b},${a.toFixed(3)})`;
 }
+
+// MOT-011 ExtremeEase (studied Chris Moran's Google-style tech ads short, 22 Nov 2026; analysis only): arrive fast,
+// settle long. Calm version: one crisp move per act (a colour snapping to its reported shade, a card locking).
+// 0.4-0.8 s; most of the travel happens in the first fifth, the rest is a long, soft landing. No overshoot.
+export const EXTREME = Easing.bezier(0.05, 0.9, 0.1, 1);
+export function snap(frame: number, fps: number, startSec: number, durSec = 0.6): number {
+  if (durSec < 0.4 || durSec > 0.8) throw new Error(`snap ${durSec}s is outside the calm range 0.4-0.8 s.`);
+  const a = sec(startSec, fps);
+  return interpolate(frame, [a, a + sec(durSec, fps)], [0, 1], { ...clamp, easing: EXTREME });
+}
+
+// MOT-009 LineBoil (studied Ben Marriott's Best Motion Design of 2026, Giant Ant for OpenTable; analysis only):
+// a hand-drawn line never sits perfectly still. The seed of a small displacement changes every `every` frames
+// (default 3: "on threes"), so drawn lines wobble a pixel or so. Calm: amplitude 0.5-2 px. Only for our own line
+// drawings (pins, routes, connectors, hatched drawings); never on text, photos or scans (layers/LineBoil.tsx).
+export function boilStep(frame: number, every = 3, seed = 1): number {
+  return Math.floor(frame / Math.max(2, every)) * 7 + seed * 101;
+}

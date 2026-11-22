@@ -4,6 +4,7 @@ import { Composition, Folder } from "remotion";
 import { Preview, type PreviewProps } from "./previews/Preview";
 import { PushThroughPreview } from "./previews/PushThroughPreview";
 import { TransitionPreview, type TransitionKind } from "./previews/TransitionPreview";
+import { MotionTexturePreview, type MotionTextureKind } from "./previews/MotionTexturePreview";
 import { DEMO, DEMO_VARIANTS } from "./previews/demoProps";
 import { COMPONENTS } from "./components";
 import { Episode, type EpisodeProps } from "./episodes/Episode";
@@ -63,6 +64,18 @@ export const RemotionRoot: React.FC = () => {
               key={id}
               id={`${id}-${th.id}`}
               component={TransitionPreview}
+              durationInFrames={5 * FPS}
+              fps={FPS}
+              width={W}
+              height={H}
+              defaultProps={{ themeId: th.id, registryMode: "render" as const, kind }}
+            />
+          ))}
+          {([["VectorTraceConnector", "trace"], ["LineBoil", "boil"], ["ExtremeEase", "snap"], ["EngravingHatch", "hatch"], ["PrintScreenOverlay", "printscreen"]] as [string, MotionTextureKind][]).map(([id, kind]) => (
+            <Composition
+              key={id}
+              id={`${id}-${th.id}`}
+              component={MotionTexturePreview}
               durationInFrames={5 * FPS}
               fps={FPS}
               width={W}
