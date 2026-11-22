@@ -72,7 +72,8 @@ shot(B(8, 9, 10), "ArchivalScanCard", lambda r: {
                    {"box": [440, 2100, 700, 54], "atSec": 1.5},
                    {"box": [1090, 2158, 300, 46], "atSec": r(word("almost"))}],
     "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
-    "source": "JOHN DALTON · 1798 · P. 29"})
+    "source": "JOHN DALTON · 1798 · P. 29"},
+    transitionIn="slide")
 # 11 Dalton's swatch: DAY sky-blue already filled, CANDLE empty on "candle".
 shot(B(11), "SwatchRows", lambda r: {
     "columns": ["BY DAY", "BY CANDLE"],
@@ -99,17 +100,21 @@ shot(B(14, 15, 16, 17, 18, 19), "SwatchRows", lambda r: {
          "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": r(BEAT["E01-A1-18"][0]), "fillSec": r(word("brother"))},
                    {"color": RED, "name": "RED", "atSec": r(BEAT["E01-A1-18"][0]), "fillSec": r(word("brother"))}],
          "sub": {"text": "JONATHAN", "atSec": r(word("jonathan"))}}],
-    "caption": {"text": "What he called red", "atSec": r(word("red")), "untilSec": r(word("friends"))}})
+    "caption": {"text": "What he called red", "atSec": r(word("red")), "untilSec": r(word("friends"))}},
+    transitionIn="slide")
 # 20 the geranium alone; 21 push into one petal; 22 WHERE IS THE PINK?
-shot(B(20), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 0]})
-shot(B(21), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [640, 560, 520, 292], "warmth": [0, 0]},
-     transitionIn="push", focus=[860, 620])
+# 20 the friends' pink swatch grows into the flower (push-through); label on the question (Vox rule: visualise every line).
+shot(B(20), "FootagePlate", lambda r: {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 0],
+                                       "labels": [{"text": "WHO'S RIGHT?", "atSec": r(word("who's")), "x": 960, "y": 860, "align": "center", "accent": True}]},
+     transitionIn="push", focus=[1033, 552])
+shot(B(21), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [640, 560, 520, 292], "warmth": [0, 0]})
 shot(B(22), "KineticLine", lambda r: {
     "lines": [{"text": "Where is the pink?", "atSec": r(word("where"))}],
     "backdrop": {"srcId": "SRC-013", "imgSize": GER, "crop": [640, 560, 520, 292], "layout": "full", "dim": 0.5}})
 # 23 back to the candle, wide (the clip forward, from 3 s in).
-shot(B(23), "FootagePlate", {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
-                              "clipStartSec": 3, "warmth": [1, 1]})
+shot(B(23), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
+                              "clipStartSec": 3, "warmth": [1, 1],
+                              "labels": [{"text": "A SILLY QUESTION?", "atSec": r(word("silly")), "x": 960, "y": 860, "align": "center"}]})
 # 24 Dalton's first face: Charles Turner's mezzotint, 1834.
 shot(B(24), "ParallaxCutout", lambda r: {
     "bg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [0, 300, 996, 560]},

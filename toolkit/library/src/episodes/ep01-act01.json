@@ -227,12 +227,13 @@
     "TXT-009",
     "TXT-010",
     "MOT-002",
-    "TRN-001",
+    "TRN-007",
     "LOK-009",
     "LOK-010",
     "SFX-006",
     "SRC-001",
     "MOT-003",
+    "TRN-001",
     "MOT-001"
    ],
    "props": {
@@ -296,7 +297,8 @@
      24.2,
      26.3
     ]
-   ]
+   ],
+   "transitionIn": "slide"
   },
   {
    "id": "11",
@@ -423,11 +425,12 @@
     "VIS-017",
     "TXT-010",
     "MOT-003",
-    "TRN-001",
+    "TRN-007",
     "LOK-009",
     "LOK-010",
     "SRC-029",
     "MOT-002",
+    "TRN-001",
     "MOT-001"
    ],
    "props": {
@@ -539,7 +542,8 @@
      46.1,
      49.1
     ]
-   ]
+   ],
+   "transitionIn": "slide"
   },
   {
    "id": "20",
@@ -551,8 +555,9 @@
    "component": "FootagePlate",
    "assets": [
     "VIS-016",
+    "TXT-010",
     "MOT-001",
-    "TRN-001",
+    "TRN-006",
     "LOK-009",
     "LOK-010",
     "SRC-013"
@@ -573,6 +578,16 @@
     "warmth": [
      0,
      0
+    ],
+    "labels": [
+     {
+      "text": "WHO'S RIGHT?",
+      "atSec": 0.44,
+      "x": 960,
+      "y": 860,
+      "align": "center",
+      "accent": true
+     }
     ]
    },
    "beatTimes": [
@@ -581,6 +596,11 @@
      49.1,
      51.7
     ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    1033,
+    552
    ]
   },
   {
@@ -594,7 +614,7 @@
    "assets": [
     "VIS-016",
     "MOT-001",
-    "TRN-006",
+    "TRN-001",
     "LOK-009",
     "LOK-010",
     "SRC-013"
@@ -623,11 +643,6 @@
      51.7,
      54.2
     ]
-   ],
-   "transitionIn": "push",
-   "focus": [
-    860,
-    620
    ]
   },
   {
@@ -688,6 +703,7 @@
    "component": "FootagePlate",
    "assets": [
     "VIS-016",
+    "TXT-010",
     "MOT-001",
     "TRN-001",
     "LOK-009",
@@ -707,6 +723,15 @@
     "warmth": [
      1,
      1
+    ],
+    "labels": [
+     {
+      "text": "A SILLY QUESTION?",
+      "atSec": 2.13,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     }
     ]
    },
    "beatTimes": [

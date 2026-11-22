@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T07:24:23.808Z",
+ "generated": "2026-11-22T07:46:23.309Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1506,6 +1506,162 @@
    "use": "Best use: the request to examine Dalton's eyes and the examination itself (acts 1 and 6). Limit: max 8 beats per episode; max 6% of runtime. Not for: how the eye works in general (EyeDiagram section mode), or any shot that would show real tissue.",
    "maxBeats": 8,
    "maxShare": 6
+  },
+  "TRN-007": {
+   "id": "TRN-007",
+   "folder": "4_Transitions",
+   "name": "SlideAcross",
+   "paths": [
+    "src/components/SlideAcross.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: moving into or out of a document, or between two documents (a scene change, not within a scene). Limit: max 8 beats per episode; never two in a row. Not for: cuts inside one scene (TRN-001) or a detail growing into the next shot (TRN-006).",
+   "maxBeats": 8,
+   "maxShare": null
+  },
+  "VIS-023": {
+   "id": "VIS-023",
+   "folder": "1_Visuals",
+   "name": "GlyphMosaic",
+   "paths": [
+    "src/components/GlyphMosaic.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: act numbers and the numbered keepers at an episode's end; one hero word per episode. Limit: max 8 beats per episode. Not for: body text or labels.",
+   "maxBeats": 8,
+   "maxShare": null
+  },
+  "VIS-024": {
+   "id": "VIS-024",
+   "folder": "1_Visuals",
+   "name": "ScaleField",
+   "paths": [
+    "src/components/ScaleField.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one big-number scale reveal (millions of colours, 1 in 12 men). Limit: max 2 beats per episode. Not for: small numbers (use YearCounter) or decoration.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "VIS-025": {
+   "id": "VIS-025",
+   "folder": "1_Visuals",
+   "name": "PictureToShape",
+   "paths": [
+    "src/components/PictureToShape.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a real image whose shape carries the point. Limit: max 4 beats per episode. Not for: pictures without a shape to show.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "VIS-026": {
+   "id": "VIS-026",
+   "folder": "1_Visuals",
+   "name": "SourceWall",
+   "paths": [
+    "src/components/SourceWall.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: the evidence-pile moment (many papers and reports at once). Limit: max 3 beats per episode. Not for: a single source (ArchivalScanCard).",
+   "maxBeats": 3,
+   "maxShare": null
+  },
+  "VIS-027": {
+   "id": "VIS-027",
+   "folder": "1_Visuals",
+   "name": "StillsMontage",
+   "paths": [
+    "src/components/StillsMontage.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a long span said out loud (a hundred and fifty-one years), years passing in a life. Limit: max 3 beats per episode; one burst of motion per montage. Not for: comparisons.",
+   "maxBeats": 3,
+   "maxShare": null
+  },
+  "TXT-012": {
+   "id": "TXT-012",
+   "folder": "2_Text",
+   "name": "KeywordSlab",
+   "paths": [
+    "src/components/KeywordSlab.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: the one word the viewer must keep in a beat. Limit: max 12 beats per episode; never two on screen; only in themes with a condensed face (e.g. LOK-013). Not for: full sentences.",
+   "maxBeats": 12,
+   "maxShare": null
+  },
+  "TXT-013": {
+   "id": "TXT-013",
+   "folder": "2_Text",
+   "name": "RunningHead",
+   "paths": [
+    "src/components/RunningHead.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: acts longer than 2 minutes, so the viewer always knows where they are. Limit: one per act; off during title cards, quotes and full-frame pictures. Not for: short acts.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "PKG-007": {
+   "id": "PKG-007",
+   "folder": "10_Packaging",
+   "name": "NumberedKeepers",
+   "paths": [
+    "src/components/NumberedKeepers.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: an episode or season ending that gives the viewer rules to keep. Limit: once per episode, 3-5 items. Not for: recaps of facts.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-015": {
+   "id": "LOK-015",
+   "folder": "5_Look_and_Color",
+   "name": "AnalogueFinish",
+   "paths": [
+    "src/layers/AnalogueFinish.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: candlelit, archival and memory scenes. Limit: max 15% of runtime; never on diagrams or text-heavy beats. Not for: the whole episode.",
+   "maxBeats": null,
+   "maxShare": 15
+  },
+  "LOK-016": {
+   "id": "LOK-016",
+   "folder": "5_Look_and_Color",
+   "name": "CandleFlicker",
+   "paths": [
+    "src/layers/CandleFlicker.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: candlelit scenes (Kendal 1792, the 1844 room). Limit: max 12 beats per episode; only where a flame is on screen or just off it. Not for: daylight or diagrams.",
+   "maxBeats": 12,
+   "maxShare": null
+  },
+  "MOT-009": {
+   "id": "MOT-009",
+   "folder": "3_Motion",
+   "name": "LineBoil",
+   "paths": [
+    "src/motion.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: drawn diagrams (eyes, swatches, maps) to feel handmade. Limit: only on line drawings; never on text or photos. Not for: real scans.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TEX-005": {
+   "id": "TEX-005",
+   "folder": "8_Textures",
+   "name": "EngravingHatch",
+   "paths": [
+    "src/layers/EngravingHatch.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: drawn period scenes (Kendal, Manchester, Ransome's room). Limit: max 10 beats per episode. Not for: modern scenes or photos.",
+   "maxBeats": 10,
+   "maxShare": null
   }
  }
 }

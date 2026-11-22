@@ -4,6 +4,7 @@ import { COMPONENTS } from "../components";
 import { ThemeProvider } from "../themes";
 import { OpticalStack } from "../layers/OpticalStack";
 import { PushThrough } from "../components/PushThrough";
+import { SlideAcross } from "../components/SlideAcross";
 import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
 
@@ -16,7 +17,7 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push";
+  transitionIn?: "cut" | "push" | "slide";
   focus?: [number, number]; // key point for a push-through (the last shot's key picture)
   beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
   note?: string;
@@ -66,6 +67,19 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
         const prev = beats[i - 1];
         const entry = COMPONENTS[b.component];
         let body: React.ReactNode = <Shot beat={b} />;
+        if (b.transitionIn === "slide" && prev) {
+          const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
+          body = (
+            <SlideAcross
+              from={
+                <Freeze frame={prevDur - 1}>
+                  <Shot beat={prev} />
+                </Freeze>
+              }
+              to={<Shot beat={b} />}
+            />
+          );
+        }
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (

@@ -103,18 +103,36 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
             )
           : 1);
 
-  // Meridians (vertical ellipses) and parallels give the ball its volume.
-  const meridians = [0.25, 0.55, 0.82].map((k) => R * k);
+  // Meridians and parallels (faint) keep the drawing's volume; shading, vessels, iris and the optic nerve make it an eye.
+  const meridians = [0.3, 0.62, 0.88].map((k) => R * k);
   const parallels = [-0.55, 0, 0.55];
   const cutLen =
     Math.PI *
     (3 * (cutRx + cutRy) -
       Math.sqrt((3 * cutRx + cutRy) * (cutRx + 3 * cutRy)));
-  const iris = { x: cx - R * 0.62, rx: R * 0.16, ry: R * 0.4 };
+  // The eye looks front-left; a slow drift of the gaze (12 px over the shot) keeps the drawing alive.
+  const gaze = interpolate(frame, [0, Math.max(1, durationInFrames)], [0, 12], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const iris = { x: cx - R * 0.64 + gaze, rx: R * 0.17, ry: R * 0.42 };
+  const pupil = { rx: iris.rx * 0.4, ry: iris.ry * 0.4 };
+  // Thin vessels on the white, running from the back towards the iris (seeded, the same every frame).
+  const vessels = [
+    [0.15, -0.55, -0.32, -0.3, -0.45, -0.16],
+    [0.25, 0.5, -0.2, 0.32, -0.43, 0.18],
+    [0.35, -0.1, -0.1, -0.05, -0.38, 0.02],
+    [-0.05, -0.75, -0.3, -0.62, -0.5, -0.34],
+    [0.05, 0.78, -0.28, 0.6, -0.5, 0.36],
+  ].map(
+    (v) =>
+      `M ${cx + v[0] * R} ${cy + v[1] * R} Q ${cx + v[2] * R} ${cy + v[3] * R} ${cx + v[4] * R} ${cy + v[5] * R}`,
+  );
+  const fibres = 44;
 
   const ball = (side: "front" | "back") => (
     <g clipPath={`url(#${side}${uid})`}>
-      <circle cx={cx} cy={cy} r={R} fill={t.colors.panel} />
+      <circle cx={cx} cy={cy} r={R} fill={`url(#shade${uid})`} />
       {meridians.map((m) => (
         <ellipse
           key={m}
@@ -124,24 +142,43 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
           ry={R}
           fill="none"
           stroke={ink}
-          strokeOpacity={0.14}
-          strokeWidth={1.2}
+          strokeOpacity={0.07}
+          strokeWidth={1}
         />
       ))}
-      {parallels.map((p) => (
+      {parallels.map((q) => (
         <ellipse
-          key={p}
+          key={q}
           cx={cx}
-          cy={cy + p * R}
-          rx={R * Math.sqrt(1 - p * p)}
-          ry={R * 0.12 * Math.sqrt(1 - p * p)}
+          cy={cy + q * R}
+          rx={R * Math.sqrt(1 - q * q)}
+          ry={R * 0.12 * Math.sqrt(1 - q * q)}
           fill="none"
           stroke={ink}
-          strokeOpacity={0.12}
-          strokeWidth={1.2}
+          strokeOpacity={0.06}
+          strokeWidth={1}
         />
       ))}
-      <circle cx={cx} cy={cy} r={R} fill="none" stroke={ink} strokeWidth={3} />
+      {vessels.map((d, k) => (
+        <path
+          key={k}
+          d={d}
+          fill="none"
+          stroke={t.colors.cones.L}
+          strokeOpacity={0.28}
+          strokeWidth={k < 3 ? 1.6 : 1.1}
+          strokeLinecap="round"
+        />
+      ))}
+      <circle cx={cx} cy={cy} r={R} fill={`url(#rim${uid})`} />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={R}
+        fill="none"
+        stroke={ink}
+        strokeWidth={2.6}
+      />
       {side === "front" ? (
         <g>
           <ellipse
@@ -149,43 +186,84 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
             cy={cy}
             rx={iris.rx}
             ry={iris.ry}
-            fill="none"
+            fill={`url(#iris${uid})`}
             stroke={ink}
-            strokeWidth={2.6}
+            strokeWidth={2.4}
           />
-          {Array.from({ length: 14 }, (_, k) => {
-            const a = (k / 14) * Math.PI * 2;
+          {Array.from({ length: fibres }, (_, k) => {
+            const ang = (k / fibres) * Math.PI * 2;
+            const wob = 0.06 * Math.sin(k * 2.7);
             return (
               <line
                 key={k}
-                x1={iris.x + Math.cos(a) * iris.rx * 0.45}
-                y1={cy + Math.sin(a) * iris.ry * 0.45}
-                x2={iris.x + Math.cos(a) * iris.rx * 0.92}
-                y2={cy + Math.sin(a) * iris.ry * 0.92}
+                x1={iris.x + Math.cos(ang) * pupil.rx * 1.08}
+                y1={cy + Math.sin(ang) * pupil.ry * 1.08}
+                x2={iris.x + Math.cos(ang + wob) * iris.rx * 0.94}
+                y2={cy + Math.sin(ang + wob) * iris.ry * 0.94}
                 stroke={ink}
-                strokeOpacity={0.35}
-                strokeWidth={1.2}
+                strokeOpacity={k % 3 === 0 ? 0.45 : 0.22}
+                strokeWidth={1}
               />
             );
           })}
           <ellipse
             cx={iris.x}
             cy={cy}
-            rx={iris.rx * 0.42}
-            ry={iris.ry * 0.42}
-            fill={t.colors.dimMask}
-            stroke={ink}
-            strokeWidth={2}
-          />
-          <path
-            d={`M ${iris.x + 8} ${cy - iris.ry * 1.25} Q ${iris.x - R * 0.3} ${cy} ${iris.x + 8} ${cy + iris.ry * 1.25}`}
+            rx={iris.rx * 0.62}
+            ry={iris.ry * 0.62}
             fill="none"
             stroke={ink}
-            strokeOpacity={0.55}
-            strokeWidth={2}
+            strokeOpacity={0.35}
+            strokeWidth={1.2}
+            strokeDasharray="3 5"
+          />
+          <ellipse
+            cx={iris.x}
+            cy={cy}
+            rx={pupil.rx}
+            ry={pupil.ry}
+            fill={t.colors.dimMask}
+            stroke={ink}
+            strokeOpacity={0.6}
+            strokeWidth={1.6}
+          />
+          {/* The cornea: a clear dome over the iris, with a window-shaped highlight. */}
+          <path
+            d={`M ${iris.x + 10} ${cy - iris.ry * 1.22} Q ${iris.x - R * 0.34} ${cy} ${iris.x + 10} ${cy + iris.ry * 1.22}`}
+            fill={ink}
+            fillOpacity={0.04}
+            stroke={ink}
+            strokeOpacity={0.6}
+            strokeWidth={1.8}
+          />
+          <ellipse
+            cx={iris.x - iris.rx * 0.25}
+            cy={cy - iris.ry * 0.38}
+            rx={iris.rx * 0.18}
+            ry={iris.ry * 0.12}
+            fill={ink}
+            opacity={0.75}
+            transform={`rotate(-20 ${iris.x - iris.rx * 0.25} ${cy - iris.ry * 0.38})`}
           />
         </g>
-      ) : null}
+      ) : (
+        <g>
+          {/* The optic nerve leaving the back of the eye. */}
+          <path
+            d={`M ${cx + R * 0.93} ${cy - 38} C ${cx + R * 1.12} ${cy - 40} ${cx + R * 1.3} ${cy - 30} ${cx + R * 1.42} ${cy - 22} L ${cx + R * 1.42} ${cy + 46} C ${cx + R * 1.3} ${cy + 52} ${cx + R * 1.12} ${cy + 58} ${cx + R * 0.93} ${cy + 56}`}
+            fill={t.colors.panel}
+            stroke={ink}
+            strokeWidth={2.4}
+          />
+          <path
+            d={`M ${cx + R * 0.98} ${cy + 10} C ${cx + R * 1.15} ${cy + 8} ${cx + R * 1.3} ${cy + 12} ${cx + R * 1.42} ${cy + 12}`}
+            fill="none"
+            stroke={ink}
+            strokeOpacity={0.3}
+            strokeWidth={1}
+          />
+        </g>
+      )}
     </g>
   );
 
@@ -252,6 +330,31 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
         }}
       >
         <defs>
+          <radialGradient id={`shade${uid}`} cx="34%" cy="36%" r="72%">
+            <stop offset="0%" stopColor={ink} stopOpacity={0.2} />
+            <stop offset="55%" stopColor={t.colors.panel} stopOpacity={1} />
+            <stop offset="100%" stopColor={t.colors.canvas} stopOpacity={1} />
+          </radialGradient>
+          <radialGradient id={`rim${uid}`} cx="50%" cy="50%" r="50%">
+            <stop offset="82%" stopColor={ink} stopOpacity={0} />
+            <stop offset="100%" stopColor={ink} stopOpacity={0.12} />
+          </radialGradient>
+          <radialGradient id={`iris${uid}`} cx="50%" cy="50%" r="50%">
+            <stop
+              offset="30%"
+              stopColor={t.colors.secondary}
+              stopOpacity={0.55}
+            />
+            <stop
+              offset="100%"
+              stopColor={t.colors.secondary}
+              stopOpacity={0.18}
+            />
+          </radialGradient>
+          <radialGradient id={`jelly${uid}`} cx="45%" cy="40%" r="60%">
+            <stop offset="0%" stopColor={ink} stopOpacity={0.16} />
+            <stop offset="100%" stopColor={ink} stopOpacity={0.03} />
+          </radialGradient>
           <clipPath id={`front${uid}`}>
             <rect x={0} y={0} width={cutX} height={1080} />
           </clipPath>
@@ -267,34 +370,54 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
             cy={cy}
             rx={cutRx}
             ry={cutRy}
-            fill={t.colors.canvas}
+            fill={ink}
+            fillOpacity={0.85}
             stroke={ink}
-            strokeWidth={3}
+            strokeWidth={2.6}
           />
           <ellipse
             cx={cutX}
             cy={cy}
             rx={cutRx * 0.9}
-            ry={cutRy * 0.94}
-            fill="none"
-            stroke={t.colors.accent}
-            strokeWidth={4}
-            strokeOpacity={0.8}
+            ry={cutRy * 0.95}
+            fill={t.colors.canvas}
           />
           <ellipse
             cx={cutX}
             cy={cy}
-            rx={cutRx * 0.84}
-            ry={cutRy * 0.88}
-            fill={ink}
-            fillOpacity={0.06}
+            rx={cutRx * 0.86}
+            ry={cutRy * 0.915}
+            fill="none"
+            stroke={t.colors.accent}
+            strokeWidth={4}
+            strokeOpacity={0.85}
           />
+          <ellipse
+            cx={cutX}
+            cy={cy}
+            rx={cutRx * 0.8}
+            ry={cutRy * 0.87}
+            fill={`url(#jelly${uid})`}
+          />
+          {[0.25, 0.5, 0.72].map((k) => (
+            <ellipse
+              key={k}
+              cx={cutX}
+              cy={cy}
+              rx={cutRx * 0.8 * k}
+              ry={cutRy * 0.87 * k}
+              fill="none"
+              stroke={ink}
+              strokeOpacity={0.06}
+              strokeWidth={1}
+            />
+          ))}
           {jellyTint ? (
             <ellipse
               cx={cutX}
               cy={cy}
-              rx={cutRx * 0.84}
-              ry={cutRy * 0.88}
+              rx={cutRx * 0.8}
+              ry={cutRy * 0.87}
               fill={jellyTint.color}
               opacity={tint}
             />
@@ -310,7 +433,25 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
               d={`M ${cutX} ${cy - cutRy} A ${cutRx} ${cutRy} 0 0 1 ${cutX} ${cy + cutRy}`}
               fill={t.colors.canvas}
               stroke={ink}
+              strokeWidth={2.6}
+            />
+            <path
+              d={`M ${cutX} ${cy - cutRy * 0.95} A ${cutRx * 0.86} ${cutRy * 0.915} 0 0 1 ${cutX} ${cy + cutRy * 0.95}`}
+              fill="none"
+              stroke={t.colors.accent}
+              strokeOpacity={0.6}
               strokeWidth={3}
+            />
+            <ellipse
+              cx={cutX + cutRx * 0.32}
+              cy={cy}
+              rx={cutRx * 0.34}
+              ry={cutRy * 0.3}
+              fill={ink}
+              fillOpacity={0.12}
+              stroke={ink}
+              strokeOpacity={0.7}
+              strokeWidth={1.8}
             />
           </g>
         </g>
