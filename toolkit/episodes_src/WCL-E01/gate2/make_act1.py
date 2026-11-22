@@ -224,7 +224,7 @@ audio = [
     {"id": "SFX-001", "atSec": round(word("dies", 75, end=True) + 0.05, 2), "volumeDb": -15},  # the push into his lens
     {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -22},  # count lock tick (own); texture level since v12, the impact is the hero (review v11)
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
-    {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
+    {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick: option B 'pad' (v14, 22 Nov 2026; was C 'prism')
 ]
 # The sound pass (22 Nov 2026; Sam: "Demo sound should go in act 1"; rules from the study of Chris Moran's "The VOX
 # Sound Design System", scripts/sound-pass.py). Levels are dB against the voice (SRC-030 at -19.6 LUFS, kit files at
