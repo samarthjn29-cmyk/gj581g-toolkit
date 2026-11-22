@@ -7,7 +7,11 @@
    "Source_Origin",
    "File_Path_or_Token",
    "Description_&_Usage_Note",
-   "Status"
+   "Status",
+   "Total_Uses",
+   "Usage_Status",
+   "Date_Logged",
+   "Best_Use_&_Limit"
   ],
   [
    "VIS-001",
@@ -16,7 +20,11 @@
    "",
    "src/components/ArchivalScanCard.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: a real document or quote as proof (a page, a letter, a paper), with the quoted words highlighted. Limit: max 30% of runtime. Not for: a page with nothing highlighted or said about it."
   ],
   [
    "VIS-002",
@@ -25,7 +33,11 @@
    "",
    "src/components/MinimalDataChart.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: one statistic or contrast that the line says out loud (two or three bars, one hero). Limit: max 6 beats per episode. Not for: numbers the narration doesn't say."
   ],
   [
    "VIS-003",
@@ -34,7 +46,11 @@
    "",
    "src/components/HeadlineMatchCut.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: showing scale (many headlines or pages saying the same thing). Limit: max 3 beats per episode, at most one per act. Not for: a single source."
   ],
   [
    "VIS-004",
@@ -43,7 +59,11 @@
    "",
    "src/components/ParallaxCutout.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the first appearance of a named person or a hero subject. Limit: max 8 beats per episode. Not for: repeating a portrait already shown."
   ],
   [
    "VIS-005",
@@ -52,7 +72,11 @@
    "",
    "src/components/SpotlightIsolator.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: one small detail inside a crowded picture or page. Limit: max 8 beats per episode. Not for: a picture whose whole frame is the point."
   ],
   [
    "VIS-006",
@@ -61,7 +85,11 @@
    "",
    "src/components/CleanUICard.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: web pages, specifications or museum records shown as evidence. Limit: max 6 beats per episode. Not for: text the narrator reads in full."
   ],
   [
    "VIS-007",
@@ -70,7 +98,11 @@
    "",
    "src/components/ChapterSlate.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the turn into each act (chapter number and title). Limit: max 8 beats per episode. Not for: mid-act headings."
   ],
   [
    "VIS-008",
@@ -79,7 +111,11 @@
    "",
    "src/components/SplitComparisonCard.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "VIS-009",
@@ -88,7 +124,11 @@
    "",
    "src/components/BlueprintPhotoPair.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "VIS-010",
@@ -97,7 +137,11 @@
    "",
    "src/components/AnalogMonitorFrame.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TXT-001",
@@ -106,7 +150,11 @@
    "",
    "public/fonts/archivo-latin-800-normal.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Archival Desk (LOK-001) headlines and big numbers. Limit: only in episodes using that theme; a typeface, not a picture, so no beat cap."
   ],
   [
    "TXT-002",
@@ -115,7 +163,11 @@
    "",
    "public/fonts/newsreader-latin-500-normal.woff2;public/fonts/newsreader-latin-500-italic.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Archival Desk quotes and titles. Limit: only in episodes using that theme; no beat cap."
   ],
   [
    "TXT-003",
@@ -124,7 +176,11 @@
    "",
    "public/fonts/ibm-plex-mono-latin-500-normal.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Archival Desk dates, sources and counters. Limit: only in episodes using that theme; no beat cap."
   ],
   [
    "TXT-004",
@@ -133,7 +189,11 @@
    "",
    "public/fonts/plus-jakarta-sans-latin-500-normal.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Archival Desk body text and UI labels. Limit: only in episodes using that theme; no beat cap."
   ],
   [
    "TXT-005",
@@ -142,7 +202,11 @@
    "",
    "src/components/CutoutCollageTitle.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TXT-006",
@@ -151,7 +215,11 @@
    "",
    "src/components/SyncedQuoteBridge.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TXT-007",
@@ -160,7 +228,11 @@
    "",
    "src/components/ArchivalDateStamp.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TXT-008",
@@ -169,7 +241,11 @@
    "",
    "src/components/EditorialLowerThird.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MOT-001",
@@ -178,7 +254,11 @@
    "",
    "src/motion.ts#drift",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the one slow move on a still picture or a held shot (calm limit 3%). Limit: one move per shot; never stacked with another camera move. Not for: diagrams that already move."
   ],
   [
    "MOT-002",
@@ -187,7 +267,11 @@
    "",
    "src/motion.ts#reveal",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: entrances of headlines, labels, charts and underlines. Limit: one entrance per element; no beat cap (it is a motion rule, not a picture)."
   ],
   [
    "MOT-003",
@@ -196,7 +280,11 @@
    "",
    "src/motion.ts#lock",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: brackets, highlights and cards that lock on. Limit: one lock per element; no beat cap."
   ],
   [
    "MOT-004",
@@ -205,7 +293,11 @@
    "",
    "src/components/HeadlineMatchCut.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: only inside HeadlineMatchCut (VIS-003). Limit: follows VIS-003 (max 3 beats per episode)."
   ],
   [
    "MOT-005",
@@ -214,7 +306,11 @@
    "",
    "src/components/VectorTraceConnector.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MOT-006",
@@ -223,7 +319,11 @@
    "",
    "src/components/BlueprintCounterBar.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MOT-007",
@@ -232,7 +332,11 @@
    "",
    "src/components/SchematicWaveDiagram.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MOT-008",
@@ -241,7 +345,11 @@
    "",
    "src/components/BoilingInkCallout.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TRN-001",
@@ -250,7 +358,11 @@
    "",
    "rules/beat-routing.md#eye-trace",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the default cut between beats, keeping the focal point within 25% of the screen. Limit: no beat cap (it is the plain cut); use PushThrough or a slate only where they add meaning."
   ],
   [
    "TRN-002",
@@ -259,7 +371,11 @@
    "",
    "src/components/ChapterSlate.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TRN-003",
@@ -268,7 +384,11 @@
    "",
    "src/components/PhotoToCardMatchCut.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TRN-004",
@@ -277,7 +397,11 @@
    "",
    "src/components/InfiniteCanvasGrid.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TRN-005",
@@ -286,7 +410,11 @@
    "",
    "src/components/InkBleedTransition.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-001",
@@ -295,7 +423,11 @@
    "",
    "src/themes/archivalDesk.ts",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: archive-led episodes (old papers, photos, maps). Limit: the episode's theme, chosen at Gate 0; one theme per episode."
   ],
   [
    "LOK-002",
@@ -304,7 +436,11 @@
    "",
    "src/theme.ts#warmPaper",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-003",
@@ -313,7 +449,11 @@
    "",
    "src/components/MinimalStageCanvas.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-004",
@@ -322,7 +462,11 @@
    "",
    "src/components/CategorySwatchCard.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-005",
@@ -331,7 +475,11 @@
    "",
    "public/textures/paper-grain-loop/",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-006",
@@ -340,7 +488,11 @@
    "",
    "public/textures/torn-paper-tape/",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-007",
@@ -349,7 +501,11 @@
    "",
    "public/textures/halftone-grit.png",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-008",
@@ -358,7 +514,11 @@
    "",
    "public/textures/16mm-grain-dust.mp4",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-001",
@@ -367,7 +527,11 @@
    "",
    "public/sfx/soft-whoosh.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-002",
@@ -376,7 +540,11 @@
    "",
    "public/sfx/camera-focus-tick.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-003",
@@ -385,7 +553,11 @@
    "",
    "public/sfx/mechanical-shutter.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-004",
@@ -394,7 +566,11 @@
    "",
    "public/sfx/chalk-underline.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-005",
@@ -403,7 +579,11 @@
    "",
    "public/sfx/muted-thump.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-006",
@@ -412,7 +592,11 @@
    "",
    "public/sfx/cardstock-slide.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-007",
@@ -421,7 +605,11 @@
    "",
    "public/sfx/soft-key-click.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-008",
@@ -430,7 +618,11 @@
    "",
    "src/audio/HookBedTemplate.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-009",
@@ -439,7 +631,11 @@
    "",
    "src/audio/SynchresisCueMap.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-010",
@@ -448,7 +644,11 @@
    "",
    "src/audio/JCutTransitionEnvelope.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-011",
@@ -457,7 +657,11 @@
    "",
    "src/components/AudioQuoteWaveform.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SFX-012",
@@ -466,7 +670,11 @@
    "",
    "src/components/SearchToArticleCard.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MUS-001",
@@ -475,7 +683,11 @@
    "",
    "src/audio/GenreStingerSuite.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MUS-002",
@@ -484,7 +696,11 @@
    "",
    "src/audio/DynamicMixBreak.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MUS-003",
@@ -493,7 +709,11 @@
    "",
    "src/audio/SyncopatedMontageBed.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MUS-004",
@@ -502,7 +722,11 @@
    "",
    "src/audio/ReflectivePianoBed.ts",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TEX-001",
@@ -511,7 +735,11 @@
    "",
    "src/components/GraphPaperTextureLayer.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TEX-002",
@@ -520,7 +748,11 @@
    "",
    "src/components/AnalogScanlineOverlay.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TEX-003",
@@ -529,7 +761,11 @@
    "",
    "src/components/SketchToVectorTexture.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "TEX-004",
@@ -538,7 +774,11 @@
    "",
    "src/components/ArchivalDeskFlatlay.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MAP-001",
@@ -547,7 +787,11 @@
    "",
    "src/components/SatelliteTerritoryZoom.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MAP-002",
@@ -556,7 +800,11 @@
    "",
    "src/components/ReliefFlowMap.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MAP-003",
@@ -565,7 +813,11 @@
    "",
    "src/components/ArchivalTopoOverlay.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "MAP-004",
@@ -574,7 +826,11 @@
    "",
    "src/components/GlobalReliefScaleMap.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "PKG-001",
@@ -583,7 +839,11 @@
    "",
    "src/components/SeriesIntroBumper.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "PKG-002",
@@ -592,7 +852,11 @@
    "",
    "src/components/InlineChapterStamp.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "PKG-003",
@@ -601,7 +865,11 @@
    "",
    "src/components/FramedInterviewCard.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "PKG-004",
@@ -610,7 +878,11 @@
    "",
    "src/components/SplitEndScreenLayout.tsx",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "LOK-009",
@@ -619,7 +891,11 @@
    "",
    "src/themes/warmGraphite.ts",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: light-and-colour science episodes (the default for Where Colour Lives). Limit: the episode's theme, chosen at Gate 0; one theme per episode."
   ],
   [
    "TXT-009",
@@ -628,7 +904,11 @@
    "",
    "public/fonts/fraunces-latin-400-normal.woff2;public/fonts/fraunces-latin-400-italic.woff2;public/fonts/fraunces-latin-600-normal.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Warm Graphite (LOK-009) spoken lines, quotes and titles. Limit: only in episodes using that theme; a typeface, not a picture, so no beat cap."
   ],
   [
    "TXT-010",
@@ -637,7 +917,11 @@
    "",
    "public/fonts/jetbrains-mono-latin-500-normal.woff2",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Typeface for Warm Graphite tags, labels, dates and sources. Limit: only in episodes using that theme; no beat cap."
   ],
   [
    "TRN-006",
@@ -646,7 +930,11 @@
    "",
    "src/components/PushThrough.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: when the next shot grows out of a key picture in the last one (a detail becomes the next scene). Limit: max 8 beats per episode; never two in a row. Not for: ordinary cuts (use TRN-001)."
   ],
   [
    "LOK-010",
@@ -655,7 +943,11 @@
    "",
    "src/layers/OpticalStack.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the frame layer (grain, grade, vignette) on every beat. This is the one asset meant to be on every frame, because it is the frame itself, not a picture. Limit: none, by design."
   ],
   [
    "SRC-001",
@@ -664,7 +956,11 @@
    "",
    "public/assets/sources/dalton1798_p29.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-002",
@@ -673,7 +969,11 @@
    "",
    "public/assets/sources/dalton1798_p34.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-003",
@@ -682,7 +982,11 @@
    "",
    "public/assets/sources/dalton1798_p43.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-004",
@@ -691,7 +995,11 @@
    "",
    "public/assets/sources/dalton_turner1834.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-005",
@@ -700,7 +1008,11 @@
    "",
    "public/assets/sources/newton_opticks1704_p90.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-006",
@@ -709,7 +1021,11 @@
    "",
    "public/assets/sources/young1802_p12.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-007",
@@ -718,7 +1034,11 @@
    "",
    "public/assets/sources/henry1854_p25.jpg",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "VIS-011",
@@ -727,7 +1047,11 @@
    "",
    "src/components/ColourPathMap.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: the 20-second 'previously' at the start of each episode, and one return near the end to show which stops are now lit. Limit: max 3 beats per episode. Not for: explaining one idea mid-act."
   ],
   [
    "VIS-012",
@@ -736,7 +1060,11 @@
    "",
    "src/components/ConeTrio.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: a line that names the three cone types, or one that is missing (Young's guess, Dalton's answer, olo). Limit: max 6 beats per episode. Not for: general colour talk with no cones in it."
   ],
   [
    "VIS-013",
@@ -745,7 +1073,11 @@
    "",
    "src/components/ConeCurveChart.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: where the overlap of the three curves is the point (two lights that look the same, why olo needs a laser). Limit: max 4 beats per episode. Not for: episode 1, before cones are introduced; never as decoration."
   ],
   [
    "VIS-014",
@@ -754,7 +1086,11 @@
    "",
    "src/components/SpectrumStrip.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: a line that names wavelengths or the band of colours (Newton's spectrum, Dalton's six against his two). Limit: max 5 beats per episode. Not for: background colour or transitions."
   ],
   [
    "PKG-005",
@@ -763,7 +1099,11 @@
    "",
    "src/components/SeriesTitleCard.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: once, right after the cold open. Limit: max 1 beat per episode."
   ],
   [
    "PKG-006",
@@ -772,7 +1112,11 @@
    "",
    "src/components/EpisodeCard.tsx",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: once, straight after the series title card. Limit: max 1 beat per episode."
   ],
   [
    "MUS-005",
@@ -781,7 +1125,11 @@
    "",
    "public/music/",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   "Best use: one bed family under narration for the season, chosen with Sam per episode. Limit: drops out under the biggest reveal of each act. Not for: the cold open's first line."
   ],
   [
    "MUS-006",
@@ -790,7 +1138,11 @@
    "",
    "public/music/season_sting.wav",
    "",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   "Best use: under the series title card only. Limit: max 1 beat per episode."
   ],
   [
    "SRC-008",
@@ -799,7 +1151,11 @@
    "",
    "public/assets/sources/dalton_webster_c1840.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-009",
@@ -808,7 +1164,11 @@
    "",
    "public/assets/sources/manchester_plan_1794.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-010",
@@ -817,7 +1177,11 @@
    "",
    "public/assets/sources/candle_flame_fogg.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-011",
@@ -826,7 +1190,11 @@
    "",
    "public/assets/sources/candle_lighting_mixkit3458.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-012",
@@ -835,7 +1203,11 @@
    "",
    "public/assets/sources/candles_close_mixkit3438.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-013",
@@ -844,7 +1216,11 @@
    "",
    "public/assets/sources/geranium_stang.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-014",
@@ -853,7 +1229,11 @@
    "",
    "public/assets/sources/laurel_runicearth.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-015",
@@ -862,7 +1242,11 @@
    "",
    "public/assets/sources/sealingwax_petrik.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-016",
@@ -871,7 +1255,11 @@
    "",
    "public/assets/sources/green_eye_mixkit4257.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-017",
@@ -880,7 +1268,11 @@
    "",
    "public/assets/sources/rgb_pixels_mixkit258.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-018",
@@ -889,7 +1281,11 @@
    "",
    "public/assets/sources/cursor_pixels_mixkit3818.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-019",
@@ -898,7 +1294,11 @@
    "",
    "public/assets/sources/pink_flowers_mixkit1168.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-020",
@@ -907,7 +1307,11 @@
    "",
    "public/assets/sources/blue_sky_mixkit2408.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-021",
@@ -916,7 +1320,11 @@
    "",
    "public/assets/sources/apples_mixkit42946.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-022",
@@ -925,7 +1333,11 @@
    "",
    "public/assets/sources/earth_views_nasa.webm",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-023",
@@ -934,7 +1346,11 @@
    "",
    "public/assets/sources/pointing_kucinic.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-024",
@@ -943,7 +1359,11 @@
    "",
    "public/assets/sources/berkeley_campus_2026.jpg",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-025",
@@ -952,7 +1372,11 @@
    "",
    "public/assets/sources/fong2025_fig1c.png",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-026",
@@ -961,7 +1385,11 @@
    "",
    "public/assets/sources/fong2025_fig1a.png;public/assets/sources/fong2025_fig1b.png",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-027",
@@ -970,7 +1398,11 @@
    "",
    "public/assets/sources/fong2025_fig2a.png",
    "",
-   "Spec Ready"
+   "Spec Ready",
+   "",
+   "",
+   "",
+   ""
   ],
   [
    "SRC-028",
@@ -979,7 +1411,11 @@
    "",
    "public/assets/data/ss2000_cone_fundamentals.json",
    "",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: only as the data inside ConeCurveChart (VIS-013). Limit: follows VIS-013. Not for: hand-drawn curves elsewhere."
   ],
   [
    "LOK-011",
@@ -988,7 +1424,11 @@
    "Own (studied LEMMiNO; analysis only)",
    "src/themes/void.ts",
    "Theme: near-black #131313, crimson accent, one lit object at a time, long holds, cut to black. For cold opens and mysteries. Tokens on the Theme_Library tab.",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   "Best use: a whole episode built around one mystery, or a cold open told one lit object at a time. Limit: the episode's theme, chosen at Gate 0; one theme per episode. Not for: episodes carried mostly by documents or data."
   ],
   [
    "LOK-012",
@@ -997,7 +1437,11 @@
    "Own (studied Johnny Harris; analysis only)",
    "src/themes/mapRoom.ts",
    "Theme: deep teal #15272A, parchment documents and drawn maps, marker red and brass, Libre Caslon. For places and journeys. Tokens on the Theme_Library tab.",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   "Best use: an episode about places and journeys (drawn maps, parchment documents). Limit: the episode's theme, chosen at Gate 0; one theme per episode. Not for: lab or light experiments."
   ],
   [
    "LOK-013",
@@ -1006,7 +1450,11 @@
    "Own (studied Phil Edwards; analysis only)",
    "src/themes/federalPrint.ts",
    "Theme: black #0C0C0C, paper scans on a grid, signal red and steel blue, Inter Tight. For print, design and dye stories. Tokens on the Theme_Library tab.",
-   "Planned"
+   "Planned",
+   "",
+   "",
+   "",
+   "Best use: an episode about print, design, pigments or dyes, carried by printed pages. Limit: the episode's theme, chosen at Gate 0; one theme per episode. Not for: soft, emotional episodes."
   ],
   [
    "VIS-015",
@@ -1015,7 +1463,11 @@
    "Own (Sam asked, 22 Nov 2026)",
    "src/components/PerspectiveGrid.tsx",
    "A 3D room or floor drawn as a perspective grid in the theme's hairline colour (one vanishing point, lines fade with depth). Optional objects placed in the same space: a sunbeam, a spectrum on the back wall, a page lying on the floor, a label. One slow dolly per shot (calm limit). For Newton's dark room, Ransome's look-through test, pages on a desk and tilted maps.",
-   "Active"
+   "Active",
+   "",
+   "",
+   "",
+   "Best use: only where 3D space carries the meaning: a light path through a room (Newton's shutter, prism, Experimentum Crucis, lens), a line of sight (Ransome looking through the eye), or places laid out on a tilted map. Limit: max 8 beats per episode; max 8% of runtime; only in acts where the story is in a physical space. Not for: documents (use ArchivalScanCard), comparisons, numbers, titles, or decoration."
   ]
  ]
 }

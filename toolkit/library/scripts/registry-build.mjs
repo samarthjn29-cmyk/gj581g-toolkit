@@ -15,6 +15,14 @@ const col = (name) => {
   return i;
 };
 const [A, B, C, E, G] = ["Asset_ID", "Folder", "Asset_Name", "File_Path_or_Token", "Status"].map(col);
+// Best_Use_&_Limit (Sam, 22 Nov 2026: "determine the best use of that particular asset. That asset shall never be
+// used ubiquitously"). Text like "Best use: ... Limit: max 3 beats per episode; max 8% of runtime. Not for: ...".
+const K = header.indexOf("Best_Use_&_Limit");
+const limits = (t) => ({
+  maxBeats: Number((t.match(/max\s+(\d+)\s+(?:beats?|shots?)\s+per\s+episode/i) ?? [])[1] ?? NaN) || null,
+  maxShare: Number((t.match(/max\s+(\d+(?:\.\d+)?)\s*%\s+of\s+(?:the\s+)?runtime/i) ?? [])[1] ?? NaN) || null,
+});
+const noLimit = [];
 const STATUSES = new Set(["Planned", "Spec Ready", "Active", "Retired"]);
 const assets = {};
 const problems = [];
@@ -30,7 +38,10 @@ for (const r of rows.slice(1)) {
     name: (r[C] ?? "").trim(),
     paths: (r[E] ?? "").split(";").map((s) => s.trim()).filter(Boolean),
     status,
+    use: K >= 0 ? (r[K] ?? "").trim() : "",
+    ...limits(K >= 0 ? r[K] ?? "" : ""),
   };
+  if (status === "Active" && K >= 0 && !(r[K] ?? "").trim() && !id.startsWith("SRC-")) noLimit.push(id);
 }
 if (problems.length) {
   console.error("Registry problems:\n- " + problems.join("\n- "));
@@ -46,3 +57,5 @@ fs.writeFileSync(dest, JSON.stringify(out, null, 1) + "\n");
 const counts = {};
 for (const a of Object.values(assets)) counts[a.status] = (counts[a.status] ?? 0) + 1;
 console.log(`${dest}: ${Object.keys(assets).length} assets`, counts);
+if (K < 0) console.log("WARN: no Best_Use_&_Limit column in the dump (dump Master_Asset_Registry!A1:K).");
+else if (noLimit.length) console.log(`WARN: Active assets with no Best_Use_&_Limit yet: ${noLimit.join(", ")}`);
