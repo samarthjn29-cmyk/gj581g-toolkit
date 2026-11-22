@@ -1,0 +1,54 @@
+id,act,claim as the outline uses it,source to check,status
+E1-01,2-3,"Dalton read his paper 'Extraordinary Facts Relating to the Vision of Colours' to the Manchester Literary and Philosophical Society on 31 Oct 1794; it was printed in 1798 (Memoirs vol. 5 pt 1, pp. 28-45)","Dalton 1798 scan p.28 ('READ OCT. 31st, 1794'), Wikimedia Commons DPLA scan (SRC-001..003); Colour_v1 C16",primary read 20 Nov
+E1-02,2,"He was 28 when he read it (born 6 Sep 1766)",birth date: Royal Society / Britannica; arithmetic,to check
+E1-03,2,"He was a Quaker and earned his living teaching (in 1794 at Manchester's New College)","Britannica; Manchester Lit & Phil past members page",to check
+E1-04,2,"He later became famous for the atomic theory (A New System of Chemical Philosophy, 1808)",Britannica; Royal Society of Chemistry,to check
+E1-05,1-2,"The pink geranium looked to him 'almost an exact sky-blue by day; in candle-light, however, it was astonishingly changed ... being what I called red'","Dalton 1798 pp.29-30 scan; Colour_v1 C17",primary read 20 Nov
+E1-06,2,"The friends he asked saw no real change by candlelight; only his brother saw it as he did","Dalton 1798 p.30: 'they all agreed, that the colour was not materially different ... except my brother who saw it in the same light as myself'",primary read 20 Nov
+E1-07,3,"He matched the face of a laurel leaf to a stick of red sealing-wax","Dalton 1798 p.34 scan (SRC-002)",primary visible in scan
+E1-08,2,"Family story: he bought his mother stockings he saw as dark; she said they were 'as red as a cherry'; his brother agreed with John (told as a family story)","Lonsdale, Worthies of Cumberland vol. 5 (1874); Colour_v1 C38 PASS",checked 21 Nov
+E1-09,3,"He guessed one of the fluids of his eye was tinted, 'probably some modification of blue', likely the vitreous humour","Dalton 1798 p.43 scan (SRC-003); Colour_v1 C19",primary read 20 Nov
+E1-10,3,"He asked for his eyes to be examined after his death","Henry 1854 Memoirs of Dalton p.25 (SRC-007); Hunt et al. 1995 abstract",to check wording
+E1-11,4,"Newton: in the beginning of 1666 he got a triangular glass prism, darkened his room and made a small hole in his window shutters","Newton, 'New Theory about Light and Colours', Phil Trans No. 80 (19 Feb 1671/72) pp.3075-3087, Newton Project NATP00006",primary read 22 Nov
+E1-12,4,"His letter about it was sent from Cambridge on 6 Feb 1671/72 and printed in Philosophical Transactions",same,primary read 22 Nov
+E1-13,4,"In it he calls his decisive test the 'Experimentum Crucis'",same,primary read 22 Nov
+E1-14,4,"He wrote that 'Colours are not Qualifications of Light, derived from Refractions, or Reflections of natural Bodies' but properties the light already has",same (Proposition 1),primary read 22 Nov; check the rest of the sentence
+E1-15,4,"The letter started a long, bitter argument, notably with Robert Hooke",histories of science (e.g. Cambridge University Library; Newton Project),to check
+E1-16,5,"In Opticks (1704) p.90 Newton wrote: 'For the Rays to speak properly are not coloured'","Opticks 1704 p.90 scan (SRC-005), Wellcome via Internet Archive",primary visible in scan
+E1-17,5,"Newton tied his seven colours to the seven-note musical (diatonic) scale","Whipple Library, Cambridge, Newton page; Opticks Book I Pt II",to check
+E1-18,5,"A glass of water in sunlight can throw a small spectrum onto a wall (viewer test)",general optics; test it before recording,to check by trying
+E1-19,6,"Dalton died in Manchester on 27 July 1844",Britannica; Royal Society,to check
+E1-20,6,"After his death, as he had asked, the surgeon Joseph Ransome examined his eyes","Henry 1854 pp.201-202 (Ransome's account); Hektoen; Colour_v1 C30 (open fix: head examined next day, eyes studied later)",to check timing wording
+E1-21,6,"Ransome removed the back of one eye and looked through it at scarlet and green things: they looked as they always did","Henry 1854 pp.201-202; Colour_v1 C39",to check
+E1-22,6,"The fluids of the eye were perfectly clear: Dalton's theory was wrong","Hunt et al. Science 1995 abstract",read 20 Nov (abstract)
+E1-23,6,"His theory was about 50 years old when it was tested (1794 to 1844)",arithmetic,computed
+E1-24,7,"Part of his eyes was kept and survives: 'Remains of John Dalton's eyes', Manchester Lit & Phil collection, now Science Museum Group object Y1997.6.38","Science Museum Group collection page co8410957",read 22 Nov
+E1-25,7,"Thomas Young believed Dalton lacked the red-sensitive part (what we now call a protanope); planted, answered in ep 2",Hunt et al. 1995 abstract,read (abstract)
+E1-26,7,"151 years pass between the 1844 examination and the 1995 DNA answer (cliffhanger)",arithmetic,computed
+E1-27,2 or 7,"About 8% of men and 0.4% of women of European descent have red-green colour deficiency","Birch, J Opt Soc Am A 2012; Colour_v1 C41",checked 21 Nov
+E1-28,7,"For a long time colour blindness was called 'Daltonism'",dictionary / history source,to check
+E1-29,7,"A phone screen makes white from red, green and blue sub-pixels (cliffhanger into ep 2)",display references,to check
+E1-30,2,Dalton kept a weather diary every day for more than fifty years (from 1787 until his death in 1844),Henry 1854; Britannica; Science and Industry Museum blog,to check
+E1-31,2,"By his mid-twenties (1792) he was teaching in Kendal, a market town on the edge of the Lake District",Lonsdale 1874 p.79; Britannica,to check
+E1-32,3,"The vitreous humour is a clear jelly, the largest of the eye's clear fluids; light passes through it to the back of the eye",any ophthalmology reference (e.g. NCBI StatPearls),to check
+E1-33b,3,Newton died before Dalton was born (Newton d. 1727; Dalton b. 1766),Britannica,to check
+E1-34,4,At the beginning of 1666 Newton was 23,Britannica (born 25 Dec 1642 OS / 4 Jan 1643 NS),to check
+E1-35,4,"Newton was surprised that the coloured image was oblong, about five times longer than wide, when by the received laws of refraction he expected it circular","Newton 1672 letter, NATP00006",to check
+E1-36,4,At the time the common view was that refraction (the prism) modified or changed white light to produce colours,histories of optics; Newton Project; Britannica,to check
+E1-37,4,Experimentum Crucis and the letter's propositions: a single colour sent through a second prism refracts by its own fixed amount and its colour is not changed by further refraction; the prism sorts colours already in white light,"Newton 1672 letter, NATP00006 (Experimentum Crucis; Propositions 2-3)",to check
+E1-38,5,"Newton named seven colours: red, orange, yellow, green, blue, indigo and violet",Opticks 1704 Book I Pt II,to check
+E1-39,5,People have argued about indigo as a separate colour ever since (joke line),any source on indigo in the rainbow,to check
+E1-40,6,Dalton was president of the Manchester Literary and Philosophical Society,RMG mezzotint caption 1834; Lit & Phil,to check
+E1-41,6,Most people's eye lenses yellow a little as they get older,ophthalmology reference,to check
+E1-42,6,Sir David Brewster was a Scottish scientist who studied light,Britannica,to check
+E1-43,7,"Thomas Young (a London doctor and physicist) suggested only a few (three) kinds of colour-sensing parts at the back of the eye, and believed Dalton was missing the one that senses red",Young 1802 Bakerian Lecture (SRC-006); Young 1807 Lectures; Hunt et al. 1995,to check
+E1-44,7,French still says daltonisme and Spanish daltonismo for colour blindness,"dictionaries (Larousse, RAE)",to check
+E1-45,7,"A unit used to weigh atoms, the dalton (Da), is named after him",IUPAC / BIPM SI brochure,to check
+E1-46,3,"Dalton: the part of the prism's image others call red appears to him 'little more than a shade, or defect of light'",Dalton 1798 pp.28-45,to check
+E1-47,3,"Dalton: where most people see six or seven colours in the spectrum, he sees two or at most three, which he would call yellow and blue, or yellow, blue and purple",Dalton 1798 pp.28-45,to check
+E1-48,4,Newton (1672 letter): colours brought back together (by a lens) reproduce light 'intirely and perfectly white',"Newton 1672 letter, NATP00006",to check
+E1-49,5,Newton (1672 letter): natural bodies get their colours by reflecting one sort of light in greater plenty than another,"Newton 1672 letter, NATP00006 (Proposition 13)",to check
+E1-50,6,"The evening before he died, Dalton made a last weather-diary entry: 'Little rain this day.'",Henry 1854; Science and Industry Museum; Lit & Phil,to check
+E1-51,6,About two weeks later (Aug 1844) Manchester gave him a public funeral; tens of thousands filed past his coffin,Henry 1854; Science and Industry Museum blog; Britannica,to check
+E1-52,7,Thomas Young helped start the decoding of the Rosetta Stone,Britannica; British Museum,to check
+E1-53,5,"Candlelight is much yellower than daylight, with far less blue in it (candle ~1,800-1,900 K vs daylight ~5,500-6,500 K)",colour temperature references; factcheck3,checked 22 Nov (FC3 PASS)

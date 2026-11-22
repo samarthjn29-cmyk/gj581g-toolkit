@@ -1,0 +1,319 @@
+# WCL-E01 "The Man Who Saw Pink" script v2 (22 Nov 2026): fact-check 2 + fresher/hooks fixes applied; water-glass test cut (Sam can't test it).
+# Format: "== <act no> | <file name> | <title>" starts an act. Each paragraph: V: voice, S: on screen, C: claim ids.
+
+== 1 | 01_flower | The flower
+V: Kendal, in the north of England. An autumn evening, seventeen ninety-two.
+S: Dark. A candle is lit (SRC-011). Dateline tag: KENDAL · AUTUMN 1792.
+C: NEW-2
+V: A young teacher named John Dalton is looking at a flower by candlelight. It's a geranium. Nothing rare. The kind of flower you've probably walked past this week.
+S: The geranium photo (SRC-013), half in candle glow, slow drift. Label: "Geranium zonale".
+C: E1-05, NEW-2
+V: By day, this flower has always looked to him almost exactly sky-blue. Tonight, by the candle, it's different. In his own words, it is "astonishingly changed". It's now what he calls red.
+S: Dalton 1798 pp.29-30 (SRC-001 + new p.30 scan), the line highlighted. Beside it, Dalton's two swatches: sky-blue (day) turns red (candle).
+C: E1-05
+V: To the friends he asks, it looks much the same by day or by candle. Of all of them, only one sees what he sees. His brother, Jonathan.
+S: Swatch rows: FRIENDS no real change · JOHN blue / red · HIS BROTHER blue / red.
+C: E1-06, NEW-1, E1-08
+V: So who's right about this flower? By the end of this episode, you might not be so sure where the pink in it actually is.
+S: The geranium alone. The labels fade out; slow push.
+C: NEW-7
+V: It sounds like a silly question. But Dalton is not a silly man. Later, he'll be remembered as a pioneer of the modern theory of the atom. About two years after that evening, he'll have an answer to this flower. He'll want it tested so much that he'll ask for his own eyes to be examined after he dies.
+S: Text beside the candle: A PIONEER OF ATOMIC THEORY. A small drawn eye appears and closes.
+C: E1-04, E1-01, E1-10, NEW-3
+V: His idea will fail the test. And the real answer will wait, in what was left of his eyes, for a hundred and fifty-one years.
+S: Counter: 151 YEARS, counting up slowly; nothing else.
+C: E1-26, NEW-5
+V: Along the way, we'll go back to a dark room, where a young Isaac Newton has made a small hole in his window shutter. And we'll open Dalton's eyes, as he asked.
+S: Two quick previews: a beam through a shutter hole; an eye. Then the series title card (PKG-005) and EPISODE 1 · THE MAN WHO SAW PINK (PKG-006).
+C: E1-11, E1-20
+
+== 2 | 02_brothers | The odd one out
+V: [matter-of-fact] John Dalton was born in seventeen sixty-six, in Eaglesfield, a village in Cumberland, in the north-west of England. His family were Quakers.
+S: Drawn map (new): Eaglesfield, Kendal, Manchester; the Eaglesfield pin drops. Tag: BORN 1766.
+C: E1-02, E1-03
+V: Quakers keep things plain. Plain clothes, plain words. Dalton lives that way, and he writes everything down. For more than fifty years, he keeps a diary of the weather, every single day.
+S: A drawn weather diary page fills with ticks; label: WEATHER DIARY · 57 YEARS.
+C: E1-30
+V: He's been teaching in Kendal, a market town on the edge of the Lake District, since he was fifteen. That's where the geranium happens.
+S: Map: a line from Eaglesfield to Kendal; the Kendal pin. Tag: KENDAL.
+C: E1-31
+V: Dalton takes it for granted that everyone will see the same change. So he asks around.
+S: The geranium returns, small, with a question mark beside it.
+C: E1-06
+V: He was surprised, he wrote later, to find they all agreed. By candle, the colour was not much different from daylight. Except, he says, for his brother, "who saw it in the same light as myself".
+S: Dalton 1798 p.30 (new SRC), the sentence highlighted; spotlight on "except my brother".
+C: E1-06, NEW-1
+V: There's another story about the two brothers. It comes from a biography written thirty years after John died, so it may have grown in the telling.
+S: Lonsdale 1874 title page (new SRC) beside the text AS THE STORY GOES.
+C: E1-08
+V: One day in Kendal, John passes a shop window and sees a pair of stockings. He buys them for his mother. To him, they're a sensible dark colour. A bluish dark drab, in the biographer's words.
+S: Drawn shop window, a pair of stockings in dark blue-grey, labelled JOHN'S VIEW.
+C: E1-08
+V: His mother opens the present and says, "They're as red as a cherry, John!" John can't see it. Neither can Jonathan. To both of them, the stockings are dark.
+S: The stockings flip to cherry red (MOTHER) and back to drab (JOHN · JONATHAN).
+C: E1-08
+V: [deadpan] Two grown men, one pair of stockings, and a mother who is quite sure she's right. [matter-of-fact]
+S: The three labels side by side under the stockings.
+C: -
+V: So look at what stays the same. Everyone sees the same flower, by the same candle. Everyone sees the same stockings. Only the person looking changes. The odd thing isn't the flower, or the candle. It's the two brothers.
+S: Flower, candle and stockings in a row, each ticked SAME; then two simple drawn figures, and everything else fades.
+C: -
+V: They aren't rare, either. Today we'd call this a kind of colour blindness. About eight in a hundred men of European descent have some trouble telling certain reds and greens apart. For women of European descent, it's about four in a thousand.
+S: Dot grid (new): 100 men, 8 lit. Then 1,000 women, 4 lit. Source line: Birch 2012.
+C: E1-27, NEW-4
+V: So in a room of fifty of those men, about four would have some form of it. It's less common among men in China and Japan, but it's still there.
+S: A room of 50 dots; 4 light up.
+C: E1-27, NEW-4
+V: Picture it from the inside. You've looked at the world one way your whole life. Grass, blood, cherries, sky. You use the same colour names as everyone else. And nobody has ever told you your red is different. Nobody else can see what you see. Then one evening, a flower changes colour, and almost nobody else sees it happen.
+S: First-person view (drawn): a field, a bowl of cherries, a sky, each with its colour name; then the geranium by candle.
+C: -
+V: Dalton, though, is a scientist. It's not enough for him to know that he's different. He wants to know why.
+S: Back to the geranium, the word WHY? beside it.
+C: -
+
+== 3 | 03_talk | The talk and the guess
+V: [matter-of-fact] So Dalton takes his question to the experts. Manchester, the last day of October, seventeen ninety-four.
+S: Manchester plan 1794 (SRC-009) with the dateline tag MANCHESTER · 31 OCT 1794 and a pin.
+C: E1-01
+V: He moved to the town the year before. He's twenty-eight. He teaches mathematics and natural philosophy, the old name for the study of nature, at a college called the New College.
+S: Text card: NEW COLLEGE · MATHEMATICS AND NATURAL PHILOSOPHY · AGE 28.
+C: E1-02, E1-03
+V: Tonight, he stands up in front of the town's Literary and Philosophical Society and reads out a paper. Its title is "Extraordinary facts relating to the vision of colours". The subject is his own eyes. It's his first paper to the Society.
+S: Dalton 1798 p.28 (new SRC): the title and "READ OCT. 31st, 1794" highlighted.
+C: E1-01, FC2-a3-04
+V: And it's a careful paper. He doesn't just say that he sees colours oddly. He lists them, one by one, with examples anyone can check.
+S: Dalton 1798 p.34 (SRC-002), the list of colours slowly scrolling.
+C: E1-07
+V: Here's one. The face of a laurel leaf, he says, is a good match to a stick of red sealing-wax. That's the wax people once used to seal letters.
+S: Cherry laurel leaf (SRC-014, check it is cherry laurel) beside red sealing-wax (SRC-015). Quote on screen exactly: "The face of a laurel-leaf (Prunus Lauro-cerasus) is a good match to a stick of red sealing-wax".
+C: E1-07
+V: Think about that. A green leaf, and a red stick of wax. To you, about as different as two colours get. To him, a match.
+S: Both swatches slide to the same olive, labelled SIMULATION: ONE WAY HE MAY HAVE SEEN THEM.
+C: E1-07
+V: He describes the band of colours from a prism, too. A prism is a triangular piece of glass that throws colours on a wall. The part that others call red, he writes, looks to him "little more than a shade, or defect of light". Almost no light at all. Where others see six colours, he sees two, or at most three. Yellow and blue. Or yellow, blue and purple.
+S: SpectrumStrip (VIS-014) twice: OTHERS (DALTON'S SIX) red, orange, yellow, green, blue, purple above; DALTON'S WORDS below (yellow, blue, purple; the red end dark). Quote beside it.
+C: E1-46, E1-47, FC2-a3-08
+V: Then he does what a scientist should. He offers an explanation.
+S: Drawn cross-section of an eye (new) fades in.
+C: -
+V: Your eye isn't hollow. It's filled with clear fluids. The biggest is a clear jelly called the vitreous humour. Here, "humour" is an old word for a fluid in the body. Light passes through it on its way to the back of the eye.
+S: The eye diagram: label VITREOUS HUMOUR on the jelly; a beam passes through to the back.
+C: E1-32
+V: Dalton's guess is that, in his eyes, one of these fluids isn't clear. It's tinted. In his words, "probably some modification of blue". And he supposes it must be the vitreous humour.
+S: Dalton 1798 p.43 (SRC-003) highlighted; the jelly in the diagram tints blue.
+C: E1-09
+V: It makes sense. Think of looking at the world through blue glass. In Dalton's version, the tinted jelly soaks up much of the red and the green light before it reaches the back of the eye. Reds and greens would both look duller, and more like each other. And a red stick of wax might end up looking like a leaf.
+S: The beam passes the blue jelly; its red and green parts thin out. The wax and leaf swatches drift toward each other.
+C: NEW-8, FC2-a3-12
+V: He has a reason for picking the jelly, too. "Otherwise," he writes, "I apprehend it might be discovered by inspection, which has not been done." In other words, a tint anywhere easier to see would have been noticed by now.
+S: p.43: the whole sentence highlighted, from "I suppose it must be the vitreous humour".
+C: E1-09, NEW-3, FC2-a3-13
+V: [deadpan] So the only way to check the jelly is to open an eye. And Dalton only has two. [matter-of-fact]
+S: The eye diagram blinks once.
+C: -
+V: So, at some point, he asks for it to be done after he dies. His biographer would call it his "strongly expressed wish".
+S: Henry 1854 p.25 (SRC-007) with "his strongly expressed wish" highlighted.
+C: E1-10, NEW-3
+V: But a blue tint only explains colours if we know what colour is. And on that, Dalton leans on one man. A man who died long before Dalton was born.
+S: Text: WHAT IS COLOUR? A dark-room door begins to close.
+C: E1-33b
+
+== 4 | 04_shutter | A hole in the shutter
+V: [matter-of-fact] So let's go back to Isaac Newton. It's the start of sixteen sixty-six, a hundred years before Dalton is born. At least, that's the date Newton gives when he writes it up, six years later.
+S: Dateline tag: 1666 · BY HIS OWN ACCOUNT. Newton 1672 letter (new SRC), the opening lines highlighted.
+C: E1-11, E1-12
+V: He's twenty-three. He has just bought a triangular glass prism. People already know a prism can throw colours on a wall.
+S: Drawn triangular prism (new) turning slowly; tag AGE 23.
+C: E1-11, E1-34
+V: Newton wants to know where those colours come from. So he darkens his room. He makes a small hole in his window shutter. And he lets one thin beam of sunlight in.
+S: Drawn dark room (new): the shutter, the hole, one beam crossing the room. Quote line: "made a small hole in my window-shuts".
+C: E1-11
+V: He puts the prism in the beam. The glass bends the light. And on the far wall, a band of colours appears. Red at one end, violet at the other, and everything in between.
+S: The beam hits the prism and bends; a spectrum (VIS-014) spreads on the far wall.
+C: E1-11
+V: The first thing that surprises him is its shape. The beam came in through a small round hole. But the band on the wall is long, about five times longer than it is wide. By the rules he'd been taught, he says, it should have been round.
+S: Overlay: the round hole against the long band, with a 1 : 5 measure. Quote: "I expected should have been circular".
+C: E1-35
+V: At the time, most people who thought about it believed something simple. White light is pure. The prism changes it, and that's what makes the colours.
+S: Text: THE COMMON VIEW · THE GLASS MAKES THE COLOURS.
+C: E1-36
+V: Newton suspects it's the other way round. So he sets up a test he will later call the Experimentum Crucis. The crucial experiment.
+S: Quote highlight from the letter: "Experimentum Crucis".
+C: E1-13
+V: He lets the band of colours fall on a board with a small hole in it. Only one colour gets through. Say, just the blue. Then he sends that blue light through a second prism.
+S: Diagram (new): a board with a hole lets one colour through; a second prism.
+C: E1-13
+V: If the glass makes the colours, the second prism should turn that blue into something else. It doesn't. The blue bends again, by its own fixed amount. And in his other tests, he says, a colour once separated "obstinately retained its colour", whatever he did to it.
+S: The blue beam passes the second prism and stays blue; then red does the same. Quote: "obstinately retained its colour".
+C: E1-37, FC2-a4-09
+V: So the prism isn't making the colours. It's sorting them. Every kind of ray was in the white sunlight all along, mixed together. The glass just spreads them out.
+S: White beam splits; the bands spread apart, labelled RAYS.
+C: E1-37
+V: He checks it the other way, too. He gathers the spread-out rays back together with a lens. Where they meet, they make white again. In his words, light "entirely and perfectly white".
+S: Diagram: a lens brings the band back to one white spot. Quote from the 1672 letter, as printed: "intirely and perfectly white".
+C: E1-48
+V: If you've ever seen a little rainbow thrown on a wall by a window or a glass, you've seen the first half of his experiment.
+S: A soft rainbow patch on a wall (drawn), tag: THE FIRST HALF.
+C: -
+V: In his letter, he puts it like this. "Colours are not Qualifications of Light, derived from Refractions, or Reflections of natural Bodies." Put simply, glass doesn't create colour. Light bouncing off things doesn't create it either. Each kind of ray carries something fixed, and that decides which colour you'll see.
+S: The quote, set large, ending at "Bodies" (TXT-009). A one-line plain version below it.
+C: E1-14
+V: He sends all this in a letter from Cambridge, in February sixteen seventy-two. It's printed in the Philosophical Transactions, the journal run by the Royal Society's secretary.
+S: Phil. Trans. No. 80 page (new SRC), date highlighted: CAMBRIDGE · 6 FEB 1672.
+C: E1-12, FC2-a4-14
+V: Plenty of readers like it. But not all of them. Robert Hooke, a leading London scientist, is not impressed, and says so. The arguments, with Hooke and others, drag on by letter for about six years.
+S: Letter icons trading back and forth on a timeline 1672 → 1678.
+C: E1-15
+V: But notice what Newton has done. He's taken colour out of the glass. So where is it?
+S: The prism fades; the spectrum stays, with a question mark.
+C: -
+
+== 5 | 05_rays | The rays are not coloured
+V: [matter-of-fact] In seventeen oh-four, in London, Newton publishes a book called Opticks. And on page ninety, he gives his answer.
+S: Opticks 1704 title page (new SRC) beside the dateline tag LONDON · 1704.
+C: E1-16
+V: It's a sentence that's easy to read past. "For the rays to speak properly are not coloured." In plain words, strictly speaking, the rays have no colour.
+S: Opticks p.90 (SRC-005), the sentence highlighted, lower-case "rays" as printed; the plain version below.
+C: E1-16
+V: All they have, he goes on, is "a certain power and disposition to stir up a sensation of this or that colour".
+S: The second sentence highlighted on the same page.
+C: NEW-7
+V: That sounds like it clashes with the prism. It doesn't. What's in sunlight is many kinds of ray. The light coming off that geranium isn't pink. Each ray only has a kind of push. And the pink is what happens when that push reaches whoever is looking.
+S: The geranium; rays leave it as plain white lines and turn pink only as they reach a drawn eye.
+C: NEW-7
+V: So, on Newton's view, colour isn't really in the flower. It isn't in the light either. It's something that happens where the light meets a person.
+S: Series device ColourPathMap (VIS-011): LIGHT and EYE stops glow, the word WHERE? between them.
+C: NEW-7, FC2-a5-05
+V: But a geranium and a leaf still look different. Newton has an answer for that, too. In his letter from Cambridge, he says things get their colours by sending back some kinds of light more than others. A geranium sends back one mix. A leaf sends back another. Neither one is painting the light. Each is choosing from it.
+S: Sunlight falls on the geranium and a laurel leaf; each sends back a different set of spectrum bands (VIS-014 under each).
+C: E1-49
+V: That also explains the candle. Candlelight is much yellower than daylight, with far less blue in it. So by candle, the geranium has a different mix of rays to choose from.
+S: Two spectrum strips: DAYLIGHT (full) and CANDLE (weak blue end); the geranium sends back a different mix under each.
+C: E1-53
+V: And to most people, that change hardly matters. Their eyes still call it pink. Dalton's eyes don't.
+S: The swatch rows from act 1 return: FRIENDS no real change · JOHN blue / red.
+C: E1-06
+V: Newton also gives us the rainbow we learn at school. He splits his band of colours into seven. Red, orange, yellow, green, blue, indigo and violet. And he spaces them in the same proportions as the seven steps of a musical scale.
+S: The spectrum strip divides into seven named bands; a keyboard octave lines up under it.
+C: E1-17, E1-38
+V: [deadpan] Seven notes, seven colours. It's tidy. Possibly a little too tidy. People have been arguing about indigo ever since. [matter-of-fact]
+S: The indigo band gets a small question mark.
+C: E1-39
+V: Here's why all this matters for Dalton. He knows this science. He says he's "pretty well acquainted with the theory of light and colours". And on Newton's terms, his idea makes good sense.
+S: Dalton 1798 p.29: "pretty well acquainted with the theory of light and colours" highlighted.
+C: NEW-8, FC2-a5-11
+V: Colour is what happens when certain rays reach the back of the eye. So a tinted jelly in front of it changes which rays arrive. Change the rays, and you change the colour.
+S: Eye diagram again: the blue jelly thins the red and green rays before they reach the back.
+C: NEW-8
+V: But a guess about the inside of an eye can only be tested one way. Someone has to open it.
+S: The eye diagram, still; slow push.
+C: -
+
+== 6 | 06_opened | The eye opened
+V: [matter-of-fact] Fifty years after that talk in Manchester, someone does. Manchester, July eighteen forty-four.
+S: Dateline tag: MANCHESTER · JULY 1844.
+C: E1-23, FC2-a6-01
+V: John Dalton is seventy-seven now, and he's famous. His theory of the atom has made his name. He's even president of the same society where he first described his eyes.
+S: Turner mezzotint (SRC-004), labelled MEZZOTINT, 1834, with PRESIDENT OF THE LITERARY & PHILOSOPHICAL SOCIETY beside it.
+C: E1-04, NEW-9, E1-40
+V: On the evening of the twenty-sixth, he makes one last entry in his weather diary. "Little rain this day." Early the next morning, the twenty-seventh, he's found collapsed in his room. He dies before a doctor can get there.
+S: Drawn diary page, the last line written in; the portrait dims. Tag: 26-27 JULY 1844.
+C: E1-19, E1-50, FC2-a6-03
+V: The doctor who comes is a surgeon named Joseph Ransome. All he can do now is what Dalton asked.
+S: Henry 1854 p.201 (new SRC): Ransome's account, "hastily summoned" highlighted.
+C: E1-19, E1-20, NEW-10
+V: The next day, Ransome examines the head. He looks at the eyes where they are, and they look normal. So he removes them, to study them more carefully later.
+S: Henry pp.201-202 highlights: "On the following day" · "presented no peculiarity" · "at my leisure".
+C: E1-20
+V: He uses the first eye to test the fluids. The clear liquid at the front, he writes, is "perfectly pellucid and free from colour". Pellucid just means see-through. And the jelly behind it, the vitreous humour, the one Dalton suspected, is "also perfectly colourless".
+S: Henry p.202 highlights; the eye diagram's jelly loses its blue tint and turns clear.
+C: E1-22
+V: The eye's lens is a little yellowish. But that's normal at Dalton's age. Most people's lenses yellow a little as they get older.
+S: The diagram's lens tints faint amber; label NORMAL WITH AGE.
+C: E1-22, E1-41
+V: No blue.
+S: Text alone: NO BLUE.
+C: E1-22
+V: Then Ransome tries something stranger with the second eye. He cuts away the back of it. Now it's a little window. And he holds it up, and looks through it, at things that are scarlet and green.
+S: Drawn: an eye held up as a lens, a scarlet and a green patch seen through it.
+C: E1-21
+V: If Dalton is right, the scarlet should look dull and dark through his eye. Make your guess.
+S: The two colour patches behind the drawn lens, still; tag YOUR GUESS?
+C: E1-21
+V: It doesn't. The difference between the colours, Ransome writes, "was as great as ever".
+S: Through the drawn lens, scarlet and green stay bright. Quote from p.202.
+C: E1-21
+V: [deadpan] It might be the most literal attempt in history to see the world through someone else's eyes. And the world looks just as it always did. [matter-of-fact]
+S: Hold on the two colour patches.
+C: E1-21
+V: So Dalton's theory is wrong. Not a little wrong. The fluids in his eyes were clear.
+S: Text: 1794 → 1844 · THE GUESS · WRONG.
+C: E1-23, E1-22
+V: Ransome talks it over with Sir David Brewster, a Scottish scientist who studied light. They agree. They think Dalton's problem came from "some deficient sensorial or perceptive power, rather than from any peculiarity in the eye itself".
+S: Henry pp.202-203 (new SRC): the Brewster sentence highlighted.
+C: NEW-6, E1-42
+V: In plain words, the eye was fine as a window. Whatever was different was in the part that does the sensing, wherever that is.
+S: The eye diagram: the front glows clear; a question mark settles at the back.
+C: NEW-6
+V: Ransome and Brewster's guess is a good one. But in eighteen forty-four, nobody can look at that part closely enough to check.
+S: A question mark at the back of the drawn eye, dimming.
+C: -
+V: A couple of weeks later, Manchester gives Dalton a public funeral. Tens of thousands of people file past his coffin. Very few of them know that his eyes have already been taken out, as he asked.
+S: Drawn street, a long line of tiny figures; tag: MANCHESTER · AUGUST 1844.
+C: E1-51, FC2-a6-15
+V: So what's left of Dalton's eyes is put away. And it waits.
+S: A plain box closes; tag: KEPT · 1844.
+C: E1-24
+
+== 7 | 07_left | What was left
+V: [thoughtful] For a long time, the remains stay in Manchester. In time, they end up with the same society where he read his paper. Today they belong to the Science Museum Group, listed simply as "Remains of John Dalton's eyes".
+S: Text card (no photo): REMAINS OF JOHN DALTON'S EYES · OBJECT Y1997.6.38 · SCIENCE MUSEUM GROUP.
+C: E1-24, FC2-a7-01
+V: Ransome's idea, that the difference was in the sensing, wasn't new. Back in eighteen oh-seven, while Dalton was still alive, a London doctor named Thomas Young had a different guess from Dalton's.
+S: Young's 1807 Lectures page (new SRC) beside his 1802 paper (SRC-006); dateline tag LONDON · 1807.
+C: E1-43
+V: Young thought the back of the eye had only a few kinds of colour-sensing parts. Three, he thought. And Dalton, he believed, was simply missing the one that senses red.
+S: ConeTrio (VIS-012): three small lights; the red one goes dark, labelled YOUNG'S GUESS.
+C: E1-25, E1-43
+V: Was Young right? Hold that thought.
+S: The three lights hold, the dark one flickering.
+C: E1-25
+V: A hundred and fifty-one years after Ransome's examination, in nineteen ninety-five, scientists published what they had found in what was left of that eye. They had a tool Dalton couldn't have imagined. And this time, the eye gave an answer. That's where the next episode begins.
+S: Counter 1844 → 1995; the plain box opens a crack of light. Tag: NEXT EPISODE.
+C: E1-26, FC2-a7-17
+V: Dalton's story did something else, too. It gave the condition a name. Especially in continental Europe, colour blindness came to be called Daltonism. In French, it's still daltonisme. In Spanish, daltonismo.
+S: The word DALTONISM, then daltonisme and daltonismo, each in its own label.
+C: E1-28, E1-44
+V: [deadpan] Most scientists hope to have one thing named after them. Dalton got a whole list. Among them, a unit used to weigh atoms, the dalton. And the thing he couldn't see. [matter-of-fact]
+S: Labels: 1 Da (A UNIT OF ATOMIC MASS) · DALTONISM · AND MORE.
+C: E1-45, FC2-a7-07
+V: [thoughtful] So let's go back to that evening in Kendal. A pink flower, a candle, and two brothers who see something different from their friends.
+S: The candle and geranium again (SRC-011, SRC-013), as at the start.
+C: NEW-2, E1-06
+V: Newton tells us the pink was never in the flower, or in the light. It happens in whoever is looking. And Dalton shows us that two people can look at the same flower and get different answers.
+S: Opticks p.90 line beside the geranium; the swatch rows from act 1 return.
+C: NEW-7, E1-06
+V: Which leaves us with the question this whole series is really about. If Dalton's pink wasn't your pink, how do you know your red is my red?
+S: Text alone: IS YOUR RED MY RED?
+C: -
+V: The comforting answer is that colour is a bit like the weather in Dalton's diary. Something real is out there, and each of us measures it with our own instrument. Most of our instruments agree. So we can share the same words.
+S: The diary page; small drawn thermometers, mostly reading the same, one reading differently.
+C: -
+V: Or perhaps it's stranger than that. Perhaps there's no pink out there at all, only light. And every pink is made fresh, inside each person who looks. Newton's own words lean that way. And Dalton was the proof that the instruments can differ.
+S: Opticks p.90 line, faint; the geranium turns pink only where a drawn eye looks at it.
+C: NEW-7
+V: We can't settle that yet. But we can get a lot closer than Dalton ever could. And that's where we're going, one stop at a time. From the light, to the object, to the eye, to the brain, and finally to the words we use.
+S: ColourPathMap (VIS-011): LIGHT lit, EYE half-lit, the other three dim.
+C: -
+V: Before the next episode, here's something to look at. Newton showed that white sunlight is a mix of every kind of ray in the rainbow. But the white on most screens, like the one in front of you, isn't made that way. Look closely enough, and it's made from three kinds of tiny light. Red, green and blue.
+S: A slow zoom into a white screen until the red, green and blue sub-pixels show (SRC-017).
+C: E1-29, FC2-a7-15
+V: So how can three lights make white, when Newton needed the whole rainbow?
+S: Spectrum strip (VIS-014) beside three dots; a question mark between them.
+C: E1-29
+V: [thoughtful] Until then, look at the person next to you. You both call the sky blue, and you probably mean almost the same thing. But they might be seeing it a little differently. A colour-vision test can show whether your eyes sort colours the same way. Whether their blue looks like yours is a harder question.
+S: Two drawn figures under one sky; a small sky-blue swatch above each, very slightly different. Tag: NEXT · THREE NUMBERS.
+C: FC2-a7-18
+V: And don't forget to live well.
+S: Sign-off: the channel logo, its wink and the wink ding.
+C: -
