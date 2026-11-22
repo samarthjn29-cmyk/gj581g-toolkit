@@ -29,7 +29,7 @@ const direct = walk("src")
 const COMPONENT_IDS = Object.fromEntries(
   Object.entries(JSON.parse(fs.readFileSync("src/components/catalog.json", "utf8"))).map(([k, v]) => [k, v.assetId]),
 );
-const acts = process.argv.slice(2).length ? process.argv.slice(2) : walk("src/episodes").filter((f) => f.endsWith(".json"));
+const acts = process.argv.slice(2).length ? process.argv.slice(2) : walk("src/episodes").filter((f) => f.endsWith(".json") && !f.endsWith(".music.json"));
 const inactive = [];
 for (const f of acts) {
   const act = JSON.parse(fs.readFileSync(f, "utf8"));
