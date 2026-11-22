@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T16:41:05.724Z",
+ "generated": "2026-11-22T16:46:58.869Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2579,7 +2579,7 @@
   },
   "SFX-026": {
    "id": "SFX-026",
-   "folder": "6_Sound_Effects",
+   "folder": "6_Sounds",
    "name": "SoftPop",
    "paths": [
     "public/sfx/kit/tactile/soft_pop_v1-3.wav"
@@ -2591,7 +2591,7 @@
   },
   "SFX-027": {
    "id": "SFX-027",
-   "folder": "6_Sound_Effects",
+   "folder": "6_Sounds",
    "name": "TypewriterKeys",
    "paths": [
     "public/sfx/kit/mechanical/typewriter_*.wav"
@@ -2615,7 +2615,7 @@
   },
   "TEX-008": {
    "id": "TEX-008",
-   "folder": "3_Textures",
+   "folder": "8_Textures",
    "name": "ScreenStrokes",
    "paths": [
     "src/layers/ScreenStrokes.tsx"

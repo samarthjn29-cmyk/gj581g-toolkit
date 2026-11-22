@@ -5302,7 +5302,7 @@
 ],
 [
 "SFX-026",
-"6_Sound_Effects",
+"6_Sounds",
 "SoftPop",
 "Own synthesis (scripts/sfx-synth.py); contrast with MoSidd's demo, which pops on every entrance (analysis only)",
 "public/sfx/kit/tactile/soft_pop_v1-3.wav",
@@ -5327,7 +5327,7 @@
 ],
 [
 "SFX-027",
-"6_Sound_Effects",
+"6_Sounds",
 "TypewriterKeys",
 "Mixkit sound effects free licence (to fetch)",
 "public/sfx/kit/mechanical/typewriter_*.wav",
@@ -5377,7 +5377,7 @@
 ],
 [
 "TEX-008",
-"3_Textures",
+"8_Textures",
 "ScreenStrokes",
 "Own (studied byl, 'How I Edit Documentary Video LIKE Johnny Harris in Capcut (Part 1)', 22 Nov 2026; analysis only)",
 "src/layers/ScreenStrokes.tsx",
