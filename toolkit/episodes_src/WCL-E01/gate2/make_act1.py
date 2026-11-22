@@ -217,6 +217,27 @@ audio = [
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
     {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
 ]
+# The sound pass (22 Nov 2026; Sam: "Demo sound should go in act 1"; rules from the study of Chris Moran's "The VOX
+# Sound Design System", scripts/sound-pass.py). Levels are dB against the voice (SRC-030 at -19.6 LUFS, kit files at
+# their own measured LUFS): hero sounds ~15 dB under, textures 22-24 dB under, the projector hum 28 dB under. Times
+# are tied to the shots' starts and props, so a re-timed act keeps them on their moves.
+K = "public/sfx/kit/"
+def S(t):  # shot start (act seconds) of the shot that begins with beat t
+    return BEAT[f"E01-A1-{t:02d}"][0]
+audio += [
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(5) - 0.15, 2), "volumeDb": -21.6},  # push into the geranium (on "at": played as a texture)
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(11) - 0.15, 2), "volumeDb": -14.6},  # slide to p.30, in the pause
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.1, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -14.6},  # push into the petal, in the pause
+    {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.1, 2), "volumeDb": -19.6},  # the loupe setting on the pink
+    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(25) + 2.15, 2), "volumeDb": -21.4},  # Plate 4 laid on the collage
+    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "volumeDb": -18.5},  # the two colour scraps
+    {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": round(S(35) - 0.35, 2), "endSec": round(S(37) + 0.3, 2),
+     "volumeDb": -27.6, "fadeInSec": 0.4, "fadeOutSec": 0.6},  # Newton's dark room, J-cut in
+    {"id": "SFX-019", "file": K + "mechanical/switch_click.wav", "atSec": round(word("open", 95) - 0.18, 2), "volumeDb": -14.8},  # Dalton's eyes opened
+]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
        "voice": {"id": "SRC-030", "atSec": LEAD},

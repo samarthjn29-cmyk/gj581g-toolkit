@@ -49,6 +49,75 @@
    "id": "MUS-006",
    "atSec": 98.75,
    "volumeDb": -6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 10.95,
+   "volumeDb": -21.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+   "atSec": 26.15,
+   "volumeDb": -14.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 26.2,
+   "volumeDb": -21.4
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
+   "atSec": 33.55,
+   "volumeDb": -14.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 48.95,
+   "volumeDb": -14.6
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/dial_turn.wav",
+   "atSec": 54.3,
+   "volumeDb": -19.6
+  },
+  {
+   "id": "SFX-017",
+   "file": "public/sfx/kit/tactile/pencil_stroke.wav",
+   "atSec": 59.85,
+   "volumeDb": -20.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 64.75,
+   "volumeDb": -21.4
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/pages_move.wav",
+   "atSec": 68.5,
+   "volumeDb": -18.5
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_hum.wav",
+   "atSec": 89.9,
+   "endSec": 95.6,
+   "volumeDb": -27.6,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.6
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/switch_click.wav",
+   "atSec": 95.7,
+   "volumeDb": -14.8
   }
  ],
  "beats": [

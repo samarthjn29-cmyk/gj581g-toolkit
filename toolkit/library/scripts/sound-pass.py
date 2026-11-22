@@ -127,6 +127,10 @@ def main():
     lines.append(f"Voice {act['voice']['id']} at {vL:.1f} LUFS. {len(shots)} shots, {len(cues)} cues.\n")
 
     def shot_at(t):
+        # a sound up to 0.4 s before a cut belongs to the next shot (rule J: its lead-in)
+        for s in shots:
+            if 0 < s["start"] - t <= 0.4:
+                return s
         for s in shots:
             if s["start"] - 1e-6 <= t < s["end"]:
                 return s

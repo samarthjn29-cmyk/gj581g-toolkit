@@ -17,6 +17,8 @@ ap.add_argument("--bed", required=True); ap.add_argument("--voice-at", type=floa
 ap.add_argument("--bed-from", type=float, default=0); ap.add_argument("--lufs", type=float, default=-33)
 ap.add_argument("--dip", default=""); ap.add_argument("--fade-in", type=float, default=2); ap.add_argument("--fade-out", type=float, default=3)
 ap.add_argument("--pocket", nargs="?", const="300:4000", default=None); ap.add_argument("--bed-only", default=None)
+ap.add_argument("--threshold", type=float, default=None)  # sidechain threshold (default 0.03 pocket / 0.05 full); lower = deeper duck (demo only)
+ap.add_argument("--ratio", type=float, default=None)  # duck ratio (default 4 with --pocket, 2 without); a big ratio exaggerates the effect for a demo
 a = ap.parse_args()
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", a.act], capture_output=True, text=True).stdout)
 def lufs(args):
@@ -36,10 +38,10 @@ fc = (
     f"[2:a]adelay={vd}|{vd},aresample=48000,aformat=channel_layouts=stereo,apad[key];"
     + (
         (lambda lo, hi: f"[bed]acrossover=split={lo} {hi}:order=4th[blo][bmid][bhi];"
-         f"[bmid][key]sidechaincompress=threshold=0.03:ratio=4:attack=60:release=900[bmidd];"
+         f"[bmid][key]sidechaincompress=threshold={a.threshold or 0.03}:ratio={a.ratio or 4}:attack=60:release=900[bmidd];"
          f"[blo][bmidd][bhi]amix=inputs=3:normalize=0[duck0];")(*a.pocket.split(":"))
         if a.pocket else
-        f"[bed][key]sidechaincompress=threshold=0.05:ratio=2:attack=80:release=1100[duck0];"
+        f"[bed][key]sidechaincompress=threshold={a.threshold or 0.05}:ratio={a.ratio or 2}:attack=80:release=1100[duck0];"
     )
     + (f"[duck0]asplit=2[duck][bedonly];" if a.bed_only else f"[duck0]anull[duck];")
     + f"[0:a]aresample=48000,aformat=channel_layouts=stereo[act];"
