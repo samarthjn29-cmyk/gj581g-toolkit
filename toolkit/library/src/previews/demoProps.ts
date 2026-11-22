@@ -105,6 +105,20 @@ export const DEMO: Record<string, Record<string, unknown>> = {
     lines: [{ text: "Preview question?", atSec: 0.6 }, { text: "PREVIEW · MONO LINE", atSec: 1.6, style: "mono" }],
     backdrop: { srcId: "SRC-013", imgSize: [1920, 1280], crop: [300, 260, 1160, 652], layout: "full" },
   },
+  HalftoneMoire: {
+    color: "#E79AB9",
+    name: "PREVIEW · PINK",
+    loupe: { atSec: 0.3, from: [1130, 470], to: [1480, 600], moveSec: 3, r: 230, cell: 22 },
+    lines: [{ text: "Preview question?", atSec: 0.6 }],
+  },
+  DuotoneCollage: {
+    pieces: [
+      { color: "#86B5E8", x: 1660, y: 230, w: 320, h: 210, rot: 6, atSec: 0 },
+      { srcId: "SRC-004", file: "public/assets/sources/dalton_turner1834_halftone.png", imgSize: [760, 972], x: 1420, y: 450, w: 600, rot: -2.5, atSec: 0.2, caption: "PREVIEW · PORTRAIT", captionAt: "top" },
+      { srcId: "SRC-031", file: "public/assets/sources/dalton1808_symbols_line.png", imgSize: [1000, 705], x: 1240, y: 735, w: 620, rot: 2.5, atSec: 0.9, caption: "PREVIEW · PLATE" },
+    ],
+    lines: [{ text: "Preview line", atSec: 0.6 }],
+  },
   EyeDissection: {
     cutAtSec: 0.6,
     openAtSec: 2.4,

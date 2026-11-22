@@ -108,9 +108,13 @@ shot(B(20), "FootagePlate", lambda r: {"srcId": "SRC-013", "kind": "image", "siz
                                        "labels": [{"text": "WHO'S RIGHT?", "atSec": r(word("who's")), "x": 960, "y": 860, "align": "center", "accent": True}]},
      transitionIn="push", focus=[1033, 552])
 shot(B(21), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [640, 560, 520, 292], "warmth": [0, 0]})
-shot(B(22), "KineticLine", lambda r: {
-    "lines": [{"text": "Where is the pink?", "atSec": r(word("where"))}],
-    "backdrop": {"srcId": "SRC-013", "imgSize": GER, "crop": [640, 560, 520, 292], "layout": "full", "dim": 0.5}})
+# 22 (Sam, 22 Nov 2026: "I like the Moire pattern. Let's use it where it fits best"): the friends' pink as a
+# big swatch; a loupe glides across it and inside it the "flat" pink is only dots of ink on paper, with a
+# slow moire. LOK-017 (own build; the geranium photo SRC-013 stays unaltered, its licence says so).
+shot(B(22), "HalftoneMoire", lambda r: {
+    "color": PINK, "name": "PINK", "loupe": {"atSec": 0.15, "from": [1130, 470], "to": [1480, 600], "moveSec": 2.6, "r": 230, "cell": 22},
+    "moire": {"opacity": 0.22, "turnDeg": 4},
+    "lines": [{"text": "Where is the pink?", "atSec": r(word("where"))}]})
 # 23 back to the candle, wide (the clip forward, from 3 s in).
 shot(B(23), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
                               "clipStartSec": 3, "warmth": [1, 1],
@@ -121,12 +125,23 @@ shot(B(24), "ParallaxCutout", lambda r: {
     "fg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010]},
     "kicker": "PORTRAIT · 1834", "headline": "John Dalton", "startSec": max(0, r(word("dalton", 60)) - 0.3)})
 # 25-26 beside the portrait: a pioneer of atomic theory; later, 1808.
-shot(B(25, 26), "KineticLine", lambda r: {
+shot(B(25, 26), "DuotoneCollage", lambda r: {
+    "pieces": [
+        {"color": SKY, "x": 1660, "y": 230, "w": 320, "h": 210, "rot": 6, "atSec": 0.0, "seed": 7},
+        {"srcId": "SRC-004", "file": "public/assets/sources/dalton_turner1834_halftone.png", "imgSize": [760, 972],
+         "x": 1420, "y": 450, "w": 600, "rot": -2.5, "atSec": 0.1, "caption": "JOHN DALTON · 1834", "captionAt": "top", "seed": 3},
+        {"srcId": "SRC-031", "file": "public/assets/sources/dalton1808_symbols_line.png", "imgSize": [1000, 705],
+         "x": 1240, "y": 735, "w": 620, "rot": 2.5, "atSec": max(0.6, r(word("pioneer")) - 0.2), "caption": "HIS ATOMS · PLATE 4, 1808", "seed": 5}],
     "lines": [{"text": "A pioneer of atomic theory", "atSec": r(word("pioneer"))},
-              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("theory")), "style": "mono"}],
-    "backdrop": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010], "layout": "card-right"}})
-# 27-28 about two years later: an answer.
-shot(B(27, 28), "KineticLine", lambda r: {
+              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("theory")), "style": "mono"}]})
+# 27-28 about two years later: an answer. VIS-028 collage: his own words on the geranium, between the two
+# colours he saw (sky-blue by day, red by candle).
+shot(B(27, 28), "DuotoneCollage", lambda r: {
+    "pieces": [
+        {"srcId": "SRC-001", "file": "public/assets/sources/dalton1798_p29_line.png", "imgSize": [1100, 240],
+         "x": 1340, "y": 420, "w": 980, "rot": -1.5, "atSec": 0.1, "caption": "HIS OWN WORDS · P. 29", "seed": 11},
+        {"color": SKY, "x": 1150, "y": 740, "w": 340, "h": 240, "rot": 4, "atSec": 0.7, "seed": 13},
+        {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
     "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about"))}]}})
 # 29-31 (Sam, 22 Nov 2026: "an eye which has been cut", the words on screen): the whole eye as a line drawing;

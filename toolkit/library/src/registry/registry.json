@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T08:17:03.739Z",
+ "generated": "2026-11-22T08:30:59.910Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -874,7 +874,8 @@
    "folder": "11_Sources",
    "name": "Dalton1798_p29",
    "paths": [
-    "public/assets/sources/dalton1798_p29.jpg"
+    "public/assets/sources/dalton1798_p29.jpg",
+    "public/assets/sources/dalton1798_p29_line.png"
    ],
    "status": "Active",
    "use": "",
@@ -910,7 +911,8 @@
    "folder": "11_Sources",
    "name": "DaltonTurner1834",
    "paths": [
-    "public/assets/sources/dalton_turner1834.jpg"
+    "public/assets/sources/dalton_turner1834.jpg",
+    "public/assets/sources/dalton_turner1834_halftone.png"
    ],
    "status": "Active",
    "use": "",
@@ -1673,6 +1675,57 @@
    "status": "Active",
    "use": "Best use: the bed under the narration of WCL-E01, running through every act (it carries on across acts; it never stops, only dips). Limit: at -33 LUFS before ducking, sidechain-ducked under the voice, dips under the season sting and on deadpan or reveal lines (at most 2 a minute). Not for: the series title sting itself, or another episode without Sam hearing it there.",
    "maxBeats": null,
+   "maxShare": null
+  },
+  "SRC-031": {
+   "id": "SRC-031",
+   "folder": "11_Sources",
+   "name": "Dalton1808_Plate4",
+   "paths": [
+    "public/assets/sources/dalton1808_symbols_wellcome.jpg",
+    "public/assets/sources/dalton1808_symbols_line.png"
+   ],
+   "status": "Active",
+   "use": "Best use: Dalton's atomic theory (1808): beside his portrait, or when atoms are named. Limit: max 4 beats per episode; shown as the plate or its one-ink line mask (changes credited). Not for: decorating unrelated chemistry.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "LOK-017": {
+   "id": "LOK-017",
+   "folder": "5_Look_and_Color",
+   "name": "HalftoneMoire",
+   "paths": [
+    "src/components/HalftoneMoire.tsx",
+    "src/layers/DotScreen.tsx",
+    "scripts/halftone.py"
+   ],
+   "status": "Active",
+   "use": "Best use: the beat where a colour itself is questioned. Limit: max 2 beats per episode, at most once per act; moire opacity <= 0.3. Not for: decoration or a whole act.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "VIS-028": {
+   "id": "VIS-028",
+   "folder": "1_Visuals",
+   "name": "DuotoneCollage",
+   "paths": [
+    "src/components/DuotoneCollage.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a life or idea told from several period pieces at once. Limit: max 4 beats per episode; 2-4 pieces a shot. Not for: one photo or a page to read.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "TEX-006": {
+   "id": "TEX-006",
+   "folder": "8_Textures",
+   "name": "PrintScreenOverlay",
+   "paths": [
+    "src/layers/PrintScreenOverlay.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: held full-frame stills. Limit: max 6 beats per episode; opacity <= 0.15. Not for: text, diagrams or faces.",
+   "maxBeats": 6,
    "maxShare": null
   }
  }
