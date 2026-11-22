@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T17:17:01.966Z",
+ "generated": "2026-11-22T17:34:12.235Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1585,7 +1585,7 @@
    "paths": [
     "src/components/StillsMontage.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a long span said out loud (a hundred and fifty-one years), years passing in a life. Limit: max 3 beats per episode; one burst of motion per montage. Not for: comparisons.",
    "maxBeats": 3,
    "maxShare": null
@@ -1607,9 +1607,9 @@
    "folder": "2_Text",
    "name": "RunningHead",
    "paths": [
-    "src/components/RunningHead.tsx"
+    "src/layers/RunningHead.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: acts longer than 2 minutes, so the viewer always knows where they are. Limit: one per act; off during title cards, quotes and full-frame pictures. Not for: short acts.",
    "maxBeats": null,
    "maxShare": null
@@ -1633,7 +1633,7 @@
    "paths": [
     "src/layers/AnalogueFinish.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: candlelit, archival and memory scenes. Limit: max 15% of runtime; never on diagrams or text-heavy beats. Not for: the whole episode.",
    "maxBeats": null,
    "maxShare": 15
@@ -1643,9 +1643,9 @@
    "folder": "5_Look_and_Color",
    "name": "CandleFlicker",
    "paths": [
-    "src/layers/CandleFlicker.tsx"
+    "src/components/FootagePlate.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: candlelit scenes (Kendal 1792, the 1844 room). Limit: max 12 beats per episode; only where a flame is on screen or just off it. Not for: daylight or diagrams.",
    "maxBeats": 12,
    "maxShare": null
@@ -1851,10 +1851,10 @@
    "folder": "9_Maps",
    "name": "FocusDim",
    "paths": [
-    "src/components/FocusDim.tsx"
+    "src/components/PeriodMapPlate.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: maps where one place is spoken about. Limit: max 4 beats per episode.",
+   "status": "Active",
+   "use": "Best use: maps where one place is spoken about (Manchester 1794, a pin named in the narration). Limit: max 4 beats per episode. Not for: routes between places (MAP-009) or more than one place at a time.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -2685,8 +2685,8 @@
    "paths": [
     "src/components/BuildUpMap.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: an episode built from 3-6 named ideas, shown again at each chapter end and as the recap. Limit: 1 per episode; labels are the narration's own words; icons are our own silhouettes, no real people.",
+   "status": "Active",
+   "use": "Best use: an episode built from 3-7 named ideas: once at the end of each act (that act's piece lit, the next piece arriving as a question) and as the recap, where the pieces close into one ring. Limit: 1 per episode, at most one beat per act plus the recap; labels and keywords are on-screen titles or the narration's own words; own icons only, no real people.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2697,8 +2697,8 @@
    "paths": [
     "src/themes/chapterKey.ts"
    ],
-   "status": "Planned",
-   "use": "Best use: episodes with 3+ acts that return to one diagram. Limit: 3-6 colours, all checked for 3:1 contrast on the canvas; never used for data colours (a data colour stays its real colour).",
+   "status": "Active",
+   "use": "Best use: episodes with 3+ acts that return to one diagram (VIS-048). Limit: 3-7 colours, each at least 3:1 on the canvas (all are 5:1+); never used as a data colour; one colour per act for the whole episode.",
    "maxBeats": null,
    "maxShare": null
   }

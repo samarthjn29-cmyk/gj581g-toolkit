@@ -10,6 +10,7 @@ import { ColourBlockWipe } from "../components/ColourBlockWipe";
 import { FlashFrame } from "../components/FlashFrame";
 import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
+import { RunningHead } from "../layers/RunningHead";
 
 // One act of an episode, composed only from library components (src/episodes/epXX-actYY.json).
 // Episodes always render in strict registry mode: every ID in a beat must be Active.
@@ -32,7 +33,7 @@ export type Beat = {
 // `file` picks one of the row's registered files (an SFX kit's variants: rule V in scripts/sound-pass.py, never the
 // same file twice within 10 s).
 export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number; file?: string };
-export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string };
+export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number } };
 
 const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
   const e = useAsset(cue.id);
@@ -133,11 +134,12 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
   );
 };
 
-export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [] }) => (
+export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [], runningHead }) => (
   <RegistryModeProvider mode="render">
     <ThemeProvider themeId={themeId}>
       <AbsoluteFill>
         <Beats beats={beats} />
+        {runningHead ? <RunningHead text={runningHead.text} fromSec={runningHead.fromSec} beats={beats} /> : null}
         {voice ? <Sound cue={voice} /> : null}
         {audio.map((c) => (
           <Sound key={`${c.id}${c.atSec}`} cue={c} />

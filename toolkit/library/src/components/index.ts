@@ -31,6 +31,8 @@ import { ScaleField } from "./ScaleField";
 import { PageSpread } from "./PageSpread";
 import { LedgerCard } from "./LedgerCard";
 import { SourceWall } from "./SourceWall";
+import { BuildUpMap } from "./BuildUpMap";
+import { StillsMontage } from "./StillsMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -75,6 +77,8 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   PageSpread,
   LedgerCard,
   SourceWall,
+  BuildUpMap,
+  StillsMontage,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(

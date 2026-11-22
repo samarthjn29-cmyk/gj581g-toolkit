@@ -1,6 +1,10 @@
 {
  "episodeId": "WCL-E01-act02",
  "themeId": "LOK-009",
+ "runningHead": {
+  "text": "2 · THE ODD ONE OUT",
+  "fromSec": 2.4
+ },
  "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
  "voice": {
   "id": "NAR-002",
@@ -155,6 +159,12 @@
    "file": "public/sfx/kit/mechanical/typewriter_run_v1.wav",
    "atSec": 170.57,
    "volumeDb": -16.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 173.05,
+   "volumeDb": -17.6
   },
   {
    "id": "SFX-014",
@@ -519,6 +529,7 @@
     "TXT-009",
     "TXT-010",
     "TXT-016",
+    "TXT-013",
     "MOT-003",
     "MOT-009",
     "TRN-001",
@@ -709,6 +720,8 @@
     "TRN-006",
     "LOK-009",
     "LOK-010",
+    "LOK-016",
+    "LOK-015",
     "SFX-020",
     "SFX-014",
     "MUS-007",
@@ -732,6 +745,8 @@
      1,
      1
     ],
+    "flicker": {},
+    "analogue": {},
     "labels": [
      {
       "text": "THE GERANIUM, 1792",
@@ -1281,6 +1296,7 @@
     "VIS-008",
     "TXT-009",
     "TXT-010",
+    "TXT-013",
     "MOT-002",
     "TRN-012",
     "LOK-009",
@@ -1448,6 +1464,7 @@
     "VIS-024",
     "TXT-009",
     "TXT-010",
+    "TXT-013",
     "MOT-002",
     "TRN-007",
     "LOK-009",
@@ -1607,6 +1624,7 @@
     "TXT-009",
     "TXT-015",
     "TXT-017",
+    "TXT-013",
     "MOT-002",
     "TRN-011",
     "LOK-009",
@@ -1662,6 +1680,7 @@
     "VIS-020",
     "TXT-009",
     "TXT-015",
+    "TXT-013",
     "MOT-002",
     "TRN-001",
     "LOK-009",
@@ -1742,6 +1761,7 @@
    "assets": [
     "VIS-017",
     "TXT-010",
+    "TXT-013",
     "MOT-003",
     "TRN-001",
     "LOK-009",
@@ -1824,6 +1844,8 @@
     "TRN-006",
     "LOK-009",
     "LOK-010",
+    "LOK-016",
+    "LOK-015",
     "SFX-020",
     "SFX-014",
     "MUS-007",
@@ -1847,6 +1869,12 @@
      0,
      1
     ],
+    "flicker": {
+     "seed": 2
+    },
+    "analogue": {
+     "seed": 2
+    },
     "warmthSec": [
      2.65,
      3.8499999999999996
@@ -1899,20 +1927,19 @@
    ]
   },
   {
-   "id": "66+67+68",
+   "id": "66+67",
    "beats": [
     "E01-A2-66",
-    "E01-A2-67",
-    "E01-A2-68"
+    "E01-A2-67"
    ],
    "start": 166.9,
-   "end": 175.57,
+   "end": 172.95,
    "component": "KineticLine",
    "assets": [
     "VIS-020",
     "TXT-009",
-    "TXT-015",
     "TXT-017",
+    "TXT-013",
     "MOT-002",
     "TRN-001",
     "LOK-009",
@@ -1963,16 +1990,6 @@
       "atSec": 3.67,
       "style": "mono",
       "type": true
-     },
-     {
-      "text": "Why?",
-      "atSec": 7.29,
-      "fill": {
-       "word": "Why?",
-       "atSec": 7.29,
-       "color": "#C8402F",
-       "outline": "#D9D2C5"
-      }
      }
     ]
    },
@@ -1986,13 +2003,78 @@
      "E01-A2-67",
      169.75,
      172.95
+    ]
+   ]
+  },
+  {
+   "id": "68",
+   "beats": [
+    "E01-A2-68"
+   ],
+   "start": 172.95,
+   "end": 175.57,
+   "component": "BuildUpMap",
+   "assets": [
+    "VIS-048",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "MOT-005",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "LOK-026",
+    "SFX-024",
+    "MUS-007"
+   ],
+   "props": {
+    "title": "WHERE IS THE PINK?",
+    "slots": 7,
+    "nodes": [
+     {
+      "act": 1,
+      "label": "The flower",
+      "keywords": [
+       "SKY-BLUE BY DAY",
+       "RED BY CANDLE"
+      ],
+      "icon": "flower",
+      "atSec": 0
+     },
+     {
+      "act": 2,
+      "label": "The odd one out",
+      "keywords": [
+       "HIS BROTHER TOO",
+       "NOT RARE"
+      ],
+      "icon": "brothers",
+      "atSec": 0.2
+     },
+     {
+      "act": 3,
+      "label": "Why?",
+      "icon": "question",
+      "atSec": 1.24
+     }
     ],
+    "focus": {
+     "act": 2,
+     "atSec": 0.5
+    }
+   },
+   "beatTimes": [
     [
      "E01-A2-68",
      172.95,
      175.57
     ]
-   ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "paper"
+   }
   }
  ]
 }

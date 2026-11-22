@@ -143,6 +143,18 @@ export const DEMO: Record<string, Record<string, unknown>> = {
 // Extra previews of one component in other set-ups: composition id -> component name and props.
 export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
   // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).
+  "FootagePlate-Candle": {
+    name: "FootagePlate",
+    props: { srcId: "SRC-013", kind: "image", size: [1920, 1280], crop: [380, 330, 1000, 562], warmth: [1, 1], flicker: {}, analogue: {}, labels: [{ text: "PREVIEW · LABEL", atSec: 0.4, x: 1240, y: 820 }] },
+  },
+  "PeriodMapPlate-FocusDim": {
+    name: "PeriodMapPlate",
+    props: {
+      srcId: "SRC-033", size: [4000, 5313], views: [{ atSec: 0, crop: [400, 2300, 2000, 1125] }],
+      pins: [{ id: "a", x: 858, y: 2795, atSec: 0.3, label: "PIN A" }], focusDim: { pin: "a", atSec: 1.0 },
+      source: "MAP · PREVIEW · SOURCE LINE",
+    },
+  },
   "KineticLine-Typewriter": {
     name: "KineticLine",
     props: { lines: [{ text: "Preview line", atSec: 0.3 }, { text: "PREVIEW · A TYPED MONO LINE", atSec: 1.2, style: "mono", type: true }] },
@@ -376,6 +388,30 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
       { srcId: "SRC-006", imgSize: [1400, 1823], label: "PIECE B · YEAR", atSec: 1.6 },
       { srcId: "SRC-036", imgSize: [785, 1158], label: "PIECE C · YEAR", atSec: 3.0 },
     ],
+    source: "PREVIEW · SOURCE LINE",
+  },
+  BuildUpMap: {
+    title: "PREVIEW · WHERE IS IT?",
+    nodes: [
+      { act: 1, label: "Idea one", keywords: ["WORD", "WORD"], icon: "flower", atSec: 0.2 },
+      { act: 2, label: "Idea two", keywords: ["WORD"], icon: "brothers", atSec: 0.6 },
+      { act: 3, label: "Idea three", keywords: ["WORD", "WORD"], icon: "eye", atSec: 1.0 },
+      { act: 4, label: "Idea four", keywords: ["WORD"], icon: "prism", atSec: 1.4 },
+      { act: 5, label: "Idea five", keywords: ["WORD"], icon: "page", atSec: 1.8 },
+    ],
+    focus: { act: 3, atSec: 2.2 },
+    assembleAtSec: 3.4,
+    ringLabel: "?",
+  },
+  StillsMontage: {
+    stills: [
+      { srcId: "SRC-001", imgSize: [1920, 2813], label: "STILL A · YEAR", atSec: 0.2 },
+      { srcId: "SRC-004", imgSize: [996, 1230], label: "STILL B · YEAR", atSec: 1.0 },
+      { srcId: "SRC-007", imgSize: [2288, 4010], crop: [0, 600, 2288, 2600], label: "STILL C · YEAR", atSec: 1.8 },
+      { srcId: "SRC-029", imgSize: [1920, 2934], label: "STILL D · YEAR", atSec: 3.6 },
+    ],
+    years: { from: 1794, to: 1844, atSec: 0.4, untilSec: 3.6, caption: "PREVIEW · CAPTION" },
+    burst: { atSec: 2.8, sec: 0.7 },
     source: "PREVIEW · SOURCE LINE",
   },
   "KineticLine-Notebook": {

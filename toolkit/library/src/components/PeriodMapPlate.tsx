@@ -26,13 +26,16 @@ export type PeriodMapPlateProps = {
   labels?: LabelSpec[];
   tag?: DatelineTagProps;
   source: string; // e.g. "MAP · EMANUEL BOWEN · 1760 · YALE UNIVERSITY LIBRARY"
+  // MAP-005 FocusDim (built 22 Nov 2026): from atSec the map dims outside a soft circle round one pin, so the one
+  // place being spoken about holds the eye; untilSec lets the rest come back. Max 4 beats per episode.
+  focusDim?: { pin: string; atSec: number; untilSec?: number; radius?: number; dim?: number };
   startSec?: number;
 };
 
 const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
 
-export const PeriodMapPlate: React.FC<PeriodMapPlateProps> = ({ srcId, size, views, pins = [], rings = [], route, labels = [], tag, source, startSec = 0 }) => {
-  useAssets(["MAP-010", "MOT-001", ...(pins.length ? ["MOT-009"] : []), ...(route ? ["MAP-009", "MOT-005"] : [])]);
+export const PeriodMapPlate: React.FC<PeriodMapPlateProps> = ({ srcId, size, views, pins = [], rings = [], route, labels = [], tag, source, focusDim, startSec = 0 }) => {
+  useAssets(["MAP-010", "MOT-001", ...(pins.length ? ["MOT-009"] : []), ...(route ? ["MAP-009", "MOT-005"] : []), ...(focusDim ? ["MAP-005"] : [])]);
   const t = useTheme();
   const src = useSourceFile(srcId);
   const frame = useCurrentFrame();
@@ -81,6 +84,14 @@ export const PeriodMapPlate: React.FC<PeriodMapPlateProps> = ({ srcId, size, vie
               })}
             </g>
           </svg>
+          {focusDim
+            ? (() => {
+                const [fx, fy] = toScreen(pin(focusDim.pin).x, pin(focusDim.pin).y);
+                const on = reveal(frame, fps, focusDim.atSec, 0.8) * (focusDim.untilSec !== undefined ? 1 - reveal(frame, fps, focusDim.untilSec, 0.8) : 1);
+                const r = focusDim.radius ?? 240;
+                return <AbsoluteFill style={{ background: `radial-gradient(circle ${r * 1.6}px at ${fx}px ${fy}px, rgba(0,0,0,0) ${Math.round(r * 0.55)}px, ${t.colors.dimMask} ${r * 1.6}px)`, opacity: (focusDim.dim ?? 0.75) * on }} />;
+              })()
+            : null}
           {rings.map((r) => {
             const [x, y] = toScreen(pin(r.pin).x, pin(r.pin).y);
             return <RadioRings key={`${r.pin}${r.atSec}`} spec={{ x, y, atSec: r.atSec, pulses: r.pulses }} />;

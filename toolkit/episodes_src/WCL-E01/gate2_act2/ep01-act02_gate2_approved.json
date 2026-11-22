@@ -1,0 +1,1998 @@
+{
+ "episodeId": "WCL-E01-act02",
+ "themeId": "LOK-009",
+ "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
+ "voice": {
+  "id": "NAR-002",
+  "atSec": 2.4,
+  "tailSec": 0.64
+ },
+ "audio": [
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 2.5,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/dial_turn.wav",
+   "atSec": 5.43,
+   "volumeDb": -22.6
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 11.55,
+   "volumeDb": -14.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 16.87,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 26.47,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-017",
+   "file": "public/sfx/kit/tactile/pencil_stroke.wav",
+   "atSec": 27.4,
+   "volumeDb": -22.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 32.15,
+   "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-014",
+   "atSec": 32.3,
+   "endSec": 38.34,
+   "fadeInSec": 0.8,
+   "fadeOutSec": 0.6,
+   "volumeDb": -2.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 38.29,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+   "atSec": 55.05,
+   "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 64.28,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-021",
+   "file": "public/sfx/kit/whoosh/cloth_slide.wav",
+   "atSec": 73.81,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 98.55,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/page_turn.wav",
+   "atSec": 102.05,
+   "volumeDb": -12.5
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/pages_move.wav",
+   "atSec": 103.23,
+   "endSec": 103.68,
+   "fadeOutSec": 0.1,
+   "volumeDb": -18.0
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 105.65,
+   "volumeDb": -23.0
+  },
+  {
+   "id": "SFX-025",
+   "file": "public/sfx/kit/mechanical/sub_impact_v2.wav",
+   "atSec": 114.87,
+   "volumeDb": -12.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 114.98,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-018",
+   "file": "public/sfx/kit/mechanical/ticker_run.wav",
+   "atSec": 121.48,
+   "endSec": 122.43,
+   "fadeOutSec": 0.1,
+   "volumeDb": -23.0
+  },
+  {
+   "id": "SFX-018",
+   "file": "public/sfx/kit/mechanical/stopwatch_tick_v1.wav",
+   "atSec": 129.45,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-018",
+   "file": "public/sfx/kit/mechanical/stopwatch_tick_v2.wav",
+   "atSec": 133.79,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 140.7,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
+   "atSec": 160.15,
+   "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-027",
+   "file": "public/sfx/kit/mechanical/typewriter_run_v1.wav",
+   "atSec": 170.57,
+   "volumeDb": -16.0
+  },
+  {
+   "id": "SFX-014",
+   "atSec": 160.3,
+   "endSec": 162.38,
+   "fadeInSec": 0.6,
+   "fadeOutSec": 0.6,
+   "volumeDb": -2.0
+  }
+ ],
+ "beats": [
+  {
+   "id": "01",
+   "beats": [
+    "E01-A2-01"
+   ],
+   "start": 0.0,
+   "end": 2.4,
+   "component": "ChapterSlate",
+   "assets": [
+    "VIS-007",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-007"
+   ],
+   "props": {
+    "index": "02",
+    "title": "The odd one out"
+   },
+   "beatTimes": [
+    [
+     "E01-A2-01",
+     0.0,
+     2.4
+    ]
+   ]
+  },
+  {
+   "id": "02+03+04+05",
+   "beats": [
+    "E01-A2-02",
+    "E01-A2-03",
+    "E01-A2-04",
+    "E01-A2-05"
+   ],
+   "start": 2.4,
+   "end": 11.65,
+   "component": "PeriodMapPlate",
+   "assets": [
+    "MAP-010",
+    "TXT-011",
+    "TXT-010",
+    "MOT-001",
+    "MOT-009",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "SFX-019",
+    "MUS-007",
+    "TEX-007",
+    "MAP-008",
+    "SRC-033",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-033",
+    "size": [
+     4000,
+     5313
+    ],
+    "source": "MAP · EMANUEL BOWEN · 1760 · YALE UNIVERSITY LIBRARY",
+    "views": [
+     {
+      "atSec": 0,
+      "crop": [
+       380,
+       2420,
+       1400,
+       788
+      ]
+     },
+     {
+      "atSec": 5.34,
+      "crop": [
+       0,
+       1700,
+       3800,
+       2138
+      ],
+      "moveSec": 1.8
+     }
+    ],
+    "pins": [
+     {
+      "id": "eag",
+      "x": 858,
+      "y": 2795,
+      "atSec": 2.98
+     }
+    ],
+    "rings": [
+     {
+      "pin": "eag",
+      "atSec": 2.98,
+      "pulses": 2
+     }
+    ],
+    "labels": [
+     {
+      "text": "BORN 1766",
+      "atSec": 1.4,
+      "untilSec": 5.34,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "NORTH-WEST ENGLAND",
+      "atSec": 5.74,
+      "untilSec": 8.08,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "A QUAKER FAMILY",
+      "atSec": 8.08,
+      "x": 960,
+      "y": 860,
+      "align": "center",
+      "accent": true
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "EAGLESFIELD",
+       "atSec": 2.98
+      },
+      {
+       "text": "CUMBERLAND",
+       "atSec": 4.52
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A2-02",
+     2.4,
+     4.84
+    ],
+    [
+     "E01-A2-03",
+     4.84,
+     6.92
+    ],
+    [
+     "E01-A2-04",
+     6.92,
+     9.24
+    ],
+    [
+     "E01-A2-05",
+     9.24,
+     11.65
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "paper"
+   }
+  },
+  {
+   "id": "06+07",
+   "beats": [
+    "E01-A2-06",
+    "E01-A2-07"
+   ],
+   "start": 11.65,
+   "end": 16.97,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "SFX-006",
+    "MUS-007",
+    "SRC-034",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-034",
+    "imgSize": [
+     1814,
+     2600
+    ],
+    "crop": [
+     185,
+     370,
+     1395,
+     1330
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       200,
+       425,
+       1150,
+       95
+      ],
+      "atSec": 0.6
+     },
+     {
+      "box": [
+       945,
+       640,
+       615,
+       55
+      ],
+      "atSec": 1.55
+     },
+     {
+      "box": [
+       190,
+       695,
+       1025,
+       55
+      ],
+      "atSec": 2.35
+     }
+    ],
+    "quote": "keep to truth and plainness, in language, habit, deportment, and behaviour",
+    "source": "QUAKER ADVICE OF 1691 · PRINTED LONDON 1783 · P. 185",
+    "notes": [
+     {
+      "text": "PLAIN CLOTHES, PLAIN WORDS",
+      "atSec": 3.04
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-06",
+     11.65,
+     14.17
+    ],
+    [
+     "E01-A2-07",
+     14.17,
+     16.97
+    ]
+   ],
+   "transitionIn": "slide"
+  },
+  {
+   "id": "08+09",
+   "beats": [
+    "E01-A2-08",
+    "E01-A2-09"
+   ],
+   "start": 16.97,
+   "end": 21.76,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-003",
+    "TRN-013",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "MUS-007",
+    "SRC-035",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-035",
+    "imgSize": [
+     1575,
+     2588
+    ],
+    "crop": [
+     250,
+     280,
+     1080,
+     1980
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       340,
+       560,
+       770,
+       85
+      ],
+      "atSec": 0.3
+     },
+     {
+      "box": [
+       480,
+       1290,
+       520,
+       80
+      ],
+      "atSec": 0.9
+     }
+    ],
+    "quote": "Meteorological Observations and Essays",
+    "quoteMarks": false,
+    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZÜRICH",
+    "notes": [
+     {
+      "text": "HIS FIRST BOOK · 1793",
+      "atSec": 1.0
+     },
+     {
+      "text": "BUILT ON HIS WEATHER RECORDS",
+      "atSec": 2.6
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-08",
+     16.97,
+     19.31
+    ],
+    [
+     "E01-A2-09",
+     19.31,
+     21.76
+    ]
+   ],
+   "transitionIn": "flash"
+  },
+  {
+   "id": "10+11",
+   "beats": [
+    "E01-A2-10",
+    "E01-A2-11"
+   ],
+   "start": 21.76,
+   "end": 26.37,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "TXT-010",
+    "TXT-016",
+    "MOT-003",
+    "MOT-009",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-007",
+    "TEX-005"
+   ],
+   "props": {
+    "ink": true,
+    "lines": [
+     {
+      "text": "A diary of the weather",
+      "atSec": 1.66
+     },
+     {
+      "text": "THE DIARY · FROM 24 MARCH 1787",
+      "atSec": 0.0,
+      "style": "mono"
+     },
+     {
+      "text": "TO THE EVENING BEFORE HE DIED · 1844",
+      "atSec": 2.9,
+      "style": "mono"
+     }
+    ],
+    "notebook": {
+     "atSec": 0.1,
+     "rowsFromSec": 0.6,
+     "rowsToSec": 3.96
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "ILLUSTRATION",
+       "atSec": 0.1
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A2-10",
+     21.76,
+     23.98
+    ],
+    [
+     "E01-A2-11",
+     23.98,
+     26.37
+    ]
+   ]
+  },
+  {
+   "id": "12+13",
+   "beats": [
+    "E01-A2-12",
+    "E01-A2-13"
+   ],
+   "start": 26.37,
+   "end": 32.3,
+   "component": "PeriodMapPlate",
+   "assets": [
+    "MAP-010",
+    "TXT-011",
+    "TXT-010",
+    "MOT-001",
+    "MOT-005",
+    "MOT-009",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "SFX-016",
+    "MUS-007",
+    "MUS-011",
+    "TEX-007",
+    "MAP-009",
+    "MAP-008",
+    "SRC-033",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-033",
+    "size": [
+     4000,
+     5313
+    ],
+    "source": "MAP · EMANUEL BOWEN · 1760 · YALE UNIVERSITY LIBRARY",
+    "views": [
+     {
+      "atSec": 0,
+      "crop": [
+       100,
+       2450,
+       2900,
+       1631
+      ]
+     }
+    ],
+    "pins": [
+     {
+      "id": "eag",
+      "x": 858,
+      "y": 2795,
+      "atSec": 0.1
+     },
+     {
+      "id": "ken",
+      "x": 1985,
+      "y": 3825,
+      "atSec": 2.23
+     }
+    ],
+    "rings": [
+     {
+      "pin": "ken",
+      "atSec": 1.61,
+      "pulses": 2
+     }
+    ],
+    "route": {
+     "from": "eag",
+     "to": "ken",
+     "atSec": 1.03,
+     "drawSec": 1.3,
+     "tilt": {
+      "atSec": 3.79,
+      "deg": 6
+     }
+    },
+    "labels": [
+     {
+      "text": "IN KENDAL FROM AGE 15",
+      "atSec": 4.17,
+      "x": 960,
+      "y": 860,
+      "align": "center",
+      "accent": true
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "KENDAL",
+       "atSec": 1.61
+      },
+      {
+       "text": "WESTMORLAND",
+       "atSec": 2.43
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A2-12",
+     26.37,
+     29.72
+    ],
+    [
+     "E01-A2-13",
+     29.72,
+     32.3
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "paper"
+   }
+  },
+  {
+   "id": "14+15",
+   "beats": [
+    "E01-A2-14",
+    "E01-A2-15"
+   ],
+   "start": 32.3,
+   "end": 38.34,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "SFX-020",
+    "SFX-014",
+    "MUS-007",
+    "SRC-013",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     1,
+     1
+    ],
+    "labels": [
+     {
+      "text": "THE GERANIUM, 1792",
+      "atSec": 1.16,
+      "untilSec": 3.68,
+      "x": 1240,
+      "y": 820
+     },
+     {
+      "text": "WHAT DO YOU SEE?",
+      "atSec": 3.8800000000000003,
+      "x": 960,
+      "y": 860,
+      "align": "center",
+      "accent": true
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-14",
+     32.3,
+     35.11
+    ],
+    [
+     "E01-A2-15",
+     35.11,
+     38.34
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    1248,
+    910
+   ]
+  },
+  {
+   "id": "16+17+18+19+20+21",
+   "beats": [
+    "E01-A2-16",
+    "E01-A2-17",
+    "E01-A2-18",
+    "E01-A2-19",
+    "E01-A2-20",
+    "E01-A2-21"
+   ],
+   "start": 38.34,
+   "end": 55.2,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "SFX-006",
+    "MUS-007",
+    "SRC-029",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-029",
+    "imgSize": [
+     1920,
+     2934
+    ],
+    "crop": [
+     500,
+     510,
+     1080,
+     1030
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       570,
+       882,
+       970,
+       56
+      ],
+      "atSec": 1.36
+     },
+     {
+      "box": [
+       1035,
+       940,
+       175,
+       56
+      ],
+      "atSec": 3.54
+     },
+     {
+      "box": [
+       1405,
+       940,
+       135,
+       56
+      ],
+      "atSec": 5.86
+     },
+     {
+      "box": [
+       570,
+       1000,
+       140,
+       56
+      ],
+      "atSec": 6.11
+     },
+     {
+      "box": [
+       1085,
+       1000,
+       455,
+       56
+      ],
+      "atSec": 9.18
+     },
+     {
+      "box": [
+       1180,
+       1060,
+       360,
+       56
+      ],
+      "atSec": 11.69
+     },
+     {
+      "box": [
+       570,
+       1118,
+       765,
+       56
+      ],
+      "atSec": 13.49
+     }
+    ],
+    "callout": {
+     "atSec": 11.69,
+     "dim": 0.7
+    },
+    "quote": "except my brother who saw it in the same light as myself",
+    "source": "JOHN DALTON · 1798 · P. 30"
+   },
+   "beatTimes": [
+    [
+     "E01-A2-16",
+     38.34,
+     40.99
+    ],
+    [
+     "E01-A2-17",
+     40.99,
+     43.68
+    ],
+    [
+     "E01-A2-18",
+     43.68,
+     46.92
+    ],
+    [
+     "E01-A2-19",
+     46.92,
+     49.51
+    ],
+    [
+     "E01-A2-20",
+     49.51,
+     52.38
+    ],
+    [
+     "E01-A2-21",
+     52.38,
+     55.2
+    ]
+   ],
+   "transitionIn": "slide"
+  },
+  {
+   "id": "22+23+24",
+   "beats": [
+    "E01-A2-22",
+    "E01-A2-23",
+    "E01-A2-24"
+   ],
+   "start": 55.2,
+   "end": 64.18,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "TXT-011",
+    "MOT-002",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "SFX-020",
+    "MUS-007",
+    "TEX-008",
+    "SRC-036",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-036",
+    "imgSize": [
+     785,
+     1158
+    ],
+    "crop": [
+     60,
+     100,
+     690,
+     1000
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       185,
+       455,
+       430,
+       50
+      ],
+      "atSec": 0.5
+     },
+     {
+      "box": [
+       336,
+       1002,
+       84,
+       40
+      ],
+      "atSec": 4.91
+     }
+    ],
+    "quote": "The Worthies of Cumberland: John Dalton",
+    "quoteMarks": false,
+    "source": "HENRY LONSDALE · LONDON, 1874",
+    "strokes": {},
+    "notes": [
+     {
+      "text": "AS THE STORY GOES",
+      "atSec": 0.89
+     },
+     {
+      "text": "1874 · 30 YEARS AFTER HE DIED",
+      "atSec": 4.91
+     },
+     {
+      "text": "MAY HAVE GROWN IN THE TELLING",
+      "atSec": 7.51,
+      "accent": true
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-22",
+     55.2,
+     58.11
+    ],
+    [
+     "E01-A2-23",
+     58.11,
+     61.39
+    ],
+    [
+     "E01-A2-24",
+     61.39,
+     64.18
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    700,
+    640
+   ]
+  },
+  {
+   "id": "25+26+27+28+29+30+31+32+33+34+35+36+37+38",
+   "beats": [
+    "E01-A2-25",
+    "E01-A2-26",
+    "E01-A2-27",
+    "E01-A2-28",
+    "E01-A2-29",
+    "E01-A2-30",
+    "E01-A2-31",
+    "E01-A2-32",
+    "E01-A2-33",
+    "E01-A2-34",
+    "E01-A2-35",
+    "E01-A2-36",
+    "E01-A2-37",
+    "E01-A2-38"
+   ],
+   "start": 64.18,
+   "end": 98.63,
+   "component": "ReportedColour",
+   "assets": [
+    "VIS-035",
+    "TXT-011",
+    "TXT-010",
+    "MOT-001",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "SFX-021",
+    "MUS-007",
+    "TEX-007",
+    "TEX-006",
+    "SRC-037",
+    "TRN-001",
+    "TXT-009",
+    "MOT-003",
+    "MOT-011"
+   ],
+   "props": {
+    "srcId": "SRC-037",
+    "file": "public/assets/sources/period_stockings_flat.jpg",
+    "mask": "public/assets/sources/period_stockings_flat_mask.png",
+    "size": [
+     2600,
+     1622
+    ],
+    "crop": [
+     60,
+     80,
+     2480,
+     1395
+    ],
+    "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
+    "printScreen": 0.08,
+    "printScreenUntilSec": 15.05,
+    "states": [
+     {
+      "atSec": 0,
+      "color": null
+     },
+     {
+      "atSec": 9.68,
+      "color": "#3B4250",
+      "sec": 0.9
+     },
+     {
+      "atSec": 18.6,
+      "color": "#B3262E",
+      "snap": true,
+      "sec": 0.6
+     },
+     {
+      "atSec": 20.37,
+      "color": "#3B4250",
+      "sec": 0.9
+     }
+    ],
+    "people": [
+     {
+      "name": "MOTHER",
+      "color": "#B3262E",
+      "colorName": "RED",
+      "atSec": 19.0,
+      "x": 1400,
+      "y": 880
+     },
+     {
+      "name": "JOHN",
+      "color": "#3B4250",
+      "colorName": "DARK",
+      "atSec": 20.37,
+      "x": 520,
+      "y": 880
+     },
+     {
+      "name": "JONATHAN",
+      "color": "#3B4250",
+      "colorName": "DARK",
+      "atSec": 23.11,
+      "x": 960,
+      "y": 880
+     }
+    ],
+    "labels": [
+     {
+      "text": "A SHOP WINDOW",
+      "atSec": 3.23,
+      "untilSec": 6.34,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "FOR HIS MOTHER",
+      "atSec": 7.04,
+      "untilSec": 8.46,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "TO JOHN · AS THE STORY TELLS IT",
+      "atSec": 8.46,
+      "untilSec": 15.44,
+      "x": 960,
+      "y": 800,
+      "align": "center"
+     },
+     {
+      "text": "'A BLUISH DARK DRAB' · LONSDALE, 1874",
+      "atSec": 11.54,
+      "untilSec": 15.44,
+      "x": 960,
+      "y": 860,
+      "align": "center",
+      "accent": true
+     },
+     {
+      "text": "HIS MOTHER",
+      "atSec": 15.84,
+      "untilSec": 18.6,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "'AS RED AS A CHERRY'",
+      "atSec": 18.6,
+      "untilSec": 20.37,
+      "x": 960,
+      "y": 780,
+      "align": "center",
+      "accent": true
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "KENDAL",
+       "atSec": 1.83,
+       "untilSec": 15.84
+      },
+      {
+       "text": "EAGLESFIELD",
+       "atSec": 15.84
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A2-25",
+     64.18,
+     66.58
+    ],
+    [
+     "E01-A2-26",
+     66.58,
+     69.89
+    ],
+    [
+     "E01-A2-27",
+     69.89,
+     72.0
+    ],
+    [
+     "E01-A2-28",
+     72.0,
+     74.28
+    ],
+    [
+     "E01-A2-29",
+     74.28,
+     76.52
+    ],
+    [
+     "E01-A2-30",
+     76.52,
+     79.23
+    ],
+    [
+     "E01-A2-31",
+     79.23,
+     81.69
+    ],
+    [
+     "E01-A2-32",
+     81.69,
+     84.03
+    ],
+    [
+     "E01-A2-33",
+     84.03,
+     86.29
+    ],
+    [
+     "E01-A2-34",
+     86.29,
+     89.23
+    ],
+    [
+     "E01-A2-35",
+     89.23,
+     91.62
+    ],
+    [
+     "E01-A2-36",
+     91.62,
+     94.06
+    ],
+    [
+     "E01-A2-37",
+     94.06,
+     96.39
+    ],
+    [
+     "E01-A2-38",
+     96.39,
+     98.63
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "paper"
+   }
+  },
+  {
+   "id": "39+40+41+42+43+44",
+   "beats": [
+    "E01-A2-39",
+    "E01-A2-40",
+    "E01-A2-41",
+    "E01-A2-42",
+    "E01-A2-43",
+    "E01-A2-44"
+   ],
+   "start": 98.63,
+   "end": 115.06,
+   "component": "SplitComparisonCard",
+   "assets": [
+    "VIS-008",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-012",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "SFX-016",
+    "MUS-007",
+    "SRC-013",
+    "SRC-011",
+    "SRC-037",
+    "TRN-001",
+    "MOT-005",
+    "SFX-025",
+    "MUS-010"
+   ],
+   "props": {
+    "panels": [
+     {
+      "srcId": "SRC-013",
+      "kind": "image",
+      "size": [
+       1920,
+       1280
+      ],
+      "crop": [
+       380,
+       230,
+       900,
+       900
+      ],
+      "label": "THE FLOWER",
+      "atSec": 0.3,
+      "stamp": {
+       "text": "SAME",
+       "atSec": 3.37
+      }
+     },
+     {
+      "srcId": "SRC-011",
+      "file": "public/assets/sources/candle_lighting_mixkit3458.mp4",
+      "kind": "video",
+      "size": [
+       1080,
+       1920
+      ],
+      "focus": 0.56,
+      "clipStartSec": 3,
+      "label": "THE CANDLE",
+      "atSec": 0.45,
+      "stamp": {
+       "text": "SAME",
+       "atSec": 4.55
+      }
+     },
+     {
+      "srcId": "SRC-037",
+      "file": "public/assets/sources/period_stockings_flat.jpg",
+      "kind": "image",
+      "size": [
+       2600,
+       1622
+      ],
+      "crop": [
+       900,
+       180,
+       1300,
+       1300
+      ],
+      "label": "THE STOCKINGS · A PERIOD PAIR",
+      "atSec": 0.6,
+      "stamp": {
+       "text": "SAME",
+       "atSec": 6.97
+      }
+     }
+    ],
+    "lines": [
+     {
+      "text": "What stays the same?",
+      "atSec": 0.17,
+      "untilSec": 8.6
+     },
+     {
+      "text": "Only the person looking changes.",
+      "atSec": 8.6,
+      "untilSec": 11.34
+     },
+     {
+      "text": "The odd thing isn't the flower.",
+      "atSec": 11.44
+     }
+    ],
+    "dimAtSec": 8.6,
+    "names": [
+     {
+      "text": "JOHN",
+      "atSec": 15.1
+     },
+     {
+      "text": "JONATHAN",
+      "atSec": 15.35
+     }
+    ],
+    "thread": {
+     "atSec": 15.45,
+     "drawSec": 1.0
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A2-39",
+     98.63,
+     102.0
+    ],
+    [
+     "E01-A2-40",
+     102.0,
+     104.08
+    ],
+    [
+     "E01-A2-41",
+     104.08,
+     106.71
+    ],
+    [
+     "E01-A2-42",
+     106.71,
+     109.45
+    ],
+    [
+     "E01-A2-43",
+     109.45,
+     112.77
+    ],
+    [
+     "E01-A2-44",
+     112.77,
+     115.06
+    ]
+   ],
+   "transitionIn": "block",
+   "transition": {
+    "color": "#B3262E",
+    "side": "right"
+   }
+  },
+  {
+   "id": "45+46+47+48+49+50+51+52+53+54",
+   "beats": [
+    "E01-A2-45",
+    "E01-A2-46",
+    "E01-A2-47",
+    "E01-A2-48",
+    "E01-A2-49",
+    "E01-A2-50",
+    "E01-A2-51",
+    "E01-A2-52",
+    "E01-A2-53",
+    "E01-A2-54"
+   ],
+   "start": 115.06,
+   "end": 140.6,
+   "component": "ScaleField",
+   "assets": [
+    "VIS-024",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "SFX-018",
+    "MUS-007",
+    "MUS-011",
+    "TRN-001"
+   ],
+   "props": {
+    "source": "BIRCH 2012 · J. OPT. SOC. AM. A",
+    "lines": [
+     {
+      "text": "They aren't rare.",
+      "atSec": 1.08,
+      "untilSec": 4.319999999999999
+     },
+     {
+      "text": "Colour blindness",
+      "atSec": 4.52
+     },
+     {
+      "text": "RED-GREEN",
+      "atSec": 4.94,
+      "untilSec": 8.96,
+      "size": "small"
+     },
+     {
+      "text": "TROUBLE TELLING SOME REDS AND GREENS APART",
+      "atSec": 8.96,
+      "untilSec": 12.39,
+      "size": "small"
+     },
+     {
+      "text": "STILL THERE",
+      "atSec": 24.29,
+      "size": "small",
+      "row": 1,
+      "accent": true
+     }
+    ],
+    "phases": [
+     {
+      "atSec": 0.2,
+      "total": 100,
+      "cols": 20,
+      "lit": 8,
+      "litAtSec": 6.42,
+      "label": {
+       "text": "MEN OF EUROPEAN DESCENT · ABOUT 8 IN 100",
+       "atSec": 6.42
+      }
+     },
+     {
+      "atSec": 12.39,
+      "total": 1000,
+      "cols": 50,
+      "lit": 4,
+      "litAtSec": 14.39,
+      "seed": 2,
+      "label": {
+       "text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000",
+       "atSec": 14.39
+      }
+     },
+     {
+      "atSec": 16.97,
+      "total": 50,
+      "cols": 10,
+      "lit": 4,
+      "litAtSec": 18.73,
+      "seed": 3,
+      "label": {
+       "text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4",
+       "atSec": 18.73
+      }
+     },
+     {
+      "atSec": 22.69,
+      "total": 100,
+      "cols": 20,
+      "lit": 5,
+      "litAtSec": 22.89,
+      "seed": 4,
+      "label": {
+       "text": "MEN OF CHINESE OR JAPANESE DESCENT · 4–6.5 IN 100",
+       "atSec": 22.89
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-45",
+     115.06,
+     117.42
+    ],
+    [
+     "E01-A2-46",
+     117.42,
+     120.74
+    ],
+    [
+     "E01-A2-47",
+     120.74,
+     124.02
+    ],
+    [
+     "E01-A2-48",
+     124.02,
+     126.72
+    ],
+    [
+     "E01-A2-49",
+     126.72,
+     128.73
+    ],
+    [
+     "E01-A2-50",
+     128.73,
+     131.06
+    ],
+    [
+     "E01-A2-51",
+     131.06,
+     133.49
+    ],
+    [
+     "E01-A2-52",
+     133.49,
+     135.91
+    ],
+    [
+     "E01-A2-53",
+     135.91,
+     138.19
+    ],
+    [
+     "E01-A2-54",
+     138.19,
+     140.6
+    ]
+   ],
+   "transitionIn": "slide"
+  },
+  {
+   "id": "55+56",
+   "beats": [
+    "E01-A2-55",
+    "E01-A2-56"
+   ],
+   "start": 140.6,
+   "end": 145.43,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "TXT-015",
+    "TXT-017",
+    "MOT-002",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "SFX-024",
+    "MUS-007",
+    "TEX-007",
+    "TRN-001"
+   ],
+   "props": {
+    "lines": [
+     {
+      "text": "Picture it from the inside.",
+      "atSec": 0.65,
+      "fill": {
+       "word": "inside",
+       "atSec": 1.41,
+       "color": "#00E0BE",
+       "style": "mark",
+       "onMark": "#2F2D2C"
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-55",
+     140.6,
+     142.97
+    ],
+    [
+     "E01-A2-56",
+     142.97,
+     145.43
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "paper"
+   }
+  },
+  {
+   "id": "57+58",
+   "beats": [
+    "E01-A2-57",
+    "E01-A2-58"
+   ],
+   "start": 145.43,
+   "end": 150.4,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "TXT-015",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-007"
+   ],
+   "props": {
+    "lines": [
+     {
+      "text": "YOUR WHOLE LIFE",
+      "atSec": 0,
+      "style": "mono"
+     },
+     {
+      "text": "Grass",
+      "atSec": 1.65,
+      "fill": {
+       "word": "Grass",
+       "atSec": 1.65,
+       "color": "#4C9A3B"
+      }
+     },
+     {
+      "text": "Blood",
+      "atSec": 2.45,
+      "fill": {
+       "word": "Blood",
+       "atSec": 2.45,
+       "color": "#7A1A1A",
+       "outline": "#D9D2C5"
+      }
+     },
+     {
+      "text": "Cherries",
+      "atSec": 3.21,
+      "fill": {
+       "word": "Cherries",
+       "atSec": 3.21,
+       "color": "#B3262E",
+       "outline": "#D9D2C5"
+      }
+     },
+     {
+      "text": "Sky",
+      "atSec": 4.13,
+      "fill": {
+       "word": "Sky",
+       "atSec": 4.13,
+       "color": "#86B5E8"
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-57",
+     145.43,
+     148.39
+    ],
+    [
+     "E01-A2-58",
+     148.39,
+     150.4
+    ]
+   ]
+  },
+  {
+   "id": "59+60+61+62",
+   "beats": [
+    "E01-A2-59",
+    "E01-A2-60",
+    "E01-A2-61",
+    "E01-A2-62"
+   ],
+   "start": 150.4,
+   "end": 160.3,
+   "component": "SwatchRows",
+   "assets": [
+    "VIS-017",
+    "TXT-010",
+    "MOT-003",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-007"
+   ],
+   "props": {
+    "columns": [
+     "WHAT IT IS CALLED"
+    ],
+    "rows": [
+     {
+      "name": "YOU",
+      "atSec": 0,
+      "cells": [
+       {
+        "color": "#C23A47",
+        "name": "RED",
+        "atSec": 0,
+        "fillSec": 0.4
+       }
+      ],
+      "tag": {
+       "text": "ILLUSTRATIVE",
+       "atSec": 0
+      }
+     },
+     {
+      "name": "EVERYONE ELSE",
+      "atSec": 0.3,
+      "dimAtSec": 7.36,
+      "cells": [
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 0.3,
+        "fillSec": 0.8
+       }
+      ]
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-59",
+     150.4,
+     153.0
+    ],
+    [
+     "E01-A2-60",
+     153.0,
+     155.16
+    ],
+    [
+     "E01-A2-61",
+     155.16,
+     157.24
+    ],
+    [
+     "E01-A2-62",
+     157.24,
+     160.3
+    ]
+   ]
+  },
+  {
+   "id": "63+64+65",
+   "beats": [
+    "E01-A2-63",
+    "E01-A2-64",
+    "E01-A2-65"
+   ],
+   "start": 160.3,
+   "end": 166.9,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "SFX-020",
+    "SFX-014",
+    "MUS-007",
+    "SRC-013",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     0,
+     1
+    ],
+    "warmthSec": [
+     2.65,
+     3.8499999999999996
+    ],
+    "labels": [
+     {
+      "text": "SKY-BLUE · HIS WORDS",
+      "atSec": 0.4,
+      "untilSec": 2.3,
+      "x": 1240,
+      "y": 820
+     },
+     {
+      "text": "RED · HIS WORDS",
+      "atSec": 2.75,
+      "x": 1240,
+      "y": 760,
+      "accent": true
+     },
+     {
+      "text": "ALMOST NOBODY ELSE SEES IT",
+      "atSec": 3.95,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-63",
+     160.3,
+     162.38
+    ],
+    [
+     "E01-A2-64",
+     162.38,
+     164.55
+    ],
+    [
+     "E01-A2-65",
+     164.55,
+     166.9
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    1180,
+    450
+   ]
+  },
+  {
+   "id": "66+67+68",
+   "beats": [
+    "E01-A2-66",
+    "E01-A2-67",
+    "E01-A2-68"
+   ],
+   "start": 166.9,
+   "end": 175.57,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "TXT-015",
+    "TXT-017",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-007",
+    "SRC-004",
+    "TXT-021",
+    "SFX-027"
+   ],
+   "props": {
+    "backdrop": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ],
+     "layout": "card-right"
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0.3
+      }
+     ]
+    },
+    "lines": [
+     {
+      "text": "A scientist.",
+      "atSec": 0.65,
+      "fill": {
+       "word": "scientist",
+       "atSec": 1.93,
+       "color": "#00E0BE",
+       "style": "mark",
+       "onMark": "#2F2D2C"
+      }
+     },
+     {
+      "text": "NOT ENOUGH TO KNOW HE'S DIFFERENT",
+      "atSec": 3.67,
+      "style": "mono",
+      "type": true
+     },
+     {
+      "text": "Why?",
+      "atSec": 7.29,
+      "fill": {
+       "word": "Why?",
+       "atSec": 7.29,
+       "color": "#C8402F",
+       "outline": "#D9D2C5"
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A2-66",
+     166.9,
+     169.75
+    ],
+    [
+     "E01-A2-67",
+     169.75,
+     172.95
+    ],
+    [
+     "E01-A2-68",
+     172.95,
+     175.57
+    ]
+   ]
+  }
+ ]
+}

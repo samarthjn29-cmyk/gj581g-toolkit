@@ -6,6 +6,7 @@ import { CropImage, type Rect } from "../layers/CropImage";
 import { Label, type LabelSpec } from "../layers/Label";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 import { ScreenTexture } from "../layers/ScreenTexture";
+import { AnalogueFinish } from "../layers/AnalogueFinish";
 
 // VIS-016 FootagePlate (beat type 4: a real clip or photo that sets a scene, calm).
 // The picture fills the frame with one slow move and the theme grade, and always carries a label or a
@@ -31,6 +32,10 @@ export type FootagePlateProps = {
   labels?: LabelSpec[];
   tag?: DatelineTagProps;
   screen?: { strength?: number }; // LOK-023: the picture is on a screen (scanlines, sub-pixels, edge falloff)
+  // LOK-016 CandleFlicker (studied Ben Marriott, Best Motion Design of 2026; analysis only; built 22 Nov 2026): the grade breathes with a flame in
+  // the scene, a few percent of brightness, never a strobe. Only where a flame is seen or said.
+  flicker?: { strength?: number; seed?: number };
+  analogue?: { strength?: number; seed?: number }; // LOK-015 AnalogueFinish (candlelit, archival, memory scenes)
   startSec?: number;
 };
 
@@ -55,9 +60,11 @@ export const FootagePlate: React.FC<FootagePlateProps> = ({
   labels = [],
   tag,
   screen,
+  flicker,
+  analogue,
   startSec = 0,
 }) => {
-  useAssets(["VIS-016", "MOT-001", ...(screen ? ["LOK-023"] : [])]);
+  useAssets(["VIS-016", "MOT-001", ...(screen ? ["LOK-023"] : []), ...(flicker ? ["LOK-016"] : []), ...(analogue ? ["LOK-015"] : [])]);
   const src = useSourceFile(srcId, file);
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -70,7 +77,17 @@ export const FootagePlate: React.FC<FootagePlateProps> = ({
   });
   const pIn = reveal(frame, fps, startSec, 0.9);
   const pOut = fadeOutSec !== undefined ? exit(frame, fps, fadeOutSec, 0.9) : 1;
-  const filter = `${grade(w)} brightness(${(1 - dim).toFixed(3)})`;
+  // Flame flicker: three slow incommensurate waves plus a gentle random step every 3 frames, mean 1, within
+  // +-strength (default 0.035, cap 0.06), scaled by the warmth so a neutral grade never flickers.
+  const fs = flicker ? Math.min(0.06, flicker.strength ?? 0.035) : 0;
+  const tt = frame / fps;
+  const sd = flicker?.seed ?? 1;
+  const wob = fs
+    ? (0.45 * Math.sin(tt * 7.3 + sd) + 0.3 * Math.sin(tt * 11.9 + 2 * sd) + 0.25 * Math.sin(tt * 3.1 + 3 * sd)) * 0.8 +
+      0.2 * (((Math.floor(frame / 3) * 9301 + 49297 * sd) % 233280) / 233280 - 0.5) * 2
+    : 0;
+  const flick = 1 + fs * Math.max(0.2, w) * wob;
+  const filter = `${grade(w)} brightness(${((1 - dim) * flick).toFixed(4)})`;
 
   let picture: React.ReactNode;
   if (kind === "video") {
@@ -97,6 +114,7 @@ export const FootagePlate: React.FC<FootagePlateProps> = ({
         <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, push)})`, transformOrigin: "50% 50%" }}>
           {picture}
           {screen ? <ScreenTexture strength={screen.strength} /> : null}
+          {analogue ? <AnalogueFinish strength={analogue.strength} seed={analogue.seed} /> : null}
         </AbsoluteFill>
         <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%)" }} />
       </AbsoluteFill>

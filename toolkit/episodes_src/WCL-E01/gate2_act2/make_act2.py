@@ -124,7 +124,7 @@ shot(B(12, 13), "PeriodMapPlate", lambda r: {
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
 # 14-15 the geranium by candle (push-through from the Kendal pin).
 shot(B(14, 15), "FootagePlate", lambda r: {
-    "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 1],
+    "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 1], "flicker": {}, "analogue": {},  # LOK-016, LOK-015: lit by the candle
     "labels": [{"text": "THE GERANIUM, 1792", "atSec": max(0.2, r(word("geranium"))), "untilSec": r(word("takes")), "x": 1240, "y": 820},
                {"text": "WHAT DO YOU SEE?", "atSec": r(word("takes")) + 0.2, "x": 960, "y": 860, "align": "center", "accent": True}]},
     transitionIn="push", focus=[1248, 910])
@@ -221,21 +221,31 @@ shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
               "cells": [{"color": RED, "name": "RED", "atSec": 0.3, "fillSec": 0.8}]}]})
 # 63-65 one evening, a flower changes colour (his colour names: what he called them, not what he saw).
 shot(B(63, 64, 65), "FootagePlate", lambda r: {
-    "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 1],
+    "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 1], "flicker": {"seed": 2}, "analogue": {"seed": 2},  # LOK-016, LOK-015: the evening, by the candle
     "warmthSec": [r(word("changes", 160)), r(word("changes", 160)) + 1.2],
     "labels": [{"text": "SKY-BLUE · HIS WORDS", "atSec": 0.4, "untilSec": 2.3, "x": 1240, "y": 820},
                {"text": "RED · HIS WORDS", "atSec": 2.75, "x": 1240, "y": 760, "accent": True},
                {"text": "ALMOST NOBODY ELSE SEES IT", "atSec": r(word("almost")), "x": 960, "y": 860, "align": "center"}]},
     transitionIn="push", focus=[1180, 450])
-# 66-68 Dalton is a scientist: he wants to know why (act 3 starts on the next frame).
-shot(B(66, 67, 68), "KineticLine", lambda r: {
+# 66-67 Dalton is a scientist (act 3 starts on the next frame after 68).
+shot(B(66, 67), "KineticLine", lambda r: {
     # SRC-004 Dalton's 1834 portrait (Turner mezzotint) beside the words: the act's one look at the man himself.
     "backdrop": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010], "layout": "card-right"},
     "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0.3}]},
     "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164)),
                "fill": {"word": "scientist", "atSec": r(word("scientist")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}},
-              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True},  # TXT-021, the act's one typed line
-              {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED, "outline": "#D9D2C5"}}]})
+              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True}]})  # TXT-021, the act's one typed line
+# 68 "He wants to know why.": the episode's BuildUpMap (VIS-048) for the first time. Acts 1 and 2 as pieces in their
+# chapter colours (LOK-026), the act 2 piece lit; a third piece, WHY?, arrives on "why". Seven places for the
+# seven acts, so later acts keep these positions. Words: act titles (on screen already) and the narration's own.
+shot(B(68), "BuildUpMap", lambda r: {
+    "title": "WHERE IS THE PINK?",
+    "slots": 7,
+    "nodes": [{"act": 1, "label": "The flower", "keywords": ["SKY-BLUE BY DAY", "RED BY CANDLE"], "icon": "flower", "atSec": 0},
+              {"act": 2, "label": "The odd one out", "keywords": ["HIS BROTHER TOO", "NOT RARE"], "icon": "brothers", "atSec": 0.2},
+              {"act": 3, "label": "Why?", "icon": "question", "atSec": r(word("why"))}],
+    "focus": {"act": 2, "atSec": 0.5}},
+    transitionIn="band", transition={"dir": "up", "tone": "paper"})
 
 # The cherry snap (MOT-011) plays silent: a swish there peaked on "John!" (sound-pass W), and the shot keeps one hero
 # (the band) and one texture (the cloth on "dark"). Sounds: levels against the voice as in act 1 (hero ~15-17 dB under in a pause, texture 21-23 dB under a word).
@@ -268,9 +278,11 @@ audio = [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(55) + 0.1, 2), "volumeDb": -17.6},  # band up into "Picture it from the inside"
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(63) - 0.15, 2), "volumeDb": -16.6},  # push from YOUR red into the geranium
     {"id": "SFX-027", "file": K + "mechanical/typewriter_run_v1.wav", "atSec": round(word("enough"), 2), "volumeDb": -16.0},  # keys under the typed line (texture; the kit file sits at -27 LUFS, peak-capped)
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(68) + 0.1, 2), "volumeDb": -17.6},  # paper band up into the map
     {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)
 ]
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
+       "runningHead": {"text": "2 · THE ODD ONE OUT", "fromSec": round(S(2), 2)},  # TXT-013, on diagram and text shots only
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
        "voice": {"id": "NAR-002", "atSec": LEAD, "tailSec": round(BEAT["E01-A2-68"][1] - LEAD - VOICE_SEC, 2)},
        "audio": audio, "beats": shots}

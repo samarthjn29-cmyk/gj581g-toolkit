@@ -184,5 +184,17 @@
     "beatType": 1,
     "energy": "Calm",
     "grid": false
+  },
+  "BuildUpMap": {
+    "assetId": "VIS-048",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
+  },
+  "StillsMontage": {
+    "assetId": "VIS-027",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
   }
 }
