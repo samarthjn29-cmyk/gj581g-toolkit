@@ -11,7 +11,7 @@ import { sec } from "../motion";
 // started 0.05-0.15 s before the band (set in the act file).
 //  tone "paper": the theme's paper (ink token) with fibre; "dark": the theme's panel, a faint lit edge on the
 //  leading side, for a move into a dark scene.
-// Calm: 0.6 s, one direction, eased in and out, no bounce.
+// Calm: 0.75 s (about 0.65 s in frame), one direction, eased in and out, no bounce.
 export const PaperBandWipe: React.FC<{
   from: React.ReactNode;
   to: React.ReactNode;
@@ -21,7 +21,7 @@ export const PaperBandWipe: React.FC<{
   tone?: "paper" | "dark";
   band?: number; // band height in px
   tilt?: number; // degrees; a slight tilt reads as a real sheet, not a UI panel
-}> = ({ from, to, atSec = 0, durSec = 0.6, dir = "down", tone = "paper", band = 560, tilt = -2.5 }) => {
+}> = ({ from, to, atSec = 0, durSec = 0.75, dir = "down", tone = "paper", band = 560, tilt = -2.5 }) => {
   useAsset("TRN-011");
   useAsset("TEX-007");
   const t = useTheme();
@@ -29,10 +29,13 @@ export const PaperBandWipe: React.FC<{
   const { fps } = useVideoConfig();
   const a = sec(atSec, fps);
   const d = Math.max(1, sec(durSec, fps));
-  const p = interpolate(frame, [a, a + d], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
+  // Gentle ease (independent review, v11: inOut cubic with a 140 px run-up kept the band out of sight for 0.2 s and
+  // then whipped it across in 0.28 s, after its swish had finished): a quad ease and a 50 px run-up, so the band is in
+  // frame from the first frames and crosses in about 0.65 s.
+  const p = interpolate(frame, [a, a + d], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.quad) });
   // The band's top edge travels from above the frame to below it (down), so the frame is covered at mid-move.
   const H = 1080;
-  const pad = 140; // the tilt needs a margin so no corner shows
+  const pad = 50; // the tilt needs about 45 px so no corner shows
   const top0 = -band - pad;
   const top1 = H + pad;
   const top = dir === "down" ? top0 + (top1 - top0) * p : top1 - (top1 - top0) * p;
@@ -50,7 +53,9 @@ export const PaperBandWipe: React.FC<{
     <AbsoluteFill>
       {!done ? <AbsoluteFill style={{ clipPath: frame < a ? undefined : oldClip }}>{from}</AbsoluteFill> : null}
       {frame >= a ? (
-        <AbsoluteFill style={{ clipPath: done ? undefined : newClip, backgroundColor: t.colors.canvas }}>{to}</AbsoluteFill>
+        // No canvas behind the incoming shot: it never moves (the band covers the seam), and a painted canvas would hide
+        // OpticalStack's corner light for the whole shot (independent review, v11).
+        <AbsoluteFill style={{ clipPath: done ? undefined : newClip }}>{to}</AbsoluteFill>
       ) : null}
       {frame >= a && !done ? (
         <div

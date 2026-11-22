@@ -49,7 +49,9 @@ export const SlideAcross: React.FC<{
             boxShadow: "-40px 0 80px rgba(0,0,0,0.45)",
             // The incoming shot carries its own canvas, so it covers the old one as it slides in
             // (transparent shots let the old text show through; Sam, act 1 v3, 22 Nov 2026).
-            backgroundColor: t.colors.canvas,
+            // ... only while it moves: after the slide a painted canvas would hide OpticalStack's corner light
+            // (independent review, act 1 v11).
+            backgroundColor: frame >= a + d ? undefined : t.colors.canvas,
           }}
         >
           {to}

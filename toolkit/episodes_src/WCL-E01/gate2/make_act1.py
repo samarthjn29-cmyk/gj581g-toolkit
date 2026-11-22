@@ -193,7 +193,7 @@ shot(B(32, 33), "YearCounter", lambda r: {
     "to": 151, "unit": "YEARS", "countFromSec": r(word("wait")), "lockSec": r(word("years", 85))})
 # 34 back to the candle, which gutters out (the clip's own ending) into the dark room.
 shot(B(34), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
-                                       "clipStartSec": 10.55, "warmth": [1, 1]})  # v11: no fade, the dark band wipes the last light
+                                       "clipStartSec": 10.0, "warmth": [1, 1]})  # v12: from 10.0 s so the flame is still dying as the dark band crosses (review v11: black from 89.97)
 # 35-36 the grid: Newton's dark room, the shutter hole lights on "hole", the beam starts after "shutter."
 shot(B(35, 36), "PerspectiveGrid", lambda r: {
     "variant": "room", "depth": 2000, "dark": 0.7, "dolly": 0.02, "startSec": r(word("dark")) - 0.2,
@@ -222,7 +222,7 @@ audio = [
     {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
     {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
     {"id": "SFX-001", "atSec": round(word("dies", 75, end=True) + 0.05, 2), "volumeDb": -15},  # the push into his lens
-    {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -16},  # count lock tick (own)
+    {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -22},  # count lock tick (own); texture level since v12, the impact is the hero (review v11)
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
     {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
 ]
@@ -239,7 +239,7 @@ audio += [
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.25, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -21.6},  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
-    {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.1, 2), "volumeDb": -19.6},  # the loupe setting on the pink
+    {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.52, 2), "volumeDb": -19.6},  # the loupe setting on the pink, once the block has gone (review v11)
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(25) + 2.15, 2), "volumeDb": -21.4},  # Plate 4 laid on the collage
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "endSec": round(S(27) + 1.5, 2), "fadeOutSec": 0.15, "volumeDb": -18.5},  # the two colour scraps, stopped when they have landed (review v9)
@@ -257,7 +257,7 @@ audio += [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(22) - 0.08, 2), "volumeDb": -21.0},  # pink block, over "so": texture level
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(23) - 0.1, 2), "volumeDb": -17.6},  # the flash, in the pause
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) - 0.1, 2), "volumeDb": -17.6},  # paper band, in the pause
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(27) - 0.45, 2), "volumeDb": -16.6},  # the collage page slides in; loud part before "About"
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(27) - 0.45, 2), "volumeDb": -21.6},  # texture level (review v11: two hero whooshes in one shot)  # the collage page slides in; loud part before "About"
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v1.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the one impact, as the bed returns
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(35) - 0.08, 2), "volumeDb": -21.0},  # dark band, over "to a": texture level  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
 ]

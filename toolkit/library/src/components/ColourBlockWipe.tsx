@@ -43,7 +43,7 @@ export const ColourBlockWipe: React.FC<{
           style={{
             transform: frame >= r1 ? undefined : `translateY(${((1 - rise) * 1080).toFixed(1)}px)`,
             boxShadow: frame >= r1 ? undefined : "0 -30px 70px rgba(0,0,0,0.38)",
-            backgroundColor: t.colors.canvas,
+            backgroundColor: frame >= r1 ? undefined : t.colors.canvas, // only while it rises (corner light, review v11)
           }}
         >
           {to}

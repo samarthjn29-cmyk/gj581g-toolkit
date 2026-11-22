@@ -66,7 +66,7 @@ export const FlashFrame: React.FC<{
   const tint = "rgba(255,226,182,0.95)"; // warm light (data-free: the flash is light, not a colour claim)
   const look = (g: number) => ({ filter: `brightness(${(1 + 1.6 * g).toFixed(3)}) blur(${(6 * g).toFixed(2)}px)` });
   return (
-    <AbsoluteFill style={{ backgroundColor: t.colors.canvas }}>
+    <AbsoluteFill style={{ backgroundColor: frame < end ? t.colors.canvas : undefined }}>
       {frame < cut ? <AbsoluteFill style={look(up)}>{from}</AbsoluteFill> : <AbsoluteFill style={frame < end ? look(down) : undefined}>{to}</AbsoluteFill>}
       {frame >= a && frame < end ? (
         <AbsoluteFill style={{ opacity: glow * peak, mixBlendMode: "screen" }}>
