@@ -1822,12 +1822,20 @@
       "y": 920,
       "align": "center",
       "accent": true
+     },
+     {
+      "text": "NOBODY ELSE CAN SEE WHAT YOU SEE",
+      "atSec": 7.36,
+      "x": 960,
+      "y": 920,
+      "align": "center"
      }
     ],
     "rows": [
      {
       "name": "YOU",
       "atSec": 0,
+      "brightAtSec": 7.36,
       "cells": [
        {
         "color": "#C23A47",
@@ -1844,7 +1852,7 @@
      {
       "name": "EVERYONE ELSE",
       "atSec": 0.3,
-      "dimAtSec": 7.36,
+      "dimAtSec": 3.72,
       "cells": [
        {
         "color": "#C8402F",

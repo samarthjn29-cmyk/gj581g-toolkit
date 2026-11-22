@@ -223,10 +223,11 @@ shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
     "columns": ["WHAT IT IS CALLED"],
     # Gate 3 stillness (151.5-157.8 s): the narration's words under the swatches
     "labels": [{"text": "THE SAME COLOUR NAMES", "atSec": r(word("same", 150)), "untilSec": r(word("nobody", 153)) - 0.1, "x": 960, "y": 920, "align": "center"},
-               {"text": "NOBODY HAS EVER TOLD YOU", "atSec": r(word("nobody", 153)), "untilSec": r(word("nobody", 155)) - 0.1, "x": 960, "y": 920, "align": "center", "accent": True}],
-    "rows": [{"name": "YOU", "atSec": 0, "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
+               {"text": "NOBODY HAS EVER TOLD YOU", "atSec": r(word("nobody", 153)), "untilSec": r(word("nobody", 155)) - 0.1, "x": 960, "y": 920, "align": "center", "accent": True},
+               {"text": "NOBODY ELSE CAN SEE WHAT YOU SEE", "atSec": r(word("nobody", 155)), "x": 960, "y": 920, "align": "center"}],
+    "rows": [{"name": "YOU", "atSec": 0, "brightAtSec": r(word("nobody", 155)), "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
               "tag": {"text": "ILLUSTRATIVE", "atSec": 0}},
-             {"name": "EVERYONE ELSE", "atSec": 0.3, "dimAtSec": r(word("nobody", 155)),
+             {"name": "EVERYONE ELSE", "atSec": 0.3, "dimAtSec": r(word("nobody", 153)),  # Gate 3 stillness: dims on the first "nobody"
               "cells": [{"color": RED, "name": "RED", "atSec": 0.3, "fillSec": 0.8}]}]})
 # 63-65 one evening, a flower changes colour (his colour names: what he called them, not what he saw).
 shot(B(63, 64, 65), "FootagePlate", lambda r: {
