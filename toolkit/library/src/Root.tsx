@@ -5,7 +5,7 @@ import { Preview, type PreviewProps } from "./previews/Preview";
 import { PushThroughPreview } from "./previews/PushThroughPreview";
 import { TransitionPreview, type TransitionKind } from "./previews/TransitionPreview";
 import { MotionTexturePreview, type MotionTextureKind } from "./previews/MotionTexturePreview";
-import { DEMO, DEMO_VARIANTS } from "./previews/demoProps";
+import { DEMO, DEMO_VARIANTS, DEMO_ACT2 } from "./previews/demoProps";
 import { COMPONENTS } from "./components";
 import { Episode, type EpisodeProps } from "./episodes/Episode";
 import demoAct from "./episodes/ep00-act00.json";
@@ -35,7 +35,7 @@ export const RemotionRoot: React.FC = () => {
               fps={FPS}
               width={W}
               height={H}
-              defaultProps={{ name, themeId: th.id, registryMode: "render", props: DEMO[name] ?? {} } satisfies PreviewProps}
+              defaultProps={{ name, themeId: th.id, registryMode: "render", props: DEMO[name] ?? DEMO_ACT2[name] ?? {} } satisfies PreviewProps}
             />
           ))}
           {Object.entries(DEMO_VARIANTS).map(([vid, v]) => (
@@ -50,6 +50,15 @@ export const RemotionRoot: React.FC = () => {
               defaultProps={{ name: v.name, themeId: th.id, registryMode: "render", props: v.props } satisfies PreviewProps}
             />
           ))}
+          <Composition
+            id={`KineticLine-Notebook-${th.id}`}
+            component={Preview}
+            durationInFrames={5 * FPS}
+            fps={FPS}
+            width={W}
+            height={H}
+            defaultProps={{ name: "KineticLine", themeId: th.id, registryMode: "render", props: DEMO_ACT2["KineticLine-Notebook"] } satisfies PreviewProps}
+          />
           <Composition
             id={`PushThrough-${th.id}`}
             component={PushThroughPreview}

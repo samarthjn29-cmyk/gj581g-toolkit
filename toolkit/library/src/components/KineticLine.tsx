@@ -7,6 +7,7 @@ import { CropImage, type Rect } from "../layers/CropImage";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 import { InkPressFilter } from "../layers/PaperFibre";
 import { FillLine, type WordFill } from "../layers/FillWord";
+import { HatchNotebook, type NotebookSpec } from "../layers/HatchNotebook";
 
 // VIS-020 KineticLine (beat type 3: a hinge question or one key label the viewer must keep, calm).
 // One short line set large (serif), optionally with a small mono line under it, revealed on its word,
@@ -17,6 +18,7 @@ export type KineticLineProps = {
   backdrop?: { srcId: string; imgSize: readonly [number, number]; crop?: Rect; layout: "full" | "card-right"; dim?: number };
   align?: "centre" | "left";
   tag?: DatelineTagProps;
+  notebook?: NotebookSpec; // TEX-005 hatched notebook on the right (illustrative), lines on the left
   startSec?: number;
 };
 
@@ -52,12 +54,12 @@ const Backdrop: React.FC<{ b: NonNullable<KineticLineProps["backdrop"]> }> = ({ 
   );
 };
 
-export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align = "centre", tag, ink, startSec = 0 }) => {
+export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align = "centre", tag, ink, notebook, startSec = 0 }) => {
   useAssets(["VIS-020", "MOT-002", ...(ink ? ["TXT-016"] : []), ...(lines.some((l) => l.fill) ? [lines.find((l) => l.fill)?.fill?.style === "mark" ? "TXT-017" : "TXT-015"] : [])]);
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const beside = backdrop?.layout === "card-right";
+  const beside = backdrop?.layout === "card-right" || !!notebook;
   const left = align === "left" || beside;
   const boxStyle: React.CSSProperties = beside
     ? { position: "absolute", left: t.safe.x, top: 330, width: 1920 - t.safe.x * 2 - 600 - 120 }
@@ -65,6 +67,7 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
   return (
     <AbsoluteFill style={{ opacity: reveal(frame, fps, startSec, 0.6) }}>
       {backdrop ? <Backdrop b={backdrop} /> : null}
+      {notebook ? <HatchNotebook spec={notebook} /> : null}
       {ink ? <InkPressFilter id="klinkpress" /> : null}
       <div style={boxStyle}>
         {lines.map((l) => {

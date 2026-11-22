@@ -142,5 +142,29 @@
     "beatType": 4,
     "energy": "Calm",
     "grid": false
+  },
+  "PeriodMapPlate": {
+    "assetId": "MAP-010",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
+  },
+  "ReportedColour": {
+    "assetId": "VIS-035",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
+  },
+  "SplitComparisonCard": {
+    "assetId": "VIS-008",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
+  },
+  "ScaleField": {
+    "assetId": "VIS-024",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

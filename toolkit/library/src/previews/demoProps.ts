@@ -277,3 +277,56 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
     },
   },
 };
+
+// Act 2 pieces (22 Nov 2026). Preview labels are neutral; real cues are set in make_act2.py.
+export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
+  PeriodMapPlate: {
+    srcId: "SRC-033",
+    size: [4000, 5313],
+    views: [{ atSec: 0, crop: [400, 2300, 2000, 1125] }, { atSec: 2.2, crop: [500, 2620, 2311, 1300], moveSec: 1.6 }],
+    pins: [
+      { id: "a", x: 858, y: 2795, atSec: 0.6, label: "PIN A" },
+      { id: "b", x: 1985, y: 3825, atSec: 2.0, label: "PIN B", labelDx: -200 },
+    ],
+    rings: [{ pin: "a", atSec: 0.8 }],
+    route: { from: "a", to: "b", atSec: 2.4, drawSec: 1.3, tilt: { atSec: 3.6, deg: 8 } },
+    source: "MAP · PREVIEW · SOURCE LINE",
+  },
+  ReportedColour: {
+    srcId: "SRC-037",
+    file: "public/assets/sources/period_stockings_flat.jpg",
+    mask: "public/assets/sources/period_stockings_flat_mask.png",
+    size: [2600, 1622],
+    crop: [60, 80, 2480, 1395],
+    states: [{ atSec: 0, color: null }, { atSec: 1.2, color: "#3B4250" }, { atSec: 3.0, color: "#B3262E", snap: true }],
+    people: [
+      { name: "PERSON A", color: "#3B4250", colorName: "DARK", atSec: 1.4, x: 560, y: 900 },
+      { name: "PERSON B", color: "#B3262E", colorName: "RED", atSec: 3.2, x: 1360, y: 900 },
+    ],
+    caption: "PREVIEW · OBJECT OF THE PERIOD",
+    printScreen: 0.08,
+  },
+  SplitComparisonCard: {
+    panels: [
+      { srcId: "SRC-013", kind: "image", size: [1920, 1280], crop: [380, 230, 900, 900], label: "PANEL A", atSec: 0.3, stamp: { text: "SAME", atSec: 1.2 } },
+      { srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: 0.56, label: "PANEL B", atSec: 0.5, stamp: { text: "SAME", atSec: 1.6 } },
+      { srcId: "SRC-037", file: "public/assets/sources/period_stockings_flat.jpg", kind: "image", size: [2600, 1622], crop: [900, 180, 1300, 1300], label: "PANEL C", atSec: 0.7, stamp: { text: "SAME", atSec: 2.0 } },
+    ],
+    lines: [{ text: "Preview line?", atSec: 0.2, untilSec: 2.6 }, { text: "Second preview line.", atSec: 2.8 }],
+    dimAtSec: 2.8,
+    names: [{ text: "NAME A", atSec: 3.1 }, { text: "NAME B", atSec: 3.4 }],
+    thread: { atSec: 3.5, drawSec: 1.0 },
+  },
+  ScaleField: {
+    phases: [
+      { atSec: 0, total: 100, cols: 20, lit: 8, litAtSec: 0.8, label: { text: "PREVIEW · 8 IN 100", atSec: 1.0 } },
+      { atSec: 3.0, total: 1000, cols: 50, lit: 4, litAtSec: 3.6, seed: 2, label: { text: "PREVIEW · 4 IN 1,000", atSec: 3.6 } },
+    ],
+    lines: [{ text: "Preview line", atSec: 0.2 }],
+    source: "PREVIEW · SOURCE LINE",
+  },
+  "KineticLine-Notebook": {
+    lines: [{ text: "Preview line", atSec: 0.4 }, { text: "PREVIEW · MONO LINE", atSec: 1.2, style: "mono" }],
+    notebook: { atSec: 0.3, rowsFromSec: 1.0, rowsToSec: 4.0 },
+  },
+};

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T15:57:21.607Z",
+ "generated": "2026-11-22T16:06:37.048Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -93,9 +93,9 @@
    "paths": [
     "src/components/SplitComparisonCard.tsx"
    ],
-   "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: showing what stays the same against what changes (the flower, the candle and the stockings are the same; only the person looking changes). Limit: max 8 beats per episode; 2-4 panels, every panel a registered source. Not for: data with numbers (MinimalDataChart) or two versions of one picture (SwatchRows).",
+   "maxBeats": 8,
    "maxShare": null
   },
   "VIS-009": {
@@ -1549,7 +1549,7 @@
    "paths": [
     "src/components/ScaleField.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: one big-number scale reveal (millions of colours, 1 in 12 men). Limit: max 12 beats per episode (raised from 2, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: small numbers (use YearCounter) or decoration.",
    "maxBeats": 12,
    "maxShare": null
@@ -2292,10 +2292,10 @@
    "folder": "9_Maps",
    "name": "RadioRings",
    "paths": [
-    "src/components/RadioRings.tsx"
+    "src/layers/RadioRings.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: marking 'here' on a map (Kendal, Manchester), or a signal or news spreading from a place. Limit: max 3 per episode. Not for: decoration without a place.",
+   "status": "Active",
+   "use": "Best use: marking 'here' on a map (Eaglesfield, Kendal, Manchester) the first time the place is named. Limit: max 3 ring moments per episode, each held over at most 4 beats. Not for: decoration without a place.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2304,9 +2304,9 @@
    "folder": "9_Maps",
    "name": "TiltedRouteDraw",
    "paths": [
-    "src/components/TiltedRouteDraw.tsx"
+    "src/components/PeriodMapPlate.tsx#route"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a journey or an invasion route (Dalton to Manchester; any move between places). Limit: max 3 per episode. Not for: maps that need exact reading.",
    "maxBeats": null,
    "maxShare": null
@@ -2342,7 +2342,7 @@
    "paths": [
     "src/components/PeriodMapPlate.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: where a real place in the story is first named (Eaglesfield, Kendal, Manchester) and a move between them. Limit: max 8 beats per episode; always a real period map underneath, never a modern map for an old story. Not for: decoration or a place said in passing.",
    "maxBeats": 8,
    "maxShare": null
@@ -2354,7 +2354,7 @@
    "paths": [
     "src/components/ReportedColour.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: one object that different people reported as different colours (the stockings: John and Jonathan dark, their mother cherry red). Limit: max 16 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026); always tagged as reported colours, never presented as a measurement. Not for: what colour-blind people 'really see'.",
    "maxBeats": 16,
    "maxShare": null
@@ -2412,7 +2412,9 @@
    "folder": "11_Sources",
    "name": "PeriodStockings_Rijksmuseum",
    "paths": [
-    "public/assets/sources/period_stockings.jpg"
+    "public/assets/sources/period_stockings.jpg",
+    "public/assets/sources/period_stockings_flat.jpg",
+    "public/assets/sources/period_stockings_flat_mask.png"
    ],
    "status": "Active",
    "use": "Best use: the stockings story (act 2, beats 25-44), shown in each person's reported colour by VIS-035. Limit: max 20 beats per episode; always captioned STOCKINGS OF THE PERIOD · RIJKSMUSEUM, never as Dalton's own pair. Not for: other clothing stories.",
