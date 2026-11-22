@@ -8,7 +8,7 @@ import {
 } from "remotion";
 import { useAsset } from "../registry";
 import { useTheme } from "../themes";
-import { sec, SLOW_OUT } from "../motion";
+import { canvasAfterMove, sec, SLOW_OUT } from "../motion";
 
 // TRN-007 SlideAcross (studied Vox via a Denys Zhylin tutorial short; analysis only): the old shot slides out to
 // the left while the new one slides in from the right, like a page pushed across a desk (0.7 s, slow-out, no
@@ -51,7 +51,7 @@ export const SlideAcross: React.FC<{
             // (transparent shots let the old text show through; Sam, act 1 v3, 22 Nov 2026).
             // ... only while it moves: after the slide a painted canvas would hide OpticalStack's corner light
             // (independent review, act 1 v11).
-            backgroundColor: frame >= a + d ? undefined : t.colors.canvas,
+            backgroundColor: canvasAfterMove(t.colors.canvas, frame, a + d), // fades out after the move (review v12)
           }}
         >
           {to}

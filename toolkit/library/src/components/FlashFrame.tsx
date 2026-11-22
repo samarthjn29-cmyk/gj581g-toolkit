@@ -1,7 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAsset } from "../registry";
-import { useTheme } from "../themes";
 import { sec } from "../motion";
 
 // TRN-013 FlashFrame (studied Chris Moran's Netflix-doc text tutorial, 22 Nov 2026; analysis only): his flash is
@@ -52,7 +51,6 @@ export const FlashFrame: React.FC<{
   seed?: number;
 }> = ({ from, to, atSec = 0, upSec = 0.2, downSec = 0.3, peak = 0.85, seed = 5 }) => {
   useAsset("TRN-013");
-  const t = useTheme();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const a = sec(atSec, fps);
@@ -66,7 +64,8 @@ export const FlashFrame: React.FC<{
   const tint = "rgba(255,226,182,0.95)"; // warm light (data-free: the flash is light, not a colour claim)
   const look = (g: number) => ({ filter: `brightness(${(1 + 1.6 * g).toFixed(3)}) blur(${(6 * g).toFixed(2)}px)` });
   return (
-    <AbsoluteFill style={{ backgroundColor: frame < end ? t.colors.canvas : undefined }}>
+    // No root canvas: the old and new shots fill the frame, and a canvas would hide the corner light (review v12).
+    <AbsoluteFill>
       {frame < cut ? <AbsoluteFill style={look(up)}>{from}</AbsoluteFill> : <AbsoluteFill style={frame < end ? look(down) : undefined}>{to}</AbsoluteFill>}
       {frame >= a && frame < end ? (
         <AbsoluteFill style={{ opacity: glow * peak, mixBlendMode: "screen" }}>

@@ -42,3 +42,13 @@ export const rise = (p: number, px = 28): { opacity: number; transform: string }
   opacity: p,
   transform: `translateY(${((1 - p) * px).toFixed(2)}px)`,
 });
+
+// The canvas colour behind an incoming shot, faded out over `frames` after its move ends (independent review,
+// act 1 v12: switching the canvas off in one frame made OpticalStack's corner light snap on, 31-43% of pixels changing).
+export function canvasAfterMove(hex: string, frame: number, endFrame: number, frames = 10): string | undefined {
+  if (frame >= endFrame + frames) return undefined;
+  const a = frame < endFrame ? 1 : 1 - (frame - endFrame) / frames;
+  const h = hex.replace("#", "");
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+  return `rgba(${r},${g},${b},${a.toFixed(3)})`;
+}
