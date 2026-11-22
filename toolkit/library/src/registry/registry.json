@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T15:38:52.684Z",
+ "generated": "2026-11-22T15:49:49.833Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -858,8 +858,8 @@
     "src/components/PushThrough.tsx"
    ],
    "status": "Active",
-   "use": "Best use: when the next shot grows out of a key picture in the last one (a detail becomes the next scene). Limit: max 8 beats per episode; never two in a row. Not for: ordinary cuts (use TRN-001).",
-   "maxBeats": 8,
+   "use": "Best use: when the next shot grows out of a key picture in the last one (a detail becomes the next scene). Limit: max 14 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026); never two in a row. Not for: ordinary cuts (use TRN-001).",
+   "maxBeats": 14,
    "maxShare": null
   },
   "LOK-010": {
@@ -1103,8 +1103,8 @@
     "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
    ],
    "status": "Active",
-   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 8 beats per episode. Not for: any other scene.",
-   "maxBeats": 8,
+   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 14 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: any other scene.",
+   "maxBeats": 14,
    "maxShare": null
   },
   "SRC-012": {
@@ -1127,8 +1127,8 @@
     "public/assets/sources/geranium_stang.jpg"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 10 beats per episode. Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
-   "maxBeats": 10,
+   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 20 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
+   "maxBeats": 20,
    "maxShare": null
   },
   "SRC-014": {
@@ -1370,8 +1370,8 @@
     "src/components/FootagePlate.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a real clip or photo that sets a scene (a candle in a dark room, a place) with its dateline or label. Limit: max 16 beats per episode; max 15% of runtime (raised from 12 beats, Sam approved at WCL-E01 Gate 1). Not for: documents (ArchivalScanCard) or a named person's first appearance (ParallaxCutout).",
-   "maxBeats": 16,
+   "use": "Best use: a real clip or photo that sets a scene (a candle in a dark room, a place) with its dateline or label. Limit: max 24 beats per episode; max 15% of runtime (raised from 12 at act 1 Gate 1 and from 16 at act 2 Gate 1, Sam, 22 Nov 2026). Not for: documents (ArchivalScanCard) or a named person's first appearance (ParallaxCutout).",
+   "maxBeats": 24,
    "maxShare": 15
   },
   "VIS-017": {
@@ -1382,8 +1382,8 @@
     "src/components/SwatchRows.tsx"
    ],
    "status": "Active",
-   "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 8 beats per episode. Not for: data with numbers (MinimalDataChart).",
-   "maxBeats": 8,
+   "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 12 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: data with numbers (MinimalDataChart).",
+   "maxBeats": 12,
    "maxShare": null
   },
   "VIS-018": {
@@ -1418,8 +1418,8 @@
     "src/components/KineticLine.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a hinge question or one key label the viewer must keep (WHERE IS THE PINK?). Limit: max 6 beats per episode. Not for: repeating what the narration says word for word, or decoration.",
-   "maxBeats": 6,
+   "use": "Best use: a hinge question or one key label the viewer must keep (WHERE IS THE PINK?). Limit: max 12 beats per episode (raised from 6, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: repeating what the narration says word for word, or decoration.",
+   "maxBeats": 12,
    "maxShare": null
   },
   "TXT-011": {
@@ -1430,8 +1430,8 @@
     "src/components/DatelineTag.tsx"
    ],
    "status": "Active",
-   "use": "Best use: the first time a new place or date opens a scene. Limit: max 12 beats per episode. Not for: every line with a year in it.",
-   "maxBeats": 12,
+   "use": "Best use: the first time a new place or date opens a scene. Limit: max 24 beats per episode (raised from 12, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: every line with a year in it.",
+   "maxBeats": 24,
    "maxShare": null
   },
   "SFX-013": {
@@ -1526,8 +1526,8 @@
     "src/components/SlideAcross.tsx"
    ],
    "status": "Active",
-   "use": "Best use: moving into or out of a document, or between two documents (a scene change, not within a scene). Limit: max 8 beats per episode; never two in a row. Not for: cuts inside one scene (TRN-001) or a detail growing into the next shot (TRN-006).",
-   "maxBeats": 8,
+   "use": "Best use: moving into or out of a document, or between two documents (a scene change, not within a scene). Limit: max 16 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026); never two in a row. Not for: cuts inside one scene (TRN-001) or a detail growing into the next shot (TRN-006).",
+   "maxBeats": 16,
    "maxShare": null
   },
   "VIS-023": {
@@ -1550,8 +1550,8 @@
     "src/components/ScaleField.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: one big-number scale reveal (millions of colours, 1 in 12 men). Limit: max 2 beats per episode. Not for: small numbers (use YearCounter) or decoration.",
-   "maxBeats": 2,
+   "use": "Best use: one big-number scale reveal (millions of colours, 1 in 12 men). Limit: max 12 beats per episode (raised from 2, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: small numbers (use YearCounter) or decoration.",
+   "maxBeats": 12,
    "maxShare": null
   },
   "VIS-025": {
@@ -2172,7 +2172,7 @@
     "src/components/PaperBandWipe.tsx"
    ],
    "status": "Active",
-   "use": "Best use: scene changes inside a collage or paper act (one page of the story to the next), on a pause. Limit: max 6 per episode, never two in a row; calm speed (0.5-0.7 s). Not for: cuts inside a scene.",
+   "use": "Best use: scene changes inside a collage or paper act (one page of the story to the next), on a pause. Limit: max 14 per episode (raised from 6, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026), never two in a row; calm speed (0.5-0.7 s). Not for: cuts inside a scene.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2184,7 +2184,7 @@
     "src/components/ColourBlockWipe.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a chapter or act turn where a colour carries the meaning (the red Dalton saw, the season sting colour). Limit: max 2 per episode. Not for: ordinary scene changes (TRN-011, TRN-006).",
+   "use": "Best use: a chapter or act turn where a colour carries the meaning (the red Dalton saw, the season sting colour). Limit: max 2 per act (raised from 2 per episode, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: ordinary scene changes (TRN-011, TRN-006).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2210,7 +2210,7 @@
     "public/sfx/kit/whoosh/air_swish_v3.wav"
    ],
    "status": "Active",
-   "use": "Best use: a paper band, colour block or panel wiping across (TRN-011/012/013, TRN-007 slide), starting 0.05-0.15 s before the wipe; rotate v1-v3. Limit: max 8 per episode, 16-22 dB under the voice. Not for: camera pushes (SFX-020) or text appearing.",
+   "use": "Best use: a paper band, colour block or panel wiping across (TRN-011/012/013, TRN-007 slide), starting 0.05-0.15 s before the wipe; rotate v1-v3. Limit: max 30 per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026), 16-22 dB under the voice. Not for: camera pushes (SFX-020) or text appearing.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2247,7 +2247,7 @@
     "scripts/mix-act-bed.py"
    ],
    "status": "Active",
-   "use": "Best use: a scene change on a wipe when the bed is busy. Limit: max 4 per episode. Not for: Sam's voice (never filtered).",
+   "use": "Best use: a scene change on a wipe when the bed is busy. Limit: max 14 per episode (raised from 4, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: Sam's voice (never filtered).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2355,8 +2355,8 @@
     "src/components/ReportedColour.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: one object that different people reported as different colours (the stockings: John and Jonathan dark, their mother cherry red). Limit: max 10 beats per episode; always tagged as reported colours, never presented as a measurement. Not for: what colour-blind people 'really see'.",
-   "maxBeats": 10,
+   "use": "Best use: one object that different people reported as different colours (the stockings: John and Jonathan dark, their mother cherry red). Limit: max 16 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026); always tagged as reported colours, never presented as a measurement. Not for: what colour-blind people 'really see'.",
+   "maxBeats": 16,
    "maxShare": null
   },
   "SRC-033": {
