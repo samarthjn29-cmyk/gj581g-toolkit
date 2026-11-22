@@ -1,0 +1,43 @@
+# WCL-E01 act 1: on-screen text to check (Gate 1, fact-check 2)
+
+Each beat: id, time, spoken line, then the director note holding the on-screen words (capitals = on-screen text).
+
+- E01-A1-01 (0.00-2.95 s) | voice: "Kendal, in the north of England." | sources: SRC-011 | on screen: Calm. Dark; a candle is lit (Mixkit 3458). Match strike at 0.00 s in the 0.8 s lead-in, room tone starts under it. Dateline tag fades up: KENDAL · NORTH OF ENGLAND.
+- E01-A1-02 (2.95-6.40 s) | voice: "An autumn evening, seventeen ninety-two." | sources: SRC-011 | on screen: Calm. Dateline extends: KENDAL · AUTUMN 1792 (locks on 'seventeen ninety-two').
+- E01-A1-03 (6.40-8.60 s) | voice: "" | sources: SRC-011 | on screen: Calm. Pause: the flame settles, slow drift; dateline tag eases to the corner.
+- E01-A1-04 (8.60-11.10 s) | voice: "A young teacher named John Dalton is looking at" | sources: SRC-011 | on screen: Calm. Label JOHN DALTON · TEACHER on 'John Dalton'.
+- E01-A1-05 (11.10-13.60 s) | voice: "a flower by candlelight." | sources: SRC-013 | on screen: Calm. Push-through from the flame's glow into the geranium photo (FootagePlate) on 'flower', warm candle grade.
+- E01-A1-06 (13.60-16.60 s) | voice: "It's a geranium, nothing rare." | sources: SRC-013 | on screen: Calm. Label GERANIUM ZONALE locks on 'geranium' (Dalton's own name for it, p.29).
+- E01-A1-07 (16.60-19.50 s) | voice: "The kind of flower you've probably walked past this week." | sources: SRC-013 | on screen: Calm. Label shrinks to the corner; room tone fades out by 19.4 s; grade drifts from candle-warm to neutral.
+- E01-A1-08 (19.50-22.00 s) | voice: "By day," | sources: SRC-001, SRC-029 | on screen: Calm. Paper slide in the pause at 19.50 s. Spread p.29 | p.30 on the tray; highlight p.29's last lines 'the Geranium zonale by candle-light, in the Autumn of 1792'. Source tag: JOHN DALTON · 1798 · P. 29-30.
+- E01-A1-09 (22.00-24.20 s) | voice: "this flower has always looked to him almost exactly" | sources: SRC-001, SRC-029 | on screen: Calm. Highlight runs onto p.30: 'almost an exact sky-blue by day'.
+- E01-A1-10 (24.20-26.30 s) | voice: "sky-blue." | sources: SRC-001, SRC-029 | on screen: Calm. Beside the page, Dalton's swatch DAY: sky-blue locks on 'sky-blue'.
+- E01-A1-11 (26.30-29.00 s) | voice: "Tonight, by the candle, it's different." | sources: SRC-001, SRC-029 | on screen: Calm. Second swatch CANDLE appears, empty, on 'by the candle'.
+- E01-A1-12 (29.00-31.40 s) | voice: "In his own words, it is" | sources: SRC-029 | on screen: Calm. Page p.30 fills the tray; slow push towards the line.
+- E01-A1-13 (31.40-33.60 s) | voice: "astonishingly changed." | sources: SRC-029 | on screen: Peak. Highlight 'astonishingly changed' locks on the word.
+- E01-A1-14 (33.60-36.00 s) | voice: "It's now what he calls red." | sources: SRC-029 | on screen: Peak. CANDLE swatch fills red on 'red'; caption: WHAT HE CALLED RED.
+- E01-A1-15 (36.00-38.80 s) | voice: "To the friends he asks," | sources: - | on screen: Calm. Swatch rows: JOHN blue / red stays; FRIENDS row slides in on 'friends'.
+- E01-A1-16 (38.80-41.40 s) | voice: "it looks much the same by day or by candle." | sources: - | on screen: Calm. FRIENDS: pink / pink, tag NO REAL CHANGE locks on 'candle'.
+- E01-A1-17 (41.40-44.00 s) | voice: "Of all of them, only one" | sources: - | on screen: Calm. FRIENDS row dims; JOHN row brightens on 'only one'.
+- E01-A1-18 (44.00-46.10 s) | voice: "sees what he sees." | sources: - | on screen: Calm. Hold; an empty third row waits.
+- E01-A1-19 (46.10-49.10 s) | voice: "His brother, Jonathan." | sources: - | on screen: Peak. Third row HIS BROTHER blue / red on 'brother'; name JONATHAN locks on 'Jonathan'.
+- E01-A1-20 (49.10-51.70 s) | voice: "So who's right about this flower?" | sources: SRC-013 | on screen: Calm. The geranium alone, labels gone; slow push.
+- E01-A1-21 (51.70-54.20 s) | voice: "By the end of this episode, you might not be" | sources: SRC-013 | on screen: Calm. Hold, push continues.
+- E01-A1-22 (54.20-57.00 s) | voice: "so sure where the pink in it actually is." | sources: SRC-013 | on screen: Calm. Over the flower, one line: WHERE IS THE PINK? reveals on 'where the pink'.
+- E01-A1-23 (57.00-59.60 s) | voice: "It sounds like a silly question," | sources: SRC-011 | on screen: Calm. Back to the candle, wide.
+- E01-A1-24 (59.60-62.60 s) | voice: "but Dalton is not a silly man." | sources: SRC-004 | on screen: Calm. Dalton's first face: Charles Turner's mezzotint (1834) on 'Dalton', slow parallax; label JOHN DALTON · PORTRAIT, 1834.
+- E01-A1-25 (62.60-65.20 s) | voice: "Later, he'll be remembered as a pioneer" | sources: SRC-004 | on screen: Calm. Beside the portrait: A PIONEER OF ATOMIC THEORY reveals on 'pioneer'.
+- E01-A1-26 (65.20-67.80 s) | voice: "of the modern theory of the atom." | sources: SRC-004 | on screen: Calm. Small mono line under it: LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY.
+- E01-A1-27 (67.80-69.90 s) | voice: "About two years after that evening," | sources: - | on screen: Calm. Dateline tag: TWO YEARS LATER.
+- E01-A1-28 (69.90-72.20 s) | voice: "he'll have an answer to this flower." | sources: - | on screen: Calm. Line: AN ANSWER reveals on 'answer'.
+- E01-A1-29 (72.20-75.00 s) | voice: "He'll want it tested so much that he'll ask for his own" | sources: - | on screen: Calm. A simple drawn eye opens in the centre on 'his own eyes'.
+- E01-A1-30 (75.00-78.00 s) | voice: "eyes to be examined after he dies." | sources: - | on screen: Calm. The eye closes on 'dies'.
+- E01-A1-31 (78.00-81.40 s) | voice: "His idea will fail the test." | sources: - | on screen: Calm. Closed eye holds; dateline tag THE TEST · 1844 fades up.
+- E01-A1-32 (81.40-84.80 s) | voice: "And the real answer will wait, in what was left of his eyes," | sources: - | on screen: Calm. Counter appears and starts counting up: 0 YEARS.
+- E01-A1-33 (84.80-87.90 s) | voice: "for a hundred and fifty-one years." | sources: - | on screen: Peak. Counter locks at 151 YEARS on 'years'; soft low thump at 86.85 s in the pause.
+- E01-A1-34 (87.90-90.25 s) | voice: "Along the way, we'll go back to a" | sources: SRC-011 | on screen: Calm. Back to the candle, which gutters out (the clip's own ending); the frame goes dark into the next shot.
+- E01-A1-35 (90.25-93.20 s) | voice: "dark room, where a young Isaac Newton has made a small" | sources: - | on screen: Calm. Perspective grid (beat 1 of the episode's 8): Newton's dark room fades up on 'dark room' (dark 0.7), slow dolly; label ISAAC NEWTON on 'Newton'.
+- E01-A1-36 (93.20-95.30 s) | voice: "hole in his window shutter." | sources: - | on screen: Calm. Grid beat 2 of 8: the shutter hole lights on 'hole'; the beam starts across after 'shutter.' with a soft air swell at 94.60 s. No prism, no spectrum (saved for act 4).
+- E01-A1-37 (95.30-98.60 s) | voice: "And we'll open Dalton's eyes as he asked." | sources: - | on screen: Calm. Cut on 'And' to the drawn eye, which opens again on 'open Dalton's eyes'.
+- E01-A1-38 (98.60-101.60 s) | voice: "" | sources: - | on screen: Calm. Series title card WHERE COLOUR LIVES with the season sting (no narration).
+- E01-A1-39 (101.60-104.60 s) | voice: "" | sources: - | on screen: Calm. EPISODE 1 · THE MAN WHO SAW PINK (no narration). Act 2 starts on the next frame.
