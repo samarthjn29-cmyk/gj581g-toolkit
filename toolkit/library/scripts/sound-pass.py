@@ -46,6 +46,28 @@ def lufs(path):
     return v
 
 
+def loud(path):
+    """(start, end, peak dBFS) of the file's loud stretch: the 50 ms windows within 6 dB of its loudest one.
+    Rule W is judged on this stretch, not on the cue's start (review of act 1 v9: a whoosh starting in a pause
+    peaked 0.5 s later, on a word)."""
+    key = "loud:" + path
+    if key in _cache:
+        return _cache[key]
+    full = os.path.join(LIB, path)
+    r = subprocess.run(["ffmpeg", "-v", "error", "-i", full, "-ac", "1", "-ar", "48000", "-f", "f32le", "-"], capture_output=True).stdout
+    import numpy as np
+    x = np.frombuffer(r, dtype=np.float32).astype(float)
+    h = 2400
+    e = np.array([np.sqrt(np.mean(x[i:i + h] ** 2)) + 1e-12 for i in range(0, max(1, len(x) - h), h // 2)])
+    db = 20 * np.log10(e)
+    idx = np.where(db >= db.max() - 6)[0]
+    # the peak is read on 10 ms windows, so a click (all its energy in a few ms) is not averaged away
+    e10 = np.array([np.sqrt(np.mean(x[i:i + 480] ** 2)) + 1e-12 for i in range(0, max(1, len(x) - 480), 240)])
+    out = (idx[0] * h / 2 / 48000, (idx[-1] * h / 2 + h) / 48000, float(max(db.max(), 20 * np.log10(e10.max()) - 3)))
+    _cache[key] = out
+    return out
+
+
 # What a sound is for, by kit (the suggestion table). family: hero | texture | ambience
 KIT = {
     "move": ("SFX-020", "hero", "low whoosh (rotate v1/v2/v3)"),
@@ -165,10 +187,14 @@ def main():
                 bad += 1
             elif rel < lo - 4:
                 fx.append(f"L: {rel:+.1f} dB may be lost ({fam} band {lo}..{hi})")
-        w = on_word(c["atSec"])
+        ls, le, pk = loud(f) if os.path.exists(os.path.join(LIB, f)) else (0, 0.25, -99)
+        # loudest 50 ms against the voice's own 50 ms peaks (speech peaks run about 6 dB over its LUFS); short clicks
+        # read far too low when their loudness is averaged over the file
+        prel = pk + c.get("volumeDb", 0) - (vL + 6)
+        w = next((w for w in W if w[1] < c["atSec"] + le - 0.06 and w[2] > c["atSec"] + ls + 0.06), None)
         on_word_ok = "on the word" in (ROWS.get(c["id"], [""] * 11)[10] or "").lower()  # e.g. SFX-015: a lock ON its word
-        if fam == "hero" and w and (rel is None or rel > -20) and not on_word_ok:
-            fx.append(f"W: starts on the word '{w[0]}' ({w[1]:.2f}-{w[2]:.2f})")
+        if fam != "ambience" and fam != "music" and w and prel > -20 and not on_word_ok:
+            fx.append(f"W: its loud part ({c['atSec'] + ls:.2f}-{c['atSec'] + le:.2f}, {prel:+.1f} dB vs voice) is on '{w[0]}' ({w[1]:.2f}-{w[2]:.2f})")
             bad += 1
         cut = min(shots, key=lambda s: abs(s["start"] - c["atSec"]))
         if fam == "hero" and 0 <= c["atSec"] - cut["start"] <= 0.12 and cut["start"] > 0.5:

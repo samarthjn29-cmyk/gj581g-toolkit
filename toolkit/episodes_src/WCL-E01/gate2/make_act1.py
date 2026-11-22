@@ -226,17 +226,17 @@ def S(t):  # shot start (act seconds) of the shot that begins with beat t
     return BEAT[f"E01-A1-{t:02d}"][0]
 audio += [
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(5) - 0.15, 2), "volumeDb": -21.6},  # push into the geranium (on "at": played as a texture)
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(11) - 0.15, 2), "volumeDb": -14.6},  # slide to p.30, in the pause
-    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.1, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(11) - 0.30, 2), "volumeDb": -14.6},  # slide to p.30: loud part 26.18-26.51, before "Tonight" (review v9)
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.25, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -14.6},  # push into the petal, in the pause
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -21.6},  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
     {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.1, 2), "volumeDb": -19.6},  # the loupe setting on the pink
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(25) + 2.15, 2), "volumeDb": -21.4},  # Plate 4 laid on the collage
-    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "volumeDb": -18.5},  # the two colour scraps
+    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "endSec": round(S(27) + 1.5, 2), "fadeOutSec": 0.15, "volumeDb": -18.5},  # the two colour scraps, stopped when they have landed (review v9)
     {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": round(S(35) - 0.35, 2), "endSec": round(S(37) + 0.3, 2),
      "volumeDb": -27.6, "fadeInSec": 0.4, "fadeOutSec": 0.6},  # Newton's dark room, J-cut in
-    {"id": "SFX-019", "file": K + "mechanical/switch_click.wav", "atSec": round(word("open", 95) - 0.18, 2), "volumeDb": -14.8},  # Dalton's eyes opened
+    {"id": "SFX-019", "file": K + "mechanical/switch_click.wav", "atSec": round(word("open", 95), 2), "volumeDb": -21.0},  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
 ]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",

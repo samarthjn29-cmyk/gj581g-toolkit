@@ -58,14 +58,14 @@
   },
   {
    "id": "SFX-020",
-   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
-   "atSec": 26.15,
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 26.0,
    "volumeDb": -14.6
   },
   {
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/paper_move.wav",
-   "atSec": 26.2,
+   "atSec": 26.05,
    "volumeDb": -21.4
   },
   {
@@ -76,9 +76,9 @@
   },
   {
    "id": "SFX-020",
-   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
    "atSec": 48.95,
-   "volumeDb": -14.6
+   "volumeDb": -21.6
   },
   {
    "id": "SFX-019",
@@ -102,6 +102,8 @@
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/pages_move.wav",
    "atSec": 68.5,
+   "endSec": 69.3,
+   "fadeOutSec": 0.15,
    "volumeDb": -18.5
   },
   {
@@ -116,8 +118,8 @@
   {
    "id": "SFX-019",
    "file": "public/sfx/kit/mechanical/switch_click.wav",
-   "atSec": 95.7,
-   "volumeDb": -14.8
+   "atSec": 95.88,
+   "volumeDb": -21.0
   }
  ],
  "beats": [
