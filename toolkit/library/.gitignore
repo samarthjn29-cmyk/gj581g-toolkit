@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Ignore the output video from Git but not videos you import into src/.
+out
+
+# Gate outputs and renders stay out of git (they go to Sam and G:)
+qa/
+release/
+out/

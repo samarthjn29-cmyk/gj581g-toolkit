@@ -1,0 +1,48 @@
+// Builds src/registry/registry.json (the render manifest) from a dump of Master_Asset_Registry!A1:G.
+// Usage: node scripts/registry-build.mjs scripts/data/registry_values.json
+// The dump is either the Sheets get_values response ({values:[[...]]}) or a bare array of rows; row 1 is the header.
+// Columns used: A Asset_ID, B Folder, C Asset_Name, E File_Path_or_Token (";"-separated), G Status.
+import fs from "node:fs";
+import path from "node:path";
+
+const input = process.argv[2] ?? "scripts/data/registry_values.json";
+const raw = JSON.parse(fs.readFileSync(input, "utf8"));
+const rows = Array.isArray(raw) ? raw : raw.values;
+const header = rows[0];
+const col = (name) => {
+  const i = header.indexOf(name);
+  if (i < 0) throw new Error(`Column ${name} missing from the registry dump`);
+  return i;
+};
+const [A, B, C, E, G] = ["Asset_ID", "Folder", "Asset_Name", "File_Path_or_Token", "Status"].map(col);
+const STATUSES = new Set(["Planned", "Spec Ready", "Active", "Retired"]);
+const assets = {};
+const problems = [];
+for (const r of rows.slice(1)) {
+  const id = (r[A] ?? "").trim();
+  if (!id) continue;
+  if (assets[id]) problems.push(`duplicate ID ${id}`);
+  const status = (r[G] ?? "").trim();
+  if (!STATUSES.has(status)) problems.push(`${id}: unknown status "${status}"`);
+  assets[id] = {
+    id,
+    folder: (r[B] ?? "").trim(),
+    name: (r[C] ?? "").trim(),
+    paths: (r[E] ?? "").split(";").map((s) => s.trim()).filter(Boolean),
+    status,
+  };
+}
+if (problems.length) {
+  console.error("Registry problems:\n- " + problems.join("\n- "));
+  process.exit(1);
+}
+const out = {
+  generated: new Date().toISOString(),
+  source: "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
+  assets,
+};
+const dest = path.join("src", "registry", "registry.json");
+fs.writeFileSync(dest, JSON.stringify(out, null, 1) + "\n");
+const counts = {};
+for (const a of Object.values(assets)) counts[a.status] = (counts[a.status] ?? 0) + 1;
+console.log(`${dest}: ${Object.keys(assets).length} assets`, counts);

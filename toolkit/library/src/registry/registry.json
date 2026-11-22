@@ -1,0 +1,720 @@
+{
+ "generated": "2026-11-22T03:39:32.578Z",
+ "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
+ "assets": {
+  "VIS-001": {
+   "id": "VIS-001",
+   "folder": "1_Visuals",
+   "name": "ArchivalScanCard",
+   "paths": [
+    "src/components/ArchivalScanCard.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-002": {
+   "id": "VIS-002",
+   "folder": "1_Visuals",
+   "name": "MinimalDataChart",
+   "paths": [
+    "src/components/MinimalDataChart.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-003": {
+   "id": "VIS-003",
+   "folder": "1_Visuals",
+   "name": "HeadlineMatchCut",
+   "paths": [
+    "src/components/HeadlineMatchCut.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-004": {
+   "id": "VIS-004",
+   "folder": "1_Visuals",
+   "name": "ParallaxCutout",
+   "paths": [
+    "src/components/ParallaxCutout.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-005": {
+   "id": "VIS-005",
+   "folder": "1_Visuals",
+   "name": "SpotlightIsolator",
+   "paths": [
+    "src/components/SpotlightIsolator.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-006": {
+   "id": "VIS-006",
+   "folder": "1_Visuals",
+   "name": "CleanUICard",
+   "paths": [
+    "src/components/CleanUICard.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-007": {
+   "id": "VIS-007",
+   "folder": "1_Visuals",
+   "name": "ChapterSlate",
+   "paths": [
+    "src/components/ChapterSlate.tsx"
+   ],
+   "status": "Active"
+  },
+  "VIS-008": {
+   "id": "VIS-008",
+   "folder": "1_Visuals",
+   "name": "SplitComparisonCard",
+   "paths": [
+    "src/components/SplitComparisonCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "VIS-009": {
+   "id": "VIS-009",
+   "folder": "1_Visuals",
+   "name": "BlueprintPhotoPair",
+   "paths": [
+    "src/components/BlueprintPhotoPair.tsx"
+   ],
+   "status": "Planned"
+  },
+  "VIS-010": {
+   "id": "VIS-010",
+   "folder": "1_Visuals",
+   "name": "AnalogMonitorFrame",
+   "paths": [
+    "src/components/AnalogMonitorFrame.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TXT-001": {
+   "id": "TXT-001",
+   "folder": "2_Text",
+   "name": "HeadlineArchivoBold",
+   "paths": [
+    "public/fonts/archivo-latin-800-normal.woff2"
+   ],
+   "status": "Active"
+  },
+  "TXT-002": {
+   "id": "TXT-002",
+   "folder": "2_Text",
+   "name": "EditorialSerifQuote",
+   "paths": [
+    "public/fonts/newsreader-latin-500-normal.woff2",
+    "public/fonts/newsreader-latin-500-italic.woff2"
+   ],
+   "status": "Active"
+  },
+  "TXT-003": {
+   "id": "TXT-003",
+   "folder": "2_Text",
+   "name": "MonoDataCounter",
+   "paths": [
+    "public/fonts/ibm-plex-mono-latin-500-normal.woff2"
+   ],
+   "status": "Active"
+  },
+  "TXT-004": {
+   "id": "TXT-004",
+   "folder": "2_Text",
+   "name": "BodyPlusJakartaUI",
+   "paths": [
+    "public/fonts/plus-jakarta-sans-latin-500-normal.woff2"
+   ],
+   "status": "Active"
+  },
+  "TXT-005": {
+   "id": "TXT-005",
+   "folder": "2_Text",
+   "name": "CutoutCollageTitle",
+   "paths": [
+    "src/components/CutoutCollageTitle.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TXT-006": {
+   "id": "TXT-006",
+   "folder": "2_Text",
+   "name": "SyncedQuoteBridge",
+   "paths": [
+    "src/components/SyncedQuoteBridge.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TXT-007": {
+   "id": "TXT-007",
+   "folder": "2_Text",
+   "name": "ArchivalDateStamp",
+   "paths": [
+    "src/components/ArchivalDateStamp.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TXT-008": {
+   "id": "TXT-008",
+   "folder": "2_Text",
+   "name": "EditorialLowerThird",
+   "paths": [
+    "src/components/EditorialLowerThird.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MOT-001": {
+   "id": "MOT-001",
+   "folder": "3_Motion",
+   "name": "SpringCameraDrift",
+   "paths": [
+    "src/motion.ts#drift"
+   ],
+   "status": "Active"
+  },
+  "MOT-002": {
+   "id": "MOT-002",
+   "folder": "3_Motion",
+   "name": "SpringEditorialReveal",
+   "paths": [
+    "src/motion.ts#reveal"
+   ],
+   "status": "Active"
+  },
+  "MOT-003": {
+   "id": "MOT-003",
+   "folder": "3_Motion",
+   "name": "SpringSnappyLock",
+   "paths": [
+    "src/motion.ts#lock"
+   ],
+   "status": "Active"
+  },
+  "MOT-004": {
+   "id": "MOT-004",
+   "folder": "3_Motion",
+   "name": "MatchCut4FrameCadence",
+   "paths": [
+    "src/components/HeadlineMatchCut.tsx"
+   ],
+   "status": "Active"
+  },
+  "MOT-005": {
+   "id": "MOT-005",
+   "folder": "3_Motion",
+   "name": "VectorTraceConnector",
+   "paths": [
+    "src/components/VectorTraceConnector.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MOT-006": {
+   "id": "MOT-006",
+   "folder": "3_Motion",
+   "name": "BlueprintCounterBar",
+   "paths": [
+    "src/components/BlueprintCounterBar.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MOT-007": {
+   "id": "MOT-007",
+   "folder": "3_Motion",
+   "name": "SchematicWaveDiagram",
+   "paths": [
+    "src/components/SchematicWaveDiagram.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MOT-008": {
+   "id": "MOT-008",
+   "folder": "3_Motion",
+   "name": "BoilingInkCallout",
+   "paths": [
+    "src/components/BoilingInkCallout.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TRN-001": {
+   "id": "TRN-001",
+   "folder": "4_Transitions",
+   "name": "HardCutEyeTrace",
+   "paths": [
+    "rules/beat-routing.md#eye-trace"
+   ],
+   "status": "Active"
+  },
+  "TRN-002": {
+   "id": "TRN-002",
+   "folder": "4_Transitions",
+   "name": "JCutDraftingWipe",
+   "paths": [
+    "src/components/ChapterSlate.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TRN-003": {
+   "id": "TRN-003",
+   "folder": "4_Transitions",
+   "name": "PhotoToCardMatchCut",
+   "paths": [
+    "src/components/PhotoToCardMatchCut.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TRN-004": {
+   "id": "TRN-004",
+   "folder": "4_Transitions",
+   "name": "InfiniteCanvasGrid",
+   "paths": [
+    "src/components/InfiniteCanvasGrid.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TRN-005": {
+   "id": "TRN-005",
+   "folder": "4_Transitions",
+   "name": "InkBleedTransition",
+   "paths": [
+    "src/components/InkBleedTransition.tsx"
+   ],
+   "status": "Planned"
+  },
+  "LOK-001": {
+   "id": "LOK-001",
+   "folder": "5_Look_and_Color",
+   "name": "DarkArchiveOpticalStack",
+   "paths": [
+    "src/themes/archivalDesk.ts"
+   ],
+   "status": "Active"
+  },
+  "LOK-002": {
+   "id": "LOK-002",
+   "folder": "5_Look_and_Color",
+   "name": "WarmPaperOpticalStack",
+   "paths": [
+    "src/theme.ts#warmPaper"
+   ],
+   "status": "Planned"
+  },
+  "LOK-003": {
+   "id": "LOK-003",
+   "folder": "5_Look_and_Color",
+   "name": "MinimalStageCanvas",
+   "paths": [
+    "src/components/MinimalStageCanvas.tsx"
+   ],
+   "status": "Planned"
+  },
+  "LOK-004": {
+   "id": "LOK-004",
+   "folder": "5_Look_and_Color",
+   "name": "CategorySwatchCard",
+   "paths": [
+    "src/components/CategorySwatchCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "LOK-005": {
+   "id": "LOK-005",
+   "folder": "5_Look_and_Color",
+   "name": "MattePaperGrainLoop",
+   "paths": [
+    "public/textures/paper-grain-loop/"
+   ],
+   "status": "Planned"
+  },
+  "LOK-006": {
+   "id": "LOK-006",
+   "folder": "5_Look_and_Color",
+   "name": "TornPaperTapeOverlays",
+   "paths": [
+    "public/textures/torn-paper-tape/"
+   ],
+   "status": "Planned"
+  },
+  "LOK-007": {
+   "id": "LOK-007",
+   "folder": "5_Look_and_Color",
+   "name": "HalftonePhotocopyGrit",
+   "paths": [
+    "public/textures/halftone-grit.png"
+   ],
+   "status": "Planned"
+  },
+  "LOK-008": {
+   "id": "LOK-008",
+   "folder": "5_Look_and_Color",
+   "name": "FilmGrainDustLoop16mm",
+   "paths": [
+    "public/textures/16mm-grain-dust.mp4"
+   ],
+   "status": "Planned"
+  },
+  "SFX-001": {
+   "id": "SFX-001",
+   "folder": "6_Sounds",
+   "name": "SoftWhoosh",
+   "paths": [
+    "public/sfx/soft-whoosh.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-002": {
+   "id": "SFX-002",
+   "folder": "6_Sounds",
+   "name": "CameraFocusTick",
+   "paths": [
+    "public/sfx/camera-focus-tick.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-003": {
+   "id": "SFX-003",
+   "folder": "6_Sounds",
+   "name": "MechanicalShutter",
+   "paths": [
+    "public/sfx/mechanical-shutter.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-004": {
+   "id": "SFX-004",
+   "folder": "6_Sounds",
+   "name": "ChalkUnderline",
+   "paths": [
+    "public/sfx/chalk-underline.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-005": {
+   "id": "SFX-005",
+   "folder": "6_Sounds",
+   "name": "MutedThump",
+   "paths": [
+    "public/sfx/muted-thump.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-006": {
+   "id": "SFX-006",
+   "folder": "6_Sounds",
+   "name": "CardstockSlide",
+   "paths": [
+    "public/sfx/cardstock-slide.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-007": {
+   "id": "SFX-007",
+   "folder": "6_Sounds",
+   "name": "SoftKeyClick",
+   "paths": [
+    "public/sfx/soft-key-click.wav"
+   ],
+   "status": "Planned"
+  },
+  "SFX-008": {
+   "id": "SFX-008",
+   "folder": "6_Sounds",
+   "name": "PizzicatoHookBed",
+   "paths": [
+    "src/audio/HookBedTemplate.ts"
+   ],
+   "status": "Planned"
+  },
+  "SFX-009": {
+   "id": "SFX-009",
+   "folder": "6_Sounds",
+   "name": "AccentBellPing",
+   "paths": [
+    "src/audio/SynchresisCueMap.ts"
+   ],
+   "status": "Planned"
+  },
+  "SFX-010": {
+   "id": "SFX-010",
+   "folder": "6_Sounds",
+   "name": "JCutRiserSwell",
+   "paths": [
+    "src/audio/JCutTransitionEnvelope.ts"
+   ],
+   "status": "Planned"
+  },
+  "SFX-011": {
+   "id": "SFX-011",
+   "folder": "6_Sounds",
+   "name": "InterviewAudioWaveform",
+   "paths": [
+    "src/components/AudioQuoteWaveform.tsx"
+   ],
+   "status": "Planned"
+  },
+  "SFX-012": {
+   "id": "SFX-012",
+   "folder": "6_Sounds",
+   "name": "TypingHighlighterCombo",
+   "paths": [
+    "src/components/SearchToArticleCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MUS-001": {
+   "id": "MUS-001",
+   "folder": "7_Music",
+   "name": "GenreSwitchStingerSuite",
+   "paths": [
+    "src/audio/GenreStingerSuite.ts"
+   ],
+   "status": "Planned"
+  },
+  "MUS-002": {
+   "id": "MUS-002",
+   "folder": "7_Music",
+   "name": "DynamicMixBreakSwell",
+   "paths": [
+    "src/audio/DynamicMixBreak.ts"
+   ],
+   "status": "Planned"
+  },
+  "MUS-003": {
+   "id": "MUS-003",
+   "folder": "7_Music",
+   "name": "SyncopatedMontageBed",
+   "paths": [
+    "src/audio/SyncopatedMontageBed.ts"
+   ],
+   "status": "Planned"
+  },
+  "MUS-004": {
+   "id": "MUS-004",
+   "folder": "7_Music",
+   "name": "ReflectivePianoPivot",
+   "paths": [
+    "src/audio/ReflectivePianoBed.ts"
+   ],
+   "status": "Planned"
+  },
+  "TEX-001": {
+   "id": "TEX-001",
+   "folder": "8_Textures",
+   "name": "GraphPaperDeskFrame",
+   "paths": [
+    "src/components/GraphPaperTextureLayer.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TEX-002": {
+   "id": "TEX-002",
+   "folder": "8_Textures",
+   "name": "AnalogScanlineGlitch",
+   "paths": [
+    "src/components/AnalogScanlineOverlay.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TEX-003": {
+   "id": "TEX-003",
+   "folder": "8_Textures",
+   "name": "SketchToVectorTexture",
+   "paths": [
+    "src/components/SketchToVectorTexture.tsx"
+   ],
+   "status": "Planned"
+  },
+  "TEX-004": {
+   "id": "TEX-004",
+   "folder": "8_Textures",
+   "name": "ArchivalDeskFlatlay",
+   "paths": [
+    "src/components/ArchivalDeskFlatlay.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MAP-001": {
+   "id": "MAP-001",
+   "folder": "9_Maps",
+   "name": "SatelliteTerritoryZoom",
+   "paths": [
+    "src/components/SatelliteTerritoryZoom.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MAP-002": {
+   "id": "MAP-002",
+   "folder": "9_Maps",
+   "name": "ReliefWatershedFlowMap",
+   "paths": [
+    "src/components/ReliefFlowMap.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MAP-003": {
+   "id": "MAP-003",
+   "folder": "9_Maps",
+   "name": "ArchivalTopoBorderTrace",
+   "paths": [
+    "src/components/ArchivalTopoOverlay.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MAP-004": {
+   "id": "MAP-004",
+   "folder": "9_Maps",
+   "name": "GlobalReliefScaleMap",
+   "paths": [
+    "src/components/GlobalReliefScaleMap.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-001": {
+   "id": "PKG-001",
+   "folder": "10_Packaging",
+   "name": "SeriesIntroGridBumper",
+   "paths": [
+    "src/components/SeriesIntroBumper.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-002": {
+   "id": "PKG-002",
+   "folder": "10_Packaging",
+   "name": "InlineNumberedChapter",
+   "paths": [
+    "src/components/InlineChapterStamp.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-003": {
+   "id": "PKG-003",
+   "folder": "10_Packaging",
+   "name": "FramedInterviewCard",
+   "paths": [
+    "src/components/FramedInterviewCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-004": {
+   "id": "PKG-004",
+   "folder": "10_Packaging",
+   "name": "SplitCreditEndScreen",
+   "paths": [
+    "src/components/SplitEndScreenLayout.tsx"
+   ],
+   "status": "Planned"
+  },
+  "LOK-009": {
+   "id": "LOK-009",
+   "folder": "5_Look_and_Color",
+   "name": "WarmGraphiteLightLab",
+   "paths": [
+    "src/themes/warmGraphite.ts"
+   ],
+   "status": "Active"
+  },
+  "TXT-009": {
+   "id": "TXT-009",
+   "folder": "2_Text",
+   "name": "FrauncesLineSerif",
+   "paths": [
+    "public/fonts/fraunces-latin-400-normal.woff2",
+    "public/fonts/fraunces-latin-400-italic.woff2",
+    "public/fonts/fraunces-latin-600-normal.woff2"
+   ],
+   "status": "Active"
+  },
+  "TXT-010": {
+   "id": "TXT-010",
+   "folder": "2_Text",
+   "name": "JetBrainsMonoLabel",
+   "paths": [
+    "public/fonts/jetbrains-mono-latin-500-normal.woff2"
+   ],
+   "status": "Active"
+  },
+  "TRN-006": {
+   "id": "TRN-006",
+   "folder": "4_Transitions",
+   "name": "PushThrough",
+   "paths": [
+    "src/components/PushThrough.tsx"
+   ],
+   "status": "Active"
+  },
+  "LOK-010": {
+   "id": "LOK-010",
+   "folder": "5_Look_and_Color",
+   "name": "OpticalStack",
+   "paths": [
+    "src/layers/OpticalStack.tsx"
+   ],
+   "status": "Active"
+  },
+  "SRC-001": {
+   "id": "SRC-001",
+   "folder": "11_Sources",
+   "name": "Dalton1798_p29",
+   "paths": [
+    "public/assets/sources/dalton1798_p29.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-002": {
+   "id": "SRC-002",
+   "folder": "11_Sources",
+   "name": "Dalton1798_p34",
+   "paths": [
+    "public/assets/sources/dalton1798_p34.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-003": {
+   "id": "SRC-003",
+   "folder": "11_Sources",
+   "name": "Dalton1798_p43",
+   "paths": [
+    "public/assets/sources/dalton1798_p43.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-004": {
+   "id": "SRC-004",
+   "folder": "11_Sources",
+   "name": "DaltonTurner1834",
+   "paths": [
+    "public/assets/sources/dalton_turner1834.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-005": {
+   "id": "SRC-005",
+   "folder": "11_Sources",
+   "name": "NewtonOpticks1704_p90",
+   "paths": [
+    "public/assets/sources/newton_opticks1704_p90.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-006": {
+   "id": "SRC-006",
+   "folder": "11_Sources",
+   "name": "Young1802_p12",
+   "paths": [
+    "public/assets/sources/young1802_p12.jpg"
+   ],
+   "status": "Active"
+  },
+  "SRC-007": {
+   "id": "SRC-007",
+   "folder": "11_Sources",
+   "name": "Henry1854_p25",
+   "paths": [
+    "public/assets/sources/henry1854_p25.jpg"
+   ],
+   "status": "Active"
+  }
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "ArchivalScanCard": { "assetId": "VIS-001", "beatType": 1, "energy": "Calm", "grid": true },
+ "MinimalDataChart": { "assetId": "VIS-002", "beatType": 2, "energy": "Peak", "grid": true },
+ "HeadlineMatchCut": { "assetId": "VIS-003", "beatType": 3, "energy": "Peak", "grid": false },
+ "ParallaxCutout": { "assetId": "VIS-004", "beatType": 4, "energy": "Calm", "grid": false },
+ "SpotlightIsolator": { "assetId": "VIS-005", "beatType": 5, "energy": "Calm", "grid": false },
+ "CleanUICard": { "assetId": "VIS-006", "beatType": 6, "energy": "Calm", "grid": true },
+ "ChapterSlate": { "assetId": "VIS-007", "beatType": 7, "energy": "Reset", "grid": false }
+}

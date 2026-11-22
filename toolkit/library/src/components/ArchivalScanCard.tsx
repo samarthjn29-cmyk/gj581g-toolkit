@@ -1,0 +1,140 @@
+import React from "react";
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { useTheme } from "../themes";
+import { useAssets, useSource } from "../registry";
+import { drift, reveal, rise, sec, SLOW_OUT } from "../motion";
+import { CropImage, cropToBox, type Rect } from "../layers/CropImage";
+
+// VIS-001 ArchivalScanCard (beat type 1: document or quote proof, calm).
+// A real scan on a tray, a highlighter sweeping across the words that matter (image-pixel coordinates),
+// the line set as a serif quote with an accent underline, and a mono source tag.
+export type ArchivalScanCardProps = {
+  srcId: string;
+  imgSize: readonly [number, number];
+  crop: Rect;
+  highlights: { box: Rect; atSec: number }[];
+  quote: string;
+  source: string;
+  side?: "left" | "right";
+  startSec?: number;
+};
+
+export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
+  srcId,
+  imgSize,
+  crop,
+  highlights,
+  quote,
+  source,
+  side = "left",
+  startSec = 0,
+}) => {
+  useAssets(["VIS-001", "MOT-001", "MOT-002"]);
+  const src = useSource(srcId);
+  const t = useTheme();
+  const frame = useCurrentFrame();
+  const { fps, durationInFrames } = useVideoConfig();
+  const st = t.motion.staggerSec;
+
+  const cardH = 860;
+  const cardW = Math.min(900, Math.round((cardH * crop[2]) / crop[3]));
+  const pad = 18;
+  const innerW = cardW - pad * 2;
+  const innerH = cardH - pad * 2;
+  const { map } = cropToBox(crop, innerW, innerH, "cover");
+  const cardX = side === "left" ? t.safe.x : 1920 - t.safe.x - cardW;
+  const textX = side === "left" ? cardX + cardW + 90 : t.safe.x;
+  const textW = 1920 - t.safe.x * 2 - cardW - 90;
+
+  const pCard = reveal(frame, fps, startSec, t.motion.enterSec);
+  const pQuote = reveal(frame, fps, startSec + st * 2, t.motion.enterSec);
+  const pLine = reveal(frame, fps, startSec + st * 2 + t.motion.enterSec, 0.7);
+  const pTag = reveal(frame, fps, startSec + st * 4, t.motion.enterSec);
+
+  return (
+    <AbsoluteFill>
+      <div
+        style={{
+          position: "absolute",
+          left: cardX,
+          top: (1080 - cardH) / 2,
+          width: cardW,
+          height: cardH,
+          padding: pad,
+          background: t.colors.panel,
+          borderRadius: 6,
+          boxShadow: "0 30px 60px rgba(0,0,0,0.45), 0 6px 14px rgba(0,0,0,0.35)",
+          ...rise(pCard, 36),
+        }}
+      >
+        <div style={{ transform: `scale(${drift(frame, durationInFrames)})`, transformOrigin: "50% 40%" }}>
+          <CropImage
+            src={src}
+            imgSize={imgSize}
+            crop={crop}
+            width={innerW}
+            height={innerH}
+            filter="grayscale(0.55) sepia(0.12) contrast(1.06) brightness(0.94)"
+          >
+            {highlights.map((h, i) => {
+              const r = map(h.box);
+              const a = sec(h.atSec, fps);
+              const p = interpolate(frame, [a, a + sec(0.7, fps)], [0, 1], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+                easing: SLOW_OUT,
+              });
+              return (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    left: r.left - 6,
+                    top: r.top - 4,
+                    width: (r.width + 12) * p,
+                    height: r.height + 8,
+                    background: t.colors.accentSoft,
+                    mixBlendMode: "multiply",
+                    borderRadius: 3,
+                  }}
+                />
+              );
+            })}
+          </CropImage>
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: textX, top: 300, width: textW }}>
+        <div
+          style={{
+            fontFamily: t.fonts.serif,
+            fontStyle: "italic",
+            fontWeight: 400,
+            fontSize: 58,
+            lineHeight: 1.2,
+            color: t.colors.ink,
+            ...rise(pQuote),
+          }}
+        >
+          “{quote}”
+        </div>
+        <div style={{ height: 4, width: 260 * pLine, background: t.colors.accent, marginTop: 34, borderRadius: 2 }} />
+        <div
+          style={{
+            display: "inline-block",
+            marginTop: 30,
+            fontFamily: t.fonts.mono,
+            fontSize: 22,
+            letterSpacing: 1.2,
+            color: t.colors.secondary,
+            background: t.colors.chip,
+            padding: "8px 14px",
+            borderRadius: 4,
+            ...rise(pTag, 16),
+          }}
+        >
+          {source}
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};

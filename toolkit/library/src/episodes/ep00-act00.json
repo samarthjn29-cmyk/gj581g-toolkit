@@ -1,0 +1,195 @@
+{
+ "episodeId": "ep00-act00",
+ "themeId": "LOK-009",
+ "note": "Library demo act (not a video): the library preview content in the act-file format, for testing Gate 2.",
+ "beats": [
+  {
+   "id": "b01",
+   "start": 0,
+   "end": 3,
+   "component": "ChapterSlate",
+   "assets": [
+    "VIS-007",
+    "MOT-001",
+    "MOT-002",
+    "TXT-009",
+    "TXT-010",
+    "LOK-009",
+    "LOK-010"
+   ],
+   "props": {
+    "index": "01",
+    "title": "The man who saw pink",
+    "subtitle": "Preview subtitle in the serif italic"
+   }
+  },
+  {
+   "id": "b02",
+   "start": 3,
+   "end": 6.4,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "SRC-001",
+    "MOT-001",
+    "MOT-002",
+    "TRN-006"
+   ],
+   "transitionIn": "push",
+   "focus": [
+    560,
+    500
+   ],
+   "props": {
+    "srcId": "SRC-001",
+    "imgSize": [
+     1920,
+     2813
+    ],
+    "crop": [
+     380,
+     400,
+     1220,
+     1100
+    ],
+    "highlights": [
+     {
+      "box": [
+       480,
+       704,
+       990,
+       46
+      ],
+      "atSec": 1.6
+     },
+     {
+      "box": [
+       480,
+       766,
+       560,
+       46
+      ],
+      "atSec": 2.2
+     }
+    ],
+    "quote": "when the term red was substituted for pink, I thought it highly improper",
+    "source": "JOHN DALTON · 1798 · MEMOIRS, MANCHESTER LIT. & PHIL. SOC. · P. 29"
+   }
+  },
+  {
+   "id": "b03",
+   "start": 6.4,
+   "end": 9.4,
+   "component": "SpotlightIsolator",
+   "assets": [
+    "VIS-005",
+    "SRC-005",
+    "MOT-001",
+    "MOT-003",
+    "TRN-001"
+   ],
+   "transitionIn": "cut",
+   "props": {
+    "srcId": "SRC-005",
+    "imgSize": [
+     1600,
+     2321
+    ],
+    "crop": [
+     0,
+     260,
+     1600,
+     900
+    ],
+    "target": [
+     585,
+     588,
+     580,
+     62
+    ],
+    "label": "NEWTON · OPTICKS · 1704 · P. 90",
+    "atSec": 1.2
+   }
+  },
+  {
+   "id": "b04",
+   "start": 9.4,
+   "end": 12.4,
+   "component": "ParallaxCutout",
+   "assets": [
+    "VIS-004",
+    "SRC-002",
+    "SRC-004",
+    "MOT-001",
+    "MOT-002",
+    "TRN-001"
+   ],
+   "transitionIn": "cut",
+   "props": {
+    "bg": {
+     "srcId": "SRC-002",
+     "imgSize": [
+      1920,
+      2813
+     ],
+     "crop": [
+      200,
+      400,
+      1500,
+      845
+     ]
+    },
+    "fg": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ]
+    },
+    "kicker": "MANCHESTER · 1794",
+    "headline": "John Dalton",
+    "caption": "Preview caption in the serif italic"
+   }
+  },
+  {
+   "id": "b05",
+   "start": 12.4,
+   "end": 15,
+   "component": "CleanUICard",
+   "assets": [
+    "VIS-006",
+    "MOT-001",
+    "MOT-002",
+    "MOT-003",
+    "TRN-001"
+   ],
+   "transitionIn": "cut",
+   "props": {
+    "kicker": "PREVIEW · CARD",
+    "title": "Three kinds of cone",
+    "nodes": [
+     {
+      "label": "S cone",
+      "detail": "short"
+     },
+     {
+      "label": "M cone",
+      "detail": "medium"
+     },
+     {
+      "label": "L cone",
+      "detail": "long"
+     }
+    ],
+    "firstSec": 1.4,
+    "stepSec": 1.1
+   }
+  }
+ ]
+}
