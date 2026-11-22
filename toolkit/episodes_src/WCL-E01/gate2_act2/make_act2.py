@@ -105,6 +105,7 @@ shot(B(8, 9), "ArchivalScanCard", lambda r: {
     transitionIn="flash")
 # 10-11 the diary: a plain card with our own hatched notebook (illustrative; no writing), rows filling day by day.
 shot(B(10, 11), "KineticLine", lambda r: {
+    "ink": True,  # TXT-016 InkSpreadType: the period headline presses into the paper
     "lines": [{"text": "A diary of the weather", "atSec": r(word("diary"))},
               {"text": "THE DIARY · FROM 24 MARCH 1787", "atSec": r(word("50")), "style": "mono"},
               {"text": "TO THE EVENING BEFORE HE DIED · 1844", "atSec": r(word("every")), "style": "mono"}],
@@ -200,7 +201,8 @@ shot(B(*range(45, 55)), "ScaleField", lambda r: {
     transitionIn="slide")
 # 55-56 picture it from the inside.
 shot(B(55, 56), "KineticLine", lambda r: {
-    "lines": [{"text": "Picture it from the inside.", "atSec": r(word("picture"))}]},
+    "lines": [{"text": "Picture it from the inside.", "atSec": r(word("picture")),
+               "fill": {"word": "inside", "atSec": r(word("inside")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}}]},  # TXT-017
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
 # 57-58 grass, blood, cherries, sky: each word fills in its colour (TXT-015).
 shot(B(57, 58), "KineticLine", lambda r: {
@@ -226,7 +228,11 @@ shot(B(63, 64, 65), "FootagePlate", lambda r: {
     transitionIn="push", focus=[1180, 450])
 # 66-68 Dalton is a scientist: he wants to know why (act 3 starts on the next frame).
 shot(B(66, 67, 68), "KineticLine", lambda r: {
-    "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164))},
+    # SRC-004 Dalton's 1834 portrait (Turner mezzotint) beside the words: the act's one look at the man himself.
+    "backdrop": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010], "layout": "card-right"},
+    "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0.3}]},
+    "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164)),
+               "fill": {"word": "scientist", "atSec": r(word("scientist")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}},
               {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono"},
               {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED, "outline": "#D9D2C5"}}]})
 
@@ -244,6 +250,7 @@ audio = [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(12) + 0.1, 2), "volumeDb": -17.6},  # band back to the map
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -22.6},  # the route drawn on: texture under the words
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(14) - 0.15, 2), "volumeDb": -16.6},  # push from Kendal into the geranium
+    {"id": "SFX-014", "atSec": round(S(14), 2), "endSec": round(S(16), 2), "fadeInSec": 0.8, "fadeOutSec": 0.6, "volumeDb": -2.0},  # candle room under the geranium by candle (Kendal)
     {"id": "SFX-006", "atSec": round(S(16) - 0.05, 2), "volumeDb": -21.0},  # slide to p.30, over "change,": texture
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(22) - 0.15, 2), "volumeDb": -16.6},  # push from "my brother" into Lonsdale
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # band into the stockings
@@ -259,6 +266,7 @@ audio = [
     {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v2.wav", "atSec": round(word("four", 131), 2), "volumeDb": -22.0},
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(55) + 0.1, 2), "volumeDb": -17.6},  # band up into "Picture it from the inside"
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(63) - 0.15, 2), "volumeDb": -16.6},  # push from YOUR red into the geranium
+    {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)
 ]
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",

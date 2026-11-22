@@ -50,6 +50,14 @@
    "volumeDb": -16.6
   },
   {
+   "id": "SFX-014",
+   "atSec": 32.3,
+   "endSec": 38.34,
+   "fadeInSec": 0.8,
+   "fadeOutSec": 0.6,
+   "volumeDb": -2.0
+  },
+  {
    "id": "SFX-006",
    "atSec": 38.29,
    "volumeDb": -21.0
@@ -141,6 +149,14 @@
    "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
    "atSec": 160.15,
    "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-014",
+   "atSec": 160.3,
+   "endSec": 162.38,
+   "fadeInSec": 0.6,
+   "fadeOutSec": 0.6,
+   "volumeDb": -2.0
   }
  ],
  "beats": [
@@ -496,6 +512,7 @@
     "VIS-020",
     "TXT-009",
     "TXT-010",
+    "TXT-016",
     "MOT-003",
     "MOT-009",
     "TRN-001",
@@ -505,6 +522,7 @@
     "TEX-005"
    ],
    "props": {
+    "ink": true,
     "lines": [
      {
       "text": "A diary of the weather",
@@ -686,6 +704,7 @@
     "LOK-009",
     "LOK-010",
     "SFX-020",
+    "SFX-014",
     "MUS-007",
     "SRC-013",
     "TRN-001"
@@ -1579,6 +1598,7 @@
     "VIS-020",
     "TXT-009",
     "TXT-015",
+    "TXT-017",
     "MOT-002",
     "TRN-011",
     "LOK-009",
@@ -1592,7 +1612,14 @@
     "lines": [
      {
       "text": "Picture it from the inside.",
-      "atSec": 0.65
+      "atSec": 0.65,
+      "fill": {
+       "word": "inside",
+       "atSec": 1.41,
+       "color": "#00E0BE",
+       "style": "mark",
+       "onMark": "#2F2D2C"
+      }
      }
     ]
    },
@@ -1790,6 +1817,7 @@
     "LOK-009",
     "LOK-010",
     "SFX-020",
+    "SFX-014",
     "MUS-007",
     "SRC-013",
     "TRN-001"
@@ -1876,17 +1904,49 @@
     "VIS-020",
     "TXT-009",
     "TXT-015",
+    "TXT-017",
     "MOT-002",
     "TRN-001",
     "LOK-009",
     "LOK-010",
-    "MUS-007"
+    "MUS-007",
+    "SRC-004"
    ],
    "props": {
+    "backdrop": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ],
+     "layout": "card-right"
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0.3
+      }
+     ]
+    },
     "lines": [
      {
       "text": "A scientist.",
-      "atSec": 0.65
+      "atSec": 0.65,
+      "fill": {
+       "word": "scientist",
+       "atSec": 1.93,
+       "color": "#00E0BE",
+       "style": "mark",
+       "onMark": "#2F2D2C"
+      }
      },
      {
       "text": "NOT ENOUGH TO KNOW HE'S DIFFERENT",
