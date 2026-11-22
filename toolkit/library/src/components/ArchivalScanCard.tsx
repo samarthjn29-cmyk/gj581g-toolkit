@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
 import { useAssets, useSource } from "../registry";
@@ -16,6 +16,9 @@ export type ArchivalScanCardProps = {
   quote: string;
   source: string;
   side?: "left" | "right";
+  // VIS-029 ContrastCallout (studied Chris Moran's short "How to guide your viewer's eye using contrast";
+  // analysis only): from atSec the rest of the page dims and only the highlighted lines stay bright.
+  callout?: { atSec: number; dim?: number };
   startSec?: number;
 };
 
@@ -27,9 +30,11 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   quote,
   source,
   side = "left",
+  callout,
   startSec = 0,
 }) => {
-  useAssets(["VIS-001", "MOT-001", "MOT-002"]);
+  useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : [])]);
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const src = useSource(srcId);
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -100,6 +105,28 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
                 />
               );
             })}
+            {callout ? (
+              <svg width={innerW} height={innerH} style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none" }}>
+                <defs>
+                  <mask id={`co${uid}`}>
+                    <rect width={innerW} height={innerH} fill="white" />
+                    {highlights
+                      .filter((h) => frame >= sec(h.atSec, fps))
+                      .map((h, i) => {
+                        const r = map(h.box);
+                        return <rect key={i} x={r.left - 10} y={r.top - 8} width={r.width + 20} height={r.height + 16} rx={4} fill="black" />;
+                      })}
+                  </mask>
+                </defs>
+                <rect
+                  width={innerW}
+                  height={innerH}
+                  fill={t.colors.dimMask}
+                  mask={`url(#co${uid})`}
+                  opacity={(callout.dim ?? 0.7) * reveal(frame, fps, callout.atSec, 0.6)}
+                />
+              </svg>
+            ) : null}
           </CropImage>
         </div>
       </div>

@@ -22,6 +22,7 @@ import { KineticLine } from "./KineticLine";
 import { EyeDissection } from "./EyeDissection";
 import { HalftoneMoire } from "./HalftoneMoire";
 import { DuotoneCollage } from "./DuotoneCollage";
+import { RisoPlate } from "./RisoPlate";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -57,6 +58,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   EyeDissection,
   HalftoneMoire,
   DuotoneCollage,
+  RisoPlate,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(

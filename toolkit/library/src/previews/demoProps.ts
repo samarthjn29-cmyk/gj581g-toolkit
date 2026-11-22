@@ -111,6 +111,17 @@ export const DEMO: Record<string, Record<string, unknown>> = {
     loupe: { atSec: 0.3, from: [1130, 470], to: [1480, 600], moveSec: 3, r: 230, cell: 22 },
     lines: [{ text: "Preview question?", atSec: 0.6 }],
   },
+  RisoPlate: {
+    srcId: "SRC-004",
+    imgSize: [996, 1230],
+    w: 560,
+    inks: [
+      { file: "public/assets/sources/dalton_turner1834_trace.png", color: "#E4004F", atSec: 0, offset: [3, -2], drift: [1.5, 0.5] },
+      { file: "public/assets/sources/dalton_turner1834_halftone_full.png", color: "#0078BF", atSec: 0.8, offset: [-2, 1] },
+    ],
+    caption: "PREVIEW · TWO INKS",
+    lines: [{ text: "Preview: two inks make a third", atSec: 0.5 }],
+  },
   DuotoneCollage: {
     pieces: [
       { color: "#86B5E8", x: 1660, y: 230, w: 320, h: 210, rot: 6, atSec: 0 },
@@ -131,6 +142,18 @@ export const DEMO: Record<string, Record<string, unknown>> = {
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.
 export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
+  "ArchivalScanCard-Callout": {
+    name: "ArchivalScanCard",
+    props: {
+      srcId: "SRC-001",
+      imgSize: [1920, 2813],
+      crop: [380, 1220, 1100, 1050],
+      highlights: [{ box: [440, 2100, 700, 54], atSec: 1.0 }],
+      callout: { atSec: 1.4, dim: 0.7 },
+      quote: "Preview: the rest of the page dims",
+      source: "PREVIEW · CONTRAST CALLOUT",
+    },
+  },
   "PerspectiveGrid-Floor": {
     name: "PerspectiveGrid",
     props: {

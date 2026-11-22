@@ -130,5 +130,11 @@
     "beatType": 4,
     "energy": "Calm",
     "grid": false
+  },
+  "RisoPlate": {
+    "assetId": "LOK-021",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
   }
 }

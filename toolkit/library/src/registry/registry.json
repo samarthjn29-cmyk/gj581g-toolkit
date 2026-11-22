@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T09:03:33.449Z",
+ "generated": "2026-11-22T09:27:26.812Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -913,7 +913,8 @@
    "paths": [
     "public/assets/sources/dalton_turner1834.jpg",
     "public/assets/sources/dalton_turner1834_halftone.png",
-    "public/assets/sources/dalton_turner1834_trace.png"
+    "public/assets/sources/dalton_turner1834_trace.png",
+    "public/assets/sources/dalton_turner1834_halftone_full.png"
    ],
    "status": "Active",
    "use": "",
@@ -1848,6 +1849,127 @@
    "status": "Planned",
    "use": "Best use: maps where one place is spoken about. Limit: max 4 beats per episode.",
    "maxBeats": 4,
+   "maxShare": null
+  },
+  "VIS-029": {
+   "id": "VIS-029",
+   "folder": "1_Visuals",
+   "name": "ContrastCallout",
+   "paths": [
+    "src/components/ArchivalScanCard.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: page shots where one or two lines are read aloud. Limit: max 6 beats per episode.",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "LOK-021": {
+   "id": "LOK-021",
+   "folder": "5_Look_and_Color",
+   "name": "RisoPlate",
+   "paths": [
+    "src/components/RisoPlate.tsx",
+    "src/layers/RisoPrint.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: mixing and printing beats. Limit: max 4 beats per episode.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "LOK-022": {
+   "id": "LOK-022",
+   "folder": "5_Look_and_Color",
+   "name": "GateWeave",
+   "paths": [
+    "src/layers/GateWeave.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: held archival stills and cards. Limit: weave <= 1.5 px.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-011": {
+   "id": "MOT-011",
+   "folder": "3_Motion",
+   "name": "ExtremeEase",
+   "paths": [
+    "src/motion.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: one crisp move per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-008": {
+   "id": "MUS-008",
+   "folder": "7_Music",
+   "name": "ActMoodCueSheet",
+   "paths": [
+    "episodes_src/<EP>/music_cues.json"
+   ],
+   "status": "Planned",
+   "use": "Best use: planning each act bed.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-030": {
+   "id": "VIS-030",
+   "folder": "1_Visuals",
+   "name": "PeriodFrame",
+   "paths": [
+    "src/components/PeriodFrame.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: era footage. Limit: max 3 per episode.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-020": {
+   "id": "LOK-020",
+   "folder": "5_Look_and_Color",
+   "name": "DeskDepthOfField",
+   "paths": [
+    "src/layers/DeskDepthOfField.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: pages as objects. Limit: max 6 beats per episode.",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "VIS-031": {
+   "id": "VIS-031",
+   "folder": "1_Visuals",
+   "name": "Photo25D",
+   "paths": [
+    "src/components/Photo25D.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: held real photos. Limit: max 4 per episode.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-006": {
+   "id": "MAP-006",
+   "folder": "9_Maps",
+   "name": "TerrainTintMap",
+   "paths": [
+    "src/components/TerrainTintMap.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: moves between places. Limit: max 4 beats per episode.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "TXT-016": {
+   "id": "TXT-016",
+   "folder": "2_Text",
+   "name": "InkSpreadType",
+   "paths": [
+    "src/layers/PaperFibre.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: period headline cards.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

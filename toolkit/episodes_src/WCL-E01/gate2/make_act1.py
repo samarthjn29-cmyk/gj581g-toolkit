@@ -50,7 +50,7 @@ def shot(beats, component, props, **kw):
     def walk(o, path=""):
         if isinstance(o, dict):
             for k, v in o.items():
-                if k in ("atSec", "untilSec", "fillSec", "nameAtSec", "dimAtSec", "brightAtSec", "countFromSec", "lockSec", "openAtSec") and isinstance(v, (int, float)) and v < -0.05:
+                if k in ("atSec", "untilSec", "fillSec", "nameAtSec", "dimAtSec", "brightAtSec", "countFromSec", "lockSec", "openAtSec") and isinstance(v, (int, float)) and v < -0.05 and v != -1:  # -1 = already in place on the cut
                     raise SystemExit(f"shot {d['id']}: {path}.{k} = {v} (before the shot starts: wrong word match?)")
                 walk(v, f"{path}.{k}")
         elif isinstance(o, list):
@@ -142,9 +142,9 @@ shot(B(24), "ParallaxCutout", lambda r: {
 # 25-26 beside the portrait: a pioneer of atomic theory; later, 1808.
 shot(B(25, 26), "DuotoneCollage", lambda r: {
     "pieces": [
-        {"color": SKY, "x": 1660, "y": 230, "w": 320, "h": 210, "rot": 6, "atSec": 0.0, "seed": 7},
+        {"color": SKY, "x": 1660, "y": 230, "w": 320, "h": 210, "rot": 6, "atSec": -1, "seed": 7},
         {"srcId": "SRC-004", "file": "public/assets/sources/dalton_turner1834_halftone.png", "imgSize": [760, 972],
-         "x": 1420, "y": 450, "w": 600, "rot": -2.5, "atSec": 0.1, "caption": "JOHN DALTON · 1834", "captionAt": "top", "seed": 3},
+         "x": 1420, "y": 450, "w": 600, "rot": -2.5, "atSec": -1, "caption": "JOHN DALTON · 1834", "captionAt": "top", "seed": 3},
         {"srcId": "SRC-031", "file": "public/assets/sources/dalton1808_symbols_line.png", "imgSize": [1000, 705],
          "x": 1240, "y": 735, "w": 620, "rot": 2.5, "atSec": max(0.6, r(word("pioneer")) - 0.2), "caption": "HIS ATOMS · PLATE 4, 1808", "seed": 5}],
     "lines": [{"text": "A pioneer of atomic theory", "atSec": r(word("pioneer"))},
@@ -154,7 +154,7 @@ shot(B(25, 26), "DuotoneCollage", lambda r: {
 shot(B(27, 28), "DuotoneCollage", lambda r: {
     "pieces": [
         {"srcId": "SRC-001", "file": "public/assets/sources/dalton1798_p29_line.png", "imgSize": [1100, 240],
-         "x": 1340, "y": 420, "w": 980, "rot": -1.5, "atSec": 0.1, "caption": "HIS OWN WORDS · P. 29", "seed": 11},
+         "x": 1340, "y": 420, "w": 980, "rot": -1.5, "atSec": -1, "caption": "HIS OWN WORDS · P. 29", "seed": 11},
         {"color": SKY, "x": 1150, "y": 740, "w": 340, "h": 240, "rot": 4, "atSec": 0.7, "seed": 13},
         {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
