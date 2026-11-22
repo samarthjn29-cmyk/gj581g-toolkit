@@ -16,6 +16,7 @@ export type ComparisonPanel = {
   size: readonly [number, number];
   crop?: Rect; // image pixels; for video the frame is covered around `focus`
   focus?: number;
+  clipStartSec?: number;
   label: string;
   atSec: number;
   stamp?: { text: string; atSec: number };
@@ -44,7 +45,7 @@ const Panel: React.FC<{ p: ComparisonPanel; x: number; w: number; h: number; top
     const sc = Math.max(w / p.size[0], h / p.size[1]);
     const vw = p.size[0] * sc, vh = p.size[1] * sc;
     const topv = Math.min(0, Math.max(h - vh, h / 2 - (p.focus ?? 0.5) * vh));
-    pic = <OffthreadVideo src={src} muted style={{ position: "absolute", left: (w - vw) / 2, top: topv, width: vw, height: vh, maxWidth: "none", filter: "sepia(0.3) saturate(1.15)" }} />;
+    pic = <OffthreadVideo src={src} muted startFrom={sec(p.clipStartSec ?? 0, fps)} style={{ position: "absolute", left: (w - vw) / 2, top: topv, width: vw, height: vh, maxWidth: "none", filter: "sepia(0.3) saturate(1.15)" }} />;
   } else {
     const c = p.crop ?? ([0, 0, p.size[0], p.size[1]] as const);
     const { s, ox, oy } = cropToBox(c, w, h, "cover");

@@ -27,11 +27,12 @@ export type ReportedColourProps = {
   tag?: DatelineTagProps;
   caption: string; // e.g. "STOCKINGS OF THE PERIOD · RIJKSMUSEUM"
   printScreen?: number; // TEX-006 strength (<= 0.15)
+  printScreenUntilSec?: number; // it fades out here (keeps TEX-006 inside its beat limit)
   startSec?: number;
 };
 
-export const ReportedColour: React.FC<ReportedColourProps> = ({ srcId, file, mask, size, crop, states, people = [], labels = [], tag, caption, printScreen, startSec = 0 }) => {
-  useAssets(["VIS-035", "MOT-001", ...(states.some((s) => s.snap) ? ["MOT-011"] : [])]);
+export const ReportedColour: React.FC<ReportedColourProps> = ({ srcId, file, mask, size, crop, states, people = [], labels = [], tag, caption, printScreen, printScreenUntilSec, startSec = 0 }) => {
+  useAssets(["VIS-035", "MOT-001", ...(states.some((s) => s.snap) ? ["MOT-011"] : []), ...(printScreen ? ["TEX-006"] : [])]);
   const t = useTheme();
   const img = useSourceFile(srcId, file);
   const msk = useSourceFile(srcId, mask);
@@ -59,7 +60,9 @@ export const ReportedColour: React.FC<ReportedColourProps> = ({ srcId, file, mas
         <div style={{ ...box, background: color, mixBlendMode: "multiply", WebkitMaskImage: `url(${msk})`, maskImage: `url(${msk})`, WebkitMaskSize: "100% 100%", maskSize: "100% 100%" }} />
         <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.32) 100%)" }} />
       </AbsoluteFill>
-      {printScreen ? <PrintScreenOverlay strength={printScreen} /> : null}
+      {printScreen && (printScreenUntilSec === undefined || now < printScreenUntilSec + 0.7) ? (
+        <PrintScreenOverlay strength={printScreen} fade={printScreenUntilSec === undefined ? 1 : 1 - reveal(frame, fps, printScreenUntilSec, 0.6)} />
+      ) : null}
       {people.map((p) => (
         <PersonChip key={`${p.name}${p.atSec}`} p={p} />
       ))}

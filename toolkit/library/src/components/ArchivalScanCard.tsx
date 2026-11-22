@@ -19,6 +19,8 @@ export type ArchivalScanCardProps = {
   // VIS-029 ContrastCallout (studied Chris Moran's short "How to guide your viewer's eye using contrast";
   // analysis only): from atSec the rest of the page dims and only the highlighted lines stay bright.
   callout?: { atSec: number; dim?: number };
+  quoteMarks?: boolean; // false for a book title (not a quote)
+  notes?: { text: string; atSec: number; untilSec?: number; accent?: boolean }[]; // mono notes under the source tag, on their words
   startSec?: number;
 };
 
@@ -31,6 +33,8 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   source,
   side = "left",
   callout,
+  quoteMarks = true,
+  notes = [],
   startSec = 0,
 }) => {
   useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : [])]);
@@ -142,7 +146,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
             ...rise(pQuote),
           }}
         >
-          “{quote}”
+          {quoteMarks ? `“${quote}”` : quote}
         </div>
         <div style={{ height: 4, width: 260 * pLine, background: t.colors.accent, marginTop: 34, borderRadius: 2 }} />
         <div
@@ -161,6 +165,16 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
         >
           {source}
         </div>
+        {notes.map((n) => {
+          const pn = reveal(frame, fps, n.atSec, t.motion.enterSec);
+          const on = n.untilSec !== undefined ? 1 - reveal(frame, fps, n.untilSec, 0.6) : 1;
+          if (pn * on <= 0) return null;
+          return (
+            <div key={`${n.text}${n.atSec}`} style={{ marginTop: 22, fontFamily: t.fonts.mono, fontSize: 30, letterSpacing: 3, color: n.accent ? t.colors.accent : t.colors.ink, ...rise(pn * on, 14) }}>
+              {n.text}
+            </div>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );
