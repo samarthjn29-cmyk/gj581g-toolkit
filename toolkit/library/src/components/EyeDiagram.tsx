@@ -5,6 +5,7 @@ import { useAssets } from "../registry";
 import { drift, lock, reveal, sec, SLOW_OUT } from "../motion";
 import { Label, type LabelSpec } from "../layers/Label";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { particles, type RaySpec } from "../layers/RayParticles";
 
 // VIS-019 EyeDiagram (beat type 4: lines about the eye itself, calm).
 // Two modes, drawn in the theme's ink:
@@ -17,6 +18,7 @@ export type EyeDiagramProps = {
   tints?: { part: "vitreous" | "lens"; color: string; atSec: number; opacity?: number }[];
   parts?: { part: "cornea" | "lens" | "vitreous" | "retina"; text: string; atSec: number }[];
   beat?: { atSec: number; drawSec?: number; color?: string };
+  rays?: RaySpec & { color?: string }; // section mode: VIS-021 dots of light travelling in through the front to the back
   question?: { atSec: number; dimAtSec?: number };
   labels?: LabelSpec[];
   tag?: DatelineTagProps;
@@ -29,12 +31,13 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
   tints = [],
   parts = [],
   beat,
+  rays,
   question,
   labels = [],
   tag,
   startSec = 0,
 }) => {
-  useAssets(["VIS-019", "MOT-001", "MOT-002"]);
+  useAssets(["VIS-019", "MOT-001", "MOT-002", ...(rays ? ["VIS-021"] : [])]);
   const t = useTheme();
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const frame = useCurrentFrame();
@@ -137,6 +140,11 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
             opacity={0.85}
           />
         ) : null}
+        {rays
+          ? particles(rays, x1 - x0, frame / fps).map((q) => (
+              <circle key={q.k} cx={x0 + (x1 - x0) * q.u} cy={cy + q.side} r={rays.size ?? 6} fill={q.color ?? rays.color ?? ink} opacity={q.alpha} />
+            ))
+          : null}
         {question ? (
           <text
             x={cx + R - 90}

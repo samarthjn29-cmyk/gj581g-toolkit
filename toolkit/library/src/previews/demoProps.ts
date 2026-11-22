@@ -172,4 +172,32 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
       backdrop: { srcId: "SRC-004", imgSize: [996, 1230], crop: [110, 60, 790, 1010], layout: "card-right" },
     },
   },
+  "PerspectiveGrid-Rays": {
+    name: "PerspectiveGrid",
+    props: {
+      variant: "room",
+      depth: 2000,
+      dark: 0.7,
+      fog: 0.45,
+      dolly: 0.02,
+      objects: [
+        { kind: "hole", at: [-1300, -150, 600], r: 22, atSec: 0.2 },
+        { kind: "beam", from: [-1300, -150, 600], to: [-520, 60, 900], width: 10, atSec: 0.4, drawSec: 0.8 },
+        { kind: "rays", from: [-1300, -150, 600], to: [-520, 60, 900], speed: 520, count: 14, atSec: 0.6, size: 5, jitter: 6 },
+        { kind: "prism", at: [-520, 60, 900], size: 170, atSec: 1.0 },
+        { kind: "rays", from: [-520, 60, 900], to: [300, -120, 2000], speed: 700, count: 10, atSec: 1.6, size: 5, colors: ["#FF4A3D"] },
+        { kind: "rays", from: [-520, 60, 900], to: [700, -60, 2000], speed: 700, count: 10, atSec: 1.7, size: 5, colors: ["#3DFF7A"] },
+        { kind: "rays", from: [-520, 60, 900], to: [1100, 0, 2000], speed: 700, count: 10, atSec: 1.8, size: 5, colors: ["#4A7BFF"] },
+        { kind: "label", at: [-1300, -150, 600], text: "PREVIEW · RAYS", atSec: 0.8 },
+      ],
+    },
+  },
+  "EyeDiagram-Rays": {
+    name: "EyeDiagram",
+    props: {
+      mode: "section",
+      parts: [{ part: "retina", text: "BACK OF THE EYE", atSec: 0.4 }],
+      rays: { speed: 360, count: 12, atSec: 0.5, size: 6, jitter: 18, colors: ["#FF4A3D", "#3DFF7A", "#4A7BFF"] },
+    },
+  },
 };
