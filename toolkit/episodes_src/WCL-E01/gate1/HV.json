@@ -477,7 +477,7 @@
  ],
  [
   "He'll want it tested so much that he'll ask for his own",
-  "VIS-022",
+  "VIS-032",
   "TXT-009, TXT-010",
   "MOT-002",
   "TRN-001",
@@ -487,14 +487,31 @@
   "",
   "",
   "",
+  "SRC-004",
   "",
-  "",
-  "Yes: new VIS-022 (Sam, 22 Nov)",
-  "Calm. Line-drawn eye, whole (EyeDissection); words on their words: TESTED · HIS OWN EYES."
+  "Yes: new VIS-032 LensDive",
+  "Calm. VIS-032 LensDive (Sam, 22 Nov: the eye shot was boring; his magnifying-glass idea, refined by the independent reviewer): Dalton's real 1834 portrait; 'Tested' on 'tested'; brackets lock on his own spectacle lens on 'his own eyes'."
  ],
  [
   "eyes to be examined after he dies.",
-  "VIS-022",
+  "VIS-032",
+  "TXT-009, TXT-010",
+  "MOT-002",
+  "TRN-001",
+  "LOK-009, LOK-010",
+  "SFX-001",
+  "MUS-007",
+  "",
+  "",
+  "",
+  "SRC-004",
+  "",
+  "",
+  "Calm. 'EXAMINED AFTER HE DIES · 1844' on 'examined'; in the silence after 'dies.' the camera pushes through his lens (the act's one flashy moment, soft whoosh SFX-001): inside, his guess shown: a blue-tinted fluid over a red and a sky-blue scrap (red goes dark); chip HIS GUESS · 1794 · A BLUE-TINTED FLUID."
+ ],
+ [
+  "His idea will fail the test.",
+  "VIS-032",
   "TXT-009, TXT-010",
   "MOT-002",
   "TRN-001",
@@ -504,27 +521,10 @@
   "",
   "",
   "",
+  "SRC-004",
   "",
   "",
-  "",
-  "Calm. The cut line traces round the eye on 'examined'; mono line EXAMINED AFTER HE DIES."
- ],
- [
-  "His idea will fail the test.",
-  "VIS-022",
-  "TXT-009, TXT-011",
-  "MOT-002",
-  "TRN-001",
-  "LOK-009, LOK-010",
-  "",
-  "MUS-007",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "Calm. Words clear; HIS IDEA WILL FAIL THE TEST. on 'idea'; dateline tag THE TEST · 1844."
+  "Calm. 'His idea will fail the test.' on 'idea'; on 'fail' the blue drains, red is red; chip 1844 · THE FLUID: CLEAR (Ransome, Henry 1854 p.202: \"perfectly colourless\"); the circle shrinks into the counter's 0."
  ],
  [
   "And the real answer will wait, in what was left of his eyes,",
@@ -613,7 +613,7 @@
  ],
  [
   "And we'll open Dalton's eyes as he asked.",
-  "VIS-022",
+  "VIS-032",
   "TXT-009, TXT-010",
   "MOT-002",
   "TRN-001",
@@ -623,10 +623,10 @@
   "",
   "",
   "",
+  "SRC-004",
   "",
   "",
-  "",
-  "Calm. The same cut eye: the front lifts away on 'open', showing the inside; words OPEN DALTON'S EYES · AS HE ASKED (the mono line 0.5 s after, so both can be read)."
+  "Calm. VIS-032 pay-off: the same lens of his, bracketed from the cut; on 'open' the ring opens out to fill the frame (clear, red is red) into the title card; OPEN DALTON'S EYES · AS HE ASKED."
  ],
  [
   "",

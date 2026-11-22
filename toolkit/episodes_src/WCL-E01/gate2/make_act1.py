@@ -30,6 +30,7 @@ def ids(beats):
     return out
 
 SKY, RED, PINK = "#86B5E8", "#C8402F", "#E79AB9"  # what each person reported (data, not theme colours)
+BLUE_HUMOUR = "#3D6BD6"  # Dalton's 1794 guess: a blue-tinted humour (data)
 P29 = ([1920, 2813], [380, 1220, 1100, 1050])
 P30 = ([1920, 2934], [500, 400, 1080, 1030])
 GER = [1920, 1280]
@@ -159,16 +160,25 @@ shot(B(27, 28), "DuotoneCollage", lambda r: {
         {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
     "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about", 67))}]}})
-# 29-31 (Sam, 22 Nov 2026: "an eye which has been cut", the words on screen): the whole eye as a line drawing;
-# the cut line traces round it on "examined"; the words beside it; THE TEST · 1844.
-shot(B(29, 30, 31), "EyeDissection", lambda r: {
-    "cutAtSec": r(word("examined")),
-    # The first group leaves in the pause after "dies." so the next line arrives alone, in the same place.
-    "words": [{"text": "Tested", "atSec": r(word("tested")), "untilSec": r(word("dies", end=True) + 0.7)},
-              {"text": "His own eyes", "atSec": r(word("own", 74)), "untilSec": r(word("dies", end=True) + 0.7)},
-              {"text": "EXAMINED AFTER HE DIES", "atSec": r(word("examined")), "style": "mono", "untilSec": r(word("dies", end=True) + 0.7)},
-              {"text": "His idea will fail the test.", "atSec": r(word("idea")), "group": 1}],
-    "tag": {"at": "corner", "parts": [{"text": "THE TEST · 1844", "atSec": r(word("his", 78))}]}})
+# 29-31 (Sam, 22 Nov 2026: "This particular eye frame ... feel very boring"; his idea, a magnifying glass into
+# the eyes, refined with the independent reviewer): VIS-032 LensDive. Dalton's real 1834 portrait; brackets
+# lock onto his own spectacle lens on "his own eyes"; in the silence after "dies." the camera pushes through the
+# lens (the act's one designed flashy moment); inside, his 1794 guess is SHOWN (a blue-tinted fluid in front of
+# a red and a sky-blue scrap: the red goes dark); on "fail" the blue drains and red is red; the circle then
+# shrinks into the "0" of the counter.
+LENS = {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [24, 180, 700, 394], "lens": {"x": 420, "y": 377, "r": 33}}
+SCRAPS = [{"color": RED, "x": -105, "y": 0, "w": 190, "h": 250, "rot": -4}, {"color": SKY, "x": 105, "y": 6, "w": 190, "h": 250, "rot": 3}]
+shot(B(29, 30, 31), "LensDive", lambda r: {**LENS,
+    "bracketsAtSec": r(word("own", 74)),
+    "push": {"atSec": r(word("dies", 75, end=True)) + 0.05, "sec": 1.1, "to": [1250, 500], "r": 330},
+    "inside": {"scraps": SCRAPS, "tint": {"color": BLUE_HUMOUR, "opacity": 0.75}, "clearAtSec": r(word("fail", 79))},
+    "out": {"atSec": r(BEAT["E01-A1-31"][1]) - 0.55, "sec": 0.5, "to": [830, 525], "r": 70},
+    "lines": [{"text": "Tested", "atSec": r(word("tested", 72)), "untilSec": r(word("dies", 75, end=True)), "row": 0},
+              {"text": "His own eyes", "atSec": r(word("own", 74)), "untilSec": r(word("dies", 75, end=True)), "row": 1},
+              {"text": "EXAMINED AFTER HE DIES · 1844", "atSec": r(word("examined", 75)), "untilSec": r(word("dies", 75, end=True)), "row": 2, "style": "mono"},
+              {"text": "His idea will fail the test.", "atSec": r(word("idea", 78)), "row": 0}],
+    "labels": [{"text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID", "atSec": r(word("dies", 75, end=True)) + 1.0, "untilSec": r(word("fail", 79))},
+               {"text": "1844 · THE FLUID: CLEAR", "atSec": r(word("fail", 79)) + 0.6}]})
 # 32-33 the counter: 0 -> 151 YEARS, locks on "years".
 shot(B(32, 33), "YearCounter", lambda r: {
     "to": 151, "unit": "YEARS", "countFromSec": r(word("wait")), "lockSec": r(word("years", 85))})
@@ -185,11 +195,14 @@ shot(B(35, 36), "PerspectiveGrid", lambda r: {
         {"kind": "beam", "from": [-1050, -150, 600], "to": [-300, 120, 1400], "width": 14,
          "atSec": r(word("shutter")), "drawSec": 0.7}],
     "tag": {"at": "corner", "parts": [{"text": "ISAAC NEWTON", "atSec": r(word("newton"))}]}})
-# 37 the same cut eye: the front lifts away on "open".
-shot(B(37), "EyeDissection", lambda r: {
-    "cutAtSec": -2, "openAtSec": r(word("open")),
-    "words": [{"text": "Open Dalton's eyes", "atSec": r(word("open"))},
-              {"text": "AS HE ASKED", "atSec": r(word("open")) + 0.5, "style": "mono"}]})
+# 37 the pay-off (VIS-032): the same lens of his, locked from the cut; on "open" the ring opens out to fill
+# the frame (clear, red is red), into the title card.
+shot(B(37), "LensDive", lambda r: {**LENS,
+    "bracketsAtSec": -1,
+    "inside": {"scraps": SCRAPS},
+    "open": {"atSec": r(word("open", 95)), "sec": 1.4},
+    "lines": [{"text": "Open Dalton's eyes", "atSec": r(word("open", 95)), "row": 0},
+              {"text": "AS HE ASKED", "atSec": r(word("open", 95)) + 0.5, "row": 1, "style": "mono"}]})
 # 38-39 the title cards; the season sting (MUS-006) plays under the first.
 shot(B(38), "SeriesTitleCard", {})
 shot(B(39), "EpisodeCard", {"number": 1, "title": "The Man Who Saw Pink"})
@@ -198,6 +211,7 @@ audio = [
     {"id": "SFX-013", "atSec": 0.0, "volumeDb": 2},
     {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
     {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
+    {"id": "SFX-001", "atSec": round(word("dies", 75, end=True) + 0.05, 2), "volumeDb": -15},  # the push into his lens
     {"id": "SFX-005", "atSec": 86.85, "volumeDb": -18},
     {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -16},  # count lock tick (own)
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},

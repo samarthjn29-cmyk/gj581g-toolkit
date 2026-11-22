@@ -26,6 +26,11 @@
    "volumeDb": -12
   },
   {
+   "id": "SFX-001",
+   "atSec": 77.15,
+   "volumeDb": -15
+  },
+  {
    "id": "SFX-005",
    "atSec": 86.85,
    "volumeDb": -18
@@ -985,9 +990,9 @@
    ],
    "start": 72.2,
    "end": 81.4,
-   "component": "EyeDissection",
+   "component": "LensDive",
    "assets": [
-    "VIS-022",
+    "VIS-032",
     "TXT-009",
     "TXT-010",
     "MOT-002",
@@ -995,42 +1000,107 @@
     "LOK-009",
     "LOK-010",
     "MUS-007",
-    "TXT-011"
+    "SRC-004",
+    "SFX-001"
    ],
    "props": {
-    "cutAtSec": 3.62,
-    "words": [
+    "srcId": "SRC-004",
+    "imgSize": [
+     996,
+     1230
+    ],
+    "crop": [
+     24,
+     180,
+     700,
+     394
+    ],
+    "lens": {
+     "x": 420,
+     "y": 377,
+     "r": 33
+    },
+    "bracketsAtSec": 2.68,
+    "push": {
+     "atSec": 4.95,
+     "sec": 1.1,
+     "to": [
+      1250,
+      500
+     ],
+     "r": 330
+    },
+    "inside": {
+     "scraps": [
+      {
+       "color": "#C8402F",
+       "x": -105,
+       "y": 0,
+       "w": 190,
+       "h": 250,
+       "rot": -4
+      },
+      {
+       "color": "#86B5E8",
+       "x": 105,
+       "y": 6,
+       "w": 190,
+       "h": 250,
+       "rot": 3
+      }
+     ],
+     "tint": {
+      "color": "#3D6BD6",
+      "opacity": 0.75
+     },
+     "clearAtSec": 7.51
+    },
+    "out": {
+     "atSec": 8.649999999999999,
+     "sec": 0.5,
+     "to": [
+      830,
+      525
+     ],
+     "r": 70
+    },
+    "lines": [
      {
       "text": "Tested",
       "atSec": 0.72,
-      "untilSec": 5.6
+      "untilSec": 4.9,
+      "row": 0
      },
      {
       "text": "His own eyes",
       "atSec": 2.68,
-      "untilSec": 5.6
+      "untilSec": 4.9,
+      "row": 1
      },
      {
-      "text": "EXAMINED AFTER HE DIES",
+      "text": "EXAMINED AFTER HE DIES · 1844",
       "atSec": 3.62,
-      "style": "mono",
-      "untilSec": 5.6
+      "untilSec": 4.9,
+      "row": 2,
+      "style": "mono"
      },
      {
       "text": "His idea will fail the test.",
       "atSec": 6.73,
-      "group": 1
+      "row": 0
      }
     ],
-    "tag": {
-     "at": "corner",
-     "parts": [
-      {
-       "text": "THE TEST · 1844",
-       "atSec": 6.57
-      }
-     ]
-    }
+    "labels": [
+     {
+      "text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID",
+      "atSec": 5.9,
+      "untilSec": 7.51
+     },
+     {
+      "text": "1844 · THE FLUID: CLEAR",
+      "atSec": 8.11
+     }
+    ]
    },
    "beatTimes": [
     [
@@ -1237,28 +1307,70 @@
    ],
    "start": 95.3,
    "end": 98.6,
-   "component": "EyeDissection",
+   "component": "LensDive",
    "assets": [
-    "VIS-022",
+    "VIS-032",
     "TXT-009",
     "TXT-010",
     "MOT-002",
     "TRN-001",
     "LOK-009",
     "LOK-010",
-    "MUS-007"
+    "MUS-007",
+    "SRC-004"
    ],
    "props": {
-    "cutAtSec": -2,
-    "openAtSec": 0.58,
-    "words": [
+    "srcId": "SRC-004",
+    "imgSize": [
+     996,
+     1230
+    ],
+    "crop": [
+     24,
+     180,
+     700,
+     394
+    ],
+    "lens": {
+     "x": 420,
+     "y": 377,
+     "r": 33
+    },
+    "bracketsAtSec": -1,
+    "inside": {
+     "scraps": [
+      {
+       "color": "#C8402F",
+       "x": -105,
+       "y": 0,
+       "w": 190,
+       "h": 250,
+       "rot": -4
+      },
+      {
+       "color": "#86B5E8",
+       "x": 105,
+       "y": 6,
+       "w": 190,
+       "h": 250,
+       "rot": 3
+      }
+     ]
+    },
+    "open": {
+     "atSec": 0.58,
+     "sec": 1.4
+    },
+    "lines": [
      {
       "text": "Open Dalton's eyes",
-      "atSec": 0.58
+      "atSec": 0.58,
+      "row": 0
      },
      {
       "text": "AS HE ASKED",
       "atSec": 1.08,
+      "row": 1,
       "style": "mono"
      }
     ]
