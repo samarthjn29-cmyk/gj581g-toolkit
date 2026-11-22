@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T16:46:58.869Z",
+ "generated": "2026-11-22T16:50:45.302Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1470,9 +1470,9 @@
    "maxBeats": 10,
    "maxShare": null
   },
-  "SRC-030": {
-   "id": "SRC-030",
-   "folder": "11_Sources",
+  "NAR-001": {
+   "id": "NAR-001",
+   "folder": "12_Narration",
    "name": "WCL-E01_Act1_Narration",
    "paths": [
     "public/episodes/wcl-e01/01_flower_paced_148wpm.wav"
@@ -2323,9 +2323,9 @@
    "maxBeats": 4,
    "maxShare": null
   },
-  "SRC-032": {
-   "id": "SRC-032",
-   "folder": "11_Sources",
+  "NAR-002": {
+   "id": "NAR-002",
+   "folder": "12_Narration",
    "name": "WCL-E01_Act2_Narration",
    "paths": [
     "public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav"

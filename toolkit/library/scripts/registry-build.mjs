@@ -47,7 +47,7 @@ for (const r of rows.slice(1)) {
     use: K >= 0 ? (r[K] ?? "").trim() : "",
     ...limits(K >= 0 ? r[K] ?? "" : ""),
   };
-  if (status === "Active" && K >= 0 && !(r[K] ?? "").trim() && !id.startsWith("SRC-")) noLimit.push(id);
+  if (status === "Active" && K >= 0 && !(r[K] ?? "").trim() && !id.startsWith("SRC-") && !id.startsWith("NAR-")) noLimit.push(id);
   if (status === "Active" && W >= 0 && !(r[W] ?? "").trim() && !CODE_ONLY.test(id)) noCopy.push(id);
 }
 if (problems.length) {

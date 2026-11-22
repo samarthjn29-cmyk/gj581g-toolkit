@@ -1,12 +1,12 @@
 """WCL-E01 act 2 act file (src/episodes/ep01-act02.json) from the approved Gate 1 beat sheet (Sam, 22 Nov 2026 21:18:
 "Act2 gate 1 approved"). Shots join beat-sheet beats whose picture carries on; every cue is a word time from Sam's
-final take (02_brothers_paced_149wpm_even, SRC-032) plus the 2.4 s chapter slate. Writes into the library."""
+final take (02_brothers_paced_149wpm_even, NAR-002) plus the 2.4 s chapter slate. Writes into the library."""
 import json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 G1 = os.path.join(HERE, "..", "gate1_act2")
 LIB = os.path.join(HERE, "..", "..", "..", "library")
 LEAD = 2.4
-VOICE_SEC = 172.533  # ffprobe of public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav (SRC-032)
+VOICE_SEC = 172.533  # ffprobe of public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav (NAR-002)
 W = [(t.strip(".,;?!\"'").lower(), a + LEAD, b + LEAD) for t, a, b in json.load(open(os.path.join(G1, "02_brothers_final_words.json")))]
 dump = json.load(open(os.path.join(G1, "beatsheet_dump.json")))
 vals = dump["values"] if isinstance(dump, dict) else dump
@@ -262,7 +262,7 @@ audio = [
 ]
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
-       "voice": {"id": "SRC-032", "atSec": LEAD, "tailSec": round(BEAT["E01-A2-68"][1] - LEAD - VOICE_SEC, 2)},
+       "voice": {"id": "NAR-002", "atSec": LEAD, "tailSec": round(BEAT["E01-A2-68"][1] - LEAD - VOICE_SEC, 2)},
        "audio": audio, "beats": shots}
 json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act02.json"), "w"), indent=1, ensure_ascii=False)
 json.dump({"break": BREAK, "sweeps": SWEEPS, "dips": DIPS}, open(os.path.join(LIB, "src", "episodes", "ep01-act02.music.json"), "w"))

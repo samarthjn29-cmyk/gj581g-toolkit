@@ -227,7 +227,7 @@ audio = [
     {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick: option B 'pad' (v14, 22 Nov 2026; was C 'prism')
 ]
 # The sound pass (22 Nov 2026; Sam: "Demo sound should go in act 1"; rules from the study of Chris Moran's "The VOX
-# Sound Design System", scripts/sound-pass.py). Levels are dB against the voice (SRC-030 at -19.6 LUFS, kit files at
+# Sound Design System", scripts/sound-pass.py). Levels are dB against the voice (NAR-001 at -19.6 LUFS, kit files at
 # their own measured LUFS): hero sounds ~15 dB under, textures 22-24 dB under, the projector hum 28 dB under. Times
 # are tied to the shots' starts and props, so a re-timed act keeps them on their moves.
 K = "public/sfx/kit/"
@@ -263,7 +263,7 @@ audio += [
 ]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
-       "voice": {"id": "SRC-030", "atSec": LEAD},
+       "voice": {"id": "NAR-001", "atSec": LEAD},
        "audio": audio, "beats": shots}
 json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act01.json"), "w"), indent=1, ensure_ascii=False)
 # The mix's music moves, for scripts/mix-act-bed.py (printed so the render command uses the same times).

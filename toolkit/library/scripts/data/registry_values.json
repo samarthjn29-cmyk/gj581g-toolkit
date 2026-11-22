@@ -23,7 +23,9 @@
 "",
 "",
 "",
-"Drive_Copy"
+"Drive_Copy",
+"Kind (1_Visuals)",
+"12_Narration_IDs"
 ],
 [
 "VIS-001",
@@ -48,7 +50,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1o0dJrEUYCfYCka4-uiHlbXtxd32BZJ_z/view"
+"https://drive.google.com/file/d/1o0dJrEUYCfYCka4-uiHlbXtxd32BZJ_z/view",
+"Document",
+""
 ],
 [
 "VIS-002",
@@ -73,7 +77,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ZtEk5pz4b6sd-Yd4V9ubKK1lOIViu5Fo/view"
+"https://drive.google.com/file/d/1ZtEk5pz4b6sd-Yd4V9ubKK1lOIViu5Fo/view",
+"Chart & Count",
+""
 ],
 [
 "VIS-003",
@@ -98,7 +104,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1YawAxMy1XXwQMudfVOCS5N90tA1JPLGv/view"
+"https://drive.google.com/file/d/1YawAxMy1XXwQMudfVOCS5N90tA1JPLGv/view",
+"Document",
+""
 ],
 [
 "VIS-004",
@@ -123,7 +131,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1pXDFNscKpwIxwu2uBLJHmCn9nSaL5L6b/view"
+"https://drive.google.com/file/d/1pXDFNscKpwIxwu2uBLJHmCn9nSaL5L6b/view",
+"Collage & Cutout",
+""
 ],
 [
 "VIS-005",
@@ -148,7 +158,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1asvG21zdIdsollQCdZkOZGgJMdYQOHcg/view"
+"https://drive.google.com/file/d/1asvG21zdIdsollQCdZkOZGgJMdYQOHcg/view",
+"Photo",
+""
 ],
 [
 "VIS-006",
@@ -173,7 +185,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/14yYFIUQ10g_DIzPCRx5JKUA5Ti76Zjsg/view"
+"https://drive.google.com/file/d/14yYFIUQ10g_DIzPCRx5JKUA5Ti76Zjsg/view",
+"Screen & UI",
+""
 ],
 [
 "VIS-007",
@@ -198,7 +212,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/12KIcYniHxXo3vvtwZqbOPzYS4dZ28P3K/view"
+"https://drive.google.com/file/d/12KIcYniHxXo3vvtwZqbOPzYS4dZ28P3K/view",
+"Text Card",
+""
 ],
 [
 "VIS-008",
@@ -223,7 +239,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1aqFFbpGLcAX_xBPBJ_FFStHeYDvDstZ2/view"
+"https://drive.google.com/file/d/1aqFFbpGLcAX_xBPBJ_FFStHeYDvDstZ2/view",
+"Photo",
+""
 ],
 [
 "VIS-009",
@@ -248,6 +266,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -273,6 +293,8 @@
 "",
 "",
 "",
+"",
+"Screen & UI",
 ""
 ],
 [
@@ -298,7 +320,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1p6149fs_FBxaTKOCWDvJ37qc9yGCslRx/view"
+"https://drive.google.com/file/d/1p6149fs_FBxaTKOCWDvJ37qc9yGCslRx/view",
+"",
+""
 ],
 [
 "TXT-002",
@@ -323,7 +347,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1kIUNjKn69MQGkd26uyZuxxvQ5u-nsz1W/view\nhttps://drive.google.com/file/d/11ser-AnQC_k4WE2qaToNeyhycZx5URGB/view"
+"https://drive.google.com/file/d/1kIUNjKn69MQGkd26uyZuxxvQ5u-nsz1W/view\nhttps://drive.google.com/file/d/11ser-AnQC_k4WE2qaToNeyhycZx5URGB/view",
+"",
+""
 ],
 [
 "TXT-003",
@@ -348,7 +374,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1mn44kaxp2L8NJH3FkEeSn0wF7MXvub_Q/view"
+"https://drive.google.com/file/d/1mn44kaxp2L8NJH3FkEeSn0wF7MXvub_Q/view",
+"",
+""
 ],
 [
 "TXT-004",
@@ -373,7 +401,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1CKtywm-CWpO-f63qKE7DTMuGeLSKzDD6/view"
+"https://drive.google.com/file/d/1CKtywm-CWpO-f63qKE7DTMuGeLSKzDD6/view",
+"",
+""
 ],
 [
 "TXT-005",
@@ -383,6 +413,8 @@
 "src/components/CutoutCollageTitle.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -423,6 +455,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -433,6 +467,8 @@
 "src/components/ArchivalDateStamp.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -473,6 +509,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -498,7 +536,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view"
+"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view",
+"",
+""
 ],
 [
 "MOT-002",
@@ -523,7 +563,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view"
+"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view",
+"",
+""
 ],
 [
 "MOT-003",
@@ -548,7 +590,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view"
+"https://drive.google.com/file/d/1DvPLsEyt2nQymcwMx7iLyDCcofSMtwul/view",
+"",
+""
 ],
 [
 "MOT-004",
@@ -573,7 +617,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1KYg8a1xHsMk78dPE2lTApjOQ716Qgt6M/view"
+"https://drive.google.com/file/d/1KYg8a1xHsMk78dPE2lTApjOQ716Qgt6M/view",
+"",
+""
 ],
 [
 "MOT-005",
@@ -598,7 +644,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1U-p2hDTfOSyc5nS03Xcob_HgvkS-ZKuA/view"
+"https://drive.google.com/file/d/1U-p2hDTfOSyc5nS03Xcob_HgvkS-ZKuA/view",
+"",
+""
 ],
 [
 "MOT-006",
@@ -608,6 +656,8 @@
 "src/components/BlueprintCounterBar.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -648,6 +698,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -658,6 +710,8 @@
 "src/components/BoilingInkCallout.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -698,7 +752,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ZMd68YFxI-gOXjUuNIczMWrt1hmlnC-B/view"
+"https://drive.google.com/file/d/1ZMd68YFxI-gOXjUuNIczMWrt1hmlnC-B/view",
+"",
+""
 ],
 [
 "TRN-002",
@@ -708,6 +764,8 @@
 "src/components/ChapterSlate.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -748,6 +806,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -773,6 +833,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -783,6 +845,8 @@
 "src/components/InkBleedTransition.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -823,7 +887,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1NrNF1AfP-O0P-ReTbg_Ssi6IYPWs2dJz/view"
+"https://drive.google.com/file/d/1NrNF1AfP-O0P-ReTbg_Ssi6IYPWs2dJz/view",
+"",
+""
 ],
 [
 "LOK-002",
@@ -833,6 +899,8 @@
 "src/theme.ts#warmPaper",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -873,6 +941,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -883,6 +953,8 @@
 "src/components/CategorySwatchCard.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -923,6 +995,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -948,6 +1022,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -958,6 +1034,8 @@
 "public/textures/halftone-grit.png",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -998,6 +1076,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1023,7 +1103,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ehZOs3t7YylTrR6cVlNojXk_4WmoozUP/view"
+"https://drive.google.com/file/d/1ehZOs3t7YylTrR6cVlNojXk_4WmoozUP/view",
+"",
+""
 ],
 [
 "SFX-002",
@@ -1033,6 +1115,8 @@
 "public/sfx/camera-focus-tick.wav",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1073,7 +1157,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/14vZQSp3a5WCX47SdEb8-tCjDKZf9yMVW/view"
+"https://drive.google.com/file/d/14vZQSp3a5WCX47SdEb8-tCjDKZf9yMVW/view",
+"",
+""
 ],
 [
 "SFX-004",
@@ -1083,6 +1169,8 @@
 "public/sfx/chalk-underline.wav",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1123,7 +1211,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1V9VpkHr005p8l9LfoMcB9qB7xid7g3wa/view"
+"https://drive.google.com/file/d/1V9VpkHr005p8l9LfoMcB9qB7xid7g3wa/view",
+"",
+""
 ],
 [
 "SFX-006",
@@ -1148,7 +1238,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/11jFFTHdNN9ahiCt9MnkTg5cOHAErCB5k/view"
+"https://drive.google.com/file/d/11jFFTHdNN9ahiCt9MnkTg5cOHAErCB5k/view",
+"",
+""
 ],
 [
 "SFX-007",
@@ -1173,7 +1265,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1uRFtwHBk5q8B2xKtRZDW5p61Pm2WZxXo/view"
+"https://drive.google.com/file/d/1uRFtwHBk5q8B2xKtRZDW5p61Pm2WZxXo/view",
+"",
+""
 ],
 [
 "SFX-008",
@@ -1183,6 +1277,8 @@
 "src/audio/HookBedTemplate.ts",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1223,6 +1319,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1233,6 +1331,8 @@
 "src/audio/JCutTransitionEnvelope.ts",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1273,6 +1373,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1283,6 +1385,8 @@
 "src/components/SearchToArticleCard.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1323,6 +1427,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1333,6 +1439,8 @@
 "src/audio/DynamicMixBreak.ts",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1373,6 +1481,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1383,6 +1493,8 @@
 "src/audio/ReflectivePianoBed.ts",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1423,6 +1535,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1433,6 +1547,8 @@
 "src/components/AnalogScanlineOverlay.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1473,6 +1589,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1483,6 +1601,8 @@
 "src/components/ArchivalDeskFlatlay.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1523,6 +1643,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1533,6 +1655,8 @@
 "src/components/ReliefFlowMap.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1573,6 +1697,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1583,6 +1709,8 @@
 "src/components/GlobalReliefScaleMap.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1623,6 +1751,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1633,6 +1763,8 @@
 "src/components/InlineChapterStamp.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1673,6 +1805,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -1683,6 +1817,8 @@
 "src/components/SplitEndScreenLayout.tsx",
 "",
 "Planned",
+"",
+"",
 "",
 "",
 "",
@@ -1723,7 +1859,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1kSJqVNUUUqBCVIENW_cb2Q27vt9k0NBJ/view"
+"https://drive.google.com/file/d/1kSJqVNUUUqBCVIENW_cb2Q27vt9k0NBJ/view",
+"",
+""
 ],
 [
 "TXT-009",
@@ -1748,7 +1886,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1cxLfxcv7yAyMrbjOWsdkHfWmKF5y0dlb/view\nhttps://drive.google.com/file/d/1V2CPZstCwQBRKJbkbwHWf6Y5T5eVgOqd/view\nhttps://drive.google.com/file/d/1F3c8wT34MGbOT9Vy4ZOIbsYu8qHh12IN/view"
+"https://drive.google.com/file/d/1cxLfxcv7yAyMrbjOWsdkHfWmKF5y0dlb/view\nhttps://drive.google.com/file/d/1V2CPZstCwQBRKJbkbwHWf6Y5T5eVgOqd/view\nhttps://drive.google.com/file/d/1F3c8wT34MGbOT9Vy4ZOIbsYu8qHh12IN/view",
+"",
+""
 ],
 [
 "TXT-010",
@@ -1773,7 +1913,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1KMNOkpVF-3zp6PdUXz6MeIXckRhmNUoW/view"
+"https://drive.google.com/file/d/1KMNOkpVF-3zp6PdUXz6MeIXckRhmNUoW/view",
+"",
+""
 ],
 [
 "TRN-006",
@@ -1798,7 +1940,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1kSo1VWRZHNY6MbToGywHVb3D75RClitQ/view"
+"https://drive.google.com/file/d/1kSo1VWRZHNY6MbToGywHVb3D75RClitQ/view",
+"",
+""
 ],
 [
 "LOK-010",
@@ -1823,7 +1967,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1_jP3MoWeZXItqT1Opx8qiufL7oYvNOwu/view"
+"https://drive.google.com/file/d/1_jP3MoWeZXItqT1Opx8qiufL7oYvNOwu/view",
+"",
+""
 ],
 [
 "SRC-001",
@@ -1848,7 +1994,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1lUxShTPNfVocT7fP7SbdwzesjesNPX2L/view ; https://drive.google.com/file/d/1_C3rf570b2cRVKJG-gaHcJ-W4f3BOnra/view"
+"https://drive.google.com/file/d/1lUxShTPNfVocT7fP7SbdwzesjesNPX2L/view ; https://drive.google.com/file/d/1_C3rf570b2cRVKJG-gaHcJ-W4f3BOnra/view",
+"",
+""
 ],
 [
 "SRC-002",
@@ -1873,7 +2021,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/15f6xgHLuXK4KutFA05cooGQKNum4cc2R/view"
+"https://drive.google.com/file/d/15f6xgHLuXK4KutFA05cooGQKNum4cc2R/view",
+"",
+""
 ],
 [
 "SRC-003",
@@ -1898,7 +2048,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1eSuzoGofQTA28lWOKkcwe5wON1ZctuYX/view"
+"https://drive.google.com/file/d/1eSuzoGofQTA28lWOKkcwe5wON1ZctuYX/view",
+"",
+""
 ],
 [
 "SRC-004",
@@ -1923,7 +2075,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1qcZp1Xwpb2SGohsd6-yULz22a2ptZqoj/view ; https://drive.google.com/file/d/1CNr83BniTFkaslwui0CzHHw5D47n0HN9/view ; https://drive.google.com/file/d/11H5ObgNh83IThAGiK-6X-YevbcBVXEfL/view ; https://drive.google.com/file/d/1l-QOW8_nlk0g4BBAPYFRC_F0mfungU1B/view"
+"https://drive.google.com/file/d/1qcZp1Xwpb2SGohsd6-yULz22a2ptZqoj/view ; https://drive.google.com/file/d/1CNr83BniTFkaslwui0CzHHw5D47n0HN9/view ; https://drive.google.com/file/d/11H5ObgNh83IThAGiK-6X-YevbcBVXEfL/view ; https://drive.google.com/file/d/1l-QOW8_nlk0g4BBAPYFRC_F0mfungU1B/view",
+"",
+""
 ],
 [
 "SRC-005",
@@ -1948,7 +2102,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1fXSA0CiGdvhuBC7Hq22I_P66pSJTkBda/view"
+"https://drive.google.com/file/d/1fXSA0CiGdvhuBC7Hq22I_P66pSJTkBda/view",
+"",
+""
 ],
 [
 "SRC-006",
@@ -1973,7 +2129,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1DH0qf3yk416bTz31iH5QvErTeJiP-aCU/view"
+"https://drive.google.com/file/d/1DH0qf3yk416bTz31iH5QvErTeJiP-aCU/view",
+"",
+""
 ],
 [
 "SRC-007",
@@ -1998,7 +2156,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1kVXG-v_HrtVZ9iyjKceR40bvMC2nBWMI/view"
+"https://drive.google.com/file/d/1kVXG-v_HrtVZ9iyjKceR40bvMC2nBWMI/view",
+"",
+""
 ],
 [
 "VIS-011",
@@ -2023,7 +2183,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1MLcqvmrIcRacGrdzKR89ZOp1YZsE2n5A/view"
+"https://drive.google.com/file/d/1MLcqvmrIcRacGrdzKR89ZOp1YZsE2n5A/view",
+"Diagram",
+""
 ],
 [
 "VIS-012",
@@ -2048,7 +2210,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1iDVjZ0tGy70rDmPyGIvSn3_pwLz0CLcZ/view"
+"https://drive.google.com/file/d/1iDVjZ0tGy70rDmPyGIvSn3_pwLz0CLcZ/view",
+"Diagram",
+""
 ],
 [
 "VIS-013",
@@ -2073,7 +2237,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/15ZdtN005UAfjG2U8dY3gsA4hzlgh7Jjp/view"
+"https://drive.google.com/file/d/15ZdtN005UAfjG2U8dY3gsA4hzlgh7Jjp/view",
+"Chart & Count",
+""
 ],
 [
 "VIS-014",
@@ -2098,7 +2264,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1zKglgT11QT7Z-ZM-EO1lA7VSgSkHsjGw/view"
+"https://drive.google.com/file/d/1zKglgT11QT7Z-ZM-EO1lA7VSgSkHsjGw/view",
+"Diagram",
+""
 ],
 [
 "PKG-005",
@@ -2123,7 +2291,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1rC-Y53Pt9t2K4n4BPOUHdnQmCb82rftc/view"
+"https://drive.google.com/file/d/1rC-Y53Pt9t2K4n4BPOUHdnQmCb82rftc/view",
+"",
+""
 ],
 [
 "PKG-006",
@@ -2148,7 +2318,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Kl_BRh8K75WviD4MOGRYvGPQCxm_Bk_x/view"
+"https://drive.google.com/file/d/1Kl_BRh8K75WviD4MOGRYvGPQCxm_Bk_x/view",
+"",
+""
 ],
 [
 "MUS-005",
@@ -2162,6 +2334,8 @@
 "",
 "",
 "Best use: one bed family under narration for the season, chosen with Sam per episode. Limit: drops out under the biggest reveal of each act. Not for: the cold open's first line.",
+"",
+"",
 "",
 "",
 "",
@@ -2198,7 +2372,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1BxebGvV7_TuFD0O03-TW_QLOidAbxch_/view"
+"https://drive.google.com/file/d/1BxebGvV7_TuFD0O03-TW_QLOidAbxch_/view",
+"",
+""
 ],
 [
 "SRC-008",
@@ -2211,6 +2387,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2248,7 +2426,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1cZfYaQTYegzk4m43uuUtpcOVwrjrZHfx/view"
+"https://drive.google.com/file/d/1cZfYaQTYegzk4m43uuUtpcOVwrjrZHfx/view",
+"",
+""
 ],
 [
 "SRC-010",
@@ -2261,6 +2441,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2298,7 +2480,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/13EtTDpweEMFUKHzZkfwiKtYa3Md4gjKW/view ; https://drive.google.com/file/d/1B5npkTS3pbF0xvvSAELhWHmtPpv9ky2B/view"
+"https://drive.google.com/file/d/13EtTDpweEMFUKHzZkfwiKtYa3Md4gjKW/view ; https://drive.google.com/file/d/1B5npkTS3pbF0xvvSAELhWHmtPpv9ky2B/view",
+"",
+""
 ],
 [
 "SRC-012",
@@ -2311,6 +2495,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2348,7 +2534,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1UmtDlT8Z34GMbWcwGuoj3NODrCo8P7Nf/view"
+"https://drive.google.com/file/d/1UmtDlT8Z34GMbWcwGuoj3NODrCo8P7Nf/view",
+"",
+""
 ],
 [
 "SRC-014",
@@ -2373,7 +2561,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/19TMU496Iotd4jHSGnTGQY1CJ32HjdoeK/view"
+"https://drive.google.com/file/d/19TMU496Iotd4jHSGnTGQY1CJ32HjdoeK/view",
+"",
+""
 ],
 [
 "SRC-015",
@@ -2398,7 +2588,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1s4rMUePsA866p19XrFQXqGC7Fr-pTPXl/view"
+"https://drive.google.com/file/d/1s4rMUePsA866p19XrFQXqGC7Fr-pTPXl/view",
+"",
+""
 ],
 [
 "SRC-016",
@@ -2411,6 +2603,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2448,7 +2642,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1NCIpHKcl2Xy2Om0ViZpLlDNUEvvsP4_W/view"
+"https://drive.google.com/file/d/1NCIpHKcl2Xy2Om0ViZpLlDNUEvvsP4_W/view",
+"",
+""
 ],
 [
 "SRC-018",
@@ -2473,7 +2669,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1rCB7rQ5g70T7mBbA2-Ovjd5djjNRqWio/view"
+"https://drive.google.com/file/d/1rCB7rQ5g70T7mBbA2-Ovjd5djjNRqWio/view",
+"",
+""
 ],
 [
 "SRC-019",
@@ -2486,6 +2684,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2523,7 +2723,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1qm3RfCTQTfwbKXFvf4klqAevETs0qubk/view"
+"https://drive.google.com/file/d/1qm3RfCTQTfwbKXFvf4klqAevETs0qubk/view",
+"",
+""
 ],
 [
 "SRC-021",
@@ -2536,6 +2738,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2573,7 +2777,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1oNi3NL2kqMo7J9edsusDqIb4TyvWkde_/view"
+"https://drive.google.com/file/d/1oNi3NL2kqMo7J9edsusDqIb4TyvWkde_/view",
+"",
+""
 ],
 [
 "SRC-023",
@@ -2586,6 +2792,8 @@
 "",
 "",
 "2026-11-22",
+"",
+"",
 "",
 "",
 "",
@@ -2623,7 +2831,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1V1bEbuoIp99d0uaezBXvU-aq0q8EFyt9/view"
+"https://drive.google.com/file/d/1V1bEbuoIp99d0uaezBXvU-aq0q8EFyt9/view",
+"",
+""
 ],
 [
 "SRC-025",
@@ -2648,7 +2858,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Qk0cUVw3mbSYxT6FMbmZwxmOeaYEn0RZ/view"
+"https://drive.google.com/file/d/1Qk0cUVw3mbSYxT6FMbmZwxmOeaYEn0RZ/view",
+"",
+""
 ],
 [
 "SRC-026",
@@ -2673,7 +2885,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/12VnZA-3rk7ktrP715vN3KEw_Y125HL_U/view ; https://drive.google.com/file/d/1DHSpSk3_Rjdu9-FuI4U8-cog_xZDaF6m/view ; https://drive.google.com/file/d/1lhIwadXQVODHb0MQIcszyRIvfVRCaj2r/view ; https://drive.google.com/file/d/1mUr0xJZ5SL4cOCh7b1yqjzYVxYeyD_rq/view"
+"https://drive.google.com/file/d/12VnZA-3rk7ktrP715vN3KEw_Y125HL_U/view ; https://drive.google.com/file/d/1DHSpSk3_Rjdu9-FuI4U8-cog_xZDaF6m/view ; https://drive.google.com/file/d/1lhIwadXQVODHb0MQIcszyRIvfVRCaj2r/view ; https://drive.google.com/file/d/1mUr0xJZ5SL4cOCh7b1yqjzYVxYeyD_rq/view",
+"",
+""
 ],
 [
 "SRC-027",
@@ -2698,7 +2912,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1iHQjzrs2BRXG20szF-N-pvrmjtpYWnIm/view"
+"https://drive.google.com/file/d/1iHQjzrs2BRXG20szF-N-pvrmjtpYWnIm/view",
+"",
+""
 ],
 [
 "SRC-028",
@@ -2723,7 +2939,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1dc5_hKjcGoRBE5S1wvzpZ2IXYTwk4jFS/view"
+"https://drive.google.com/file/d/1dc5_hKjcGoRBE5S1wvzpZ2IXYTwk4jFS/view",
+"",
+""
 ],
 [
 "LOK-011",
@@ -2748,7 +2966,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Oe5Z1x62cssqqMJYI4ObXMlIQVCXVQYL/view"
+"https://drive.google.com/file/d/1Oe5Z1x62cssqqMJYI4ObXMlIQVCXVQYL/view",
+"",
+""
 ],
 [
 "LOK-012",
@@ -2773,7 +2993,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ILxyCR9R36AXI3fCWlGLtO2XWq4p1fLP/view"
+"https://drive.google.com/file/d/1ILxyCR9R36AXI3fCWlGLtO2XWq4p1fLP/view",
+"",
+""
 ],
 [
 "LOK-013",
@@ -2798,7 +3020,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/13711papqS-mtJ8W1g1Hyz38iInYCuADg/view"
+"https://drive.google.com/file/d/13711papqS-mtJ8W1g1Hyz38iInYCuADg/view",
+"",
+""
 ],
 [
 "VIS-015",
@@ -2823,7 +3047,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1r8cPZzorBOyv6ADM_HqTM6t0e24M1nXC/view"
+"https://drive.google.com/file/d/1r8cPZzorBOyv6ADM_HqTM6t0e24M1nXC/view",
+"Space & 3D",
+""
 ],
 [
 "VIS-016",
@@ -2848,7 +3074,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/14TL4OjldXzEc3Jw4-UW8AzWUZ1Z-dHbw/view"
+"https://drive.google.com/file/d/14TL4OjldXzEc3Jw4-UW8AzWUZ1Z-dHbw/view",
+"Photo",
+""
 ],
 [
 "VIS-017",
@@ -2873,7 +3101,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1U1xUhy3tQGPufYOFO1DLHUK_syK-YhKd/view"
+"https://drive.google.com/file/d/1U1xUhy3tQGPufYOFO1DLHUK_syK-YhKd/view",
+"Diagram",
+""
 ],
 [
 "VIS-018",
@@ -2898,7 +3128,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/134MQ20nKoQk-h32JmqR2ab_x_a3JB74S/view"
+"https://drive.google.com/file/d/134MQ20nKoQk-h32JmqR2ab_x_a3JB74S/view",
+"Chart & Count",
+""
 ],
 [
 "VIS-019",
@@ -2923,7 +3155,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Gc7zfLLavMOz-MqB4eD5tgPPmn3qJLgv/view"
+"https://drive.google.com/file/d/1Gc7zfLLavMOz-MqB4eD5tgPPmn3qJLgv/view",
+"Diagram",
+""
 ],
 [
 "VIS-020",
@@ -2948,7 +3182,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/13UTeWblneKthy8hqReqXSHIC5PL2III2/view"
+"https://drive.google.com/file/d/13UTeWblneKthy8hqReqXSHIC5PL2III2/view",
+"Text Card",
+""
 ],
 [
 "TXT-011",
@@ -2973,7 +3209,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1QWsRiaEV_I-877ctYFv_P1LraOxmmgT8/view"
+"https://drive.google.com/file/d/1QWsRiaEV_I-877ctYFv_P1LraOxmmgT8/view",
+"",
+""
 ],
 [
 "SFX-013",
@@ -2998,7 +3236,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1SGgSSNxlikfLI0EO_eypFQwjyIHGKG5h/view"
+"https://drive.google.com/file/d/1SGgSSNxlikfLI0EO_eypFQwjyIHGKG5h/view",
+"",
+""
 ],
 [
 "SFX-014",
@@ -3023,7 +3263,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1f6f9oDWolgpmmmG4Iss37FfFtF_ijEb_/view"
+"https://drive.google.com/file/d/1f6f9oDWolgpmmmG4Iss37FfFtF_ijEb_/view",
+"",
+""
 ],
 [
 "SRC-029",
@@ -3048,11 +3290,13 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1oJZV7rLAMiH7GjekrN-84IBc18PaY2dN/view"
+"https://drive.google.com/file/d/1oJZV7rLAMiH7GjekrN-84IBc18PaY2dN/view",
+"",
+""
 ],
 [
-"SRC-030",
-"11_Sources",
+"NAR-001",
+"12_Narration",
 "WCL-E01_Act1_Narration",
 "Own: Sam's ElevenLabs take (his Samarth voice), paced to 148 wpm with silence only; Sam picked it 22 Nov 2026",
 "public/episodes/wcl-e01/01_flower_paced_148wpm.wav",
@@ -3073,7 +3317,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1nc7_t-KivS9fKdYM7Quogx523hfSbghk/view"
+"https://drive.google.com/file/d/11VDbviJnriJtmz2R6v6Hi5ZVkmvoFy9P/view",
+"",
+""
 ],
 [
 "VIS-021",
@@ -3098,7 +3344,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1I5bedaMN5H5OLay4MFIt2m9NnUx6FdbZ/view"
+"https://drive.google.com/file/d/1I5bedaMN5H5OLay4MFIt2m9NnUx6FdbZ/view",
+"Diagram",
+""
 ],
 [
 "LOK-014",
@@ -3123,7 +3371,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/19fuNqpTASpDzQH87UPt1HmGYh4uZ59Xw/view"
+"https://drive.google.com/file/d/19fuNqpTASpDzQH87UPt1HmGYh4uZ59Xw/view",
+"",
+""
 ],
 [
 "VIS-022",
@@ -3148,7 +3398,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ecrsdcHE01zetZJ5nZLjRCZsTqS9xxMs/view"
+"https://drive.google.com/file/d/1ecrsdcHE01zetZJ5nZLjRCZsTqS9xxMs/view",
+"Diagram",
+""
 ],
 [
 "TRN-007",
@@ -3173,7 +3425,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1qAc5S-O0GgJQeEY-CfsZ43vh8BZespSO/view"
+"https://drive.google.com/file/d/1qAc5S-O0GgJQeEY-CfsZ43vh8BZespSO/view",
+"",
+""
 ],
 [
 "VIS-023",
@@ -3198,6 +3452,8 @@
 "",
 "",
 "",
+"",
+"Text Card",
 ""
 ],
 [
@@ -3223,7 +3479,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1mragDIUv5Re7nnPL5qFSDWwb6mMLBR02/view"
+"https://drive.google.com/file/d/1mragDIUv5Re7nnPL5qFSDWwb6mMLBR02/view",
+"Chart & Count",
+""
 ],
 [
 "VIS-025",
@@ -3248,6 +3506,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -3273,6 +3533,8 @@
 "",
 "",
 "",
+"",
+"Document",
 ""
 ],
 [
@@ -3298,6 +3560,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -3312,6 +3576,8 @@
 "",
 "2026-11-22",
 "Best use: the one word the viewer must keep in a beat. Limit: max 12 beats per episode; never two on screen; only in themes with a condensed face (e.g. LOK-013). Not for: full sentences.",
+"",
+"",
 "",
 "",
 "",
@@ -3348,6 +3614,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -3362,6 +3630,8 @@
 "",
 "2026-11-22",
 "Best use: an episode or season ending that gives the viewer rules to keep. Limit: once per episode, 3-5 items. Not for: recaps of facts.",
+"",
+"",
 "",
 "",
 "",
@@ -3398,6 +3668,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -3412,6 +3684,8 @@
 "",
 "2026-11-22",
 "Best use: candlelit scenes (Kendal 1792, the 1844 room). Limit: max 12 beats per episode; only where a flame is on screen or just off it. Not for: daylight or diagrams.",
+"",
+"",
 "",
 "",
 "",
@@ -3448,7 +3722,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/11fj1-0zGgEW-M562p6fSmn8-ocTnwWXJ/view"
+"https://drive.google.com/file/d/11fj1-0zGgEW-M562p6fSmn8-ocTnwWXJ/view",
+"",
+""
 ],
 [
 "TEX-005",
@@ -3473,7 +3749,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1uJZ4GgMCx-yBXGnReqg1etM7WWhJ9O0G/view"
+"https://drive.google.com/file/d/1uJZ4GgMCx-yBXGnReqg1etM7WWhJ9O0G/view",
+"",
+""
 ],
 [
 "MUS-007",
@@ -3498,7 +3776,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1PJWCnXpvh5tX02cbO3zJIvgsRF8s3rZy/view"
+"https://drive.google.com/file/d/1PJWCnXpvh5tX02cbO3zJIvgsRF8s3rZy/view",
+"",
+""
 ],
 [
 "SRC-031",
@@ -3523,7 +3803,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1s_HRRh6KmS9JavRN1TQN1p4-zACogLLG/view ; https://drive.google.com/file/d/17s4otcfWXVL8oNOzdhcgt5UeMrm25Hhg/view"
+"https://drive.google.com/file/d/1s_HRRh6KmS9JavRN1TQN1p4-zACogLLG/view ; https://drive.google.com/file/d/17s4otcfWXVL8oNOzdhcgt5UeMrm25Hhg/view",
+"",
+""
 ],
 [
 "LOK-017",
@@ -3548,7 +3830,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1GwPpcbSUgzrNPC_pb_TZ4jRlybv-V_JR/view"
+"https://drive.google.com/file/d/1GwPpcbSUgzrNPC_pb_TZ4jRlybv-V_JR/view",
+"",
+""
 ],
 [
 "VIS-028",
@@ -3573,7 +3857,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1-KHidOHG6oX3E-E72aFcGgUBDRIJBA85/view"
+"https://drive.google.com/file/d/1-KHidOHG6oX3E-E72aFcGgUBDRIJBA85/view",
+"Collage & Cutout",
+""
 ],
 [
 "TEX-006",
@@ -3598,7 +3884,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Mz9m0jVOv7Ih7f2KSe0j_8C1oyTIwsd_/view"
+"https://drive.google.com/file/d/1Mz9m0jVOv7Ih7f2KSe0j_8C1oyTIwsd_/view",
+"",
+""
 ],
 [
 "SFX-015",
@@ -3623,7 +3911,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1iR2jYR39LKGeAfR0r56H6lpYOZj5gVgP/view"
+"https://drive.google.com/file/d/1iR2jYR39LKGeAfR0r56H6lpYOZj5gVgP/view",
+"",
+""
 ],
 [
 "TEX-007",
@@ -3648,7 +3938,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1x0pN0rQ5v1n1q8hl1InQSbLxC8lCEPMV/view"
+"https://drive.google.com/file/d/1x0pN0rQ5v1n1q8hl1InQSbLxC8lCEPMV/view",
+"",
+""
 ],
 [
 "TXT-015",
@@ -3673,7 +3965,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1jwfqXKSNSOTNCVHLNwD56Flw0oaD4m3a/view"
+"https://drive.google.com/file/d/1jwfqXKSNSOTNCVHLNwD56Flw0oaD4m3a/view",
+"",
+""
 ],
 [
 "TRN-008",
@@ -3698,7 +3992,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1WRza9rRoTMTTWbznsYA9X6C4vygi4ODc/view"
+"https://drive.google.com/file/d/1WRza9rRoTMTTWbznsYA9X6C4vygi4ODc/view",
+"",
+""
 ],
 [
 "PKG-008",
@@ -3712,6 +4008,8 @@
 "",
 "2026-11-22",
 "Best use: act changes and chapter cards.",
+"",
+"",
 "",
 "",
 "",
@@ -3748,6 +4046,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -3762,6 +4062,8 @@
 "",
 "2026-11-22",
 "Best use: hand-drawn diagrams.",
+"",
+"",
 "",
 "",
 "",
@@ -3798,6 +4100,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -3812,6 +4116,8 @@
 "",
 "2026-11-22",
 "Best use: held period photos and candlelit rooms. Limit: max 6 beats per episode.",
+"",
+"",
 "",
 "",
 "",
@@ -3848,6 +4154,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -3873,7 +4181,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1UNrnsbfbC0rUHESjdL_lKQRMfbYUSI_2/view"
+"https://drive.google.com/file/d/1UNrnsbfbC0rUHESjdL_lKQRMfbYUSI_2/view",
+"Document",
+""
 ],
 [
 "LOK-021",
@@ -3898,7 +4208,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1u1J4-a7g37_Z8s8caiyJzgoQacXHUf2A/view ; https://drive.google.com/file/d/1TnEssD2_UkVmlC-ER2uIJ3Vb3iGK978A/view"
+"https://drive.google.com/file/d/1u1J4-a7g37_Z8s8caiyJzgoQacXHUf2A/view ; https://drive.google.com/file/d/1TnEssD2_UkVmlC-ER2uIJ3Vb3iGK978A/view",
+"",
+""
 ],
 [
 "LOK-022",
@@ -3923,7 +4235,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1O_lg-bKNgMSAOwdaE9YKdqxAkzslnKhC/view"
+"https://drive.google.com/file/d/1O_lg-bKNgMSAOwdaE9YKdqxAkzslnKhC/view",
+"",
+""
 ],
 [
 "MOT-011",
@@ -3948,7 +4262,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1jbImbk9JgxPKNUdatd4ONDXRNMdhPLvQ/view"
+"https://drive.google.com/file/d/1jbImbk9JgxPKNUdatd4ONDXRNMdhPLvQ/view",
+"",
+""
 ],
 [
 "MUS-008",
@@ -3962,6 +4278,8 @@
 "",
 "2026-11-22",
 "Best use: planning each act bed.",
+"",
+"",
 "",
 "",
 "",
@@ -3998,6 +4316,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -4012,6 +4332,8 @@
 "",
 "2026-11-22",
 "Best use: pages as objects. Limit: max 6 beats per episode.",
+"",
+"",
 "",
 "",
 "",
@@ -4048,6 +4370,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -4062,6 +4386,8 @@
 "",
 "2026-11-22",
 "Best use: moves between places. Limit: max 4 beats per episode.",
+"",
+"",
 "",
 "",
 "",
@@ -4098,7 +4424,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1SF6vjrcDLsrH6jg4jD_PpfQDfuXWP-Z9/view"
+"https://drive.google.com/file/d/1SF6vjrcDLsrH6jg4jD_PpfQDfuXWP-Z9/view",
+"",
+""
 ],
 [
 "LOK-023",
@@ -4123,7 +4451,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1eWTe_0mN3FolmXLscXJf1vLJZuNLrnHl/view ; https://drive.google.com/file/d/1E7KmhN-_kHTHx06CFtp-OZAlQbeIRHV8/view"
+"https://drive.google.com/file/d/1eWTe_0mN3FolmXLscXJf1vLJZuNLrnHl/view ; https://drive.google.com/file/d/1E7KmhN-_kHTHx06CFtp-OZAlQbeIRHV8/view",
+"",
+""
 ],
 [
 "TXT-017",
@@ -4148,7 +4478,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1RKRW1ybiuvoyPX_7hPSGFofwus-G1yEm/view"
+"https://drive.google.com/file/d/1RKRW1ybiuvoyPX_7hPSGFofwus-G1yEm/view",
+"",
+""
 ],
 [
 "MAP-007",
@@ -4162,6 +4494,8 @@
 "",
 "2026-11-22",
 "Best use: places seen from above. Limit: max 4 beats per episode.",
+"",
+"",
 "",
 "",
 "",
@@ -4198,6 +4532,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -4212,6 +4548,8 @@
 "",
 "2026-11-22",
 "Best use: analytic or tension acts; Sam picks first.",
+"",
+"",
 "",
 "",
 "",
@@ -4248,7 +4586,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/18TCA7yUCn4O_OStTtwlSnVRLIPD1m_lk/view"
+"https://drive.google.com/file/d/18TCA7yUCn4O_OStTtwlSnVRLIPD1m_lk/view",
+"Photo",
+""
 ],
 [
 "SFX-016",
@@ -4273,7 +4613,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1tg72ItREyl5WaOZ9eiF0urzXRcWRTjoW/view"
+"https://drive.google.com/file/d/1tg72ItREyl5WaOZ9eiF0urzXRcWRTjoW/view",
+"",
+""
 ],
 [
 "SFX-017",
@@ -4298,7 +4640,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1pJjgZXjBYwt4p0xIipajLFVMAgopa8Yv/view"
+"https://drive.google.com/file/d/1pJjgZXjBYwt4p0xIipajLFVMAgopa8Yv/view",
+"",
+""
 ],
 [
 "SFX-018",
@@ -4323,7 +4667,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1MZ_rje-7jxKR2bRKODMewzfRsQTh7IAq/view"
+"https://drive.google.com/file/d/1MZ_rje-7jxKR2bRKODMewzfRsQTh7IAq/view",
+"",
+""
 ],
 [
 "SFX-019",
@@ -4348,7 +4694,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1shY_rXjAaHsruKXrXM9m4QrxIN3q3E6d/view"
+"https://drive.google.com/file/d/1shY_rXjAaHsruKXrXM9m4QrxIN3q3E6d/view",
+"",
+""
 ],
 [
 "SFX-020",
@@ -4373,7 +4721,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1_--2H76kghKE3ae9rNm5P-TaUaMPATB8/view"
+"https://drive.google.com/file/d/1_--2H76kghKE3ae9rNm5P-TaUaMPATB8/view",
+"",
+""
 ],
 [
 "SFX-021",
@@ -4398,7 +4748,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1JTlu6zV_Dor9maLWaV2Ud7pWa9dXHCsd/view"
+"https://drive.google.com/file/d/1JTlu6zV_Dor9maLWaV2Ud7pWa9dXHCsd/view",
+"",
+""
 ],
 [
 "SFX-022",
@@ -4423,7 +4775,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Zv6pMGWQ3eSaYgToKL_lW8eXng7DFOCf/view"
+"https://drive.google.com/file/d/1Zv6pMGWQ3eSaYgToKL_lW8eXng7DFOCf/view",
+"",
+""
 ],
 [
 "SFX-023",
@@ -4448,7 +4802,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1KNlL7nhspOTzOFvkVRr3ASQ5cVow9-rI/view"
+"https://drive.google.com/file/d/1KNlL7nhspOTzOFvkVRr3ASQ5cVow9-rI/view",
+"",
+""
 ],
 [
 "TRN-011",
@@ -4473,7 +4829,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1U8oNRyeVe_R98VfnVHnXKHpmMM2Bjjub/view ; https://drive.google.com/file/d/1oVtGBoX7zniYmmXWDnAR293fPA2oxvM6/view ; https://drive.google.com/file/d/1STTPW2l6-4hGbP0oCPV0pUL5Y-gMQLw1/view"
+"https://drive.google.com/file/d/1U8oNRyeVe_R98VfnVHnXKHpmMM2Bjjub/view ; https://drive.google.com/file/d/1oVtGBoX7zniYmmXWDnAR293fPA2oxvM6/view ; https://drive.google.com/file/d/1STTPW2l6-4hGbP0oCPV0pUL5Y-gMQLw1/view",
+"",
+""
 ],
 [
 "TRN-012",
@@ -4498,7 +4856,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1vpbdu7_wSC1n8YHZTZx4besCICLoa1ZR/view ; https://drive.google.com/file/d/1cNNr03ugur8tfFabXX5Y8VERO9Oh5wDH/view"
+"https://drive.google.com/file/d/1vpbdu7_wSC1n8YHZTZx4besCICLoa1ZR/view ; https://drive.google.com/file/d/1cNNr03ugur8tfFabXX5Y8VERO9Oh5wDH/view",
+"",
+""
 ],
 [
 "TRN-013",
@@ -4523,7 +4883,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1uxKaAHczD_RVRHo2J4kmlcll7Bgg5Z5r/view ; https://drive.google.com/file/d/1RRcIXooQdy1_zosPCr4ADW_RGZPa0Xk3/view"
+"https://drive.google.com/file/d/1uxKaAHczD_RVRHo2J4kmlcll7Bgg5Z5r/view ; https://drive.google.com/file/d/1RRcIXooQdy1_zosPCr4ADW_RGZPa0Xk3/view",
+"",
+""
 ],
 [
 "SFX-024",
@@ -4548,7 +4910,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1GzY8mumRg12Lb51UySruJOofhnSa2cvK/view"
+"https://drive.google.com/file/d/1GzY8mumRg12Lb51UySruJOofhnSa2cvK/view",
+"",
+""
 ],
 [
 "SFX-025",
@@ -4573,7 +4937,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/13_CMx_X4j-VWb82L0wYALpcmKtzm1BZs/view"
+"https://drive.google.com/file/d/13_CMx_X4j-VWb82L0wYALpcmKtzm1BZs/view",
+"",
+""
 ],
 [
 "MUS-010",
@@ -4598,7 +4964,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/16e0_duhh3olNjyvs68gt_SfIk7eKs0VC/view"
+"https://drive.google.com/file/d/16e0_duhh3olNjyvs68gt_SfIk7eKs0VC/view",
+"",
+""
 ],
 [
 "MUS-011",
@@ -4623,7 +4991,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/16e0_duhh3olNjyvs68gt_SfIk7eKs0VC/view"
+"https://drive.google.com/file/d/16e0_duhh3olNjyvs68gt_SfIk7eKs0VC/view",
+"",
+""
 ],
 [
 "TXT-018",
@@ -4637,6 +5007,8 @@
 "Unused",
 "2026-11-22",
 "Best use: a quote from a primary source set as typed text (Dalton's own lines from 1794/1798), held 4 s or more. Limit: max 4 per episode. Not for: modern or digital sources.",
+"",
+"",
 "",
 "",
 "",
@@ -4673,6 +5045,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -4698,6 +5072,8 @@
 "",
 "",
 "",
+"",
+"Screen & UI",
 ""
 ],
 [
@@ -4723,7 +5099,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/181DJ2RigzvsqFLl8Tgx71RoESyBnFOC9/view"
+"https://drive.google.com/file/d/181DJ2RigzvsqFLl8Tgx71RoESyBnFOC9/view",
+"",
+""
 ],
 [
 "MAP-009",
@@ -4748,7 +5126,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1KxmCcYjlh_MGuqTSkuotRJRWZ_K6bcju/view"
+"https://drive.google.com/file/d/1KxmCcYjlh_MGuqTSkuotRJRWZ_K6bcju/view",
+"",
+""
 ],
 [
 "VIS-034",
@@ -4773,11 +5153,13 @@
 "",
 "",
 "",
+"",
+"Collage & Cutout",
 ""
 ],
 [
-"SRC-032",
-"11_Sources",
+"NAR-002",
+"12_Narration",
 "WCL-E01_Act2_Narration",
 "Own: Sam's ElevenLabs take (his Samarth voice), paced to 149.5 wpm with even pauses, silence only (tts/pace_even.py); Sam: final, 22 Nov 2026",
 "public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav",
@@ -4798,7 +5180,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1iThS7oqphO2SShSu6oWXz8ilve8wGZti/view"
+"https://drive.google.com/file/d/1zTwHd8p7Hkgq33NhEiljF4miqzP-nrXm/view",
+"",
+""
 ],
 [
 "MAP-010",
@@ -4823,7 +5207,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1_ydSeKj7dPjXz32z-wW87c3pEdZFJnSw/view"
+"https://drive.google.com/file/d/1_ydSeKj7dPjXz32z-wW87c3pEdZFJnSw/view",
+"",
+""
 ],
 [
 "VIS-035",
@@ -4848,7 +5234,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1Mcv3F_FqDGo50cXdFSGbiU2XSxNmvARc/view"
+"https://drive.google.com/file/d/1Mcv3F_FqDGo50cXdFSGbiU2XSxNmvARc/view",
+"Photo",
+""
 ],
 [
 "SRC-033",
@@ -4873,7 +5261,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1ThXHVTBcJ3KF0WX0vRVJTASWTZWFZyh5/view"
+"https://drive.google.com/file/d/1ThXHVTBcJ3KF0WX0vRVJTASWTZWFZyh5/view",
+"",
+""
 ],
 [
 "SRC-034",
@@ -4898,7 +5288,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1nzmJg_i51ad8i6qOtzgQiE3Hye7IWxWU/view"
+"https://drive.google.com/file/d/1nzmJg_i51ad8i6qOtzgQiE3Hye7IWxWU/view",
+"",
+""
 ],
 [
 "SRC-035",
@@ -4923,7 +5315,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1DX7jIB8JKvDz22NBqFP5u24gL496HOnq/view"
+"https://drive.google.com/file/d/1DX7jIB8JKvDz22NBqFP5u24gL496HOnq/view",
+"",
+""
 ],
 [
 "SRC-036",
@@ -4948,7 +5342,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1TrrikmjcOugLa9fP1DyXg7kpPov526WN/view"
+"https://drive.google.com/file/d/1TrrikmjcOugLa9fP1DyXg7kpPov526WN/view",
+"",
+""
 ],
 [
 "SRC-037",
@@ -4973,7 +5369,9 @@
 "",
 "",
 "",
-"https://drive.google.com/file/d/1PgC1XAcVlEkV8hUOhXqlGrLZbDkjpMIC/view"
+"https://drive.google.com/file/d/1PgC1XAcVlEkV8hUOhXqlGrLZbDkjpMIC/view",
+"",
+""
 ],
 [
 "VIS-036",
@@ -4998,6 +5396,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5023,6 +5423,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5048,6 +5450,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5073,6 +5477,8 @@
 "",
 "",
 "",
+"",
+"Document",
 ""
 ],
 [
@@ -5098,6 +5504,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5123,6 +5531,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5148,6 +5558,8 @@
 "",
 "",
 "",
+"",
+"Collage & Cutout",
 ""
 ],
 [
@@ -5173,6 +5585,8 @@
 "",
 "",
 "",
+"",
+"Photo",
 ""
 ],
 [
@@ -5198,6 +5612,8 @@
 "",
 "",
 "",
+"",
+"Space & 3D",
 ""
 ],
 [
@@ -5212,6 +5628,8 @@
 "",
 "2026-11-22",
 "Best use: midground figure cutouts in a collage act. Limit: one accent colour per act; never on a scan of a page.",
+"",
+"",
 "",
 "",
 "",
@@ -5248,6 +5666,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -5262,6 +5682,8 @@
 "",
 "2026-11-22",
 "Best use: correcting a misconception said out loud. Limit: max 2 per episode; the correction must be sourced.",
+"",
+"",
 "",
 "",
 "",
@@ -5298,6 +5720,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -5312,6 +5736,8 @@
 "",
 "2026-11-22",
 "Best use: the one cutout entrance that matters in a shot, texture level (22-24 dB under the voice). Limit: one per shot; never on every entrance (our hierarchy rule).",
+"",
+"",
 "",
 "",
 "",
@@ -5348,6 +5774,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -5362,6 +5790,8 @@
 "",
 "2026-11-22",
 "Best use: out of a period title card into its first archival picture. Limit: max 2 per episode, never two in a row, never over a real photo of a person's face. Not for: calm reflective moments (use a dissolve).",
+"",
+"",
 "",
 "",
 "",
@@ -5398,6 +5828,8 @@
 "",
 "",
 "",
+"",
+"",
 ""
 ],
 [
@@ -5423,6 +5855,8 @@
 "",
 "",
 "",
+"",
+"Document",
 ""
 ],
 [
@@ -5437,6 +5871,8 @@
 "",
 "2026-11-22",
 "Best use: naming a document, place or case the first time (THE ... MEMO). Limit: max 2 per act; pairs with TXT-021 TypewriterLine, not with KeywordSlab in the same shot.",
+"",
+"",
 "",
 "",
 "",
@@ -5473,6 +5909,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5498,6 +5936,8 @@
 "",
 "",
 "",
+"",
+"Chart & Count",
 ""
 ],
 [
@@ -5523,6 +5963,8 @@
 "",
 "",
 "",
+"",
+"Diagram",
 ""
 ],
 [
@@ -5537,6 +5979,8 @@
 "",
 "2026-11-22",
 "Best use: episodes with 3+ acts that return to one diagram. Limit: 3-6 colours, all checked for 3:1 contrast on the canvas; never used for data colours (a data colour stays its real colour).",
+"",
+"",
 "",
 "",
 "",
