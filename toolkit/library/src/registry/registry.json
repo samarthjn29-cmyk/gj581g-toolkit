@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T07:58:14.255Z",
+ "generated": "2026-11-22T08:17:03.739Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1661,6 +1661,18 @@
    "status": "Planned",
    "use": "Best use: drawn period scenes (Kendal, Manchester, Ransome's room). Limit: max 10 beats per episode. Not for: modern scenes or photos.",
    "maxBeats": 10,
+   "maxShare": null
+  },
+  "MUS-007": {
+   "id": "MUS-007",
+   "folder": "7_Music",
+   "name": "WholesomeBed",
+   "paths": [
+    "public/music/wholesome_kevin_macleod.mp3"
+   ],
+   "status": "Active",
+   "use": "Best use: the bed under the narration of WCL-E01, running through every act (it carries on across acts; it never stops, only dips). Limit: at -33 LUFS before ducking, sidechain-ducked under the voice, dips under the season sting and on deadpan or reveal lines (at most 2 a minute). Not for: the series title sting itself, or another episode without Sam hearing it there.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

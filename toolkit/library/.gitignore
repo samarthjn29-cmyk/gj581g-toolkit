@@ -17,3 +17,6 @@ public/assets/sources/*mixkit*
 
 # Sam's narration takes: Drive only (private), never GitHub
 public/episodes/
+
+# Library music tracks: Drive copy (Video Reference Library/7_Music) is the master; too big for git
+public/music/*.mp3
