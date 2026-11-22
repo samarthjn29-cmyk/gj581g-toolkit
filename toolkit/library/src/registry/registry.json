@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T03:39:32.578Z",
+ "generated": "2026-11-22T04:30:59.720Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -715,6 +715,259 @@
     "public/assets/sources/henry1854_p25.jpg"
    ],
    "status": "Active"
+  },
+  "VIS-011": {
+   "id": "VIS-011",
+   "folder": "1_Visuals",
+   "name": "ColourPathMap",
+   "paths": [
+    "src/components/ColourPathMap.tsx"
+   ],
+   "status": "Planned"
+  },
+  "VIS-012": {
+   "id": "VIS-012",
+   "folder": "1_Visuals",
+   "name": "ConeTrio",
+   "paths": [
+    "src/components/ConeTrio.tsx"
+   ],
+   "status": "Planned"
+  },
+  "VIS-013": {
+   "id": "VIS-013",
+   "folder": "1_Visuals",
+   "name": "ConeCurveChart",
+   "paths": [
+    "src/components/ConeCurveChart.tsx"
+   ],
+   "status": "Planned"
+  },
+  "VIS-014": {
+   "id": "VIS-014",
+   "folder": "1_Visuals",
+   "name": "SpectrumStrip",
+   "paths": [
+    "src/components/SpectrumStrip.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-005": {
+   "id": "PKG-005",
+   "folder": "10_Packaging",
+   "name": "SeriesTitleCard",
+   "paths": [
+    "src/components/SeriesTitleCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "PKG-006": {
+   "id": "PKG-006",
+   "folder": "10_Packaging",
+   "name": "EpisodeCard",
+   "paths": [
+    "src/components/EpisodeCard.tsx"
+   ],
+   "status": "Planned"
+  },
+  "MUS-005": {
+   "id": "MUS-005",
+   "folder": "7_Music",
+   "name": "SeasonBed",
+   "paths": [
+    "public/music/"
+   ],
+   "status": "Planned"
+  },
+  "MUS-006": {
+   "id": "MUS-006",
+   "folder": "7_Music",
+   "name": "SeasonSting",
+   "paths": [
+    "public/music/season_sting.wav"
+   ],
+   "status": "Planned"
+  },
+  "SRC-008": {
+   "id": "SRC-008",
+   "folder": "11_Sources",
+   "name": "DaltonWebster_c1840",
+   "paths": [
+    "public/assets/sources/dalton_webster_c1840.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-009": {
+   "id": "SRC-009",
+   "folder": "11_Sources",
+   "name": "ManchesterPlan1794",
+   "paths": [
+    "public/assets/sources/manchester_plan_1794.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-010": {
+   "id": "SRC-010",
+   "folder": "11_Sources",
+   "name": "CandleFlame_Fogg",
+   "paths": [
+    "public/assets/sources/candle_flame_fogg.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-011": {
+   "id": "SRC-011",
+   "folder": "11_Sources",
+   "name": "CandleLighting_Mixkit3458",
+   "paths": [
+    "public/assets/sources/candle_lighting_mixkit3458.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-012": {
+   "id": "SRC-012",
+   "folder": "11_Sources",
+   "name": "CandlesClose_Mixkit3438",
+   "paths": [
+    "public/assets/sources/candles_close_mixkit3438.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-013": {
+   "id": "SRC-013",
+   "folder": "11_Sources",
+   "name": "Geranium_Stang",
+   "paths": [
+    "public/assets/sources/geranium_stang.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-014": {
+   "id": "SRC-014",
+   "folder": "11_Sources",
+   "name": "Laurel_RunicEarth",
+   "paths": [
+    "public/assets/sources/laurel_runicearth.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-015": {
+   "id": "SRC-015",
+   "folder": "11_Sources",
+   "name": "SealingWax_Petrik",
+   "paths": [
+    "public/assets/sources/sealingwax_petrik.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-016": {
+   "id": "SRC-016",
+   "folder": "11_Sources",
+   "name": "GreenEye_Mixkit4257",
+   "paths": [
+    "public/assets/sources/green_eye_mixkit4257.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-017": {
+   "id": "SRC-017",
+   "folder": "11_Sources",
+   "name": "RGBPixels_Mixkit258",
+   "paths": [
+    "public/assets/sources/rgb_pixels_mixkit258.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-018": {
+   "id": "SRC-018",
+   "folder": "11_Sources",
+   "name": "CursorPixels_Mixkit3818",
+   "paths": [
+    "public/assets/sources/cursor_pixels_mixkit3818.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-019": {
+   "id": "SRC-019",
+   "folder": "11_Sources",
+   "name": "PinkFlowers_Mixkit1168",
+   "paths": [
+    "public/assets/sources/pink_flowers_mixkit1168.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-020": {
+   "id": "SRC-020",
+   "folder": "11_Sources",
+   "name": "BlueSky_Mixkit2408",
+   "paths": [
+    "public/assets/sources/blue_sky_mixkit2408.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-021": {
+   "id": "SRC-021",
+   "folder": "11_Sources",
+   "name": "Apples_Mixkit42946",
+   "paths": [
+    "public/assets/sources/apples_mixkit42946.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-022": {
+   "id": "SRC-022",
+   "folder": "11_Sources",
+   "name": "EarthViews_NASA",
+   "paths": [
+    "public/assets/sources/earth_views_nasa.webm"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-023": {
+   "id": "SRC-023",
+   "folder": "11_Sources",
+   "name": "Pointing_Kucinic",
+   "paths": [
+    "public/assets/sources/pointing_kucinic.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-024": {
+   "id": "SRC-024",
+   "folder": "11_Sources",
+   "name": "BerkeleyCampus_2026",
+   "paths": [
+    "public/assets/sources/berkeley_campus_2026.jpg"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-025": {
+   "id": "SRC-025",
+   "folder": "11_Sources",
+   "name": "Fong2025_Fig1C",
+   "paths": [
+    "public/assets/sources/fong2025_fig1c.png"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-026": {
+   "id": "SRC-026",
+   "folder": "11_Sources",
+   "name": "Fong2025_Fig1A_1B",
+   "paths": [
+    "public/assets/sources/fong2025_fig1a.png",
+    "public/assets/sources/fong2025_fig1b.png"
+   ],
+   "status": "Spec Ready"
+  },
+  "SRC-027": {
+   "id": "SRC-027",
+   "folder": "11_Sources",
+   "name": "Fong2025_Fig2A",
+   "paths": [
+    "public/assets/sources/fong2025_fig2a.png"
+   ],
+   "status": "Spec Ready"
   }
  }
 }
