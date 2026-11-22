@@ -65,7 +65,7 @@ export type GridObject =
     }
   | { kind: "label"; at: V3; text: string; atSec?: number; dy?: number }
   // VIS-021 RayParticles: dots of light travelling from `from` to `to` (one dot per ray), shrinking with depth.
-  | ({ kind: "rays"; from: V3; to: V3; color?: string } & RaySpec);
+  | ({ kind: "rays"; from: V3; to: V3; color?: string; trail?: number } & RaySpec); // trail: faint path line opacity (0-0.35)
 
 export type PerspectiveGridProps = {
   variant?: "room" | "floor";
@@ -233,8 +233,14 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
           k: q.k,
         };
       });
+      const pa = P(...o.from);
+      const pb = P(...o.to);
+      const trailOp = Math.min(0.35, o.trail ?? 0) * Math.min(1, ps.length ? 1 : 0) * appear({ atSec: o.atSec });
       return (
         <g key={i}>
+          {trailOp > 0 ? (
+            <line x1={pa[0]} y1={pa[1]} x2={pb[0]} y2={pb[1]} stroke={o.color ?? o.colors?.[0] ?? "#FFF6DD"} strokeOpacity={trailOp} strokeWidth={2} strokeLinecap="round" />
+          ) : null}
           <g filter="url(#pg-glow)">
             {dots.map((d) => (
               <circle
@@ -495,7 +501,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
         <AbsoluteFill
           style={{
             background: `radial-gradient(ellipse 55% 42% at ${cx}px ${cy}px, ${ink} 0%, transparent 72%)`,
-            opacity: 0.07 * fog * pGrid,
+            opacity: 0.1 * fog * pGrid,
             pointerEvents: "none",
           }}
         />

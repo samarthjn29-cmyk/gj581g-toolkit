@@ -26,7 +26,7 @@ def toks(s):
     ise = lambda t: re.sub(r'(?<=[a-z]{3})iz(e|es|ed|ing|ation|ations)$', r'is\1', t)   # organized = organised, alphabetizes = alphabetises
     return ' '.join(ise(SAME.get(t, t)) for t in re.sub(r"[^a-z ]", ' ', s.replace('-', ' ').replace("'", '')).split()).split()
 S = json.load(open(a.script)); L = S['lines'] if isinstance(S, dict) else S
-ids = [l['id'] for l in L]; i0, i1 = (ids.index(x) for x in a.lines.split('-')); L = L[i0:i1 + 1]
+ids = [l['id'] for l in L]; i0, i1 = (ids.index(x) for x in (a.lines.split(':') if ':' in a.lines else a.lines.split('-'))); L = L[i0:i1 + 1]
 with tempfile.TemporaryDirectory() as td:
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', a.clip, '-ac', '1', '-ar', '16000', f'{td}/a.wav'], check=True)
     x, sr = sf.read(f'{td}/a.wav', dtype='float32')

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T07:03:18.652Z",
+ "generated": "2026-11-22T07:12:56.096Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1478,7 +1478,7 @@
    "paths": [
     "src/layers/RayParticles.ts"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: only where light physically travels: through Newton's shutter hole, the prism split, the second prism, a lens bringing rays back together, light entering the eye and reaching the back. Limit: max 6 beats per episode; max 5% of runtime; 40 dots on screen at most. Not for: decoration, data or money flows, or any line with no light in it.",
    "maxBeats": 6,
    "maxShare": 5
@@ -1490,7 +1490,7 @@
    "paths": [
     "src/components/PerspectiveGrid.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: dark-room perspective-grid shots where depth carries the meaning (Newton's room, Ransome's look-through). Limit: only inside VIS-015 shots; max 8 beats per episode; fog 0.6 at most. Not for: flat shots, documents or titles.",
    "maxBeats": 8,
    "maxShare": null
