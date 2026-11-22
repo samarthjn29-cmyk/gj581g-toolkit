@@ -149,20 +149,17 @@ shot(B(35, 36), "PerspectiveGrid", lambda r: {
          "atSec": r(word("shutter", end=True)), "drawSec": 0.7}]})
 # 37 the drawn eye opens again on "open Dalton's eyes".
 shot(B(37), "EyeDiagram", lambda r: {"mode": "simple", "openKeys": [{"atSec": 0, "open": 0.04}, {"atSec": r(word("open")), "open": 1}]})
-# 38-39 the title cards (the sting MUS-006 is added once Sam picks it).
+# 38-39 the title cards; the season sting (MUS-006) plays under the first.
 shot(B(38), "SeriesTitleCard", {})
 shot(B(39), "EpisodeCard", {"number": 1, "title": "The Man Who Saw Pink"})
 
-for s in shots:
-    if "MUS-006" in s["assets"]:
-        s["assets"].remove("MUS-006")
-        s["note"] = "MUS-006 sting held back: not chosen yet (Sam picks from 3 at Gate 2)."
 audio = [
     {"id": "SFX-013", "atSec": 0.0, "volumeDb": -4},
     {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
     {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
     {"id": "SFX-005", "atSec": 86.85, "volumeDb": -20},
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
+    {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
 ]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",

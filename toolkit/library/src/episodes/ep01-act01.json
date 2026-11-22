@@ -34,6 +34,11 @@
    "id": "SFX-001",
    "atSec": 94.6,
    "volumeDb": -14
+  },
+  {
+   "id": "MUS-006",
+   "atSec": 98.75,
+   "volumeDb": -6
   }
  ],
  "beats": [
@@ -1183,7 +1188,8 @@
     "MOT-002",
     "TRN-001",
     "LOK-009",
-    "LOK-010"
+    "LOK-010",
+    "MUS-006"
    ],
    "props": {},
    "beatTimes": [
@@ -1192,8 +1198,7 @@
      98.6,
      101.6
     ]
-   ],
-   "note": "MUS-006 sting held back: not chosen yet (Sam picks from 3 at Gate 2)."
+   ]
   },
   {
    "id": "39",

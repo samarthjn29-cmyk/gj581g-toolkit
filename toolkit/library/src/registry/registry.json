@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T06:48:12.754Z",
+ "generated": "2026-11-22T06:55:30.858Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1044,7 +1044,7 @@
    "paths": [
     "public/music/season_sting.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: under the series title card only. Limit: max 1 beat per episode.",
    "maxBeats": 1,
    "maxShare": null
