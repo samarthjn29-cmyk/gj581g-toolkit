@@ -58,6 +58,16 @@ beats.forEach((b, i) => {
   }
   if (b.transitionIn === "push" && !b.focus) crit.push(`${b.id}: push-through without a focus point`);
 });
+// Reading time (Sam, 22 Nov 2026: "should stay on the screen for enough time so that someone can actually read
+// them when you highlight"): a page shot stays at least 4 s, and every highlight keeps 2 s on screen after it lands.
+for (const b of beats.filter((x) => x.component === "ArchivalScanCard")) {
+  const len = b.end - b.start;
+  if (len < 4) crit.push(`${b.id}: page on screen ${len.toFixed(2)} s (at least 4 s to read it)`);
+  for (const h of b.props?.highlights ?? []) {
+    const left = len - h.atSec - 0.7;
+    if (left < 2) crit.push(`${b.id}: highlight at ${h.atSec}s leaves ${left.toFixed(2)} s to read (needs 2 s)`);
+  }
+}
 const frenzy = beats.filter((b) => b.component === "HeadlineMatchCut").length;
 if (frenzy > 1) warn.push(`HeadlineMatchCut used ${frenzy} times in one act (once a chapter at most)`);
 const remote = JSON.stringify(act).match(/https?:\/\/[^"]+/g) ?? [];

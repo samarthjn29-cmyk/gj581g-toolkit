@@ -112,5 +112,11 @@
   "beatType": 3,
   "energy": "Calm",
   "grid": false
+ },
+ "EyeDissection": {
+  "assetId": "VIS-022",
+  "beatType": 4,
+  "energy": "Calm",
+  "grid": false
  }
 }

@@ -30,8 +30,8 @@ def ids(beats):
     return out
 
 SKY, RED, PINK = "#86B5E8", "#C8402F", "#E79AB9"  # what each person reported (data, not theme colours)
-P29 = ([1920, 2813], [400, 1650, 1100, 1050])
-P30 = ([1920, 2934], [400, 420, 1100, 1050])
+P29 = ([1920, 2813], [380, 1220, 1100, 1050])
+P30 = ([1920, 2934], [500, 400, 1080, 1030])
 GER = [1920, 1280]
 CANDLE = "public/assets/sources/candle_lighting_mixkit3458.mp4"
 CANDLE_REV = "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
@@ -64,28 +64,24 @@ shot(B(5, 6, 7), "FootagePlate", lambda r: {
     "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": r(word("geranium")), "x": 1240, "y": 820,
                 "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1420, "y": 960, "scale": 0.78}}]},
     transitionIn="push", focus=[960, 560])
-# 8 p.29: "the Geranium zonale by candle-light, in the Autumn of 1792 ... almost an exact"
-shot(B(8), "ArchivalScanCard", lambda r: {
+# 8-10 p.29 held for three beats (Sam, 22 Nov 2026: the pages moved too fast to read; the p.30 card that
+# followed is gone). Highlights in reading order, the last one on "almost".
+shot(B(8, 9, 10), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-001", "imgSize": P29[0], "crop": P29[1], "side": "left",
-    "highlights": [{"box": [1015, 2040, 375, 46], "atSec": r(word("by", 20) + 0.2)},
-                   {"box": [440, 2100, 700, 54], "atSec": r(word("day", 20))}],
+    "highlights": [{"box": [1015, 2040, 375, 46], "atSec": 0.6},
+                   {"box": [440, 2100, 700, 54], "atSec": 1.5},
+                   {"box": [1090, 2158, 300, 46], "atSec": r(word("almost"))}],
     "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
-    "source": "JOHN DALTON · 1798 · P. 29-30"})
-# 9 p.30: "sky-blue by day"
-shot(B(9), "ArchivalScanCard", lambda r: {
-    "srcId": "SRC-029", "imgSize": P30[0], "crop": P30[1], "side": "left",
-    "highlights": [{"box": [570, 586, 330, 56], "atSec": r(word("almost"))}],
-    "quote": "almost an exact sky-blue by day",
-    "source": "JOHN DALTON · 1798 · P. 29-30"})
-# 10-11 Dalton's swatch: DAY sky-blue on "sky", CANDLE empty on "candle".
-shot(B(10, 11), "SwatchRows", lambda r: {
+    "source": "JOHN DALTON · 1798 · P. 29"})
+# 11 Dalton's swatch: DAY sky-blue already filled, CANDLE empty on "candle".
+shot(B(11), "SwatchRows", lambda r: {
     "columns": ["BY DAY", "BY CANDLE"],
-    "rows": [{"atSec": 0, "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": 0, "fillSec": r(word("sky"))},
+    "rows": [{"atSec": 0, "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": 0, "fillSec": 0.3},
                                     {"atSec": r(word("candle", 26))}]}]})
 # 12-13 p.30: "astonishingly changed"
 shot(B(12, 13), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-029", "imgSize": P30[0], "crop": P30[1], "side": "left",
-    "highlights": [{"box": [570, 645, 430, 56], "atSec": r(word("astonishingly"))}],
+    "highlights": [{"box": [570, 645, 430, 56], "atSec": r(word("it", 30))}],  # lands on "astonishingly"
     "quote": "in candle-light, however, it was astonishingly changed",
     "source": "JOHN DALTON · 1798 · P. 30"})
 # 14-19 the rows: John blue/red, friends pink/pink, his brother blue/red.
@@ -128,10 +124,14 @@ shot(B(25, 26), "KineticLine", lambda r: {
 shot(B(27, 28), "KineticLine", lambda r: {
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
     "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about"))}]}})
-# 29-31 the drawn eye opens on "his own eyes", closes on "dies"; THE TEST · 1844.
-shot(B(29, 30, 31), "EyeDiagram", lambda r: {
-    "mode": "simple",
-    "openKeys": [{"atSec": 0, "open": 0.04}, {"atSec": r(word("own")), "open": 1}, {"atSec": r(word("dies")), "open": 0.04}],
+# 29-31 (Sam, 22 Nov 2026: "an eye which has been cut", the words on screen): the whole eye as a line drawing;
+# the cut line traces round it on "examined"; the words beside it; THE TEST · 1844.
+shot(B(29, 30, 31), "EyeDissection", lambda r: {
+    "cutAtSec": r(word("examined")),
+    "words": [{"text": "Tested", "atSec": r(word("tested")), "untilSec": r(word("his", 78))},
+              {"text": "His own eyes", "atSec": r(word("own")), "untilSec": r(word("his", 78))},
+              {"text": "EXAMINED AFTER HE DIES", "atSec": r(word("examined")), "style": "mono", "untilSec": r(word("his", 78))},
+              {"text": "His idea will fail the test.", "atSec": r(word("idea"))}],
     "tag": {"at": "corner", "parts": [{"text": "THE TEST · 1844", "atSec": r(word("his", 78))}]}})
 # 32-33 the counter: 0 -> 151 YEARS, locks on "years".
 shot(B(32, 33), "YearCounter", lambda r: {
@@ -147,8 +147,11 @@ shot(B(35, 36), "PerspectiveGrid", lambda r: {
         {"kind": "hole", "at": [-1300, -150, 600], "r": 22, "atSec": r(word("hole"))},
         {"kind": "beam", "from": [-1300, -150, 600], "to": [-300, 120, 1400], "width": 14,
          "atSec": r(word("shutter", end=True)), "drawSec": 0.7}]})
-# 37 the drawn eye opens again on "open Dalton's eyes".
-shot(B(37), "EyeDiagram", lambda r: {"mode": "simple", "openKeys": [{"atSec": 0, "open": 0.04}, {"atSec": r(word("open")), "open": 1}]})
+# 37 the same cut eye: the front lifts away on "open".
+shot(B(37), "EyeDissection", lambda r: {
+    "cutAtSec": -2, "openAtSec": r(word("open")),
+    "words": [{"text": "Open Dalton's eyes", "atSec": r(word("open"))},
+              {"text": "AS HE ASKED", "atSec": r(word("asked")), "style": "mono"}]})
 # 38-39 the title cards; the season sting (MUS-006) plays under the first.
 shot(B(38), "SeriesTitleCard", {})
 shot(B(39), "EpisodeCard", {"number": 1, "title": "The Man Who Saw Pink"})

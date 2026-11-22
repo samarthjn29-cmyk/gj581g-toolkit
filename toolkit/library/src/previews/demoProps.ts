@@ -105,6 +105,14 @@ export const DEMO: Record<string, Record<string, unknown>> = {
     lines: [{ text: "Preview question?", atSec: 0.6 }, { text: "PREVIEW · MONO LINE", atSec: 1.6, style: "mono" }],
     backdrop: { srcId: "SRC-013", imgSize: [1920, 1280], crop: [300, 260, 1160, 652], layout: "full" },
   },
+  EyeDissection: {
+    cutAtSec: 0.6,
+    openAtSec: 2.4,
+    words: [
+      { text: "Preview line", atSec: 0.4 },
+      { text: "PREVIEW · MONO LINE", atSec: 1.2, style: "mono" },
+    ],
+  },
 };
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.

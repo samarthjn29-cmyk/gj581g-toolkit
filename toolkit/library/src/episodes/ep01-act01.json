@@ -213,12 +213,14 @@
    ]
   },
   {
-   "id": "08",
+   "id": "08+09+10",
    "beats": [
-    "E01-A1-08"
+    "E01-A1-08",
+    "E01-A1-09",
+    "E01-A1-10"
    ],
    "start": 19.5,
-   "end": 22.0,
+   "end": 26.3,
    "component": "ArchivalScanCard",
    "assets": [
     "VIS-001",
@@ -230,7 +232,8 @@
     "LOK-010",
     "SFX-006",
     "SRC-001",
-    "SRC-029"
+    "MOT-003",
+    "MOT-001"
    ],
    "props": {
     "srcId": "SRC-001",
@@ -239,8 +242,8 @@
      2813
     ],
     "crop": [
-     400,
-     1650,
+     380,
+     1220,
      1100,
      1050
     ],
@@ -253,7 +256,7 @@
        375,
        46
       ],
-      "atSec": 1.86
+      "atSec": 0.6
      },
      {
       "box": [
@@ -262,93 +265,56 @@
        700,
        54
       ],
-      "atSec": 1.84
+      "atSec": 1.5
+     },
+     {
+      "box": [
+       1090,
+       2158,
+       300,
+       46
+      ],
+      "atSec": 4.1
      }
     ],
     "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
-    "source": "JOHN DALTON · 1798 · P. 29-30"
+    "source": "JOHN DALTON · 1798 · P. 29"
    },
    "beatTimes": [
     [
      "E01-A1-08",
      19.5,
      22.0
-    ]
-   ]
-  },
-  {
-   "id": "09",
-   "beats": [
-    "E01-A1-09"
-   ],
-   "start": 22.0,
-   "end": 24.2,
-   "component": "ArchivalScanCard",
-   "assets": [
-    "VIS-001",
-    "TXT-009",
-    "TXT-010",
-    "MOT-003",
-    "TRN-001",
-    "LOK-009",
-    "LOK-010",
-    "SRC-001",
-    "SRC-029"
-   ],
-   "props": {
-    "srcId": "SRC-029",
-    "imgSize": [
-     1920,
-     2934
     ],
-    "crop": [
-     400,
-     420,
-     1100,
-     1050
-    ],
-    "side": "left",
-    "highlights": [
-     {
-      "box": [
-       570,
-       586,
-       330,
-       56
-      ],
-      "atSec": 1.6
-     }
-    ],
-    "quote": "almost an exact sky-blue by day",
-    "source": "JOHN DALTON · 1798 · P. 29-30"
-   },
-   "beatTimes": [
     [
      "E01-A1-09",
      22.0,
      24.2
+    ],
+    [
+     "E01-A1-10",
+     24.2,
+     26.3
     ]
    ]
   },
   {
-   "id": "10+11",
+   "id": "11",
    "beats": [
-    "E01-A1-10",
     "E01-A1-11"
    ],
-   "start": 24.2,
+   "start": 26.3,
    "end": 29.0,
    "component": "SwatchRows",
    "assets": [
     "VIS-017",
     "TXT-010",
-    "MOT-003",
+    "MOT-002",
     "TRN-001",
     "LOK-009",
     "LOK-010",
     "SRC-001",
-    "SRC-029",
-    "MOT-002"
+    "SRC-029"
    ],
    "props": {
     "columns": [
@@ -363,21 +329,16 @@
         "color": "#86B5E8",
         "name": "SKY-BLUE",
         "atSec": 0,
-        "fillSec": 0.46
+        "fillSec": 0.3
        },
        {
-        "atSec": 3.39
+        "atSec": 1.29
        }
       ]
      }
     ]
    },
    "beatTimes": [
-    [
-     "E01-A1-10",
-     24.2,
-     26.3
-    ],
     [
      "E01-A1-11",
      26.3,
@@ -392,7 +353,7 @@
     "E01-A1-13"
    ],
    "start": 29.0,
-   "end": 33.6,
+   "end": 33.86,
    "component": "ArchivalScanCard",
    "assets": [
     "VIS-001",
@@ -412,10 +373,10 @@
      2934
     ],
     "crop": [
+     500,
      400,
-     420,
-     1100,
-     1050
+     1080,
+     1030
     ],
     "side": "left",
     "highlights": [
@@ -426,7 +387,7 @@
        430,
        56
       ],
-      "atSec": 2.45
+      "atSec": 2.05
      }
     ],
     "quote": "in candle-light, however, it was astonishingly changed",
@@ -441,7 +402,7 @@
     [
      "E01-A1-13",
      31.4,
-     33.6
+     33.86
     ]
    ]
   },
@@ -455,7 +416,7 @@
     "E01-A1-18",
     "E01-A1-19"
    ],
-   "start": 33.6,
+   "start": 33.86,
    "end": 49.1,
    "component": "SwatchRows",
    "assets": [
@@ -477,7 +438,7 @@
     "rows": [
      {
       "name": "JOHN",
-      "nameAtSec": 4.24,
+      "nameAtSec": 3.98,
       "atSec": 0,
       "cells": [
        {
@@ -490,67 +451,67 @@
         "color": "#C8402F",
         "name": "RED",
         "atSec": 0,
-        "fillSec": 1.58
+        "fillSec": 1.32
        }
       ]
      },
      {
       "name": "FRIENDS",
-      "atSec": 4.24,
-      "dimAtSec": 8.73,
+      "atSec": 3.98,
+      "dimAtSec": 8.47,
       "cells": [
        {
         "color": "#E79AB9",
         "name": "PINK",
-        "atSec": 4.24,
-        "fillSec": 6.54
+        "atSec": 3.98,
+        "fillSec": 6.28
        },
        {
         "color": "#E79AB9",
         "name": "PINK",
-        "atSec": 4.24,
-        "fillSec": 7.38
+        "atSec": 3.98,
+        "fillSec": 7.12
        }
       ],
       "tag": {
        "text": "NO REAL CHANGE",
-       "atSec": 7.38
+       "atSec": 7.12
       }
      },
      {
       "name": "HIS BROTHER",
-      "nameAtSec": 12.7,
-      "atSec": 10.4,
+      "nameAtSec": 12.44,
+      "atSec": 10.14,
       "cells": [
        {
         "color": "#86B5E8",
         "name": "SKY-BLUE",
-        "atSec": 10.4,
-        "fillSec": 12.7
+        "atSec": 10.14,
+        "fillSec": 12.44
        },
        {
         "color": "#C8402F",
         "name": "RED",
-        "atSec": 10.4,
-        "fillSec": 12.7
+        "atSec": 10.14,
+        "fillSec": 12.44
        }
       ],
       "sub": {
        "text": "JONATHAN",
-       "atSec": 13.52
+       "atSec": 13.26
       }
      }
     ],
     "caption": {
      "text": "What he called red",
-     "atSec": 1.58,
-     "untilSec": 4.24
+     "atSec": 1.32,
+     "untilSec": 3.98
     }
    },
    "beatTimes": [
     [
      "E01-A1-14",
-     33.6,
+     33.86,
      36.0
     ],
     [
@@ -929,31 +890,39 @@
    ],
    "start": 72.2,
    "end": 81.4,
-   "component": "EyeDiagram",
+   "component": "EyeDissection",
    "assets": [
-    "VIS-019",
+    "VIS-022",
+    "TXT-009",
+    "TXT-010",
     "MOT-002",
     "TRN-001",
     "LOK-009",
     "LOK-010",
-    "MOT-003",
-    "TXT-011",
-    "MOT-001"
+    "TXT-011"
    ],
    "props": {
-    "mode": "simple",
-    "openKeys": [
+    "cutAtSec": 3.62,
+    "words": [
      {
-      "atSec": 0,
-      "open": 0.04
+      "text": "Tested",
+      "atSec": 0.72,
+      "untilSec": 6.57
      },
      {
+      "text": "His own eyes",
       "atSec": -41.9,
-      "open": 1
+      "untilSec": 6.57
      },
      {
-      "atSec": 4.56,
-      "open": 0.04
+      "text": "EXAMINED AFTER HE DIES",
+      "atSec": 3.62,
+      "style": "mono",
+      "untilSec": 6.57
+     },
+     {
+      "text": "His idea will fail the test.",
+      "atSec": 6.73
      }
     ],
     "tag": {
@@ -1146,24 +1115,28 @@
    ],
    "start": 95.3,
    "end": 98.6,
-   "component": "EyeDiagram",
+   "component": "EyeDissection",
    "assets": [
-    "VIS-019",
+    "VIS-022",
+    "TXT-009",
+    "TXT-010",
     "MOT-002",
     "TRN-001",
     "LOK-009",
     "LOK-010"
    ],
    "props": {
-    "mode": "simple",
-    "openKeys": [
+    "cutAtSec": -2,
+    "openAtSec": 0.58,
+    "words": [
      {
-      "atSec": 0,
-      "open": 0.04
+      "text": "Open Dalton's eyes",
+      "atSec": 0.58
      },
      {
-      "atSec": 0.58,
-      "open": 1
+      "text": "AS HE ASKED",
+      "atSec": 2.42,
+      "style": "mono"
      }
     ]
    },
