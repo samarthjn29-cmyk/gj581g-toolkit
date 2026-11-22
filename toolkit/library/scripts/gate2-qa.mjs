@@ -84,8 +84,11 @@ if (voice) {
   const at = act.voice?.atSec ?? 0;
   const cards = new Set(["SeriesTitleCard", "EpisodeCard"]);
   const lastVoiced = [...units].reverse().find((u) => !cards.has(u.component)) ?? units[units.length - 1];
-  const diff = Math.abs(f(at + d) - f(lastVoiced.end));
-  checks.push(`Voice: ${d.toFixed(3)} s from ${at.toFixed(2)} s, ends ${(at + d).toFixed(3)} s; last voiced beat ends ${lastVoiced.end.toFixed(3)} s; difference ${diff} frame(s)`);
+  // tailSec: a deliberate pause after the voice file ends (the gap before the next act), declared in the act file
+  // (WCL-E01 act 2, 22 Nov 2026: the approved beat sheet ends 0.64 s after Sam's take). Only that tail is accepted.
+  const tail = act.voice?.tailSec ?? 0;
+  const diff = Math.abs(f(at + d + tail) - f(lastVoiced.end));
+  checks.push(`Voice: ${d.toFixed(3)} s from ${at.toFixed(2)} s, ends ${(at + d).toFixed(3)} s${tail ? ` + ${tail.toFixed(2)} s tail` : ""}; last voiced beat ends ${lastVoiced.end.toFixed(3)} s; difference ${diff} frame(s)`);
   if (diff > 1) crit.push(`beats and voice differ by ${diff} frames`);
 } else checks.push("Voice length: not checked (no --voice given)");
 checks.push(

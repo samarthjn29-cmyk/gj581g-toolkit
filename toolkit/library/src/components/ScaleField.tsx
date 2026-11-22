@@ -12,7 +12,7 @@ import { exit, reveal, rise, sec, SLOW_OUT } from "../motion";
 export type ScalePhase = { atSec: number; total: number; cols: number; lit: number; litAtSec: number; seed?: number; label?: { text: string; atSec: number } };
 export type ScaleFieldProps = {
   phases: ScalePhase[];
-  lines?: { text: string; atSec: number; untilSec?: number; size?: "large" | "small" }[];
+  lines?: { text: string; atSec: number; untilSec?: number; size?: "large" | "small"; row?: number; accent?: boolean }[];
   source: string;
   startSec?: number;
 };
@@ -62,7 +62,7 @@ export const ScaleField: React.FC<ScaleFieldProps> = ({ phases, lines = [], sour
         const out = l.untilSec !== undefined ? exit(frame, fps, l.untilSec, t.motion.enterSec) : 1;
         const large = l.size !== "small";
         return (
-          <div key={`${l.text}${l.atSec}`} style={{ position: "absolute", left: 0, right: 0, top: large ? 120 : 196, textAlign: "center", fontFamily: large ? t.fonts.headline : t.fonts.mono, fontWeight: large ? t.fonts.headlineWeight : 500, fontSize: large ? 76 : 30, letterSpacing: large ? t.fonts.headlineTracking : 3, color: large ? t.colors.ink : t.colors.secondary, ...rise(p * out, 18) }}>
+          <div key={`${l.text}${l.atSec}`} style={{ position: "absolute", left: 0, right: 0, top: large ? 120 : 226 + (l.row ?? 0) * 44, textAlign: "center", fontFamily: large ? t.fonts.headline : t.fonts.mono, fontWeight: large ? t.fonts.headlineWeight : 500, fontSize: large ? 76 : 30, letterSpacing: large ? t.fonts.headlineTracking : 3, color: large ? t.colors.ink : l.accent ? t.colors.accent : t.colors.secondary, ...rise(p * out, 18) }}>
             {l.text}
           </div>
         );

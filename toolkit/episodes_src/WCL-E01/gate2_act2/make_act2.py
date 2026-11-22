@@ -6,6 +6,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 G1 = os.path.join(HERE, "..", "gate1_act2")
 LIB = os.path.join(HERE, "..", "..", "..", "library")
 LEAD = 2.4
+VOICE_SEC = 172.533  # ffprobe of public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav (SRC-032)
 W = [(t.strip(".,;?!\"'").lower(), a + LEAD, b + LEAD) for t, a, b in json.load(open(os.path.join(G1, "02_brothers_final_words.json")))]
 dump = json.load(open(os.path.join(G1, "beatsheet_dump.json")))
 vals = dump["values"] if isinstance(dump, dict) else dump
@@ -87,7 +88,7 @@ shot(B(6, 7), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-034", "imgSize": [1814, 2600], "crop": [150, 380, 1500, 1200], "side": "left",
     "highlights": [{"box": [200, 425, 1150, 95], "atSec": 0.6},
                    {"box": [945, 640, 615, 55], "atSec": r(word("plain"))},
-                   {"box": [190, 695, 1025, 55], "atSec": r(word("plain", 14)) + 0.3}],
+                   {"box": [190, 695, 1025, 55], "atSec": r(word("plain")) + 0.8}],
     "quote": "keep to truth and plainness, in language, habit, deportment, and behaviour",
     "source": "QUAKER ADVICE OF 1691 · PRINTED LONDON 1783 · P. 185",
     "notes": [{"text": "PLAIN CLOTHES, PLAIN WORDS", "atSec": r(word("plain", 14))}]},
@@ -95,8 +96,8 @@ shot(B(6, 7), "ArchivalScanCard", lambda r: {
 # 8-9 Dalton's first book, 1793 (first edition, e-rara): his habit of writing everything down.
 shot(B(8, 9), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-035", "imgSize": [1575, 2588], "crop": [250, 280, 1080, 1980], "side": "left",
-    "highlights": [{"box": [340, 560, 770, 85], "atSec": 0.5},
-                   {"box": [480, 1290, 520, 80], "atSec": r(word("writes"))}],
+    "highlights": [{"box": [340, 560, 770, 85], "atSec": 0.3},
+                   {"box": [480, 1290, 520, 80], "atSec": 0.9}],  # his name as he is named (QA: 2 s to read before the cut)
     "quote": "Meteorological Observations and Essays", "quoteMarks": False,
     "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZURICH",
     "notes": [{"text": "HIS FIRST BOOK · 1793", "atSec": r(word("writes"))},
@@ -111,11 +112,11 @@ shot(B(10, 11), "KineticLine", lambda r: {
 # 12-13 back to the map: the route from Eaglesfield to Kendal draws on, rings on Kendal, the map tilts back.
 shot(B(12, 13), "PeriodMapPlate", lambda r: {
     "srcId": "SRC-033", "size": MAP, "source": MAPSRC,
-    "views": [{"atSec": 0, "crop": [250, 2560, 2560, 1440]}],
+    "views": [{"atSec": 0, "crop": [100, 2450, 2900, 1631]}],
     "pins": [{"id": "eag", "x": EAG[0], "y": EAG[1], "atSec": 0.1},
              {"id": "ken", "x": KEN[0], "y": KEN[1], "atSec": r(word("teaching")) + 1.2}],
     "rings": [{"pin": "ken", "atSec": r(word("kendal", 26)), "pulses": 2}],
-    "route": {"from": "eag", "to": "ken", "atSec": r(word("teaching")), "drawSec": 1.3, "tilt": {"atSec": r(word("district")), "deg": 8}},
+    "route": {"from": "eag", "to": "ken", "atSec": r(word("teaching")), "drawSec": 1.3, "tilt": {"atSec": r(word("district")), "deg": 6}},
     "labels": [{"text": "IN KENDAL FROM AGE 15", "atSec": r(word("15")), "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 26))}, {"text": "WESTMORLAND", "atSec": r(word("market"))}]}},
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
@@ -124,7 +125,7 @@ shot(B(14, 15), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 1],
     "labels": [{"text": "THE GERANIUM, 1792", "atSec": max(0.2, r(word("geranium"))), "untilSec": r(word("takes")), "x": 1240, "y": 820},
                {"text": "WHAT DO YOU SEE?", "atSec": r(word("takes")) + 0.2, "x": 960, "y": 860, "align": "center", "accent": True}]},
-    transitionIn="push", focus=[1301, 949])
+    transitionIn="push", focus=[1248, 910])
 # 16-21 p.30: his friends, his surprise, they all agreed, except his brother.
 shot(B(16, 17, 18, 19, 20, 21), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-029", "imgSize": P30, "crop": [500, 510, 1080, 1030], "side": "left",
@@ -134,7 +135,7 @@ shot(B(16, 17, 18, 19, 20, 21), "ArchivalScanCard", lambda r: {
                    {"box": [570, 1000, 140, 56], "atSec": r(word("they", 41)) + 0.25},
                    {"box": [1085, 1000, 455, 56], "atSec": r(word("not", 44))},
                    {"box": [1180, 1060, 360, 56], "atSec": r(word("except"))},
-                   {"box": [570, 1118, 765, 56], "atSec": r(word("who", 50))}],
+                   {"box": [570, 1118, 765, 56], "atSec": r(word("brother"))}],
     "callout": {"atSec": r(word("except")), "dim": 0.7},
     "quote": "except my brother who saw it in the same light as myself",
     "source": "JOHN DALTON · 1798 · P. 30"},
@@ -190,8 +191,8 @@ shot(B(*range(45, 55)), "ScaleField", lambda r: {
               {"text": "Colour blindness", "atSec": r(word("colour", 118))},
               {"text": "RED-GREEN", "atSec": r(word("blindness")) + 0.2, "untilSec": r(word("trouble")), "size": "small"},
               {"text": "TROUBLE TELLING SOME REDS AND GREENS APART", "atSec": r(word("trouble")), "untilSec": r(word("women")), "size": "small"},
-              {"text": "MEN OF CHINESE OR JAPANESE DESCENT: 4-6.5%", "atSec": r(word("china")), "untilSec": r(word("still")), "size": "small"},
-              {"text": "MEN OF CHINESE OR JAPANESE DESCENT: 4-6.5% · STILL THERE", "atSec": r(word("still")), "size": "small"}],
+              {"text": "MEN OF CHINESE OR JAPANESE DESCENT: 4-6.5%", "atSec": r(word("china")), "size": "small"},
+              {"text": "STILL THERE", "atSec": r(word("still")), "size": "small", "row": 1, "accent": True}],
     "phases": [{"atSec": 0.2, "total": 100, "cols": 20, "lit": 8, "litAtSec": r(word("eight")), "label": {"text": "MEN OF EUROPEAN DESCENT · ABOUT 8 IN 100", "atSec": r(word("eight"))}},
                {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": r(word("four", 127)), "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
                {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": r(word("four", 131)), "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}}]},
@@ -203,17 +204,18 @@ shot(B(55, 56), "KineticLine", lambda r: {
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
 # 57-58 grass, blood, cherries, sky: each word fills in its colour (TXT-015).
 shot(B(57, 58), "KineticLine", lambda r: {
-    "lines": [{"text": "Grass", "atSec": r(word("grass")), "fill": {"word": "Grass", "atSec": r(word("grass")), "color": GRASS}},
+    "lines": [{"text": "YOUR WHOLE LIFE", "atSec": -1, "style": "mono"},
+              {"text": "Grass", "atSec": r(word("grass")), "fill": {"word": "Grass", "atSec": r(word("grass")), "color": GRASS}},
               {"text": "Blood", "atSec": r(word("blood")), "fill": {"word": "Blood", "atSec": r(word("blood")), "color": BLOOD}},
               {"text": "Cherries", "atSec": r(word("cherries")), "fill": {"word": "Cherries", "atSec": r(word("cherries")), "color": CHERRY}},
               {"text": "Sky", "atSec": r(word("sky")), "fill": {"word": "Sky", "atSec": r(word("sky")), "color": SKY}}]})
 # 59-62 the same colour name, and nobody can show you the difference (illustrative).
 shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
     "columns": ["WHAT IT IS CALLED"],
-    "rows": [{"name": "YOU", "atSec": 0, "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": r(word("names"))}],
+    "rows": [{"name": "YOU", "atSec": 0, "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
               "tag": {"text": "ILLUSTRATIVE", "atSec": r(word("different", 153))}},
              {"name": "EVERYONE ELSE", "atSec": 0.3, "dimAtSec": r(word("nobody", 155)),
-              "cells": [{"color": RED, "name": "RED", "atSec": 0.3, "fillSec": r(word("names")) + 0.2}]}]})
+              "cells": [{"color": RED, "name": "RED", "atSec": 0.3, "fillSec": 0.8}]}]})
 # 63-65 one evening, a flower changes colour (his colour names: what he called them, not what he saw).
 shot(B(63, 64, 65), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 1],
@@ -224,7 +226,7 @@ shot(B(63, 64, 65), "FootagePlate", lambda r: {
     transitionIn="push", focus=[1180, 450])
 # 66-68 Dalton is a scientist: he wants to know why (act 3 starts on the next frame).
 shot(B(66, 67, 68), "KineticLine", lambda r: {
-    "lines": [{"text": "A scientist.", "atSec": r(word("scientist"))},
+    "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164))},
               {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono"},
               {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED}}]})
 
@@ -260,7 +262,7 @@ audio = [
 ]
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
-       "voice": {"id": "SRC-032", "atSec": LEAD},
+       "voice": {"id": "SRC-032", "atSec": LEAD, "tailSec": round(BEAT["E01-A2-68"][1] - LEAD - VOICE_SEC, 2)},
        "audio": audio, "beats": shots}
 json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act02.json"), "w"), indent=1, ensure_ascii=False)
 json.dump({"break": BREAK, "sweeps": SWEEPS, "dips": DIPS}, open(os.path.join(LIB, "src", "episodes", "ep01-act02.music.json"), "w"))
