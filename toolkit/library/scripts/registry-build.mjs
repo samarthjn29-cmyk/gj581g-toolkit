@@ -23,6 +23,12 @@ const limits = (t) => ({
   maxShare: Number((t.match(/max\s+(\d+(?:\.\d+)?)\s*%\s+of\s+(?:the\s+)?runtime/i) ?? [])[1] ?? NaN) || null,
 });
 const noLimit = [];
+// Drive_Copy (Sam, 22 Nov 2026: "Are we saving the digital copies of the assets we are using in their respective
+// folders?"): every Active asset that is a file (or has a preview) has a copy in its Video Reference Library folder,
+// linked in column W. Code-only rules and motion presets (MOT-, TRN-001, LOK-010) live in the toolkit repo.
+const W = header.indexOf("Drive_Copy");
+const CODE_ONLY = /^(MOT-|TRN-001$|LOK-010$)/;
+const noCopy = [];
 const STATUSES = new Set(["Planned", "Spec Ready", "Active", "Retired"]);
 const assets = {};
 const problems = [];
@@ -42,6 +48,7 @@ for (const r of rows.slice(1)) {
     ...limits(K >= 0 ? r[K] ?? "" : ""),
   };
   if (status === "Active" && K >= 0 && !(r[K] ?? "").trim() && !id.startsWith("SRC-")) noLimit.push(id);
+  if (status === "Active" && W >= 0 && !(r[W] ?? "").trim() && !CODE_ONLY.test(id)) noCopy.push(id);
 }
 if (problems.length) {
   console.error("Registry problems:\n- " + problems.join("\n- "));
@@ -59,3 +66,5 @@ for (const a of Object.values(assets)) counts[a.status] = (counts[a.status] ?? 0
 console.log(`${dest}: ${Object.keys(assets).length} assets`, counts);
 if (K < 0) console.log("WARN: no Best_Use_&_Limit column in the dump (dump Master_Asset_Registry!A1:K).");
 else if (noLimit.length) console.log(`WARN: Active assets with no Best_Use_&_Limit yet: ${noLimit.join(", ")}`);
+if (W < 0) console.log("WARN: no Drive_Copy column in the dump (dump Master_Asset_Registry!A1:W).");
+else if (noCopy.length) console.log(`WARN: Active assets with no Drive copy yet: ${noCopy.join(", ")}`);
