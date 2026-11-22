@@ -133,10 +133,11 @@ shot(B(27, 28), "KineticLine", lambda r: {
 # the cut line traces round it on "examined"; the words beside it; THE TEST · 1844.
 shot(B(29, 30, 31), "EyeDissection", lambda r: {
     "cutAtSec": r(word("examined")),
-    "words": [{"text": "Tested", "atSec": r(word("tested")), "untilSec": r(word("his", 78))},
-              {"text": "His own eyes", "atSec": r(word("own")), "untilSec": r(word("his", 78))},
-              {"text": "EXAMINED AFTER HE DIES", "atSec": r(word("examined")), "style": "mono", "untilSec": r(word("his", 78))},
-              {"text": "His idea will fail the test.", "atSec": r(word("idea"))}],
+    # The first group leaves in the pause after "dies." so the next line arrives alone, in the same place.
+    "words": [{"text": "Tested", "atSec": r(word("tested")), "untilSec": r(word("dies", end=True) + 0.7)},
+              {"text": "His own eyes", "atSec": r(word("own")), "untilSec": r(word("dies", end=True) + 0.7)},
+              {"text": "EXAMINED AFTER HE DIES", "atSec": r(word("examined")), "style": "mono", "untilSec": r(word("dies", end=True) + 0.7)},
+              {"text": "His idea will fail the test.", "atSec": r(word("idea")), "group": 1}],
     "tag": {"at": "corner", "parts": [{"text": "THE TEST · 1844", "atSec": r(word("his", 78))}]}})
 # 32-33 the counter: 0 -> 151 YEARS, locks on "years".
 shot(B(32, 33), "YearCounter", lambda r: {

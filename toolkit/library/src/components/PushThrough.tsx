@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAsset } from "../registry";
+import { useTheme } from "../themes";
 import { sec } from "../motion";
 
 // TRN-006 PushThrough (from Colour_v1): the new shot grows out of the last shot's key picture.
@@ -13,6 +14,7 @@ export const PushThrough: React.FC<{
   durSec?: number;
 }> = ({ from, to, atSec, focus, durSec = 0.6 }) => {
   useAsset("TRN-006");
+  const t = useTheme();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const a = sec(atSec, fps);
@@ -34,6 +36,7 @@ export const PushThrough: React.FC<{
             clipPath: p >= 1 ? undefined : `circle(${(p * 2300).toFixed(1)}px at ${origin})`,
             transform: `scale(${0.92 + 0.08 * p})`,
             transformOrigin: origin,
+            backgroundColor: t.colors.canvas, // covers the old shot inside the circle (no ghost text)
           }}
         >
           {to}

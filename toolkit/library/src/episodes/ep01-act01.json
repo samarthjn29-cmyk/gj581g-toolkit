@@ -932,22 +932,23 @@
      {
       "text": "Tested",
       "atSec": 0.72,
-      "untilSec": 6.57
+      "untilSec": 5.6
      },
      {
       "text": "His own eyes",
       "atSec": -41.9,
-      "untilSec": 6.57
+      "untilSec": 5.6
      },
      {
       "text": "EXAMINED AFTER HE DIES",
       "atSec": 3.62,
       "style": "mono",
-      "untilSec": 6.57
+      "untilSec": 5.6
      },
      {
       "text": "His idea will fail the test.",
-      "atSec": 6.73
+      "atSec": 6.73,
+      "group": 1
      }
     ],
     "tag": {

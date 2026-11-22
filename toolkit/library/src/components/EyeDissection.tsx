@@ -26,7 +26,8 @@ export type EyeDissectionProps = {
     atSec: number;
     style?: "serif" | "mono";
     untilSec?: number;
-  }[];
+    group?: number;
+  }[]; // group: lines that share a column
   dimAtSec?: number;
   tag?: DatelineTagProps;
   startSec?: number;
@@ -493,40 +494,63 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
           );
         })}
       </svg>
-      <div
-        style={{ position: "absolute", left: t.safe.x, top: 300, width: 760 }}
-      >
-        {words
-          .filter(
-            (w) =>
-              w.untilSec === undefined || frame < sec(w.untilSec + 0.6, fps),
-          ) // gone words leave the column
-          .map((w) => {
-            const p = reveal(frame, fps, w.atSec, t.motion.enterSec);
-            const out =
-              w.untilSec !== undefined
-                ? exit(frame, fps, w.untilSec, t.motion.enterSec)
-                : 1;
-            const mono = w.style === "mono";
-            return (
-              <div
-                key={w.text}
-                style={{
-                  fontFamily: mono ? t.fonts.mono : t.fonts.headline,
-                  fontWeight: mono ? 500 : t.fonts.headlineWeight,
-                  fontSize: mono ? 30 : 72,
-                  lineHeight: mono ? 1.5 : 1.05,
-                  letterSpacing: mono ? 3 : t.fonts.headlineTracking,
-                  color: mono ? t.colors.secondary : t.colors.ink,
-                  marginBottom: mono ? 10 : 22,
-                  ...rise(p * out, mono ? 12 : 24),
-                }}
-              >
-                {w.text}
-              </div>
-            );
-          })}
-      </div>
+      {/* Words sit in groups; each group has its own column at the same place, and a new group only arrives once
+          the group before it has gone (Sam, act 1 v3: the next line appeared under the fading one, then jumped up). */}
+      {Array.from(new Set(words.map((w) => w.group ?? 0))).map(
+        (g, gi, groups) => {
+          const prevUntil = Math.max(
+            -Infinity,
+            ...words
+              .filter(
+                (w) =>
+                  groups.indexOf(w.group ?? 0) < gi && w.untilSec !== undefined,
+              )
+              .map((w) => w.untilSec as number),
+          );
+          return (
+            <div
+              key={g}
+              style={{
+                position: "absolute",
+                left: t.safe.x,
+                top: 300,
+                width: 760,
+              }}
+            >
+              {words
+                .filter((w) => (w.group ?? 0) === g)
+                .map((w) => {
+                  const at = Number.isFinite(prevUntil)
+                    ? Math.max(w.atSec, prevUntil + 0.6)
+                    : w.atSec;
+                  const p = reveal(frame, fps, at, t.motion.enterSec);
+                  const out =
+                    w.untilSec !== undefined
+                      ? exit(frame, fps, w.untilSec, t.motion.enterSec)
+                      : 1;
+                  const mono = w.style === "mono";
+                  return (
+                    <div
+                      key={w.text}
+                      style={{
+                        fontFamily: mono ? t.fonts.mono : t.fonts.headline,
+                        fontWeight: mono ? 500 : t.fonts.headlineWeight,
+                        fontSize: mono ? 30 : 72,
+                        lineHeight: mono ? 1.5 : 1.05,
+                        letterSpacing: mono ? 3 : t.fonts.headlineTracking,
+                        color: mono ? t.colors.secondary : t.colors.ink,
+                        marginBottom: mono ? 10 : 22,
+                        ...rise(p * out, mono ? 12 : 24),
+                      }}
+                    >
+                      {w.text}
+                    </div>
+                  );
+                })}
+            </div>
+          );
+        },
+      )}
       {tag ? <DatelineTag {...tag} /> : null}
     </AbsoluteFill>
   );
