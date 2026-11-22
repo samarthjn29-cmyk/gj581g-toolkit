@@ -142,6 +142,37 @@ export const DEMO: Record<string, Record<string, unknown>> = {
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.
 export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
+  "HalftoneMoire-Screen": {
+    name: "HalftoneMoire",
+    props: {
+      color: "#E79AB9",
+      medium: "screen",
+      name: "PREVIEW · PINK ON A SCREEN",
+      loupe: { atSec: 0.3, from: [1130, 470], to: [1480, 600], moveSec: 3, r: 230, cell: 30 },
+      lines: [{ text: "Preview: red and blue light", atSec: 0.6 }],
+    },
+  },
+  "KineticLine-Mark": {
+    name: "KineticLine",
+    props: {
+      ink: true,
+      lines: [
+        { text: "Preview marker highlight", atSec: 0.4, fill: { word: "marker", atSec: 1.0, color: "#00E0BE", style: "mark", onMark: "#2F2D2C" } },
+        { text: "PREVIEW · INK-PRESSED HEADLINE", atSec: 1.2, style: "mono" },
+      ],
+    },
+  },
+  "FootagePlate-Screen": {
+    name: "FootagePlate",
+    props: {
+      srcId: "SRC-031",
+      kind: "image",
+      size: [1280, 2078],
+      crop: [200, 250, 900, 506],
+      screen: { strength: 1 },
+      labels: [{ text: "PREVIEW · ON A SCREEN", atSec: 0.5, x: 960, y: 900, align: "center" }],
+    },
+  },
   "ArchivalScanCard-Callout": {
     name: "ArchivalScanCard",
     props: {

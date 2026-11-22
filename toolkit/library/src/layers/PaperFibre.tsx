@@ -43,3 +43,20 @@ export const InkEdgeFilter: React.FC<{ id: string; seed?: number; amount?: numbe
     </filter>
   </svg>
 );
+
+// TXT-016 InkSpreadType / InkPress (studied Chris Moran's shorts "The SECRET to editing nostalgia" and "A
+// counter-intuitive way to make your work look analog"; analysis only): blur the shape, then threshold it back
+// (a "choke"), with a touch of turbulence, so sharp digital corners round off and edges go slightly irregular,
+// like ink pressed into paper. Use on large headline type and flat shapes only (filter: url(#id)).
+export const InkPressFilter: React.FC<{ id: string; seed?: number; blur?: number; rough?: number }> = ({ id, seed = 5, blur = 1.4, rough = 1.5 }) => (
+  <svg width={0} height={0} style={{ position: "absolute" }}>
+    <filter id={id} x="-3%" y="-3%" width="106%" height="106%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves={2} seed={seed} result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale={rough} xChannelSelector="R" yChannelSelector="G" result="d" />
+      <feGaussianBlur in="d" stdDeviation={blur} result="b" />
+      <feComponentTransfer in="b">
+        <feFuncA type="linear" slope={6} intercept={-2.4} />
+      </feComponentTransfer>
+    </filter>
+  </svg>
+);

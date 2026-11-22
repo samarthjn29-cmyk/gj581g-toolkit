@@ -5,12 +5,15 @@ import { useAssets, useSource } from "../registry";
 import { drift, exit, reveal, rise } from "../motion";
 import { CropImage, type Rect } from "../layers/CropImage";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { InkPressFilter } from "../layers/PaperFibre";
+import { FillLine, type WordFill } from "../layers/FillWord";
 
 // VIS-020 KineticLine (beat type 3: a hinge question or one key label the viewer must keep, calm).
 // One short line set large (serif), optionally with a small mono line under it, revealed on its word,
 // over the canvas, over a dimmed picture ("full") or beside a picture card ("card-right").
 export type KineticLineProps = {
-  lines: { text: string; atSec: number; style?: "serif" | "mono"; untilSec?: number }[];
+  lines: { text: string; atSec: number; style?: "serif" | "mono"; untilSec?: number; fill?: WordFill }[];
+  ink?: boolean; // TXT-016 InkPress on the serif lines (period headline cards)
   backdrop?: { srcId: string; imgSize: readonly [number, number]; crop?: Rect; layout: "full" | "card-right"; dim?: number };
   align?: "centre" | "left";
   tag?: DatelineTagProps;
@@ -49,8 +52,8 @@ const Backdrop: React.FC<{ b: NonNullable<KineticLineProps["backdrop"]> }> = ({ 
   );
 };
 
-export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align = "centre", tag, startSec = 0 }) => {
-  useAssets(["VIS-020", "MOT-002"]);
+export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align = "centre", tag, ink, startSec = 0 }) => {
+  useAssets(["VIS-020", "MOT-002", ...(ink ? ["TXT-016"] : []), ...(lines.some((l) => l.fill) ? [lines.find((l) => l.fill)?.fill?.style === "mark" ? "TXT-017" : "TXT-015"] : [])]);
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -62,6 +65,7 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
   return (
     <AbsoluteFill style={{ opacity: reveal(frame, fps, startSec, 0.6) }}>
       {backdrop ? <Backdrop b={backdrop} /> : null}
+      {ink ? <InkPressFilter id="klinkpress" /> : null}
       <div style={boxStyle}>
         {lines.map((l) => {
           const p = reveal(frame, fps, l.atSec, t.motion.enterSec);
@@ -79,10 +83,11 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
                 color: mono ? t.colors.secondary : t.colors.ink,
                 marginTop: mono ? 30 : 0,
                 textShadow: backdrop?.layout === "full" ? "0 4px 30px rgba(0,0,0,0.6)" : undefined,
+                filter: ink && !mono ? "url(#klinkpress)" : undefined,
                 ...rise(p * out, mono ? 12 : 26),
               }}
             >
-              {l.text}
+              <FillLine text={l.text} fill={l.fill} ink={mono ? t.colors.secondary : t.colors.ink} />
             </div>
           );
         })}

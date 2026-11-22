@@ -5,6 +5,7 @@ import { drift, exit, reveal, sec, SLOW_OUT } from "../motion";
 import { CropImage, type Rect } from "../layers/CropImage";
 import { Label, type LabelSpec } from "../layers/Label";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { ScreenTexture } from "../layers/ScreenTexture";
 
 // VIS-016 FootagePlate (beat type 4: a real clip or photo that sets a scene, calm).
 // The picture fills the frame with one slow move and the theme grade, and always carries a label or a
@@ -29,6 +30,7 @@ export type FootagePlateProps = {
   fadeOutSec?: number; // the frame fades to the canvas from here (into a dark next shot)
   labels?: LabelSpec[];
   tag?: DatelineTagProps;
+  screen?: { strength?: number }; // LOK-023: the picture is on a screen (scanlines, sub-pixels, edge falloff)
   startSec?: number;
 };
 
@@ -52,9 +54,10 @@ export const FootagePlate: React.FC<FootagePlateProps> = ({
   fadeOutSec,
   labels = [],
   tag,
+  screen,
   startSec = 0,
 }) => {
-  useAssets(["VIS-016", "MOT-001"]);
+  useAssets(["VIS-016", "MOT-001", ...(screen ? ["LOK-023"] : [])]);
   const src = useSourceFile(srcId, file);
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -93,6 +96,7 @@ export const FootagePlate: React.FC<FootagePlateProps> = ({
       <AbsoluteFill style={{ opacity: pIn * pOut }}>
         <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, push)})`, transformOrigin: "50% 50%" }}>
           {picture}
+          {screen ? <ScreenTexture strength={screen.strength} /> : null}
         </AbsoluteFill>
         <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%)" }} />
       </AbsoluteFill>

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T09:27:26.812Z",
+ "generated": "2026-11-22T09:50:29.167Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1965,10 +1965,74 @@
    "folder": "2_Text",
    "name": "InkSpreadType",
    "paths": [
-    "src/layers/PaperFibre.tsx"
+    "src/layers/PaperFibre.tsx",
+    "src/components/KineticLine.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: period headline cards.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-023": {
+   "id": "LOK-023",
+   "folder": "5_Look_and_Color",
+   "name": "ScreenMedium",
+   "paths": [
+    "src/layers/ScreenTexture.tsx",
+    "src/layers/DotScreen.tsx",
+    "src/components/HalftoneMoire.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: screen beats and pictures on a display. Limit: max 4 beats per episode.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "TXT-017": {
+   "id": "TXT-017",
+   "folder": "2_Text",
+   "name": "MarkerHighlight",
+   "paths": [
+    "src/layers/FillWord.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: one key word per headline line. Limit: max 4 per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-007": {
+   "id": "MAP-007",
+   "folder": "9_Maps",
+   "name": "SatelliteCutout",
+   "paths": [
+    "src/components/SatelliteCutout.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: period headline cards.",
+   "use": "Best use: places seen from above. Limit: max 4 beats per episode.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "TRN-010": {
+   "id": "TRN-010",
+   "folder": "4_Transitions",
+   "name": "CutOnAction",
+   "paths": [
+    "rules/beat-routing.md",
+    "scripts/gate2-qa.mjs"
+   ],
+   "status": "Planned",
+   "use": "Best use: scene changes where something moves.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-009": {
+   "id": "MUS-009",
+   "folder": "7_Music",
+   "name": "DocPulseBed",
+   "paths": [
+    "media/ambient_bed.py (pulse)"
+   ],
+   "status": "Planned",
+   "use": "Best use: analytic or tension acts; Sam picks first.",
    "maxBeats": null,
    "maxShare": null
   }

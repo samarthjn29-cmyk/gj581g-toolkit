@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import { useTheme } from "../themes";
 import { useAssets } from "../registry";
 import { drift, reveal, rise, sec, SLOW_OUT } from "../motion";
-import { cmyk, DotPattern, dotR, PROCESS_INKS, SCREEN_ANGLES } from "../layers/DotScreen";
+import { cmyk, DotPattern, dotR, PROCESS_INKS, SCREEN_ANGLES, SubpixelPattern } from "../layers/DotScreen";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 import { FillLine, type WordFill } from "../layers/FillWord";
 
@@ -16,6 +16,9 @@ import { FillLine, type WordFill } from "../layers/FillWord";
 // Own build (studied Chris Moran's short on Johnny Harris's moire stills; analysis only).
 export type HalftoneMoireProps = {
   color: string; // data colour (#RRGGBB) of the swatch
+  // "print" (default): process-ink dots on paper. "screen" (LOK-023): the same colour as a display makes it,
+  // red/green/blue sub-pixel stripes on black, with a faint turning scanline screen for the moire.
+  medium?: "print" | "screen";
   name?: string; // swatch label, e.g. PINK
   loupe: { atSec: number; from: [number, number]; to: [number, number]; moveSec: number; r?: number; cell?: number };
   moire?: { opacity?: number; turnDeg?: number; scale?: number };
@@ -26,8 +29,8 @@ export type HalftoneMoireProps = {
 
 const SW = { x: 860, y: 200, w: 920, h: 680 }; // the swatch box
 
-export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, name, loupe, moire = {}, lines = [], tag, startSec = 0 }) => {
-  useAssets(["LOK-017", "MOT-002"]);
+export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, medium = "print", name, loupe, moire = {}, lines = [], tag, startSec = 0 }) => {
+  useAssets(["LOK-017", "MOT-002", ...(medium === "screen" ? ["LOK-023"] : [])]);
   const t = useTheme();
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const frame = useCurrentFrame();
@@ -59,6 +62,10 @@ export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, name, loupe
             {inks.map((k) => (
               <DotPattern key={k} id={`${k}${uid}`} cell={cell} angle={SCREEN_ANGLES[k]} r={dotR(cell, cov[k])} color={PROCESS_INKS[k]} />
             ))}
+            <SubpixelPattern id={`px${uid}`} cell={cell} color={color} />
+            <pattern id={`sl${uid}`} width={8} height={mCell * 0.5} patternUnits="userSpaceOnUse" patternTransform={`rotate(${turn})`}>
+              <rect x={0} y={0} width={8} height={mCell * 0.14} fill={t.colors.canvas} />
+            </pattern>
             <DotPattern id={`mo${uid}`} cell={mCell} angle={SCREEN_ANGLES.M + turn} r={mCell * 0.24} color={t.colors.canvas} />
             <clipPath id={clip}>
               <circle cx={lx} cy={ly} r={R * pL} />
@@ -67,7 +74,14 @@ export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, name, loupe
           {/* the flat swatch, as the eye sees it from a distance */}
           <rect x={SW.x} y={SW.y} width={SW.w} height={SW.h} rx={10} fill={color} />
           {/* inside the loupe: paper and ink dots, then the turning screen that makes the moire */}
-          <g clipPath={`url(#${clip})`}>
+          {medium === "screen" ? (
+            <g clipPath={`url(#${clip})`}>
+              <rect x={0} y={0} width={1920} height={1080} fill={t.colors.dimMask} />
+              <rect x={0} y={0} width={1920} height={1080} fill={`url(#px${uid})`} />
+              <rect x={0} y={0} width={1920} height={1080} fill={`url(#sl${uid})`} opacity={mOp * 1.6} />
+            </g>
+          ) : null}
+          <g clipPath={`url(#${clip})`} opacity={medium === "screen" ? 0 : 1}>
             <rect x={0} y={0} width={1920} height={1080} fill={t.colors.ink} />
             {inks.map((k) => (
               <rect key={k} x={0} y={0} width={1920} height={1080} fill={`url(#${k}${uid})`} style={{ mixBlendMode: "multiply" }} />
