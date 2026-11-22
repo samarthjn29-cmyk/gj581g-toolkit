@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T16:06:37.048Z",
+ "generated": "2026-11-22T16:41:05.724Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2598,6 +2598,102 @@
    ],
    "status": "Planned",
    "use": "Best use: under TXT-021 TypewriterLine, one key per letter at texture level. Limit: with TXT-021 only.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-014": {
+   "id": "TRN-014",
+   "folder": "4_Transitions",
+   "name": "StaticBurst",
+   "paths": [
+    "src/components/StaticBurst.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: out of a period title card into its first archival picture. Limit: max 2 per episode, never two in a row, never over a real photo of a person's face. Not for: calm reflective moments (use a dissolve).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TEX-008": {
+   "id": "TEX-008",
+   "folder": "3_Textures",
+   "name": "ScreenStrokes",
+   "paths": [
+    "src/layers/ScreenStrokes.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: under a held document or a monochrome photo for 3+ s. Limit: max 3 per act; never over the words being highlighted, never on a colour photo.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-045": {
+   "id": "VIS-045",
+   "folder": "1_Visuals",
+   "name": "PageSpread",
+   "paths": [
+    "src/components/PageSpread.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a document with several pages the narration names (a memo, a paper's pages). Limit: max 2 per episode; real pages only, credited; at least 4 s on screen before a highlight.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-022": {
+   "id": "TXT-022",
+   "folder": "2_Text",
+   "name": "RuledTitle",
+   "paths": [
+    "src/layers/RuledTitle.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: naming a document, place or case the first time (THE ... MEMO). Limit: max 2 per act; pairs with TXT-021 TypewriterLine, not with KeywordSlab in the same shot.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-046": {
+   "id": "VIS-046",
+   "folder": "1_Visuals",
+   "name": "ChartRebuild",
+   "paths": [
+    "src/components/ChartRebuild.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one dense published figure the episode depends on. Limit: max 1 per episode; the rebuilt chart uses only the figure's own data, the threshold said aloud.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-047": {
+   "id": "VIS-047",
+   "folder": "1_Visuals",
+   "name": "TradeoffSliders",
+   "paths": [
+    "src/components/TradeoffSliders.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a trade-off the narration states (more of X costs Y). Limit: max 1 per episode; illustrative, labelled ILLUSTRATIVE unless the values are sourced.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-048": {
+   "id": "VIS-048",
+   "folder": "1_Visuals",
+   "name": "BuildUpMap",
+   "paths": [
+    "src/components/BuildUpMap.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: an episode built from 3-6 named ideas, shown again at each chapter end and as the recap. Limit: 1 per episode; labels are the narration's own words; icons are our own silhouettes, no real people.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-026": {
+   "id": "LOK-026",
+   "folder": "5_Look_and_Color",
+   "name": "ChapterColourKey",
+   "paths": [
+    "src/themes/chapterKey.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: episodes with 3+ acts that return to one diagram. Limit: 3-6 colours, all checked for 3:1 contrast on the canvas; never used for data colours (a data colour stays its real colour).",
    "maxBeats": null,
    "maxShare": null
   }

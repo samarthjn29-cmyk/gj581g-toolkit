@@ -7,7 +7,9 @@ import { sec, SLOW_OUT } from "../motion";
 // The rest of the line keeps the theme ink. Calm: one fill per line, 0.6 s, no bounce.
 // style "fill" (TXT-015): the letters fill. style "mark" (TXT-017 MarkerHighlight, studied Chris Moran's short on
 // Vox's animation style): a solid block sweeps in BEHIND the word, like a marker; the letters switch to `onMark`.
-export type WordFill = { word: string; atSec: number; color: string; sec?: number; style?: "fill" | "mark"; onMark?: string };
+export type WordFill = { word: string; atSec: number; color: string; sec?: number; style?: "fill" | "mark"; onMark?: string; outline?: string };
+// outline: a thin stroke round the filled letters, for a dark data colour on the dark canvas (WCL-E01 act 2 review,
+// 22 Nov 2026: blood red #7A1A1A read at 1.32:1). The colour stays the data colour; the stroke carries the shape.
 
 export const FillLine: React.FC<{ text: string; fill?: WordFill; ink: string }> = ({ text, fill, ink }) => {
   const frame = useCurrentFrame();
@@ -42,6 +44,7 @@ export const FillLine: React.FC<{ text: string; fill?: WordFill; ink: string }> 
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
+          WebkitTextStroke: fill.outline ? `2px ${fill.outline}` : undefined,
         }}
       >
         {w}

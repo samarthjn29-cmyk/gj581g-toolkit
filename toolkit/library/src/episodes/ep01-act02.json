@@ -342,10 +342,10 @@
      2600
     ],
     "crop": [
-     150,
-     380,
-     1500,
-     1200
+     185,
+     370,
+     1395,
+     1330
     ],
     "side": "left",
     "highlights": [
@@ -457,15 +457,15 @@
     ],
     "quote": "Meteorological Observations and Essays",
     "quoteMarks": false,
-    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZURICH",
+    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZÜRICH",
     "notes": [
      {
       "text": "HIS FIRST BOOK · 1793",
-      "atSec": 2.14
+      "atSec": 1.0
      },
      {
       "text": "BUILT ON HIS WEATHER RECORDS",
-      "atSec": 4.25
+      "atSec": 2.6
      }
     ]
    },
@@ -525,6 +525,15 @@
      "atSec": 0.1,
      "rowsFromSec": 0.6,
      "rowsToSec": 3.96
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "ILLUSTRATION",
+       "atSec": 0.1
+      }
+     ]
     }
    },
    "beatTimes": [
@@ -621,7 +630,7 @@
     "labels": [
      {
       "text": "IN KENDAL FROM AGE 15",
-      "atSec": 5.07,
+      "atSec": 4.17,
       "x": 960,
       "y": 860,
       "align": "center",
@@ -928,9 +937,9 @@
      },
      {
       "box": [
-       350,
-       1005,
-       70,
+       336,
+       1002,
+       84,
        40
       ],
       "atSec": 4.91
@@ -1032,7 +1041,7 @@
      2480,
      1395
     ],
-    "caption": "STOCKINGS OF THE PERIOD · c. 1806-10 · RIJKSMUSEUM",
+    "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
     "printScreen": 0.08,
     "printScreenUntilSec": 15.05,
     "states": [
@@ -1101,9 +1110,9 @@
       "align": "center"
      },
      {
-      "text": "IN JOHN'S WORDS",
+      "text": "TO JOHN · AS THE STORY TELLS IT",
       "atSec": 8.46,
-      "untilSec": 15.84,
+      "untilSec": 15.44,
       "x": 960,
       "y": 800,
       "align": "center"
@@ -1111,7 +1120,7 @@
      {
       "text": "'A BLUISH DARK DRAB' · LONSDALE, 1874",
       "atSec": 11.54,
-      "untilSec": 15.84,
+      "untilSec": 15.44,
       "x": 960,
       "y": 860,
       "align": "center",
@@ -1313,7 +1322,7 @@
        1300,
        1300
       ],
-      "label": "THE STOCKINGS",
+      "label": "THE STOCKINGS · A PERIOD PAIR",
       "atSec": 0.6,
       "stamp": {
        "text": "SAME",
@@ -1446,11 +1455,6 @@
       "size": "small"
      },
      {
-      "text": "MEN OF CHINESE OR JAPANESE DESCENT: 4-6.5%",
-      "atSec": 22.69,
-      "size": "small"
-     },
-     {
       "text": "STILL THERE",
       "atSec": 24.29,
       "size": "small",
@@ -1492,6 +1496,18 @@
       "label": {
        "text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4",
        "atSec": 18.73
+      }
+     },
+     {
+      "atSec": 22.69,
+      "total": 100,
+      "cols": 20,
+      "lit": 5,
+      "litAtSec": 22.89,
+      "seed": 4,
+      "label": {
+       "text": "MEN OF CHINESE OR JAPANESE DESCENT · 4–6.5 IN 100",
+       "atSec": 22.89
       }
      }
     ]
@@ -1577,11 +1593,6 @@
      {
       "text": "Picture it from the inside.",
       "atSec": 0.65
-     },
-     {
-      "text": "YOUR WHOLE LIFE",
-      "atSec": 4.49,
-      "style": "mono"
      }
     ]
    },
@@ -1626,7 +1637,7 @@
     "lines": [
      {
       "text": "YOUR WHOLE LIFE",
-      "atSec": -1,
+      "atSec": 0,
       "style": "mono"
      },
      {
@@ -1644,7 +1655,8 @@
       "fill": {
        "word": "Blood",
        "atSec": 2.45,
-       "color": "#7A1A1A"
+       "color": "#7A1A1A",
+       "outline": "#D9D2C5"
       }
      },
      {
@@ -1653,7 +1665,8 @@
       "fill": {
        "word": "Cherries",
        "atSec": 3.21,
-       "color": "#B3262E"
+       "color": "#B3262E",
+       "outline": "#D9D2C5"
       }
      },
      {
@@ -1718,7 +1731,7 @@
       ],
       "tag": {
        "text": "ILLUSTRATIVE",
-       "atSec": 5.9
+       "atSec": 0
       }
      },
      {
@@ -1805,17 +1818,16 @@
     "labels": [
      {
       "text": "SKY-BLUE · HIS WORDS",
-      "atSec": 1.49,
-      "untilSec": 2.65,
+      "atSec": 0.4,
+      "untilSec": 2.3,
       "x": 1240,
       "y": 820
      },
      {
       "text": "RED · HIS WORDS",
-      "atSec": 2.9499999999999997,
-      "untilSec": 3.95,
+      "atSec": 2.75,
       "x": 1240,
-      "y": 820,
+      "y": 760,
       "accent": true
      },
      {
@@ -1887,7 +1899,8 @@
       "fill": {
        "word": "Why?",
        "atSec": 7.29,
-       "color": "#C8402F"
+       "color": "#C8402F",
+       "outline": "#D9D2C5"
       }
      }
     ]

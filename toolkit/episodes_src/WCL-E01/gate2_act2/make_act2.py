@@ -85,7 +85,7 @@ shot(B(2, 3, 4, 5), "PeriodMapPlate", lambda r: {
     transitionIn="band", transition={"dir": "down", "tone": "paper"})
 # 6-7 the Quaker advice on plainness (1691, printed 1783).
 shot(B(6, 7), "ArchivalScanCard", lambda r: {
-    "srcId": "SRC-034", "imgSize": [1814, 2600], "crop": [150, 380, 1500, 1200], "side": "left",
+    "srcId": "SRC-034", "imgSize": [1814, 2600], "crop": [185, 370, 1395, 1330], "side": "left",
     "highlights": [{"box": [200, 425, 1150, 95], "atSec": 0.6},
                    {"box": [945, 640, 615, 55], "atSec": r(word("plain"))},
                    {"box": [190, 695, 1025, 55], "atSec": r(word("plain")) + 0.8}],
@@ -99,16 +99,17 @@ shot(B(8, 9), "ArchivalScanCard", lambda r: {
     "highlights": [{"box": [340, 560, 770, 85], "atSec": 0.3},
                    {"box": [480, 1290, 520, 80], "atSec": 0.9}],  # his name as he is named (QA: 2 s to read before the cut)
     "quote": "Meteorological Observations and Essays", "quoteMarks": False,
-    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZURICH",
-    "notes": [{"text": "HIS FIRST BOOK · 1793", "atSec": r(word("writes"))},
-              {"text": "BUILT ON HIS WEATHER RECORDS", "atSec": r(word("for", 20))}]},
+    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZÜRICH",
+    "notes": [{"text": "HIS FIRST BOOK · 1793", "atSec": 1.0},
+              {"text": "BUILT ON HIS WEATHER RECORDS", "atSec": 2.6}]},
     transitionIn="flash")
 # 10-11 the diary: a plain card with our own hatched notebook (illustrative; no writing), rows filling day by day.
 shot(B(10, 11), "KineticLine", lambda r: {
     "lines": [{"text": "A diary of the weather", "atSec": r(word("diary"))},
               {"text": "THE DIARY · FROM 24 MARCH 1787", "atSec": r(word("50")), "style": "mono"},
               {"text": "TO THE EVENING BEFORE HE DIED · 1844", "atSec": r(word("every")), "style": "mono"}],
-    "notebook": {"atSec": 0.1, "rowsFromSec": 0.6, "rowsToSec": r(word("day", 24, end=True))}})
+    "notebook": {"atSec": 0.1, "rowsFromSec": 0.6, "rowsToSec": r(word("day", 24, end=True))},
+    "tag": {"at": "corner", "parts": [{"text": "ILLUSTRATION", "atSec": 0.1}]}})
 # 12-13 back to the map: the route from Eaglesfield to Kendal draws on, rings on Kendal, the map tilts back.
 shot(B(12, 13), "PeriodMapPlate", lambda r: {
     "srcId": "SRC-033", "size": MAP, "source": MAPSRC,
@@ -117,7 +118,7 @@ shot(B(12, 13), "PeriodMapPlate", lambda r: {
              {"id": "ken", "x": KEN[0], "y": KEN[1], "atSec": r(word("teaching")) + 1.2}],
     "rings": [{"pin": "ken", "atSec": r(word("kendal", 26)), "pulses": 2}],
     "route": {"from": "eag", "to": "ken", "atSec": r(word("teaching")), "drawSec": 1.3, "tilt": {"atSec": r(word("district")), "deg": 6}},
-    "labels": [{"text": "IN KENDAL FROM AGE 15", "atSec": r(word("15")), "x": 960, "y": 860, "align": "center", "accent": True}],
+    "labels": [{"text": "IN KENDAL FROM AGE 15", "atSec": r(word("15")) - 0.9, "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 26))}, {"text": "WESTMORLAND", "atSec": r(word("market"))}]}},
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
 # 14-15 the geranium by candle (push-through from the Kendal pin).
@@ -144,7 +145,7 @@ shot(B(16, 17, 18, 19, 20, 21), "ArchivalScanCard", lambda r: {
 shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-036", "imgSize": [785, 1158], "crop": [60, 100, 690, 1000], "side": "left",
     "highlights": [{"box": [185, 455, 430, 50], "atSec": 0.5},
-                   {"box": [350, 1005, 70, 40], "atSec": r(word("30"))}],
+                   {"box": [336, 1002, 84, 40], "atSec": r(word("30"))}],
     "quote": "The Worthies of Cumberland: John Dalton", "quoteMarks": False,
     "source": "HENRY LONSDALE · LONDON, 1874",
     "notes": [{"text": "AS THE STORY GOES", "atSec": r(word("another"))},
@@ -154,7 +155,7 @@ shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
 # 25-38 the stockings, in each person's reported colour (REPORTED COLOURS on screen throughout).
 shot(B(*range(25, 39)), "ReportedColour", lambda r: {
     "srcId": "SRC-037", "file": FLAT, "mask": MASK, "size": [2600, 1622], "crop": [60, 80, 2480, 1395],
-    "caption": "STOCKINGS OF THE PERIOD · c. 1806-10 · RIJKSMUSEUM",
+    "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
     "printScreen": 0.08, "printScreenUntilSec": r(BEAT["E01-A2-30"][1]),
     "states": [{"atSec": 0, "color": None},
                {"atSec": r(word("dark", 70)), "color": DARK, "sec": 0.9},
@@ -165,8 +166,8 @@ shot(B(*range(25, 39)), "ReportedColour", lambda r: {
                {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan")), "x": 960, "y": 880}],
     "labels": [{"text": "A SHOP WINDOW", "atSec": r(word("shop")), "untilSec": r(word("buys")), "x": 960, "y": 860, "align": "center"},
                {"text": "FOR HIS MOTHER", "atSec": r(word("mother", 67)), "untilSec": r(word("him", 69)), "x": 960, "y": 860, "align": "center"},
-               {"text": "IN JOHN'S WORDS", "atSec": r(word("him", 69)), "untilSec": r(word("mother", 76)), "x": 960, "y": 800, "align": "center"},
-               {"text": "'A BLUISH DARK DRAB' · LONSDALE, 1874", "atSec": r(word("bluish")), "untilSec": r(word("mother", 76)), "x": 960, "y": 860, "align": "center", "accent": True},
+               {"text": "TO JOHN · AS THE STORY TELLS IT", "atSec": r(word("him", 69)), "untilSec": r(word("mother", 76)) - 0.4, "x": 960, "y": 800, "align": "center"},
+               {"text": "'A BLUISH DARK DRAB' · LONSDALE, 1874", "atSec": r(word("bluish")), "untilSec": r(word("mother", 76)) - 0.4, "x": 960, "y": 860, "align": "center", "accent": True},
                {"text": "HIS MOTHER", "atSec": r(word("mother", 76)), "untilSec": r(word("cherry")), "x": 960, "y": 860, "align": "center"},
                {"text": "'AS RED AS A CHERRY'", "atSec": r(word("cherry")), "untilSec": r(word("john", 84)), "x": 960, "y": 780, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 63)), "untilSec": r(word("mother", 76))},
@@ -176,7 +177,7 @@ shot(B(*range(25, 39)), "ReportedColour", lambda r: {
 shot(B(*range(39, 45)), "SplitComparisonCard", lambda r: {
     "panels": [{"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 230, 900, 900], "label": "THE FLOWER", "atSec": 0.3, "stamp": {"text": "SAME", "atSec": r(word("flower"))}},
                {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56, "clipStartSec": 3, "label": "THE CANDLE", "atSec": 0.45, "stamp": {"text": "SAME", "atSec": r(word("candle", 100))}},
-               {"srcId": "SRC-037", "file": FLAT, "kind": "image", "size": [2600, 1622], "crop": [900, 180, 1300, 1300], "label": "THE STOCKINGS", "atSec": 0.6, "stamp": {"text": "SAME", "atSec": r(word("stockings", 104))}}],
+               {"srcId": "SRC-037", "file": FLAT, "kind": "image", "size": [2600, 1622], "crop": [900, 180, 1300, 1300], "label": "THE STOCKINGS · A PERIOD PAIR", "atSec": 0.6, "stamp": {"text": "SAME", "atSec": r(word("stockings", 104))}}],
     "lines": [{"text": "What stays the same?", "atSec": r(word("look")), "untilSec": r(word("only"))},
               {"text": "Only the person looking changes.", "atSec": r(word("only")), "untilSec": r(word("the", 109))},
               {"text": "The odd thing isn't the flower.", "atSec": r(word("the", 109)) + 0.1}],
@@ -191,44 +192,43 @@ shot(B(*range(45, 55)), "ScaleField", lambda r: {
               {"text": "Colour blindness", "atSec": r(word("colour", 118))},
               {"text": "RED-GREEN", "atSec": r(word("blindness")) + 0.2, "untilSec": r(word("trouble")), "size": "small"},
               {"text": "TROUBLE TELLING SOME REDS AND GREENS APART", "atSec": r(word("trouble")), "untilSec": r(word("women")), "size": "small"},
-              {"text": "MEN OF CHINESE OR JAPANESE DESCENT: 4-6.5%", "atSec": r(word("china")), "size": "small"},
-              {"text": "STILL THERE", "atSec": r(word("still")), "size": "small", "row": 1, "accent": True}],
+                            {"text": "STILL THERE", "atSec": r(word("still")), "size": "small", "row": 1, "accent": True}],
     "phases": [{"atSec": 0.2, "total": 100, "cols": 20, "lit": 8, "litAtSec": r(word("eight")), "label": {"text": "MEN OF EUROPEAN DESCENT · ABOUT 8 IN 100", "atSec": r(word("eight"))}},
                {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": r(word("four", 127)), "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
-               {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": r(word("four", 131)), "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}}]},
+               {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": r(word("four", 131)), "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}},
+               {"atSec": r(word("china")), "total": 100, "cols": 20, "lit": 5, "litAtSec": r(word("china")) + 0.2, "seed": 4, "label": {"text": "MEN OF CHINESE OR JAPANESE DESCENT · 4–6.5 IN 100", "atSec": r(word("china")) + 0.2}}]},
     transitionIn="slide")
 # 55-56 picture it from the inside.
 shot(B(55, 56), "KineticLine", lambda r: {
-    "lines": [{"text": "Picture it from the inside.", "atSec": r(word("picture"))},
-              {"text": "YOUR WHOLE LIFE", "atSec": r(word("whole")), "style": "mono"}]},
+    "lines": [{"text": "Picture it from the inside.", "atSec": r(word("picture"))}]},
     transitionIn="band", transition={"dir": "up", "tone": "paper"})
 # 57-58 grass, blood, cherries, sky: each word fills in its colour (TXT-015).
 shot(B(57, 58), "KineticLine", lambda r: {
-    "lines": [{"text": "YOUR WHOLE LIFE", "atSec": -1, "style": "mono"},
+    "lines": [{"text": "YOUR WHOLE LIFE", "atSec": 0, "style": "mono"},
               {"text": "Grass", "atSec": r(word("grass")), "fill": {"word": "Grass", "atSec": r(word("grass")), "color": GRASS}},
-              {"text": "Blood", "atSec": r(word("blood")), "fill": {"word": "Blood", "atSec": r(word("blood")), "color": BLOOD}},
-              {"text": "Cherries", "atSec": r(word("cherries")), "fill": {"word": "Cherries", "atSec": r(word("cherries")), "color": CHERRY}},
+              {"text": "Blood", "atSec": r(word("blood")), "fill": {"word": "Blood", "atSec": r(word("blood")), "color": BLOOD, "outline": "#D9D2C5"}},
+              {"text": "Cherries", "atSec": r(word("cherries")), "fill": {"word": "Cherries", "atSec": r(word("cherries")), "color": CHERRY, "outline": "#D9D2C5"}},
               {"text": "Sky", "atSec": r(word("sky")), "fill": {"word": "Sky", "atSec": r(word("sky")), "color": SKY}}]})
 # 59-62 the same colour name, and nobody can show you the difference (illustrative).
 shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
     "columns": ["WHAT IT IS CALLED"],
     "rows": [{"name": "YOU", "atSec": 0, "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
-              "tag": {"text": "ILLUSTRATIVE", "atSec": r(word("different", 153))}},
+              "tag": {"text": "ILLUSTRATIVE", "atSec": 0}},
              {"name": "EVERYONE ELSE", "atSec": 0.3, "dimAtSec": r(word("nobody", 155)),
               "cells": [{"color": RED, "name": "RED", "atSec": 0.3, "fillSec": 0.8}]}]})
 # 63-65 one evening, a flower changes colour (his colour names: what he called them, not what he saw).
 shot(B(63, 64, 65), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 1],
     "warmthSec": [r(word("changes", 160)), r(word("changes", 160)) + 1.2],
-    "labels": [{"text": "SKY-BLUE · HIS WORDS", "atSec": r(word("evening")), "untilSec": r(word("changes", 160)), "x": 1240, "y": 820},
-               {"text": "RED · HIS WORDS", "atSec": r(word("changes", 160)) + 0.3, "untilSec": r(word("almost")), "x": 1240, "y": 820, "accent": True},
+    "labels": [{"text": "SKY-BLUE · HIS WORDS", "atSec": 0.4, "untilSec": 2.3, "x": 1240, "y": 820},
+               {"text": "RED · HIS WORDS", "atSec": 2.75, "x": 1240, "y": 760, "accent": True},
                {"text": "ALMOST NOBODY ELSE SEES IT", "atSec": r(word("almost")), "x": 960, "y": 860, "align": "center"}]},
     transitionIn="push", focus=[1180, 450])
 # 66-68 Dalton is a scientist: he wants to know why (act 3 starts on the next frame).
 shot(B(66, 67, 68), "KineticLine", lambda r: {
     "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164))},
               {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono"},
-              {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED}}]})
+              {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED, "outline": "#D9D2C5"}}]})
 
 # The cherry snap (MOT-011) plays silent: a swish there peaked on "John!" (sound-pass W), and the shot keeps one hero
 # (the band) and one texture (the cloth on "dark"). Sounds: levels against the voice as in act 1 (hero ~15-17 dB under in a pause, texture 21-23 dB under a word).
