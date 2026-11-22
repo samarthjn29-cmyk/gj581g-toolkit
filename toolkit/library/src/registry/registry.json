@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T10:02:44.438Z",
+ "generated": "2026-11-22T10:36:51.097Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -500,11 +500,12 @@
    "folder": "6_Sounds",
    "name": "MechanicalShutter",
    "paths": [
-    "public/sfx/mechanical-shutter.wav"
+    "public/sfx/kit/mechanical/shutter_click.wav",
+    "public/sfx/kit/mechanical/shutter_vintage.wav"
    ],
-   "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: a flash from black or white, or a real photograph landing on screen, on the frame it lands. Limit: max 4 beats per episode; one per photo, never per collage piece. Not for: text or diagrams.",
+   "maxBeats": 4,
    "maxShare": null
   },
   "SFX-004": {
@@ -548,11 +549,15 @@
    "folder": "6_Sounds",
    "name": "SoftKeyClick",
    "paths": [
-    "public/sfx/soft-key-click.wav"
+    "public/sfx/kit/tech/key_press.wav",
+    "public/sfx/kit/tech/mouse_click.wav",
+    "public/sfx/kit/tech/mouse_click_close.wav",
+    "public/sfx/kit/tech/ui_tick_v1.wav",
+    "public/sfx/kit/tech/ui_tick_v2.wav"
    ],
-   "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: a window, button or cursor on a screen scene (LOK-023), a search being typed; rotate files (a click, then a key press: Moran's variety). Limit: max 6 beats per episode. Not for: paper or analog scenes.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "SFX-008": {
@@ -2047,6 +2052,115 @@
    "use": "Best use: the moment the eye is examined and its pay-off. Limit: max 2 beats sets per episode.",
    "maxBeats": null,
    "maxShare": null
+  },
+  "SFX-016": {
+   "id": "SFX-016",
+   "folder": "6_Sounds",
+   "name": "PaperFoley",
+   "paths": [
+    "public/sfx/kit/tactile/paper_move.wav",
+    "public/sfx/kit/tactile/pages_move.wav",
+    "public/sfx/kit/tactile/page_turn.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: under a whoosh when the thing moving is paper (a collage scrap, a torn note, an archival page sliding), 8-10 dB under the hero; alone, quietly, when a page settles. Rotate the three files. Limit: max 10 beats per episode; never on every collage piece (one per shot). Not for: text cards, diagrams, or a document arriving (SFX-006).",
+   "maxBeats": 10,
+   "maxShare": null
+  },
+  "SFX-017": {
+   "id": "SFX-017",
+   "folder": "6_Sounds",
+   "name": "InkLineFoley",
+   "paths": [
+    "public/sfx/kit/tactile/pencil_stroke.wav",
+    "public/sfx/kit/tactile/marker_stroke.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: a line or highlight drawn on paper (a trace drawing on, a marker highlight, an underline), on the draw. Limit: max 6 beats per episode; only the shot's hero line, never every arrow or label. Not for: lines on a screen (use SFX-007) or diagrams that build without a hand.",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "SFX-018": {
+   "id": "SFX-018",
+   "folder": "6_Sounds",
+   "name": "StopwatchTicks",
+   "paths": [
+    "public/sfx/kit/mechanical/stopwatch_tick_v1.wav",
+    "public/sfx/kit/mechanical/stopwatch_tick_v2.wav",
+    "public/sfx/kit/mechanical/stopwatch_tick_v3.wav",
+    "public/sfx/kit/mechanical/ticker_run.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: creative texture under a line or chart line moving, a timeline running, or time passing; low, under the hero. Rotate v1-v3. Limit: max 4 beats per episode. Not for: the lock of a number (SFX-015) or a clock that is on screen and silent in the story.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "SFX-019": {
+   "id": "SFX-019",
+   "folder": "6_Sounds",
+   "name": "SwitchDial",
+   "paths": [
+    "public/sfx/kit/mechanical/switch_click.wav",
+    "public/sfx/kit/mechanical/dial_turn.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: something switching on or opening (a light, a shutter or hole opening, a lens ring opening), and a dial or focus being set. Limit: max 4 beats per episode. Not for: buttons on a screen (SFX-007).",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "SFX-020": {
+   "id": "SFX-020",
+   "folder": "6_Sounds",
+   "name": "LowWhoosh",
+   "paths": [
+    "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+    "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+    "public/sfx/kit/whoosh/low_whoosh_v3.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: the hero sound of a camera move or something emerging (a push-in, a slide cut, a dive into a lens), starting 0.1-0.2 s before the move; rotate v1/v2/v3. Limit: max 8 beats per episode, one per shot; sits in a pause or 20 dB under the voice. Not for: every cut, text or arrows appearing.",
+   "maxBeats": 8,
+   "maxShare": null
+  },
+  "SFX-021": {
+   "id": "SFX-021",
+   "folder": "6_Sounds",
+   "name": "AirClothWhoosh",
+   "paths": [
+    "public/sfx/kit/whoosh/air_woosh.wav",
+    "public/sfx/kit/whoosh/cloth_slide.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: a fast line or object sweeping across (air), a window, panel or sheet folding away (cloth). Limit: max 4 beats per episode. Not for: slow calm moves (SFX-020).",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "SFX-022": {
+   "id": "SFX-022",
+   "folder": "6_Sounds",
+   "name": "ProjectorAmbience",
+   "paths": [
+    "public/sfx/kit/ambience/projector_hum.wav",
+    "public/sfx/kit/ambience/projector_run.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: under shots about film, light being projected or archive footage (Newton's beam in a dark room, an old film plate), 24-30 dB under the voice, starting 0.2-0.5 s before the cut (J-cut) and fading out at the scene's end. Limit: max 3 scenes per episode, max 10% of runtime. Not for: modern or digital scenes.",
+   "maxBeats": null,
+   "maxShare": 10
+  },
+  "SFX-023": {
+   "id": "SFX-023",
+   "folder": "6_Sounds",
+   "name": "AnalogNoise",
+   "paths": [
+    "public/sfx/kit/ambience/tape_hiss.wav",
+    "public/sfx/kit/ambience/vinyl_crackle.wav",
+    "public/sfx/kit/ambience/mains_hum.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: under old-media scenes (a record, a tape, an old radio or TV, an old room with a lamp) 26-32 dB under the voice, J-cut in. Limit: max 3 scenes per episode, max 10% of runtime. Not for: digital scenes, or on top of the room tone SFX-014.",
+   "maxBeats": null,
+   "maxShare": 10
   }
  }
 }

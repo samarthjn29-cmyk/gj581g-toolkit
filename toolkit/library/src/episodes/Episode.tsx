@@ -23,7 +23,9 @@ export type Beat = {
   note?: string;
 };
 // Sound: every file is a registered asset (the narration take is an SRC row, the sounds SFX rows).
-export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number };
+// `file` picks one of the row's registered files (an SFX kit's variants: rule V in scripts/sound-pass.py, never the
+// same file twice within 10 s).
+export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number; file?: string };
 export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string };
 
 const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
@@ -37,7 +39,7 @@ const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
   return (
     <Sequence from={from} durationInFrames={dur} name={`sound ${cue.id}`}>
       <Audio
-        src={assetFile(e)}
+        src={assetFile(e, cue.file)}
         volume={(f) => {
           let v = g;
           if (fi > 0) v *= interpolate(f, [0, fi], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
