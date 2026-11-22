@@ -15,6 +15,7 @@ export type Theme = {
     readonly chip: string; // dark chip behind small text
     readonly dimMask: string; // spotlight dimming
     readonly leaks: readonly string[]; // faint corner glows (empty for none)
+    readonly cones: { readonly L: string; readonly M: string; readonly S: string }; // the three cone colours (long, medium, short)
   };
   readonly fonts: {
     readonly headline: string;

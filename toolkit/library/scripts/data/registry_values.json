@@ -727,7 +727,7 @@
 "",
 "src/components/ColourPathMap.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "VIS-012",
@@ -736,7 +736,7 @@
 "",
 "src/components/ConeTrio.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "VIS-013",
@@ -745,7 +745,7 @@
 "",
 "src/components/ConeCurveChart.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "VIS-014",
@@ -754,7 +754,7 @@
 "",
 "src/components/SpectrumStrip.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "PKG-005",
@@ -763,7 +763,7 @@
 "",
 "src/components/SeriesTitleCard.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "PKG-006",
@@ -772,7 +772,7 @@
 "",
 "src/components/EpisodeCard.tsx",
 "",
-"Planned"
+"Active"
 ],
 [
 "MUS-005",
@@ -971,6 +971,15 @@
 "public/assets/sources/fong2025_fig2a.png",
 "",
 "Spec Ready"
+],
+[
+"SRC-028",
+"11_Sources",
+"StockmanSharpe2000_ConeFundamentals",
+"",
+"public/assets/data/ss2000_cone_fundamentals.json",
+"",
+"Active"
 ]
 ]
 }

@@ -7,6 +7,12 @@ import { ParallaxCutout } from "./ParallaxCutout";
 import { SpotlightIsolator } from "./SpotlightIsolator";
 import { CleanUICard } from "./CleanUICard";
 import { ChapterSlate } from "./ChapterSlate";
+import { ColourPathMap } from "./ColourPathMap";
+import { ConeTrio } from "./ConeTrio";
+import { ConeCurveChart } from "./ConeCurveChart";
+import { SpectrumStrip } from "./SpectrumStrip";
+import { SeriesTitleCard } from "./SeriesTitleCard";
+import { EpisodeCard } from "./EpisodeCard";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -27,6 +33,12 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   SpotlightIsolator,
   CleanUICard,
   ChapterSlate,
+  ColourPathMap,
+  ConeTrio,
+  ConeCurveChart,
+  SpectrumStrip,
+  SeriesTitleCard,
+  EpisodeCard,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(

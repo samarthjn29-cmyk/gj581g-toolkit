@@ -61,4 +61,10 @@ export const DEMO: Record<string, Record<string, unknown>> = {
     stepSec: 1.1,
   },
   ChapterSlate: { index: "01", title: "The man who saw pink", subtitle: "Preview subtitle in the serif italic" },
+  ColourPathMap: { lit: ["light", "eye"], current: "eye", caption: "Preview: the stops this season has visited so far" },
+  ConeTrio: { preset: "dalton", from: [1, 1, 1], atSec: 1.8, caption: "Preview: one kind of cone missing" },
+  ConeCurveChart: { title: "Three kinds of cone", markerFromNm: 450, markerToNm: 600, markerAtSec: 1.6 },
+  SpectrumStrip: { title: "Preview: one yellow, two ways", markers: [{ nm: 540, label: "540 nm" }, { nm: 580, label: "580 nm" }, { nm: 620, label: "620 nm" }] },
+  SeriesTitleCard: {},
+  EpisodeCard: { number: 1, title: "The Man Who Saw Pink" },
 };

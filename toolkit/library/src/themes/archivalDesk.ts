@@ -15,6 +15,7 @@ export const archivalDesk: Theme = {
     panel: "#1C2125",
     chip: "rgba(10,12,14,0.78)",
     dimMask: "rgba(10,12,14,0.8)",
+    cones: { L: "#D95D39", M: "#7BAE7F", S: "#5B7FB8" },
     leaks: [],
   },
   fonts: { headline: "Archivo", headlineWeight: 800, headlineTracking: "-0.025em", titleWeight: 500, serif: "Newsreader", mono: "IBM Plex Mono", body: "Plus Jakarta Sans" },

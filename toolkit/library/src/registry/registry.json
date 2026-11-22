@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T04:30:59.720Z",
+ "generated": "2026-11-22T04:55:00.432Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -723,7 +723,7 @@
    "paths": [
     "src/components/ColourPathMap.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "VIS-012": {
    "id": "VIS-012",
@@ -732,7 +732,7 @@
    "paths": [
     "src/components/ConeTrio.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "VIS-013": {
    "id": "VIS-013",
@@ -741,7 +741,7 @@
    "paths": [
     "src/components/ConeCurveChart.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "VIS-014": {
    "id": "VIS-014",
@@ -750,7 +750,7 @@
    "paths": [
     "src/components/SpectrumStrip.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "PKG-005": {
    "id": "PKG-005",
@@ -759,7 +759,7 @@
    "paths": [
     "src/components/SeriesTitleCard.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "PKG-006": {
    "id": "PKG-006",
@@ -768,7 +768,7 @@
    "paths": [
     "src/components/EpisodeCard.tsx"
    ],
-   "status": "Planned"
+   "status": "Active"
   },
   "MUS-005": {
    "id": "MUS-005",
@@ -968,6 +968,15 @@
     "public/assets/sources/fong2025_fig2a.png"
    ],
    "status": "Spec Ready"
+  },
+  "SRC-028": {
+   "id": "SRC-028",
+   "folder": "11_Sources",
+   "name": "StockmanSharpe2000_ConeFundamentals",
+   "paths": [
+    "public/assets/data/ss2000_cone_fundamentals.json"
+   ],
+   "status": "Active"
   }
  }
 }

@@ -1,0 +1,382 @@
+[
+ {
+  "id": "LOK-009",
+  "name": "Warm Graphite Light Lab",
+  "status": "ACTIVE \u00b7 DEFAULT",
+  "origin": "Our own look, from Colour_v1 (Sam's pick, 21 Nov 2026)",
+  "vars": {
+   "canvas": "#2F2D2C",
+   "ink": "#F2EEE4",
+   "sec": "#9EA5B8",
+   "accent": "#00E0BE",
+   "accent2": "#FFC24A",
+   "panel": "#3A3836",
+   "hair": "rgba(242,238,228,0.14)",
+   "paper": "#E9E2D2",
+   "paperInk": "#2A2622"
+  },
+  "colors": [
+   [
+    "Canvas",
+    "#2F2D2C"
+   ],
+   [
+    "Ink",
+    "#F2EEE4"
+   ],
+   [
+    "Secondary",
+    "#9EA5B8"
+   ],
+   [
+    "Olo teal (accent)",
+    "#00E0BE"
+   ],
+   [
+    "Gold",
+    "#FFC24A"
+   ],
+   [
+    "Cone red \u00b7 green \u00b7 blue",
+    "#FF3B30 #30D158 #2F6BFF"
+   ]
+  ],
+  "head": [
+   "Fraunces",
+   600
+  ],
+  "body": [
+   "Fraunces",
+   400
+  ],
+  "label": [
+   "JetBrains Mono",
+   500
+  ],
+  "rules": {
+   "Texture and light": "Film grain 4.5%, faint red, green and blue corner glows; colours add like real light",
+   "Motion": "One slow move per shot (3% or less), entrances 0.6-0.9 s, no overshoot",
+   "Transition": "Push-through from the last shot's key picture (0.6 s)",
+   "Best for": "Light, colour and vision; documentaries built on real documents"
+  },
+  "sample": "image:../library/qa/library/render/ArchivalScanCard-LOK-009_f105.jpg"
+ },
+ {
+  "id": "LOK-001",
+  "name": "Archival Desk",
+  "status": "ACTIVE \u00b7 BUILT",
+  "origin": "From the 4-Gate Protocol guide",
+  "vars": {
+   "canvas": "#14171A",
+   "ink": "#EFECE6",
+   "sec": "#9AA3AC",
+   "accent": "#D95D39",
+   "accent2": "#9AA3AC",
+   "panel": "#1C2125",
+   "hair": "#2E363E",
+   "paper": "#E8E2D6",
+   "paperInk": "#1E2226"
+  },
+  "colors": [
+   [
+    "Canvas",
+    "#14171A"
+   ],
+   [
+    "Hairline grid",
+    "#2E363E"
+   ],
+   [
+    "Ink (bone)",
+    "#EFECE6"
+   ],
+   [
+    "Secondary",
+    "#9AA3AC"
+   ],
+   [
+    "Terracotta (focal claim)",
+    "#D95D39"
+   ],
+   [
+    "Panel",
+    "#1C2125"
+   ]
+  ],
+  "head": [
+   "Archivo",
+   800
+  ],
+  "body": [
+   "Newsreader",
+   500
+  ],
+  "label": [
+   "IBM Plex Mono",
+   500
+  ],
+  "rules": {
+   "Texture and light": "Matte grain 12%, soft vignette 32%, faint hairline grid",
+   "Motion": "Calm version: one slow move per shot, staggered reveals",
+   "Transition": "Hard cut that keeps the focal point within 25% of the screen",
+   "Best for": "Archive-led stories: old papers, photos, maps"
+  },
+  "sample": "image:../library/qa/library/render/ArchivalScanCard-LOK-001_f105.jpg"
+ },
+ {
+  "id": "CANDIDATE A",
+  "name": "Void",
+  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "origin": "Studied: LEMMiNO, 'The Universal S' (measured: 53% of pixels near-black #181818)",
+  "take": "Huge black negative space; one small object or line of type at a time; wide-tracked caps",
+  "change": "Warmer crimson accent and our serif for spoken lines; no imitation of LEMMiNO's titles or logo",
+  "vars": {
+   "canvas": "#131313",
+   "ink": "#ECECEC",
+   "sec": "#8A8A8A",
+   "accent": "#D94A5A",
+   "accent2": "#6CC2F5",
+   "panel": "#1C1C1C",
+   "hair": "rgba(236,236,236,0.12)",
+   "paper": "#D9D6CF",
+   "paperInk": "#151515"
+  },
+  "colors": [
+   [
+    "Canvas",
+    "#131313"
+   ],
+   [
+    "Ink",
+    "#ECECEC"
+   ],
+   [
+    "Secondary",
+    "#8A8A8A"
+   ],
+   [
+    "Crimson (accent)",
+    "#D94A5A"
+   ],
+   [
+    "Ice blue (rare)",
+    "#6CC2F5"
+   ],
+   [
+    "Panel",
+    "#1C1C1C"
+   ]
+  ],
+  "head": [
+   "IBM Plex Sans Condensed",
+   500
+  ],
+  "body": [
+   "Newsreader",
+   500
+  ],
+  "label": [
+   "IBM Plex Mono",
+   500
+  ],
+  "headCaps": true,
+  "rules": {
+   "Texture and light": "Almost none: 3% grain, deep vignette, objects lit as if under one lamp",
+   "Motion": "Very slow push-ins, long holds of 4-6 s on one object",
+   "Transition": "Cut to black for a beat, then the next object",
+   "Best for": "Mysteries and cold opens: the eye in the dark, the shuttered room"
+  }
+ },
+ {
+  "id": "CANDIDATE B",
+  "name": "Map Room",
+  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "origin": "Studied: Johnny Harris, 'How Europe Stole Africa so Quickly, Mapped' (teal room, parchment maps, sepia)",
+  "take": "Parchment maps and documents on a dark teal ground; hand-marked annotations",
+  "change": "No host on camera; our maps are drawn, not printed and filmed; brass instead of marker yellow",
+  "vars": {
+   "canvas": "#15272A",
+   "ink": "#EDE3CC",
+   "sec": "#9FB1AE",
+   "accent": "#C4452F",
+   "accent2": "#B8864E",
+   "panel": "#1C3236",
+   "hair": "rgba(237,227,204,0.14)",
+   "paper": "#E6D6B6",
+   "paperInk": "#2A221A",
+   "label": "#D9A46A"
+  },
+  "colors": [
+   [
+    "Canvas (deep teal)",
+    "#15272A"
+   ],
+   [
+    "Parchment",
+    "#E6D6B6"
+   ],
+   [
+    "Ink on parchment",
+    "#2A221A"
+   ],
+   [
+    "Marker red (accent)",
+    "#C4452F"
+   ],
+   [
+    "Brass",
+    "#B8864E"
+   ],
+   [
+    "Secondary",
+    "#9FB1AE"
+   ]
+  ],
+  "head": [
+   "Libre Caslon Text",
+   700
+  ],
+  "body": [
+   "Libre Caslon Text",
+   400
+  ],
+  "label": [
+   "Courier Prime",
+   400
+  ],
+  "hand": "Kalam",
+  "rules": {
+   "Texture and light": "Paper grain and fibre on every card; a soft desk-lamp falloff",
+   "Motion": "Slow pans across a map; routes draw on; pins drop and settle",
+   "Transition": "Zoom from one place on the map into the next document",
+   "Best for": "Places and journeys: the lapis route (ep 5), Manchester and Kendal (ep 1)"
+  }
+ },
+ {
+  "id": "CANDIDATE C",
+  "name": "Night Lab",
+  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "origin": "Studied: Be Smart, 'How Do We Actually See Color?' (navy diagram ground, white line art, pure RGB)",
+  "take": "One dark navy ground for every diagram; white line drawings; pure saturated primaries only for the light itself",
+  "change": "No host or studio set; our own icon set (eye, cone trio, prism) drawn the same every time",
+  "vars": {
+   "canvas": "#171A2C",
+   "ink": "#F4F4F8",
+   "sec": "#9AA0C0",
+   "accent": "#98F858",
+   "accent2": "#2A3CC0",
+   "panel": "#20243A",
+   "hair": "rgba(244,244,248,0.14)",
+   "paper": "#EEF0F6",
+   "paperInk": "#171A2C"
+  },
+  "colors": [
+   [
+    "Canvas (navy)",
+    "#171A2C"
+   ],
+   [
+    "Ink",
+    "#F4F4F8"
+   ],
+   [
+    "Secondary",
+    "#9AA0C0"
+   ],
+   [
+    "Lime (accent)",
+    "#98F858"
+   ],
+   [
+    "Signal blue",
+    "#2A3CC0"
+   ],
+   [
+    "Light red \u00b7 yellow",
+    "#E01010 #F8F010"
+   ]
+  ],
+  "head": [
+   "Space Grotesk",
+   700
+  ],
+  "body": [
+   "Inter",
+   400
+  ],
+  "label": [
+   "Space Grotesk",
+   500
+  ],
+  "rules": {
+   "Texture and light": "Flat, no grain; light shown as glowing strokes on dark",
+   "Motion": "Diagrams build line by line; curves draw on; labels snap in",
+   "Transition": "The diagram's last element becomes the next shot's first",
+   "Best for": "Science explainers: cones, metamers, opponent colours (eps 2-3)"
+  }
+ },
+ {
+  "id": "CANDIDATE D",
+  "name": "Federal Print",
+  "status": "CANDIDATE \u00b7 FOR REVIEW",
+  "origin": "Studied: Phil Edwards, 'How the US government got hip graphic design' (black ground, white paper scans, red and steel blue)",
+  "take": "Real printed pages on black; bold modernist type; red and steel-blue labels",
+  "change": "No host on camera; our own grid and labels; film-strip framing used sparingly",
+  "vars": {
+   "canvas": "#0C0C0C",
+   "ink": "#F4F2EC",
+   "sec": "#A3A3A3",
+   "accent": "#C8102E",
+   "accent2": "#2B78A8",
+   "panel": "#161616",
+   "hair": "rgba(244,242,236,0.16)",
+   "paper": "#F4F2EC",
+   "paperInk": "#111111",
+   "label": "#E2475B"
+  },
+  "colors": [
+   [
+    "Canvas",
+    "#0C0C0C"
+   ],
+   [
+    "Paper",
+    "#F4F2EC"
+   ],
+   [
+    "Ink on paper",
+    "#111111"
+   ],
+   [
+    "Signal red (accent)",
+    "#C8102E"
+   ],
+   [
+    "Steel blue",
+    "#2B78A8"
+   ],
+   [
+    "Secondary",
+    "#A3A3A3"
+   ]
+  ],
+  "head": [
+   "Inter Tight",
+   800
+  ],
+  "body": [
+   "Inter",
+   400
+  ],
+  "label": [
+   "IBM Plex Mono",
+   500
+  ],
+  "rules": {
+   "Texture and light": "Light halftone on scans; crisp edges; no glows",
+   "Motion": "Pages slide in on a grid; labels stamp on; one bold word fills the frame",
+   "Transition": "Hard cut on the beat; film-strip wipe between chapters",
+   "Best for": "Design and print history; pigment and dye stories (ep 5)"
+  }
+ }
+]

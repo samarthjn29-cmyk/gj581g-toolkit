@@ -1,9 +1,80 @@
 {
- "ArchivalScanCard": { "assetId": "VIS-001", "beatType": 1, "energy": "Calm", "grid": true },
- "MinimalDataChart": { "assetId": "VIS-002", "beatType": 2, "energy": "Peak", "grid": true },
- "HeadlineMatchCut": { "assetId": "VIS-003", "beatType": 3, "energy": "Peak", "grid": false },
- "ParallaxCutout": { "assetId": "VIS-004", "beatType": 4, "energy": "Calm", "grid": false },
- "SpotlightIsolator": { "assetId": "VIS-005", "beatType": 5, "energy": "Calm", "grid": false },
- "CleanUICard": { "assetId": "VIS-006", "beatType": 6, "energy": "Calm", "grid": true },
- "ChapterSlate": { "assetId": "VIS-007", "beatType": 7, "energy": "Reset", "grid": false }
+ "ArchivalScanCard": {
+  "assetId": "VIS-001",
+  "beatType": 1,
+  "energy": "Calm",
+  "grid": true
+ },
+ "MinimalDataChart": {
+  "assetId": "VIS-002",
+  "beatType": 2,
+  "energy": "Peak",
+  "grid": true
+ },
+ "HeadlineMatchCut": {
+  "assetId": "VIS-003",
+  "beatType": 3,
+  "energy": "Peak",
+  "grid": false
+ },
+ "ParallaxCutout": {
+  "assetId": "VIS-004",
+  "beatType": 4,
+  "energy": "Calm",
+  "grid": false
+ },
+ "SpotlightIsolator": {
+  "assetId": "VIS-005",
+  "beatType": 5,
+  "energy": "Calm",
+  "grid": false
+ },
+ "CleanUICard": {
+  "assetId": "VIS-006",
+  "beatType": 6,
+  "energy": "Calm",
+  "grid": true
+ },
+ "ChapterSlate": {
+  "assetId": "VIS-007",
+  "beatType": 7,
+  "energy": "Reset",
+  "grid": false
+ },
+ "ColourPathMap": {
+  "assetId": "VIS-011",
+  "beatType": 7,
+  "energy": "Reset",
+  "grid": false
+ },
+ "ConeTrio": {
+  "assetId": "VIS-012",
+  "beatType": 2,
+  "energy": "Calm",
+  "grid": false
+ },
+ "ConeCurveChart": {
+  "assetId": "VIS-013",
+  "beatType": 2,
+  "energy": "Calm",
+  "grid": true
+ },
+ "SpectrumStrip": {
+  "assetId": "VIS-014",
+  "beatType": 2,
+  "energy": "Calm",
+  "grid": false
+ },
+ "SeriesTitleCard": {
+  "assetId": "PKG-005",
+  "beatType": 7,
+  "energy": "Reset",
+  "grid": false
+ },
+ "EpisodeCard": {
+  "assetId": "PKG-006",
+  "beatType": 7,
+  "energy": "Reset",
+  "grid": false
+ }
 }
