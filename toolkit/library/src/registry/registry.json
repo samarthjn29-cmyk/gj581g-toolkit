@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T15:21:25.429Z",
+ "generated": "2026-11-22T15:30:02.907Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -359,7 +359,7 @@
     "src/components/InfiniteCanvasGrid.tsx"
    ],
    "status": "Planned",
-   "use": "",
+   "use": "Best use: runs of scenes on one idea inside an act. Limit: scene changes between ideas keep their designed transitions (TRN-006/007/011-013).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -443,7 +443,7 @@
     "public/textures/torn-paper-tape/"
    ],
    "status": "Planned",
-   "use": "",
+   "use": "Best use: one label on the hero element of a shot. Limit: max 6 per act; never over a face or a page's text.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -676,7 +676,7 @@
     "src/components/GraphPaperTextureLayer.tsx"
    ],
    "status": "Planned",
-   "use": "",
+   "use": "Best use: data and diagram acts. Limit: one ground per act; not under period scans (they keep their own paper).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2416,6 +2416,186 @@
    ],
    "status": "Spec Ready",
    "use": "",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-036": {
+   "id": "VIS-036",
+   "folder": "1_Visuals",
+   "name": "LiveTally",
+   "paths": [
+    "src/components/LiveTally.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one quantity that grows while the viewer watches (a sourced rate per second). Limit: max 1 per episode; the chip carries its source line. Not for: a fixed number (use MonoDataCounter) or a rate we can't source.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-037": {
+   "id": "VIS-037",
+   "folder": "1_Visuals",
+   "name": "ShareOut",
+   "paths": [
+    "src/components/ShareOut.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a total turned into a per-person share, or 1 in N people (1 in 12 men). Limit: max 1 per act. Not for: proportions that aren't per person (use JarFill).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-038": {
+   "id": "VIS-038",
+   "folder": "1_Visuals",
+   "name": "RescalingChart",
+   "paths": [
+    "src/components/RescalingChart.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: growth that speeds up, said out loud ('it's speeding up'). Limit: max 2 per episode; real data with a source line only.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-039": {
+   "id": "VIS-039",
+   "folder": "1_Visuals",
+   "name": "LedgerCard",
+   "paths": [
+    "src/components/LedgerCard.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a few named items from one real document compared (a list in a source). Limit: max 2 per episode; the items must come from the source, not invented.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-040": {
+   "id": "VIS-040",
+   "folder": "1_Visuals",
+   "name": "RankSwap",
+   "paths": [
+    "src/components/RankSwap.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a change in ranking over time. Limit: max 1 per episode; real ranked data only.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-041": {
+   "id": "VIS-041",
+   "folder": "1_Visuals",
+   "name": "JarFill",
+   "paths": [
+    "src/components/JarFill.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a then-versus-now share or concentration. Limit: max 2 per episode; the tag says what one dot stands for.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-042": {
+   "id": "VIS-042",
+   "folder": "1_Visuals",
+   "name": "RiseFromBehind",
+   "paths": [
+    "src/components/RiseFromBehind.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: people tied to a place (a portrait rising behind its town or meeting house). Limit: max 3 per act; real photos only, credited. Not for: invented scenes with real people.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-043": {
+   "id": "VIS-043",
+   "folder": "1_Visuals",
+   "name": "FootageLayer",
+   "paths": [
+    "src/components/FootageLayer.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a place whose motion matters (the sea, a mill's smoke). Limit: max 2 per act; Mixkit or NASA footage under its licence, never in git.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-044": {
+   "id": "VIS-044",
+   "folder": "1_Visuals",
+   "name": "ExtrudedRegion",
+   "paths": [
+    "src/components/ExtrudedRegion.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one region named in the narration (England, Cumberland). Limit: max 1 per act. Not for: routes (MAP-009).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-025": {
+   "id": "LOK-025",
+   "folder": "5_Look_and_Color",
+   "name": "OffsetMarkerStroke",
+   "paths": [
+    "src/layers/OffsetMarkerStroke.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: midground figure cutouts in a collage act. Limit: one accent colour per act; never on a scan of a page.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-019": {
+   "id": "TXT-019",
+   "folder": "2_Text",
+   "name": "LetterDrop",
+   "paths": [
+    "src/layers/LetterDrop.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one hero number card per act. Limit: max 2 per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-020": {
+   "id": "TXT-020",
+   "folder": "2_Text",
+   "name": "StrikeThrough",
+   "paths": [
+    "src/layers/StrikeThrough.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: correcting a misconception said out loud. Limit: max 2 per episode; the correction must be sourced.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-021": {
+   "id": "TXT-021",
+   "folder": "2_Text",
+   "name": "TypewriterLine",
+   "paths": [
+    "src/layers/TypewriterLine.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a closing line or a quoted line from a document. Limit: 1 per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SFX-026": {
+   "id": "SFX-026",
+   "folder": "6_Sound_Effects",
+   "name": "SoftPop",
+   "paths": [
+    "public/sfx/kit/tactile/soft_pop_v1-3.wav"
+   ],
+   "status": "Planned",
+   "use": "Best use: the one cutout entrance that matters in a shot, texture level (22-24 dB under the voice). Limit: one per shot; never on every entrance (our hierarchy rule).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SFX-027": {
+   "id": "SFX-027",
+   "folder": "6_Sound_Effects",
+   "name": "TypewriterKeys",
+   "paths": [
+    "public/sfx/kit/mechanical/typewriter_*.wav"
+   ],
+   "status": "Planned",
+   "use": "Best use: under TXT-021 TypewriterLine, one key per letter at texture level. Limit: with TXT-021 only.",
    "maxBeats": null,
    "maxShare": null
   }
