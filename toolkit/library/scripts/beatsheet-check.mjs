@@ -5,9 +5,15 @@
 //    {"range": "Beat_Sheet!W2:W<n>", "values": [["VALID"], ["FIX: ..."], ...]} ready for update_values.
 // VALID only when every ID in Visual_ID..Source_ID is registered AND Active, and no asset goes over the limit in its
 // Best_Use_&_Limit (max beats per episode, max % of runtime): beats past the limit read FIX ("over its limit").
+// The % limit is a share of the EPISODE: when the sheet holds only some acts, pass the planned episode length,
+// e.g. `--runtime 1272` (seconds), or a short act is measured against itself and every scene asset fails.
 import fs from "node:fs";
 
-const file = process.argv[2];
+const args = process.argv.slice(2);
+const rtFlag = args.indexOf("--runtime");
+const plannedRuntime = rtFlag >= 0 ? Number(args.splice(rtFlag, 2)[1]) : 0;
+if (rtFlag >= 0 && !(plannedRuntime > 0)) throw new Error("--runtime needs the episode length in seconds");
+const file = args[0];
 if (!file) throw new Error("Give the Beat_Sheet dump (get_values JSON).");
 const raw = JSON.parse(fs.readFileSync(file, "utf8"));
 const rows = Array.isArray(raw) ? raw : raw.values;
@@ -38,8 +44,8 @@ for (let r = 1; r < rows.length; r++) {
   if (!String(row[beatCol] ?? "").trim()) continue;
   const d = Math.max(0, num(row[endCol]) - num(row[startCol])) || 0;
   runtime = Math.max(runtime, num(row[endCol]) || 0);
-  for (const c of ID_COLS)
-    for (const id of new Set(idsOf(row, c))) {
+  // One beat counts once per asset, even when the ID sits in two columns (PKG-005 as Visual_ID and Packaging_ID).
+  for (const id of new Set(ID_COLS.flatMap((c) => idsOf(row, c)))) {
       const a = reg.assets[id];
       if (!a) continue;
       const s0 = (seen[id] ??= { beats: 0, secs: 0 });
@@ -47,6 +53,10 @@ for (let r = 1; r < rows.length; r++) {
       s0.secs += d;
       if (a.maxBeats && s0.beats > a.maxBeats) (over[r] ??= []).push(`${id} ${a.name} over its limit (${a.maxBeats} beats per episode)`);
     }
+}
+if (plannedRuntime) {
+  if (plannedRuntime < runtime) throw new Error(`--runtime ${plannedRuntime} is shorter than the sheet (${runtime} s)`);
+  runtime = plannedRuntime;
 }
 const shareIssues = [];
 for (const [id, s0] of Object.entries(seen)) {
@@ -95,6 +105,7 @@ const result = { range: `Beat_Sheet!${L}2:${L}${out.length + 1}`, values: out };
 const dest = file.replace(/\.json$/, "") + "_registry_check.json";
 fs.writeFileSync(dest, JSON.stringify(result));
 console.log(`Registry manifest generated ${reg.generated}`);
+console.log(`Shares measured against ${runtime.toFixed(1)} s${plannedRuntime ? " (planned episode length)" : " (the sheet's last beat)"}`);
 console.log(`Beats checked: ${valid + fix}; VALID: ${valid}; FIX: ${fix}`);
 problems.forEach((p) => console.log("  - " + p));
 shareIssues.forEach((p) => console.log("  - SHARE: " + p));

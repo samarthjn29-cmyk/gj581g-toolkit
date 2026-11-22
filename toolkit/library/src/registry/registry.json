@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T06:05:01.828Z",
+ "generated": "2026-11-22T06:23:14.606Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -479,8 +479,8 @@
     "public/sfx/soft-whoosh.wav"
    ],
    "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: a light beam or a camera move starting, rising into the next cut, in a pause. Limit: max 6 beats per episode. Not for: under narration words, or every transition.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "SFX-002": {
@@ -527,8 +527,8 @@
     "public/sfx/muted-thump.wav"
    ],
    "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: one big number or reveal landing, in the pause after the line. Limit: max 4 beats per episode. Not for: ordinary labels.",
+   "maxBeats": 4,
    "maxShare": null
   },
   "SFX-006": {
@@ -539,8 +539,8 @@
     "public/sfx/cardstock-slide.wav"
    ],
    "status": "Planned",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: a real page or document arriving on screen, in the pause before its line. Limit: max 10 beats per episode. Not for: text cards or diagrams.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SFX-007": {
@@ -1093,8 +1093,8 @@
     "public/assets/sources/candle_lighting_mixkit3458.webm"
    ],
    "status": "Spec Ready",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 8 beats per episode. Not for: any other scene.",
+   "maxBeats": 8,
    "maxShare": null
   },
   "SRC-012": {
@@ -1117,8 +1117,8 @@
     "public/assets/sources/geranium_stang.jpg"
    ],
    "status": "Spec Ready",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 10 beats per episode. Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SRC-014": {
@@ -1349,6 +1349,114 @@
    "use": "Best use: only where 3D space carries the meaning: a light path through a room (Newton's shutter, prism, Experimentum Crucis, lens), a line of sight (Ransome looking through the eye), or places laid out on a tilted map. Limit: max 8 beats per episode; max 8% of runtime; only in acts where the story is in a physical space. Not for: documents (use ArchivalScanCard), comparisons, numbers, titles, or decoration.",
    "maxBeats": 8,
    "maxShare": 8
+  },
+  "VIS-016": {
+   "id": "VIS-016",
+   "folder": "1_Visuals",
+   "name": "FootagePlate",
+   "paths": [
+    "src/components/FootagePlate.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a real clip or photo that sets a scene (a candle in a dark room, a place) with its dateline or label. Limit: max 12 beats per episode; max 15% of runtime. Not for: documents (ArchivalScanCard) or a named person's first appearance (ParallaxCutout).",
+   "maxBeats": 12,
+   "maxShare": 15
+  },
+  "VIS-017": {
+   "id": "VIS-017",
+   "folder": "1_Visuals",
+   "name": "SwatchRows",
+   "paths": [
+    "src/components/SwatchRows.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 8 beats per episode. Not for: data with numbers (MinimalDataChart).",
+   "maxBeats": 8,
+   "maxShare": null
+  },
+  "VIS-018": {
+   "id": "VIS-018",
+   "folder": "1_Visuals",
+   "name": "YearCounter",
+   "paths": [
+    "src/components/YearCounter.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: one big span of time said out loud (151 years). Limit: max 2 beats per episode. Not for: dates (DatelineTag) or small numbers.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "VIS-019": {
+   "id": "VIS-019",
+   "folder": "1_Visuals",
+   "name": "EyeDiagram",
+   "paths": [
+    "src/components/EyeDiagram.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 10 beats per episode. Not for: lines about light or the brain with no eye in them.",
+   "maxBeats": 10,
+   "maxShare": null
+  },
+  "VIS-020": {
+   "id": "VIS-020",
+   "folder": "1_Visuals",
+   "name": "KineticLine",
+   "paths": [
+    "src/components/KineticLine.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a hinge question or one key label the viewer must keep (WHERE IS THE PINK?). Limit: max 6 beats per episode. Not for: repeating what the narration says word for word, or decoration.",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "TXT-011": {
+   "id": "TXT-011",
+   "folder": "2_Text",
+   "name": "DatelineTag",
+   "paths": [
+    "src/components/DatelineTag.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: the first time a new place or date opens a scene. Limit: max 12 beats per episode. Not for: every line with a year in it.",
+   "maxBeats": 12,
+   "maxShare": null
+  },
+  "SFX-013": {
+   "id": "SFX-013",
+   "folder": "6_Sounds",
+   "name": "CandleStrike",
+   "paths": [
+    "public/sfx/candle_strike_mk2590.wav"
+   ],
+   "status": "Planned",
+   "use": "Best use: the candle being lit at the episode's very start (and again only if the story returns to that evening). Limit: max 2 beats per episode. Not for: transitions.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SFX-014": {
+   "id": "SFX-014",
+   "folder": "6_Sounds",
+   "name": "CandleRoomTone",
+   "paths": [
+    "public/sfx/room_tone_mk3080.wav"
+   ],
+   "status": "Planned",
+   "use": "Best use: under the candlelit Kendal scene only. Limit: max 10 beats per episode; max 10% of runtime. Not for: diagrams or documents.",
+   "maxBeats": 10,
+   "maxShare": 10
+  },
+  "SRC-029": {
+   "id": "SRC-029",
+   "folder": "11_Sources",
+   "name": "Dalton1798_p30",
+   "paths": [
+    "public/assets/sources/dalton1798_p30.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 10 beats per episode. Not for: decoration.",
+   "maxBeats": 10,
+   "maxShare": null
   }
  }
 }
