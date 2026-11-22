@@ -59,3 +59,10 @@ export const useSource = (id: string): string => {
   if (e.folder !== "11_Sources") throw new Error(`${id} is in ${e.folder}, not 11_Sources.`);
   return assetFile(e);
 };
+
+// One file of a multi-file source (e.g. a clip and its reversed copy). The file must be listed on the entry.
+export const useSourceFile = (id: string, file?: string): string => {
+  const e = useAsset(id);
+  if (e.folder !== "11_Sources") throw new Error(`${id} is in ${e.folder}, not 11_Sources.`);
+  return assetFile(e, file);
+};

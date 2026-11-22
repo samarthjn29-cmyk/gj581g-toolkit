@@ -1,0 +1,1226 @@
+{
+ "episodeId": "WCL-E01-act01",
+ "themeId": "LOK-009",
+ "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
+ "voice": {
+  "id": "SRC-030",
+  "atSec": 0.8
+ },
+ "audio": [
+  {
+   "id": "SFX-013",
+   "atSec": 0.0,
+   "volumeDb": -4
+  },
+  {
+   "id": "SFX-014",
+   "atSec": 0.0,
+   "volumeDb": 0,
+   "fadeInSec": 1.0,
+   "fadeOutSec": 1.0,
+   "endSec": 19.4
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 19.5,
+   "volumeDb": -12
+  },
+  {
+   "id": "SFX-005",
+   "atSec": 86.85,
+   "volumeDb": -20
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 94.6,
+   "volumeDb": -14
+  }
+ ],
+ "beats": [
+  {
+   "id": "01+02+03+04",
+   "beats": [
+    "E01-A1-01",
+    "E01-A1-02",
+    "E01-A1-03",
+    "E01-A1-04"
+   ],
+   "start": 0.0,
+   "end": 11.1,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-011",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SFX-013",
+    "SFX-014",
+    "SRC-011",
+    "MOT-002",
+    "TXT-010"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458_rev.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "warmth": [
+     1,
+     1
+    ],
+    "tag": {
+     "at": "low-centre",
+     "toCornerAtSec": 6.7,
+     "parts": [
+      {
+       "text": "KENDAL",
+       "atSec": 0.8
+      },
+      {
+       "text": "NORTH OF ENGLAND",
+       "atSec": 1.9,
+       "untilSec": 4.16
+      },
+      {
+       "text": "AUTUMN 1792",
+       "atSec": 5.47
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "JOHN DALTON · TEACHER",
+      "atSec": 9.53,
+      "x": 960,
+      "y": 820,
+      "align": "center"
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-01",
+     0.0,
+     2.95
+    ],
+    [
+     "E01-A1-02",
+     2.95,
+     6.4
+    ],
+    [
+     "E01-A1-03",
+     6.4,
+     8.6
+    ],
+    [
+     "E01-A1-04",
+     8.6,
+     11.1
+    ]
+   ]
+  },
+  {
+   "id": "05+06+07",
+   "beats": [
+    "E01-A1-05",
+    "E01-A1-06",
+    "E01-A1-07"
+   ],
+   "start": 11.1,
+   "end": 19.5,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "SFX-014",
+    "SRC-013",
+    "MOT-002",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     1,
+     0
+    ],
+    "warmthSec": [
+     5.5,
+     8.4
+    ],
+    "labels": [
+     {
+      "text": "DALTON'S 'GERANIUM ZONALE'",
+      "atSec": 2.79,
+      "x": 1240,
+      "y": 820,
+      "moveTo": {
+       "atSec": 5.5,
+       "x": 1420,
+       "y": 960,
+       "scale": 0.78
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-05",
+     11.1,
+     13.6
+    ],
+    [
+     "E01-A1-06",
+     13.6,
+     16.6
+    ],
+    [
+     "E01-A1-07",
+     16.6,
+     19.5
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    960,
+    560
+   ]
+  },
+  {
+   "id": "08",
+   "beats": [
+    "E01-A1-08"
+   ],
+   "start": 19.5,
+   "end": 22.0,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SFX-006",
+    "SRC-001",
+    "SRC-029"
+   ],
+   "props": {
+    "srcId": "SRC-001",
+    "imgSize": [
+     1920,
+     2813
+    ],
+    "crop": [
+     400,
+     1650,
+     1100,
+     1050
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       1015,
+       2040,
+       375,
+       46
+      ],
+      "atSec": 1.86
+     },
+     {
+      "box": [
+       440,
+       2100,
+       700,
+       54
+      ],
+      "atSec": 1.84
+     }
+    ],
+    "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
+    "source": "JOHN DALTON · 1798 · P. 29-30"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-08",
+     19.5,
+     22.0
+    ]
+   ]
+  },
+  {
+   "id": "09",
+   "beats": [
+    "E01-A1-09"
+   ],
+   "start": 22.0,
+   "end": 24.2,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-003",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-001",
+    "SRC-029"
+   ],
+   "props": {
+    "srcId": "SRC-029",
+    "imgSize": [
+     1920,
+     2934
+    ],
+    "crop": [
+     400,
+     420,
+     1100,
+     1050
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       570,
+       586,
+       330,
+       56
+      ],
+      "atSec": 1.6
+     }
+    ],
+    "quote": "almost an exact sky-blue by day",
+    "source": "JOHN DALTON · 1798 · P. 29-30"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-09",
+     22.0,
+     24.2
+    ]
+   ]
+  },
+  {
+   "id": "10+11",
+   "beats": [
+    "E01-A1-10",
+    "E01-A1-11"
+   ],
+   "start": 24.2,
+   "end": 29.0,
+   "component": "SwatchRows",
+   "assets": [
+    "VIS-017",
+    "TXT-010",
+    "MOT-003",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-001",
+    "SRC-029",
+    "MOT-002"
+   ],
+   "props": {
+    "columns": [
+     "BY DAY",
+     "BY CANDLE"
+    ],
+    "rows": [
+     {
+      "atSec": 0,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 0,
+        "fillSec": 0.46
+       },
+       {
+        "atSec": 3.39
+       }
+      ]
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-10",
+     24.2,
+     26.3
+    ],
+    [
+     "E01-A1-11",
+     26.3,
+     29.0
+    ]
+   ]
+  },
+  {
+   "id": "12+13",
+   "beats": [
+    "E01-A1-12",
+    "E01-A1-13"
+   ],
+   "start": 29.0,
+   "end": 33.6,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-029",
+    "MOT-003"
+   ],
+   "props": {
+    "srcId": "SRC-029",
+    "imgSize": [
+     1920,
+     2934
+    ],
+    "crop": [
+     400,
+     420,
+     1100,
+     1050
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       570,
+       645,
+       430,
+       56
+      ],
+      "atSec": 2.45
+     }
+    ],
+    "quote": "in candle-light, however, it was astonishingly changed",
+    "source": "JOHN DALTON · 1798 · P. 30"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-12",
+     29.0,
+     31.4
+    ],
+    [
+     "E01-A1-13",
+     31.4,
+     33.6
+    ]
+   ]
+  },
+  {
+   "id": "14+15+16+17+18+19",
+   "beats": [
+    "E01-A1-14",
+    "E01-A1-15",
+    "E01-A1-16",
+    "E01-A1-17",
+    "E01-A1-18",
+    "E01-A1-19"
+   ],
+   "start": 33.6,
+   "end": 49.1,
+   "component": "SwatchRows",
+   "assets": [
+    "VIS-017",
+    "TXT-010",
+    "MOT-003",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-029",
+    "MOT-002",
+    "MOT-001"
+   ],
+   "props": {
+    "columns": [
+     "BY DAY",
+     "BY CANDLE"
+    ],
+    "rows": [
+     {
+      "name": "JOHN",
+      "nameAtSec": 4.24,
+      "atSec": 0,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 0,
+        "fillSec": 0
+       },
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 0,
+        "fillSec": 1.58
+       }
+      ]
+     },
+     {
+      "name": "FRIENDS",
+      "atSec": 4.24,
+      "dimAtSec": 8.73,
+      "cells": [
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": 4.24,
+        "fillSec": 6.54
+       },
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": 4.24,
+        "fillSec": 7.38
+       }
+      ],
+      "tag": {
+       "text": "NO REAL CHANGE",
+       "atSec": 7.38
+      }
+     },
+     {
+      "name": "HIS BROTHER",
+      "nameAtSec": 12.7,
+      "atSec": 10.4,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 10.4,
+        "fillSec": 12.7
+       },
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 10.4,
+        "fillSec": 12.7
+       }
+      ],
+      "sub": {
+       "text": "JONATHAN",
+       "atSec": 13.52
+      }
+     }
+    ],
+    "caption": {
+     "text": "What he called red",
+     "atSec": 1.58,
+     "untilSec": 4.24
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-14",
+     33.6,
+     36.0
+    ],
+    [
+     "E01-A1-15",
+     36.0,
+     38.8
+    ],
+    [
+     "E01-A1-16",
+     38.8,
+     41.4
+    ],
+    [
+     "E01-A1-17",
+     41.4,
+     44.0
+    ],
+    [
+     "E01-A1-18",
+     44.0,
+     46.1
+    ],
+    [
+     "E01-A1-19",
+     46.1,
+     49.1
+    ]
+   ]
+  },
+  {
+   "id": "20",
+   "beats": [
+    "E01-A1-20"
+   ],
+   "start": 49.1,
+   "end": 51.7,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-013"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     0,
+     0
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-20",
+     49.1,
+     51.7
+    ]
+   ]
+  },
+  {
+   "id": "21",
+   "beats": [
+    "E01-A1-21"
+   ],
+   "start": 51.7,
+   "end": 54.2,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "SRC-013"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     640,
+     560,
+     520,
+     292
+    ],
+    "warmth": [
+     0,
+     0
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-21",
+     51.7,
+     54.2
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    860,
+    620
+   ]
+  },
+  {
+   "id": "22",
+   "beats": [
+    "E01-A1-22"
+   ],
+   "start": 54.2,
+   "end": 57.0,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-013"
+   ],
+   "props": {
+    "lines": [
+     {
+      "text": "Where is the pink?",
+      "atSec": 0.62
+     }
+    ],
+    "backdrop": {
+     "srcId": "SRC-013",
+     "imgSize": [
+      1920,
+      1280
+     ],
+     "crop": [
+      640,
+      560,
+      520,
+      292
+     ],
+     "layout": "full",
+     "dim": 0.5
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-22",
+     54.2,
+     57.0
+    ]
+   ]
+  },
+  {
+   "id": "23",
+   "beats": [
+    "E01-A1-23"
+   ],
+   "start": 57.0,
+   "end": 59.6,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-011"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "clipStartSec": 3,
+    "warmth": [
+     1,
+     1
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-23",
+     57.0,
+     59.6
+    ]
+   ]
+  },
+  {
+   "id": "24",
+   "beats": [
+    "E01-A1-24"
+   ],
+   "start": 59.6,
+   "end": 62.6,
+   "component": "ParallaxCutout",
+   "assets": [
+    "VIS-004",
+    "TXT-010",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-004"
+   ],
+   "props": {
+    "bg": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      0,
+      300,
+      996,
+      560
+     ]
+    },
+    "fg": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ]
+    },
+    "kicker": "PORTRAIT · 1834",
+    "headline": "John Dalton",
+    "startSec": 0.55
+   },
+   "beatTimes": [
+    [
+     "E01-A1-24",
+     59.6,
+     62.6
+    ]
+   ]
+  },
+  {
+   "id": "25+26",
+   "beats": [
+    "E01-A1-25",
+    "E01-A1-26"
+   ],
+   "start": 62.6,
+   "end": 67.8,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-009",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-004",
+    "TXT-010",
+    "MOT-003"
+   ],
+   "props": {
+    "lines": [
+     {
+      "text": "A pioneer of atomic theory",
+      "atSec": 2.35
+     },
+     {
+      "text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY",
+      "atSec": 3.39,
+      "style": "mono"
+     }
+    ],
+    "backdrop": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ],
+     "layout": "card-right"
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-25",
+     62.6,
+     65.2
+    ],
+    [
+     "E01-A1-26",
+     65.2,
+     67.8
+    ]
+   ]
+  },
+  {
+   "id": "27+28",
+   "beats": [
+    "E01-A1-27",
+    "E01-A1-28"
+   ],
+   "start": 67.8,
+   "end": 72.2,
+   "component": "KineticLine",
+   "assets": [
+    "VIS-020",
+    "TXT-011",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "TXT-009"
+   ],
+   "props": {
+    "lines": [
+     {
+      "text": "An answer.",
+      "atSec": 2.62
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "ABOUT TWO YEARS LATER",
+       "atSec": -17.5
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-27",
+     67.8,
+     69.9
+    ],
+    [
+     "E01-A1-28",
+     69.9,
+     72.2
+    ]
+   ]
+  },
+  {
+   "id": "29+30+31",
+   "beats": [
+    "E01-A1-29",
+    "E01-A1-30",
+    "E01-A1-31"
+   ],
+   "start": 72.2,
+   "end": 81.4,
+   "component": "EyeDiagram",
+   "assets": [
+    "VIS-019",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MOT-003",
+    "TXT-011",
+    "MOT-001"
+   ],
+   "props": {
+    "mode": "simple",
+    "openKeys": [
+     {
+      "atSec": 0,
+      "open": 0.04
+     },
+     {
+      "atSec": -41.9,
+      "open": 1
+     },
+     {
+      "atSec": 4.56,
+      "open": 0.04
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "THE TEST · 1844",
+       "atSec": 6.57
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-29",
+     72.2,
+     75.0
+    ],
+    [
+     "E01-A1-30",
+     75.0,
+     78.0
+    ],
+    [
+     "E01-A1-31",
+     78.0,
+     81.4
+    ]
+   ]
+  },
+  {
+   "id": "32+33",
+   "beats": [
+    "E01-A1-32",
+    "E01-A1-33"
+   ],
+   "start": 81.4,
+   "end": 87.9,
+   "component": "YearCounter",
+   "assets": [
+    "VIS-018",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MOT-003",
+    "SFX-005"
+   ],
+   "props": {
+    "to": 151,
+    "unit": "YEARS",
+    "countFromSec": 1.19,
+    "lockSec": 4.47
+   },
+   "beatTimes": [
+    [
+     "E01-A1-32",
+     81.4,
+     84.8
+    ],
+    [
+     "E01-A1-33",
+     84.8,
+     87.9
+    ]
+   ]
+  },
+  {
+   "id": "34",
+   "beats": [
+    "E01-A1-34"
+   ],
+   "start": 87.9,
+   "end": 90.25,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SRC-011"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "clipStartSec": 10.55,
+    "warmth": [
+     1,
+     1
+    ],
+    "fadeOutSec": 1.85
+   },
+   "beatTimes": [
+    [
+     "E01-A1-34",
+     87.9,
+     90.25
+    ]
+   ]
+  },
+  {
+   "id": "35+36",
+   "beats": [
+    "E01-A1-35",
+    "E01-A1-36"
+   ],
+   "start": 90.25,
+   "end": 95.3,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-001",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MOT-002",
+    "SFX-001"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.7,
+    "dolly": 0.02,
+    "startSec": -0.17,
+    "objects": [
+     {
+      "kind": "label",
+      "at": [
+       -1300,
+       -330,
+       600
+      ],
+      "text": "ISAAC NEWTON",
+      "atSec": 1.77
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1300,
+       -150,
+       600
+      ],
+      "r": 22,
+      "atSec": 3.01
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1300,
+       -150,
+       600
+      ],
+      "to": [
+       -300,
+       120,
+       1400
+      ],
+      "width": 14,
+      "atSec": 4.35,
+      "drawSec": 0.7
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-35",
+     90.25,
+     93.2
+    ],
+    [
+     "E01-A1-36",
+     93.2,
+     95.3
+    ]
+   ]
+  },
+  {
+   "id": "37",
+   "beats": [
+    "E01-A1-37"
+   ],
+   "start": 95.3,
+   "end": 98.6,
+   "component": "EyeDiagram",
+   "assets": [
+    "VIS-019",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010"
+   ],
+   "props": {
+    "mode": "simple",
+    "openKeys": [
+     {
+      "atSec": 0,
+      "open": 0.04
+     },
+     {
+      "atSec": 0.58,
+      "open": 1
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-37",
+     95.3,
+     98.6
+    ]
+   ]
+  },
+  {
+   "id": "38",
+   "beats": [
+    "E01-A1-38"
+   ],
+   "start": 98.6,
+   "end": 101.6,
+   "component": "SeriesTitleCard",
+   "assets": [
+    "PKG-005",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010"
+   ],
+   "props": {},
+   "beatTimes": [
+    [
+     "E01-A1-38",
+     98.6,
+     101.6
+    ]
+   ],
+   "note": "MUS-006 sting held back: not chosen yet (Sam picks from 3 at Gate 2)."
+  },
+  {
+   "id": "39",
+   "beats": [
+    "E01-A1-39"
+   ],
+   "start": 101.6,
+   "end": 104.6,
+   "component": "EpisodeCard",
+   "assets": [
+    "PKG-006",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010"
+   ],
+   "props": {
+    "number": 1,
+    "title": "The Man Who Saw Pink"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-39",
+     101.6,
+     104.6
+    ]
+   ]
+  }
+ ]
+}

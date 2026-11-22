@@ -27,6 +27,12 @@ const crit = [];
 const warn = [];
 const beats = act.beats;
 const f = (s) => Math.round(s * FPS);
+// A shot may join several beat-sheet beats (beatTimes: [[id, start, end], ...]); lengths and stills go per beat.
+const units = beats.flatMap((b) =>
+  Array.isArray(b.beatTimes) && b.beatTimes.length
+    ? b.beatTimes.map(([id, s0, e0]) => ({ ...b, id, start: s0, end: e0, shot: b.id }))
+    : [{ ...b, shot: b.id }],
+);
 checks.push(`Act: ${act.episodeId}  theme: ${act.themeId}  beats: ${beats.length}  fps: ${FPS}`);
 let gaps = 0;
 beats.forEach((b, i) => {
@@ -35,7 +41,7 @@ beats.forEach((b, i) => {
 });
 checks.push(`Frame parity: ${beats.length} beats on whole frames (Math.round(s*30)); gaps/overlaps between beats: ${gaps}`);
 if (gaps) crit.push(`${gaps} gap(s) or overlap(s) between beats`);
-for (const b of beats) {
+for (const b of units) {
   const len = (f(b.end) - f(b.start)) / FPS;
   if (len > 6) crit.push(`${b.id}: ${len.toFixed(2)} s (static risk; split it or add a change inside the shot)`);
   else if (len < 2 || len > 3.5) warn.push(`${b.id}: ${len.toFixed(2)} s, outside 2.0-3.5 s (OK only if the shot changes inside)`);
@@ -46,7 +52,8 @@ beats.forEach((b, i) => {
   if (!p) return;
   if (catalog[p.component]?.energy === "Peak" && catalog[b.component]?.energy === "Peak") crit.push(`${p.id}->${b.id}: peak after peak (needs a calm beat between)`);
   if (p.component === b.component) {
-    const same = JSON.stringify(p.props?.srcId ?? p.props?.bg) === JSON.stringify(b.props?.srcId ?? b.props?.bg);
+    const key = (x) => JSON.stringify([x.props?.srcId ?? x.props?.bg, x.props?.backdrop, x.props?.file, x.props?.crop, x.props?.mode, x.props?.lines]);
+    const same = key(p) === key(b);
     (same ? crit : warn).push(`${p.id}->${b.id}: back-to-back ${b.component}${same ? " on the same picture (clone)" : ""}`);
   }
   if (b.transitionIn === "push" && !b.focus) crit.push(`${b.id}: push-through without a focus point`);
@@ -60,11 +67,16 @@ const fontsMissing = fs.readdirSync("public/fonts").length ? [] : ["public/fonts
 checks.push(`Fonts: ${fs.readdirSync("public/fonts").length} files in public/fonts${fontsMissing.length ? " (MISSING)" : ""}`);
 if (voice) {
   const d = Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", voice]).toString());
-  const diff = Math.abs(f(d) - f(beats[beats.length - 1].end));
-  checks.push(`Voice length: ${d.toFixed(3)} s; beats end at ${beats[beats.length - 1].end.toFixed(3)} s; difference ${diff} frame(s)`);
+  const at = act.voice?.atSec ?? 0;
+  const cards = new Set(["SeriesTitleCard", "EpisodeCard"]);
+  const lastVoiced = [...units].reverse().find((u) => !cards.has(u.component)) ?? units[units.length - 1];
+  const diff = Math.abs(f(at + d) - f(lastVoiced.end));
+  checks.push(`Voice: ${d.toFixed(3)} s from ${at.toFixed(2)} s, ends ${(at + d).toFixed(3)} s; last voiced beat ends ${lastVoiced.end.toFixed(3)} s; difference ${diff} frame(s)`);
   if (diff > 1) crit.push(`beats and voice differ by ${diff} frames`);
 } else checks.push("Voice length: not checked (no --voice given)");
-checks.push("Sound overlap: checked at Gate 3 against the mix (no SFX in the act yet)");
+checks.push(
+  `Sounds in the act: ${(act.audio ?? []).map((c) => `${c.id} @ ${c.atSec}s`).join(", ") || "none"} (placement in pauses checked at Gate 3 against the word times)`,
+);
 const reg = spawnSync("node", ["scripts/registry-check.mjs", actFile], { encoding: "utf8" });
 checks.push("--- registry guard", reg.stdout.trim());
 if (reg.status !== 0) crit.push("registry guard failed (see above)");
@@ -76,7 +88,7 @@ const rendered = [];
 const stillErr = {};
 try {
   const comp = await selectComposition({ serveUrl, id: "Episode", inputProps: act, puppeteerInstance: browser });
-  for (const b of beats) {
+  for (const b of units) {
     const frame = Math.floor((f(b.start) + f(b.end)) / 2);
     const out = path.join(stillsDir, `${b.id}_f${frame}.jpg`);
     try {
@@ -108,7 +120,7 @@ if (rendered.length) {
 const verdict = crit.length ? "FAIL" : "AUTO-PASS (visual review pending)";
 checks.push("--- critical", ...(crit.length ? crit.map((c) => `  - ${c}`) : ["  none"]), "--- warnings", ...(warn.length ? warn.map((w) => `  - ${w}`) : ["  none"]), `Result: ${verdict}`);
 fs.writeFileSync(path.join(qa, "checks.txt"), checks.join("\n") + "\n");
-const rows = beats.map((b) => {
+const rows = units.map((b) => {
   const r = rendered.find(([x]) => x.id === b.id);
   const auto = [...crit, ...warn].filter((c) => c.includes(b.id)).join("; ") || "ok";
   return `| ${b.id} | ${b.start.toFixed(2)}-${b.end.toFixed(2)} | ${b.component} | ${r ? `stills/${path.basename(r[2])}` : "FAILED"} | ${auto} | to review |`;

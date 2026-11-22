@@ -81,6 +81,30 @@ export const DEMO: Record<string, Record<string, unknown>> = {
   },
   SeriesTitleCard: {},
   EpisodeCard: { number: 1, title: "The Man Who Saw Pink" },
+  FootagePlate: {
+    srcId: "SRC-013",
+    kind: "image",
+    size: [1920, 1280],
+    crop: [300, 260, 1160, 652],
+    warmth: [0.9, 0.2],
+    warmthSec: [2.5, 4.5],
+    labels: [{ text: "PREVIEW LABEL · FLOWER", atSec: 0.8, x: 1240, y: 820 }],
+    tag: { parts: [{ text: "PREVIEW", atSec: 0.3 }, { text: "PLACE · DATE", atSec: 1.4 }], at: "low-centre", toCornerAtSec: 3.2 },
+  },
+  SwatchRows: {
+    columns: ["BY DAY", "BY CANDLE"],
+    rows: [
+      { name: "ROW A", atSec: 0.3, cells: [{ color: "#86B5E8", name: "SKY-BLUE", atSec: 0.3 }, { color: "#C8402F", name: "RED", atSec: 0.6, fillSec: 1.6 }] },
+      { name: "ROW B", atSec: 2.0, cells: [{ color: "#E79AB9", name: "PINK", atSec: 2.0 }, { color: "#E79AB9", name: "PINK", atSec: 2.3 }], tag: { text: "PREVIEW TAG", atSec: 2.8 } },
+    ],
+    caption: { text: "Preview caption", atSec: 3.4 },
+  },
+  YearCounter: { to: 151, unit: "YEARS", countFromSec: 0.5, lockSec: 3.0 },
+  EyeDiagram: { mode: "simple", openKeys: [{ atSec: 0, open: 0.05 }, { atSec: 0.6, open: 1 }, { atSec: 3.4, open: 0.04 }] },
+  KineticLine: {
+    lines: [{ text: "Preview question?", atSec: 0.6 }, { text: "PREVIEW · MONO LINE", atSec: 1.6, style: "mono" }],
+    backdrop: { srcId: "SRC-013", imgSize: [1920, 1280], crop: [300, 260, 1160, 652], layout: "full" },
+  },
 };
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.
@@ -111,6 +135,41 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
         { kind: "ring", at: [0, -20, 260], r: 330, atSec: 1.4 },
         { kind: "label", at: [0, -340, 260], text: "PREVIEW · LOOKING THROUGH", atSec: 1.8 },
       ],
+    },
+  },
+  "FootagePlate-Video": {
+    name: "FootagePlate",
+    props: {
+      srcId: "SRC-011",
+      file: "public/assets/sources/candle_lighting_mixkit3458_rev.mp4",
+      kind: "video",
+      size: [1080, 1920],
+      focus: 0.56,
+      zoom: 1.0,
+      warmth: [1, 1],
+      tag: { parts: [{ text: "PREVIEW · PLACE", atSec: 0.8 }], at: "low-centre" },
+    },
+  },
+  "EyeDiagram-Section": {
+    name: "EyeDiagram",
+    props: {
+      mode: "section",
+      parts: [
+        { part: "cornea", text: "CORNEA", atSec: 0.4 },
+        { part: "lens", text: "LENS", atSec: 0.7 },
+        { part: "vitreous", text: "VITREOUS HUMOUR", atSec: 1.0 },
+        { part: "retina", text: "BACK OF THE EYE", atSec: 1.3 },
+      ],
+      tints: [{ part: "vitreous", color: "#3C6FD8", atSec: 2.0, opacity: 0.4 }],
+      beat: { atSec: 1.6 },
+      question: { atSec: 3.2 },
+    },
+  },
+  "KineticLine-Card": {
+    name: "KineticLine",
+    props: {
+      lines: [{ text: "Preview line beside a card", atSec: 0.5 }, { text: "PREVIEW · 1808", atSec: 1.5, style: "mono" }],
+      backdrop: { srcId: "SRC-004", imgSize: [996, 1230], crop: [110, 60, 790, 1010], layout: "card-right" },
     },
   },
 };

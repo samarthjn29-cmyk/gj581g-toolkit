@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T06:23:14.606Z",
+ "generated": "2026-11-22T06:48:12.754Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -478,7 +478,7 @@
    "paths": [
     "public/sfx/soft-whoosh.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a light beam or a camera move starting, rising into the next cut, in a pause. Limit: max 6 beats per episode. Not for: under narration words, or every transition.",
    "maxBeats": 6,
    "maxShare": null
@@ -526,7 +526,7 @@
    "paths": [
     "public/sfx/muted-thump.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: one big number or reveal landing, in the pause after the line. Limit: max 4 beats per episode. Not for: ordinary labels.",
    "maxBeats": 4,
    "maxShare": null
@@ -538,7 +538,7 @@
    "paths": [
     "public/sfx/cardstock-slide.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a real page or document arriving on screen, in the pause before its line. Limit: max 10 beats per episode. Not for: text cards or diagrams.",
    "maxBeats": 10,
    "maxShare": null
@@ -1090,9 +1090,10 @@
    "folder": "11_Sources",
    "name": "CandleLighting_Mixkit3458",
    "paths": [
-    "public/assets/sources/candle_lighting_mixkit3458.webm"
+    "public/assets/sources/candle_lighting_mixkit3458.mp4",
+    "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
    ],
-   "status": "Spec Ready",
+   "status": "Active",
    "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 8 beats per episode. Not for: any other scene.",
    "maxBeats": 8,
    "maxShare": null
@@ -1116,7 +1117,7 @@
    "paths": [
     "public/assets/sources/geranium_stang.jpg"
    ],
-   "status": "Spec Ready",
+   "status": "Active",
    "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 10 beats per episode. Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
    "maxBeats": 10,
    "maxShare": null
@@ -1357,9 +1358,9 @@
    "paths": [
     "src/components/FootagePlate.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: a real clip or photo that sets a scene (a candle in a dark room, a place) with its dateline or label. Limit: max 12 beats per episode; max 15% of runtime. Not for: documents (ArchivalScanCard) or a named person's first appearance (ParallaxCutout).",
-   "maxBeats": 12,
+   "status": "Active",
+   "use": "Best use: a real clip or photo that sets a scene (a candle in a dark room, a place) with its dateline or label. Limit: max 16 beats per episode; max 15% of runtime (raised from 12 beats, Sam approved at WCL-E01 Gate 1). Not for: documents (ArchivalScanCard) or a named person's first appearance (ParallaxCutout).",
+   "maxBeats": 16,
    "maxShare": 15
   },
   "VIS-017": {
@@ -1369,7 +1370,7 @@
    "paths": [
     "src/components/SwatchRows.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 8 beats per episode. Not for: data with numbers (MinimalDataChart).",
    "maxBeats": 8,
    "maxShare": null
@@ -1381,7 +1382,7 @@
    "paths": [
     "src/components/YearCounter.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: one big span of time said out loud (151 years). Limit: max 2 beats per episode. Not for: dates (DatelineTag) or small numbers.",
    "maxBeats": 2,
    "maxShare": null
@@ -1393,7 +1394,7 @@
    "paths": [
     "src/components/EyeDiagram.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 10 beats per episode. Not for: lines about light or the brain with no eye in them.",
    "maxBeats": 10,
    "maxShare": null
@@ -1405,7 +1406,7 @@
    "paths": [
     "src/components/KineticLine.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a hinge question or one key label the viewer must keep (WHERE IS THE PINK?). Limit: max 6 beats per episode. Not for: repeating what the narration says word for word, or decoration.",
    "maxBeats": 6,
    "maxShare": null
@@ -1417,7 +1418,7 @@
    "paths": [
     "src/components/DatelineTag.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the first time a new place or date opens a scene. Limit: max 12 beats per episode. Not for: every line with a year in it.",
    "maxBeats": 12,
    "maxShare": null
@@ -1429,7 +1430,7 @@
    "paths": [
     "public/sfx/candle_strike_mk2590.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the candle being lit at the episode's very start (and again only if the story returns to that evening). Limit: max 2 beats per episode. Not for: transitions.",
    "maxBeats": 2,
    "maxShare": null
@@ -1441,7 +1442,7 @@
    "paths": [
     "public/sfx/room_tone_mk3080.wav"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: under the candlelit Kendal scene only. Limit: max 10 beats per episode; max 10% of runtime. Not for: diagrams or documents.",
    "maxBeats": 10,
    "maxShare": 10
@@ -1453,9 +1454,21 @@
    "paths": [
     "public/assets/sources/dalton1798_p30.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 10 beats per episode. Not for: decoration.",
    "maxBeats": 10,
+   "maxShare": null
+  },
+  "SRC-030": {
+   "id": "SRC-030",
+   "folder": "11_Sources",
+   "name": "WCL-E01_Act1_Narration",
+   "paths": [
+    "public/episodes/wcl-e01/01_flower_paced_148wpm.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: act 1 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say-so.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

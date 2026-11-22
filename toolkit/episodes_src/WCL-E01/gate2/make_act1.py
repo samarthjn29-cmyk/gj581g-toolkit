@@ -1,0 +1,172 @@
+"""WCL-E01 act 1 act file (src/episodes/ep01-act01.json) from the approved Gate 1 beat sheet.
+Shots join beat-sheet beats whose picture carries on; every cue is a word time from Sam's paced take
+(01_flower_paced_words.json) plus the 0.8 s lead-in. Run from anywhere; writes into the library."""
+import json, os
+HERE = os.path.dirname(os.path.abspath(__file__))
+LIB = os.path.join(HERE, "..", "..", "..", "library")
+WORDS = os.environ.get("WORDS", "/home/claude/wcl/ep01/voice/eleven/01_flower_paced_words.json")
+LEAD = 0.8
+W = [(t.strip(".,;?").lower(), a + LEAD, b + LEAD) for t, a, b in json.load(open(WORDS))]
+ad = json.load(open(os.path.join(HERE, "..", "gate1", "AD.json")))
+hv = json.load(open(os.path.join(HERE, "..", "gate1", "HV.json")))
+BEAT = {r[0]: (r[2], r[3]) for r in ad}
+
+def word(w, after=0.0, end=False):
+    for t, a, b in W:
+        if t == w and a >= after - 1e-6:
+            return round(b if end else a, 2)
+    raise KeyError(f"{w} after {after}")
+
+def ids(beats):
+    out = []
+    for b in beats:
+        i = int(b.split("-")[-1]) - 1
+        row = hv[i]
+        for col in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11):
+            for x in row[col].split(","):
+                x = x.strip()
+                if x and x not in out:
+                    out.append(x)
+    return out
+
+SKY, RED, PINK = "#86B5E8", "#C8402F", "#E79AB9"  # what each person reported (data, not theme colours)
+P29 = ([1920, 2813], [400, 1650, 1100, 1050])
+P30 = ([1920, 2934], [400, 420, 1100, 1050])
+GER = [1920, 1280]
+CANDLE = "public/assets/sources/candle_lighting_mixkit3458.mp4"
+CANDLE_REV = "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
+shots = []
+
+def shot(beats, component, props, **kw):
+    s, e = BEAT[beats[0]][0], BEAT[beats[-1]][1]
+    rel = lambda x: round(x - s, 2)
+    p = props(rel) if callable(props) else props
+    d = {"id": "+".join(b.split("-")[-1] for b in beats), "beats": beats, "start": s, "end": e,
+         "component": component, "assets": ids(beats), "props": p,
+         "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
+    d.update(kw)
+    shots.append(d)
+
+B = lambda *n: [f"E01-A1-{k:02d}" for k in n]
+
+# 1-4 Kendal: the candle is lit (the clip reversed, so the flame catches), dateline, Dalton's label.
+shot(B(1, 2, 3, 4), "FootagePlate", lambda r: {
+    "srcId": "SRC-011", "file": CANDLE_REV, "kind": "video", "size": [1080, 1920], "focus": 0.56, "warmth": [1, 1],
+    "tag": {"at": "low-centre", "toCornerAtSec": r(BEAT["E01-A1-03"][0] + 0.3), "parts": [
+        {"text": "KENDAL", "atSec": r(word("kendall"))},
+        {"text": "NORTH OF ENGLAND", "atSec": r(word("north")), "untilSec": r(word("autumn"))},
+        {"text": "AUTUMN 1792", "atSec": r(word("1792"))}]},
+    "labels": [{"text": "JOHN DALTON · TEACHER", "atSec": r(word("john")), "x": 960, "y": 820, "align": "center"}]})
+# 5-7 the geranium (push-through from the flame), warm candle grade drifting to neutral on beat 7.
+shot(B(5, 6, 7), "FootagePlate", lambda r: {
+    "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 0],
+    "warmthSec": [r(BEAT["E01-A1-07"][0]), r(BEAT["E01-A1-07"][1])],
+    "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": r(word("geranium")), "x": 1240, "y": 820,
+                "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1420, "y": 960, "scale": 0.78}}]},
+    transitionIn="push", focus=[960, 560])
+# 8 p.29: "the Geranium zonale by candle-light, in the Autumn of 1792 ... almost an exact"
+shot(B(8), "ArchivalScanCard", lambda r: {
+    "srcId": "SRC-001", "imgSize": P29[0], "crop": P29[1], "side": "left",
+    "highlights": [{"box": [1015, 2040, 375, 46], "atSec": r(word("by", 20) + 0.2)},
+                   {"box": [440, 2100, 700, 54], "atSec": r(word("day", 20))}],
+    "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
+    "source": "JOHN DALTON · 1798 · P. 29-30"})
+# 9 p.30: "sky-blue by day"
+shot(B(9), "ArchivalScanCard", lambda r: {
+    "srcId": "SRC-029", "imgSize": P30[0], "crop": P30[1], "side": "left",
+    "highlights": [{"box": [570, 586, 330, 56], "atSec": r(word("almost"))}],
+    "quote": "almost an exact sky-blue by day",
+    "source": "JOHN DALTON · 1798 · P. 29-30"})
+# 10-11 Dalton's swatch: DAY sky-blue on "sky", CANDLE empty on "candle".
+shot(B(10, 11), "SwatchRows", lambda r: {
+    "columns": ["BY DAY", "BY CANDLE"],
+    "rows": [{"atSec": 0, "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": 0, "fillSec": r(word("sky"))},
+                                    {"atSec": r(word("candle", 26))}]}]})
+# 12-13 p.30: "astonishingly changed"
+shot(B(12, 13), "ArchivalScanCard", lambda r: {
+    "srcId": "SRC-029", "imgSize": P30[0], "crop": P30[1], "side": "left",
+    "highlights": [{"box": [570, 645, 430, 56], "atSec": r(word("astonishingly"))}],
+    "quote": "in candle-light, however, it was astonishingly changed",
+    "source": "JOHN DALTON · 1798 · P. 30"})
+# 14-19 the rows: John blue/red, friends pink/pink, his brother blue/red.
+shot(B(14, 15, 16, 17, 18, 19), "SwatchRows", lambda r: {
+    "columns": ["BY DAY", "BY CANDLE"],
+    "rows": [
+        {"name": "JOHN", "nameAtSec": r(word("friends")), "atSec": 0,
+         "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": 0, "fillSec": 0},
+                   {"color": RED, "name": "RED", "atSec": 0, "fillSec": r(word("red"))}]},
+        {"name": "FRIENDS", "atSec": r(word("friends")), "dimAtSec": r(word("of", 42)),
+         "cells": [{"color": PINK, "name": "PINK", "atSec": r(word("friends")), "fillSec": r(word("day", 39))},
+                   {"color": PINK, "name": "PINK", "atSec": r(word("friends")), "fillSec": r(word("candle", 40))}],
+         "tag": {"text": "NO REAL CHANGE", "atSec": r(word("candle", 40))}},
+        {"name": "HIS BROTHER", "nameAtSec": r(word("brother")), "atSec": r(BEAT["E01-A1-18"][0]),
+         "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": r(BEAT["E01-A1-18"][0]), "fillSec": r(word("brother"))},
+                   {"color": RED, "name": "RED", "atSec": r(BEAT["E01-A1-18"][0]), "fillSec": r(word("brother"))}],
+         "sub": {"text": "JONATHAN", "atSec": r(word("jonathan"))}}],
+    "caption": {"text": "What he called red", "atSec": r(word("red")), "untilSec": r(word("friends"))}})
+# 20 the geranium alone; 21 push into one petal; 22 WHERE IS THE PINK?
+shot(B(20), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 0]})
+shot(B(21), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [640, 560, 520, 292], "warmth": [0, 0]},
+     transitionIn="push", focus=[860, 620])
+shot(B(22), "KineticLine", lambda r: {
+    "lines": [{"text": "Where is the pink?", "atSec": r(word("where"))}],
+    "backdrop": {"srcId": "SRC-013", "imgSize": GER, "crop": [640, 560, 520, 292], "layout": "full", "dim": 0.5}})
+# 23 back to the candle, wide (the clip forward, from 3 s in).
+shot(B(23), "FootagePlate", {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
+                              "clipStartSec": 3, "warmth": [1, 1]})
+# 24 Dalton's first face: Charles Turner's mezzotint, 1834.
+shot(B(24), "ParallaxCutout", lambda r: {
+    "bg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [0, 300, 996, 560]},
+    "fg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010]},
+    "kicker": "PORTRAIT · 1834", "headline": "John Dalton", "startSec": max(0, r(word("dalton", 60)) - 0.3)})
+# 25-26 beside the portrait: a pioneer of atomic theory; later, 1808.
+shot(B(25, 26), "KineticLine", lambda r: {
+    "lines": [{"text": "A pioneer of atomic theory", "atSec": r(word("pioneer"))},
+              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("theory")), "style": "mono"}],
+    "backdrop": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010], "layout": "card-right"}})
+# 27-28 about two years later: an answer.
+shot(B(27, 28), "KineticLine", lambda r: {
+    "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
+    "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about"))}]}})
+# 29-31 the drawn eye opens on "his own eyes", closes on "dies"; THE TEST · 1844.
+shot(B(29, 30, 31), "EyeDiagram", lambda r: {
+    "mode": "simple",
+    "openKeys": [{"atSec": 0, "open": 0.04}, {"atSec": r(word("own")), "open": 1}, {"atSec": r(word("dies")), "open": 0.04}],
+    "tag": {"at": "corner", "parts": [{"text": "THE TEST · 1844", "atSec": r(word("his", 78))}]}})
+# 32-33 the counter: 0 -> 151 YEARS, locks on "years".
+shot(B(32, 33), "YearCounter", lambda r: {
+    "to": 151, "unit": "YEARS", "countFromSec": r(word("wait")), "lockSec": r(word("years", 85))})
+# 34 back to the candle, which gutters out (the clip's own ending) into the dark room.
+shot(B(34), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
+                                       "clipStartSec": 10.55, "warmth": [1, 1], "fadeOutSec": r(BEAT["E01-A1-34"][1]) - 0.5})
+# 35-36 the grid: Newton's dark room, the shutter hole lights on "hole", the beam starts after "shutter."
+shot(B(35, 36), "PerspectiveGrid", lambda r: {
+    "variant": "room", "depth": 2000, "dark": 0.7, "dolly": 0.02, "startSec": r(word("dark")) - 0.2,
+    "objects": [
+        {"kind": "label", "at": [-1300, -330, 600], "text": "ISAAC NEWTON", "atSec": r(word("newton"))},
+        {"kind": "hole", "at": [-1300, -150, 600], "r": 22, "atSec": r(word("hole"))},
+        {"kind": "beam", "from": [-1300, -150, 600], "to": [-300, 120, 1400], "width": 14,
+         "atSec": r(word("shutter", end=True)), "drawSec": 0.7}]})
+# 37 the drawn eye opens again on "open Dalton's eyes".
+shot(B(37), "EyeDiagram", lambda r: {"mode": "simple", "openKeys": [{"atSec": 0, "open": 0.04}, {"atSec": r(word("open")), "open": 1}]})
+# 38-39 the title cards (the sting MUS-006 is added once Sam picks it).
+shot(B(38), "SeriesTitleCard", {})
+shot(B(39), "EpisodeCard", {"number": 1, "title": "The Man Who Saw Pink"})
+
+for s in shots:
+    if "MUS-006" in s["assets"]:
+        s["assets"].remove("MUS-006")
+        s["note"] = "MUS-006 sting held back: not chosen yet (Sam picks from 3 at Gate 2)."
+audio = [
+    {"id": "SFX-013", "atSec": 0.0, "volumeDb": -4},
+    {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
+    {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
+    {"id": "SFX-005", "atSec": 86.85, "volumeDb": -20},
+    {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
+]
+act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
+       "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
+       "voice": {"id": "SRC-030", "atSec": LEAD},
+       "audio": audio, "beats": shots}
+json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act01.json"), "w"), indent=1, ensure_ascii=False)
+print(len(shots), "shots,", shots[-1]["end"], "s")

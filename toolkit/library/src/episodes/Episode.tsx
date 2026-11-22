@@ -1,10 +1,10 @@
 import React from "react";
-import { AbsoluteFill, Freeze, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useVideoConfig } from "remotion";
 import { COMPONENTS } from "../components";
 import { ThemeProvider } from "../themes";
 import { OpticalStack } from "../layers/OpticalStack";
 import { PushThrough } from "../components/PushThrough";
-import { RegistryModeProvider, useAssets } from "../registry";
+import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
 
 // One act of an episode, composed only from library components (src/episodes/epXX-actYY.json).
@@ -18,8 +18,35 @@ export type Beat = {
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
   transitionIn?: "cut" | "push";
   focus?: [number, number]; // key point for a push-through (the last shot's key picture)
+  beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
+  note?: string;
 };
-export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[] };
+// Sound: every file is a registered asset (the narration take is an SRC row, the sounds SFX rows).
+export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number };
+export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string };
+
+const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
+  const e = useAsset(cue.id);
+  const { fps } = useVideoConfig();
+  const from = sec(cue.atSec, fps);
+  const dur = cue.endSec !== undefined ? sec(cue.endSec, fps) - from : undefined;
+  const g = Math.pow(10, (cue.volumeDb ?? 0) / 20);
+  const fi = sec(cue.fadeInSec ?? 0, fps);
+  const fo = sec(cue.fadeOutSec ?? 0, fps);
+  return (
+    <Sequence from={from} durationInFrames={dur} name={`sound ${cue.id}`}>
+      <Audio
+        src={assetFile(e)}
+        volume={(f) => {
+          let v = g;
+          if (fi > 0) v *= interpolate(f, [0, fi], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          if (fo > 0 && dur !== undefined) v *= interpolate(f, [dur - fo, dur], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          return v;
+        }}
+      />
+    </Sequence>
+  );
+};
 
 const Shot: React.FC<{ beat: Beat }> = ({ beat }) => {
   const entry = COMPONENTS[beat.component];
@@ -64,11 +91,15 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
   );
 };
 
-export const Episode: React.FC<EpisodeProps> = ({ themeId, beats }) => (
+export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [] }) => (
   <RegistryModeProvider mode="render">
     <ThemeProvider themeId={themeId}>
       <AbsoluteFill>
         <Beats beats={beats} />
+        {voice ? <Sound cue={voice} /> : null}
+        {audio.map((c) => (
+          <Sound key={`${c.id}${c.atSec}`} cue={c} />
+        ))}
       </AbsoluteFill>
     </ThemeProvider>
   </RegistryModeProvider>

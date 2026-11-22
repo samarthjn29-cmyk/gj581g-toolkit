@@ -10,3 +10,10 @@ out
 qa/
 release/
 out/
+
+# Mixkit files (free licence, but not to be redistributed as files): kept in Drive (Video Reference Library), not in git
+public/sfx/
+public/assets/sources/*mixkit*
+
+# Sam's narration takes: Drive only (private), never GitHub
+public/episodes/

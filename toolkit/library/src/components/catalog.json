@@ -82,5 +82,35 @@
   "beatType": 4,
   "energy": "Calm",
   "grid": false
+ },
+ "FootagePlate": {
+  "assetId": "VIS-016",
+  "beatType": 4,
+  "energy": "Calm",
+  "grid": false
+ },
+ "SwatchRows": {
+  "assetId": "VIS-017",
+  "beatType": 2,
+  "energy": "Calm",
+  "grid": false
+ },
+ "YearCounter": {
+  "assetId": "VIS-018",
+  "beatType": 2,
+  "energy": "Peak",
+  "grid": false
+ },
+ "EyeDiagram": {
+  "assetId": "VIS-019",
+  "beatType": 4,
+  "energy": "Calm",
+  "grid": false
+ },
+ "KineticLine": {
+  "assetId": "VIS-020",
+  "beatType": 3,
+  "energy": "Calm",
+  "grid": false
  }
 }
