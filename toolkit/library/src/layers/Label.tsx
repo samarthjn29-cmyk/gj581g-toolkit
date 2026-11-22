@@ -46,7 +46,7 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
         transformOrigin: align === "right" ? "100% 0%" : align === "center" ? "50% 0%" : "0% 0%",
         opacity: r.opacity * out,
         fontFamily: t.fonts.mono,
-        fontSize: spec.size ?? 26,
+        fontSize: spec.size ?? 32,
         letterSpacing: 2,
         color: spec.accent ? t.colors.accent : t.colors.ink,
         background: t.colors.chip,

@@ -171,20 +171,20 @@
  ],
  [
   "Tonight, by the candle, it's different.",
-  "VIS-017",
-  "TXT-010",
+  "VIS-001",
+  "TXT-009, TXT-010",
   "MOT-002",
-  "TRN-001",
+  "TRN-007",
   "LOK-009, LOK-010",
   "",
   "MUS-007",
   "",
   "",
   "",
-  "SRC-001, SRC-029",
+  "SRC-029",
   "",
-  "Yes: new VIS-017",
-  "Calm. Dalton's swatches: DAY sky-blue fills as the shot opens; CANDLE appears empty on 'by the candle'."
+  "",
+  "Calm. TRN-007 slide to page 30 (independent review, 22 Nov: the short swatch shot between the pages made a ping-pong, removed). Highlight 'sky-blue by day; in candle-light' locks on 'candle'; page held through beat 13."
  ],
  [
   "In his own words, it is",
@@ -201,7 +201,7 @@
   "SRC-029",
   "",
   "",
-  "Calm. Page p.30 fills the tray; slow push towards the line."
+  "Calm. Page 30 held (from beat 11); slow push towards the line."
  ],
  [
   "astonishingly changed.",
@@ -234,7 +234,7 @@
   "",
   "SRC-029",
   "",
-  "",
+  "Yes: new VIS-017 (first use, since the beat 11 swatch shot was removed)",
   "Calm. Slide across from the page to the swatches; CANDLE swatch fills red on 'red'; caption: WHAT HE CALLED RED."
  ],
  [
@@ -388,7 +388,7 @@
   "SRC-011",
   "",
   "",
-  "Calm. Back to the candle, wide; label A SILLY QUESTION? on 'silly'."
+  "Calm. Back to the candle, wide; label A SILLY QUESTION? from 'It', held to the cut (beat ends 59.95 s, just before 'but')."
  ],
  [
   "but Dalton is not a silly man.",
@@ -550,15 +550,15 @@
   "MOT-003",
   "TRN-001",
   "LOK-009, LOK-010",
-  "SFX-005",
+  "SFX-005, SFX-015",
   "MUS-007",
   "",
   "",
   "",
   "",
   "",
-  "Yes: SFX-005 file",
-  "Peak. Counter locks at 151 YEARS on 'years'; soft low thump at 86.85 s in the pause."
+  "Yes: SFX-005 file; new SFX-015 CountLockTick (own)",
+  "Peak. Counter locks at 151 YEARS on 'years'; a mid tick on the lock (SFX-015) and the soft low thump at 86.85 s in the pause."
  ],
  [
   "Along the way, we'll go back to a",
@@ -580,7 +580,7 @@
  [
   "dark room, where a young Isaac Newton has made a small",
   "VIS-015",
-  "TXT-010",
+  "TXT-011",
   "MOT-001",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -592,12 +592,12 @@
   "",
   "",
   "",
-  "Calm. Perspective grid (beat 1 of the episode's 8): Newton's dark room fades up on 'dark room' (dark 0.7), slow dolly; label ISAAC NEWTON on 'Newton'."
+  "Calm. Perspective grid (beat 1 of the episode's 8): Newton's dark room fades up on 'dark room' (dark 0.7), slow dolly; a closed wooden shutter on the left wall; corner tag ISAAC NEWTON on 'Newton'."
  ],
  [
   "hole in his window shutter.",
   "VIS-015",
-  "",
+  "TXT-010",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -609,7 +609,7 @@
   "",
   "",
   "Yes: SFX-001 file",
-  "Calm. Grid beat 2 of 8: the shutter hole lights on 'hole'; the beam starts across after 'shutter.' with a soft air swell at 94.60 s. No prism, no spectrum (saved for act 4)."
+  "Calm. Grid beat 2 of 8: the shutter hole lights on 'hole' with the label A HOLE IN THE SHUTTER; the beam starts across on 'shutter' with a soft air swell at 94.60 s. No prism, no spectrum (saved for act 4)."
  ],
  [
   "And we'll open Dalton's eyes as he asked.",
@@ -626,7 +626,7 @@
   "",
   "",
   "",
-  "Calm. The same cut eye: the front lifts away on 'open', showing the inside; words OPEN DALTON'S EYES · AS HE ASKED."
+  "Calm. The same cut eye: the front lifts away on 'open', showing the inside; words OPEN DALTON'S EYES · AS HE ASKED (the mono line 0.5 s after, so both can be read)."
  ],
  [
   "",

@@ -49,11 +49,17 @@ const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
   );
 };
 
-const Shot: React.FC<{ beat: Beat }> = ({ beat }) => {
+// `built`: a hard cut lands on a fully built frame (independent review, 22 Nov 2026: 12 of 19 cuts blinked
+// to the bare canvas because every component faded its base in from 0). The shot's base entrance is moved
+// before its first frame (startSec -1); cued overlays keep their own times. A shot whose act file sets a
+// deliberate startSec (> 0.3 s, e.g. a dark room fading up from a dark shot) keeps it.
+const Shot: React.FC<{ beat: Beat; built?: boolean }> = ({ beat, built }) => {
   const entry = COMPONENTS[beat.component];
   if (!entry) throw new Error(`${beat.id}: ${beat.component} is not a library component.`);
   const C = entry.Component;
-  return <C {...beat.props} />;
+  const st = beat.props.startSec as number | undefined;
+  const props = built && !(st !== undefined && st > 0.3) ? { ...beat.props, startSec: -1 } : beat.props;
+  return <C {...props} />;
 };
 
 const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
@@ -66,7 +72,8 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
         const dur = sec(b.end, fps) - from;
         const prev = beats[i - 1];
         const entry = COMPONENTS[b.component];
-        let body: React.ReactNode = <Shot beat={b} />;
+        const cut = i > 0 && (!b.transitionIn || b.transitionIn === "cut");
+        let body: React.ReactNode = <Shot beat={b} built={cut} />;
         if (b.transitionIn === "slide" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (
@@ -76,7 +83,7 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
                   <Shot beat={prev} />
                 </Freeze>
               }
-              to={<Shot beat={b} />}
+              to={<Shot beat={b} built />}
             />
           );
         }
@@ -89,7 +96,7 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
                   <Shot beat={prev} />
                 </Freeze>
               }
-              to={<Shot beat={b} />}
+              to={<Shot beat={b} built />}
               atSec={0}
               focus={b.focus ?? [960, 540]}
             />

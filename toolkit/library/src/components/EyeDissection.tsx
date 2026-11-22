@@ -483,7 +483,7 @@ export const EyeDissection: React.FC<EyeDissectionProps> = ({
               x={x}
               y={y}
               fontFamily={t.fonts.mono}
-              fontSize={24}
+              fontSize={28}
               letterSpacing={3}
               fill={t.colors.secondary}
               textAnchor={p.part === "coat" ? "middle" : "start"}

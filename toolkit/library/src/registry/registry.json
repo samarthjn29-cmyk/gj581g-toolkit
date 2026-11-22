@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T08:37:57.794Z",
+ "generated": "2026-11-22T09:03:33.449Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -912,7 +912,8 @@
    "name": "DaltonTurner1834",
    "paths": [
     "public/assets/sources/dalton_turner1834.jpg",
-    "public/assets/sources/dalton_turner1834_halftone.png"
+    "public/assets/sources/dalton_turner1834_halftone.png",
+    "public/assets/sources/dalton_turner1834_trace.png"
    ],
    "status": "Active",
    "use": "",
@@ -1726,6 +1727,127 @@
    "status": "Planned",
    "use": "Best use: held full-frame stills. Limit: max 6 beats per episode; opacity <= 0.15. Not for: text, diagrams or faces.",
    "maxBeats": 6,
+   "maxShare": null
+  },
+  "SFX-015": {
+   "id": "SFX-015",
+   "folder": "6_Sounds",
+   "name": "CountLockTick",
+   "paths": [
+    "public/sfx/count_lock_tick.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: the lock of a counter or a key number, on the word, with SFX-005 under it. Limit: max 4 beats per episode, at -16 dB or quieter. Not for: labels, page highlights or transitions.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "TEX-007": {
+   "id": "TEX-007",
+   "folder": "8_Textures",
+   "name": "PaperFibre",
+   "paths": [
+    "src/layers/PaperFibre.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: every paper piece on screen. Limit: inside each piece only, low strength. Not for: digital UI or diagrams.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-015": {
+   "id": "TXT-015",
+   "folder": "2_Text",
+   "name": "FillSweep",
+   "paths": [
+    "src/layers/FillWord.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: the one word a line turns on. Limit: one fill per line, max 6 per act. Not for: whole sentences.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-008": {
+   "id": "TRN-008",
+   "folder": "4_Transitions",
+   "name": "TraceToPicture",
+   "paths": [
+    "src/components/ParallaxCutout.tsx",
+    "scripts/trace.py"
+   ],
+   "status": "Active",
+   "use": "Best use: a first appearance. Limit: max 3 per episode. Not for: documents to read.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "PKG-008": {
+   "id": "PKG-008",
+   "folder": "10_Packaging",
+   "name": "SeriesThread",
+   "paths": [
+    "src/components/SeriesThread.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: act changes and chapter cards.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-018": {
+   "id": "LOK-018",
+   "folder": "5_Look_and_Color",
+   "name": "TopLightSheen",
+   "paths": [
+    "src/layers/TopLightSheen.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: title and chapter cards.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-010": {
+   "id": "MOT-010",
+   "folder": "3_Motion",
+   "name": "OnTwos",
+   "paths": [
+    "src/motion.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: hand-drawn diagrams.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-009": {
+   "id": "TRN-009",
+   "folder": "4_Transitions",
+   "name": "ShapeMorphCut",
+   "paths": [
+    "src/components/ShapeMorphCut.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: shape-to-shape scene changes. Limit: max 2 per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-019": {
+   "id": "LOK-019",
+   "folder": "5_Look_and_Color",
+   "name": "ShadowPass",
+   "paths": [
+    "src/layers/ShadowPass.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: held period photos and candlelit rooms. Limit: max 6 beats per episode.",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "MAP-005": {
+   "id": "MAP-005",
+   "folder": "9_Maps",
+   "name": "FocusDim",
+   "paths": [
+    "src/components/FocusDim.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: maps where one place is spoken about. Limit: max 4 beats per episode.",
+   "maxBeats": 4,
    "maxShare": null
   }
  }

@@ -12,6 +12,7 @@ import { useAssets, useSource } from "../registry";
 import { particles, type RaySpec } from "../layers/RayParticles";
 import { reveal, rise } from "../motion";
 import { wavelengthRGB } from "../layers/spectrum";
+import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 
 // VIS-015 PerspectiveGrid: a room or a floor drawn as a one-point perspective grid in the theme's ink,
 // with objects placed in the same space (a beam, a prism, a spectrum fan on the back wall, a page lying on
@@ -44,6 +45,8 @@ export type GridObject =
       atSec?: number;
     }
   | { kind: "hole"; at: V3; r?: number; atSec?: number }
+  // a closed wooden window shutter on a wall (draw it before its hole); boards as faint vertical lines
+  | { kind: "shutter"; at: V3; w: number; h: number; boards?: number; atSec?: number }
   | {
       kind: "patch";
       at: V3;
@@ -83,6 +86,7 @@ export type PerspectiveGridProps = {
   fog?: number; // 0..0.6 LOK-014 DepthFog: far lines and objects fade and soften, a haze sits at the back, beams scatter
   objects?: GridObject[];
   caption?: string;
+  tag?: DatelineTagProps; // e.g. the name of who is in the room, when no figure is drawn
   startSec?: number;
 };
 
@@ -102,6 +106,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
   fog = 0,
   objects = [],
   caption,
+  tag,
   startSec = 0,
 }) => {
   const hasRays = objects.some((o) => o.kind === "rays");
@@ -300,6 +305,21 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             strokeOpacity={0.9}
             strokeLinecap="round"
           />
+        </g>
+      );
+    }
+    if (o.kind === "shutter") {
+      const sc = s(o.at[2]);
+      const [x, y] = P(...o.at);
+      const w = o.w * sc;
+      const h = o.h * sc;
+      const n = o.boards ?? 4;
+      return (
+        <g key={i} opacity={p}>
+          <rect x={x - w / 2} y={y - h / 2} width={w} height={h} rx={4 * sc} fill={t.colors.panel} stroke={t.colors.ink} strokeOpacity={0.35} strokeWidth={2} />
+          {Array.from({ length: n - 1 }, (_, k) => (
+            <line key={k} x1={x - w / 2 + ((k + 1) * w) / n} y1={y - h / 2 + 4} x2={x - w / 2 + ((k + 1) * w) / n} y2={y + h / 2 - 4} stroke={t.colors.ink} strokeOpacity={0.18} strokeWidth={1.5} />
+          ))}
         </g>
       );
     }
@@ -573,6 +593,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
           {caption}
         </div>
       ) : null}
+      {tag ? <DatelineTag {...tag} /> : null}
     </AbsoluteFill>
   );
 };

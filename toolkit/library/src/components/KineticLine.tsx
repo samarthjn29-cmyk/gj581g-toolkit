@@ -74,7 +74,7 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
                 fontFamily: mono ? t.fonts.mono : t.fonts.headline,
                 fontWeight: mono ? 500 : t.fonts.headlineWeight,
                 letterSpacing: mono ? 3 : t.fonts.headlineTracking,
-                fontSize: mono ? 28 : 96,
+                fontSize: mono ? 32 : 96,
                 lineHeight: mono ? 1.4 : 1.05,
                 color: mono ? t.colors.secondary : t.colors.ink,
                 marginTop: mono ? 30 : 0,

@@ -28,15 +28,18 @@ fc = (
     f"[1:a]atrim={a.bed_from}:{a.bed_from+dur},asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={gain:.2f}dB,"
     f"volume='{vol}':eval=frame,afade=t=in:d={a.fade_in},afade=t=out:st={dur-a.fade_out:.2f}:d={a.fade_out}[bed];"
     f"[2:a]adelay={vd}|{vd},aresample=48000,aformat=channel_layouts=stereo,apad[key];"
-    f"[bed][key]sidechaincompress=threshold=0.05:ratio=3:attack=20:release=400[duck];"
+    f"[bed][key]sidechaincompress=threshold=0.05:ratio=2:attack=80:release=1100[duck];"
     f"[0:a]aresample=48000,aformat=channel_layouts=stereo[act];"
     f"[act][duck]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.89[mix]"
 )
 tmp = a.out.replace(".mp4", "_premix.mp4")
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.act, "-i", a.bed, "-i", a.voice, "-filter_complex", fc, "-map", "0:v", "-map", "[mix]", "-c:v", "copy", "-c:a", "pcm_s16le", tmp.replace(".mp4", ".mov")], check=True)
 m = lufs(["-i", tmp.replace(".mp4", ".mov")])
-ln = f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true"
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp.replace(".mp4", ".mov"), "-c:v", "copy", "-af", ln + ",aresample=48000", "-c:a", "aac", "-b:a", "256k", a.out], check=True)
+# Linear level (independent review, 22 Nov 2026: loudnorm fell back to dynamic mode and rode the voice up
+# 2 dB across the act, against "Sam's audio is final"): one fixed gain to -16 LUFS, then only a peak limiter.
+gain_all = -16.0 - float(m["input_i"])
+af = f"volume={gain_all:.2f}dB,alimiter=limit={10 ** (-1.6 / 20):.4f}:attack=1:release=60:level=false,aresample=48000"
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp.replace(".mp4", ".mov"), "-c:v", "copy", "-af", af, "-c:a", "aac", "-b:a", "256k", a.out], check=True)
 subprocess.run(["rm", "-f", tmp.replace(".mp4", ".mov")])
 f = lufs(["-i", a.out])
 print(f"bed {L:.1f} LUFS -> {a.lufs} (gain {gain:+.1f} dB), dips {dips}; final {f['input_i']} LUFS, TP {f['input_tp']}")

@@ -4,6 +4,8 @@ import { useTheme } from "../themes";
 import { useAssets, useSourceFile } from "../registry";
 import { drift, reveal, rise } from "../motion";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { FillLine, type WordFill } from "../layers/FillWord";
+import { InkEdgeFilter, PaperFibre } from "../layers/PaperFibre";
 
 // VIS-028 DuotoneCollage (Sam, 22 Nov 2026: "Maybe we can use collage on a few of our frames").
 // Torn paper pieces laid on the canvas, slightly turned, each a registered source re-screened as ONE ink
@@ -30,7 +32,7 @@ export type CollagePiece = {
 };
 export type DuotoneCollageProps = {
   pieces: CollagePiece[];
-  lines?: { text: string; atSec: number; style?: "serif" | "mono" }[];
+  lines?: { text: string; atSec: number; style?: "serif" | "mono"; fill?: WordFill }[]; // fill: TXT-015 FillSweep on one word
   tag?: DatelineTagProps;
   startSec?: number;
 };
@@ -53,12 +55,17 @@ function tornClip(seed: number): string {
 }
 
 // One ink: the source's mask file filled with the canvas token.
-const Ink: React.FC<{ srcId: string; file?: string }> = ({ srcId, file }) => {
+// TEX-007: the ink edges roughened slightly so it sits in the paper.
+const Ink: React.FC<{ srcId: string; file?: string; seed: number }> = ({ srcId, file, seed }) => {
   const t = useTheme();
   const src = useSourceFile(srcId, file);
   const m = `url(${src})`;
+  const fid = `inkedge${srcId.replace(/[^A-Za-z0-9]/g, "")}${seed}`;
   return (
-    <div style={{ position: "absolute", inset: 0, background: t.colors.canvas, WebkitMaskImage: m, maskImage: m, WebkitMaskSize: "100% 100%", maskSize: "100% 100%" }} />
+    <>
+      <InkEdgeFilter id={fid} seed={seed} />
+      <div style={{ position: "absolute", inset: 0, background: t.colors.canvas, WebkitMaskImage: m, maskImage: m, WebkitMaskSize: "100% 100%", maskSize: "100% 100%", filter: `url(#${fid})` }} />
+    </>
   );
 };
 
@@ -84,7 +91,8 @@ const Piece: React.FC<{ p: CollagePiece; i: number }> = ({ p, i }) => {
       }}
     >
       <div style={{ position: "absolute", inset: 0, background: paper, clipPath: tornClip(p.seed ?? i + 1) }}>
-        {p.srcId ? <Ink srcId={p.srcId} file={p.file} /> : null}
+        {p.srcId ? <Ink srcId={p.srcId} file={p.file} seed={p.seed ?? i + 1} /> : null}
+        <PaperFibre seed={p.seed ?? i + 1} strength={p.srcId ? 1 : 0.8} />
       </div>
       {p.caption ? (
         <div
@@ -96,7 +104,7 @@ const Piece: React.FC<{ p: CollagePiece; i: number }> = ({ p, i }) => {
             background: t.colors.chip,
             color: t.colors.ink,
             fontFamily: t.fonts.mono,
-            fontSize: 22,
+            fontSize: 26,
             letterSpacing: 3,
             whiteSpace: "nowrap",
             borderRadius: 4,
@@ -111,7 +119,7 @@ const Piece: React.FC<{ p: CollagePiece; i: number }> = ({ p, i }) => {
 };
 
 export const DuotoneCollage: React.FC<DuotoneCollageProps> = ({ pieces, lines = [], tag, startSec = 0 }) => {
-  useAssets(["VIS-028", "LOK-017", "MOT-002"]);
+  useAssets(["VIS-028", "LOK-017", "TEX-007", "MOT-002"]);
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -133,14 +141,14 @@ export const DuotoneCollage: React.FC<DuotoneCollageProps> = ({ pieces, lines = 
                 fontFamily: mono ? t.fonts.mono : t.fonts.headline,
                 fontWeight: mono ? 500 : t.fonts.headlineWeight,
                 letterSpacing: mono ? 3 : t.fonts.headlineTracking,
-                fontSize: mono ? 26 : 84,
+                fontSize: mono ? 30 : 84,
                 lineHeight: mono ? 1.45 : 1.05,
                 color: mono ? t.colors.secondary : t.colors.ink,
                 marginTop: mono ? 28 : 0,
                 ...rise(p, mono ? 12 : 26),
               }}
             >
-              {l.text}
+              <FillLine text={l.text} fill={l.fill} ink={mono ? t.colors.secondary : t.colors.ink} />
             </div>
           );
         })}

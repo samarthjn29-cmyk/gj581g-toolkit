@@ -45,6 +45,18 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
+    # Guard (independent review, 22 Nov 2026: word("own") matched "his own words" 44 s earlier, so a line
+    # showed before it was spoken): any cue before the shot's own start is a wrong word match.
+    def walk(o, path=""):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if k in ("atSec", "untilSec", "fillSec", "nameAtSec", "dimAtSec", "brightAtSec", "countFromSec", "lockSec", "openAtSec") and isinstance(v, (int, float)) and v < -0.05:
+                    raise SystemExit(f"shot {d['id']}: {path}.{k} = {v} (before the shot starts: wrong word match?)")
+                walk(v, f"{path}.{k}")
+        elif isinstance(o, list):
+            for i, v in enumerate(o):
+                walk(v, f"{path}[{i}]")
+    walk(p)
     shots.append(d)
 
 B = lambda *n: [f"E01-A1-{k:02d}" for k in n]
@@ -62,7 +74,7 @@ shot(B(5, 6, 7), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 0],
     "warmthSec": [r(BEAT["E01-A1-07"][0]), r(BEAT["E01-A1-07"][1])],
     "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": r(word("geranium")), "x": 1240, "y": 820,
-                "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1420, "y": 960, "scale": 0.78}}]},
+                "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1380, "y": 960, "scale": 1}}]},
     transitionIn="push", focus=[960, 560])
 # 8-10 p.29 held for three beats (Sam, 22 Nov 2026: the pages moved too fast to read; the p.30 card that
 # followed is gone). Highlights in reading order, the last one on "almost".
@@ -74,17 +86,17 @@ shot(B(8, 9, 10), "ArchivalScanCard", lambda r: {
     "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
     "source": "JOHN DALTON · 1798 · P. 29"},
     transitionIn="slide")
-# 11 Dalton's swatch: DAY sky-blue already filled, CANDLE empty on "candle".
-shot(B(11), "SwatchRows", lambda r: {
-    "columns": ["BY DAY", "BY CANDLE"],
-    "rows": [{"atSec": 0, "cells": [{"color": SKY, "name": "SKY-BLUE", "atSec": 0, "fillSec": 0.3},
-                                    {"atSec": r(word("candle", 26))}]}]})
 # 12-13 p.30: "astonishingly changed"
-shot(B(12, 13), "ArchivalScanCard", lambda r: {
+# 11-13 p.30 held from "Tonight" (independent review, 22 Nov 2026: the 2.7 s swatch shot between the pages
+# made a page-swatch-page-swatch ping-pong): "sky-blue by day; in candle-light" on "candle", then
+# "astonishingly changed". Slides in from p.29 like the next page of the paper.
+shot(B(11, 12, 13), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-029", "imgSize": P30[0], "crop": P30[1], "side": "left",
-    "highlights": [{"box": [570, 645, 430, 56], "atSec": r(word("it", 30))}],  # lands on "astonishingly"
+    "highlights": [{"box": [570, 588, 640, 56], "atSec": r(word("candle", 27))},
+                   {"box": [570, 645, 430, 56], "atSec": r(word("it", 30))}],  # lands on "astonishingly"
     "quote": "in candle-light, however, it was astonishingly changed",
-    "source": "JOHN DALTON · 1798 · P. 30"})
+    "source": "JOHN DALTON · 1798 · P. 30"},
+    transitionIn="slide")
 # 14-19 the rows: John blue/red, friends pink/pink, his brother blue/red.
 shot(B(14, 15, 16, 17, 18, 19), "SwatchRows", lambda r: {
     "columns": ["BY DAY", "BY CANDLE"],
@@ -114,16 +126,19 @@ shot(B(21), "FootagePlate", {"srcId": "SRC-013", "kind": "image", "size": GER, "
 shot(B(22), "HalftoneMoire", lambda r: {
     "color": PINK, "name": "PINK", "loupe": {"atSec": 0.15, "from": [1130, 470], "to": [1480, 600], "moveSec": 2.6, "r": 230, "cell": 22},
     "moire": {"opacity": 0.22, "turnDeg": 4},
-    "lines": [{"text": "Where is the pink?", "atSec": r(word("where"))}]})
+    "lines": [{"text": "Where is the pink?", "atSec": r(word("where")),
+               "fill": {"word": "pink", "atSec": r(word("pink", 54)), "color": PINK}}]})  # TXT-015 FillSweep
 # 23 back to the candle, wide (the clip forward, from 3 s in).
 shot(B(23), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
                               "clipStartSec": 3, "warmth": [1, 1],
-                              "labels": [{"text": "A SILLY QUESTION?", "atSec": r(word("silly")), "x": 960, "y": 860, "align": "center"}]})
+                              "labels": [{"text": "A SILLY QUESTION?", "atSec": r(word("it", 58)) - 0.3, "x": 960, "y": 860, "align": "center"}]})
 # 24 Dalton's first face: Charles Turner's mezzotint, 1834.
 shot(B(24), "ParallaxCutout", lambda r: {
     "bg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [0, 300, 996, 560]},
     "fg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [110, 60, 790, 1010]},
-    "kicker": "PORTRAIT · 1834", "headline": "John Dalton", "startSec": max(0, r(word("dalton", 60)) - 0.3)})
+    "kicker": "PORTRAIT · 1834", "headline": "John Dalton", "startSec": max(0, r(word("dalton", 60)) - 0.3),
+    # TRN-008: his first face is drawn first, then becomes the real portrait.
+    "trace": {"file": "public/assets/sources/dalton_turner1834_trace.png", "atSec": 0.0, "drawSec": 0.9, "fillSec": 0.6}})
 # 25-26 beside the portrait: a pioneer of atomic theory; later, 1808.
 shot(B(25, 26), "DuotoneCollage", lambda r: {
     "pieces": [
@@ -133,7 +148,7 @@ shot(B(25, 26), "DuotoneCollage", lambda r: {
         {"srcId": "SRC-031", "file": "public/assets/sources/dalton1808_symbols_line.png", "imgSize": [1000, 705],
          "x": 1240, "y": 735, "w": 620, "rot": 2.5, "atSec": max(0.6, r(word("pioneer")) - 0.2), "caption": "HIS ATOMS · PLATE 4, 1808", "seed": 5}],
     "lines": [{"text": "A pioneer of atomic theory", "atSec": r(word("pioneer"))},
-              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("theory")), "style": "mono"}]})
+              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("pioneer")) + 0.6, "style": "mono"}]})
 # 27-28 about two years later: an answer. VIS-028 collage: his own words on the geranium, between the two
 # colours he saw (sky-blue by day, red by candle).
 shot(B(27, 28), "DuotoneCollage", lambda r: {
@@ -143,14 +158,14 @@ shot(B(27, 28), "DuotoneCollage", lambda r: {
         {"color": SKY, "x": 1150, "y": 740, "w": 340, "h": 240, "rot": 4, "atSec": 0.7, "seed": 13},
         {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
-    "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about"))}]}})
+    "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about", 67))}]}})
 # 29-31 (Sam, 22 Nov 2026: "an eye which has been cut", the words on screen): the whole eye as a line drawing;
 # the cut line traces round it on "examined"; the words beside it; THE TEST · 1844.
 shot(B(29, 30, 31), "EyeDissection", lambda r: {
     "cutAtSec": r(word("examined")),
     # The first group leaves in the pause after "dies." so the next line arrives alone, in the same place.
     "words": [{"text": "Tested", "atSec": r(word("tested")), "untilSec": r(word("dies", end=True) + 0.7)},
-              {"text": "His own eyes", "atSec": r(word("own")), "untilSec": r(word("dies", end=True) + 0.7)},
+              {"text": "His own eyes", "atSec": r(word("own", 74)), "untilSec": r(word("dies", end=True) + 0.7)},
               {"text": "EXAMINED AFTER HE DIES", "atSec": r(word("examined")), "style": "mono", "untilSec": r(word("dies", end=True) + 0.7)},
               {"text": "His idea will fail the test.", "atSec": r(word("idea")), "group": 1}],
     "tag": {"at": "corner", "parts": [{"text": "THE TEST · 1844", "atSec": r(word("his", 78))}]}})
@@ -164,24 +179,27 @@ shot(B(34), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind
 shot(B(35, 36), "PerspectiveGrid", lambda r: {
     "variant": "room", "depth": 2000, "dark": 0.7, "dolly": 0.02, "startSec": r(word("dark")) - 0.2,
     "objects": [
-        {"kind": "label", "at": [-1300, -330, 600], "text": "ISAAC NEWTON", "atSec": r(word("newton"))},
-        {"kind": "hole", "at": [-1300, -150, 600], "r": 22, "atSec": r(word("hole"))},
-        {"kind": "beam", "from": [-1300, -150, 600], "to": [-300, 120, 1400], "width": 14,
-         "atSec": r(word("shutter", end=True)), "drawSec": 0.7}]})
+        {"kind": "shutter", "at": [-1050, -150, 600], "w": 260, "h": 360, "atSec": r(word("dark")) + 0.4},
+        {"kind": "hole", "at": [-1050, -150, 600], "r": 22, "atSec": r(word("hole"))},
+        {"kind": "label", "at": [-1050, -380, 600], "text": "A HOLE IN THE SHUTTER", "atSec": r(word("hole"))},
+        {"kind": "beam", "from": [-1050, -150, 600], "to": [-300, 120, 1400], "width": 14,
+         "atSec": r(word("shutter")), "drawSec": 0.7}],
+    "tag": {"at": "corner", "parts": [{"text": "ISAAC NEWTON", "atSec": r(word("newton"))}]}})
 # 37 the same cut eye: the front lifts away on "open".
 shot(B(37), "EyeDissection", lambda r: {
     "cutAtSec": -2, "openAtSec": r(word("open")),
     "words": [{"text": "Open Dalton's eyes", "atSec": r(word("open"))},
-              {"text": "AS HE ASKED", "atSec": r(word("asked")), "style": "mono"}]})
+              {"text": "AS HE ASKED", "atSec": r(word("open")) + 0.5, "style": "mono"}]})
 # 38-39 the title cards; the season sting (MUS-006) plays under the first.
 shot(B(38), "SeriesTitleCard", {})
 shot(B(39), "EpisodeCard", {"number": 1, "title": "The Man Who Saw Pink"})
 
 audio = [
-    {"id": "SFX-013", "atSec": 0.0, "volumeDb": -4},
+    {"id": "SFX-013", "atSec": 0.0, "volumeDb": 2},
     {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
     {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
-    {"id": "SFX-005", "atSec": 86.85, "volumeDb": -20},
+    {"id": "SFX-005", "atSec": 86.85, "volumeDb": -18},
+    {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -16},  # count lock tick (own)
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
     {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
 ]

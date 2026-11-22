@@ -123,7 +123,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
             display: "inline-block",
             marginTop: 30,
             fontFamily: t.fonts.mono,
-            fontSize: 22,
+            fontSize: 28,
             letterSpacing: 1.2,
             color: t.colors.secondary,
             background: t.colors.chip,

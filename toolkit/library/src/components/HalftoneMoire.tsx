@@ -5,6 +5,7 @@ import { useAssets } from "../registry";
 import { drift, reveal, rise, sec, SLOW_OUT } from "../motion";
 import { cmyk, DotPattern, dotR, PROCESS_INKS, SCREEN_ANGLES } from "../layers/DotScreen";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { FillLine, type WordFill } from "../layers/FillWord";
 
 // LOK-017 HalftoneMoire (Sam, 22 Nov 2026: "I like the Moire pattern. Let's use it where it fits best").
 // A flat colour (data: what someone reported, e.g. the friends' PINK) set as a large swatch. A loupe glides
@@ -18,7 +19,7 @@ export type HalftoneMoireProps = {
   name?: string; // swatch label, e.g. PINK
   loupe: { atSec: number; from: [number, number]; to: [number, number]; moveSec: number; r?: number; cell?: number };
   moire?: { opacity?: number; turnDeg?: number; scale?: number };
-  lines?: { text: string; atSec: number; style?: "serif" | "mono" }[];
+  lines?: { text: string; atSec: number; style?: "serif" | "mono"; fill?: WordFill }[]; // fill: TXT-015 FillSweep on one word
   tag?: DatelineTagProps;
   startSec?: number;
 };
@@ -77,7 +78,7 @@ export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, name, loupe
           <circle cx={lx} cy={ly + 10} r={R * pL + 6} fill="none" stroke={t.colors.dimMask} strokeWidth={14} opacity={0.5 * pL} />
           <circle cx={lx} cy={ly} r={R * pL} fill="none" stroke={t.colors.ink} strokeWidth={6} opacity={pL} />
           {name ? (
-            <text x={SW.x} y={SW.y + SW.h + 50} fontFamily={t.fonts.mono} fontSize={24} letterSpacing={3} fill={t.colors.secondary}>
+            <text x={SW.x} y={SW.y + SW.h + 50} fontFamily={t.fonts.mono} fontSize={28} letterSpacing={3} fill={t.colors.secondary}>
               {name}
             </text>
           ) : null}
@@ -94,14 +95,14 @@ export const HalftoneMoire: React.FC<HalftoneMoireProps> = ({ color, name, loupe
                 fontFamily: mono ? t.fonts.mono : t.fonts.headline,
                 fontWeight: mono ? 500 : t.fonts.headlineWeight,
                 letterSpacing: mono ? 3 : t.fonts.headlineTracking,
-                fontSize: mono ? 26 : 92,
+                fontSize: mono ? 30 : 92,
                 lineHeight: mono ? 1.4 : 1.05,
                 color: mono ? t.colors.secondary : t.colors.ink,
                 marginTop: mono ? 28 : 0,
                 ...rise(p, mono ? 12 : 26),
               }}
             >
-              {l.text}
+              <FillLine text={l.text} fill={l.fill} ink={mono ? t.colors.secondary : t.colors.ink} />
             </div>
           );
         })}
