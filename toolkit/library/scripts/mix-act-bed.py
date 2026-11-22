@@ -16,10 +16,12 @@ ap.add_argument("act"); ap.add_argument("voice"); ap.add_argument("out")
 ap.add_argument("--bed", required=True); ap.add_argument("--voice-at", type=float, default=0.8)
 ap.add_argument("--bed-from", type=float, default=0); ap.add_argument("--lufs", type=float, default=-33)
 ap.add_argument("--dip", default=""); ap.add_argument("--fade-in", type=float, default=2); ap.add_argument("--fade-out", type=float, default=3)
-ap.add_argument("--pocket", nargs="?", const="300:4000", default=None); ap.add_argument("--bed-only", default=None)
+ap.add_argument("--pocket", nargs="?", const="300:4000", default="300:4000"); ap.add_argument("--no-pocket", action="store_true"); ap.add_argument("--bed-only", default=None)
 ap.add_argument("--threshold", type=float, default=None)  # sidechain threshold (default 0.03 pocket / 0.05 full); lower = deeper duck (demo only)
 ap.add_argument("--ratio", type=float, default=None)  # duck ratio (default 4 with --pocket, 2 without); a big ratio exaggerates the effect for a demo
 a = ap.parse_args()
+if a.no_pocket:
+    a.pocket = None  # the pocket is the default (Sam, 22 Nov 2026: "Use the music pocket"); --no-pocket ducks the whole bed
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", a.act], capture_output=True, text=True).stdout)
 def lufs(args):
     o = subprocess.run(["ffmpeg", "-nostats", *args, "-af", "loudnorm=print_format=json", "-f", "null", "-"], capture_output=True, text=True).stderr
