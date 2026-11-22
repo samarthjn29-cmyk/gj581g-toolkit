@@ -1007,6 +1007,15 @@
    "src/themes/federalPrint.ts",
    "Theme: black #0C0C0C, paper scans on a grid, signal red and steel blue, Inter Tight. For print, design and dye stories. Tokens on the Theme_Library tab.",
    "Planned"
+  ],
+  [
+   "VIS-015",
+   "1_Visuals",
+   "PerspectiveGrid",
+   "Own (Sam asked, 22 Nov 2026)",
+   "src/components/PerspectiveGrid.tsx",
+   "A 3D room or floor drawn as a perspective grid in the theme's hairline colour (one vanishing point, lines fade with depth). Optional objects placed in the same space: a sunbeam, a spectrum on the back wall, a page lying on the floor, a label. One slow dolly per shot (calm limit). For Newton's dark room, Ransome's look-through test, pages on a desk and tilted maps.",
+   "Active"
   ]
  ]
 }

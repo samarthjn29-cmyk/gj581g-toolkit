@@ -76,5 +76,11 @@
   "beatType": 7,
   "energy": "Reset",
   "grid": false
+ },
+ "PerspectiveGrid": {
+  "assetId": "VIS-015",
+  "beatType": 4,
+  "energy": "Calm",
+  "grid": false
  }
 }

@@ -3,7 +3,7 @@ import React from "react";
 import { Composition, Folder } from "remotion";
 import { Preview, type PreviewProps } from "./previews/Preview";
 import { PushThroughPreview } from "./previews/PushThroughPreview";
-import { DEMO } from "./previews/demoProps";
+import { DEMO, DEMO_VARIANTS } from "./previews/demoProps";
 import { COMPONENTS } from "./components";
 import { Episode, type EpisodeProps } from "./episodes/Episode";
 import demoAct from "./episodes/ep00-act00.json";
@@ -34,6 +34,18 @@ export const RemotionRoot: React.FC = () => {
               width={W}
               height={H}
               defaultProps={{ name, themeId: th.id, registryMode: "render", props: DEMO[name] ?? {} } satisfies PreviewProps}
+            />
+          ))}
+          {Object.entries(DEMO_VARIANTS).map(([vid, v]) => (
+            <Composition
+              key={vid}
+              id={`${vid}-${th.id}`}
+              component={Preview}
+              durationInFrames={5 * FPS}
+              fps={FPS}
+              width={W}
+              height={H}
+              defaultProps={{ name: v.name, themeId: th.id, registryMode: "render", props: v.props } satisfies PreviewProps}
             />
           ))}
           <Composition

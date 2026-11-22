@@ -1,5 +1,5 @@
 // Renders check stills of every library preview composition (both themes) and a contact sheet.
-// Usage: node scripts/library-stills.mjs [render|build] [seconds,comma,separated]
+// Usage: node scripts/library-stills.mjs [render|build] [seconds,comma,separated] [id-filter-regex]
 // "render" (default) is strict: only Active assets. "build" previews pieces still Planned (frames are tagged).
 import { bundle } from "@remotion/bundler";
 import { getCompositions, openBrowser, renderStill, selectComposition } from "@remotion/renderer";
@@ -9,13 +9,14 @@ import path from "node:path";
 
 const mode = process.argv[2] ?? "render";
 const times = (process.argv[3] ?? "2.5").split(",").map(Number);
+const only = process.argv[4] ? new RegExp(process.argv[4]) : null;
 const outDir = path.resolve("qa", "library", mode);
 fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts") });
 const browser = await openBrowser("chrome", { chromiumOptions: { gl: "swangle" } });
-const comps = (await getCompositions(serveUrl, { puppeteerInstance: browser })).filter((c) => c.id !== "Episode");
+const comps = (await getCompositions(serveUrl, { puppeteerInstance: browser })).filter((c) => c.id !== "Episode" && (!only || only.test(c.id)));
 const files = [];
 const failures = [];
 for (const c0 of comps) {

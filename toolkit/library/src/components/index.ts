@@ -13,6 +13,7 @@ import { ConeCurveChart } from "./ConeCurveChart";
 import { SpectrumStrip } from "./SpectrumStrip";
 import { SeriesTitleCard } from "./SeriesTitleCard";
 import { EpisodeCard } from "./EpisodeCard";
+import { PerspectiveGrid } from "./PerspectiveGrid";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -39,6 +40,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   SpectrumStrip,
   SeriesTitleCard,
   EpisodeCard,
+  PerspectiveGrid,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(

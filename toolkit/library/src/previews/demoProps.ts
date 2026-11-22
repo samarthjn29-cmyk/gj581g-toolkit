@@ -65,6 +65,52 @@ export const DEMO: Record<string, Record<string, unknown>> = {
   ConeTrio: { preset: "dalton", from: [1, 1, 1], atSec: 1.8, caption: "Preview: one kind of cone missing" },
   ConeCurveChart: { title: "Three kinds of cone", markerFromNm: 450, markerToNm: 600, markerAtSec: 1.6 },
   SpectrumStrip: { title: "Preview: one yellow, two ways", markers: [{ nm: 540, label: "540 nm" }, { nm: 580, label: "580 nm" }, { nm: 620, label: "620 nm" }] },
+  PerspectiveGrid: {
+    variant: "room",
+    depth: 2000,
+    dark: 0.7,
+    dolly: 0.02,
+    objects: [
+      { kind: "hole", at: [-1300, -150, 600], r: 22, atSec: 0.5 },
+      { kind: "beam", from: [-1300, -150, 600], to: [-520, 60, 900], width: 14, atSec: 0.9, drawSec: 0.9 },
+      { kind: "prism", at: [-520, 60, 900], size: 170, atSec: 1.4 },
+      { kind: "fan", from: [-520, 60, 900], x0: -150, x1: 1150, y: -60, height: 150, atSec: 1.9 },
+      { kind: "label", at: [-1300, -150, 600], text: "PREVIEW · THE HOLE", atSec: 1.0 },
+      { kind: "label", at: [500, -130, 2000], text: "PREVIEW · THE FAR WALL", atSec: 2.4 },
+    ],
+  },
   SeriesTitleCard: {},
   EpisodeCard: { number: 1, title: "The Man Who Saw Pink" },
+};
+
+// Extra previews of one component in other set-ups: composition id -> component name and props.
+export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
+  "PerspectiveGrid-Floor": {
+    name: "PerspectiveGrid",
+    props: {
+      variant: "floor",
+      vanishY: 300,
+      floorY: 520,
+      depth: 2600,
+      dolly: 0.03,
+      objects: [
+        { kind: "page", srcId: "SRC-005", aspect: 1600 / 2321, x: 0, z: 420, width: 700, atSec: 0.6 },
+        { kind: "label", at: [0, 520, 1700], text: "PREVIEW · A PAGE ON THE DESK", atSec: 1.4, dy: -40 },
+      ],
+    },
+  },
+  "PerspectiveGrid-LookThrough": {
+    name: "PerspectiveGrid",
+    props: {
+      variant: "room",
+      depth: 1800,
+      dolly: 0.02,
+      objects: [
+        { kind: "patch", at: [-330, -20, 1800], w: 480, h: 340, color: "#E0301E", atSec: 0.6 },
+        { kind: "patch", at: [330, -20, 1800], w: 480, h: 340, color: "#2FAF55", atSec: 0.8 },
+        { kind: "ring", at: [0, -20, 260], r: 330, atSec: 1.4 },
+        { kind: "label", at: [0, -340, 260], text: "PREVIEW · LOOKING THROUGH", atSec: 1.8 },
+      ],
+    },
+  },
 };
