@@ -7,6 +7,11 @@ Sound Design System", analysis only; his folder list names them, the sounds are 
   tape_hiss          analog ambience loop: cassette hiss, gently modulated (12 s, seamless).
   vinyl_crackle      analog ambience loop: sparse crackle and dust over a faint rumble (12 s, seamless).
   mains_hum          analog ambience loop: 50 Hz hum with soft harmonics and air (12 s, seamless).
+  air_swish v1-v3    a short bright swish (0.25-0.4 s, high-band air), the sound of a paper band or colour block
+                     wiping across (studied: ilkin's collage ad and Chris Moran's Netflix-text tutorial, 22 Nov 2026;
+                     every wipe there carries a brief 6-16 kHz swish). Own synthesis.
+  sub_impact v1-v2   a deep sub hit (fast attack, 45-55 Hz body, 0.7-0.9 s tail): the one impact after a music break,
+                     or a hard cut into a new idea (the same studies; Moran's short puts a low thump on its cuts).
 Usage: sfx-synth.py OUTDIR   (writes the raw files; level them with sfx-prep.py one/loop)."""
 import os, sys
 import numpy as np
@@ -104,6 +109,30 @@ def mains_hum(d=12.5):
     return norm(seamless(x))
 
 
+def air_swish(d, f0, f1):
+    t = t_(d)
+    n = rng.standard_normal(len(t))
+    y = np.zeros_like(n)
+    blk = 240
+    for i in range(0, len(n), blk):
+        u = i / len(n)
+        fc = f0 * (f1 / f0) ** u
+        y[i:i + blk] = sosfilt(sos_bp(max(200, fc / 1.7), min(18000, fc * 1.7)), n[max(0, i - 2400):i + blk])[-len(n[i:i + blk]):]
+    u = t / d
+    e = np.where(u < 0.4, (u / 0.4) ** 1.6, ((1 - u) / 0.6) ** 2.2)
+    return norm(hp(y * e, 1500))
+
+
+def sub_impact(d, f0, f1):
+    t = t_(d)
+    f = f1 + (f0 - f1) * np.exp(-t * 9)  # a short pitch drop gives it weight
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    body = np.sin(ph) * np.exp(-t * 4.2)
+    click = lp(rng.standard_normal(len(t)), 900) * np.exp(-t * 60) * 0.35
+    a = np.minimum(1, t / 0.004)
+    return norm((body + click) * a)
+
+
 def main():
     od = sys.argv[1]
     os.makedirs(od, exist_ok=True)
@@ -116,6 +145,11 @@ def main():
         "tape_hiss": tape_hiss(),
         "vinyl_crackle": vinyl_crackle(),
         "mains_hum": mains_hum(),
+        "air_swish_v1": air_swish(0.32, 3500, 9000),
+        "air_swish_v2": air_swish(0.26, 5000, 11000),
+        "air_swish_v3": air_swish(0.40, 9000, 3800),
+        "sub_impact_v1": sub_impact(0.85, 110, 48),
+        "sub_impact_v2": sub_impact(0.7, 95, 55),
     }
     for k, x in out.items():
         wavfile.write(os.path.join(od, k + ".wav"), SR, (x * 32767).astype(np.int16))
