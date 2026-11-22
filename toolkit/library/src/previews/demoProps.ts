@@ -142,6 +142,27 @@ export const DEMO: Record<string, Record<string, unknown>> = {
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.
 export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
+  // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).
+  "KineticLine-Typewriter": {
+    name: "KineticLine",
+    props: { lines: [{ text: "Preview line", atSec: 0.3 }, { text: "PREVIEW · A TYPED MONO LINE", atSec: 1.2, style: "mono", type: true }] },
+  },
+  "KineticLine-Strike": {
+    name: "KineticLine",
+    props: { lines: [{ text: "The preview view", atSec: 0.3, strike: { atSec: 1.6 } }, { text: "PREVIEW · THE RIGHT WORDS", atSec: 2.4, style: "mono" }] },
+  },
+  "KineticLine-Ruled": {
+    name: "KineticLine",
+    props: { lines: [{ text: "Preview Title", atSec: 0.3, ruled: { atSec: 0.3 } }, { text: "PREVIEW · A TYPED LINE", atSec: 1.0, style: "mono", type: true }] },
+  },
+  "ArchivalScanCard-Strokes": {
+    name: "ArchivalScanCard",
+    props: {
+      srcId: "SRC-007", imgSize: [2288, 4010], crop: [200, 900, 1900, 1900],
+      highlights: [{ box: [300, 1500, 1500, 90], atSec: 1.4 }],
+      quote: "A preview quote", source: "PREVIEW · SOURCE LINE", strokes: {},
+    },
+  },
   "HalftoneMoire-Screen": {
     name: "HalftoneMoire",
     props: {
@@ -323,6 +344,38 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
       { atSec: 3.0, total: 1000, cols: 50, lit: 4, litAtSec: 3.6, seed: 2, label: { text: "PREVIEW · 4 IN 1,000", atSec: 3.6 } },
     ],
     lines: [{ text: "Preview line", atSec: 0.2 }],
+    source: "PREVIEW · SOURCE LINE",
+  },
+  PageSpread: {
+    pages: [
+      { srcId: "SRC-001", imgSize: [1920, 2813], label: "PAGE A" },
+      { srcId: "SRC-029", imgSize: [1920, 2934], label: "PAGE B" },
+      { srcId: "SRC-002", imgSize: [1920, 2934], label: "PAGE C" },
+    ],
+    spreadSec: 1.0,
+    focus: { index: 1, atSec: 2.6, scale: 1.3 },
+    highlights: [{ page: 1, box: [570, 882, 970, 56], atSec: 3.6 }],
+    notes: [{ text: "PREVIEW · NOTE", atSec: 3.2 }],
+    source: "PREVIEW · SOURCE LINE",
+    strokes: {},
+  },
+  LedgerCard: {
+    title: "PREVIEW · A LIST",
+    rows: [
+      { text: "ITEM ONE", value: "VALUE", atSec: 0.6 },
+      { text: "ITEM TWO", value: "VALUE", atSec: 1.2 },
+      { text: "ITEM THREE", value: "VALUE", atSec: 1.8, markAtSec: 3.0 },
+      { text: "ITEM FOUR", value: "VALUE", atSec: 2.4 },
+    ],
+    lines: [{ text: "A preview line beside the card", atSec: 0.4 }],
+    source: "PREVIEW · SOURCE LINE",
+  },
+  SourceWall: {
+    items: [
+      { srcId: "SRC-005", imgSize: [1600, 2321], label: "PIECE A · YEAR", atSec: 0.2 },
+      { srcId: "SRC-006", imgSize: [1400, 1823], label: "PIECE B · YEAR", atSec: 1.6 },
+      { srcId: "SRC-036", imgSize: [785, 1158], label: "PIECE C · YEAR", atSec: 3.0 },
+    ],
     source: "PREVIEW · SOURCE LINE",
   },
   "KineticLine-Notebook": {

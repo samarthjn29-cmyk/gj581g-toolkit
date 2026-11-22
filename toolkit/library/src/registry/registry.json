@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T16:50:45.302Z",
+ "generated": "2026-11-22T17:17:01.966Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1573,7 +1573,7 @@
    "paths": [
     "src/components/SourceWall.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the evidence-pile moment (many papers and reports at once). Limit: max 3 beats per episode. Not for: a single source (ArchivalScanCard).",
    "maxBeats": 3,
    "maxShare": null
@@ -2464,7 +2464,7 @@
    "paths": [
     "src/components/LedgerCard.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a few named items from one real document compared (a list in a source). Limit: max 2 per episode; the items must come from the source, not invented.",
    "maxBeats": null,
    "maxShare": null
@@ -2560,7 +2560,7 @@
    "paths": [
     "src/layers/StrikeThrough.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: correcting a misconception said out loud. Limit: max 2 per episode; the correction must be sourced.",
    "maxBeats": null,
    "maxShare": null
@@ -2572,8 +2572,8 @@
    "paths": [
     "src/layers/TypewriterLine.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: a closing line or a quoted line from a document. Limit: 1 per act.",
+   "status": "Active",
+   "use": "Best use: a closing line or a quoted line from a document; the rows of a LedgerCard. Limit: 1 typed line per act (LedgerCard rows count as that act's one). Not for: serif headlines or long sentences (over about 60 letters).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2594,10 +2594,15 @@
    "folder": "6_Sounds",
    "name": "TypewriterKeys",
    "paths": [
-    "public/sfx/kit/mechanical/typewriter_*.wav"
+    "public/sfx/kit/mechanical/typewriter_run_v1.wav",
+    "public/sfx/kit/mechanical/typewriter_run_v2.wav",
+    "public/sfx/kit/mechanical/typewriter_run_v3.wav",
+    "public/sfx/kit/mechanical/typewriter_key_v1.wav",
+    "public/sfx/kit/mechanical/typewriter_key_v2.wav",
+    "public/sfx/kit/mechanical/typewriter_bell.wav"
    ],
-   "status": "Planned",
-   "use": "Best use: under TXT-021 TypewriterLine, one key per letter at texture level. Limit: with TXT-021 only.",
+   "status": "Active",
+   "use": "Best use: under TXT-021 TypewriterLine: one typing run matched to the line's length at texture level (22-24 dB under the voice), the bell only on a closing line. Limit: with TXT-021 only; one run per typed line.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2620,8 +2625,8 @@
    "paths": [
     "src/layers/ScreenStrokes.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: under a held document or a monochrome photo for 3+ s. Limit: max 3 per act; never over the words being highlighted, never on a colour photo.",
+   "status": "Active",
+   "use": "Best use: under a held document or a monochrome photo for 3+ s ('shadow' on light pages, 'light' on dark photos). Limit: max 3 per act; 0.15-0.4 strength; never over the words being highlighted, never on a colour photo.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2632,7 +2637,7 @@
    "paths": [
     "src/components/PageSpread.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a document with several pages the narration names (a memo, a paper's pages). Limit: max 2 per episode; real pages only, credited; at least 4 s on screen before a highlight.",
    "maxBeats": null,
    "maxShare": null
@@ -2644,7 +2649,7 @@
    "paths": [
     "src/layers/RuledTitle.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: naming a document, place or case the first time (THE ... MEMO). Limit: max 2 per act; pairs with TXT-021 TypewriterLine, not with KeywordSlab in the same shot.",
    "maxBeats": null,
    "maxShare": null

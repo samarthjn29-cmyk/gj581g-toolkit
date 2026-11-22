@@ -8,12 +8,24 @@ import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 import { InkPressFilter } from "../layers/PaperFibre";
 import { FillLine, type WordFill } from "../layers/FillWord";
 import { HatchNotebook, type NotebookSpec } from "../layers/HatchNotebook";
+import { Typed, type TypeSpec } from "../layers/TypewriterLine";
+import { Strike, type StrikeSpec } from "../layers/StrikeThrough";
+import { Ruled, type RuledSpec } from "../layers/RuledTitle";
 
 // VIS-020 KineticLine (beat type 3: a hinge question or one key label the viewer must keep, calm).
 // One short line set large (serif), optionally with a small mono line under it, revealed on its word,
 // over the canvas, over a dimmed picture ("full") or beside a picture card ("card-right").
 export type KineticLineProps = {
-  lines: { text: string; atSec: number; style?: "serif" | "mono"; untilSec?: number; fill?: WordFill }[];
+  lines: {
+    text: string;
+    atSec: number;
+    style?: "serif" | "mono";
+    untilSec?: number;
+    fill?: WordFill;
+    type?: TypeSpec | true; // TXT-021 TypewriterLine: typed from atSec (mono lines)
+    strike?: StrikeSpec; // TXT-020 StrikeThrough: crossed out on the spoken correction
+    ruled?: RuledSpec; // TXT-022 RuledTitle: rules above and below, slow grow
+  }[];
   ink?: boolean; // TXT-016 InkPress on the serif lines (period headline cards)
   backdrop?: { srcId: string; imgSize: readonly [number, number]; crop?: Rect; layout: "full" | "card-right"; dim?: number };
   align?: "centre" | "left";
@@ -55,7 +67,15 @@ const Backdrop: React.FC<{ b: NonNullable<KineticLineProps["backdrop"]> }> = ({ 
 };
 
 export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align = "centre", tag, ink, notebook, startSec = 0 }) => {
-  useAssets(["VIS-020", "MOT-002", ...(ink ? ["TXT-016"] : []), ...(lines.some((l) => l.fill) ? [lines.find((l) => l.fill)?.fill?.style === "mark" ? "TXT-017" : "TXT-015"] : [])]);
+  useAssets([
+    "VIS-020",
+    "MOT-002",
+    ...(ink ? ["TXT-016"] : []),
+    ...(lines.some((l) => l.fill) ? [lines.find((l) => l.fill)?.fill?.style === "mark" ? "TXT-017" : "TXT-015"] : []),
+    ...(lines.some((l) => l.type) ? ["TXT-021"] : []),
+    ...(lines.some((l) => l.strike) ? ["TXT-020"] : []),
+    ...(lines.some((l) => l.ruled) ? ["TXT-022"] : []),
+  ]);
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -71,7 +91,8 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
       {ink ? <InkPressFilter id="klinkpress" /> : null}
       <div style={boxStyle}>
         {lines.map((l) => {
-          const p = reveal(frame, fps, l.atSec, t.motion.enterSec);
+          // A typed line appears letter by letter, so it skips the rise (it would double the entrance).
+          const p = l.type ? (frame >= Math.round(l.atSec * fps) ? 1 : 0) : reveal(frame, fps, l.atSec, t.motion.enterSec);
           const out = l.untilSec !== undefined ? exit(frame, fps, l.untilSec, t.motion.enterSec) : 1;
           const mono = l.style === "mono";
           return (
@@ -90,7 +111,17 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
                 ...rise(p * out, mono ? 12 : 26),
               }}
             >
-              <FillLine text={l.text} fill={l.fill} ink={mono ? t.colors.secondary : t.colors.ink} />
+              {(() => {
+                const color = mono ? t.colors.secondary : t.colors.ink;
+                let body: React.ReactNode = l.type ? (
+                  <Typed text={l.text} atSec={l.atSec} spec={l.type === true ? undefined : l.type} color={color} />
+                ) : (
+                  <FillLine text={l.text} fill={l.fill} ink={color} />
+                );
+                if (l.strike) body = <Strike spec={l.strike} color={t.colors.accent} ink={color} grey={t.colors.secondary}>{body}</Strike>;
+                if (l.ruled) body = <Ruled spec={l.ruled} color={color}>{body}</Ruled>;
+                return body;
+              })()}
             </div>
           );
         })}

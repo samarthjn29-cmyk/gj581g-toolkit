@@ -149,6 +149,7 @@ shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
                    {"box": [336, 1002, 84, 40], "atSec": r(word("30"))}],
     "quote": "The Worthies of Cumberland: John Dalton", "quoteMarks": False,
     "source": "HENRY LONSDALE · LONDON, 1874",
+    "strokes": {},  # TEX-008 'shadow' strokes drift over the held title page (the story told and retold), off the highlights
     "notes": [{"text": "AS THE STORY GOES", "atSec": r(word("another"))},
               {"text": "1874 · 30 YEARS AFTER HE DIED", "atSec": r(word("30"))},
               {"text": "MAY HAVE GROWN IN THE TELLING", "atSec": r(word("grown")), "accent": True}]},
@@ -233,7 +234,7 @@ shot(B(66, 67, 68), "KineticLine", lambda r: {
     "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0.3}]},
     "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164)),
                "fill": {"word": "scientist", "atSec": r(word("scientist")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}},
-              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono"},
+              {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True},  # TXT-021, the act's one typed line
               {"text": "Why?", "atSec": r(word("why")), "fill": {"word": "Why?", "atSec": r(word("why")), "color": RED, "outline": "#D9D2C5"}}]})
 
 # The cherry snap (MOT-011) plays silent: a swish there peaked on "John!" (sound-pass W), and the shot keeps one hero
@@ -266,6 +267,7 @@ audio = [
     {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v2.wav", "atSec": round(word("four", 131), 2), "volumeDb": -22.0},
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(55) + 0.1, 2), "volumeDb": -17.6},  # band up into "Picture it from the inside"
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(63) - 0.15, 2), "volumeDb": -16.6},  # push from YOUR red into the geranium
+    {"id": "SFX-027", "file": K + "mechanical/typewriter_run_v1.wav", "atSec": round(word("enough"), 2), "volumeDb": -16.0},  # keys under the typed line (texture; the kit file sits at -27 LUFS, peak-capped)
     {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)
 ]
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",

@@ -28,6 +28,9 @@ import { PeriodMapPlate } from "./PeriodMapPlate";
 import { ReportedColour } from "./ReportedColour";
 import { SplitComparisonCard } from "./SplitComparisonCard";
 import { ScaleField } from "./ScaleField";
+import { PageSpread } from "./PageSpread";
+import { LedgerCard } from "./LedgerCard";
+import { SourceWall } from "./SourceWall";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -69,6 +72,9 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   ReportedColour,
   SplitComparisonCard,
   ScaleField,
+  PageSpread,
+  LedgerCard,
+  SourceWall,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(

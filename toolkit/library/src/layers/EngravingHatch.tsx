@@ -10,7 +10,11 @@ import { useTheme } from "../themes";
 const SPACING = 7;
 const LEVELS = [0.15, 0.3, 0.45, 0.6, 0.75, 0.9];
 
-export const HatchDefs: React.FC<{ prefix?: string; angle?: number; color?: string }> = ({ prefix = "hatch", angle = -35, color }) => {
+export const HatchDefs: React.FC<{
+  prefix?: string;
+  angle?: number;
+  color?: string;
+}> = ({ prefix = "hatch", angle = -35, color }) => {
   useAsset("TEX-005");
   const t = useTheme();
   const ink = color ?? t.colors.ink;
@@ -20,9 +24,31 @@ export const HatchDefs: React.FC<{ prefix?: string; angle?: number; color?: stri
         const w = Math.max(0.7, SPACING * lv * 0.55);
         const cross = lv >= 0.6;
         return (
-          <pattern key={i} id={`${prefix}-${i}`} width={SPACING} height={SPACING} patternUnits="userSpaceOnUse" patternTransform={`rotate(${angle})`}>
-            <rect x={0} y={(SPACING - w) / 2} width={SPACING} height={w} fill={ink} />
-            {cross ? <rect x={(SPACING - w * 0.7) / 2} y={0} width={w * 0.7} height={SPACING} fill={ink} opacity={0.85} /> : null}
+          <pattern
+            key={i}
+            id={`${prefix}-${i}`}
+            width={SPACING}
+            height={SPACING}
+            patternUnits="userSpaceOnUse"
+            patternTransform={`rotate(${angle})`}
+          >
+            <rect
+              x={0}
+              y={(SPACING - w) / 2}
+              width={SPACING}
+              height={w}
+              fill={ink}
+            />
+            {cross ? (
+              <rect
+                x={(SPACING - w * 0.7) / 2}
+                y={0}
+                width={w * 0.7}
+                height={SPACING}
+                fill={ink}
+                opacity={0.85}
+              />
+            ) : null}
           </pattern>
         );
       })}

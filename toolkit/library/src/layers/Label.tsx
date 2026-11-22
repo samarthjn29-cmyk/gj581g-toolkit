@@ -22,13 +22,20 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const p = lock(frame, fps, spec.atSec);
-  const out = spec.untilSec !== undefined ? exit(frame, fps, spec.untilSec, t.motion.enterSec) : 1;
+  const out =
+    spec.untilSec !== undefined
+      ? exit(frame, fps, spec.untilSec, t.motion.enterSec)
+      : 1;
   let x = spec.x;
   let y = spec.y;
   let sc = 1;
   if (spec.moveTo) {
     const a = sec(spec.moveTo.atSec, fps);
-    const m = interpolate(frame, [a, a + sec(0.8, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: SLOW_OUT });
+    const m = interpolate(frame, [a, a + sec(0.8, fps)], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: SLOW_OUT,
+    });
     x += (spec.moveTo.x - spec.x) * m;
     y += (spec.moveTo.y - spec.y) * m;
     sc = 1 + ((spec.moveTo.scale ?? 1) - 1) * m;
@@ -43,7 +50,12 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
         left: x,
         top: y,
         transform: `translateX(${tx}) ${r.transform} scale(${sc})`,
-        transformOrigin: align === "right" ? "100% 0%" : align === "center" ? "50% 0%" : "0% 0%",
+        transformOrigin:
+          align === "right"
+            ? "100% 0%"
+            : align === "center"
+              ? "50% 0%"
+              : "0% 0%",
         opacity: r.opacity * out,
         fontFamily: t.fonts.mono,
         fontSize: spec.size ?? 32,

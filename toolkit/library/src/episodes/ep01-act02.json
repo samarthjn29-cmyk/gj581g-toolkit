@@ -151,6 +151,12 @@
    "volumeDb": -16.6
   },
   {
+   "id": "SFX-027",
+   "file": "public/sfx/kit/mechanical/typewriter_run_v1.wav",
+   "atSec": 170.57,
+   "volumeDb": -16.0
+  },
+  {
    "id": "SFX-014",
    "atSec": 160.3,
    "endSec": 162.38,
@@ -928,6 +934,7 @@
     "LOK-010",
     "SFX-020",
     "MUS-007",
+    "TEX-008",
     "SRC-036",
     "TRN-001"
    ],
@@ -967,6 +974,7 @@
     "quote": "The Worthies of Cumberland: John Dalton",
     "quoteMarks": false,
     "source": "HENRY LONSDALE · LONDON, 1874",
+    "strokes": {},
     "notes": [
      {
       "text": "AS THE STORY GOES",
@@ -1910,7 +1918,9 @@
     "LOK-009",
     "LOK-010",
     "MUS-007",
-    "SRC-004"
+    "SRC-004",
+    "TXT-021",
+    "SFX-027"
    ],
    "props": {
     "backdrop": {
@@ -1951,7 +1961,8 @@
      {
       "text": "NOT ENOUGH TO KNOW HE'S DIFFERENT",
       "atSec": 3.67,
-      "style": "mono"
+      "style": "mono",
+      "type": true
      },
      {
       "text": "Why?",

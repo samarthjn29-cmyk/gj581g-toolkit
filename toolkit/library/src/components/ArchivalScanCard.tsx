@@ -4,6 +4,7 @@ import { useTheme } from "../themes";
 import { useAssets, useSource } from "../registry";
 import { drift, reveal, rise, sec, SLOW_OUT } from "../motion";
 import { CropImage, cropToBox, type Rect } from "../layers/CropImage";
+import { ScreenStrokes, type StrokesSpec } from "../layers/ScreenStrokes";
 
 // VIS-001 ArchivalScanCard (beat type 1: document or quote proof, calm).
 // A real scan on a tray, a highlighter sweeping across the words that matter (image-pixel coordinates),
@@ -21,6 +22,7 @@ export type ArchivalScanCardProps = {
   callout?: { atSec: number; dim?: number };
   quoteMarks?: boolean; // false for a book title (not a quote)
   notes?: { text: string; atSec: number; untilSec?: number; accent?: boolean }[]; // mono notes under the source tag, on their words
+  strokes?: StrokesSpec; // TEX-008 ScreenStrokes over the held page, kept off the highlighted words
   startSec?: number;
 };
 
@@ -35,9 +37,10 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   callout,
   quoteMarks = true,
   notes = [],
+  strokes,
   startSec = 0,
 }) => {
-  useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : [])]);
+  useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : []), ...(strokes ? ["TEX-008"] : [])]);
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const src = useSource(srcId);
   const t = useTheme();
@@ -109,6 +112,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
                 />
               );
             })}
+            {strokes ? <ScreenStrokes width={innerW} height={innerH} spec={{ mode: "shadow", ...strokes }} holes={highlights.map((h) => map(h.box))} /> : null}
             {callout ? (
               <svg width={innerW} height={innerH} style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none" }}>
                 <defs>

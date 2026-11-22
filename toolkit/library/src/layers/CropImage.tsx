@@ -5,12 +5,25 @@ import { Img } from "remotion";
 // cropToBox() maps image pixels to box pixels, so highlights and spotlights stay on the right words.
 export type Rect = readonly [number, number, number, number]; // x, y, w, h in image pixels
 
-export function cropToBox(crop: Rect, boxW: number, boxH: number, fit: "cover" | "contain" = "cover") {
+export function cropToBox(
+  crop: Rect,
+  boxW: number,
+  boxH: number,
+  fit: "cover" | "contain" = "cover",
+) {
   const [cx, cy, cw, ch] = crop;
-  const s = fit === "cover" ? Math.max(boxW / cw, boxH / ch) : Math.min(boxW / cw, boxH / ch);
+  const s =
+    fit === "cover"
+      ? Math.max(boxW / cw, boxH / ch)
+      : Math.min(boxW / cw, boxH / ch);
   const ox = (boxW - cw * s) / 2 - cx * s;
   const oy = (boxH - ch * s) / 2 - cy * s;
-  const map = (r: Rect) => ({ left: ox + r[0] * s, top: oy + r[1] * s, width: r[2] * s, height: r[3] * s });
+  const map = (r: Rect) => ({
+    left: ox + r[0] * s,
+    top: oy + r[1] * s,
+    width: r[2] * s,
+    height: r[3] * s,
+  });
   return { s, ox, oy, map };
 }
 
@@ -23,7 +36,16 @@ export const CropImage: React.FC<{
   fit?: "cover" | "contain";
   filter?: string;
   children?: React.ReactNode;
-}> = ({ src, imgSize, crop, width, height, fit = "cover", filter, children }) => {
+}> = ({
+  src,
+  imgSize,
+  crop,
+  width,
+  height,
+  fit = "cover",
+  filter,
+  children,
+}) => {
   const c = crop ?? ([0, 0, imgSize[0], imgSize[1]] as const);
   const { s, ox, oy } = cropToBox(c, width, height, fit);
   return (

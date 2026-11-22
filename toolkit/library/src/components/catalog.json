@@ -166,5 +166,23 @@
     "beatType": 2,
     "energy": "Calm",
     "grid": false
+  },
+  "PageSpread": {
+    "assetId": "VIS-045",
+    "beatType": 1,
+    "energy": "Calm",
+    "grid": false
+  },
+  "LedgerCard": {
+    "assetId": "VIS-039",
+    "beatType": 1,
+    "energy": "Calm",
+    "grid": false
+  },
+  "SourceWall": {
+    "assetId": "VIS-026",
+    "beatType": 1,
+    "energy": "Calm",
+    "grid": false
   }
 }

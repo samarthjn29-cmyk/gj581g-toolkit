@@ -11,18 +11,35 @@ const rnd = (n: number, s: number) => {
   return x - Math.floor(x);
 };
 
-export const GateWeave: React.FC<{ children: React.ReactNode; weave?: number; flicker?: number; seed?: number }> = ({
-  children,
-  weave = 1,
-  flicker = 0.02,
-  seed = 1,
-}) => {
+export const GateWeave: React.FC<{
+  children: React.ReactNode;
+  weave?: number;
+  flicker?: number;
+  seed?: number;
+}> = ({ children, weave = 1, flicker = 0.02, seed = 1 }) => {
   const frame = useCurrentFrame();
   const k = Math.floor(frame / 2);
   // smooth-ish weave: blend two neighbouring random targets
   const f = (frame % 2) / 2;
-  const wx = ((rnd(k, seed) * (1 - f) + rnd(k + 1, seed) * f) - 0.5) * 2 * Math.min(1.5, weave);
-  const wy = ((rnd(k, seed + 3) * (1 - f) + rnd(k + 1, seed + 3) * f) - 0.5) * 2 * Math.min(1.5, weave);
+  const wx =
+    (rnd(k, seed) * (1 - f) + rnd(k + 1, seed) * f - 0.5) *
+    2 *
+    Math.min(1.5, weave);
+  const wy =
+    (rnd(k, seed + 3) * (1 - f) + rnd(k + 1, seed + 3) * f - 0.5) *
+    2 *
+    Math.min(1.5, weave);
   const b = 1 + (rnd(k, seed + 7) - 0.5) * 2 * Math.min(0.03, flicker);
-  return <div style={{ position: "absolute", inset: 0, transform: `translate(${wx.toFixed(2)}px, ${wy.toFixed(2)}px)`, filter: `brightness(${b.toFixed(3)})` }}>{children}</div>;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        transform: `translate(${wx.toFixed(2)}px, ${wy.toFixed(2)}px)`,
+        filter: `brightness(${b.toFixed(3)})`,
+      }}
+    >
+      {children}
+    </div>
+  );
 };
