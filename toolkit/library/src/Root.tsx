@@ -3,6 +3,7 @@ import React from "react";
 import { Composition, Folder } from "remotion";
 import { Preview, type PreviewProps } from "./previews/Preview";
 import { PushThroughPreview } from "./previews/PushThroughPreview";
+import { TransitionPreview, type TransitionKind } from "./previews/TransitionPreview";
 import { DEMO, DEMO_VARIANTS } from "./previews/demoProps";
 import { COMPONENTS } from "./components";
 import { Episode, type EpisodeProps } from "./episodes/Episode";
@@ -57,6 +58,18 @@ export const RemotionRoot: React.FC = () => {
             height={H}
             defaultProps={{ themeId: th.id, registryMode: "render" as const }}
           />
+          {([["PaperBandWipe", "band"], ["PaperBandWipe-dark", "band-dark"], ["ColourBlockWipe", "block"], ["FlashFrame", "flash"]] as [string, TransitionKind][]).map(([id, kind]) => (
+            <Composition
+              key={id}
+              id={`${id}-${th.id}`}
+              component={TransitionPreview}
+              durationInFrames={5 * FPS}
+              fps={FPS}
+              width={W}
+              height={H}
+              defaultProps={{ themeId: th.id, registryMode: "render" as const, kind }}
+            />
+          ))}
         </Folder>
       ))}
       <Folder name="Episodes">

@@ -46,6 +46,9 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
+    trn = {"push": "TRN-006", "slide": "TRN-007", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
+    if trn and trn not in d["assets"]:
+        d["assets"].append(trn)
     # Guard (independent review, 22 Nov 2026: word("own") matched "his own words" 44 s earlier, so a line
     # showed before it was spoken): any cue before the shot's own start is a wrong word match.
     def walk(o, path=""):
@@ -128,11 +131,15 @@ shot(B(22), "HalftoneMoire", lambda r: {
     "color": PINK, "name": "PINK", "loupe": {"atSec": 0.15, "from": [1130, 470], "to": [1480, 600], "moveSec": 2.6, "r": 230, "cell": 22},
     "moire": {"opacity": 0.22, "turnDeg": 4},
     "lines": [{"text": "Where is the pink?", "atSec": r(word("where")),
-               "fill": {"word": "pink", "atSec": r(word("pink", 54)), "color": PINK}}]})  # TXT-015 FillSweep
+               "fill": {"word": "pink", "atSec": r(word("pink", 54)), "color": PINK}}]},  # TXT-015 FillSweep
+    # v11 (Sam, 22 Nov 2026: "more transitions and transition music"): TRN-012, the friends' pink floods in from the
+    # right and the swatch rises out of it (the colour is the subject here).
+    transitionIn="block", transition={"color": PINK, "side": "right"})
 # 23 back to the candle, wide (the clip forward, from 3 s in).
 shot(B(23), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
                               "clipStartSec": 3, "warmth": [1, 1],
-                              "labels": [{"text": "A SILLY QUESTION?", "atSec": r(word("it", 58)) - 0.3, "x": 960, "y": 860, "align": "center"}]})
+                              "labels": [{"text": "A SILLY QUESTION?", "atSec": r(word("it", 58)) - 0.3, "x": 960, "y": 860, "align": "center"}]},
+     transitionIn="flash")  # v11: TRN-013 in the pause after "is.", one question card to the next
 # 24 Dalton's first face: Charles Turner's mezzotint, 1834.
 shot(B(24), "ParallaxCutout", lambda r: {
     "bg": {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [0, 300, 996, 560]},
@@ -149,7 +156,8 @@ shot(B(25, 26), "DuotoneCollage", lambda r: {
         {"srcId": "SRC-031", "file": "public/assets/sources/dalton1808_symbols_line.png", "imgSize": [1000, 705],
          "x": 1240, "y": 735, "w": 620, "rot": 2.5, "atSec": max(0.6, r(word("pioneer")) - 0.2), "caption": "HIS ATOMS · PLATE 4, 1808", "seed": 5}],
     "lines": [{"text": "A pioneer of atomic theory", "atSec": r(word("pioneer"))},
-              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("pioneer")) + 0.6, "style": "mono"}]})
+              {"text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY", "atSec": r(word("pioneer")) + 0.6, "style": "mono"}]},
+    transitionIn="band", transition={"dir": "down", "tone": "paper"})  # v11: TRN-011 in the pause after "man.", into the collage
 # 27-28 about two years later: an answer. VIS-028 collage: his own words on the geranium, between the two
 # colours he saw (sky-blue by day, red by candle).
 shot(B(27, 28), "DuotoneCollage", lambda r: {
@@ -159,7 +167,8 @@ shot(B(27, 28), "DuotoneCollage", lambda r: {
         {"color": SKY, "x": 1150, "y": 740, "w": 340, "h": 240, "rot": 4, "atSec": 0.7, "seed": 13},
         {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
-    "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about", 67))}]}})
+    "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about", 67))}]}},
+    transitionIn="slide")  # v11: the next collage page slides in (TRN-007), in the pause after "atom."
 # 29-31 (Sam, 22 Nov 2026: "This particular eye frame ... feel very boring"; his idea, a magnifying glass into
 # the eyes, refined with the independent reviewer): VIS-032 LensDive. Dalton's real 1834 portrait; brackets
 # lock onto his own spectacle lens on "his own eyes"; in the silence after "dies." the camera pushes through the
@@ -184,7 +193,7 @@ shot(B(32, 33), "YearCounter", lambda r: {
     "to": 151, "unit": "YEARS", "countFromSec": r(word("wait")), "lockSec": r(word("years", 85))})
 # 34 back to the candle, which gutters out (the clip's own ending) into the dark room.
 shot(B(34), "FootagePlate", lambda r: {"srcId": "SRC-011", "file": CANDLE, "kind": "video", "size": [1080, 1920], "focus": 0.56,
-                                       "clipStartSec": 10.55, "warmth": [1, 1], "fadeOutSec": r(BEAT["E01-A1-34"][1]) - 0.5})
+                                       "clipStartSec": 10.55, "warmth": [1, 1]})  # v11: no fade, the dark band wipes the last light
 # 35-36 the grid: Newton's dark room, the shutter hole lights on "hole", the beam starts after "shutter."
 shot(B(35, 36), "PerspectiveGrid", lambda r: {
     "variant": "room", "depth": 2000, "dark": 0.7, "dolly": 0.02, "startSec": r(word("dark")) - 0.2,
@@ -194,7 +203,8 @@ shot(B(35, 36), "PerspectiveGrid", lambda r: {
         {"kind": "label", "at": [-1050, -380, 600], "text": "A HOLE IN THE SHUTTER", "atSec": r(word("hole"))},
         {"kind": "beam", "from": [-1050, -150, 600], "to": [-300, 120, 1400], "width": 14,
          "atSec": r(word("shutter")), "drawSec": 0.7}],
-    "tag": {"at": "corner", "parts": [{"text": "ISAAC NEWTON", "atSec": r(word("newton"))}]}})
+    "tag": {"at": "corner", "parts": [{"text": "ISAAC NEWTON", "atSec": r(word("newton"))}]}},
+    transitionIn="band", transition={"dir": "up", "tone": "dark"})  # v11: TRN-011 dark, into Newton's dark room
 # 37 the pay-off (VIS-032): the same lens of his, locked from the cut; on "open" the ring opens out to fill
 # the frame (clear, red is red), into the title card.
 shot(B(37), "LensDive", lambda r: {**LENS,
@@ -212,7 +222,6 @@ audio = [
     {"id": "SFX-014", "atSec": 0.0, "volumeDb": 0, "fadeInSec": 1.0, "fadeOutSec": 1.0, "endSec": 19.4},
     {"id": "SFX-006", "atSec": 19.5, "volumeDb": -12},
     {"id": "SFX-001", "atSec": round(word("dies", 75, end=True) + 0.05, 2), "volumeDb": -15},  # the push into his lens
-    {"id": "SFX-005", "atSec": 86.85, "volumeDb": -18},
     {"id": "SFX-015", "atSec": round(word("years", 85), 2), "volumeDb": -16},  # count lock tick (own)
     {"id": "SFX-001", "atSec": 94.6, "volumeDb": -14},
     {"id": "MUS-006", "atSec": BEAT["E01-A1-38"][0] + 0.15, "volumeDb": -6},  # Sam's pick, option C 'prism'
@@ -236,11 +245,28 @@ audio += [
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "endSec": round(S(27) + 1.5, 2), "fadeOutSec": 0.15, "volumeDb": -18.5},  # the two colour scraps, stopped when they have landed (review v9)
     {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": round(S(35) - 0.35, 2), "endSec": round(S(37) + 0.3, 2),
      "volumeDb": -27.6, "fadeInSec": 0.4, "fadeOutSec": 0.6},  # Newton's dark room, J-cut in
-    {"id": "SFX-019", "file": K + "mechanical/switch_click.wav", "atSec": round(word("open", 95), 2), "volumeDb": -21.0},  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
+    {"id": "SFX-019", "file": K + "mechanical/switch_click.wav", "atSec": round(word("open", 95), 2), "volumeDb": -21.0},
+]
+# v11 (Sam, 22 Nov 2026: "I would like more transitions and transition music in next clip"): every designed wipe gets
+# its air swish (SFX-024, 0.08-0.1 s before the wipe; over a word it sits at texture level, about 21 dB under the voice),
+# the collage slide its low whoosh, and the 151-years lock its one impact: the bed breaks to near-silence in the pause
+# after "years." (MUS-010, mix-act-bed.py --break BREAK) and the sub hit lands as it returns (SFX-025).
+BREAK = (round(word("years", 85, end=True) + 0.05, 2), round(word("years", 85, end=True) + 0.45, 2))
+SWEEPS = [S(14), S(20)]  # MUS-011 bass drop-outs on the two busy cuts (mix-act-bed.py --sweep)
+audio += [
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(22) - 0.08, 2), "volumeDb": -21.0},  # pink block, over "so": texture level
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(23) - 0.1, 2), "volumeDb": -17.6},  # the flash, in the pause
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) - 0.1, 2), "volumeDb": -17.6},  # paper band, in the pause
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(27) - 0.45, 2), "volumeDb": -16.6},  # the collage page slides in; loud part before "About"
+    {"id": "SFX-025", "file": K + "mechanical/sub_impact_v1.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the one impact, as the bed returns
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(35) - 0.08, 2), "volumeDb": -21.0},  # dark band, over "to a": texture level  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
 ]
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
        "voice": {"id": "SRC-030", "atSec": LEAD},
        "audio": audio, "beats": shots}
 json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act01.json"), "w"), indent=1, ensure_ascii=False)
+# The mix's music moves, for scripts/mix-act-bed.py (printed so the render command uses the same times).
+json.dump({"break": BREAK, "sweeps": SWEEPS}, open(os.path.join(LIB, "src", "episodes", "ep01-act01.music.json"), "w"))
+print("mix: --break %.2f:%.2f --sweep %s" % (BREAK[0], BREAK[1], ",".join(f"{t:.2f}" for t in SWEEPS)))
 print(len(shots), "shots,", shots[-1]["end"], "s")

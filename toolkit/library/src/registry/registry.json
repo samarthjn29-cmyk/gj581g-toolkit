@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T13:20:21.701Z",
+ "generated": "2026-11-22T13:30:21.527Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2171,7 +2171,7 @@
    "paths": [
     "src/components/PaperBandWipe.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: scene changes inside a collage or paper act (one page of the story to the next), on a pause. Limit: max 6 per episode, never two in a row; calm speed (0.5-0.7 s). Not for: cuts inside a scene.",
    "maxBeats": null,
    "maxShare": null
@@ -2183,7 +2183,7 @@
    "paths": [
     "src/components/ColourBlockWipe.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a chapter or act turn where a colour carries the meaning (the red Dalton saw, the season sting colour). Limit: max 2 per episode. Not for: ordinary scene changes (TRN-011, TRN-006).",
    "maxBeats": null,
    "maxShare": null
@@ -2195,7 +2195,7 @@
    "paths": [
     "src/components/FlashFrame.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: between two type cards or two pages on the same idea (one quote to the next). Limit: max 2 per episode, never at a calm reflective moment. Not for: real photos of people.",
    "maxBeats": null,
    "maxShare": null
@@ -2232,9 +2232,9 @@
    "folder": "7_Music",
    "name": "BreakAndImpact",
    "paths": [
-    "scripts/mix-act-bed.py (planned --break)"
+    "scripts/mix-act-bed.py"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the act's peak reveal and the season or episode title. Limit: max 1 per act; the break sits in a pause, never over words. Not for: reflective acts.",
    "maxBeats": null,
    "maxShare": null
@@ -2244,9 +2244,9 @@
    "folder": "7_Music",
    "name": "BedFilterSweep",
    "paths": [
-    "scripts/mix-act-bed.py (planned --sweep)"
+    "scripts/mix-act-bed.py"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a scene change on a wipe when the bed is busy. Limit: max 4 per episode. Not for: Sam's voice (never filtered).",
    "maxBeats": null,
    "maxShare": null

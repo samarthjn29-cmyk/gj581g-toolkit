@@ -58,6 +58,9 @@ beats.forEach((b, i) => {
   }
   if (b.transitionIn === "push" && !b.focus) crit.push(`${b.id}: push-through without a focus point`);
   if (b.transitionIn === "push" && p.transitionIn === "push") crit.push(`${p.id}->${b.id}: two push-throughs in a row (TRN-006 limit)`);
+  // TRN-011/012/013 (22 Nov 2026): never the same designed wipe twice in a row; a colour block needs its data colour.
+  if (["band", "block", "flash"].includes(b.transitionIn) && p.transitionIn === b.transitionIn) crit.push(`${p.id}->${b.id}: two ${b.transitionIn} transitions in a row`);
+  if (b.transitionIn === "block" && !b.transition?.color) crit.push(`${b.id}: colour block without its data colour`);
 });
 // Reading time (Sam, 22 Nov 2026: "should stay on the screen for enough time so that someone can actually read
 // them when you highlight"): a page shot stays at least 4 s, and every highlight keeps 2 s on screen after it lands.

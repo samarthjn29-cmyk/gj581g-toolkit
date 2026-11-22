@@ -72,6 +72,7 @@ def loud(path):
 KIT = {
     "move": ("SFX-020", "hero", "low whoosh (rotate v1/v2/v3)"),
     "move_fast": ("SFX-021", "hero", "air whoosh"),
+    "wipe": ("SFX-024", "hero", "air swish on a paper band, colour block or flash (TRN-011/012/013; rotate v1/v2/v3)"),
     "fold": ("SFX-021", "hero", "cloth slide (a window or panel collapsing)"),
     "paper": ("SFX-016", "texture", "paper movement under the move"),
     "page": ("SFX-006", "hero", "a document arriving"),
@@ -104,6 +105,8 @@ def motions(shot):
     out = []
     if shot.get("transitionIn") in ("push", "slide"):
         out.append((s0, "move", f"{shot['transitionIn']} into the shot"))
+    if shot.get("transitionIn") in ("band", "block", "flash"):
+        out.append((s0, "wipe", f"{shot['transitionIn']} into the shot"))
     c = shot["component"]
     for k, v in walk(p):
         if not isinstance(v, dict) or not isinstance(v.get("atSec"), (int, float)) or v["atSec"] < 0:

@@ -31,11 +31,6 @@
    "volumeDb": -15
   },
   {
-   "id": "SFX-005",
-   "atSec": 86.85,
-   "volumeDb": -18
-  },
-  {
    "id": "SFX-015",
    "atSec": 85.87,
    "volumeDb": -16
@@ -119,6 +114,42 @@
    "id": "SFX-019",
    "file": "public/sfx/kit/mechanical/switch_click.wav",
    "atSec": 95.88,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 54.12,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 56.9,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 62.5,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 67.35,
+   "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-025",
+   "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
+   "atSec": 87.2,
+   "volumeDb": -12.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 90.17,
    "volumeDb": -21.0
   }
  ],
@@ -718,7 +749,8 @@
     "TRN-001",
     "LOK-009",
     "LOK-010",
-    "MUS-007"
+    "MUS-007",
+    "TRN-012"
    ],
    "props": {
     "color": "#E79AB9",
@@ -759,7 +791,12 @@
      54.2,
      57.0
     ]
-   ]
+   ],
+   "transitionIn": "block",
+   "transition": {
+    "color": "#E79AB9",
+    "side": "right"
+   }
   },
   {
    "id": "23",
@@ -777,7 +814,8 @@
     "LOK-009",
     "LOK-010",
     "MUS-007",
-    "SRC-011"
+    "SRC-011",
+    "TRN-013"
    ],
    "props": {
     "srcId": "SRC-011",
@@ -809,7 +847,8 @@
      57.0,
      59.95
     ]
-   ]
+   ],
+   "transitionIn": "flash"
   },
   {
    "id": "24",
@@ -894,7 +933,8 @@
     "SRC-004",
     "SRC-031",
     "TXT-010",
-    "MOT-003"
+    "MOT-003",
+    "TRN-011"
    ],
    "props": {
     "pieces": [
@@ -963,7 +1003,12 @@
      65.2,
      67.8
     ]
-   ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "paper"
+   }
   },
   {
    "id": "27+28",
@@ -983,7 +1028,8 @@
     "LOK-009",
     "LOK-010",
     "MUS-007",
-    "SRC-001"
+    "SRC-001",
+    "TRN-007"
    ],
    "props": {
     "pieces": [
@@ -1050,7 +1096,8 @@
      69.9,
      72.2
     ]
-   ]
+   ],
+   "transitionIn": "slide"
   },
   {
    "id": "29+30+31",
@@ -1261,8 +1308,7 @@
     "warmth": [
      1,
      1
-    ],
-    "fadeOutSec": 1.85
+    ]
    },
    "beatTimes": [
     [
@@ -1291,7 +1337,8 @@
     "MUS-007",
     "TXT-010",
     "MOT-002",
-    "SFX-001"
+    "SFX-001",
+    "TRN-011"
    ],
    "props": {
     "variant": "room",
@@ -1369,7 +1416,12 @@
      93.2,
      95.3
     ]
-   ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "dark"
+   }
   },
   {
    "id": "37",

@@ -5,6 +5,9 @@ import { ThemeProvider } from "../themes";
 import { OpticalStack } from "../layers/OpticalStack";
 import { PushThrough } from "../components/PushThrough";
 import { SlideAcross } from "../components/SlideAcross";
+import { PaperBandWipe } from "../components/PaperBandWipe";
+import { ColourBlockWipe } from "../components/ColourBlockWipe";
+import { FlashFrame } from "../components/FlashFrame";
 import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
 
@@ -17,7 +20,10 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push" | "slide";
+  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash";
+  // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
+  // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
+  transition?: Record<string, unknown>;
   focus?: [number, number]; // key point for a push-through (the last shot's key picture)
   beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
   note?: string;
@@ -89,6 +95,19 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
             />
           );
         }
+        const frozenPrev = () => {
+          const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
+          return (
+            <Freeze frame={prevDur - 1}>
+              <Shot beat={prev} />
+            </Freeze>
+          );
+        };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const o = (b.transition ?? {}) as any;
+        if (b.transitionIn === "band" && prev) body = <PaperBandWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "block" && prev) body = <ColourBlockWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "flash" && prev) body = <FlashFrame {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (
