@@ -203,7 +203,7 @@ shot(B(*range(45, 55)), "ScaleField", lambda r: {
               {"text": "TROUBLE TELLING SOME REDS AND GREENS APART", "atSec": r(word("trouble")), "untilSec": r(word("women")), "size": "small"},
                             {"text": "STILL THERE", "atSec": r(word("still")), "size": "small", "row": 1, "accent": True}],
     "phases": [{"atSec": 0.2, "total": 100, "cols": 20, "lit": 8, "litAtSec": r(word("eight")), "label": {"text": "MEN OF EUROPEAN DESCENT · ABOUT 8 IN 100", "atSec": r(word("eight"))}},
-               {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": 15.39, "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
+               {"atSec": r(word("women")), "total": 1000, "cols": 50, "lit": 4, "litAtSec": 15.6, "seed": 2, "label": {"text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000", "atSec": r(word("four", 127))}},
                {"atSec": r(word("room")), "total": 50, "cols": 10, "lit": 4, "litAtSec": 20.36, "seed": 3, "label": {"text": "A ROOM OF 50 MEN OF EUROPEAN DESCENT · ABOUT 4", "atSec": r(word("four", 131))}},
                {"atSec": r(word("china")), "total": 100, "cols": 20, "lit": 5, "litAtSec": r(word("china")) + 0.2, "seed": 4, "label": {"text": "MEN OF CHINESE OR JAPANESE DESCENT · 4–6.5 IN 100", "atSec": r(word("china")) + 0.2}}]},
     transitionIn="slide")
@@ -274,7 +274,7 @@ audio = [
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -29.0},  # the route drawn on: texture under the words
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(14) - 0.15, 2), "volumeDb": -16.6},  # push from Kendal into the geranium
     {"id": "SFX-014", "atSec": round(S(14), 2), "endSec": round(S(16), 2), "fadeInSec": 0.8, "fadeOutSec": 0.6, "volumeDb": -2.0},  # candle room under the geranium by candle (Kendal)
-    {"id": "SFX-006", "atSec": 38.85, "volumeDb": -21.0},  # slide to p.30, over "change,": texture
+    {"id": "SFX-006", "atSec": 38.70, "volumeDb": -21.0},  # slide to p.30, over "change,": texture
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(22) - 0.15, 2), "volumeDb": -16.6},  # push from "my brother" into Lonsdale
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # band into the stockings
     {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": round(word("dark", 70) - 0.05, 2), "volumeDb": -22.0},  # the stockings go dark (in John's words)
@@ -285,10 +285,11 @@ audio = [
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v2.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the act's one impact, as the bed returns after "brothers."
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(45) - 0.08, 2), "volumeDb": -17.6},  # slide to the dot grid
     {"id": "SFX-018", "file": K + "mechanical/ticker_run.wav", "atSec": round(word("eight"), 2), "endSec": round(word("eight") + 0.95, 2), "fadeOutSec": 0.1, "volumeDb": -23.0},  # 8 dots light (creative swap)
-    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v1.wav", "atSec": 130.45, "volumeDb": -22.0},
+    {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v1.wav", "atSec": 130.66, "volumeDb": -22.0},
     {"id": "SFX-018", "file": K + "mechanical/stopwatch_tick_v2.wav", "atSec": 135.42, "volumeDb": -22.0},
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(55) + 0.1, 2), "volumeDb": -17.6},  # band up into "Picture it from the inside"
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(63) - 0.15, 2), "volumeDb": -16.6},  # push from YOUR red into the geranium
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(66) - 0.08, 2), "volumeDb": -17.6},  # slide into the portrait (gate 3 v4 taste)
     {"id": "SFX-027", "file": K + "mechanical/typewriter_run_v1.wav", "atSec": round(word("enough"), 2), "volumeDb": -23.0},  # keys under the typed line (texture; the kit file sits at -27 LUFS, peak-capped)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(68) + 0.1, 2), "volumeDb": -17.6},  # paper band up into the map
     {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)

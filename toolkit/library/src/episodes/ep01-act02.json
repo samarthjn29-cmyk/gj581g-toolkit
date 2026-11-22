@@ -63,7 +63,7 @@
   },
   {
    "id": "SFX-006",
-   "atSec": 38.85,
+   "atSec": 38.7,
    "volumeDb": -21.0
   },
   {
@@ -133,7 +133,7 @@
   {
    "id": "SFX-018",
    "file": "public/sfx/kit/mechanical/stopwatch_tick_v1.wav",
-   "atSec": 130.45,
+   "atSec": 130.66,
    "volumeDb": -22.0
   },
   {
@@ -153,6 +153,12 @@
    "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
    "atSec": 160.15,
    "volumeDb": -16.6
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 166.82,
+   "volumeDb": -17.6
   },
   {
    "id": "SFX-027",
@@ -1561,7 +1567,7 @@
       "total": 1000,
       "cols": 50,
       "lit": 4,
-      "litAtSec": 15.39,
+      "litAtSec": 15.6,
       "seed": 2,
       "label": {
        "text": "WOMEN OF EUROPEAN DESCENT · ABOUT 4 IN 1,000",
@@ -2006,14 +2012,14 @@
     "TXT-017",
     "TXT-013",
     "MOT-002",
-    "TRN-001",
+    "TRN-007",
     "LOK-009",
     "LOK-010",
     "MUS-007",
     "SRC-004",
     "TXT-021",
-    "SFX-027",
-    "TRN-007"
+    "TRN-001",
+    "SFX-027"
    ],
    "props": {
     "backdrop": {

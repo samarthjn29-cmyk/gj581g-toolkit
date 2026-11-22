@@ -135,24 +135,27 @@ export const BuildUpMap: React.FC<BuildUpMapProps> = ({ title, nodes, focus, ass
         </div>
       ) : null}
       <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0 }}>
-        {/* The path: one dashed segment between each pair of shown pieces, leaving each piece outside its icon,
-            pill and keyword block so it never runs through a label; it draws on as the later piece arrives. */}
+        {/* The path: one dashed segment between each pair of shown pieces, from the high piece's pill side to the
+            low piece's icon side, so it never runs through a label; it draws on as the later piece arrives. */}
         {pos.slice(1).map((q, k) => {
           const p0 = pos[k];
           const st = nodes[k + 1] ? sec(nodes[k + 1].atSec, fps) : null;
           if (st === null) return null;
           const dp = interpolate(frame, [st, st + sec(0.8, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: SLOW_OUT });
           if (dp <= 0) return null;
-          // Each end leaves from just outside its piece's block (icon, pill, keyword lines), one line-height
-          // clear: below it when the path heads down, above the icon when it heads up (gate 3 act 2: the path ran
-          // through RED BY CANDLE).
-          const kwH = (i: number) => (nodes[i]?.keywords?.length ?? 0) * 36;
-          const end = (i: number, goingDown: boolean, c: { x: number; y: number }) => ({ x: c.x, y: goingDown ? c.y - 118 + 76 + 10 + 74 + 10 + kwH(i) + 34 : c.y - 118 - 30 });
-          const a0 = end(k, q.y > p0.y, p0);
-          const b0 = end(k + 1, p0.y > q.y, q);
-          const ax = a0.x + (q.x - p0.x) * 0.08;
+          // A V into each low piece (gate 3 act 2 reviews: lines through RED BY CANDLE, then flat dashes that read as
+          // one line over the low piece): the higher piece's end leaves from the side of its pill that faces the
+          // other piece; the lower piece's end lands on the near side of its icon, above its pill and keywords.
+          const side = Math.sign(q.x - p0.x) || 1;
+          const pillHalf = (i: number) => (nodes[i].label.length * 23 + 44) / 2; // serif 44 px, 22 px padding a side
+          const pillEnd = (i: number, c: { x: number; y: number }, dir: number) => ({ x: c.x + dir * (pillHalf(i) + 14), y: c.y + 5 });
+          const iconEnd = (c: { x: number; y: number }, dir: number) => ({ x: c.x + dir * 52, y: c.y - 80 });
+          const p0High = p0.y <= q.y;
+          const a0 = p0High ? pillEnd(k, p0, side) : iconEnd(p0, side);
+          const b0 = p0High ? iconEnd(q, -side) : pillEnd(k + 1, q, -side);
+          const ax = a0.x;
           const ay = a0.y;
-          const bx = b0.x - (q.x - p0.x) * 0.08;
+          const bx = b0.x;
           const by = b0.y;
           return <line key={k} x1={ax} y1={ay} x2={ax + (bx - ax) * dp} y2={ay + (by - ay) * dp} stroke={ink} strokeOpacity={0.35 * (1 - ap)} strokeWidth={3} strokeDasharray="10 12" strokeLinecap="round" />;
         })}
