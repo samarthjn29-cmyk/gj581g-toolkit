@@ -151,6 +151,7 @@ shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
     "source": "HENRY LONSDALE · LONDON, 1874",
     "strokes": {},  # TEX-008 'shadow' strokes drift over the held title page (the story told and retold), off the highlights
     "notes": [{"text": "AS THE STORY GOES", "atSec": r(word("another"))},
+              {"text": "A BIOGRAPHY", "atSec": r(word("biography"))},  # Gate 3 stillness: a change inside 56-60 s
               {"text": "1874 · 30 YEARS AFTER HE DIED", "atSec": r(word("30"))},
               {"text": "MAY HAVE GROWN IN THE TELLING", "atSec": r(word("grown")), "accent": True}]},
     transitionIn="push", focus=[700, 640])
@@ -162,7 +163,8 @@ shot(B(*range(25, 39)), "ReportedColour", lambda r: {
     "states": [{"atSec": 0, "color": None},
                {"atSec": r(word("dark", 70)), "color": DARK, "sec": 0.9},
                {"atSec": r(word("cherry")), "color": CHERRY, "snap": True, "sec": 0.6},
-               {"atSec": r(word("john", 84)), "color": DARK, "sec": 0.9}],
+               {"atSec": r(word("john", 84)), "color": DARK, "sec": 0.9},
+               {"atSec": r(word("mother", 94)), "color": CHERRY, "sec": 0.9}],  # "a mother who is quite sure she's right": her red
     "people": [{"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("cherry")) + 0.4, "x": 1400, "y": 880},
                {"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("john", 84)), "x": 520, "y": 880},
                {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan")), "x": 960, "y": 880}],
@@ -171,7 +173,11 @@ shot(B(*range(25, 39)), "ReportedColour", lambda r: {
                {"text": "TO JOHN · AS THE STORY TELLS IT", "atSec": r(word("him", 69)), "untilSec": r(word("mother", 76)) - 0.4, "x": 960, "y": 800, "align": "center"},
                {"text": "'A BLUISH DARK DRAB' · LONSDALE, 1874", "atSec": r(word("bluish")), "untilSec": r(word("mother", 76)) - 0.4, "x": 960, "y": 860, "align": "center", "accent": True},
                {"text": "HIS MOTHER", "atSec": r(word("mother", 76)), "untilSec": r(word("cherry")), "x": 960, "y": 860, "align": "center"},
-               {"text": "'AS RED AS A CHERRY'", "atSec": r(word("cherry")), "untilSec": r(word("john", 84)), "x": 960, "y": 780, "align": "center", "accent": True}],
+               {"text": "'AS RED AS A CHERRY'", "atSec": r(word("cherry")), "untilSec": r(word("john", 84)), "x": 960, "y": 780, "align": "center", "accent": True},
+               # Gate 3 stillness (87.5-98.6 s had no visible change): the narration's own words, then her red again
+               {"text": "TO BOTH OF THEM · DARK", "atSec": r(word("both", 88)), "untilSec": r(word("two", 92)), "x": 960, "y": 860, "align": "center"},
+               {"text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS", "atSec": r(word("two", 92)), "untilSec": r(word("mother", 94)), "x": 960, "y": 860, "align": "center"},
+               {"text": "QUITE SURE SHE'S RIGHT", "atSec": r(word("quite")), "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 63)), "untilSec": r(word("mother", 76))},
                                       {"text": "EAGLESFIELD", "atSec": r(word("mother", 76))}]}},
     transitionIn="band", transition={"dir": "down", "tone": "paper"})
@@ -215,6 +221,9 @@ shot(B(57, 58), "KineticLine", lambda r: {
 # 59-62 the same colour name, and nobody can show you the difference (illustrative).
 shot(B(59, 60, 61, 62), "SwatchRows", lambda r: {
     "columns": ["WHAT IT IS CALLED"],
+    # Gate 3 stillness (151.5-157.8 s): the narration's words under the swatches
+    "labels": [{"text": "THE SAME COLOUR NAMES", "atSec": r(word("same", 150)), "untilSec": r(word("nobody", 153)) - 0.1, "x": 960, "y": 920, "align": "center"},
+               {"text": "NOBODY HAS EVER TOLD YOU", "atSec": r(word("nobody", 153)), "untilSec": r(word("nobody", 155)) - 0.1, "x": 960, "y": 920, "align": "center", "accent": True}],
     "rows": [{"name": "YOU", "atSec": 0, "cells": [{"color": "#C23A47", "name": "RED", "atSec": 0, "fillSec": 0.4}],
               "tag": {"text": "ILLUSTRATIVE", "atSec": 0}},
              {"name": "EVERYONE ELSE", "atSec": 0.3, "dimAtSec": r(word("nobody", 155)),

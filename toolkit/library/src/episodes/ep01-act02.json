@@ -996,6 +996,10 @@
       "atSec": 0.89
      },
      {
+      "text": "A BIOGRAPHY",
+      "atSec": 4.19
+     },
+     {
       "text": "1874 · 30 YEARS AFTER HE DIED",
       "atSec": 4.91
      },
@@ -1106,6 +1110,11 @@
       "atSec": 20.37,
       "color": "#3B4250",
       "sec": 0.9
+     },
+     {
+      "atSec": 30.98,
+      "color": "#B3262E",
+      "sec": 0.9
      }
     ],
     "people": [
@@ -1182,6 +1191,30 @@
       "untilSec": 20.37,
       "x": 960,
       "y": 780,
+      "align": "center",
+      "accent": true
+     },
+     {
+      "text": "TO BOTH OF THEM · DARK",
+      "atSec": 24.7,
+      "untilSec": 28.1,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS",
+      "atSec": 28.1,
+      "untilSec": 30.98,
+      "x": 960,
+      "y": 860,
+      "align": "center"
+     },
+     {
+      "text": "QUITE SURE SHE'S RIGHT",
+      "atSec": 31.68,
+      "x": 960,
+      "y": 860,
       "align": "center",
       "accent": true
      }
@@ -1771,6 +1804,25 @@
    "props": {
     "columns": [
      "WHAT IT IS CALLED"
+    ],
+    "labels": [
+     {
+      "text": "THE SAME COLOUR NAMES",
+      "atSec": 1.16,
+      "untilSec": 3.62,
+      "x": 960,
+      "y": 920,
+      "align": "center"
+     },
+     {
+      "text": "NOBODY HAS EVER TOLD YOU",
+      "atSec": 3.72,
+      "untilSec": 7.260000000000001,
+      "x": 960,
+      "y": 920,
+      "align": "center",
+      "accent": true
+     }
     ],
     "rows": [
      {
