@@ -5163,7 +5163,7 @@
 "WCL-E01_Act2_Narration",
 "Own: Sam's ElevenLabs take (his Samarth voice), paced to 149.5 wpm with even pauses, silence only (tts/pace_even.py); Sam: final, 22 Nov 2026",
 "public/episodes/wcl-e01/02_brothers_paced_149wpm_even.wav",
-"Act 2 narration of WCL-E01 'The Man Who Saw Pink' (172.6 s, mono 44.1 kHz WAV; the master of 02_brothers_paced_149wpm_even.mp3). Take 174 wpm; pauses evened (commas >= 0.32 s, sentences 1.04 s, paragraphs 1.3 s). Sam's audio is final: never re-timed, stretched or filtered. Private: Drive only, never GitHub.",
+"Act 2 narration of WCL-E01 'The Man Who Saw Pink' (172.6 s, mono 44.1 kHz WAV; the master of 02_brothers_paced_149wpm_even.mp3). Take 174 wpm; pauses evened (commas >= 0.32 s, sentences 1.04 s, paragraphs 1.3 s). 23 Nov 2026 (Sam: 'disturbance in the voice' at 1:38): rebuilt from his original take with the same 65 pauses, 17 moved out of sound into real silences (both sides under -55 dBFS); words untouched. Sam's audio is final: never re-timed, stretched or filtered. Private: Drive only, never GitHub.",
 "Active",
 "",
 "",
