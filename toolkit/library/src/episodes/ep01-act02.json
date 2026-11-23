@@ -46,13 +46,13 @@
   {
    "id": "SFX-017",
    "file": "public/sfx/kit/tactile/pencil_stroke.wav",
-   "atSec": 27.4,
+   "atSec": 27.48,
    "volumeDb": -29.0
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
-   "atSec": 28.36,
+   "atSec": 28.44,
    "volumeDb": -24.0
   },
   {
@@ -592,7 +592,7 @@
     "lines": [
      {
       "text": "A diary of the weather",
-      "atSec": 1.66
+      "atSec": 1.48
      },
      {
       "text": "THE DIARY · FROM 24 MARCH 1787",
@@ -682,7 +682,7 @@
       "zoom": 0.86
      },
      {
-      "atSec": 1.03,
+      "atSec": 1.11,
       "center": [
        1480,
        3330
@@ -723,7 +723,7 @@
        1985,
        3825
       ],
-      "atSec": 1.39,
+      "atSec": 1.4699999999999998,
       "drop": true,
       "accent": true
      }
@@ -744,14 +744,14 @@
         3825
        ]
       ],
-      "atSec": 1.03,
+      "atSec": 1.11,
       "sec": 1.3
      }
     ],
     "labels": [
      {
       "text": "IN KENDAL FROM AGE 15",
-      "atSec": 4.17,
+      "atSec": 4.029999999999999,
       "x": 960,
       "y": 860,
       "align": "center",
@@ -763,7 +763,7 @@
      "parts": [
       {
        "text": "KENDAL",
-       "atSec": 1.61
+       "atSec": 1.69
       },
       {
        "text": "WESTMORLAND",
@@ -963,7 +963,7 @@
        360,
        56
       ],
-      "atSec": 11.69
+      "atSec": 11.85
      },
      {
       "box": [
@@ -976,7 +976,7 @@
      }
     ],
     "callout": {
-     "atSec": 11.69,
+     "atSec": 11.85,
      "dim": 0.7
     },
     "quote": "except my brother who saw it in the same light as myself",
@@ -1304,7 +1304,7 @@
         2323
        ]
       ],
-      "atSec": 8.34,
+      "atSec": 8.38,
       "sec": 0.9,
       "kind": "line"
      },
@@ -1399,7 +1399,7 @@
         2945
        ]
       ],
-      "atSec": 31.68,
+      "atSec": 31.48,
       "sec": 1.2,
       "kind": "line"
      },
@@ -1470,7 +1470,7 @@
     },
     "quotes": [
      {
-      "atSec": 8.94,
+      "atSec": 8.98,
       "untilSec": 10.94,
       "kicker": "TO JOHN · AS THE STORY TELLS IT",
       "text": "A sensible dark colour."
@@ -1834,7 +1834,7 @@
      {
       "text": "TROUBLE TELLING SOME REDS AND GREENS APART",
       "atSec": 8.96,
-      "untilSec": 12.39,
+      "untilSec": 12.71,
       "size": "small"
      },
      {
@@ -1858,7 +1858,7 @@
       }
      },
      {
-      "atSec": 12.39,
+      "atSec": 12.71,
       "total": 1000,
       "cols": 50,
       "lit": 4,
@@ -2352,7 +2352,7 @@
     "lines": [
      {
       "text": "A scientist.",
-      "atSec": 0.65,
+      "atSec": 0.81,
       "fill": {
        "word": "scientist",
        "atSec": 1.93,

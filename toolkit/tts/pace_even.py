@@ -57,6 +57,19 @@ for i, k, g in gaps:
         plan.append((i, d))
 ins = []
 win = int(0.02 * sr)
+_w30 = int(0.03 * sr)
+_db = lambda a: 20 * np.log10(np.sqrt(np.mean(a.astype(float) ** 2)) + 1e-12)
+quiet_db = lambda p: max(_db(x[max(0, p - _w30 - 2):p - 2]), _db(x[p + 2:p + _w30 + 2]))
+_env = 10 * np.log10(np.convolve(x.astype(float) ** 2, np.ones(_w30) / _w30, "same") + 1e-12)
+def nearest_quiet(p):
+    for rad in (int(0.8 * sr), int(2.0 * sr)):
+        c = [k for k in np.where(_env[max(0, p - rad):p + rad] < -55)[0][::32] + max(0, p - rad) if quiet_db(k) < -55]
+        if c:
+            return int(min(c, key=lambda k: abs(k - p)))
+    k = p
+    while k < len(x) - 1 and not (_env[k] < -55 and quiet_db(k) < -55):
+        k += 64
+    return int(k)
 for i, d in plan:
     s, e = int(W[i][2] * sr), int(W[i + 1][1] * sr)
     if e - s < 3 * win:  # whisper's edges can touch: look for the quietest point just around the boundary
@@ -64,6 +77,10 @@ for i, d in plan:
     seg = x[s:e]
     en = np.convolve(seg ** 2, np.ones(win), "valid")
     p = s + int(np.argmin(en)) + win // 2
+    # guard (Sam, 23 Nov 2026: "disturbance in the voice" at act 2 1:38): never splice silence into sound. Both 30 ms
+    # sides must sit under -55 dBFS; otherwise the pause goes to the nearest real pause (within 2 s, else the next one).
+    if quiet_db(p) >= -55:
+        p = nearest_quiet(p)
     ins.append((p, d, i))
 ins.sort()
 y, last, f = [], 0, int(0.008 * sr)
@@ -78,11 +95,9 @@ for p, d, i in ins:
 y.append(x[last:])
 y = np.concatenate(y)
 sf.write(out, y, sr, subtype="PCM_24")
-shift, k, NW = 0.0, 0, []
-for j, (w, s, e) in enumerate(W):
-    while k < len(ins) and ins[k][2] < j:
-        shift += ins[k][1]
-        k += 1
+NW = []
+for j, (w, s, e) in enumerate(W):  # shift by the silences placed before the word (by position: a moved pause moves with it)
+    shift = sum(int(d * sr) for p, d, _ in ins if p <= int(s * sr) + int(0.01 * sr)) / sr
     NW.append([w, round(s + shift, 3), round(e + shift, 3)])
 json.dump(NW, open(owj, "w"))
 span2 = NW[-1][2] - NW[0][1]

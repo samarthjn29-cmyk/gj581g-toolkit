@@ -31,16 +31,16 @@ For more than 50 years, he keeps a diary
 of the weather, every single day.
 
 8
-00:00:27,016 --> 00:00:28,566
+00:00:27,096 --> 00:00:28,586
 He's been teaching in Kendal,
 
 9
-00:00:28,636 --> 00:00:32,026
+00:00:28,636 --> 00:00:31,886
 a market town on the edge of the Lake
 District, since he was 15.
 
 10
-00:00:32,820 --> 00:00:34,710
+00:00:32,680 --> 00:00:34,710
 That's where the geranium happens.
 
 11
@@ -59,11 +59,11 @@ they all agreed.
 
 14
 00:00:46,164 --> 00:00:49,234
-By candle, the colour was not much
+By Kendal, the colour was not much
 different from daylight.
 
 15
-00:00:50,027 --> 00:00:54,797
+00:00:50,187 --> 00:00:54,797
 Except, he says, for his brother, who saw
 it in the same light as myself.
 
@@ -78,11 +78,11 @@ It comes from a biography written 30 years
 after John died,
 
 18
-00:01:02,111 --> 00:01:03,781
+00:01:02,111 --> 00:01:03,481
 so it may have grown in the telling.
 
 19
-00:01:04,831 --> 00:01:09,621
+00:01:03,531 --> 00:01:09,621
 One day in Kendal, John passes a shop
 window and sees a pair of stockings.
 
@@ -91,7 +91,7 @@ window and sees a pair of stockings.
 He buys them for his mother.
 
 21
-00:01:12,519 --> 00:01:14,829
+00:01:12,559 --> 00:01:14,829
 To him, they're a sensible dark colour.
 
 22
@@ -100,7 +100,7 @@ A bluish-dark drab, in the biographer's
 words.
 
 23
-00:01:19,883 --> 00:01:23,753
+00:01:19,883 --> 00:01:23,693
 His mother opens the present and says,
 they're as red as a cherry, John!
 
@@ -117,12 +117,12 @@ Neither can Jonathan.
 To both of them, the stockings are dark.
 
 27
-00:01:32,275 --> 00:01:37,325
+00:01:32,275 --> 00:01:37,125
 Two grown men, one pair of stockings, and
 a mother who is quite sure she's right.
 
 28
-00:01:38,375 --> 00:01:40,145
+00:01:38,595 --> 00:01:40,145
 So, look at what stays the same.
 
 29
@@ -152,7 +152,7 @@ It's the two brothers.
 They aren't rare either.
 
 35
-00:01:57,939 --> 00:02:00,469
+00:01:58,159 --> 00:02:00,469
 Today, we'd call this a kind of colour
 blindness.
 
@@ -167,7 +167,7 @@ have some trouble telling certain reds and
 greens apart.
 
 38
-00:02:07,246 --> 00:02:10,656
+00:02:07,566 --> 00:02:10,656
 For women of European descent, it's about
 four in a thousand.
 
@@ -214,7 +214,7 @@ Then one evening, a flower changes colour,
 and almost nobody else sees it happen.
 
 48
-00:02:47,546 --> 00:02:49,476
+00:02:47,706 --> 00:02:49,476
 Dalton, though, is a scientist.
 
 49
