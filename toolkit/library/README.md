@@ -12,7 +12,7 @@ Built 22 Nov 2026 for the library-build workflow (skill `gj581g-library-build`).
 
 ## Commands
 ```
-node scripts/registry-build.mjs scripts/data/registry_values.json   # manifest from a get_values dump of Master_Asset_Registry!A1:G
+node scripts/registry-build.mjs scripts/data/registry_values.json   # manifest from a get_values dump of Master_Asset_Registry!A1:Y
 node scripts/registry-check.mjs [act.json]                          # "Unregistered assets: N" and the other guards
 node scripts/beatsheet-check.mjs beat_sheet_dump.json               # Gate 1: fills the beat sheet's Registry_Check (W) column
 node scripts/library-stills.mjs render 1.2,3.5                       # every library preview, both themes -> qa/library/

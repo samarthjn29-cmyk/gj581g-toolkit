@@ -1,4 +1,4 @@
-// Builds src/registry/registry.json (the render manifest) from a dump of Master_Asset_Registry!A1:G.
+// Builds src/registry/registry.json (the render manifest) from a dump of Master_Asset_Registry!A1:Y (K = Best_Use_&_Limit, W = Drive_Copy).
 // Usage: node scripts/registry-build.mjs scripts/data/registry_values.json
 // The dump is either the Sheets get_values response ({values:[[...]]}) or a bare array of rows; row 1 is the header.
 // Columns used: A Asset_ID, B Folder, C Asset_Name, E File_Path_or_Token (";"-separated), G Status.
@@ -64,7 +64,7 @@ fs.writeFileSync(dest, JSON.stringify(out, null, 1) + "\n");
 const counts = {};
 for (const a of Object.values(assets)) counts[a.status] = (counts[a.status] ?? 0) + 1;
 console.log(`${dest}: ${Object.keys(assets).length} assets`, counts);
-if (K < 0) console.log("WARN: no Best_Use_&_Limit column in the dump (dump Master_Asset_Registry!A1:K).");
+if (K < 0) console.log("WARN: no Best_Use_&_Limit column in the dump (dump Master_Asset_Registry!A1:Y).");
 else if (noLimit.length) console.log(`WARN: Active assets with no Best_Use_&_Limit yet: ${noLimit.join(", ")}`);
 if (W < 0) console.log("WARN: no Drive_Copy column in the dump (dump Master_Asset_Registry!A1:W).");
 else if (noCopy.length) console.log(`WARN: Active assets with no Drive copy yet: ${noCopy.join(", ")}`);
