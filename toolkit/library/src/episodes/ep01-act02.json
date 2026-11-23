@@ -115,7 +115,7 @@
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
-   "atSec": 94.57,
+   "atSec": 94.79,
    "volumeDb": -27.0
   },
   {
@@ -1506,7 +1506,7 @@
       "colorName": "DARK",
       "atSec": 23.47,
       "x": 1190,
-      "y": 860
+      "y": 842
      },
      {
       "name": "MOTHER",

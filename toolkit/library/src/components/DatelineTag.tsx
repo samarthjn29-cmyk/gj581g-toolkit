@@ -58,7 +58,9 @@ export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", 
     >
       {shown.map((p, i) => {
         const text = `${i > 0 ? "  ·  " : ""}${p.text}`;
-        const v = i === 0 && p.untilSec === undefined ? 1 : vis(p);
+        const v0 = i === 0 && p.untilSec === undefined ? 1 : vis(p);
+        // smoothstep: the width (and so a centred tag's glide) eases at both ends, never stopping dead (recheck v18)
+        const v = v0 * v0 * (3 - 2 * v0);
         return (
           <span
             key={p.text}

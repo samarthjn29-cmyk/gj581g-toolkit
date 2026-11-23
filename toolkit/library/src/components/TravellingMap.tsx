@@ -293,7 +293,7 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
               {pin.drop ? (
                 <>
                   <div style={{ position: "absolute", left: -12 * (0.5 + 0.5 * fp), top: -4 * (0.5 + 0.5 * fp), width: 24 * (0.5 + 0.5 * fp), height: 8 * (0.5 + 0.5 * fp), borderRadius: "50%", background: "rgba(0,0,0,0.45)", filter: `blur(${(1 - fp) * 4 + 1}px)`, opacity: out * (0.3 + 0.7 * fp) }} />
-                  {ring > 0 && ring < 1 ? <div style={{ position: "absolute", left: -(9 + 40 * ringE), top: -(9 + 40 * ringE), width: 2 * (9 + 40 * ringE), height: 2 * (9 + 40 * ringE), borderRadius: "50%", border: `${3 - 2.4 * ringE}px solid ${pin.accent ? t.colors.accent : t.colors.ink}`, opacity: (1 - ring) * 0.85 * out }} /> : null}
+                  {ring > 0 && ring < 1 ? <div style={{ position: "absolute", left: -(9 + 40 * ringE), top: -(9 + 40 * ringE), width: 2 * (9 + 40 * ringE), height: 2 * (9 + 40 * ringE), borderRadius: "50%", border: `${5 - 4 * ringE}px solid ${pin.accent ? t.colors.accent : t.colors.ink}`, boxShadow: `0 0 0 2px ${t.colors.canvas}88`, opacity: (1 - ring) * 0.9 * out }} /> : null /* gate 3 review: 5 px start with a light halo, so it reads on a busy map at phone size */}
                 </>
               ) : null}
               <div style={{ position: "absolute", left: -9, top: -9 - (1 - fp) * 16, width: 18, height: 18, borderRadius: 9, background: pin.accent ? t.colors.accent : t.colors.ink, border: `3px solid ${t.colors.canvas}`, opacity: (pin.drop ? Math.min(1, fp * 3) : a) * out }} />

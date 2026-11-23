@@ -194,7 +194,7 @@ shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
                {"atSec": r(word("bluish", 75)), "untilSec": r(word("words", 77, end=True)) + 0.05, "kicker": "IN THE BIOGRAPHER'S WORDS", "text": "'a bluish dark drab'", "by": "LONSDALE, 1874 · P. 99", "byAtSec": r(word("biographer's", 77))},
                {"atSec": r(word("opens", 79)) + 0.3, "untilSec": r(word("john", 84)) + 0.45, "kicker": "HIS MOTHER · AS THE STORY TELLS IT", "text": "'as red as a cherry'", "textAtSec": r(word("cherry", 82))}],
     "tags": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("it", 85, end=True)) + 0.02, "x": 1140, "y": 800},
-             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1190, "y": 860},  # gate 3 v8: was touching the caption
+             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1190, "y": 842},  # gate 3 v8: was touching the caption
              {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("stockings", 90, end=True)) + 0.05, "x": 1520, "y": 830, "hard": True}],  # gate 3 v8: lands in the pause, with a pop
     "tie": {"atSec": r(word("both", 88)), "names": ["JOHN", "JONATHAN"]},
     "pullBack": {"atSec": r(word("dark", 90, end=True)) + 0.05, "scale": 0.95},
@@ -300,7 +300,7 @@ audio = [
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("words", 77, end=True) + 0.1, 2), "volumeDb": -24.0},  # wrapped in tissue (in the pause)
     {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": round(word("it", 85, end=True) + 0.25, 2), "volumeDb": -28.0},  # JOHN's tag lands (pause)
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(word("jonathan", 86, end=True) + 0.3, 2), "volumeDb": -28.0},
-    {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(word("stockings", 90, end=True) + 0.05, 2), "volumeDb": -27.0},  # MOTHER's tag lands (pause before "and a mother")  # JONATHAN's tag lands (pause)
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(word("stockings", 90, end=True) + 0.27, 2), "volumeDb": -27.0},  # MOTHER's tag lands (pause before "and a mother"); recheck v9: the tag settles 0.23 s after it starts, so the pop sits on the landing  # JONATHAN's tag lands (pause)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(39) - 0.08, 2), "volumeDb": -17.6},  # cherry block, after "So,"
     {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": 103.60, "volumeDb": -12.5},  # SAME stamps (paper taps), rotated
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": 104.03, "endSec": 104.48, "fadeOutSec": 0.1, "volumeDb": -18.0},

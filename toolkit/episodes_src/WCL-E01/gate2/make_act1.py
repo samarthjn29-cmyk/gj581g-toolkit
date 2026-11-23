@@ -240,7 +240,7 @@ audio += [
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(11) - 0.30, 2), "volumeDb": -14.6},  # slide to p.30: loud part 26.18-26.51, before "Tonight" (review v9)
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.25, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.30, 2), "volumeDb": -21.6},  # gate 3 v17: peak before "So" (was -0.15)  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.40, 2), "volumeDb": -21.6},  # recheck v18: 0.1 s earlier so its peak clears "So"; gate 3 v17: peak before "So" (was -0.15)  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
     {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.52, 2), "volumeDb": -19.6},  # the loupe setting on the pink, once the block has gone (review v11)
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -31.0},  # gate 3 v17: texture, ~20 dB under the voice (was -20.6)
     {"id": "SFX-003", "file": K + "mechanical/shutter_vintage.wav", "atSec": round(S(29) - 0.02, 2), "volumeDb": -24.0},  # TRN-017: the portrait lands under the lens (texture level)  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
