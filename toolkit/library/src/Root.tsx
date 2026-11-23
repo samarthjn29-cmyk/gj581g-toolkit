@@ -43,7 +43,7 @@ export const RemotionRoot: React.FC = () => {
               key={vid}
               id={`${vid}-${th.id}`}
               component={Preview}
-              durationInFrames={5 * FPS}
+              durationInFrames={Math.round((v.sec ?? 5) * FPS)}
               fps={FPS}
               width={W}
               height={H}

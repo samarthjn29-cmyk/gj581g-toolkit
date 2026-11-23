@@ -141,7 +141,44 @@ export const DEMO: Record<string, Record<string, unknown>> = {
 };
 
 // Extra previews of one component in other set-ups: composition id -> component name and props.
-export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown> }> = {
+export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string, unknown>; sec?: number }> = {
+  // 23 Nov 2026 layer tests (VIS-059 LayerStage; Sam: "Start working on building the layers.")
+  "LayerStage-Geranium": {
+    name: "LayerStage",
+    sec: 10,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "DAYLIGHT" },
+        { atSec: 5.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.5], clipStartSec: 7.6, change: "dissolve", sec: 1.4, light: "warm", label: "CANDLELIGHT" },
+      ],
+      carry: [
+        { srcId: "SRC-013", file: "public/assets/sources/geranium_stang_flowerhead_cutout.png", size: [1185, 769], at: [960, 470], w: 780, atSec: 0.3, enter: "rise",
+          moves: [{ atSec: 5.7, to: [1290, 430], w: 600, sec: 1.3 }],
+          states: [
+            { atSec: 0.3, color: null, label: "TO US: PINK" },
+            { atSec: 2.8, color: "#86B5E8", label: "TO DALTON, BY DAY: SKY-BLUE" },
+            { atSec: 6.8, color: "#C8402F", label: "BY CANDLE: RED" },
+          ],
+          caption: "REPORTED COLOURS · PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)" },
+      ],
+      camera: { pan: -70, push: 0.03 },
+    },
+  },
+  "LayerStage-Weather": {
+    name: "LayerStage",
+    sec: 10,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "THE SKY HE RECORDED" },
+        { atSec: 5.0, srcId: "SRC-033", kind: "image", size: [4000, 5313], focus: [0.496, 0.72], change: "pan", sec: 1.5, light: "none", label: "MAP · EMANUEL BOWEN · 1760" },
+      ],
+      carry: [
+        { srcId: "SRC-035", size: [1575, 2588], at: [960, 520], w: 400, atSec: 0.6, enter: "rise", moves: [{ atSec: 7.0, to: [1180, 470], w: 250, sec: 1.4 }],
+          caption: "METEOROLOGICAL OBSERVATIONS · 1793" },
+      ],
+      camera: { pan: -80, push: 0.02 },
+    },
+  },
   // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).
   "FootagePlate-Candle": {
     name: "FootagePlate",
@@ -452,6 +489,13 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
       { from: "a", to: "d", atSec: 2.6, dashed: true, label: "CLAIMED" },
     ],
     caption: "PREVIEW · SOURCE",
+  },
+  LayerStage: {
+    worlds: [
+      { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], light: "day", label: "PREVIEW · WORLD A" },
+      { atSec: 2.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.4], clipStartSec: 7.6, change: "dissolve", sec: 1.2, light: "warm", label: "PREVIEW · WORLD B" },
+    ],
+    carry: [{ srcId: "SRC-013", file: "public/assets/sources/geranium_stang_flowerhead_cutout.png", size: [1185, 769], at: [960, 480], w: 700, atSec: 0.3, states: [{ atSec: 0.3, color: null, label: "PREVIEW · STATE A" }, { atSec: 3.2, color: "#C8402F", label: "PREVIEW · STATE B" }] }],
   },
   ObjectEntrance: {
     __ground: { kind: "paper" },

@@ -262,5 +262,11 @@
     "beatType": 2,
     "energy": "Calm",
     "grid": false
+  },
+  "LayerStage": {
+    "assetId": "VIS-059",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
   }
 }

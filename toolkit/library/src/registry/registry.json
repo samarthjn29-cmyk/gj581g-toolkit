@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T08:57:40.656Z",
+ "generated": "2026-11-23T09:42:34.476Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1124,7 +1124,8 @@
    "folder": "11_Sources",
    "name": "Geranium_Stang",
    "paths": [
-    "public/assets/sources/geranium_stang.jpg"
+    "public/assets/sources/geranium_stang.jpg",
+    "public/assets/sources/geranium_stang_flowerhead_cutout.png"
    ],
    "status": "Active",
    "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 20 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
@@ -3087,6 +3088,55 @@
    "status": "Active",
    "use": "Best use: a stand-in pair of spectacles set down beside Dalton's portrait or paper (VIS-058, ILLUSTRATION tag). Limit: never presented as his own spectacles; max 2 shots per episode.",
    "maxBeats": 2,
+   "maxShare": null
+  },
+  "VIS-059": {
+   "id": "VIS-059",
+   "folder": "1_Visuals",
+   "name": "LayerStage",
+   "paths": [
+    "src/components/LayerStage.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: one thing seen in different worlds (the geranium by day and by candle); a thing carried from one place to the next (a page from the sky to the map); a weather sky behind the man who recorded it. Limit: 1-4 worlds, 1-3 carried things a shot; max 2 per act; registered pictures only; recolours are reported colours and say so.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-016": {
+   "id": "MOT-016",
+   "folder": "3_Motion",
+   "name": "ParallaxPlanes",
+   "paths": [
+    "src/components/LayerStage.tsx (camera)"
+   ],
+   "status": "Active",
+   "use": "Best use: every LayerStage shot. Limit: one move per shot; no plane faster than the near plane; the calm limits apply.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-018": {
+   "id": "TRN-018",
+   "folder": "4_Transitions",
+   "name": "WorldSwap",
+   "paths": [
+    "src/components/LayerStage.tsx (worlds change)"
+   ],
+   "status": "Active",
+   "use": "Best use: the same thing in a new light or a new place, on the word that names the change ('in candle-light'). Limit: at most one change every 2.5 s; counts as a scene change for the act's transition limits; max 3 per act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SRC-040": {
+   "id": "SRC-040",
+   "folder": "11_Sources",
+   "name": "SkyClouds_Mixkit51102",
+   "paths": [
+    "public/assets/sources/sky_clouds_mixkit51102.mp4",
+    "public/assets/sources/sky_clouds_mixkit51102_rev.mp4"
+   ],
+   "status": "Active",
+   "use": "Best use: a present-day daylight sky as a LayerStage world (the weather Dalton recorded, daylight for the geranium). Limit: never presented as period footage; max 3 shots per episode; counts towards the footage share (VIS-016).",
+   "maxBeats": 3,
    "maxShare": null
   }
  }
