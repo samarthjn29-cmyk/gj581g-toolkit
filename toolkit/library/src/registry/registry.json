@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T19:00:47.480Z",
+ "generated": "2026-11-23T19:31:34.954Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3246,8 +3246,68 @@
     "public/assets/sources/crossstreetchapel_1835.jpg"
    ],
    "status": "Planned",
-   "use": "Best use: where the Literary and Philosophical Society met when Dalton read his 1794 paper (WCL-E01 act 3 shot A, a world swap from Green's plan on 'Literary and Philosophical Society'), labelled CROSS STREET CHAPEL · DRAWN 1835. Limit: max 4 beats per episode; low resolution (800 px), so always hazed and never zoomed past 1.05; never said to show 1794 itself. Not for: the Society after 1799 (George Street), or Manchester in general.",
+   "use": "Best use: where the Literary and Philosophical Society met when Dalton read his 1794 paper (WCL-E01 act 3 shot A, a world swap from Green's plan on 'Literary and Philosophical Society'), labelled CROSS STREET CHAPEL · AS IN 1835 / THE SOCIETY MET IN A ROOM HERE UNTIL 1799 (fact-check 24 Nov 2026). Limit: max 4 beats per episode; low resolution (800 px), so always hazed and never zoomed past 1.05; never said to show 1794 itself. Not for: the Society after 1799 (George Street), or Manchester in general.",
    "maxBeats": 4,
+   "maxShare": null
+  },
+  "TXT-024": {
+   "id": "TXT-024",
+   "folder": "2_Text",
+   "name": "KeywordChips",
+   "paths": [
+    "src/components/KeywordChips.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: the one or two words a story turn hangs on ('in secret', 'washing dishes', 'the dream -> the dishes'), at a turn of the story. Limit: max 1 keyword panel per 15 s of an act and max 8 per act; only words that are spoken, never a new claim; never over a document's own highlighted text. Not for: every line, numbers that need a source tag, or quotes (TXT-025).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TXT-025": {
+   "id": "TXT-025",
+   "folder": "2_Text",
+   "name": "QuoteChips",
+   "paths": [
+    "src/components/QuoteChips.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: the one quote in a shot that must be kept (a person's own words), over the picture of the person or the page it is from. Limit: max 3 per act; verbatim only, from the fact-check; never over a highlighted page that already shows the words. Not for: narration, or paraphrase.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-060": {
+   "id": "VIS-060",
+   "folder": "1_Visuals",
+   "name": "StickerCutout",
+   "paths": [
+    "src/components/StickerCutout.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a real person or a real thing a line names, made to stand out on a collage panel. Limit: max 12 beats per act; real photos and period portraits only, credited; never animate a face; one sticker entrance at a time. Not for: drawings presented as photos, or anyone not named in the line.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-061": {
+   "id": "VIS-061",
+   "folder": "1_Visuals",
+   "name": "ObjectProp",
+   "paths": [
+    "src/components/ObjectProp.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a noun the narration says, shown literally (Within Motion's plates for 'washing dishes'). Limit: max 6 beats per act; each object only on the line that names it; period-right or tagged TODAY. Not for: decoration, or objects the line does not name.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-017": {
+   "id": "MAP-017",
+   "folder": "9_Maps",
+   "name": "MapScrapRoute",
+   "paths": [
+    "src/components/MapScrapRoute.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a journey or a single place said in the line (Kendal -> Manchester, the walk to the Society). Limit: max 3 per episode; period maps only, credited; the route is the reported one, never invented. Not for: exact distances without a source.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

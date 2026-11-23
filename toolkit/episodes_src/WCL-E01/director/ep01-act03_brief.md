@@ -269,3 +269,211 @@ I checked the 13-row map in `ep01-act03_plan.md` ("## Transitions") against this
 **Not used (agree):** TRN-003 PhotoToCard. Its move goes from a full frame into a slot, which is the wrong direction for row 2, where we go into the page. TRN-014 StaticBurst: no TV-era material, and act 3 is calm. TRN-016 FlashMontage: cold opens only.
 
 **This review changed earlier sections of this brief** to match: D's exit (draft), the p.43 card's entry, its highlight split and its a3-12 return (slide), C's entry (ink) and exit (slide), a3-13 (one close, no reopen), a3-14 (action, not lens), A2's and B's exits (canvas), and E's question position (vertically centred, not y 385).
+
+---
+
+## Added layer shots (24 Nov 2026)
+
+Written 24 Nov 2026, after Sam approved three more layered moments ("Try doing all 3"; VIS-059 is now max 4 per act). The narration is recorded, so times here are **act seconds** (take time + 2.4 s, from `gate1_act3/03_talk_final_words.json`), and beat numbers are the rows of `gate1_act3/act3_rows.json`. The builder turns them into shot-relative times (A starts at 2.40, S at 74.50, H at 183.82). The wording follows the coordinator's fact-check of 24 Nov: the chapel labels, Turner after Lonsdale, W. C. HENRY, no "the biographer", the prism's paper backdrop, and the album-cover warning.
+
+Pictures I looked at and measured: `crossstreetchapel_1835.jpg` (800x564), `prism_evies.jpg` (1920x1282), `dalton_turner1834.jpg` (996x1230, greyscale; the print itself, not the halftone or trace forms), and `henry1854_p25.jpg` (the wish lines, measured by ink profile). Image px are pixels of the named file. All other positions are frame px. World geometry: LayerStage's cover scale is s = max(1920/w, 1080/h) x 1.08 x zoom, so an image point (x, y) sits at (960 + (x - fx·w)·s, 540 + (y - fy·h)·s) before the camera. Frame positions given for carried things **include the camera** (near plane: 960 + (at + pan·prog - 960)·push).
+
+| Shot | Beats | Lines | Component | Transition in | Transition out |
+|---|---|---|---|---|---|
+| A_worldswap_chapel | 10-12 (inside A) | a3-03, first sentence | LayerStage A, second world | TRN-018 WorldSwap (dissolve) on "Literary" | TRN-015 into A2 (unchanged in kind) |
+| S_prism_world | 29-38 | a3-07 and a3-08's first sentence | LayerStage + VIS-014 x2 | TRN-004 canvas glide (down) from B | the act's one hard cut, on the hit at 102.10, into D |
+| H_wish_over_portrait | 69-72 | a3-14 | LayerStage | TRN-010 CutOnAction from the closing lid | TRN-011 paper band (up) into WHAT IS COLOUR? |
+
+### A_worldswap_chapel (inside shot A)
+
+**The idea:** the plan of the town gives way to the building in it where the Society met, and the paper rises in front of that building.
+
+| Field | What it says |
+|---|---|
+| Line | a3-03, first sentence: "Tonight (24.01), he stands up in front of the town's Literary (26.29) and Philosophical (26.89) Society (27.43) and reads (28.35) out a paper (28.95)." A ends at the match into A2 (beat 13, 29.70). |
+| Subject | 23.35-26.29: the plan, now cleared. From 26.29: the chapel, the building of the talk. From 28.95: the page. |
+| World and why | World 2 is SRC-044, Cross Street Chapel as it looked in 1835. **Same place, same night.** `why: "Same place, same night: in 1794 the Literary and Philosophical Society met in a room at Cross Street Chapel; this is that building (the 1737 rebuilding, unchanged until 1856), drawn as it looked in 1835."` The plan was the town. The chapel is the building in it. |
+| Period honesty | A period drawing, but of 1835, not 1794. The labels say so (coordinator wording): `CROSS STREET CHAPEL · AS IN 1835` and `THE SOCIETY MET IN A ROOM HERE UNTIL 1799`. No label says the drawing shows 1794. The 1794 dateline leaves as the chapel arrives, so 1794 and 1835 are never on screen together beside one picture. The date comes back on the page itself in A2 (READ OCT. 31ST, 1794, on "first paper"). |
+| Entry | TRN-018 `change: "dissolve"`, `sec 1.2`, from 26.29 to 27.49. Why a dissolve: going from a plan to the building in it is the same place seen closer, not a journey. A pan would claim a direction (the chapel lies north of this crop, and LayerStage pans only sideways). A wipe would read as a page change. The camera move carries on through the swap. It is near its end by then (far plane at -13.4 px and x1.0144), so the chapel barely moves. |
+| Path and landing | **Framing:** `zoom 1.0`, `focus [0.47, 0.5]`. Zoom 1.0 is the minimum: with the cover factor, that is already 2.59x of the 800 px file, so the register's 1.05 is a ceiling we stay under. With the far transform at the swap, the chapel sits as follows. Cornice: y 252. Door surround (pediment and columns): x 725-1000, y 523-934. Door: x 783-913, y 669-857. Lower-left window: x 483-601, y 652-776. Railings: y 732-918. Cart: x 990-1360, y 864-1100. Cloud: x 1140-1430, y 82-250. Chimney pot on the cornice: x 392-431, y 226-252. **Labels** are LabelSpecs, not the world label, because the house world-label spot (bottom-right) falls on the cart and the donkey. `CROSS STREET CHAPEL · AS IN 1835` at (120, 84), size 22, atSec 27.2, once the chapel is more than 80% in. `THE SOCIETY MET IN A ROOM HERE UNTIL 1799` at (120, 133), size 22, on "Society" (27.43). Both are left-aligned in the open sky (about x 120-520 and 120-771, bottoms about 125 and 174), about 50 px above the chimney pot and 75 px above the cornice. It is the corner the dateline used, so the place tag takes the date's place. **Page:** `w 500` (was 560). It rises on "paper" (28.95), `at [464, 1106]`. At its settle (camera -39.9 px, x1.0299) it sits at frame x 150-665, top 831, with its bottom off frame (1414). About 249 px of the page show: its top 43%, the title block (EXTRAORDINARY FACTS at about y 895-955). It covers the left railings, the pavement and the woman in the street (x 339-405, y 1000 and below). It covers none of the facade's door or windows: it is 60 px left of the door surround and 55 px below the lower-left window's sill. Why w 500: at 560 the page can only keep 60 px from the door if its left edge sits at x 89, cramped against the frame edge (rule 8). Its lead room faces right, towards the door. |
+| Scale | None. The page grows in A2: we go into it. |
+| Action | The dissolve, the two labels, then the page lands lifted with its shadow falling down and to the right. That agrees with the drawing, whose light comes from the left (the window reveals and the cart throw their shade to the right), and with the plan, the house convention and B. |
+| Exit | **Tags first:** both labels get `untilSec 29.25` (after "paper.") and are gone by about 29.7. **The page does not leave:** the TRN-015 focus match at 29.70 opens A2, now with `focus [408, 908]`, the page's title (was [560, 780]). |
+| Eye out | The page's title at (408, 908) → A2's first highlight, EXTRAORDINARY FACTS (about x 270-840, y 180-220). The match is a push from the title point (rule 10's second case), and the card's title is the same words. |
+| Sound | The swap is silent: it falls mid-sentence with no pause, and the bed carries it. SFX-016 `paper_move` at -24 dB on the page's settle (about 29.65, in the pause after "paper.") and SFX-024 for the match in the pause before "Its": both unchanged. |
+
+**LayerStage choices (world 2)**
+- `worlds[1]`: `{ atSec: <26.29>, srcId: "SRC-044", kind: "image", size: [800, 564], zoom: 1.0, focus: [0.47, 0.5], change: "dissolve", sec: 1.2, light: "paper"` (Builder 4; fall back to `"none"`)`, haze: 0.12, blur: 1.8, rackSec: <28.95>, lightFrom: "top-left", why: ... }`. It has no `label`: the two LabelSpecs do that job.
+- **World 1 (the plan) loses its `rackSec`.** The page no longer sits on the plan, so the plan stays sharp (haze 0.06) until it dissolves.
+- **Haze 0.12**, twice the plan's. The low-resolution drawing, enlarged 2.6x, reads as a softer, flatter far plane, and the haze hides its JPEG steps a little. There is no blur while the chapel is the subject ("Literary" to "paper"). The 1.8 px blur racks in with the page (rule 14). If the 200% still shows block steps, a static `blur: 0.8` with no rack is allowed: that removes the blocks and does not read as out of focus. A larger scan is wanted (see Needs registering).
+- **Focus:** at zoom 1.0 the file is limited by its width, so fx can only run from 0.463 to 0.537 and the building is centred whatever we pick. fx 0.47 puts the door just left of centre and keeps the left edge at -28 px (with the camera), off frame. fy 0.5 keeps a band of sky for the labels. fy 0.62 would leave only 16 px of sky and force the tag onto the cart and the donkey.
+- **Rule 4:** the world's subject is the facade: the door surround, the Venetian window and the four windows. The page stays low and to the left of them, and the labels stay in the sky. The cart, the woman and the donkey are street detail, and only the woman goes under the page.
+- **Rule 16:** the page's top edge (831) is horizontal, and so are the railings (732 and 918). It is 85+ px from both, so no edge of ours lines up with a line of the drawing. The page's right edge (665) is 60 px from the nearest vertical, the door surround's column (725).
+- **Rule 13:** far = the drawing (its hatching, sky and street); near = the page. There is no mid plane, as before.
+- **Rule 12:** one world change in the shot, with nothing carried during it. The page comes 2.66 s after the swap starts.
+- **Stillness:** 24.01 and 24.31 (un-wipes), 26.29 (swap), 27.2, 27.43, 28.95, 29.25. No gap is over 2 s.
+
+**Re-check of the earlier A choices**
+1. **The ring and labels un-wiping on "Tonight"** (24.01; NEW COLLEGE and the ring at 24.31): kept. They are gone by about 25.2, 1.1 s before the swap, so nothing we drew on the plan is still there when it dissolves. The ring is drawn inside the plan's plane (Builder 2) and would otherwise dissolve with it.
+2. **The dateline's `untilSec`:** moved from "title" (30.36) to **"Literary" (26.29)**. It un-wipes over about 26.45-26.95, together with the plan's own label (which un-wipes as the chapel reaches 40%), and it is gone 0.25 s before CROSS STREET CHAPEL lands in the same corner. Why: three dates (1794, 1835 and 1799) beside one picture are too many, and they invite reading the drawing as 1794. SRC-009's rule "always with a dateline tag" still holds while the plan is the picture. And the date returns on the page in A2.
+3. **The page landing:** moved from (560, 780) at w 560 to `at [464, 1106]` at w 500 (frame x 150-665, top 831), as set out above. Note that the old figures left out the camera: at 29.7 the near plane sits at -40 px and x1.03, so (560, 780) would actually have rendered at about (536, 787).
+4. **The camera** `{ pan: -40, push: 0.03 }`: kept. Its last few px carry towards the door.
+5. **The match into A2:** unchanged in kind (TRN-015, 0.65 s, SFX-024). Only `focus` follows the page, to [408, 908].
+
+**A2's blurred ground (beats 13-16) becomes the chapel:** `ground: { kind: "blur", srcId: "SRC-044", size: [800, 564], focus: [0.47, 0.5] }`. Why: the match blurs A's world as the card arrives. If the ground is the same chapel blurred (LOK-028: 38 px, brightness 0.42), the grey-white drawing simply goes soft behind the paper: a focus pull, with no second picture. The plan would bring the brown town back under the dissolve, a hidden second world change that would also read as going back. **Cost:** SRC-044 then takes 6 beats (11-16) against its limit of 4, which is Sam's decision: raise it to 6. If he does not, the order of fallbacks is: p.28 itself blurred (SRC-042, no extra beats, and it keeps LOK-028's "same source as the card in front"), then the approved plan ground (SRC-009, 14 of 16). Note that the chapel and the plan both break LOK-028's same-source rule, as the approved plan ground already did.
+
+**Beat rows (A)**
+
+| Beat | What changes |
+|---|---|
+| 10 | Notes: add "all gone by about 25.2, before the swap". |
+| 11 | Transition: TRN-001 in, plus **TRN-018 inside the beat at 26.29**. Source: SRC-009, **SRC-044**. New: "Yes: SRC-044 Planned → Active; TRN-018 1 of 3". Notes: "WorldSwap (TRN-018, dissolve 1.2 s) from the plan to Cross Street Chapel as in 1835 on 'Literary' (26.29); the dateline (untilSec 26.29) and the plan's label un-wipe with it; CROSS STREET CHAPEL · AS IN 1835 at (120, 84), size 22, at 27.2." |
+| 12 | Text: TXT-010 (TXT-011 drops). Source: **SRC-044**, SRC-042 (SRC-009 drops). Notes: "THE SOCIETY MET IN A ROOM HERE UNTIL 1799 at (120, 133) on 'Society'. Page (w 500) rises on 'paper' and lands lifted at frame x 150-665, top 831 (at [464, 1106]), its bottom off frame, clear of the door and the windows; blur racks in on the chapel (1.8 px); paper SFX-016 at -24 dB on its settle; both labels un-wipe at 29.25." |
+| 13 | Text: drop TXT-011. Source: SRC-042, **SRC-044** (was SRC-009). New: "SRC-044 limit raise 4 → 6 (A2's ground)". Notes: focus match `focus [408, 908]`; ground = the chapel blurred; delete "the dateline un-wipes on 'title'". |
+| 14-16 | Source: SRC-042, SRC-044. |
+
+### S_prism_world (beats 29-38)
+
+**The idea:** a prism today throws its colours on a paper backdrop, and the band others see and the band Dalton describes are laid in front of it. When the line turns from the prism to his words, the photo goes dim and soft. Before his explanation, it is gone.
+
+| Field | What it says |
+|---|---|
+| Line | a3-07: "He describes (74.74) the band of colours from a prism, too. A prism (78.23) is a triangular (78.97) piece of glass that throws (80.29) colours on a wall. The part that others (82.93) call red, he writes, looks to him 'little (85.69) more than a shade, or defect of light'. Almost (89.03) no light at all. Where others see six colours, he sees two (93.47), or at most three. Yellow (95.43) and blue (96.05). Or yellow, blue and purple (98.53)." a3-08, first sentence: "Then (100.17) he does what a scientist should." Shot 74.50-102.10. |
+| Subject | 74.5-82.9: the prism and its band (the world, then the top strip). From 82.93: Dalton's words (the lower track, the quote, the count). 101.37-102.10: the strips alone. |
+| World and why | SRC-043: a glass prism today, throwing overlapping patches of colour onto a paper backdrop. **Same idea:** the line explains what a prism is and what it does. `why: "Same idea: the line explains what a prism is ('a triangular piece of glass that throws colours'); a glass prism today doing it, behind the band others see and the band Dalton describes."` A generic photo is allowed here because the line is about that thing (rule 1). |
+| Period honesty | World label `PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH`, bottom-right, at about x 1132-1800 over the dark surface. Use `today: false`: the `today` key prints "TODAY · ...", and the register asks for PHOTO TODAY. The indefinite "A GLASS PRISM" and the modern look say it is nobody's own prism. No name sits near it. It is dimmed when his words begin (82.93) and gone (101.37) before his explanation and before act 4's Newton, who gets his own plates. **Coordinator's album-cover warning:** no white beam goes into the triangle and nothing fans out of it. The strips are horizontal bars that draw from x 210 at the left, never out of the prism. D's beam appears only after the photo has gone, on the canvas. |
+| Entry | TRN-004 canvas glide (down, pull 0.86) from B, unchanged. The photo arrives as the next card on the sheet, already in place (`startSec: -1`, so LayerStage's pIn fade does not run inside the glide). On arrival the frame holds only the photo and its tag, so the glide lands the eye on the prism (top centre). The track label `OTHERS · DALTON'S SIX` (210, 408), size 22, comes on "describes" (74.74) and brings the eye back to the strip's start (210, 518), where B left it (the pair at x 330). |
+| Path and landing | **Framing:** `zoom 1.1`, `focus [0.5, 0.642]` (s 1.188). The prism sits top centre: apex (853, 132), top-right corner (1085, 115) (10.6% headroom), front base corners (639, 519) and (1079, 519), back-bottom corner (1310, 501). The photo's blue patch lies behind the apex (y 60-230). The green-to-red patch lies round the base (x 170-1280, y 320-670), magenta on the right (x 1305-1600, y 490-610) and the lower-right patch at x 1125-1840, y 630-905. **The top strip** (VIS-014: x 210-1710, y 470-566) draws left to right on "triangular" (78.97, over 1.4 s) and is complete on "throws colours" (80.37), so the band is complete as it is "thrown". It passes over the prism's base: the base line (519) and the back corner (501) sit inside the strip, 30-50 px from both of its edges, so no edge of ours lies on a line of the prism (rule 16). From 78.23 to 78.97 the whole prism shows, on "A prism is a triangular". **The lower track** (y 598-694, an opaque panel while empty) comes on "others" (82.93), with `DALTON'S WORDS` (210, 714), size 22, under it. **The quote** `little more than a shade, or defect of light` (serif italic 40, x 210, y 790) types on "little" (85.69), with its source tag `DALTON · 1798 · P. 31` (210, 856, mono 20). The quote sits under the red end, beside it as the row asks. The red end fills dim on "Almost" (89.03). The quote un-wipes at 92.9, and the count `I see only two or at most three distinctions` types in the same place on "two" (93.47). The tag holds if the fact-check confirms the count is on p.31; otherwise the tag changes with the line. Then yellow on "Yellow" (95.43), blue on "blue" (96.05) and the darker blue on "purple" (98.53). All our text ends by y 890, and the world label sits at about y 980-1014. |
+| Scale | The push only. |
+| Action | Two world actions, each on the word that turns the line: the rack and dim on "others" (82.93), and the rack-out on "Then" (100.17). |
+| Exit | **Tags first:** the world label un-wipes from 100.17. The world then fades to the theme canvas over 1.2 s (to 101.37), its blur rising from 3 to 4 px. The strips, the track labels and the count hold. That leaves 0.73 s of strips alone on the canvas under the riser's peak, then the act's one hard cut, on the hit at 102.10, into D. |
+| Eye out | The strips' centre (960, 518) → the eye's centre (960, 540). The strip's left end → the beam's start at x 210. |
+| Sound | Nothing new. The glide stays silent under cue 2 (row 29), and the rack and the rack-out are silent. Cue 2 drops out after "purple.", the riser builds under beat 38, and the hit lands on the cut: all unchanged. |
+
+**Decision: the world racks out before the cut.** (1) The cut goes from canvas to canvas, so the match the act depends on (the strips' centre onto the eye's centre, the strip's left end onto the beam's start) reads as one drawing becoming another. Cut from a full-colour photo, the diagram's first frame would read as a new place. (2) The riser needs the frame to empty with it. Clearing the world under "Then he does what a scientist should" is the pull-back before the hit: the break before the impact, as in the Harris sound study. (3) A present-day photo stays out of his explanation and never shares a cut with DALTON'S GUESS. (4) Beat 38 is the one beat with no prism in its line (the register: not for a line with no prism).
+
+**LayerStage choices**
+- `worlds[0]`: `{ atSec: 0, srcId: "SRC-043", kind: "image", size: [1920, 1282], zoom: 1.1, focus: [0.5, 0.642], light: "none", haze: 0.12, dim: 0.15, blur: 3, rackSec: <82.93>, rackDim: 0.55, outSec: <100.17>, label: "PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH", why: ... }` (dim, rackDim and outSec: Builders S2, S3).
+- **Haze 0.12 and dim 0.15 from the start.** The patches overlap and glow, and the coordinator asked for the photo hazed. The static dim keeps the photo's colours quieter than the strip's hard bands, so the bands win (rule 2), while the prism stays sharp as the line describes it.
+- **The rack on "others" (82.93):** blur 0 → 3 px and dim 0.15 → 0.55, over 0.8 s. From here the subject is his words and his dim red. The photo's own red and orange patch sits right behind the lower track's red end, so it must be dark and grey by the time the red end fills (89.03), or the dim red will read as bright. This keeps rule 14: the world softens when the narration leaves it. For the same reason **the lower track must be an opaque panel while empty**, never transparent over the photo.
+- **Camera** `{ pan: 0, push: 0.03 }`: the far plane scales to 1.015 and does nothing else. No pan, because any pan would move the strips' plane (or leave it behind), and the strips must end exactly where D's eye opens. The strips keep VIS-014's own 0.02 drift, as already accepted for the D match.
+- **Planes (rule 13):** far = the photo, which has its own depth (the prism in front of the lit backdrop). Mid = the two strips and their labels. Near = the typed quote and count. Mid and near are one drawn layer (Builder S1), separated by placement, not motion, so the quote never slides off the red end it belongs to. Nothing of ours is blurred, graded or vignetted: the layer sits above the vignette.
+- **Overscan:** the bottom edge is at 1085 at the start (5 px, and it only grows with the push), the left at -180 and the right at 2100. Check the bottom edge on the arrival still (rule 15).
+- **Rule 4:** the prism's apex and both slanted faces stay visible all shot. The strip covers only its base, and only from about 79.4.
+- **Text clearance:** the OTHERS label (x 210-557, y 408-450) is 130 px left of the prism's left face at that height (x 689).
+- **Stillness:** 74.74, 78.97, 80.37, 82.93, 85.69, 89.03, 92.9, 93.47, 95.43, 96.05, 98.53, 100.17 and 102.10. The longest gap is 75.8-78.97 (3.2 s, after the glide), within the 3.5 s limit.
+- **Change to the a3-07 card line** (Plain cards, above): there is no 62 px headline title at y 250, because it would sit on the prism's left face. The strip names are mono track chips instead.
+
+**Beat rows (S):** in every row from 29 to 38, Visual becomes VIS-059, VIS-014 and Source becomes SRC-043. Motion gains MOT-016 (and MOT-013 on 36 and 38).
+
+| Beat | What changes in the notes |
+|---|---|
+| 29 | New: "Yes: SRC-043 Planned → Active, 10 of 10; LayerStage builder additions (drawn overlay plane, dim/rackDim, outSec); VIS-014 two-track mode". Notes: "Director S_prism_world. World = SRC-043, a glass prism today (zoom 1.1, focus [0.5, 0.642], haze 0.12, dim 0.15), label PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH bottom-right. The glide lands on the photo alone; OTHERS · DALTON'S SIX chip at (210, 408) on 'describes'. No headline title. Never a beam into the prism or a fan out of it." |
+| 30 | "The whole prism on 'A prism'; the top strip draws left to right from x 210 on 'triangular' (78.97, 1.4 s), over the prism's base." |
+| 31 | "Top strip complete on 'throws colours' (80.37)." |
+| 32 | "World racks on 'others' (82.93): blur 3 px, dim 0.55 over 0.8 s. Lower track (opaque, empty) appears, with the DALTON'S WORDS chip at (210, 714)." |
+| 33 | "Quote typed at (210, 790) on 'little', tag DALTON · 1798 · P. 31 at (210, 856), over the dimmed world." |
+| 34 | As now, plus "against the opaque track; the photo's red behind it is already dark". |
+| 35 | Unchanged. |
+| 36 | "Quote un-wipes at 92.9; the count types in its place on 'two'; tag held; one yellow on 'Yellow'." |
+| 37 | Unchanged. |
+| 38 | "World label un-wipes and the photo fades to the canvas from 'Then' (100.17-101.37, blur to 4 px); the strips alone under the riser's peak; hard cut at 102.10." |
+
+### H_wish_over_portrait (beats 69-72)
+
+**The idea:** the eye shuts, and the cut lands on his spectacles: on the man who asked. Then his biographer's two lines rise in front of him.
+
+| Field | What it says |
+|---|---|
+| Line | a3-14: "At (184.47) some point, he asks for exactly (186.15) that. For his eyes (188.39) to be examined after (189.41) he dies. His biographer (191.31) would call it his strongly (192.81) expressed wish." Beats 69-72, 183.82-195.02. |
+| Subject | 183.82-186.15: the man (his portrait, with his spectacles where the closing eye was). From 186.15: the two lines, then the highlights in reading order. |
+| World and why | SRC-004, `dalton_turner1834.jpg`. **Same person:** `why: "Same person: John Dalton, whose eyes his wish was about; his biographer's words about it are held up in front of him."` |
+| Period honesty | A period print (mezzotint by Charles Turner after James Lonsdale, 1834; this is not shown on screen, and the painting is never dated on screen). The tag `JOHN DALTON · 1834` is the world label (bottom-right), on from the first frame until the paper band covers it. The strip's tag is `W. C. HENRY · 1854 · P. 25`. No label says "biographer", let alone "the biographer". The "not, however, verified" line (page y about 1050-1100) and the "pale yellow" line (page y about 1310-1390) are both outside the strip's crop. |
+| Entry | TRN-010 cut on action from the closing lid (beat 68). **The action carries onto his spectacles, on the lens on the viewer's left** (image (417, 382), rim radius about 27 px). It lands at **(854, 516)**, 106 px left of and 30 px above the iris it replaces (960, 546). The portrait arrives 90 px high and settles down, so the lid's downward movement continues into the frame. Why the spectacles and not the eye: (a) the lens rim is a hard circle (r 57 frame px) answering the iris circle (r 112), a shape the eye can follow; his eye behind the glass is about 30 px across and soft at 2x, too small to match. (b) A closing eye cut onto his open eye reads as the same eye opening again, which is the opposite of the beat (the next words are about his death) and close to making his face act. Glass is an object, so nothing in his face seems to move. (c) It is the lens act 1's LensDive came back out onto (`out.to` (830, 525) there), so the episode has already made it the door to his eyes, and it lands within 30 px of the same screen spot. |
+| Path and landing | **Framing:** `zoom 1.0` (s 2.082), `focus [0.47, 0.32]`. The print is narrow, so at zoom 1.0 fx can only run from 0.463 to 0.537 and the head sits near centre: hair top at y 75 (6.9%), the viewer's-left lens at (854, 516), the other lens at (1031, 507), the nose at about (922, 616), the chin at about (933, 751), and the face (with the ear) across about x 776-1360. His white stock and shirt lie at x 1067-1318, y 643 to the bottom of the frame. He looks to the frame's left. **Strip** (`henry1854_p25_wish_line.png`, re-cut to 1850x170, see the asset fix below): `w 1440`. It rises (`enter: "rise"`, 140 px, 0.9 s) on "exactly" (186.15) and settles in the pause after "that." (187.05-188.05), `at [880, 872]`. At its settle it sits at frame x 151-1597, y 807-939. At the shot's end (camera -30 px, x1.02) it is at x 113-1582, y 811-946, with its text starting at x 129, inside the safe line. Its x-height is 23 px (B's page was 27). It sits 56 px below his chin. **Tag:** `W. C. HENRY · 1854 · P. 25`, a LabelSpec at x 160, y 746, size 22 (about x 160-540), on 187.05. It sits on the black ground left of his face (the face starts at x 776), 19 px above the strip. **Highlights** (on the carried strip, Builder H1), in the strip file's px: H1 `[710, 20, 1112, 52]` "carefully made after Dalton's death" on "after" (189.41); H2 `[598, 102, 822, 54]` "his strongly expressed wish" on "strongly" (192.81). In page px these are [795, 1144, 1112, 52] and [683, 1226, 822, 54], measured by ink profile. The old brief's box [732, 1225, 562, 50] started inside "his" and stopped inside "expressed". |
+| Scale | None. |
+| Action | The two highlights, and one rack: the world's blur goes from 0 to 1.5 px on "His biographer" (191.31). |
+| Exit | **Tags first:** the Henry tag gets `untilSec 194.45` (after "wish.") and is gone by about 195.0. The portrait's tag stays: the band rises from the bottom and covers that corner first, so the face is never on screen without its tag. Then TRN-011 paper band (dark, up) at 195.02, with SFX-024 (unchanged). |
+| Eye out | H2 (about (914, 906) at the end) → WHAT IS COLOUR? at x 120, about y 540: 22% across and 34% up. The rising band carries the eye up, as act 2's band did. |
+| Sound | Cue 4 enters in the pause after "two." (183.17-184.47), on the cut (unchanged). On the strip's settle, SFX-016 `paper_move` at -26 dB in the pause after "that." (about 187.1), **only if the episode's SFX-016 count has room** (max 10); otherwise silent. The highlights are silent, and the music is near-silent under the quote (beat 72). |
+
+**LayerStage choices**
+- `worlds[0]`: `{ atSec: 0, srcId: "SRC-004", file: "dalton_turner1834.jpg", kind: "image", size: [996, 1230], zoom: 1.0, focus: [0.47, 0.32], light: "none", haze: 0.10, blur: 1.5, rackSec: <191.31>, lightFrom: "top-left", label: "JOHN DALTON · 1834", why: ... }`.
+- `carry[0]`: `{ srcId: "SRC-007", file: "henry1854_p25_wish_line.png", size: [1850, 170], at: [880, 872], w: 1440, atSec: <186.15>, enter: "rise", rest: false, highlights: [H1, H2] }`.
+- `labels`: `[{ text: "W. C. HENRY · 1854 · P. 25", atSec: <187.05>, untilSec: <194.45>, x: 160, y: 746, size: 22 }]`.
+- `arrive: { dir: "down", px: 90, sec: 0.45 }` (Builder H2). The print has about 290 px of picture above the frame and 1190 px below it, so arriving inside the stage shows no bare edge. CutOnAction's own translate would show a 90 px band of canvas at the bottom during the settle.
+- **Camera** `{ pan: -30, push: 0.02 }`: calm. The strip drifts 30 px left, towards where the next shot's question stands (rule 6), and the far plane moves 10.5 px and 1%. **His face is never animated:** nothing moves inside the print, and there is no glint, no mask on the eye or lid, and no push aimed at the face (the push is about the frame centre, and only 1% on the far plane).
+- **lightFrom "top-left", read from the print:** the light falls on him from the upper left (his forehead and the left of his face are lit, and the shadow falls to the right of his nose). The strip's shadow falls down and to the right, onto the shirt and coat.
+- **light "none":** the world is a neutral grey print. Check the cream strip against it on the landing still (rule 17). If the warm paper jumps out, try `light: "paper"`, whose near grade lowers the strip's saturation.
+- **Haze 0.10** lifts the mezzotint's blacks a little, so the lifted paper separates from them. The rack comes on "His biographer": up to there the line is about him and his eyes, and the print stays sharp (rule 14). From there it is Henry's words.
+- **Rule 4:** the face (x 776-1360, y 75-751) is never covered. The strip is 56 px below the chin and the tag 236 px left of the face.
+- **Rule 16:** the strip's long edges are horizontal. The print's lines here are the lapels' diagonals and the stock's curves, so there is no joint. The strip does cross the white stock and shirt (x 1067-1318), light paper on a light shirt for 250 px, so the lifted shadow and the rim must separate it (check at 200%). Fallback: a hairline keyline round the strip (Builder H3).
+- **Rule 13:** far = the print (the mezzotint grain, the figure against the dark ground); near = the strip. There is no mid plane, as in A and B.
+- **Stillness:** cut 184.07 (settled 184.52), strip 186.15, tag 187.05, H1 189.41, rack 191.31, H2 192.81, tag out 194.45, band 195.02. The longest gap is 2.4 s. This is also why the strip rises later and does not come in with the cut: with the strip in from the cut, the first change after it would have been H1, 5.3 s later.
+
+**Asset fix (SRC-007's strip file):** the requested crop `[90, 1140, 2110, 135]` clips the descenders of line 2 (the g, y and p of "conformity", "strongly", "expressed" and "by"). It also clips the tops of line 1's ascenders (they start at y 1136), and it carries about 280 px of blank page on the right (the text ends at x 1921). **Re-cut it to `[85, 1124, 1850, 170]`** (y 1124-1294). The line above ("This theory was not, however, verified...") has descenders ending at about y 1112, and the line below ("medical attendant, Mr. Ransome. The vitreous humour was") has ascenders starting at about y 1304, so neither shows, and the "pale yellow" line is further down still. Check both edges at 200% for a stray serif.
+
+**Beat rows (H)**
+
+| Beat | What changes |
+|---|---|
+| 69 | Visual VIS-059 (was VIS-001). Motion MOT-016, MOT-013 (was MOT-003). Source SRC-004, SRC-007. New: "Yes: henry1854_p25_wish_line.png re-cut at [85, 1124, 1850, 170] (file of SRC-007); SRC-004 16 of 16; LayerStage builder additions (carried highlights, arrive)". Notes: "Calm. Director H_wish_over_portrait. TRN-010 cut on action, dir down, px 90 (the move is done by LayerStage arrive): the closing lid carries onto the viewer's-left lens of his spectacles in the 1834 mezzotint (SRC-004, zoom 1.0, focus [0.47, 0.32], haze 0.10), lens at (854, 516); tag JOHN DALTON · 1834 bottom-right from frame 0. Cue 4 in the same pause. The strip rises on 'exactly' (186.15), lifted, to frame x 151-1597, y 807-939, 56 px under his chin; tag W. C. HENRY · 1854 · P. 25 at (160, 746) on its settle. The 'not, however, verified' and 'pale yellow' lines never show. His face is never animated." (This replaces "the strip arrives moving down on 'At some point'" and "on the same page blurred".) |
+| 70 | Visual VIS-059, motion MOT-016. Notes: "H1 'carefully made after Dalton's death' (file box [710, 20, 1112, 52]) on 'after' (189.41)." |
+| 71 | Visual VIS-059, motion MOT-016. Notes: "The world racks to 1.5 px on 'His biographer' (191.31); no label for him (the tag names him)." |
+| 72 | Visual VIS-059, motion MOT-016, MOT-013. Notes: "H2 'his strongly expressed wish' (file box [598, 102, 822, 54]) on 'strongly' (192.81); the Henry tag un-wipes at 194.45; the portrait's tag stays until the band covers it." |
+| 73 | Unchanged, plus "the band covers the portrait's tag first". |
+
+### Transition review: rows these shots change
+- **Row 2 (A → A2):** `focus` [560, 780] → [408, 908]. A2's ground becomes the chapel (above).
+- **Row 5 (B → S):** the canvas glide now carries a LayerStage (photo) card. The parameters stay: down, pull 0.86, silent (row 29).
+- **Row 6 (S → D):** still the one hard cut, now canvas to canvas after S's rack-out.
+- **Row 11 (simple eye → H):** dir down, px 90 and the lid keyed 0.30 s before the shot's end are kept. The cut now lands on the portrait's lens (854, 516), and the strip comes in later, on "exactly".
+- **Row 12 (H → band):** the eye leaves from H2 at about (914, 906), and the band, rising, carries it to the question.
+- **New, inside A:** TRN-018 on "Literary". It counts as a scene change, which makes 14. TRN-015's 2 stay within 1 in 3.
+
+### Builder additions
+**LayerStage**
+- **S1 `overlay?: ReactNode`:** a drawn plane (a component), rendered above the vignette and below the world labels. The stage gives it no grade, blur, camera move or scale; it keeps its own drift. For S (VIS-014 x2 and the typed lines).
+- **S2 `worlds[].dim` and `worlds[].rackDim`** (0-0.6): `brightness(1-d) saturate(1-d)`. `rackDim` is the dim value reached on the rack curve (rackSec, 0.8 s). For S.
+- **S3 `worlds[].outSec`:** the world fades to the canvas over 1.2 s while its blur rises to 4 px, and its label un-wipes from outSec (MOT-013). For S.
+- **H1 `carry[].highlights: { box (carried file px), atSec }[]`:** the ArchivalScanCard sweep (accentSoft, multiply), drawn inside the carried thing under its light wash. For H.
+- **H2 `arrive?: { dir, px, sec }`:** every plane starts offset and settles (out-cubic), so a TRN-010 entry shows no bare edge. With it, CutOnAction needs a prop to leave `to` untranslated (for example `moveTo: false`). For H.
+- **H3 (fallback only) `carry[].keyline`:** a 1 px ink hairline at 25% round a cut strip, if the frame review finds the strip lost on his shirt.
+- **Header comment:** "max 2 per act" → "max 4 per act" (the register already says 4).
+- **Still pending from the first brief:** Builder 1 (the tag, with `untilSec`: A's dateline now leaves at 26.29), Builder 2 (rings inside world 1's plane only, so the ring belongs to the plan), Builder 4 (the "paper" light, now used by the chapel too).
+- **Noticed:** MidPlate ignores `push` (the near plane scales, the far plane scales by half, the mid plane not at all). No shot here uses `mid`. Fix it when one does.
+
+**Elsewhere**
+- **VIS-014 two-track mode**, which a3-07 needs whatever the world (check it is in the act build): a top track of six discrete bands drawn left to right from x 210 (red at the left); a lower track that is an opaque panel while empty and fills on cue (dim red, one yellow from strong to pale, blue, a darker blue); track names as mono chips (OTHERS · DALTON'S SIX above, DALTON'S WORDS below); and in this act no nm ticks and no 62 px title.
+- **CutOnAction:** the `moveTo: false` prop (see H2).
+- **Episode, A2's ground:** `{ kind: "blur", srcId: "SRC-044", size: [800, 564], focus: [0.47, 0.5] }`. No code change.
+
+### Counts (asset limits these shots use)
+
+| Asset | Limit | Use | Status |
+|---|---|---|---|
+| VIS-059 LayerStage | 4 per act | A, B, S, H = 4 | **At the limit.** C and E stay non-LayerStage. |
+| TRN-018 WorldSwap | 3 per act | 1 (A) | OK. It counts as a scene change (14 in the act). |
+| SRC-004 portrait | 16 per episode | 4 (beats 69-72) + 12 in acts 1-2 = 16 | **At the limit: none left for acts 4-7.** Act 6's examination will need another picture of him, or a raise. |
+| SRC-007 Henry p.25 | 6 per episode | 4 (69-72) | OK. 2 left for act 6. |
+| SRC-043 prism photo | 10 per episode | 10 (29-38) | **At the limit.** No other use in E01. |
+| SRC-044 chapel | 4 per episode | 2 (11-12); **6 with A2's ground** | **Over by 2 if A2 takes the chapel.** Sam: raise to 6, or A2 falls back (p.28 blurred, then the plan). |
+| SRC-009 plan | 16 per episode | 10 (2-11); 14 if A2 keeps the plan | OK. |
+| SRC-042 p.28 | 6 per episode | 5 (12-16) | OK, unchanged. |
+| TXT-011 dateline | 40 per episode | act 3: 9 (beats 3-11; was 11) | OK, 2 fewer. |
+| VIS-014 SpectrumStrip | 20 per episode | 10 (29-38) | OK, unchanged. |
+| LOK-028 BlurPlate | 3 shots per act; the card's own source | A2 only (the Henry strip's blurred-page ground is gone) | Count OK. The same-source rule is broken as it already was (flagged above). |
+| TRN-010 / TRN-011 / TRN-004 / TRN-015 | 3 per act / 14 per episode / 4 per act / 1 in 3 changes | 1 / 1 / 2 / 2 | OK, unchanged. |
+| SFX-016 paper | 10 per episode | +1, optional (H's settle) | Count the episode first. Silent if there is no room. |
+| VIS-001 ArchivalScanCard | 30% of runtime | 4 beats fewer (69-72) | OK. |
+
+### Needs registering
+- `henry1854_p25_wish_line.png`, re-cut at `[85, 1124, 1850, 170]` (a file of SRC-007).
+- SRC-043 and SRC-044, from Planned to Active (at the gate).
+- **Proposed, not added:** a larger scan of the 1835 Cross Street Chapel drawing (or of its plate in Shercliff, 1960). The 800 px file is enlarged 2.6x.
+- **Sam's decisions:** SRC-044 from 4 to 6 (A2's ground). Note also that SRC-004 is used up at 16.
+
+### Stills to request for the frame review
+- **A (chapel):** 25.2 (the plan clear: ring and labels gone). 26.29 (swap start; the dateline starting to un-wipe). 26.95 (the dateline and the plan's label gone, the chapel label not yet in: the corner clear). 27.6 (both chapel labels, at least 50 px above the chimney pot; the drawing at 200% for JPEG steps; the world's left edge). 29.4 (the page mid-rise). 29.65 (the page's settle: 60 px from the door surround and 55 px below the window, shadow down and right, no halo at 200%). 30.03 (match midpoint: the chapel soft behind the page). 30.35 (A2's first sharp frame on the chapel ground). Each A2 highlight landing.
+- **S (prism):** 75.1 (the OTHERS chip, 130 px from the prism's face). 75.8 (the glide landed: the whole prism, the tag, the world's bottom edge). 79.4 (the strip mid-draw at the prism's base). 80.5 (the strip complete: the base line and the back corner inside the strip, no edge lined up). 83.8 (rack end). 86.6 (the quote readable on the dimmed world). 89.8 (the dim red end against the opaque track, with the photo's red behind it dark). 94.0 (the count and tag in place). 96.4 and 99.2 (fills). 100.6 (the world label gone, the world mid-fade). 101.5 (only canvas behind the strips). 102.07 (last frame), side by side with D's 102.10 (centres and the x 210 line agree).
+- **H (portrait):** 184.0 (the lid moving in the old shot). 184.07 (the cut). 184.22 (the portrait arriving, no bare bottom edge). 184.6 (settled: the lens at about (854, 516) against the iris's (960, 546)). 186.6 (the strip rising). 187.1 (the strip settled: 56 px under the chin, the tag 19 px above it, the strip over his white stock at 200%, shadow down and right, any colour jump). 190.2 (H1). 192.2 (rack end). 193.6 (H2, plus a phone-size thumbnail of it: does the strip read?). 194.95 (the Henry tag gone, the portrait's tag on). 195.4 (band midpoint: the tag covered first).
