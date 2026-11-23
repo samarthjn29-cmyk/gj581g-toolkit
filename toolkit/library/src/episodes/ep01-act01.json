@@ -1,4 +1,6 @@
 {
+ "finish": {},
+ "motionBlur": true,
  "episodeId": "WCL-E01-act01",
  "themeId": "LOK-009",
  "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
@@ -442,6 +444,7 @@
     "MOT-001",
     "TRN-001",
     "MOT-003",
+    "TRN-015",
     "LOK-028"
    ],
    "props": {
@@ -497,7 +500,7 @@
      33.86
     ]
    ],
-   "transitionIn": "slide",
+   "transitionIn": "match",
    "ground": {
     "kind": "blur",
     "srcId": "SRC-029",
@@ -1046,7 +1049,7 @@
     "LOK-010",
     "MUS-007",
     "SRC-001",
-    "TRN-007"
+    "TRN-015"
    ],
    "props": {
     "pieces": [
@@ -1114,7 +1117,7 @@
      72.2
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "match"
   },
   {
    "id": "29+30+31",

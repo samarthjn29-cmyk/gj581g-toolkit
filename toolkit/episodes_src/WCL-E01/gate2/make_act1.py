@@ -46,7 +46,7 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
-    trn = {"push": "TRN-006", "slide": "TRN-007", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
+    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
     if trn and trn not in d["assets"]:
         d["assets"].append(trn)
     # Guard (independent review, 22 Nov 2026: word("own") matched "his own words" 44 s earlier, so a line
@@ -100,7 +100,7 @@ shot(B(11, 12, 13), "ArchivalScanCard", lambda r: {
                    {"box": [570, 645, 430, 56], "atSec": r(word("it", 30))}],  # lands on "astonishingly"
     "quote": "in candle-light, however, it was astonishingly changed",
     "source": "JOHN DALTON · 1798 · P. 30"},
-    transitionIn="slide")
+    transitionIn="match")
 # 14-19 the rows: John blue/red, friends pink/pink, his brother blue/red.
 shot(B(14, 15, 16, 17, 18, 19), "SwatchRows", lambda r: {
     "columns": ["BY DAY", "BY CANDLE"],
@@ -168,7 +168,7 @@ shot(B(27, 28), "DuotoneCollage", lambda r: {
         {"color": RED, "x": 1540, "y": 760, "w": 340, "h": 240, "rot": -3, "atSec": 1.1, "seed": 17}],
     "lines": [{"text": "An answer.", "atSec": r(word("answer"))}],
     "tag": {"at": "corner", "parts": [{"text": "ABOUT TWO YEARS LATER", "atSec": r(word("about", 67))}]}},
-    transitionIn="slide")  # v11: the next collage page slides in (TRN-007), in the pause after "atom."
+    transitionIn="match")  # v11: the next collage page slides in (TRN-007), in the pause after "atom."
 # 29-31 (Sam, 22 Nov 2026: "This particular eye frame ... feel very boring"; his idea, a magnifying glass into
 # the eyes, refined with the independent reviewer): VIS-032 LensDive. Dalton's real 1834 portrait; brackets
 # lock onto his own spectacle lens on "his own eyes"; in the silence after "dies." the camera pushes through the
@@ -277,7 +277,7 @@ for d in shots:
     for x in [GID[g["kind"]]] + [it["srcId"] for it in g.get("items", [])] + ([g["srcId"]] if "srcId" in g else []):
         if x not in d["assets"]:
             d["assets"].append(x)
-act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
+act = {"finish": {}, "motionBlur": True, "episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
        "voice": {"id": "NAR-001", "atSec": LEAD},
        "audio": audio, "beats": shots}

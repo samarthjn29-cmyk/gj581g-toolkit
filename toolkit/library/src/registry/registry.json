@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T05:49:46.411Z",
+ "generated": "2026-11-23T06:28:54.859Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2796,6 +2796,91 @@
    ],
    "status": "Active",
    "use": "Best use: an anecdote from a named, registered source about an object people disagreed on (Dalton's stockings, Lonsdale 1874 p. 99). Limit: 1 per episode, max 16 beats; the page and object are registered and captioned; colours are reported colours only (REPORTED COLOURS tag); quotes on screen only where the script quotes; no people drawn. Not for: a page to be read in full (ArchivalScanCard).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-030": {
+   "id": "LOK-030",
+   "folder": "5_Look_and_Color",
+   "name": "CinematicFinish",
+   "paths": [
+    "src/layers/CinematicFinish.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: every act of an episode, once, at the Episode level. Limit: the coded strengths are the ceiling (calm version); never stacked with a second finish or with LOK-022 GateWeave on the same shot.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-031": {
+   "id": "LOK-031",
+   "folder": "5_Look_and_Color",
+   "name": "MotionBlur",
+   "paths": [
+    "src/episodes/Episode.tsx (BlurWindow)",
+    "@remotion/motion-blur 4.0.545 CameraMotionBlur"
+   ],
+   "status": "Active",
+   "use": "Best use: slides, pushes and match cuts. Limit: transitions only (render cost); never on text-only shots that must read during the move; Episode prop motionBlur.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-015": {
+   "id": "TRN-015",
+   "folder": "4_Transitions",
+   "name": "FocusMatchCut",
+   "paths": [
+    "src/components/FocusMatchCut.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a scene change where the next picture relates to a point in the last one (a word to its page, a map to its town, a face to its portrait). Limit: max 1 in 3 scene changes in an act; never two in a row; 0.5-0.8 s; with its swish (SFX-024) in a pause.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-012": {
+   "id": "MAP-012",
+   "folder": "9_Maps",
+   "name": "TravellingMap",
+   "paths": [
+    "src/components/TravellingMap.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a story that moves between named places (Eaglesfield, Kendal, Manchester). Limit: max 2 per act; moves 1.2-2 s, only between spoken places; registered, dated maps only; place names from the narration or the map.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-052": {
+   "id": "VIS-052",
+   "folder": "1_Visuals",
+   "name": "FootageMontage",
+   "paths": [
+    "src/components/FootageMontage.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: the present-day world of a place or thing between graphics (Kendal today, the Lake District, a candle, a prism, an eye). Limit: max 2 montages per act; counts towards the footage share (VIS-016, 15% of an episode); never presented as period footage.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-013": {
+   "id": "MAP-013",
+   "folder": "9_Maps",
+   "name": "EarthFlyIn",
+   "paths": [
+    "(to build)"
+   ],
+   "status": "Planned",
+   "use": "Best use: an act or episode opening that lands on a place. Limit: 1 per episode; public-domain imagery only, credited.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-016": {
+   "id": "TRN-016",
+   "folder": "4_Transitions",
+   "name": "FlashMontage",
+   "paths": [
+    "(to build)"
+   ],
+   "status": "Planned",
+   "use": "Best use: an episode's cold open only. Limit: 1 per episode, max 8 s; real registered sources only; no flashes faster than 0.25 s.",
    "maxBeats": null,
    "maxShare": null
   }

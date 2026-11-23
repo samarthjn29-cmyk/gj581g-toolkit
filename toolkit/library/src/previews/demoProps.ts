@@ -417,6 +417,28 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     caption: "PREVIEW · OBJECT · SOURCE",
     illustration: [[0, 1.6], [2.7, 4.3]],
   },
+  TravellingMap: {
+    srcId: "SRC-033",
+    size: [4000, 5313],
+    cams: [
+      { atSec: 0, center: [900, 2800], zoom: 0.55, tilt: 0 },
+      { atSec: 1.0, center: [1900, 3700], zoom: 0.75, tilt: 32, turn: -4, sec: 1.6 },
+    ],
+    pins: [
+      { at: [858, 2795], label: "PLACE A", atSec: 0.2 },
+      { at: [1985, 3825], label: "PLACE B", sub: "PREVIEW · SUB", atSec: 2.0, accent: true },
+    ],
+    routes: [{ points: [[858, 2795], [1300, 3200], [1985, 3825]], atSec: 1.0, sec: 1.4, mark: true }],
+    caption: "PREVIEW · MAP · YEAR",
+  },
+  FootageMontage: {
+    clips: [
+      { srcId: "SRC-020", kind: "video", size: [1920, 1080], atSec: 0, label: "PREVIEW · CLIP A" },
+      { srcId: "SRC-011", file: "public/assets/sources/candle_lighting_mixkit3458.mp4", kind: "video", size: [1080, 1920], atSec: 1.6, clipStartSec: 4, label: "PREVIEW · CLIP B" },
+      { srcId: "SRC-013", kind: "image", size: [1920, 1280], atSec: 3.4, label: "PREVIEW · PHOTO C" },
+    ],
+    frame: "inset",
+  },
   StillsMontage: {
     stills: [
       { srcId: "SRC-001", imgSize: [1920, 2813], label: "STILL A · YEAR", atSec: 0.2 },

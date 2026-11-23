@@ -34,6 +34,8 @@ import { SourceWall } from "./SourceWall";
 import { BuildUpMap } from "./BuildUpMap";
 import { ObjectStory } from "./ObjectStory";
 import { SourcePageStory } from "./SourcePageStory";
+import { TravellingMap } from "./TravellingMap";
+import { FootageMontage } from "./FootageMontage";
 import { StillsMontage } from "./StillsMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
@@ -82,6 +84,8 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   BuildUpMap,
   ObjectStory,
   SourcePageStory,
+  TravellingMap,
+  FootageMontage,
   StillsMontage,
 };
 

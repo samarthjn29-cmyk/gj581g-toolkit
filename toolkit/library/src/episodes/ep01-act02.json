@@ -1,4 +1,6 @@
 {
+ "finish": {},
+ "motionBlur": true,
  "episodeId": "WCL-E01-act02",
  "themeId": "LOK-009",
  "runningHead": {
@@ -845,7 +847,8 @@
     "SFX-006",
     "MUS-007",
     "SRC-029",
-    "TRN-001"
+    "TRN-001",
+    "TRN-015"
    ],
    "props": {
     "srcId": "SRC-029",
@@ -964,7 +967,7 @@
      55.2
     ]
    ],
-   "transitionIn": "slide",
+   "transitionIn": "match",
    "ground": {
     "kind": "paper"
    }
@@ -2270,7 +2273,8 @@
     "SRC-004",
     "TXT-021",
     "TRN-001",
-    "SFX-027"
+    "SFX-027",
+    "TRN-015"
    ],
    "props": {
     "backdrop": {
@@ -2328,7 +2332,7 @@
      172.95
     ]
    ],
-   "transitionIn": "slide",
+   "transitionIn": "match",
    "ground": {
     "kind": "blur",
     "srcId": "SRC-004",

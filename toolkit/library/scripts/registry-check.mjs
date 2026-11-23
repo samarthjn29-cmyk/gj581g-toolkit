@@ -23,7 +23,7 @@ const direct = walk("src")
       .readFileSync(f, "utf8")
       .split("\n")
       .map((l, i) => [l, i])
-      .filter(([l]) => /staticFile\s*\(|https?:\/\//.test(l) && !/^\s*\/\//.test(l))
+      .filter(([l]) => /staticFile\s*\(|https?:\/\//.test(l.replace(/http:\/\/www\.w3\.org\/2000\/svg/g, "")) && !/^\s*\/\//.test(l)) // the SVG namespace is not a fetch
       .map(([l, i]) => `${f}:${i + 1}: ${l.trim()}`),
   );
 const COMPONENT_IDS = Object.fromEntries(

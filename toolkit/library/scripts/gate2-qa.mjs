@@ -58,6 +58,7 @@ beats.forEach((b, i) => {
   }
   if (b.transitionIn === "push" && !b.focus) crit.push(`${b.id}: push-through without a focus point`);
   if (b.transitionIn === "push" && p.transitionIn === "push") crit.push(`${p.id}->${b.id}: two push-throughs in a row (TRN-006 limit)`);
+  if (b.transitionIn === "match" && p.transitionIn === "match") crit.push(`${p.id}->${b.id}: two match cuts in a row (TRN-015 limit)`);
   // TRN-011/012/013 (22 Nov 2026): never the same designed wipe twice in a row; a colour block needs its data colour.
   if (["band", "block", "flash"].includes(b.transitionIn) && p.transitionIn === b.transitionIn) crit.push(`${p.id}->${b.id}: two ${b.transitionIn} transitions in a row`);
   if (b.transitionIn === "block" && !b.transition?.color) crit.push(`${b.id}: colour block without its data colour`);
@@ -73,6 +74,9 @@ for (const b of beats.filter((x) => x.component === "ArchivalScanCard")) {
   }
 }
 const frenzy = beats.filter((b) => b.component === "HeadlineMatchCut").length;
+const matches = beats.filter((b) => b.transitionIn === "match").length;
+const changes = beats.filter((b, i) => i > 0 && b.transitionIn && b.transitionIn !== "cut").length;
+if (matches * 3 > changes + 2) crit.push(`${matches} match cuts in ${changes} scene changes (TRN-015: max 1 in 3)`);
 if (frenzy > 1) warn.push(`HeadlineMatchCut used ${frenzy} times in one act (once a chapter at most)`);
 const remote = JSON.stringify(act).match(/https?:\/\/[^"]+/g) ?? [];
 checks.push(`Local paths: ${remote.length ? `${remote.length} remote URL(s)` : "all local"}`);

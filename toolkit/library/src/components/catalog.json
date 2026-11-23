@@ -208,5 +208,17 @@
     "beatType": 2,
     "energy": "Calm",
     "grid": false
+  },
+  "TravellingMap": {
+    "assetId": "MAP-012",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
+  },
+  "FootageMontage": {
+    "assetId": "VIS-052",
+    "beatType": 4,
+    "energy": "Peak",
+    "grid": false
   }
 }

@@ -52,7 +52,7 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
-    trn = {"push": "TRN-006", "slide": "TRN-007", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
+    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
     if trn and trn not in d["assets"]:
         d["assets"].append(trn)
     def walk(o, path=""):  # any cue before the shot starts is a wrong word match (act 1 review lesson)
@@ -142,7 +142,7 @@ shot(B(16, 17, 18, 19, 20, 21), "ArchivalScanCard", lambda r: {
     "callout": {"atSec": r(word("except")), "dim": 0.7},
     "quote": "except my brother who saw it in the same light as myself",
     "source": "JOHN DALTON · 1798 · P. 30"},
-    transitionIn="slide")
+    transitionIn="match")
 # 22-24 Lonsdale's 1874 life: the source of the stockings story, and how far after the fact it was written.
 shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-036", "imgSize": [785, 1158], "crop": [60, 100, 690, 1000], "side": "left",
@@ -259,7 +259,7 @@ shot(B(66, 67), "KineticLine", lambda r: {
     "lines": [{"text": "A scientist.", "atSec": r(word("dalton", 164)),
                "fill": {"word": "scientist", "atSec": r(word("scientist")), "color": "#00E0BE", "style": "mark", "onMark": "#2F2D2C"}},
               {"text": "NOT ENOUGH TO KNOW HE'S DIFFERENT", "atSec": r(word("enough")), "style": "mono", "type": True}]},
-    transitionIn="slide")  # gate 3: was a hard cut from the full-bleed geranium (slide: the shot before is already a push)  # TXT-021, the act's one typed line
+    transitionIn="match")  # gate 3: was a hard cut from the full-bleed geranium (slide: the shot before is already a push)  # TXT-021, the act's one typed line
 # 68 "He wants to know why.": the episode's BuildUpMap (VIS-048) for the first time. Acts 1 and 2 as pieces in their
 # chapter colours (LOK-026), the act 2 piece lit; a third piece, WHY?, arrives on "why". Seven places for the
 # seven acts, so later acts keep these positions. Words: act titles (on screen already) and the narration's own.
@@ -333,7 +333,7 @@ for d in shots:
     for x in [GID[g["kind"]]] + [it["srcId"] for it in g.get("items", [])] + ([g["srcId"]] if "srcId" in g else []):
         if x not in d["assets"]:
             d["assets"].append(x)
-act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
+act = {"finish": {}, "motionBlur": True, "episodeId": "WCL-E01-act02", "themeId": "LOK-009",
        "runningHead": {"text": "2 · THE ODD ONE OUT", "fromSec": round(S(2), 2)},  # TXT-013, on diagram and text shots only
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",
        "voice": {"id": "NAR-002", "atSec": LEAD, "tailSec": round(BEAT["E01-A2-68"][1] - LEAD - VOICE_SEC, 2)},

@@ -1,5 +1,8 @@
 import React from "react";
-import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
+import { CameraMotionBlur } from "@remotion/motion-blur";
+import { FocusMatchCut } from "../components/FocusMatchCut";
+import { CinematicFinish, type FinishSpec } from "../layers/CinematicFinish";
 import { COMPONENTS } from "../components";
 import { ThemeOverride, ThemeProvider } from "../themes";
 import { Ground, GROUND_IDS, type GroundSpec } from "../layers/Ground";
@@ -22,7 +25,7 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash";
+  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match";
   // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
   // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
   transition?: Record<string, unknown>;
@@ -37,7 +40,16 @@ export type Beat = {
 // `file` picks one of the row's registered files (an SFX kit's variants: rule V in scripts/sound-pass.py, never the
 // same file twice within 10 s).
 export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number; file?: string };
-export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number } };
+// finish: LOK-030 CinematicFinish over the whole act. motionBlur: LOK-031 on the moving transitions (slide, push,
+// match) for their first 0.8 s only, 6 samples at a 180-degree shutter (render cost stays inside those frames).
+export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number }; finish?: FinishSpec | false; motionBlur?: boolean };
+
+const MOVING = new Set(["slide", "push", "match"]);
+const BlurWindow: React.FC<{ frames: number; children: React.ReactNode }> = ({ frames, children }) => {
+  useAsset("LOK-031");
+  const frame = useCurrentFrame();
+  return frame < frames ? <CameraMotionBlur shutterAngle={180} samples={6}>{children}</CameraMotionBlur> : <>{children}</>;
+};
 
 const Sound: React.FC<{ cue: Cue }> = ({ cue }) => {
   const e = useAsset(cue.id);
@@ -82,7 +94,7 @@ const Shot: React.FC<{ beat: Beat; built?: boolean }> = ({ beat, built }) => {
   );
 };
 
-const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
+const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motionBlur }) => {
   const { fps } = useVideoConfig();
   useAssets(Array.from(new Set(beats.flatMap((b) => [...b.assets, COMPONENTS[b.component]?.assetId ?? b.component]))));
   return (
@@ -120,6 +132,7 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
         if (b.transitionIn === "band" && prev) body = <PaperBandWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "block" && prev) body = <ColourBlockWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "flash" && prev) body = <FlashFrame {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "match" && prev) body = <FocusMatchCut from={frozenPrev()} to={<Shot beat={b} built />} focus={b.focus ?? [960, 540]} />;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (
@@ -135,6 +148,7 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
             />
           );
         }
+        if (motionBlur && prev && b.transitionIn && MOVING.has(b.transitionIn)) body = <BlurWindow frames={Math.round(0.8 * fps)}>{body}</BlurWindow>;
         return (
           <Sequence key={b.id} from={from} durationInFrames={dur} name={`${b.id} ${b.component}`}>
             <OpticalStack grid={entry?.grid ?? true}>{body}</OpticalStack>
@@ -145,11 +159,17 @@ const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {
   );
 };
 
-export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [], runningHead }) => (
+export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [], runningHead, finish, motionBlur }) => (
   <RegistryModeProvider mode="render">
     <ThemeProvider themeId={themeId}>
       <AbsoluteFill>
-        <Beats beats={beats} />
+        {finish ? (
+          <CinematicFinish spec={finish}>
+            <Beats beats={beats} motionBlur={motionBlur} />
+          </CinematicFinish>
+        ) : (
+          <Beats beats={beats} motionBlur={motionBlur} />
+        )}
         {runningHead ? <RunningHead text={runningHead.text} fromSec={runningHead.fromSec} beats={beats} /> : null}
         {voice ? <Sound cue={voice} /> : null}
         {audio.map((c) => (
