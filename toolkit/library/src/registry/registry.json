@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T18:12:09.187Z",
+ "generated": "2026-11-23T18:39:57.009Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -895,8 +895,8 @@
     "public/assets/sources/dalton1798_p34.jpg"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's own list of colours on p. 34, including the laurel-leaf and red sealing-wax example (WCL-E01 act 3), with the lines highlighted as read and held at least 4 s. Limit: max 10 beats per episode. Not for: decoration; never a page alone on screen without its quote.",
-   "maxBeats": 10,
+   "use": "Best use: Dalton's own list of colours on p. 34, including the laurel-leaf and red sealing-wax example (WCL-E01 act 3), with the lines highlighted as read and held at least 4 s. Limit: max 12 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: decoration; never a page alone on screen without its quote.",
+   "maxBeats": 12,
    "maxShare": null
   },
   "SRC-003": {
@@ -1006,8 +1006,8 @@
     "src/components/SpectrumStrip.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a line that names wavelengths or the band of colours (Newton's spectrum, Dalton's six against his two). Limit: max 5 beats per episode. Not for: background colour or transitions.",
-   "maxBeats": 5,
+   "use": "Best use: a line that names wavelengths or the band of colours (Newton's spectrum, Dalton's six against his two). Limit: max 20 beats per episode (raised from 5, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: background colour or transitions.",
+   "maxBeats": 20,
    "maxShare": null
   },
   "PKG-005": {
@@ -1078,8 +1078,8 @@
     "public/assets/sources/manchester_plan_1794.jpg"
    ],
    "status": "Active",
-   "use": "Best use: the dateline for Dalton's 1794 talk in Manchester (WCL-E01 act 3: MANCHESTER · 31 OCT 1794), and other 1790s Manchester beats in the season. Limit: max 4 beats per episode; always with a dateline tag, never alone. Not for: Manchester after about 1800 (the map is 1794), or any other town.",
-   "maxBeats": 4,
+   "use": "Best use: the dateline for Dalton's 1794 talk in Manchester (WCL-E01 act 3: MANCHESTER · 31 OCT 1794), and other 1790s Manchester beats in the season. Limit: max 16 beats per episode (raised from 4, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); always with a dateline tag, never alone. Not for: Manchester after about 1800 (the map is 1794), or any other town.",
+   "maxBeats": 16,
    "maxShare": null
   },
   "SRC-010": {
@@ -1141,8 +1141,8 @@
     "public/assets/sources/laurel_runicearth_leaf_cutout.png"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's laurel-leaf example (1798 p. 34) beside the red sealing-wax (SRC-015), WCL-E01 act 3, and the act 5 return (sunlight on the geranium and a laurel leaf). Limit: max 3 beats per episode. Not for: generic leaves or greenery.",
-   "maxBeats": 3,
+   "use": "Best use: Dalton's laurel-leaf example (1798 p. 34) beside the red sealing-wax (SRC-015), WCL-E01 act 3, and the act 5 return (sunlight on the geranium and a laurel leaf). Limit: max 14 beats per episode (raised from 3, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: generic leaves or greenery.",
+   "maxBeats": 14,
    "maxShare": null
   },
   "SRC-015": {
@@ -1154,8 +1154,8 @@
     "public/assets/sources/sealingwax_petrik_cutout.png"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's red sealing-wax example (1798 p. 34) beside the laurel leaf (SRC-014), WCL-E01 act 3. Limit: max 3 beats per episode; shown cropped to the seal, no writing. Not for: letters, post or seals in general.",
-   "maxBeats": 3,
+   "use": "Best use: Dalton's red sealing-wax example (1798 p. 34) beside the laurel leaf (SRC-014), WCL-E01 act 3. Limit: max 10 beats per episode (raised from 3, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); shown cropped to the seal, no writing. Not for: letters, post or seals in general.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SRC-016": {
@@ -1409,8 +1409,8 @@
     "src/components/EyeDiagram.tsx"
    ],
    "status": "Active",
-   "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 10 beats per episode. Not for: lines about light or the brain with no eye in them.",
-   "maxBeats": 10,
+   "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 30 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: lines about light or the brain with no eye in them.",
+   "maxBeats": 30,
    "maxShare": null
   },
   "VIS-020": {
@@ -1433,8 +1433,8 @@
     "src/components/DatelineTag.tsx"
    ],
    "status": "Active",
-   "use": "Best use: the first time a new place or date opens a scene. Limit: max 24 beats per episode (raised from 12, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: every line with a year in it.",
-   "maxBeats": 24,
+   "use": "Best use: the first time a new place or date opens a scene. Limit: max 40 beats per episode (raised from 24, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026; from 12 at act 2 Gate 1). Not for: every line with a year in it.",
+   "maxBeats": 40,
    "maxShare": null
   },
   "SFX-013": {
@@ -1469,8 +1469,8 @@
     "public/assets/sources/dalton1798_p30.jpg"
    ],
    "status": "Active",
-   "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 10 beats per episode. Not for: decoration.",
-   "maxBeats": 10,
+   "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 13 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: decoration.",
+   "maxBeats": 13,
    "maxShare": null
   },
   "NAR-001": {
@@ -1493,8 +1493,8 @@
     "src/layers/RayParticles.ts"
    ],
    "status": "Active",
-   "use": "Best use: only where light physically travels: through Newton's shutter hole, the prism split, the second prism, a lens bringing rays back together, light entering the eye and reaching the back. Limit: max 6 beats per episode; max 5% of runtime; 40 dots on screen at most. Not for: decoration, data or money flows, or any line with no light in it.",
-   "maxBeats": 6,
+   "use": "Best use: only where light physically travels: through Newton's shutter hole, the prism split, the second prism, a lens bringing rays back together, light entering the eye and reaching the back. Limit: max 20 beats per episode (raised from 6, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); max 5% of runtime; 40 dots on screen at most. Not for: decoration, data or money flows, or any line with no light in it.",
+   "maxBeats": 20,
    "maxShare": 5
   },
   "LOK-014": {
@@ -2122,8 +2122,8 @@
     "public/sfx/kit/whoosh/low_whoosh_v3.wav"
    ],
    "status": "Active",
-   "use": "Best use: the hero sound of a camera move or something emerging (a push-in, a slide cut, a dive into a lens), starting 0.1-0.2 s before the move; rotate v1/v2/v3. Limit: max 8 beats per episode, one per shot; sits in a pause or 20 dB under the voice. Not for: every cut, text or arrows appearing.",
-   "maxBeats": 8,
+   "use": "Best use: the hero sound of a camera move or something emerging (a push-in, a slide cut, a dive into a lens), starting 0.1-0.2 s before the move; rotate v1/v2/v3. Limit: max 12 beats per episode (raised from 8, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026), one per shot; sits in a pause or 20 dB under the voice. Not for: every cut, text or arrows appearing.",
+   "maxBeats": 12,
    "maxShare": null
   },
   "SFX-021": {
@@ -2225,7 +2225,7 @@
     "public/sfx/kit/mechanical/sub_impact_v2.wav"
    ],
    "status": "Active",
-   "use": "Best use: the act's one impact: right after a 0.3-0.6 s music break (MUS-010), or a hard cut into a new idea; in a pause. Limit: max 2 per episode, never two in one act. Not for: under a spoken number (SFX-015/005).",
+   "use": "Best use: the act's one impact: right after a 0.3-0.6 s music break (MUS-010), or a hard cut into a new idea; in a pause. Limit: max 3 per episode (raised from 2, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026), never two in one act. Not for: under a spoken number (SFX-015/005).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2381,8 +2381,8 @@
     "public/assets/sources/quaker_advices_plainness.jpg"
    ],
    "status": "Active",
-   "use": "Best use: the Quakers' plainness, in Dalton's words about his family (act 2, beats 6-7). Limit: max 4 beats per episode; quote only the lines on the page. Not for: a general picture of Quakers.",
-   "maxBeats": 4,
+   "use": "Best use: the Quakers' plainness, in Dalton's words about his family (act 2, beats 6-7). Limit: max 5 beats per episode (raised from 4, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); quote only the lines on the page. Not for: a general picture of Quakers.",
+   "maxBeats": 5,
    "maxShare": null
   },
   "SRC-035": {
@@ -2393,8 +2393,8 @@
     "public/assets/sources/dalton1793_meteorological_title.jpg"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's habit of writing everything down (act 2, beats 8-9). Limit: max 4 beats per episode. Not for: standing in for the 57-year weather diary (that is a separate handwritten journal).",
-   "maxBeats": 4,
+   "use": "Best use: Dalton's habit of writing everything down (act 2, beats 8-9). Limit: max 5 beats per episode (raised from 4, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: standing in for the 57-year weather diary (that is a separate handwritten journal).",
+   "maxBeats": 5,
    "maxShare": null
   },
   "SRC-036": {
