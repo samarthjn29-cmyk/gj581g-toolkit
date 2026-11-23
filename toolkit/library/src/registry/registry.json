@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T20:40:38.751Z",
+ "generated": "2026-11-23T20:51:11.403Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3160,9 +3160,10 @@
    "folder": "11_Sources",
    "name": "Dalton1798_p28",
    "paths": [
-    "public/assets/sources/dalton1798_p28.jpg"
+    "public/assets/sources/dalton1798_p28.jpg",
+    "public/assets/sources/dalton1798_p28_page.png"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the start of Dalton's talk (WCL-E01 act 3 shot A): the title and 'READ OCT. 31st, 1794.' highlighted as said, rising onto Green's 1794 plan of Manchester. Limit: max 6 beats per episode. Not for: decoration; never alone on screen without the highlighted line.",
    "maxBeats": 6,
    "maxShare": null

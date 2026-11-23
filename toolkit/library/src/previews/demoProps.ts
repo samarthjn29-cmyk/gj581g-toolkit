@@ -229,7 +229,7 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
       carry: [
         { srcId: "SRC-045", size: [960, 1015], at: [440, 560], w: 520, atSec: 1.5, enter: "rise", tilt: -4, torn: true, untilSec: 4.6, exit: "sink",
           route: { from: [411, 346], to: [602, 894], atSec: 1.7, drawSec: 0.8, circleSec: 2.5, chips: [{ text: "KENDAL", at: [190, 300] }, { text: "MANCHESTER", at: [300, 940] }], source: "KITCHIN · LAURIE & WHITTLE · 1794" } },
-        { srcId: "SRC-042", size: [1669, 1890], at: [464, 1106], w: 500, atSec: 8.0, enter: "rise" },
+        { srcId: "SRC-042", file: "public/assets/sources/dalton1798_p28_page.png", size: [1661, 1890], at: [464, 1106], w: 500, atSec: 8.0, enter: "rise" },
       ],
       labels: [
         { text: "AGE 28", atSec: 3.0, untilSec: 5.0, x: 1280, y: 490, size: 26, align: "center" },
