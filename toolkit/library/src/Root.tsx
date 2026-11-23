@@ -68,7 +68,7 @@ export const RemotionRoot: React.FC = () => {
             height={H}
             defaultProps={{ themeId: th.id, registryMode: "render" as const }}
           />
-          {([["PaperBandWipe", "band"], ["PaperBandWipe-dark", "band-dark"], ["ColourBlockWipe", "block"], ["FlashFrame", "flash"]] as [string, TransitionKind][]).map(([id, kind]) => (
+          {([["PaperBandWipe", "band"], ["PaperBandWipe-dark", "band-dark"], ["ColourBlockWipe", "block"], ["FlashFrame", "flash"], ["LensSettle", "lens"]] as [string, TransitionKind][]).map(([id, kind]) => (
             <Composition
               key={id}
               id={`${id}-${th.id}`}

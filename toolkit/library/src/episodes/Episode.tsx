@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { CameraMotionBlur } from "@remotion/motion-blur";
 import { FocusMatchCut } from "../components/FocusMatchCut";
+import { LensSettle } from "../components/LensSettle";
 import { CinematicFinish, type FinishSpec } from "../layers/CinematicFinish";
 import { COMPONENTS } from "../components";
 import { ThemeOverride, ThemeProvider } from "../themes";
@@ -25,7 +26,7 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match";
+  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match" | "lens"; // lens = TRN-017 LensSettle (a cut that settles through a lens)
   // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
   // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
   transition?: Record<string, unknown>;
@@ -104,7 +105,7 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         const dur = sec(b.end, fps) - from;
         const prev = beats[i - 1];
         const entry = COMPONENTS[b.component];
-        const cut = i > 0 && (!b.transitionIn || b.transitionIn === "cut");
+        const cut = i > 0 && (!b.transitionIn || b.transitionIn === "cut" || b.transitionIn === "lens");
         let body: React.ReactNode = <Shot beat={b} built={cut} />;
         if (b.transitionIn === "slide" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
@@ -133,6 +134,7 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         if (b.transitionIn === "block" && prev) body = <ColourBlockWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "flash" && prev) body = <FlashFrame {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "match" && prev) body = <FocusMatchCut from={frozenPrev()} to={<Shot beat={b} built />} focus={b.focus ?? [960, 540]} />;
+        if (b.transitionIn === "lens" && prev) body = <LensSettle {...o}><Shot beat={b} built /></LensSettle>;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (

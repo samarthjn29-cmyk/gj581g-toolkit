@@ -220,5 +220,17 @@
     "beatType": 4,
     "energy": "Peak",
     "grid": false
+  },
+  "EvidenceChain": {
+    "assetId": "VIS-053",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
+  },
+  "WhatWeKnow": {
+    "assetId": "VIS-054",
+    "beatType": 1,
+    "energy": "Calm",
+    "grid": false
   }
 }

@@ -46,7 +46,7 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
-    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
+    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013", "lens": "TRN-017"}.get(d.get("transitionIn", ""))
     if trn and trn not in d["assets"]:
         d["assets"].append(trn)
     # Guard (independent review, 22 Nov 2026: word("own") matched "his own words" 44 s earlier, so a line
@@ -187,7 +187,8 @@ shot(B(29, 30, 31), "LensDive", lambda r: {**LENS,
               {"text": "EXAMINED AFTER HE DIES · 1844", "atSec": r(word("examined", 75)), "untilSec": r(word("dies", 75, end=True)), "row": 2, "style": "mono"},
               {"text": "His idea will fail the test.", "atSec": r(word("idea", 78)), "row": 0}],
     "labels": [{"text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID", "atSec": r(word("dies", 75, end=True)) + 1.0, "untilSec": r(word("fail", 79))},
-               {"text": "1844 · THE FLUID: CLEAR", "atSec": r(word("fail", 79)) + 0.6}]})
+               {"text": "1844 · THE FLUID: CLEAR", "atSec": r(word("fail", 79)) + 0.6}]},
+    transitionIn="lens")  # v17 (maps and cinematics study, 23 Nov 2026): TRN-017, the real portrait settles through a lens
 # 32-33 the counter: 0 -> 151 YEARS, locks on "years".
 shot(B(32, 33), "YearCounter", lambda r: {
     "to": 151, "unit": "YEARS", "countFromSec": r(word("wait")), "lockSec": r(word("years", 85))})
@@ -240,7 +241,8 @@ audio += [
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -21.6},  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
     {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.52, 2), "volumeDb": -19.6},  # the loupe setting on the pink, once the block has gone (review v11)
-    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
+    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},
+    {"id": "SFX-003", "file": K + "mechanical/shutter_vintage.wav", "atSec": round(S(29) - 0.02, 2), "volumeDb": -24.0},  # TRN-017: the portrait lands under the lens (texture level)  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(25) + 2.15, 2), "volumeDb": -21.4},  # Plate 4 laid on the collage
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "endSec": round(S(27) + 1.5, 2), "fadeOutSec": 0.15, "volumeDb": -18.5},  # the two colour scraps, stopped when they have landed (review v9)
     {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": round(S(35) - 0.35, 2), "endSec": round(S(37) + 0.3, 2),

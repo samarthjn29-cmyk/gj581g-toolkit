@@ -422,14 +422,45 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     size: [4000, 5313],
     cams: [
       { atSec: 0, center: [900, 2800], zoom: 0.55, tilt: 0 },
-      { atSec: 1.0, center: [1900, 3700], zoom: 0.75, tilt: 32, turn: -4, sec: 1.6 },
+      { atSec: 1.0, center: [1500, 3300], zoom: 0.72, tilt: 32, turn: -5, sec: 1.6 },
     ],
+    lag: 0.3,
+    holdTilt: 3,
+    dof: { focusY: 600 },
     pins: [
-      { at: [858, 2795], label: "PLACE A", atSec: 0.2 },
-      { at: [1985, 3825], label: "PLACE B", sub: "PREVIEW · SUB", atSec: 2.0, accent: true },
+      { at: [858, 2795], label: "PLACE A", atSec: 0.2, drop: true },
+      { at: [1985, 3825], label: "PLACE B", sub: "PREVIEW · SUB", atSec: 2.0, accent: true, drop: true },
+      { at: [1250, 3050], label: "REGION", atSec: 1.4, flat: true },
     ],
     routes: [{ points: [[858, 2795], [1300, 3200], [1985, 3825]], atSec: 1.0, sec: 1.4, mark: true }],
+    regions: [
+      { points: [[620, 2520], [1320, 2460], [1520, 2980], [1140, 3320], [660, 3120]], atSec: 0.6, sec: 1.0, mode: "wipe", edge: true, ragged: true, front: { points: [[620, 2520], [1520, 2400], [1800, 3000], [1400, 3420], [660, 3120]], atSec: 2.4, sec: 2 } },
+    ],
+    sheet: { srcId: "SRC-001", at: [1700, 2700, 520, 762], atSec: 2.6, lift: 50, label: "PREVIEW · SHEET" },
     caption: "PREVIEW · MAP · YEAR",
+  },
+  EvidenceChain: {
+    nodes: [
+      { id: "a", at: [420, 520], atSec: 0.2, label: "PERSON A", sub: "PREVIEW", srcId: "SRC-004", focus: [0.5, 0.3] },
+      { id: "b", at: [960, 360], atSec: 0.9, label: "A PAPER", icon: "page" },
+      { id: "c", at: [1500, 520], atSec: 1.6, label: "A SOCIETY", icon: "bank" },
+      { id: "d", at: [960, 760], atSec: 2.3, label: "AN EYE", icon: "jar", accent: true },
+    ],
+    links: [
+      { from: "a", to: "b", atSec: 0.6, label: "WROTE" },
+      { from: "b", to: "c", atSec: 1.3, token: { text: "LETTER", atSec: 2.0, sec: 1.2 } },
+      { from: "a", to: "d", atSec: 2.6, dashed: true, label: "CLAIMED" },
+    ],
+    caption: "PREVIEW · SOURCE",
+  },
+  WhatWeKnow: {
+    lines: [
+      { text: "Preview line one", tickAtSec: 1.0 },
+      { text: "Preview line two" },
+      { text: "A line that is wrong", strikeAtSec: 3.4 },
+      { text: "The new line, written", atSec: 1.6 },
+    ],
+    beside: { srcId: "SRC-004", imgSize: [996, 1230], focus: [0.5, 0.3], label: "PREVIEW · PORTRAIT" },
   },
   FootageMontage: {
     clips: [

@@ -52,7 +52,7 @@ def shot(beats, component, props, **kw):
          "component": component, "assets": ids(beats), "props": p,
          "beatTimes": [[b, BEAT[b][0], BEAT[b][1]] for b in beats]}
     d.update(kw)
-    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013"}.get(d.get("transitionIn", ""))
+    trn = {"push": "TRN-006", "slide": "TRN-007", "match": "TRN-015", "band": "TRN-011", "block": "TRN-012", "flash": "TRN-013", "lens": "TRN-017"}.get(d.get("transitionIn", ""))
     if trn and trn not in d["assets"]:
         d["assets"].append(trn)
     def walk(o, path=""):  # any cue before the shot starts is a wrong word match (act 1 review lesson)
@@ -112,14 +112,19 @@ shot(B(10, 11), "KineticLine", lambda r: {
               {"text": "TO THE EVENING BEFORE HE DIED · 1844", "atSec": r(word("every")), "style": "mono"}],
     "notebook": {"atSec": 0.1, "rowsFromSec": 0.6, "rowsToSec": r(word("day", 24, end=True))},
     "tag": {"at": "corner", "parts": [{"text": "ILLUSTRATION", "atSec": 0.1}]}})
-# 12-13 back to the map: the route from Eaglesfield to Kendal draws on, rings on Kendal, the map tilts back.
-shot(B(12, 13), "PeriodMapPlate", lambda r: {
-    "srcId": "SRC-033", "size": MAP, "source": MAPSRC,
-    "views": [{"atSec": 0, "crop": [100, 2450, 2900, 1631]}],
-    "pins": [{"id": "eag", "x": EAG[0], "y": EAG[1], "atSec": 0.1},
-             {"id": "ken", "x": KEN[0], "y": KEN[1], "atSec": r(word("teaching")) + 1.2}],
-    "rings": [{"pin": "ken", "atSec": r(word("kendal", 26)), "pulses": 2}],
-    "route": {"from": "eag", "to": "ken", "atSec": r(word("teaching")), "drawSec": 1.3, "tilt": {"atSec": r(word("district")), "deg": 6}},
+# 12-13 back to the map (v7, 23 Nov 2026, MAP-012 TravellingMap v2 from the maps study): the camera leaves
+# Eaglesfield as he is named teaching, follows the route as it draws and tilts the map back towards Kendal, the
+# turn trailing the move (an orbit); Kendal's pin lands on its word (MOT-012) and only a band round it stays sharp
+# (LOK-032). Same corner tag and line as before.
+shot(B(12, 13), "TravellingMap", lambda r: {
+    "srcId": "SRC-033", "size": MAP, "caption": MAPSRC,
+    "cams": [{"atSec": 0, "center": [1050, 2920], "zoom": 0.86},
+             {"atSec": r(word("teaching")), "center": [1480, 3330], "zoom": 0.7, "tilt": 24, "turn": -4, "sec": 1.8},
+             {"atSec": r(word("district")), "center": [1940, 3700], "zoom": 0.84, "tilt": 32, "turn": -6, "sec": 1.6}],
+    "lag": 0.25, "holdTilt": 2, "dof": {"focusY": 610, "band": 230},
+    "pins": [{"at": list(EAG), "atSec": 0.1},
+             {"at": list(KEN), "atSec": r(word("kendal", 26)), "drop": True, "accent": True}],
+    "routes": [{"points": [list(EAG), [1380, 3330], list(KEN)], "atSec": r(word("teaching")), "sec": 1.3}],
     "labels": [{"text": "IN KENDAL FROM AGE 15", "atSec": r(word("15")) - 0.9, "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 26))}, {"text": "WESTMORLAND", "atSec": r(word("market"))}]}},
     transitionIn="band", transition={"dir": "up", "tone": "paper"})

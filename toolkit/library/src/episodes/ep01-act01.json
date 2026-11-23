@@ -90,6 +90,12 @@
    "volumeDb": -20.6
   },
   {
+   "id": "SFX-003",
+   "file": "public/sfx/kit/mechanical/shutter_vintage.wav",
+   "atSec": 72.18,
+   "volumeDb": -24.0
+  },
+  {
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/paper_move.wav",
    "atSec": 64.75,
@@ -1139,7 +1145,8 @@
     "LOK-010",
     "MUS-007",
     "SRC-004",
-    "SFX-001"
+    "SFX-001",
+    "TRN-017"
    ],
    "props": {
     "srcId": "SRC-004",
@@ -1256,7 +1263,8 @@
      78.0,
      81.4
     ]
-   ]
+   ],
+   "transitionIn": "lens"
   },
   {
    "id": "32+33",

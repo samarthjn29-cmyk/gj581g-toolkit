@@ -9,7 +9,7 @@ import fs from "node:fs";
 
 const NATIVE = {
   FootagePlate: "photo", LensDive: "photo", HalftoneMoire: "photo", ParallaxCutout: "photo", ReportedColour: "photo",
-  PeriodMapPlate: "map", DuotoneCollage: "collage", SourceWall: "collage", BuildUpMap: "paper",
+  PeriodMapPlate: "map", TravellingMap: "map", FootageMontage: "photo", DuotoneCollage: "collage", SourceWall: "collage", BuildUpMap: "paper",
 };
 const TITLES = new Set(["ChapterSlate", "SeriesTitleCard", "EpisodeCard"]);
 let failed = false;

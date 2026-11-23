@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T06:28:54.859Z",
+ "generated": "2026-11-23T07:15:28.872Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2881,6 +2881,90 @@
    ],
    "status": "Planned",
    "use": "Best use: an episode's cold open only. Limit: 1 per episode, max 8 s; real registered sources only; no flashes faster than 0.25 s.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-017": {
+   "id": "TRN-017",
+   "folder": "4_Transitions",
+   "name": "LensSettle",
+   "paths": [
+    "src/components/LensSettle.tsx (Episode transitionIn 'lens')"
+   ],
+   "status": "Planned",
+   "use": "Best use: a cut to a real picture (a scan, a portrait, a photo, a page). Limit: at most 1 in 4 scene changes in an act, never two in a row; never onto a text card or chart; blur <= 16 px.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-012": {
+   "id": "MOT-012",
+   "folder": "3_Motion",
+   "name": "PinDrop",
+   "paths": [
+    "src/components/TravellingMap.tsx (pin drop)"
+   ],
+   "status": "Planned",
+   "use": "Best use: the one place a line names (Kendal on 'Kendal'). Limit: on TravellingMap pins only; max 3 drops a shot; on the place's word.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-032": {
+   "id": "LOK-032",
+   "folder": "5_Look_and_Color",
+   "name": "MapDepthOfField",
+   "paths": [
+    "src/components/TravellingMap.tsx (dof)"
+   ],
+   "status": "Planned",
+   "use": "Best use: a TravellingMap tilted back 20-40 degrees, so the far map goes soft and the eye stays on the place. Limit: TravellingMap only; blur <= 8 px; no effect on a flat map.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-014": {
+   "id": "MAP-014",
+   "folder": "9_Maps",
+   "name": "MapRegion",
+   "paths": [
+    "src/components/TravellingMap.tsx (regions)"
+   ],
+   "status": "Planned",
+   "use": "Best use: a county, a country, a spreading idea or a moving front the narration names. Limit: max 3 regions a shot; draw-on 0.6-1.6 s; shapes traced from the registered map or a registered boundary, never guessed; a moving front only for a change the narration states.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-015": {
+   "id": "MAP-015",
+   "folder": "9_Maps",
+   "name": "MapOverlaySheet",
+   "paths": [
+    "src/components/TravellingMap.tsx (sheet)"
+   ],
+   "status": "Planned",
+   "use": "Best use: an old map over the modern one (or a document over the place it concerns). Limit: one sheet a shot; registered sources only, with their date; placed by matched landmarks, never stretched to fit.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-053": {
+   "id": "VIS-053",
+   "folder": "1_Visuals",
+   "name": "EvidenceChain",
+   "paths": [
+    "src/components/EvidenceChain.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a chain of evidence or of hands (a paper read to a society, an eye kept in a jar, a test 150 years later). Limit: max 2 per act; portraits are real registered photos only; a dashed link is said as uncertain in the narration.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-054": {
+   "id": "VIS-054",
+   "folder": "1_Visuals",
+   "name": "WhatWeKnow",
+   "paths": [
+    "src/components/WhatWeKnow.tsx"
+   ],
+   "status": "Planned",
+   "use": "Best use: a mystery or case told in steps (what Dalton knew, what the eye showed). Limit: up to 6 lines, one new line per return, max 4 returns an act; every line a fact the narration says in the same words or fewer; a struck line is said to be wrong.",
    "maxBeats": null,
    "maxShare": null
   }
