@@ -50,6 +50,12 @@
    "volumeDb": -29.0
   },
   {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 28.36,
+   "volumeDb": -24.0
+  },
+  {
    "id": "SFX-020",
    "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
    "atSec": 32.15,
@@ -83,8 +89,10 @@
   {
    "id": "SFX-021",
    "file": "public/sfx/kit/whoosh/cloth_slide.wav",
-   "atSec": 69.52,
-   "volumeDb": -22.0
+   "atSec": 68.85,
+   "endSec": 70.35,
+   "fadeOutSec": 0.1,
+   "volumeDb": -26.0
   },
   {
    "id": "SFX-016",
@@ -103,6 +111,12 @@
    "file": "public/sfx/kit/tactile/pages_move.wav",
    "atSec": 87.93,
    "volumeDb": -28.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 94.57,
+   "volumeDb": -27.0
   },
   {
    "id": "SFX-024",
@@ -662,7 +676,7 @@
      {
       "atSec": 0,
       "center": [
-       1050,
+       1360,
        2920
       ],
       "zoom": 0.86
@@ -673,7 +687,7 @@
        1480,
        3330
       ],
-      "zoom": 0.7,
+      "zoom": 0.8,
       "tilt": 24,
       "turn": -4,
       "sec": 1.8
@@ -681,10 +695,10 @@
      {
       "atSec": 3.79,
       "center": [
-       1940,
-       3700
+       1860,
+       3500
       ],
-      "zoom": 0.84,
+      "zoom": 0.76,
       "tilt": 32,
       "turn": -6,
       "sec": 1.6
@@ -709,7 +723,7 @@
        1985,
        3825
       ],
-      "atSec": 1.61,
+      "atSec": 1.39,
       "drop": true,
       "accent": true
      }
@@ -1492,13 +1506,13 @@
       "colorName": "DARK",
       "atSec": 23.47,
       "x": 1190,
-      "y": 885
+      "y": 860
      },
      {
       "name": "MOTHER",
       "color": "#B3262E",
       "colorName": "RED",
-      "atSec": 30.98,
+      "atSec": 30.39,
       "x": 1520,
       "y": 830,
       "hard": true
@@ -2247,6 +2261,7 @@
      {
       "text": "RED · HIS WORDS",
       "atSec": 2.75,
+      "untilSec": 5.75,
       "x": 1240,
       "y": 760,
       "accent": true
@@ -2254,6 +2269,7 @@
      {
       "text": "ALMOST NOBODY ELSE SEES IT",
       "atSec": 3.95,
+      "untilSec": 5.9,
       "x": 960,
       "y": 860,
       "align": "center"

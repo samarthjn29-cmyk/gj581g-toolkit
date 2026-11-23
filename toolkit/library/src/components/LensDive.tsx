@@ -5,6 +5,7 @@ import { useAssets, useSource } from "../registry";
 import { reveal, rise, sec, SLOW_OUT } from "../motion";
 import { cropToBox, type Rect } from "../layers/CropImage";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
+import { Label } from "../layers/Label";
 
 // VIS-032 LensDive (Sam, 22 Nov 2026: "a pair of eyes ... a magnifying glass to look into the eyes and the
 // camera goes straight into the magnifying glass and transition to the next scene"; refined with the
@@ -171,31 +172,15 @@ export const LensDive: React.FC<LensDiveProps> = ({
             })
           : null}
       </svg>
-      {/* chips on the stage circle */}
+      {/* chips on the stage circle: the shared Label layer (MOT-013 un-wipe exit; reviewer 23 Nov 2026: these faded).
+          A chip leaves before the circle shrinks out (a tag leaves before its object). */}
       {labels.map((l) => {
-        const p = reveal(frame, fps, l.atSec, t.motion.enterSec);
-        const u = l.untilSec !== undefined ? 1 - interpolate(frame, [sec(l.untilSec, fps), sec(l.untilSec + 0.4, fps)], [0, 1], ease) : 1;
+        const until = l.untilSec ?? (out ? out.atSec - 0.2 : undefined); // un-wipes as the circle starts to shrink
         return (
-          <div
+          <Label
             key={l.text}
-            style={{
-              position: "absolute",
-              left: cx + (l.dx ?? 0),
-              top: cy + cr + 30 + (l.dy ?? 0),
-              transform: "translateX(-50%)",
-              padding: "10px 16px",
-              background: t.colors.chip,
-              color: t.colors.ink,
-              fontFamily: t.fonts.mono,
-              fontSize: 32,
-              letterSpacing: 3,
-              whiteSpace: "nowrap",
-              borderRadius: 4,
-              opacity: p * u * (1 - pO),
-            }}
-          >
-            {l.text}
-          </div>
+            spec={{ text: l.text, atSec: l.atSec, untilSec: until, x: stage[0] + (l.dx ?? 0), y: stage[1] + stageR + 30 + (l.dy ?? 0), align: "center", size: 32 }}
+          />
         );
       })}
       {/* the spoken words, left */}

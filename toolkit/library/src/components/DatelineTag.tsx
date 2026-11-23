@@ -32,7 +32,11 @@ export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", 
   }
   const x = low.x + (corner.x - low.x) * m;
   const y = low.y + (corner.y - low.y) * m;
-  const shown = parts.filter((p) => nowSec >= p.atSec && (p.untilSec === undefined || nowSec < p.untilSec));
+  // A part wipes in and un-wipes out by its width (MOT-013), so the tag's width eases and a centred tag never jumps
+  // (gate 3 review of WCL-E01 act 1 v17: "· NORTH OF ENGLAND" vanished in one frame and the tag jumped 245 px).
+  const vis = (p: DatelineTagProps["parts"][number]) =>
+    reveal(frame, fps, p.atSec, 0.6) * (p.untilSec !== undefined ? exit(frame, fps, p.untilSec, 0.6) : 1);
+  const shown = parts.filter((p) => nowSec >= p.atSec && vis(p) > 0);
   return (
     <div
       style={{
@@ -53,11 +57,21 @@ export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", 
       }}
     >
       {shown.map((p, i) => {
-        const pp = reveal(frame, fps, p.atSec, 0.6);
+        const text = `${i > 0 ? "  ·  " : ""}${p.text}`;
+        const v = i === 0 && p.untilSec === undefined ? 1 : vis(p);
         return (
-          <span key={p.text} style={{ opacity: i === 0 ? 1 : pp }}>
-            {i > 0 ? "  ·  " : ""}
-            {p.text}
+          <span
+            key={p.text}
+            style={{
+              display: "inline-block",
+              verticalAlign: "bottom",
+              whiteSpace: "pre",
+              overflow: "hidden",
+              maxWidth: v >= 1 ? undefined : `calc(${v.toFixed(4)} * ${text.length} * (1ch + 4px))`,
+              opacity: Math.min(1, v * 2.5),
+            }}
+          >
+            {text}
           </span>
         );
       })}

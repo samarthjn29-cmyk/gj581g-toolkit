@@ -177,17 +177,18 @@ shot(B(27, 28), "DuotoneCollage", lambda r: {
 # shrinks into the "0" of the counter.
 LENS = {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [24, 180, 700, 394], "lens": {"x": 420, "y": 377, "r": 33}}
 SCRAPS = [{"color": RED, "x": -105, "y": 0, "w": 190, "h": 250, "rot": -4}, {"color": SKY, "x": 105, "y": 6, "w": 190, "h": 250, "rot": 3}]
-shot(B(29, 30, 31), "LensDive", lambda r: {**LENS,
+shot(B(29, 30, 31), "LensDive", lambda r: {**LENS, "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0}]},  # gate 3 v17: the portrait never alone
     "bracketsAtSec": r(word("own", 74)),
     "push": {"atSec": r(word("dies", 75, end=True)) + 0.05, "sec": 1.1, "to": [1250, 500], "r": 330},
-    "inside": {"scraps": SCRAPS, "tint": {"color": BLUE_HUMOUR, "opacity": 0.75}, "clearAtSec": r(word("fail", 79))},
+    "inside": {"scraps": SCRAPS, "tint": {"color": BLUE_HUMOUR, "opacity": 0.75}, "clearAtSec": r(word("fail", 79)) + 0.04},
     "out": {"atSec": r(BEAT["E01-A1-31"][1]) - 0.55, "sec": 0.5, "to": [830, 525], "r": 70},
     "lines": [{"text": "Tested", "atSec": r(word("tested", 72)), "untilSec": r(word("dies", 75, end=True)), "row": 0},
               {"text": "His own eyes", "atSec": r(word("own", 74)), "untilSec": r(word("dies", 75, end=True)), "row": 1},
               {"text": "EXAMINED AFTER HE DIES · 1844", "atSec": r(word("examined", 75)), "untilSec": r(word("dies", 75, end=True)), "row": 2, "style": "mono"},
               {"text": "His idea will fail the test.", "atSec": r(word("idea", 78)), "row": 0}],
-    "labels": [{"text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID", "atSec": r(word("dies", 75, end=True)) + 1.0, "untilSec": r(word("fail", 79))},
-               {"text": "1844 · THE FLUID: CLEAR", "atSec": r(word("fail", 79)) + 0.6}]},
+    # gate 3 review of v17: HIS GUESS leaves on "will", the fluid clears and 1844 arrives on "fail" (readable ~1 s)
+    "labels": [{"text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID", "atSec": r(word("dies", 75, end=True)) + 1.0, "untilSec": r(word("fail", 79)) - 0.56},
+               {"text": "1844 · THE FLUID: CLEAR", "atSec": r(word("fail", 79)) + 0.04}]},
     transitionIn="lens")  # v17 (maps and cinematics study, 23 Nov 2026): TRN-017, the real portrait settles through a lens
 # 32-33 the counter: 0 -> 151 YEARS, locks on "years".
 shot(B(32, 33), "YearCounter", lambda r: {
@@ -208,7 +209,7 @@ shot(B(35, 36), "PerspectiveGrid", lambda r: {
     transitionIn="band", transition={"dir": "up", "tone": "dark"})  # v11: TRN-011 dark, into Newton's dark room
 # 37 the pay-off (VIS-032): the same lens of his, locked from the cut; on "open" the ring opens out to fill
 # the frame (clear, red is red), into the title card.
-shot(B(37), "LensDive", lambda r: {**LENS,
+shot(B(37), "LensDive", lambda r: {**LENS, "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0}]},
     "bracketsAtSec": -1,
     "inside": {"scraps": SCRAPS},
     "open": {"atSec": r(word("open", 95)), "sec": 1.4},
@@ -239,9 +240,9 @@ audio += [
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(11) - 0.30, 2), "volumeDb": -14.6},  # slide to p.30: loud part 26.18-26.51, before "Tonight" (review v9)
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(11) - 0.25, 2), "volumeDb": -21.4},  # the page under the whoosh (stack)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": round(S(14) - 0.31, 2), "volumeDb": -14.6},  # slide to the swatches, J-cut in the pause
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.15, 2), "volumeDb": -21.6},  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(20) - 0.30, 2), "volumeDb": -21.6},  # gate 3 v17: peak before "So" (was -0.15)  # push into the petal: texture, like the same move at 11.1 (its loud part meets "So"; review v9)
     {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": round(S(22) + 0.52, 2), "volumeDb": -19.6},  # the loupe setting on the pink, once the block has gone (review v11)
-    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -20.6},
+    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(S(24) - 0.1, 2), "volumeDb": -31.0},  # gate 3 v17: texture, ~20 dB under the voice (was -20.6)
     {"id": "SFX-003", "file": K + "mechanical/shutter_vintage.wav", "atSec": round(S(29) - 0.02, 2), "volumeDb": -24.0},  # TRN-017: the portrait lands under the lens (texture level)  # Dalton's face drawn on (TRN-008); runs under "but", so texture level
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(S(25) + 2.15, 2), "volumeDb": -21.4},  # Plate 4 laid on the collage
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(27) + 0.7, 2), "endSec": round(S(27) + 1.5, 2), "fadeOutSec": 0.15, "volumeDb": -18.5},  # the two colour scraps, stopped when they have landed (review v9)

@@ -118,12 +118,12 @@ shot(B(10, 11), "KineticLine", lambda r: {
 # (LOK-032). Same corner tag and line as before.
 shot(B(12, 13), "TravellingMap", lambda r: {
     "srcId": "SRC-033", "size": MAP, "caption": MAPSRC,
-    "cams": [{"atSec": 0, "center": [1050, 2920], "zoom": 0.86},
-             {"atSec": r(word("teaching")), "center": [1480, 3330], "zoom": 0.7, "tilt": 24, "turn": -4, "sec": 1.8},
-             {"atSec": r(word("district")), "center": [1940, 3700], "zoom": 0.84, "tilt": 32, "turn": -6, "sec": 1.6}],
+    "cams": [{"atSec": 0, "center": [1360, 2920], "zoom": 0.86},  # gate 3 review of v8: the map's left edge showed at [1050, ...]
+             {"atSec": r(word("teaching")), "center": [1480, 3330], "zoom": 0.8, "tilt": 24, "turn": -4, "sec": 1.8},  # 0.7 showed a dark wedge top-left
+             {"atSec": r(word("district")), "center": [1860, 3500], "zoom": 0.76, "tilt": 32, "turn": -6, "sec": 1.6}],  # the route's start clear of the tag
     "lag": 0.25, "holdTilt": 2, "dof": {"focusY": 610, "band": 230},
     "pins": [{"at": list(EAG), "atSec": 0.1},
-             {"at": list(KEN), "atSec": r(word("kendal", 26)), "drop": True, "accent": True}],
+             {"at": list(KEN), "atSec": r(word("kendal", 26, end=True)) - 0.56, "drop": True, "accent": True}],  # lands ~0.04 s after "Kendal," (SFX-026 pop)
     "routes": [{"points": [list(EAG), [1380, 3330], list(KEN)], "atSec": r(word("teaching")), "sec": 1.3}],
     "labels": [{"text": "IN KENDAL FROM AGE 15", "atSec": r(word("15")) - 0.9, "x": 960, "y": 860, "align": "center", "accent": True}],
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 26))}, {"text": "WESTMORLAND", "atSec": r(word("market"))}]}},
@@ -194,8 +194,8 @@ shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
                {"atSec": r(word("bluish", 75)), "untilSec": r(word("words", 77, end=True)) + 0.05, "kicker": "IN THE BIOGRAPHER'S WORDS", "text": "'a bluish dark drab'", "by": "LONSDALE, 1874 · P. 99", "byAtSec": r(word("biographer's", 77))},
                {"atSec": r(word("opens", 79)) + 0.3, "untilSec": r(word("john", 84)) + 0.45, "kicker": "HIS MOTHER · AS THE STORY TELLS IT", "text": "'as red as a cherry'", "textAtSec": r(word("cherry", 82))}],
     "tags": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("it", 85, end=True)) + 0.02, "x": 1140, "y": 800},
-             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1190, "y": 885},
-             {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("mother", 95)), "x": 1520, "y": 830, "hard": True}],
+             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1190, "y": 860},  # gate 3 v8: was touching the caption
+             {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("stockings", 90, end=True)) + 0.05, "x": 1520, "y": 830, "hard": True}],  # gate 3 v8: lands in the pause, with a pop
     "tie": {"atSec": r(word("both", 88)), "names": ["JOHN", "JONATHAN"]},
     "pullBack": {"atSec": r(word("dark", 90, end=True)) + 0.05, "scale": 0.95},
     "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10\nRIJKSMUSEUM · A PERIOD PAIR, RECOLOURED"},
@@ -253,8 +253,8 @@ shot(B(63, 64, 65), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [0, 1], "flicker": {"seed": 2}, "analogue": {"seed": 2},  # LOK-016, LOK-015: the evening, by the candle
     "warmthSec": [r(word("changes", 160)), r(word("changes", 160)) + 1.2],
     "labels": [{"text": "SKY-BLUE · HIS WORDS", "atSec": 0.4, "untilSec": 2.3, "x": 1240, "y": 820},
-               {"text": "RED · HIS WORDS", "atSec": 2.75, "x": 1240, "y": 760, "accent": True},
-               {"text": "ALMOST NOBODY ELSE SEES IT", "atSec": r(word("almost")), "x": 960, "y": 860, "align": "center"}]},
+               {"text": "RED · HIS WORDS", "atSec": 2.75, "untilSec": 5.75, "x": 1240, "y": 760, "accent": True},  # gate 3 v8: leave before the match cut
+               {"text": "ALMOST NOBODY ELSE SEES IT", "atSec": r(word("almost")), "untilSec": 5.9, "x": 960, "y": 860, "align": "center"}]},
     transitionIn="push", focus=[1180, 450])
 # 66-67 Dalton is a scientist (act 3 starts on the next frame after 68).
 shot(B(66, 67), "KineticLine", lambda r: {
@@ -289,16 +289,18 @@ audio = [
     {"id": "SFX-006", "atSec": round(S(6) - 0.1, 2), "volumeDb": -14.0},  # the Quaker page slides in (pause after "Quakers.")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(8) - 0.1, 2), "volumeDb": -17.6},  # flash to the 1793 title page, in the pause
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(12) + 0.1, 2), "volumeDb": -17.6},  # band back to the map
-    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -29.0},  # the route drawn on: texture under the words
+    {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("teaching"), 2), "volumeDb": -29.0},
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": round(word("kendal", 26, end=True) + 0.04, 2), "volumeDb": -24.0},  # Kendal's pin lands (MOT-012), in the pause  # the route drawn on: texture under the words
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(14) - 0.15, 2), "volumeDb": -16.6},  # push from Kendal into the geranium
     {"id": "SFX-014", "atSec": round(S(14), 2), "endSec": round(S(16), 2), "fadeInSec": 0.8, "fadeOutSec": 0.6, "volumeDb": -2.0},  # candle room under the geranium by candle (Kendal)
     {"id": "SFX-006", "atSec": 38.70, "volumeDb": -21.0},  # slide to p.30, over "change,": texture
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(22) - 0.15, 2), "volumeDb": -16.6},  # push from "my brother" into Lonsdale
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # band into the stockings
-    {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": round(word("stockings", 68, end=True) + 0.15, 2), "volumeDb": -22.0},  # the pair leaves the shop window (in the pause)
+    {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": 68.85, "endSec": 70.35, "fadeOutSec": 0.1, "volumeDb": -26.0},  # gate 3 v8: its body fills the pause after the slide  # the pair leaves the shop window (in the pause)
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("words", 77, end=True) + 0.1, 2), "volumeDb": -24.0},  # wrapped in tissue (in the pause)
     {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": round(word("it", 85, end=True) + 0.25, 2), "volumeDb": -28.0},  # JOHN's tag lands (pause)
-    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(word("jonathan", 86, end=True) + 0.3, 2), "volumeDb": -28.0},  # JONATHAN's tag lands (pause)
+    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(word("jonathan", 86, end=True) + 0.3, 2), "volumeDb": -28.0},
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(word("stockings", 90, end=True) + 0.05, 2), "volumeDb": -27.0},  # MOTHER's tag lands (pause before "and a mother")  # JONATHAN's tag lands (pause)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(39) - 0.08, 2), "volumeDb": -17.6},  # cherry block, after "So,"
     {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": 103.60, "volumeDb": -12.5},  # SAME stamps (paper taps), rotated
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": 104.03, "endSec": 104.48, "fadeOutSec": 0.1, "volumeDb": -18.0},

@@ -43,7 +43,7 @@ Tonight, by the candle, it's different.
 In his own words, it is astonishingly
 
 12
-00:00:32,445 --> 00:00:33,325
+00:00:32,445 --> 00:00:33,500
 changed.
 
 13
@@ -63,7 +63,7 @@ same by day or by candle.
 Of all of them, only one sees what he
 
 17
-00:00:44,771 --> 00:00:45,571
+00:00:44,771 --> 00:00:45,800
 sees.
 
 18
@@ -119,7 +119,7 @@ He'll want it tested so much that he'll
 ask for his own eyes to be examined after
 
 31
-00:01:16,516 --> 00:01:17,496
+00:01:16,516 --> 00:01:17,550
 he dies.
 
 32

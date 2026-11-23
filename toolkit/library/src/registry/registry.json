@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T09:42:34.476Z",
+ "generated": "2026-11-23T09:58:13.064Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2583,11 +2583,13 @@
    "folder": "6_Sounds",
    "name": "SoftPop",
    "paths": [
-    "public/sfx/kit/tactile/soft_pop_v1-3.wav"
+    "public/sfx/kit/tactile/soft_pop_v1.wav",
+    "public/sfx/kit/tactile/soft_pop_v2.wav",
+    "public/sfx/kit/tactile/soft_pop_v3.wav"
    ],
-   "status": "Planned",
-   "use": "Best use: the one cutout entrance that matters in a shot, texture level (22-24 dB under the voice). Limit: one per shot; never on every entrance (our hierarchy rule).",
-   "maxBeats": null,
+   "status": "Active",
+   "use": "Best use: the one cut-out, map pin (MOT-012) or tag landing that matters in a shot, in the pause after its word, texture level (22-28 dB under the voice). Rotate v1-v3. Limit: one per shot; max 8 beats per episode; never on every entrance (our hierarchy rule). Not for: text cards or page highlights.",
+   "maxBeats": 8,
    "maxShare": null
   },
   "SFX-027": {

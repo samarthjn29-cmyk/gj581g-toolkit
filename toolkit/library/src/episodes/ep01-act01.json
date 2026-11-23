@@ -74,7 +74,7 @@
   {
    "id": "SFX-020",
    "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
-   "atSec": 48.95,
+   "atSec": 48.8,
    "volumeDb": -21.6
   },
   {
@@ -87,7 +87,7 @@
    "id": "SFX-017",
    "file": "public/sfx/kit/tactile/pencil_stroke.wav",
    "atSec": 59.85,
-   "volumeDb": -20.6
+   "volumeDb": -31.0
   },
   {
    "id": "SFX-003",
@@ -1165,6 +1165,15 @@
      "y": 377,
      "r": 33
     },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0
+      }
+     ]
+    },
     "bracketsAtSec": 2.68,
     "push": {
      "atSec": 4.95,
@@ -1198,7 +1207,7 @@
       "color": "#3D6BD6",
       "opacity": 0.75
      },
-     "clearAtSec": 7.51
+     "clearAtSec": 7.55
     },
     "out": {
      "atSec": 8.649999999999999,
@@ -1239,11 +1248,11 @@
      {
       "text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID",
       "atSec": 5.9,
-      "untilSec": 7.51
+      "untilSec": 6.949999999999999
      },
      {
       "text": "1844 · THE FLUID: CLEAR",
-      "atSec": 8.11
+      "atSec": 7.55
      }
     ]
    },
@@ -1491,6 +1500,15 @@
      "x": 420,
      "y": 377,
      "r": 33
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0
+      }
+     ]
     },
     "bracketsAtSec": -1,
     "inside": {

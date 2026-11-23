@@ -12,6 +12,9 @@ Sound Design System", analysis only; his folder list names them, the sounds are 
                      every wipe there carries a brief 6-16 kHz swish). Own synthesis.
   sub_impact v1-v2   a deep sub hit (fast attack, 45-55 Hz body, 0.7-0.9 s tail): the one impact after a music break,
                      or a hard cut into a new idea (the same studies; Moran's short puts a low thump on its cuts).
+  soft_pop v1-v3     a small soft pop with a papery touch (a short pitch-dropping sine, 0.09-0.12 s): the one cut-out
+                     or map pin that matters landing in a shot (SFX-026; 23 Nov 2026, reviewer on WCL-E01 act 2: the
+                     Kendal pin landed silently).
 Usage: sfx-synth.py OUTDIR   (writes the raw files; level them with sfx-prep.py one/loop)."""
 import os, sys
 import numpy as np
@@ -133,6 +136,16 @@ def sub_impact(d, f0, f1):
     return norm((body + click) * a)
 
 
+def soft_pop(f0, f1, d):
+    t = t_(d)
+    f = f1 + (f0 - f1) * np.exp(-t * 60)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    body = np.sin(ph) * np.exp(-t * 38)
+    touch = sosfilt(sos_bp(1800, 6000), rng.standard_normal(len(t))) * np.exp(-t * 400) * 0.18
+    a = np.minimum(1, t / 0.002)
+    return norm(lp((body + touch) * a, 7000))
+
+
 def main():
     od = sys.argv[1]
     os.makedirs(od, exist_ok=True)
@@ -150,6 +163,9 @@ def main():
         "air_swish_v3": air_swish(0.40, 9000, 3800),
         "sub_impact_v1": sub_impact(0.85, 110, 48),
         "sub_impact_v2": sub_impact(0.7, 95, 55),
+        "soft_pop_v1": soft_pop(520, 260, 0.11),
+        "soft_pop_v2": soft_pop(600, 300, 0.09),
+        "soft_pop_v3": soft_pop(460, 230, 0.12),
     }
     for k, x in out.items():
         wavfile.write(os.path.join(od, k + ".wav"), SR, (x * 32767).astype(np.int16))
