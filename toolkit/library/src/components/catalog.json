@@ -196,5 +196,11 @@
     "beatType": 4,
     "energy": "Calm",
     "grid": false
+  },
+  "ObjectStory": {
+    "assetId": "VIS-049",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

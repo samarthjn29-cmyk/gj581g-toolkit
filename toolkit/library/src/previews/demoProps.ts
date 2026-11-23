@@ -403,6 +403,20 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     assembleAtSec: 3.4,
     ringLabel: "?",
   },
+  ObjectStory: {
+    srcId: "SRC-037",
+    file: "public/assets/sources/period_stockings_flat.jpg",
+    mask: "public/assets/sources/period_stockings_flat_mask.png",
+    size: [2600, 1622],
+    bbox: [176, 236, 2274, 1037],
+    window: { atSec: 0.1, objectAtSec: 0.5, outAtSec: 1.3 },
+    states: [{ atSec: 1.8, color: "#4A4E57" }],
+    notes: [{ atSec: 1.8, untilSec: 2.6, head: "PREVIEW · HEAD", text: "'A quote'", by: "SOURCE, YEAR" }],
+    parcel: { atSec: 2.7, openAtSec: 4.0, tag: "FOR SOMEONE" },
+    views: { atSec: 4.8, columns: [{ name: "ONE", color: "#4A4E57", colorName: "DARK", atSec: 4.8 }, { name: "TWO", color: "#B3261E", colorName: "RED", atSec: 5.2 }], focus: { index: 1, atSec: 5.8 } },
+    caption: "PREVIEW · OBJECT · SOURCE",
+    illustration: [[0, 1.6], [2.7, 4.3]],
+  },
   StillsMontage: {
     stills: [
       { srcId: "SRC-001", imgSize: [1920, 2813], label: "STILL A · YEAR", atSec: 0.2 },

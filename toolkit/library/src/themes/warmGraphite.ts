@@ -15,6 +15,7 @@ export const warmGraphite: Theme = {
     panel: "#3A3836",
     chip: "rgba(22,21,20,0.72)",
     dimMask: "rgba(22,21,20,0.8)",
+    kraft: "#A9845A",
     cones: { L: "#FF3B30", M: "#30D158", S: "#2F6BFF" },
     leaks: ["rgba(255,59,48,0.10)", "rgba(48,209,88,0.08)", "rgba(47,107,255,0.12)"],
   },

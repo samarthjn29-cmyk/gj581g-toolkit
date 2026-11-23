@@ -14,6 +14,7 @@ export type Theme = {
     readonly panel: string; // card surface
     readonly chip: string; // dark chip behind small text
     readonly dimMask: string; // spotlight dimming
+    readonly kraft?: string; // wrapping paper (VIS-049 parcel); falls back to a mix of ink and panel
     readonly leaks: readonly string[]; // faint corner glows (empty for none)
     readonly cones: { readonly L: string; readonly M: string; readonly S: string }; // the three cone colours (long, medium, short)
   };

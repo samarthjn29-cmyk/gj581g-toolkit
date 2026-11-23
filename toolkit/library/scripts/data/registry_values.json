@@ -5993,6 +5993,33 @@
 "https://drive.google.com/file/d/19Hl-bQSeZ4sWMJvWB-Y--JsOej3AyccJ/view",
 "",
 ""
+],
+[
+"VIS-049",
+"1_Visuals",
+"ObjectStory",
+"Own (Sam, WCL-E01 act 2 Gate 3 note on the full-screen stockings photo; he picked option A 'the parcel', 23 Nov 2026)",
+"src/components/ObjectStory.tsx",
+"One real object cut out of its registered photo by its mask and carried through a short story on the theme canvas, never larger than about half the frame: a drawn shop window with the object on its shelf; the object beside quote cards, its colour following the words (VIS-035's reported-colour rule and REPORTED COLOURS tag); kraft flaps, string and a tag that wrap it and part again (a present opened); then 2-4 columns, one per person, each copy in the colour that person reported, one column lit. Our drawings carry an ILLUSTRATION chip; the photo keeps its caption.",
+"Active",
+"",
+"",
+"2026-11-23",
+"Best use: a story about one object passed between people who then disagree about it (bought, wrapped, given, seen differently), such as Dalton's stockings. Limit: 1 per episode, max 16 beats; a real registered photo with its object mask and caption (a period piece is captioned as one, never as the person's own); drawn settings tagged ILLUSTRATION; colours are reported colours only. Not for: a photo that should be read in detail (ArchivalScanCard) or a plain comparison (SplitComparisonCard).",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"Collage & Cutout",
+""
 ]
 ]
 }

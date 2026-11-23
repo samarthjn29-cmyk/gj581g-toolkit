@@ -81,8 +81,14 @@
   {
    "id": "SFX-021",
    "file": "public/sfx/kit/whoosh/cloth_slide.wav",
-   "atSec": 73.81,
+   "atSec": 69.52,
    "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 78.68,
+   "volumeDb": -24.0
   },
   {
    "id": "SFX-024",
@@ -1059,23 +1065,24 @@
    ],
    "start": 64.18,
    "end": 98.63,
-   "component": "ReportedColour",
+   "component": "ObjectStory",
    "assets": [
+    "VIS-049",
     "VIS-035",
     "TXT-011",
+    "TXT-009",
     "TXT-010",
     "MOT-001",
     "TRN-011",
     "LOK-009",
     "LOK-010",
     "SFX-024",
-    "SFX-021",
     "MUS-007",
     "TEX-007",
-    "TEX-006",
     "SRC-037",
     "TRN-001",
-    "TXT-009",
+    "SFX-021",
+    "SFX-016",
     "MOT-003",
     "MOT-011"
    ],
@@ -1087,15 +1094,18 @@
      2600,
      1622
     ],
-    "crop": [
-     60,
-     80,
-     2480,
-     1395
+    "bbox": [
+     176,
+     236,
+     2274,
+     1037
     ],
     "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
-    "printScreen": 0.08,
-    "printScreenUntilSec": 15.05,
+    "window": {
+     "atSec": 0.15,
+     "objectAtSec": 4.35,
+     "outAtSec": 5.340000000000001
+    },
     "states": [
      {
       "atSec": 0,
@@ -1111,119 +1121,105 @@
       "color": "#B3262E",
       "snap": true,
       "sec": 0.6
-     },
-     {
-      "atSec": 20.37,
-      "color": "#3B4250",
-      "sec": 0.9
-     },
-     {
-      "atSec": 30.98,
-      "color": "#B3262E",
-      "sec": 0.9
      }
     ],
-    "people": [
+    "notes": [
      {
-      "name": "MOTHER",
-      "color": "#B3262E",
-      "colorName": "RED",
-      "atSec": 19.0,
-      "x": 1400,
-      "y": 880
+      "atSec": 6.34,
+      "untilSec": 8.04,
+      "head": "A PRESENT",
+      "text": "For his mother."
      },
      {
-      "name": "JOHN",
-      "color": "#3B4250",
-      "colorName": "DARK",
-      "atSec": 20.37,
-      "x": 520,
-      "y": 880
+      "atSec": 8.34,
+      "untilSec": 11.239999999999998,
+      "head": "TO JOHN · AS THE STORY TELLS IT",
+      "text": "A sensible dark colour."
      },
      {
-      "name": "JONATHAN",
-      "color": "#3B4250",
-      "colorName": "DARK",
-      "atSec": 23.11,
-      "x": 960,
-      "y": 880
-     }
-    ],
-    "labels": [
-     {
-      "text": "A SHOP WINDOW",
-      "atSec": 3.23,
-      "untilSec": 6.34,
-      "x": 960,
-      "y": 860,
-      "align": "center"
-     },
-     {
-      "text": "FOR HIS MOTHER",
-      "atSec": 7.04,
-      "untilSec": 8.46,
-      "x": 960,
-      "y": 860,
-      "align": "center"
-     },
-     {
-      "text": "TO JOHN · AS THE STORY TELLS IT",
-      "atSec": 8.46,
-      "untilSec": 15.44,
-      "x": 960,
-      "y": 800,
-      "align": "center"
-     },
-     {
-      "text": "'A BLUISH DARK DRAB' · LONSDALE, 1874",
       "atSec": 11.54,
-      "untilSec": 15.44,
-      "x": 960,
-      "y": 860,
-      "align": "center",
+      "untilSec": 14.1,
+      "head": "IN THE BIOGRAPHER'S WORDS",
+      "text": "'A bluish dark drab'",
+      "by": "LONSDALE, 1874",
       "accent": true
      },
      {
-      "text": "HIS MOTHER",
-      "atSec": 15.84,
-      "untilSec": 18.6,
-      "x": 960,
-      "y": 860,
-      "align": "center"
-     },
-     {
-      "text": "'AS RED AS A CHERRY'",
-      "atSec": 18.6,
-      "untilSec": 20.37,
-      "x": 960,
-      "y": 780,
-      "align": "center",
+      "atSec": 16.6,
+      "untilSec": 20.17,
+      "head": "HIS MOTHER · AS THE STORY TELLS IT",
+      "text": "'As red as a cherry'",
+      "textAtSec": 18.6,
       "accent": true
-     },
+     }
+    ],
+    "parcel": {
+     "atSec": 14.15,
+     "openAtSec": 16.1,
+     "tag": "FOR HIS MOTHER"
+    },
+    "views": {
+     "atSec": 20.37,
+     "columns": [
+      {
+       "name": "JOHN",
+       "color": "#3B4250",
+       "colorName": "DARK",
+       "atSec": 20.37
+      },
+      {
+       "name": "JONATHAN",
+       "color": "#3B4250",
+       "colorName": "DARK",
+       "atSec": 23.11
+      },
+      {
+       "name": "MOTHER",
+       "color": "#B3262E",
+       "colorName": "RED",
+       "atSec": 30.98
+      }
+     ],
+     "focus": {
+      "index": 2,
+      "atSec": 31.68
+     }
+    },
+    "labels": [
      {
       "text": "TO BOTH OF THEM · DARK",
       "atSec": 24.7,
       "untilSec": 27.5,
       "x": 960,
-      "y": 780,
+      "y": 190,
       "align": "center"
      },
      {
       "text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS",
       "atSec": 28.1,
-      "untilSec": 30.98,
+      "untilSec": 31.08,
       "x": 960,
-      "y": 780,
+      "y": 190,
       "align": "center"
      },
      {
       "text": "QUITE SURE SHE'S RIGHT",
       "atSec": 31.68,
       "x": 960,
-      "y": 780,
+      "y": 190,
       "align": "center",
       "accent": true
      }
+    ],
+    "illustration": [
+     [
+      0,
+      6.090000000000001
+     ],
+     [
+      14.1,
+      17.0
+     ]
     ],
     "tag": {
      "at": "corner",

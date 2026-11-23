@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22T17:38:44.758Z",
+ "generated": "2026-11-23T05:08:38.338Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2699,6 +2699,18 @@
    ],
    "status": "Active",
    "use": "Best use: episodes with 3+ acts that return to one diagram (VIS-048). Limit: 3-7 colours, each at least 3:1 on the canvas (all are 5:1+); never used as a data colour; one colour per act for the whole episode.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-049": {
+   "id": "VIS-049",
+   "folder": "1_Visuals",
+   "name": "ObjectStory",
+   "paths": [
+    "src/components/ObjectStory.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a story about one object passed between people who then disagree about it (bought, wrapped, given, seen differently), such as Dalton's stockings. Limit: 1 per episode, max 16 beats; a real registered photo with its object mask and caption (a period piece is captioned as one, never as the person's own); drawn settings tagged ILLUSTRATION; colours are reported colours only. Not for: a photo that should be read in detail (ArchivalScanCard) or a plain comparison (SplitComparisonCard).",
    "maxBeats": null,
    "maxShare": null
   }

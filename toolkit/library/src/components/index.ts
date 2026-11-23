@@ -32,6 +32,7 @@ import { PageSpread } from "./PageSpread";
 import { LedgerCard } from "./LedgerCard";
 import { SourceWall } from "./SourceWall";
 import { BuildUpMap } from "./BuildUpMap";
+import { ObjectStory } from "./ObjectStory";
 import { StillsMontage } from "./StillsMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
@@ -78,6 +79,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   LedgerCard,
   SourceWall,
   BuildUpMap,
+  ObjectStory,
   StillsMontage,
 };
 
