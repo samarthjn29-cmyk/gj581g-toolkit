@@ -20,3 +20,11 @@ export const ThemeProvider: React.FC<{ themeId: string; children: React.ReactNod
   ensureFonts(theme.textStyles, useRegistryMode());
   return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
 };
+
+// A shot on a paper ground (LOK-027) renders with the theme's paper palette, so text and lines read dark on cream.
+export const ThemeOverride: React.FC<{ paper?: boolean; children: React.ReactNode }> = ({ paper, children }) => {
+  const base = useTheme();
+  if (!paper || !base.paper) return <>{children}</>;
+  const theme = { ...base, colors: { ...base.colors, ...base.paper }, optical: { ...base.optical, vignette: base.optical.vignette * 0.5 } } as Theme;
+  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+};

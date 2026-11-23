@@ -18,6 +18,8 @@ export type Theme = {
     readonly leaks: readonly string[]; // faint corner glows (empty for none)
     readonly cones: { readonly L: string; readonly M: string; readonly S: string }; // the three cone colours (long, medium, short)
   };
+  // The paper palette (LOK-027 PaperDesk ground, 23 Nov 2026): dark ink on cream, used by shots on a paper ground.
+  readonly paper?: Partial<Theme["colors"]>;
   readonly fonts: {
     readonly headline: string;
     readonly headlineWeight: number;

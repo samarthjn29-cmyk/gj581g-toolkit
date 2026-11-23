@@ -1,7 +1,8 @@
 import React from "react";
 import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useVideoConfig } from "remotion";
 import { COMPONENTS } from "../components";
-import { ThemeProvider } from "../themes";
+import { ThemeOverride, ThemeProvider } from "../themes";
+import { Ground, GROUND_IDS, type GroundSpec } from "../layers/Ground";
 import { OpticalStack } from "../layers/OpticalStack";
 import { PushThrough } from "../components/PushThrough";
 import { SlideAcross } from "../components/SlideAcross";
@@ -25,6 +26,9 @@ export type Beat = {
   // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
   // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
   transition?: Record<string, unknown>;
+  // The shot's ground (LOK-027 paper, MAP-011 map, LOK-028 blur, VIS-050 collage, LOK-029 inset); none = the theme
+  // canvas (graphite). Its ID must be in `assets`. Rule in scripts/ground-check.mjs.
+  ground?: GroundSpec;
   focus?: [number, number]; // key point for a push-through (the last shot's key picture)
   beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
   note?: string;
@@ -68,7 +72,14 @@ const Shot: React.FC<{ beat: Beat; built?: boolean }> = ({ beat, built }) => {
   const C = entry.Component;
   const st = beat.props.startSec as number | undefined;
   const props = built && !(st !== undefined && st > 0.3) ? { ...beat.props, startSec: -1 } : beat.props;
-  return <C {...props} />;
+  if (!beat.ground) return <C {...props} />;
+  if (!beat.assets.includes(GROUND_IDS[beat.ground.kind])) throw new Error(`${beat.id}: ground ${GROUND_IDS[beat.ground.kind]} is not listed in the beat's assets.`);
+  return (
+    <ThemeOverride paper={beat.ground.kind === "paper" && beat.ground.tone !== "dark"}>
+      <Ground spec={beat.ground} />
+      <C {...props} />
+    </ThemeOverride>
+  );
 };
 
 const Beats: React.FC<{ beats: Beat[] }> = ({ beats }) => {

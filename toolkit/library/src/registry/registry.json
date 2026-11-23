@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T05:08:38.338Z",
+ "generated": "2026-11-23T05:49:46.411Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2711,6 +2711,91 @@
    ],
    "status": "Active",
    "use": "Best use: a story about one object passed between people who then disagree about it (bought, wrapped, given, seen differently), such as Dalton's stockings. Limit: 1 per episode, max 16 beats; a real registered photo with its object mask and caption (a period piece is captioned as one, never as the person's own); drawn settings tagged ILLUSTRATION; colours are reported colours only. Not for: a photo that should be read in detail (ArchivalScanCard) or a plain comparison (SplitComparisonCard).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-027": {
+   "id": "LOK-027",
+   "folder": "5_Look_and_Color",
+   "name": "PaperDesk",
+   "paths": [
+    "src/layers/Ground.tsx (kind paper)",
+    "src/themes (paper palette)"
+   ],
+   "status": "Active",
+   "use": "Best use: documents, pages, typed lines, objects and the BuildUpMap board: anything that is a thing on a desk. Limit: no more than 2 shots in a row (ground rule); not for light, colour-mixing or cone data (they need a dark ground); max ~35% of an act.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-011": {
+   "id": "MAP-011",
+   "folder": "9_Maps",
+   "name": "LitMapGround",
+   "paths": [
+    "src/layers/Ground.tsx (kind map)"
+   ],
+   "status": "Active",
+   "use": "Best use: a line that names a place or a journey without needing pins (the place sets the mood), act openings, 'how we got here'. Limit: max 3 shots per act; registered maps only, never presented as a modern map; when places must be read, use PeriodMapPlate instead.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-028": {
+   "id": "LOK-028",
+   "folder": "5_Look_and_Color",
+   "name": "BlurPlate",
+   "paths": [
+    "src/layers/Ground.tsx (kind blur)"
+   ],
+   "status": "Active",
+   "use": "Best use: a portrait, photo or page card shown on its own (the card's own picture behind it). Limit: max 3 shots per act; the same source as the card in front.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-050": {
+   "id": "VIS-050",
+   "folder": "1_Visuals",
+   "name": "CollageGround",
+   "paths": [
+    "src/layers/Ground.tsx (kind collage)"
+   ],
+   "status": "Active",
+   "use": "Best use: 'the record says', 'as the story tells it', a source's distance in time, recaps. Limit: max 2 shots per act; registered sources from this episode only.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-029": {
+   "id": "LOK-029",
+   "folder": "5_Look_and_Color",
+   "name": "InsetGround",
+   "paths": [
+    "src/layers/Ground.tsx (kind inset)"
+   ],
+   "status": "Active",
+   "use": "Best use: held lines, the act's turn, a quote or portrait card that should feel set apart. Limit: max 3 shots per act; the chapter colour only as a glow, never as a data colour.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SRC-038": {
+   "id": "SRC-038",
+   "folder": "11_Sources",
+   "name": "Lonsdale1874_p99_Stockings",
+   "paths": [
+    "public/assets/sources/lonsdale1874_p99.jpg"
+   ],
+   "status": "Active",
+   "use": "Best use: the stockings story told on its own page (act 2, beats 25-38, VIS-051). Limit: max 16 beats per episode; marks only on phrases the narration says or the fact-check logs; never retyped as a quote beyond the two the script quotes. Not for: presenting the story as certain (it was written 30 years after Dalton died).",
+   "maxBeats": 16,
+   "maxShare": null
+  },
+  "VIS-051": {
+   "id": "VIS-051",
+   "folder": "1_Visuals",
+   "name": "SourcePageStory",
+   "paths": [
+    "src/components/SourcePageStory.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: an anecdote from a named, registered source about an object people disagreed on (Dalton's stockings, Lonsdale 1874 p. 99). Limit: 1 per episode, max 16 beats; the page and object are registered and captioned; colours are reported colours only (REPORTED COLOURS tag); quotes on screen only where the script quotes; no people drawn. Not for: a page to be read in full (ArchivalScanCard).",
    "maxBeats": null,
    "maxShare": null
   }

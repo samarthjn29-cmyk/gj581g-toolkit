@@ -19,6 +19,7 @@ export const archivalDesk: Theme = {
     cones: { L: "#D95D39", M: "#7BAE7F", S: "#5B7FB8" },
     leaks: [],
   },
+  paper: { canvas: "#EAE4D8", ink: "#1E2226", secondary: "#5F676E", accent: "#B84A2A", accentSoft: "rgba(184,74,42,0.28)", panel: "#DDD5C6", chip: "rgba(244,240,232,0.88)", dimMask: "rgba(234,228,216,0.82)", hairline: "rgba(30,34,38,0.14)", kraft: "#B08A5E", leaks: [] },
   fonts: { headline: "Archivo", headlineWeight: 800, headlineTracking: "-0.025em", titleWeight: 500, serif: "Newsreader", mono: "IBM Plex Mono", body: "Plus Jakarta Sans" },
   textStyles: ["TXT-001", "TXT-002", "TXT-003", "TXT-004"],
   optical: { grain: 0.12, grainStepFrames: 4, vignette: 0.32, gridOpacity: 0.55 },

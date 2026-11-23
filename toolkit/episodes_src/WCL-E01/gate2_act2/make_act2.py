@@ -156,34 +156,46 @@ shot(B(22, 23, 24), "ArchivalScanCard", lambda r: {
               {"text": "1874 · 30 YEARS AFTER HE DIED", "atSec": r(word("30"))},
               {"text": "MAY HAVE GROWN IN THE TELLING", "atSec": 6.9, "accent": True}]},
     transitionIn="push", focus=[700, 640])
-# 25-38 the stockings, in each person's reported colour (REPORTED COLOURS on screen throughout).
-# 25-38 the stockings (Sam, Gate 3, 23 Nov: not a full-screen photo; option A "the parcel"): VIS-049 ObjectStory.
-# A drawn shop window in Kendal; the pair beside the reported words; wrapped as a present in the pause after
-# "words."; opened by his mother ("as red as a cherry"); then one column per person in the colour each reported.
-shot(B(*range(25, 39)), "ObjectStory", lambda r: {
-    "srcId": "SRC-037", "file": FLAT, "mask": MASK, "size": [2600, 1622], "bbox": [176, 236, 2274, 1037],
-    "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
-    "window": {"atSec": 0.15, "objectAtSec": r(word("pair", 68)), "outAtSec": r(word("stockings", 68, end=True)) + 0.15},
-    "states": [{"atSec": 0, "color": None},
-               {"atSec": r(word("dark", 73)), "color": DARK, "sec": 0.9},
-               {"atSec": r(word("cherry", 82)), "color": CHERRY, "snap": True, "sec": 0.6}],
-    "notes": [{"atSec": r(word("buys")), "untilSec": r(word("to", 72)) - 0.3, "head": "A PRESENT", "text": "For his mother."},
-              {"atSec": r(word("to", 72)), "untilSec": r(word("bluish", 75)) - 0.3, "head": "TO JOHN · AS THE STORY TELLS IT", "text": "A sensible dark colour."},
-              {"atSec": r(word("bluish", 75)), "untilSec": r(word("words", 77)), "head": "IN THE BIOGRAPHER'S WORDS", "text": "'A bluish dark drab'", "by": "LONSDALE, 1874", "accent": True},
-              {"atSec": r(word("opens", 79)) + 0.5, "untilSec": r(word("john", 84)) - 0.2, "head": "HIS MOTHER · AS THE STORY TELLS IT", "text": "'As red as a cherry'", "textAtSec": r(word("cherry", 82)), "accent": True}],
-    "parcel": {"atSec": r(word("words", 77)) + 0.05, "openAtSec": r(word("opens", 79)), "tag": "FOR HIS MOTHER"},
-    "views": {"atSec": r(word("john", 84)),
-              "columns": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("john", 84))},
-                          {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86))},
-                          {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("mother", 95))}],
-              "focus": {"index": 2, "atSec": r(word("quite"))}},
-    "labels": [{"text": "TO BOTH OF THEM · DARK", "atSec": r(word("both", 88)), "untilSec": r(word("two", 92)) - 0.6, "x": 960, "y": 190, "align": "center"},
-               {"text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS", "atSec": r(word("two", 92)), "untilSec": r(word("quite")) - 0.6, "x": 960, "y": 190, "align": "center"},
-               {"text": "QUITE SURE SHE'S RIGHT", "atSec": r(word("quite")), "x": 960, "y": 190, "align": "center", "accent": True}],
-    "illustration": [[0, r(word("stockings", 68, end=True)) + 0.9], [r(word("words", 77)), r(word("opens", 79)) + 0.9]],
+# 25-38 the stockings, told on Lonsdale's own page (Sam, 23 Nov: "Let's think of something else to do the stockings
+# scene ... get the help of an independent animator and graphic designer"; their pick, concept A "The page tells it",
+# gate3_act2/STOCKINGS_DESIGN_REVIEW.md). VIS-051 SourcePageStory on the dark desk; p.99 = SRC-038 (crop coords).
+P99 = "public/assets/sources/lonsdale1874_p99.jpg"
+shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
+    "page": {"srcId": "SRC-038", "file": P99, "size": [2450, 3025], "scale": 0.48, "lineH": 84},
+    "frames": [{"atSec": 0, "y": 1350}, {"atSec": r(word("mother", 70, end=True)) + 0.02, "y": 2580}],
+    "marks": [
+        {"boxes": [[555, 810, 1080]], "atSec": r(word("kendal", 65)), "sec": 0.45},
+        {"boxes": [[1169, 2143, 975]], "atSec": r(word("passes", 66)), "sec": 0.9},
+        {"boxes": [[815, 1666, 1080]], "atSec": r(word("sees", 68)), "sec": 1.0},
+        {"boxes": [[975, 1976, 1180]], "atSec": r(word("stockings", 68, end=True)) + 0.15, "sec": 0.8},
+        {"boxes": [[1885, 2145, 1287], [148, 1585, 1394]], "atSec": r(word("buys", 70)), "sec": 1.0},
+        {"boxes": [[1330, 2142, 2323]], "atSec": r(word("to", 72)), "sec": 0.9, "kind": "line"},
+        {"boxes": [[977, 1620, 2427]], "atSec": r(word("sensible", 73)), "sec": 0.5, "kind": "line"},
+        {"boxes": [[150, 782, 2427]], "atSec": r(word("bluish", 75)), "sec": 1.2, "kind": "line", "color": DARK},
+        {"boxes": [[154, 1658, 2530]], "atSec": r(word("they're", 81.5)), "sec": 1.1, "kind": "line", "color": CHERRY},
+        {"boxes": [[1773, 2144, 2530], [153, 860, 2633]], "atSec": r(word("john", 84)), "sec": 1.1, "kind": "line"},
+        {"boxes": [[893, 1965, 2633]], "atSec": r(word("neither", 86)), "sec": 0.8, "kind": "line"},
+        {"boxes": [[1445, 2144, 2737], [154, 443, 2841]], "atSec": r(word("two", 92)), "sec": 1.6},
+        {"boxes": [[156, 1094, 2945]], "atSec": r(word("quite", 95)), "sec": 1.2, "kind": "line"}],
+    "dims": [{"y0": 1850, "y1": 2265, "atSec": r(word("mother", 70, end=True))}],
+    "swatches": [{"x": 40, "y": 2427, "color": DARK, "atSec": r(word("bluish", 75)) + 0.6}],
+    "object": {"srcId": "SRC-037", "file": FLAT, "mask": MASK, "size": [2600, 1622], "bbox": [176, 236, 2274, 1037], "atSec": r(word("pair", 68)) - 0.1, "width": 620},
+    "states": [{"atSec": r(word("dark", 73)) - 0.06, "color": DARK, "sec": 0.9},
+               {"atSec": r(word("cherry", 82)) - 0.16, "color": CHERRY, "snap": True},
+               {"atSec": r(word("john", 84)), "color": DARK, "sec": 0.8}],
+    "wrap": {"atSec": r(word("words", 77, end=True)) + 0.05, "openAtSec": r(word("opens", 79))},
+    "quotes": [{"atSec": r(word("to", 72)) + 0.6, "untilSec": r(word("bluish", 75)) - 0.6, "kicker": "TO JOHN · AS THE STORY TELLS IT", "text": "A sensible dark colour."},
+               {"atSec": r(word("bluish", 75)), "untilSec": r(word("words", 77, end=True)) + 0.05, "kicker": "IN THE BIOGRAPHER'S WORDS", "text": "'a bluish dark drab'", "by": "LONSDALE, 1874 · P. 99", "byAtSec": r(word("biographer's", 77))},
+               {"atSec": r(word("opens", 79)) + 0.3, "untilSec": r(word("john", 84)) + 0.45, "kicker": "HIS MOTHER · AS THE STORY TELLS IT", "text": "'as red as a cherry'", "textAtSec": r(word("cherry", 82))}],
+    "tags": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("it", 85, end=True)) + 0.02, "x": 1150, "y": 800},
+             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1230, "y": 880},
+             {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("mother", 95)), "x": 1560, "y": 830, "hard": True}],
+    "tie": {"atSec": r(word("both", 88)), "names": ["JOHN", "JONATHAN"]},
+    "pullBack": {"atSec": r(word("dark", 90, end=True)) + 0.05, "scale": 0.95},
+    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM · A PERIOD PAIR, RECOLOURED",
     "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 65)), "untilSec": r(word("mother", 79.5))},
                                       {"text": "EAGLESFIELD", "atSec": r(word("mother", 79.5))}]}},
-    transitionIn="band", transition={"dir": "down", "tone": "paper"})
+    transitionIn="slide")
 # 39-44 what stays the same: the flower, the candle, the stockings; only the person looking changes.
 shot(B(*range(39, 45)), "SplitComparisonCard", lambda r: {
     "panels": [{"srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 230, 900, 900], "label": "THE FLOWER", "atSec": 0.3, "stamp": {"text": "SAME", "atSec": 4.97}},
@@ -280,7 +292,9 @@ audio = [
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": round(S(22) - 0.15, 2), "volumeDb": -16.6},  # push from "my brother" into Lonsdale
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(25) + 0.1, 2), "volumeDb": -17.6},  # band into the stockings
     {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": round(word("stockings", 68, end=True) + 0.15, 2), "volumeDb": -22.0},  # the pair leaves the shop window (in the pause)
-    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("words", 77, end=True) + 0.1, 2), "volumeDb": -24.0},  # wrapped as a present (in the pause)
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("words", 77, end=True) + 0.1, 2), "volumeDb": -24.0},  # wrapped in tissue (in the pause)
+    {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": round(word("it", 85, end=True) + 0.25, 2), "volumeDb": -28.0},  # JOHN's tag lands (pause)
+    {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(word("jonathan", 86, end=True) + 0.3, 2), "volumeDb": -28.0},  # JONATHAN's tag lands (pause)
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(39) - 0.08, 2), "volumeDb": -17.6},  # cherry block, after "So,"
     {"id": "SFX-016", "file": K + "tactile/page_turn.wav", "atSec": 103.60, "volumeDb": -12.5},  # SAME stamps (paper taps), rotated
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": 104.03, "endSec": 104.48, "fadeOutSec": 0.1, "volumeDb": -18.0},
@@ -297,6 +311,29 @@ audio = [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(68) + 0.1, 2), "volumeDb": -17.6},  # paper band up into the map
     {"id": "SFX-014", "atSec": round(S(63), 2), "endSec": round(S(64), 2), "fadeInSec": 0.6, "fadeOutSec": 0.6, "volumeDb": -2.0},  # the same candle room as the evening returns (beat 63 only: the episode's 10-beat limit)
 ]
+# Grounds (23 Nov 2026 rule: no ground 3 shots running, 4+ grounds, graphite <= 40%; scripts/ground-check.mjs).
+GROUNDS = {
+    "06+07": {"kind": "paper"},
+    "08+09": {"kind": "paper"},
+    "10+11": {"kind": "inset", "act": 2},
+    "16+17+18+19+20+21": {"kind": "paper"},
+    "25+26+27+28+29+30+31+32+33+34+35+36+37+38": {"kind": "paper", "tone": "dark"},
+    "22+23+24": {"kind": "collage", "items": [{"srcId": "SRC-035", "size": [1575, 2588]}, {"srcId": "SRC-034", "size": [1814, 2600]},
+                                              {"srcId": "SRC-004", "size": [996, 1230]}, {"srcId": "SRC-029", "size": [1920, 2934]},
+                                              {"srcId": "SRC-033", "size": [4000, 5313]}]},
+    "39+40+41+42+43+44": {"kind": "paper"},
+    "55+56": {"kind": "inset", "act": 2},
+    "66+67": {"kind": "blur", "srcId": "SRC-004", "size": [996, 1230], "focus": [0.5, 0.35]},
+}
+GID = {"paper": "LOK-027", "map": "MAP-011", "blur": "LOK-028", "collage": "VIS-050", "inset": "LOK-029"}
+for d in shots:
+    g = GROUNDS.get(d["id"])
+    if not g:
+        continue
+    d["ground"] = g
+    for x in [GID[g["kind"]]] + [it["srcId"] for it in g.get("items", [])] + ([g["srcId"]] if "srcId" in g else []):
+        if x not in d["assets"]:
+            d["assets"].append(x)
 act = {"episodeId": "WCL-E01-act02", "themeId": "LOK-009",
        "runningHead": {"text": "2 · THE ODD ONE OUT", "fromSec": round(S(2), 2)},  # TXT-013, on diagram and text shots only
        "note": "Act 2 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026 21:18. Shots join beat-sheet beats. Cues from 02_brothers_paced_149wpm_even + 2.4 s slate.",

@@ -349,7 +349,8 @@
     "SRC-001",
     "MOT-003",
     "TRN-001",
-    "MOT-001"
+    "MOT-001",
+    "LOK-027"
    ],
    "props": {
     "srcId": "SRC-001",
@@ -413,7 +414,10 @@
      26.3
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper"
+   }
   },
   {
    "id": "11+12+13",
@@ -437,7 +441,8 @@
     "SRC-029",
     "MOT-001",
     "TRN-001",
-    "MOT-003"
+    "MOT-003",
+    "LOK-028"
    ],
    "props": {
     "srcId": "SRC-029",
@@ -492,7 +497,19 @@
      33.86
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-029",
+    "size": [
+     1920,
+     2934
+    ],
+    "focus": [
+     0.5,
+     0.4
+    ]
+   }
   },
   {
    "id": "14+15+16+17+18+19",
@@ -1257,7 +1274,8 @@
     "MUS-007",
     "MOT-003",
     "SFX-005",
-    "SFX-015"
+    "SFX-015",
+    "LOK-029"
    ],
    "props": {
     "to": 151,
@@ -1276,7 +1294,11 @@
      84.8,
      87.9
     ]
-   ]
+   ],
+   "ground": {
+    "kind": "inset",
+    "act": 1
+   }
   },
   {
    "id": "34",

@@ -261,6 +261,22 @@ audio += [
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v1.wav", "atSec": BREAK[1], "volumeDb": -12.0},  # the one impact, as the bed returns
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(35) + 0.12, 2), "volumeDb": -21.0},  # dark band, texture level over "dark"; v12: with the band, which enters ~0.2 s after the cut  # Dalton's eyes opened: on the first visible frame, texture level (it sits on "open"; review v9)
 ]
+# Grounds (23 Nov 2026 rule: no ground 3 shots running, 4+ grounds, graphite <= 40%): paper for Dalton's page,
+# his p.30 page blurred behind itself, the act's inset glow under the counter.
+GROUNDS = {
+    "08+09+10": {"kind": "paper"},
+    "11+12+13": {"kind": "blur", "srcId": "SRC-029", "size": [1920, 2934], "focus": [0.5, 0.4]},
+    "32+33": {"kind": "inset", "act": 1},
+}
+GID = {"paper": "LOK-027", "map": "MAP-011", "blur": "LOK-028", "collage": "VIS-050", "inset": "LOK-029"}
+for d in shots:
+    g = GROUNDS.get(d["id"])
+    if not g:
+        continue
+    d["ground"] = g
+    for x in [GID[g["kind"]]] + [it["srcId"] for it in g.get("items", [])] + ([g["srcId"]] if "srcId" in g else []):
+        if x not in d["assets"]:
+            d["assets"].append(x)
 act = {"episodeId": "WCL-E01-act01", "themeId": "LOK-009",
        "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in.",
        "voice": {"id": "NAR-001", "atSec": LEAD},

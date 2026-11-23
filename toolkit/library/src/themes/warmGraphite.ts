@@ -19,6 +19,7 @@ export const warmGraphite: Theme = {
     cones: { L: "#FF3B30", M: "#30D158", S: "#2F6BFF" },
     leaks: ["rgba(255,59,48,0.10)", "rgba(48,209,88,0.08)", "rgba(47,107,255,0.12)"],
   },
+  paper: { canvas: "#ECE4D2", ink: "#2B2724", secondary: "#6E655B", accent: "#007F73", accentSoft: "rgba(0,150,130,0.30)", panel: "#E0D6C2", chip: "rgba(246,240,228,0.88)", dimMask: "rgba(236,228,210,0.82)", hairline: "rgba(43,39,36,0.14)", kraft: "#A9845A", leaks: [] },
   fonts: { headline: "Fraunces", headlineWeight: 600, headlineTracking: "-0.01em", titleWeight: 600, serif: "Fraunces", mono: "JetBrains Mono", body: "Fraunces" },
   textStyles: ["TXT-009", "TXT-010"],
   optical: { grain: 0.045, grainStepFrames: 2, vignette: 0.32, gridOpacity: 0 },

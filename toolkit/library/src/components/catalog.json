@@ -202,5 +202,11 @@
     "beatType": 2,
     "energy": "Calm",
     "grid": false
+  },
+  "SourcePageStory": {
+    "assetId": "VIS-051",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

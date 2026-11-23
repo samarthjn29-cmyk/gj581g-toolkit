@@ -12,7 +12,7 @@ export const HEAD_ON = new Set([
   "KineticLine", "ScaleField", "SwatchRows", "SplitComparisonCard", "ConeTrio", "ConeCurveChart", "SpectrumStrip",
   "EyeDiagram", "EyeDissection", "PerspectiveGrid", "YearCounter", "ColourPathMap", "LedgerCard", "MinimalDataChart",
 ]);
-type B = { start: number; end: number; component: string; props: Record<string, unknown> };
+type B = { start: number; end: number; component: string; props: Record<string, unknown>; ground?: { kind: string; tone?: string } };
 const allowed = (b: B) => {
   if (!HEAD_ON.has(b.component)) return false;
   const bd = b.props.backdrop as { layout?: string } | undefined;
@@ -28,7 +28,9 @@ export const RunningHead: React.FC<{ text: string; beats: B[]; fromSec?: number 
   if (now < fromSec) return null;
   // Opacity follows the shots: 1 inside an allowed shot, with 0.3 s ramps at the edges of each allowed run.
   let o = 0;
+  let paper = false; // on a paper ground (LOK-027) the head takes the paper palette's secondary, so it reads
   for (const b of beats) {
+    if (now >= b.start && now < b.end) paper = b.ground?.kind === "paper" && b.ground?.tone !== "dark";
     if (!allowed(b)) continue;
     const v = interpolate(now, [b.start, b.start + 0.3, b.end - 0.3, b.end], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
     const prevOn = beats.some((p) => Math.abs(p.end - b.start) < 0.02 && allowed(p));
@@ -47,7 +49,7 @@ export const RunningHead: React.FC<{ text: string; beats: B[]; fromSec?: number 
         fontFamily: t.fonts.mono,
         fontSize: 22,
         letterSpacing: 4,
-        color: t.colors.secondary,
+        color: paper && t.paper?.secondary ? t.paper.secondary : t.colors.secondary,
         opacity: 0.85 * o,
         whiteSpace: "nowrap",
       }}

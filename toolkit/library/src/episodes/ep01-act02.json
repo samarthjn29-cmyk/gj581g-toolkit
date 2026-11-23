@@ -91,6 +91,18 @@
    "volumeDb": -24.0
   },
   {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/page_turn.wav",
+   "atSec": 86.02,
+   "volumeDb": -28.0
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/pages_move.wav",
+   "atSec": 87.93,
+   "volumeDb": -28.0
+  },
+  {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
    "atSec": 98.55,
@@ -374,6 +386,7 @@
     "TRN-007",
     "LOK-009",
     "LOK-010",
+    "LOK-027",
     "SFX-006",
     "MUS-007",
     "SRC-034",
@@ -442,7 +455,10 @@
      16.97
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper"
+   }
   },
   {
    "id": "08+09",
@@ -461,6 +477,7 @@
     "TRN-013",
     "LOK-009",
     "LOK-010",
+    "LOK-027",
     "SFX-024",
     "MUS-007",
     "SRC-035",
@@ -525,7 +542,10 @@
      21.76
     ]
    ],
-   "transitionIn": "flash"
+   "transitionIn": "flash",
+   "ground": {
+    "kind": "paper"
+   }
   },
   {
    "id": "10+11",
@@ -547,6 +567,7 @@
     "TRN-001",
     "LOK-009",
     "LOK-010",
+    "LOK-029",
     "MUS-007",
     "TEX-005"
    ],
@@ -594,7 +615,11 @@
      23.98,
      26.37
     ]
-   ]
+   ],
+   "ground": {
+    "kind": "inset",
+    "act": 2
+   }
   },
   {
    "id": "12+13",
@@ -816,6 +841,7 @@
     "TRN-007",
     "LOK-009",
     "LOK-010",
+    "LOK-027",
     "SFX-006",
     "MUS-007",
     "SRC-029",
@@ -938,7 +964,10 @@
      55.2
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper"
+   }
   },
   {
    "id": "22+23+24",
@@ -952,6 +981,7 @@
    "component": "ArchivalScanCard",
    "assets": [
     "VIS-001",
+    "VIS-050",
     "TXT-009",
     "TXT-010",
     "TXT-011",
@@ -963,6 +993,11 @@
     "MUS-007",
     "TEX-008",
     "SRC-036",
+    "SRC-035",
+    "SRC-034",
+    "SRC-004",
+    "SRC-029",
+    "SRC-033",
     "TRN-001"
    ],
    "props": {
@@ -1043,7 +1078,47 @@
    "focus": [
     700,
     640
-   ]
+   ],
+   "ground": {
+    "kind": "collage",
+    "items": [
+     {
+      "srcId": "SRC-035",
+      "size": [
+       1575,
+       2588
+      ]
+     },
+     {
+      "srcId": "SRC-034",
+      "size": [
+       1814,
+       2600
+      ]
+     },
+     {
+      "srcId": "SRC-004",
+      "size": [
+       996,
+       1230
+      ]
+     },
+     {
+      "srcId": "SRC-029",
+      "size": [
+       1920,
+       2934
+      ]
+     },
+     {
+      "srcId": "SRC-033",
+      "size": [
+       4000,
+       5313
+      ]
+     }
+    ]
+   }
   },
   {
    "id": "25+26+27+28+29+30+31+32+33+34+35+36+37+38",
@@ -1065,20 +1140,23 @@
    ],
    "start": 64.18,
    "end": 98.63,
-   "component": "ObjectStory",
+   "component": "SourcePageStory",
    "assets": [
-    "VIS-049",
+    "VIS-051",
     "VIS-035",
     "TXT-011",
     "TXT-009",
     "TXT-010",
+    "TXT-017",
     "MOT-001",
-    "TRN-011",
+    "TRN-007",
     "LOK-009",
     "LOK-010",
+    "LOK-027",
     "SFX-024",
     "MUS-007",
     "TEX-007",
+    "SRC-038",
     "SRC-037",
     "TRN-001",
     "SFX-021",
@@ -1087,140 +1165,310 @@
     "MOT-011"
    ],
    "props": {
-    "srcId": "SRC-037",
-    "file": "public/assets/sources/period_stockings_flat.jpg",
-    "mask": "public/assets/sources/period_stockings_flat_mask.png",
-    "size": [
-     2600,
-     1622
+    "page": {
+     "srcId": "SRC-038",
+     "file": "public/assets/sources/lonsdale1874_p99.jpg",
+     "size": [
+      2450,
+      3025
+     ],
+     "scale": 0.48,
+     "lineH": 84
+    },
+    "frames": [
+     {
+      "atSec": 0,
+      "y": 1350
+     },
+     {
+      "atSec": 7.319999999999999,
+      "y": 2580
+     }
     ],
-    "bbox": [
-     176,
-     236,
-     2274,
-     1037
+    "marks": [
+     {
+      "boxes": [
+       [
+        555,
+        810,
+        1080
+       ]
+      ],
+      "atSec": 1.83,
+      "sec": 0.45
+     },
+     {
+      "boxes": [
+       [
+        1169,
+        2143,
+        975
+       ]
+      ],
+      "atSec": 2.67,
+      "sec": 0.9
+     },
+     {
+      "boxes": [
+       [
+        815,
+        1666,
+        1080
+       ]
+      ],
+      "atSec": 4.01,
+      "sec": 1.0
+     },
+     {
+      "boxes": [
+       [
+        975,
+        1976,
+        1180
+       ]
+      ],
+      "atSec": 5.340000000000001,
+      "sec": 0.8
+     },
+     {
+      "boxes": [
+       [
+        1885,
+        2145,
+        1287
+       ],
+       [
+        148,
+        1585,
+        1394
+       ]
+      ],
+      "atSec": 6.34,
+      "sec": 1.0
+     },
+     {
+      "boxes": [
+       [
+        1330,
+        2142,
+        2323
+       ]
+      ],
+      "atSec": 8.34,
+      "sec": 0.9,
+      "kind": "line"
+     },
+     {
+      "boxes": [
+       [
+        977,
+        1620,
+        2427
+       ]
+      ],
+      "atSec": 9.32,
+      "sec": 0.5,
+      "kind": "line"
+     },
+     {
+      "boxes": [
+       [
+        150,
+        782,
+        2427
+       ]
+      ],
+      "atSec": 11.54,
+      "sec": 1.2,
+      "kind": "line",
+      "color": "#3B4250"
+     },
+     {
+      "boxes": [
+       [
+        154,
+        1658,
+        2530
+       ]
+      ],
+      "atSec": 17.68,
+      "sec": 1.1,
+      "kind": "line",
+      "color": "#B3262E"
+     },
+     {
+      "boxes": [
+       [
+        1773,
+        2144,
+        2530
+       ],
+       [
+        153,
+        860,
+        2633
+       ]
+      ],
+      "atSec": 20.37,
+      "sec": 1.1,
+      "kind": "line"
+     },
+     {
+      "boxes": [
+       [
+        893,
+        1965,
+        2633
+       ]
+      ],
+      "atSec": 22.63,
+      "sec": 0.8,
+      "kind": "line"
+     },
+     {
+      "boxes": [
+       [
+        1445,
+        2144,
+        2737
+       ],
+       [
+        154,
+        443,
+        2841
+       ]
+      ],
+      "atSec": 28.1,
+      "sec": 1.6
+     },
+     {
+      "boxes": [
+       [
+        156,
+        1094,
+        2945
+       ]
+      ],
+      "atSec": 31.68,
+      "sec": 1.2,
+      "kind": "line"
+     }
     ],
-    "caption": "SILK STOCKINGS · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM",
-    "window": {
-     "atSec": 0.15,
-     "objectAtSec": 4.35,
-     "outAtSec": 5.340000000000001
+    "dims": [
+     {
+      "y0": 1850,
+      "y1": 2265,
+      "atSec": 7.3
+     }
+    ],
+    "swatches": [
+     {
+      "x": 40,
+      "y": 2427,
+      "color": "#3B4250",
+      "atSec": 12.139999999999999
+     }
+    ],
+    "object": {
+     "srcId": "SRC-037",
+     "file": "public/assets/sources/period_stockings_flat.jpg",
+     "mask": "public/assets/sources/period_stockings_flat_mask.png",
+     "size": [
+      2600,
+      1622
+     ],
+     "bbox": [
+      176,
+      236,
+      2274,
+      1037
+     ],
+     "atSec": 4.25,
+     "width": 620
     },
     "states": [
      {
-      "atSec": 0,
-      "color": null
-     },
-     {
-      "atSec": 9.68,
+      "atSec": 9.62,
       "color": "#3B4250",
       "sec": 0.9
      },
      {
-      "atSec": 18.6,
+      "atSec": 18.44,
       "color": "#B3262E",
-      "snap": true,
-      "sec": 0.6
-     }
-    ],
-    "notes": [
-     {
-      "atSec": 6.34,
-      "untilSec": 8.04,
-      "head": "A PRESENT",
-      "text": "For his mother."
+      "snap": true
      },
      {
-      "atSec": 8.34,
-      "untilSec": 11.239999999999998,
-      "head": "TO JOHN · AS THE STORY TELLS IT",
+      "atSec": 20.37,
+      "color": "#3B4250",
+      "sec": 0.8
+     }
+    ],
+    "wrap": {
+     "atSec": 14.450000000000001,
+     "openAtSec": 16.1
+    },
+    "quotes": [
+     {
+      "atSec": 8.94,
+      "untilSec": 10.94,
+      "kicker": "TO JOHN · AS THE STORY TELLS IT",
       "text": "A sensible dark colour."
      },
      {
       "atSec": 11.54,
-      "untilSec": 14.1,
-      "head": "IN THE BIOGRAPHER'S WORDS",
-      "text": "'A bluish dark drab'",
-      "by": "LONSDALE, 1874",
-      "accent": true
+      "untilSec": 14.450000000000001,
+      "kicker": "IN THE BIOGRAPHER'S WORDS",
+      "text": "'a bluish dark drab'",
+      "by": "LONSDALE, 1874 · P. 99",
+      "byAtSec": 13.56
      },
      {
-      "atSec": 16.6,
-      "untilSec": 20.17,
-      "head": "HIS MOTHER · AS THE STORY TELLS IT",
-      "text": "'As red as a cherry'",
-      "textAtSec": 18.6,
-      "accent": true
+      "atSec": 16.400000000000002,
+      "untilSec": 20.82,
+      "kicker": "HIS MOTHER · AS THE STORY TELLS IT",
+      "text": "'as red as a cherry'",
+      "textAtSec": 18.6
      }
     ],
-    "parcel": {
-     "atSec": 14.15,
-     "openAtSec": 16.1,
-     "tag": "FOR HIS MOTHER"
-    },
-    "views": {
-     "atSec": 20.37,
-     "columns": [
-      {
-       "name": "JOHN",
-       "color": "#3B4250",
-       "colorName": "DARK",
-       "atSec": 20.37
-      },
-      {
-       "name": "JONATHAN",
-       "color": "#3B4250",
-       "colorName": "DARK",
-       "atSec": 23.11
-      },
-      {
-       "name": "MOTHER",
-       "color": "#B3262E",
-       "colorName": "RED",
-       "atSec": 30.98
-      }
-     ],
-     "focus": {
-      "index": 2,
-      "atSec": 31.68
-     }
-    },
-    "labels": [
+    "tags": [
      {
-      "text": "TO BOTH OF THEM · DARK",
-      "atSec": 24.7,
-      "untilSec": 27.5,
-      "x": 960,
-      "y": 190,
-      "align": "center"
+      "name": "JOHN",
+      "color": "#3B4250",
+      "colorName": "DARK",
+      "atSec": 21.61,
+      "x": 1150,
+      "y": 800
      },
      {
-      "text": "TWO GROWN MEN · ONE PAIR OF STOCKINGS",
-      "atSec": 28.1,
-      "untilSec": 31.08,
-      "x": 960,
-      "y": 190,
-      "align": "center"
+      "name": "JONATHAN",
+      "color": "#3B4250",
+      "colorName": "DARK",
+      "atSec": 23.47,
+      "x": 1230,
+      "y": 880
      },
      {
-      "text": "QUITE SURE SHE'S RIGHT",
-      "atSec": 31.68,
-      "x": 960,
-      "y": 190,
-      "align": "center",
-      "accent": true
+      "name": "MOTHER",
+      "color": "#B3262E",
+      "colorName": "RED",
+      "atSec": 30.98,
+      "x": 1560,
+      "y": 830,
+      "hard": true
      }
     ],
-    "illustration": [
-     [
-      0,
-      6.090000000000001
-     ],
-     [
-      14.1,
-      17.0
+    "tie": {
+     "atSec": 24.7,
+     "names": [
+      "JOHN",
+      "JONATHAN"
      ]
-    ],
+    },
+    "pullBack": {
+     "atSec": 26.85,
+     "scale": 0.95
+    },
+    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM · A PERIOD PAIR, RECOLOURED",
     "tag": {
      "at": "corner",
      "parts": [
@@ -1308,10 +1556,10 @@
      98.63
     ]
    ],
-   "transitionIn": "band",
-   "transition": {
-    "dir": "down",
-    "tone": "paper"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
    }
   },
   {
@@ -1336,6 +1584,7 @@
     "TRN-012",
     "LOK-009",
     "LOK-010",
+    "LOK-027",
     "SFX-024",
     "SFX-016",
     "MUS-007",
@@ -1481,6 +1730,9 @@
    "transition": {
     "color": "#B3262E",
     "side": "right"
+   },
+   "ground": {
+    "kind": "paper"
    }
   },
   {
@@ -1669,6 +1921,7 @@
     "TRN-011",
     "LOK-009",
     "LOK-010",
+    "LOK-029",
     "SFX-024",
     "MUS-007",
     "TEX-007",
@@ -1705,6 +1958,10 @@
    "transition": {
     "dir": "up",
     "tone": "paper"
+   },
+   "ground": {
+    "kind": "inset",
+    "act": 2
    }
   },
   {
@@ -2011,6 +2268,7 @@
     "TRN-007",
     "LOK-009",
     "LOK-010",
+    "LOK-028",
     "MUS-007",
     "SRC-004",
     "TXT-021",
@@ -2073,7 +2331,19 @@
      172.95
     ]
    ],
-   "transitionIn": "slide"
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-004",
+    "size": [
+     996,
+     1230
+    ],
+    "focus": [
+     0.5,
+     0.35
+    ]
+   }
   },
   {
    "id": "68",
