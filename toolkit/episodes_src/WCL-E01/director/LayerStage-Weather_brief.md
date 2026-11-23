@@ -124,3 +124,46 @@ prefers waiting for the Howard plate.
   - The title page (SRC-035) itself reads "at the New College, Manchester" and "W. Pennington, Kendal".
 - **Library (builder):** a timed `labels` prop on LayerStage and the MOT-013 un-wipe for carry tags (Builder notes 1-2). These
   go through strict stills before use.
+
+## Frame review (build 1)
+
+Stills reviewed: 0.5, 1.0, 2.5, 3.4, 3.9, 5.0, 7.0, 8.9, 9.9 s (build-mode preview, 1920x1080). Detail crops checked at 1:1 and
+3x (top sky band, the shower, the dates against the castle, the page edge against the tower, Kendal at 9.9).
+
+**Builder's deviations**
+- *Commons copy of Plate VII, zoom 1.2, focus [0.417, 0.5255]:* accepted for framing. The shower's dark mass and rain sit at
+  about x 1100-1300 (the brief asked for [1340, 420]), which is still right of centre and inside the clear box; the land line
+  is at y 780-850. There is no canvas in any frame. The horizontal ruling in the sky is the engraving's own ruled sky and reads
+  as a print, not an artefact. The upsampled castle and shower look soft but fine. **The JPEG block steps in the source** do
+  read as an artefact: they show along the cloud edges in the top band (x 350-1000, y 10-70; x 1300-1900, y 20-180) at 1:1,
+  for 8 s. See note 2.
+- *Dates on the house Label layer (small rise, not a wipe-on):* accepted. It is calm and matches the other on-world text.
+  Their position is wrong (note 1).
+
+**Checks**
+- 0.5-2.5: the page is up by 0.5 and holds on the left third. It continues from the Quaker card's scan, and the shower is
+  open on the right. The page's right edge (x 820) sits close to the square tower (x about 830). It is a mild tangent only,
+  so no note.
+- 3.4-3.9: the tag un-wipes, then the page sinks straight down. The castle is revealed as the page goes, which is good.
+- 5.0 and 7.0: **fail.** "FROM 24 MARCH 1787" rests on the round keep's top (chip bottom y 527, keep top about 525), and line 2
+  (y 532-590) lies across the keep and the square tower. The dates read as a sign on the castle, not as writing across the
+  sky. The shower still carries the weight on the right.
+- 8.9: nothing hangs over the dissolve (dates gone at 7.8, page gone, Howard label out, map label wiping in). It passes.
+- 9.9: Kendal is clear and nothing covers it. The town mark is at about [920, 635] and the name "Kendal" at about
+  [878, 648], small but legible at full size. Hand-off for 12+13: centre the Kendal ring on about [900, 642] so it holds both
+  the name and the mark.
+- Eye out passes: from the dates to Kendal is about 22% of the frame width.
+
+**Notes**
+1. Move the diary dates up into open sky, clear of the castle. Set `labels[0]` to `x: 580, y: 320` and `labels[1]` to `x: 580, y: 382`
+   (was 620 / 470, 532). The block then spans about y 320-440, centred near the upper third. That leaves about 85 px of sky
+   above the keep's top, and line 2 (about x 184-975) ends at the faint left edge of the cumulus, so the shower's dark mass
+   and its rain stay clear. It is still inside the area the page held. Timings unchanged.
+2. World 1 file: the register should look for a larger scan of the same Plate VII (at least 2900 px wide, so zoom 1.2
+   needs no upsampling), for example the Biodiversity Heritage Library or Linda Hall Library copies of *Philosophical
+   Magazine* vol. 16. If one is registered, swap `srcId`/`size`, keep `zoom: 1.2`, and re-measure `focus` so that the
+   shower and the land line land where they do now. If no such scan is registered in this pass, this note closes as
+   accepted with the current file. It must not hold the act.
+
+Watch item for the reviewer (not a Director note): in the render, check that the sky's fine ruling does not shimmer or
+crawl under the slow push.

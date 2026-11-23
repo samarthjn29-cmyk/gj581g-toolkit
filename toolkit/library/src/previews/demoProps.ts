@@ -184,8 +184,8 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
           caption: "ETH-BIBLIOTHEK ZÜRICH", captionUntilSec: 3.2 },
       ],
       labels: [
-        { text: "FROM 24 MARCH 1787", atSec: 4.36, untilSec: 7.7, x: 620, y: 470, align: "center" },
-        { text: "TO THE EVENING BEFORE HE DIED · 1844", atSec: 5.58, untilSec: 7.8, x: 620, y: 532, align: "center" },
+        { text: "FROM 24 MARCH 1787", atSec: 4.36, untilSec: 7.7, x: 580, y: 320, align: "center" },  // Director build 1: in open sky, off the castle
+        { text: "TO THE EVENING BEFORE HE DIED · 1844", atSec: 5.58, untilSec: 7.8, x: 580, y: 382, align: "center" },
       ],
       camera: { pan: -60, push: 0.04 },
     },
