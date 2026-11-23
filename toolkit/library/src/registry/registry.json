@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T08:43:34.753Z",
+ "generated": "2026-11-23T08:57:40.656Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3051,6 +3051,42 @@
    "status": "Active",
    "use": "Best use: a place name or a name tag on a picture or footage, the first time it is said. Limit: one at a time; not on the act's one focal accent label (that stays accent).",
    "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-058": {
+   "id": "VIS-058",
+   "folder": "1_Visuals",
+   "name": "ObjectEntrance",
+   "paths": [
+    "src/components/ObjectEntrance.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a real thing arriving at the moment it is named (a paper, spectacles, a pot, a letter, a jar). Limit: 1-4 objects a shot, max 3 shots an act; registered cut-outs only; stand-ins tagged ILLUSTRATION; every landing has its sound (gate2-qa).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-015": {
+   "id": "MOT-015",
+   "folder": "3_Motion",
+   "name": "RealEntrance",
+   "paths": [
+    "src/components/ObjectEntrance.tsx (enter, action)"
+   ],
+   "status": "Active",
+   "use": "Best use: every cut-out object entering a shot. Limit: one entrance per object; the action at least at the landing; a landing sound within 0.35 s before to 0.15 s after it lands (gate2-qa rule R).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SRC-039": {
+   "id": "SRC-039",
+   "folder": "11_Sources",
+   "name": "Spectacles_KonseptaStudio",
+   "paths": [
+    "public/assets/sources/spectacles_konsepta_cutout.png"
+   ],
+   "status": "Active",
+   "use": "Best use: a stand-in pair of spectacles set down beside Dalton's portrait or paper (VIS-058, ILLUSTRATION tag). Limit: never presented as his own spectacles; max 2 shots per episode.",
+   "maxBeats": 2,
    "maxShare": null
   }
  }

@@ -42,6 +42,7 @@ import { TimelineRail } from "./TimelineRail";
 import { LetterDrop } from "./LetterDrop";
 import { ArchiveGate } from "./ArchiveGate";
 import { ZoomNest } from "./ZoomNest";
+import { ObjectEntrance } from "./ObjectEntrance";
 import { StillsMontage } from "./StillsMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
@@ -98,6 +99,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   LetterDrop,
   ArchiveGate,
   ZoomNest,
+  ObjectEntrance,
   StillsMontage,
 };
 

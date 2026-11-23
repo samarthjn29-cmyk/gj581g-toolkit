@@ -73,6 +73,22 @@ for (const b of beats.filter((x) => x.component === "ArchivalScanCard")) {
     if (left < 2) crit.push(`${b.id}: highlight at ${h.atSec}s leaves ${left.toFixed(2)} s to read (needs 2 s)`);
   }
 }
+// Rule R, real entrances (MOT-015, 23 Nov 2026; Sam: "Sure" to things entering by their own motion): every cut-out
+// object comes in by a named real-world entrance (the component throws without one) and lands with a sound: a cue
+// from 0.35 s before to 0.15 s after the landing. Its one action must come after it lands (the component throws).
+// Cut-outs may only enter through ObjectEntrance: ObjectStory, RiseFromBehind keep their own designed moves.
+const cues = act.audio ?? [];
+for (const b of beats.filter((x) => x.component === "ObjectEntrance")) {
+  for (const o of b.props?.objects ?? []) {
+    if (!o.enter?.kind) crit.push(`${b.id}: an object with no entrance (rule R: slide, setDown, roll, path or grow)`);
+    const land = b.start + o.atSec + (o.enter?.sec ?? 0.9);
+    const heard = cues.some((c) => c.atSec >= land - 0.35 && c.atSec <= land + 0.15);
+    if (!heard) crit.push(`${b.id}: ${o.srcId} lands at ${land.toFixed(2)} s with no sound (rule R: a cue within -0.35/+0.15 s)`);
+  }
+  if ((b.props?.objects ?? []).length > 4) crit.push(`${b.id}: more than 4 objects in one ObjectEntrance`);
+}
+const entranceShots = beats.filter((b) => b.component === "ObjectEntrance").length;
+if (entranceShots > 3) crit.push(`${entranceShots} ObjectEntrance shots in one act (VIS-058: max 3)`);
 const frenzy = beats.filter((b) => b.component === "HeadlineMatchCut").length;
 const matches = beats.filter((b) => b.transitionIn === "match").length;
 const changes = beats.filter((b, i) => i > 0 && b.transitionIn && b.transitionIn !== "cut").length;

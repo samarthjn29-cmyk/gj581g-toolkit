@@ -256,5 +256,11 @@
     "beatType": 2,
     "energy": "Calm",
     "grid": false
+  },
+  "ObjectEntrance": {
+    "assetId": "VIS-058",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

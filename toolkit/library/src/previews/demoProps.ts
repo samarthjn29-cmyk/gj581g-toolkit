@@ -453,6 +453,14 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     ],
     caption: "PREVIEW · SOURCE",
   },
+  ObjectEntrance: {
+    __ground: { kind: "paper" },
+    objects: [
+      { srcId: "SRC-001", size: [1920, 2813], at: [700, 520], w: 520, rot: -3, atSec: 0.2, enter: { kind: "slide", from: "left", sec: 1.0 }, action: { kind: "swap", atSec: 2.0, srcId: "SRC-029" }, label: { text: "PREVIEW · PAGE" } },
+      { srcId: "SRC-039", size: [2000, 828], at: [1330, 640], w: 620, rot: 6, atSec: 1.0, enter: { kind: "setDown", sec: 0.8 }, action: { kind: "glint", atSec: 3.2 }, label: { text: "PREVIEW · SPECTACLES", atSec: 2.4 }, illustrative: true },
+    ],
+    caption: "PREVIEW · SOURCES",
+  },
   ArchiveGate: {
     slides: [
       { srcId: "SRC-004", imgSize: [996, 1230], atSec: 0.2, focus: [0.5, 0.3], label: "PREVIEW · SLIDE A" },
