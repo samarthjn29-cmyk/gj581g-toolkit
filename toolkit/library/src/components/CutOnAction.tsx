@@ -16,7 +16,9 @@ export const CutOnAction: React.FC<{
   settleSec?: number;
   dir?: "down" | "up" | "left" | "right";
   px?: number;
-}> = ({ from, to, atSec = 0, leadSec = 0.25, settleSec = 0.45, dir = "down", px = 90 }) => {
+  // moveTo false: the new shot is not translated (it settles itself, e.g. LayerStage `arrive`, so no bare edge shows)
+  moveTo?: boolean;
+}> = ({ from, to, atSec = 0, leadSec = 0.25, settleSec = 0.45, dir = "down", px = 90, moveTo = true }) => {
   useAsset("TRN-010");
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -39,7 +41,7 @@ export const CutOnAction: React.FC<{
       {frame < cut ? (
         <AbsoluteFill style={{ transform: `translate(${vx * out}px, ${vy * out}px)`, filter: dirBlur ?? blur }}>{from}</AbsoluteFill>
       ) : (
-        <AbsoluteFill style={{ transform: `translate(${vx * inn}px, ${vy * inn}px)`, filter: dirBlur ?? blur }}>{to}</AbsoluteFill>
+        <AbsoluteFill style={{ transform: moveTo ? `translate(${vx * inn}px, ${vy * inn}px)` : undefined, filter: dirBlur ?? blur }}>{to}</AbsoluteFill>
       )}
     </AbsoluteFill>
   );

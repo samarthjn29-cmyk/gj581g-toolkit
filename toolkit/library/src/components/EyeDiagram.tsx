@@ -22,6 +22,11 @@ export type EyeDiagramProps = {
   question?: { atSec: number; dimAtSec?: number };
   labels?: LabelSpec[];
   tag?: DatelineTagProps;
+  // section mode (WCL-E01 act 3, the Director's D_into_the_eye / C): a part outline on cue in the accent (the fluids on
+  // 'clear fluids', then the vitreous alone on 'clear jelly'); untilSec un-draws it
+  outlines?: { parts: ("aqueous" | "vitreous")[]; atSec: number; untilSec?: number }[];
+  // a tint pulse: the tint's opacity rises to `to` and settles back over `sec` (C: 'blue glass', 0.5 -> 0.6 -> 0.5)
+  pulses?: { part: "vitreous" | "lens"; atSec: number; to: number; sec?: number }[];
   startSec?: number;
 };
 
@@ -35,6 +40,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
   question,
   labels = [],
   tag,
+  outlines = [],
+  pulses = [],
   startSec = 0,
 }) => {
   useAssets(["VIS-019", "MOT-001", "MOT-002", ...(rays ? ["VIS-021"] : [])]);
@@ -98,7 +105,15 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
   const tintOf = (part: "vitreous" | "lens") =>
     tints
       .filter((x) => x.part === part)
-      .map((x) => ({ color: x.color, op: interpolate(frame, [sec(x.atSec, fps), sec(x.atSec + 1.2, fps)], [0, x.opacity ?? 0.45], ease) }))
+      .map((x) => {
+        let op = interpolate(frame, [sec(x.atSec, fps), sec(x.atSec + 1.2, fps)], [0, x.opacity ?? 0.45], ease);
+        for (const pu of pulses.filter((q) => q.part === part)) {
+          const d = pu.sec ?? 1.2;
+          const u = interpolate(frame, [sec(pu.atSec, fps), sec(pu.atSec + d, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+          op += (pu.to - (x.opacity ?? 0.45)) * Math.sin(Math.PI * u);
+        }
+        return { color: x.color, op };
+      })
       .pop();
   const tv = tintOf("vitreous");
   const tl = tintOf("lens");
@@ -128,6 +143,19 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
           strokeWidth={6}
           opacity={0.8}
         />
+        {outlines.map((o, i) => {
+          const pin = interpolate(frame, [sec(o.atSec, fps), sec(o.atSec + 0.7, fps)], [0, 1], ease);
+          const pout = o.untilSec !== undefined ? interpolate(frame, [sec(o.untilSec, fps), sec(o.untilSec + 0.4, fps)], [1, 0], ease) : 1;
+          const v = Math.min(pin, pout);
+          if (v <= 0) return null;
+          const len = 2400;
+          return (
+            <g key={i} fill="none" stroke={t.colors.accent} strokeWidth={5} strokeLinejoin="round" strokeDasharray={len} strokeDashoffset={len * (1 - pin)} opacity={pout}>
+              {o.parts.includes("vitreous") ? <path d={`M ${cx - R + 168} ${cy - 252} A ${R - 18} ${R - 18} 0 1 1 ${cx - R + 168} ${cy + 252} Q ${cx - R + 150} ${cy} ${cx - R + 168} ${cy - 252} Z`} /> : null}
+              {o.parts.includes("aqueous") ? <path d={`M ${cx - R + 44} ${cy - 140} Q ${cx - R - 56} ${cy} ${cx - R + 44} ${cy + 140} Q ${cx - R + 86} ${cy} ${cx - R + 44} ${cy - 140} Z`} /> : null}
+            </g>
+          );
+        })}
         {beat ? (
           <line
             x1={x0}

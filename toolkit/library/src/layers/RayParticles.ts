@@ -11,6 +11,9 @@ export type RaySpec = {
   jitter?: number; // sideways drift in path units
   seed?: number;
   colors?: string[]; // one colour per particle, cycled
+  // absorb (WCL-E01 act 3 shot C, Dalton's blue jelly): from atSec, dots of these colours fade to `keep` alpha between
+  // path fractions `from` and `to` (the jelly soaks them up); other colours pass at full strength
+  absorb?: { atSec: number; colors: string[]; from: number; to: number; keep: number };
 };
 export type Particle = {
   u: number;
@@ -56,7 +59,13 @@ export function particles(
       spec.colors && spec.colors.length
         ? spec.colors[k % spec.colors.length]
         : undefined;
-    out.push({ u, side, alpha: Math.max(0, alpha), color: c, k });
+    let a = Math.max(0, alpha);
+    const ab = spec.absorb;
+    if (ab && c && ab.colors.includes(c) && born + spec.atSec + (ab.from * travel) >= ab.atSec) {
+      const f = Math.min(1, Math.max(0, (u - ab.from) / Math.max(1e-6, ab.to - ab.from)));
+      a *= 1 - (1 - ab.keep) * f;
+    }
+    out.push({ u, side, alpha: a, color: c, k });
   }
   return out;
 }

@@ -4,6 +4,7 @@ import { ThemeOverride, ThemeProvider } from "../themes";
 import { Ground, type GroundSpec } from "../layers/Ground";
 import { OpticalStack } from "../layers/OpticalStack";
 import { RegistryModeProvider, type RegistryMode } from "../registry";
+import { ShotOverlay, type ShotOverlaySpec } from "../layers/ShotOverlay";
 
 // A library preview: one component, in one theme, inside the optical stack.
 export type PreviewProps = {
@@ -18,7 +19,9 @@ export const Preview: React.FC<PreviewProps> = ({ name, themeId, registryMode, p
   if (!entry) throw new Error(`${name} is not in src/components/index.ts`);
   const C = entry.Component;
   // a preview may sit on a ground (LOK-027 paper etc.) like an episode shot: props.__ground
-  const { __ground, ...rest } = props as { __ground?: GroundSpec };
+  // and carry a shot overlay (chips, quote chips, stickers) like an episode shot: props.__overlay
+  const { __ground, __overlay, ...rest } = props as { __ground?: GroundSpec; __overlay?: ShotOverlaySpec };
+  const over = __overlay ? <ShotOverlay spec={__overlay} /> : null;
   if (__ground)
     return (
       <RegistryModeProvider mode={registryMode}>
@@ -27,6 +30,7 @@ export const Preview: React.FC<PreviewProps> = ({ name, themeId, registryMode, p
             <ThemeOverride paper={__ground.kind === "paper" && __ground.tone !== "dark"}>
               <Ground spec={__ground} />
               <C {...rest} />
+              {over}
             </ThemeOverride>
           </OpticalStack>
         </ThemeProvider>
@@ -36,7 +40,8 @@ export const Preview: React.FC<PreviewProps> = ({ name, themeId, registryMode, p
     <RegistryModeProvider mode={registryMode}>
       <ThemeProvider themeId={themeId}>
         <OpticalStack grid={entry.grid}>
-          <C {...props} />
+          <C {...rest} />
+          {over}
         </OpticalStack>
       </ThemeProvider>
     </RegistryModeProvider>

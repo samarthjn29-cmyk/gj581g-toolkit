@@ -204,12 +204,144 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
       carry: [
         { srcId: "SRC-014", file: "public/assets/sources/laurel_runicearth_leaf_cutout.png", size: [800, 700], at: [560, 560], w: 520, atSec: 0.4, enter: "setDown", rest: true,
           states: [{ atSec: 0.4, color: null, label: "LAUREL LEAF" }, { atSec: 4.2, color: "#574F18", label: "SIMULATION · ONE WAY HE MAY HAVE SEEN THEM" }] },
-        { srcId: "SRC-015", file: "public/assets/sources/sealingwax_petrik_cutout.png", size: [497, 438], at: [1360, 600], w: 380, atSec: 1.4, enter: "setDown", rest: true,
+        { srcId: "SRC-015", file: "public/assets/sources/sealingwax_petrik_cutout.png", size: [438, 497], at: [1360, 600], w: 380, atSec: 1.4, enter: "setDown", rest: true,
           states: [{ atSec: 1.4, color: null, label: "RED SEALING-WAX" }, { atSec: 4.2, color: "#574F18" }] },
       ],
       // no typed quote: the printed line is on the page behind (a single-line label overflowed the frame); the act
       // build highlights that line on p.34 (ArchivalScanCard) before the cut-outs lift off.
       camera: { pan: -40, push: 0.03 },
+    },
+  },
+  // 24 Nov 2026 act 3 Gate 2 builder tests (the Director's "Added layer shots" and "Within Motion blend" briefs), on
+  // the real act 3 pictures with the timing compressed. Strict stills for TXT-024/025, VIS-060/061, MAP-017 and the
+  // LayerStage / EyeDiagram / SpectrumStrip / Label / CutOnAction additions.
+  "LayerStage-A3-Chapel": {
+    name: "LayerStage",
+    sec: 10,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-009", kind: "image", size: [1920, 1280], zoom: 1.1, focus: [0.4769, 0.37], light: "paper", haze: 0.06, lightFrom: "top-left", label: "PLAN OF MANCHESTER · WILLIAM GREEN · 1794",
+          rings: [{ x: 1280, y: 307, r: 125, atSec: 3.2, untilSec: 5.2 }],
+          why: "Same place, same year: Manchester in 1794, the town where Dalton reads his paper." },
+        { atSec: 6.0, srcId: "SRC-044", kind: "image", size: [800, 564], zoom: 1.0, focus: [0.47, 0.5], change: "dissolve", sec: 1.2, light: "paper", haze: 0.12, blur: 1.8, rackSec: 8.0, lightFrom: "top-left",
+          why: "Same place, same night: in 1794 the Literary and Philosophical Society met in a room at Cross Street Chapel; this is that building, drawn as it looked in 1835." },
+      ],
+      carry: [
+        { srcId: "SRC-045", size: [960, 1015], at: [440, 560], w: 520, atSec: 1.5, enter: "rise", tilt: -4, torn: true, untilSec: 4.6, exit: "sink",
+          route: { from: [411, 346], to: [602, 894], atSec: 1.7, drawSec: 0.8, circleSec: 2.5, chips: [{ text: "KENDAL", at: [190, 300] }, { text: "MANCHESTER", at: [300, 940] }], source: "KITCHIN · LAURIE & WHITTLE · 1794" } },
+        { srcId: "SRC-042", size: [1669, 1890], at: [464, 1106], w: 500, atSec: 8.0, enter: "rise" },
+      ],
+      labels: [
+        { text: "AGE 28", atSec: 3.0, untilSec: 5.0, x: 1280, y: 490, size: 26, align: "center" },
+        { text: "CROSS STREET CHAPEL · AS IN 1835", lines: ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], atSec: 7.4, untilSec: 9.4, x: 120, y: 84, size: 22 },
+      ],
+      tag: { parts: [{ text: "MANCHESTER", atSec: 0.3 }, { text: "31 OCT 1794", atSec: 0.6 }], at: "low-centre", toCornerAtSec: 1.0, untilSec: 6.0 },
+      camera: { pan: -40, push: 0.03 },
+      __overlay: {
+        chips: [{ chips: [{ text: "question", atSec: 0.4, x: 160, y: 400 }, { text: "experts", atSec: 1.0, x: 260, y: 520, accent: true }], arrows: [{ atSec: 0.8, from: [330, 495], to: [300, 520] }], untilSec: 1.4 }],
+      },
+    },
+  },
+  "LayerStage-A3-Prism": {
+    name: "LayerStage",
+    sec: 9,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-043", kind: "image", size: [1920, 1282], zoom: 1.1, focus: [0.5, 0.642], light: "none", haze: 0.12, dim: 0.15, blur: 3, rackSec: 3.0, rackDim: 0.55, outSec: 7.4, label: "PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH",
+          why: "Same idea: the line explains what a prism is; a glass prism today doing it, behind the band others see and the band Dalton describes." },
+      ],
+      overlay: {
+        spectrum: {
+          tracks: { drawAtSec: 0.6, drawSec: 1.4, lowerAtSec: 3.0, fills: [{ band: "red", atSec: 4.6 }, { band: "yellow", atSec: 6.0 }, { band: "blue", atSec: 6.4 }, { band: "purple", atSec: 6.8 }], count: { text: "I see only two or at most three distinctions", atSec: 5.6 } },
+          labels: [{ text: "OTHERS · DALTON'S SIX", atSec: 0.3, x: 210, y: 408, size: 22 }, { text: "DALTON'S WORDS", atSec: 3.0, x: 210, y: 714, size: 22 }],
+        },
+      },
+      camera: { pan: 0, push: 0.03 },
+      __overlay: {
+        quotes: [{ lines: [{ x: 210, y: 760, words: [{ text: "little", atSec: 3.6 }, { text: "more", atSec: 3.8 }, { text: "than", atSec: 4.0 }, { text: "a", atSec: 4.15 }, { text: "shade,", atSec: 4.3 }] }, { x: 210, y: 828, words: [{ text: "or", atSec: 4.6 }, { text: "defect", atSec: 4.75 }, { text: "of", atSec: 4.95 }, { text: "light", atSec: 5.1 }] }],
+          source: { text: "DALTON · 1798 · P. 31", atSec: 3.6, x: 720, y: 840 }, untilSec: 5.5 }],
+      },
+    },
+  },
+  "LayerStage-A3-Wish": {
+    name: "LayerStage",
+    sec: 6,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-004", file: "public/assets/sources/dalton_turner1834.jpg", kind: "image", size: [996, 1230], zoom: 1.0, focus: [0.47, 0.32], light: "none", haze: 0.1, blur: 1.5, rackSec: 4.0, lightFrom: "top-left", label: "JOHN DALTON · 1834",
+          why: "Same person: John Dalton, whose eyes his wish was about; his biographer's words about it are held up in front of him." },
+      ],
+      carry: [
+        { srcId: "SRC-007", file: "public/assets/sources/henry1854_p25_wish_line.png", size: [1850, 170], at: [880, 872], w: 1440, atSec: 1.0, enter: "rise",
+          highlights: [{ box: [710, 20, 1112, 52], atSec: 2.6 }, { box: [598, 102, 822, 54], atSec: 4.6 }] },
+      ],
+      labels: [{ text: "W. C. HENRY · 1854 · P. 25", atSec: 1.9, untilSec: 5.4, x: 160, y: 746, size: 22 }],
+      arrive: { dir: "down", px: 90, sec: 0.45 },
+      camera: { pan: -30, push: 0.02 },
+    },
+  },
+  "LayerStage-A3-Letter": {
+    name: "LayerStage",
+    sec: 8,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-002", kind: "image", size: [1920, 2934], zoom: 1.15, focus: [0.538, 0.4797], light: "paper", haze: 0.08, blur: 2, rackSec: 3.2, lightFrom: "top-left", label: "JOHN DALTON · 1798 · P. 34",
+          highlights: [{ box: [1645, 1252, 80, 50], atSec: 0 }, { box: [745, 1308, 980, 54], atSec: 0 }, { box: [745, 1366, 690, 54], atSec: 1.0 }],
+          why: "Same thing: the page where Dalton prints the laurel-leaf and sealing-wax match." },
+      ],
+      carry: [
+        { srcId: "SRC-014", file: "public/assets/sources/laurel_runicearth_leaf_cutout.png", size: [800, 700], at: [330, 360], w: 300, atSec: 0.2, enter: "rise" },
+        { srcId: "SRC-015", file: "public/assets/sources/sealingwax_petrik_cutout.png", size: [438, 497], at: [330, 690], w: 220, atSec: 0.8, enter: "rise" },
+        { srcId: "SRC-046", size: [1920, 1089], at: [1450, 770], w: 360, atSec: 1.6, enter: "rise", untilSec: 3.0, exit: "sink", caption: "A SEALED LETTER · 1841", captionSize: 20 },
+      ],
+      camera: { pan: -40, push: 0.03 },
+      __overlay: {
+        chips: [{ chips: [{ text: "green", atSec: 4.0, x: 1160, y: 640 }, { text: "red", atSec: 4.6, x: 1430, y: 640 }, { text: "to you", atSec: 5.4, x: 1160, y: 750, accent: true }], untilSec: 7.0 }],
+      },
+    },
+  },
+  "EyeDiagram-A3-Section": {
+    name: "EyeDiagram",
+    sec: 6,
+    props: {
+      mode: "section",
+      outlines: [{ parts: ["aqueous", "vitreous"], atSec: 0.4, untilSec: 1.6 }, { parts: ["vitreous"], atSec: 1.7 }],
+      labels: [{ text: "VITREOUS HUMOUR", atSec: 2.0, x: 1000, y: 480, size: 26, underline: { atSec: 2.8, fromCh: 9 } }, { text: "DALTON'S GUESS", atSec: 3.0, x: 1500, y: 84, size: 22 }],
+      beat: { atSec: 2.4, drawSec: 1.0 },
+      tints: [{ part: "vitreous", color: "#3D6BD6", atSec: 4.4, opacity: 0.5 }],
+      __overlay: {
+        chips: [{ chips: [{ text: "clear", atSec: 3.4, x: 160, y: 250, strikeSec: 4.0 }, { text: "tinted", atSec: 4.8, x: 160, y: 370, accent: true }], arrows: [{ atSec: 4.4, from: [230, 345], to: [215, 375] }] }],
+      },
+    },
+  },
+  "EyeDiagram-A3-Carry": {
+    name: "EyeDiagram",
+    sec: 6,
+    props: {
+      mode: "section",
+      tints: [{ part: "vitreous", color: "#3D6BD6", atSec: -1, opacity: 0.5 }],
+      pulses: [{ part: "vitreous", atSec: 0.5, to: 0.6, sec: 1.2 }],
+      rays: { atSec: 1.0, speed: 700, count: 18, colors: ["#FF3B30", "#30D158", "#2F6BFF"], absorb: { atSec: 1.0, colors: ["#FF3B30", "#30D158"], from: 0.55, to: 0.75, keep: 0.3 } },
+      labels: [{ text: "DALTON'S GUESS", atSec: -1, x: 1500, y: 84, size: 22 }],
+      __overlay: {
+        drift: 0.02,
+        stickers: [
+          { srcId: "SRC-014", file: "public/assets/sources/laurel_runicearth_leaf_cutout.png", size: [800, 700], at: [300, 380], w: 180, atSec: 2.0, tilt: -3, states: [{ atSec: 3.6, multiply: "#3D6BD6", opacity: 0.6 }], moves: [{ atSec: 3.6, to: [300, 440] }] },
+          { srcId: "SRC-015", file: "public/assets/sources/sealingwax_petrik_cutout.png", size: [438, 497], at: [300, 700], w: 140, atSec: 2.6, tilt: 2, states: [{ atSec: 3.6, multiply: "#3D6BD6", opacity: 0.6 }], moves: [{ atSec: 3.6, to: [300, 645] }] },
+        ],
+      },
+    },
+  },
+  "EyeDiagram-A3-Model": {
+    name: "EyeDiagram",
+    sec: 4,
+    props: {
+      mode: "simple",
+      openKeys: [{ atSec: 0, open: 1 }, { atSec: 3.2, open: 0 }],
+      __overlay: {
+        stickers: [{ srcId: "SRC-047", file: "public/assets/sources/eye_model_wellcome_cutout.png", size: [1714, 1197], at: [1600, 520], w: 320, atSec: 0.4, tilt: 2, object: true, tag: { text: "A MODEL OF AN EYE\nWELLCOME COLLECTION" } }],
+        chips: [{ chips: [{ text: "only", atSec: 1.6, x: 160, y: 490 }, { text: "two", atSec: 2.2, x: 376, y: 490, accent: true }] }],
+      },
     },
   },
   // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).

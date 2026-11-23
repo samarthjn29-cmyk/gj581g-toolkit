@@ -23,6 +23,7 @@ import { StaticBurst } from "../components/StaticBurst";
 import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
 import { RunningHead } from "../layers/RunningHead";
+import { ShotOverlay, type ShotOverlaySpec } from "../layers/ShotOverlay";
 
 // One act of an episode, composed only from library components (src/episodes/epXX-actYY.json).
 // Episodes always render in strict registry mode: every ID in a beat must be Active.
@@ -45,6 +46,8 @@ export type Beat = {
   ground?: GroundSpec;
   focus?: [number, number]; // key point for a push-through (the last shot's key picture)
   beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
+  // chips, quote chips and stickers over the component (layers/ShotOverlay.tsx); their IDs must be in `assets`
+  overlay?: ShotOverlaySpec;
   note?: string;
 };
 // Sound: every file is a registered asset (the narration take is an SRC row, the sounds SFX rows).
@@ -95,12 +98,19 @@ const Shot: React.FC<{ beat: Beat; built?: boolean }> = ({ beat, built }) => {
   const C = entry.Component;
   const st = beat.props.startSec as number | undefined;
   const props = built && !(st !== undefined && st > 0.3) ? { ...beat.props, startSec: -1 } : beat.props;
-  if (!beat.ground) return <C {...props} />;
+  const ov = beat.overlay;
+  if (ov) {
+    const need = [...((ov.chips ?? []).length ? ["TXT-024"] : []), ...((ov.quotes ?? []).length ? ["TXT-025"] : []), ...((ov.stickers ?? []).length ? ["VIS-060"] : []), ...(ov.stickers ?? []).map((x) => x.srcId)];
+    for (const id of need) if (!beat.assets.includes(id)) throw new Error(`${beat.id}: overlay uses ${id}, which is not listed in the beat's assets.`);
+  }
+  const over = ov ? <ShotOverlay spec={ov} /> : null;
+  if (!beat.ground) return over ? <><C {...props} />{over}</> : <C {...props} />;
   if (!beat.assets.includes(GROUND_IDS[beat.ground.kind])) throw new Error(`${beat.id}: ground ${GROUND_IDS[beat.ground.kind]} is not listed in the beat's assets.`);
   return (
     <ThemeOverride paper={beat.ground.kind === "paper" && beat.ground.tone !== "dark"}>
       <Ground spec={beat.ground} />
       <C {...props} />
+      {over}
     </ThemeOverride>
   );
 };

@@ -18,6 +18,10 @@ export type LabelSpec = {
   accent?: boolean; // accent colour for the one focal label
   settle?: boolean; // MOT-014 AccentSettle: arrives in the accent, cools to ink 0.5-1.1 s after (Johnny Harris's place names)
   moveTo?: { atSec: number; x: number; y: number; scale?: number }; // e.g. shrink to a corner
+  // an accent underline swipes in under part of the label on its word (Within Motion blend, act 3 W7: HUMOUR);
+  // fromCh/toCh: character range underlined (default the whole label); 0.35 s draw; leaves with the label
+  underline?: { atSec: number; fromCh?: number; toCh?: number };
+  lines?: string[]; // a two-line tag: lines after the first sit under it in the same chip
 };
 
 export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
@@ -46,6 +50,10 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
   const align = spec.align ?? "left";
   const tx = align === "center" ? "-50%" : align === "right" ? "-100%" : "0%";
   const r = rise(Math.min(1, p), 12);
+  const ul = spec.underline;
+  const pu = ul ? interpolate(frame, [sec(ul.atSec, fps), sec(ul.atSec + 0.35, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: SLOW_OUT }) : 0;
+  const n = spec.text.length;
+  const fs = spec.size ?? 32;
   return (
     <div
       style={{
@@ -76,6 +84,12 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
       }}
     >
       {spec.text}
+      {(spec.lines ?? []).map((l, i) => (
+        <div key={i}>{l}</div>
+      ))}
+      {ul && pu > 0 ? (
+        <div style={{ position: "absolute", left: 14 + (ul.fromCh ?? 0) * (0.6 * fs + 2), bottom: 4, height: 5, borderRadius: 3, background: t.colors.accent, width: ((ul.toCh ?? n) - (ul.fromCh ?? 0)) * (0.6 * fs + 2) * pu }} />
+      ) : null}
     </div>
   );
 };
