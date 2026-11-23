@@ -477,3 +477,141 @@ Pictures I looked at and measured: `crossstreetchapel_1835.jpg` (800x564), `pris
 - **A (chapel):** 25.2 (the plan clear: ring and labels gone). 26.29 (swap start; the dateline starting to un-wipe). 26.95 (the dateline and the plan's label gone, the chapel label not yet in: the corner clear). 27.6 (both chapel labels, at least 50 px above the chimney pot; the drawing at 200% for JPEG steps; the world's left edge). 29.4 (the page mid-rise). 29.65 (the page's settle: 60 px from the door surround and 55 px below the window, shadow down and right, no halo at 200%). 30.03 (match midpoint: the chapel soft behind the page). 30.35 (A2's first sharp frame on the chapel ground). Each A2 highlight landing.
 - **S (prism):** 75.1 (the OTHERS chip, 130 px from the prism's face). 75.8 (the glide landed: the whole prism, the tag, the world's bottom edge). 79.4 (the strip mid-draw at the prism's base). 80.5 (the strip complete: the base line and the back corner inside the strip, no edge lined up). 83.8 (rack end). 86.6 (the quote readable on the dimmed world). 89.8 (the dim red end against the opaque track, with the photo's red behind it dark). 94.0 (the count and tag in place). 96.4 and 99.2 (fills). 100.6 (the world label gone, the world mid-fade). 101.5 (only canvas behind the strips). 102.07 (last frame), side by side with D's 102.10 (centres and the x 210 line agree).
 - **H (portrait):** 184.0 (the lid moving in the old shot). 184.07 (the cut). 184.22 (the portrait arriving, no bare bottom edge). 184.6 (settled: the lens at about (854, 516) against the iris's (960, 546)). 186.6 (the strip rising). 187.1 (the strip settled: 56 px under the chin, the tag 19 px above it, the strip over his white stock at 200%, shadow down and right, any colour jump). 190.2 (H1). 192.2 (rack end). 193.6 (H2, plus a phone-size thumbnail of it: does the strip read?). 194.95 (the Henry tag gone, the portrait's tag on). 195.4 (band midpoint: the tag covered first).
+
+---
+
+## Within Motion blend (24 Nov 2026)
+
+Sam, 24 Nov 2026: "Blend into E01 from act 3". Source: `/home/claude/recs/WITHIN_MOTION_STUDY_2026-11-24.md`, and I looked at frame sheets `WMsheet_00` and `WMsheet_02`. Their panels: one big spoken keyword on paper chips (white chips, the key word on the orange one: "washing / dishes", "dream / live inside"); strikes ("college", "reward"); a literal cut-out object for the noun (plates, a radio, a stack of books, a phone); halftone sticker people; map scraps with a route and a circled end. Pieces pop in and settle, and there are no camera moves. We keep LOK-009 and the calm version, and add five Planned devices: TXT-024, TXT-025, VIS-060, VIS-061 and MAP-017. All times are act seconds; beats are `act3_rows.json` rows.
+
+**How the devices look in LOK-009 (so they belong to this theme, not to theirs)**
+- **TXT-024 chips:**
+  - **White chip:** the paper chip (#F6F0E4 at 0.92) with ink text. **Accent chip:** #00E0BE with ink text. One accent chip per panel.
+  - **Type:** Fraunces 600, lowercase as spoken, 72-80 px, padding 10/18 px, radius 4. Each chip sits at a fixed tilt of ±1.5°. The lowercase serif tells the spoken words apart from our uppercase mono labels.
+  - **Entrance:** each chip lands on its word with the house lock (rises 12 px, 0.35 s, no overshoot).
+  - **Options:**
+    - **Strike:** a 6 px accent line swipes across in 0.3 s, on the word.
+    - **Swap:** a hand-drawn arrow draws in 0.35 s, then the second chip lands.
+    - **Stack:** rows staggered by about 80 px.
+  - **Exit:** an un-wipe (MOT-013), or the chips leave with the shot.
+  - **Sound:** silent, as all our text is.
+- **TXT-025 quote chips:** the same white chips at 44 px, landing word by word from the word times. The speaker or source sits on a mono chip.
+- **VIS-060 sticker:** a 6 px white edge (the cut-out's alpha, dilated) and a small soft shadow.
+  - **Entrance (the calm pop):** scale 0.94 → 1 and tilt ±6° → a resting tilt of ±2-3°, over 0.6 s, slow-out, no overshoot.
+  - **Rules:** one sticker entrance at a time. No halftone where the object's colour is the point. Colour states apply inside the photo only, and the white edge stays white.
+- **Not taken from Within Motion:** the poster palette, starbursts, spinners, bumpers, and the 50% footage pace. LayerStage keeps its one slow camera move. No device is placed on the act's one impact (the hit cut at 102.10) or over a page's own highlight.
+
+### Placements, beat by beat
+
+| # | Beat (act s) | Device | Words or object | Position (frame px) | Cue | Entrance / exit | Sound |
+|---|---|---|---|---|---|---|---|
+| W1 | 2 (2.40-5.09), shot A | TXT-024 swap | `question` (white) → `experts` (accent) | `question` at (160, 400) (x 160-553); the arrow runs down-right to `experts` at (260, 500) (x 260-608), over the plan's west streets, away from the college (1280, 310) and the dateline's low-centre spot | "question" 3.42; arrow + "experts" 4.14 (the plan is in by 3.0) | Both chips un-wipe from 6.9, before part 2 of the dateline on "October" (7.12). MANCHESTER lands low-centre at 5.56 while they are still on, in a different part of the frame. | silent |
+| W2 | 5-7 (10.22-17.5), shot A, **conditional** | MAP-017 | A torn scrap of a 1790s regional map (to source) with a straight line KENDAL → MANCHESTER and a hand-drawn circle on Manchester; small mono chips `KENDAL` and `MANCHESTER`; no date on screen | A LayerStage carried piece, `w 520`, `at [440, 560]` (about x 180-700, y 330-760 with the camera), tilted -4°, torn edge. It stays clear of AGE 28 (x ~1190-1370) and TUTOR (x 955-1605). | Rises on "moved" (10.22); the line draws 10.42-11.24; the circle lands on "before" (11.24) | Sinks away from 17.4, before "That's the old name". | Silent: A's one SFX-016 (the page) and one SFX-017 (the ring) are already used. |
+| W3 | 15 (36.08-36.48), A2 card | TXT-024 stack | `his own` (white) + `eyes` (accent) | One row in the card's right column at y 700: x 1106-1419 and 1435-1629. That is about 75 px under the source tag, which ends near y 625 (check), and off the page. | "his" 36.08, "eyes" 36.48 | Carried off by the canvas glide at 40.21, with the column. | silent |
+| W4 | 24-25 (60.60-63.05), shot B | VIS-061 (as a layer cut-out, not a sticker: B is a lit LayerStage) | **A folded letter sealed with red wax, about 1790-1810** (to source) | `carry[2]`, `w 360`, `at [1450, 770]` (about x 1255-1620, y 650-890 at its settle). It sits over the page's lower, unhighlighted lines, 90 px below H3 (which ends at y 556). | Rises from "used" (60.60) and lands on "seal letters" (61.5) | Sinks away 62.45-63.05, so it leaves as a3-05 ends, before "Think". | SFX-016 `paper_move` at -27 dB at 61.6, in the pause after "letters." (B's first SFX-016) |
+| W5 | 25-27 (65.08-71.5), shot B | TXT-024 stack | `green` (white), `red` (white), `to you` (accent) | Row 1 at y 640: `green` x 1160-1410, `red` x 1430-1600. Row 2 at y 750: `to you` x 1160-1440. On the blurred page's lower lines, where the letter was, 84 px clear of the highlights. | "green" 65.08, "red" 66.36, "To you" 68.84 | All un-wipe from 71.0, so the olive (71.65) and SIMULATION (72.06) land on a clean frame: the chips say "to you", and the olive pair shows "to him". | silent |
+| W6 | 33-34 (85.69-88.35), shot S | TXT-025 quote chips (replace the typed quote) | `little more than a shade,` / `or defect of light`, verbatim as spoken, plus the source chip `DALTON · 1798 · P. 31` | Row 1 (210, 760), x 210-~910. Row 2 (210, 828). The source chip right of row 2, at about (720, 840). All under the lower track's red end, ending by y 890. | Word by word, from "little" (85.69) to "light" (88.35) | Un-wipe at 92.9, as the typed quote did. The count still types in their place on "two". | silent |
+| W7 | 44 (114.83), shot D | Underline swipe on an existing label (no new words) | under `HUMOUR` in the VITREOUS HUMOUR label (1000, 480) | under the label | "humour" 114.83 | 0.35 s draw; it leaves with the label | silent |
+| W8 | 47-48 (124.81-128.08), shot D | TXT-024 strike + swap | `clear` (white, struck) → `tinted` (accent) | `clear` at (160, 250) (x 160-~400); arrow down; `tinted` at (160, 350) (x 160-~470). Left of the eye circle (x 630), above the beam's line (y 540), 166 px under the DALTON'S GUESS corner tag. | "isn't" 124.81 (the chip); strike on "clear." 125.27; arrow + "tinted" 127.11, with the tint already running from 126.59 | Carried off by the DraftingWipe at 128.08, whose line uncovers the left side first. | silent |
+| W9 | 54-55 (142.36-146.9), shot C | VIS-061 + VIS-060 sticker (replaces the tint pulse on "blue glass") | **A flat piece of blue glass, photographed today**, tagged `BLUE GLASS · TODAY` | `w 300` at (1560, 330) (x 1410-1710, y ~200-460), outside the eye circle (x 630-1290), balancing the leaf and wax that come later on the left. Its tag sits under it (y ~480, mono 20). It rides in EyeDiagram's carry layer. | Pops from "looking" (142.36) and settles on "blue glass" (~143.0) | Sinks away 146.4-146.9, before "soaks up" (147.15); the rays start at x 210, far from it. | silent (C's one pop belongs to the pair) |
+| W10 | 57-60 (152.72-161.80), shot C | VIS-060 sticker look for C's leaf and wax (positions, sizes, states and moves unchanged) | SRC-014 / SRC-015 cut-outs, white edge, no halftone | (300, 380) and (300, 700), as briefed; resting tilts -3° and +2° | Leaf pops at 152.72, wax at 153.10 (one sticker entrance at a time), both settled before "Reds" (153.94) | Carried off by the slide at 161.80, as before. The multiply-blue "duller" state applies inside the photos only; the white edges stay white. | SFX-026 at -26 dB on the wax's settle (~153.7), the shot's one pop (was "on the pair's settle") |
+| W11 | 67-68 (180.28-184.07), a3-13 | VIS-061 + VIS-060 sticker | **A 19th-century anatomical model of the eye that comes apart**, shown opened (to source), tagged `A MODEL OF AN EYE · <date from its record>` | `w 320` at (1600, 520) (x 1440-1760), 100 px right of the simple eye (x 580-1340); its tag under it at y ~720 | Pops on "open" (180.28), settled by "eye." (180.88) | Carried off by the cut on action (the old frame drops 90 px) at 184.07 | Silent: the deadpan runs in silence, and a3-13's one pop is the morph's |
+| W12 | 68 (182.25-184.07), a3-13 | TXT-024 stack | `only` (white) + `two` (accent) | One row at y 490: x 160-360 and 376-540. `two` at about (458, 532) is 396 px from the lens the cut lands on (854, 516): inside 25%. | "only" 182.25, "two." 182.85, in the silence | Carried off by the cut, with the frame. The closing lid (from 183.52) stays the one moving thing into the cut. | silent |
+| W13 | 73-75 (198.53-203.00), shot E | TXT-024 stack (**replaces VIS-020 KineticLine**) | `what is` (white) + `colour?` (accent), then `one man` (white) | Row 1 at (120, 470): x 120-464 and 480-824, about vertically centred as the line was. Row 2 `one man` at (120, 590), x 120-464. The match focus (280, 370) is about 100 px above. | "what" 198.53, "colour" 198.83; "one" 202.34 (this fills beat 75's 4 s of "nothing new") | Blurred away by the focus match into the dark room at 203.00 | silent |
+
+**Not placed, with the reason**
+- **'a careful paper' and 'one by one':** "careful" would land on the canvas glide and is 5.5 s after W3 (TXT-024 allows one panel per 15 s). "one by one" falls on the GREEN highlight, which already shows it.
+- **'He offers an explanation':** that is the act's one impact (the hard cut, the hit and the eye drawing in on "explanation"). A chip there would be a second hero.
+- **'strongly expressed wish':** H2 highlights those very words on Henry's page. TXT-025 is not allowed over a page that shows the words, and a chip elsewhere would duplicate the highlight (rule 2).
+- **Quote chips over Dalton's portrait:** SRC-004 is at its limit (16 of 16). W6's quote sits beside the track named DALTON'S WORDS instead (p.31 is not local).
+- **A prism object:** S's world is a prism already. A second, period prism next to his words would read as his own prism, which the register forbids. A period prism belongs to act 4 (Newton) if anywhere.
+- **The request in H:** no object. The frame is already the portrait, the strip and two tags, and nothing else in the line is a thing.
+
+### What it replaces, and the small retimes that keep it calm
+- **Replaced:**
+  - The typed quote (beat 33) → quote chips (W6).
+  - C's tint pulse on "blue glass" (beat 54) → the blue glass (W9).
+  - E's KineticLine (beats 73-75) → chips (W13).
+  - B's "TO YOU" fallback label → part of W5.
+  - C's carried cut-outs → stickers (W10).
+- **Retimed, with no new elements:**
+  - A's dateline corner move: from "moved" to 9.0, in the pause after "1794.", so W2 arrives alone.
+  - B's wax label A WAX SEAL · TODAY: from "seal letters" to "wax" (59.88), so the letter arrives alone.
+  - p.43's 'fication of blue.' highlight: from "probably" to "blue" (131.28, beat 50).
+  - The p.43 dim: from "noticed by now" to "anywhere" (173.76, beat 65). It means the same thing: anywhere else, a tint would have been seen.
+- **Stillness after the blend:**
+  - The longest gaps are 4.35 s on the p.34 card (the card's own reveal, then "lists") and 4.6 s on the p.43 return while the quote is read in near-silence (165.66 → 170.28). Both are within Within Motion's 3-5 s and moving with the drift. The frame review judges them.
+  - Fixed by the blend: A's 6.1 s on "That's the old name..." (W2; still open if W2 is not approved), A2's 4.9 s (W3), B's 7 s after the rack (W5), D's 5.5 s on "humour is an old word" (W7), and E's 4 s on "one man" (W13).
+- **Beats with two new elements, each with its reason:**
+  - 2 and 48: one device in two parts (a swap).
+  - 24: the line names both the wax and the letters, 1.6 s apart.
+  - 25: the rack, then the first colour named, 2 s apart.
+  - 67: the morph, then the noun "eye", 2.2 s apart.
+  - 68: the chips, then the lid, which is the existing cut-on-action.
+  - No beat gains two things on one frame.
+- **Words on screen:** no chip repeats a whole spoken line. Each carries the line's key word or words, all spoken. W6 is a verbatim quote, which is what TXT-025 is for. There are no new claims, apart from W2's Kendal (see the conditions).
+
+### Counts
+
+| Asset | Limit | Use | Status |
+|---|---|---|---|
+| TXT-024 KeywordChips | 8 per act; 1 panel per 15 s | W1, W3, W5, W8, W12, W13 = 6, at 3.42, 36.08, 65.08, 124.81, 182.25 and 198.53 (gaps 32.7, 29.0, 59.7, 57.4, 16.3 s) | OK |
+| TXT-025 QuoteChips | 3 per act | W6 = 1 | OK |
+| VIS-060 StickerCutout | 12 beats per act | beats 54, 55, 57-60, 67, 68 = 8 | OK |
+| VIS-061 ObjectProp | 6 beats per act | letter 24-25, glass 54-55, eye model 67-68 = 6 | **At the limit** |
+| MAP-017 MapScrapRoute | 3 per episode | W2 = 1 (conditional) | OK |
+| VIS-059 carried things | 3 per shot | B: leaf, wax, letter = 3; A: scrap, page = 2 | B **at the limit** |
+| SFX-026 SoftPop | 1 per shot; 8 per episode | no new pops (C's moves to the wax's settle); the episode stays at 5 (act 2: 2; act 3: 3) | OK |
+| SFX-016 PaperFoley | 10 per episode; 1 per shot | +1 (B's letter): act 3 = beats 12, 17, 24 (+ H's optional) | OK; count acts 1-2 first |
+| VIS-020 KineticLine | 12 per episode | 3 beats fewer (73-75) | frees 3 |
+| SRC-004 | 16 per episode | no new use | stays at 16 of 16 |
+
+Nothing goes over a limit. VIS-061 and B's carry are exactly at theirs.
+
+### New objects to source (each needs its own SRC row, licence and Drive copy, then the fact-check; the Director only proposes)
+1. **A folded letter sealed with red sealing-wax, about 1790-1810** (W4, beats 24-25). A museum photograph of a real letter of the period, folded into its own envelope (no separate envelope; those come after 1840), with an intact red wax seal, shot face-on with the seal showing. CC0 or public domain. If the address is legible, it must not be Dalton's or anyone the episode names. No tag (it is period-right); the credit goes in the description.
+2. **A flat piece of blue glass, today** (W9, beats 54-55). A pane or disc of clear deep-blue glass on a plain ground, front-lit, so it reads as glass you could look through. Free licence. Tagged BLUE GLASS · TODAY. Not tinted spectacles (that would suggest he wore them, which no source says), and not a bottle (you can't look through one).
+3. **A 19th-century model of the eye that comes apart** (W11, beats 67-68). A dissectible anatomical eye model (papier-mâché or ivory, from a museum collection such as the Science Museum Group or the Wellcome Collection), photographed opened or with its parts laid out. CC BY or public domain. Tagged A MODEL OF AN EYE with the date from its record. It must read as a model, never as Dalton's own eye (act 6's real remains).
+4. **Conditional, for W2:** a public-domain 1790s map showing both Kendal and Manchester (for example John Cary's 1794 *New Map of England and Wales*, the sheet with both towns, or a 1790s map of Lancashire and Westmorland), large enough to tear a piece about 1000 px wide. W2 goes in only if both: (a) this map is registered; and (b) the fact-check passes "he moved from Kendal" as already established (act 2's Kendal pin; "the year before" = 1793, which is never put on screen). The line is a straight line between the towns, never a road (MAP-017: the route is never invented). Without both, W2 is dropped and A's 6.1 s gap goes back to the frame review.
+
+### Builder additions (blend)
+- **TXT-024 and TXT-025 as a per-shot chip layer in the act file**, using frame positions and word cues, over any component, with stack, strike, swap and word-by-word timing, as specified above.
+- **VIS-060** for EyeDiagram's carry (Builder 6 of the first brief) and as a stand-alone layer: the white edge, the calm pop, the resting tilt, and states applied inside the photo only.
+- **LayerStage carry exit:** `untilSec` with `exit: "sink"` (the rise reversed, 0.6 s), for W2 and W4.
+- **MAP-017 on a carried piece:** a torn-paper mask, a from → to line in the map's image px, a hand-drawn end circle, and mono place chips, all drawn inside the carried thing.
+- **Label `underline: { atSec, word }`** for W7.
+
+### Rows to change (notes, and the visual, text or source column where named)
+
+| Beat | Change |
+|---|---|
+| 2 | Add TXT-024 W1 (question → experts). |
+| 4 | Dateline corner move at 9.0 (was on "moved", row 5). |
+| 5-7 | Add MAP-017 W2 (conditional), the scrap out at 17.4. Source: + the new map SRC. |
+| 15 | Add TXT-024 W3 (his own · eyes). |
+| 24 | Wax label on "wax" (59.88). Add VIS-061 W4 (the sealed letter) and SFX-016 at 61.6. Source: + the letter SRC. |
+| 25 | The letter sinks away by 63.05. Add W5's `green` (65.08). |
+| 26 | Add `red` (66.36): no longer "nothing new". |
+| 27 | Add `to you` (68.84); the chips un-wipe from 71.0. |
+| 33 | The typed quote becomes TXT-025 W6. |
+| 44 | The underline swipe under HUMOUR (W7). |
+| 47-48 | Add TXT-024 W8 (clear, struck → tinted). |
+| 49-50 | 'fication of blue.' highlight moves to "blue" (131.28). |
+| 54-55 | The tint pulse is replaced by VIS-061/VIS-060 W9 (blue glass). Source: + the glass SRC. |
+| 57-60 | The leaf and wax take the VIS-060 sticker look, staggered (152.72 / 153.10); the pop on the wax's settle. |
+| 65-66 | The dim moves to "anywhere" (173.76, beat 65). |
+| 67-68 | Add VIS-061/VIS-060 W11 (the eye model) and TXT-024 W12 (only · two). Source: + the model SRC. |
+| 73-75 | Visual VIS-020 → TXT-024 (W13: what is · colour? · one man). |
+
+### Stills to add to the frame review
+- 4.4 (W1: both chips on, clear of the plan's college).
+- 11.4 (W2: the line drawn and the circle on Manchester, the scrap's torn edge at 200%).
+- 36.8 (W3, under the source tag).
+- 61.6 (W4: the letter settled, 90 px under H3).
+- 69.2 (W5: three chips, clear of the highlights).
+- 88.5 (W6: all quote chips readable on the dimmed photo).
+- 127.4 (W8).
+- 143.2 (W9: the glass's sticker edge and tag).
+- 153.8 (W10: both stickers, the edge staying white under the blue state at 156.5).
+- 182.95 (W11 and W12: the model, the chips and the eye balanced).
+- 202.6 (W13).
