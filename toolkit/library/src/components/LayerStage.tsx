@@ -43,6 +43,14 @@ export type StageWorld = {
   why: string;
   // a present-day clip or photo behind a period subject: its label reads TODAY · ...
   today?: boolean;
+  // depth (layering study, 23 Nov 2026): atmospheric perspective and depth of field on the world, so the carried
+  // thing separates from it. haze 0-0.35 lifts and flattens the far plane; blur 0-4 px softens it; rackSec pulls the
+  // blur in from 0 over 0.8 s from that time (focus moves from the world to the thing as it arrives).
+  haze?: number;
+  blur?: number;
+  rackSec?: number;
+  // where the world's light comes from: the carried things' shadows fall the other way
+  lightFrom?: "top" | "top-left" | "top-right" | "left" | "right";
 };
 export type CarryState = { atSec: number; color?: string | null; label?: string };
 export type StageCarry = {
@@ -57,6 +65,9 @@ export type StageCarry = {
   moves?: { atSec: number; to: XY; w?: number; sec?: number; why: string }[]; // why: what the destination means
   caption?: string;
   captionUntilSec?: number; // the caption un-wipes from here (MOT-013), with or before the thing's exit
+  // rest: the thing lies on the world's surface (a page on a desk): a tight contact shadow; otherwise it is lifted
+  // off the world and its shadow is softer and further away (layering study, 23 Nov 2026)
+  rest?: boolean;
 };
 export type LayerStageProps = {
   worlds: StageWorld[];
@@ -80,6 +91,11 @@ const GRADE: Record<string, string> = {
 };
 // the light a world casts on the carried things (a soft-light wash over them, masked to their shape)
 const CAST: Record<string, string> = { day: "rgba(170,205,255,0.18)", warm: "rgba(255,150,60,0.38)", night: "rgba(60,80,140,0.35)", none: "rgba(0,0,0,0)" };
+// a shadow takes the world's ambient colour (a cool day, a brown candle-lit room), never neutral black
+const SHADOW: Record<string, string> = { day: "rgba(24,34,52,", warm: "rgba(58,26,8,", night: "rgba(6,10,26,", none: "rgba(20,18,16," };
+// the carried thing is graded part-way towards its world (saturation and brightness match)
+const NEAR_GRADE: Record<string, string> = { day: "saturate(0.95)", warm: "sepia(0.12) saturate(1.04) brightness(0.96)", night: "saturate(0.8) brightness(0.8)", none: "none" };
+const LIGHT_DIR: Record<string, XY> = { top: [0, 1], "top-left": [0.6, 0.8], "top-right": [-0.6, 0.8], left: [1, 0.25], right: [-1, 0.25] };
 
 const WorldPlate: React.FC<{ w: StageWorld; until: number }> = ({ w, until }) => {
   const src = useSourceFile(w.srcId, w.file);
@@ -89,7 +105,15 @@ const WorldPlate: React.FC<{ w: StageWorld; until: number }> = ({ w, until }) =>
   if (z < 1 || z > 1.5) throw new Error("LayerStage: world zoom 1-1.5.");
   const s = Math.max(1920 / w.size[0], 1080 / w.size[1]) * 1.08 * z;
   const f = w.focus ?? [0.5, 0.5];
-  const st: React.CSSProperties = { position: "absolute", width: w.size[0] * s, height: w.size[1] * s, left: 960 - f[0] * w.size[0] * s, top: 540 - f[1] * w.size[1] * s, maxWidth: "none", filter: GRADE[w.light ?? "none"] };
+  const frame = useCurrentFrame();
+  const hz = w.haze ?? 0;
+  if (hz < 0 || hz > 0.35) throw new Error("LayerStage: world haze 0-0.35.");
+  if ((w.blur ?? 0) < 0 || (w.blur ?? 0) > 4) throw new Error("LayerStage: world blur 0-4 px.");
+  // inside the world's Sequence, frame counts from the world's start
+  const rack = w.rackSec !== undefined ? interpolate(frame, [sec(w.rackSec - w.atSec, fps), sec(w.rackSec - w.atSec + 0.8, fps)], [0, 1], { ...clamp, easing: SLOW_OUT }) : 1;
+  const bl = (w.blur ?? 0) * rack;
+  const depth = `${hz > 0 ? ` contrast(${(1 - hz * 0.6).toFixed(3)}) brightness(${(1 + hz * 0.25).toFixed(3)}) saturate(${(1 - hz * 0.5).toFixed(3)})` : ""}${bl > 0.05 ? ` blur(${bl.toFixed(2)}px)` : ""}`;
+  const st: React.CSSProperties = { position: "absolute", width: w.size[0] * s, height: w.size[1] * s, left: 960 - f[0] * w.size[0] * s, top: 540 - f[1] * w.size[1] * s, maxWidth: "none", filter: `${GRADE[w.light ?? "none"]}${depth}`.replace(/^none /, "") };
   if (w.kind === "image") return <Img src={src} style={st} />;
   if (!w.revFile || !w.clipSec) return <OffthreadVideo src={src} muted startFrom={sec(w.clipStartSec ?? 0, fps)} style={st} />;
   // ping-pong: forward, reversed, forward... so a short real clip covers the whole shot
@@ -107,7 +131,8 @@ const WorldPlate: React.FC<{ w: StageWorld; until: number }> = ({ w, until }) =>
   );
 };
 
-const Carried: React.FC<{ c: StageCarry; light: { a: string; b: string; p: number }; cam: XY }> = ({ c, light, cam }) => {
+type NearLight = { a: string; b: string; p: number; key: string; from: XY };
+const Carried: React.FC<{ c: StageCarry; light: NearLight; cam: XY; uid: string }> = ({ c, light, cam, uid }) => {
   const t = useTheme();
   const src = useSourceFile(c.srcId, c.file);
   const frame = useCurrentFrame();
@@ -135,10 +160,36 @@ const Carried: React.FC<{ c: StageCarry; light: { a: string; b: string; p: numbe
     return { s, o: pin * pout };
   });
   const mask: React.CSSProperties = { WebkitMaskImage: `url(${src})`, maskImage: `url(${src})`, WebkitMaskSize: "100% 100%", maskSize: "100% 100%" };
+  const fid = `ls-edge-${uid}`;
+  // shadow: falls away from the world's light, in the world's ambient colour; tight when resting, soft when lifted
+  const sc = SHADOW[light.key] ?? SHADOW.none;
+  const [lx, ly] = light.from;
+  const lift = c.rest ? 0 : 1 - 0.35 * pe; // a rising thing's shadow tightens as it settles
+  const shadow = c.rest
+    ? `drop-shadow(${(lx * 3).toFixed(1)}px ${(ly * 3).toFixed(1)}px 3px ${sc}0.42)) drop-shadow(${(lx * 12).toFixed(1)}px ${(ly * 12).toFixed(1)}px 14px ${sc}0.22))`
+    : `drop-shadow(${(lx * (16 + 14 * lift)).toFixed(1)}px ${(ly * (16 + 14 * lift)).toFixed(1)}px ${(22 + 16 * lift).toFixed(0)}px ${sc}${(0.3 - 0.08 * lift).toFixed(2)}))`;
+  const wrapColor = light.key === "warm" ? "#ffb070" : light.key === "night" ? "#7088c0" : light.key === "day" ? "#dbe8ff" : "#ffffff";
+  const wrapOpacity = light.key === "none" ? 0 : light.key === "warm" ? 0.32 : 0.22;
   const capV = c.captionUntilSec !== undefined ? interpolate(frame, [sec(c.captionUntilSec, fps), sec(c.captionUntilSec + 0.4, fps)], [1, 0], clamp) : 1;
   return (
     <div style={{ position: "absolute", left: at[0] - w / 2 + cam[0], top: at[1] - h / 2 + dy + cam[1], width: w, height: h, opacity: op }}>
-      <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: "drop-shadow(0 26px 36px rgba(0,0,0,0.22))" }} />
+      {/* edge: a 0.6 px choke kills the old background's fringe, and a soft rim of the world's light wraps the edge
+          (layering study: halos and hard rims are what make a cut-out look pasted on) */}
+      <svg width={0} height={0} style={{ position: "absolute" }}>
+        <filter id={fid} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+          <feMorphology in="SourceAlpha" operator="erode" radius={0.6} result="core" />
+          <feGaussianBlur in="core" stdDeviation={0.45} result="coreS" />
+          <feComposite in="SourceGraphic" in2="coreS" operator="in" result="body" />
+          <feMorphology in="coreS" operator="erode" radius={5} result="inner" />
+          <feComposite in="coreS" in2="inner" operator="out" result="rimBand" />
+          <feGaussianBlur in="rimBand" stdDeviation={3} result="rimSoft" />
+          <feFlood floodColor={wrapColor} floodOpacity={wrapOpacity} />
+          <feComposite in2="rimSoft" operator="in" result="rim" />
+          <feComposite in="rim" in2="coreS" operator="in" result="rimIn" />
+          <feBlend in="rimIn" in2="body" mode="screen" />
+        </filter>
+      </svg>
+      <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: `url(#${fid}) ${NEAR_GRADE[light.key] ?? "none"} ${shadow}` }} />
       {layers.map(({ s, o }, i) => (s.color && o > 0 ? <div key={i} style={{ position: "absolute", inset: 0, background: s.color, mixBlendMode: "color", opacity: o * 0.92, ...mask }} /> : null))}
       {/* the world's light on the thing */}
       <div style={{ position: "absolute", inset: 0, background: light.a, mixBlendMode: "soft-light", opacity: 1 - light.p, ...mask }} />
@@ -190,6 +241,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
   });
   if ((camera.push ?? 0) > 0.06) throw new Error("LayerStage: push <= 0.06.");
   const t = useTheme();
+  const uid = React.useId().replace(/[^a-zA-Z0-9]/g, "");
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const prog = Easing.inOut(Easing.sin)(frame / Math.max(1, durationInFrames - 1));
@@ -208,7 +260,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
   // light on the carried things: from the previous world's light to the current one's
   const prevLight = worlds[Math.max(0, curI - 1)].light ?? "none";
   const curLight = worlds[curI].light ?? "none";
-  const light = { a: CAST[curI === 0 ? curLight : prevLight], b: CAST[curLight], p: curI === 0 ? 1 : showing[curI] };
+  const light: NearLight = { a: CAST[curI === 0 ? curLight : prevLight], b: CAST[curLight], p: curI === 0 ? 1 : showing[curI], key: curLight, from: LIGHT_DIR[worlds[curI].lightFrom ?? "top"] };
   const until = durationInFrames / fps;
   // a pan reads as a whip: the far plane blurs while it travels (peak 12 px mid-pan), which also hides the seam
   const whip = worlds.reduce((b, w, i) => (i && (w.change ?? "dissolve") === "pan" ? Math.max(b, Math.sin(Math.PI * showing[i]) * 12) : b), 0);
@@ -249,7 +301,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
       {/* near plane: the carried things */}
       <AbsoluteFill style={{ transform: `scale(${push.toFixed(4)})` }}>
         {carry.map((c, i) => (
-          <Carried key={i} c={c} light={light} cam={[pan, 0]} />
+          <Carried key={i} c={c} light={light} cam={[pan, 0]} uid={`${uid}-${i}`} />
         ))}
       </AbsoluteFill>
       <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, ${t.colors.dimMask} 100%)`, opacity: 0.55, pointerEvents: "none" }} />

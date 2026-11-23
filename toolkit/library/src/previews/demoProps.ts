@@ -148,8 +148,8 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
     sec: 10,
     props: {
       worlds: [
-        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "DAYLIGHT", today: true, why: "The change itself: Dalton saw the flower sky-blue by day." },
-        { atSec: 5.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.5], clipStartSec: 7.6, change: "dissolve", sec: 1.4, light: "warm", label: "CANDLELIGHT", today: true, why: "The change itself: by candle the same flower turned red to him." },
+        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", haze: 0.12, blur: 2, rackSec: 0.3, label: "DAYLIGHT", today: true, why: "The change itself: Dalton saw the flower sky-blue by day." },
+        { atSec: 5.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.5], clipStartSec: 7.6, change: "dissolve", sec: 1.4, light: "warm", blur: 1.5, lightFrom: "left", label: "CANDLELIGHT", today: true, why: "The change itself: by candle the same flower turned red to him." },
       ],
       carry: [
         { srcId: "SRC-013", file: "public/assets/sources/geranium_stang_flowerhead_cutout.png", size: [1185, 769], at: [960, 470], w: 780, atSec: 0.3, enter: "rise",
@@ -172,7 +172,7 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
     sec: 10,
     props: {
       worlds: [
-        { atSec: 0, srcId: "SRC-041", kind: "image", size: [1920, 1148], zoom: 1.2, focus: [0.417, 0.5255], light: "day", label: "A DISTANT SHOWER · LUKE HOWARD · 1803",
+        { atSec: 0, srcId: "SRC-041", kind: "image", size: [1920, 1148], zoom: 1.2, focus: [0.417, 0.5255], light: "day", haze: 0.1, blur: 1.4, rackSec: 0.2, lightFrom: "top-left", label: "A DISTANT SHOWER · LUKE HOWARD · 1803",
           why: "Same time, same idea: the weather of Dalton's years, drawn in 1803 by Luke Howard, who named the clouds; this book and the diary record that weather." },
         { atSec: 8.3, srcId: "SRC-033", kind: "image", size: [4000, 5313], focus: [0.506, 0.684], change: "dissolve", sec: 1.2, light: "none", label: "MAP · EMANUEL BOWEN · 1760",
           why: "Same place: Kendal, where he taught and where the 1793 book's observations were made; the next words name it." },

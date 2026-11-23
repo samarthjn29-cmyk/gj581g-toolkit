@@ -60,6 +60,25 @@ Plain cards, charts and pages get a one-line brief (where the eye starts and end
     lit subject, never a flat cut-out pasted on top.
 12. **Calm version:** one move per shot, entrances 0.6-0.9 s, no overshoot, at most one world change every 2.5 s.
 
+### Layering (study of compositing and parallax practice, 23 Nov 2026: `styles/LAYERING_STUDY_2026-11-23.md`)
+13. **Three planes, each with texture.** A layered shot has a far world, a mid plane or a second depth inside the
+    world, and the near thing. A flat colour plane hides parallax; every plane carries real detail.
+14. **Depth by more than speed.** Far moves slowest (0.35x), and is also a little softer and flatter: `haze`
+    0.05-0.15, `blur` 1-2.5 px, with `rackSec` when the near thing arrives (focus moves from the world to the thing).
+    Never blur the world's own subject while the narration is about it.
+15. **No gaps, no tearing.** Every plane overlaps the frame and the plane in front by at least the full camera move;
+    scrub the stills at the move's ends for a bare edge.
+16. **No lines that tie the planes together.** A road, bridge, horizon rail or power line running from the near plane
+    into the far one locks to one perspective and shows the cardboard; pick another world or keep the move tiny.
+17. **Integrate the cut-out.** Its shadow falls away from the world's light (`lightFrom`) in the world's own ambient
+    colour, never grey-black; `rest: true` for a thing lying on a surface (tight contact shadow), lifted otherwise.
+    The edge is choked and wrapped in the world's light; the thing is graded part-way to the world (LayerStage does
+    these). Halos from the old background, a light direction that disagrees, or a saturation jump are notes.
+18. **Moves stay small and eased.** One pan or push of a few per cent, eased in and out, all planes the same
+    direction; the big moves are the carried thing's own, with a destination (rule 6).
+19. **Stylised is fine when it is honest.** A layered picture is a made picture: ILLUSTRATION, SIMULATION or
+    RECOLOURED tags where the meaning could be taken as a record.
+
 ## 4. The frame review (after strict stills)
 The Director gets stills at the shot's start, entry midpoint, landing, each change, and end, plus the brief. For each
 shot it answers:
@@ -68,6 +87,9 @@ shot it answers:
 - Is the landing on a third, with lead room, and off the background's own subject?
 - Is anything crowded, cramped against an edge, or unbalanced?
 - Does the eye leave this shot where the next one picks it up?
+- Layering checks on the landing still: blur the frame in your head (does the cut-out's brightness or colour jump
+  out of the world?), look at the edge at 200% (fringe or halo?), look at the thumbnail (does it read at phone size?),
+  and check the shadow falls away from the world's light.
 It returns PASS or a note per shot, each note with a concrete change in prop terms (move `at` to [x, y], change the
 world, change the entry side). Notes are logged in `rules/DIRECTOR_NOTES.md` so its taste stays the same act to act.
 
