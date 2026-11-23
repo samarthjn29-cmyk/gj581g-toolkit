@@ -1352,6 +1352,17 @@
       "atSec": 31.68,
       "sec": 1.2,
       "kind": "line"
+     },
+     {
+      "boxes": [
+       [
+        1305,
+        1730,
+        1599
+       ]
+      ],
+      "atSec": 15.7,
+      "sec": 0.7
      }
     ],
     "dims": [
@@ -1436,7 +1447,7 @@
       "color": "#3B4250",
       "colorName": "DARK",
       "atSec": 21.61,
-      "x": 1150,
+      "x": 1140,
       "y": 800
      },
      {
@@ -1444,15 +1455,15 @@
       "color": "#3B4250",
       "colorName": "DARK",
       "atSec": 23.47,
-      "x": 1230,
-      "y": 880
+      "x": 1190,
+      "y": 885
      },
      {
       "name": "MOTHER",
       "color": "#B3262E",
       "colorName": "RED",
       "atSec": 30.98,
-      "x": 1560,
+      "x": 1520,
       "y": 830,
       "hard": true
      }
@@ -1468,21 +1479,7 @@
      "atSec": 26.85,
      "scale": 0.95
     },
-    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM · A PERIOD PAIR, RECOLOURED",
-    "tag": {
-     "at": "corner",
-     "parts": [
-      {
-       "text": "KENDAL",
-       "atSec": 1.83,
-       "untilSec": 15.84
-      },
-      {
-       "text": "EAGLESFIELD",
-       "atSec": 15.84
-      }
-     ]
-    }
+    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10\nRIJKSMUSEUM · A PERIOD PAIR, RECOLOURED"
    },
    "beatTimes": [
     [

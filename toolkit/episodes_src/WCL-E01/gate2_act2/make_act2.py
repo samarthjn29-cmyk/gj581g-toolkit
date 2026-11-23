@@ -176,7 +176,8 @@ shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
         {"boxes": [[1773, 2144, 2530], [153, 860, 2633]], "atSec": r(word("john", 84)), "sec": 1.1, "kind": "line"},
         {"boxes": [[893, 1965, 2633]], "atSec": r(word("neither", 86)), "sec": 0.8, "kind": "line"},
         {"boxes": [[1445, 2144, 2737], [154, 443, 2841]], "atSec": r(word("two", 92)), "sec": 1.6},
-        {"boxes": [[156, 1094, 2945]], "atSec": r(word("quite", 95)), "sec": 1.2, "kind": "line"}],
+        {"boxes": [[156, 1094, 2945]], "atSec": r(word("quite", 95)), "sec": 1.2, "kind": "line"},
+        {"boxes": [[1305, 1730, 1599]], "atSec": r(word("his", 79.5)), "sec": 0.7}],  # Eaglesfield, where she opens it (fact-check row 36)
     "dims": [{"y0": 1850, "y1": 2265, "atSec": r(word("mother", 70, end=True))}],
     "swatches": [{"x": 40, "y": 2427, "color": DARK, "atSec": r(word("bluish", 75)) + 0.6}],
     "object": {"srcId": "SRC-037", "file": FLAT, "mask": MASK, "size": [2600, 1622], "bbox": [176, 236, 2274, 1037], "atSec": r(word("pair", 68)) - 0.1, "width": 620},
@@ -187,14 +188,12 @@ shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
     "quotes": [{"atSec": r(word("to", 72)) + 0.6, "untilSec": r(word("bluish", 75)) - 0.6, "kicker": "TO JOHN · AS THE STORY TELLS IT", "text": "A sensible dark colour."},
                {"atSec": r(word("bluish", 75)), "untilSec": r(word("words", 77, end=True)) + 0.05, "kicker": "IN THE BIOGRAPHER'S WORDS", "text": "'a bluish dark drab'", "by": "LONSDALE, 1874 · P. 99", "byAtSec": r(word("biographer's", 77))},
                {"atSec": r(word("opens", 79)) + 0.3, "untilSec": r(word("john", 84)) + 0.45, "kicker": "HIS MOTHER · AS THE STORY TELLS IT", "text": "'as red as a cherry'", "textAtSec": r(word("cherry", 82))}],
-    "tags": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("it", 85, end=True)) + 0.02, "x": 1150, "y": 800},
-             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1230, "y": 880},
-             {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("mother", 95)), "x": 1560, "y": 830, "hard": True}],
+    "tags": [{"name": "JOHN", "color": DARK, "colorName": "DARK", "atSec": r(word("it", 85, end=True)) + 0.02, "x": 1140, "y": 800},
+             {"name": "JONATHAN", "color": DARK, "colorName": "DARK", "atSec": r(word("jonathan", 86, end=True)) + 0.02, "x": 1190, "y": 885},
+             {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("mother", 95)), "x": 1520, "y": 830, "hard": True}],
     "tie": {"atSec": r(word("both", 88)), "names": ["JOHN", "JONATHAN"]},
     "pullBack": {"atSec": r(word("dark", 90, end=True)) + 0.05, "scale": 0.95},
-    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10 · RIJKSMUSEUM · A PERIOD PAIR, RECOLOURED",
-    "tag": {"at": "corner", "parts": [{"text": "KENDAL", "atSec": r(word("kendal", 65)), "untilSec": r(word("mother", 79.5))},
-                                      {"text": "EAGLESFIELD", "atSec": r(word("mother", 79.5))}]}},
+    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10\nRIJKSMUSEUM · A PERIOD PAIR, RECOLOURED"},
     transitionIn="slide")
 # 39-44 what stays the same: the flower, the candle, the stockings; only the person looking changes.
 shot(B(*range(39, 45)), "SplitComparisonCard", lambda r: {

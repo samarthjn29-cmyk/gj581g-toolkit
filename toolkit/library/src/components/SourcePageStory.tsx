@@ -182,10 +182,10 @@ export const SourcePageStory: React.FC<SourcePageStoryProps> = ({ page, frames, 
           const tied = tie && tie.names.includes(tg.name) ? ease(frame, fps, tie.atSec + 0.5, 0.5) : 0;
           const rot = tg.hard ? -2 : (1 - SLOW_OUT(a)) * 1.5 + (tg.name === tie?.names[1] ? 2 : -1);
           return (
-            <div key={tg.name} style={{ position: "absolute", left: tg.x - 12 * tied, top: tg.y + y + impact, opacity: Math.min(1, a * 2), transform: `rotate(${rot}deg)`, display: "flex", alignItems: "center", gap: 10, padding: "12px 18px 12px 34px", background: kraft, borderRadius: "4px 4px 4px 4px", boxShadow: "0 8px 14px rgba(20,12,6,0.45)", fontFamily: t.fonts.mono, fontSize: 26, letterSpacing: 2.5, color: paperInk }}>
-              <span style={{ position: "absolute", left: 12, top: "50%", width: 10, height: 10, marginTop: -5, borderRadius: 5, background: t.colors.canvas }} />
+            <div key={tg.name} style={{ position: "absolute", left: tg.x - 12 * tied, top: tg.y + y + impact, opacity: Math.min(1, a * 2), transform: `rotate(${rot}deg)`, display: "flex", alignItems: "center", gap: 12, padding: "14px 22px 14px 42px", background: kraft, borderRadius: 4, boxShadow: "0 8px 14px rgba(20,12,6,0.45)", fontFamily: t.fonts.mono, fontSize: 32, letterSpacing: 3, color: paperInk }}>
+              <span style={{ position: "absolute", left: 14, top: "50%", width: 12, height: 12, marginTop: -6, borderRadius: 6, background: t.colors.canvas }} />
               <span>{tg.name}</span>
-              <span style={{ width: 26, height: 26, borderRadius: 3, background: tg.color, border: `2px solid ${paperInk}` }} />
+              <span style={{ width: 32, height: 32, borderRadius: 3, background: tg.color, border: `2px solid ${paperInk}` }} />
               <span>{tg.colorName}</span>
             </div>
           );
@@ -197,11 +197,11 @@ export const SourcePageStory: React.FC<SourcePageStoryProps> = ({ page, frames, 
               if (!a || !b) return null;
               const p = ease(frame, fps, tie.atSec, 0.7);
               const sh = 12 * ease(frame, fps, tie.atSec + 0.5, 0.5);
-              const x1 = a.x + 17 - sh;
-              const x2 = b.x + 17 - sh;
-              const y1 = a.y + 31;
-              const y2 = b.y + 31;
-              const d = `M ${x1} ${y1} C ${x1 - 40} ${y1 + 60}, ${x2 - 30} ${y2 + 70}, ${x2} ${y2} C ${x2 + 20} ${y2 - 30}, ${x1 + 30} ${y1 - 34}, ${x1} ${y1}`;
+              const x1 = a.x + 20 - sh;
+              const x2 = b.x + 20 - sh;
+              const y1 = a.y + 33;
+              const y2 = b.y + 33;
+              const d = `M ${x1} ${y1} C ${x1 - 60} ${y1 + 10}, ${x2 - 70} ${y2 - 20}, ${x2} ${y2}`;
               return (
                 <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none" }}>
                   <path d={d} fill="none" stroke={sheet} strokeWidth={3} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} opacity={0.9} />
@@ -226,7 +226,7 @@ export const SourcePageStory: React.FC<SourcePageStoryProps> = ({ page, frames, 
       })}
 
       <div style={{ position: "absolute", right: t.safe.x, top: t.safe.y, fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 3, color: t.colors.ink, background: t.colors.chip, padding: "8px 14px", borderRadius: 4, borderLeft: `3px solid ${t.colors.accent}` }}>REPORTED COLOURS</div>
-      <div style={{ position: "absolute", left: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, lineHeight: 1.6, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, whiteSpace: "pre" }}>{caption}</div>
+      <div style={{ position: "absolute", right: t.safe.x - 40, bottom: 36, fontFamily: t.fonts.mono, fontSize: 18, letterSpacing: 1.6, lineHeight: 1.6, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, whiteSpace: "pre", textAlign: "right" }}>{caption}</div>
       {tag ? <DatelineTag {...tag} /> : null}
     </AbsoluteFill>
   );
