@@ -150,7 +150,22 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         if (b.transitionIn === "canvas" && prev) body = <CanvasGridPan {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "ink" && prev) body = <InkBleed {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "morph" && prev) body = <ShapeMorph {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
-        if (b.transitionIn === "action" && prev) body = <CutOnAction {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        // Cut on action plays the old shot ON past its end (its movement keeps going: the lid keeps closing) until the cut
+        // at leadSec, never a frozen frame (Director, 23 Nov 2026: a frozen lid stops dead and only the frame slides).
+        if (b.transitionIn === "action" && prev) {
+          const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
+          body = (
+            <CutOnAction
+              {...o}
+              from={
+                <Sequence from={-prevDur} layout="none">
+                  <Shot beat={prev} />
+                </Sequence>
+              }
+              to={<Shot beat={b} built />}
+            />
+          );
+        }
         if (b.transitionIn === "static" && prev) body = <StaticBurst {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
