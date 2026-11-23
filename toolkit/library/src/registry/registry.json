@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T13:49:06.900Z",
+ "generated": "2026-11-23T15:09:54.939Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -883,8 +883,8 @@
     "public/assets/sources/dalton1798_p29_line.png"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: the beats where Dalton's own words on p. 29 are quoted (WCL-E01), the quoted line highlighted as it is said. Limit: max 10 beats per episode. Not for: decoration, or as a generic 'old page'.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SRC-002": {
@@ -895,8 +895,8 @@
     "public/assets/sources/dalton1798_p34.jpg"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Dalton's own list of colours on p. 34, including the laurel-leaf and red sealing-wax example (WCL-E01 act 3), with the lines highlighted as read and held at least 4 s. Limit: max 10 beats per episode. Not for: decoration; never a page alone on screen without its quote.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SRC-003": {
@@ -907,8 +907,8 @@
     "public/assets/sources/dalton1798_p43.jpg"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Dalton's own explanation on p. 43 ('probably some modification of blue', the vitreous humour), WCL-E01 act 3, with the highlight across the hyphenated line breaks. Limit: max 10 beats per episode. Not for: decoration; always shown as his guess, never as anatomy fact.",
+   "maxBeats": 10,
    "maxShare": null
   },
   "SRC-004": {
@@ -922,8 +922,8 @@
     "public/assets/sources/dalton_turner1834_halftone_full.png"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: John Dalton's face where the story needs the man himself (WCL-E01), always tagged JOHN DALTON · 1834 (Sam, 23 Nov 2026: keep the tag). The halftone and trace versions are stylised forms of the same print. Limit: max 12 beats per episode. Not for: any beat set before 1834 without the tag; never retouched to change his face, never animated to speak.",
+   "maxBeats": 12,
    "maxShare": null
   },
   "SRC-005": {
@@ -934,8 +934,8 @@
     "public/assets/sources/newton_opticks1704_p90.jpg"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Newton's own words on p. 90 ('the Rays to speak properly are not coloured'), WCL-E01, highlighted as said. Limit: max 6 beats per episode. Not for: decoration or as a generic old book.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "SRC-006": {
@@ -946,8 +946,8 @@
     "public/assets/sources/young1802_p12.jpg"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Thomas Young's own 1802 page where his idea of a few kinds of colour-sensing parts is quoted (WCL-E01, planted for episode 2). Limit: max 6 beats per episode. Not for: decoration.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "SRC-007": {
@@ -958,8 +958,8 @@
     "public/assets/sources/henry1854_p25.jpg"
    ],
    "status": "Active",
-   "use": "",
-   "maxBeats": null,
+   "use": "Best use: Henry's account of Dalton's 'strongly expressed wish' that his eyes be examined (WCL-E01 act 3 and act 6), highlighted as said. Limit: max 6 beats per episode; the line two lines below ('The vitreous humour was of a pale yellow colour') is always cropped or dimmed, because it contradicts Ransome (p. 202). Not for: decoration.",
+   "maxBeats": 6,
    "maxShare": null
   },
   "VIS-011": {
@@ -1137,7 +1137,8 @@
    "folder": "11_Sources",
    "name": "Laurel_RunicEarth",
    "paths": [
-    "public/assets/sources/laurel_runicearth.jpg"
+    "public/assets/sources/laurel_runicearth.jpg",
+    "public/assets/sources/laurel_runicearth_leaf_cutout.png"
    ],
    "status": "Active",
    "use": "Best use: Dalton's laurel-leaf example (1798 p. 34) beside the red sealing-wax (SRC-015), WCL-E01 act 3, and the act 5 return (sunlight on the geranium and a laurel leaf). Limit: max 3 beats per episode. Not for: generic leaves or greenery.",
@@ -1149,7 +1150,8 @@
    "folder": "11_Sources",
    "name": "SealingWax_Petrik",
    "paths": [
-    "public/assets/sources/sealingwax_petrik.jpg"
+    "public/assets/sources/sealingwax_petrik.jpg",
+    "public/assets/sources/sealingwax_petrik_cutout.png"
    ],
    "status": "Active",
    "use": "Best use: Dalton's red sealing-wax example (1798 p. 34) beside the laurel leaf (SRC-014), WCL-E01 act 3. Limit: max 3 beats per episode; shown cropped to the seal, no writing. Not for: letters, post or seals in general.",
@@ -3151,6 +3153,18 @@
    "status": "Active",
    "use": "Best use: the weather of Dalton's years behind his weather records (WCL-E01 act 2, the Director's Weather layer shot). Limit: max 2 beats per episode; always labelled A DISTANT SHOWER · LUKE HOWARD · 1803; never presented as Dalton's drawing or as a view of Kendal; never flipped, colourised or retouched.",
    "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-042": {
+   "id": "SRC-042",
+   "folder": "11_Sources",
+   "name": "Dalton1798_p28",
+   "paths": [
+    "public/assets/sources/dalton1798_p28.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the start of Dalton's talk (WCL-E01 act 3 shot A): the title and 'READ OCT. 31st, 1794.' highlighted as said, rising onto Green's 1794 plan of Manchester. Limit: max 6 beats per episode. Not for: decoration; never alone on screen without the highlighted line.",
+   "maxBeats": 6,
    "maxShare": null
   }
  }

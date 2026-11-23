@@ -190,6 +190,28 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
       camera: { pan: -60, push: 0.04 },
     },
   },
+  "LayerStage-LeafWax": {
+    // 23 Nov 2026 test of the act 3 shot B cut-outs on the new depth options (not the act build: that waits for Sam's
+    // yes on the act 3 plan and the Director's brief). World: Dalton's own p.34, where the example is printed.
+    // Olive = Machado deuteranope simulation of the two cut-outs (leaf #4F492A, wax #5F5405 -> #574F18).
+    name: "LayerStage",
+    sec: 8,
+    props: {
+      worlds: [
+        { atSec: 0, srcId: "SRC-002", kind: "image", size: [1920, 2934], zoom: 1.1, focus: [0.5, 0.55], light: "warm", haze: 0.14, blur: 1.6, rackSec: 0.4, lightFrom: "top-left", label: "JOHN DALTON · 1798 · P. 34",
+          why: "Same thing: the page where Dalton prints the laurel-leaf and sealing-wax match." },
+      ],
+      carry: [
+        { srcId: "SRC-014", file: "public/assets/sources/laurel_runicearth_leaf_cutout.png", size: [800, 700], at: [560, 560], w: 520, atSec: 0.4, enter: "setDown", rest: true,
+          states: [{ atSec: 0.4, color: null, label: "LAUREL LEAF" }, { atSec: 4.2, color: "#574F18", label: "SIMULATION · ONE WAY HE MAY HAVE SEEN THEM" }] },
+        { srcId: "SRC-015", file: "public/assets/sources/sealingwax_petrik_cutout.png", size: [497, 438], at: [1360, 600], w: 380, atSec: 1.4, enter: "setDown", rest: true,
+          states: [{ atSec: 1.4, color: null, label: "RED SEALING-WAX" }, { atSec: 4.2, color: "#574F18" }] },
+      ],
+      // no typed quote: the printed line is on the page behind (a single-line label overflowed the frame); the act
+      // build highlights that line on p.34 (ArchivalScanCard) before the cut-outs lift off.
+      camera: { pan: -40, push: 0.03 },
+    },
+  },
   // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).
   "FootagePlate-Candle": {
     name: "FootagePlate",
