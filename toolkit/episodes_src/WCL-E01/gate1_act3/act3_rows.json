@@ -38,7 +38,7 @@
   "",
   "SRC-009",
   "",
-  "Yes: SRC-009 limit raise 4 -> 16 beats (A + A2's blurred ground); LayerStage builder additions (dateline tag, rings inside the far plane, 'paper' light)",
+  "Yes: SRC-009 limit raise 4 -> 16 beats (A + A2's blurred ground); TXT-011 limit raise 24 -> 40 (act 2 grew to 23 dateline beats after its Gate 1; act 3 adds 11); LayerStage builder additions (dateline tag, rings inside the far plane, 'paper' light)",
   "Calm. Director shot A_manchester_talk. LayerStage world = Green's 1794 plan of Manchester (same place, same year), zoom 1.1, focus [0.4769, 0.37], haze 0.06, light 'paper' (fallback 'none'), lightFrom top-left; one slow move {pan -40, push 0.03} towards the college. NO PIN (in 1794 the Society met at Cross Street Chapel, outside this crop). Labels un-wipe (MOT-013). Plan fades in under the slate (0.6 s); world label PLAN OF MANCHESTER · WILLIAM GREEN · 1794 bottom-right; the camera's one slow move begins."
  ],
  [
@@ -585,7 +585,7 @@
   "SRC-002, SRC-014, SRC-015",
   "",
   "",
-  "Both turn the same olive (#574F18, simulated) on 'To him'; the wax label un-wipes with it; label SIMULATION · ONE WAY / HE MAY HAVE SEEN THEM (x 120, y 830/868, size 22) 0.45 s later; that label and the caption un-wipe 0.6 s before the glide."
+  "Both turn the same olive (#574F18, simulated) in the pause after 'get.' (about 71.65 s), the wax label un-wiping with it; label SIMULATION · ONE WAY / HE MAY HAVE SEEN THEM (x 120, y 830/868, size 22) on 'To him' (72.06 s, about 1.8 s to read); that label and the caption un-wipe 0.6 s before the glide."
  ],
  [
   "E01-A3-29",
@@ -753,7 +753,7 @@
   "",
   "",
   "",
-  "Typed count 'I see only two or at most three distinctions' on 'two'; the lower strip fills one yellow, strong to pale under orange, yellow and green, on 'yellow'."
+  "Typed count 'I see only two or at most three distinctions' on 'two'; then, in reading order at the end of the beat, the lower strip fills one yellow, strong to pale under orange, yellow and green, on 'Yellow' (two events because the line names the count, then the first colour)."
  ],
  [
   "E01-A3-37",
@@ -858,7 +858,7 @@
   "",
   "",
   "",
-  "Nothing new on 'clear fluids' (frame review: check the stillness of 40-42)."
+  "The fluids (aqueous and vitreous) outlined on 'clear fluids' (EyeDiagram builder addition: a part outline on cue)."
  ],
  [
   "E01-A3-42",
@@ -879,7 +879,7 @@
   "",
   "",
   "",
-  "The vitreous outlined on 'clear jelly' (EyeDiagram builder addition: a part outline on cue)."
+  "The outline narrows to the vitreous alone on 'clear jelly'."
  ],
  [
   "E01-A3-43",
@@ -1081,15 +1081,15 @@
   "MOT-002",
   "TRN-005",
   "LOK-009, LOK-010",
-  "SFX-017",
+  "",
   "MUS-013",
   "",
   "",
   "",
   "",
   "",
-  "Yes: TRN-005 InkBleed (built 23 Nov 2026); EyeDiagram builder additions (carried cut-outs with a multiply state, RaySpec absorb)",
-  "Calm. Director C_carry_into_eye: TRN-005 ink bleed in the jelly's blue (#3D6BD6) from [894, 303] (the word 'vitreous', inside the jelly in this framing), cued on 'And'; it opens on D's exact framing, jelly already blue, tag DALTON'S GUESS in the corner throughout. The leaf and the wax come back in their own colours on the left (the light's side), carried inside the diagram's drift; under his blue they go darker, duller and closer, but stay two colours. NO olive inside his guess (fact-check item 8). Blue ink spreads from 'vitreous' into the eye on 'And honestly'; a soft ink drip (SFX-017, -26 dB)."
+  "Yes: TRN-005 InkBleed (built 23 Nov 2026); EyeDiagram builder additions (carried cut-outs with a multiply state, RaySpec absorb, a tint pulse)",
+  "Calm. Director C_carry_into_eye: TRN-005 ink bleed in the jelly's blue (#3D6BD6) from [894, 303] (the word 'vitreous', inside the jelly in this framing), cued on 'And'; it opens on D's exact framing, jelly already blue, tag DALTON'S GUESS in the corner throughout. The leaf and the wax come back in their own colours on the left (the light's side), carried inside the diagram's drift; under his blue they go darker, duller and closer, but stay two colours. NO olive inside his guess (fact-check item 8). Blue ink spreads from 'vitreous' into the eye on 'And honestly' (silent: SFX-017 is for lines on paper)."
  ],
  [
   "E01-A3-53",
@@ -1131,7 +1131,7 @@
   "",
   "",
   "",
-  "Nothing new on 'blue glass' (the blue jelly is the picture)."
+  "The blue jelly brightens a little and settles back (tint 0.5 -> 0.6 -> 0.5, 1.2 s) on 'blue glass': no label, the blue is the picture."
  ],
  [
   "E01-A3-55",
@@ -1383,7 +1383,7 @@
   "SRC-003",
   "",
   "",
-  "Nothing new: the 'vitreous' box is about to lift."
+  "The other highlights dim to 40% on 'noticed by now'; the 'vitreous' box alone stays lit, ready to lift."
  ],
  [
   "E01-A3-67",
@@ -1467,7 +1467,7 @@
   "SRC-007",
   "",
   "",
-  "Nothing new: the two lines are read."
+  "Highlight 'carefully made after Dalton's death' (on the strip's first line) on 'after he dies'."
  ],
  [
   "E01-A3-71",
