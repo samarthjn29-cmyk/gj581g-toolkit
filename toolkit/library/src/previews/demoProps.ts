@@ -148,12 +148,12 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
     sec: 10,
     props: {
       worlds: [
-        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "DAYLIGHT" },
-        { atSec: 5.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.5], clipStartSec: 7.6, change: "dissolve", sec: 1.4, light: "warm", label: "CANDLELIGHT" },
+        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "DAYLIGHT", today: true, why: "The change itself: Dalton saw the flower sky-blue by day." },
+        { atSec: 5.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.5], clipStartSec: 7.6, change: "dissolve", sec: 1.4, light: "warm", label: "CANDLELIGHT", today: true, why: "The change itself: by candle the same flower turned red to him." },
       ],
       carry: [
         { srcId: "SRC-013", file: "public/assets/sources/geranium_stang_flowerhead_cutout.png", size: [1185, 769], at: [960, 470], w: 780, atSec: 0.3, enter: "rise",
-          moves: [{ atSec: 5.7, to: [1290, 430], w: 600, sec: 1.3 }],
+          moves: [{ atSec: 5.7, to: [1290, 430], w: 600, sec: 1.3, why: "Steps aside so the flame that changes it is seen." }],
           states: [
             { atSec: 0.3, color: null, label: "TO US: PINK" },
             { atSec: 2.8, color: "#86B5E8", label: "TO DALTON, BY DAY: SKY-BLUE" },
@@ -492,8 +492,8 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
   },
   LayerStage: {
     worlds: [
-      { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], light: "day", label: "PREVIEW · WORLD A" },
-      { atSec: 2.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.4], clipStartSec: 7.6, change: "dissolve", sec: 1.2, light: "warm", label: "PREVIEW · WORLD B" },
+      { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], light: "day", label: "PREVIEW · WORLD A", why: "Preview: world A for the component card." },
+      { atSec: 2.6, srcId: "SRC-011", kind: "video", size: [1080, 1920], focus: [0.5, 0.4], clipStartSec: 7.6, change: "dissolve", sec: 1.2, light: "warm", label: "PREVIEW · WORLD B", why: "Preview: world B for the component card." },
     ],
     carry: [{ srcId: "SRC-013", file: "public/assets/sources/geranium_stang_flowerhead_cutout.png", size: [1185, 769], at: [960, 480], w: 700, atSec: 0.3, states: [{ atSec: 0.3, color: null, label: "PREVIEW · STATE A" }, { atSec: 3.2, color: "#C8402F", label: "PREVIEW · STATE B" }] }],
   },

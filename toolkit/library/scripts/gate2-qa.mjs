@@ -89,6 +89,29 @@ for (const b of beats.filter((x) => x.component === "ObjectEntrance")) {
 }
 const entranceShots = beats.filter((b) => b.component === "ObjectEntrance").length;
 if (entranceShots > 3) crit.push(`${entranceShots} ObjectEntrance shots in one act (VIS-058: max 3)`);
+// Rule D, the Director (23 Nov 2026; Sam: "Setup the Director"; rules/DIRECTOR.md): every layered, carried-object,
+// map-move or carry-over-transition shot has a brief in episodes_src/<EP>/director/<act>_brief.md under a heading
+// with its shot id, and every LayerStage world states its relation to the subject (`why`).
+const DIRECTED = new Set(["LayerStage", "ObjectEntrance", "ObjectStory", "TravellingMap"]);
+const CARRY_IN = new Set(["push", "match", "lens"]);
+const directed = beats.filter((b) => DIRECTED.has(b.component) || CARRY_IN.has(b.transitionIn));
+if (directed.length) {
+  const ep = String(act.episodeId).split("-act")[0];
+  const briefFile = path.resolve("..", "episodes_src", ep, "director", `${path.basename(actFile, ".json")}_brief.md`);
+  const brief = fs.existsSync(briefFile) ? fs.readFileSync(briefFile, "utf8") : "";
+  checks.push(`Director: ${directed.length} shot(s) need a brief; ${brief ? path.relative(process.cwd(), briefFile) : "no brief file"}`);
+  for (const b of directed) {
+    if (!new RegExp(`^#+ .*\\b${b.id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "m").test(brief)) crit.push(`${b.id}: no Director's brief (rule D: ${path.basename(briefFile)}, a heading with the shot id)`);
+  }
+}
+for (const b of beats.filter((x) => x.component === "LayerStage")) {
+  (b.props?.worlds ?? []).forEach((w, i) => {
+    if (!w.why || w.why.trim().length < 12) crit.push(`${b.id}: world ${i + 1} (${w.srcId}) has no 'why' (rule D: its relation to the subject)`);
+  });
+  (b.props?.carry ?? []).forEach((c) => (c.moves ?? []).forEach((m, i) => {
+    if (!m.why) crit.push(`${b.id}: ${c.srcId} move ${i + 1} has no 'why' (rule D: a destination that means something)`);
+  }));
+}
 const frenzy = beats.filter((b) => b.component === "HeadlineMatchCut").length;
 const matches = beats.filter((b) => b.transitionIn === "match").length;
 const changes = beats.filter((b, i) => i > 0 && b.transitionIn && b.transitionIn !== "cut").length;

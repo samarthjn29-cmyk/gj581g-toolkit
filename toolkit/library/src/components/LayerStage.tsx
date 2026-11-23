@@ -36,6 +36,11 @@ export type StageWorld = {
   sec?: number;
   light?: "day" | "warm" | "night" | "none";
   label?: string;
+  // the Director (rules/DIRECTOR.md, Sam 23 Nov 2026: "There has to be some kind of relation between the two"):
+  // the world's relation to the subject: same place, same time, same idea, or the change itself
+  why: string;
+  // a present-day clip or photo behind a period subject: its label reads TODAY · ...
+  today?: boolean;
 };
 export type CarryState = { atSec: number; color?: string | null; label?: string };
 export type StageCarry = {
@@ -47,7 +52,7 @@ export type StageCarry = {
   atSec: number;
   enter?: "rise" | "setDown";
   states?: CarryState[];
-  moves?: { atSec: number; to: XY; w?: number; sec?: number }[];
+  moves?: { atSec: number; to: XY; w?: number; sec?: number; why: string }[]; // why: what the destination means
   caption?: string;
 };
 export type LayerStageProps = {
@@ -156,6 +161,12 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
     ...(mid ? [mid.srcId] : []),
   ]);
   if (worlds.length < 1 || worlds.length > 4) throw new Error("LayerStage: 1-4 worlds.");
+  worlds.forEach((w, i) => {
+    if (!w.why || w.why.trim().length < 12) throw new Error(`LayerStage: world ${i + 1} needs a 'why' (its relation to the subject; rules/DIRECTOR.md).`);
+  });
+  carry.forEach((c) => (c.moves ?? []).forEach((m) => {
+    if (!m.why) throw new Error(`LayerStage: every move of ${c.srcId} needs a 'why' (what its destination means).`);
+  }));
   if (carry.length > 3) throw new Error("LayerStage: 1-3 carried things.");
   worlds.forEach((w, i) => {
     if (i && ((w.sec ?? 1.2) < 0.8 || (w.sec ?? 1.2) > 1.6)) throw new Error("LayerStage: world changes take 0.8-1.6 s.");
@@ -229,7 +240,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
       {worlds.map((w, i) =>
         w.label && labelVis[i] > 0 ? (
           <div key={`l${i}`} style={{ position: "absolute", right: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: `inset(0 ${((1 - labelVis[i]) * 100).toFixed(1)}% 0 0)`, opacity: Math.min(1, labelVis[i] * 2.5) }}>
-            {w.label}
+            {w.today ? `TODAY · ${w.label}` : w.label}
           </div>
         ) : null,
       )}
