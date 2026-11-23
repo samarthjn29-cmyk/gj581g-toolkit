@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T09:58:13.064Z",
+ "generated": "2026-11-23T10:22:27.975Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3139,6 +3139,18 @@
    "status": "Active",
    "use": "Best use: a present-day daylight sky as a LayerStage world (the weather Dalton recorded, daylight for the geranium). Limit: never presented as period footage; max 3 shots per episode; counts towards the footage share (VIS-016).",
    "maxBeats": 3,
+   "maxShare": null
+  },
+  "SRC-041": {
+   "id": "SRC-041",
+   "folder": "11_Sources",
+   "name": "Howard1803_DistantShower",
+   "paths": [
+    "public/assets/sources/howard1803_distant_shower.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the weather of Dalton's years behind his weather records (WCL-E01 act 2, the Director's Weather layer shot). Limit: max 2 beats per episode; always labelled A DISTANT SHOWER · LUKE HOWARD · 1803; never presented as Dalton's drawing or as a view of Kendal; never flipped, colourised or retouched.",
+   "maxBeats": 2,
    "maxShare": null
   }
  }

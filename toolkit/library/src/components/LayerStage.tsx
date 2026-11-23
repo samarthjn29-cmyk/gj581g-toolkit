@@ -1,3 +1,4 @@
+import { Label, type LabelSpec } from "../layers/Label";
 import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, OffthreadVideo, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAssets, useSourceFile } from "../registry";
@@ -32,6 +33,7 @@ export type StageWorld = {
   kind: "video" | "image";
   size: readonly [number, number];
   focus?: readonly [number, number];
+  zoom?: number; // 1-1.5: scale past cover, so a subject can sit on a third without showing the canvas
   change?: "dissolve" | "pan" | "wipe";
   sec?: number;
   light?: "day" | "warm" | "night" | "none";
@@ -54,6 +56,7 @@ export type StageCarry = {
   states?: CarryState[];
   moves?: { atSec: number; to: XY; w?: number; sec?: number; why: string }[]; // why: what the destination means
   caption?: string;
+  captionUntilSec?: number; // the caption un-wipes from here (MOT-013), with or before the thing's exit
 };
 export type LayerStageProps = {
   worlds: StageWorld[];
@@ -61,6 +64,9 @@ export type LayerStageProps = {
   carry?: StageCarry[];
   camera?: { pan?: number; push?: number }; // px over the shot at the near plane; push: zoom (<= 0.06)
   caption?: string;
+  // timed text on the world (the Director's Weather brief: the diary dates written across the sky), the Label layer:
+  // locks in on its word, un-wipes out (MOT-013)
+  labels?: LabelSpec[];
   startSec?: number;
 };
 
@@ -79,7 +85,9 @@ const WorldPlate: React.FC<{ w: StageWorld; until: number }> = ({ w, until }) =>
   const src = useSourceFile(w.srcId, w.file);
   const rev = useSourceFile(w.srcId, w.revFile ?? w.file);
   const { fps } = useVideoConfig();
-  const s = Math.max(1920 / w.size[0], 1080 / w.size[1]) * 1.08;
+  const z = w.zoom ?? 1;
+  if (z < 1 || z > 1.5) throw new Error("LayerStage: world zoom 1-1.5.");
+  const s = Math.max(1920 / w.size[0], 1080 / w.size[1]) * 1.08 * z;
   const f = w.focus ?? [0.5, 0.5];
   const st: React.CSSProperties = { position: "absolute", width: w.size[0] * s, height: w.size[1] * s, left: 960 - f[0] * w.size[0] * s, top: 540 - f[1] * w.size[1] * s, maxWidth: "none", filter: GRADE[w.light ?? "none"] };
   if (w.kind === "image") return <Img src={src} style={st} />;
@@ -127,7 +135,7 @@ const Carried: React.FC<{ c: StageCarry; light: { a: string; b: string; p: numbe
     return { s, o: pin * pout };
   });
   const mask: React.CSSProperties = { WebkitMaskImage: `url(${src})`, maskImage: `url(${src})`, WebkitMaskSize: "100% 100%", maskSize: "100% 100%" };
-  const cur = [...layers].reverse().find((l) => l.o > 0.5);
+  const capV = c.captionUntilSec !== undefined ? interpolate(frame, [sec(c.captionUntilSec, fps), sec(c.captionUntilSec + 0.4, fps)], [1, 0], clamp) : 1;
   return (
     <div style={{ position: "absolute", left: at[0] - w / 2 + cam[0], top: at[1] - h / 2 + dy + cam[1], width: w, height: h, opacity: op }}>
       <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: "drop-shadow(0 26px 36px rgba(0,0,0,0.22))" }} />
@@ -135,12 +143,20 @@ const Carried: React.FC<{ c: StageCarry; light: { a: string; b: string; p: numbe
       {/* the world's light on the thing */}
       <div style={{ position: "absolute", inset: 0, background: light.a, mixBlendMode: "soft-light", opacity: 1 - light.p, ...mask }} />
       <div style={{ position: "absolute", inset: 0, background: light.b, mixBlendMode: "soft-light", opacity: light.p, ...mask }} />
-      {cur?.s.label ? (
-        <div style={{ position: "absolute", left: "50%", top: h + 22, transform: "translateX(-50%)", whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: 26, letterSpacing: 3, color: t.colors.ink, background: t.colors.chip, padding: "7px 13px", borderRadius: 3 }}>
-          {cur.s.label}
-        </div>
-      ) : null}
-      {c.caption ? <div style={{ position: "absolute", left: "50%", top: h + 72, transform: "translateX(-50%)", whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: 16, letterSpacing: 2, color: t.colors.secondary, background: t.colors.chip, padding: "4px 10px", borderRadius: 3 }}>{c.caption}</div> : null}
+      {states.map((st, i) => {
+        if (!st.label) return null;
+        const vin = interpolate(frame, [sec(st.atSec, fps), sec(st.atSec + 0.5, fps)], [0, 1], { ...clamp, easing: SLOW_OUT });
+        const nx = states[i + 1];
+        const vout = nx ? interpolate(frame, [sec(nx.atSec, fps), sec(nx.atSec + 0.4, fps)], [1, 0], clamp) : 1;
+        const v = Math.min(vin, vout);
+        if (v <= 0) return null;
+        return (
+          <div key={i} style={{ position: "absolute", left: "50%", top: h + 22, transform: `translateX(-50%) translateY(${((1 - vin) * 10).toFixed(1)}px)`, whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: 26, letterSpacing: 3, color: t.colors.ink, background: t.colors.chip, padding: "7px 13px", borderRadius: 3, opacity: Math.min(1, v * 2.5), clipPath: vout < 1 ? `inset(-4px ${((1 - vout) * 100).toFixed(1)}% -4px -4px)` : undefined }}>
+            {st.label}
+          </div>
+        );
+      })}
+      {c.caption && capV > 0 ? <div style={{ position: "absolute", left: "50%", top: h + 72, opacity: Math.min(1, capV * 2.5), clipPath: capV < 1 ? `inset(-4px ${((1 - capV) * 100).toFixed(1)}% -4px -4px)` : undefined, transform: "translateX(-50%)", whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: 16, letterSpacing: 2, color: t.colors.secondary, background: t.colors.chip, padding: "4px 10px", borderRadius: 3 }}>{c.caption}</div> : null}
     </div>
   );
 };
@@ -151,7 +167,7 @@ const MidPlate: React.FC<{ m: NonNullable<LayerStageProps["mid"]>; cam: XY }> = 
   return <Img src={src} style={{ position: "absolute", left: m.at[0] - m.w / 2 + cam[0], top: m.at[1] - h / 2 + cam[1], width: m.w, height: h, maxWidth: "none" }} />;
 };
 
-export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [], camera = {}, caption, startSec = 0 }) => {
+export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [], camera = {}, caption, labels = [], startSec = 0 }) => {
   useAssets([
     "VIS-059",
     "MOT-016",
@@ -237,6 +253,9 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
         ))}
       </AbsoluteFill>
       <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, ${t.colors.dimMask} 100%)`, opacity: 0.55, pointerEvents: "none" }} />
+      {labels.map((l, i) => (
+        <Label key={`t${i}`} spec={l} />
+      ))}
       {worlds.map((w, i) =>
         w.label && labelVis[i] > 0 ? (
           <div key={`l${i}`} style={{ position: "absolute", right: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: `inset(0 ${((1 - labelVis[i]) * 100).toFixed(1)}% 0 0)`, opacity: Math.min(1, labelVis[i] * 2.5) }}>

@@ -133,7 +133,7 @@ shot(B(14, 15), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 1], "flicker": {}, "analogue": {},  # LOK-016, LOK-015: lit by the candle
     "labels": [{"text": "THE GERANIUM, 1792", "atSec": max(0.2, r(word("geranium"))), "untilSec": r(word("takes")), "x": 1240, "y": 820},
                {"text": "WHAT DO YOU SEE?", "atSec": r(word("takes")) + 0.2, "x": 960, "y": 860, "align": "center", "accent": True}]},
-    transitionIn="push", focus=[1248, 910])
+    transitionIn="push", focus=[1090, 766])  # Director 23 Nov: the push opens from the Kendal pin (its frame position after the map fix)
 # 16-21 p.30: his friends, his surprise, they all agreed, except his brother.
 shot(B(16, 17, 18, 19, 20, 21), "ArchivalScanCard", lambda r: {
     "srcId": "SRC-029", "imgSize": P30, "crop": [500, 510, 1080, 1030], "side": "left",

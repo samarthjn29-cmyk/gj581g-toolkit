@@ -78,7 +78,7 @@ shot(B(5, 6, 7), "FootagePlate", lambda r: {
     "srcId": "SRC-013", "kind": "image", "size": GER, "crop": [380, 330, 1000, 562], "warmth": [1, 0],
     "warmthSec": [r(BEAT["E01-A1-07"][0]), r(BEAT["E01-A1-07"][1])],
     "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": r(word("geranium")), "x": 1240, "y": 820,
-                "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1380, "y": 960, "scale": 1}}]},
+                "moveTo": {"atSec": r(BEAT["E01-A1-07"][0]), "x": 1200, "y": 900, "scale": 1}}]},  # Director 23 Nov: was off the right edge and under the safe line
     transitionIn="push", focus=[960, 560])
 # 8-10 p.29 held for three beats (Sam, 22 Nov 2026: the pages moved too fast to read; the p.30 card that
 # followed is gone). Highlights in reading order, the last one on "almost".
@@ -179,7 +179,7 @@ LENS = {"srcId": "SRC-004", "imgSize": [996, 1230], "crop": [24, 180, 700, 394],
 SCRAPS = [{"color": RED, "x": -105, "y": 0, "w": 190, "h": 250, "rot": -4}, {"color": SKY, "x": 105, "y": 6, "w": 190, "h": 250, "rot": 3}]
 shot(B(29, 30, 31), "LensDive", lambda r: {**LENS, "tag": {"at": "corner", "parts": [{"text": "JOHN DALTON · 1834", "atSec": 0}]},  # gate 3 v17: the portrait never alone
     "bracketsAtSec": r(word("own", 74)),
-    "push": {"atSec": r(word("dies", 75, end=True)) + 0.05, "sec": 1.1, "to": [1250, 500], "r": 330},
+    "push": {"atSec": r(word("dies", 75, end=True)) + 0.05, "sec": 1.1, "to": [1330, 500], "r": 330},  # Director 23 Nov: 125 px clear of the line
     "inside": {"scraps": SCRAPS, "tint": {"color": BLUE_HUMOUR, "opacity": 0.75}, "clearAtSec": r(word("fail", 79)) + 0.04},
     "out": {"atSec": r(BEAT["E01-A1-31"][1]) - 0.55, "sec": 0.5, "to": [830, 525], "r": 70},
     "lines": [{"text": "Tested", "atSec": r(word("tested", 72)), "untilSec": r(word("dies", 75, end=True)), "row": 0},

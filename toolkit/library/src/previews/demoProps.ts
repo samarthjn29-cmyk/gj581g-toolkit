@@ -165,18 +165,29 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
     },
   },
   "LayerStage-Weather": {
+    // Rebuilt from the Director's brief (episodes_src/WCL-E01/director/LayerStage-Weather_brief.md) after Sam's note:
+    // the book, then the weather it was about (Howard's 1803 print), then the place (Kendal), each world a period picture.
+    // Shot time 0 = act 2 17.4 s ("Dalton lives that way ... every single day.").
     name: "LayerStage",
     sec: 10,
     props: {
       worlds: [
-        { atSec: 0, srcId: "SRC-040", kind: "video", size: [1920, 1080], revFile: "public/assets/sources/sky_clouds_mixkit51102_rev.mp4", clipSec: 8.5, light: "day", label: "THE SKY HE RECORDED" },
-        { atSec: 5.0, srcId: "SRC-033", kind: "image", size: [4000, 5313], focus: [0.496, 0.72], change: "pan", sec: 1.5, light: "none", label: "MAP · EMANUEL BOWEN · 1760" },
+        { atSec: 0, srcId: "SRC-041", kind: "image", size: [1920, 1148], zoom: 1.2, focus: [0.417, 0.5255], light: "day", label: "A DISTANT SHOWER · LUKE HOWARD · 1803",
+          why: "Same time, same idea: the weather of Dalton's years, drawn in 1803 by Luke Howard, who named the clouds; this book and the diary record that weather." },
+        { atSec: 8.3, srcId: "SRC-033", kind: "image", size: [4000, 5313], focus: [0.506, 0.684], change: "dissolve", sec: 1.2, light: "none", label: "MAP · EMANUEL BOWEN · 1760",
+          why: "Same place: Kendal, where he taught and where the 1793 book's observations were made; the next words name it." },
       ],
       carry: [
-        { srcId: "SRC-035", size: [1575, 2588], at: [960, 520], w: 400, atSec: 0.6, enter: "rise", moves: [{ atSec: 7.0, to: [1180, 470], w: 250, sec: 1.4 }],
-          caption: "METEOROLOGICAL OBSERVATIONS · 1793" },
+        { srcId: "SRC-035", size: [1575, 2588], at: [620, 500], w: 400, atSec: 0.1, enter: "rise",
+          states: [{ atSec: 1.2, label: "1793 · BUILT ON HIS WEATHER RECORDS" }, { atSec: 3.2 }],
+          moves: [{ atSec: 3.6, to: [620, 1480], sec: 0.7, why: "Leaves the way it came, before the diary is named, so the 1793 book is never taken for the diary." }],
+          caption: "ETH-BIBLIOTHEK ZÜRICH", captionUntilSec: 3.2 },
       ],
-      camera: { pan: -80, push: 0.02 },
+      labels: [
+        { text: "FROM 24 MARCH 1787", atSec: 4.36, untilSec: 7.7, x: 620, y: 470, align: "center" },
+        { text: "TO THE EVENING BEFORE HE DIED · 1844", atSec: 5.58, untilSec: 7.8, x: 620, y: 532, align: "center" },
+      ],
+      camera: { pan: -60, push: 0.04 },
     },
   },
   // 22 Nov 2026 text layers on KineticLine (TXT-021 / TXT-020 / TXT-022) and strokes on a scan (TEX-008).
