@@ -38,6 +38,8 @@ import { TravellingMap } from "./TravellingMap";
 import { FootageMontage } from "./FootageMontage";
 import { EvidenceChain } from "./EvidenceChain";
 import { WhatWeKnow } from "./WhatWeKnow";
+import { TimelineRail } from "./TimelineRail";
+import { LetterDrop } from "./LetterDrop";
 import { StillsMontage } from "./StillsMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
@@ -90,6 +92,8 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   FootageMontage,
   EvidenceChain,
   WhatWeKnow,
+  TimelineRail,
+  LetterDrop,
   StillsMontage,
 };
 

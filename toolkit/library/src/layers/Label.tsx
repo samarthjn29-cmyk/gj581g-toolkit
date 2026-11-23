@@ -5,10 +5,12 @@ import { exit, lock, rise, sec, SLOW_OUT } from "../motion";
 
 // A small mono label (TXT-010 style) that locks on its word, and may later move and shrink to a corner.
 // Used inside components (it is not a beat visual of its own). Positions are frame pixels.
+// Exit (MOT-013 UnwipeExit, Vox study 23 Nov 2026): a label leaves by un-wiping from its left edge, the words going in
+// reading order, with only a short fade at the end, never a plain fade; it leaves before the object it names.
 export type LabelSpec = {
   text: string;
   atSec: number;
-  untilSec?: number; // fades out here
+  untilSec?: number; // un-wipes out from here (MOT-013)
   x: number;
   y: number;
   align?: "left" | "center" | "right";
@@ -56,7 +58,8 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
             : align === "center"
               ? "50% 0%"
               : "0% 0%",
-        opacity: r.opacity * out,
+        opacity: r.opacity * Math.min(1, out * 2.5),
+        clipPath: out < 1 ? `inset(-4px -4px -4px ${((1 - out) * 100).toFixed(1)}%)` : undefined,
         fontFamily: t.fonts.mono,
         fontSize: spec.size ?? 32,
         letterSpacing: 2,

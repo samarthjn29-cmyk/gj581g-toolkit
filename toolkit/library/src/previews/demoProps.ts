@@ -453,6 +453,22 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     ],
     caption: "PREVIEW · SOURCE",
   },
+  TimelineRail: {
+    from: 1760, to: 1850, pxPerYear: 26, majorEvery: 20,
+    cams: [{ atSec: 0, year: 1766 }, { atSec: 1.6, year: 1794, sec: 1.4 }],
+    items: [
+      { year: 1766, atSec: 0.2, untilSec: 1.6, srcId: "SRC-004", focus: [0.5, 0.3], label: "PERSON A" },
+      { year: 1794, atSec: 2.3, text: "A preview paper", label: "PREVIEW" },
+      { year: 1844, atSec: 3.6, icon: "jar" },
+    ],
+    caption: "PREVIEW · CAPTION",
+  },
+  LetterDrop: {
+    word: "PREVIEW", atSec: 0.2,
+    roll: { to: "WEIVERP", atSec: 1.6 },
+    mark: { from: 0, to: 3, atSec: 2.6 },
+    gloss: { text: "a preview gloss", atSec: 3.0 },
+  },
   WhatWeKnow: {
     lines: [
       { text: "Preview line one", tickAtSec: 1.0 },

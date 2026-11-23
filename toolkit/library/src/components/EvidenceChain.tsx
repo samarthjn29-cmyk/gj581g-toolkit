@@ -19,7 +19,7 @@ export type ChainNode = { id: string; at: XY; atSec: number; label: string; sub?
 export type ChainLink = { from: string; to: string; atSec: number; sec?: number; dashed?: boolean; label?: string; token?: { text: string; atSec: number; sec?: number } };
 export type EvidenceChainProps = { nodes: ChainNode[]; links: ChainLink[]; caption?: string; startSec?: number };
 
-const Icon: React.FC<{ k: ChainIcon; c: string; s: number }> = ({ k, c, s }) => {
+export const Icon: React.FC<{ k: ChainIcon; c: string; s: number }> = ({ k, c, s }) => {
   const p = { fill: "none", stroke: c, strokeWidth: 3.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const body: Record<ChainIcon, React.ReactNode> = {
     letter: <><rect x={-24} y={-16} width={48} height={32} rx={2} {...p} /><path d="M -24 -14 L 0 4 L 24 -14" {...p} /></>,

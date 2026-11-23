@@ -222,7 +222,7 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
           if (a * out <= 0) return null;
           const fs = pin.flatSize ?? 40 / cams[0].zoom;
           return (
-            <div key={`flat-${pin.label ?? ''}-${pin.atSec}`} style={{ position: "absolute", left: pin.at[0], top: pin.at[1], transform: `translate(-50%, -50%) translateY(${(1 - a) * fs * 0.3}px)`, opacity: a * out * 0.82, whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: fs, letterSpacing: fs * 0.32, color: dark ? t.colors.ink : t.colors.secondary, textShadow: dark ? `0 0 ${fs * 0.3}px rgba(0,0,0,0.6)` : undefined }}>
+            <div key={`flat-${pin.label ?? ''}-${pin.atSec}`} style={{ position: "absolute", left: pin.at[0], top: pin.at[1], transform: `translate(-50%, -50%) translateY(${(1 - a) * fs * 0.3}px)`, opacity: a * out * 0.82, whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: fs, letterSpacing: fs * 0.32, color: dark ? t.colors.ink : t.paper?.ink ?? t.colors.secondary, textShadow: dark ? `0 0 ${fs * 0.3}px rgba(0,0,0,0.6)` : undefined }}>
               {pin.label}
             </div>
           );
