@@ -41,8 +41,8 @@ S = [
   ["Slate fades up; title locks; cue 1 alone."]),
  (2, 12, "VIS-059", "TXT-011, TXT-010", "MOT-016, MOT-013, MOT-014", "TRN-001", "MUS-007",
   "Calm. Director shot A_manchester_talk + A_worldswap_chapel. LayerStage world 1 = Green's 1794 plan of Manchester (same place, same year), zoom 1.1, focus [0.4769, 0.37], haze 0.06, light 'paper' (fallback 'none'), lightFrom top-left, no rack; world 2 (from 'Literary', 26.29) = Cross Street Chapel as in 1835 (SRC-044, the building where the Society met; zoom 1.0, focus [0.47, 0.5], haze 0.12, rack 1.8 px on 'paper'). One slow move {pan -40, push 0.03} for the whole shot. NO PIN. Labels un-wipe (MOT-013). Keyword chips (TXT-024) are lowercase Fraunces 600 on paper chips, the key word on the one accent chip, silent.",
-  ["Plan fades in under the slate (0.6 s); world label PLAN OF MANCHESTER · WILLIAM GREEN · 1794 bottom-right; the camera's one slow move begins. Chips (W1): 'question' (white) at (160, 400) on 'question' (3.42), then a drawn arrow down-right and 'experts' (accent) at (260, 500) on 'experts' (4.14), over the plan's west streets, away from the college; both un-wipe from 6.9.",
-   "Dateline part 1 MANCHESTER arrives low-centre (960, 860) on 'Manchester' (5.56), clear of the chips.",
+  ["Plan fades in under the slate (0.6 s); world label PLAN OF MANCHESTER · WILLIAM GREEN · 1794 bottom-right; the camera's one slow move begins. Chips (W1): 'question' (white) at (160, 400) on 'question' (3.42), then a drawn arrow down-right and 'experts' (accent) at (260, 500) on 'experts' (4.14), over the plan's west streets, away from the college.",
+   "Dateline part 1 MANCHESTER arrives low-centre (960, 860) on 'Manchester' (5.56), clear of the chips; both chips un-wipe from 6.9.",
    "Part 2 · 31 OCT 1794 arrives on 'October'; the dateline eases to the top-left corner (120, 84) at 9.0, in the pause after '1794.', so the map scrap arrives alone.",
    "Map scrap (W2, MAP-017 on SRC-045: a torn piece of Kitchin's 1794 map, LayerStage carry w 520 at [440, 560], tilted -4°) rises on 'moved' (10.22); a straight line KENDAL → MANCHESTER draws 10.42-11.24 and a hand-drawn circle lands on Manchester on 'before' (11.24); mono chips KENDAL, MANCHESTER and the source chip KITCHIN · LAURIE & WHITTLE · 1794. No date for the move on screen; never a road. Silent.",
    "Label AGE 28 at (1280, 490), under where the college will be ringed, on 'twenty-eight' (clear of the scrap, x 180-700).",
@@ -50,8 +50,8 @@ S = [
    "The scrap sinks away (the rise reversed, 0.6 s) from 17.4, before 'That's the old name' (17.51); the camera carries on towards the college.",
    "Ring (MAP-008, centre (1280, 307), r 125, drawn inside the far plane) round the plan's own 'Academy' building on 'college', pencil line SFX-017 at -29 dB; NEW COLLEGE (accent settle, MOT-014) lands above it at (1280, 135) on 'New College'.",
    "AGE 28 and TUTOR un-wipe on 'Tonight' (24.01); NEW COLLEGE and the ring 0.3 s later (24.31); all gone by about 25.2, before the swap.",
-   "WorldSwap (TRN-018, dissolve 1.2 s) from the plan to Cross Street Chapel as in 1835 on 'Literary' (26.29); the dateline (untilSec 26.29) and the plan's label un-wipe with it; CROSS STREET CHAPEL · AS IN 1835 at (120, 84), size 22, at 27.2 (no label says the drawing shows 1794).",
-   "THE SOCIETY MET IN A ROOM HERE UNTIL 1799 at (120, 133) on 'Society' (27.43). Page (p.28 page-only cut-out, w 500) rises on 'paper' (28.95) and lands lifted at frame x 150-665, top 831 (at [464, 1106]), its bottom off frame, 60 px clear of the door surround and 55 px under the lower-left window, shadow down-right; blur racks in on the chapel (1.8 px); paper SFX-016 at -24 dB on its settle, in the pause; both labels un-wipe at 29.25."]),
+   "WorldSwap (TRN-018, dissolve 1.2 s) from the plan to Cross Street Chapel as in 1835 on 'Literary' (26.29); the dateline (untilSec 26.29) and the plan's label un-wipe with it; the corner stays clear until the dissolve ends (27.49).",
+   "Two-line tag CROSS STREET CHAPEL · AS IN 1835 / THE SOCIETY MET IN A ROOM HERE UNTIL 1799 at (120, 84/133), size 22, lands as one on 'Society' (27.43) (reviewer: one landing instead of the brief's two, 0.23 s apart; no label says the drawing shows 1794). Page (p.28 page-only cut-out, w 500) rises on 'paper' (28.95) and lands lifted at frame x 150-665, top 831 (at [464, 1106]), its bottom off frame, 60 px clear of the door surround and 55 px under the lower-left window, shadow down-right; blur racks in on the chapel (1.8 px); paper SFX-016 at -24 dB on its settle, in the pause; both labels un-wipe at 29.25."]),
  (13, 16, "VIS-001", "TXT-009, TXT-010", "MOT-003", "TRN-015", "MUS-007",
   "Calm. Director A2_title_match: TRN-015 focus match from the held page's title (focus [408, 908]) into the p.28 card (side left, crop [700, 160, 1000, 960]); ground = the chapel blurred (LOK-028 38 px, brightness 0.42: SRC-044, Sam's decision: see New_Assets), so the drawing simply goes soft behind the paper. Source tag JOHN DALTON · 1798 · P. 28; quote column: Extraordinary Facts relating to the Vision of Colours: with Observations (no quote marks). Highlights in reading order.",
   ["Focus match on 'Its title is', swish SFX-024 in the pause before 'Its'; highlight EXTRAORDINARY FACTS on 'Extraordinary'.",
@@ -72,7 +72,7 @@ S = [
    "State label A WAX SEAL · TODAY under the wax on 'wax' (59.88; it is never called a stick). The sealed letter (W4, VIS-061 on SRC-046, a layer cut-out carry[2], w 360) rises from 'used' (60.60) and lands on 'seal letters' (61.5) at about x 1255-1620, y 650-890, over the page's lower, unhighlighted lines, 90 px under H3; tag A SEALED LETTER · 1841 under it (mono 20); silent (SFX-016 is at its episode limit of 10).",
    "The letter and its tag sink away 62.45-63.05, before 'Think'; blur racks in on the page (2 px) on 'Think': the two things are now the subject. Chip (W5) 'green' (white) at y 640, x 1160-1410, on 'green' (65.08), on the blurred page's lower lines where the letter was.",
    "Chip 'red' (white) at x 1430-1600 on 'red' (66.36), 84 px clear of the highlights.",
-   "Chip 'to you' (accent) row 2 at y 750, x 1160-1440, on 'To you' (68.84); all three chips un-wipe from 71.0, so the olive lands on a clean frame (the chips say 'to you', the olive pair shows 'to him').",
+   "Chip 'to you' (accent) row 2 at y 750, x 1160-1440, on 'you' (68.84), after the held 'To' (67.32); all three chips un-wipe from 71.0, so the olive lands on a clean frame (the chips say 'to you', the olive pair shows 'to him').",
    "Both turn the same olive (#574F18, simulated) in the pause after 'get.' (about 71.65 s), the wax label un-wiping with it; label SIMULATION · ONE WAY / HE MAY HAVE SEEN THEM (x 120, y 830/868, size 22) on 'To him' (72.06 s, about 1.8 s to read); that label and the caption un-wipe 0.6 s before the glide."]),
  (29, 38, "VIS-059, VIS-014", "TXT-010", "MOT-016", "TRN-004", "MUS-012",
   "Calm. Director S_prism_world: TRN-004 canvas glide, dir down, pull 0.86 (the next card on the same sheet), silent under cue 2; the photo arrives already in place. LayerStage world = SRC-043, a glass prism today throwing colours on a paper backdrop (zoom 1.1, focus [0.5, 0.642], haze 0.12, dim 0.15, no camera pan, push 0.03), world label PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH bottom-right. Overlay plane: two SpectrumStrips (VIS-014 two-track mode): top OTHERS · DALTON'S SIX (red, orange, yellow, green, blue, purple) at x 210-1710, y 470-566; lower DALTON'S WORDS, an opaque panel while empty (red end dim, not black; one yellow fading strong to pale under orange, yellow and green; blue under blue; a darker blue under purple). No headline title. Never a beam into the prism or a fan out of it. Cue 2 drops out in the pause after 'purple.'; the riser (MUS-015) builds under beat 38.",
@@ -80,7 +80,7 @@ S = [
    "The whole prism shows on 'A prism' (78.23); the top strip draws left to right from x 210 on 'triangular' (78.97, 1.4 s), over the prism's base (the base line and back corner inside the strip, no edge lined up).",
    "Top strip complete on 'throws colours' (80.37).",
    "World racks on 'others' (82.93): blur 3 px and dim 0.55 over 0.8 s. The lower track (opaque, empty) appears, with the DALTON'S WORDS chip at (210, 714).",
-   "Quote chips (W6, TXT-025, verbatim as spoken) land word by word from 'little' (85.69) to 'light' (88.35): row 1 'little more than a shade,' at (210, 760), row 2 'or defect of light' at (210, 828), source chip DALTON · 1798 · P. 31 at about (720, 840), all under the red end, ending by y 890 (music near-silent under the quote).",
+   "Quote chips (W6, TXT-025, verbatim as spoken) land word by word from 'little' (85.69) to 'light' (88.35): row 1 'little more than a shade,' at (210, 760), row 2 'or defect of light' at (210, 828), source chip DALTON · 1798 · P. 31 at about (720, 840) with the first word (85.69), all under the red end, ending by y 890 (the last words land in beat 34; music near-silent under the quote).",
    "Lower red end fills dim (not black) on 'Almost' (89.03), against the opaque track; the photo's red behind it is already dark.",
    "Nothing new: the top strip's six hold on 'six colours'.",
    "Quote chips un-wipe at 92.9; the count 'I see only two or at most three distinctions' types in their place on 'two' (93.47), the source chip held; then, in reading order at the end of the beat, one yellow fills strong to pale under orange, yellow and green on 'Yellow' (95.43).",
@@ -110,8 +110,8 @@ S = [
    "The blue jelly brightens a little and settles back (tint 0.5 -> 0.6 -> 0.5, 1.2 s) on 'blue glass': no label, the blue is the picture (the blue-glass object, W9, is dropped: no free picture found).",
    "Rays (VIS-021: red, green, blue) start from x 210 on 'In Dalton's version'; red and green fade to about 30% in the jelly (path 0.55-0.75) on 'soaks up'; blue passes.",
    "Nothing new: the thinned red and green hold.",
-   "The thinned beam reaches the back of the eye; the leaf sticker (w 180) pops at 152.72 and settles at (300, 380), resting tilt -3°; the wax sticker (w 140) pops at 153.10 (one entrance at a time) and settles at (300, 700), resting +2°, the beam starting between them; soft pop SFX-026 at -26 dB on the wax's settle (about 153.7), both settled before 'Reds'.",
-   "Both darken under the jelly's blue (multiply, inside the photos) and move closer, to (300, 440) and (300, 645), on 'duller': still two colours.",
+   "The thinned beam reaches the back of the eye; the leaf sticker (w 180) pops at 152.50 and settles at (300, 380) by 153.10, resting tilt -3°; the wax sticker (w 140) pops at 153.10 (one entrance at a time: the brief's 152.72 overlapped) and settles at (300, 700), resting +2°, the beam starting between them.",
+   "Soft pop SFX-026 at -26 dB on the wax's settle (about 153.7, in the pause before 'Reds'). Both darken under the jelly's blue (multiply, inside the photos) and move closer, to (300, 440) and (300, 645), on 'duller': still two colours.",
    "Label HIS IDEA: / DULLER, AND MORE ALIKE (x 120, y 790/830, size 22) 0.5 s after 'other.'.",
    "Nothing new on 'might end up looking like a leaf'; the label un-wipes 0.6 s before the slide."]),
  (61, 66, "VIS-001", "TXT-009, TXT-010", "MOT-003", "TRN-007", "MUS-013",
@@ -124,19 +124,19 @@ S = [
    "Nothing new on 'would have been noticed by now'."]),
  (67, 68, "VIS-019", "TXT-010", "MOT-002", "TRN-009", "MUS-013",
   "Calm. TRN-009 shape morph: the 'vitreous' highlight box [832, 285, 123, 37, 3] lifts off and becomes the IRIS [848, 434, 224, 224, 112] of EyeDiagram mode simple, centred (960, 540). The deadpan: the music drops to silence from the pause after 'eye.' through the pause after 'two.'; the eye closes once (one close, no reopen), its close keyed 0.30 s before the shot ends.",
-  ["Morph lands on the iris on 'So the only way' (about 178.0); soft pop SFX-026 on the landing (this shot's one). The eye model (W11, VIS-061 + VIS-060 sticker on SRC-047, the Wellcome ivory model that comes apart, w 320 at (1600, 520), 100 px right of the simple eye) pops on 'open' (180.28), settled by 'eye.' (180.88); tag A MODEL OF AN EYE · WELLCOME COLLECTION under it at y about 720 (no date: the record says only 'possibly 19th century'). Silent.",
+  ["Morph lands on the iris at about 177.9, in the pause before 'So'; soft pop SFX-026 on the landing (this shot's one). The eye model (W11, VIS-061 + VIS-060 sticker on SRC-047, the Wellcome ivory model that comes apart, w 320 at (1600, 520), 100 px right of the simple eye) pops on 'open' (180.28), settled by 'eye.' (180.88); tag A MODEL OF AN EYE · WELLCOME COLLECTION under it at y about 720 (no date: the record says only 'possibly 19th century'). Silent.",
    "Music silent; chips (W12) 'only' (white) on 'only' (182.25) and 'two' (accent) on 'two.' (182.85), one row at y 490, x 160-360 and 376-540; the lid starts to close at the end (from about 183.52), the one moving thing into the cut; the model and chips leave with the frame."]),
  (69, 72, "VIS-059", "TXT-010", "MOT-016", "TRN-010", "MUS-014",
   "Calm. Director H_wish_over_portrait. TRN-010 cut on action, dir down, px 90 (the move done by LayerStage arrive, 0.45 s): the closing lid carries onto the viewer's-left lens of his spectacles in the 1834 mezzotint (SRC-004, zoom 1.0, focus [0.47, 0.32], haze 0.10, light 'none', lightFrom top-left), lens at (854, 516); world label JOHN DALTON · 1834 bottom-right from frame 0. Camera {pan -30, push 0.02}. Cue 4 enters in the same pause. His face is never animated (no glint, no mask, no push at the face) and never covered.",
-  ["The cut lands on the lens; the portrait settles from 90 px above. The Henry strip (henry1854_p25_wish_line.png, re-cut [85, 1124, 1850, 170], w 1440) rises 140 px on 'exactly' (186.15) and settles lifted in the pause after 'that.' at frame x 151-1597, y 807-939, 56 px under his chin; the 'not, however, verified' and 'pale yellow' lines never show.",
-   "Tag W. C. HENRY · 1854 · P. 25 at (160, 746), size 22, on the strip's settle (187.05). H1 'carefully made after Dalton's death' (strip box [710, 20, 1112, 52]) on 'after' (189.41).",
+  ["The cut lands on the lens; the portrait settles from 90 px above. The Henry strip (henry1854_p25_wish_line.png, re-cut [85, 1124, 1850, 170], w 1440) rises 140 px on 'exactly' (186.15) and settles lifted in the pause after 'that.' at frame x 151-1597, y 807-939, 56 px under his chin; the 'not, however, verified' and 'pale yellow' lines never show. The old frame (simple eye, eye model, chips) plays live from the beat's start (183.82) to the cut (184.07), so its assets are tagged here. No un-wipe in this beat, so MOT-013 sits on beat 72 only.",
+   "Tag W. C. HENRY · 1854 · P. 25 at (160, 746), size 22, on the strip's settle (187.05). H1 'carefully made after Dalton's death' (strip box [710, 20, 1112, 52]) on 'after' (189.41). Silent: SFX-016 is at 10 of 10, so the strip's settle has no paper sound.",
    "The world racks to 1.5 px on 'His biographer' (191.31); no label for him (the tag names him).",
    "H2 'his strongly expressed wish' (strip box [598, 102, 822, 54]) on 'strongly' (192.81; music near-silent under the quote); the Henry tag un-wipes at 194.45; the portrait's tag stays until the band covers it."]),
  (73, 75, "TXT-024", "TXT-024", "MOT-002", "TRN-011", "MUS-014",
-  "Calm. TRN-011 paper band (dark, up) into the new question, covering the portrait's tag first. Keyword chips (W13, TXT-024, replacing the KineticLine) left-aligned at x 120: row 1 'what is' (white) + 'colour?' (accent) at y 470, row 2 'one man' (white) at y 590; never a whole spoken line.",
-  ["Band wipes up on 'But', SFX-024; the dark ground holds.",
-   "Chips 'what is' on 'what' (198.53) and 'colour?' on 'colour' (198.83).",
-   "Chip 'one man' on 'one' (202.34); blurred away by the focus match at 203.00."]),
+  "Calm. TRN-011 paper band (dark, up) into the new question, covering the portrait's tag first. Keyword chips (W13, TXT-024) replace the KineticLine from beat 74; never a whole spoken line.",
+  ["Band wipes up in the pause before 'But' (195.02-195.67), SFX-024, and uncovers the chip panel's dark ground (Visual TXT-024; Text empty: the first chip lands in beat 74); the dark ground holds.",
+   "Chips left-aligned at x 120: row 1 'what is' (white) on 'what' (198.53) + 'colour?' (accent) on 'colour' (198.83) at y 470.",
+   "Row 2 chip 'one man' (white) at (120, 590) on 'one' (202.34); blurred away by the focus match at 203.00."]),
  (76, 77, "VIS-015", "TXT-010", "MOT-002", "TRN-015", "MUS-014",
   "Calm. TRN-015 focus match into act 1's dark room (PerspectiveGrid, depth 2000, dark 0.7, dolly 0.02, fog 0.15) with the CLOSED shutter at about (280, 370): no hole, no beam, no tag, no door (act 4 makes the hole on 'small hole'). After 'born.' the music plays alone for about 3 s. Act 4 opens from this exact framing.",
   ["Match into the dark room on 'A man who died', SFX-024 swish in the pause before it; the closed shutter on the left third.",
@@ -145,22 +145,24 @@ S = [
 
 # Per-beat columns: each asset only on the beats where it is on screen (Gate 1 review item 6/17), sounds on their beats.
 VIS = {**{k: "VIS-019, VIS-021" for k in (45, 46, 47, 48, 55, 56)}, **{k: "VIS-019, VIS-021, VIS-060" for k in (57, 58, 59, 60)},
-       24: "VIS-059, VIS-061", 25: "VIS-059, VIS-061", 67: "VIS-019, VIS-061, VIS-060", 68: "VIS-019, VIS-061, VIS-060"}
-TXT = {2: "TXT-010, TXT-024", 12: "TXT-010", 13: "TXT-009, TXT-010", 15: "TXT-009, TXT-010, TXT-024",
+       73: "TXT-024", 69: "VIS-059, VIS-019, VIS-061, VIS-060", 24: "VIS-059, VIS-061", 25: "VIS-059, VIS-061", 67: "VIS-019, VIS-061, VIS-060", 68: "VIS-019, VIS-061, VIS-060"}
+TXT = {2: "TXT-010, TXT-024", 3: "TXT-011, TXT-010, TXT-024", 12: "TXT-010", 13: "TXT-009, TXT-010", **{k: "TXT-009, TXT-010, TXT-024" for k in (15, 16, 17)},
+       **{k: "TXT-009, TXT-010" for k in (36, 37, 38)}, 69: "TXT-010, TXT-024", 73: "",
        **{k: "TXT-010, TXT-024" for k in (25, 26, 27, 47, 48, 68)}, 33: "TXT-010, TXT-025", 34: "TXT-010, TXT-025",
-       35: "TXT-010, TXT-025", 36: "TXT-010, TXT-025"}
+       35: "TXT-010, TXT-025", 36: "TXT-009, TXT-010, TXT-025"}
 SRC = {**{k: "SRC-009" for k in range(2, 11)}, **{k: "SRC-009, SRC-045" for k in (5, 6, 7, 8)}, 11: "SRC-009, SRC-044",
        12: "SRC-044, SRC-042", **{k: "SRC-042, SRC-044" for k in range(13, 17)},
        17: "SRC-042, SRC-002", **{k: "SRC-002" for k in (18, 19, 20, 21)}, 22: "SRC-002, SRC-014",
        **{k: "SRC-002, SRC-014, SRC-015" for k in range(23, 29)}, 24: "SRC-002, SRC-014, SRC-015, SRC-046",
        25: "SRC-002, SRC-014, SRC-015, SRC-046", **{k: "SRC-043" for k in range(29, 39)}, **{k: "SRC-003" for k in (49, 50, 51)},
        **{k: "SRC-014, SRC-015" for k in (57, 58, 59, 60)}, **{k: "SRC-003" for k in range(61, 67)},
-       67: "SRC-047", 68: "SRC-047", **{k: "SRC-004, SRC-007" for k in range(69, 73)}}
+       67: "SRC-047", 68: "SRC-047", **{k: "SRC-004, SRC-007" for k in range(69, 73)}, 69: "SRC-004, SRC-007, SRC-047"}
 MOT = {36: "MOT-016, MOT-013", 38: "MOT-016, MOT-013", 72: "MOT-016, MOT-013"}
 SFX = {9: "SFX-017", 12: "SFX-016", 13: "SFX-024", 17: "SFX-016", 21: "SFX-020", 22: "SFX-026", 39: "SFX-025",
-       49: "SFX-006, SFX-017", 57: "SFX-026", 61: "SFX-024", 67: "SFX-026", 73: "SFX-024", 76: "SFX-024"}
+       49: "SFX-006, SFX-017", 58: "SFX-026", 61: "SFX-024", 67: "SFX-026", 73: "SFX-024", 76: "SFX-024"}
 MAP = {5: "MAP-017", 6: "MAP-017", 7: "MAP-017", 8: "MAP-017", 9: "MAP-008", 10: "MAP-008"}
 TRN_IN = {11: "TRN-001, TRN-018"}
+LOOK = {k: "LOK-009, LOK-010, LOK-028" for k in (13, 14, 15, 16)}
 NEW = {
  1: "Yes: MUS-008 ActMoodCueSheet (scripts/mix-cue-bed.py, built); cue sheet act3_cues_v2.json",
  2: "Yes: SRC-009 limit raise 4 -> 16 beats; TXT-011 limit raise 24 -> 40; LayerStage builder additions (dateline tag with untilSec, rings inside the far plane, 'paper' light); TXT-024 KeywordChips (new, Planned: chip layer with stack, strike, swap)",
@@ -195,7 +197,7 @@ for s in S:
         lo, hi = BOUNDS.get(k, (None, None))
         st, en = (lo if lo is not None else st), (hi if hi is not None else en)
         first = k == a
-        rows.append([beat, 3, f"{st:.2f}", f"{en:.2f}", spoken(line), VIS.get(k, vis), TXT.get(k, txt), MOT.get(k, mot), TRN_IN.get(k, trn if first else "TRN-001"), L,
+        rows.append([beat, 3, f"{st:.2f}", f"{en:.2f}", spoken(line), VIS.get(k, vis), TXT.get(k, txt), MOT.get(k, mot), TRN_IN.get(k, trn if first else "TRN-001"), LOOK.get(k, L),
                      SFX.get(k, ""), CUE.get(k, mus), "", MAP.get(k, ""), "", SRC.get(k, ""), "", NEW.get(k, ""),
                      (shot + " " if first else "") + notes[k - a]])
         covered.append(k)

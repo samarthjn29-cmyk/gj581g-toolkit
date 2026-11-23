@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T19:51:33.841Z",
+ "generated": "2026-11-23T20:07:44.343Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3294,7 +3294,7 @@
     "src/components/ObjectProp.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: a noun the narration says, shown literally (Within Motion's plates for 'washing dishes'). Limit: max 6 beats per act; each object only on the line that names it; period-right or tagged TODAY. Not for: decoration, or objects the line does not name.",
+   "use": "Best use: a noun the narration says, shown literally (Within Motion's plates for 'washing dishes'). Limit: max 6 beats per act; each object only on the line that names it; period-right, tagged TODAY, or tagged with its own date when it is a later period object standing for the kind of thing (SRC-046, A SEALED LETTER · 1841). Not for: decoration, or objects the line does not name.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -3330,7 +3330,7 @@
     "public/assets/sources/letter1841_wenden_reverse.jpg"
    ],
    "status": "Planned",
-   "use": "Best use: the line 'That's the wax people once used to seal letters' (WCL-E01 act 3, VIS-061 object on 'seal letters'), as a sticker beside the wax seal, tagged A SEALED LETTER · 1841. Limit: max 2 beats per episode; never shown as a letter of Dalton's or anyone in the story; date tag always on. Not for: post in general, or any address.",
+   "use": "Best use: the line 'That's the wax people once used to seal letters' (WCL-E01 act 3, VIS-061 object on 'seal letters'), as a layer cut-out beside the wax seal (no sticker edge: B is a lit LayerStage), tagged A SEALED LETTER · 1841. Limit: max 2 beats per episode; never shown as a letter of Dalton's or anyone in the story; date tag always on. Not for: post in general, or any address.",
    "maxBeats": 2,
    "maxShare": null
   },
