@@ -7019,6 +7019,33 @@
 "https://drive.google.com/file/d/18dSDxLZ9kja8YVxP9p0Gx-UQ0y1gjYLW/view",
 "",
 ""
+],
+[
+"NAR-003",
+"12_Narration",
+"WCL-E01_Act3_Narration",
+"Own: Sam's ElevenLabs take (his Samarth voice) with his re-recorded a3-11 sentence spliced in, paced to 149.5 wpm with even pauses, silence only (tts/pace_even.py); Sam: 'Use the paced version for Act 3', 23 Nov 2026",
+"public/episodes/wcl-e01/03_talk_paced_149wpm_even.wav",
+"Act 3 narration of WCL-E01 'The Man Who Saw Pink' (204.8 s, mono 44.1 kHz 24-bit WAV; the master of 03_talk_paced_149wpm_even.mp3). Take 175.6 wpm, recorded from the reviewed wording (5 voice-only changes). 'In Dalton's version, the tinted jelly soaks up much of the red and the green light.' replaced by Sam's 03_talk_fix.mp3 at silent points (120.55 s and 125.43 s of the take, both under -80 dB), level-matched -2.57 dB; then pauses evened (commas >= 0.32 s, sentences 0.94 s, paragraphs 1.3 s), only in real silences. Heard words match the script 509/509 (whisper medium.en). Sam's audio is final: never re-timed, stretched or filtered. Private: Drive only, never GitHub.",
+"Active",
+"",
+"",
+"2026-11-23",
+"Best use: act 3 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say-so.",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"https://drive.google.com/file/d/1vVRcmxc4SdIbdcHV7J_j0cPvKUNYQynR/view",
+"",
+""
 ]
 ]
 }

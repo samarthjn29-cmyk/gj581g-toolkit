@@ -216,7 +216,7 @@
   {
    "id": "a3-02",
    "scene": 3,
-   "text": "He moved to the town the year before. He's twenty-eight. He teaches mathematics and natural philosophy, the old name for the study of nature, at a college called the New College.",
+   "text": "He moved to the town the year before. He's twenty-eight. He teaches mathematics and natural philosophy. That's the old name for the study of nature. And his college is called the New College.",
    "src": [
     "E1-02",
     "E1-03"
@@ -290,7 +290,7 @@
   {
    "id": "a3-10",
    "scene": 3,
-   "text": "Dalton's guess is that, in his eyes, one of these fluids isn't clear. It's tinted. In his words, \"probably some modification of blue\". And he supposes it must be the vitreous humour.",
+   "text": "Dalton's guess is that, in his eyes, one of these fluids isn't clear. It's tinted. In his words, \"probably some modification of blue\". So, some kind of blue. And he supposes it must be the vitreous humour.",
    "src": [
     "E1-09"
    ],
@@ -299,7 +299,7 @@
   {
    "id": "a3-11",
    "scene": 3,
-   "text": "It makes sense. Think of looking at the world through blue glass. In Dalton's version, the tinted jelly soaks up much of the red and the green light before it reaches the back of the eye. Reds and greens would both look duller, and more like each other. And a red stick of wax might end up looking like a leaf.",
+   "text": "And honestly? It makes sense. Think of looking at the world through blue glass. In Dalton's version, the tinted jelly soaks up much of the red and the green light. Before it ever reaches the back of the eye. Reds and greens would both look duller, and more like each other. And a red stick of wax might end up looking like a leaf.",
    "src": [
     "NEW-8",
     "FC2-a3-12"
@@ -327,7 +327,7 @@
   {
    "id": "a3-14",
    "scene": 3,
-   "text": "So, at some point, he asks for it to be done after he dies. His biographer would call it his \"strongly expressed wish\".",
+   "text": "At some point, he asks for exactly that: for his eyes to be examined after he dies. His biographer would call it his \"strongly expressed wish\".",
    "src": [
     "E1-10",
     "NEW-3"

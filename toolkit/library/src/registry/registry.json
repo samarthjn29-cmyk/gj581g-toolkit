@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T15:16:50.340Z",
+ "generated": "2026-11-23T17:23:15.176Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3165,6 +3165,18 @@
    "status": "Planned",
    "use": "Best use: the start of Dalton's talk (WCL-E01 act 3 shot A): the title and 'READ OCT. 31st, 1794.' highlighted as said, rising onto Green's 1794 plan of Manchester. Limit: max 6 beats per episode. Not for: decoration; never alone on screen without the highlighted line.",
    "maxBeats": 6,
+   "maxShare": null
+  },
+  "NAR-003": {
+   "id": "NAR-003",
+   "folder": "12_Narration",
+   "name": "WCL-E01_Act3_Narration",
+   "paths": [
+    "public/episodes/wcl-e01/03_talk_paced_149wpm_even.wav"
+   ],
+   "status": "Active",
+   "use": "Best use: act 3 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say-so.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

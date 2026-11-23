@@ -75,7 +75,7 @@ C: -
 V: [matter-of-fact] So Dalton takes his question to the experts. Manchester, the last day of October, seventeen ninety-four.
 S: Manchester plan 1794 (SRC-009) with the dateline tag MANCHESTER · 31 OCT 1794 and a pin.
 C: E1-01
-V: He moved to the town the year before. He's twenty-eight. He teaches mathematics and natural philosophy, the old name for the study of nature, at a college called the New College.
+V: He moved to the town the year before. He's twenty-eight. He teaches mathematics and natural philosophy. That's the old name for the study of nature. And his college is called the New College.
 S: Text card: NEW COLLEGE · MATHEMATICS AND NATURAL PHILOSOPHY · AGE 28.
 C: E1-02, E1-03
 V: Tonight, he stands up in front of the town's Literary and Philosophical Society and reads out a paper. Its title is "Extraordinary facts relating to the vision of colours". The subject is his own eyes. It's his first paper to the Society.
@@ -99,10 +99,10 @@ C: -
 V: Your eye isn't hollow. It's filled with clear fluids. The biggest is a clear jelly called the vitreous humour. Here, "humour" is an old word for a fluid in the body. Light passes through it on its way to the back of the eye.
 S: The eye diagram: label VITREOUS HUMOUR on the jelly; a beam passes through to the back.
 C: E1-32
-V: Dalton's guess is that, in his eyes, one of these fluids isn't clear. It's tinted. In his words, "probably some modification of blue". And he supposes it must be the vitreous humour.
+V: Dalton's guess is that, in his eyes, one of these fluids isn't clear. It's tinted. In his words, "probably some modification of blue". So, some kind of blue. And he supposes it must be the vitreous humour.
 S: Dalton 1798 p.43 (SRC-003) highlighted; the jelly in the diagram tints blue.
 C: E1-09
-V: It makes sense. Think of looking at the world through blue glass. In Dalton's version, the tinted jelly soaks up much of the red and the green light before it reaches the back of the eye. Reds and greens would both look duller, and more like each other. And a red stick of wax might end up looking like a leaf.
+V: And honestly? It makes sense. Think of looking at the world through blue glass. In Dalton's version, the tinted jelly soaks up much of the red and the green light. Before it ever reaches the back of the eye. Reds and greens would both look duller, and more like each other. And a red stick of wax might end up looking like a leaf.
 S: The beam passes the blue jelly; its red and green parts thin out. The wax and leaf swatches drift toward each other.
 C: NEW-8, FC2-a3-12
 V: He has a reason for picking the jelly, too. "Otherwise," he writes, "I apprehend it might be discovered by inspection, which has not been done." In other words, a tint anywhere easier to see would have been noticed by now.
@@ -111,7 +111,7 @@ C: E1-09, NEW-3, FC2-a3-13
 V: [deadpan] So the only way to check the jelly is to open an eye. And Dalton only has two. [matter-of-fact]
 S: The eye diagram blinks once.
 C: -
-V: So, at some point, he asks for it to be done after he dies. His biographer would call it his "strongly expressed wish".
+V: At some point, he asks for exactly that: for his eyes to be examined after he dies. His biographer would call it his "strongly expressed wish".
 S: Henry 1854 p.25 (SRC-007) with "his strongly expressed wish" highlighted.
 C: E1-10, NEW-3
 V: But a blue tint only explains colours if we know what colour is. And on that, Dalton leans on one man. A man who died long before Dalton was born.
