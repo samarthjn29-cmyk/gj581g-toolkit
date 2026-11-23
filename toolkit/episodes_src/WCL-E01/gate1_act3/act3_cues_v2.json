@@ -1,0 +1,129 @@
+{
+ "dur": 209.68,
+ "cues": [
+  {
+   "name": "1 the talk",
+   "file": "/home/claude/wcl/ep01/cues/dl/Wholesome.mp3",
+   "from": 280.2,
+   "at": 0,
+   "until": 51.2,
+   "fadeIn": 0.03,
+   "fadeOut": 1.0,
+   "lufs": -34,
+   "levels": [
+    [
+     0,
+     -26
+    ],
+    [
+     2.0,
+     -26
+    ],
+    [
+     2.9,
+     -34
+    ],
+    [
+     51.2,
+     -34
+    ]
+   ]
+  },
+  {
+   "name": "2 the match",
+   "file": "/home/claude/wcl/ep01/cues/dl/Thinking Music.mp3",
+   "from": 0,
+   "at": 50.7,
+   "until": 99.8,
+   "fadeIn": 0.6,
+   "fadeOut": 0.8,
+   "lufs": -35
+  },
+  {
+   "name": "3 the guess",
+   "file": "/home/claude/wcl/ep01/cues/dl/Long Note Two.mp3",
+   "from": 35.0,
+   "at": 102.1,
+   "until": 183.4,
+   "fadeIn": 0.02,
+   "fadeOut": 0.4,
+   "lufs": -41,
+   "filter": "dynaudnorm=f=3000:g=31"
+  },
+  {
+   "name": "4 the wish",
+   "file": "/home/claude/wcl/ep01/cues/dl/At Rest.mp3",
+   "from": 75.0,
+   "at": 183.6,
+   "until": 209.68,
+   "fadeIn": 1.0,
+   "fadeOut": 1.0,
+   "lufs": -35,
+   "levels": [
+    [
+     183.6,
+     -35
+    ],
+    [
+     206.7,
+     -35
+    ],
+    [
+     207.4,
+     -27
+    ],
+    [
+     209.68,
+     -27
+    ]
+   ]
+  }
+ ],
+ "quiet": [
+  [
+   85.45,
+   88.85,
+   -50,
+   0.3
+  ],
+  [
+   129.4,
+   131.9,
+   -50,
+   0.3
+  ],
+  [
+   165.4,
+   171.3,
+   -50,
+   0.4
+  ],
+  [
+   180.95,
+   183.5,
+   -55,
+   0.06
+  ],
+  [
+   192.6,
+   194.6,
+   -50,
+   0.3
+  ]
+ ],
+ "events": [
+  {
+   "name": "riser",
+   "file": "/home/claude/wcl/ep01/cues/riser_turn.wav",
+   "at": 99.6,
+   "lufs": -30
+  },
+  {
+   "name": "hit SFX-025",
+   "file": "/home/claude/toolkit/toolkit/library/public/sfx/kit/mechanical/sub_impact_v1.wav",
+   "at": 102.1,
+   "lufs": -29
+  }
+ ],
+ "note": "v2 (Gate 1 review, 23 Nov 2026): hard cut, hit and cue 3 on one frame at 102.10 s (measured silence 102.05-103.2 s after 'should.'); quiet spans for the prism, p.43 and Henry quotes; ends at 209.68 s. The sampler Sam heard is v1."
+}
