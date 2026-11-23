@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T19:50:14.407Z",
+ "generated": "2026-11-23T19:51:33.841Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3343,7 +3343,7 @@
     "public/assets/sources/eye_model_wellcome_cutout.png"
    ],
    "status": "Planned",
-   "use": "Best use: 'the only way to check the jelly is to open an eye' (WCL-E01 act 3, VIS-061 object, tagged A TEACHING MODEL OF THE EYE · 19TH CENTURY · WELLCOME COLLECTION). Limit: max 3 beats per episode; never presented as Dalton's eye or as an examination; credit always on screen or in the description. Not for: anatomy claims, or acts 6-7's real examination.",
+   "use": "Best use: 'the only way to check the jelly is to open an eye' (WCL-E01 act 3, VIS-061 object, tagged A MODEL OF AN EYE · WELLCOME COLLECTION; no date on screen: the record says only 'possibly 19th century'). Limit: max 3 beats per episode; never presented as Dalton's eye or as an examination; credit always on screen or in the description. Not for: anatomy claims, or acts 6-7's real examination.",
    "maxBeats": 3,
    "maxShare": null
   }

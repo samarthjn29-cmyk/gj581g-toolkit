@@ -34,3 +34,16 @@ Verdicts: **PASS** means it can be built as planned. **FIX** means use the corre
 ## Notes
 - The archive.org copy of p.31 has a handwritten correction ("yellow" struck out, "blue" written in) in the sentence about green and yellow. If p.31 is shown, use a clean copy (SHI/Commons) or crop to the lines needed.
 - Nothing on screen in act 3 names deuteranope or protanope. That matches the plan to save the answer for episode 2.
+
+## Addendum, 24 Nov 2026: the three layer shots' new assets and the Within Motion blend
+
+Checked against the Commons records (read through the Commons API in the browser), the act 3 word times (`gate1_act3/03_talk_final_words.json`) and the rows above.
+
+| # | Item | Planned on-screen text | Verdict | Evidence | Corrected text / action |
+|---|---|---|---|---|---|
+| 11 | W2 map scrap (MAP-017 on SRC-045) | line KENDAL → MANCHESTER, circle on Manchester; chips KENDAL, MANCHESTER; source chip KITCHIN · LAURIE & WHITTLE · 1794 | PASS | Spoken: "He moved to the town the year before." Dalton's own note (row 2): "removed thence to Manchester in 1793". He was at Kendal before (act 2, KENDAL · WESTMORLAND). Map record: "A new map of England & Wales (North half) ... By Thos. Kitchin, Geogr. The canals inserted to 1792 by J. Phillips ... London, Published by Laurie & Whittle ... 12th May, 1794", public domain; this copy is from the atlas's 1804 6th edition. | Straight line only, never a road. No 1793 on screen. Register F corrected ("canals inserted to 1792"). |
+| 12 | W4 sealed letter (SRC-046) | tag A SEALED LETTER · 1841 | PASS | Commons: "Wenden 1841 official letter ... rated 2 kopeks", Post of the Russian Empire, public domain. The image shows a folded letter with an intact red wax seal and a postmark. Spoken: "That's the wax people once used to seal letters." | Keep the date on: the letter is 47 years after the talk and is nobody in the story's. |
+| 13 | W11 eye model (SRC-047) | tag A MODEL OF AN EYE · <date> | FIX | Wellcome L0058734 (CC BY 4.0): "Ivory and glass demonstration model of an eye, comes apart to show various components, on ivory pedestal, possibly 19th century." | **A MODEL OF AN EYE · WELLCOME COLLECTION**, no date ("possibly" is too weak for a date on screen). The credit doubles as the CC BY attribution. |
+| 14 | Keyword and quote chips W1, W3, W5, W6, W8, W12, W13 | question → experts; his own · eyes; green · red · to you; little more than a shade, / or defect of light + DALTON · 1798 · P. 31; clear (struck) → tinted; only · two; what is · colour? · one man | PASS | Every chip word is spoken within 1.2 s of its cue (checked against the word times). W6 matches p.31 exactly (row 5a). | W9 (blue glass) is dropped: no free-licence picture found; C keeps its tint pulse. |
+| 15 | S world label (SRC-043) | PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH | PASS | Checked 23 Nov (coordinator's fact-check, as the Director's brief records). | none |
+| 16 | A chapel labels (SRC-044) | CROSS STREET CHAPEL · AS IN 1835; THE SOCIETY MET IN A ROOM HERE UNTIL 1799 | PASS | Row 1b; the coordinator's wording of 24 Nov. | none |

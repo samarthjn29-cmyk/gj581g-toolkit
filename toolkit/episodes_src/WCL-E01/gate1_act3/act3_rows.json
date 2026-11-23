@@ -27,7 +27,7 @@
   "5.09",
   "So Dalton takes his question to the experts.",
   "VIS-059",
-  "TXT-010",
+  "TXT-010, TXT-024",
   "MOT-016, MOT-013, MOT-014",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -38,8 +38,8 @@
   "",
   "SRC-009",
   "",
-  "Yes: SRC-009 limit raise 4 -> 16 beats (A + A2's blurred ground); TXT-011 limit raise 24 -> 40 (act 2 grew to 23 dateline beats after its Gate 1; act 3 adds 11); LayerStage builder additions (dateline tag, rings inside the far plane, 'paper' light)",
-  "Calm. Director shot A_manchester_talk. LayerStage world = Green's 1794 plan of Manchester (same place, same year), zoom 1.1, focus [0.4769, 0.37], haze 0.06, light 'paper' (fallback 'none'), lightFrom top-left; one slow move {pan -40, push 0.03} towards the college. NO PIN (in 1794 the Society met at Cross Street Chapel, outside this crop). Labels un-wipe (MOT-013). Plan fades in under the slate (0.6 s); world label PLAN OF MANCHESTER · WILLIAM GREEN · 1794 bottom-right; the camera's one slow move begins."
+  "Yes: SRC-009 limit raise 4 -> 16 beats; TXT-011 limit raise 24 -> 40; LayerStage builder additions (dateline tag with untilSec, rings inside the far plane, 'paper' light); TXT-024 KeywordChips (new, Planned: chip layer with stack, strike, swap)",
+  "Calm. Director shot A_manchester_talk + A_worldswap_chapel. LayerStage world 1 = Green's 1794 plan of Manchester (same place, same year), zoom 1.1, focus [0.4769, 0.37], haze 0.06, light 'paper' (fallback 'none'), lightFrom top-left, no rack; world 2 (from 'Literary', 26.29) = Cross Street Chapel as in 1835 (SRC-044, the building where the Society met; zoom 1.0, focus [0.47, 0.5], haze 0.12, rack 1.8 px on 'paper'). One slow move {pan -40, push 0.03} for the whole shot. NO PIN. Labels un-wipe (MOT-013). Keyword chips (TXT-024) are lowercase Fraunces 600 on paper chips, the key word on the one accent chip, silent. Plan fades in under the slate (0.6 s); world label PLAN OF MANCHESTER · WILLIAM GREEN · 1794 bottom-right; the camera's one slow move begins. Chips (W1): 'question' (white) at (160, 400) on 'question' (3.42), then a drawn arrow down-right and 'experts' (accent) at (260, 500) on 'experts' (4.14), over the plan's west streets, away from the college; both un-wipe from 6.9."
  ],
  [
   "E01-A3-03",
@@ -60,7 +60,7 @@
   "SRC-009",
   "",
   "",
-  "Dateline part 1 MANCHESTER arrives low-centre (960, 860) on 'Manchester'."
+  "Dateline part 1 MANCHESTER arrives low-centre (960, 860) on 'Manchester' (5.56), clear of the chips."
  ],
  [
   "E01-A3-04",
@@ -81,7 +81,7 @@
   "SRC-009",
   "",
   "",
-  "Part 2 · 31 OCT 1794 arrives on 'October'."
+  "Part 2 · 31 OCT 1794 arrives on 'October'; the dateline eases to the top-left corner (120, 84) at 9.0, in the pause after '1794.', so the map scrap arrives alone."
  ],
  [
   "E01-A3-05",
@@ -97,12 +97,12 @@
   "",
   "MUS-007",
   "",
+  "MAP-017",
   "",
+  "SRC-009, SRC-045",
   "",
-  "SRC-009",
-  "",
-  "",
-  "Dateline eases to the top-left corner (120, 84) on 'moved'."
+  "Yes: MAP-017 MapScrapRoute (new, Planned) on SRC-045 Kitchin 1794 (new, Planned); LayerStage carry exit 'sink'",
+  "Map scrap (W2, MAP-017 on SRC-045: a torn piece of Kitchin's 1794 map, LayerStage carry w 520 at [440, 560], tilted -4°) rises on 'moved' (10.22); a straight line KENDAL → MANCHESTER draws 10.42-11.24 and a hand-drawn circle lands on Manchester on 'before' (11.24); mono chips KENDAL, MANCHESTER and the source chip KITCHIN · LAURIE & WHITTLE · 1794. No date for the move on screen; never a road. Silent."
  ],
  [
   "E01-A3-06",
@@ -118,12 +118,12 @@
   "",
   "MUS-007",
   "",
+  "MAP-017",
+  "",
+  "SRC-009, SRC-045",
   "",
   "",
-  "SRC-009",
-  "",
-  "",
-  "Label AGE 28 at (1280, 490), under where the college will be ringed, on 'twenty-eight'."
+  "Label AGE 28 at (1280, 490), under where the college will be ringed, on 'twenty-eight' (clear of the scrap, x 180-700)."
  ],
  [
   "E01-A3-07",
@@ -139,9 +139,9 @@
   "",
   "MUS-007",
   "",
+  "MAP-017",
   "",
-  "",
-  "SRC-009",
+  "SRC-009, SRC-045",
   "",
   "",
   "Label TUTOR · MATHEMATICS AND NATURAL PHILOSOPHY at y 536 on 'mathematics'."
@@ -160,12 +160,12 @@
   "",
   "MUS-007",
   "",
+  "MAP-017",
+  "",
+  "SRC-009, SRC-045",
   "",
   "",
-  "SRC-009",
-  "",
-  "",
-  "Nothing new: the old name is in the narration only; the camera carries on towards the college."
+  "The scrap sinks away (the rise reversed, 0.6 s) from 17.4, before 'That's the old name' (17.51); the camera carries on towards the college."
  ],
  [
   "E01-A3-09",
@@ -207,7 +207,7 @@
   "SRC-009",
   "",
   "",
-  "AGE 28 and TUTOR un-wipe on 'Tonight'; NEW COLLEGE and the ring 0.3 s later, so the right side is clear."
+  "AGE 28 and TUTOR un-wipe on 'Tonight' (24.01); NEW COLLEGE and the ring 0.3 s later (24.31); all gone by about 25.2, before the swap."
  ],
  [
   "E01-A3-11",
@@ -218,17 +218,17 @@
   "VIS-059",
   "TXT-011, TXT-010",
   "MOT-016, MOT-013, MOT-014",
-  "TRN-001",
+  "TRN-001, TRN-018",
   "LOK-009, LOK-010",
   "",
   "MUS-007",
   "",
   "",
   "",
-  "SRC-009",
+  "SRC-009, SRC-044",
   "",
-  "",
-  "Nothing new: the right side stays clear for the page."
+  "Yes: SRC-044 Cross Street Chapel 1835 (new, Planned -> Active); TRN-018 WorldSwap, 1 of 3 in the act",
+  "WorldSwap (TRN-018, dissolve 1.2 s) from the plan to Cross Street Chapel as in 1835 on 'Literary' (26.29); the dateline (untilSec 26.29) and the plan's label un-wipe with it; CROSS STREET CHAPEL · AS IN 1835 at (120, 84), size 22, at 27.2 (no label says the drawing shows 1794)."
  ],
  [
   "E01-A3-12",
@@ -237,7 +237,7 @@
   "29.70",
   "Society and reads out a paper.",
   "VIS-059",
-  "TXT-011, TXT-010",
+  "TXT-010",
   "MOT-016, MOT-013, MOT-014",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -246,10 +246,10 @@
   "",
   "",
   "",
-  "SRC-009, SRC-042",
+  "SRC-044, SRC-042",
   "",
-  "Yes: SRC-042 Dalton 1798 p.28 (new, Planned) and its page-only cut-out (new file of SRC-042)",
-  "Page (p.28 page-only cut-out, w 560) rises on 'paper' and lands lifted at (560, 780), its bottom edge off frame, shadow down-right; paper sound SFX-016 at -24 dB on its settle, in the pause; blur racks in on the plan (1.5 px)."
+  "Yes: SRC-042 Dalton 1798 p.28 (Planned) and its page-only cut-out (file of SRC-042)",
+  "THE SOCIETY MET IN A ROOM HERE UNTIL 1799 at (120, 133) on 'Society' (27.43). Page (p.28 page-only cut-out, w 500) rises on 'paper' (28.95) and lands lifted at frame x 150-665, top 831 (at [464, 1106]), its bottom off frame, 60 px clear of the door surround and 55 px under the lower-left window, shadow down-right; blur racks in on the chapel (1.8 px); paper SFX-016 at -24 dB on its settle, in the pause; both labels un-wipe at 29.25."
  ],
  [
   "E01-A3-13",
@@ -258,7 +258,7 @@
   "32.48",
   "Its title is \"Extraordinary facts",
   "VIS-001",
-  "TXT-009, TXT-010, TXT-011",
+  "TXT-009, TXT-010",
   "MOT-003",
   "TRN-015",
   "LOK-009, LOK-010",
@@ -267,10 +267,10 @@
   "",
   "",
   "",
-  "SRC-042, SRC-009",
+  "SRC-042, SRC-044",
   "",
-  "",
-  "Calm. Director A2_title_match: TRN-015 focus match from the held page into the p.28 card (side left, crop [700, 160, 1000, 960]), ground = the same plan blurred. Source tag JOHN DALTON · 1798 · P. 28; quote column: Extraordinary Facts relating to the Vision of Colours: with Observations (no quote marks). Highlights in reading order. Focus match on 'Its title is', swish SFX-024 in the pause before 'Its'; the dateline un-wipes on 'title'; highlight EXTRAORDINARY FACTS on 'Extraordinary'."
+  "Decision for Sam: SRC-044 limit raise 4 -> 6 (A2's ground = the chapel blurred); without it the ground falls back to p.28 blurred (SRC-042)",
+  "Calm. Director A2_title_match: TRN-015 focus match from the held page's title (focus [408, 908]) into the p.28 card (side left, crop [700, 160, 1000, 960]); ground = the chapel blurred (LOK-028 38 px, brightness 0.42: SRC-044, Sam's decision: see New_Assets), so the drawing simply goes soft behind the paper. Source tag JOHN DALTON · 1798 · P. 28; quote column: Extraordinary Facts relating to the Vision of Colours: with Observations (no quote marks). Highlights in reading order. Focus match on 'Its title is', swish SFX-024 in the pause before 'Its'; highlight EXTRAORDINARY FACTS on 'Extraordinary'."
  ],
  [
   "E01-A3-14",
@@ -288,7 +288,7 @@
   "",
   "",
   "",
-  "SRC-042, SRC-009",
+  "SRC-042, SRC-044",
   "",
   "",
   "Highlight Vision of Colours: on 'vision'."
@@ -300,7 +300,7 @@
   "37.43",
   "The subject is his own eyes.",
   "VIS-001",
-  "TXT-009, TXT-010",
+  "TXT-009, TXT-010, TXT-024",
   "MOT-003",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -309,10 +309,10 @@
   "",
   "",
   "",
-  "SRC-042, SRC-009",
+  "SRC-042, SRC-044",
   "",
   "",
-  "Nothing new: the two highlights hold on 'his own eyes'."
+  "Chips (W3): 'his own' (white) on 'his' (36.08) and 'eyes' (accent) on 'eyes' (36.48), one row in the card's right column at y 700 (x 1106-1419 and 1435-1629), about 75 px under the source tag, off the page."
  ],
  [
   "E01-A3-16",
@@ -330,7 +330,7 @@
   "",
   "",
   "",
-  "SRC-042, SRC-009",
+  "SRC-042, SRC-044",
   "",
   "",
   "Highlight READ OCT. 31ST, 1794. on 'first paper'."
@@ -354,7 +354,7 @@
   "SRC-042, SRC-002",
   "",
   "Yes: TRN-004 CanvasGridPan (built 23 Nov 2026)",
-  "Calm. TRN-004 canvas glide, dir right, pull 0.86: page 28 to page 34 along one drafting sheet (two pages of the same paper). p.34 card (side left, crop [470, 600, 1300, 1290]), source tag JOHN DALTON · 1798 · P. 34; held at least 4 s, no scrolling. The glide carries p.28 off and p.34 in on 'a careful paper', a quiet paper slide SFX-016 at -26 dB under it."
+  "Calm. TRN-004 canvas glide, dir right, pull 0.86: page 28 to page 34 along one drafting sheet (two pages of the same paper). p.34 card (side left, crop [470, 600, 1300, 1290]), source tag JOHN DALTON · 1798 · P. 34; held at least 4 s, no scrolling. The glide carries p.28 and the W3 chips off and p.34 in on 'a careful paper', a quiet paper slide SFX-016 at -26 dB under it."
  ],
  [
   "E01-A3-18",
@@ -437,8 +437,8 @@
   "",
   "SRC-002",
   "",
-  "Yes: leaf and wax-seal cut-outs (SRC-014/015 files); limit raises SRC-014 3 -> 14 (B, C and act 5's leaf), SRC-015 3 -> 10, SRC-002 10 -> 12, SFX-020 8 -> 12; MUS-012 Thinking Music (new cue 2, Sam to hear); LayerStage builder addition (world highlights)",
-  "Calm. Director B_leaf_and_wax: TRN-006 push from the p.34 laurel line. World = p.34 itself, framed on the laurel sentence (zoom 1.15, focus [0.538, 0.4797], haze 0.08, light 'paper', lightFrom top-left), world label JOHN DALTON · 1798 · P. 34. The printed sentence is the on-screen quote (world highlights H1-H3; no typed copy). Leaf (330, 360) and wax (330, 690) rise in the margin BESIDE their words, lifted. Caption (bottom-left, static) PHOTOS TODAY · CHERRY LAUREL, RUNIC EARTH · WAX SEAL, PETRIK from the push until 0.6 s before the glide. Cue 2 enters in the pause before 'Here's one'. Push lands on the laurel sentence with H1 'The' and H2 'face of a laurel-leaf (Prunus Lauro-cerasus) is a good' lit from frame 0; low whoosh SFX-020 in the pause before 'Here's one'; cue 2 enters; the caption comes in with the world."
+  "Yes: leaf and wax-seal cut-outs (SRC-014/015 files); limit raises SRC-014 3 -> 14, SRC-015 3 -> 10, SRC-002 10 -> 12, SFX-020 8 -> 12; MUS-012 Thinking Music (new cue 2, Sam to hear); LayerStage builder addition (world highlights)",
+  "Calm. Director B_leaf_and_wax: TRN-006 push from the p.34 laurel line. World = p.34 itself, framed on the laurel sentence (zoom 1.15, focus [0.538, 0.4797], haze 0.08, light 'paper', lightFrom top-left), world label JOHN DALTON · 1798 · P. 34. The printed sentence is the on-screen quote (world highlights H1-H3; no typed copy). Leaf (330, 360) and wax (330, 690) rise in the margin BESIDE their words, lifted; the sealed letter is the third and last carried thing (B at its carry limit of 3). Caption (bottom-left, static) PHOTOS TODAY · CHERRY LAUREL, RUNIC EARTH · WAX SEAL, PETRIK from the push until 0.6 s before the glide. Cue 2 enters in the pause before 'Here's one'. Push lands on the laurel sentence with H1 'The' and H2 'face of a laurel-leaf (Prunus Lauro-cerasus) is a good' lit from frame 0; low whoosh SFX-020 in the pause before 'Here's one'; cue 2 enters; the caption comes in with the world."
  ],
  [
   "E01-A3-22",
@@ -488,7 +488,7 @@
   "59.02",
   "62.41",
   "That's the wax people once used to seal letters.",
-  "VIS-059",
+  "VIS-059, VIS-061",
   "TXT-010",
   "MOT-016, MOT-013",
   "TRN-001",
@@ -498,10 +498,10 @@
   "",
   "",
   "",
-  "SRC-002, SRC-014, SRC-015",
+  "SRC-002, SRC-014, SRC-015, SRC-046",
   "",
-  "",
-  "State label A WAX SEAL · TODAY under the wax on 'seal letters' (it is never called a stick)."
+  "Yes: VIS-061 ObjectProp (new, Planned) on SRC-046 sealed letter 1841 (new, Planned)",
+  "State label A WAX SEAL · TODAY under the wax on 'wax' (59.88; it is never called a stick). The sealed letter (W4, VIS-061 on SRC-046, a layer cut-out carry[2], w 360) rises from 'used' (60.60) and lands on 'seal letters' (61.5) at about x 1255-1620, y 650-890, over the page's lower, unhighlighted lines, 90 px under H3; tag A SEALED LETTER · 1841 under it (mono 20); silent (SFX-016 is at its episode limit of 10)."
  ],
  [
   "E01-A3-25",
@@ -509,8 +509,8 @@
   "62.41",
   "65.76",
   "Think about that. A green leaf",
-  "VIS-059",
-  "TXT-010",
+  "VIS-059, VIS-061",
+  "TXT-010, TXT-024",
   "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -519,10 +519,10 @@
   "",
   "",
   "",
-  "SRC-002, SRC-014, SRC-015",
+  "SRC-002, SRC-014, SRC-015, SRC-046",
   "",
   "",
-  "Blur racks in on the page (2 px) on 'Think': the two things are now the subject."
+  "The letter and its tag sink away 62.45-63.05, before 'Think'; blur racks in on the page (2 px) on 'Think': the two things are now the subject. Chip (W5) 'green' (white) at y 640, x 1160-1410, on 'green' (65.08), on the blurred page's lower lines where the letter was."
  ],
  [
   "E01-A3-26",
@@ -531,7 +531,7 @@
   "68.37",
   "and a red stick of wax. To",
   "VIS-059",
-  "TXT-010",
+  "TXT-010, TXT-024",
   "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -543,7 +543,7 @@
   "SRC-002, SRC-014, SRC-015",
   "",
   "",
-  "Nothing new: both things hold in their own colours."
+  "Chip 'red' (white) at x 1430-1600 on 'red' (66.36), 84 px clear of the highlights."
  ],
  [
   "E01-A3-27",
@@ -552,7 +552,7 @@
   "71.59",
   "you, about as different as two colours get.",
   "VIS-059",
-  "TXT-010",
+  "TXT-010, TXT-024",
   "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -564,7 +564,7 @@
   "SRC-002, SRC-014, SRC-015",
   "",
   "",
-  "Nothing new (the longest still stretch, about 4.5 s, with the camera moving; if the frame review finds it still, a TO YOU label at (120, 830), per the brief)."
+  "Chip 'to you' (accent) row 2 at y 750, x 1160-1440, on 'To you' (68.84); all three chips un-wipe from 71.0, so the olive lands on a clean frame (the chips say 'to you', the olive pair shows 'to him')."
  ],
  [
   "E01-A3-28",
@@ -593,9 +593,9 @@
   "74.50",
   "76.62",
   "He describes the band of colours from a prism",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016",
   "TRN-004",
   "LOK-009, LOK-010",
   "",
@@ -603,10 +603,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
-  "",
-  "Yes: VIS-014 limit raise 5 -> 20 beats (act 3: 10; act 4's Newton spectrum)",
-  "Calm. TRN-004 canvas glide, dir down, pull 0.86 (the next example on the same sheet), silent under cue 2. Two SpectrumStrips: top OTHERS · DALTON'S SIX (red, orange, yellow, green, blue, purple); bottom DALTON'S WORDS (red end dim, not black; one yellow fading strong to pale under orange, yellow and green; blue under blue; a darker blue under purple). Quote typed only, credited DALTON · 1798 · P. 31. Cue 2 drops out in the pause after 'purple.'; the riser (MUS-015) builds under beat 38. Glide down to the strips just before 'He describes'; the top strip titled OTHERS · DALTON'S SIX, its colours drawing left to right from x 210."
+  "Yes: SRC-043 prism photo (Planned -> Active, 10 of 10); VIS-014 limit raise 5 -> 20; LayerStage builder additions (S1 overlay plane, S2 dim/rackDim, S3 outSec); VIS-014 two-track mode",
+  "Calm. Director S_prism_world: TRN-004 canvas glide, dir down, pull 0.86 (the next card on the same sheet), silent under cue 2; the photo arrives already in place. LayerStage world = SRC-043, a glass prism today throwing colours on a paper backdrop (zoom 1.1, focus [0.5, 0.642], haze 0.12, dim 0.15, no camera pan, push 0.03), world label PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH bottom-right. Overlay plane: two SpectrumStrips (VIS-014 two-track mode): top OTHERS · DALTON'S SIX (red, orange, yellow, green, blue, purple) at x 210-1710, y 470-566; lower DALTON'S WORDS, an opaque panel while empty (red end dim, not black; one yellow fading strong to pale under orange, yellow and green; blue under blue; a darker blue under purple). No headline title. Never a beam into the prism or a fan out of it. Cue 2 drops out in the pause after 'purple.'; the riser (MUS-015) builds under beat 38. The glide lands on the photo alone (the prism top centre, its tag); track chip OTHERS · DALTON'S SIX at (210, 408), size 22, on 'describes' (74.74), bringing the eye back to x 210."
  ],
  [
   "E01-A3-30",
@@ -614,9 +614,9 @@
   "76.62",
   "79.79",
   "too. A prism is a triangular piece of",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -624,10 +624,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "The top strip draws on (nothing else new)."
+  "The whole prism shows on 'A prism' (78.23); the top strip draws left to right from x 210 on 'triangular' (78.97, 1.4 s), over the prism's base (the base line and back corner inside the strip, no edge lined up)."
  ],
  [
   "E01-A3-31",
@@ -635,9 +635,9 @@
   "79.79",
   "81.96",
   "glass that throws colours on a wall.",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -645,10 +645,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "Top strip complete."
+  "Top strip complete on 'throws colours' (80.37)."
  ],
  [
   "E01-A3-32",
@@ -656,9 +656,9 @@
   "81.96",
   "84.80",
   "The part that others call red, he writes,",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -666,10 +666,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "Lower track DALTON'S WORDS appears under it, still empty, on 'others call red'."
+  "World racks on 'others' (82.93): blur 3 px and dim 0.55 over 0.8 s. The lower track (opaque, empty) appears, with the DALTON'S WORDS chip at (210, 714)."
  ],
  [
   "E01-A3-33",
@@ -677,9 +677,9 @@
   "84.80",
   "88.05",
   "looks to him \"little more than a shade, or defect",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010, TXT-025",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -687,10 +687,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
-  "",
-  "",
-  "Quote typed beside the red end as said: 'little more than a shade, or defect of light', source DALTON · 1798 · P. 31 (music near-silent under the quote)."
+  "Yes: TXT-025 QuoteChips (new, Planned)",
+  "Quote chips (W6, TXT-025, verbatim as spoken) land word by word from 'little' (85.69) to 'light' (88.35): row 1 'little more than a shade,' at (210, 760), row 2 'or defect of light' at (210, 828), source chip DALTON · 1798 · P. 31 at about (720, 840), all under the red end, ending by y 890 (music near-silent under the quote)."
  ],
  [
   "E01-A3-34",
@@ -698,9 +698,9 @@
   "88.05",
   "90.78",
   "of light\". Almost no light at all.",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010, TXT-025",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -708,10 +708,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "Lower red end fills dim (not black) on 'almost no light at all'."
+  "Lower red end fills dim (not black) on 'Almost' (89.03), against the opaque track; the photo's red behind it is already dark."
  ],
  [
   "E01-A3-35",
@@ -719,9 +719,9 @@
   "90.78",
   "92.88",
   "Where others see six colours,",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010, TXT-025",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -729,7 +729,7 @@
   "",
   "",
   "",
-  "",
+  "SRC-043",
   "",
   "",
   "Nothing new: the top strip's six hold on 'six colours'."
@@ -740,9 +740,9 @@
   "92.88",
   "96.05",
   "he sees two, or at most three. Yellow and",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010, TXT-025",
+  "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -750,10 +750,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "Typed count 'I see only two or at most three distinctions' on 'two'; then, in reading order at the end of the beat, the lower strip fills one yellow, strong to pale under orange, yellow and green, on 'Yellow' (two events because the line names the count, then the first colour)."
+  "Quote chips un-wipe at 92.9; the count 'I see only two or at most three distinctions' types in their place on 'two' (93.47), the source chip held; then, in reading order at the end of the beat, one yellow fills strong to pale under orange, yellow and green on 'Yellow' (95.43)."
  ],
  [
   "E01-A3-37",
@@ -761,9 +761,9 @@
   "96.05",
   "99.52",
   "blue. Or yellow, blue and purple.",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -771,10 +771,10 @@
   "",
   "",
   "",
+  "SRC-043",
   "",
   "",
-  "",
-  "Blue under blue, then a darker blue under purple, on 'blue' and 'purple'; cue 2 out in the pause after 'purple.'."
+  "Blue under blue (96.05), then a darker blue under purple (98.53); cue 2 out in the pause after 'purple.'."
  ],
  [
   "E01-A3-38",
@@ -782,9 +782,9 @@
   "99.52",
   "102.10",
   "Then he does what a scientist should.",
-  "VIS-014",
-  "TXT-009, TXT-010",
-  "MOT-002",
+  "VIS-059, VIS-014",
+  "TXT-010",
+  "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -792,10 +792,10 @@
   "",
   "",
   "",
-  "",
+  "SRC-043",
   "",
   "Yes: MUS-015 TurnRiser (new, in-house, Sam to hear)",
-  "Nothing new; the riser (MUS-015) builds under 'Then he does what a scientist should' into the hard cut."
+  "The world label un-wipes and the photo fades to the canvas from 'Then' (100.17-101.37, blur to 4 px); the strips, track chips and count alone on the canvas under the riser's peak; hard cut at 102.10."
  ],
  [
   "E01-A3-39",
@@ -815,8 +815,8 @@
   "",
   "",
   "",
-  "Yes: VIS-019 limit raise 10 -> 30 (acts 3 and 6); SFX-025 limit 2 -> 3, one per act (or the riser cut dead with no hit); MUS-013 Long Note Two (new cue 3, Sam to hear); EyeDiagram builder addition (part outline on cue)",
-  "Calm. Director D_into_the_eye: the act's ONE hard cut, at 102.10 s on the hit (SFX-025) in the measured silence after 'should.' (102.05-103.2 s); cue 3 (a low held drone) enters on the same frame. EyeDiagram section on the theme canvas, eye centre (960, 540) = the strips' centre. Music about 27 dB under the voice (explanation level). Hard cut, hit and cue 3 on one frame; the cross-section draws in (0.9 s) on 'explanation'."
+  "Yes: VIS-019 limit raise 10 -> 30; SFX-025 limit 3 per episode; MUS-013 Long Note Two (new cue 3, Sam to hear); EyeDiagram builder addition (part outline on cue)",
+  "Calm. Director D_into_the_eye: the act's ONE hard cut, at 102.10 s on the hit (SFX-025) in the measured silence after 'should.' (102.05-103.2 s); cue 3 (a low held drone) enters on the same frame. Canvas to canvas: the strips' centre (960, 518) cuts onto the eye's centre (960, 540) and the strip's left end onto the beam's start at x 210. EyeDiagram section on the theme canvas. Music about 27 dB under the voice (explanation level). No device on the impact. Hard cut, hit and cue 3 on one frame; the cross-section draws in (0.9 s) on 'explanation'."
  ],
  [
   "E01-A3-40",
@@ -920,8 +920,8 @@
   "",
   "",
   "",
-  "",
-  "Nothing new: 'humour' is explained in the narration only."
+  "Yes: label underline option (builder addition)",
+  "An accent underline swipes under HUMOUR (W7, 0.35 s) on 'humour' (114.83); no new words; it leaves with the label."
  ],
  [
   "E01-A3-45",
@@ -941,7 +941,7 @@
   "",
   "",
   "",
-  "Yes: VIS-021 limit raise 6 -> 20 beats (act 3: 10; act 4's light paths)",
+  "Yes: VIS-021 limit raise 6 -> 20 beats",
   "Beam (VIS-021) draws from x 210 to x 1280 along y 540 on 'Light passes' (1.4 s), silent; the bed thins."
  ],
  [
@@ -972,7 +972,7 @@
   "125.27",
   "his eyes, one of these fluids isn't",
   "VIS-019, VIS-021",
-  "TXT-010",
+  "TXT-010, TXT-024",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -984,7 +984,7 @@
   "",
   "",
   "",
-  "Nothing new on 'his eyes, one of these fluids isn't'."
+  "Chip (W8) 'clear' (white) at (160, 250), left of the eye circle and 166 px under the DALTON'S GUESS tag, on 'isn't' (124.81)."
  ],
  [
   "E01-A3-48",
@@ -993,7 +993,7 @@
   "128.08",
   "clear. It's tinted.",
   "VIS-019, VIS-021",
-  "TXT-010",
+  "TXT-010, TXT-024",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -1005,7 +1005,7 @@
   "",
   "",
   "",
-  "The jelly tints blue (#3D6BD6, 50%, 1.2 s) on 'It's', complete before the wipe."
+  "The accent strike swipes across 'clear' on 'clear.' (125.27); the jelly tints blue (#3D6BD6, 50%, 1.2 s) on 'It's' (126.59); an arrow draws down and 'tinted' (accent) lands at (160, 350) on 'tinted' (127.11), complete before the wipe, which carries the chips off at 128.08."
  ],
  [
   "E01-A3-49",
@@ -1026,7 +1026,7 @@
   "SRC-003",
   "",
   "Yes: TRN-002 DraftingWipe (built 23 Nov 2026)",
-  "Calm. TRN-002 drafting wipe, angle 8, dir right, into the p.43 card (side left, crop [180, 900, 1080, 1040]), source tag JOHN DALTON · 1798 · P. 43; highlights across the hyphenated line breaks; quote column 'probably some modification of blue' in near-silence. J-cut: the page sound SFX-006 leads 0.5 s, then the drafting line (ink SFX-017 under the stroke) on 'In his words'; highlights 'probably some modi-' and 'fication of blue.' on 'probably' (music near-silent under the quote)."
+  "Calm. TRN-002 drafting wipe, angle 8, dir right, into the p.43 card (side left, crop [180, 900, 1080, 1040]), source tag JOHN DALTON · 1798 · P. 43; highlights across the hyphenated line breaks; quote column 'probably some modification of blue' in near-silence. J-cut: the page sound SFX-006 leads 0.5 s, then the drafting line (ink SFX-017 under the stroke) on 'In his words'; highlight 'probably some modi-' on 'probably' (music near-silent under the quote)."
  ],
  [
   "E01-A3-50",
@@ -1047,7 +1047,7 @@
   "SRC-003",
   "",
   "",
-  "Nothing new: 'So, some kind of blue' (the quote column holds)."
+  "Highlight 'fication of blue.' on 'blue' (131.28); nothing else new on 'So, some kind of blue'."
  ],
  [
   "E01-A3-51",
@@ -1089,7 +1089,7 @@
   "",
   "",
   "Yes: TRN-005 InkBleed (built 23 Nov 2026); EyeDiagram builder additions (carried cut-outs with a multiply state, RaySpec absorb, a tint pulse)",
-  "Calm. Director C_carry_into_eye: TRN-005 ink bleed in the jelly's blue (#3D6BD6) from [894, 303] (the word 'vitreous', inside the jelly in this framing), cued on 'And'; it opens on D's exact framing, jelly already blue, tag DALTON'S GUESS in the corner throughout. The leaf and the wax come back in their own colours on the left (the light's side), carried inside the diagram's drift; under his blue they go darker, duller and closer, but stay two colours. NO olive inside his guess (fact-check item 8). Blue ink spreads from 'vitreous' into the eye on 'And honestly' (silent: SFX-017 is for lines on paper)."
+  "Calm. Director C_carry_into_eye: TRN-005 ink bleed in the jelly's blue (#3D6BD6) from [894, 303] (the word 'vitreous', inside the jelly in this framing), cued on 'And'; it opens on D's exact framing, jelly already blue, tag DALTON'S GUESS in the corner throughout. The leaf and the wax come back as stickers (VIS-060: white edge, calm pop, resting tilt) on the left (the light's side), carried inside the diagram's drift; under his blue they go darker, duller and closer, but stay two colours; the blue state applies inside the photos only, the white edges stay white. NO olive inside his guess (fact-check item 8). Blue ink spreads from 'vitreous' into the eye on 'And honestly' (silent: SFX-017 is for lines on paper)."
  ],
  [
   "E01-A3-53",
@@ -1131,7 +1131,7 @@
   "",
   "",
   "",
-  "The blue jelly brightens a little and settles back (tint 0.5 -> 0.6 -> 0.5, 1.2 s) on 'blue glass': no label, the blue is the picture."
+  "The blue jelly brightens a little and settles back (tint 0.5 -> 0.6 -> 0.5, 1.2 s) on 'blue glass': no label, the blue is the picture (the blue-glass object, W9, is dropped: no free picture found)."
  ],
  [
   "E01-A3-55",
@@ -1181,7 +1181,7 @@
   "150.62",
   "153.48",
   "it ever reaches the back of the eye.",
-  "VIS-019, VIS-021",
+  "VIS-019, VIS-021, VIS-060",
   "TXT-010",
   "MOT-002",
   "TRN-001",
@@ -1193,8 +1193,8 @@
   "",
   "SRC-014, SRC-015",
   "",
-  "",
-  "The thinned beam reaches the back of the eye; leaf (w 180) and wax (w 140) rise on the left in the pause after 'eye.' and settle at (300, 380) and (300, 700), the beam starting between them; soft pop SFX-026 at -26 dB on the settle."
+  "Yes: VIS-060 StickerCutout (new, Planned) for EyeDiagram's carry",
+  "The thinned beam reaches the back of the eye; the leaf sticker (w 180) pops at 152.72 and settles at (300, 380), resting tilt -3°; the wax sticker (w 140) pops at 153.10 (one entrance at a time) and settles at (300, 700), resting +2°, the beam starting between them; soft pop SFX-026 at -26 dB on the wax's settle (about 153.7), both settled before 'Reds'."
  ],
  [
   "E01-A3-58",
@@ -1202,7 +1202,7 @@
   "153.48",
   "156.88",
   "Reds and greens would both look duller and more like each",
-  "VIS-019, VIS-021",
+  "VIS-019, VIS-021, VIS-060",
   "TXT-010",
   "MOT-002",
   "TRN-001",
@@ -1215,7 +1215,7 @@
   "SRC-014, SRC-015",
   "",
   "",
-  "Both darken under the jelly's blue (multiply) and move closer, to (300, 440) and (300, 645), on 'duller': still two colours."
+  "Both darken under the jelly's blue (multiply, inside the photos) and move closer, to (300, 440) and (300, 645), on 'duller': still two colours."
  ],
  [
   "E01-A3-59",
@@ -1223,7 +1223,7 @@
   "156.88",
   "159.48",
   "other. And a red stick of wax",
-  "VIS-019, VIS-021",
+  "VIS-019, VIS-021, VIS-060",
   "TXT-010",
   "MOT-002",
   "TRN-001",
@@ -1244,7 +1244,7 @@
   "159.48",
   "161.80",
   "might end up looking like a leaf.",
-  "VIS-019, VIS-021",
+  "VIS-019, VIS-021, VIS-060",
   "TXT-010",
   "MOT-002",
   "TRN-001",
@@ -1362,7 +1362,7 @@
   "SRC-003",
   "",
   "",
-  "Nothing new on 'a tint anywhere easier to see'."
+  "The other highlights dim to 40% on 'anywhere' (173.76); the 'vitreous' box alone stays lit, ready to lift."
  ],
  [
   "E01-A3-66",
@@ -1383,7 +1383,7 @@
   "SRC-003",
   "",
   "",
-  "The other highlights dim to 40% on 'noticed by now'; the 'vitreous' box alone stays lit, ready to lift."
+  "Nothing new on 'would have been noticed by now'."
  ],
  [
   "E01-A3-67",
@@ -1391,7 +1391,7 @@
   "177.37",
   "180.70",
   "So the only way to check the jelly is to open an",
-  "VIS-019",
+  "VIS-019, VIS-061, VIS-060",
   "TXT-010",
   "MOT-002",
   "TRN-009",
@@ -1401,10 +1401,10 @@
   "",
   "",
   "",
+  "SRC-047",
   "",
-  "",
-  "Yes: TRN-009 ShapeMorph (built 23 Nov 2026)",
-  "Calm. TRN-009 shape morph: the 'vitreous' highlight box [832, 285, 123, 37, 3] lifts off and becomes the IRIS [848, 434, 224, 224, 112] of EyeDiagram mode simple, centred (960, 540). The deadpan: the music drops to silence from the pause after 'eye.' through the pause after 'two.'; the eye closes once (one close, no reopen), its close keyed 0.30 s before the shot ends. Morph lands on the iris on 'open an eye'; soft pop SFX-026 on the landing (this shot's one)."
+  "Yes: TRN-009 ShapeMorph (built 23 Nov 2026); SRC-047 Wellcome eye model + cut-out (new, Planned)",
+  "Calm. TRN-009 shape morph: the 'vitreous' highlight box [832, 285, 123, 37, 3] lifts off and becomes the IRIS [848, 434, 224, 224, 112] of EyeDiagram mode simple, centred (960, 540). The deadpan: the music drops to silence from the pause after 'eye.' through the pause after 'two.'; the eye closes once (one close, no reopen), its close keyed 0.30 s before the shot ends. Morph lands on the iris on 'So the only way' (about 178.0); soft pop SFX-026 on the landing (this shot's one). The eye model (W11, VIS-061 + VIS-060 sticker on SRC-047, the Wellcome ivory model that comes apart, w 320 at (1600, 520), 100 px right of the simple eye) pops on 'open' (180.28), settled by 'eye.' (180.88); tag A MODEL OF AN EYE · WELLCOME COLLECTION under it at y about 720 (no date: the record says only 'possibly 19th century'). Silent."
  ],
  [
   "E01-A3-68",
@@ -1412,8 +1412,8 @@
   "180.70",
   "183.82",
   "eye. And Dalton only has two.",
-  "VIS-019",
-  "TXT-010",
+  "VIS-019, VIS-061, VIS-060",
+  "TXT-010, TXT-024",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -1422,10 +1422,10 @@
   "",
   "",
   "",
+  "SRC-047",
   "",
   "",
-  "",
-  "Music silent; 'And Dalton only has two.' over the plain eye; the lid starts to close at the end."
+  "Music silent; chips (W12) 'only' (white) on 'only' (182.25) and 'two' (accent) on 'two.' (182.85), one row at y 490, x 160-360 and 376-540; the lid starts to close at the end (from about 183.52), the one moving thing into the cut; the model and chips leave with the frame."
  ],
  [
   "E01-A3-69",
@@ -1433,9 +1433,9 @@
   "183.82",
   "186.59",
   "At some point, he asks for exactly",
-  "VIS-001",
-  "TXT-009, TXT-010",
-  "MOT-003",
+  "VIS-059",
+  "TXT-010",
+  "MOT-016",
   "TRN-010",
   "LOK-009, LOK-010",
   "",
@@ -1443,10 +1443,10 @@
   "",
   "",
   "",
-  "SRC-007",
+  "SRC-004, SRC-007",
   "",
-  "Yes: TRN-010 CutOnAction (built 23 Nov 2026); henry1854_p25_wish_line.png (new file of SRC-007); MUS-014 At Rest (new cue 4, Sam to hear)",
-  "Calm. TRN-010 cut on action, dir down, px 90: the closing lid (the old shot plays on live) carries into the Henry LINE STRIP arriving downward: henry1854_p25_wish_line.png, image px [90, 1140, 2110, 135], the two lines only, on the same page blurred (the act 1 strip pattern). The 'not, however, verified' and 'pale yellow' lines never show. Cue 4 enters in the same pause. Cut on the closing lid; the strip arrives moving down on 'At some point'; source tag W. C. HENRY · 1854 · P. 25 on arrival; cue 4 in."
+  "Yes: TRN-010 CutOnAction (built; moveTo:false prop); henry1854_p25_wish_line.png re-cut [85, 1124, 1850, 170] (file of SRC-007, done); SRC-004 16 of 16 (none left for acts 4-7); LayerStage builder additions (H1 carried highlights, H2 arrive); MUS-014 At Rest (new cue 4, Sam to hear)",
+  "Calm. Director H_wish_over_portrait. TRN-010 cut on action, dir down, px 90 (the move done by LayerStage arrive, 0.45 s): the closing lid carries onto the viewer's-left lens of his spectacles in the 1834 mezzotint (SRC-004, zoom 1.0, focus [0.47, 0.32], haze 0.10, light 'none', lightFrom top-left), lens at (854, 516); world label JOHN DALTON · 1834 bottom-right from frame 0. Camera {pan -30, push 0.02}. Cue 4 enters in the same pause. His face is never animated (no glint, no mask, no push at the face) and never covered. The cut lands on the lens; the portrait settles from 90 px above. The Henry strip (henry1854_p25_wish_line.png, re-cut [85, 1124, 1850, 170], w 1440) rises 140 px on 'exactly' (186.15) and settles lifted in the pause after 'that.' at frame x 151-1597, y 807-939, 56 px under his chin; the 'not, however, verified' and 'pale yellow' lines never show."
  ],
  [
   "E01-A3-70",
@@ -1454,9 +1454,9 @@
   "186.59",
   "190.09",
   "that. For his eyes to be examined after he",
-  "VIS-001",
-  "TXT-009, TXT-010",
-  "MOT-003",
+  "VIS-059",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -1464,10 +1464,10 @@
   "",
   "",
   "",
-  "SRC-007",
+  "SRC-004, SRC-007",
   "",
   "",
-  "Highlight 'carefully made after Dalton's death' (on the strip's first line) on 'after he dies'."
+  "Tag W. C. HENRY · 1854 · P. 25 at (160, 746), size 22, on the strip's settle (187.05). H1 'carefully made after Dalton's death' (strip box [710, 20, 1112, 52]) on 'after' (189.41)."
  ],
  [
   "E01-A3-71",
@@ -1475,9 +1475,9 @@
   "190.09",
   "192.81",
   "dies. His biographer would call it his",
-  "VIS-001",
-  "TXT-009, TXT-010",
-  "MOT-003",
+  "VIS-059",
+  "TXT-010",
+  "MOT-016",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -1485,10 +1485,10 @@
   "",
   "",
   "",
-  "SRC-007",
+  "SRC-004, SRC-007",
   "",
   "",
-  "Nothing new on 'His biographer' (the tag names him)."
+  "The world racks to 1.5 px on 'His biographer' (191.31); no label for him (the tag names him)."
  ],
  [
   "E01-A3-72",
@@ -1496,9 +1496,9 @@
   "192.81",
   "195.02",
   "\"strongly expressed wish\".",
-  "VIS-001",
-  "TXT-009, TXT-010",
-  "MOT-003",
+  "VIS-059",
+  "TXT-010",
+  "MOT-016, MOT-013",
   "TRN-001",
   "LOK-009, LOK-010",
   "",
@@ -1506,10 +1506,10 @@
   "",
   "",
   "",
-  "SRC-007",
+  "SRC-004, SRC-007",
   "",
   "",
-  "Highlight 'his strongly expressed wish' on 'strongly' (music near-silent under the quote)."
+  "H2 'his strongly expressed wish' (strip box [598, 102, 822, 54]) on 'strongly' (192.81; music near-silent under the quote); the Henry tag un-wipes at 194.45; the portrait's tag stays until the band covers it."
  ],
  [
   "E01-A3-73",
@@ -1517,8 +1517,8 @@
   "195.02",
   "197.75",
   "But a blue tint only explains colours",
-  "VIS-020",
-  "TXT-009",
+  "TXT-024",
+  "TXT-024",
   "MOT-002",
   "TRN-011",
   "LOK-009, LOK-010",
@@ -1530,7 +1530,7 @@
   "",
   "",
   "",
-  "Calm. TRN-011 paper band (dark, up) into the new question; KineticLine left-aligned at x 120, vertically centred; one line only, never repeating the narration. Band wipes up on 'But', SFX-024; the dark ground holds."
+  "Calm. TRN-011 paper band (dark, up) into the new question, covering the portrait's tag first. Keyword chips (W13, TXT-024, replacing the KineticLine) left-aligned at x 120: row 1 'what is' (white) + 'colour?' (accent) at y 470, row 2 'one man' (white) at y 590; never a whole spoken line. Band wipes up on 'But', SFX-024; the dark ground holds."
  ],
  [
   "E01-A3-74",
@@ -1538,8 +1538,8 @@
   "197.75",
   "199.97",
   "if we know what colour is.",
-  "VIS-020",
-  "TXT-009",
+  "TXT-024",
+  "TXT-024",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -1551,7 +1551,7 @@
   "",
   "",
   "",
-  "WHAT IS COLOUR? sets on 'what colour is', accent fill on 'colour'."
+  "Chips 'what is' on 'what' (198.53) and 'colour?' on 'colour' (198.83)."
  ],
  [
   "E01-A3-75",
@@ -1559,8 +1559,8 @@
   "199.97",
   "203.00",
   "And on that, Dalton leans on one man.",
-  "VIS-020",
-  "TXT-009",
+  "TXT-024",
+  "TXT-024",
   "MOT-002",
   "TRN-001",
   "LOK-009, LOK-010",
@@ -1572,7 +1572,7 @@
   "",
   "",
   "",
-  "Nothing new: the question holds."
+  "Chip 'one man' on 'one' (202.34); blurred away by the focus match at 203.00."
  ],
  [
   "E01-A3-76",
