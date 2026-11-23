@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T18:00:14.161Z",
+ "generated": "2026-11-23T18:12:09.187Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1915,10 +1915,10 @@
    "folder": "7_Music",
    "name": "ActMoodCueSheet",
    "paths": [
-    "episodes_src/<EP>/music_cues.json"
+    "scripts/mix-cue-bed.py"
    ],
-   "status": "Planned",
-   "use": "Best use: planning each act bed.",
+   "status": "Active",
+   "use": "Best use: planning and rendering every act's music from act 3 on: 3-4 cues entering in pauses on the lines that turn the story, levels by moment (story 19-21 dB under the voice, explanations about 27, quotes and punchlines near-silent), music alone 2-3 s at the act's ends (Sam picks the tracks). Limit: Sam hears every new track under his voice first; no cue shorter than about 20 s; never a change mid-word. Not for: replacing Sam's choice.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -3175,6 +3175,54 @@
    ],
    "status": "Active",
    "use": "Best use: act 3 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say-so.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-012": {
+   "id": "MUS-012",
+   "folder": "7_Music",
+   "name": "ThinkingMusicCue",
+   "paths": [
+    "public/music/thinking_music_kevin_macleod.mp3"
+   ],
+   "status": "Planned",
+   "use": "Best use: curious, light passages: a list of examples, a first look at the evidence. Limit: one cue of 20 s or more per act at most, entering in a pause on the line that turns the story; story level (19-21 dB under the voice). Not for: explanations, quotes or grief.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-013": {
+   "id": "MUS-013",
+   "folder": "7_Music",
+   "name": "LongNoteTwoCue",
+   "paths": [
+    "public/music/long_note_two_kevin_macleod.mp3"
+   ],
+   "status": "Planned",
+   "use": "Best use: the explanation section of an act (a mechanism, a guess, the lesson), held under a whole explanation. Limit: one cue per act; levelled (no swell over the voice); explanation level about 27 dB under the voice; near-silent under quotes. Not for: story or wonder passages.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-014": {
+   "id": "MUS-014",
+   "folder": "7_Music",
+   "name": "AtRestCue",
+   "paths": [
+    "public/music/at_rest_kevin_macleod.mp3"
+   ],
+   "status": "Planned",
+   "use": "Best use: consequence, wishes, death and the act's closing riddle; it may play alone 2-3 s after an act's last word. Limit: one cue per act; 20 s or more. Not for: playful or curious lines.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MUS-015": {
+   "id": "MUS-015",
+   "folder": "7_Music",
+   "name": "TurnRiser",
+   "paths": [
+    "public/sfx/kit/riser_turn_act3_v1.wav"
+   ],
+   "status": "Planned",
+   "use": "Best use: the act's one turn, under the line before the turn, ending hard on the hit (SFX-025) in a pause. Limit: max 1 per act, never two acts in a row unless the turn earns it; calm level (about -30 LUFS). Not for: transitions that aren't the act's turn.",
    "maxBeats": null,
    "maxShare": null
   }
