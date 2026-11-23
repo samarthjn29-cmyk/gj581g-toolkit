@@ -13,6 +13,13 @@ import { SlideAcross } from "../components/SlideAcross";
 import { PaperBandWipe } from "../components/PaperBandWipe";
 import { ColourBlockWipe } from "../components/ColourBlockWipe";
 import { FlashFrame } from "../components/FlashFrame";
+import { DraftingWipe } from "../components/DraftingWipe";
+import { PhotoToCard } from "../components/PhotoToCard";
+import { CanvasGridPan } from "../components/CanvasGridPan";
+import { InkBleed } from "../components/InkBleed";
+import { ShapeMorph } from "../components/ShapeMorph";
+import { CutOnAction } from "../components/CutOnAction";
+import { StaticBurst } from "../components/StaticBurst";
 import { assetFile, RegistryModeProvider, useAsset, useAssets } from "../registry";
 import { sec } from "../motion";
 import { RunningHead } from "../layers/RunningHead";
@@ -26,9 +33,12 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match" | "lens"; // lens = TRN-017 LensSettle (a cut that settles through a lens)
+  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static"; // lens = TRN-017 LensSettle (a cut that settles through a lens)
   // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
   // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
+  // 23 Nov 2026 (Sam: "Build the transitions which we haven't built yet"): draft = TRN-002 DraftingWipe {angle, dir};
+  // photocard = TRN-003 PhotoToCard {rect}; canvas = TRN-004 CanvasGridPan {dir, pull}; ink = TRN-005 InkBleed {at, tint};
+  // morph = TRN-009 ShapeMorph {fromShape, toShape}; action = TRN-010 CutOnAction {dir, px}; static = TRN-014 StaticBurst.
   transition?: Record<string, unknown>;
   // The shot's ground (LOK-027 paper, MAP-011 map, LOK-028 blur, VIS-050 collage, LOK-029 inset); none = the theme
   // canvas (graphite). Its ID must be in `assets`. Rule in scripts/ground-check.mjs.
@@ -45,7 +55,7 @@ export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: nu
 // match) for their first 0.8 s only, 6 samples at a 180-degree shutter (render cost stays inside those frames).
 export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number }; finish?: FinishSpec | false; motionBlur?: boolean };
 
-const MOVING = new Set(["slide", "push", "match"]);
+const MOVING = new Set(["slide", "push", "match", "canvas", "photocard"]);
 const BlurWindow: React.FC<{ frames: number; children: React.ReactNode }> = ({ frames, children }) => {
   useAsset("LOK-031");
   const frame = useCurrentFrame();
@@ -135,6 +145,13 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         if (b.transitionIn === "flash" && prev) body = <FlashFrame {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "match" && prev) body = <FocusMatchCut from={frozenPrev()} to={<Shot beat={b} built />} focus={b.focus ?? [960, 540]} />;
         if (b.transitionIn === "lens" && prev) body = <LensSettle {...o}><Shot beat={b} built /></LensSettle>;
+        if (b.transitionIn === "draft" && prev) body = <DraftingWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "photocard" && prev) body = <PhotoToCard {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "canvas" && prev) body = <CanvasGridPan {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "ink" && prev) body = <InkBleed {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "morph" && prev) body = <ShapeMorph {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "action" && prev) body = <CutOnAction {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "static" && prev) body = <StaticBurst {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (

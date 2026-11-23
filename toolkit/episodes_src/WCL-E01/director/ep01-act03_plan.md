@@ -35,3 +35,27 @@ Sound (calm, Johnny Harris study): Wholesome bed stays; swell-to-hit under "Then
 - p.28 re-cropped to the page only (1669x1890; binding and facing page off).
 - For Sam at Gate 1: raise the beat limits on SRC-014/015 (3) and SRC-009 (4), which shots A-C go past (the Director recommends raising rather than cutting); a front-lit whole leaf and a stick-of-wax photo would be better than the current pair.
 - Builder additions the brief needs (LayerStage dateline, rings/pins on the world, highlights on a world, "paper" light, rays fading by colour, carried cut-outs inside EyeDiagram with a multiply state): built only after Sam's yes on the plan.
+
+## Transitions (23 Nov 2026, Sam: "Build the transitions which we haven't built yet and then try to create those moments in our videos")
+The eight Planned transitions are now built and Active: TRN-002 DraftingWipe, TRN-003 PhotoToCard, TRN-004 CanvasGridPan, TRN-005 InkBleed, TRN-009 ShapeMorph, TRN-010 CutOnAction, TRN-014 StaticBurst and TRN-016 FlashMontage. Act 3 now has one hard cut between scenes (the hit at the turn); every other scene change is designed and means something.
+
+| # | From -> to | On the line | Transition | Why this one | Sound |
+|---|---|---|---|---|---|
+| 1 | slate -> A Manchester plan | a3-01 | dissolve in (LayerStage pIn) | the act opens on music alone | bed |
+| 2 | A -> A2 p.28 card | "Its title is" | TRN-015 FocusMatchCut | the held page becomes the page card (Director) | SFX-016 paper |
+| 3 | A2 p.28 -> p.34 card | "And it's a careful paper." | **TRN-004 CanvasGridPan** (dir right) | two pages of the same paper, laid side by side on one drafting sheet: the camera glides along his paper | SFX-021 air on the glide |
+| 4 | p.34 card -> B leaf and wax | "Here's one." | TRN-006 PushThrough from the laurel line | the line becomes the shot (Director) | cue 2 enters |
+| 5 | B -> SpectrumStrip | "He describes the band of colours from a prism, too." | **TRN-004 CanvasGridPan** (dir down) | the next example on the same sheet; not two canvas moves in a row (shot 4 is a push) | SFX-021 |
+| 6 | SpectrumStrip -> D eye | "He offers" | TRN-001 hard cut on the hit | the act's one impact (riser + SFX-025) lands the turn | riser, hit, cue 3 |
+| 7 | D eye -> p.43 card | "In his words," | **TRN-002 DraftingWipe** (J-cut) | a ruled line drafts across from the drawing to his own page; the page sound leads 0.5 s | SFX-016 page 0.5 s early, SFX-017 ink line |
+| 8 | p.43 card -> C eye with the leaf and wax | "And honestly? It makes sense." | **TRN-005 InkBleed**, tint #3D6BD6 from the jelly | his blue spreading is the idea: "looking at the world through blue glass" | SFX-016 soft wet spread -26 dB |
+| 9 | C -> p.43 sentence card | "He has a reason for picking the jelly, too." | TRN-007 SlideAcross | into a document | swish |
+| 10 | p.43 -> EyeDiagram (simple) | "So the only way to check the jelly is to open an eye." | **TRN-009 ShapeMorph** | the highlight on "vitreous humour" lifts off and becomes the eye's outline: the jelly he means is in that eye | soft pop on the landing |
+| 11 | EyeDiagram -> Henry p.25 strip | "At some point," | **TRN-010 CutOnAction** on the blink | the lid closes downward and the Henry strip arrives moving down: the eye shuts, the next we hear is about his death | cue 4 enters in the same pause |
+| 12 | Henry strip -> WHAT IS COLOUR? | "But a blue tint only explains colours..." | TRN-011 PaperBandWipe (dark) | a turn to the new question | SFX-024 |
+| 13 | WHAT IS COLOUR? -> dark room | "A man who died long before" | TRN-015 FocusMatchCut into the room (Director) | act 4 opens from this framing | SFX-024, then cue 4 alone |
+
+Not used in act 3, with the reason:
+- **TRN-003 PhotoToCard:** no act 3 shot holds a slot for a full-frame picture. First real use: act 6/7, where the museum photo of the eye remains can fly onto the evidence board.
+- **TRN-014 StaticBurst:** E01 has no TV-era material. Kept for a later episode (e.g. colour television).
+- **TRN-016 FlashMontage:** cold opens only, and E01's cold open (act 1) is locked. First use: E02's cold open.

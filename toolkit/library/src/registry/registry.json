@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T17:23:15.176Z",
+ "generated": "2026-11-23T18:00:14.161Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -332,10 +332,10 @@
    "folder": "4_Transitions",
    "name": "JCutDraftingWipe",
    "paths": [
-    "src/components/ChapterSlate.tsx"
+    "src/components/DraftingWipe.tsx"
    ],
-   "status": "Planned",
-   "use": "",
+   "status": "Active",
+   "use": "Best use: from a drawing or diagram into a document, or between two drawings, when the next shot's sound can lead in (a J-cut). Limit: max 4 per episode, never two in a row; 0.7-0.9 s. Not for: real photos of people, or calm reflective moments.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -344,10 +344,10 @@
    "folder": "4_Transitions",
    "name": "PhotoToCardMatchCut",
    "paths": [
-    "src/components/PhotoToCardMatchCut.tsx"
+    "src/components/PhotoToCard.tsx"
    ],
-   "status": "Planned",
-   "use": "",
+   "status": "Active",
+   "use": "Best use: a picture we were inside becoming one piece of a bigger picture (a page onto a board, a photo onto a map, a source into an evidence chain). Limit: max 3 per episode; the new shot must hold a real slot at rect; 0.8-1.0 s. Not for: a new shot with no matching slot.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -356,10 +356,10 @@
    "folder": "4_Transitions",
    "name": "InfiniteCanvasGrid",
    "paths": [
-    "src/components/InfiniteCanvasGrid.tsx"
+    "src/components/CanvasGridPan.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: runs of scenes on one idea inside an act. Limit: scene changes between ideas keep their designed transitions (TRN-006/007/011-013).",
+   "status": "Active",
+   "use": "Best use: runs of scenes on one idea inside an act. Limit: scene changes between ideas keep their designed transitions (TRN-006/007/011-013); max 4 per act, never two in a row; pull no deeper than 0.8.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -368,10 +368,10 @@
    "folder": "4_Transitions",
    "name": "InkBleedTransition",
    "paths": [
-    "src/components/InkBleedTransition.tsx"
+    "src/components/InkBleed.tsx"
    ],
-   "status": "Planned",
-   "use": "",
+   "status": "Active",
+   "use": "Best use: a change that spreads from one point, where the spreading means something (Dalton's blue tint, a stain, a dye, a rumour, a colour taking over). Limit: max 2 per episode, never two in a row; one drop only. Not for: a plain scene change with no spreading idea.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1830,10 +1830,10 @@
    "folder": "4_Transitions",
    "name": "ShapeMorphCut",
    "paths": [
-    "src/components/ShapeMorphCut.tsx"
+    "src/components/ShapeMorph.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: shape-to-shape scene changes. Limit: max 2 per act.",
+   "status": "Active",
+   "use": "Best use: shape-to-shape scene changes. Limit: max 2 per act; the two shapes must be real elements of the two shots.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2026,11 +2026,10 @@
    "folder": "4_Transitions",
    "name": "CutOnAction",
    "paths": [
-    "rules/beat-routing.md",
-    "scripts/gate2-qa.mjs"
+    "src/components/CutOnAction.tsx"
    ],
-   "status": "Planned",
-   "use": "Best use: scene changes where something moves.",
+   "status": "Active",
+   "use": "Best use: scene changes where something moves. Limit: max 3 per act; the movement must be in the old shot (never invented for the cut).",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2618,7 +2617,7 @@
    "paths": [
     "src/components/StaticBurst.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: out of a period title card into its first archival picture. Limit: max 2 per episode, never two in a row, never over a real photo of a person's face. Not for: calm reflective moments (use a dissolve).",
    "maxBeats": null,
    "maxShare": null
@@ -2882,9 +2881,9 @@
    "folder": "4_Transitions",
    "name": "FlashMontage",
    "paths": [
-    "(to build)"
+    "src/components/FlashMontage.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: an episode's cold open only. Limit: 1 per episode, max 8 s; real registered sources only; no flashes faster than 0.25 s.",
    "maxBeats": null,
    "maxShare": null

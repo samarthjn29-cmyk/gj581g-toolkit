@@ -268,5 +268,11 @@
     "beatType": 4,
     "energy": "Calm",
     "grid": false
+  },
+  "FlashMontage": {
+    "assetId": "TRN-016",
+    "beatType": 4,
+    "energy": "Peak",
+    "grid": false
   }
 }

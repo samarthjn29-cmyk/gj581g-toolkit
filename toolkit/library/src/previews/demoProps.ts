@@ -598,6 +598,16 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     burst: { atSec: 2.8, sec: 0.7 },
     source: "PREVIEW · SOURCE LINE",
   },
+  FlashMontage: {
+    // TRN-016 preview: the 1834 portrait held, three 0.3 s flashes of registered pages (a cold-open device, max 8 s).
+    hero: { srcId: "SRC-004", size: [996, 1230], atSec: 0, label: "PREVIEW · HERO", focus: [0.5, 0.35] },
+    flashes: [
+      { srcId: "SRC-001", size: [1920, 2813], atSec: 1.0, label: "PREVIEW · FLASH A" },
+      { srcId: "SRC-029", size: [1920, 2934], atSec: 2.1, label: "PREVIEW · FLASH B" },
+      { srcId: "SRC-007", size: [2288, 4010], atSec: 3.2, label: "PREVIEW · FLASH C", focus: [0.5, 0.3] },
+    ],
+    flashSec: 0.3,
+  },
   "KineticLine-Notebook": {
     lines: [{ text: "Preview line", atSec: 0.4 }, { text: "PREVIEW · MONO LINE", atSec: 1.2, style: "mono" }],
     notebook: { atSec: 0.3, rowsFromSec: 1.0, rowsToSec: 4.0 },

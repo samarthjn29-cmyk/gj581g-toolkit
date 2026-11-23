@@ -45,6 +45,7 @@ import { ZoomNest } from "./ZoomNest";
 import { ObjectEntrance } from "./ObjectEntrance";
 import { LayerStage } from "./LayerStage";
 import { StillsMontage } from "./StillsMontage";
+import { FlashMontage } from "./FlashMontage";
 
 // Beat-sheet name -> component. catalog.json holds each one's registry ID, beat type and energy
 // (rules/beat-routing.md); the gate scripts read the same file. Episodes may only use components listed here.
@@ -103,6 +104,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   ObjectEntrance,
   LayerStage,
   StillsMontage,
+  FlashMontage,
 };
 
 export const COMPONENTS: Record<string, LibraryEntry> = Object.fromEntries(
