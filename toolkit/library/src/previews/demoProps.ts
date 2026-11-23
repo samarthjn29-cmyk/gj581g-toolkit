@@ -432,9 +432,9 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
       { at: [1985, 3825], label: "PLACE B", sub: "PREVIEW · SUB", atSec: 2.0, accent: true, drop: true },
       { at: [1250, 3050], label: "REGION", atSec: 1.4, flat: true },
     ],
-    routes: [{ points: [[858, 2795], [1300, 3200], [1985, 3825]], atSec: 1.0, sec: 1.4, mark: true }],
+    routes: [{ points: [[858, 2795], [1300, 3200], [1985, 3825]], atSec: 1.0, sec: 1.4, mark: true }, { points: [[1985, 3825], [2300, 3300], [2500, 2900]], atSec: 2.4, sec: 1.6, glow: true }],
     regions: [
-      { points: [[620, 2520], [1320, 2460], [1520, 2980], [1140, 3320], [660, 3120]], atSec: 0.6, sec: 1.0, mode: "wipe", edge: true, ragged: true, front: { points: [[620, 2520], [1520, 2400], [1800, 3000], [1400, 3420], [660, 3120]], atSec: 2.4, sec: 2 } },
+      { points: [[620, 2520], [1320, 2460], [1520, 2980], [1140, 3320], [660, 3120]], atSec: 0.6, sec: 1.4, mode: "bleed", edge: true, ragged: true, front: { points: [[620, 2520], [1520, 2400], [1800, 3000], [1400, 3420], [660, 3120]], atSec: 2.4, sec: 2 } },
     ],
     sheet: { srcId: "SRC-001", at: [1700, 2700, 520, 762], atSec: 2.6, lift: 50, label: "PREVIEW · SHEET" },
     caption: "PREVIEW · MAP · YEAR",
@@ -452,6 +452,22 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
       { from: "a", to: "d", atSec: 2.6, dashed: true, label: "CLAIMED" },
     ],
     caption: "PREVIEW · SOURCE",
+  },
+  ArchiveGate: {
+    slides: [
+      { srcId: "SRC-004", imgSize: [996, 1230], atSec: 0.2, focus: [0.5, 0.3], label: "PREVIEW · SLIDE A" },
+      { srcId: "SRC-001", imgSize: [1920, 2813], atSec: 2.0, label: "PREVIEW · SLIDE B" },
+      { srcId: "SRC-033", imgSize: [4000, 5313], atSec: 3.6, focus: [0.3, 0.55], label: "PREVIEW · SLIDE C" },
+    ],
+    bleedAtSec: 4.0,
+  },
+  ZoomNest: {
+    levels: [
+      { count: 400, label: "PREVIEW · 400", atSec: 0.2, color: "ink" },
+      { count: 32, label: "PREVIEW · 32", atSec: 1.6 },
+      { count: 3, label: "PREVIEW · 3", atSec: 3.2, color: "L" },
+    ],
+    caption: "PREVIEW · ILLUSTRATIVE",
   },
   TimelineRail: {
     from: 1760, to: 1850, pxPerYear: 26, majorEvery: 20,

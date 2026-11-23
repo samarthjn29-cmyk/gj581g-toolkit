@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, interpolateColors, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
 import { exit, lock, rise, sec, SLOW_OUT } from "../motion";
 
@@ -16,6 +16,7 @@ export type LabelSpec = {
   align?: "left" | "center" | "right";
   size?: number; // font size, default 26
   accent?: boolean; // accent colour for the one focal label
+  settle?: boolean; // MOT-014 AccentSettle: arrives in the accent, cools to ink 0.5-1.1 s after (Johnny Harris's place names)
   moveTo?: { atSec: number; x: number; y: number; scale?: number }; // e.g. shrink to a corner
 };
 
@@ -63,7 +64,11 @@ export const Label: React.FC<{ spec: LabelSpec }> = ({ spec }) => {
         fontFamily: t.fonts.mono,
         fontSize: spec.size ?? 32,
         letterSpacing: 2,
-        color: spec.accent ? t.colors.accent : t.colors.ink,
+        color: spec.settle
+          ? interpolateColors(frame, [sec(spec.atSec + 0.5, fps), sec(spec.atSec + 1.1, fps)], [t.colors.accent, t.colors.ink])
+          : spec.accent
+            ? t.colors.accent
+            : t.colors.ink,
         background: t.colors.chip,
         padding: "8px 14px",
         borderRadius: 4,

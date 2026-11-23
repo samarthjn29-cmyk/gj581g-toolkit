@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-23T07:54:22.025Z",
+ "generated": "2026-11-23T08:43:34.753Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3002,6 +3002,54 @@
    ],
    "status": "Active",
    "use": "Best use: a term and where it comes from (Daltonism, from Dalton), or the one word an act turns on. Limit: one word up to 16 letters; max 2 per act; origin and gloss from the fact-checked script.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-056": {
+   "id": "VIS-056",
+   "folder": "1_Visuals",
+   "name": "ArchiveGate",
+   "paths": [
+    "src/components/ArchiveGate.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a run of real period pictures about one moment (engravings, portraits, plates, pages). Limit: 2-6 slides, 1.5-3 s each (the last may run on); max 2 per act; registered sources only; never presented as film when it is a still.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "VIS-057": {
+   "id": "VIS-057",
+   "folder": "1_Visuals",
+   "name": "ZoomNest",
+   "paths": [
+    "src/components/ZoomNest.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a share inside a share (100 men, 8 colour-blind, 1 like Dalton) or a body inside a body. Limit: 2-4 levels; up to 1,200 units; max 1 per act; counts from the fact-checked script; labelled ILLUSTRATIVE when units are not one-to-one.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MAP-016": {
+   "id": "MAP-016",
+   "folder": "9_Maps",
+   "name": "LightTrace",
+   "paths": [
+    "src/components/TravellingMap.tsx (routes glow)"
+   ],
+   "status": "Active",
+   "use": "Best use: a river, a current or a journey of light or water named in the line. Limit: one lit route a shot, max 2 per act; registered maps only; the path traced from the map, never guessed.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "MOT-014": {
+   "id": "MOT-014",
+   "folder": "3_Motion",
+   "name": "AccentSettle",
+   "paths": [
+    "src/layers/Label.tsx (settle)"
+   ],
+   "status": "Active",
+   "use": "Best use: a place name or a name tag on a picture or footage, the first time it is said. Limit: one at a time; not on the act's one focal accent label (that stays accent).",
    "maxBeats": null,
    "maxShare": null
   }

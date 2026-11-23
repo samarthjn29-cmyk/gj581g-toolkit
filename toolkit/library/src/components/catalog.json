@@ -244,5 +244,17 @@
     "beatType": 1,
     "energy": "Calm",
     "grid": false
+  },
+  "ArchiveGate": {
+    "assetId": "VIS-056",
+    "beatType": 4,
+    "energy": "Calm",
+    "grid": false
+  },
+  "ZoomNest": {
+    "assetId": "VIS-057",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

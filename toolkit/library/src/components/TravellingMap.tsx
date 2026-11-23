@@ -24,16 +24,18 @@ import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 // - dof (LOK-032 MapDepthOfField): only a band round the focus stays sharp on a tilted map; blur grows with tilt.
 // - regions (MAP-014 MapRegion): a polygon tint that wipes or grows on, may glow at its edge, fade, or move its
 //   front to a new shape along a ragged edge.
+// - routes with `glow` (MAP-016 LightTrace, Johnny Harris's Nile lighting up its course): a lit line with a bright
+//   travelling head instead of the hand line; regions with mode "bleed" spread like ink from a few seeds (his Iran zones).
 // - sheet (MAP-015 MapOverlaySheet): a registered period map laid over the base map at its place, lifted, shadowed.
 type XY = readonly [number, number];
 export type MapCam = { atSec: number; center: XY; zoom: number; tilt?: number; turn?: number; sec?: number };
 export type MapPin = { at: XY; label?: string; atSec: number; untilSec?: number; sub?: string; accent?: boolean; drop?: boolean; flat?: boolean; flatSize?: number };
-export type MapRoute = { points: XY[]; atSec: number; sec?: number; mark?: boolean; dashed?: boolean; shadow?: boolean };
+export type MapRoute = { points: XY[]; atSec: number; sec?: number; mark?: boolean; dashed?: boolean; shadow?: boolean; glow?: boolean }; // glow: MAP-016 LightTrace
 export type MapRegion = {
   points: XY[]; // map px, closed
   atSec: number;
   sec?: number; // 0.6-1.6 s
-  mode?: "wipe" | "grow"; // wipe: left to right; grow: a feathered circle from `from` (default: the centroid)
+  mode?: "wipe" | "grow" | "bleed"; // wipe: left to right; grow: a feathered circle from `from` (default: the centroid); bleed: ink spreading from a few seeds in blots
   from?: XY;
   color?: "accent" | "L" | "M" | "S";
   edge?: boolean; // a lit border (Johnny Harris)
@@ -65,6 +67,18 @@ const inOut = Easing.bezier(0.45, 0, 0.15, 1);
 const fall = Easing.bezier(0.55, 0, 0.8, 0.35);
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const lerpPts = (a: XY[], b: XY[], p: number) => a.map((q, i) => [q[0] + (b[i][0] - q[0]) * p, q[1] + (b[i][1] - q[1]) * p] as const);
+const pointAt = (pts: readonly XY[], p: number): XY => {
+  const seg = pts.slice(1).map((q, k) => Math.hypot(q[0] - pts[k][0], q[1] - pts[k][1]));
+  let left = seg.reduce((a, b) => a + b, 0) * Math.min(1, Math.max(0, p));
+  for (let k = 0; k < seg.length; k++) {
+    if (left <= seg[k] || k === seg.length - 1) {
+      const f = seg[k] ? Math.min(1, left / seg[k]) : 0;
+      return [pts[k][0] + (pts[k + 1][0] - pts[k][0]) * f, pts[k][1] + (pts[k + 1][1] - pts[k][1]) * f];
+    }
+    left -= seg[k];
+  }
+  return pts[pts.length - 1];
+};
 const pathOf = (pts: readonly XY[], close = false) => pts.map((q, k) => `${k ? "L" : "M"} ${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join(" ") + (close ? " Z" : "");
 
 export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size, cams, pins = [], routes = [], regions = [], sheet, caption, labels = [], tag, dark, lag = 0.25, holdTilt = 0, dof, startSec = 0 }) => {
@@ -76,6 +90,7 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
     ...(usesDrop ? ["MOT-012"] : []),
     ...(dof ? ["LOK-032"] : []),
     ...(regions.length ? ["MAP-014"] : []),
+    ...(routes.some((r) => r.glow) ? ["MAP-016"] : []),
     ...(sheet ? ["MAP-015", sheet.srcId] : []),
   ]);
   if (cams.some((c) => (c.tilt ?? 0) > 40)) throw new Error("TravellingMap: tilt above 40 degrees.");
@@ -164,7 +179,25 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
           return (
             <g key={i} opacity={out}>
               <defs>
-                {r.mode === "grow" ? (
+                {r.mode === "bleed" ? (
+                  <mask id={clip}>
+                    <filter id={`${clip}-f`} x="-20%" y="-20%" width="140%" height="140%">
+                      <feTurbulence type="fractalNoise" baseFrequency={0.006} numOctaves={3} seed={11 + i} />
+                      <feDisplacementMap in="SourceGraphic" scale={R * 0.35} xChannelSelector="R" yChannelSelector="G" />
+                      <feGaussianBlur stdDeviation={R * 0.02} />
+                    </filter>
+                    <g filter={`url(#${clip}-f)`}>
+                      {[0, 1, 2, 3, 4].map((k) => {
+                        const sx = k === 0 ? o[0] : x0 + (x1 - x0) * (0.2 + 0.6 * ((k * 0.618) % 1));
+                        const sy = k === 0 ? o[1] : y0 + (y1 - y0) * (0.2 + 0.6 * ((k * 0.381 + 0.3) % 1));
+                        const lag = k * 0.12;
+                        const lin = interpolate(frame, [sec(r.atSec, fps), sec(r.atSec + d, fps)], [0, 1], clamp);
+                        const pk = Easing.inOut(Easing.quad)(Math.max(0, Math.min(1, (lin - lag) / (1 - lag))));
+                        return <circle key={k} cx={sx} cy={sy} r={Math.max(0.1, R * (k ? 0.55 : 0.9) * pk)} fill="white" />;
+                      })}
+                    </g>
+                  </mask>
+                ) : r.mode === "grow" ? (
                   <mask id={clip}>
                     <radialGradient id={`${clip}-g`} cx={o[0]} cy={o[1]} r={Math.max(1, R * p)} gradientUnits="userSpaceOnUse">
                       <stop offset="0.82" stopColor="white" />
@@ -178,7 +211,7 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
                   </clipPath>
                 )}
               </defs>
-              <g {...(r.mode === "grow" ? { mask: `url(#${clip})` } : { clipPath: `url(#${clip})` })} filter={r.ragged ? `url(#rag-${key})` : undefined}>
+              <g {...(r.mode === "grow" || r.mode === "bleed" ? { mask: `url(#${clip})` } : { clipPath: `url(#${clip})` })} filter={r.ragged ? `url(#rag-${key})` : undefined}>
                 <path d={dd} fill={col} fillOpacity={dark ? 0.34 : 0.28} style={{ mixBlendMode: dark ? "screen" : "multiply" }} />
                 {r.edge ? (
                   <>
@@ -202,8 +235,19 @@ export const TravellingMap: React.FC<TravellingMapProps> = ({ srcId, file, size,
           const draw = { pathLength: 1, strokeDasharray: r.dashed ? undefined : 1, strokeDashoffset: r.dashed ? undefined : 1 - p };
           return (
             <g key={i}>
-              {r.shadow !== false ? <path d={d} fill="none" stroke="rgba(0,0,0,0.32)" strokeWidth={w * 1.3} strokeLinecap="round" strokeLinejoin="round" transform={`translate(${5 / z} ${9 / z})`} filter={`url(#glow-${key})`} {...draw} {...dash} /> : null}
-              <path d={d} fill="none" stroke={t.colors.cones.L} strokeOpacity={0.88} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" {...draw} {...dash} style={{ mixBlendMode: r.shadow === false ? "multiply" : undefined }} />
+              {r.shadow !== false && !r.glow ? <path d={d} fill="none" stroke="rgba(0,0,0,0.32)" strokeWidth={w * 1.3} strokeLinecap="round" strokeLinejoin="round" transform={`translate(${5 / z} ${9 / z})`} filter={`url(#glow-${key})`} {...draw} {...dash} /> : null}
+              {r.glow ? (
+                <>
+                  <path d={d} fill="none" stroke={t.colors.cones.S} strokeOpacity={0.55} strokeWidth={w * 3.2} strokeLinecap="round" strokeLinejoin="round" filter={`url(#glow-${key})`} {...draw} />
+                  <path d={d} fill="none" stroke={t.colors.cones.S} strokeOpacity={0.95} strokeWidth={w * 0.9} strokeLinecap="round" strokeLinejoin="round" {...draw} />
+                  {p < 1 ? (() => {
+                    const hd = pointAt(r.points, p);
+                    return <circle cx={hd[0]} cy={hd[1]} r={w * 2.2} fill={t.colors.ink} opacity={0.9} filter={`url(#glow-${key})`} />;
+                  })() : null}
+                </>
+              ) : (
+                <path d={d} fill="none" stroke={t.colors.cones.L} strokeOpacity={0.88} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" {...draw} {...dash} style={{ mixBlendMode: r.shadow === false ? "multiply" : undefined }} />
+              )}
               {r.mark && xp > 0 ? (
                 <g stroke={t.colors.cones.L} strokeWidth={w * 1.2} strokeLinecap="round" opacity={0.9}>
                   <line x1={end[0] - s} y1={end[1] - s} x2={end[0] - s + 2 * s * Math.min(1, xp * 2)} y2={end[1] - s + 2 * s * Math.min(1, xp * 2)} />
