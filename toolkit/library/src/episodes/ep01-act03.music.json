@@ -4,7 +4,7 @@
   {
    "name": "1 the talk",
    "file": "public/music/wholesome_kevin_macleod.mp3",
-   "from": 280.2,
+   "from": 280.167,
    "at": 0,
    "until": 51.2,
    "fadeIn": 0.03,
@@ -36,7 +36,7 @@
    "at": 50.7,
    "until": 99.8,
    "fadeIn": 0.6,
-   "fadeOut": 0.8,
+   "fadeOut": 1.64,
    "lufs": -35
   },
   {
@@ -83,7 +83,7 @@
    "at": 183.6,
    "until": 208.1,
    "fadeIn": 1.0,
-   "fadeOut": 1.0,
+   "fadeOut": 0.6,
    "lufs": -35,
    "levels": [
     [
@@ -95,7 +95,7 @@
      -35
     ],
     [
-     207.4,
+     207.08,
      -27
     ],
     [

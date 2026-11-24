@@ -280,5 +280,11 @@
     "beatType": 3,
     "energy": "Calm",
     "grid": false
+  },
+  "EarthFlyIn": {
+    "assetId": "MAP-013",
+    "beatType": 2,
+    "energy": "Calm",
+    "grid": false
   }
 }

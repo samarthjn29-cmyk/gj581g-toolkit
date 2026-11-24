@@ -30,7 +30,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 29.65,
+   "atSec": 29.88,
    "volumeDb": -26.0
   },
   {
@@ -42,7 +42,7 @@
   {
    "id": "SFX-020",
    "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
-   "atSec": 51.09,
+   "atSec": 51.21,
    "volumeDb": -21.6
   },
   {
@@ -65,7 +65,7 @@
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
-   "atSec": 153.7,
+   "atSec": 153.13,
    "volumeDb": -26.0
   },
   {
@@ -83,13 +83,13 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 195.12,
+   "atSec": 195.27,
    "volumeDb": -17.6
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 203.65,
+   "atSec": 203.83,
    "volumeDb": -21.0
   }
  ],
@@ -317,7 +317,7 @@
       "lines": [
        "THE SOCIETY MET IN A ROOM HERE UNTIL 1799"
       ],
-      "atSec": 25.03,
+      "atSec": 24.5,
       "untilSec": 27.25,
       "x": 120,
       "y": 84,
@@ -647,7 +647,18 @@
     ],
     "quote": "",
     "quoteMarks": false,
-    "source": "JOHN DALTON · 1798 · P. 34"
+    "source": "JOHN DALTON · 1798 · P. 34",
+    "notes": [
+     {
+      "text": "ORANGE & YELLOW",
+      "atSec": 6.64
+     },
+     {
+      "text": "GREEN",
+      "atSec": 7.48,
+      "accent": true
+     }
+    ]
    },
    "beatTimes": [
     [
@@ -781,7 +792,7 @@
        360
       ],
       "w": 300,
-      "atSec": 3.33,
+      "atSec": 3.52,
       "enter": "rise",
       "states": [
        {
@@ -840,12 +851,12 @@
     ],
     "labels": [
      {
-      "text": "SIMULATION · ONE WAY",
+      "text": "MODERN SIMULATION · ONE WAY",
       "lines": [
        "HE MAY HAVE SEEN THEM"
       ],
       "atSec": 20.41,
-      "untilSec": 22.96,
+      "untilSec": 22.62,
       "x": 120,
       "y": 830,
       "size": 22
@@ -857,10 +868,10 @@
        "WAX SEAL, PETRIK"
       ],
       "atSec": 0,
-      "untilSec": 22.66,
+      "untilSec": 22.62,
       "x": 120,
       "y": 96,
-      "size": 16
+      "size": 20
      },
      {
       "text": "JOHN DALTON · 1798 · P. 34",
@@ -1042,8 +1053,8 @@
       },
       "labels": [
        {
-        "text": "OTHERS · DALTON'S SIX",
-        "atSec": 0.24,
+        "text": "OTHERS · SIX COLOURS",
+        "atSec": 1.3,
         "x": 210,
         "y": 408,
         "size": 22
@@ -1217,8 +1228,15 @@
     "VIS-021"
    ],
    "props": {
-    "mode": "section",
+    "mode": "plate",
     "startSec": -1,
+    "card": {
+     "x": 680,
+     "y": 130,
+     "w": 1060,
+     "h": 830,
+     "tilt": 1.0
+    },
     "outlines": [
      {
       "parts": [
@@ -1232,33 +1250,96 @@
       "parts": [
        "vitreous"
       ],
-      "atSec": 9.34
+      "atSec": 9.34,
+      "untilSec": 25.01
      }
     ],
-    "labels": [
+    "captions": [
      {
-      "text": "VITREOUS HUMOUR",
+      "text": "THE EYE · SIMPLIFIED",
+      "mono": true,
+      "atSec": -1,
+      "at": [
+       724,
+       176
+      ]
+     },
+     {
+      "text": "Cornea",
+      "atSec": -1,
+      "at": [
+       736,
+       360
+      ],
+      "anchor": [
+       915,
+       470
+      ]
+     },
+     {
+      "text": "Lens",
+      "atSec": -1,
+      "at": [
+       930,
+       912
+      ],
+      "anchor": [
+       1040,
+       640
+      ]
+     },
+     {
+      "text": "Retina",
+      "atSec": -1,
+      "at": [
+       1560,
+       318
+      ],
+      "anchor": [
+       1438,
+       391
+      ]
+     },
+     {
+      "text": "Vitreous humour",
       "atSec": 10.42,
-      "x": 940,
-      "y": 440,
-      "size": 26,
+      "at": [
+       1240,
+       198
+      ],
+      "anchor": [
+       1300,
+       390
+      ],
+      "size": 34,
       "underline": {
        "atSec": 12.73,
        "fromCh": 9
       }
+     },
+     {
+      "text": "DALTON'S GUESS · A BLUE VITREOUS",
+      "mono": true,
+      "atSec": 24.49,
+      "at": [
+       1230,
+       930
+      ],
+      "anchor": [
+       1330,
+       700
+      ]
      }
     ],
-    "beat": {
+    "rays": {
      "atSec": 15.97,
-     "drawSec": 1.4
-    },
-    "tag": {
-     "at": "corner",
-     "parts": [
-      {
-       "text": "DALTON'S GUESS",
-       "atSec": 19.75
-      }
+     "speed": 700,
+     "count": 18,
+     "size": 10,
+     "colors": [
+      "#FF3B30",
+      "#30D158",
+      "#2F6BFF"
      ]
     },
     "tints": [
@@ -1266,7 +1347,7 @@
       "part": "vitreous",
       "color": "#3D6BD6",
       "atSec": 24.49,
-      "opacity": 0.5
+      "opacity": 0.55
      }
     ]
    },
@@ -1330,13 +1411,13 @@
        {
         "text": "an explanation",
         "atSec": 1.82,
-        "x": 160,
+        "x": 110,
         "y": 250
        },
        {
         "text": "isn't hollow",
         "atSec": 4.42,
-        "x": 160,
+        "x": 110,
         "y": 360,
         "accent": true
        }
@@ -1349,14 +1430,14 @@
        {
         "text": "clear",
         "atSec": 22.71,
-        "x": 160,
+        "x": 110,
         "y": 250,
         "strikeSec": 23.17
        },
        {
         "text": "tinted",
         "atSec": 25.01,
-        "x": 160,
+        "x": 110,
         "y": 380,
         "accent": true
        }
@@ -1365,11 +1446,11 @@
        {
         "atSec": 24.61,
         "from": [
-         372,
+         322,
          320
         ],
         "to": [
-         392,
+         342,
          392
         ]
        }
@@ -1526,20 +1607,27 @@
     "SFX-026"
    ],
    "props": {
-    "mode": "section",
+    "mode": "plate",
+    "card": {
+     "x": 680,
+     "y": 130,
+     "w": 1060,
+     "h": 830,
+     "tilt": 1.0
+    },
     "tints": [
      {
       "part": "vitreous",
       "color": "#3D6BD6",
       "atSec": -1.2,
-      "opacity": 0.5
+      "opacity": 0.55
      }
     ],
     "pulses": [
      {
       "part": "vitreous",
       "atSec": 4.86,
-      "to": 0.72,
+      "to": 0.75,
       "sec": 1.6
      }
     ],
@@ -1559,20 +1647,84 @@
        "#FF3B30",
        "#30D158"
       ],
-      "from": 0.55,
-      "to": 0.75,
+      "from": 0.52,
+      "to": 0.7,
       "keep": 0.3
      }
     },
-    "tag": {
-     "at": "corner",
-     "parts": [
-      {
-       "text": "DALTON'S GUESS",
-       "atSec": -1
-      }
-     ]
-    },
+    "captions": [
+     {
+      "text": "THE EYE · SIMPLIFIED",
+      "mono": true,
+      "atSec": -1,
+      "at": [
+       724,
+       176
+      ]
+     },
+     {
+      "text": "Cornea",
+      "atSec": -1,
+      "at": [
+       736,
+       360
+      ],
+      "anchor": [
+       915,
+       470
+      ]
+     },
+     {
+      "text": "Lens",
+      "atSec": -1,
+      "at": [
+       930,
+       912
+      ],
+      "anchor": [
+       1040,
+       640
+      ]
+     },
+     {
+      "text": "Retina",
+      "atSec": -1,
+      "at": [
+       1560,
+       318
+      ],
+      "anchor": [
+       1438,
+       391
+      ]
+     },
+     {
+      "text": "Vitreous humour",
+      "atSec": -1,
+      "at": [
+       1240,
+       198
+      ],
+      "anchor": [
+       1300,
+       390
+      ],
+      "size": 34
+     },
+     {
+      "text": "DALTON'S GUESS · A BLUE VITREOUS",
+      "mono": true,
+      "atSec": -1,
+      "at": [
+       1230,
+       930
+      ],
+      "anchor": [
+       1330,
+       700
+      ]
+     }
+    ],
     "labels": [
      {
       "text": "HIS IDEA:",
@@ -1587,11 +1739,15 @@
      },
      {
       "text": "PHOTOS TODAY",
-      "atSec": 15.6,
+      "lines": [
+       "CHERRY LAUREL, RUNIC EARTH",
+       "WAX SEAL, PETRIK"
+      ],
+      "atSec": 15.9,
       "untilSec": 23.7,
       "x": 120,
-      "y": 230,
-      "size": 16
+      "y": 200,
+      "size": 20
      }
     ]
    },
@@ -1671,7 +1827,7 @@
         "accent": true
        }
       ],
-      "untilSec": 7.35
+      "untilSec": 7.6
      }
     ],
     "stickers": [
@@ -1985,10 +2141,10 @@
        1197
       ],
       "at": [
-       1665,
+       1420,
        600
       ],
-      "w": 300,
+      "w": 400,
       "atSec": 2.91,
       "tilt": 2,
       "object": true,
@@ -2115,7 +2271,7 @@
      {
       "text": "W. C. HENRY · 1854 · P. 25",
       "atSec": 3.23,
-      "untilSec": 10.63,
+      "untilSec": 10.55,
       "x": 160,
       "y": 746,
       "size": 22
@@ -2214,7 +2370,7 @@
     "labels": [
      {
       "text": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726",
-      "atSec": 7.32,
+      "atSec": 5.42,
       "x": 1800,
       "y": 980,
       "align": "right",
@@ -2257,7 +2413,7 @@
      0.26
     ],
     "blurPx": 22,
-    "brightness": 0.46,
+    "brightness": 0.38,
     "zoom": 1.4
    }
   },

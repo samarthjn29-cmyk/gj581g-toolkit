@@ -117,7 +117,7 @@ shot(B(*range(2, 13)), "LayerStage", lambda r: {
         {"text": "TUTOR · MATHEMATICS AND NATURAL PHILOSOPHY", "atSec": r(word("mathematics")), "untilSec": r(word("tonight")), "x": 1280, "y": 536, "align": "center"},
         {"text": "NEW COLLEGE", "atSec": r(word("new")), "untilSec": r(word("tonight")) + 0.3, "x": 1280, "y": 112, "align": "center", "accent": True, "settle": True},
         # one landing on "Society" (Gate 1 reviewer: not the brief's two, 0.23 s apart)
-        {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(word("society")), "untilSec": r(29.65), "x": 120, "y": 84, "size": 22},  # Gate 3 review S3: leaves with the match
+        {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(26.90), "untilSec": r(29.65), "x": 120, "y": 84, "size": 22},  # v6 Editor S3: 3 s to read, as the corner clears  # Gate 3 review S3: leaves with the match
     ],
     "tag": {"parts": [{"text": "MANCHESTER", "atSec": r(word("manchester"))}, {"text": "31 OCT 1794", "atSec": r(word("october"))}],
             "at": "low-centre", "toCornerAtSec": r(9.0), "untilSec": r(word("literary"))},
@@ -148,7 +148,8 @@ shot(B(17, 18, 19, 20), "ArchivalScanCard", lambda r: {
     "highlights": [{"box": [1000, 620, 500, 50], "atSec": r(word("lists"))},
                    {"box": [1150, 1065, 190, 48], "atSec": r(word("one", 47))},
                    {"box": [745, 1308, 980, 54], "atSec": r(48.50)}],  # the laurel line, in the pause before "with examples" (Gate 2: 2 s to read); B pushes from it, lit from B's frame 0
-    "quote": "", "quoteMarks": False, "source": "JOHN DALTON · 1798 · P. 34"},
+    "quote": "", "quoteMarks": False, "source": "JOHN DALTON · 1798 · P. 34",
+    "notes": [{"text": "ORANGE & YELLOW", "atSec": r(word("lists"))}, {"text": "GREEN", "atSec": r(word("one", 47)), "accent": True}]},  # v6 Designer: the page's own headings, as he lists them
     transitionIn="canvas", transition={"dir": "right", "pull": 0.86}, ground=PAPER, extra=[])
 
 # 21-28 B_leaf_and_wax: p.34 itself, framed on the laurel sentence (push from the card's laurel line); the leaf and the
@@ -160,8 +161,8 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
                                {"box": [745, 1366, 690, 54], "atSec": r(word("match", 56))}],
                 "why": "Same idea: the sentence on p.34 where Dalton matches the laurel leaf to red sealing-wax; the two things lift off the page that names them."}],
     "carry": [
-        # rises from "laurel" so it settles in the comma pause after "leaf," (55.1-55.25), where its pop is
-        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(word("laurel")), "enter": "rise", "states": [{"atSec": r(71.30), "color": OLIVE, "blend": "replace"}]},
+        # rises at 54.76 so it settles in the comma pause after "leaf," on its pop (v6 Editor S2)
+        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(54.76), "enter": "rise", "states": [{"atSec": r(71.30), "color": OLIVE, "blend": "replace"}]},
         {**WAX, "at": [330, 690], "w": 200, "atSec": r(word("sealing")), "enter": "rise",
          "states": [{"atSec": r(word("wax", 59)), "label": "A WAX SEAL · TODAY"}, {"atSec": r(71.30), "color": OLIVE, "blend": "replace"}]},  # Gate 2 review M3: complete (72.00) before "To him"; FIX 2: one measured olive on both
         # W4: pale on the pale page, so 420 wide (Gate 2 builder test); lands on "seal letters", sinks before "Think"
@@ -169,8 +170,8 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
          "untilSec": r(62.45), "exit": "sink", "caption": "A SEALED LETTER · 1841", "captionSize": 20},
     ],
     # FIX 3: the caption and the page's tag sit in the paper margin, off the page's bottom line of print
-    "labels": [{"text": "SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(71.65), "untilSec": r(S(29) - 0.3), "x": 120, "y": 830, "size": 22},  # Gate 3 review S3: lands with the olive, 2.55 s to read
-               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": 0, "untilSec": r(S(29) - 0.6), "x": 120, "y": 96, "size": 16},
+    "labels": [{"text": "MODERN SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(71.65), "untilSec": r(73.86), "x": 120, "y": 830, "size": 22},  # v6: Expert 'MODERN'; Editor M1: gone before the glide freezes the frame
+               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": 0, "untilSec": r(73.86), "x": 120, "y": 96, "size": 20},
                {"text": "JOHN DALTON · 1798 · P. 34", "atSec": 0, "x": 120, "y": 930, "size": 20}],
     "camera": {"pan": -40, "push": 0.03}},
     sid="B_leaf_and_wax", transitionIn="push", focus=[620, 598],
@@ -190,7 +191,7 @@ shot(B(*range(29, 39)), "LayerStage", lambda r: {
                    "fills": [{"band": "red", "atSec": r(word("almost"))}, {"band": "yellow", "atSec": r(word("yellow"))},
                              {"band": "blue", "atSec": r(word("blue", 96))}, {"band": "purple", "atSec": r(word("purple"))}],
                    "count": {"text": "I see only two or at most three distinctions", "atSec": r(word("two", 93)), "y": 792}},  # Gate 2 builder test: clear of the source chip
-        "labels": [{"text": "OTHERS · DALTON'S SIX", "atSec": r(word("describes")), "x": 210, "y": 408, "size": 22},
+        "labels": [{"text": "OTHERS · SIX COLOURS", "atSec": r(75.80), "x": 210, "y": 408, "size": 22},  # v6: Expert FIX 2 (read as 'Dalton sees six'); Editor T6: lands after the glide
                    {"text": "DALTON'S WORDS", "atSec": r(word("others", 82)), "x": 210, "y": 714, "size": 22}]}},
     "camera": {"pan": 0, "push": 0.03},
     "startSec": -1},  # the photo arrives already in place inside the glide
@@ -202,24 +203,33 @@ shot(B(*range(29, 39)), "LayerStage", lambda r: {
                          "source": {"text": "DALTON · 1798 · P. 31", "atSec": round(word("little") - S(29), 2), "x": 720, "y": 866, "untilSec": round(word("then", 99) - S(29), 2)},
                          "untilSec": round(92.9 - S(29), 2)}]})
 
+# v6 plates (Designer MUST 1 + Subject Expert, 24 Nov 2026): the two section eyes drawn as one anatomical plate on a
+# cream card (EyeDiagram mode "plate"); eye centre (1220, 540), 23.8 px per mm, light from the left.
+PLATE_CARD = {"x": 680, "y": 130, "w": 1060, "h": 830, "tilt": 1.0}  # tilted down at the right, clear of the running head
+PLATE_CAPTIONS = [{"text": "THE EYE · SIMPLIFIED", "mono": True, "atSec": -1, "at": [724, 176]},
+                  {"text": "Cornea", "atSec": -1, "at": [736, 360], "anchor": [915, 470]},
+                  {"text": "Lens", "atSec": -1, "at": [930, 912], "anchor": [1040, 640]},
+                  {"text": "Retina", "atSec": -1, "at": [1560, 318], "anchor": [1438, 391]}]
 # 39-48 D_into_the_eye: the act's one hard cut, on the hit at 102.10 (cue 3 on the same frame); the cross-section draws
 # in on "explanation"; the fluids outlined, then the vitreous; VITREOUS HUMOUR with the HUMOUR underline (W7); the beam;
 # DALTON'S GUESS in the corner; chips W8 (clear struck, tinted); the jelly tints blue on "It's".
 shot(B(*range(39, 49)), "EyeDiagram", lambda r: {
-    "mode": "section", "startSec": -1,  # frame review FIX 1: drawn on the cut frame, so the strips cut onto the eye (was "explanation")
+    "mode": "plate", "startSec": -1, "card": PLATE_CARD,  # v6 (Sam: "Apply all"): the Designer's plate, the Expert's anatomy
     "outlines": [{"parts": ["aqueous", "vitreous"], "atSec": r(word("clear", 108)), "untilSec": r(word("clear", 111))},
-                 {"parts": ["vitreous"], "atSec": r(word("clear", 111))}],
-    "labels": [{"text": "VITREOUS HUMOUR", "atSec": r(word("vitreous", 112)), "x": 940, "y": 440, "size": 26, "underline": {"atSec": r(word("humour", 114)), "fromCh": 9}}],
-    "beat": {"atSec": r(word("light", 117)), "drawSec": 1.4},
-    "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": r(word("dalton's", 121))}]},
-    "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.5}]},
+                 {"parts": ["vitreous"], "atSec": r(word("clear", 111)), "untilSec": r(word("tinted"))}],  # Designer: one teal at a time
+    "captions": PLATE_CAPTIONS + [
+        {"text": "Vitreous humour", "atSec": r(word("vitreous", 112)), "at": [1240, 198], "anchor": [1300, 390], "size": 34,
+         "underline": {"atSec": r(word("humour", 114)), "fromCh": 9}},
+        {"text": "DALTON'S GUESS · A BLUE VITREOUS", "mono": True, "atSec": r(word("it's", 126)), "at": [1230, 930], "anchor": [1330, 700]}],  # Expert: tied to the wash
+    "rays": {"atSec": r(word("light", 117)), "speed": 700, "count": 18, "size": 10, "colors": RAY},  # Designer: light as dots, as in C
+    "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.55}]},
     sid="D_into_the_eye",
-    overlay={"chips": [{"size": 64, "chips": [{"text": "an explanation", "atSec": round(word("explanation") - S(39), 2), "x": 160, "y": 250},
-                                              {"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 160, "y": 360, "accent": True}],
+    overlay={"chips": [{"size": 64, "chips": [{"text": "an explanation", "atSec": round(word("explanation") - S(39), 2), "x": 110, "y": 250},
+                                              {"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 110, "y": 360, "accent": True}],
                          "untilSec": round(108.3 - S(39), 2)},  # review S2 + Gate 3 stillness (102.1-106.6): one panel, two spoken key phrases
-                       {"size": 64, "chips": [{"text": "clear", "atSec": round(word("isn't", 124) - S(39), 2), "x": 160, "y": 250, "strikeSec": round(word("clear", 125) - S(39), 2)},
-                                              {"text": "tinted", "atSec": round(word("tinted") - S(39), 2), "x": 160, "y": 380, "accent": True}],
-                        "arrows": [{"atSec": round(word("tinted") - S(39) - 0.4, 2), "from": [372, 320], "to": [392, 392]}]}]})
+                       {"size": 64, "chips": [{"text": "clear", "atSec": round(word("isn't", 124) - S(39), 2), "x": 110, "y": 250, "strikeSec": round(word("clear", 125) - S(39), 2)},
+                                              {"text": "tinted", "atSec": round(word("tinted") - S(39), 2), "x": 110, "y": 380, "accent": True}],
+                        "arrows": [{"atSec": round(word("tinted") - S(39) - 0.4, 2), "from": [322, 320], "to": [342, 392]}]}]})
 
 # 49-51 p.43 (drafting wipe in the beam's direction): "probably some modification of blue", near-silence under it.
 shot(B(49, 50, 51), "ArchivalScanCard", lambda r: {
@@ -233,20 +243,21 @@ shot(B(49, 50, 51), "ArchivalScanCard", lambda r: {
 # "blue glass"; rays lose red and green in the jelly; the leaf and the wax come back as stickers (VIS-060) on the
 # light's side and go darker, duller and closer under his blue (still two colours: no olive here, fact-check 8).
 shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
-    "mode": "section",
-    "tints": [{"part": "vitreous", "color": BLUE, "atSec": -1.2, "opacity": 0.5}],
-    "pulses": [{"part": "vitreous", "atSec": r(word("looking")), "to": 0.72, "sec": 1.6}],  # Gate 3 stillness: from "looking at the world through blue glass" (was on "blue")
+    "mode": "plate", "card": PLATE_CARD,
+    "tints": [{"part": "vitreous", "color": BLUE, "atSec": -1.2, "opacity": 0.55}],
+    "pulses": [{"part": "vitreous", "atSec": r(word("looking")), "to": 0.75, "sec": 1.6}],  # Gate 3 stillness: from "looking at the world through blue glass" (was on "blue")
     "rays": {"atSec": r(word("in", 145)), "speed": 700, "count": 18, "size": 10, "colors": RAY,  # Gate 3: dots that read at phone size (Director note 9)
-             "absorb": {"atSec": r(word("soaks")), "colors": RAY[:2], "from": 0.55, "to": 0.75, "keep": 0.3}},
-    "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": -1}]},
+             "absorb": {"atSec": r(word("soaks")), "colors": RAY[:2], "from": 0.52, "to": 0.70, "keep": 0.3}},  # Expert: fading starts where the light enters the vitreous
+    "captions": PLATE_CAPTIONS + [{"text": "Vitreous humour", "atSec": -1, "at": [1240, 198], "anchor": [1300, 390], "size": 34},
+                                  {"text": "DALTON'S GUESS · A BLUE VITREOUS", "mono": True, "atSec": -1, "at": [1230, 930], "anchor": [1330, 700]}],
     "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22},
-               {"text": "PHOTOS TODAY", "atSec": r(153.10), "untilSec": r(S(61) - 0.6), "x": 120, "y": 230, "size": 16}]},  # Gate 2 review M2: the stickers are modern photos
+               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": r(153.40), "untilSec": r(S(61) - 0.6), "x": 120, "y": 200, "size": 20}]},  # v6: Designer M3 (20 px + credit), Editor T9 (after the wax)
     sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.3},  # Gate 3 stillness: the spread carries to 138.8
     overlay={"drift": 0.02,
              # Gate 3 stillness (138.8-145.3): W9's keyword panel in place of the dropped blue-glass object; gone before the rays
              "chips": [{"size": 64, "chips": [{"text": "makes sense", "atSec": round(word("makes") - S(52), 2), "x": 160, "y": 250},
                                               {"text": "blue glass", "atSec": round(word("blue", 143) - S(52), 2), "x": 160, "y": 360, "accent": True}],
-                        "untilSec": round(144.85 - S(52), 2)}],
+                        "untilSec": round(145.10 - S(52), 2)}],  # v6 Editor T3: 'blue glass' 1.66 s
              "stickers": [
         {**LEAF, "at": [300, 380], "w": 180, "atSec": round(152.50 - S(52), 2), "tilt": -3,
          "states": [{"atSec": round(word("duller") - S(52), 2), "multiply": BLUE, "opacity": 0.6}], "moves": [{"atSec": round(word("duller") - S(52), 2), "to": [300, 440]}]},
@@ -281,7 +292,7 @@ shot(B(67, 68), "KeywordPanel", lambda r: {"panel": {"chips": []}},
     transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35, "holdSec": 1.0},  # v5 review S1: the disc stays on the iris 1 s  # Gate 3 review S1: lands in the silence before "So" (177.86)
     overlay={"stickers": [{**CLIP, "at": list(CLIP_AT), "w": CLIP_W, "atSec": 0.12, "tilt": -1.2, "fromTilt": -1.2, "edge": 0,
                            "tag": {"text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH", "dy": 18}},  # v5 review S2/S3: tag up to the cut, photographer named like the prism
-                          {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1665, 600], "w": 300,
+                          {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1420, 600], "w": 400,  # v6 Designer: over the cutting's corner, one group
                            "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
              "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 270, "y": 700},
                                   {"text": "two", "atSec": round(word("two", 182) - S(67), 2), "x": 486, "y": 700, "accent": True}]}]})
@@ -295,7 +306,7 @@ shot(B(69, 70, 71, 72), "LayerStage", lambda r: {
     "carry": [{"srcId": "SRC-007", "file": "public/assets/sources/henry1854_p25_wish_line.png", "size": [1850, 170], "at": [880, 872], "w": 1440,
                "atSec": r(word("exactly")), "enter": "rise",
                "highlights": [{"box": [710, 20, 1112, 52], "atSec": r(word("after", 189))}, {"box": [598, 102, 822, 54], "atSec": r(word("strongly"))}]}],
-    "labels": [{"text": "W. C. HENRY · 1854 · P. 25", "atSec": r(187.05), "untilSec": r(194.45), "x": 160, "y": 746, "size": 22}],
+    "labels": [{"text": "W. C. HENRY · 1854 · P. 25", "atSec": r(187.05), "untilSec": r(194.37), "x": 160, "y": 746, "size": 22}],  # v6 Editor S6
     "arrive": {"dir": "down", "px": 90, "sec": 0.45, "atSec": 0.25},  # settles from the cut (CutOnAction leadSec 0.25)
     "camera": {"pan": -30, "push": 0.02}},
     sid="H_wish_over_portrait", transitionIn="action", transition={"dir": "down", "px": 90, "leadSec": 0.25, "settleSec": 0.45, "moveTo": False})
@@ -308,10 +319,10 @@ shot(B(73, 74, 75), "KeywordPanel", lambda r: {
     # Gate 3 v5 (Sam: "show in the background a blurred photo of Issac Newton. The photo shouldn't be too famous."): the
     # one man is Newton; his face (J. Swaine's engraving after Enoch Seeman's 1726 portrait, SRC-049) blurred behind the
     # chips, tagged on "one man" so the face is named when the line points at him.
-    "labels": [{"text": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726", "atSec": r(word("one", 202)), "x": 1800, "y": 980, "align": "right", "size": 22}]},
+    "labels": [{"text": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726", "atSec": r(200.44), "x": 1800, "y": 980, "align": "right", "size": 22}]},
     transitionIn="band", transition={"dir": "up", "tone": "dark"},
     ground={"kind": "blur", "srcId": "SRC-049", "file": "public/assets/sources/newton_swaine_after_seeman1726.jpg", "size": [1063, 1790],
-            "focus": [0.0, 0.26], "blurPx": 22, "brightness": 0.46, "zoom": 1.4})
+            "focus": [0.0, 0.26], "blurPx": 22, "brightness": 0.38, "zoom": 1.4})
 
 # 76-77 E_dark_room: focus match into act 1's dark room, the closed shutter on the left third; act 4 opens from here.
 shot(B(76, 77), "PerspectiveGrid", {
@@ -325,17 +336,17 @@ K = "public/sfx/kit/"
 audio = [
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("college"), 2), "volumeDb": -29.0},  # the ring draws round "Academy"
     {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("paper", 28) + 0.45, 2), "volumeDb": -34.0},  # review S1: under the swish, not over it  # the p.28 page settles (pause after "paper.")
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(13) - 0.05, 2), "volumeDb": -26.0},  # focus match into the p.28 card (pause before "Its")
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 29.88, "volumeDb": -26.0},  # v6 Editor S1: peaks on the match  # focus match into the p.28 card (pause before "Its")
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(17) + 0.1, 2), "volumeDb": -26.0},  # the glide to p.34 (quiet paper slide)
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(21) - 0.15, 2), "volumeDb": -21.6},  # push into the page (pause before "Here's one"); cue 2 enters
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": 51.21, "volumeDb": -21.6},  # v6 Editor S1  # push into the page (pause before "Here's one"); cue 2 enters
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": round(word("laurel") + 0.62, 2), "volumeDb": -24.0},  # the leaf settles (comma pause after "leaf,")
     {"id": "SFX-006", "atSec": round(S(49) - 0.5, 2), "volumeDb": -18.0},  # J-cut: the page leads the drafting wipe by 0.5 s
     {"id": "SFX-017", "file": K + "tactile/marker_stroke.wav", "atSec": round(S(49), 2), "volumeDb": -27.0},  # the drafting line's stroke
-    {"id": "SFX-026", "file": K + "tactile/soft_pop_v2.wav", "atSec": round(153.10 + 0.6, 2), "volumeDb": -26.0},  # the wax sticker settles (pause before "Reds")
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v2.wav", "atSec": 153.13, "volumeDb": -26.0},  # v6 Editor M2: on the wax landing  # the wax sticker settles (pause before "Reds")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(61) + 0.05, 2), "volumeDb": -17.6},  # slide back into p.43
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(S(67) + 0.33, 2), "volumeDb": -24.0},  # the morph lands on the iris (pause before "So")
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(73) + 0.1, 2), "volumeDb": -17.6},  # dark paper band up (pause before "But")
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(76) + 0.05, 2), "volumeDb": -21.0},  # focus match into the room
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 195.27, "volumeDb": -17.6},  # v6 Editor S1  # dark paper band up (pause before "But")
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 203.83, "volumeDb": -21.0},  # v6 Editor S1  # focus match into the room
 ]
 # The act's music is the approved cue sheet (MUS-008 ActMoodCueSheet, scripts/mix-cue-bed.py), files in public/music.
 cues = json.load(open(os.path.join(G1, "act3_cues_v2.json")))
@@ -354,6 +365,15 @@ for c in cues["cues"]:
     if c["until"] > ACT_END:
         c["until"] = ACT_END
         c["levels"] = [l for l in c.get("levels", []) if l[0] < ACT_END] + [[ACT_END, c["levels"][-1][1]]] if c.get("levels") else c.get("levels")
+# v6 Sound reviewer S1-S3
+for c in cues["cues"]:
+    if c["name"].startswith("1 "):
+        c["from"] = 280.167  # Wholesome runs on from act 2 (104.59 + 175.567): no skip at the join
+    if c["name"].startswith("2 "):
+        c["fadeOut"] = 1.64  # ends on a bar of Thinking Music
+    if c["name"].startswith("4 "):
+        c["levels"] = [[183.6, -35], [206.7, -35], [207.08, -27], [208.1, -27]]
+        c["fadeOut"] = 0.6  # the music-alone lift after 'born.' is heard
 cues["ids"] = {"cues": ["MUS-007", "MUS-012", "MUS-013", "MUS-014"], "events": ["MUS-015", "SFX-025"]}
 
 act = {"finish": {}, "motionBlur": True, "episodeId": "WCL-E01-act03", "themeId": "LOK-009",

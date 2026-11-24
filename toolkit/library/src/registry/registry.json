@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T10:30:35.064Z",
+ "generated": "2026-11-24T12:46:36.656Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2870,7 +2870,7 @@
    "folder": "9_Maps",
    "name": "EarthFlyIn",
    "paths": [
-    "(to build)"
+    "src/components/EarthFlyIn.tsx"
    ],
    "status": "Planned",
    "use": "Best use: an act or episode opening that lands on a place. Limit: 1 per episode; public-domain imagery only, credited.",
@@ -3373,6 +3373,19 @@
    "status": "Active",
    "use": "Best use: the 'one man' Dalton leans on (WCL-E01 act 3, beats 73-75): a LOK-028 blur ground behind the keyword chips, tagged with the likeness on 'one man'; later Newton lines in the season where the portrait sits behind other cards. Limit: max 6 beats per episode; always tagged as Newton after Seeman (no engraving date implied); never flipped, colourised or presented as a photograph.",
    "maxBeats": 6,
+   "maxShare": null
+  },
+  "SRC-050": {
+   "id": "SRC-050",
+   "folder": "11_Sources",
+   "name": "BlueMarbleNG_Aug2004",
+   "paths": [
+    "public/assets/sources/bm_global_8192.jpg",
+    "public/assets/sources/bm_britain_240ppd.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the globe and the close view of the British Isles inside MAP-013 EarthFlyIn (an act or episode opening that lands on a place). Limit: only through MAP-013 (1 per episode); always tagged SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE; never presented as a photo of a day or of the period; credit NASA Earth Observatory / Blue Marble Next Generation.",
+   "maxBeats": null,
    "maxShare": null
   }
  }

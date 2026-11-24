@@ -300,6 +300,26 @@ export const DEMO_VARIANTS: Record<string, { name: string; props: Record<string,
       },
     },
   },
+  "EarthFlyIn-Kendal": {
+    name: "EarthFlyIn",
+    sec: 9,
+    props: {
+      globe: { srcId: "SRC-050", file: "public/assets/sources/bm_global_8192.jpg", size: [8192, 4096] },
+      inset: { srcId: "SRC-050", file: "public/assets/sources/bm_britain_240ppd.jpg", size: [3840, 3120], lon0: -12, lon1: 4, lat0: 61, lat1: 48 },
+      keys: [
+        { atSec: 0, lon: -35, lat: 28, radius: 360 },
+        { atSec: 2.2, lon: -8, lat: 46, radius: 900, sec: 2.2 },
+        { atSec: 6.0, lon: -2.55, lat: 53.95, radius: 26000, sec: 3.8 },
+        { atSec: 9.0, lon: -2.5, lat: 53.92, radius: 30000, sec: 3.0 },
+      ],
+      pins: [
+        { lon: -2.746, lat: 54.328, text: "KENDAL", atSec: 5.2 },
+        { lon: -2.244, lat: 53.48, text: "MANCHESTER", atSec: 5.5, accent: true },
+      ],
+      map: { srcId: "SRC-045", size: [960, 1015], atSec: 6.6, sec: 1.6, fit: [[411, 346, -2.746, 54.328], [602, 894, -2.244, 53.48]], grade: "paper" },
+      tag: { text: "SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE", atSec: 0.3, untilSec: 6.6 },
+    },
+  },
   "EyeDiagram-A3-Section": {
     name: "EyeDiagram",
     sec: 6,

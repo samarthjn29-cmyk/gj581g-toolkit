@@ -35,6 +35,7 @@ import { BuildUpMap } from "./BuildUpMap";
 import { ObjectStory } from "./ObjectStory";
 import { SourcePageStory } from "./SourcePageStory";
 import { TravellingMap } from "./TravellingMap";
+import { EarthFlyIn } from "./EarthFlyIn";
 import { FootageMontage } from "./FootageMontage";
 import { EvidenceChain } from "./EvidenceChain";
 import { WhatWeKnow } from "./WhatWeKnow";
@@ -95,6 +96,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   ObjectStory,
   SourcePageStory,
   TravellingMap,
+  EarthFlyIn,
   FootageMontage,
   EvidenceChain,
   WhatWeKnow,
