@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
-import { useAssets, useSource } from "../registry";
+import { useAssets, useSourceFile } from "../registry";
 import { drift, reveal, rise, sec, SLOW_OUT } from "../motion";
 import { CropImage, cropToBox, type Rect } from "../layers/CropImage";
 import { ScreenStrokes, type StrokesSpec } from "../layers/ScreenStrokes";
@@ -11,6 +11,7 @@ import { ScreenStrokes, type StrokesSpec } from "../layers/ScreenStrokes";
 // the line set as a serif quote with an accent underline, and a mono source tag.
 export type ArchivalScanCardProps = {
   srcId: string;
+  file?: string; // one page of a multi-page source (e.g. SRC-058, six pages of Newton's 1672 letter)
   imgSize: readonly [number, number];
   crop: Rect;
   highlights: { box: Rect; atSec: number; dimAtSec?: number; dimTo?: number }[]; // dimAtSec: this highlight fades to dimTo (default 0.4) over 0.5 s
@@ -29,6 +30,7 @@ export type ArchivalScanCardProps = {
 
 export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   srcId,
+  file,
   imgSize,
   crop,
   highlights,
@@ -44,7 +46,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
 }) => {
   useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : []), ...(strokes ? ["TEX-008"] : [])]);
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
-  const src = useSource(srcId);
+  const src = useSourceFile(srcId, file);
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();

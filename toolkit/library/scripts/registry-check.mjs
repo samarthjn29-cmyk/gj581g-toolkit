@@ -31,9 +31,11 @@ const COMPONENT_IDS = Object.fromEntries(
 );
 const acts = process.argv.slice(2).length ? process.argv.slice(2) : walk("src/episodes").filter((f) => f.endsWith(".json") && !f.endsWith(".music.json"));
 const inactive = [];
+const actIds = new Set();
 for (const f of acts) {
   const act = JSON.parse(fs.readFileSync(f, "utf8"));
   const ids = new Set([act.themeId]);
+  JSON.stringify(act).match(/[A-Z]{3}-\d{3}/g)?.forEach((id) => actIds.add(id));
   for (const b of act.beats) {
     (b.assets ?? []).forEach((id) => ids.add(id));
     ids.add(COMPONENT_IDS[b.component] ?? `unknown component ${b.component}`);
@@ -48,16 +50,22 @@ for (const f of acts) {
     else if (a.status !== "Active") inactive.push(`${f}: ${id} (${a.name}) is ${a.status}`);
   }
 }
+// Named acts: only files of IDs those acts use can fail the check (other acts' files may not be on this machine).
+const scoped = process.argv.slice(2).length > 0;
+const idOf = (m) => m.split(":")[0];
+const missingHere = scoped ? missing.filter((m) => actIds.has(idOf(m))) : missing;
+const missingElsewhere = scoped ? missing.filter((m) => !actIds.has(idOf(m))) : [];
 const lines = [
   `Registry manifest: ${entries.length} entries, ${entries.filter((a) => a.status === "Active").length} Active`,
   `Unregistered assets: ${unregistered.length}`,
   ...unregistered.map((f) => `  - ${f}`),
-  `Missing files for Active entries: ${missing.length}`,
-  ...missing.map((m) => `  - ${m}`),
+  `Missing files for Active entries${scoped ? " used by these acts" : ""}: ${missingHere.length}`,
+  ...missingHere.map((m) => `  - ${m}`),
+  ...(missingElsewhere.length ? [`(not used by these acts, files not on this machine: ${missingElsewhere.length}; not a failure here)`] : []),
   `Direct staticFile() or remote URLs outside src/registry: ${direct.length}`,
   ...direct.map((m) => `  - ${m}`),
   `Act files checked: ${acts.length}; IDs not Active or not listed: ${inactive.length}`,
   ...inactive.map((m) => `  - ${m}`),
 ];
 console.log(lines.join("\n"));
-process.exit(unregistered.length + missing.length + direct.length + inactive.length ? 1 : 0);
+process.exit(unregistered.length + missingHere.length + direct.length + inactive.length ? 1 : 0);

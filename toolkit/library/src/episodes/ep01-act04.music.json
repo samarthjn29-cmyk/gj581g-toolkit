@@ -1,0 +1,119 @@
+{
+ "dur": 215.7,
+ "cues": [
+  {
+   "name": "1 back to Newton",
+   "file": "public/music/wholesome_kevin_macleod.mp3",
+   "from": 0,
+   "at": 0,
+   "until": 24.65,
+   "fadeIn": 0.6,
+   "fadeOut": 1.0,
+   "lufs": -34,
+   "levels": [
+    [
+     0,
+     -26
+    ],
+    [
+     2.0,
+     -26
+    ],
+    [
+     2.9,
+     -34
+    ],
+    [
+     24.65,
+     -34
+    ]
+   ]
+  },
+  {
+   "name": "2 the room and the test",
+   "file": "public/music/thinking_music_kevin_macleod.mp3",
+   "from": 49.1,
+   "at": 24.25,
+   "until": 119.5,
+   "fadeIn": 0.6,
+   "fadeOut": 0.8,
+   "lufs": -35
+  },
+  {
+   "name": "3 sorting",
+   "file": "public/music/long_note_two_kevin_macleod.mp3",
+   "from": 116.4,
+   "at": 119.2,
+   "until": 178.20000000000002,
+   "fadeIn": 0.4,
+   "fadeOut": 0.6,
+   "lufs": -41,
+   "filter": "dynaudnorm=f=3000:g=31"
+  },
+  {
+   "name": "4 the letter and the question",
+   "file": "public/music/at_rest_kevin_macleod.mp3",
+   "from": 0,
+   "at": 177.9,
+   "until": 215.7,
+   "fadeIn": 1.0,
+   "fadeOut": 1.0,
+   "lufs": -35,
+   "levels": [
+    [
+     177.9,
+     -35
+    ],
+    [
+     212.7,
+     -35
+    ],
+    [
+     213.4,
+     -27
+    ],
+    [
+     215.7,
+     -27
+    ]
+   ]
+  }
+ ],
+ "quiet": [
+  [
+   103.63000000000001,
+   104.82,
+   -60,
+   0.05
+  ],
+  [
+   114.96,
+   118.8,
+   -50,
+   0.3
+  ],
+  [
+   142.25,
+   145.33,
+   -50,
+   0.3
+  ],
+  [
+   156.77,
+   164.54,
+   -50,
+   0.4
+  ]
+ ],
+ "events": [],
+ "note": "Gate 1 plan (24 Nov 2026). Cue 1 continues the series bed (Wholesome); cues 2-4 are the act 3 tracks at new start points (Sam heard all four in the act 3 sampler). Break (MUS-010) = the quiet span before \"It doesn't.\". Act join: act 3 ends on At Rest; cue 1 fades in under act 3's tail at assembly.",
+ "ids": {
+  "cues": [
+   "MUS-007",
+   "MUS-012",
+   "MUS-013",
+   "MUS-014"
+  ],
+  "events": []
+ }
+}

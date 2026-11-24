@@ -1,0 +1,3466 @@
+{
+ "finish": {},
+ "motionBlur": true,
+ "episodeId": "WCL-E01-act04",
+ "themeId": "LOK-009",
+ "runningHead": {
+  "text": "4 · A HOLE IN THE SHUTTER",
+  "fromSec": 2.4
+ },
+ "note": "Act 4 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 25 Nov 2026. Shots join beat-sheet beats; directed shots carry the brief's names. Cues from 04_shutter_paced_149wpm_even + 2.4 s slate.",
+ "voice": {
+  "id": "NAR-004",
+  "atSec": 2.4,
+  "tailSec": 2.65,
+  "fadeOutSec": 0.03
+ },
+ "audio": [
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 2.28,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 4.25,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 9.52,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 24.1,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+   "atSec": 32.93,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-028",
+   "file": "public/sfx/kit/pixabay/shutter_lock_v1.wav",
+   "atSec": 33.06,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_hum.wav",
+   "atSec": 32.7,
+   "endSec": 60.7,
+   "volumeDb": -30.0,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.4
+  },
+  {
+   "id": "SFX-028",
+   "file": "public/sfx/kit/pixabay/glass_clink.wav",
+   "atSec": 38.95,
+   "volumeDb": -26.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 60.7,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 66.07,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 80.22,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/dial_turn.wav",
+   "atSec": 86.85,
+   "volumeDb": -26.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 91.22,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_run.wav",
+   "atSec": 91.0,
+   "endSec": 112.1,
+   "volumeDb": -30.0,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.4
+  },
+  {
+   "id": "SFX-028",
+   "file": "public/sfx/kit/pixabay/glass_clink_wine.wav",
+   "atSec": 98.35,
+   "volumeDb": -26.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 112.1,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 119.1,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-017",
+   "file": "public/sfx/kit/tactile/marker_stroke.wav",
+   "atSec": 140.75,
+   "volumeDb": -27.0
+  },
+  {
+   "id": "SFX-003",
+   "file": "public/sfx/kit/mechanical/shutter_click.wav",
+   "atSec": 146.2,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 154.02,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 164.78,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 177.8,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 189.28,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 194.64,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 199.72,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 205.34,
+   "volumeDb": -21.0
+  }
+ ],
+ "beats": [
+  {
+   "id": "A0_title_room",
+   "beats": [
+    "E01-A4-01"
+   ],
+   "start": 0.0,
+   "end": 2.4,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "VIS-007",
+    "TXT-009",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "LOK-014",
+    "SFX-024",
+    "MUS-007",
+    "MUS-008"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.7,
+    "dolly": 0.025,
+    "fog": 0.15,
+    "startSec": -1,
+    "plaster": 0.12,
+    "dollyFrom": 0.02,
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": -1
+     }
+    ],
+    "title": {
+     "text": "4 · A HOLE IN THE SHUTTER",
+     "atSec": 0.2,
+     "untilSec": 1.85,
+     "x": 620,
+     "y": 560
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-01",
+     0.0,
+     2.4
+    ]
+   ],
+   "transitionIn": "cut"
+  },
+  {
+   "id": "A_rail_1666",
+   "beats": [
+    "E01-A4-02",
+    "E01-A4-03",
+    "E01-A4-04"
+   ],
+   "start": 2.4,
+   "end": 9.62,
+   "component": "TimelineRail",
+   "assets": [
+    "VIS-055",
+    "VIS-060",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "SFX-026",
+    "MUS-007",
+    "SRC-049",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "from": 1640,
+    "to": 1790,
+    "pxPerYear": 9,
+    "cams": [
+     {
+      "atSec": 0,
+      "year": 1666
+     },
+     {
+      "atSec": 4.87,
+      "year": 1716,
+      "sec": 1.5
+     }
+    ],
+    "items": [
+     {
+      "year": 1666,
+      "atSec": 1.18,
+      "srcId": "SRC-049",
+      "w": 220,
+      "h": 330,
+      "focus": [
+       0.5,
+       0.3
+      ],
+      "label": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726"
+     },
+     {
+      "year": 1766,
+      "atSec": 5.87,
+      "text": "DALTON BORN",
+      "w": 220,
+      "h": 110
+     }
+    ],
+    "yearLabels": [
+     1666,
+     1766
+    ],
+    "accents": [
+     {
+      "year": 1666,
+      "atSec": 3.29
+     }
+    ],
+    "bracket": {
+     "fromYear": 1666,
+     "toYear": 1766,
+     "atSec": 5.0,
+     "text": "100 YEARS"
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-02",
+     2.4,
+     4.43
+    ],
+    [
+     "E01-A4-03",
+     4.43,
+     6.91
+    ],
+    [
+     "E01-A4-04",
+     6.91,
+     9.62
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "B_p3075_date",
+   "beats": [
+    "E01-A4-05",
+    "E01-A4-06",
+    "E01-A4-07",
+    "E01-A4-08",
+    "E01-A4-09"
+   ],
+   "start": 9.62,
+   "end": 24.25,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-015",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-007",
+    "TEX-008",
+    "SRC-058",
+    "TRN-001",
+    "SFX-020"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3075.jpg",
+    "imgSize": [
+     1554,
+     2466
+    ],
+    "crop": [
+     40,
+     1040,
+     1480,
+     1411
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3075",
+    "highlights": [
+     {
+      "box": [
+       855,
+       2128,
+       632,
+       62
+      ],
+      "atSec": 1.59,
+      "dimAtSec": 8.95,
+      "dimTo": 0.45
+     },
+     {
+      "box": [
+       64,
+       2171,
+       124,
+       78
+      ],
+      "atSec": 1.59,
+      "dimAtSec": 8.95,
+      "dimTo": 0.45
+     },
+     {
+      "box": [
+       1328,
+       1846,
+       155,
+       66
+      ],
+      "atSec": 3.71,
+      "dimAtSec": 8.95,
+      "dimTo": 0.45
+     },
+     {
+      "box": [
+       120,
+       1901,
+       135,
+       64
+      ],
+      "atSec": 3.71,
+      "dimAtSec": 8.95,
+      "dimTo": 0.45
+     },
+     {
+      "box": [
+       1290,
+       2229,
+       198,
+       70
+      ],
+      "atSec": 8.95
+     },
+     {
+      "box": [
+       62,
+       2284,
+       385,
+       64
+      ],
+      "atSec": 8.95
+     },
+     {
+      "box": [
+       450,
+       2284,
+       1048,
+       64
+      ],
+      "atSec": 11.26
+     },
+     {
+      "box": [
+       1326,
+       2349,
+       165,
+       60
+      ],
+      "atSec": 11.26
+     }
+    ],
+    "quote": "in the beginning of the Year 1666",
+    "quoteAtSec": 1.59,
+    "notes": [
+     {
+      "text": "AGE 23",
+      "atSec": 6.09,
+      "accent": true
+     }
+    ],
+    "callout": {
+     "atSec": 8.95,
+     "dim": 0.45
+    },
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-05",
+     9.62,
+     12.67
+    ],
+    [
+     "E01-A4-06",
+     12.67,
+     14.8
+    ],
+    [
+     "E01-A4-07",
+     14.8,
+     18.29
+    ],
+    [
+     "E01-A4-08",
+     18.29,
+     21.54
+    ],
+    [
+     "E01-A4-09",
+     21.54,
+     24.25
+    ]
+   ],
+   "transitionIn": "match",
+   "focus": [
+    188,
+    812
+   ],
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "C_p3076_chamber",
+   "beats": [
+    "E01-A4-10",
+    "E01-A4-11",
+    "E01-A4-12"
+   ],
+   "start": 24.25,
+   "end": 33.06,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-004",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-012",
+    "MUS-008",
+    "SRC-058",
+    "TRN-001",
+    "SFX-020"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3076.jpg",
+    "imgSize": [
+     1566,
+     2342
+    ],
+    "crop": [
+     40,
+     120,
+     1480,
+     1411
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3076",
+    "highlights": [
+     {
+      "box": [
+       68,
+       126,
+       200,
+       64
+      ],
+      "atSec": -1
+     },
+     {
+      "box": [
+       740,
+       126,
+       665,
+       64
+      ],
+      "atSec": 4.37
+     },
+     {
+      "box": [
+       66,
+       186,
+       945,
+       62
+      ],
+      "atSec": 6.06
+     }
+    ],
+    "quote": "",
+    "quoteMarks": false
+   },
+   "beatTimes": [
+    [
+     "E01-A4-10",
+     24.25,
+     27.7
+    ],
+    [
+     "E01-A4-11",
+     27.7,
+     30.05
+    ],
+    [
+     "E01-A4-12",
+     30.05,
+     33.06
+    ]
+   ],
+   "transitionIn": "canvas",
+   "transition": {
+    "dir": "right",
+    "pull": 0.86
+   },
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "D1_shutter_room",
+   "beats": [
+    "E01-A4-13",
+    "E01-A4-14",
+    "E01-A4-15",
+    "E01-A4-16"
+   ],
+   "start": 33.06,
+   "end": 44.9,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "LOK-014",
+    "SFX-028",
+    "SFX-022",
+    "MUS-012",
+    "TEX-009",
+    "TRN-001"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0.15,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": 0.64
+      }
+     ]
+    },
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": -1
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "r": 16,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -600,
+       -60,
+       950
+      ],
+      "atSec": 1.65,
+      "drawSec": 0.9,
+      "width": 14
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -600,
+       -60,
+       950
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": 4.71
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "x0": 150,
+      "x1": 650,
+      "y": -40,
+      "height": 100,
+      "z": 2000,
+      "coneAtSec": 7.23,
+      "atSec": 10.19
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-13",
+     33.06,
+     36.56
+    ],
+    [
+     "E01-A4-14",
+     36.56,
+     39.26
+    ],
+    [
+     "E01-A4-15",
+     39.26,
+     41.47
+    ],
+    [
+     "E01-A4-16",
+     41.47,
+     44.9
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    375,
+    184
+   ]
+  },
+  {
+   "id": "D2_far_wall",
+   "beats": [
+    "E01-A4-17",
+    "E01-A4-18",
+    "E01-A4-19",
+    "E01-A4-20",
+    "E01-A4-21",
+    "E01-A4-22",
+    "E01-A4-23"
+   ],
+   "start": 44.9,
+   "end": 60.78,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SFX-022",
+    "MUS-012",
+    "TEX-009",
+    "SFX-024"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 400,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": -1
+      }
+     ],
+     "untilSec": 15.4
+    },
+    "objects": [
+     {
+      "kind": "fan",
+      "from": [
+       -1400,
+       -100,
+       -250
+      ],
+      "x0": -582,
+      "x1": 418,
+      "y": 0,
+      "height": 200,
+      "z": 400,
+      "atSec": -1,
+      "coneAtSec": -1,
+      "dimSec": 7.3,
+      "dimTo": 0.45
+     },
+     {
+      "kind": "label",
+      "at": [
+       368,
+       100,
+       400
+      ],
+      "dy": 30,
+      "text": "RED",
+      "atSec": 0.54,
+      "untilSec": 6.84
+     },
+     {
+      "kind": "label",
+      "at": [
+       -532,
+       100,
+       400
+      ],
+      "dy": 30,
+      "text": "VIOLET",
+      "atSec": 1.72,
+      "untilSec": 6.84
+     },
+     {
+      "kind": "label",
+      "at": [
+       -82,
+       100,
+       400
+      ],
+      "dy": 30,
+      "text": "EVERYTHING IN BETWEEN",
+      "atSec": 3.1,
+      "untilSec": 6.84
+     },
+     {
+      "kind": "ring",
+      "at": [
+       -482,
+       0,
+       400
+      ],
+      "r": 100,
+      "dashed": true,
+      "atSec": 10.36,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "label",
+      "at": [
+       -482,
+       100,
+       400
+      ],
+      "dy": 30,
+      "text": "ROUND, LIKE THE HOLE",
+      "atSec": 10.76,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "ring",
+      "at": [
+       -282,
+       0,
+       400
+      ],
+      "r": 100,
+      "dashed": true,
+      "atSec": 14.02,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "ring",
+      "at": [
+       -82,
+       0,
+       400
+      ],
+      "r": 100,
+      "dashed": true,
+      "atSec": 14.17,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "ring",
+      "at": [
+       118,
+       0,
+       400
+      ],
+      "r": 100,
+      "dashed": true,
+      "atSec": 14.32,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "ring",
+      "at": [
+       318,
+       0,
+       400
+      ],
+      "r": 100,
+      "dashed": true,
+      "atSec": 14.47,
+      "untilSec": 15.5
+     },
+     {
+      "kind": "label",
+      "at": [
+       507,
+       0,
+       400
+      ],
+      "dy": -20,
+      "text": "× 5",
+      "atSec": 14.7,
+      "untilSec": 15.5
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-17",
+     44.9,
+     47.56
+    ],
+    [
+     "E01-A4-18",
+     47.56,
+     49.59
+    ],
+    [
+     "E01-A4-19",
+     49.59,
+     51.74
+    ],
+    [
+     "E01-A4-20",
+     51.74,
+     53.88
+    ],
+    [
+     "E01-A4-21",
+     53.88,
+     56.04
+    ],
+    [
+     "E01-A4-22",
+     56.04,
+     58.54
+    ],
+    [
+     "E01-A4-23",
+     58.54,
+     60.78
+    ]
+   ],
+   "transitionIn": "cut"
+  },
+  {
+   "id": "E_p3076_oblong",
+   "beats": [
+    "E01-A4-24",
+    "E01-A4-25"
+   ],
+   "start": 60.78,
+   "end": 66.17,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-012",
+    "SRC-058",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3076.jpg",
+    "imgSize": [
+     1566,
+     2342
+    ],
+    "crop": [
+     40,
+     120,
+     1480,
+     1411
+    ],
+    "side": "right",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3076",
+    "highlights": [
+     {
+      "box": [
+       68,
+       516,
+       1414,
+       62
+      ],
+      "atSec": 0.52
+     },
+     {
+      "box": [
+       66,
+       573,
+       950,
+       62
+      ],
+      "atSec": 2.64
+     }
+    ],
+    "quote": "which, according to the received laws of Refraction, I expected should have been circular",
+    "quoteAtSec": 2.95
+   },
+   "beatTimes": [
+    [
+     "E01-A4-24",
+     60.78,
+     63.56
+    ],
+    [
+     "E01-A4-25",
+     63.56,
+     66.17
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "F_common_view",
+   "beats": [
+    "E01-A4-26",
+    "E01-A4-27",
+    "E01-A4-28",
+    "E01-A4-29",
+    "E01-A4-30"
+   ],
+   "start": 66.17,
+   "end": 80.32,
+   "component": "KeywordPanel",
+   "assets": [
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "MUS-012",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "panel": {
+     "size": 64,
+     "chips": [
+      {
+       "text": "something simple",
+       "atSec": 3.0,
+       "x": 560,
+       "y": 250,
+       "dimSec": 11.77
+      },
+      {
+       "text": "white light",
+       "atSec": 5.03,
+       "x": 560,
+       "y": 390,
+       "dimSec": 11.77
+      },
+      {
+       "text": "is pure",
+       "atSec": 5.83,
+       "x": 960,
+       "y": 390,
+       "dimSec": 11.77
+      },
+      {
+       "text": "the prism",
+       "atSec": 7.49,
+       "x": 560,
+       "y": 530,
+       "dimSec": 11.77
+      },
+      {
+       "text": "changes it",
+       "atSec": 7.73,
+       "x": 900,
+       "y": 530,
+       "dimSec": 11.77
+      },
+      {
+       "text": "makes the colours",
+       "atSec": 9.51,
+       "x": 560,
+       "y": 670,
+       "dimSec": 11.77
+      },
+      {
+       "text": "Newton",
+       "atSec": 11.53,
+       "x": 560,
+       "y": 830
+      },
+      {
+       "text": "the other way round",
+       "atSec": 12.63,
+       "x": 800,
+       "y": 830,
+       "accent": true
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-26",
+     66.17,
+     68.45
+    ],
+    [
+     "E01-A4-27",
+     68.45,
+     70.66
+    ],
+    [
+     "E01-A4-28",
+     70.66,
+     73.9
+    ],
+    [
+     "E01-A4-29",
+     73.9,
+     77.05
+    ],
+    [
+     "E01-A4-30",
+     77.05,
+     80.32
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "G_p3078_crucis",
+   "beats": [
+    "E01-A4-31",
+    "E01-A4-32",
+    "E01-A4-33"
+   ],
+   "start": 80.32,
+   "end": 86.8,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-012",
+    "SRC-058",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3078.jpg",
+    "imgSize": [
+     1567,
+     2351
+    ],
+    "crop": [
+     55,
+     968,
+     1460,
+     1383
+    ],
+    "side": "right",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3078",
+    "highlights": [
+     {
+      "box": [
+       88,
+       1636,
+       460,
+       68
+      ],
+      "atSec": 2.93
+     }
+    ],
+    "quote": "Experimentum Crucis",
+    "quoteAtSec": 4.81,
+    "quoteMarks": false
+   },
+   "beatTimes": [
+    [
+     "E01-A4-31",
+     80.32,
+     82.61
+    ],
+    [
+     "E01-A4-32",
+     82.61,
+     84.77
+    ],
+    [
+     "E01-A4-33",
+     84.77,
+     86.8
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "H_fig18",
+   "beats": [
+    "E01-A4-34",
+    "E01-A4-35"
+   ],
+   "start": 86.8,
+   "end": 91.32,
+   "component": "SpotlightIsolator",
+   "assets": [
+    "VIS-005",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-017",
+    "LOK-009",
+    "LOK-010",
+    "SFX-019",
+    "MUS-012",
+    "SRC-059",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-059",
+    "imgSize": [
+     2423,
+     3071
+    ],
+    "crop": [
+     0,
+     380,
+     2423,
+     1363
+    ],
+    "target": [
+     450,
+     770,
+     1720,
+     610
+    ],
+    "label": "NEWTON'S DIAGRAM · OPTICKS, 1704",
+    "atSec": 0.65
+   },
+   "beatTimes": [
+    [
+     "E01-A4-34",
+     86.8,
+     89.25
+    ],
+    [
+     "E01-A4-35",
+     89.25,
+     91.32
+    ]
+   ],
+   "transitionIn": "lens",
+   "transition": {
+    "durSec": 0.7,
+    "blur": 14
+   }
+  },
+  {
+   "id": "I1_board_room",
+   "beats": [
+    "E01-A4-36",
+    "E01-A4-37",
+    "E01-A4-38"
+   ],
+   "start": 91.32,
+   "end": 98.73,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "TRN-015",
+    "LOK-009",
+    "LOK-010",
+    "SFX-022",
+    "MUS-012",
+    "TEX-009",
+    "TRN-001",
+    "SFX-028"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": 0.68
+      }
+     ]
+    },
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": -1
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "r": 16,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -600,
+       -60,
+       950
+      ],
+      "atSec": -1,
+      "width": 14
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -600,
+       -60,
+       950
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1
+     },
+     {
+      "kind": "board",
+      "at": [
+       -450,
+       120,
+       1200
+      ],
+      "w": 600,
+      "h": 520,
+      "atSec": -1
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "x0": -422,
+      "x1": -303,
+      "y": -55,
+      "height": 40,
+      "z": 1200,
+      "atSec": -1,
+      "coneAtSec": -1
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -398,
+       -55,
+       1200
+      ],
+      "r": 14,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -398,
+       -55,
+       1200
+      ],
+      "to": [
+       -34,
+       -46,
+       1650
+      ],
+      "atSec": 1.33,
+      "drawSec": 0.8,
+      "width": 8,
+      "color": "#3A6BFF"
+     },
+     {
+      "kind": "label",
+      "at": [
+       -114,
+       60,
+       1400
+      ],
+      "dy": 30,
+      "text": "BLUE",
+      "atSec": 3.13
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -34,
+       -46,
+       1650
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": 6.18
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-36",
+     91.32,
+     93.43
+    ],
+    [
+     "E01-A4-37",
+     93.43,
+     96.64
+    ],
+    [
+     "E01-A4-38",
+     96.64,
+     98.73
+    ]
+   ],
+   "transitionIn": "match",
+   "focus": [
+    740,
+    594
+   ]
+  },
+  {
+   "id": "I2_second_prism",
+   "beats": [
+    "E01-A4-39",
+    "E01-A4-40",
+    "E01-A4-41",
+    "E01-A4-42",
+    "E01-A4-43"
+   ],
+   "start": 98.73,
+   "end": 112.19,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "SFX-022",
+    "MUS-012",
+    "TEX-009",
+    "MUS-010",
+    "SFX-024"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 1200,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": -1
+      }
+     ],
+     "untilSec": 12.97
+    },
+    "objects": [
+     {
+      "kind": "beam",
+      "from": [
+       -1850,
+       -120,
+       -250
+      ],
+      "to": [
+       -600,
+       -60,
+       150
+      ],
+      "atSec": -1,
+      "width": 14
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -600,
+       -60,
+       150
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1,
+      "turn": {
+       "atSec": 11.89,
+       "deg": 4
+      }
+     },
+     {
+      "kind": "board",
+      "at": [
+       -450,
+       120,
+       400
+      ],
+      "w": 600,
+      "h": 520,
+      "atSec": -1
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -600,
+       -60,
+       150
+      ],
+      "x0": -422,
+      "x1": -303,
+      "y": -55,
+      "height": 40,
+      "z": 400,
+      "atSec": -1,
+      "coneAtSec": -1,
+      "shift": {
+       "atSec": 11.89,
+       "dx": -75
+      }
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -398,
+       -55,
+       400
+      ],
+      "r": 14,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -398,
+       -55,
+       400
+      ],
+      "to": [
+       -34,
+       -46,
+       850
+      ],
+      "atSec": -1,
+      "width": 8,
+      "color": "#3A6BFF",
+      "untilSec": 11.89
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -34,
+       -46,
+       850
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1
+     },
+     {
+      "kind": "label",
+      "at": [
+       701,
+       -360,
+       1200
+      ],
+      "dy": 0,
+      "text": "IF THE GLASS MAKES THE COLOURS",
+      "atSec": 0.91,
+      "untilSec": 6.0
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -34,
+       -46,
+       850
+      ],
+      "x0": 169,
+      "x1": 569,
+      "y": -339,
+      "height": 120,
+      "z": 1200,
+      "ghost": true,
+      "atSec": 3.69,
+      "untilSec": 6.2
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -34,
+       -46,
+       850
+      ],
+      "to": [
+       249,
+       -339,
+       1200
+      ],
+      "atSec": 8.04,
+      "drawSec": 0.9,
+      "width": 8,
+      "color": "#3A6BFF",
+      "untilSec": 11.89
+     },
+     {
+      "kind": "patch",
+      "at": [
+       249,
+       -339,
+       1200
+      ],
+      "w": 46,
+      "h": 30,
+      "color": "#3A6BFF",
+      "atSec": 8.37,
+      "untilSec": 11.89
+     },
+     {
+      "kind": "label",
+      "at": [
+       -34,
+       106,
+       850
+      ],
+      "dy": 0,
+      "text": "ITS OWN FIXED AMOUNT",
+      "atSec": 9.68,
+      "untilSec": 12.97
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -398,
+       -55,
+       400
+      ],
+      "to": [
+       -34,
+       -46,
+       850
+      ],
+      "atSec": 11.97,
+      "drawSec": 0.6,
+      "width": 8,
+      "color": "#FF3B30"
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -34,
+       -46,
+       850
+      ],
+      "to": [
+       249,
+       -234,
+       1200
+      ],
+      "atSec": 12.32,
+      "drawSec": 0.6,
+      "width": 8,
+      "color": "#FF3B30"
+     },
+     {
+      "kind": "patch",
+      "at": [
+       249,
+       -234,
+       1200
+      ],
+      "w": 46,
+      "h": 30,
+      "color": "#FF3B30",
+      "atSec": 12.82
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-39",
+     98.73,
+     100.77
+    ],
+    [
+     "E01-A4-40",
+     100.77,
+     104.23
+    ],
+    [
+     "E01-A4-41",
+     104.23,
+     107.63
+    ],
+    [
+     "E01-A4-42",
+     107.63,
+     109.73
+    ],
+    [
+     "E01-A4-43",
+     109.73,
+     112.19
+    ]
+   ],
+   "transitionIn": "cut"
+  },
+  {
+   "id": "J_p3082_obstinately",
+   "beats": [
+    "E01-A4-44",
+    "E01-A4-45",
+    "E01-A4-46"
+   ],
+   "start": 112.19,
+   "end": 119.2,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-012",
+    "SRC-058",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3082.jpg",
+    "imgSize": [
+     1549,
+     2355
+    ],
+    "crop": [
+     40,
+     60,
+     1480,
+     1411
+    ],
+    "side": "right",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3082",
+    "highlights": [
+     {
+      "box": [
+       60,
+       132,
+       745,
+       66
+      ],
+      "atSec": 1.3
+     },
+     {
+      "box": [
+       1228,
+       132,
+       245,
+       66
+      ],
+      "atSec": 2.82
+     },
+     {
+      "box": [
+       60,
+       189,
+       470,
+       62
+      ],
+      "atSec": 2.82
+     },
+     {
+      "box": [
+       528,
+       189,
+       944,
+       62
+      ],
+      "atSec": 4.26
+     },
+     {
+      "box": [
+       60,
+       244,
+       265,
+       62
+      ],
+      "atSec": 4.26
+     }
+    ],
+    "quote": "it hath afterwards obstinately retained its colour, notwithstanding my utmost endeavours to change it.",
+    "quoteAtSec": 2.82
+   },
+   "beatTimes": [
+    [
+     "E01-A4-44",
+     112.19,
+     114.79
+    ],
+    [
+     "E01-A4-45",
+     114.79,
+     117.16
+    ],
+    [
+     "E01-A4-46",
+     117.16,
+     119.2
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "L_sorting_room",
+   "beats": [
+    "E01-A4-47",
+    "E01-A4-48",
+    "E01-A4-49",
+    "E01-A4-50",
+    "E01-A4-51"
+   ],
+   "start": 119.2,
+   "end": 131.63,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "TXT-024",
+    "MOT-002",
+    "MOT-013",
+    "TRN-012",
+    "LOK-009",
+    "LOK-010",
+    "MUS-013",
+    "MUS-008",
+    "TEX-009",
+    "TRN-001",
+    "VIS-021"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": 0.7
+      }
+     ]
+    },
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": -1
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "r": 16,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -600,
+       -60,
+       950
+      ],
+      "atSec": -1,
+      "width": 14,
+      "dimSec": 4.95,
+      "dimTo": 0.3
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -600,
+       -60,
+       950
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "x0": 150,
+      "x1": 650,
+      "y": -40,
+      "height": 100,
+      "z": 2000,
+      "atSec": -1
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -600,
+       -60,
+       950
+      ],
+      "atSec": 4.95,
+      "count": 12,
+      "speed": 260,
+      "jitter": 6,
+      "size": 5,
+      "streak": 14,
+      "colors": [
+       "#FF3B30",
+       "#FF8C1A",
+       "#FFD60A",
+       "#30D158",
+       "#2F6BFF",
+       "#7A3CFF"
+      ]
+     },
+     {
+      "kind": "label",
+      "at": [
+       -852,
+       -238,
+       775
+      ],
+      "dy": 0,
+      "text": "KINDS OF RAY",
+      "atSec": 4.95,
+      "untilSec": 11.6
+     },
+     {
+      "kind": "label",
+      "at": [
+       -852,
+       153,
+       775
+      ],
+      "dy": 0,
+      "text": "MIXED TOGETHER",
+      "atSec": 8.01,
+      "untilSec": 10.2
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       566.6666666666667,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#FF3B30",
+      "colors": [
+       "#FF3B30"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       483.3333333333333,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#FF8C1A",
+      "colors": [
+       "#FF8C1A"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       441.6666666666667,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#FFD60A",
+      "colors": [
+       "#FFD60A"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       366.66666666666663,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#30D158",
+      "colors": [
+       "#30D158"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       266.6666666666667,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#2F6BFF",
+      "colors": [
+       "#2F6BFF"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "to": [
+       183.33333333333334,
+       -40,
+       2000
+      ],
+      "atSec": 10.92,
+      "count": 4,
+      "speed": 380,
+      "jitter": 3,
+      "size": 5,
+      "streak": 14,
+      "color": "#7A3CFF",
+      "colors": [
+       "#7A3CFF"
+      ]
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-47",
+     119.2,
+     121.41
+    ],
+    [
+     "E01-A4-48",
+     121.41,
+     123.6
+    ],
+    [
+     "E01-A4-49",
+     123.6,
+     126.47
+    ],
+    [
+     "E01-A4-50",
+     126.47,
+     128.85
+    ],
+    [
+     "E01-A4-51",
+     128.85,
+     131.63
+    ]
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 64,
+      "untilSec": 11.6,
+      "chips": [
+       {
+        "text": "making",
+        "atSec": 1.65,
+        "x": 1000,
+        "y": 140,
+        "strikeSec": 2.21
+       },
+       {
+        "text": "sorting",
+        "atSec": 3.23,
+        "x": 1340,
+        "y": 140,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "block",
+   "transition": {
+    "color": "#FFF6DD",
+    "side": "left"
+   }
+  },
+  {
+   "id": "M_lens",
+   "beats": [
+    "E01-A4-52",
+    "E01-A4-53",
+    "E01-A4-54",
+    "E01-A4-55"
+   ],
+   "start": 131.63,
+   "end": 140.72,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-013",
+    "TEX-009",
+    "VIS-021",
+    "SFX-017"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 1400,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": -1
+      }
+     ],
+     "untilSec": 8.67
+    },
+    "objects": [
+     {
+      "kind": "beam",
+      "from": [
+       -1850,
+       -120,
+       -250
+      ],
+      "to": [
+       -900,
+       -60,
+       300
+      ],
+      "atSec": -1,
+      "width": 14
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -900,
+       -60,
+       300
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -900,
+       -60,
+       300
+      ],
+      "x0": 400,
+      "x1": 900,
+      "y": -20,
+      "height": 60,
+      "z": 1400,
+      "atSec": -1,
+      "coneAtSec": -1,
+      "untilSec": 3.57
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -900,
+       -60,
+       300
+      ],
+      "x0": -309,
+      "x1": -82,
+      "y": -51,
+      "height": 50,
+      "z": 800,
+      "atSec": 3.11,
+      "coneAtSec": 3.11
+     },
+     {
+      "kind": "lens",
+      "at": [
+       -200,
+       -40,
+       800
+      ],
+      "w": 80,
+      "h": 500,
+      "atSec": 3.11
+     },
+     {
+      "kind": "label",
+      "at": [
+       -200,
+       260,
+       800
+      ],
+      "dy": 0,
+      "text": "LENS",
+      "atSec": 5.28,
+      "untilSec": 8.67
+     },
+     {
+      "kind": "patch",
+      "at": [
+       600,
+       -20,
+       1400
+      ],
+      "w": 70,
+      "h": 46,
+      "color": "#FFF6DD",
+      "atSec": 7.94
+     },
+     {
+      "kind": "label",
+      "at": [
+       600,
+       100,
+       1400
+      ],
+      "dy": 30,
+      "text": "WHITE AGAIN",
+      "atSec": 8.18,
+      "untilSec": 8.67
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -119.83333333333334,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#FF3B30",
+      "colors": [
+       "#FF3B30"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -157.66666666666666,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#FF8C1A",
+      "colors": [
+       "#FF8C1A"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -176.58333333333334,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#FFD60A",
+      "colors": [
+       "#FFD60A"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -210.63333333333333,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#30D158",
+      "colors": [
+       "#30D158"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -256.0333333333333,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#2F6BFF",
+      "colors": [
+       "#2F6BFF"
+      ]
+     },
+     {
+      "kind": "rays",
+      "from": [
+       -293.8666666666667,
+       -51,
+       800
+      ],
+      "to": [
+       600,
+       -20,
+       1400
+      ],
+      "atSec": 4.01,
+      "count": 5,
+      "speed": 300,
+      "jitter": 2,
+      "size": 5,
+      "color": "#7A3CFF",
+      "colors": [
+       "#7A3CFF"
+      ]
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-52",
+     131.63,
+     134.13
+    ],
+    [
+     "E01-A4-53",
+     134.13,
+     136.53
+    ],
+    [
+     "E01-A4-54",
+     136.53,
+     138.65
+    ],
+    [
+     "E01-A4-55",
+     138.65,
+     140.72
+    ]
+   ],
+   "transitionIn": "cut"
+  },
+  {
+   "id": "N_p3083_white",
+   "beats": [
+    "E01-A4-56",
+    "E01-A4-57"
+   ],
+   "start": 140.72,
+   "end": 145.73,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-002",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-013",
+    "SRC-058",
+    "TRN-001"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3083.jpg",
+    "imgSize": [
+     1555,
+     2355
+    ],
+    "crop": [
+     40,
+     400,
+     1480,
+     1411
+    ],
+    "side": "right",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3083",
+    "highlights": [
+     {
+      "box": [
+       1145,
+       678,
+       330,
+       62
+      ],
+      "atSec": 0.54
+     },
+     {
+      "box": [
+       70,
+       735,
+       862,
+       66
+      ],
+      "atSec": 0.54
+     },
+     {
+      "box": [
+       262,
+       845,
+       1032,
+       66
+      ],
+      "atSec": 2.26
+     }
+    ],
+    "quote": "reproduced light, intirely and perfectly white",
+    "quoteAtSec": 2.3
+   },
+   "beatTimes": [
+    [
+     "E01-A4-56",
+     140.72,
+     142.81
+    ],
+    [
+     "E01-A4-57",
+     142.81,
+     145.73
+    ]
+   ],
+   "transitionIn": "draft",
+   "transition": {
+    "angle": 8,
+    "dir": "left"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3083.jpg",
+    "size": [
+     1555,
+     2355
+    ],
+    "focus": [
+     0.5,
+     0.35
+    ]
+   }
+  },
+  {
+   "id": "O_glass_today",
+   "beats": [
+    "E01-A4-58",
+    "E01-A4-59",
+    "E01-A4-60"
+   ],
+   "start": 145.73,
+   "end": 154.12,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "TXT-011",
+    "MOT-001",
+    "TRN-017",
+    "LOK-009",
+    "LOK-010",
+    "SFX-003",
+    "MUS-013",
+    "SRC-062",
+    "TRN-001",
+    "TXT-024",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-062",
+    "kind": "image",
+    "size": [
+     2560,
+     1834
+    ],
+    "crop": [
+     0,
+     200,
+     2560,
+     1440
+    ],
+    "push": 0.02,
+    "tag": {
+     "parts": [
+      {
+       "text": "PHOTO TODAY",
+       "atSec": 1.31
+      },
+      {
+       "text": " · SUNLIGHT THROUGH A GLASS OF WATER · R. & S. HOLLOS, EXSTROM LABORATORIES · CC BY 4.0",
+       "atSec": 3.89
+      }
+     ],
+     "untilSec": 7.87
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-58",
+     145.73,
+     148.7
+    ],
+    [
+     "E01-A4-59",
+     148.7,
+     150.81
+    ],
+    [
+     "E01-A4-60",
+     150.81,
+     154.12
+    ]
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "the first half",
+        "atSec": 6.37,
+        "x": 1300,
+        "y": 120,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "lens",
+   "transition": {
+    "durSec": 0.7,
+    "blur": 14
+   }
+  },
+  {
+   "id": "P_p3081_quote",
+   "beats": [
+    "E01-A4-61",
+    "E01-A4-62",
+    "E01-A4-63",
+    "E01-A4-64",
+    "E01-A4-65"
+   ],
+   "start": 154.12,
+   "end": 164.88,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-013",
+    "TEX-008",
+    "SRC-058",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3081.jpg",
+    "imgSize": [
+     1564,
+     2352
+    ],
+    "crop": [
+     40,
+     700,
+     1480,
+     1411
+    ],
+    "side": "right",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3081",
+    "highlights": [
+     {
+      "box": [
+       362,
+       1018,
+       845,
+       64
+      ],
+      "atSec": 2.8
+     },
+     {
+      "box": [
+       1205,
+       1018,
+       297,
+       64
+      ],
+      "atSec": 6.67
+     },
+     {
+      "box": [
+       86,
+       1074,
+       980,
+       63
+      ],
+      "atSec": 7.39
+     }
+    ],
+    "quote": "Colours are not Qualifications of Light, derived from Refractions, or Reflections of natural Bodies",
+    "quoteAtSec": 2.8,
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-61",
+     154.12,
+     156.12
+    ],
+    [
+     "E01-A4-62",
+     156.12,
+     158.2
+    ],
+    [
+     "E01-A4-63",
+     158.2,
+     160.25
+    ],
+    [
+     "E01-A4-64",
+     160.25,
+     162.51
+    ],
+    [
+     "E01-A4-65",
+     162.51,
+     164.88
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "Q_plain_version",
+   "beats": [
+    "E01-A4-66",
+    "E01-A4-67",
+    "E01-A4-68",
+    "E01-A4-69",
+    "E01-A4-70"
+   ],
+   "start": 164.88,
+   "end": 177.9,
+   "component": "KeywordPanel",
+   "assets": [
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-013",
+    "SRC-058",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "panel": {
+     "size": 64,
+     "chips": [
+      {
+       "text": "glass",
+       "atSec": 2.42,
+       "x": 900,
+       "y": 300
+      },
+      {
+       "text": "doesn't create colour",
+       "atSec": 2.78,
+       "x": 1090,
+       "y": 300,
+       "strikeSec": 3.32
+      },
+      {
+       "text": "light bouncing off things",
+       "atSec": 5.04,
+       "x": 900,
+       "y": 440
+      },
+      {
+       "text": "creates it",
+       "atSec": 5.72,
+       "x": 900,
+       "y": 540,
+       "strikeSec": 6.42
+      },
+      {
+       "text": "each kind of ray",
+       "atSec": 7.85,
+       "x": 900,
+       "y": 660
+      },
+      {
+       "text": "fixed",
+       "atSec": 9.29,
+       "x": 1430,
+       "y": 660,
+       "accent": true
+      },
+      {
+       "text": "which colour you'll see",
+       "atSec": 11.45,
+       "x": 900,
+       "y": 800
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "NEWTON'S LETTER · 1672 · P. 3081",
+      "atSec": 0.62,
+      "x": 1800,
+      "y": 980,
+      "align": "right",
+      "size": 22
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-66",
+     164.88,
+     167.66
+    ],
+    [
+     "E01-A4-67",
+     167.66,
+     169.92
+    ],
+    [
+     "E01-A4-68",
+     169.92,
+     171.94
+    ],
+    [
+     "E01-A4-69",
+     171.94,
+     174.94
+    ],
+    [
+     "E01-A4-70",
+     174.94,
+     177.9
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "dark"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3081.jpg",
+    "size": [
+     1564,
+     2352
+    ],
+    "focus": [
+     0.5,
+     0.45
+    ],
+    "brightness": 0.38
+   }
+  },
+  {
+   "id": "R_p3075_masthead",
+   "beats": [
+    "E01-A4-71",
+    "E01-A4-72",
+    "E01-A4-73",
+    "E01-A4-74"
+   ],
+   "start": 177.9,
+   "end": 189.38,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-014",
+    "MUS-008",
+    "TEX-008",
+    "SRC-058",
+    "TXT-011",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3075.jpg",
+    "imgSize": [
+     1554,
+     2466
+    ],
+    "crop": [
+     0,
+     40,
+     1554,
+     1930
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3075",
+    "highlights": [
+     {
+      "box": [
+       990,
+       1846,
+       492,
+       66
+      ],
+      "atSec": 2.17
+     },
+     {
+      "box": [
+       120,
+       1901,
+       135,
+       64
+      ],
+      "atSec": 2.17
+     },
+     {
+      "box": [
+       60,
+       175,
+       1412,
+       120
+      ],
+      "atSec": 6.85
+     },
+     {
+      "box": [
+       310,
+       340,
+       942,
+       70
+      ],
+      "atSec": 6.85
+     },
+     {
+      "box": [
+       410,
+       1901,
+       795,
+       64
+      ],
+      "atSec": 8.73
+     }
+    ],
+    "quote": "",
+    "quoteMarks": false,
+    "notes": [
+     {
+      "text": "CAMBRIDGE · FEB 1672",
+      "atSec": 3.21
+     }
+    ],
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-71",
+     177.9,
+     180.76
+    ],
+    [
+     "E01-A4-72",
+     180.76,
+     183.25
+    ],
+    [
+     "E01-A4-73",
+     183.25,
+     186.19
+    ],
+    [
+     "E01-A4-74",
+     186.19,
+     189.38
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "S1_hooke",
+   "beats": [
+    "E01-A4-75",
+    "E01-A4-76",
+    "E01-A4-77",
+    "E01-A4-78"
+   ],
+   "start": 189.38,
+   "end": 199.81,
+   "component": "KeywordPanel",
+   "assets": [
+    "VIS-060",
+    "TXT-010",
+    "TXT-024",
+    "MOT-002",
+    "MOT-013",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-014",
+    "SRC-060",
+    "TRN-001",
+    "SFX-026",
+    "SFX-024"
+   ],
+   "props": {
+    "panel": {
+     "size": 64,
+     "chips": [
+      {
+       "text": "plenty of readers",
+       "atSec": 1.21,
+       "x": 120,
+       "y": 640
+      },
+      {
+       "text": "not all of them",
+       "atSec": 2.62,
+       "x": 120,
+       "y": 760
+      },
+      {
+       "text": "says so",
+       "atSec": 9.12,
+       "x": 120,
+       "y": 880,
+       "accent": true
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A4-75",
+     189.38,
+     191.56
+    ],
+    [
+     "E01-A4-76",
+     191.56,
+     194.75
+    ],
+    [
+     "E01-A4-77",
+     194.75,
+     196.92
+    ],
+    [
+     "E01-A4-78",
+     196.92,
+     199.81
+    ]
+   ],
+   "overlay": {
+    "stickers": [
+     {
+      "srcId": "SRC-060",
+      "size": [
+       1800,
+       2883
+      ],
+      "at": [
+       1380,
+       520
+      ],
+      "w": 420,
+      "atSec": 4.66,
+      "tilt": 2,
+      "edge": 6,
+      "tag": {
+       "text": "ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665\nNO CONFIRMED PORTRAIT OF HOOKE SURVIVES",
+       "untilSec": 9.72
+      }
+     }
+    ]
+   },
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "dark"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-060",
+    "size": [
+     1800,
+     2883
+    ],
+    "focus": [
+     0.5,
+     0.4
+    ],
+    "blurPx": 14
+   }
+  },
+  {
+   "id": "S2_p5084_answer",
+   "beats": [
+    "E01-A4-79",
+    "E01-A4-80"
+   ],
+   "start": 199.81,
+   "end": 205.44,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-014",
+    "SRC-061",
+    "TRN-001",
+    "SFX-024"
+   ],
+   "props": {
+    "srcId": "SRC-061",
+    "imgSize": [
+     1470,
+     2318
+    ],
+    "crop": [
+     30,
+     60,
+     1420,
+     1354
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. NO. 88, 1672 · P. 5084",
+    "highlights": [
+     {
+      "box": [
+       495,
+       127,
+       650,
+       64
+      ],
+      "atSec": 0.8
+     }
+    ],
+    "quote": "Answer to some Considerations upon his Doctrine of Light and Colors",
+    "quoteAtSec": 0.8,
+    "notes": [
+     {
+      "text": "ABOUT 6 YEARS",
+      "atSec": 4.14
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-79",
+     199.81,
+     202.39
+    ],
+    [
+     "E01-A4-80",
+     202.39,
+     205.44
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "T_where_is_it",
+   "beats": [
+    "E01-A4-81",
+    "E01-A4-82",
+    "E01-A4-83",
+    "E01-A4-84"
+   ],
+   "start": 205.44,
+   "end": 215.7,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-010",
+    "MOT-002",
+    "TRN-015",
+    "LOK-009",
+    "LOK-010",
+    "MUS-014",
+    "TEX-009",
+    "TRN-001"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 0.85,
+    "dolly": 0.02,
+    "fog": 0,
+    "startSec": -1,
+    "plaster": 0.12,
+    "tag": {
+     "parts": [
+      {
+       "text": "ILLUSTRATION · NEWTON'S DARKENED ROOM",
+       "atSec": 1.39
+      }
+     ]
+    },
+    "lineFadeSec": 6.62,
+    "lineTo": 0.4,
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": -1
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "r": 16,
+      "atSec": -1
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -600,
+       -60,
+       950
+      ],
+      "atSec": -1,
+      "width": 14
+     },
+     {
+      "kind": "prism",
+      "at": [
+       -600,
+       -60,
+       950
+      ],
+      "size": 160,
+      "apex": "down",
+      "atSec": -1,
+      "dimSec": 4.25,
+      "dimTo": 0.3
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -600,
+       -60,
+       950
+      ],
+      "x0": 150,
+      "x1": 650,
+      "y": -40,
+      "height": 100,
+      "z": 2000,
+      "atSec": -1
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A4-81",
+     205.44,
+     208.24
+    ],
+    [
+     "E01-A4-82",
+     208.24,
+     210.37
+    ],
+    [
+     "E01-A4-83",
+     210.37,
+     212.46
+    ],
+    [
+     "E01-A4-84",
+     212.46,
+     215.7
+    ]
+   ],
+   "transitionIn": "match",
+   "focus": [
+    423,
+    222
+   ]
+  }
+ ]
+}

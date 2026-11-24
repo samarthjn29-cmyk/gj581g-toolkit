@@ -14,7 +14,7 @@ import { sec, SLOW_OUT } from "../motion";
 // act, at most one panel every 15 s; never a whole spoken line; never on the act's impact or over a page's own
 // highlight. TXT-025: a verbatim quote as spoken, word by word, with its source on a mono chip; max 3 an act.
 type XY = readonly [number, number];
-export type KeywordChip = { text: string; atSec: number; x: number; y: number; accent?: boolean; strikeSec?: number };
+export type KeywordChip = { text: string; atSec: number; x: number; y: number; accent?: boolean; strikeSec?: number; dimSec?: number; dimTo?: number }; // dimSec: the chip goes quiet (to dimTo, default 0.35) when the story turns away from it (act 4)
 export type KeywordPanel = { chips: KeywordChip[]; arrows?: { atSec: number; from: XY; to: XY }[]; untilSec?: number; size?: number };
 export type QuotePanel = {
   lines: { x: number; y: number; words: { text: string; atSec: number }[] }[];
@@ -49,7 +49,7 @@ const PanelClip: React.FC<{ out: number; x0: number; x1: number; children: React
     <div style={{ position: "absolute", inset: 0, clipPath: out < 1 ? `inset(-40px -40px -40px ${(x0 + (x1 - x0) * (1 - out)).toFixed(1)}px)` : undefined, opacity: Math.min(1, out * 2.5) }}>{children}</div>
   );
 
-const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: number; tilt: number; strikeSec?: number; out: number; style?: React.CSSProperties }> = ({ text, atSec, accent, size, tilt, strikeSec, out, style }) => {
+const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: number; tilt: number; strikeSec?: number; dimSec?: number; dimTo?: number; out: number; style?: React.CSSProperties }> = ({ text, atSec, accent, size, tilt, strikeSec, dimSec, dimTo, out, style }) => {
   const L = useChipLook();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -71,7 +71,7 @@ const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: numb
         lineHeight: 1.05,
         whiteSpace: "nowrap",
         transform: `translateY(${((1 - p) * 12).toFixed(1)}px) rotate(${tilt}deg)`,
-        opacity: Math.min(1, p * 1.8),
+        opacity: Math.min(1, p * 1.8) * (dimSec === undefined ? 1 : interpolate(frame, [sec(dimSec, fps), sec(dimSec + 0.6, fps)], [1, dimTo ?? 0.35], clamp)),
         boxShadow: "0 6px 16px rgba(0,0,0,0.28)",
         ...style,
       }}
@@ -112,7 +112,7 @@ export const KeywordChips: React.FC<{ panel: KeywordPanel }> = ({ panel }) => {
       })}
       {panel.chips.map((c, i) => (
         <div key={i} style={{ position: "absolute", left: c.x, top: c.y }}>
-          <Chip text={c.text} atSec={c.atSec} accent={c.accent} size={size} tilt={i % 2 ? 1.5 : -1.5} strikeSec={c.strikeSec} out={out} />
+          <Chip text={c.text} atSec={c.atSec} accent={c.accent} size={size} tilt={i % 2 ? 1.5 : -1.5} strikeSec={c.strikeSec} dimSec={c.dimSec} dimTo={c.dimTo} out={out} />
         </div>
       ))}
     </PanelClip>

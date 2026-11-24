@@ -8,7 +8,14 @@ import {
   useVideoConfig,
 } from "remotion";
 import { useTheme } from "../themes";
-import { useAssets, useSource } from "../registry";
+import { useAssets, useSource, useAsset, assetFile } from "../registry";
+
+const PLASTER = "public/assets/textures/texturelabs/Texturelabs_Concrete_202M.jpg";
+// TEX-009 is only checked (and must be Active) when a shot asks for it; props are fixed for a shot's life.
+const usePlaster = (on: boolean) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return on ? assetFile(useAsset("TEX-009"), PLASTER) : "";
+};
 import { particles, type RaySpec } from "../layers/RayParticles";
 import { reveal, rise } from "../motion";
 import { wavelengthRGB } from "../layers/spectrum";
@@ -23,7 +30,12 @@ import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 // the same perspective, so lines and pages line up.
 
 type V3 = [number, number, number];
-export type GridObject =
+// Act 4 builder additions (25 Nov 2026, WCL-E01 act 4 Director's brief): every object may leave (untilSec, 0.5 s fade)
+// and dim (dimSec -> dimTo over 0.6 s); prisms point down (light bends towards the base), turn, and dim to an outline;
+// fans draw their cone first (coneAtSec), shift sideways (shift), and can be a dashed ghost (the prediction);
+// boards (a panel standing in the room), lenses and dashed rings.
+type Life = { untilSec?: number; dimSec?: number; dimTo?: number };
+export type GridObject = (
   | {
       kind: "beam";
       from: V3;
@@ -33,7 +45,7 @@ export type GridObject =
       atSec?: number;
       drawSec?: number;
     }
-  | { kind: "prism"; at: V3; size?: number; atSec?: number }
+  | { kind: "prism"; at: V3; size?: number; atSec?: number; apex?: "up" | "down"; turn?: { atSec: number; deg: number; sec?: number } }
   | {
       kind: "fan";
       from: V3;
@@ -43,6 +55,9 @@ export type GridObject =
       height: number;
       z?: number;
       atSec?: number;
+      coneAtSec?: number; // the cone from the prism draws first; the band lands at atSec
+      ghost?: boolean; // dashed outline, faint fill: a prediction, not a result
+      shift?: { atSec: number; dx: number; sec?: number };
     }
   | { kind: "hole"; at: V3; r?: number; atSec?: number }
   // a closed wooden window shutter on a wall (draw it before its hole); boards as faint vertical lines
@@ -55,7 +70,7 @@ export type GridObject =
       color: string;
       atSec?: number;
     }
-  | { kind: "ring"; at: V3; r: number; atSec?: number }
+  | { kind: "ring"; at: V3; r: number; atSec?: number; dashed?: boolean }
   | {
       kind: "page";
       srcId: string;
@@ -68,7 +83,10 @@ export type GridObject =
     }
   | { kind: "label"; at: V3; text: string; atSec?: number; dy?: number }
   // VIS-021 RayParticles: dots of light travelling from `from` to `to` (one dot per ray), shrinking with depth.
-  | ({ kind: "rays"; from: V3; to: V3; color?: string; trail?: number } & RaySpec); // trail: faint path line opacity (0-0.35)
+  | ({ kind: "rays"; from: V3; to: V3; color?: string; trail?: number; streak?: number } & RaySpec) // trail: faint path line opacity (0-0.35); streak: draw each ray as a short streak of this many px
+  | { kind: "board"; at: V3; w: number; h: number; atSec?: number }
+  | { kind: "lens"; at: V3; w: number; h: number; atSec?: number }
+) & Life;
 
 export type PerspectiveGridProps = {
   variant?: "room" | "floor";
@@ -80,9 +98,14 @@ export type PerspectiveGridProps = {
   vanishY?: number;
   focal?: number;
   dolly?: number; // near-plane scale reached by the end of the shot, 0..0.03 (calm limit)
+  dollyFrom?: number; // near-plane scale at the shot's first frame (0 = 1.00): continue a previous shot's dolly at a join
+  lineFadeSec?: number; // the room's lines fade to lineTo (0.8 s) from this time
+  lineTo?: number;
+  title?: { text: string; atSec?: number; untilSec?: number; x?: number; y?: number }; // a chapter title standing in the room
   lineOpacity?: number;
   nearZ?: number; // how far the floor and walls run in front of the screen plane (negative = towards the viewer)
   dark?: number; // 0..1 darkens the canvas (Newton's dark room)
+  plaster?: number; // 0..0.3: TEX-009 plaster (Concrete_202) inside the room's walls and floor, never over lines or text
   fog?: number; // 0..0.6 LOK-014 DepthFog: far lines and objects fade and soften, a haze sits at the back, beams scatter
   objects?: GridObject[];
   caption?: string;
@@ -100,9 +123,14 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
   vanishY = 470,
   focal = 1100,
   dolly = 0.02,
+  dollyFrom = 0,
+  lineFadeSec,
+  lineTo = 0.4,
+  title,
   lineOpacity = 0.26,
   nearZ = -420,
   dark = 0,
+  plaster = 0,
   fog = 0,
   objects = [],
   caption,
@@ -117,6 +145,11 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
     ...(hasRays ? ["VIS-021"] : []),
     ...(fog > 0 ? ["LOK-014"] : []),
   ]);
+  const plasterSrc = usePlaster(plaster > 0);
+  if (plaster < 0 || plaster > 0.3)
+    throw new Error(`PerspectiveGrid plaster ${plaster} is outside 0-0.3.`);
+  if (dollyFrom < 0 || dollyFrom > dolly + 1e-9)
+    throw new Error(`PerspectiveGrid dollyFrom ${dollyFrom} must be 0..dolly.`);
   if (dolly < 0 || dolly > 0.03)
     throw new Error(
       `PerspectiveGrid dolly ${dolly} is outside the calm limit (0-0.03).`,
@@ -132,7 +165,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
   const push = interpolate(
     frame,
     [0, Math.max(1, durationInFrames)],
-    [0, focal * (1 - 1 / (1 + dolly))],
+    [focal * (1 - 1 / (1 + dollyFrom)), focal * (1 - 1 / (1 + dolly))],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -211,6 +244,14 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
 
   const appear = (o: { atSec?: number }) =>
     reveal(frame, fps, o.atSec ?? startSec + 0.6, 0.8);
+  const life = (o: Life) => {
+    const tt = frame / fps;
+    let k = 1;
+    if (o.untilSec !== undefined) k *= interpolate(tt, [o.untilSec, o.untilSec + 0.5], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    if (o.dimSec !== undefined) k *= interpolate(tt, [o.dimSec, o.dimSec + 0.6], [1, o.dimTo ?? 0.3], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) });
+    return k;
+  };
+  const lineK = lineFadeSec === undefined ? 1 : interpolate(frame / fps, [lineFadeSec, lineFadeSec + 0.8], [1, lineTo], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // One object in the grid's SVG (labels and pages are drawn outside it).
   const drawObject = (o: GridObject, i: number): React.ReactNode => {
@@ -258,16 +299,27 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
               />
             ))}
           </g>
-          {dots.map((d) => (
-            <circle
-              key={`d${d.k}`}
-              cx={d.x}
-              cy={d.y}
-              r={d.r}
-              fill={d.c}
-              opacity={d.a}
-            />
-          ))}
+          {o.streak
+            ? (() => {
+                const dx = pb[0] - pa[0];
+                const dy = pb[1] - pa[1];
+                const n = Math.hypot(dx, dy) || 1;
+                const ux = (dx / n) * (o.streak ?? 0) * 0.5;
+                const uy = (dy / n) * (o.streak ?? 0) * 0.5;
+                return dots.map((d) => (
+                  <line key={`d${d.k}`} x1={d.x - ux} y1={d.y - uy} x2={d.x + ux} y2={d.y + uy} stroke={d.c} strokeOpacity={d.a} strokeWidth={d.r * 1.6} strokeLinecap="round" />
+                ));
+              })()
+            : dots.map((d) => (
+                <circle
+                  key={`d${d.k}`}
+                  cx={d.x}
+                  cy={d.y}
+                  r={d.r}
+                  fill={d.c}
+                  opacity={d.a}
+                />
+              ))}
         </g>
       );
     }
@@ -343,14 +395,17 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
     if (o.kind === "prism") {
       const [x, y] = P(...o.at);
       const k = (o.size ?? 120) * s(o.at[2]);
+      const dn = o.apex === "down" ? -1 : 1;
       const pts = [
-        [x, y - k * 0.62],
-        [x - k * 0.55, y + k * 0.38],
-        [x + k * 0.55, y + k * 0.38],
+        [x, y - dn * k * 0.62],
+        [x - k * 0.55, y + dn * k * 0.38],
+        [x + k * 0.55, y + dn * k * 0.38],
       ];
+      const deg = o.turn ? interpolate(frame / fps, [o.turn.atSec, o.turn.atSec + (o.turn.sec ?? 0.5)], [0, o.turn.deg], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) }) : 0;
       return (
         <polygon
           key={i}
+          transform={deg ? `rotate(${deg} ${x} ${y})` : undefined}
           points={pts.map((q) => q.join(",")).join(" ")}
           fill={ink}
           fillOpacity={0.1 * p}
@@ -365,19 +420,36 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
       const z = o.z ?? depth;
       const a = P(...o.from);
       const n = 24;
+      const sh = o.shift ? interpolate(frame / fps, [o.shift.atSec, o.shift.atSec + (o.shift.sec ?? 0.5)], [0, o.shift.dx], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) }) : 0;
+      const pc = o.coneAtSec !== undefined ? reveal(frame, fps, o.coneAtSec, 0.8) : p;
       const bands = Array.from({ length: n }, (_, j) => {
         const u0 = j / n;
         const u1 = (j + 1) / n;
         const nm = 400 + (300 * (j + 0.5)) / n;
-        const xa = o.x0 + (o.x1 - o.x0) * u0;
-        const xb = o.x0 + (o.x1 - o.x0) * u1;
+        const xa = o.x0 + sh + (o.x1 - o.x0) * u0;
+        const xb = o.x0 + sh + (o.x1 - o.x0) * u1;
         const top = o.y - o.height / 2;
         const bot = o.y + o.height / 2;
         const q = [P(xa, top, z), P(xb, top, z), P(xb, bot, z), P(xa, bot, z)];
         return { nm, q, mid: P((xa + xb) / 2, o.y, z) };
       });
+      if (o.ghost) {
+        const top = o.y - o.height / 2;
+        const bot = o.y + o.height / 2;
+        const q = [P(o.x0 + sh, top, z), P(o.x1 + sh, top, z), P(o.x1 + sh, bot, z), P(o.x0 + sh, bot, z)];
+        return (
+          <g key={i} opacity={p}>
+            {bands.map((b, j) => (
+              <polygon key={`gf${j}`} points={b.q.map((q2) => q2.join(",")).join(" ")} fill={wavelengthRGB(b.nm)} opacity={0.18} />
+            ))}
+            <polygon points={q.map((q2) => q2.join(",")).join(" ")} fill="none" stroke={ink} strokeOpacity={0.8} strokeWidth={2} strokeDasharray="10 8" />
+            <polyline points={[q[0], a, q[3]].map((q2) => q2.join(",")).join(" ")} fill="none" stroke={ink} strokeOpacity={0.45} strokeWidth={1.5} strokeDasharray="6 8" />
+          </g>
+        );
+      }
       return (
-        <g key={i} opacity={p}>
+        <g key={i}>
+          <g opacity={pc}>
           {bands.map((b, j) => (
             <polygon
               key={`f${j}`}
@@ -393,6 +465,8 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
               style={{ mixBlendMode: "screen" }}
             />
           ))}
+          </g>
+          <g opacity={p}>
           {bands.map((b, j) => (
             <polygon
               key={`w${j}`}
@@ -409,8 +483,27 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
               filter="url(#pg-glow)"
             />
           ))}
+          </g>
         </g>
       );
+    }
+    if (o.kind === "board") {
+      const sc = s(o.at[2]);
+      const [x, y] = P(...o.at);
+      return (
+        <g key={i} opacity={p}>
+          <rect x={x - (o.w * sc) / 2} y={y - (o.h * sc) / 2} width={o.w * sc} height={o.h * sc} rx={3 * sc} fill={t.colors.panel} stroke={ink} strokeOpacity={0.4} strokeWidth={2} />
+        </g>
+      );
+    }
+    if (o.kind === "lens") {
+      const sc = s(o.at[2]);
+      const [x, y] = P(...o.at);
+      const w = o.w * sc;
+      const h = o.h * sc;
+      const rise2 = (1 - p) * 40;
+      const d = `M ${x} ${y - h / 2 + rise2} Q ${x + w} ${y + rise2} ${x} ${y + h / 2 + rise2} Q ${x - w} ${y + rise2} ${x} ${y - h / 2 + rise2} Z`;
+      return <path key={i} d={d} fill={ink} fillOpacity={0.08 * p} stroke={ink} strokeOpacity={0.85 * p} strokeWidth={2.2} />;
     }
     if (o.kind === "patch") {
       const sc = s(o.at[2]);
@@ -451,6 +544,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             stroke={ink}
             strokeOpacity={0.9}
             strokeWidth={3}
+            strokeDasharray={o.dashed ? "9 7" : undefined}
           />
           <circle
             cx={x}
@@ -481,7 +575,25 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             <feGaussianBlur stdDeviation={(1.6 * fog).toFixed(2)} />
           </filter>
         </defs>
-        <g opacity={pGrid}>
+        {plaster > 0 && variant === "room" ? (() => {
+          const poly = (pts: V3[]) => pts.map((q) => P(...q).map((v) => v.toFixed(1)).join(",")).join(" ");
+          const D = depth, n = nearZ, c = -ceilY, f = floorY;
+          const planes: V3[][] = [
+            [[-hw, c, D], [hw, c, D], [hw, f, D], [-hw, f, D]],
+            [[-hw, f, n], [hw, f, n], [hw, f, D], [-hw, f, D]],
+            [[-hw, c, n], [-hw, c, D], [-hw, f, D], [-hw, f, n]],
+            [[hw, c, n], [hw, c, D], [hw, f, D], [hw, f, n]],
+          ];
+          return (
+            <g opacity={pGrid * plaster} style={{ mixBlendMode: "screen" }}>
+              <clipPath id="pg-plaster">
+                {planes.map((q, i) => <polygon key={i} points={poly(q)} />)}
+              </clipPath>
+              <image href={plasterSrc} x={0} y={0} width={W} height={1080} preserveAspectRatio="xMidYMid slice" clipPath="url(#pg-plaster)" />
+            </g>
+          );
+        })() : null}
+        <g opacity={pGrid * lineK}>
           {lines
             .filter((l) => !(fog > 0 && l.far))
             .map((l) => (
@@ -515,7 +627,10 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             </g>
           ) : null}
         </g>
-        {objects.map((o, i) => fogged(o, drawObject(o, i), i))}
+        {objects.map((o, i) => {
+          const k = life(o);
+          return k <= 0.001 ? null : <g key={i} opacity={k}>{fogged(o, drawObject(o, i), i)}</g>;
+        })}
       </svg>
       {fog > 0 ? (
         <AbsoluteFill
@@ -551,7 +666,8 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
       {objects.map((o, i) => {
         if (o.kind !== "label") return null;
         const [x, y] = P(...o.at);
-        const p = appear(o);
+        const p = appear(o) * life(o);
+        if (p <= 0.001) return null;
         return (
           <div
             key={i}
@@ -593,6 +709,18 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
           {caption}
         </div>
       ) : null}
+      {title ? (() => {
+        const tt = frame / fps;
+        const pin = reveal(frame, fps, title.atSec ?? 0.2, 0.7);
+        const pout = title.untilSec === undefined ? 1 : interpolate(tt, [title.untilSec, title.untilSec + 0.45], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+        const wipe = Math.min(pin, pout);
+        if (wipe <= 0.001) return null;
+        return (
+          <div style={{ position: "absolute", left: title.x ?? 620, top: (title.y ?? 560) - 76, fontFamily: t.fonts.serif, fontSize: 76, fontWeight: 600, color: t.colors.ink, whiteSpace: "nowrap", clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)`, ...rise(pin, 18) }}>
+            {title.text}
+          </div>
+        );
+      })() : null}
       {tag ? <DatelineTag {...tag} /> : null}
     </AbsoluteFill>
   );

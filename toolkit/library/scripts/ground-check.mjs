@@ -1,4 +1,5 @@
 // Ground rule check (Sam, 23 Nov 2026: "it gets a bit boring when you use only one background for all your frames").
+// Newton's dark room (PerspectiveGrid variant room) counts as its own ground (Sam, 25 Nov 2026, act 4 Gate 1).
 // Usage: node scripts/ground-check.mjs src/episodes/ep01-act02.json [...more act files]
 // Each shot's ground is its `ground.kind`, else the component's own full-frame picture (footage, map, collage),
 // else the theme canvas ("graphite"). Title cards are left out. FAIL when:
@@ -16,7 +17,7 @@ let failed = false;
 for (const f of process.argv.slice(2)) {
   const act = JSON.parse(fs.readFileSync(f, "utf8"));
   const shots = act.beats.filter((b) => !TITLES.has(b.component));
-  const rows = shots.map((b) => ({ id: b.id, comp: b.component, g: b.ground ? (b.ground.kind === "paper" && b.ground.tone === "dark" ? "desk" : b.ground.kind) : NATIVE[b.component] ?? "graphite", dur: b.end - b.start }));
+  const rows = shots.map((b) => ({ id: b.id, comp: b.component, g: b.ground ? (b.ground.kind === "paper" && b.ground.tone === "dark" ? "desk" : b.ground.kind) : b.component === "PerspectiveGrid" && b.props?.variant === "room" ? "room" : NATIVE[b.component] ?? "graphite", dur: b.end - b.start }));
   const total = rows.reduce((s, r) => s + r.dur, 0);
   const share = {};
   for (const r of rows) share[r.g] = (share[r.g] ?? 0) + r.dur;

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T18:39:23.917Z",
+ "generated": "2026-11-24T18:58:07.068Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3523,7 +3523,7 @@
    "paths": [
     "public/episodes/wcl-e01/04_shutter_paced_149wpm_even.mp3"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: act 4 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say.",
    "maxBeats": null,
    "maxShare": null
@@ -3534,13 +3534,13 @@
    "name": "Newton1672_PhilTrans80_NewTheory",
    "paths": [
     "public/assets/sources/newton1672_p3075.jpg",
-    "newton1672_p3076.jpg",
-    "newton1672_p3078.jpg",
-    "newton1672_p3081.jpg",
-    "newton1672_p3082.jpg",
-    "newton1672_p3083.jpg"
+    "public/assets/sources/newton1672_p3076.jpg",
+    "public/assets/sources/newton1672_p3078.jpg",
+    "public/assets/sources/newton1672_p3081.jpg",
+    "public/assets/sources/newton1672_p3082.jpg",
+    "public/assets/sources/newton1672_p3083.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: Newton's own words and dates in WCL-E01 act 4 (his 1672 letter), each page held >= 4 s with the spoken words highlighted as said; p.3075 also for the act's Phil. Trans. line. Limit: max 34 beats per episode across its six pages (act 4 uses 32, as cards and one blur ground); never cropped to hide the page as a page; always tagged NEWTON · PHIL. TRANS. NO. 80 · 1672 with the page number. Not for: decoration, a generic old book, or Opticks (1704) lines (SRC-005/059).",
    "maxBeats": 34,
    "maxShare": null
@@ -3552,7 +3552,7 @@
    "paths": [
     "public/assets/sources/newton_opticks1704_plate4_part1.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: 'He lets the band of colours fall on a board with a small hole in it' (WCL-E01 act 4): Fig. 18 isolated as Newton's own drawing of the crucial experiment, before the room shows it moving. Limit: max 3 beats per episode; always tagged as his drawing in Opticks, 1704 (never as a 1666 or 1672 drawing); shown unaltered except a spotlight. Not for: other figures on the plate, or decoration.",
    "maxBeats": 3,
    "maxShare": null
@@ -3564,7 +3564,7 @@
    "paths": [
     "public/assets/sources/hooke_micrographia1665_title.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: Robert Hooke's name in WCL-E01 act 4 ('Robert Hooke, a leading London scientist'), as a sticker on its own blur, tagged ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665 / NO CONFIRMED PORTRAIT OF HOOKE SURVIVES. Limit: max 4 beats per episode. Not for: presenting it as a portrait, or as what Hooke said about Newton's letter.",
    "maxBeats": 4,
    "maxShare": null
@@ -3576,7 +3576,7 @@
    "paths": [
     "public/assets/sources/newton1672_answer_p5084.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: 'is not impressed. And says so.' / 'The arguments ... drag on' (WCL-E01 act 4): the printed answer that shows Hooke's 'Considerations' were sent and answered, title highlighted. Limit: max 3 beats per episode; tagged ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. NO. 88, 1672 · P. 5084. Not for: Hooke's own words (they are not on this page).",
    "maxBeats": 3,
    "maxShare": null
@@ -3588,7 +3588,7 @@
    "paths": [
     "public/assets/sources/glass_rainbow_hollos_exstrom.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: 'Ever seen a little rainbow thrown on a wall by a window, or a glass of water?' (WCL-E01 act 4): the viewer's own everyday version of the first half of the experiment. Limit: max 3 beats per episode; always tagged PHOTO TODAY · R. & S. HOLLOS / EXSTROM, CC BY 4.0; changes (crop, grade, drift) indicated in the description credit. Not for: Newton's own experiment, or as a wall rainbow (it is on a tabletop).",
    "maxBeats": 3,
    "maxShare": null
@@ -3598,9 +3598,10 @@
    "folder": "8_Textures",
    "name": "TexturelabsPaperWorldKit",
    "paths": [
-    "Drive only: Video Reference Library/8_Textures/TEX-009_TexturelabsPaperWorldKit/ (never git)"
+    "public/assets/textures/texturelabs/Texturelabs_Concrete_202M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Grunge_352M.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the paper world behind and inside things: page and card grounds (placement ground), a paper or card hero (placement object), the dark room's plaster wall in WCL-E01 act 4 (7 room shots). Limit: max 40 beats per episode across the kit; each file at most 12 of them; strength as TEX-007 (inside pieces, low); never over text, lines or numbers (DIRECTOR rule 21), never on archival scans or TODAY photos (rule 25). Not for: one texture over the whole frame (TEX-007 rule).",
    "maxBeats": 40,
    "maxShare": null
