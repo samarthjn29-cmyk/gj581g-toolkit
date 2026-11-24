@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T13:24:28.398Z",
+ "generated": "2026-11-24T14:11:40.218Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2872,7 +2872,7 @@
    "paths": [
     "src/components/EarthFlyIn.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: an act or episode opening that lands on a place. Limit: 1 per episode; public-domain imagery only, credited.",
    "maxBeats": null,
    "maxShare": null
@@ -3383,7 +3383,7 @@
     "public/assets/sources/bm_global_8192.jpg",
     "public/assets/sources/bm_britain_240ppd.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the globe and the close view of the British Isles inside MAP-013 EarthFlyIn (an act or episode opening that lands on a place). Limit: only through MAP-013 (1 per episode); always tagged SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE; never presented as a photo of a day or of the period; credit NASA Earth Observatory / Blue Marble Next Generation.",
    "maxBeats": null,
    "maxShare": null

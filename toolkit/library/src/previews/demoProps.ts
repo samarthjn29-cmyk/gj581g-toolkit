@@ -765,3 +765,6 @@ export const DEMO_ACT2: Record<string, Record<string, unknown>> = {
     notebook: { atSec: 0.3, rowsFromSec: 1.0, rowsToSec: 4.0 },
   },
 };
+
+// The bare catalog composition shows the Kendal fly-in (it has no generic default: it needs a texture and keys).
+DEMO.EarthFlyIn = DEMO_VARIANTS["EarthFlyIn-Kendal"].props as Record<string, unknown>;
