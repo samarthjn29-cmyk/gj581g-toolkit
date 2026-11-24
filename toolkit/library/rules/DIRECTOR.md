@@ -36,6 +36,7 @@ Plain cards, charts and pages get a one-line brief (where the eye starts and end
 | Exit | How it leaves: in reverse of its entry, carried off by the camera, or a hard cut on a word. The tag first. |
 | Eye out | Where the eye is at the end, and where the next shot's subject appears (within 25% of it, or a push from it). |
 | Sound | The landing or change sound, in a pause. |
+| Texture | The shot's texture placement (rules 20-26): **ground** (the ground carries the texture, the objects are flat), **object** (one textured hero on a quiet ground) or **ensemble** (several textured pieces on a textured ground, held by one badge shape), and which texture (a registered source or a TEX-008 kit item) and why it belongs to the subject. |
 
 ## 3. Composition rules (what the Director holds every shot to)
 1. **The background has a reason.** It shares a place, a time or an idea with the subject, or it is the change the
@@ -79,6 +80,30 @@ Plain cards, charts and pages get a one-line brief (where the eye starts and end
 19. **Stylised is fine when it is honest.** A layered picture is a made picture: ILLUSTRATION, SIMULATION or
     RECOLOURED tags where the meaning could be taken as a record.
 
+### Texture placement (Vox and Johnny Harris texture studies, 24 Nov 2026: `styles/VOX_TEXTURE_STUDY_2026-11-24.md`, `styles/JOHNNY_HARRIS_TEXTURE_STUDY_2026-11-24.md`; Sam: "G + M rules")
+20. **Each shot has one texture placement,** named in its brief (or set by the frame review for shots without one):
+    - **ground:** the ground carries the texture (speckled or stained paper, a desk, the subject's own document pale and
+      large); everything on it is flat. For diagrams, charts with a ground, keyword panels, spectrum strips.
+    - **object:** one textured hero (an engraving-hatched drawing, a photo cut-out, a period object) on a quiet or flat
+      ground. For one thing that must feel real or of its time.
+    - **ensemble:** several textured pieces together on a textured ground. For collage, evidence boards, timelines and
+      Within Motion sticker frames.
+21. **Crisp ink stays crisp.** Text, labels, chips, numbers, chart lines, rules, ticks, routes and arrows are never
+    textured, on any ground. Texture sits behind them or inside the pieces, never on the ink.
+22. **Pure data stays flat.** A chart or table carries no texture of its own; at most it sits on a textured ground
+    (placement ground), and its plotting area stays clean enough to read at phone size.
+23. **At most one textured hero** in the ground and object placements: a textured ground plus one textured object is
+    the ceiling; a second textured object makes it an ensemble, and rule 24 applies.
+24. **One badge shape holds an ensemble together (M).** When several textured pieces share a frame, they share one
+    repeated container or edge: circles, octagon badges, torn-paper edges, or one sticker cut with the same white
+    border. Their colours stay in one warm, low-contrast range, and the crisp ink (rule 21) carries the structure.
+25. **Real sources keep their own surface.** An archival scan, photo, print, map or footage gets nothing new laid on
+    it: at most our usual grain and vignette (OpticalStack, CinematicFinish) and a highlight. Present-day footage
+    (TODAY) gets nothing.
+26. **The texture belongs to the subject.** It is the subject's material (paper and print for documents and letters,
+    glass for the prism, the 1672 page for Newton's letter) or the series' paper world; never a texture chosen only
+    because it looks rich. Texturelabs items never go near an AI tool and stay Drive-only (TEX-008 terms).
+
 ## 4. The frame review (after strict stills)
 The Director gets stills at the shot's start, entry midpoint, landing, each change, and end, plus the brief. For each
 shot it answers:
@@ -90,6 +115,9 @@ shot it answers:
 - Layering checks on the landing still: blur the frame in your head (does the cut-out's brightness or colour jump
   out of the world?), look at the edge at 200% (fringe or halo?), look at the thumbnail (does it read at phone size?),
   and check the shadow falls away from the world's light.
+- Texture checks (rules 20-26): which placement is it, and does it match the brief? Is any text, line or number
+  textured? Is there more than one textured hero outside an ensemble? Does an ensemble share one badge shape? Has an
+  archival source or TODAY footage been given a new texture?
 It returns PASS or a note per shot, each note with a concrete change in prop terms (move `at` to [x, y], change the
 world, change the entry side). Notes are logged in `rules/DIRECTOR_NOTES.md` so its taste stays the same act to act.
 
@@ -99,7 +127,7 @@ A fresh agent each time (it has not seen the work being made), given:
 - the act's script lines with word times, the beat sheet rows, the register's best use and limit for every asset
   it may pick, and the list of Active sources;
 - the studies: `docs/studies/` (Vox and Johnny Harris entry and exit, maps and cinematics) and the project's
-  BACKGROUNDS_STUDY and CINEMATIC_REVIEW;
+  BACKGROUNDS_STUDY and CINEMATIC_REVIEW, and the Vox and Johnny Harris texture studies (24 Nov 2026);
 - for the frame review, the stills (as images it reads) and the act file.
 It may propose a new source (a period print, a painting, a map) but it never adds one itself: new sources go through
 the register (row, best use and limit, licence, Drive copy) and the fact-check like any other.
