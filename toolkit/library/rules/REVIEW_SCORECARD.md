@@ -18,6 +18,10 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
 - **No re-check agents after small fixes:** Claude checks each fixed item on stills or measurements and lists it in
   the report's "Applied" section. A fresh agent re-checks only after a redo of a whole shot or more.
 - Agents get contact sheets of the changed shots, not the whole act, unless the whole act is new.
+- **Models (Sam, 24 Nov 2026: "Sure"):** the **Sound** reviewer and routine consistency checks (register vs beat
+  sheet vs act file, a second opinion on a voice-audit flag) run on **Sonnet** (Agent `model: "sonnet"`). The
+  **Director**, the **Designer + Editor** picture pass, the **Expert**, the **fact-check** and the **First-Time Viewer**
+  stay on **Opus**: their misses cost Sam a review round.
 
 ## The loop (after every Sam review)
 1. **Score:** each of Sam's notes is matched to the role that should have caught it. Caught before Sam = a catch;

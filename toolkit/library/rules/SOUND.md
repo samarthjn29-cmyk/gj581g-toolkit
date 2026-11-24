@@ -6,7 +6,7 @@
 Set up 24 Nov 2026 (Sam: "Sure", to a sound specialist). Nothing in the pipeline can hear, so this role turns three
 specialists' jobs into measurements and hands Sam a short **listen list**: the few moments only ears can judge.
 
-**Who:** a separate agent that has not mixed the act. It never edits files and never plays audio aloud.
+**Who:** a separate agent that has not mixed the act, run on Sonnet (REVIEW_SCORECARD.md "Who runs when"). It never edits files and never plays audio aloud.
 
 **Runs (or reads, if already run):**
 1. **Music editor:** `python3 scripts/music-beats.py src/episodes/<act>.music.json` — does each cue enter on a beat
