@@ -4,7 +4,11 @@ shot over 8 s), taken when the shot has settled (60% in, or 35% and 80% for long
 each shot's number, id and time range, so taste notes ("the eye isn't looking good") come before the Gate 3 render
 instead of after it. Sent with the Gate 2 sign-off question; it is not a review tool (strict stills and the Director's
 frame review stay as they are).
-usage: look-sheet.py ACT.json OUT.jpg [--shots ID,ID]   (--shots: only these shots, e.g. after changes)"""
+usage: look-sheet.py ACT.json OUT.jpg [--shots ID,ID] [--near] [--small]
+  --shots  only these shots, e.g. after changes
+  --near   also the shot before and after each one in --shots (the cuts in and out)
+  --small  Claude's own check (Sam, 24 Nov 2026, to save usage): 320 px tiles, one still per shot, 5 across;
+           open a full-size still only for a shot that looks wrong."""
 import json, os, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont
 
@@ -12,17 +16,24 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LIB = os.path.dirname(HERE)
 a = sys.argv[1:]
 only = None
+near = "--near" in a
+small = "--small" in a
+a = [x for x in a if x not in ("--near", "--small")]
 if "--shots" in a:
     i = a.index("--shots")
     only = set(a[i + 1].split(","))
     del a[i:i + 2]
 act_path, out = a
 act = json.load(open(act_path))
-shots = [(n + 1, b) for n, b in enumerate(act["beats"]) if not only or b["id"] in only]
+beats = act["beats"]
+if only and near:
+    ks = {k for k, b in enumerate(beats) if b["id"] in only}
+    only = {beats[j]["id"] for k in ks for j in (k - 1, k, k + 1) if 0 <= j < len(beats)}
+shots = [(n + 1, b) for n, b in enumerate(beats) if not only or b["id"] in only]
 times, label = [], {}
 for n, b in shots:
     s, e = b["start"], b["end"]
-    fr = (0.35, 0.8) if e - s > 8 else (0.6,)
+    fr = (0.35, 0.8) if e - s > 8 and not small else (0.6,)
     for f in fr:
         t = round(s + f * (e - s), 2)
         times.append(t)
@@ -32,10 +43,10 @@ subprocess.run(["node", os.path.join(HERE, "act-stills.mjs"), act_path, d, ",".j
                stdout=subprocess.DEVNULL)
 idx = json.load(open(os.path.join(d, "index.json")))
 try:
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14 if small else 18)
 except OSError:
     font = ImageFont.load_default()
-W, H, C = 480, 270, 4
+W, H, C = (320, 180, 5) if small else (480, 270, 4)
 rows = (len(idx) + C - 1) // C
 sheet = Image.new("RGB", (W * C, (H + 30) * rows), (20, 20, 20))
 for k, (t, frame, f, shot) in enumerate(idx):
@@ -43,5 +54,5 @@ for k, (t, frame, f, shot) in enumerate(idx):
     x, y = (k % C) * W, (k // C) * (H + 30)
     sheet.paste(im, (x, y))
     ImageDraw.Draw(sheet).text((x + 6, y + H + 5), label.get(round(t, 2), f"{shot} {t:.1f}"), fill=(235, 235, 235), font=font)
-sheet.save(out, quality=85)
+sheet.save(out, quality=70 if small else 85)
 print(out, f"{len(idx)} stills, {len(shots)} shots")

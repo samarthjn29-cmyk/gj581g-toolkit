@@ -18,6 +18,11 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
 - **No re-check agents after small fixes:** Claude checks each fixed item on stills or measurements and lists it in
   the report's "Applied" section. A fresh agent re-checks only after a redo of a whole shot or more.
 - Agents get contact sheets of the changed shots **plus one shot either side** (the cuts in and out), not the whole act, unless the whole act is new. A new act always gets the full review. Scripts that read every frame (stillness, colour, seams, gate2-qa) still run on the whole act. If Sam finds a miss outside the sheet, it is scored here and the sheet widens.
+- **Claude's own looks (Sam, 24 Nov 2026: "So apply it too so that you use less tokens"):** numbers before pictures
+  (stillness, colour, seam and loudness reports first); then one small sheet of the changed shots and their
+  neighbours (`scripts/look-sheet.py ACT OUT --shots IDS --near --small`); a full-size still only for a shot that
+  fails a check or looks wrong on the sheet; never re-open a picture already looked at; waveform and spectrogram
+  plots at 60 dpi. Sam's look sheet at Gate 2 stays full size.
 - **Models (Sam, 24 Nov 2026: "Sure"):** the **Sound** reviewer and routine consistency checks (register vs beat
   sheet vs act file, a second opinion on a voice-audit flag) run on **Sonnet** (Agent `model: "sonnet"`). The
   **Director**, the **Designer + Editor** picture pass, the **Expert**, the **fact-check** and the **First-Time Viewer**
