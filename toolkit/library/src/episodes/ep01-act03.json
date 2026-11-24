@@ -1951,7 +1951,8 @@
      92,
      46
     ],
-    "durSec": 0.35
+    "durSec": 0.35,
+    "holdSec": 1.0
    },
    "overlay": {
     "stickers": [
@@ -1972,9 +1973,8 @@
       "fromTilt": -1.2,
       "edge": 0,
       "tag": {
-       "text": "PHOTO TODAY",
-       "dy": 18,
-       "untilSec": 3.53
+       "text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH",
+       "dy": 18
       }
      },
      {

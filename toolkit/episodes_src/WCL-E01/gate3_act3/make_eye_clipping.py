@@ -31,7 +31,7 @@ d = np.sqrt(du * du + dv * dv)  # 0 at a dot centre, up to ~0.707
 r = np.sqrt(np.clip(1.0 - g, 0, 1) / math.pi) * 1.05  # dot radius so ink area ~ darkness
 ink = np.clip((r - d) / 0.06 + 0.5, 0, 1)  # soft-edged dots
 
-paper = np.array([233, 227, 211], np.float32)  # newsprint
+paper = np.array([221, 217, 204], np.float32)  # newsprint (v5 review: greyer, so it reads as a newspaper, not a print)
 inkc = np.array([38, 36, 34], np.float32)
 noise = np.random.default_rng(3).normal(0, 4, (H, W, 1)).astype(np.float32)
 rgb = paper * (1 - ink[..., None]) + inkc * ink[..., None] + noise

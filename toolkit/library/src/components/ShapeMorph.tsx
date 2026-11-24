@@ -19,7 +19,8 @@ export const ShapeMorph: React.FC<{
   fromShape: [number, number, number, number, number];
   toShape: [number, number, number, number, number];
   fill?: boolean; // a soft accent fill inside the shape while it travels
-}> = ({ from, to, atSec = 0, durSec = 0.75, fromShape, toShape, fill = true }) => {
+  holdSec?: number; // the landed shape stays lit this long before it fades (act 3 v5 review: the hand-over read too briefly)
+}> = ({ from, to, atSec = 0, durSec = 0.75, fromShape, toShape, fill = true, holdSec = 0 }) => {
   useAsset("TRN-009");
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -32,7 +33,7 @@ export const ShapeMorph: React.FC<{
   const mixNew = interpolate(frame, [mid - x, mid + x], [0, 1], clamp);
   const lerp = (i: number) => fromShape[i] + (toShape[i] - fromShape[i]) * p;
   const [sx, sy, sw, sh, sr] = [0, 1, 2, 3, 4].map(lerp);
-  const shapeO = frame < a ? 0 : interpolate(frame, [a, a + sec(0.1, fps), a + d, a + d + sec(0.3, fps)], [0, 1, 1, 0], clamp);
+  const shapeO = frame < a ? 0 : interpolate(frame, [a, a + sec(0.1, fps), a + d + sec(holdSec, fps), a + d + sec(holdSec + 0.3, fps)], [0, 1, 1, 0], clamp);
   if (frame < a) return <AbsoluteFill>{from}</AbsoluteFill>;
   return (
     <AbsoluteFill>

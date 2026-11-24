@@ -278,9 +278,9 @@ _ix = CLIP_AT[0] - CLIP_W / 2 + 390 * _s  # left iris in the cutting (390, 320) 
 _iy = CLIP_AT[1] - CLIP["size"][1] * _s / 2 + 320 * _s
 _ir = 46
 shot(B(67, 68), "KeywordPanel", lambda r: {"panel": {"chips": []}},
-    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35},  # Gate 3 review S1: lands in the silence before "So" (177.86)
+    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35, "holdSec": 1.0},  # v5 review S1: the disc stays on the iris 1 s  # Gate 3 review S1: lands in the silence before "So" (177.86)
     overlay={"stickers": [{**CLIP, "at": list(CLIP_AT), "w": CLIP_W, "atSec": 0.12, "tilt": -1.2, "fromTilt": -1.2, "edge": 0,
-                           "tag": {"text": "PHOTO TODAY", "dy": 18, "untilSec": round(S(68) - S(67) + 0.2, 2)}},
+                           "tag": {"text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH", "dy": 18}},  # v5 review S2/S3: tag up to the cut, photographer named like the prism
                           {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1665, 600], "w": 300,
                            "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
              "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 270, "y": 700},
