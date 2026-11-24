@@ -6,6 +6,19 @@ things before it reviews: its role file (`DIRECTOR.md`, `DESIGNER.md`, `EDITOR.m
 `FIRST_VIEWER.md`), its notes file (`notes/<ROLE>_NOTES.md`, the director's is `DIRECTOR_NOTES.md`), and the misses
 below for its role.
 
+## Who runs when (usage budget, Sam, 24 Nov 2026: "Sure", to using fewer review agents)
+Each review agent starts cold and re-reads files and frames, so they run only where they catch the most:
+- **Gate 1:** fact-check (on-screen text); the **Expert** on the lines and planned pictures that explain science.
+- **Gate 2:** the Director's frame review; the **Expert** on diagrams, simulations and data pictures only; the
+  **Designer** on the look sheet.
+- **Gate 3 (each act):** **one picture agent plays both the Designer and the Editor** (both checklists, one report,
+  `gate3_<act>/PICTURE_<clip>.md`), plus the **Sound** checks. The independent reviewer runs only when that agent
+  is not run (it covers the same defects).
+- **First-Time Viewer:** only on the joined episode before upload, not per act.
+- **No re-check agents after small fixes:** Claude checks each fixed item on stills or measurements and lists it in
+  the report's "Applied" section. A fresh agent re-checks only after a redo of a whole shot or more.
+- Agents get contact sheets of the changed shots, not the whole act, unless the whole act is new.
+
 ## The loop (after every Sam review)
 1. **Score:** each of Sam's notes is matched to the role that should have caught it. Caught before Sam = a catch;
    found by Sam = a miss. A reviewer suggestion Sam turns down = an over-flag.

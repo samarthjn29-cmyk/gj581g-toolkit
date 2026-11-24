@@ -10,7 +10,7 @@ look like this series?**
 
 **Who:** a separate agent that has not built the act (fresh eyes, like the fact-checker). It never edits files.
 
-**When:** at Gate 2, after the Director's frame review and its fixes, before the look sheet goes to Sam. Again on any
+**When (see REVIEW_SCORECARD.md "Who runs when"):** at Gate 3 the same agent also plays the Editor (one picture pass). At Gate 2, after the Director's frame review and its fixes, before the look sheet goes to Sam. Again on any
 shot changed after Sam's notes (look-sheet.py `--shots`).
 
 **Reads:** the look sheet (`python3 scripts/look-sheet.py <act.json> qa/<ep>/look_sheet.jpg`), the strict stills of

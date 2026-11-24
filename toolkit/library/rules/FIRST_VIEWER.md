@@ -12,8 +12,7 @@ It gets only the video (frames + the captions as what it "hears") and the title 
 a curious adult who clicked on the title, with no special knowledge of the subject. It never edits files.
 
 **When:**
-1. **Each act at Gate 3,** after the Editor and the reviewers, on the 720p clip (short report).
-2. **The whole joined episode before upload** (the main use): once acts 1-7 are joined, with the title and thumbnail.
+1. **The whole joined episode before upload** only (Sam, 24 Nov 2026, to save usage): once acts 1-7 are joined, with the title and thumbnail. Not per act.
 
 **How it watches:** frames every 1 s (every frame around cuts it finds confusing) with the captions at the same
 times; it writes notes as it goes, timestamped, before reading ahead (no peeking at the end).

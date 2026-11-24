@@ -13,7 +13,7 @@ texts), never from memory alone. It has not written the script. It never edits f
 and names who would know (a real colour-vision researcher reading the script once an episode is still the gold
 standard; Sam decides whether to ask one).
 
-**When:**
+**When (Gates 1-2 only; not at Gate 3, REVIEW_SCORECARD.md "Who runs when"):**
 1. **Gate 0/1, the script:** every line that explains how something works (light, the eye, cones, pigments, the brain),
    after fact-check 2 and before Sam records. Fixes go through the fact-check loop like any wording change.
 2. **Gate 2, the pictures that explain:** diagrams, simulations and data pictures on the look sheet: anatomy drawn

@@ -11,7 +11,7 @@ whether every cut and move lands. The independent reviewer still checks defects,
 **Who:** a separate agent that has not built the act. It never edits files and never plays audio aloud (ffmpeg
 measurements only; it reads the voice word times from `episodes_src/<EP>/gate1_<act>/*_words.json` + the slate).
 
-**When:** at Gate 3 on the mixed 720p clip, at the same time as the independent reviewer, before Sam.
+**When:** at Gate 3 on the mixed 720p clip, before Sam, **as one picture pass with the Designer** (one agent, both checklists, `PICTURE_<clip>.md`; REVIEW_SCORECARD.md "Who runs when"). The independent reviewer is skipped when this pass runs.
 
 **Reads:** the clip, the act file, the beat sheet notes (dump), the captions, `scripts/stillness-check.py` output and
 the colour check (`scripts/colour-check.py`). It steps frame by frame (1/30 s) around every cut.
