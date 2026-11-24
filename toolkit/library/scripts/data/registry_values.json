@@ -133,7 +133,8 @@
    "PKG-004",
    "SRC-004",
    "https://drive.google.com/file/d/1pXDFNscKpwIxwu2uBLJHmCn9nSaL5L6b/view",
-   "Collage & Cutout"
+   "Collage & Cutout",
+   "NAR-004"
   ],
   [
    "VIS-005",
@@ -258,7 +259,7 @@
    "LOK-009",
    "SFX-009",
    "MUS-009",
-   "",
+   "TEX-009",
    "MAP-009",
    "",
    "SRC-009",
@@ -1403,7 +1404,17 @@
    "Unused",
    "2026-11-22",
    "Best use: data and diagram acts. Limit: one ground per act; not under period scans (they keep their own paper).",
-   "VIS-056"
+   "VIS-056",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "SRC-058"
   ],
   [
    "TEX-002",
@@ -1417,7 +1428,17 @@
    "Unused",
    "2026-11-22",
    "",
-   "VIS-057"
+   "VIS-057",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "SRC-059"
   ],
   [
    "TEX-003",
@@ -1431,7 +1452,17 @@
    "Unused",
    "2026-11-22",
    "",
-   "VIS-058"
+   "VIS-058",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "SRC-060"
   ],
   [
    "TEX-004",
@@ -1445,7 +1476,17 @@
    "Unused",
    "2026-11-22",
    "",
-   "VIS-059"
+   "VIS-059",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "SRC-061"
   ],
   [
    "MAP-001",
@@ -1459,7 +1500,17 @@
    "Unused",
    "2026-11-22",
    "",
-   "VIS-060"
+   "VIS-060",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "SRC-062"
   ],
   [
    "MAP-002",
@@ -6690,6 +6741,97 @@
    "Unused",
    "2026-11-24",
    "Best use: The Lake District today near Kendal, tagged WINDERMERE · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them."
+  ],
+  [
+   "NAR-004",
+   "12_Narration",
+   "WCL-E01_Act4_Narration",
+   "Own: Sam's ElevenLabs take (his Samarth voice, v4, stability 50%), 04_shutter.mp3, paced to 149.5 wpm with tts/pace_even.py (silence only in real pauses)",
+   "public/episodes/wcl-e01/04_shutter_paced_149wpm_even.mp3",
+   "Act 4 narration of WCL-E01 'A hole in the shutter' (210.3 s; voice pre-check 524/524 words). Sam chose the paced take on 24 Nov 2026 ('Paced (Recommended)'). Drive only, never git.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: act 4 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say."
+  ],
+  [
+   "SRC-058",
+   "11_Sources",
+   "Newton1672_PhilTrans80_NewTheory",
+   "Royal Society, Philosophical Transactions No. 80 (19 Feb 1671/72), via JSTOR Early Journal Content / Internet Archive paper-doi-10_1098_rstl_1671_0072 (Public Domain Mark)",
+   "public/assets/sources/newton1672_p3075.jpg;newton1672_p3076.jpg;newton1672_p3078.jpg;newton1672_p3081.jpg;newton1672_p3082.jpg;newton1672_p3083.jpg",
+   "Isaac Newton, 'A Letter ... containing his New Theory about Light and Colors', sent from Cambridge Febr. 6. 1671/72, Phil. Trans. 6 (No. 80) pp. 3075-3087. Pages 3075 (masthead, 'beginning of the Year 1666', the prism), 3076 (darkened chamber, hole in the window-shuts, oblong, five times, circular), 3078 (Experimentum Crucis), 3081 ('Colours are not Qualifications of Light...'), 3082 ('obstinately retained its colour'), 3083 ('intirely and perfectly white'). 300 dpi grey from the 600 ppi bilevel scan; JSTOR footer cropped off. PDF page n = p. 3074+n.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: Newton's own words and dates in WCL-E01 act 4 (his 1672 letter), each page held >= 4 s with the spoken words highlighted as said; p.3075 also for the act's Phil. Trans. line. Limit: max 34 beats per episode across its six pages (act 4 uses 32, as cards and one blur ground); never cropped to hide the page as a page; always tagged NEWTON · PHIL. TRANS. NO. 80 · 1672 with the page number. Not for: decoration, a generic old book, or Opticks (1704) lines (SRC-005/059)."
+  ],
+  [
+   "SRC-059",
+   "11_Sources",
+   "NewtonOpticks1704_PlateIV_Fig18",
+   "Wellcome Collection copy of Opticks (1704) via Internet Archive b30412316, leaf n94 (Public Domain Mark); same scan as SRC-005",
+   "public/assets/sources/newton_opticks1704_plate4_part1.jpg",
+   "Newton, Opticks (London, 1704), Book I Part I, Plate IV (Figs 17-22); Fig. 18 is his drawing of the Experimentum Crucis (two boards with holes, two prisms). Drawn 32 years after the 1672 letter.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: 'He lets the band of colours fall on a board with a small hole in it' (WCL-E01 act 4): Fig. 18 isolated as Newton's own drawing of the crucial experiment, before the room shows it moving. Limit: max 3 beats per episode; always tagged as his drawing in Opticks, 1704 (never as a 1666 or 1672 drawing); shown unaltered except a spotlight. Not for: other figures on the plate, or decoration."
+  ],
+  [
+   "SRC-060",
+   "11_Sources",
+   "HookeMicrographia1665_Title",
+   "Wellcome Collection copy via Internet Archive b30326370, leaf n10 (Public Domain Mark)",
+   "public/assets/sources/hooke_micrographia1665_title.jpg",
+   "Robert Hooke, Micrographia (London: Martyn and Allestry, printers to the Royal Society, 1665), title page in red and black with the Royal Society arms. Stands for Hooke, of whom no authentic portrait survives.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: Robert Hooke's name in WCL-E01 act 4 ('Robert Hooke, a leading London scientist'), as a sticker on its own blur, tagged with his name and that no authentic portrait of him survives. Limit: max 4 beats per episode. Not for: presenting it as a portrait, or as what Hooke said about Newton's letter."
+  ],
+  [
+   "SRC-061",
+   "11_Sources",
+   "Newton1672_AnswerToConsiderations_p5084",
+   "Royal Society, Philosophical Transactions (1672) p. 5084, via JSTOR Early Journal Content / Internet Archive paper-doi-10_1098_rstl_1672_0051 (Public Domain Mark)",
+   "public/assets/sources/newton1672_answer_p5084.jpg",
+   "Mr. Isaac Newtons Answer to some Considerations upon his Doctrine of Light and Colors; which Doctrine was printed in Numb. 80. of these Tracts', first page (p. 5084): his printed reply to Hooke's critique; the margin note says the critique itself was 'thought needless to be here printed at length'. 300 dpi grey; JSTOR footer cropped.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: 'is not impressed. And says so.' (WCL-E01 act 4): the printed answer that shows Hooke's 'Considerations' were sent and answered, title highlighted. Limit: max 2 beats per episode; tagged NEWTON'S REPLY · PHIL. TRANS., 1672. Not for: Hooke's own words (they are not on this page)."
+  ],
+  [
+   "SRC-062",
+   "11_Sources",
+   "GlassRainbow_HollosExstrom2020",
+   "Exstrom Laboratories, Macro and Micro Picture of the Day 29 Nov 2020, Richard Hollos and Stefan Hollos (CC BY 4.0), https://exstrom.com/mpod/20201129.html",
+   "public/assets/sources/glass_rainbow_hollos_exstrom.jpg",
+   "Rainbows From a Glass of Water': sunlight dispersed by a cylindrical glass of water throws two coloured bands on a wooden tabletop (glass at right). 2560 px from the 4213x3019 original. Present-day photo.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: 'Ever seen a little rainbow thrown on a wall by a window, or a glass of water?' (WCL-E01 act 4): the viewer's own everyday version of the first half of the experiment. Limit: max 3 beats per episode; always tagged PHOTO TODAY · R. & S. HOLLOS / EXSTROM, CC BY 4.0; changes (crop, grade, drift) indicated in the description credit. Not for: Newton's own experiment, or as a wall rainbow (it is on a tabletop)."
+  ],
+  [
+   "TEX-009",
+   "8_Textures",
+   "TexturelabsPaperWorldKit",
+   "Texturelabs (texturelabs.org; free in videos, no credit required, no redistribution, no AI use)",
+   "Drive only: Video Reference Library/8_Textures/TEX-009_TexturelabsPaperWorldKit/ (never git)",
+   "Sam's option A from the Texturelabs study (24 Nov 2026, 'A: texture kit (Recommended)'; the board called it TEX-008, but TEX-008 is ScreenStrokes): 20-30 Texturelabs textures for the 1660s-1840s paper world: paper and card, kraft, plaster wall for the dark room, grunge, film dust and scratches, glass, light leaks. Files downloaded through the built-in browser (the shell is blocked by the site); kit.json lists each file and its use.",
+   "Planned",
+   "0",
+   "Unused",
+   "2026-11-24",
+   "Best use: the paper world behind and inside things: page and card grounds (placement ground), a paper or card hero (placement object), the dark room's plaster wall in WCL-E01 act 4 (7 room shots). Limit: max 40 beats per episode across the kit; each file at most 12 of them; strength as TEX-007 (inside pieces, low); never over text, lines or numbers (DIRECTOR rule 21), never on archival scans or TODAY photos (rule 25). Not for: one texture over the whole frame (TEX-007 rule)."
   ]
  ]
 }
