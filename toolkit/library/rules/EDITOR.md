@@ -1,5 +1,8 @@
 # The Editor (Gate 3, on the cut, with the motion checklist)
 
+
+**Learning (24 Nov 2026):** before every review, read `rules/notes/EDITOR_NOTES.md` (the decisions and misses so far) and your role's misses in `rules/REVIEW_SCORECARD.md`; anything you learn that should hold next time, propose as a line for your notes file.
+
 Set up 24 Nov 2026 (Sam: "Yes"). On act 3, Sam's and the reviewer's notes were an editor's notes: the 5.6 s end hold,
 how long "one man" stays up, a cut on action that read as a smear, a tag that left before its line, a lit disc that
 vanished in 7 frames. The Editor watches only **rhythm and motion**: how long things stay, where the eye rests, and

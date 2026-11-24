@@ -1,5 +1,8 @@
 # The Sound reviewer (Gate 3, beside the Editor)
 
+
+**Learning (24 Nov 2026):** before every review, read `rules/notes/SOUND_NOTES.md` (the decisions and misses so far) and your role's misses in `rules/REVIEW_SCORECARD.md`; anything you learn that should hold next time, propose as a line for your notes file.
+
 Set up 24 Nov 2026 (Sam: "Sure", to a sound specialist). Nothing in the pipeline can hear, so this role turns three
 specialists' jobs into measurements and hands Sam a short **listen list**: the few moments only ears can judge.
 

@@ -1,5 +1,8 @@
 # The First-Time Viewer (the finished cut, before upload)
 
+
+**Learning (24 Nov 2026):** the viewer itself reads nothing but the video and captions, so it stays fresh; `rules/notes/FIRST_VIEWER_NOTES.md` is for Claude, to tell new complaints from known ones and turn them into fixes.
+
 Set up 24 Nov 2026 (Sam: "Get a subject expert and a first time viewer."). We test the script on a fresh reader, but
 nobody watches the finished cut as a viewer would. The First-Time Viewer watches it cold and reports where it got
 confused, bored or lost the thread: the closest we get to a retention test before upload.

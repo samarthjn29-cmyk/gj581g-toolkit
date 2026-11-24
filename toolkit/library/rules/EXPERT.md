@@ -1,5 +1,8 @@
 # The Subject Expert (script and on-screen science)
 
+
+**Learning (24 Nov 2026):** before every review, read `rules/notes/EXPERT_NOTES.md` (the decisions and misses so far) and your role's misses in `rules/REVIEW_SCORECARD.md`; anything you learn that should hold next time, propose as a line for your notes file.
+
 Set up 24 Nov 2026 (Sam: "Get a subject expert and a first time viewer."). The fact-check confirms that each claim
 has a source; the Expert judges whether the **explanations are scientifically right and not misleading**, the way a
 researcher in the field would read them: the mechanism, the simplification, the simulation, the diagram.
