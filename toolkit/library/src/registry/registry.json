@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T14:11:40.218Z",
+ "generated": "2026-11-24T17:42:37.663Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -1713,7 +1713,7 @@
     "scripts/halftone.py"
    ],
    "status": "Active",
-   "use": "Best use: the beat where a colour itself is questioned. Limit: max 2 beats per episode, at most once per act; moire opacity <= 0.3. Not for: decoration or a whole act.",
+   "use": "Best use: the beat where a colour itself is questioned ('Where is the pink?'), or where printing and screens make colour (later acts). Limit: max 2 beats per episode, at most once per act; moire opacity <= 0.3; never over faces or text; re-screen only sources whose licence allows changes (never SRC-013, CC BY-SA 'unaltered'). Not for: decoration or a whole act.",
    "maxBeats": 2,
    "maxShare": null
   },
@@ -1725,7 +1725,7 @@
     "src/components/DuotoneCollage.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a life or idea told from several period pieces at once. Limit: max 4 beats per episode; 2-4 pieces a shot. Not for: one photo or a page to read.",
+   "use": "Best use: a life or idea told from several period pieces at once (portrait + plate + page), and uniting old scans of mixed quality. Limit: max 4 beats per episode; 2-4 pieces a shot; every picture piece captioned; only sources whose licence allows changes. Not for: one photo (FootagePlate) or a page the viewer must read (ArchivalScanCard).",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -1761,7 +1761,7 @@
     "src/layers/PaperFibre.tsx"
    ],
    "status": "Active",
-   "use": "Best use: every paper piece on screen. Limit: inside each piece only, low strength. Not for: digital UI or diagrams.",
+   "use": "Best use: every paper piece on screen (collage pieces, paper scraps, cards built to look printed). Limit: inside each piece only, low strength (grain <= 0.32, fibre <= 0.22); never over photos shown unaltered, faces in close-up or the whole frame. Not for: digital UI or diagrams.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1773,7 +1773,7 @@
     "src/layers/FillWord.tsx"
    ],
    "status": "Active",
-   "use": "Best use: the one word a line turns on. Limit: one fill per line, max 6 per act. Not for: whole sentences.",
+   "use": "Best use: the one word a line turns on ('pink', 'red', a number), filling in its own data colour on the word. Limit: one fill per line, max 6 per act, 0.6 s. Not for: whole sentences, or colours that are not data.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1786,7 +1786,7 @@
     "scripts/trace.py"
    ],
    "status": "Active",
-   "use": "Best use: a first appearance. Limit: max 3 per episode. Not for: documents to read.",
+   "use": "Best use: a person's or object's first appearance, where the drawing becomes the real thing (Dalton's first face). Limit: max 3 per episode; only sources whose licence allows changes. Not for: documents to read, or a picture seen before in the act.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1798,7 +1798,7 @@
     "src/components/SeriesThread.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: act changes and chapter cards.",
+   "use": "Best use: act changes, chapter cards and the end card of every Where Colour Lives episode. Limit: the same motif every time, under 2 s on screen each. Not for: inside story beats.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1810,7 +1810,7 @@
     "src/layers/TopLightSheen.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: title and chapter cards.",
+   "use": "Best use: series title, episode and chapter cards. Limit: one sheen per card; light pool <= 15%. Not for: story beats or photos.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1822,7 +1822,7 @@
     "src/motion.ts"
    ],
    "status": "Planned",
-   "use": "Best use: hand-drawn diagrams.",
+   "use": "Best use: hand-drawn diagrams and line drawings meant to feel made by hand (with MOT-009). Limit: never on text reveals, camera moves or photos. Not for: data charts that must read precisely.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1846,7 +1846,7 @@
     "src/layers/ShadowPass.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: held period photos and candlelit rooms. Limit: max 6 beats per episode.",
+   "use": "Best use: held period photos and the candlelit room scenes (with LOK-016). Limit: max 6 beats per episode; opacity <= 0.2. Not for: diagrams, text or SRC-013 (shown unaltered).",
    "maxBeats": 6,
    "maxShare": null
   },
@@ -1870,7 +1870,7 @@
     "src/components/ArchivalScanCard.tsx"
    ],
    "status": "Active",
-   "use": "Best use: page shots where one or two lines are read aloud. Limit: max 6 beats per episode.",
+   "use": "Best use: page shots where one or two lines are read aloud (Dalton's paper, letters, the 1995 paper). Limit: dim <= 0.75; on the highlighted lines only; max 6 beats per episode. Not for: pages shown only as an object.",
    "maxBeats": 6,
    "maxShare": null
   },
@@ -1883,7 +1883,7 @@
     "src/layers/RisoPrint.tsx"
    ],
    "status": "Active",
-   "use": "Best use: mixing and printing beats. Limit: max 4 beats per episode.",
+   "use": "Best use: the colour series' mixing and printing beats (two inks make a third; why a printed pink is only dots), botanical plates of the geranium. Limit: max 4 beats per episode; 2-3 inks; only sources whose licence allows changes; ink colours are data. Not for: photos of people shown as evidence.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -1895,7 +1895,7 @@
     "src/layers/GateWeave.tsx"
    ],
    "status": "Active",
-   "use": "Best use: held archival stills and cards. Limit: weave <= 1.5 px.",
+   "use": "Best use: held archival stills, period cards and title cards that must stay on screen over 4 s. Limit: weave <= 1.5 px, flicker <= 3 %; never on text the viewer must read closely or on diagrams. Not for: modern footage.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1931,7 +1931,7 @@
     "src/components/PeriodFrame.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: era footage. Limit: max 3 per episode.",
+   "use": "Best use: footage or photos that come from a specific era (the 1995 DNA study on a CRT; a portrait in its frame). Limit: max 3 per episode; the object matches the year. Not for: our own diagrams.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1943,7 +1943,7 @@
     "src/layers/DeskDepthOfField.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: pages as objects. Limit: max 6 beats per episode.",
+   "use": "Best use: newspaper, map and book pages seen as objects before they are read. Limit: max 6 beats per episode; any text to be read stays inside the sharp band. Not for: pages read in full (ArchivalScanCard).",
    "maxBeats": 6,
    "maxShare": null
   },
@@ -1955,7 +1955,7 @@
     "src/components/Photo25D.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: held real photos. Limit: max 4 per episode.",
+   "use": "Best use: a real photo of a person or place held for a long line (later acts: scientists, Manchester streets). Limit: max 4 per episode; only photos whose licence allows changes; never alter a person's look. Not for: scans of documents.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1967,7 +1967,7 @@
     "src/components/TerrainTintMap.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: moves between places. Limit: max 4 beats per episode.",
+   "use": "Best use: where a story moves between places (Kendal to Manchester; London). Limit: max 4 beats per episode; base map credited. Not for: a single address.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -1980,7 +1980,7 @@
     "src/components/KineticLine.tsx"
    ],
    "status": "Active",
-   "use": "Best use: period headline cards.",
+   "use": "Best use: period headline and title cards on paper (KineticLine `ink`), and flat shapes meant to look printed. Limit: serif headline lines only, blur <= 1.6, roughness <= 2 px; never on body text, captions, mono tags or numbers that must read precisely. Not for: modern UI text.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -1994,7 +1994,7 @@
     "src/components/HalftoneMoire.tsx"
    ],
    "status": "Active",
-   "use": "Best use: screen beats and pictures on a display. Limit: max 4 beats per episode.",
+   "use": "Best use: the colour series' screen beats (how your phone shows pink with red and blue light; print vs screen side by side with LOK-017 print), and any picture shown on a monitor or phone (the 1995 lab, a website). Limit: max 4 beats per episode; texture strength <= 1; never over photos shown unaltered (SRC-013) or faces in close-up. Not for: whole-frame grading.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -2006,7 +2006,7 @@
     "src/layers/FillWord.tsx"
    ],
    "status": "Active",
-   "use": "Best use: one key word per headline line. Limit: max 4 per act.",
+   "use": "Best use: the one word a headline line turns on when a fill would be too quiet (a name, a number, 'red'). Limit: one mark per line, max 4 per act; colour from the theme accent or data. Not for: body text or every line.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2018,7 +2018,7 @@
     "src/components/SatelliteCutout.tsx"
    ],
    "status": "Planned",
-   "use": "Best use: places seen from above. Limit: max 4 beats per episode.",
+   "use": "Best use: places seen from above (Kendal, Manchester, Eaglesfield) when a story moves there. Limit: max 4 beats per episode; imagery credited (public-domain or open licence only). Not for: political borders or contested regions without sources.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -2042,7 +2042,7 @@
     "media/ambient_bed.py (pulse)"
    ],
    "status": "Planned",
-   "use": "Best use: analytic or tension acts; Sam picks first.",
+   "use": "Best use: analytic or tension acts (the eye examined, the DNA test) under the narration. Limit: Sam picks and hears it under his voice first; at the episode's bed level; one bed per act. Not for: replacing Wholesome where Sam chose it.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -2054,7 +2054,7 @@
     "src/components/LensDive.tsx"
    ],
    "status": "Active",
-   "use": "Best use: the moment the eye is examined and its pay-off. Limit: max 2 beats sets per episode.",
+   "use": "Best use: the moment a person's own eyes (or an instrument's lens) are examined, and its pay-off later in the act (WCL-E01 act 1 beats 29-31 and 37; act 6 when the eyes are opened). Limit: max 2 shots per act, max 4 per episode; the push is the act's one flashy moment; only real portraits whose licence allows a crop and zoom; labels on the circle must be fact-checked. Not for: generic anatomy (EyeDiagram) or decoration.",
    "maxBeats": null,
    "maxShare": null
   },

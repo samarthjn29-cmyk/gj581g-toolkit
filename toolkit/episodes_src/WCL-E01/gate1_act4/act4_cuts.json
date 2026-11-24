@@ -1,0 +1,506 @@
+[
+ [
+  "E01-A4-01",
+  0.0,
+  2.4,
+  ""
+ ],
+ [
+  "E01-A4-02",
+  2.4,
+  4.43,
+  "So let's go back to Isaac Newton."
+ ],
+ [
+  "E01-A4-03",
+  4.43,
+  6.91,
+  "It's the start of 1666,"
+ ],
+ [
+  "E01-A4-04",
+  6.91,
+  9.62,
+  "a hundred years before Dalton is born."
+ ],
+ [
+  "E01-A4-05",
+  9.62,
+  12.67,
+  "At least, that's the date Newton gives when he writes it"
+ ],
+ [
+  "E01-A4-06",
+  12.67,
+  14.8,
+  "up, six years later."
+ ],
+ [
+  "E01-A4-07",
+  14.8,
+  18.29,
+  "He's 23. He has just bought"
+ ],
+ [
+  "E01-A4-08",
+  18.29,
+  21.54,
+  "a triangular glass prism. People already"
+ ],
+ [
+  "E01-A4-09",
+  21.54,
+  24.25,
+  "know a prism can throw colours on a wall."
+ ],
+ [
+  "E01-A4-10",
+  24.25,
+  27.7,
+  "Newton wants to know where those colours come from,"
+ ],
+ [
+  "E01-A4-11",
+  27.7,
+  30.05,
+  "so he darkens his room."
+ ],
+ [
+  "E01-A4-12",
+  30.05,
+  33.06,
+  "He makes a small hole in his window shutter,"
+ ],
+ [
+  "E01-A4-13",
+  33.06,
+  36.56,
+  "and he lets one thin beam of sunlight in."
+ ],
+ [
+  "E01-A4-14",
+  36.56,
+  39.26,
+  "He puts the prism in the beam."
+ ],
+ [
+  "E01-A4-15",
+  39.26,
+  41.47,
+  "The glass bends the light,"
+ ],
+ [
+  "E01-A4-16",
+  41.47,
+  44.9,
+  "and on the far wall, a band of colours appears."
+ ],
+ [
+  "E01-A4-17",
+  44.9,
+  47.56,
+  "Red at one end, violet at the other,"
+ ],
+ [
+  "E01-A4-18",
+  47.56,
+  49.59,
+  "and everything in between."
+ ],
+ [
+  "E01-A4-19",
+  49.59,
+  51.74,
+  "The first thing that surprises him"
+ ],
+ [
+  "E01-A4-20",
+  51.74,
+  53.88,
+  "is its shape. The"
+ ],
+ [
+  "E01-A4-21",
+  53.88,
+  56.04,
+  "beam came in through a small round hole,"
+ ],
+ [
+  "E01-A4-22",
+  56.04,
+  58.54,
+  "but the band on the wall is long,"
+ ],
+ [
+  "E01-A4-23",
+  58.54,
+  60.78,
+  "about five times longer than it is wide."
+ ],
+ [
+  "E01-A4-24",
+  60.78,
+  63.56,
+  "By the rules he'd been taught,"
+ ],
+ [
+  "E01-A4-25",
+  63.56,
+  66.17,
+  "he says, it should have been round."
+ ],
+ [
+  "E01-A4-26",
+  66.17,
+  68.45,
+  "At the time, most people who thought"
+ ],
+ [
+  "E01-A4-27",
+  68.45,
+  70.66,
+  "about it believed something simple."
+ ],
+ [
+  "E01-A4-28",
+  70.66,
+  73.9,
+  "White light is pure. The prism"
+ ],
+ [
+  "E01-A4-29",
+  73.9,
+  77.05,
+  "changes it, and that's what makes the colours."
+ ],
+ [
+  "E01-A4-30",
+  77.05,
+  80.32,
+  "Newton suspects it's the other way round."
+ ],
+ [
+  "E01-A4-31",
+  80.32,
+  82.61,
+  "So he sets up a test he will later"
+ ],
+ [
+  "E01-A4-32",
+  82.61,
+  84.77,
+  "call the experimentum cruces,"
+ ],
+ [
+  "E01-A4-33",
+  84.77,
+  86.8,
+  "the crucial experiment."
+ ],
+ [
+  "E01-A4-34",
+  86.8,
+  89.25,
+  "He lets the band of colours fall on a"
+ ],
+ [
+  "E01-A4-35",
+  89.25,
+  91.32,
+  "board with a small hole in it."
+ ],
+ [
+  "E01-A4-36",
+  91.32,
+  93.43,
+  "Only one colour gets through,"
+ ],
+ [
+  "E01-A4-37",
+  93.43,
+  96.64,
+  "say, just the blue. Then he sends that"
+ ],
+ [
+  "E01-A4-38",
+  96.64,
+  98.73,
+  "blue light through a second prism."
+ ],
+ [
+  "E01-A4-39",
+  98.73,
+  100.77,
+  "If the glass makes the colours,"
+ ],
+ [
+  "E01-A4-40",
+  100.77,
+  104.23,
+  "the second prism should turn that blue into something else."
+ ],
+ [
+  "E01-A4-41",
+  104.23,
+  107.63,
+  "It doesn't. The blue bends again,"
+ ],
+ [
+  "E01-A4-42",
+  107.63,
+  109.73,
+  "by its own fixed amount."
+ ],
+ [
+  "E01-A4-43",
+  109.73,
+  112.19,
+  "He tries the other colours too."
+ ],
+ [
+  "E01-A4-44",
+  112.19,
+  114.79,
+  "Once a colour is separated, he says,"
+ ],
+ [
+  "E01-A4-45",
+  114.79,
+  117.16,
+  "it obstinately retained its colour,"
+ ],
+ [
+  "E01-A4-46",
+  117.16,
+  119.2,
+  "whatever he did to it."
+ ],
+ [
+  "E01-A4-47",
+  119.2,
+  121.41,
+  "So the prism isn't making the"
+ ],
+ [
+  "E01-A4-48",
+  121.41,
+  123.6,
+  "colours, it's sorting them."
+ ],
+ [
+  "E01-A4-49",
+  123.6,
+  126.47,
+  "Every kind of ray was in the white sunlight all"
+ ],
+ [
+  "E01-A4-50",
+  126.47,
+  128.85,
+  "along, mixed together. The"
+ ],
+ [
+  "E01-A4-51",
+  128.85,
+  131.63,
+  "glass just spreads them out."
+ ],
+ [
+  "E01-A4-52",
+  131.63,
+  134.13,
+  "He checks it the other way too."
+ ],
+ [
+  "E01-A4-53",
+  134.13,
+  136.53,
+  "He gathers the spread -out rays back together"
+ ],
+ [
+  "E01-A4-54",
+  136.53,
+  138.65,
+  "with a lens. Where they"
+ ],
+ [
+  "E01-A4-55",
+  138.65,
+  140.72,
+  "meet, they make white again."
+ ],
+ [
+  "E01-A4-56",
+  140.72,
+  142.81,
+  "In his words, light,"
+ ],
+ [
+  "E01-A4-57",
+  142.81,
+  145.73,
+  "entirely and perfectly white."
+ ],
+ [
+  "E01-A4-58",
+  145.73,
+  148.7,
+  "Ever seen a little rainbow thrown on a wall by a"
+ ],
+ [
+  "E01-A4-59",
+  148.7,
+  150.81,
+  "window, or a glass of water?"
+ ],
+ [
+  "E01-A4-60",
+  150.81,
+  154.12,
+  "Then you've seen the first half of his experiment."
+ ],
+ [
+  "E01-A4-61",
+  154.12,
+  156.12,
+  "In his letter, he puts it"
+ ],
+ [
+  "E01-A4-62",
+  156.12,
+  158.2,
+  "like this. Colours"
+ ],
+ [
+  "E01-A4-63",
+  158.2,
+  160.25,
+  "are not qualifications of"
+ ],
+ [
+  "E01-A4-64",
+  160.25,
+  162.51,
+  "light, derived from refractions or"
+ ],
+ [
+  "E01-A4-65",
+  162.51,
+  164.88,
+  "reflections of natural bodies."
+ ],
+ [
+  "E01-A4-66",
+  164.88,
+  167.66,
+  "Put simply, glass doesn't create"
+ ],
+ [
+  "E01-A4-67",
+  167.66,
+  169.92,
+  "colour. Light bouncing off"
+ ],
+ [
+  "E01-A4-68",
+  169.92,
+  171.94,
+  "things doesn't create it either."
+ ],
+ [
+  "E01-A4-69",
+  171.94,
+  174.94,
+  "Each kind of ray carries something fixed,"
+ ],
+ [
+  "E01-A4-70",
+  174.94,
+  177.9,
+  "and that decides which colour you'll see."
+ ],
+ [
+  "E01-A4-71",
+  177.9,
+  180.76,
+  "He sends all this in a letter from Cambridge,"
+ ],
+ [
+  "E01-A4-72",
+  180.76,
+  183.25,
+  "in February 1672."
+ ],
+ [
+  "E01-A4-73",
+  183.25,
+  186.19,
+  "It's printed in the Philosophical Transactions,"
+ ],
+ [
+  "E01-A4-74",
+  186.19,
+  189.38,
+  "the journal run by the Royal Society's secretary."
+ ],
+ [
+  "E01-A4-75",
+  189.38,
+  191.56,
+  "Plenty of readers like it,"
+ ],
+ [
+  "E01-A4-76",
+  191.56,
+  194.75,
+  "but not all of them. Robert Hooke,"
+ ],
+ [
+  "E01-A4-77",
+  194.75,
+  196.92,
+  "a leading London scientist, is not"
+ ],
+ [
+  "E01-A4-78",
+  196.92,
+  199.81,
+  "impressed, and says so."
+ ],
+ [
+  "E01-A4-79",
+  199.81,
+  202.39,
+  "The arguments, with Hooke and others,"
+ ],
+ [
+  "E01-A4-80",
+  202.39,
+  205.44,
+  "drag on by letter for about six years."
+ ],
+ [
+  "E01-A4-81",
+  205.44,
+  208.24,
+  "But notice what Newton has done."
+ ],
+ [
+  "E01-A4-82",
+  208.24,
+  210.37,
+  "He's taken colour out of the"
+ ],
+ [
+  "E01-A4-83",
+  210.37,
+  212.46,
+  "glass. So where is"
+ ],
+ [
+  "E01-A4-84",
+  212.46,
+  215.7,
+  "it?"
+ ]
+]
