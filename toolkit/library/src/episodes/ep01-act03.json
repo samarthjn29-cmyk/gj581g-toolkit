@@ -88,7 +88,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 203.05,
+   "atSec": 203.65,
    "volumeDb": -21.0
   }
  ],
@@ -2119,7 +2119,7 @@
     "E01-A3-75"
    ],
    "start": 195.02,
-   "end": 203.0,
+   "end": 203.6,
    "component": "KeywordPanel",
    "assets": [
     "TXT-024",
@@ -2171,7 +2171,7 @@
     [
      "E01-A3-75",
      199.97,
-     203.0
+     203.6
     ]
    ],
    "transitionIn": "band",
@@ -2186,7 +2186,7 @@
     "E01-A3-76",
     "E01-A3-77"
    ],
-   "start": 203.0,
+   "start": 203.6,
    "end": 209.68,
    "component": "PerspectiveGrid",
    "assets": [
@@ -2225,7 +2225,7 @@
    "beatTimes": [
     [
      "E01-A3-76",
-     203.0,
+     203.6,
      206.4
     ],
     [
