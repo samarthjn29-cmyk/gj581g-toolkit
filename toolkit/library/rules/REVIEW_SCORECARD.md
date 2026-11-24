@@ -17,7 +17,7 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
 - **First-Time Viewer:** only on the joined episode before upload, not per act.
 - **No re-check agents after small fixes:** Claude checks each fixed item on stills or measurements and lists it in
   the report's "Applied" section. A fresh agent re-checks only after a redo of a whole shot or more.
-- Agents get contact sheets of the changed shots, not the whole act, unless the whole act is new.
+- Agents get contact sheets of the changed shots **plus one shot either side** (the cuts in and out), not the whole act, unless the whole act is new. A new act always gets the full review. Scripts that read every frame (stillness, colour, seams, gate2-qa) still run on the whole act. If Sam finds a miss outside the sheet, it is scored here and the sheet widens.
 - **Models (Sam, 24 Nov 2026: "Sure"):** the **Sound** reviewer and routine consistency checks (register vs beat
   sheet vs act file, a second opinion on a voice-audit flag) run on **Sonnet** (Agent `model: "sonnet"`). The
   **Director**, the **Designer + Editor** picture pass, the **Expert**, the **fact-check** and the **First-Time Viewer**
