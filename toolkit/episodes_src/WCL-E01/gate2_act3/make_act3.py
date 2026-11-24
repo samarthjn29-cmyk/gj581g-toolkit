@@ -214,7 +214,9 @@ shot(B(*range(39, 49)), "EyeDiagram", lambda r: {
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": r(word("dalton's", 121))}]},
     "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.5}]},
     sid="D_into_the_eye",
-    overlay={"chips": [{"size": 64, "chips": [{"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 160, "y": 250}], "untilSec": round(108.3 - S(39), 2)},  # review S2: a change inside the 6.7 s hold
+    overlay={"chips": [{"size": 64, "chips": [{"text": "an explanation", "atSec": round(word("explanation") - S(39), 2), "x": 160, "y": 250},
+                                              {"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 160, "y": 360, "accent": True}],
+                         "untilSec": round(108.3 - S(39), 2)},  # review S2 + Gate 3 stillness (102.1-106.6): one panel, two spoken key phrases
                        {"size": 64, "chips": [{"text": "clear", "atSec": round(word("isn't", 124) - S(39), 2), "x": 160, "y": 250, "strikeSec": round(word("clear", 125) - S(39), 2)},
                                               {"text": "tinted", "atSec": round(word("tinted") - S(39), 2), "x": 160, "y": 380, "accent": True}],
                         "arrows": [{"atSec": round(word("tinted") - S(39) - 0.4, 2), "from": [372, 320], "to": [392, 392]}]}]})
@@ -233,13 +235,13 @@ shot(B(49, 50, 51), "ArchivalScanCard", lambda r: {
 shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
     "mode": "section",
     "tints": [{"part": "vitreous", "color": BLUE, "atSec": -1.2, "opacity": 0.5}],
-    "pulses": [{"part": "vitreous", "atSec": r(word("blue", 143)), "to": 0.6, "sec": 1.2}],
-    "rays": {"atSec": r(word("in", 145)), "speed": 700, "count": 18, "colors": RAY,
+    "pulses": [{"part": "vitreous", "atSec": r(word("looking")), "to": 0.6, "sec": 1.4}],  # Gate 3 stillness: from "looking at the world through blue glass" (was on "blue")
+    "rays": {"atSec": r(word("in", 145)), "speed": 700, "count": 18, "size": 10, "colors": RAY,  # Gate 3: dots that read at phone size (Director note 9)
              "absorb": {"atSec": r(word("soaks")), "colors": RAY[:2], "from": 0.55, "to": 0.75, "keep": 0.3}},
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": -1}]},
     "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22},
                {"text": "PHOTOS TODAY", "atSec": r(153.10), "untilSec": r(S(61) - 0.6), "x": 120, "y": 230, "size": 16}]},  # Gate 2 review M2: the stickers are modern photos
-    sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.0},
+    sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.3},  # Gate 3 stillness: the spread carries to 138.8
     overlay={"drift": 0.02, "stickers": [
         {**LEAF, "at": [300, 380], "w": 180, "atSec": round(152.50 - S(52), 2), "tilt": -3,
          "states": [{"atSec": round(word("duller") - S(52), 2), "multiply": BLUE, "opacity": 0.6}], "moves": [{"atSec": round(word("duller") - S(52), 2), "to": [300, 440]}]},
