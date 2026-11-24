@@ -15,6 +15,8 @@ fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts") });
+// each bundle is ~280 MB in /tmp; 50 stale ones filled the disk on 24 Nov 2026 (LESSONS): remove it on exit
+process.on("exit", () => { try { fs.rmSync(serveUrl, { recursive: true, force: true }); } catch {} });
 const browser = await openBrowser("chrome", { chromiumOptions: { gl: "swangle" } });
 const comps = (await getCompositions(serveUrl, { puppeteerInstance: browser })).filter((c) => c.id !== "Episode" && (!only || only.test(c.id)));
 const files = [];

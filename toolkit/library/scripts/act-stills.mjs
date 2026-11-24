@@ -14,6 +14,8 @@ const act = JSON.parse(fs.readFileSync(actFile, "utf8"));
 const last = Math.round(act.beats[act.beats.length - 1].end * 30) - 1;
 fs.mkdirSync(outDir, { recursive: true });
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts") });
+// each bundle is ~280 MB in /tmp; 50 stale ones filled the disk on 24 Nov 2026 (LESSONS): remove it on exit
+process.on("exit", () => { try { fs.rmSync(serveUrl, { recursive: true, force: true }); } catch {} });
 const browser = await openBrowser("chrome", { chromiumOptions: { gl: "swangle" } });
 const index = [];
 try {

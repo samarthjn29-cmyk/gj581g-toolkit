@@ -143,6 +143,8 @@ if (reg.status !== 0) crit.push("registry guard failed (see above)");
 
 // ---- stills at each beat's midpoint, strict registry mode
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts") });
+// each bundle is ~280 MB in /tmp; 50 stale ones filled the disk on 24 Nov 2026 (LESSONS): remove it on exit
+process.on("exit", () => { try { fs.rmSync(serveUrl, { recursive: true, force: true }); } catch {} });
 const browser = await openBrowser("chrome", { chromiumOptions: { gl: "swangle" } });
 const rendered = [];
 const stillErr = {};

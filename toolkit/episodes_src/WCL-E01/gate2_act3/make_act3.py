@@ -86,6 +86,7 @@ H43_VIT = [1055, 1098, 155, 46]  # its own box: the ink point and the morph star
 H43_HUM = [250, 1148, 180, 48]
 H43_OTH = [435, 1148, 775, 48]
 H43_VER = [250, 1203, 875, 48]
+P43_BACK = [200, 1000, 1040, 1000]  # the return to p.43 (shot 61-66): lower on the page, card right, every box inside
 # Grounds (23 Nov 2026 rule, scripts/ground-check.mjs): the page cards sit on the paper desk (LOK-027), so the
 # diagrams between them keep the theme canvas without three graphite shots in a row (Gate 2 look choice).
 PAPER = {"kind": "paper", "tone": "dark"}  # frame review FIX 7: the cream page reads on the dark desk
@@ -120,7 +121,7 @@ shot(B(*range(2, 13)), "LayerStage", lambda r: {
         {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(26.90), "untilSec": r(29.65), "x": 120, "y": 84, "size": 22},  # v6 Editor S3: 3 s to read, as the corner clears  # Gate 3 review S3: leaves with the match
     ],
     "tag": {"parts": [{"text": "MANCHESTER", "atSec": r(word("manchester"))}, {"text": "31 OCT 1794", "atSec": r(word("october"))}],
-            "at": "low-centre", "toCornerAtSec": r(9.0), "untilSec": r(word("literary"))},
+            "at": "low-centre", "toCornerAtSec": r(9.0), "untilSec": r(word("literary")), "cornerEase": True},  # v7 S8: no jolt at 9.0
     "camera": {"pan": -40, "push": 0.03}},
     sid="A_manchester_talk", transitionIn="band", transition={"dir": "down", "tone": "paper"},  # Gate 3 review M1: no hard cut off the slate (act 2's slate exit)
     overlay={"chips": [{"chips": [{"text": "question", "atSec": round(word("question") - S(2), 2), "x": 160, "y": 400},
@@ -208,8 +209,8 @@ shot(B(*range(29, 39)), "LayerStage", lambda r: {
 PLATE_CARD = {"x": 680, "y": 130, "w": 1060, "h": 830, "tilt": 1.0}  # tilted down at the right, clear of the running head
 PLATE_CAPTIONS = [{"text": "THE EYE · SIMPLIFIED", "mono": True, "atSec": -1, "at": [724, 176]},
                   {"text": "Cornea", "atSec": -1, "at": [736, 360], "anchor": [915, 470]},
-                  {"text": "Lens", "atSec": -1, "at": [930, 912], "anchor": [1040, 640]},
-                  {"text": "Retina", "atSec": -1, "at": [1560, 318], "anchor": [1438, 391]}]
+                  {"text": "Lens", "atSec": -1, "at": [1090, 912], "anchor": [1050, 650]},
+                  {"text": "Retina", "atSec": -1, "at": [1560, 318], "anchor": [1428, 398]}]  # v7 picture pass S3/S5: dot on the retina; Lens leader crosses only the wall
 # 39-48 D_into_the_eye: the act's one hard cut, on the hit at 102.10 (cue 3 on the same frame); the cross-section draws
 # in on "explanation"; the fluids outlined, then the vitreous; VITREOUS HUMOUR with the HUMOUR underline (W7); the beam;
 # DALTON'S GUESS in the corner; chips W8 (clear struck, tinted); the jelly tints blue on "It's".
@@ -219,10 +220,10 @@ shot(B(*range(39, 49)), "EyeDiagram", lambda r: {
                  {"parts": ["vitreous"], "atSec": r(word("clear", 111)), "untilSec": r(word("tinted"))}],  # Designer: one teal at a time
     "captions": PLATE_CAPTIONS + [
         {"text": "Vitreous humour", "atSec": r(word("vitreous", 112)), "at": [1240, 198], "anchor": [1300, 390], "size": 34,
-         "underline": {"atSec": r(word("humour", 114)), "fromCh": 9}},
-        {"text": "DALTON'S GUESS · A BLUE VITREOUS", "mono": True, "atSec": r(word("it's", 126)), "at": [1230, 930], "anchor": [1330, 700]}],  # Expert: tied to the wash
+         "underline": {"atSec": r(word("humour", 114)), "fromCh": 9, "untilSec": r(word("it's", 126))}},  # v7 S4: one teal at a time
+        {"text": "DALTON'S GUESS · A BLUE VITREOUS", "mono": True, "atSec": round(r(word("it's", 126)) + 0.46, 2), "at": [1230, 930], "anchor": [1330, 700]}],  # Expert: tied to the wash  # v7 taste: in when the wash shows
     "rays": {"atSec": r(word("light", 117)), "speed": 700, "count": 18, "size": 10, "colors": RAY},  # Designer: light as dots, as in C
-    "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.55}]},
+    "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.55, "brushSec": 0.7}]},  # v7 S1: the wash reaches the back wall before the cut
     sid="D_into_the_eye",
     overlay={"chips": [{"size": 64, "chips": [{"text": "an explanation", "atSec": round(word("explanation") - S(39), 2), "x": 110, "y": 250},
                                               {"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 110, "y": 360, "accent": True}],
@@ -268,7 +269,7 @@ shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
 # near-silence; the rest dim to 40% on "anywhere", "vitreous" alone stays lit, ready to lift.
 ANY = word("anywhere")
 shot(B(*range(61, 67)), "ArchivalScanCard", lambda r: {
-    **P43,
+    **P43, "crop": P43_BACK, "side": "right",  # v7 picture pass S7: not shot 8's crop again (the lines being read, card right)
     "highlights": [{"box": b, "atSec": -1, "dimAtSec": r(ANY)} for b in (H43_PROB, H43_FIC, H43_SUP)] + [{"box": H43_VIT, "atSec": -1}] +
                   [{"box": H43_HUM, "atSec": -1, "dimAtSec": r(ANY)},
                    {"box": H43_OTH, "atSec": r(word("otherwise")), "dimAtSec": r(ANY)},
@@ -285,11 +286,11 @@ CLIP_W = 1180
 CLIP = {"srcId": "SRC-048", "file": "public/assets/sources/eyes_kimbarovsky_clipping.png", "size": [1852, 553]}
 CLIP_AT = (860, 410)
 _s = CLIP_W / CLIP["size"][0]
-_ix = CLIP_AT[0] - CLIP_W / 2 + 390 * _s  # left iris in the cutting (390, 320) -> frame px
+_ix = CLIP_AT[0] - CLIP_W / 2 + 1370 * _s  # v7: the right-hand iris in the cutting (1370, 320) -> frame px; nearer the p.43 box now the card sits right (left iris: 390, 320)
 _iy = CLIP_AT[1] - CLIP["size"][1] * _s / 2 + 320 * _s
 _ir = 46
 shot(B(67, 68), "KeywordPanel", lambda r: {"panel": {"chips": []}},
-    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35, "holdSec": 1.0},  # v5 review S1: the disc stays on the iris 1 s  # Gate 3 review S1: lands in the silence before "So" (177.86)
+    transitionIn="morph", transition={"fromShape": [1635, 196, 142, 45, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35, "holdSec": 1.0},  # v7: fromShape = the lit "vitreous" box on the new p.43 card (measured on a still)  # v5 review S1: the disc stays on the iris 1 s  # Gate 3 review S1: lands in the silence before "So" (177.86)
     overlay={"stickers": [{**CLIP, "at": list(CLIP_AT), "w": CLIP_W, "atSec": 0.12, "tilt": -1.2, "fromTilt": -1.2, "edge": 0,
                            "tag": {"text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH", "dy": 18}},  # v5 review S2/S3: tag up to the cut, photographer named like the prism
                           {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1420, 600], "w": 400,  # v6 Designer: over the cutting's corner, one group

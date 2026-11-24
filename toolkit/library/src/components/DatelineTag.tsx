@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
 import { useAsset } from "../registry";
 import { exit, reveal, sec, SLOW_OUT } from "../motion";
@@ -12,9 +12,10 @@ export type DatelineTagProps = {
   at?: "low-centre" | "corner";
   toCornerAtSec?: number;
   untilSec?: number;
+  cornerEase?: boolean; // ease in and out of the move to the corner (Gate 3 v6 picture pass S8; opt-in, act 1 stays)
 };
 
-export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", toCornerAtSec, untilSec }) => {
+export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", toCornerAtSec, untilSec, cornerEase }) => {
   useAsset("TXT-011");
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -28,7 +29,7 @@ export const DatelineTag: React.FC<DatelineTagProps> = ({ parts, at = "corner", 
   let m = at === "corner" ? 1 : 0;
   if (at !== "corner" && toCornerAtSec !== undefined) {
     const a = sec(toCornerAtSec, fps);
-    m = interpolate(frame, [a, a + sec(0.9, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: SLOW_OUT });
+    m = interpolate(frame, [a, a + sec(0.9, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: cornerEase ? Easing.inOut(Easing.cubic) : SLOW_OUT });
   }
   const x = low.x + (corner.x - low.x) * m;
   const y = low.y + (corner.y - low.y) * m;

@@ -40,7 +40,9 @@ const Y = wavelengthRGB(578);
 const LOWER: Record<string, { x0: number; x1: number; bg: string; f?: string }> = {
   // the red end is his yellow, dimmed (Dalton 1798 p.31: his yellow covers "the red, orange, yellow, and green of
   // others"; the red part "little more than a shade, or defect of light"; Subject Expert, act 3 v6: never a red hue)
-  red: { x0: 0, x1: 1, bg: Y, f: "brightness(0.28)" },
+  // Gate 3 v6 picture pass S6: one yellow running dim -> intense; a ramp from about 22% brightness up to the yellow
+  // band's own colour at the boundary, so there is no step
+  red: { x0: 0, x1: 1, bg: `linear-gradient(90deg, rgba(54,55,0,1) 0%, rgba(150,152,0,1) 62%, ${Y} 100%)` },
   yellow: { x0: 1, x1: 4, bg: `linear-gradient(90deg, ${Y} 0%, ${Y} 30%, rgba(236,226,170,1) 100%)` },
   blue: { x0: 4, x1: 5, bg: wavelengthRGB(470) },
   purple: { x0: 5, x1: 6, bg: wavelengthRGB(470), f: "brightness(0.5)" },

@@ -21,7 +21,7 @@ export type PlateCaption = {
   align?: "start" | "end";
   size?: number; // default 30
   mono?: boolean; // a small caps mono tag (e.g. DALTON'S GUESS), else an italic serif caption
-  underline?: { atSec: number; fromCh?: number; toCh?: number };
+  underline?: { atSec: number; fromCh?: number; toCh?: number; untilSec?: number };
 };
 export type EyeDiagramProps = {
   mode: "simple" | "section" | "plate";
@@ -32,7 +32,7 @@ export type EyeDiagramProps = {
   captions?: PlateCaption[];
   card?: { x: number; y: number; w: number; h: number; tilt?: number };
   openKeys?: { atSec: number; open: number }[];
-  tints?: { part: "vitreous" | "lens"; color: string; atSec: number; opacity?: number }[];
+  tints?: { part: "vitreous" | "lens"; color: string; atSec: number; opacity?: number; brushSec?: number }[]; // brushSec: plate wash brush-on time (default 1.2)
   parts?: { part: "cornea" | "lens" | "vitreous" | "retina"; text: string; atSec: number }[];
   beat?: { atSec: number; drawSec?: number; color?: string };
   rays?: RaySpec & { color?: string }; // section mode: VIS-021 dots of light travelling in through the front to the back
@@ -140,7 +140,9 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
     const wallX = (y: number) => ex + Math.sqrt(Math.max(0, retinaR * retinaR - y * y));
     const frontX = (r: number, h: number) => ex - Math.sqrt(Math.max(0, r * r - h * h)); // a point on the front of a circle
     const pIn2 = pIn;
-    const lensPath = `M ${(lensF + lensB) / 2} ${ey - lensH} Q ${lensF - 1.2 * mm} ${ey} ${(lensF + lensB) / 2} ${ey + lensH} Q ${lensB + 1.9 * mm} ${ey} ${(lensF + lensB) / 2} ${ey - lensH} Z`;
+    // rounded equator (Gate 3 v6 picture pass S2): cubic curves with flat tangents at the tips; back steeper than front
+    const lm = (lensF + lensB) / 2;
+    const lensPath = `M ${lm} ${ey - lensH} C ${lm - 1.1 * mm} ${ey - lensH} ${lensF} ${ey - lensH * 0.6} ${lensF} ${ey} C ${lensF} ${ey + lensH * 0.6} ${lm - 1.1 * mm} ${ey + lensH} ${lm} ${ey + lensH} C ${lm + 1.2 * mm} ${ey + lensH} ${lensB} ${ey + lensH * 0.42} ${lensB} ${ey} C ${lensB} ${ey - lensH * 0.42} ${lm + 1.2 * mm} ${ey - lensH} ${lm} ${ey - lensH} Z`;
     // vitreous: from the ciliary body round the back wall, then cupped round the lens back (hyaloid fossa)
     const vTopY = ey - (ciliaryY + 1.4 * mm);
     const vTopX = frontX(retinaR, ey - vTopY);
@@ -150,7 +152,7 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
       const x = tints.filter((q) => q.part === "vitreous").pop();
       if (!x) return null;
       const a = sec(x.atSec, fps);
-      const brush = interpolate(frame, [a, a + sec(1.2, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+      const brush = interpolate(frame, [a, a + sec(x.brushSec ?? 1.2, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
       let op = x.opacity ?? 0.45;
       for (const pu of pulses.filter((q) => q.part === "vitreous")) {
         const d = pu.sec ?? 1.2;
@@ -203,12 +205,10 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
               <path d={vitPath} />
             </clipPath>
             <filter id={id("wash")} x="-5%" y="-5%" width="110%" height="110%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves={3} seed={9} result="t" />
-              <feDisplacementMap in="SourceGraphic" in2="t" scale={18} xChannelSelector="R" yChannelSelector="G" result="d" />
-              <feGaussianBlur in="d" stdDeviation={3} result="b" />
-              <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves={2} seed={3} result="pg" />
-              <feColorMatrix in="pg" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.8 1.05" result="pm" />
-              <feComposite in="b" in2="pm" operator="in" />
+              {/* watercolour granulation (Gate 3 v6 picture pass S1): low-frequency pigment variation, no per-pixel noise */}
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves={2} seed={9} result="t" />
+              <feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.38 1.08" result="pm" />
+              <feComposite in="SourceGraphic" in2="pm" operator="in" />
             </filter>
             <linearGradient id={id("brush")} x1="0" x2="1" y1="0" y2="0">
               <stop offset={Math.max(0, (tv?.brush ?? 0) * 1.15 - 0.15)} stopColor="#fff" stopOpacity={1} />
@@ -237,24 +237,29 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
           {/* cornea: a 0.55 mm shell bulging ~1 mm beyond the globe */}
           <path d={`M ${limbX} ${ey - corH} A ${corR} ${corR} 0 0 0 ${limbX} ${ey + corH}`} fill="none" stroke={P.ink} strokeWidth={2.6} />
           <path d={`M ${limbX + 0.4 * mm} ${ey - corH + 0.5 * mm} A ${corR - 0.55 * mm} ${corR - 0.55 * mm} 0 0 0 ${limbX + 0.4 * mm} ${ey + corH - 0.5 * mm}`} fill="none" stroke={P.ink} strokeWidth={1.1} opacity={0.75} />
-          {/* retina: lines the inside almost to the front (ora serrata near the ciliary body) */}
-          <path d={`M ${frontX(retinaR, ciliaryY + 1.9 * mm)} ${ey - (ciliaryY + 1.9 * mm)} A ${retinaR} ${retinaR} 0 1 1 ${frontX(retinaR, ciliaryY + 1.9 * mm)} ${ey + ciliaryY + 1.9 * mm}`} fill="none" stroke={P.ink} strokeWidth={2} opacity={0.85} strokeDasharray="1 0" />
-          <path d={`M ${frontX(retinaR - 0.45 * mm, ciliaryY + 1.7 * mm)} ${ey - (ciliaryY + 1.7 * mm)} A ${retinaR - 0.45 * mm} ${retinaR - 0.45 * mm} 0 1 1 ${frontX(retinaR - 0.45 * mm, ciliaryY + 1.7 * mm)} ${ey + ciliaryY + 1.7 * mm}`} fill="none" stroke={P.ink} strokeWidth={0.8} opacity={0.5} strokeDasharray="3 3" />
           {/* the vitreous wash: Dalton's guess, brushed on in watercolour */}
           {tv ? (
             <g mask={`url(#${id("brushm")})`} style={{ mixBlendMode: "multiply" }}>
-              <path d={vitPath} fill={tv.color} opacity={tv.op} filter={`url(#${id("wash")})`} clipPath={`url(#${id("vit")})`} />
+              <g clipPath={`url(#${id("vit")})`}>
+                <path d={vitPath} fill={tv.color} opacity={tv.op} filter={`url(#${id("wash")})`} />
+                {/* the pigment edge where the wash dried against the wall (about +15% density, 2-3 px inside) */}
+                <path d={vitPath} fill="none" stroke={tv.color} strokeWidth={5} opacity={Math.min(1, tv.op * 0.6)} />
+              </g>
             </g>
           ) : null}
+          {/* retina: lines the inside almost to the front (ora serrata near the ciliary body) */}
+          <path d={`M ${frontX(retinaR, ciliaryY + 1.9 * mm)} ${ey - (ciliaryY + 1.9 * mm)} A ${retinaR} ${retinaR} 0 1 1 ${frontX(retinaR, ciliaryY + 1.9 * mm)} ${ey + ciliaryY + 1.9 * mm}`} fill="none" stroke={P.ink} strokeWidth={2.6} opacity={1} />
+          <path d={`M ${frontX(retinaR - 0.45 * mm, ciliaryY + 1.7 * mm)} ${ey - (ciliaryY + 1.7 * mm)} A ${retinaR - 0.45 * mm} ${retinaR - 0.45 * mm} 0 1 1 ${frontX(retinaR - 0.45 * mm, ciliaryY + 1.7 * mm)} ${ey + ciliaryY + 1.7 * mm}`} fill="none" stroke={P.ink} strokeWidth={0.9} opacity={0.45} />
           {/* ciliary body and zonules holding the lens */}
           {[-1, 1].map((sgn) => (
             <g key={sgn}>
-              <path d={`M ${limbX + 0.2 * mm} ${ey + sgn * (corH + 0.1 * mm)} L ${ciliaryX + 2.2 * mm} ${ey + sgn * (ciliaryY + 1.9 * mm)} L ${ciliaryX + 0.6 * mm} ${ey + sgn * (lensH + 1.2 * mm)} Z`} fill={`url(#${id("hatch")})`} stroke={P.ink} strokeWidth={1.4} />
+              <path d={`M ${limbX + 0.2 * mm} ${ey + sgn * (corH + 0.1 * mm)} L ${ciliaryX + 2.2 * mm} ${ey + sgn * (ciliaryY + 1.9 * mm)} L ${ciliaryX + 0.6 * mm} ${ey + sgn * (lensH + 1.2 * mm)} Z`} fill={P.ink} fillOpacity={0.42} stroke={P.ink} strokeWidth={1} strokeLinejoin="round" />
+              <path d={`M ${limbX + 0.2 * mm} ${ey + sgn * (corH + 0.1 * mm)} L ${ciliaryX + 2.2 * mm} ${ey + sgn * (ciliaryY + 1.9 * mm)} L ${ciliaryX + 0.6 * mm} ${ey + sgn * (lensH + 1.2 * mm)} Z`} fill={`url(#${id("hatch")})`} />
               {[0, 1, 2, 3].map((k) => (
                 <line key={k} x1={ciliaryX + 0.6 * mm + k * 0.35 * mm} y1={ey + sgn * (lensH + 1.15 * mm - k * 0.1 * mm)} x2={(lensF + lensB) / 2 - 0.6 * mm + k * 0.5 * mm} y2={ey + sgn * (lensH - 0.1 * mm)} stroke={P.ink} strokeWidth={0.6} opacity={0.6} />
               ))}
               {/* iris: rests on the lens front, the pupil between */}
-              <path d={`M ${limbX + 0.3 * mm} ${ey + sgn * (corH - 0.2 * mm)} Q ${lensF - 0.6 * mm} ${ey + sgn * (pupil + 2.2 * mm)} ${lensF + 0.1 * mm} ${ey + sgn * pupil} L ${lensF - 0.5 * mm} ${ey + sgn * (pupil + 0.2 * mm)} Q ${limbX - 0.2 * mm} ${ey + sgn * (corH - 1.2 * mm)} ${limbX + 0.3 * mm} ${ey + sgn * (corH - 0.2 * mm)} Z`} fill={P.ink} opacity={0.82} />
+              <path d={`M ${limbX + 0.2 * mm} ${ey + sgn * (corH + 0.1 * mm)} Q ${lensF - 0.6 * mm} ${ey + sgn * (pupil + 2.2 * mm)} ${lensF + 0.1 * mm} ${ey + sgn * pupil} L ${lensF - 0.5 * mm} ${ey + sgn * (pupil + 0.2 * mm)} Q ${limbX - 0.3 * mm} ${ey + sgn * (corH - 1.0 * mm)} ${limbX + 0.2 * mm} ${ey + sgn * (corH + 0.1 * mm)} Z`} fill={P.ink} opacity={0.82} />
             </g>
           ))}
           {/* lens: 4 mm thick, 9.5 mm across, back more curved than the front, stippled, never tinted */}
@@ -286,7 +291,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
             const v = Math.min(pin, pout);
             if (v <= 0) return null;
             const size = c.size ?? (c.mono ? 20 : 30);
-            const ul = c.underline ? interpolate(frame, [sec(c.underline.atSec, fps), sec(c.underline.atSec + 0.35, fps)], [0, 1], ease) : 0;
+            const ulOut = c.underline?.untilSec !== undefined ? interpolate(frame, [sec(c.underline.untilSec, fps), sec(c.underline.untilSec + 0.3, fps)], [1, 0], ease) : 1;
+            const ul = c.underline ? interpolate(frame, [sec(c.underline.atSec, fps), sec(c.underline.atSec + 0.35, fps)], [0, 1], ease) * ulOut : 0;
             const chW = size * (c.mono ? 0.62 : 0.5);
             const f = c.underline?.fromCh ?? 0;
             const tch = c.underline?.toCh ?? c.text.length;
@@ -295,7 +301,14 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
               <g key={i} opacity={v}>
                 {c.anchor ? (
                   <>
-                    <line x1={c.align === "end" ? c.at[0] + 8 : c.at[0] - 8} y1={c.at[1] - size * 0.32} x2={c.anchor[0]} y2={c.anchor[1]} stroke={P.ink} strokeWidth={1} opacity={0.7} />
+                    {(() => {
+                      // the leader leaves the caption's nearer end, 6 px clear of the text (Gate 3 v6 picture pass S5)
+                      const L = tx - 6;
+                      const Rr = tx + c.text.length * chW + 6;
+                      const lx = c.anchor[0] <= L ? L : c.anchor[0] >= Rr ? Rr : c.anchor[0] - L < Rr - c.anchor[0] ? L : Rr;
+                      const ly = c.anchor[0] > L && c.anchor[0] < Rr ? (c.anchor[1] > c.at[1] ? c.at[1] + 10 : c.at[1] - size * 0.9) : c.at[1] - size * 0.32;
+                      return <line x1={lx} y1={ly} x2={c.anchor[0]} y2={c.anchor[1]} stroke={P.ink} strokeWidth={1} opacity={0.7} />;
+                    })()}
                     <circle cx={c.anchor[0]} cy={c.anchor[1]} r={3} fill={P.ink} />
                   </>
                 ) : null}
