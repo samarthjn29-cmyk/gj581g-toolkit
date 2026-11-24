@@ -9,7 +9,7 @@ G1 = os.path.join(HERE, "..", "gate1_act3")
 LIB = os.path.join(HERE, "..", "..", "..", "library")
 LEAD = 2.4
 VOICE_SEC = 204.790  # ffprobe of public/episodes/wcl-e01/03_talk_paced_149wpm_even.wav (NAR-003)
-ACT_END = 209.68  # the cue sheet's end (cue 4 alone after 'born.')
+ACT_END = 208.10  # Gate 3 v5 (Sam, 24 Nov 2026: "Also end at 208.1"); was 209.68, the cue sheet's end (cue 4 alone after 'born.')
 W = [(t.strip(".,;?!\"'").lower(), a + LEAD, b + LEAD) for t, a, b in json.load(open(os.path.join(G1, "03_talk_final_words.json")))]
 dump = json.load(open(os.path.join(G1, "beatsheet_dump_v3.json")))
 vals = dump["values"] if isinstance(dump, dict) else dump
@@ -265,16 +265,26 @@ shot(B(*range(61, 67)), "ArchivalScanCard", lambda r: {
     "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done", "quoteAtSec": r(word("otherwise"))},  # review S3: in on its word  # FIX 6: the quote being read (p.43, verbatim, the 'disco-/vered' break joined)
     transitionIn="slide", ground=PAPER, extra=[])
 
-# 67-68 the simple eye: the "vitreous" bar lifts off and becomes the iris (shape morph, landing in the pause before
-# "So"); the eye model (VIS-061 sticker) on "open"; chips W12; one close, keyed 0.30 s before the shot's end.
-shot(B(67, 68), "EyeDiagram", lambda r: {
-    "mode": "simple",
-    "openKeys": [{"atSec": 0, "open": 1}, {"atSec": r(S(69) - 0.30), "open": 0}]},
-    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [848, 434, 224, 224, 112], "durSec": 0.35},  # Gate 3 review S1: lands in the silence before "So" (177.86)
-    overlay={"stickers": [{"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1600, 520], "w": 320,
+# 67-68 the eyes (Gate 3 v5, Sam 24 Nov 2026: "Can we do a newpaper cutting or a picture cut ... to display the eye in
+# the frame. It's not looking good and i would like to drop it."): the line-drawn eye is gone. A newspaper cutting of a
+# real pair of eyes (SRC-048, halftone on newsprint, our own print of an Unsplash photo) lies on the dark ground; the
+# "vitreous" bar morphs onto its left iris (landing in the pause before "So"); the eye model (VIS-061) on "open"; chips
+# "only" / "two" under the cutting; the frame drops out on the cut on action into the portrait.
+CLIP_W = 1180
+CLIP = {"srcId": "SRC-048", "file": "public/assets/sources/eyes_kimbarovsky_clipping.png", "size": [1852, 553]}
+CLIP_AT = (860, 410)
+_s = CLIP_W / CLIP["size"][0]
+_ix = CLIP_AT[0] - CLIP_W / 2 + 390 * _s  # left iris in the cutting (390, 320) -> frame px
+_iy = CLIP_AT[1] - CLIP["size"][1] * _s / 2 + 320 * _s
+_ir = 46
+shot(B(67, 68), "KeywordPanel", lambda r: {"panel": {"chips": []}},
+    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35},  # Gate 3 review S1: lands in the silence before "So" (177.86)
+    overlay={"stickers": [{**CLIP, "at": list(CLIP_AT), "w": CLIP_W, "atSec": 0.12, "tilt": -1.2, "fromTilt": -1.2, "edge": 0,
+                           "tag": {"text": "PHOTO TODAY", "dy": 18, "untilSec": round(S(68) - S(67) + 0.2, 2)}},
+                          {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1665, 600], "w": 300,
                            "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
-             "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 160, "y": 490},
-                                  {"text": "two", "atSec": round(word("two", 182) - S(67), 2), "x": 376, "y": 490, "accent": True}]}]})
+             "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 270, "y": 700},
+                                  {"text": "two", "atSec": round(word("two", 182) - S(67), 2), "x": 486, "y": 700, "accent": True}]}]})
 
 # 69-72 H_wish_over_portrait: cut on action from the closing lid onto the viewer's-left lens of his spectacles (1834
 # mezzotint); the Henry strip rises on "exactly" with its two highlights; the world racks on "His biographer".
@@ -294,8 +304,14 @@ shot(B(69, 70, 71, 72), "LayerStage", lambda r: {
 shot(B(73, 74, 75), "KeywordPanel", lambda r: {
     "panel": {"chips": [{"text": "what is", "atSec": r(word("what", 198)), "x": 120, "y": 470},
                         {"text": "colour?", "atSec": r(word("colour", 198)), "x": 476, "y": 470, "accent": True},
-                        {"text": "one man", "atSec": r(word("one", 202)), "x": 120, "y": 590}]}},
-    transitionIn="band", transition={"dir": "up", "tone": "dark"})
+                        {"text": "one man", "atSec": r(word("one", 202)), "x": 120, "y": 590}]},
+    # Gate 3 v5 (Sam: "show in the background a blurred photo of Issac Newton. The photo shouldn't be too famous."): the
+    # one man is Newton; his face (J. Swaine's engraving after Enoch Seeman's 1726 portrait, SRC-049) blurred behind the
+    # chips, tagged on "one man" so the face is named when the line points at him.
+    "labels": [{"text": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726", "atSec": r(word("one", 202)), "x": 1800, "y": 980, "align": "right", "size": 22}]},
+    transitionIn="band", transition={"dir": "up", "tone": "dark"},
+    ground={"kind": "blur", "srcId": "SRC-049", "file": "public/assets/sources/newton_swaine_after_seeman1726.jpg", "size": [1063, 1790],
+            "focus": [0.0, 0.26], "blurPx": 22, "brightness": 0.46, "zoom": 1.4})
 
 # 76-77 E_dark_room: focus match into act 1's dark room, the closed shutter on the left third; act 4 opens from here.
 shot(B(76, 77), "PerspectiveGrid", {
@@ -332,6 +348,12 @@ for c in cues["cues"] + cues["events"]:
 for c in cues["cues"]:
     if c["name"].startswith("3 "):
         c["levels"] = [[102.1, -41], [103.0, -41], [103.4, -44], [127.6, -44], [128.3, -41], [183.4, -41]]
+# Gate 3 v5: the act ends at 208.10 (Sam); cue 4 and the level line end there
+cues["dur"] = ACT_END
+for c in cues["cues"]:
+    if c["until"] > ACT_END:
+        c["until"] = ACT_END
+        c["levels"] = [l for l in c.get("levels", []) if l[0] < ACT_END] + [[ACT_END, c["levels"][-1][1]]] if c.get("levels") else c.get("levels")
 cues["ids"] = {"cues": ["MUS-007", "MUS-012", "MUS-013", "MUS-014"], "events": ["MUS-015", "SFX-025"]}
 
 act = {"finish": {}, "motionBlur": True, "episodeId": "WCL-E01-act03", "themeId": "LOK-009",

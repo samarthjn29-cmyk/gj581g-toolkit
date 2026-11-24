@@ -17,7 +17,7 @@ import { chapterColour } from "../themes/chapterKey";
 export type GroundSpec =
   | { kind: "paper"; seed?: number; tone?: "light" | "dark" } // dark: a warm dark desk under a light pool (things lie on it)
   | { kind: "map"; srcId: string; file?: string; size: readonly [number, number]; focus?: readonly [number, number]; zoom?: number }
-  | { kind: "blur"; srcId: string; file?: string; size: readonly [number, number]; focus?: readonly [number, number] }
+  | { kind: "blur"; srcId: string; file?: string; size: readonly [number, number]; focus?: readonly [number, number]; blurPx?: number; brightness?: number; zoom?: number } // blurPx/brightness/zoom: default 38 / 0.42 / 1.18
   | { kind: "collage"; items: { srcId: string; file?: string; size: readonly [number, number] }[]; seed?: number }
   | { kind: "inset"; act: number };
 
@@ -104,7 +104,8 @@ export const Ground: React.FC<{ spec: GroundSpec }> = ({ spec }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const src = useSourceFile(spec.srcId, spec.file);
       const isMap = spec.kind === "map";
-      const z = isMap ? (spec.zoom ?? 1.25) * (1 + 0.035 * p) : 1.18 * (1 + 0.03 * p);
+      const z = isMap ? (spec.zoom ?? 1.25) * (1 + 0.035 * p) : ((spec as { zoom?: number }).zoom ?? 1.18) * (1 + 0.03 * p);
+      const bl = spec.kind === "blur" ? spec : undefined;
       const box = cover(spec.size, z, spec.focus);
       const panX = isMap ? interpolate(p, [0, 1], [18, -18]) : 0;
       return (
@@ -118,7 +119,7 @@ export const Ground: React.FC<{ spec: GroundSpec }> = ({ spec }) => {
               width: box.width,
               height: box.height,
               maxWidth: "none",
-              filter: isMap ? "grayscale(0.85) sepia(0.25) contrast(1.1) brightness(0.42)" : "blur(38px) saturate(0.85) brightness(0.42)",
+              filter: isMap ? "grayscale(0.85) sepia(0.25) contrast(1.1) brightness(0.42)" : `blur(${bl?.blurPx ?? 38}px) saturate(0.85) brightness(${bl?.brightness ?? 0.42})`,
             }}
           />
           <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 46%, rgba(0,0,0,0) 30%, ${t.colors.dimMask} 100%)` }} />

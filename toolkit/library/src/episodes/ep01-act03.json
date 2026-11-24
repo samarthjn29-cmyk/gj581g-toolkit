@@ -11,7 +11,7 @@
  "voice": {
   "id": "NAR-003",
   "atSec": 2.4,
-  "tailSec": 2.49,
+  "tailSec": 0.91,
   "fadeOutSec": 0.03
  },
  "audio": [
@@ -1901,12 +1901,13 @@
    ],
    "start": 177.37,
    "end": 183.82,
-   "component": "EyeDiagram",
+   "component": "KeywordPanel",
    "assets": [
-    "VIS-019",
-    "VIS-061",
     "VIS-060",
+    "VIS-061",
     "TXT-010",
+    "TXT-024",
+    "MOT-001",
     "MOT-002",
     "TRN-009",
     "LOK-009",
@@ -1914,21 +1915,13 @@
     "SFX-026",
     "MUS-013",
     "SRC-047",
-    "TXT-024",
+    "SRC-048",
     "TRN-001"
    ],
    "props": {
-    "mode": "simple",
-    "openKeys": [
-     {
-      "atSec": 0,
-      "open": 1
-     },
-     {
-      "atSec": 6.15,
-      "open": 0
-     }
-    ]
+    "panel": {
+     "chips": []
+    }
    },
    "beatTimes": [
     [
@@ -1952,16 +1945,38 @@
      3
     ],
     "toShape": [
-     848,
-     434,
-     224,
-     224,
-     112
+     472,
+     392,
+     92,
+     92,
+     46
     ],
     "durSec": 0.35
    },
    "overlay": {
     "stickers": [
+     {
+      "srcId": "SRC-048",
+      "file": "public/assets/sources/eyes_kimbarovsky_clipping.png",
+      "size": [
+       1852,
+       553
+      ],
+      "at": [
+       860,
+       410
+      ],
+      "w": 1180,
+      "atSec": 0.12,
+      "tilt": -1.2,
+      "fromTilt": -1.2,
+      "edge": 0,
+      "tag": {
+       "text": "PHOTO TODAY",
+       "dy": 18,
+       "untilSec": 3.53
+      }
+     },
      {
       "srcId": "SRC-047",
       "file": "public/assets/sources/eye_model_wellcome_cutout.png",
@@ -1970,10 +1985,10 @@
        1197
       ],
       "at": [
-       1600,
-       520
+       1665,
+       600
       ],
-      "w": 320,
+      "w": 300,
       "atSec": 2.91,
       "tilt": 2,
       "object": true,
@@ -1989,14 +2004,14 @@
        {
         "text": "only",
         "atSec": 4.88,
-        "x": 160,
-        "y": 490
+        "x": 270,
+        "y": 700
        },
        {
         "text": "two",
         "atSec": 5.48,
-        "x": 376,
-        "y": 490,
+        "x": 486,
+        "y": 700,
         "accent": true
        }
       ]
@@ -2165,9 +2180,12 @@
     "TRN-011",
     "LOK-009",
     "LOK-010",
+    "LOK-028",
     "SFX-024",
     "MUS-014",
-    "TRN-001"
+    "SRC-049",
+    "TRN-001",
+    "TXT-010"
    ],
    "props": {
     "panel": {
@@ -2192,7 +2210,17 @@
        "y": 590
       }
      ]
-    }
+    },
+    "labels": [
+     {
+      "text": "ISAAC NEWTON · AFTER ENOCH SEEMAN, c. 1726",
+      "atSec": 7.32,
+      "x": 1800,
+      "y": 980,
+      "align": "right",
+      "size": 22
+     }
+    ]
    },
    "beatTimes": [
     [
@@ -2215,6 +2243,22 @@
    "transition": {
     "dir": "up",
     "tone": "dark"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-049",
+    "file": "public/assets/sources/newton_swaine_after_seeman1726.jpg",
+    "size": [
+     1063,
+     1790
+    ],
+    "focus": [
+     0.0,
+     0.26
+    ],
+    "blurPx": 22,
+    "brightness": 0.46,
+    "zoom": 1.4
    }
   },
   {
@@ -2224,7 +2268,7 @@
     "E01-A3-77"
    ],
    "start": 203.6,
-   "end": 209.68,
+   "end": 208.1,
    "component": "PerspectiveGrid",
    "assets": [
     "VIS-015",
@@ -2268,7 +2312,7 @@
     [
      "E01-A3-77",
      206.4,
-     209.68
+     208.1
     ]
    ],
    "transitionIn": "match",

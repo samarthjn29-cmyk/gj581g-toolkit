@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T05:27:07.518Z",
+ "generated": "2026-11-24T10:30:35.064Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2752,7 +2752,7 @@
     "src/layers/Ground.tsx (kind blur)"
    ],
    "status": "Active",
-   "use": "Best use: a portrait, photo or page card shown on its own (the card's own picture behind it). Limit: max 3 shots per act; the same source as the card in front.",
+   "use": "Best use: a portrait, photo or page card shown on its own (the card's own picture behind it); also the person a line points to, behind a keyword panel, with a lighter blur (blurPx ~14) and a name tag (Sam, 24 Nov 2026: Newton behind 'one man', WCL-E01 act 3). Limit: max 3 shots per act; otherwise the same source as the card in front.",
    "maxBeats": null,
    "maxShare": null
   },
@@ -3348,6 +3348,31 @@
    "status": "Active",
    "use": "Best use: 'the only way to check the jelly is to open an eye' (WCL-E01 act 3, VIS-061 object, tagged A MODEL OF AN EYE · WELLCOME COLLECTION; no date on screen: the record says only 'possibly 19th century'). Limit: max 3 beats per episode; never presented as Dalton's eye or as an examination; credit always on screen or in the description. Not for: anatomy claims, or acts 6-7's real examination.",
    "maxBeats": 3,
+   "maxShare": null
+  },
+  "SRC-048": {
+   "id": "SRC-048",
+   "folder": "11_Sources",
+   "name": "Eyes_Kimbarovsky_Clipping",
+   "paths": [
+    "public/assets/sources/eyes_kimbarovsky.jpg",
+    "public/assets/sources/eyes_kimbarovsky_clipping.png"
+   ],
+   "status": "Active",
+   "use": "Best use: 'the only way to check the jelly is to open an eye ... Dalton only has two' (WCL-E01 act 3, beats 67-68): the clipping on the dark ground as a VIS-060 sticker with no white edge, tagged PHOTO TODAY, the morph landing on its left iris. Limit: max 2 beats per episode; always tagged PHOTO TODAY; never presented as Dalton's eyes or as a period print; no invented headline or caption text on the clipping.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-049": {
+   "id": "SRC-049",
+   "folder": "11_Sources",
+   "name": "Newton_Swaine_after_Seeman",
+   "paths": [
+    "public/assets/sources/newton_swaine_after_seeman1726.jpg"
+   ],
+   "status": "Active",
+   "use": "Best use: the 'one man' Dalton leans on (WCL-E01 act 3, beats 73-75): a LOK-028 blur ground behind the keyword chips, tagged with the likeness on 'one man'; later Newton lines in the season where the portrait sits behind other cards. Limit: max 6 beats per episode; always tagged as Newton after Seeman (no engraving date implied); never flipped, colourised or presented as a photograph.",
+   "maxBeats": 6,
    "maxShare": null
   }
  }

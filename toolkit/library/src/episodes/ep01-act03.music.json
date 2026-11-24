@@ -1,5 +1,5 @@
 {
- "dur": 209.68,
+ "dur": 208.1,
  "cues": [
   {
    "name": "1 the talk",
@@ -81,7 +81,7 @@
    "file": "public/music/at_rest_kevin_macleod.mp3",
    "from": 75.0,
    "at": 183.6,
-   "until": 209.68,
+   "until": 208.1,
    "fadeIn": 1.0,
    "fadeOut": 1.0,
    "lufs": -35,
@@ -99,7 +99,7 @@
      -27
     ],
     [
-     209.68,
+     208.1,
      -27
     ]
    ]
