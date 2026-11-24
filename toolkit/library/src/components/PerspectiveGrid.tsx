@@ -45,7 +45,7 @@ export type GridObject = (
       atSec?: number;
       drawSec?: number;
     }
-  | { kind: "prism"; at: V3; size?: number; atSec?: number; apex?: "up" | "down"; turn?: { atSec: number; deg: number; sec?: number } }
+  | { kind: "prism"; at: V3; size?: number; atSec?: number; apex?: "up" | "down"; glass?: boolean; turn?: { atSec: number; deg: number; sec?: number } }
   | {
       kind: "fan";
       from: V3;
@@ -402,6 +402,29 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
         [x + k * 0.55, y + dn * k * 0.38],
       ];
       const deg = o.turn ? interpolate(frame / fps, [o.turn.atSec, o.turn.atSec + (o.turn.sec ?? 0.5)], [0, o.turn.deg], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) }) : 0;
+      if (o.glass) {
+        // glass: a fill that thickens across the face, a thin inner highlight on one edge, a soft spot where light enters (Designer, 25 Nov 2026)
+        const gid = `pgp${i}`;
+        const cx2 = (pts[0][0] + pts[1][0] + pts[2][0]) / 3;
+        const cy2 = (pts[0][1] + pts[1][1] + pts[2][1]) / 3;
+        const inset = (q: number[], f: number) => [cx2 + (q[0] - cx2) * f, cy2 + (q[1] - cy2) * f];
+        const a0 = inset(pts[0], 0.82);
+        const a1 = inset(pts[1], 0.82);
+        const enter = [(pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2];
+        return (
+          <g key={i} transform={deg ? `rotate(${deg} ${x} ${y})` : undefined} opacity={p}>
+            <defs>
+              <linearGradient id={gid} x1="0" x2="1" y1="0" y2="0">
+                <stop offset={0} stopColor={ink} stopOpacity={0.04} />
+                <stop offset={1} stopColor={ink} stopOpacity={0.18} />
+              </linearGradient>
+            </defs>
+            <polygon points={pts.map((q) => q.join(",")).join(" ")} fill={`url(#${gid})`} stroke={ink} strokeOpacity={0.6} strokeWidth={2.2} strokeLinejoin="round" />
+            <line x1={a0[0]} y1={a0[1]} x2={a1[0]} y2={a1[1]} stroke={ink} strokeOpacity={0.35} strokeWidth={1.2} strokeLinecap="round" />
+            <circle cx={enter[0]} cy={enter[1]} r={Math.max(3, k * 0.06)} fill={ink} opacity={0.55} filter="url(#pg-glow)" />
+          </g>
+        );
+      }
       return (
         <polygon
           key={i}

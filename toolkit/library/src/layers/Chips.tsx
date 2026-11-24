@@ -15,7 +15,7 @@ import { sec, SLOW_OUT } from "../motion";
 // highlight. TXT-025: a verbatim quote as spoken, word by word, with its source on a mono chip; max 3 an act.
 type XY = readonly [number, number];
 export type KeywordChip = { text: string; atSec: number; x: number; y: number; accent?: boolean; strikeSec?: number; dimSec?: number; dimTo?: number }; // dimSec: the chip goes quiet (to dimTo, default 0.35) when the story turns away from it (act 4)
-export type KeywordPanel = { chips: KeywordChip[]; arrows?: { atSec: number; from: XY; to: XY }[]; untilSec?: number; size?: number };
+export type KeywordPanel = { chips: KeywordChip[]; arrows?: { atSec: number; from: XY; to: XY }[]; untilSec?: number; size?: number; inkStrike?: boolean }; // inkStrike: strikes in ink, the accent kept for the replacement chip (Designer, 25 Nov 2026)
 export type QuotePanel = {
   lines: { x: number; y: number; words: { text: string; atSec: number }[] }[];
   source?: { text: string; atSec: number; x: number; y: number; untilSec?: number };
@@ -49,7 +49,7 @@ const PanelClip: React.FC<{ out: number; x0: number; x1: number; children: React
     <div style={{ position: "absolute", inset: 0, clipPath: out < 1 ? `inset(-40px -40px -40px ${(x0 + (x1 - x0) * (1 - out)).toFixed(1)}px)` : undefined, opacity: Math.min(1, out * 2.5) }}>{children}</div>
   );
 
-const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: number; tilt: number; strikeSec?: number; dimSec?: number; dimTo?: number; out: number; style?: React.CSSProperties }> = ({ text, atSec, accent, size, tilt, strikeSec, dimSec, dimTo, out, style }) => {
+const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: number; tilt: number; strikeSec?: number; dimSec?: number; dimTo?: number; out: number; style?: React.CSSProperties; inkStrike?: boolean }> = ({ text, atSec, accent, size, tilt, strikeSec, dimSec, dimTo, out, style, inkStrike }) => {
   const L = useChipLook();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -77,7 +77,7 @@ const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; size: numb
       }}
     >
       {text}
-      {ps > 0 ? <div style={{ position: "absolute", left: "6%", top: "52%", height: 6, width: `${(88 * ps).toFixed(1)}%`, borderRadius: 3, background: accent ? L.whiteInk : L.accent }} /> : null}
+      {ps > 0 ? <div style={{ position: "absolute", left: "6%", top: "52%", height: 6, width: `${(88 * ps).toFixed(1)}%`, borderRadius: 3, background: accent ? L.whiteInk : inkStrike ? L.whiteInk : L.accent, opacity: inkStrike && !accent ? 0.8 : 1 }} /> : null}
     </div>
   );
 };
@@ -112,7 +112,7 @@ export const KeywordChips: React.FC<{ panel: KeywordPanel }> = ({ panel }) => {
       })}
       {panel.chips.map((c, i) => (
         <div key={i} style={{ position: "absolute", left: c.x, top: c.y }}>
-          <Chip text={c.text} atSec={c.atSec} accent={c.accent} size={size} tilt={i % 2 ? 1.5 : -1.5} strikeSec={c.strikeSec} dimSec={c.dimSec} dimTo={c.dimTo} out={out} />
+          <Chip text={c.text} atSec={c.atSec} accent={c.accent} size={size} tilt={i % 2 ? 1.5 : -1.5} strikeSec={c.strikeSec} dimSec={c.dimSec} dimTo={c.dimTo} out={out} inkStrike={panel.inkStrike} />
         </div>
       ))}
     </PanelClip>

@@ -313,7 +313,7 @@ shot(B(75, 76, 77, 78), "KeywordPanel", lambda r: {"panel": {"size": 64, "chips"
     {"text": "says so", "atSec": r(198.50), "x": 140, "y": 880, "accent": True}]}},
     sid="S1_hooke", transitionIn="band", transition={"dir": "up", "tone": "dark"},
     ground={"kind": "blur", "srcId": "SRC-060", "size": [1800, 2883], "focus": [0.5, 0.4], "blurPx": 14},
-    overlay=lambda r: {"stickers": [{"srcId": "SRC-060", "size": [1800, 2883], "at": [1380, 520], "w": 420, "atSec": r(194.04), "tilt": 2, "edge": 6,
+    overlay=lambda r: {"stickers": [{"srcId": "SRC-060", "size": [1800, 2883], "crop": [40, 280, 1490, 2340], "at": [1380, 520], "w": 420, "atSec": r(194.04), "tilt": 2, "edge": 6,
                                      "tag": {"text": "ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665\nNO CONFIRMED PORTRAIT OF HOOKE SURVIVES", "untilSec": r(199.10)}}]})
 
 # --- S2: Newton's printed answer, p.5084
@@ -377,6 +377,19 @@ for b in act["beats"]:
         for o in b["props"].get("objects", []):
             if o.get("kind") == "fan" and not o.get("ghost"):
                 o["smooth"] = True
+# Sam, 25 Nov 2026 ("Do all three (Recommended)"): glass prisms; strike-throughs in ink.
+def walk(x):
+    if isinstance(x, dict):
+        if x.get("kind") == "prism":
+            x["glass"] = True
+        if isinstance(x.get("chips"), list) and any(isinstance(c, dict) and "strikeSec" in c for c in x["chips"]):
+            x["inkStrike"] = True
+        for v in x.values():
+            walk(v)
+    elif isinstance(x, list):
+        for v in x:
+            walk(v)
+walk(act["beats"])
 # Reading time (gate2 rule): a highlight keeps 2 s after it lands (0.7 s wipe). A late one lands early,
 # on the phrase before its word, rather than the page staying past its words.
 for b in act["beats"]:

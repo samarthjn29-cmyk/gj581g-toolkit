@@ -709,7 +709,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": 4.71
+      "atSec": 4.71,
+      "glass": true
      },
      {
       "kind": "fan",
@@ -1421,7 +1422,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": -1
+      "atSec": -1,
+      "glass": true
      },
      {
       "kind": "fan",
@@ -1486,7 +1488,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": 6.18
+      "atSec": 6.18,
+      "glass": true
      }
     ]
    },
@@ -1596,7 +1599,8 @@
       "turn": {
        "atSec": 11.89,
        "deg": 4
-      }
+      },
+      "glass": true
      },
      {
       "kind": "fan",
@@ -1654,7 +1658,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": -1
+      "atSec": -1,
+      "glass": true
      },
      {
       "kind": "label",
@@ -2010,7 +2015,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": -1
+      "atSec": -1,
+      "glass": true
      },
      {
       "kind": "fan",
@@ -2265,7 +2271,8 @@
         "y": 165,
         "accent": true
        }
-      ]
+      ],
+      "inkStrike": true
      }
     ]
    },
@@ -2341,7 +2348,8 @@
       ],
       "size": 160,
       "apex": "down",
-      "atSec": -1
+      "atSec": -1,
+      "glass": true
      },
      {
       "kind": "fan",
@@ -2961,7 +2969,8 @@
        "x": 900,
        "y": 800
       }
-     ]
+     ],
+     "inkStrike": true
     },
     "labels": [
      {
@@ -3236,6 +3245,12 @@
        1800,
        2883
       ],
+      "crop": [
+       40,
+       280,
+       1490,
+       2340
+      ],
       "at": [
        1380,
        520
@@ -3434,7 +3449,8 @@
       "apex": "down",
       "atSec": -1,
       "dimSec": 4.25,
-      "dimTo": 0.3
+      "dimTo": 0.3,
+      "glass": true
      },
      {
       "kind": "fan",

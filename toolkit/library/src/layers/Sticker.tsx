@@ -24,6 +24,7 @@ export type StickerSpec = {
   fromTilt?: number; // tilt it pops in from (default 4 degrees further the same way)
   object?: boolean; // VIS-061 ObjectProp
   edge?: number; // white edge px (default 6; 0 for none)
+  crop?: readonly [number, number, number, number]; // x, y, w, h in source px: show only this part (a scan's border off)
   states?: { atSec: number; multiply?: string | null; opacity?: number }[];
   moves?: { atSec: number; to: XY; w?: number; sec?: number }[];
   tag?: { text: string; dy?: number; untilSec?: number }; // '\n' breaks the tag into lines
@@ -48,7 +49,9 @@ export const Sticker: React.FC<{ s: StickerSpec }> = ({ s }) => {
     at = [at[0] + (m.to[0] - at[0]) * p, at[1] + (m.to[1] - at[1]) * p];
     w = w + ((m.w ?? w) - w) * p;
   }
-  const h = (w * s.size[1]) / s.size[0];
+  const cr = s.crop ?? [0, 0, s.size[0], s.size[1]];
+  const h = (w * cr[3]) / cr[2];
+  const k = w / cr[2]; // frame px per source px
   const p = interpolate(frame, [sec(s.atSec, fps), sec(s.atSec + 0.6, fps)], [0, 1], { ...clamp, easing: SLOW_OUT });
   const rest = s.tilt ?? 2;
   const from = s.fromTilt ?? (rest >= 0 ? rest + 4 : rest - 4); // pops in from about 6 degrees, settles to 2-3
@@ -86,7 +89,15 @@ export const Sticker: React.FC<{ s: StickerSpec }> = ({ s }) => {
         </filter>
       </svg>
       <div style={{ position: "absolute", inset: 0, transform: `rotate(${tilt.toFixed(2)}deg) scale(${scale.toFixed(4)})`, opacity: op, filter: "drop-shadow(0px 8px 10px rgba(0,0,0,0.30))" }}>
-        <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: edge > 0 ? `url(#${fid})` : undefined }} />
+        {s.crop ? (
+          <div style={{ position: "absolute", inset: 0, filter: edge > 0 ? `url(#${fid})` : undefined }}>
+            <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+              <Img src={src} style={{ position: "absolute", left: -cr[0] * k, top: -cr[1] * k, width: s.size[0] * k, height: s.size[1] * k, maxWidth: "none" }} />
+            </div>
+          </div>
+        ) : (
+          <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: edge > 0 ? `url(#${fid})` : undefined }} />
+        )}
         {layers.map(({ st, o }, i) => (st.multiply && o > 0 ? <div key={i} style={{ position: "absolute", inset: 0, background: st.multiply, mixBlendMode: "multiply", opacity: o * (st.opacity ?? 0.85), ...mask }} /> : null))}
       </div>
       {s.tag && tagIn > 0 && tagOut > 0 ? (
