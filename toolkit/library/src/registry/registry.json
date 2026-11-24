@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T12:46:36.656Z",
+ "generated": "2026-11-24T13:24:28.398Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3386,6 +3386,134 @@
    "status": "Planned",
    "use": "Best use: the globe and the close view of the British Isles inside MAP-013 EarthFlyIn (an act or episode opening that lands on a place). Limit: only through MAP-013 (1 per episode); always tagged SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE; never presented as a photo of a day or of the period; credit NASA Earth Observatory / Blue Marble Next Generation.",
    "maxBeats": null,
+   "maxShare": null
+  },
+  "SFX-028": {
+   "id": "SFX-028",
+   "folder": "6_Sounds",
+   "name": "PixabayFoleyKit",
+   "paths": [
+    "public/sfx/kit/pixabay/glass_clink.wav",
+    "public/sfx/kit/pixabay/glass_clink_wine.wav",
+    "public/sfx/kit/pixabay/page_flip_v1.wav",
+    "public/sfx/kit/pixabay/page_flip_v2.wav",
+    "public/sfx/kit/pixabay/page_flip_v3.wav",
+    "public/sfx/kit/pixabay/page_turn_book_v1.wav",
+    "public/sfx/kit/pixabay/page_turn_book_v2.wav",
+    "public/sfx/kit/pixabay/page_turn_book_v3.wav",
+    "public/sfx/kit/pixabay/page_turn_single.wav",
+    "public/sfx/kit/pixabay/paper_handle_v1.wav",
+    "public/sfx/kit/pixabay/paper_handle_v2.wav",
+    "public/sfx/kit/pixabay/paper_handle_v3.wav",
+    "public/sfx/kit/pixabay/paper_rustle_v1.wav",
+    "public/sfx/kit/pixabay/paper_rustle_v2.wav",
+    "public/sfx/kit/pixabay/paper_rustle_v3.wav",
+    "public/sfx/kit/pixabay/paper_sheet_v1.wav",
+    "public/sfx/kit/pixabay/paper_sheet_v2.wav",
+    "public/sfx/kit/pixabay/pen_stroke_v1.wav",
+    "public/sfx/kit/pixabay/pen_stroke_v2.wav",
+    "public/sfx/kit/pixabay/pen_stroke_v3.wav",
+    "public/sfx/kit/pixabay/quill_stroke_v1.wav",
+    "public/sfx/kit/pixabay/quill_stroke_v2.wav",
+    "public/sfx/kit/pixabay/quill_stroke_v3.wav",
+    "public/sfx/kit/pixabay/quill_stroke_v4.wav",
+    "public/sfx/kit/pixabay/room_tone_ambience.wav",
+    "public/sfx/kit/pixabay/room_tone_quiet.wav",
+    "public/sfx/kit/pixabay/shutter_lock_v1.wav",
+    "public/sfx/kit/pixabay/shutter_lock_v2.wav",
+    "public/sfx/kit/pixabay/shutter_pivot_v1.wav",
+    "public/sfx/kit/pixabay/shutter_pivot_v2.wav",
+    "public/sfx/kit/pixabay/shutter_slide_v1.wav",
+    "public/sfx/kit/pixabay/shutter_slide_v2.wav",
+    "public/sfx/kit/pixabay/kit.json"
+   ],
+   "status": "Active",
+   "use": "Best use: real-material foley the Mixkit kits lack (more paper variety, quill on paper, a wooden shutter for Newton's dark room, a prism or glass clink, quiet room tone), on the hero motion of a shot, in a pause. Limit: each file as its kit's limit (paper 10 per episode across SFX-016 and this kit); never on a word; credited in the description (Pixabay).",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "SRC-051": {
+   "id": "SRC-051",
+   "folder": "11_Sources",
+   "name": "WoolsthorpeManor_MemoryCatcher",
+   "paths": [
+    "public/assets/sources/woolsthorpe_manor_memorycatcher.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: Newton's birthplace today (WCL-E01 act 4), as a card or a blur ground, tagged WOOLSTHORPE MANOR · TODAY. Limit: max 4 beats per episode; 1280 px, so never full bleed past 1.0 zoom; never said to show the 1600s.",
+   "maxBeats": 4,
+   "maxShare": null
+  },
+  "SRC-052": {
+   "id": "SRC-052",
+   "folder": "11_Sources",
+   "name": "LakeDistrict_Ullswater_Stelogic",
+   "paths": [
+    "public/assets/sources/lake_district_ullswater_stelogic.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the Lake District today where Dalton grew up and taught (Cumberland and Westmorland), tagged LAKE DISTRICT · TODAY. Limit: max 3 beats per episode; never labelled Kendal or Eaglesfield.",
+   "maxBeats": 3,
+   "maxShare": null
+  },
+  "SRC-053": {
+   "id": "SRC-053",
+   "folder": "11_Sources",
+   "name": "ManchesterCathedral_Pexels27893739",
+   "paths": [
+    "public/assets/sources/manchestercathedral_pexels27893739.mp4"
+   ],
+   "status": "Planned",
+   "use": "Best use: Manchester today where a line names the town (WCL-E01 act 4+), tagged MANCHESTER · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-054": {
+   "id": "SRC-054",
+   "folder": "11_Sources",
+   "name": "ManchesterTownHall_Pexels4643453",
+   "paths": [
+    "public/assets/sources/manchestertownhall_pexels4643453.mp4"
+   ],
+   "status": "Planned",
+   "use": "Best use: Manchester today; the Town Hall where the city remembers Dalton (act 7), tagged MANCHESTER TOWN HALL · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-055": {
+   "id": "SRC-055",
+   "folder": "11_Sources",
+   "name": "ManchesterCentralLibrary_Pexels12163709",
+   "paths": [
+    "public/assets/sources/manchestercentrallibrary_pexels12163709.mp4"
+   ],
+   "status": "Planned",
+   "use": "Best use: Manchester today between graphics, tagged MANCHESTER · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-056": {
+   "id": "SRC-056",
+   "folder": "11_Sources",
+   "name": "LangdalePikes_Pexels36742892",
+   "paths": [
+    "public/assets/sources/langdalepikes_pexels36742892.mp4"
+   ],
+   "status": "Planned",
+   "use": "Best use: The Lake District today (Dalton's Cumberland and Westmorland), tagged LAKE DISTRICT · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them.",
+   "maxBeats": 2,
+   "maxShare": null
+  },
+  "SRC-057": {
+   "id": "SRC-057",
+   "folder": "11_Sources",
+   "name": "Windermere_Pexels31675425",
+   "paths": [
+    "public/assets/sources/windermere_pexels31675425.mp4"
+   ],
+   "status": "Planned",
+   "use": "Best use: The Lake District today near Kendal, tagged WINDERMERE · TODAY. Limit: max 2 shots per episode each; counts towards the footage share (VIS-016, 15%); never presented as period footage; place names only as the clip shows them.",
+   "maxBeats": 2,
    "maxShare": null
   }
  }

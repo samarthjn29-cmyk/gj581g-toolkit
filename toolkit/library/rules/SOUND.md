@@ -24,7 +24,10 @@ specialists' jobs into measurements and hands Sam a short **listen list**: the f
 
 **Sound designer's part (by reading, not hearing):** every sound tied to something on screen, in a pause, one per
 moving thing, the right kit for the material (paper for paper, air for a move); no sound repeated three times running;
-the hero sound of each shot at hero level, textures under.
+the hero sound of each shot at hero level, textures under. Real-material foley first comes from the Pixabay kit
+(SFX-028, `public/sfx/kit/pixabay/kit.json`, 24 Nov 2026): paper, page turns, quill and pen, wooden shutters, glass,
+room tone. Its files have a `peakSec`: a cue starts that much before the visual hit; a file under -20 LUFS gets
+`volumeDb` raised by the difference so the cue level means the same as for the other kits.
 
 ## Output (`episodes_src/<EP>/gate3_<act>/SOUND_<clip>.md`)
 - A verdict line; MUST / SHOULD / TASTE with times and exact fixes (cue, seconds, dB).

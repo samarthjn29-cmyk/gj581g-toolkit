@@ -7,7 +7,9 @@ the same thing for every sound.
   split IN OUTSTEM N [--min 0.12] cut a file of several hits (clicks, ticks, key presses) into N separate hits
                                  (OUTSTEM_v1.wav ...), the loudest N onsets at least --min s apart, each levelled as above.
                                  Variants are how one sound stays unrepeated (rule V in sound-pass.py).
-  loop  IN OUT SEC               a seamless loop of SEC seconds from the steadiest part (ambience: projector hum,
+  events IN OUTSTEM N [--max 1.5] [--gap 0.12] foley takes: N separate phrases cut at the silences between them
+                                 (a page turned, a sheet handled, a quill stroke), spread over the take, each levelled.
+  loop  IN OUT SEC              a seamless loop of SEC seconds from the steadiest part (ambience: projector hum,
                                  hiss), 0.5 s crossfade at the seam, levelled to --lufs.
   stats FILES...                 duration, LUFS, true peak, spectral centroid.
 """
@@ -38,8 +40,26 @@ def level(x, target):
     if not np.isfinite(L):
         L = 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12)
     g = target - L
+    if LIMIT[0] > 0 and g > -1.0 - tp:  # peaky foley: up to LIMIT dB of limiting instead of leaving it quiet
+        lim = min(LIMIT[0], g - (-1.0 - tp))
+        y = limit(x * 10 ** ((-1.0 - tp + lim) / 20))
+        L2, tp2 = lufs_of(y)
+        g2 = min(target - L2, -1.0 - tp2)
+        return y * 10 ** (g2 / 20), L2 + g2
     g = min(g, -1.0 - tp)  # never past -1 dBTP
     return x * 10 ** (g / 20), L + g
+
+
+LIMIT = [0.0]
+
+
+def limit(x):
+    # ffmpeg's alimiter at -1 dBFS, 2 ms attack, 60 ms release (no make-up gain)
+    tmp = "/tmp/_sfxprep_lim.wav"
+    wavfile.write(tmp, SR, x.astype(np.float32))
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", tmp, "-af", "alimiter=limit=0.89:attack=2:release=60:level=disabled",
+                          "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True).stdout
+    return np.frombuffer(raw, dtype=np.float32).astype(np.float64)
 
 
 def trim(x, thr_db=-45):
@@ -93,7 +113,14 @@ def main():
     ap.add_argument("args", nargs="+")
     ap.add_argument("--lufs", type=float, default=-20)
     ap.add_argument("--min", type=float, default=0.12)
+    ap.add_argument("--limit", type=float, default=0, help="allow up to this many dB of peak limiting to reach --lufs (foley: 6)")
+    ap.add_argument("--max", type=float, default=1.5, help="events: longest phrase kept (s)")
+    ap.add_argument("--minlen", type=float, default=0.3, help="events: shortest phrase kept (s)")
+    ap.add_argument("--gap", type=float, default=0.12, help="events: silences shorter than this join phrases (s)")
+    ap.add_argument("--lead", type=float, default=18, help="events: pre-roll quieter than this many dB under the phrase's peak is cut")
+    ap.add_argument("--below", type=float, default=28, help="events: sound = within this many dB of the take's loud frames")
     a = ap.parse_args()
+    LIMIT[0] = a.limit
     if a.mode == "one":
         x = fades(trim(load(a.args[0])))
         y, L = level(x, a.lufs)
@@ -119,6 +146,67 @@ def main():
             p = f"{stem}_v{k}.wav"
             save(p, y)
             print(f"{p}: from {s / SR:.2f} s, {len(y) / SR:.2f} s, {L:.1f} LUFS")
+    elif a.mode == "events":
+        # Foley takes (paper handled, a page turned, a quill stroke, a shutter): each sound is a phrase, not a click,
+        # so cut at the silences between phrases, not at onsets. Phrases closer than --gap merge; each is kept
+        # --minlen..--max s long (longer ones end at the quietest 20 ms inside the limit, with a 60 ms fade);
+        # the N with the most energy, spread over the take, are kept.
+        src, stem, n = a.args[0], a.args[1], int(a.args[2])
+        x = load(src)
+        hop = int(0.02 * SR)
+        r = np.sqrt(np.array([np.mean(x[i:i + hop] ** 2) for i in range(0, len(x) - hop, hop)]) + 1e-12)
+        db = 20 * np.log10(r)
+        thr = np.percentile(db, 97) - a.below
+        on = db > thr
+        ev, i = [], 0
+        while i < len(on):
+            if on[i]:
+                j = i
+                while j < len(on) and (on[j] or np.any(on[j:j + int(a.gap / 0.02)])):
+                    j += 1
+                ev.append((i, j))
+                i = j
+            else:
+                i += 1
+        mx = int(a.max / 0.02)
+        pieces = []
+        for s, e in ev:  # a long continuous take is cut into pieces, each ending at its quietest late frame
+            while e - s > mx:
+                lo = s + int(mx * 0.6)
+                c = lo + int(np.argmin(db[lo:s + mx]))
+                pieces.append((s, c))
+                s = c
+            pieces.append((s, e))
+        cands = []
+        for s, e in pieces:
+            if (e - s) * 0.02 < a.minlen:
+                continue
+            seg = x[max(0, s * hop - int(0.01 * SR)): e * hop + int(0.02 * SR)]
+            cands.append((float(np.sum(seg ** 2)), s * hop / SR, seg))
+        # spread: split the take into N equal parts and take the strongest phrase of each; fill up by energy
+        dur = len(x) / SR
+        chosen = []
+        for k in range(n):
+            part = [c for c in cands if k * dur / n <= c[1] < (k + 1) * dur / n and c not in chosen]
+            if part:
+                chosen.append(max(part, key=lambda c: c[0]))
+        for c in sorted(cands, key=lambda c: -c[0]):
+            if len(chosen) >= n:
+                break
+            if all(c is not d for d in chosen):
+                chosen.append(c)
+        chosen.sort(key=lambda c: c[1])
+        for k, (_, t, seg) in enumerate(chosen, 1):
+            # start 30 ms before the first 20 ms frame within --lead dB of the phrase's loudest frame, so a cue placed
+            # on the visual hit is not late behind faint pre-roll (handling noise before the sheet moves)
+            fr = np.sqrt(np.array([np.mean(seg[i:i + hop] ** 2) for i in range(0, max(1, len(seg) - hop), hop)]) + 1e-12)
+            fdb = 20 * np.log10(fr)
+            first = int(np.argmax(fdb > fdb.max() - a.lead))
+            seg = seg[max(0, first * hop - int(0.03 * SR)):]
+            y, L = level(fades(trim(seg), fi=0.01, fo=0.06), a.lufs)
+            p = f"{stem}_v{k}.wav"
+            save(p, y)
+            print(f"{p}: from {t:.2f} s, {len(y) / SR:.2f} s, {L:.1f} LUFS")
     elif a.mode == "loop":
         src, out, dur = a.args[0], a.args[1], float(a.args[2])
         x = load(src)
