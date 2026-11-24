@@ -235,14 +235,19 @@ shot(B(49, 50, 51), "ArchivalScanCard", lambda r: {
 shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
     "mode": "section",
     "tints": [{"part": "vitreous", "color": BLUE, "atSec": -1.2, "opacity": 0.5}],
-    "pulses": [{"part": "vitreous", "atSec": r(word("looking")), "to": 0.6, "sec": 1.4}],  # Gate 3 stillness: from "looking at the world through blue glass" (was on "blue")
+    "pulses": [{"part": "vitreous", "atSec": r(word("looking")), "to": 0.72, "sec": 1.6}],  # Gate 3 stillness: from "looking at the world through blue glass" (was on "blue")
     "rays": {"atSec": r(word("in", 145)), "speed": 700, "count": 18, "size": 10, "colors": RAY,  # Gate 3: dots that read at phone size (Director note 9)
              "absorb": {"atSec": r(word("soaks")), "colors": RAY[:2], "from": 0.55, "to": 0.75, "keep": 0.3}},
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": -1}]},
     "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22},
                {"text": "PHOTOS TODAY", "atSec": r(153.10), "untilSec": r(S(61) - 0.6), "x": 120, "y": 230, "size": 16}]},  # Gate 2 review M2: the stickers are modern photos
     sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.3},  # Gate 3 stillness: the spread carries to 138.8
-    overlay={"drift": 0.02, "stickers": [
+    overlay={"drift": 0.02,
+             # Gate 3 stillness (138.8-145.3): W9's keyword panel in place of the dropped blue-glass object; gone before the rays
+             "chips": [{"size": 64, "chips": [{"text": "makes sense", "atSec": round(word("makes") - S(52), 2), "x": 160, "y": 250},
+                                              {"text": "blue glass", "atSec": round(word("blue", 143) - S(52), 2), "x": 160, "y": 360, "accent": True}],
+                        "untilSec": round(144.85 - S(52), 2)}],
+             "stickers": [
         {**LEAF, "at": [300, 380], "w": 180, "atSec": round(152.50 - S(52), 2), "tilt": -3,
          "states": [{"atSec": round(word("duller") - S(52), 2), "multiply": BLUE, "opacity": 0.6}], "moves": [{"atSec": round(word("duller") - S(52), 2), "to": [300, 440]}]},
         {**WAX, "at": [300, 700], "w": 140, "atSec": round(153.10 - S(52), 2), "tilt": 2,

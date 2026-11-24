@@ -1199,6 +1199,7 @@
    "assets": [
     "VIS-019",
     "TXT-010",
+    "TXT-024",
     "MOT-002",
     "TRN-001",
     "LOK-009",
@@ -1206,7 +1207,6 @@
     "SFX-025",
     "MUS-013",
     "MUS-008",
-    "TXT-024",
     "VIS-021"
    ],
    "props": {
@@ -1510,6 +1510,7 @@
     "LOK-009",
     "LOK-010",
     "MUS-013",
+    "TXT-024",
     "TRN-001",
     "VIS-021",
     "VIS-060",
@@ -1531,8 +1532,8 @@
      {
       "part": "vitreous",
       "atSec": 4.86,
-      "to": 0.6,
-      "sec": 1.4
+      "to": 0.72,
+      "sec": 1.6
      }
     ],
     "rays": {
@@ -1645,6 +1646,27 @@
    },
    "overlay": {
     "drift": 0.02,
+    "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "makes sense",
+        "atSec": 2.98,
+        "x": 160,
+        "y": 250
+       },
+       {
+        "text": "blue glass",
+        "atSec": 5.94,
+        "x": 160,
+        "y": 360,
+        "accent": true
+       }
+      ],
+      "untilSec": 7.35
+     }
+    ],
     "stickers": [
      {
       "srcId": "SRC-014",
