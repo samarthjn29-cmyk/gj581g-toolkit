@@ -4372,7 +4372,7 @@
    "SRC-047, SRC-048",
    "",
    "Yes: SRC-048 eyes newspaper cutting (new at Gate 3, Sam 24 Nov 2026); TRN-009 ShapeMorph; SRC-047 Wellcome eye model",
-   "Calm. [Gate 3 v5, Sam 24 Nov 2026: the line-drawn eye dropped.] TRN-009 shape morph: the 'vitreous' highlight box [832, 285, 123, 37, 3] lifts off and lands on the LEFT IRIS [472, 392, 92, 92, 46] of a newspaper cutting of a real pair of eyes (SRC-048, our halftone print of Mason Kimbarovsky's Unsplash photo, VIS-060 with no white edge, at (860, 410), w 1180, tagged PHOTO TODAY until 180.9) on the dark ground (KeywordPanel shot, MOT-001 drift). The morph (0.35 s) lands in the pause before 'So' with SFX-026. The eye model (VIS-061, A MODEL OF AN EYE / WELLCOME COLLECTION) pops in at (1665, 600) on 'open'. Music drops to silence from the pause after 'eye.' through the pause after 'two.'.",
+   "Calm. [Gate 3 v5, Sam 24 Nov 2026: the line-drawn eye dropped.] TRN-009 shape morph: the 'vitreous' highlight box [832, 285, 123, 37, 3] lifts off and lands on the LEFT IRIS [472, 392, 92, 92, 46] of a newspaper cutting of a real pair of eyes (SRC-048, our halftone print of Mason Kimbarovsky's Unsplash photo, VIS-060 with no white edge, at (860, 410), w 1180, tagged PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH to the cut) on the dark ground (KeywordPanel shot, MOT-001 drift). The morph (0.35 s) lands in the pause before 'So' with SFX-026; its disc stays lit on the iris 1 s (v5 review). The eye model (VIS-061, A MODEL OF AN EYE / WELLCOME COLLECTION) pops in at (1665, 600) on 'open'. Music drops to silence from the pause after 'eye.' through the pause after 'two.'.",
    "FIX: MUS-013 LongNoteTwoCue is Planned"
   ],
   [
