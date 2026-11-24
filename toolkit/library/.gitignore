@@ -20,3 +20,8 @@ public/episodes/
 
 # Library music tracks: Drive copy (Video Reference Library/7_Music) is the master; too big for git
 public/music/*.mp3
+# Pixabay and Pexels files (licence: no standalone redistribution): Drive copies, not git
+public/assets/sources/woolsthorpe_manor_memorycatcher.jpg
+public/assets/sources/lake_district_ullswater_stelogic.jpg
+public/assets/sources/*pexels*
+public/assets/sources/*pixabay*
