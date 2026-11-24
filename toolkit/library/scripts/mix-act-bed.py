@@ -77,8 +77,10 @@ m = lufs(["-i", tmp.replace(".mp4", ".mov")])
 # Linear level (independent review, 22 Nov 2026: loudnorm fell back to dynamic mode and rode the voice up
 # 2 dB across the act, against "Sam's audio is final"): one fixed gain to -16 LUFS, then only a peak limiter.
 gain_all = -16.0 - float(m["input_i"])
-af = f"volume={gain_all:.2f}dB,alimiter=limit={10 ** (-2.0 / 20):.4f}:attack=1:release=60:level=false,aresample=48000"
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp.replace(".mp4", ".mov"), "-c:v", "copy", "-af", af, "-c:a", "aac", "-b:a", "256k", a.out], check=True)
+af = f"volume={gain_all:.2f}dB,alimiter=limit={10 ** (-2.0 / 20):.4f}:attack=1:release=60:level=false,aresample=48000,apad=pad_dur=0.5"
+# padded, then cut to the picture with -shortest: the limiter and the AAC encoder drop ~85 ms of tail otherwise (the audio
+# ended 67 ms before the picture, Gate 3 review M5)
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp.replace(".mp4", ".mov"), "-c:v", "copy", "-af", af, "-c:a", "aac", "-b:a", "256k", "-shortest", a.out], check=True)
 subprocess.run(["rm", "-f", tmp.replace(".mp4", ".mov")])
 f = lufs(["-i", a.out])
 print(f"bed {L:.1f} LUFS -> {a.lufs} (gain {gain:+.1f} dB), {'pocket ' + a.pocket if a.pocket else 'full-band duck'}, dips {dips}, breaks {breaks}, sweeps {sweeps}; final {f['input_i']} LUFS, TP {f['input_tp']}")
