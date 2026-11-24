@@ -23,13 +23,13 @@
   {
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/paper_move.wav",
-   "atSec": 29.65,
-   "volumeDb": -24.0
+   "atSec": 29.4,
+   "volumeDb": -34.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 29.95,
+   "atSec": 29.65,
    "volumeDb": -26.0
   },
   {
@@ -778,7 +778,7 @@
       "enter": "rise",
       "states": [
        {
-        "atSec": 20.41,
+        "atSec": 20.06,
         "color": "#574F18",
         "blend": "replace"
        }
@@ -804,7 +804,7 @@
         "label": "A WAX SEAL · TODAY"
        },
        {
-        "atSec": 20.41,
+        "atSec": 20.06,
         "color": "#574F18",
         "blend": "replace"
        }
@@ -1206,8 +1206,8 @@
     "SFX-025",
     "MUS-013",
     "MUS-008",
-    "VIS-021",
-    "TXT-024"
+    "TXT-024",
+    "VIS-021"
    ],
    "props": {
     "mode": "section",
@@ -1317,6 +1317,18 @@
    ],
    "overlay": {
     "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "isn't hollow",
+        "atSec": 4.42,
+        "x": 160,
+        "y": 250
+       }
+      ],
+      "untilSec": 6.2
+     },
      {
       "size": 64,
       "chips": [
@@ -1556,6 +1568,14 @@
       "x": 120,
       "y": 790,
       "size": 22
+     },
+     {
+      "text": "PHOTOS TODAY",
+      "atSec": 15.6,
+      "untilSec": 23.7,
+      "x": 120,
+      "y": 230,
+      "size": 16
      }
     ]
    },
@@ -1795,7 +1815,8 @@
       "dimAtSec": 11.96
      }
     ],
-    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done"
+    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done",
+    "quoteAtSec": 3.86
    },
    "beatTimes": [
     [
@@ -2102,6 +2123,7 @@
    "component": "KeywordPanel",
    "assets": [
     "TXT-024",
+    "MOT-001",
     "MOT-002",
     "TRN-011",
     "LOK-009",

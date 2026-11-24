@@ -161,9 +161,9 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
                 "why": "Same idea: the sentence on p.34 where Dalton matches the laurel leaf to red sealing-wax; the two things lift off the page that names them."}],
     "carry": [
         # rises from "laurel" so it settles in the comma pause after "leaf," (55.1-55.25), where its pop is
-        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(word("laurel")), "enter": "rise", "states": [{"atSec": r(71.65), "color": OLIVE, "blend": "replace"}]},
+        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(word("laurel")), "enter": "rise", "states": [{"atSec": r(71.30), "color": OLIVE, "blend": "replace"}]},
         {**WAX, "at": [330, 690], "w": 200, "atSec": r(word("sealing")), "enter": "rise",
-         "states": [{"atSec": r(word("wax", 59)), "label": "A WAX SEAL · TODAY"}, {"atSec": r(71.65), "color": OLIVE, "blend": "replace"}]},  # FIX 2: one measured olive on both
+         "states": [{"atSec": r(word("wax", 59)), "label": "A WAX SEAL · TODAY"}, {"atSec": r(71.30), "color": OLIVE, "blend": "replace"}]},  # Gate 2 review M3: complete (72.00) before "To him"; FIX 2: one measured olive on both
         # W4: pale on the pale page, so 420 wide (Gate 2 builder test); lands on "seal letters", sinks before "Think"
         {"srcId": "SRC-046", "file": "public/assets/sources/letter1841_wenden_reverse_cutout.png", "size": [1899, 1056], "at": [1440, 770], "w": 420, "tilt": 3, "atSec": r(word("used")), "enter": "rise",  # FIX 8
          "untilSec": r(62.45), "exit": "sink", "caption": "A SEALED LETTER · 1841", "captionSize": 20},
@@ -214,7 +214,8 @@ shot(B(*range(39, 49)), "EyeDiagram", lambda r: {
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": r(word("dalton's", 121))}]},
     "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.5}]},
     sid="D_into_the_eye",
-    overlay={"chips": [{"size": 64, "chips": [{"text": "clear", "atSec": round(word("isn't", 124) - S(39), 2), "x": 160, "y": 250, "strikeSec": round(word("clear", 125) - S(39), 2)},
+    overlay={"chips": [{"size": 64, "chips": [{"text": "isn't hollow", "atSec": round(word("hollow") - S(39), 2), "x": 160, "y": 250}], "untilSec": round(108.3 - S(39), 2)},  # review S2: a change inside the 6.7 s hold
+                       {"size": 64, "chips": [{"text": "clear", "atSec": round(word("isn't", 124) - S(39), 2), "x": 160, "y": 250, "strikeSec": round(word("clear", 125) - S(39), 2)},
                                               {"text": "tinted", "atSec": round(word("tinted") - S(39), 2), "x": 160, "y": 380, "accent": True}],
                         "arrows": [{"atSec": round(word("tinted") - S(39) - 0.4, 2), "from": [372, 320], "to": [392, 392]}]}]})
 
@@ -236,7 +237,8 @@ shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
     "rays": {"atSec": r(word("in", 145)), "speed": 700, "count": 18, "colors": RAY,
              "absorb": {"atSec": r(word("soaks")), "colors": RAY[:2], "from": 0.55, "to": 0.75, "keep": 0.3}},
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": -1}]},
-    "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22}]},
+    "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22},
+               {"text": "PHOTOS TODAY", "atSec": r(153.10), "untilSec": r(S(61) - 0.6), "x": 120, "y": 230, "size": 16}]},  # Gate 2 review M2: the stickers are modern photos
     sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.0},
     overlay={"drift": 0.02, "stickers": [
         {**LEAF, "at": [300, 380], "w": 180, "atSec": round(152.50 - S(52), 2), "tilt": -3,
@@ -253,7 +255,7 @@ shot(B(*range(61, 67)), "ArchivalScanCard", lambda r: {
                   [{"box": H43_HUM, "atSec": -1, "dimAtSec": r(ANY)},
                    {"box": H43_OTH, "atSec": r(word("otherwise")), "dimAtSec": r(ANY)},
                    {"box": H43_VER, "atSec": r(word("has", 170)), "dimAtSec": r(ANY)}],
-    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done"},  # FIX 6: the quote being read (p.43, verbatim, the 'disco-/vered' break joined)
+    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done", "quoteAtSec": r(word("otherwise"))},  # review S3: in on its word  # FIX 6: the quote being read (p.43, verbatim, the 'disco-/vered' break joined)
     transitionIn="slide", ground=PAPER, extra=[])
 
 # 67-68 the simple eye: the "vitreous" bar lifts off and becomes the iris (shape morph, landing in the pause before
@@ -299,8 +301,8 @@ shot(B(76, 77), "PerspectiveGrid", {
 K = "public/sfx/kit/"
 audio = [
     {"id": "SFX-017", "file": K + "tactile/pencil_stroke.wav", "atSec": round(word("college"), 2), "volumeDb": -29.0},  # the ring draws round "Academy"
-    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("paper", 28) + 0.7, 2), "volumeDb": -24.0},  # the p.28 page settles (pause after "paper.")
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(13) + 0.25, 2), "volumeDb": -26.0},  # focus match into the p.28 card (pause before "Its")
+    {"id": "SFX-016", "file": K + "tactile/paper_move.wav", "atSec": round(word("paper", 28) + 0.45, 2), "volumeDb": -34.0},  # review S1: under the swish, not over it  # the p.28 page settles (pause after "paper.")
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(13) - 0.05, 2), "volumeDb": -26.0},  # focus match into the p.28 card (pause before "Its")
     {"id": "SFX-016", "file": K + "tactile/pages_move.wav", "atSec": round(S(17) + 0.1, 2), "volumeDb": -26.0},  # the glide to p.34 (quiet paper slide)
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": round(S(21) - 0.15, 2), "volumeDb": -21.6},  # push into the page (pause before "Here's one"); cue 2 enters
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": round(word("laurel") + 0.62, 2), "volumeDb": -24.0},  # the leaf settles (comma pause after "leaf,")

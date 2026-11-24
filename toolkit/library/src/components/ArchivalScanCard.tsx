@@ -22,6 +22,7 @@ export type ArchivalScanCardProps = {
   callout?: { atSec: number; dim?: number };
   quoteMarks?: boolean; // false for a book title (not a quote)
   notes?: { text: string; atSec: number; untilSec?: number; accent?: boolean }[]; // mono notes under the source tag, on their words
+  quoteAtSec?: number; // the quote column comes in on its spoken word, not with the card (default: with the card)
   strokes?: StrokesSpec; // TEX-008 ScreenStrokes over the held page, kept off the highlighted words
   startSec?: number;
 };
@@ -38,6 +39,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   quoteMarks = true,
   notes = [],
   strokes,
+  quoteAtSec,
   startSec = 0,
 }) => {
   useAssets(["VIS-001", "MOT-001", "MOT-002", ...(callout ? ["VIS-029"] : []), ...(strokes ? ["TEX-008"] : [])]);
@@ -59,7 +61,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   const textW = 1920 - t.safe.x * 2 - cardW - 90;
 
   const pCard = reveal(frame, fps, startSec, t.motion.enterSec);
-  const pQuote = reveal(frame, fps, startSec + st * 2, t.motion.enterSec);
+  const pQuote = reveal(frame, fps, quoteAtSec ?? startSec + st * 2, t.motion.enterSec);
   const pLine = reveal(frame, fps, startSec + st * 2 + t.motion.enterSec, 0.7);
   const pTag = reveal(frame, fps, startSec + st * 4, t.motion.enterSec);
 

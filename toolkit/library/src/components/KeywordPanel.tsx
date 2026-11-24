@@ -1,5 +1,6 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
+import { drift } from "../motion";
 import { useAssets } from "../registry";
 import { KeywordChips, type KeywordPanel as Panel } from "../layers/Chips";
 
@@ -8,9 +9,12 @@ import { KeywordChips, type KeywordPanel as Panel } from "../layers/Chips";
 export type KeywordPanelProps = { panel: Panel };
 
 export const KeywordPanel: React.FC<KeywordPanelProps> = ({ panel }) => {
-  useAssets(["TXT-024", "MOT-002"]);
+  useAssets(["TXT-024", "MOT-001", "MOT-002"]);
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
+  // MOT-001 slow drift (2%) so the held panel is never a frozen frame
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
       <KeywordChips panel={panel} />
     </AbsoluteFill>
   );
