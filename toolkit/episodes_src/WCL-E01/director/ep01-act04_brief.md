@@ -557,3 +557,14 @@ Every on-screen string, exactly as it will appear (printed quotes as printed, lo
 4. Chip strikes (L `making`, Q `glass`, `light bouncing off things`): do they count against TXT-020 StrikeThrough
    (max 2 per episode)? If yes, Q's two strikes become a plain dim.
 5. Five shots run 13-16 s (B, D2, F, I2, Q), each with a layout change inside it. Accept, or split?
+
+---
+
+## Applied after fact-check 2 and the Expert (Claude, 25 Nov 2026; written into gate1_act4/beats_act4.py)
+Fact-check: gate1_act4_onscreen_factcheck.md (42 PASS, 8 FIX, 3 CHECK). Expert: expert/ep01-act04_gate1_expert.md (4 MUST, 7 SHOULD, 5 TASTE). All FIX and MUST items applied; SHOULDs applied except the vertical band (`fan.axis: "y"`, optional).
+- **Light geometry (Expert MUST 1-4, fact-check FIX 2/6):** every prism is drawn point-down (builder: `prism.apex: "down"`), so light bends towards the base; red is the end nearest the beam's straight line in every room shot. D2 fan `x0 -582 (violet), x1 418 (red)`, `VIOLET` x 570, `RED` x 1230. I1: board `[-450,120,1200] w 600`, board band `x0 -422, x1 -303, y -55, h 40`, hole `[-398,-55,1200]` (770, 444), prism 2 `[-34,-46,1650]` (946, 452), one straight line prism 1 -> hole -> prism 2. I2: prism 2 `[-34,-46,850]` (941, 444); blue lands `[249,-339,1200]` (1079, 308), red `[249,-234,1200]` (1079, 358); ghost centred on the blue landing (`x0 169, x1 569, y -339`); prism 1 turns ~4° during the shift; `ITS OWN FIXED AMOUNT` at (941, 530). M: beam from `[-1850,-120,-250]`, wall band violet 400 / red 900, lens-plane band -309..-82, y -51.
+- **Labels:** `ROUND, LIKE THE HOLE` (was ROUND HOLE: the ring is the round spot he expected); `NEWTON'S DIAGRAM · OPTICKS, 1704` (was OWN DRAWING); `NO CONFIRMED PORTRAIT OF HOOKE SURVIVES` (was NO AUTHENTIC); p.5084 tag adds `NO. 88`; photo credit `EXSTROM LABORATORIES`; L adds `KINDS OF RAY` over the mixed streaks (dots drawn as short streaks).
+- **Printed words:** catchword "Colours." (full stop), p.3076 H2 ends "circular."; R's H3 box `[410,1901,795,64]`, crop `[0,40,1554,1930]`.
+- **Q chips:** the verbs are struck (`doesn't create colour`, `creates it`), never `glass` or `light bouncing off things`; 2 strikes in the act (chip layer TXT-024).
+- **CHECK items decided:** coloured streaks in the white beam kept as Newton's own 1672 picture ("kinds of ray"), under the ILLUSTRATION tag and the KINDS OF RAY label; act 5 says the rays are not themselves coloured. SRC-061 register row updated to the brief's tag and max 3 beats.
+- **Builder additions added:** 18 `prism.apex`; 19 RayParticles `streak` style.

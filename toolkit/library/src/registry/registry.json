@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T18:19:59.343Z",
+ "generated": "2026-11-24T18:31:30.338Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3565,7 +3565,7 @@
     "public/assets/sources/hooke_micrographia1665_title.jpg"
    ],
    "status": "Planned",
-   "use": "Best use: Robert Hooke's name in WCL-E01 act 4 ('Robert Hooke, a leading London scientist'), as a sticker on its own blur, tagged with his name and that no authentic portrait of him survives. Limit: max 4 beats per episode. Not for: presenting it as a portrait, or as what Hooke said about Newton's letter.",
+   "use": "Best use: Robert Hooke's name in WCL-E01 act 4 ('Robert Hooke, a leading London scientist'), as a sticker on its own blur, tagged ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665 / NO CONFIRMED PORTRAIT OF HOOKE SURVIVES. Limit: max 4 beats per episode. Not for: presenting it as a portrait, or as what Hooke said about Newton's letter.",
    "maxBeats": 4,
    "maxShare": null
   },
@@ -3577,8 +3577,8 @@
     "public/assets/sources/newton1672_answer_p5084.jpg"
    ],
    "status": "Planned",
-   "use": "Best use: 'is not impressed. And says so.' (WCL-E01 act 4): the printed answer that shows Hooke's 'Considerations' were sent and answered, title highlighted. Limit: max 2 beats per episode; tagged NEWTON'S REPLY · PHIL. TRANS., 1672. Not for: Hooke's own words (they are not on this page).",
-   "maxBeats": 2,
+   "use": "Best use: 'is not impressed. And says so.' / 'The arguments ... drag on' (WCL-E01 act 4): the printed answer that shows Hooke's 'Considerations' were sent and answered, title highlighted. Limit: max 3 beats per episode; tagged ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. NO. 88, 1672 · P. 5084. Not for: Hooke's own words (they are not on this page).",
+   "maxBeats": 3,
    "maxShare": null
   },
   "SRC-062": {

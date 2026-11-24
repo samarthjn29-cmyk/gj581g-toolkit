@@ -189,7 +189,7 @@
   "SRC-058",
   "",
   "",
-  "H3 'Triangular glass-Prisme' on 'triangular' (18.57); callout: H1/H2 dim to 0.45 (the shot's layout change); H4 'to try therewith the celebrated Phænomena of' + catchword 'Colours,' on 'already' (20.88): people already knew."
+  "H3 'Triangular glass-Prisme' on 'triangular' (18.57); callout: H1/H2 dim to 0.45 (the shot's layout change); H4 'to try therewith the celebrated Phænomena of' + catchword 'Colours.' on 'already' (20.88): people already knew."
  ],
  [
   "E01-A4-09",
@@ -381,7 +381,7 @@
   "",
   "",
   "",
-  "The band lands on the far wall on 'band' (43.25): x 1013-1191, y 456, 5:1, red right. Hard cut at 44.90 (pause after 'appears.')."
+  "The band lands on the far wall on 'band' (43.25): x 1013-1191, y 456, 5:1, red at the right (the end nearest the beam's straight line: red bends least). Every prism is drawn point-down, as both of Newton's are in Fig. 18 (builder: prism apex; a prism bends light towards its base). Hard cut at 44.90 (pause after 'appears.')."
  ],
  [
   "E01-A4-17",
@@ -405,7 +405,7 @@
   "",
   "",
   "Yes: PerspectiveGrid builder addition (dashed rings with stagger)",
-  "Calm. Director D2_far_wall: hard cut, same scene, the far wall close (depth 400, dark 0.85, fog 0, dolly 0.02): the band is there on the cut, x 533-1267, y 397-543 (733x147 px, 5:1), red left (the end named first), light from upper left. Tag held from D1. Phase 1 colours, phase 2 shape (the layout change at 52.20). Texture: ground (TEX-009 plaster on the wall plane); band, rings and labels flat and crisp. Labels (mono caps 22, y 573): RED at x 570 on 'Red' (45.44); VIOLET at x 1230 on 'violet' (46.62)."
+  "Calm. Director D2_far_wall: hard cut, same scene, the far wall close (depth 400, dark 0.85, fog 0, dolly 0.02): the band is there on the cut, x 533-1267, y 397-543 (733x147 px, 5:1), fan x0 -582 (violet, left), x1 418 (red, right): the same orientation as D1 across the hard cut (fact-check FIX 2, Expert MUST 2). Tag held from D1. Phase 1 colours, phase 2 shape (the layout change at 52.20). Texture: ground (TEX-009 plaster on the wall plane); band, rings and labels flat and crisp. Labels (mono caps 22, y 573): RED at x 1230 on 'Red' (45.44); VIOLET at x 570 on 'violet' (46.62)."
  ],
  [
   "E01-A4-18",
@@ -501,7 +501,7 @@
   "",
   "",
   "",
-  "Dashed ring at (607, 470) r 73 on 'round' (55.26), label ROUND HOLE under it at 55.66 (the round image the hole would give)."
+  "Dashed ring at (607, 470) r 73 on 'round' (55.26), label ROUND, LIKE THE HOLE under it at 55.66 (the round spot he expected the hole to give; fact-check FIX 3)."
  ],
  [
   "E01-A4-22",
@@ -597,7 +597,7 @@
   "SRC-058",
   "",
   "",
-  "H2 'ction, I expected should have been circular,' on 'says' (63.73), holding 2.4 s, and the quote column."
+  "H2 'ction, I expected should have been circular.' on 'says' (63.73), holding 2.4 s, and the quote column."
  ],
  [
   "E01-A4-26",
@@ -669,7 +669,7 @@
   "",
   "",
   "",
-  "'white light' (560, 390) on 71.20; 'is pure' accent (960, 390) on 72.00; 'the prism' (560, 530) on 73.66."
+  "Chip 'white light' (560, 390) on 71.20; 'is pure' accent (960, 390) on 72.00; 'the prism' (560, 530) on 73.66."
  ],
  [
   "E01-A4-29",
@@ -693,7 +693,7 @@
   "",
   "",
   "",
-  "'changes it' (900, 530) on 73.90; 'makes the colours' (560, 670) on 75.68."
+  "Chip 'changes it' (900, 530) on 73.90; 'makes the colours' (560, 670) on 75.68."
  ],
  [
   "E01-A4-30",
@@ -717,7 +717,7 @@
   "",
   "",
   "",
-  "'Newton' (560, 830) on 77.70; the six chips above dim to 0.35 on 'suspects' (77.94); 'the other way round' accent (800, 830) on 78.80. SFX-024 at 80.22."
+  "Chip 'Newton' (560, 830) on 77.70; the six chips above dim to 0.35 on 'suspects' (77.94); 'the other way round' accent (800, 830) on 78.80. SFX-024 at 80.22."
  ],
  [
   "E01-A4-31",
@@ -813,7 +813,7 @@
   "SRC-059",
   "",
   "Yes: SRC-059 Opticks 1704 Plate IV, Fig. 18 (new, Planned); VIS-005 first use",
-  "Calm. Director H_fig18: TRN-017 lens settle (0.7 s, blur 14) to a real picture: SpotlightIsolator on SRC-059 Opticks Plate IV, crop [0, 380, 2423, 1363], target Fig. 18 [450, 770, 1720, 610] -> screen x 357-1719, y 309-792. Label NEWTON'S OWN DRAWING · OPTICKS, 1704 (drawn later). Never flipped, though his light runs right to left. Texture: object (the plate keeps its own paper and ink). Lens settle; focus-set sound SFX-019 on the settle 86.85 (pause); brackets lock on 'He lets' (87.45); label below the target 0.4 s later."
+  "Calm. Director H_fig18: TRN-017 lens settle (0.7 s, blur 14) to a real picture: SpotlightIsolator on SRC-059 Opticks Plate IV, crop [0, 380, 2423, 1363], target Fig. 18 [450, 770, 1720, 610] -> screen x 357-1719, y 309-792. Label NEWTON'S DIAGRAM · OPTICKS, 1704 (an engraving of his figure, published later; fact-check FIX 5). Never flipped, though his light runs right to left. Texture: object (the plate keeps its own paper and ink). Lens settle; focus-set sound SFX-019 on the settle 86.85 (pause); brackets lock on 'He lets' (87.45); label below the target 0.4 s later."
  ],
  [
   "E01-A4-35",
@@ -861,7 +861,7 @@
   "",
   "",
   "Yes: PerspectiveGrid builder addition (board object with a hole; fan clipped to the board)",
-  "Calm. Director I1_board_room: TRN-015 focus match [740, 594]: his drawn hole becomes the room's hole. Room wide (depth 2000, dark 0.85, fog 0, dolly 0.02), tag ILLUSTRATION · NEWTON'S DARKENED ROOM from 92.00, held through I2. On the cut: shutter, hole, beam, prism 1 (as D1) and a board (builder: board object) at z 1200, centre [-335,170,1200], w 700, h 520 (x 633-967, y 427-676), hole at (800, 500); the band from prism 1 falls on the board with its blue on the hole. One board where Newton used two (the script's simplification; Fig. 18 showed both). SFX-022 J-cut from 91.00 through I2. Texture: ground (TEX-009 plaster in the wall planes); board a flat panel. Match lands on the board's hole; a blue beam draws from the hole towards prism 2 on 'gets through' (92.65)."
+  "Calm. Director I1_board_room: TRN-015 focus match [740, 594]: his drawn hole becomes the room's hole. Room wide (depth 2000, dark 0.85, fog 0, dolly 0.02), tag ILLUSTRATION · NEWTON'S DARKENED ROOM from 92.00, held through I2. On the cut: shutter, hole, beam, prism 1 (as D1) and a board (builder: board object) at z 1200, centre [-450,120,1200], w 600; the band from prism 1 falls on the board where D1's light reaches it, x0 -422 (violet), x1 -303 (red), y -55, h 40 (red on the same side as D1); hole [-398,-55,1200] at (770, 444) on its blue; prism 2 at [-34,-46,1650] (946, 452), on one line with prism 1 and the hole, so the blue beam does not kink at the hole (Expert MUST 3). One board where Newton used two (the script's simplification; Fig. 18 showed both). SFX-022 J-cut from 91.00 through I2. Texture: ground (TEX-009 plaster in the wall planes); board a flat panel. Match lands on the board's hole; a blue beam draws from the hole towards prism 2 on 'gets through' (92.65)."
  ],
  [
   "E01-A4-37",
@@ -909,7 +909,7 @@
   "",
   "",
   "",
-  "Prism 2 (size 160) at [150,40,1650] (1020, 486) on 'second' (97.50); glass clink SFX-028 on its settle 98.35 (pause). Hard cut at 98.73."
+  "Prism 2 (size 160, point-down) at [-34,-46,1650] (946, 452) on 'second' (97.50); glass clink SFX-028 on its settle 98.35 (pause). Hard cut at 98.73."
  ],
  [
   "E01-A4-39",
@@ -926,14 +926,14 @@
   "TRN-001",
   "LOK-009, LOK-010",
   "SFX-022",
-  "MUS-012, MUS-010",
+  "MUS-012",
   "TEX-009",
   "",
   "",
   "",
   "",
   "Yes: PerspectiveGrid builder additions (ghost fan; fan shift); MUS-010 break",
-  "Calm. Director I2_second_prism: hard cut, same scene, the camera nearer the board (every z - 800: depth 1200): prism 1 at (432, 417), board hole (714, 516), prism 2 (1045, 493), blue beam hole -> prism 2. The ghost is labelled as the prediction, never shown as a result. 'It doesn't.' (104.93) changes the layout. Music break MUS-010 in the pause 103.6-104.77 (Thinking Music cut, no hit: SFX-025 is at 3 of 3). Texture: ground (TEX-009 plaster); ghost, beams and labels crisp. Caption IF THE GLASS MAKES THE COLOURS at (1295, 298) on 'glass' (99.64)."
+  "Calm. Director I2_second_prism: hard cut, same scene, the camera nearer the board (every z - 800: depth 1200): prism 1, board and hole [-398,-55,400], prism 2 at [-34,-46,850] (941, 444), blue beam hole -> prism 2 in one straight line. The ghost is labelled as the prediction, never shown as a result. 'It doesn't.' (104.93) changes the layout. Music break MUS-010 in the pause 103.6-104.77 (Thinking Music cut, no hit: SFX-025 is at 3 of 3). Texture: ground (TEX-009 plaster); ghost, beams and labels crisp. Caption IF THE GLASS MAKES THE COLOURS at (1295, 298) on 'glass' (99.64)."
  ],
  [
   "E01-A4-40",
@@ -957,7 +957,7 @@
   "",
   "",
   "",
-  "Ghost fan (builder: dashed outline, faint spectral fill 0.18) from prism 2 to the wall (x 1151-1438, y 451) on 'blue' (102.42); the music breaks in the pause after 'something else.' (103.6)."
+  "Ghost fan (builder: dashed outline, faint spectral fill 0.18) from prism 2 to the wall, centred on where the blue really lands (x0 169, x1 569, y -339) so on 'It doesn't.' only the real result is left, on 'blue' (102.42); the music breaks in the pause after 'something else.' (103.6)."
  ],
  [
   "E01-A4-41",
@@ -981,7 +981,7 @@
   "",
   "",
   "",
-  "On 'doesn't' (104.93) the ghost fades (0.4 s) and its caption un-wipes (from 104.73): the act's peak, dry. The blue bends: beam prism 2 -> (1228, 413) on 'bends' (106.77); blue patch there 107.10."
+  "On 'doesn't' (104.93) the ghost fades (0.4 s) and its caption un-wipes (from 104.73): the act's peak, dry. The blue bends: beam prism 2 -> [249,-339,1200] (1079, 308), about 47°, on 'bends' (106.77); blue patch there 107.10 (Expert MUST 4)."
  ],
  [
   "E01-A4-42",
@@ -998,14 +998,14 @@
   "TRN-001",
   "LOK-009, LOK-010",
   "SFX-022",
-  "MUS-012, MUS-010",
+  "MUS-012",
   "TEX-009",
   "",
   "",
   "",
   "",
   "",
-  "Label ITS OWN FIXED AMOUNT under prism 2 (1045, 583) on 'fixed' (108.41)."
+  "Label ITS OWN FIXED AMOUNT under prism 2 (941, 530) on 'fixed' (108.41)."
  ],
  [
   "E01-A4-43",
@@ -1022,14 +1022,14 @@
   "TRN-001",
   "LOK-009, LOK-010",
   "SFX-022, SFX-024",
-  "MUS-012, MUS-010",
+  "MUS-012",
   "TEX-009",
   "",
   "",
   "",
   "",
   "",
-  "The band on the board slides so red sits on the hole on 'other' (110.62) (builder: fan shift, 0.5 s); red beam hole -> prism 2 -> (1266, 470), bent less, 110.78-111.30. Labels un-wipe 111.70; SFX-022 fades 111.7-112.1; SFX-024 at 112.10."
+  "The band on the board slides so red sits on the hole on 'other' (110.62) while prism 1 turns about 4° (Newton turned it by hand) (builder: fan shift, 0.5 s); red beam hole -> prism 2 -> [249,-234,1200] (1079, 358), about 35°: the same way as blue, bent less, 110.78-111.30. Labels un-wipe 111.70; SFX-022 fades 111.7-112.1; SFX-024 at 112.10."
  ],
  [
   "E01-A4-44",
@@ -1112,7 +1112,7 @@
   "66",
   "OK",
   "So the prism isn't making the",
-  "VIS-015, VIS-021",
+  "VIS-015",
   "TXT-010, TXT-024",
   "MOT-002, MOT-013",
   "TRN-012",
@@ -1125,7 +1125,7 @@
   "",
   "",
   "Yes: chips over a PerspectiveGrid beat (overlay check)",
-  "Calm. Director L_sorting_room: the act's turn. TRN-012 colour block in the beam's white #FFF6DD, from the left (where the light comes from), reveals the room wide (as D1: depth 2000, dark 0.85, fog 0) with the whole path lit. Tag ILLUSTRATION · NEWTON'S DARKENED ROOM on 119.90. Chips (TXT-024 overlay, the chip layer's own strike) in the dark ceiling band, > 120 px above the light path. Coloured dots are our picture of kinds of ray (tagged illustration). Cue 3 (Long Note Two) enters with the block. Texture: ground (TEX-009 plaster); dots, chips, lines crisp. Colour block reveals the lit room; chip 'making' (1000, 140) on 'making' (120.85), struck at 121.41."
+  "Calm. Director L_sorting_room: the act's turn. TRN-012 colour block in the beam's white #FFF6DD, from the left (where the light comes from), reveals the room wide (as D1: depth 2000, dark 0.85, fog 0) with the whole path lit. Tag ILLUSTRATION · NEWTON'S DARKENED ROOM on 119.90. Chips (TXT-024 overlay, the chip layer's own strike) in the dark ceiling band, > 120 px above the light path. Coloured streaks are our picture of Newton's 'kinds of ray' (tagged illustration; act 5 says the rays are not themselves coloured). Cue 3 (Long Note Two) enters with the block. Texture: ground (TEX-009 plaster); dots, chips, lines crisp. Colour block reveals the lit room; chip 'making' (1000, 140) on 'making' (120.85), struck at 121.41."
  ],
  [
   "E01-A4-48",
@@ -1136,7 +1136,7 @@
   "66",
   "OK",
   "colours, it's sorting them.",
-  "VIS-015, VIS-021",
+  "VIS-015",
   "TXT-010, TXT-024",
   "MOT-002, MOT-013",
   "TRN-001",
@@ -1173,7 +1173,7 @@
   "",
   "",
   "",
-  "On 'Every' (124.15) the white beam dims to 0.3 and RayParticles run hole -> prism, 12 dots of the six spectral colours, mixed (jitter 6)."
+  "On 'Every' (124.15) the white beam dims to 0.3 and RayParticles run hole -> prism as short streaks, 12 of the six spectral colours, mixed (jitter 6); label KINDS OF RAY above them at (460, 330) on 124.15 (Expert SHOULD)."
  ],
  [
   "E01-A4-50",
@@ -1221,7 +1221,7 @@
   "",
   "",
   "",
-  "On 'spreads' (130.12) six rays run prism -> their own place on the band (4 dots each, 36 in all); chips leave at 130.80. Hard cut at 131.63."
+  "On 'spreads' (130.12) six rays run prism -> their own place on the band, red at the right end (4 streaks each, 36 in all); chips leave at 130.80. Hard cut at 131.63."
  ],
  [
   "E01-A4-52",
@@ -1232,7 +1232,7 @@
   "75",
   "OK",
   "He checks it the other way too.",
-  "VIS-015, VIS-021",
+  "VIS-015",
   "TXT-010",
   "MOT-002, MOT-013",
   "TRN-001",
@@ -1245,7 +1245,7 @@
   "",
   "",
   "Yes: PerspectiveGrid builder addition (lens object and the fan on the lens plane)",
-  "Calm. Director M_lens: hard cut, same scene, nearer prism 1 and turned to a clear patch of wall (depth 1400, dark 0.85, fog 0): beam from off-left into the prism (253, 423), the band on the back wall at x 1136-1356, y 461. Tag held from L. Texture: ground (TEX-009 plaster); lens outline, rays and labels crisp. Cut lands on the prism and its band ('He checks it the other way too')."
+  "Calm. Director M_lens: hard cut, same scene, nearer prism 1 and turned to a clear patch of wall (depth 1400, dark 0.85, fog 0): beam from [-1850,-120,-250] into the point-down prism (253, 423), the band on the back wall violet 400 / red 900 (x 1136-1356, y 461), the same order as D1 (Expert SHOULD). Tag held from L. Texture: ground (TEX-009 plaster); lens outline, rays and labels crisp. Cut lands on the prism and its band ('He checks it the other way too')."
  ],
  [
   "E01-A4-53",
@@ -1269,7 +1269,7 @@
   "",
   "",
   "",
-  "Lens (builder: vertical biconvex outline in the prism's ink, 290 px tall) rises into the cone at (844, 447) on 'gathers' (134.74); the wall band leaves (135.20) and the colours land on the lens; on 'rays' (135.64) six coloured rays run from the lens to one point (1224, 461), 5 dots each."
+  "Lens (builder: vertical biconvex outline in the prism's ink, 290 px tall) rises into the cone at (844, 447) on 'gathers' (134.74); the wall band leaves (135.20) and the colours land on the lens plane (-309..-82, y -51); on 'rays' (135.64) six coloured rays run from the lens to one point (1224, 461), 5 dots each."
  ],
  [
   "E01-A4-54",
@@ -1413,7 +1413,7 @@
   "SRC-062",
   "",
   "",
-  "Tag part 2 · SUNLIGHT THROUGH A GLASS OF WATER · R. & S. HOLLOS, EXSTROM LABS · CC BY 4.0 on 'glass' (149.62)."
+  "Tag part 2 · SUNLIGHT THROUGH A GLASS OF WATER · R. & S. HOLLOS, EXSTROM LABORATORIES · CC BY 4.0 on 'glass' (149.62)."
  ],
  [
   "E01-A4-60",
@@ -1581,7 +1581,7 @@
   "SRC-058",
   "",
   "",
-  "Calm. Director Q_plain_version: TRN-011 band (down, dark) at 164.88; KeywordPanel on LOK-028 blur of SRC-058 p.3081 (the page just read, soft, brightness 0.38), label NEWTON'S LETTER · 1672 · P. 3081 (right-aligned, 1800, 980, size 22) at 165.50; chips on the right half, spoken words only; strikes are the chip layer's own (TXT-024). Ground placement. Band wipe; the blurred page and its label (165.50); chip 'glass' (900, 300) on 'glass' (167.30)."
+  "Calm. Director Q_plain_version: TRN-011 band (down, dark) at 164.88; KeywordPanel on LOK-028 blur of SRC-058 p.3081 (the page just read, soft, brightness 0.38), label NEWTON'S LETTER · 1672 · P. 3081 (right-aligned, 1800, 980, size 22) at 165.50; chips on the right half, spoken words only; strikes are the chip layer's own (TXT-024). Ground placement. Band wipe; the blurred page and its label (165.50); chip 'glass' (900, 300) on 'glass' (167.30), then 'doesn't create colour' (1080, 300)."
  ],
  [
   "E01-A4-67",
@@ -1605,7 +1605,7 @@
   "SRC-058",
   "",
   "",
-  "'glass' struck on 'doesn't create' (168.20)."
+  "Chip 'doesn't create colour' struck on 'colour' (168.20): the verb is struck, not the glass (Expert SHOULD)."
  ],
  [
   "E01-A4-68",
@@ -1629,7 +1629,7 @@
   "SRC-058",
   "",
   "",
-  "'light bouncing off things' (900, 440) on 'Light' (169.92), struck at 171.30."
+  "Chip 'light bouncing off things' (900, 440) on 'Light' (169.92); 'creates it' beside it, struck at 171.30 (the second and last strike)."
  ],
  [
   "E01-A4-69",
@@ -1653,7 +1653,7 @@
   "SRC-058",
   "",
   "",
-  "'each kind of ray' (900, 600) on 'Each' (172.73); 'fixed' accent (1430, 600) on 'fixed' (174.17)."
+  "Chip 'each kind of ray' (900, 600) on 'Each' (172.73); 'fixed' accent (1430, 600) on 'fixed' (174.17)."
  ],
  [
   "E01-A4-70",
@@ -1677,7 +1677,7 @@
   "SRC-058",
   "",
   "",
-  "'which colour you'll see' (900, 760) on 'which' (176.33). SFX-024 at 177.80."
+  "Chip 'which colour you'll see' (900, 760) on 'which' (176.33). SFX-024 at 177.80."
  ],
  [
   "E01-A4-71",
@@ -1701,7 +1701,7 @@
   "SRC-058",
   "",
   "",
-  "Calm. TRN-007 slide; cue 4 (At Rest) enters with it in the pause before 'He sends all this' (177.90). SRC-058 p.3075 again, side left, crop [0, 40, 1554, 1923] (card 695 wide); source tag ... · P. 3075; no quote column; TEX-008 'shadow' 0.2 (3 of 3). Ground placement. Slide lands; H1 'from Cambridge, Febr. 6. 1671/72' on 'Cambridge' (180.07)."
+  "Calm. TRN-007 slide; cue 4 (At Rest) enters with it in the pause before 'He sends all this' (177.90). SRC-058 p.3075 again, side left, crop [0, 40, 1554, 1930] (card 695 wide); source tag ... · P. 3075; no quote column; TEX-008 'shadow' 0.2 (3 of 3). Ground placement. Slide lands; H1 'from Cambridge, Febr. 6. 1671/72' on 'Cambridge' (180.07)."
  ],
  [
   "E01-A4-72",
@@ -1773,7 +1773,7 @@
   "SRC-058",
   "",
   "",
-  "H3 'to be communicated to the R. Society' on 'Royal Society' (187.28), holding 2.1 s. SFX-024 at 189.28."
+  "H3 'to be communicated to the R. Society' (box [410,1901,795,64], the crop to [0,40,1554,1930]) on 'Royal Society' (187.28), holding 2.1 s. SFX-024 at 189.28."
  ],
  [
   "E01-A4-75",
@@ -1797,7 +1797,7 @@
   "SRC-060",
   "",
   "Yes: SRC-060 Micrographia 1665 title page (new, Planned)",
-  "Calm. Director S1_hooke: TRN-011 band (up, dark: the story lifts from the letter to its readers); KeywordPanel with an overlay sticker, ground LOK-028 blur of SRC-060 (the Micrographia title page). No authentic portrait of Hooke survives, so his 1665 book stands for him, and the tag says so. Texture: object (the title page's own printed surface, on its own blur). Band wipe; chip 'plenty of readers' (120, 640) on 'readers' (190.59)."
+  "Calm. Director S1_hooke: TRN-011 band (up, dark: the story lifts from the letter to its readers); KeywordPanel with an overlay sticker, ground LOK-028 blur of SRC-060 (the Micrographia title page). No confirmed portrait of Hooke survives (a candidate Mary Beale portrait is not accepted), so his 1665 book stands for him, and the tag says so. Texture: object (the title page's own printed surface, on its own blur). Band wipe; chip 'plenty of readers' (120, 640) on 'readers' (190.59)."
  ],
  [
   "E01-A4-76",
@@ -1821,7 +1821,7 @@
   "SRC-060",
   "",
   "",
-  "'not all of them' accent (120, 760) on 'not' (192.00); the Micrographia title page (sticker, w 420, white edge 6 px, tilt 2°) rises on 'Robert' (194.04) to (1380, 520); soft pop SFX-026 on its settle 194.64 (pause)."
+  "Chip 'not all of them' accent (120, 760) on 'not' (192.00); the Micrographia title page (sticker, w 420, white edge 6 px, tilt 2°) rises on 'Robert' (194.04) to (1380, 520); soft pop SFX-026 on its settle 194.64 (pause)."
  ],
  [
   "E01-A4-77",
@@ -1845,7 +1845,7 @@
   "SRC-060",
   "",
   "",
-  "Tag line 1 ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665 with the landing; line 2 NO AUTHENTIC PORTRAIT OF HOOKE SURVIVES on 'scientist' (195.62)."
+  "Tag line 1 ROBERT HOOKE · MICROGRAPHIA, LONDON, 1665 with the landing; line 2 NO CONFIRMED PORTRAIT OF HOOKE SURVIVES on 'scientist' (195.62)."
  ],
  [
   "E01-A4-78",
@@ -1893,7 +1893,7 @@
   "SRC-061",
   "",
   "Yes: SRC-061 Newton's 1672 Answer, p.5084 (new, Planned)",
-  "Calm. TRN-007 slide between two documents (Hooke's book -> Newton's printed reply): SRC-061 p.5084, side left, crop [30, 60, 1420, 1354]; source tag ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. 1672 · P. 5084; quote 'Answer to some Considerations upon his Doctrine of Light and Colors' from 200.61. Ground placement. Slide lands; H1 'Answer to some Considerations' on 'arguments' (200.61) with the quote column."
+  "Calm. TRN-007 slide between two documents (Hooke's book -> Newton's printed reply): SRC-061 p.5084, side left, crop [30, 60, 1420, 1354]; source tag ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. NO. 88, 1672 · P. 5084; quote 'Answer to some Considerations upon his Doctrine of Light and Colors' from 200.61. Ground placement. Slide lands; H1 'Answer to some Considerations' on 'arguments' (200.61) with the quote column."
  ],
  [
   "E01-A4-80",
@@ -1941,7 +1941,7 @@
   "",
   "",
   "Yes: PerspectiveGrid builder addition (lineFadeSec)",
-  "Calm. Director T_where_is_it: TRN-015 focus match [423, 222]: 'Light' in his title to the hole of light (281, 373). The room wide (as D1: depth 2000, dark 0.85, fog 0), the full path lit on the cut: the act ends where it started, now explained. The prism dims instead of lifting out (without the prism the band would vanish). Texture: ground (TEX-009 plaster, fading with the lines). Match lands; tag ILLUSTRATION · NEWTON'S DARKENED ROOM on 'Newton' (206.83); dolly 0.02, the one move."
+  "Calm. Director T_where_is_it: TRN-015 focus match [423, 222]: 'Light' in his title to the hole of light (281, 373). The room wide (as D1: depth 2000, dark 0.85, fog 0), the full path lit on the cut: the act ends where it started, now explained. The prism dims instead of lifting out (without the prism the band would vanish); its outline stays at 0.3 or more and the bend is unchanged. Texture: ground (TEX-009 plaster, fading with the lines). Match lands; tag ILLUSTRATION · NEWTON'S DARKENED ROOM on 'Newton' (206.83); dolly 0.02, the one move."
  ],
  [
   "E01-A4-82",
