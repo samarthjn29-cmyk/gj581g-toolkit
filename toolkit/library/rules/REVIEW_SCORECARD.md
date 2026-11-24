@@ -45,7 +45,8 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
 | Act | Version | Sam's notes | Caught before Sam | Missed (role) | Over-flags (role) |
 |---|---|---|---|---|---|
 | E01 act 3 | v4 | 3: drawn eye "not looking good"; blurred Newton wanted behind 'what is colour?'; end at 208.1 | 0 | drawn eye (Director: no design check yet); end hold (reviewer flagged it as T1, left to Sam) | none |
-| E01 act 3 | v5 | (pending) | Designer: the two other drawn eyes, 16 px tags; Editor: frozen half-erased label, late pop, early swishes; Sound: act-join holes; Expert: prism red end, 'DALTON'S SIX' label; Viewer: 'By Kendal' caption (act 2), empty quote card | - | - |
+| E01 act 3 | v5 | 0 own notes: Sam took the roles' fixes ("Apply all (Recommended)"; "Show it earlier" for the Newton tag) | Designer: the two other drawn eyes, 16 px tags; Editor: frozen half-erased label, late pop, early swishes; Sound: act-join holes; Expert: prism red end, 'DALTON'S SIX' label; Viewer: 'By Kendal' caption (act 2), empty quote card | none | none |
+| E01 act 3 | v6 | 0 notes: "Approve"; the picture pass's 8 polish SHOULDs accepted ("Apply them") | Picture pass (Designer + Editor): 8 SHOULDs; Sound: bed 2.2 dB louder than v5 (Claude's mix level), fixed before Sam | none | none |
 
 ## Misses by role (read yours before reviewing)
 - **Director / Designer:** a drawn diagram that a real picture could show, drawn as bare lines on graphite (act 3 v4,
