@@ -13,7 +13,7 @@ export type ArchivalScanCardProps = {
   srcId: string;
   imgSize: readonly [number, number];
   crop: Rect;
-  highlights: { box: Rect; atSec: number }[];
+  highlights: { box: Rect; atSec: number; dimAtSec?: number; dimTo?: number }[]; // dimAtSec: this highlight fades to dimTo (default 0.4) over 0.5 s
   quote: string;
   source: string;
   side?: "left" | "right";
@@ -108,6 +108,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
                     background: t.colors.accentSoft,
                     mixBlendMode: "multiply",
                     borderRadius: 3,
+                    opacity: h.dimAtSec === undefined ? 1 : interpolate(frame, [sec(h.dimAtSec, fps), sec(h.dimAtSec + 0.5, fps)], [1, h.dimTo ?? 0.4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
                   }}
                 />
               );

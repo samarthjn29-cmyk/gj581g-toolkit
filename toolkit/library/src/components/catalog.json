@@ -274,5 +274,11 @@
     "beatType": 4,
     "energy": "Peak",
     "grid": false
+  },
+  "KeywordPanel": {
+    "assetId": "TXT-024",
+    "beatType": 3,
+    "energy": "Calm",
+    "grid": false
   }
 }

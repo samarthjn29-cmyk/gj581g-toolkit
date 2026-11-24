@@ -52,7 +52,7 @@ beats.forEach((b, i) => {
   if (!p) return;
   if (catalog[p.component]?.energy === "Peak" && catalog[b.component]?.energy === "Peak") crit.push(`${p.id}->${b.id}: peak after peak (needs a calm beat between)`);
   if (p.component === b.component) {
-    const key = (x) => JSON.stringify([x.props?.srcId ?? x.props?.bg, x.props?.backdrop, x.props?.file, x.props?.crop, x.props?.mode, x.props?.lines]);
+    const key = (x) => JSON.stringify([x.props?.srcId ?? x.props?.bg, x.props?.backdrop, x.props?.file, x.props?.crop, x.props?.mode, x.props?.lines, x.props?.worlds?.map((w) => w.srcId)]); // LayerStage: its worlds
     const same = key(p) === key(b);
     (same ? crit : warn).push(`${p.id}->${b.id}: back-to-back ${b.component}${same ? " on the same picture (clone)" : ""}`);
   }

@@ -44,6 +44,7 @@ import { ArchiveGate } from "./ArchiveGate";
 import { ZoomNest } from "./ZoomNest";
 import { ObjectEntrance } from "./ObjectEntrance";
 import { LayerStage } from "./LayerStage";
+import { KeywordPanel } from "./KeywordPanel";
 import { StillsMontage } from "./StillsMontage";
 import { FlashMontage } from "./FlashMontage";
 
@@ -103,6 +104,7 @@ const IMPL: Record<keyof typeof catalog, LibraryEntry["Component"]> = {
   ZoomNest,
   ObjectEntrance,
   LayerStage,
+  KeywordPanel,
   StillsMontage,
   FlashMontage,
 };

@@ -109,7 +109,8 @@ export type LayerStageProps = {
   overlay?: { spectrum?: SpectrumStripProps };
   // a cut-on-action entry with no bare edge: every plane starts offset and settles (out-cubic); pair with
   // CutOnAction moveTo: false
-  arrive?: { dir: "down" | "up" | "left" | "right"; px: number; sec?: number };
+  arrive?: { dir: "down" | "up" | "left" | "right"; px: number; sec?: number; atSec?: number }; // atSec: when the settle starts (a CutOnAction's leadSec)
+  captionUntilSec?: number; // the static caption un-wipes from here (MOT-013)
   startSec?: number;
 };
 
@@ -329,7 +330,7 @@ const MidPlate: React.FC<{ m: NonNullable<LayerStageProps["mid"]>; cam: XY }> = 
   return <Img src={src} style={{ position: "absolute", left: m.at[0] - m.w / 2 + cam[0], top: m.at[1] - h / 2 + cam[1], width: m.w, height: h, maxWidth: "none" }} />;
 };
 
-export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [], camera = {}, caption, labels = [], tag, overlay, arrive, startSec = 0 }) => {
+export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [], camera = {}, caption, captionUntilSec, labels = [], tag, overlay, arrive, startSec = 0 }) => {
   useAssets([
     "VIS-059",
     "MOT-016",
@@ -362,8 +363,9 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
   const push = 1 + (camera.push ?? 0.03) * prog;
   const pIn = interpolate(frame, [sec(startSec, fps), sec(startSec + 0.6, fps)], [0, 1], { ...clamp, easing: SLOW_OUT });
   // arrive: every plane starts offset against the movement and settles (out-cubic)
-  const pa = arrive ? interpolate(frame, [0, sec(arrive.sec ?? 0.45, fps)], [1, 0], { ...clamp, easing: Easing.out(Easing.cubic) }) : 0;
+  const pa = arrive ? interpolate(frame, [sec(arrive.atSec ?? 0, fps), sec((arrive.atSec ?? 0) + (arrive.sec ?? 0.45), fps)], [1, 0], { ...clamp, easing: Easing.out(Easing.cubic) }) : 0;
   const [avx, avy] = arrive ? { down: [0, -1], up: [0, 1], left: [1, 0], right: [-1, 0] }[arrive.dir] : [0, 0];
+  const capOut = captionUntilSec !== undefined ? interpolate(frame, [sec(captionUntilSec, fps), sec(captionUntilSec + 0.5, fps)], [1, 0], clamp) : 1;
   const ax = avx * (arrive?.px ?? 0) * pa;
   const ay = avy * (arrive?.px ?? 0) * pa;
   // which worlds are showing, and how far each change has gone
@@ -446,7 +448,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
           </div>
         ) : null,
       )}
-      {caption ? <div style={{ position: "absolute", left: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3 }}>{caption}</div> : null}
+      {caption && capOut > 0 ? <div style={{ position: "absolute", left: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: capOut < 1 ? `inset(-4px -4px -4px ${((1 - capOut) * 100).toFixed(1)}%)` : undefined, opacity: Math.min(1, capOut * 2.5) }}>{caption}</div> : null}
     </AbsoluteFill>
   );
 };
