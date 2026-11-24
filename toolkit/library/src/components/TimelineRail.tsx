@@ -40,6 +40,7 @@ export type TimelineRailProps = {
   yearLabels?: number[]; // label only these years (act 4: 1666, 1766), instead of the decade ticks
   accents?: { year: number; atSec: number }[]; // a year label turns accent on its word
   bracket?: { fromYear: number; toYear: number; atSec: number; text?: string; y?: number; sec?: number }; // a span drawn under the labels
+  labelTone?: "accent" | "chip"; // name tags: accent chip (default, acts 1-3) or a dark credit chip (Designer, 25 Nov 2026)
 };
 
 const RAIL_Y = 700;
@@ -53,7 +54,8 @@ const Picture: React.FC<{ it: Item; w: number; h: number }> = ({ it, w, h }) => 
   return <Img src={src} style={{ width: w, height: h, objectFit: "cover", objectPosition: `${f[0] * 100}% ${f[1] * 100}%`, display: "block", filter: "grayscale(0.2) sepia(0.15) contrast(1.04)" }} />;
 };
 
-export const TimelineRail: React.FC<TimelineRailProps> = ({ from, to, pxPerYear, majorEvery = 10, cams, items, caption, startSec = 0, yearLabels, accents = [], bracket }) => {
+export const TimelineRail: React.FC<TimelineRailProps> = ({
+  labelTone = "accent", from, to, pxPerYear, majorEvery = 10, cams, items, caption, startSec = 0, yearLabels, accents = [], bracket }) => {
   useAssets(["VIS-055", "MOT-013", "MOT-002", ...items.filter((i) => i.srcId).map((i) => i.srcId as string)]);
   if (items.length < 2 || items.length > 6) throw new Error("TimelineRail: 2-6 items.");
   const t = useTheme();
@@ -137,7 +139,7 @@ export const TimelineRail: React.FC<TimelineRailProps> = ({ from, to, pxPerYear,
         if (on <= 0 || off >= 1) return null;
         const x = X(it.year) + w / 2 - 20;
         return (
-          <div key={`l${i}`} style={{ position: "absolute", left: x, top: RAIL_Y - 120, whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: 24, letterSpacing: 2, color: t.colors.canvas, background: t.colors.accent, padding: "5px 11px", clipPath: `inset(-2px ${((1 - on) * 100).toFixed(1)}% -2px ${(off * 100).toFixed(1)}%)` }}>
+          <div key={`l${i}`} style={{ position: "absolute", left: x, top: RAIL_Y - 120, whiteSpace: "nowrap", fontFamily: t.fonts.mono, fontSize: labelTone === "chip" ? 22 : 24, letterSpacing: 2, color: labelTone === "chip" ? t.colors.ink : t.colors.canvas, background: labelTone === "chip" ? t.colors.chip : t.colors.accent, padding: "5px 11px", clipPath: `inset(-2px ${((1 - on) * 100).toFixed(1)}% -2px ${(off * 100).toFixed(1)}%)` }}>
             {it.label}
           </div>
         );

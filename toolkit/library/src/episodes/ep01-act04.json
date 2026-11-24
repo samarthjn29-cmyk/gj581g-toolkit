@@ -207,7 +207,7 @@
     "dolly": 0.025,
     "fog": 0.15,
     "startSec": -1,
-    "plaster": 0.12,
+    "plaster": 0,
     "dollyFrom": 0.02,
     "objects": [
      {
@@ -267,7 +267,8 @@
    "props": {
     "from": 1640,
     "to": 1790,
-    "pxPerYear": 9,
+    "pxPerYear": 10,
+    "labelTone": "chip",
     "cams": [
      {
       "atSec": 0,
@@ -723,7 +724,8 @@
       "height": 100,
       "z": 2000,
       "coneAtSec": 7.23,
-      "atSec": 10.19
+      "atSec": 10.19,
+      "smooth": true
      }
     ]
    },
@@ -815,7 +817,8 @@
       "atSec": -1,
       "coneAtSec": -1,
       "dimSec": 7.3,
-      "dimTo": 0.45
+      "dimTo": 0.45,
+      "smooth": true
      },
      {
       "kind": "label",
@@ -1086,9 +1089,16 @@
      "size": 64,
      "chips": [
       {
+       "text": "most people",
+       "atSec": 1.5,
+       "x": 560,
+       "y": 250,
+       "dimSec": 11.77
+      },
+      {
        "text": "something simple",
        "atSec": 3.0,
-       "x": 560,
+       "x": 990,
        "y": 250,
        "dimSec": 11.77
       },
@@ -1116,7 +1126,7 @@
       {
        "text": "changes it",
        "atSec": 7.73,
-       "x": 900,
+       "x": 925,
        "y": 530,
        "dimSec": 11.77
       },
@@ -1356,6 +1366,17 @@
     },
     "objects": [
      {
+      "kind": "board",
+      "at": [
+       -450,
+       120,
+       1200
+      ],
+      "w": 600,
+      "h": 520,
+      "atSec": -1
+     },
+     {
       "kind": "shutter",
       "at": [
        -1050,
@@ -1403,17 +1424,6 @@
       "atSec": -1
      },
      {
-      "kind": "board",
-      "at": [
-       -450,
-       120,
-       1200
-      ],
-      "w": 600,
-      "h": 520,
-      "atSec": -1
-     },
-     {
       "kind": "fan",
       "from": [
        -600,
@@ -1426,7 +1436,8 @@
       "height": 40,
       "z": 1200,
       "atSec": -1,
-      "coneAtSec": -1
+      "coneAtSec": -1,
+      "smooth": true
      },
      {
       "kind": "hole",
@@ -1458,11 +1469,11 @@
      {
       "kind": "label",
       "at": [
-       -114,
-       60,
-       1400
+       -398,
+       70,
+       1200
       ],
-      "dy": 30,
+      "dy": 0,
       "text": "BLUE",
       "atSec": 3.13
      },
@@ -1547,6 +1558,17 @@
     },
     "objects": [
      {
+      "kind": "board",
+      "at": [
+       -450,
+       120,
+       400
+      ],
+      "w": 600,
+      "h": 520,
+      "atSec": -1
+     },
+     {
       "kind": "beam",
       "from": [
        -1850,
@@ -1577,17 +1599,6 @@
       }
      },
      {
-      "kind": "board",
-      "at": [
-       -450,
-       120,
-       400
-      ],
-      "w": 600,
-      "h": 520,
-      "atSec": -1
-     },
-     {
       "kind": "fan",
       "from": [
        -600,
@@ -1604,7 +1615,8 @@
       "shift": {
        "atSec": 11.89,
        "dx": -75
-      }
+      },
+      "smooth": true
      },
      {
       "kind": "hole",
@@ -1647,8 +1659,8 @@
      {
       "kind": "label",
       "at": [
-       701,
-       -360,
+       369,
+       -560,
        1200
       ],
       "dy": 0,
@@ -1688,7 +1700,8 @@
       "drawSec": 0.9,
       "width": 8,
       "color": "#3A6BFF",
-      "untilSec": 11.89
+      "dimSec": 11.89,
+      "dimTo": 0.35
      },
      {
       "kind": "patch",
@@ -1701,7 +1714,8 @@
       "h": 30,
       "color": "#3A6BFF",
       "atSec": 8.37,
-      "untilSec": 11.89
+      "dimSec": 11.89,
+      "dimTo": 0.35
      },
      {
       "kind": "label",
@@ -2010,7 +2024,8 @@
       "y": -40,
       "height": 100,
       "z": 2000,
-      "atSec": -1
+      "atSec": -1,
+      "smooth": true
      },
      {
       "kind": "rays",
@@ -2042,8 +2057,8 @@
      {
       "kind": "label",
       "at": [
-       -852,
-       -238,
+       -760,
+       -420,
        775
       ],
       "dy": 0,
@@ -2240,14 +2255,14 @@
         "text": "making",
         "atSec": 1.65,
         "x": 1000,
-        "y": 140,
+        "y": 165,
         "strikeSec": 2.21
        },
        {
         "text": "sorting",
         "atSec": 3.23,
         "x": 1340,
-        "y": 140,
+        "y": 165,
         "accent": true
        }
       ]
@@ -2342,7 +2357,8 @@
       "z": 1400,
       "atSec": -1,
       "coneAtSec": -1,
-      "untilSec": 3.57
+      "untilSec": 3.57,
+      "smooth": true
      },
      {
       "kind": "fan",
@@ -2351,13 +2367,14 @@
        -60,
        300
       ],
-      "x0": -309,
-      "x1": -82,
+      "x0": -235,
+      "x1": -165,
       "y": -51,
       "height": 50,
       "z": 800,
       "atSec": 3.11,
-      "coneAtSec": 3.11
+      "coneAtSec": 3.11,
+      "smooth": true
      },
      {
       "kind": "lens",
@@ -2409,7 +2426,7 @@
      {
       "kind": "rays",
       "from": [
-       -119.83333333333334,
+       -176.66666666666666,
        -51,
        800
       ],
@@ -2431,7 +2448,7 @@
      {
       "kind": "rays",
       "from": [
-       -157.66666666666666,
+       -188.33333333333334,
        -51,
        800
       ],
@@ -2453,7 +2470,7 @@
      {
       "kind": "rays",
       "from": [
-       -176.58333333333334,
+       -194.16666666666666,
        -51,
        800
       ],
@@ -2475,7 +2492,7 @@
      {
       "kind": "rays",
       "from": [
-       -210.63333333333333,
+       -204.66666666666666,
        -51,
        800
       ],
@@ -2497,7 +2514,7 @@
      {
       "kind": "rays",
       "from": [
-       -256.0333333333333,
+       -218.66666666666666,
        -51,
        800
       ],
@@ -2519,7 +2536,7 @@
      {
       "kind": "rays",
       "from": [
-       -293.8666666666667,
+       -230.33333333333334,
        -51,
        800
       ],
@@ -2711,10 +2728,11 @@
        "atSec": 1.31
       },
       {
-       "text": " · SUNLIGHT THROUGH A GLASS OF WATER · R. & S. HOLLOS, EXSTROM LABORATORIES · CC BY 4.0",
+       "text": "R. & S. HOLLOS, EXSTROM LABORATORIES · CC BY 4.0",
        "atSec": 3.89
       }
      ],
+     "at": "low-centre",
      "untilSec": 7.87
     }
    },
@@ -2744,7 +2762,7 @@
         "text": "the first half",
         "atSec": 6.37,
         "x": 1300,
-        "y": 120,
+        "y": 180,
         "accent": true
        }
       ]
@@ -2900,29 +2918,29 @@
      "chips": [
       {
        "text": "glass",
-       "atSec": 2.42,
+       "atSec": 1.58,
        "x": 900,
        "y": 300
       },
       {
        "text": "doesn't create colour",
-       "atSec": 2.78,
+       "atSec": 1.96,
        "x": 1090,
        "y": 300,
-       "strikeSec": 3.32
+       "strikeSec": 2.78
       },
       {
        "text": "light bouncing off things",
-       "atSec": 5.04,
+       "atSec": 4.2,
        "x": 900,
        "y": 440
       },
       {
-       "text": "creates it",
-       "atSec": 5.72,
+       "text": "create it",
+       "atSec": 5.4,
        "x": 900,
        "y": 540,
-       "strikeSec": 6.42
+       "strikeSec": 6.0
       },
       {
        "text": "each kind of ray",
@@ -3169,19 +3187,19 @@
       {
        "text": "plenty of readers",
        "atSec": 1.21,
-       "x": 120,
+       "x": 140,
        "y": 640
       },
       {
        "text": "not all of them",
        "atSec": 2.62,
-       "x": 120,
+       "x": 140,
        "y": 760
       },
       {
        "text": "says so",
        "atSec": 9.12,
-       "x": 120,
+       "x": 140,
        "y": 880,
        "accent": true
       }
@@ -3430,7 +3448,8 @@
       "y": -40,
       "height": 100,
       "z": 2000,
-      "atSec": -1
+      "atSec": -1,
+      "smooth": true
      }
     ]
    },

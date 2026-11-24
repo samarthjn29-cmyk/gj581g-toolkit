@@ -34,3 +34,6 @@ board and the locked acts 1-2 and act 3 v5. Each later line carries its date and
 - Calm motion: slow drift on held frames, eased moves, no overshoot except sticker pops; designed transitions between
   scenes (push, slide, band, match, morph, cut on action), hard cuts inside a scene.
 - Cinematic finish on every act (LOK-030): light grain, warm grade, soft vignette.
+- Drawn spectra and light patches are smooth gradients with feathered edges and fading ends, never stepped bands (PerspectiveGrid fan `smooth`; Designer, act 4, 25 Nov 2026).
+- Props in a drawn room (boards, screens, tables) are shaded objects with texture, thickness and a contact shadow, never flat panel rectangles; name and credit tags are dark chips, also on the rail (TimelineRail `labelTone: "chip"`; Designer, act 4, 25 Nov 2026).
+- Strike-throughs on keyword chips should be ink, keeping the accent for the one replacement chip (Designer SHOULD, act 4; not yet built).

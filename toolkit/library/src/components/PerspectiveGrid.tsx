@@ -56,7 +56,7 @@ export type GridObject = (
       z?: number;
       atSec?: number;
       coneAtSec?: number; // the cone from the prism draws first; the band lands at atSec
-      ghost?: boolean; // dashed outline, faint fill: a prediction, not a result
+      ghost?: boolean; smooth?: boolean; // dashed outline, faint fill: a prediction, not a result
       shift?: { atSec: number; dx: number; sec?: number };
     }
   | { kind: "hole"; at: V3; r?: number; atSec?: number }
@@ -467,6 +467,44 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
           ))}
           </g>
           <g opacity={p}>
+          {o.smooth ? (() => {
+            // one patch: a horizontal spectrum gradient, feathered top and bottom, fading ends (Designer, 25 Nov 2026)
+            const q0 = bands[0].q[0];
+            const q1 = bands[n - 1].q[2];
+            const gx = Math.min(q0[0], q1[0]);
+            const gy = Math.min(q0[1], q1[1]);
+            const gw = Math.abs(q1[0] - q0[0]);
+            const gh = Math.abs(q1[1] - q0[1]);
+            const id = `pgf${i}`;
+            const stops = Array.from({ length: 16 }, (_, k) => k / 15);
+            return (
+              <>
+                <defs>
+                  <linearGradient id={`${id}c`} x1="0" x2="1" y1="0" y2="0">
+                    {stops.map((u) => {
+                      const nm = o.x1 >= o.x0 ? 400 + 300 * u : 700 - 300 * u;
+                      const end = Math.min(1, Math.min(u, 1 - u) / 0.08);
+                      const op = (u < 0.5 ? 0.55 : 0.7) + (1 - (u < 0.5 ? 0.55 : 0.7)) * end;
+                      return <stop key={u} offset={u} stopColor={wavelengthRGB(nm)} stopOpacity={op} />;
+                    })}
+                  </linearGradient>
+                  <linearGradient id={`${id}v`} x1="0" x2="0" y1="0" y2="1">
+                    <stop offset={0} stopColor="#fff" stopOpacity={0} />
+                    <stop offset={0.15} stopColor="#fff" stopOpacity={1} />
+                    <stop offset={0.85} stopColor="#fff" stopOpacity={1} />
+                    <stop offset={1} stopColor="#fff" stopOpacity={0} />
+                  </linearGradient>
+                  <mask id={`${id}m`} maskContentUnits="userSpaceOnUse">
+                    <rect x={gx} y={gy} width={gw} height={gh} fill={`url(#${id}v)`} />
+                  </mask>
+                </defs>
+                <g mask={`url(#${id}m)`}>
+                  <rect x={gx} y={gy} width={gw} height={gh} fill={`url(#${id}c)`} />
+                </g>
+                <rect x={gx} y={gy} width={gw} height={gh} fill={`url(#${id}c)`} opacity={0.5} filter="url(#pg-glow)" />
+              </>
+            );
+          })() : (<>
           {bands.map((b, j) => (
             <polygon
               key={`w${j}`}
@@ -483,6 +521,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
               filter="url(#pg-glow)"
             />
           ))}
+                    </>)}
           </g>
         </g>
       );
@@ -492,7 +531,17 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
       const [x, y] = P(...o.at);
       return (
         <g key={i} opacity={p}>
-          <rect x={x - (o.w * sc) / 2} y={y - (o.h * sc) / 2} width={o.w * sc} height={o.h * sc} rx={3 * sc} fill={t.colors.panel} stroke={ink} strokeOpacity={0.4} strokeWidth={2} />
+          {/* contact shadow on the floor, a side face for thickness, the face, one lit edge (Designer, 25 Nov 2026) */}
+          {(() => {
+            const [fx, fy] = P(o.at[0], floorY, o.at[2]);
+            return <ellipse cx={fx} cy={fy} rx={(o.w * sc) * 0.55} ry={10 * sc + 4} fill="#000" opacity={0.35} filter="url(#pg-glow)" />;
+          })()}
+          <rect x={x - (o.w * sc) / 2 + 8 * sc} y={y - (o.h * sc) / 2 + 8 * sc} width={o.w * sc} height={o.h * sc} rx={3 * sc} fill="#221E1A" opacity={0.95} />
+          <rect x={x - (o.w * sc) / 2} y={y - (o.h * sc) / 2} width={o.w * sc} height={o.h * sc} rx={3 * sc} fill="#3A332D" opacity={0.95} stroke={ink} strokeOpacity={0.2} strokeWidth={1.5} />
+          {plasterSrc ? (
+            <image href={plasterSrc} x={x - (o.w * sc) / 2} y={y - (o.h * sc) / 2} width={o.w * sc} height={o.h * sc} preserveAspectRatio="xMidYMid slice" opacity={0.18} style={{ mixBlendMode: "screen" }} />
+          ) : null}
+          <polyline points={`${x - (o.w * sc) / 2},${y + (o.h * sc) / 2} ${x - (o.w * sc) / 2},${y - (o.h * sc) / 2} ${x + (o.w * sc) / 2},${y - (o.h * sc) / 2}`} fill="none" stroke={ink} strokeOpacity={0.25} strokeWidth={1.5} />
         </g>
       );
     }
@@ -585,7 +634,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             [[hw, c, n], [hw, c, D], [hw, f, D], [hw, f, n]],
           ];
           return (
-            <g opacity={pGrid * plaster} style={{ mixBlendMode: "screen" }}>
+            <g opacity={pGrid * plaster * lineK} style={{ mixBlendMode: "screen" }}>
               <clipPath id="pg-plaster">
                 {planes.map((q, i) => <polygon key={i} points={poly(q)} />)}
               </clipPath>
