@@ -117,12 +117,12 @@ shot(B(*range(2, 13)), "LayerStage", lambda r: {
         {"text": "TUTOR · MATHEMATICS AND NATURAL PHILOSOPHY", "atSec": r(word("mathematics")), "untilSec": r(word("tonight")), "x": 1280, "y": 536, "align": "center"},
         {"text": "NEW COLLEGE", "atSec": r(word("new")), "untilSec": r(word("tonight")) + 0.3, "x": 1280, "y": 112, "align": "center", "accent": True, "settle": True},
         # one landing on "Society" (Gate 1 reviewer: not the brief's two, 0.23 s apart)
-        {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(word("society")), "untilSec": r(29.25), "x": 120, "y": 84, "size": 22},
+        {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(word("society")), "untilSec": r(29.65), "x": 120, "y": 84, "size": 22},  # Gate 3 review S3: leaves with the match
     ],
     "tag": {"parts": [{"text": "MANCHESTER", "atSec": r(word("manchester"))}, {"text": "31 OCT 1794", "atSec": r(word("october"))}],
             "at": "low-centre", "toCornerAtSec": r(9.0), "untilSec": r(word("literary"))},
     "camera": {"pan": -40, "push": 0.03}},
-    sid="A_manchester_talk",
+    sid="A_manchester_talk", transitionIn="band", transition={"dir": "down", "tone": "paper"},  # Gate 3 review M1: no hard cut off the slate (act 2's slate exit)
     overlay={"chips": [{"chips": [{"text": "question", "atSec": round(word("question") - S(2), 2), "x": 160, "y": 400},
                                   {"text": "experts", "atSec": round(word("experts") - S(2), 2), "x": 300, "y": 580, "accent": True}],
                         "arrows": [{"atSec": round(word("experts") - S(2) - 0.35, 2), "from": [400, 505], "to": [440, 572]}],
@@ -169,7 +169,7 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
          "untilSec": r(62.45), "exit": "sink", "caption": "A SEALED LETTER · 1841", "captionSize": 20},
     ],
     # FIX 3: the caption and the page's tag sit in the paper margin, off the page's bottom line of print
-    "labels": [{"text": "SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(word("to", 72)), "untilSec": r(S(29) - 0.6), "x": 120, "y": 830, "size": 22},
+    "labels": [{"text": "SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(71.65), "untilSec": r(S(29) - 0.3), "x": 120, "y": 830, "size": 22},  # Gate 3 review S3: lands with the olive, 2.55 s to read
                {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": 0, "untilSec": r(S(29) - 0.6), "x": 120, "y": 96, "size": 16},
                {"text": "JOHN DALTON · 1798 · P. 34", "atSec": 0, "x": 120, "y": 930, "size": 20}],
     "camera": {"pan": -40, "push": 0.03}},
@@ -270,7 +270,7 @@ shot(B(*range(61, 67)), "ArchivalScanCard", lambda r: {
 shot(B(67, 68), "EyeDiagram", lambda r: {
     "mode": "simple",
     "openKeys": [{"atSec": 0, "open": 1}, {"atSec": r(S(69) - 0.30), "open": 0}]},
-    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [848, 434, 224, 224, 112], "durSec": 0.5},
+    transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [848, 434, 224, 224, 112], "durSec": 0.35},  # Gate 3 review S1: lands in the silence before "So" (177.86)
     overlay={"stickers": [{"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1600, 520], "w": 320,
                            "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
              "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 160, "y": 490},
@@ -317,7 +317,7 @@ audio = [
     {"id": "SFX-017", "file": K + "tactile/marker_stroke.wav", "atSec": round(S(49), 2), "volumeDb": -27.0},  # the drafting line's stroke
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v2.wav", "atSec": round(153.10 + 0.6, 2), "volumeDb": -26.0},  # the wax sticker settles (pause before "Reds")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(S(61) + 0.05, 2), "volumeDb": -17.6},  # slide back into p.43
-    {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(S(67) + 0.5, 2), "volumeDb": -24.0},  # the morph lands on the iris (pause before "So")
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v3.wav", "atSec": round(S(67) + 0.33, 2), "volumeDb": -24.0},  # the morph lands on the iris (pause before "So")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(S(73) + 0.1, 2), "volumeDb": -17.6},  # dark paper band up (pause before "But")
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": round(S(76) + 0.05, 2), "volumeDb": -21.0},  # focus match into the room
 ]
@@ -328,12 +328,16 @@ REMAP = {"Wholesome.mp3": "public/music/wholesome_kevin_macleod.mp3", "Thinking 
          "riser_turn.wav": "public/sfx/kit/riser_turn_act3_v1.wav", "sub_impact_v1.wav": "public/sfx/kit/mechanical/sub_impact_v1.wav"}
 for c in cues["cues"] + cues["events"]:
     c["file"] = REMAP[os.path.basename(c["file"])]
+# Gate 3 review M3: Long Note Two is about 4 dB louder in its first 25 s; D (explanation) sits 3 dB lower after the hit
+for c in cues["cues"]:
+    if c["name"].startswith("3 "):
+        c["levels"] = [[102.1, -41], [103.0, -41], [103.4, -44], [127.6, -44], [128.3, -41], [183.4, -41]]
 cues["ids"] = {"cues": ["MUS-007", "MUS-012", "MUS-013", "MUS-014"], "events": ["MUS-015", "SFX-025"]}
 
 act = {"finish": {}, "motionBlur": True, "episodeId": "WCL-E01-act03", "themeId": "LOK-009",
        "runningHead": {"text": "3 · THE TALK", "fromSec": round(S(2), 2)},  # TXT-013, on diagram and text shots only
        "note": "Act 3 of WCL-E01 'The Man Who Saw Pink'. Gate 1 v3.1 approved by Sam 24 Nov 2026. Shots join beat-sheet beats; directed shots carry the brief's names. Cues from 03_talk_paced_149wpm_even + 2.4 s slate.",
-       "voice": {"id": "NAR-003", "atSec": LEAD, "tailSec": round(ACT_END - LEAD - VOICE_SEC, 2)},
+       "voice": {"id": "NAR-003", "atSec": LEAD, "tailSec": round(ACT_END - LEAD - VOICE_SEC, 2), "fadeOutSec": 0.03},  # Gate 3 review S6: the take's last 5 ms (room tone) end in a tick
        "audio": audio, "beats": shots}
 json.dump(act, open(os.path.join(LIB, "src", "episodes", "ep01-act03.json"), "w"), indent=1, ensure_ascii=False)
 json.dump(cues, open(os.path.join(LIB, "src", "episodes", "ep01-act03.music.json"), "w"), indent=1, ensure_ascii=False)

@@ -133,7 +133,9 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
             <SlideAcross
               from={
                 <Freeze frame={prevDur - 1}>
-                  <Shot beat={prev} />
+                  <Sequence durationInFrames={prevDur} layout="none">
+                    <Shot beat={prev} />
+                  </Sequence>
                 </Freeze>
               }
               to={<Shot beat={b} built />}
@@ -144,7 +146,9 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           return (
             <Freeze frame={prevDur - 1}>
-              <Shot beat={prev} />
+              <Sequence durationInFrames={prevDur} layout="none">
+                <Shot beat={prev} />
+              </Sequence>
             </Freeze>
           );
         };
@@ -183,7 +187,9 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
             <PushThrough
               from={
                 <Freeze frame={prevDur - 1}>
-                  <Shot beat={prev} />
+                  <Sequence durationInFrames={prevDur} layout="none">
+                    <Shot beat={prev} />
+                  </Sequence>
                 </Freeze>
               }
               to={<Shot beat={b} built />}

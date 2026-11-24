@@ -132,7 +132,7 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
     <AbsoluteFill style={{ opacity: pIn, transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
       <svg width={1920} height={1080}>
         <circle cx={cx} cy={cy} r={R} fill={t.colors.panel} stroke={ink} strokeWidth={4} />
-        {tv ? <circle cx={cx} cy={cy} r={R - 6} fill={tv.color} opacity={tv.op} /> : null}
+        {tv ? <path d={`M ${cx - R + 168} ${cy - 252} A ${R - 18} ${R - 18} 0 1 1 ${cx - R + 168} ${cy + 252} Q ${cx - R + 150} ${cy} ${cx - R + 168} ${cy - 252} Z`} fill={tv.color} opacity={tv.op} /> : null /* the vitreous shape, as its outline (Gate 3 review S4) */}
         <path d={`M ${cx - R + 40} ${cy - 150} Q ${cx - R - 70} ${cy} ${cx - R + 40} ${cy + 150}`} fill={t.colors.canvas} stroke={ink} strokeWidth={4} />
         <ellipse cx={cx - R + 120} cy={cy} rx={42} ry={110} fill={t.colors.canvas} stroke={ink} strokeWidth={4} />
         {tl ? <ellipse cx={cx - R + 120} cy={cy} rx={40} ry={108} fill={tl.color} opacity={tl.op} /> : null}

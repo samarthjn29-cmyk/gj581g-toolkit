@@ -11,7 +11,8 @@
  "voice": {
   "id": "NAR-003",
   "atSec": 2.4,
-  "tailSec": 2.49
+  "tailSec": 2.49,
+  "fadeOutSec": 0.03
  },
  "audio": [
   {
@@ -76,7 +77,7 @@
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
-   "atSec": 177.87,
+   "atSec": 177.7,
    "volumeDb": -24.0
   },
   {
@@ -149,12 +150,13 @@
     "MOT-016",
     "MOT-013",
     "MOT-014",
-    "TRN-001",
+    "TRN-011",
     "LOK-009",
     "LOK-010",
     "MUS-007",
     "SRC-009",
     "TXT-011",
+    "TRN-001",
     "MAP-017",
     "SRC-045",
     "SFX-017",
@@ -316,7 +318,7 @@
        "THE SOCIETY MET IN A ROOM HERE UNTIL 1799"
       ],
       "atSec": 25.03,
-      "untilSec": 26.85,
+      "untilSec": 27.25,
       "x": 120,
       "y": 84,
       "size": 22
@@ -399,6 +401,11 @@
      29.7
     ]
    ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "paper"
+   },
    "overlay": {
     "chips": [
      {
@@ -837,8 +844,8 @@
       "lines": [
        "HE MAY HAVE SEEN THEM"
       ],
-      "atSec": 20.82,
-      "untilSec": 22.66,
+      "atSec": 20.41,
+      "untilSec": 22.96,
       "x": 120,
       "y": 830,
       "size": 22
@@ -1951,7 +1958,7 @@
      224,
      112
     ],
-    "durSec": 0.5
+    "durSec": 0.35
    },
    "overlay": {
     "stickers": [

@@ -67,7 +67,7 @@ fc = (
         f"[bed][key]sidechaincompress=threshold={a.threshold or 0.05}:ratio={a.ratio or 2}:attack=80:release=1100[duck0];"
     )
     + (f"[duck0]asplit=2[duck][bedonly];" if a.bed_only else f"[duck0]anull[duck];")
-    + f"[0:a]aresample=48000,aformat=channel_layouts=stereo[act];"
+    + f"[0:a]aresample=48000,aformat=channel_layouts=stereo,apad=whole_dur={dur}[act];"  # the act's audio padded to the picture (Gate 3 review M5: it ended 67 ms early)
     f"[act][duck]amix=inputs=2:normalize=0:duration=first,alimiter=limit=0.89[mix]"
 )
 tmp = a.out.replace(".mp4", "_premix.mp4")

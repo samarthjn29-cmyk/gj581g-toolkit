@@ -34,7 +34,8 @@ export const RunningHead: React.FC<{ text: string; beats: B[]; fromSec?: number 
     if (!allowed(b)) continue;
     const v = interpolate(now, [b.start, b.start + 0.3, b.end - 0.3, b.end], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
     const prevOn = beats.some((p) => Math.abs(p.end - b.start) < 0.02 && allowed(p));
-    const nextOn = beats.some((p) => Math.abs(p.start - b.end) < 0.02 && allowed(p));
+    const last = b === beats[beats.length - 1]; // the act's end: hold the head to the last frame (the next act opens on it)
+    const nextOn = last || beats.some((p) => Math.abs(p.start - b.end) < 0.02 && allowed(p));
     const inside = now >= b.start && now < b.end;
     if (!inside) continue;
     o = (prevOn && now < b.start + 0.3) || (nextOn && now > b.end - 0.3) ? 1 : v;

@@ -1,14 +1,14 @@
 1
-00:00:02,400 --> 00:00:04,870
+00:00:02,400 --> 00:00:05,100
 So Dalton takes his question to the
 experts.
 
 2
-00:00:05,557 --> 00:00:09,047
+00:00:05,557 --> 00:00:09,260
 Manchester, the last day of October, 1794.
 
 3
-00:00:10,097 --> 00:00:11,907
+00:00:10,097 --> 00:00:12,050
 He moved to the town the year before.
 
 4
@@ -16,17 +16,17 @@ He moved to the town the year before.
 He's 28.
 
 5
-00:00:14,234 --> 00:00:16,824
+00:00:14,234 --> 00:00:16,980
 He teaches mathematics and natural
 philosophy.
 
 6
-00:00:17,511 --> 00:00:19,661
+00:00:17,511 --> 00:00:19,820
 That's the old name for the study of
 nature.
 
 7
-00:00:20,347 --> 00:00:22,937
+00:00:20,347 --> 00:00:23,110
 And his college is called the New College.
 
 8
@@ -35,243 +35,246 @@ Tonight, he stands up in front of the
 town's
 
 9
-00:00:26,287 --> 00:00:29,477
+00:00:26,287 --> 00:00:29,600
 Literary and Philosophical Society and
 reads out a paper.
 
 10
-00:00:30,164 --> 00:00:34,474
+00:00:30,164 --> 00:00:34,650
 Its title is "Extraordinary facts relating
 to the vision of colours".
 
 11
-00:00:35,161 --> 00:00:37,211
+00:00:35,161 --> 00:00:37,360
 The subject is his own eyes.
 
 12
-00:00:37,898 --> 00:00:39,808
+00:00:37,898 --> 00:00:39,970
 It's his first paper to the Society.
 
 13
-00:00:40,858 --> 00:00:42,608
+00:00:40,858 --> 00:00:42,720
 And it's a careful paper.
 
 14
-00:00:43,295 --> 00:00:45,785
+00:00:43,295 --> 00:00:45,930
 He doesn't just say that he sees colours
 oddly.
 
 15
-00:00:46,472 --> 00:00:50,842
+00:00:46,472 --> 00:00:50,920
 He lists them, one by one, with examples
 anyone can check.
 
 16
-00:00:51,892 --> 00:00:52,902
+00:00:51,892 --> 00:00:52,950
 Here's one.
 
 17
-00:00:53,748 --> 00:00:58,798
+00:00:53,748 --> 00:00:58,970
 The face of a laurel leaf, he says, is a
 good match to a stick of red sealing-wax.
 
 18
-00:00:59,485 --> 00:01:02,015
+00:00:59,485 --> 00:01:02,190
 That's the wax people once used to seal
 letters.
 
 19
-00:01:03,065 --> 00:01:04,175
+00:01:03,065 --> 00:01:04,220
 Think about that.
 
 20
-00:01:04,862 --> 00:01:07,272
+00:01:04,862 --> 00:01:07,710
 A green leaf and a red stick of wax.
 
 21
-00:01:07,322 --> 00:01:11,369
+00:01:08,730 --> 00:01:11,480
 To you, about as different as two colours
 get.
 
 22
-00:01:12,056 --> 00:01:13,586
+00:01:12,056 --> 00:01:13,770
 To him, a match.
 
 23
-00:01:14,636 --> 00:01:17,446
+00:01:14,636 --> 00:01:17,500
 He describes the band of colours from a
 prism too.
 
 24
-00:01:18,133 --> 00:01:21,743
+00:01:18,133 --> 00:01:21,850
 A prism is a triangular piece of glass
 that throws colours on a wall.
 
 25
-00:01:22,430 --> 00:01:24,760
+00:01:22,430 --> 00:01:24,850
 The part that others call red, he writes,
 
 26
-00:01:25,089 --> 00:01:28,919
+00:01:25,089 --> 00:01:28,979
 looks to him "little more than a shade, or
 defect of light".
 
 27
-00:01:29,029 --> 00:01:30,559
+00:01:29,029 --> 00:01:30,610
 Almost no light at all.
 
 28
-00:01:31,246 --> 00:01:35,196
+00:01:31,246 --> 00:01:35,310
 Where others see six colours, he sees two,
 or at most three.
 
 29
-00:01:35,426 --> 00:01:36,336
+00:01:35,426 --> 00:01:36,740
 Yellow and blue.
 
 30
-00:01:36,386 --> 00:01:39,116
+00:01:36,820 --> 00:01:39,240
 Or yellow, blue and purple.
 
 31
-00:01:40,166 --> 00:01:41,856
+00:01:40,166 --> 00:01:42,290
 Then he does what a scientist should.
 
 32
-00:01:41,906 --> 00:01:44,793
+00:01:43,250 --> 00:01:44,890
 He offers an explanation.
 
 33
-00:01:45,843 --> 00:01:47,193
+00:01:45,843 --> 00:01:47,320
 Your eye isn't hollow.
 
 34
-00:01:47,880 --> 00:01:49,890
+00:01:47,880 --> 00:01:50,060
 It's filled with clear fluids.
 
 35
-00:01:50,577 --> 00:01:53,567
+00:01:50,577 --> 00:01:53,740
 The biggest is a clear jelly called the
 vitreous humour.
 
 36
-00:01:54,254 --> 00:01:57,384
+00:01:54,254 --> 00:01:57,460
 Here, humour is an old word for a fluid in
 the body.
 
 37
-00:01:58,071 --> 00:02:00,801
+00:01:58,071 --> 00:02:00,860
 Light passes through it on its way to the
 back of the eye.
 
 38
-00:02:01,851 --> 00:02:05,901
+00:02:01,851 --> 00:02:06,020
 Dalton's guess is that in his eyes, one of
 these fluids isn't clear.
 
 39
-00:02:06,587 --> 00:02:07,857
+00:02:06,587 --> 00:02:07,910
 It's tinted.
 
 40
-00:02:08,544 --> 00:02:11,894
+00:02:08,544 --> 00:02:12,020
 In his words, "probably some modification
 of blue".
 
 41
-00:02:12,581 --> 00:02:14,251
+00:02:12,581 --> 00:02:14,310
 So, some kind of blue.
 
 42
-00:02:14,938 --> 00:02:17,448
+00:02:14,938 --> 00:02:17,870
 And he supposes it must be the vitreous
 humour.
 
 43
-00:02:17,498 --> 00:02:20,028
+00:02:19,300 --> 00:02:20,228
 And honestly?
 
 44
-00:02:20,278 --> 00:02:21,348
-it makes sense.
+00:02:20,278 --> 00:02:21,460
+It makes sense.
 
 45
-00:02:22,035 --> 00:02:24,485
+00:02:22,035 --> 00:02:24,690
 Think of looking at the world through blue
 glass.
 
 46
-00:02:25,172 --> 00:02:29,522
-In Dalton's version, the tinted jelly
-soaks up much of the red and the green
-light.
+00:02:25,172 --> 00:02:26,422
+In Dalton's version,
 
 47
-00:02:29,572 --> 00:02:33,258
+00:02:26,472 --> 00:02:29,890
+the tinted jelly soaks up much of the red
+and the green light.
+
+48
+00:02:30,830 --> 00:02:33,310
 Before it ever reaches the back of the
 eye.
 
-48
-00:02:33,945 --> 00:02:37,535
+49
+00:02:33,945 --> 00:02:37,590
 Reds and greens would both look duller and
 more like each other.
 
-49
-00:02:38,222 --> 00:02:41,372
+50
+00:02:38,222 --> 00:02:41,560
 And a red stick of wax might end up
 looking like a leaf.
 
-50
-00:02:42,482 --> 00:02:44,972
+51
+00:02:42,482 --> 00:02:45,020
 He has a reason for picking the jelly,
 too.
 
-51
+52
 00:02:45,659 --> 00:02:49,849
 "Otherwise," he writes, "I apprehend it
 might be discovered by inspection,
 
-52
-00:02:49,899 --> 00:02:51,029
+53
+00:02:49,899 --> 00:02:51,410
 which has not been done."
 
-53
-00:02:51,079 --> 00:02:56,966
+54
+00:02:52,480 --> 00:02:57,020
 In other words, a tint anywhere easier to
 see would have been noticed by now.
 
-54
-00:02:58,016 --> 00:03:01,126
+55
+00:02:58,016 --> 00:03:01,280
 So the only way to check the jelly is to
 open an eye.
 
-55
-00:03:01,813 --> 00:03:03,423
+56
+00:03:01,813 --> 00:03:03,520
 And Dalton only has two.
 
-56
-00:03:04,473 --> 00:03:07,363
+57
+00:03:04,473 --> 00:03:07,410
 At some point, he asks for exactly that.
 
-57
-00:03:08,050 --> 00:03:10,620
+58
+00:03:08,050 --> 00:03:10,780
 For his eyes to be examined after he dies.
 
-58
-00:03:11,306 --> 00:03:14,616
+59
+00:03:11,306 --> 00:03:14,790
 His biographer would call it his "strongly
 expressed wish".
 
-59
-00:03:15,666 --> 00:03:19,756
+60
+00:03:15,666 --> 00:03:19,880
 But a blue tint only explains colours if
 we know what colour is.
 
-60
-00:03:20,443 --> 00:03:22,953
+61
+00:03:20,443 --> 00:03:23,340
 And on that, Dalton leans on one man.
 
-61
-00:03:23,003 --> 00:03:26,930
+62
+00:03:24,340 --> 00:03:27,080
 A man who died long before Dalton was
 born.
