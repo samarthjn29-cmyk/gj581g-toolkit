@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T04:33:12.546Z",
+ "generated": "2026-11-24T05:27:07.518Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3329,7 +3329,8 @@
    "folder": "11_Sources",
    "name": "Letter1841_WendenReverse",
    "paths": [
-    "public/assets/sources/letter1841_wenden_reverse.jpg"
+    "public/assets/sources/letter1841_wenden_reverse.jpg",
+    "public/assets/sources/letter1841_wenden_reverse_cutout.png"
    ],
    "status": "Active",
    "use": "Best use: the line 'That's the wax people once used to seal letters' (WCL-E01 act 3, VIS-061 object on 'seal letters'), as a layer cut-out beside the wax seal (no sticker edge: B is a lit LayerStage), tagged A SEALED LETTER · 1841. Limit: max 2 beats per episode; never shown as a letter of Dalton's or anyone in the story; date tag always on. Not for: post in general, or any address.",

@@ -65,7 +65,7 @@ export type StageWorld = {
   // outSec: the world fades to the theme canvas over 1.2 s while its blur rises to 4 px; its label un-wipes from here
   outSec?: number;
 };
-export type CarryState = { atSec: number; color?: string | null; label?: string };
+export type CarryState = { atSec: number; color?: string | null; label?: string; blend?: "color" | "replace" }; // replace: one flat colour over the thing (a simulated match), its texture kept faintly
 export type StageCarry = {
   srcId: string;
   file?: string;
@@ -252,7 +252,9 @@ const Carried: React.FC<{ c: StageCarry; light: NearLight; cam: XY; uid: string 
   const lift = c.rest ? 0 : 1 - 0.35 * pe; // a rising thing's shadow tightens as it settles
   const shadow = c.rest
     ? `drop-shadow(${(lx * 3).toFixed(1)}px ${(ly * 3).toFixed(1)}px 3px ${sc}0.42)) drop-shadow(${(lx * 12).toFixed(1)}px ${(ly * 12).toFixed(1)}px 14px ${sc}0.22))`
-    : `drop-shadow(${(lx * (16 + 14 * lift)).toFixed(1)}px ${(ly * (16 + 14 * lift)).toFixed(1)}px ${(22 + 16 * lift).toFixed(0)}px ${sc}${(0.3 - 0.08 * lift).toFixed(2)}))`;
+    : light.key === "paper" // a paper world is bright and even: the lifted shadow needs more weight to read (act 3 frame review, FIX 14)
+      ? `drop-shadow(${(lx * (12 + 10 * (lift - 0.65))).toFixed(1)}px ${(ly * (12 + 10 * (lift - 0.65))).toFixed(1)}px ${(18 + 12 * (lift - 0.65)).toFixed(0)}px ${sc}0.38))`
+      : `drop-shadow(${(lx * (16 + 14 * lift)).toFixed(1)}px ${(ly * (16 + 14 * lift)).toFixed(1)}px ${(22 + 16 * lift).toFixed(0)}px ${sc}${(0.3 - 0.08 * lift).toFixed(2)}))`;
   const wrapColor = light.key === "warm" ? "#ffb070" : light.key === "night" ? "#7088c0" : light.key === "day" ? "#dbe8ff" : "#ffffff";
   const wrapOpacity = light.key === "none" ? 0 : light.key === "warm" ? 0.32 : 0.22;
   const capV = c.captionUntilSec !== undefined ? interpolate(frame, [sec(c.captionUntilSec, fps), sec(c.captionUntilSec + 0.4, fps)], [1, 0], clamp) : 1;
@@ -285,7 +287,18 @@ const Carried: React.FC<{ c: StageCarry; light: NearLight; cam: XY; uid: string 
       </svg>
       <div style={{ position: "absolute", inset: 0, clipPath: torn }}>
       <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", filter: `url(#${fid}) ${NEAR_GRADE[light.key] ?? "none"}${torn ? "" : ` ${shadow}`}` }} />
-      {layers.map(({ s, o }, i) => (s.color && o > 0 ? <div key={i} style={{ position: "absolute", inset: 0, background: s.color, mixBlendMode: "color", opacity: o * 0.92, ...mask }} /> : null))}
+      {layers.map(({ s, o }, i) =>
+        s.color && o > 0 ? (
+          s.blend === "replace" ? (
+            <React.Fragment key={i}>
+              <div style={{ position: "absolute", inset: 0, background: s.color, opacity: o, ...mask }} />
+              <Img src={src} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", maxWidth: "none", mixBlendMode: "luminosity", opacity: o * 0.14 }} />
+            </React.Fragment>
+          ) : (
+            <div key={i} style={{ position: "absolute", inset: 0, background: s.color, mixBlendMode: "color", opacity: o * 0.92, ...mask }} />
+          )
+        ) : null,
+      )}
       {hl}
       {/* the world's light on the thing */}
       <div style={{ position: "absolute", inset: 0, background: light.a, mixBlendMode: "soft-light", opacity: 1 - light.p, ...mask }} />
@@ -305,7 +318,7 @@ const Carried: React.FC<{ c: StageCarry; light: NearLight; cam: XY; uid: string 
             </div>
           ))
         : null}
-      {rt?.source && pr > 0 ? <div style={{ position: "absolute", left: 10, bottom: -40, fontFamily: t.fonts.mono, fontSize: 16, letterSpacing: 2, color: t.colors.secondary, background: t.colors.chip, padding: "4px 10px", borderRadius: 3, whiteSpace: "nowrap", opacity: Math.min(1, pr * 3), transform: c.tilt ? `rotate(${-c.tilt}deg)` : undefined }}>{rt.source}</div> : null}
+      {rt?.source && pr > 0 ? <div style={{ position: "absolute", left: 10, bottom: -40, fontFamily: t.fonts.mono, fontSize: 16, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "4px 10px", borderRadius: 3, whiteSpace: "nowrap", opacity: Math.min(1, pr * 3), transform: c.tilt ? `rotate(${-c.tilt}deg)` : undefined }}>{rt.source}</div> : null}
       {states.map((st, i) => {
         if (!st.label) return null;
         const vin = interpolate(frame, [sec(st.atSec, fps), sec(st.atSec + 0.5, fps)], [0, 1], { ...clamp, easing: SLOW_OUT });

@@ -305,7 +305,7 @@
       "atSec": 19.67,
       "untilSec": 21.91,
       "x": 1280,
-      "y": 135,
+      "y": 112,
       "align": "center",
       "accent": true,
       "settle": true
@@ -412,8 +412,8 @@
        {
         "text": "experts",
         "atSec": 1.74,
-        "x": 260,
-        "y": 520,
+        "x": 300,
+        "y": 580,
         "accent": true
        }
       ],
@@ -421,12 +421,12 @@
        {
         "atSec": 1.39,
         "from": [
-         330,
-         495
+         400,
+         505
         ],
         "to": [
-         300,
-         520
+         440,
+         572
         ]
        }
       ],
@@ -555,13 +555,13 @@
         "text": "his own",
         "atSec": 6.38,
         "x": 1106,
-        "y": 700
+        "y": 760
        },
        {
         "text": "eyes",
         "atSec": 6.78,
         "x": 1435,
-        "y": 700,
+        "y": 760,
         "accent": true
        }
       ]
@@ -670,7 +670,8 @@
     "pull": 0.86
    },
    "ground": {
-    "kind": "paper"
+    "kind": "paper",
+    "tone": "dark"
    }
   },
   {
@@ -728,7 +729,6 @@
       "blur": 2,
       "rackSec": 11.82,
       "lightFrom": "top-left",
-      "label": "JOHN DALTON · 1798 · P. 34",
       "highlights": [
        {
         "box": [
@@ -779,7 +779,8 @@
       "states": [
        {
         "atSec": 20.41,
-        "color": "#574F18"
+        "color": "#574F18",
+        "blend": "replace"
        }
       ]
      },
@@ -804,21 +805,24 @@
        },
        {
         "atSec": 20.41,
-        "color": "#574F18"
+        "color": "#574F18",
+        "blend": "replace"
        }
       ]
      },
      {
       "srcId": "SRC-046",
+      "file": "public/assets/sources/letter1841_wenden_reverse_cutout.png",
       "size": [
-       1920,
-       1089
+       1899,
+       1056
       ],
       "at": [
        1440,
        770
       ],
       "w": 420,
+      "tilt": 3,
       "atSec": 9.36,
       "enter": "rise",
       "untilSec": 11.21,
@@ -838,10 +842,27 @@
       "x": 120,
       "y": 830,
       "size": 22
+     },
+     {
+      "text": "PHOTOS TODAY",
+      "lines": [
+       "CHERRY LAUREL, RUNIC EARTH",
+       "WAX SEAL, PETRIK"
+      ],
+      "atSec": 0,
+      "untilSec": 22.66,
+      "x": 120,
+      "y": 96,
+      "size": 16
+     },
+     {
+      "text": "JOHN DALTON · 1798 · P. 34",
+      "atSec": 0,
+      "x": 120,
+      "y": 930,
+      "size": 20
      }
     ],
-    "caption": "PHOTOS TODAY · CHERRY LAUREL, RUNIC EARTH · WAX SEAL, PETRIK",
-    "captionUntilSec": 22.66,
     "camera": {
      "pan": -40,
      "push": 0.03
@@ -1009,7 +1030,7 @@
        "count": {
         "text": "I see only two or at most three distinctions",
         "atSec": 18.97,
-        "y": 772
+        "y": 792
        }
       },
       "labels": [
@@ -1099,7 +1120,7 @@
       "lines": [
        {
         "x": 210,
-        "y": 760,
+        "y": 780,
         "words": [
          {
           "text": "little",
@@ -1125,7 +1146,7 @@
        },
        {
         "x": 210,
-        "y": 828,
+        "y": 848,
         "words": [
          {
           "text": "or",
@@ -1150,7 +1171,7 @@
        "text": "DALTON · 1798 · P. 31",
        "atSec": 11.19,
        "x": 720,
-       "y": 846,
+       "y": 866,
        "untilSec": 25.67
       },
       "untilSec": 18.4
@@ -1190,7 +1211,7 @@
    ],
    "props": {
     "mode": "section",
-    "startSec": 1.82,
+    "startSec": -1,
     "outlines": [
      {
       "parts": [
@@ -1211,8 +1232,8 @@
      {
       "text": "VITREOUS HUMOUR",
       "atSec": 10.42,
-      "x": 1000,
-      "y": 480,
+      "x": 940,
+      "y": 440,
       "size": 26,
       "underline": {
        "atSec": 12.73,
@@ -1442,7 +1463,8 @@
     "dir": "right"
    },
    "ground": {
-    "kind": "paper"
+    "kind": "paper",
+    "tone": "dark"
    }
   },
   {
@@ -1773,7 +1795,7 @@
       "dimAtSec": 11.96
      }
     ],
-    "quote": "probably some modification of blue"
+    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done"
    },
    "beatTimes": [
     [
@@ -1809,7 +1831,8 @@
    ],
    "transitionIn": "slide",
    "ground": {
-    "kind": "paper"
+    "kind": "paper",
+    "tone": "dark"
    }
   },
   {
@@ -1903,6 +1926,7 @@
     ],
     "chips": [
      {
+      "size": 64,
       "chips": [
        {
         "text": "only",

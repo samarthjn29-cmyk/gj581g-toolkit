@@ -156,7 +156,7 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
             </g>
           );
         })}
-        {beat ? (
+        {beat && pBeam > 0 ? ( // no zero-length line: its round cap would show as a stray dot before the beam draws
           <line
             x1={x0}
             y1={cy}

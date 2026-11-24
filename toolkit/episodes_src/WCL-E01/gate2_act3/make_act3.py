@@ -88,7 +88,7 @@ H43_OTH = [435, 1148, 775, 48]
 H43_VER = [250, 1203, 875, 48]
 # Grounds (23 Nov 2026 rule, scripts/ground-check.mjs): the page cards sit on the paper desk (LOK-027), so the
 # diagrams between them keep the theme canvas without three graphite shots in a row (Gate 2 look choice).
-PAPER = {"kind": "paper"}
+PAPER = {"kind": "paper", "tone": "dark"}  # frame review FIX 7: the cream page reads on the dark desk
 
 # 1 the chapter slate (music alone: cue 1, Wholesome carried on from act 2).
 shot(B(1), "ChapterSlate", {"index": "03", "title": "The talk"})
@@ -115,7 +115,7 @@ shot(B(*range(2, 13)), "LayerStage", lambda r: {
     "labels": [
         {"text": "AGE 28", "atSec": r(word("28")), "untilSec": r(word("tonight")), "x": 1280, "y": 490, "align": "center"},
         {"text": "TUTOR · MATHEMATICS AND NATURAL PHILOSOPHY", "atSec": r(word("mathematics")), "untilSec": r(word("tonight")), "x": 1280, "y": 536, "align": "center"},
-        {"text": "NEW COLLEGE", "atSec": r(word("new")), "untilSec": r(word("tonight")) + 0.3, "x": 1280, "y": 135, "align": "center", "accent": True, "settle": True},
+        {"text": "NEW COLLEGE", "atSec": r(word("new")), "untilSec": r(word("tonight")) + 0.3, "x": 1280, "y": 112, "align": "center", "accent": True, "settle": True},
         # one landing on "Society" (Gate 1 reviewer: not the brief's two, 0.23 s apart)
         {"text": "CROSS STREET CHAPEL · AS IN 1835", "lines": ["THE SOCIETY MET IN A ROOM HERE UNTIL 1799"], "atSec": r(word("society")), "untilSec": r(29.25), "x": 120, "y": 84, "size": 22},
     ],
@@ -124,8 +124,8 @@ shot(B(*range(2, 13)), "LayerStage", lambda r: {
     "camera": {"pan": -40, "push": 0.03}},
     sid="A_manchester_talk",
     overlay={"chips": [{"chips": [{"text": "question", "atSec": round(word("question") - S(2), 2), "x": 160, "y": 400},
-                                  {"text": "experts", "atSec": round(word("experts") - S(2), 2), "x": 260, "y": 520, "accent": True}],
-                        "arrows": [{"atSec": round(word("experts") - S(2) - 0.35, 2), "from": [330, 495], "to": [300, 520]}],
+                                  {"text": "experts", "atSec": round(word("experts") - S(2), 2), "x": 300, "y": 580, "accent": True}],
+                        "arrows": [{"atSec": round(word("experts") - S(2) - 0.35, 2), "from": [400, 505], "to": [440, 572]}],
                         "untilSec": round(6.9 - S(2), 2)}]})
 
 # 13-16 A2_title_match: the p.28 card in place of the held page (focus match on its title); ground = the chapel blurred.
@@ -139,8 +139,8 @@ shot(B(13, 14, 15, 16), "ArchivalScanCard", lambda r: {
     "source": "JOHN DALTON · 1798 · P. 28"},
     sid="A2_title_match", transitionIn="match", focus=[408, 908],
     ground={"kind": "blur", "srcId": "SRC-044", "size": [800, 564], "focus": [0.47, 0.5]},
-    overlay={"chips": [{"chips": [{"text": "his own", "atSec": round(word("his", 35) - S(13), 2), "x": 1106, "y": 700},
-                                  {"text": "eyes", "atSec": round(word("eyes", 35) - S(13), 2), "x": 1435, "y": 700, "accent": True}]}]})
+    overlay={"chips": [{"chips": [{"text": "his own", "atSec": round(word("his", 35) - S(13), 2), "x": 1106, "y": 760},
+                                  {"text": "eyes", "atSec": round(word("eyes", 35) - S(13), 2), "x": 1435, "y": 760, "accent": True}]}]})
 
 # 17-20 p.34, the next page on the same sheet (canvas glide right): the list, lines lit as read; held, no scroll.
 shot(B(17, 18, 19, 20), "ArchivalScanCard", lambda r: {
@@ -155,21 +155,23 @@ shot(B(17, 18, 19, 20), "ArchivalScanCard", lambda r: {
 # wax rise in the margin beside their words; the sealed letter (VIS-061) on "seal letters"; chips W5; both turn olive.
 shot(B(*range(21, 29)), "LayerStage", lambda r: {
     "worlds": [{"atSec": 0, "srcId": "SRC-002", "kind": "image", "size": [1920, 2934], "zoom": 1.15, "focus": [0.538, 0.4797], "light": "paper", "haze": 0.08,
-                "blur": 2, "rackSec": r(word("think", 62)), "lightFrom": "top-left", "label": "JOHN DALTON · 1798 · P. 34",
+                "blur": 2, "rackSec": r(word("think", 62)), "lightFrom": "top-left",
                 "highlights": [{"box": [1645, 1252, 80, 50], "atSec": 0}, {"box": [745, 1308, 980, 54], "atSec": 0},
                                {"box": [745, 1366, 690, 54], "atSec": r(word("match", 56))}],
                 "why": "Same idea: the sentence on p.34 where Dalton matches the laurel leaf to red sealing-wax; the two things lift off the page that names them."}],
     "carry": [
         # rises from "laurel" so it settles in the comma pause after "leaf," (55.1-55.25), where its pop is
-        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(word("laurel")), "enter": "rise", "states": [{"atSec": r(71.65), "color": OLIVE}]},
+        {**LEAF, "at": [330, 360], "w": 300, "atSec": r(word("laurel")), "enter": "rise", "states": [{"atSec": r(71.65), "color": OLIVE, "blend": "replace"}]},
         {**WAX, "at": [330, 690], "w": 200, "atSec": r(word("sealing")), "enter": "rise",
-         "states": [{"atSec": r(word("wax", 59)), "label": "A WAX SEAL · TODAY"}, {"atSec": r(71.65), "color": OLIVE}]},
+         "states": [{"atSec": r(word("wax", 59)), "label": "A WAX SEAL · TODAY"}, {"atSec": r(71.65), "color": OLIVE, "blend": "replace"}]},  # FIX 2: one measured olive on both
         # W4: pale on the pale page, so 420 wide (Gate 2 builder test); lands on "seal letters", sinks before "Think"
-        {"srcId": "SRC-046", "size": [1920, 1089], "at": [1440, 770], "w": 420, "atSec": r(word("used")), "enter": "rise",
+        {"srcId": "SRC-046", "file": "public/assets/sources/letter1841_wenden_reverse_cutout.png", "size": [1899, 1056], "at": [1440, 770], "w": 420, "tilt": 3, "atSec": r(word("used")), "enter": "rise",  # FIX 8
          "untilSec": r(62.45), "exit": "sink", "caption": "A SEALED LETTER · 1841", "captionSize": 20},
     ],
-    "labels": [{"text": "SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(word("to", 72)), "untilSec": r(S(29) - 0.6), "x": 120, "y": 830, "size": 22}],
-    "caption": "PHOTOS TODAY · CHERRY LAUREL, RUNIC EARTH · WAX SEAL, PETRIK", "captionUntilSec": r(S(29) - 0.6),
+    # FIX 3: the caption and the page's tag sit in the paper margin, off the page's bottom line of print
+    "labels": [{"text": "SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(word("to", 72)), "untilSec": r(S(29) - 0.6), "x": 120, "y": 830, "size": 22},
+               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": 0, "untilSec": r(S(29) - 0.6), "x": 120, "y": 96, "size": 16},
+               {"text": "JOHN DALTON · 1798 · P. 34", "atSec": 0, "x": 120, "y": 930, "size": 20}],
     "camera": {"pan": -40, "push": 0.03}},
     sid="B_leaf_and_wax", transitionIn="push", focus=[620, 598],
     overlay={"chips": [{"chips": [{"text": "green", "atSec": round(word("green", 64) - S(21), 2), "x": 1160, "y": 640},
@@ -187,27 +189,27 @@ shot(B(*range(29, 39)), "LayerStage", lambda r: {
         "tracks": {"drawAtSec": r(word("triangular")), "drawSec": 1.4, "lowerAtSec": r(word("others", 82)),
                    "fills": [{"band": "red", "atSec": r(word("almost"))}, {"band": "yellow", "atSec": r(word("yellow"))},
                              {"band": "blue", "atSec": r(word("blue", 96))}, {"band": "purple", "atSec": r(word("purple"))}],
-                   "count": {"text": "I see only two or at most three distinctions", "atSec": r(word("two", 93)), "y": 772}},  # Gate 2 builder test: clear of the source chip
+                   "count": {"text": "I see only two or at most three distinctions", "atSec": r(word("two", 93)), "y": 792}},  # Gate 2 builder test: clear of the source chip
         "labels": [{"text": "OTHERS · DALTON'S SIX", "atSec": r(word("describes")), "x": 210, "y": 408, "size": 22},
                    {"text": "DALTON'S WORDS", "atSec": r(word("others", 82)), "x": 210, "y": 714, "size": 22}]}},
     "camera": {"pan": 0, "push": 0.03},
     "startSec": -1},  # the photo arrives already in place inside the glide
     sid="S_prism_world", transitionIn="canvas", transition={"dir": "down", "pull": 0.86},
-    overlay={"quotes": [{"lines": [{"x": 210, "y": 760, "words": [{"text": t, "atSec": round(word(k, 85) - S(29), 2)} for t, k in
+    overlay={"quotes": [{"lines": [{"x": 210, "y": 780, "words": [{"text": t, "atSec": round(word(k, 85) - S(29), 2)} for t, k in
                                                                    [("little", "little"), ("more", "more"), ("than", "than"), ("a", "a"), ("shade,", "shade")]]},
-                                   {"x": 210, "y": 828, "words": [{"text": t, "atSec": round(word(k, 87) - S(29), 2)} for t, k in
+                                   {"x": 210, "y": 848, "words": [{"text": t, "atSec": round(word(k, 87) - S(29), 2)} for t, k in
                                                                    [("or", "or"), ("defect", "defect"), ("of", "of"), ("light", "light")]]}],
-                         "source": {"text": "DALTON · 1798 · P. 31", "atSec": round(word("little") - S(29), 2), "x": 720, "y": 846, "untilSec": round(word("then", 99) - S(29), 2)},
+                         "source": {"text": "DALTON · 1798 · P. 31", "atSec": round(word("little") - S(29), 2), "x": 720, "y": 866, "untilSec": round(word("then", 99) - S(29), 2)},
                          "untilSec": round(92.9 - S(29), 2)}]})
 
 # 39-48 D_into_the_eye: the act's one hard cut, on the hit at 102.10 (cue 3 on the same frame); the cross-section draws
 # in on "explanation"; the fluids outlined, then the vitreous; VITREOUS HUMOUR with the HUMOUR underline (W7); the beam;
 # DALTON'S GUESS in the corner; chips W8 (clear struck, tinted); the jelly tints blue on "It's".
 shot(B(*range(39, 49)), "EyeDiagram", lambda r: {
-    "mode": "section", "startSec": r(word("explanation")),
+    "mode": "section", "startSec": -1,  # frame review FIX 1: drawn on the cut frame, so the strips cut onto the eye (was "explanation")
     "outlines": [{"parts": ["aqueous", "vitreous"], "atSec": r(word("clear", 108)), "untilSec": r(word("clear", 111))},
                  {"parts": ["vitreous"], "atSec": r(word("clear", 111))}],
-    "labels": [{"text": "VITREOUS HUMOUR", "atSec": r(word("vitreous", 112)), "x": 1000, "y": 480, "size": 26, "underline": {"atSec": r(word("humour", 114)), "fromCh": 9}}],
+    "labels": [{"text": "VITREOUS HUMOUR", "atSec": r(word("vitreous", 112)), "x": 940, "y": 440, "size": 26, "underline": {"atSec": r(word("humour", 114)), "fromCh": 9}}],
     "beat": {"atSec": r(word("light", 117)), "drawSec": 1.4},
     "tag": {"at": "corner", "parts": [{"text": "DALTON'S GUESS", "atSec": r(word("dalton's", 121))}]},
     "tints": [{"part": "vitreous", "color": BLUE, "atSec": r(word("it's", 126)), "opacity": 0.5}]},
@@ -251,7 +253,7 @@ shot(B(*range(61, 67)), "ArchivalScanCard", lambda r: {
                   [{"box": H43_HUM, "atSec": -1, "dimAtSec": r(ANY)},
                    {"box": H43_OTH, "atSec": r(word("otherwise")), "dimAtSec": r(ANY)},
                    {"box": H43_VER, "atSec": r(word("has", 170)), "dimAtSec": r(ANY)}],
-    "quote": "probably some modification of blue"},
+    "quote": "otherwise I apprehend it might be discovered by inspection, which has not been done"},  # FIX 6: the quote being read (p.43, verbatim, the 'disco-/vered' break joined)
     transitionIn="slide", ground=PAPER, extra=[])
 
 # 67-68 the simple eye: the "vitreous" bar lifts off and becomes the iris (shape morph, landing in the pause before
@@ -262,7 +264,7 @@ shot(B(67, 68), "EyeDiagram", lambda r: {
     transitionIn="morph", transition={"fromShape": [832, 285, 123, 37, 3], "toShape": [848, 434, 224, 224, 112], "durSec": 0.5},
     overlay={"stickers": [{"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1600, 520], "w": 320,
                            "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
-             "chips": [{"chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 160, "y": 490},
+             "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 160, "y": 490},
                                   {"text": "two", "atSec": round(word("two", 182) - S(67), 2), "x": 376, "y": 490, "accent": True}]}]})
 
 # 69-72 H_wish_over_portrait: cut on action from the closing lid onto the viewer's-left lens of his spectacles (1834
