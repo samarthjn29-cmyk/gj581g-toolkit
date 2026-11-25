@@ -90,7 +90,7 @@
   {
    "id": "SFX-025",
    "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
-   "atSec": 101.95,
+   "atSec": 102.15,
    "volumeDb": -14.0
   },
   {
@@ -1564,10 +1564,10 @@
        {
         "atSec": 2.95,
         "to": [
-         1340,
-         400
+         1530,
+         640
         ],
-        "w": 520,
+        "w": 440,
         "sec": 1.3,
         "why": "Steps aside so the flame whose light it now gets is seen."
        }
@@ -1583,8 +1583,8 @@
      {
       "text": "ILLUSTRATION · NOT MEASURED",
       "atSec": 3.94,
-      "x": 140,
-      "y": 470,
+      "x": 1480,
+      "y": 200,
       "size": 18
      }
     ],
@@ -1882,7 +1882,7 @@
       "chips": [
        {
         "text": "don't.",
-        "atSec": 7.27,
+        "atSec": 7.47,
         "x": 1110,
         "y": 860,
         "accent": true
