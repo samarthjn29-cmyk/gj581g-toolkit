@@ -248,6 +248,14 @@ for c in music["cues"]:
     c["levels"] = [[round(x + D, 2) if x >= 56.8 else x, v] for x, v in c.get("levels", [])]
 music["quiet"] = [[round(x + D, 2), round(y + D, 2), v, r] if x >= T0 else [x, y, v, r] for x, y, v, r in music["quiet"]]
 music["dur"] = round(music["dur"] + D, 2)
+# Colour harmony (Sam, 26 Nov 2026): no accent chip over a photo whose own colour clashes with it -> the
+# tomato "who's right?" over the pink geranium becomes a paper chip
+_s20 = next(b for b in a["beats"] if b["id"] == "20")
+for _g in _s20["overlay"]["chips"]:
+    for _c in _g["chips"]:
+        if _c["text"] == "who's right?":
+            _c["accent"] = False
+
 # Picture hit on "151 years" (Gate 3 SHOULD, fixed 26 Nov 2026): the counter pops on the sub, read from the sub's own time
 _sub = next(x for x in a["audio"] if x["id"] == "SFX-025")
 _yc = next(b for b in a["beats"] if b["id"] == "32+33")

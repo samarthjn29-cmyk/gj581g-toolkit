@@ -1255,7 +1255,7 @@
         "atSec": 0.44,
         "x": 560,
         "y": 760,
-        "accent": true
+        "accent": false
        }
       ]
      }

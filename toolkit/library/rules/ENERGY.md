@@ -12,7 +12,9 @@ These rules replace the calm limits of 22 Nov 2026 wherever they conflict. Accur
 2. **Key words land big.** The word a turn hangs on lands as a large chip (90-150 px), accent or ink, slammed in
    (fast in, no fade), on its spoken word. Small mono tags stay for sources and labels only.
 3. **Colour fills the frame.** Data colours (a swatch, the spectrum, a petal's pink) are shown big: full-frame floods,
-   bands across the frame, tables at 1.2x. No important colour as a small strip on an empty ground.
+   bands across the frame, tables at 1.2x. No important colour as a small strip on an empty ground. **Harmony
+   (26 Nov 2026):** big means one story colour at a time on a calm ground, never many colours at once
+   (STYLE_GUIDE "Colour harmony").
 4. **Every scene change moves.** Prefer the transitions that carry meaning (TRN-019 prism, TRN-020 page turn,
    TRN-021 colour flood, TRN-022 macro dive, morph, push); hard cuts only inside a burst.
 5. **Camera moves you can feel.** LayerStage push up to its cap with pans of 150-250 px; drift on still shots may

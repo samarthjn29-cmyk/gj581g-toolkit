@@ -25,7 +25,7 @@ the theme file (`src/themes/warmGraphite.ts` for LOK-009) and the earlier acts' 
 3. **Type:** one family per role (serif for quotes and titles, mono for tags), sizes from the guide, nothing under
    20 px at 1080p, line lengths readable, no orphans, no clashing weights.
 4. **Colour:** accent on one focal thing only (about 10% of the frame at most); data colours (reported or imagined
-   colours) never in the theme accent; contrast of text at least 4.5:1 on what is behind it.
+   colours) never in the theme accent; contrast of text at least 4.5:1 on what is behind it. **Harmony (26 Nov 2026):** the frame keeps to the act's palette (STYLE_GUIDE "Colour harmony" 1-6): 60/30/10, one accent, at most two story colours, colour fields in one family, no accent clashing with a story colour; read `scripts/harmony-check.py` and give each frame over its limit a reason or a MUST fix.
 5. **Hierarchy:** one thing to look at first; tags and credits clearly secondary; nothing competing with the subject.
 6. **Texture and finish:** real pictures carry their texture (paper, halftone, grain) and sit in the frame (shadow,
    edge, light) rather than floating; digital-flat pieces next to textured ones are flagged.

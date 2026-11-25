@@ -5,7 +5,8 @@ import { warmGraphite } from "./warmGraphite";
 // Same fonts, motion and paper palette as LOK-009; only the ground and its colours change. Planned until Sam picks.
 const base = warmGraphite;
 
-// LOK-033 Studio Cream: warm cream ground with slow-moving riso colour fields (tomato, sun, cobalt, pink).
+// LOK-033 Studio Cream: warm cream ground with slow-moving colour fields in one warm family around the tomato accent
+// (was tomato, sun, cobalt, pink until 26 Nov 2026; changed for colour harmony, Sam: option A).
 export const studioCream: Theme = {
   ...base,
   id: "LOK-033",
@@ -23,7 +24,8 @@ export const studioCream: Theme = {
     dimMask: "rgba(244,236,221,0.82)",
     leaks: [],
   },
-  optical: { grain: 0.07, grainStepFrames: 2, vignette: 0.06, gridOpacity: 0, blobs: { colors: ["#FF7A59", "#FFC93C", "#5B8CFF", "#FF8FB8"], opacity: 0.55, size: 1100, speed: 0.35 } },  // page shots keep the paper palette but the series' one accent (Sam, 25 Nov 2026: "Tomato everywhere")
+  // colour fields: one warm family around the tomato accent (Sam, 26 Nov 2026: harmony, option A), never unrelated hues
+  optical: { grain: 0.07, grainStepFrames: 2, vignette: 0.06, gridOpacity: 0, blobs: { colors: ["#FF9A7A", "#FFC9A8", "#F2B48C", "#FFD9C2"], opacity: 0.5, size: 1100, speed: 0.35 } },  // page shots keep the paper palette but the series' one accent (Sam, 25 Nov 2026: "Tomato everywhere")
   paper: { ...base.paper, accent: "#FF4F2E", accentSoft: "rgba(255,79,46,0.30)" },
 };
 
