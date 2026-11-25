@@ -865,8 +865,8 @@
      {
       "text": "PHOTOS TODAY",
       "lines": [
-       "CHERRY LAUREL, RUNIC EARTH",
-       "WAX SEAL, PETRIK"
+       "CHERRY LAUREL",
+       "WAX SEAL"
       ],
       "atSec": 0,
       "untilSec": 22.62,
@@ -1018,7 +1018,7 @@
       "rackSec": 8.43,
       "rackDim": 0.55,
       "outSec": 25.67,
-      "label": "PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH",
+      "label": "PHOTO TODAY · A GLASS PRISM",
       "why": "Same idea: the line explains what a prism is ('a triangular piece of glass that throws colours'); a glass prism today doing it, behind the band others see and the band Dalton describes."
      }
     ],
@@ -1743,8 +1743,8 @@
      {
       "text": "PHOTOS TODAY",
       "lines": [
-       "CHERRY LAUREL, RUNIC EARTH",
-       "WAX SEAL, PETRIK"
+       "CHERRY LAUREL",
+       "WAX SEAL"
       ],
       "atSec": 15.9,
       "untilSec": 23.7,
@@ -2132,7 +2132,7 @@
       "fromTilt": -1.2,
       "edge": 0,
       "tag": {
-       "text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH",
+       "text": "PHOTO TODAY",
        "dy": 18
       }
      },
@@ -2152,7 +2152,7 @@
       "tilt": 2,
       "object": true,
       "tag": {
-       "text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"
+       "text": "A MODEL OF AN EYE"
       }
      }
     ],

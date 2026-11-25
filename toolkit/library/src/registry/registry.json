@@ -1104,8 +1104,8 @@
     "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
    ],
    "status": "Active",
-   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 16 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: any other scene. (Raised to 16 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
-   "maxBeats": 16,
+   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 16 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: any other scene. (Raised to 16 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".) (Raised to 20 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
+   "maxBeats": 20,
    "maxShare": null
   },
   "SRC-012": {
@@ -1129,8 +1129,8 @@
     "public/assets/sources/geranium_stang_flowerhead_cutout.png"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 27 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited. (Raised to 27 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
-   "maxBeats": 27,
+   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 27 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited. (Raised to 27 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".) (Raised to 30 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
+   "maxBeats": 30,
    "maxShare": null
   },
   "SRC-014": {
@@ -1458,8 +1458,8 @@
     "public/sfx/room_tone_mk3080.wav"
    ],
    "status": "Active",
-   "use": "Best use: under the candlelit Kendal scene only. Limit: max 10 beats per episode; max 10% of runtime. Not for: diagrams or documents.",
-   "maxBeats": 10,
+   "use": "Best use: under the candlelit Kendal scene only. Limit: max 10 beats per episode; max 10% of runtime. Not for: diagrams or documents. (Raised to 12 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
+   "maxBeats": 12,
    "maxShare": 10
   },
   "SRC-029": {
@@ -2068,8 +2068,8 @@
     "public/sfx/kit/tactile/page_turn.wav"
    ],
    "status": "Active",
-   "use": "Best use: under a whoosh when the thing moving is paper (a collage scrap, a torn note, an archival page sliding), 8-10 dB under the hero; alone, quietly, when a page settles. Rotate the three files. Limit: max 10 beats per episode; never on every collage piece (one per shot). Not for: text cards, diagrams, or a document arriving (SFX-006).",
-   "maxBeats": 10,
+   "use": "Best use: under a whoosh when the thing moving is paper (a collage scrap, a torn note, an archival page sliding), 8-10 dB under the hero; alone, quietly, when a page settles. Rotate the three files. Limit: max 10 beats per episode; never on every collage piece (one per shot). Not for: text cards, diagrams, or a document arriving (SFX-006). (Raised to 12 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
+   "maxBeats": 12,
    "maxShare": null
   },
   "SFX-017": {
@@ -2590,8 +2590,8 @@
     "public/sfx/kit/tactile/soft_pop_v3.wav"
    ],
    "status": "Active",
-   "use": "Best use: the one cut-out, map pin (MOT-012) or tag landing that matters in a shot, in the pause after its word, texture level (22-28 dB under the voice). Rotate v1-v3. Limit: one per shot; max 8 beats per episode; never on every entrance (our hierarchy rule). Not for: text cards or page highlights.",
-   "maxBeats": 8,
+   "use": "Best use: the one cut-out, map pin (MOT-012) or tag landing that matters in a shot, in the pause after its word, texture level (22-28 dB under the voice). Rotate v1-v3. Limit: one per shot; max 8 beats per episode; never on every entrance (our hierarchy rule). Not for: text cards or page highlights. (Raised to 30 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
+   "maxBeats": 30,
    "maxShare": null
   },
   "SFX-027": {
@@ -3385,7 +3385,7 @@
     "public/assets/sources/bm_britain_240ppd.jpg"
    ],
    "status": "Active",
-   "use": "Best use: the globe and the close view of the British Isles inside MAP-013 EarthFlyIn (an act or episode opening that lands on a place). Limit: only through MAP-013 (1 per episode); always tagged SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE; never presented as a photo of a day or of the period; credit NASA Earth Observatory / Blue Marble Next Generation.",
+   "use": "Best use: the globe and the close view of the British Isles inside MAP-013 EarthFlyIn (an act or episode opening that lands on a place). Limit: only through MAP-013 (1 per episode); always tagged SATELLITE COMPOSITE TODAY on screen; never presented as a photo of a day or of the period; credit NASA Earth Observatory / Blue Marble Next Generation in the description (no credits on screen, Sam, 25 Nov 2026).",
    "maxBeats": null,
    "maxShare": null
   },

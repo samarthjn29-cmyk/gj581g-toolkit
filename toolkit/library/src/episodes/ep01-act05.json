@@ -753,7 +753,7 @@
       "atSec": 7.59,
       "tilt": -2,
       "tag": {
-       "text": "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT",
+       "text": "PHOTO TODAY",
        "untilSec": 10.44
       }
      }
@@ -1377,7 +1377,7 @@
       "atSec": -1,
       "tilt": -2,
       "tag": {
-       "text": "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT",
+       "text": "PHOTO TODAY",
        "untilSec": 5.14
       }
      },
@@ -1396,7 +1396,7 @@
       "atSec": 2.29,
       "tilt": 3,
       "tag": {
-       "text": "PHOTO TODAY · RUNIC EARTH",
+       "text": "PHOTO TODAY",
        "untilSec": 5.14
       }
      }
@@ -1527,7 +1527,6 @@
       ]
      }
     ],
-    "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
     "camera": {
      "pan": -60,
      "push": 0.03

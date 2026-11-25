@@ -21,7 +21,8 @@ board and the locked acts 1-2 and act 3 v5. Each later line carries its date and
 
 ## Type
 - Quotes and titles: Fraunces (serif), italic for quoted words; chapter titles at the slate size.
-- Tags, sources, datelines and credits: JetBrains Mono caps, letter-spaced, on the dark chip, 20-24 px at 1080p.
+- Tags, sources and datelines: JetBrains Mono caps, letter-spaced, on the dark chip, 20-24 px at 1080p.
+- **No credits on screen** (Sam, 25 Nov 2026: "Can we remove the onscreen credits from the videos? We will put them in the description."; "Credits only", all acts): no photographer, uploader, archive, museum, library or licence names (CC BY, Unsplash, Wellcome, NASA, Rijksmuseum ...) on screen; every one goes in the description's credits (Sources_&_Rights). What stays: what the viewer is looking at and when: book/page and map source tags (JOHN DALTON · 1798 · P. 29, KITCHIN · 1794), a likeness's maker (AFTER ENOCH SEEMAN), and the honesty tags TODAY, PHOTO TODAY, ILLUSTRATION, SIMULATION, RECOLOURED.
 - Keyword chips (TXT-024): Fraunces bold on paper chips, the one key word on the accent chip, 64 px; only spoken words.
 - Running head top right (`3 · THE TALK`) on diagram and text shots only.
 

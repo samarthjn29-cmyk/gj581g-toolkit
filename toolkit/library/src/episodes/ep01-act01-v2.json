@@ -392,7 +392,7 @@
      }
     ],
     "tag": {
-     "text": "SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE",
+     "text": "SATELLITE COMPOSITE TODAY",
      "atSec": 0.2,
      "untilSec": 2.85
     }
@@ -660,7 +660,6 @@
       "align": "center"
      }
     ],
-    "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
     "camera": {
      "pan": -60,
      "push": 0.03

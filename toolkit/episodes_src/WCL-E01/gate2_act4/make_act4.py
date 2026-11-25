@@ -270,8 +270,7 @@ shot(B(56, 57), "ArchivalScanCard", lambda r: dict(PAGE("3083"), **{
 
 # --- O: the glass-of-water rainbow, today
 shot(B(58, 59, 60), "FootagePlate", lambda r: {"srcId": "SRC-062", "kind": "image", "size": [2560, 1834], "crop": [0, 200, 2560, 1440], "push": 0.02,
-                                                "tag": {"parts": [{"text": "PHOTO TODAY", "atSec": r(147.04)},
-                                                                  {"text": "R. & S. HOLLOS, EXSTROM LABORATORIES · CC BY 4.0", "atSec": r(149.62)}],
+                                                "tag": {"parts": [{"text": "PHOTO TODAY", "atSec": r(147.04)}],
                                                         "at": "low-centre",
                                                         "untilSec": r(153.60)}},
      sid="O_glass_today", transitionIn="lens", transition={"durSec": 0.7, "blur": 14},

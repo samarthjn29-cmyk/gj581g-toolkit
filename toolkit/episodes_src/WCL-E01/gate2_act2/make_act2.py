@@ -36,7 +36,7 @@ GRASS, BLOOD = "#4C9A3B", "#7A1A1A"
 GER = [1920, 1280]
 MAP = [4000, 5313]
 EAG, KEN = (858, 2795), (1985, 3825)  # Eaglesfield and Kendal on Bowen's 1760 map (SRC-033)
-MAPSRC = "MAP · EMANUEL BOWEN · 1760 · YALE UNIVERSITY LIBRARY"
+MAPSRC = "MAP · EMANUEL BOWEN · 1760"
 P30 = [1920, 2934]
 CANDLE = "public/assets/sources/candle_lighting_mixkit3458.mp4"
 CANDLE_REV = "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
@@ -198,7 +198,7 @@ shot(B(*range(25, 39)), "SourcePageStory", lambda r: {
              {"name": "MOTHER", "color": CHERRY, "colorName": "RED", "atSec": r(word("stockings", 90, end=True)) + 0.05, "x": 1520, "y": 830, "hard": True}],  # gate 3 v8: lands in the pause, with a pop
     "tie": {"atSec": r(word("both", 88)), "names": ["JOHN", "JONATHAN"]},
     "pullBack": {"atSec": r(word("dark", 90, end=True)) + 0.05, "scale": 0.95},
-    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10\nRIJKSMUSEUM · A PERIOD PAIR, RECOLOURED"},
+    "caption": "LONSDALE, THE WORTHIES OF CUMBERLAND, 1874 · P. 99\nSTOCKINGS: SILK · NETHERLANDS · c. 1806-10\nA PERIOD PAIR, RECOLOURED"},
     transitionIn="slide")
 # 39-44 what stays the same: the flower, the candle, the stockings; only the person looking changes.
 shot(B(*range(39, 45)), "SplitComparisonCard", lambda r: {

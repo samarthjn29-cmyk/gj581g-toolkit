@@ -49,7 +49,7 @@ fly = {
                  {"atSec": 3.55, "lon": -2.746, "lat": 54.093, "radius": 29300, "sec": 1.65}],
         "pins": [{"lon": -2.746, "lat": 54.328, "text": "KENDAL", "atSec": 0.80, "accent": True, "side": "left"}],
         "labels": [{"text": "NORTH OF ENGLAND", "atSec": 1.90, "untilSec": 2.70, "x": 960, "y": 860, "align": "center"}],
-        "tag": {"text": "SATELLITE COMPOSITE TODAY · NASA BLUE MARBLE", "atSec": 0.20, "untilSec": 2.85},
+        "tag": {"text": "SATELLITE COMPOSITE TODAY", "atSec": 0.20, "untilSec": 2.85},
     },
     "beatTimes": [["E01-A1-01", 0.0, SPLIT]],
 }
@@ -100,7 +100,6 @@ g["props"] = {
                           "why": "Comes to the centre as the line turns to the viewer: in today's daylight it is just a flower you walk past."}]}],
     "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": round(13.89 - S, 2), "untilSec": round(16.60 - S, 2),
                 "x": 1340, "y": 890, "align": "center"}],
-    "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
     "camera": {"pan": -60, "push": 0.03},
 }
 panel = g["overlay"]["chips"][0]

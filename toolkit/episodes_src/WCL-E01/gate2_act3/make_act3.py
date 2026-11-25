@@ -172,7 +172,7 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
     ],
     # FIX 3: the caption and the page's tag sit in the paper margin, off the page's bottom line of print
     "labels": [{"text": "MODERN SIMULATION · ONE WAY", "lines": ["HE MAY HAVE SEEN THEM"], "atSec": r(71.65), "untilSec": r(73.86), "x": 120, "y": 830, "size": 22},  # v6: Expert 'MODERN'; Editor M1: gone before the glide freezes the frame
-               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": 0, "untilSec": r(73.86), "x": 120, "y": 96, "size": 20},
+               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL", "WAX SEAL"], "atSec": 0, "untilSec": r(73.86), "x": 120, "y": 96, "size": 20},
                {"text": "JOHN DALTON · 1798 · P. 34", "atSec": 0, "x": 120, "y": 930, "size": 20}],
     "camera": {"pan": -40, "push": 0.03}},
     sid="B_leaf_and_wax", transitionIn="push", focus=[620, 598],
@@ -185,7 +185,7 @@ shot(B(*range(21, 29)), "LayerStage", lambda r: {
 # racks and dims on "others" and fades to the canvas on "Then"; strips alone under the riser's peak.
 shot(B(*range(29, 39)), "LayerStage", lambda r: {
     "worlds": [{"atSec": 0, "srcId": "SRC-043", "kind": "image", "size": [1920, 1282], "zoom": 1.1, "focus": [0.5, 0.642], "light": "none", "haze": 0.12, "dim": 0.15,
-                "blur": 3, "rackSec": r(word("others", 82)), "rackDim": 0.55, "outSec": r(word("then", 99)), "label": "PHOTO TODAY · A GLASS PRISM · EVIE S. / UNSPLASH",
+                "blur": 3, "rackSec": r(word("others", 82)), "rackDim": 0.55, "outSec": r(word("then", 99)), "label": "PHOTO TODAY · A GLASS PRISM",
                 "why": "Same idea: the line explains what a prism is ('a triangular piece of glass that throws colours'); a glass prism today doing it, behind the band others see and the band Dalton describes."}],
     "overlay": {"spectrum": {
         "tracks": {"drawAtSec": r(word("triangular")), "drawSec": 1.4, "lowerAtSec": r(word("others", 82)),
@@ -252,7 +252,7 @@ shot(B(*range(52, 61)), "EyeDiagram", lambda r: {
     "captions": PLATE_CAPTIONS + [{"text": "Vitreous humour", "atSec": -1, "at": [1240, 198], "anchor": [1300, 390], "size": 34},
                                   {"text": "DALTON'S GUESS · A BLUE VITREOUS", "mono": True, "atSec": -1, "at": [1230, 930], "anchor": [1330, 700]}],
     "labels": [{"text": "HIS IDEA:", "lines": ["DULLER, AND MORE ALIKE"], "atSec": r(word("other", 156, end=True) + 0.5), "untilSec": r(S(61) - 0.6), "x": 120, "y": 790, "size": 22},
-               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL, RUNIC EARTH", "WAX SEAL, PETRIK"], "atSec": r(153.40), "untilSec": r(S(61) - 0.6), "x": 120, "y": 200, "size": 20}]},  # v6: Designer M3 (20 px + credit), Editor T9 (after the wax)
+               {"text": "PHOTOS TODAY", "lines": ["CHERRY LAUREL", "WAX SEAL"], "atSec": r(153.40), "untilSec": r(S(61) - 0.6), "x": 120, "y": 200, "size": 20}]},  # v6: Designer M3 (20 px + credit), Editor T9 (after the wax)
     sid="C_carry_into_eye", transitionIn="ink", transition={"at": [894, 303], "tint": BLUE, "durSec": 1.3},  # Gate 3 stillness: the spread carries to 138.8
     overlay={"drift": 0.02,
              # Gate 3 stillness (138.8-145.3): W9's keyword panel in place of the dropped blue-glass object; gone before the rays
@@ -292,9 +292,9 @@ _ir = 46
 shot(B(67, 68), "KeywordPanel", lambda r: {"panel": {"chips": []}},
     transitionIn="morph", transition={"fromShape": [1635, 196, 142, 45, 3], "toShape": [round(_ix - _ir), round(_iy - _ir), 2 * _ir, 2 * _ir, _ir], "durSec": 0.35, "holdSec": 1.0},  # v7: fromShape = the lit "vitreous" box on the new p.43 card (measured on a still)  # v5 review S1: the disc stays on the iris 1 s  # Gate 3 review S1: lands in the silence before "So" (177.86)
     overlay={"stickers": [{**CLIP, "at": list(CLIP_AT), "w": CLIP_W, "atSec": 0.12, "tilt": -1.2, "fromTilt": -1.2, "edge": 0,
-                           "tag": {"text": "PHOTO TODAY · MASON KIMBAROVSKY / UNSPLASH", "dy": 18}},  # v5 review S2/S3: tag up to the cut, photographer named like the prism
+                           "tag": {"text": "PHOTO TODAY", "dy": 18}},  # v5 review S2/S3: tag up to the cut, photographer named like the prism
                           {"srcId": "SRC-047", "file": "public/assets/sources/eye_model_wellcome_cutout.png", "size": [1714, 1197], "at": [1420, 600], "w": 400,  # v6 Designer: over the cutting's corner, one group
-                           "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE\nWELLCOME COLLECTION"}}],
+                           "atSec": round(word("open") - S(67), 2), "tilt": 2, "object": True, "tag": {"text": "A MODEL OF AN EYE"}}],
              "chips": [{"size": 64, "chips": [{"text": "only", "atSec": round(word("only", 182) - S(67), 2), "x": 270, "y": 700},
                                   {"text": "two", "atSec": round(word("two", 182) - S(67), 2), "x": 486, "y": 700, "accent": True}]}]})
 

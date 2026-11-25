@@ -69,7 +69,7 @@ PAPER = {"kind": "paper", "tone": "dark"}
 INSET = {"kind": "inset", "act": 5}
 GER = {"srcId": "SRC-013", "file": SRC + "geranium_stang_flowerhead_cutout.png", "size": [1185, 769]}
 LEAF = {"srcId": "SRC-014", "file": SRC + "laurel_runicearth_leaf_cutout.png", "size": [800, 700]}
-GERTAG = "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT"  # fact-check FIX 16
+GERTAG = "PHOTO TODAY"  # fact-check FIX 16
 WHITE = "#FFF6DD"
 KINDS = [{"size": 10, "speed": 560, "count": 6}, {"size": 13, "speed": 620, "count": 6}, {"size": 16, "speed": 680, "count": 6}]  # Designer M1: read above the dust
 # the light leaving the geranium is a different mix (fewer of the middle kind; fact-check FIX 15, Expert S1)
@@ -191,7 +191,7 @@ shot(B(29, 30, 31, 32), "SpectrumStrip", lambda r: {
     "labels": [{"text": "ILLUSTRATION · SIMPLIFIED, NOT MEASURED", "atSec": r(74.44), "x": 1800, "y": 960, "align": "right", "size": 20}]},
     sid="H_choosing", transitionIn="slide",
     overlay=lambda r: {"stickers": [dict(GER, at=[560, 430], w=400, atSec=-1, tilt=-2, tag={"text": GERTAG, "untilSec": r(78.60)}),
-                                    dict(LEAF, at=[1360, 430], w=250, atSec=r(75.75), tilt=3, tag={"text": "PHOTO TODAY · RUNIC EARTH", "untilSec": r(78.60)})],
+                                    dict(LEAF, at=[1360, 430], w=250, atSec=r(75.75), tilt=3, tag={"text": "PHOTO TODAY", "untilSec": r(78.60)})],
                        "chips": [{"size": 64, "inkStrike": True, "chips": [
                            {"text": "painting the light", "atSec": r(79.37), "x": 330, "y": 820, "strikeSec": r(80.67)},
                            {"text": "choosing from it", "atSec": r(81.31), "x": 1060, "y": 820, "accent": True}]}]})
@@ -206,7 +206,6 @@ shot(B(33, 34, 35, 36, 37), "LayerStage", lambda r: {
                 "why": "The change itself: Dalton's evening light, which has far less blue."}],
     "carry": [dict(GER, at=[640, 470], w=640, atSec=-1,
                    moves=[{"atSec": r(85.75), "to": [1340, 400], "w": 520, "sec": 1.3, "why": "Steps aside so the flame whose light it now gets is seen."}])],
-    "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
     "camera": {"pan": -60, "push": 0.03},
     "labels": [{"text": "ILLUSTRATION · NOT MEASURED", "atSec": r(86.74), "x": 140, "y": 470, "size": 18}],
     "overlay": {"spectrum": {"rows": [
