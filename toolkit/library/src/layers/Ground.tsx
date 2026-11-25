@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import { AbsoluteFill, Img, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
-import { useAssets, useSourceFile } from "../registry";
+import { assetFile, useAsset, useAssets, useSourceFile } from "../registry";
 import { chapterColour } from "../themes/chapterKey";
 
 // The ground a shot sits on (Sam, 23 Nov 2026: "it gets a bit boring when you use only one background for all
@@ -15,7 +15,7 @@ import { chapterColour } from "../themes/chapterKey";
 //   collage VIS-050 CollageGround: 3-6 registered sources scattered, turned, blurred and dimmed.
 //   inset   LOK-029 InsetGround: a deeper canvas with the act's chapter colour (LOK-026) as a low glow and slow dust.
 export type GroundSpec =
-  | { kind: "paper"; seed?: number; tone?: "light" | "dark" } // dark: a warm dark desk under a light pool (things lie on it)
+  | { kind: "paper"; seed?: number; tone?: "light" | "dark"; tex?: { file: string; strength?: number } } // dark: a warm dark desk under a light pool (things lie on it); tex: a TEX-009 Texturelabs paper inside the desk (multiply, 0.1-0.3), never over the shot's ink (DIRECTOR rules 20-26; WCL-E01 act 1 v2)
   | { kind: "map"; srcId: string; file?: string; size: readonly [number, number]; focus?: readonly [number, number]; zoom?: number }
   | { kind: "blur"; srcId: string; file?: string; size: readonly [number, number]; focus?: readonly [number, number]; blurPx?: number; brightness?: number; zoom?: number } // blurPx/brightness/zoom: default 38 / 0.42 / 1.18
   | { kind: "collage"; items: { srcId: string; file?: string; size: readonly [number, number] }[]; seed?: number }
@@ -74,8 +74,19 @@ export const Ground: React.FC<{ spec: GroundSpec }> = ({ spec }) => {
           </AbsoluteFill>
         );
       }
+      const tex = spec.tex;
+      if (tex && ((tex.strength ?? 0.2) < 0 || (tex.strength ?? 0.2) > 0.3))
+        throw new Error(`Ground paper tex strength ${tex.strength} is outside 0-0.3.`);
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const texEntry = tex ? useAsset("TEX-009") : null;
       return (
         <AbsoluteFill style={{ background: t.colors.canvas }}>
+          {tex && texEntry ? (
+            <Img
+              src={assetFile(texEntry, tex.file)}
+              style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, objectFit: "cover", transform: `scale(${z * 1.04})`, transformOrigin: "50% 50%", mixBlendMode: "multiply", opacity: tex.strength ?? 0.2, filter: "grayscale(0.6) sepia(0.25)" }}
+            />
+          ) : null}
           <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, transform: `scale(${z})`, transformOrigin: "50% 50%" }}>
             <defs>
               <filter id={`fib${uid}`}>
