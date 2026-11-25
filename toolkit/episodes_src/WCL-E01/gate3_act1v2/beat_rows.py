@@ -41,9 +41,12 @@ for b in a["beats"]:
             note += " Earth fly-in onto Kendal (TODAY tag), pin on 'Kendal'; whoosh on the plunge; boundary to 02 moved 2.95 -> 3.70 (in the pause)."
         if bid == "E01-A1-02":
             note += " Focus match into Kitchin's 1794 scrap, Kendal circled; scrap sinks as the candle comes up; KENDAL · AUTUMN 1792."
+        if bid == "E01-A1-22A":
+            note += " The viewer's screen (Sam, 25 Nov 2026 at Gate 3: a hook the viewer can relate to): Sam's 01_screen take, paced, spliced at 57.0; a real screen's sub-pixels (SRC-017), tagged A SCREEN, UP CLOSE · TODAY; pays off in act 7's keeper ending."
         if bid == "E01-A1-07":
             note += " The candle wipes to TODAY daylight; the flower moves to the centre."
-        line = lines[n] if n < len(lines) else ""
+        EXTRA = {"E01-A1-22A": "Even on the screen in front of you.", "E01-A1-22B": "Look closely, and that pink is", "E01-A1-22C": "tiny red, green and blue lights.", "E01-A1-22D": "Not one of them is pink."}
+        line = EXTRA.get(bid) or lines[int(bid.split("-")[-1]) - 1]
         n += 1
         row = [bid, "1", f"{s:.2f}", f"{e:.2f}", f"{d:.2f}", str(round(d * 30)), pace, line] + [", ".join(ids[k]) for k in COL] + ["", "", note, ""]
         rows.append(row)

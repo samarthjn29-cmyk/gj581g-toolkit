@@ -11,6 +11,7 @@ import { OpticalStack } from "../layers/OpticalStack";
 import { PrismSplit } from "../components/PrismSplit";
 import { PageTurn } from "../components/PageTurn";
 import { ColourFlood } from "../components/ColourFlood";
+import { IrisBlink, LightLeak, SpectrumSweep, TornPaper, RGBSplit, WhipPan, PinholeProject } from "../components/SeriesTransitions";
 import { MacroDive } from "../components/MacroDive";
 import { PushThrough } from "../components/PushThrough";
 import { SlideAcross } from "../components/SlideAcross";
@@ -38,7 +39,7 @@ export type Beat = {
   component: string;
   props: Record<string, unknown>;
   assets: string[]; // every registry ID the beat uses, as on the beat sheet
-  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static" | "prism" | "pageturn" | "flood" | "dive"; // lens = TRN-017 LensSettle (a cut that settles through a lens)
+  transitionIn?: "cut" | "push" | "slide" | "band" | "block" | "flash" | "match" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static" | "prism" | "pageturn" | "flood" | "dive" | "iris" | "leak" | "sweep" | "tear" | "rgb" | "whip" | "pinhole"; // lens = TRN-017 LensSettle (a cut that settles through a lens)
   // Options for the transition (22 Nov 2026, Sam: "more transitions and transition music"): band = TRN-011
   // PaperBandWipe {dir, tone}; block = TRN-012 ColourBlockWipe {color (data colour), side}; flash = TRN-013 FlashFrame.
   // 23 Nov 2026 (Sam: "Build the transitions which we haven't built yet"): draft = TRN-002 DraftingWipe {angle, dir};
@@ -202,6 +203,13 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         if (b.transitionIn === "flood" && prev) body = <ColourFlood {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "dive" && prev) body = <MacroDive {...o} focus={o.focus ?? b.focus ?? [960, 540]} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "static" && prev) body = <StaticBurst {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "iris" && prev) body = <IrisBlink {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "leak" && prev) body = <LightLeak {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "sweep" && prev) body = <SpectrumSweep {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "tear" && prev) body = <TornPaper {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "rgb" && prev) body = <RGBSplit {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "whip" && prev) body = <WhipPan {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
+        if (b.transitionIn === "pinhole" && prev) body = <PinholeProject {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "push" && prev) {
           const prevDur = sec(prev.end, fps) - sec(prev.start, fps);
           body = (

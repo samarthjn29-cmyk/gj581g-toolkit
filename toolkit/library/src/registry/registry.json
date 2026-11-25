@@ -1179,8 +1179,8 @@
     "public/assets/sources/rgb_pixels_mixkit258.mp4"
    ],
    "status": "Active",
-   "use": "Best use: a screen's red, green and blue sub-pixels: WCL-E01 act 7 (the phone question) and WCL-E02's cold open (a phone screen under a microscope). Limit: max 4 beats per episode. Not for: generic tech or 'digital' mood.",
-   "maxBeats": 4,
+   "use": "Best use: a screen's red, green and blue sub-pixels: WCL-E01 act 1 (the viewer's screen line), act 7 (the payoff) and WCL-E02's cold open. Limit: max 8 beats per episode (act 1 uses 4). Not for: generic tech or digital mood.",
+   "maxBeats": 8,
    "maxShare": null
   },
   "SRC-018": {
@@ -3732,6 +3732,90 @@
    ],
    "status": "Planned",
    "use": "Best use: the series ground in place of graphite, if Sam picks it. Limit: the frame layer (no beat cap, as LOK-009). Not for: shots on paper (LOK-027) or photo grounds.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-023": {
+   "id": "TRN-023",
+   "folder": "4_Transitions",
+   "name": "IrisBlink",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: into or out of an eye, a look or an examination (WCL-E01 acts 6-7; any episode's eye moments): two lids close on the old shot and open on the new. Limit: max 1 per act, 3 per episode. Not for: shots with no eye or look in them.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-024": {
+   "id": "TRN-024",
+   "folder": "4_Transitions",
+   "name": "LightLeak",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a jump in time, into or out of candlelight, a memory: a warm film light leak burns across and the new shot comes up through it. Limit: max 2 per act, 6 per episode. Not for: data, diagrams or charts.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-025": {
+   "id": "TRN-025",
+   "folder": "4_Transitions",
+   "name": "SpectrumSweep",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: a turn about light or colour once the prism (TRN-019) is used or does not fit: a band of the visible spectrum sweeps across. Limit: max 1 per act, never in the same act as TRN-019; 4 per episode. Not for: scenes with no colour idea.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-026": {
+   "id": "TRN-026",
+   "folder": "4_Transitions",
+   "name": "TornPaper",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: one document, letter, page or map to the next in the paper world: the old shot tears along a ragged edge and the halves pull apart. Limit: max 2 per act, 6 per episode. Not for: footage of today or diagrams.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-027": {
+   "id": "TRN-027",
+   "folder": "4_Transitions",
+   "name": "RGBSplit",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: screens, pixels and how three lights make every colour (WCL-E01 act 7's payoff, WCL-E02): the shot splits into red, green and blue copies that come back together as the next. Limit: max 1 per act, 3 per episode. Not for: period scenes.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-028": {
+   "id": "TRN-028",
+   "folder": "4_Transitions",
+   "name": "WhipPan",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: inside a burst (ENERGY rule 1), between two shots of the same scene or place: a fast blurred pan. Limit: max 2 per act, never twice in a row; 8 per episode. Not for: calm stretches or across a change of time.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "TRN-029": {
+   "id": "TRN-029",
+   "folder": "4_Transitions",
+   "name": "PinholeProject",
+   "paths": [
+    "src/components/SeriesTransitions.tsx"
+   ],
+   "status": "Active",
+   "use": "Best use: Newton's dark room and any 'light through a small hole' turn (camera obscura, the eye's pupil): the old shot closes to a bright point and the new opens from it upside-down, turning upright. Limit: max 1 per act, 3 per episode. Not for: unrelated scene changes.",
    "maxBeats": null,
    "maxShare": null
   }

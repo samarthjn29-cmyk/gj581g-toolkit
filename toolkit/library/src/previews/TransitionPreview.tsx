@@ -17,12 +17,13 @@ import { PrismSplit } from "../components/PrismSplit";
 import { PageTurn } from "../components/PageTurn";
 import { ColourFlood } from "../components/ColourFlood";
 import { MacroDive } from "../components/MacroDive";
+import { IrisBlink, LightLeak, SpectrumSweep, TornPaper, RGBSplit, WhipPan, PinholeProject } from "../components/SeriesTransitions";
 import { AbsoluteFill, Sequence } from "remotion";
 import { RegistryModeProvider, type RegistryMode } from "../registry";
 import { DEMO } from "./demoProps";
 
 // TRN-011/012/013 previews: the chapter slate into the scan card, the transition at 2 s.
-export type TransitionKind = "band" | "band-dark" | "block" | "flash" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static" | "prism" | "pageturn" | "flood" | "dive";
+export type TransitionKind = "band" | "band-dark" | "block" | "flash" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static" | "prism" | "pageturn" | "flood" | "dive" | "iris" | "leak" | "sweep" | "tear" | "rgb" | "whip" | "pinhole";
 export const TransitionPreview: React.FC<{ themeId: string; registryMode: RegistryMode; kind: TransitionKind }> = ({ themeId, registryMode, kind }) => {
   const A = COMPONENTS.ChapterSlate.Component;
   const B = COMPONENTS.ArchivalScanCard.Component;
@@ -53,6 +54,13 @@ export const TransitionPreview: React.FC<{ themeId: string; registryMode: Regist
           {kind === "flood" ? <ColourFlood from={strip} to={eye} atSec={2} color="#E79AB9" at={[960, 540]} r0={60} /> : null}
           {kind === "dive" ? <MacroDive from={eye} to={page} atSec={2} focus={[960, 540]} r0={40} /> : null}
           {kind === "static" ? <StaticBurst from={from} to={page} atSec={2} /> : null}
+          {kind === "iris" ? <IrisBlink from={eye} to={page} atSec={2} /> : null}
+          {kind === "leak" ? <LightLeak from={page} to={eye} atSec={2} /> : null}
+          {kind === "sweep" ? <SpectrumSweep from={page} to={strip} atSec={2} /> : null}
+          {kind === "tear" ? <TornPaper from={page} to={to} atSec={2} /> : null}
+          {kind === "rgb" ? <RGBSplit from={strip} to={eye} atSec={2} /> : null}
+          {kind === "whip" ? <WhipPan from={eye} to={strip} atSec={2} /> : null}
+          {kind === "pinhole" ? <PinholeProject from={page} to={eye} atSec={2} /> : null}
           {kind === "lens" ? (
             <>
               <Sequence durationInFrames={60} layout="none"><AbsoluteFill>{from}</AbsoluteFill></Sequence>
