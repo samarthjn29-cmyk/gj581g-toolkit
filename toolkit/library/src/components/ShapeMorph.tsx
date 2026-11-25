@@ -19,8 +19,9 @@ export const ShapeMorph: React.FC<{
   fromShape: [number, number, number, number, number];
   toShape: [number, number, number, number, number];
   fill?: boolean; // a soft accent fill inside the shape while it travels
+  color?: string; // hex: the colour of what the shape becomes when it lands in a data cell (never the accent there; Editor, act 5)
   holdSec?: number; // the landed shape stays lit this long before it fades (act 3 v5 review: the hand-over read too briefly)
-}> = ({ from, to, atSec = 0, durSec = 0.75, fromShape, toShape, fill = true, holdSec = 0 }) => {
+}> = ({ from, to, atSec = 0, durSec = 0.75, fromShape, toShape, fill = true, holdSec = 0, color }) => {
   useAsset("TRN-009");
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -48,10 +49,10 @@ export const ShapeMorph: React.FC<{
             width: sw,
             height: sh,
             borderRadius: sr,
-            border: `3px solid ${t.colors.accent}`,
-            background: fill ? t.colors.accentSoft : undefined,
+            border: `3px solid ${color ?? t.colors.accent}`,
+            background: fill ? (color ? `${color}66` : t.colors.accentSoft) : undefined,
             opacity: shapeO * (fill ? 0.9 : 1),
-            boxShadow: `0 0 ${18 + 20 * Math.sin(Math.PI * p)}px ${t.colors.accentSoft}`,
+            boxShadow: `0 0 ${18 + 20 * Math.sin(Math.PI * p)}px ${color ? `${color}66` : t.colors.accentSoft}`,
           }}
         />
       ) : null}

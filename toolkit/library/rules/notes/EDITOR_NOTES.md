@@ -12,3 +12,7 @@ Read before every review, with `../REVIEW_SCORECARD.md`.
 - 2026-11-25 (act 4 v1): a key label or result shown under 1 s before a cut or transition (× 5, WHITE AGAIN, the red bend) is a MUST.
 - 2026-11-25 (act 4 v1): check each swish peak against the first moving frame, not the shot boundary; bands start about 4 frames after the cut.
 - 2026-11-25 (act 4 v1): stillness-check counts crisp changes only; slow fades and thin dashed rings do not register. Give a long diagram hold a large change (a fill, a re-lit band, a chip) at least every 4 s.
+- 2026-11-25 (act 5 Gate 3): a morph shape landing in a data cell takes the colour of what it becomes (ShapeMorph `color`), never the accent.
+- 2026-11-25 (act 5 Gate 3): a same-scene hard cut changes scale by at least 1.3x (or becomes a push), and carries over the chips still being read.
+- 2026-11-25 (act 5 Gate 3): an exit label finishes before a frozen-frame transition starts (again, as in act 3).
+- 2026-11-25 (act 5 Gate 3): not taken: 'seven heads at the segment centres' on Newton's chord. The Expert's rule stands (notes on the stops, colours are the intervals); Sam approved the chord as drawn.

@@ -22,25 +22,26 @@
   },
   {
    "id": "SFX-006",
-   "atSec": 2.3,
+   "atSec": 2.1,
    "volumeDb": -22.0
   },
   {
-   "id": "SFX-006",
-   "atSec": 8.92,
-   "volumeDb": -22.0
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 9.02,
+   "volumeDb": -24.0
   },
   {
-   "id": "SFX-021",
-   "file": "public/sfx/kit/whoosh/cloth_slide.wav",
-   "atSec": 23.66,
-   "volumeDb": -22.0
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 23.73,
+   "volumeDb": -21.0
   },
   {
-   "id": "SFX-021",
-   "file": "public/sfx/kit/whoosh/air_woosh.wav",
-   "atSec": 32.08,
-   "volumeDb": -22.0
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 32.09,
+   "volumeDb": -21.0
   },
   {
    "id": "SFX-026",
@@ -54,10 +55,10 @@
    "volumeDb": -24.0
   },
   {
-   "id": "SFX-021",
-   "file": "public/sfx/kit/whoosh/cloth_slide.wav",
-   "atSec": 50.17,
-   "volumeDb": -22.0
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 50.25,
+   "volumeDb": -21.0
   },
   {
    "id": "SFX-006",
@@ -342,7 +343,7 @@
      },
      {
       "text": "THE RAYS HAVE NO COLOUR",
-      "atSec": 13.03,
+      "atSec": 12.63,
       "accent": true
      }
     ],
@@ -564,8 +565,8 @@
      0.55,
      0.62
     ],
-    "blurPx": 7,
-    "brightness": 0.42
+    "blurPx": 14,
+    "brightness": 0.38
    }
   },
   {
@@ -862,7 +863,7 @@
      {
       "text": "A KIND OF PUSH",
       "atSec": 1.69,
-      "untilSec": 6.69,
+      "untilSec": 5.59,
       "x": 160,
       "y": 380,
       "size": 26
@@ -1516,10 +1517,10 @@
        {
         "atSec": 2.95,
         "to": [
-         1290,
-         430
+         1340,
+         400
         ],
-        "w": 560,
+        "w": 520,
         "sec": 1.3,
         "why": "Steps aside so the flame whose light it now gets is seen."
        }
@@ -1549,7 +1550,8 @@
         "w": 560,
         "h": 44,
         "atSec": 0.77,
-        "label": "DAYLIGHT"
+        "label": "DAYLIGHT",
+        "labelTone": "chip"
        },
        {
         "x": 140,
@@ -1558,6 +1560,7 @@
         "h": 44,
         "atSec": 3.94,
         "label": "CANDLELIGHT",
+        "labelTone": "chip",
         "profile": [
          [
           400,
@@ -1602,6 +1605,7 @@
         "h": 44,
         "atSec": 8.73,
         "label": "THE GERANIUM'S MIX, BY CANDLE",
+        "labelTone": "chip",
         "labelAtSec": 9.83,
         "profile": [
          [
@@ -1739,7 +1743,7 @@
         "color": "#E79AB9",
         "name": "PINK",
         "atSec": -1,
-        "fillSec": 2.29
+        "fillSec": 0.75
        }
       ],
       "tag": {
@@ -1812,7 +1816,8 @@
      10
     ],
     "durSec": 0.75,
-    "holdSec": 1.0
+    "holdSec": 1.0,
+    "color": "#E79AB9"
    }
   },
   {
@@ -1838,7 +1843,8 @@
     "MUS-013",
     "MUS-008",
     "TRN-001",
-    "SFX-006"
+    "SFX-006",
+    "TXT-024"
    ],
    "props": {
     "divisions": {
@@ -1891,7 +1897,9 @@
        "text": "VIOLET",
        "atSec": 10.52
       }
-     ]
+     ],
+     "nameSize": 26,
+     "liftFrom": 0.45
     },
     "labels": [
      {
@@ -1925,6 +1933,30 @@
      115.05
     ]
    ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 60,
+      "chips": [
+       {
+        "text": "the rainbow we learn at school",
+        "atSec": 1.89,
+        "x": 210,
+        "y": 250,
+        "dimSec": 4.89,
+        "dimTo": 0.3
+       },
+       {
+        "text": "into seven",
+        "atSec": 4.89,
+        "x": 210,
+        "y": 340,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
    "transitionIn": "block",
    "transition": {
     "color": "#C8402F",
@@ -2187,8 +2219,8 @@
      0.5,
      0.6
     ],
-    "blurPx": 7,
-    "brightness": 0.42
+    "blurPx": 14,
+    "brightness": 0.38
    }
   },
   {
@@ -2572,7 +2604,8 @@
     "TRN-001",
     "LOK-009",
     "LOK-010",
-    "MUS-014"
+    "MUS-014",
+    "TXT-024"
    ],
    "props": {
     "mode": "plate",
@@ -2585,7 +2618,7 @@
      "tilt": 1.0
     },
     "zoom": {
-     "scale": 1.15,
+     "scale": 1.35,
      "focus": [
       1250,
       545
@@ -2649,7 +2682,7 @@
     "labels": [
      {
       "text": "ILLUSTRATION",
-      "atSec": -1,
+      "atSec": 1.09,
       "x": 120,
       "y": 960,
       "size": 20
@@ -2678,6 +2711,29 @@
      166.34
     ]
    ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 52,
+      "untilSec": 1.0,
+      "chips": [
+       {
+        "text": "change the rays",
+        "atSec": -1,
+        "x": 120,
+        "y": 760
+       },
+       {
+        "text": "change the colour",
+        "atSec": -1,
+        "x": 120,
+        "y": 880,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
    "transitionIn": "cut"
   }
  ]

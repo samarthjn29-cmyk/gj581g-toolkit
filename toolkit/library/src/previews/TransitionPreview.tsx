@@ -13,12 +13,16 @@ import { InkBleed } from "../components/InkBleed";
 import { ShapeMorph } from "../components/ShapeMorph";
 import { CutOnAction } from "../components/CutOnAction";
 import { StaticBurst } from "../components/StaticBurst";
+import { PrismSplit } from "../components/PrismSplit";
+import { PageTurn } from "../components/PageTurn";
+import { ColourFlood } from "../components/ColourFlood";
+import { MacroDive } from "../components/MacroDive";
 import { AbsoluteFill, Sequence } from "remotion";
 import { RegistryModeProvider, type RegistryMode } from "../registry";
 import { DEMO } from "./demoProps";
 
 // TRN-011/012/013 previews: the chapter slate into the scan card, the transition at 2 s.
-export type TransitionKind = "band" | "band-dark" | "block" | "flash" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static";
+export type TransitionKind = "band" | "band-dark" | "block" | "flash" | "lens" | "draft" | "photocard" | "canvas" | "ink" | "morph" | "action" | "static" | "prism" | "pageturn" | "flood" | "dive";
 export const TransitionPreview: React.FC<{ themeId: string; registryMode: RegistryMode; kind: TransitionKind }> = ({ themeId, registryMode, kind }) => {
   const A = COMPONENTS.ChapterSlate.Component;
   const B = COMPONENTS.ArchivalScanCard.Component;
@@ -44,6 +48,10 @@ export const TransitionPreview: React.FC<{ themeId: string; registryMode: Regist
           {kind === "ink" ? <InkBleed from={page} to={eye} atSec={2} at={[960, 540]} tint="#3D6BD6" /> : null}
           {kind === "morph" ? <ShapeMorph from={page} to={eye} atSec={2} fromShape={[560, 470, 800, 60, 8]} toShape={[810, 390, 300, 300, 150]} /> : null}
           {kind === "action" ? <CutOnAction from={eye} to={page} atSec={2} dir="down" /> : null}
+          {kind === "prism" ? <PrismSplit from={page} to={strip} atSec={2} /> : null}
+          {kind === "pageturn" ? <PageTurn from={page} to={to} atSec={2} /> : null}
+          {kind === "flood" ? <ColourFlood from={strip} to={eye} atSec={2} color="#E79AB9" at={[960, 540]} r0={60} /> : null}
+          {kind === "dive" ? <MacroDive from={eye} to={page} atSec={2} focus={[960, 540]} r0={40} /> : null}
           {kind === "static" ? <StaticBurst from={from} to={page} atSec={2} /> : null}
           {kind === "lens" ? (
             <>

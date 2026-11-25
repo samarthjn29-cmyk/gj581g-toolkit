@@ -14,3 +14,5 @@ the rule, whose call.
 - 2026-11-24 (act 3 v5): the same page twice in an act changes crop, side or camera.
 - 2026-11-24 (act 3 v5, Sam): a blurred portrait ground stays dark (brightness about 0.38), so the graphite stays warm.
 - 2026-11-25 (act 4 v1): chips placed by x on one row must clear the previous chip's measured width.
+- 2026-11-25 (act 5 Gate 3): a blur ground behind a quote must not let the same words be read: blurPx 14 or more, brightness 0.38, at 1080p.
+- 2026-11-25 (act 5 Gate 3): labels over a bright photo world (sky, footage) sit on the dark chip (`labelTone: "chip"`), never bare mono.

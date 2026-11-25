@@ -1,0 +1,223 @@
+1
+00:00:02,700 --> 00:00:05,790
+More than 30 years later, in 1704,
+
+2
+00:00:05,840 --> 00:00:09,130
+in London, Newton publishes a book called
+Opticks.
+
+3
+00:00:09,180 --> 00:00:12,190
+And on page 90, he gives his answer.
+
+4
+00:00:13,160 --> 00:00:15,680
+It's a sentence that's easy to read past.
+
+5
+00:00:16,193 --> 00:00:19,080
+"For the rays to speak properly are not
+coloured."
+
+6
+00:00:19,666 --> 00:00:23,430
+In plain words, strictly speaking, the
+rays have no colour.
+
+7
+00:00:24,386 --> 00:00:26,360
+All they have, he goes on,
+
+8
+00:00:26,466 --> 00:00:29,176
+is "a certain power and disposition to
+stir
+
+9
+00:00:29,226 --> 00:00:31,860
+up a sensation of this or that colour".
+
+10
+00:00:32,806 --> 00:00:35,430
+That sounds like it clashes with the
+prism.
+
+11
+00:00:35,959 --> 00:00:36,959
+It doesn't.
+
+12
+00:00:37,412 --> 00:00:39,980
+What's in sunlight is many kinds of ray.
+
+13
+00:00:40,545 --> 00:00:43,100
+The light coming off that geranium isn't
+pink.
+
+14
+00:00:43,678 --> 00:00:46,060
+Each ray only has a kind of push.
+
+15
+00:00:46,118 --> 00:00:49,900
+And the pink is what happens when that
+push reaches whoever is looking.
+
+16
+00:00:50,898 --> 00:00:54,750
+So, on Newton's view, colour isn't really
+in the flower.
+
+17
+00:00:55,271 --> 00:00:56,890
+It isn't in the light either.
+
+18
+00:00:57,444 --> 00:01:00,460
+It's something that happens where the
+light meets a person.
+
+19
+00:01:01,464 --> 00:01:04,370
+But a geranium and a leaf still look
+different.
+
+20
+00:01:04,937 --> 00:01:06,920
+Newton has an answer for that, too.
+
+21
+00:01:07,550 --> 00:01:08,980
+In his letter from Cambridge,
+
+22
+00:01:09,030 --> 00:01:10,840
+he says things get their colours by
+sending
+
+23
+00:01:10,890 --> 00:01:13,310
+back some kinds of light more than others.
+
+24
+00:01:13,923 --> 00:01:15,960
+A geranium sends back one mix.
+
+25
+00:01:16,516 --> 00:01:18,240
+A leaf sends back another.
+
+26
+00:01:18,789 --> 00:01:20,619
+Neither one is painting the light.
+
+27
+00:01:20,669 --> 00:01:22,450
+Each is choosing from it.
+
+28
+00:01:23,449 --> 00:01:25,170
+That also explains the candle.
+
+29
+00:01:25,702 --> 00:01:29,720
+Candlelight is much yellower than
+daylight, with far less blue in it.
+
+30
+00:01:30,394 --> 00:01:34,330
+So by candle, the geranium has a different
+mix of rays to choose from.
+
+31
+00:01:35,334 --> 00:01:38,260
+And to most people, that change hardly
+matters.
+
+32
+00:01:39,240 --> 00:01:41,070
+Their eyes still call it pink.
+
+33
+00:01:41,680 --> 00:01:43,260
+Dalton's eyes don't.
+
+34
+00:01:44,260 --> 00:01:46,980
+Newton also gives us the rainbow we learn
+at school.
+
+35
+00:01:47,533 --> 00:01:49,770
+He splits his band of colours into seven.
+
+36
+00:01:50,406 --> 00:01:54,930
+Red, orange, yellow, green, blue, indigo
+and violet.
+
+37
+00:01:55,519 --> 00:02:00,010
+And he spaces them in the same proportions
+as the seven steps of a musical scale.
+
+38
+00:02:00,959 --> 00:02:03,090
+Seven notes, seven colours.
+
+39
+00:02:03,512 --> 00:02:04,512
+It's tidy.
+
+40
+00:02:04,965 --> 00:02:06,920
+Possibly a little too tidy.
+
+41
+00:02:07,438 --> 00:02:10,220
+People have been arguing about indigo ever
+since.
+
+42
+00:02:11,138 --> 00:02:13,350
+Here's why all this matters for Dalton.
+
+43
+00:02:13,871 --> 00:02:15,530
+He knows this science.
+
+44
+00:02:16,044 --> 00:02:20,180
+He says he's "pretty well acquainted with
+the theory of light and colours".
+
+45
+00:02:20,697 --> 00:02:23,910
+And on Newton's terms, his idea makes good
+sense.
+
+46
+00:02:24,837 --> 00:02:28,650
+Colour is what happens when certain rays
+reach the back of the eye.
+
+47
+00:02:29,230 --> 00:02:32,800
+So a tinted jelly in front of it changes
+which rays arrive.
+
+48
+00:02:33,323 --> 00:02:35,760
+Change the rays, and you change the
+colour.
+
+49
+00:02:36,663 --> 00:02:40,710
+But a guess about the inside of an eye can
+only be tested one way.
+
+50
+00:02:41,860 --> 00:02:43,690
+Someone has to open it.

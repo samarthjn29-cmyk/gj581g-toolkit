@@ -123,15 +123,15 @@ shot(B(4, 5, 6, 7, 8), "ArchivalScanCard", lambda r: {"srcId": "SRC-005", "imgSi
                                                       "callout": {"atSec": r(13.50), "dim": 0.55, "keep": [[384, 1316, 1120, 64]]},
                                                       "quote": "For the rays to speak properly are not coloured.", "quoteAtSec": r(16.19),
                                                       "notes": [{"text": "P. 90", "atSec": r(10.10)}, {"text": "IN PLAIN WORDS", "atSec": r(19.79)},
-                                                                {"text": "THE RAYS HAVE NO COLOUR", "atSec": r(22.05), "accent": True}],
+                                                                {"text": "THE RAYS HAVE NO COLOUR", "atSec": r(21.65), "accent": True}],
                                                       "strokes": {"mode": "shadow", "strength": 0.2}},
-     sid="B_p90_not_coloured", transitionIn="canvas", transition={"dir": "right", "pull": 0.86}, ground=PAPER)
+     sid="B_p90_not_coloured", transitionIn="canvas", transition={"dir": "right", "pull": 0.86}, ground=PAPER)  # Gate 3 S6 not taken: TXT-024 is at its 8 panels in this act
 
 # --- C: his second sentence as quote chips on the blurred page
 Q = lambda words, x, y: {"x": x, "y": y, "words": [{"text": w, "atSec": a} for w, a in words]}
 shot(B(9, 10, 11), "KeywordPanel", lambda r: {"panel": {"chips": []}},
      sid="C_power_quote", transitionIn="band", transition={"dir": "down", "tone": "dark"},
-     ground={"kind": "blur", "srcId": "SRC-005", "file": SRC + "newton_opticks1704_p90.jpg", "size": [1600, 2321], "focus": [0.55, 0.62], "blurPx": 7, "brightness": 0.42},
+     ground={"kind": "blur", "srcId": "SRC-005", "file": SRC + "newton_opticks1704_p90.jpg", "size": [1600, 2321], "focus": [0.55, 0.62], "blurPx": 14, "brightness": 0.38},
      overlay=lambda r: {"chips": [{"size": 64, "chips": [{"text": "All they have", "atSec": r(24.39), "x": 860, "y": 190, "dimSec": r(26.69)}]}], "quotes": [{"size": 52, "source": {"text": "ISAAC NEWTON · OPTICKS · 1704 · P. 90", "atSec": r(24.39), "x": 860, "y": 730},
                                     "lines": [Q([("a", r(26.69)), ("certain", r(26.99)), ("power", r(27.37))], 860, 300),
                                               Q([("and", r(27.79)), ("disposition", r(28.05))], 860, 400),
@@ -155,7 +155,7 @@ shot(B(12, 13, 14, 15), "KeywordPanel", lambda r: {
 shot(B(16, 17, 18), "EyeDiagram", lambda r: {"mode": "plate", "startSec": -1, "card": PLATE,
                                              "captions": CAPS[:3] + [{"text": "Retina", "atSec": r(46.48), "at": [1560, 318], "anchor": [1428, 398]},
                                                                      {"text": "seen as pink", "atSec": r(48.26), "at": [1440, 820], "anchor": [1595, 632], "size": 34, "swatch": "#E79AB9"}],
-                                             "labels": [{"text": "A KIND OF PUSH", "atSec": r(44.90), "untilSec": r(49.90), "x": 160, "y": 380, "size": 26},
+                                             "labels": [{"text": "A KIND OF PUSH", "atSec": r(44.90), "untilSec": r(48.80), "x": 160, "y": 380, "size": 26},
                                                         ILL(r(43.40))]},
      sid="E_whoever_looks", transitionIn="canvas", transition={"dir": "right", "pull": 0.86},
      overlay=lambda r: {"rays": [{"path": [[-40, 545], [1478, 545]], "atSec": -1, "untilSec": r(47.60), "color": WHITE, "stroke": "rgba(43,39,36,0.95)", "strokeWidth": 2.5, "jitter": 16, "kinds": KINDS}]})
@@ -205,34 +205,37 @@ shot(B(33, 34, 35, 36, 37), "LayerStage", lambda r: {
                 "light": "warm", "blur": 1.5, "lightFrom": "left", "label": "CANDLELIGHT", "today": True,
                 "why": "The change itself: Dalton's evening light, which has far less blue."}],
     "carry": [dict(GER, at=[640, 470], w=640, atSec=-1,
-                   moves=[{"atSec": r(85.75), "to": [1290, 430], "w": 560, "sec": 1.3, "why": "Steps aside so the flame whose light it now gets is seen."}])],
+                   moves=[{"atSec": r(85.75), "to": [1340, 400], "w": 520, "sec": 1.3, "why": "Steps aside so the flame whose light it now gets is seen."}])],
     "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
     "camera": {"pan": -60, "push": 0.03},
     "labels": [{"text": "ILLUSTRATION · NOT MEASURED", "atSec": r(86.74), "x": 140, "y": 470, "size": 18}],
     "overlay": {"spectrum": {"rows": [
-        {"x": 140, "y": 140, "w": 560, "h": 44, "atSec": r(83.57), "label": "DAYLIGHT"},
-        {"x": 140, "y": 260, "w": 560, "h": 44, "atSec": r(86.74), "label": "CANDLELIGHT", "profile": CANDLE,
+        {"x": 140, "y": 140, "w": 560, "h": 44, "atSec": r(83.57), "label": "DAYLIGHT", "labelTone": "chip"},
+        {"x": 140, "y": 260, "w": 560, "h": 44, "atSec": r(86.74), "label": "CANDLELIGHT", "labelTone": "chip", "profile": CANDLE,
          "mark": {"fromNm": 400, "toNm": 470, "text": "FAR LESS BLUE", "atSec": r(88.40)}},
-        {"x": 140, "y": 400, "w": 560, "h": 44, "atSec": r(91.53), "label": "THE GERANIUM'S MIX, BY CANDLE", "labelAtSec": r(92.63), "profile": PETAL_BY_CANDLE}]}}},
+        {"x": 140, "y": 400, "w": 560, "h": 44, "atSec": r(91.53), "label": "THE GERANIUM'S MIX, BY CANDLE", "labelTone": "chip", "labelAtSec": r(92.63), "profile": PETAL_BY_CANDLE}]}}},
     sid="I_by_candle", transitionIn="push", focus=[560, 430], extra=["TRN-018"])
 
 # --- J: most people / Dalton, by day and by candle (act 1's rows); the music break
 shot(B(38, 39, 40), "SwatchRows", lambda r: {
     "columns": ["BY DAY", "BY CANDLE"], "startSec": -1,
     "rows": [{"name": "MOST PEOPLE", "nameAtSec": r(95.59), "atSec": -1,
-              "cells": [{"color": "#E79AB9", "name": "PINK", "atSec": -1, "fillSec": r(95.59)}, {"color": "#E79AB9", "name": "PINK", "atSec": -1, "fillSec": r(96.97)}],
+              "cells": [{"color": "#E79AB9", "name": "PINK", "atSec": -1, "fillSec": r(95.59)}, {"color": "#E79AB9", "name": "PINK", "atSec": -1, "fillSec": r(95.43)}],
               "tag": {"text": "NO REAL CHANGE", "atSec": r(99.99)}},
              {"name": "DALTON", "nameAtSec": r(101.68), "atSec": r(100.90),
               "cells": [{"color": "#86B5E8", "name": "SKY-BLUE", "atSec": r(100.90), "fillSec": r(101.68)}, {"color": "#C8402F", "name": "RED", "atSec": r(100.90), "fillSec": r(102.18)}]}],
     "labels": [{"text": "REPORTED COLOURS · DALTON 1798, PP. 29-30", "atSec": r(102.60), "x": 960, "y": 830, "align": "center", "size": 22}]},
-    sid="J_most_people", transitionIn="morph", transition={"fromShape": [140, 400, 560, 44, 6], "toShape": [1202, 374, 250, 150, 10], "durSec": 0.75, "holdSec": 1.0})
+    sid="J_most_people", transitionIn="morph", transition={"fromShape": [140, 400, 560, 44, 6], "toShape": [1202, 374, 250, 150, 10], "durSec": 0.75, "holdSec": 1.0, "color": "#E79AB9"})
 
 # --- K: Newton's seven, at his own proportions
 shot(B(41, 42, 43, 44), "SpectrumStrip", lambda r: {
     "divisions": {"fractions": SEVEN, "colorsNm": SEVEN_NM, "drawAtSec": r(104.26), "dividersAtSec": r(109.07),
-                  "names": [{"text": t, "atSec": r(a)} for t, a in [("RED", 110.41), ("ORANGE", 111.01), ("YELLOW", 111.65), ("GREEN", 112.21), ("BLUE", 112.81), ("INDIGO", 113.47), ("VIOLET", 114.13)]]},
+                  "names": [{"text": t, "atSec": r(a)} for t, a in [("RED", 110.41), ("ORANGE", 111.01), ("YELLOW", 111.65), ("GREEN", 112.21), ("BLUE", 112.81), ("INDIGO", 113.47), ("VIOLET", 114.13)]],
+                  "nameSize": 26, "liftFrom": 0.45},  # Gate 3 stillness fix: each colour comes up as it is named
     "labels": [ILL(r(104.40), "ILLUSTRATION · AFTER NEWTON, OPTICKS, 1704")]},
-    sid="K_seven", transitionIn="block", transition={"color": "#C8402F", "side": "right"}, ground=INSET)
+    sid="K_seven", transitionIn="block", transition={"color": "#C8402F", "side": "right"}, ground=INSET, extra=["TXT-024"],
+    overlay=lambda r: {"chips": [{"size": 60, "chips": [{"text": "the rainbow we learn at school", "atSec": r(105.50), "x": 210, "y": 250, "dimSec": r(108.50), "dimTo": 0.3},
+                                                         {"text": "into seven", "atSec": r(108.50), "x": 210, "y": 340, "accent": True}]}]})
 
 # --- L: Opticks p.92 (the seven names become his printed list)
 shot(B(45, 46), "ArchivalScanCard", lambda r: {"srcId": "SRC-063", "imgSize": [1600, 2321], "crop": [250, 1000, 1290, 1230], "side": "left",
@@ -250,7 +253,7 @@ shot(B(47, 48, 49, 50), "SpectrumStrip", lambda r: {
                   "query": {"segment": 5, "atSec": r(128.62)}},
     "labels": [ILL(-1, "ILLUSTRATION · AFTER OPTICKS, 1704, P. 92")]},
     sid="M_seven_notes", transitionIn="slide",
-    ground={"kind": "blur", "srcId": "SRC-063", "file": SRC + "newton_opticks1704_p92.jpg", "size": [1600, 2321], "focus": [0.5, 0.6], "blurPx": 7, "brightness": 0.42},
+    ground={"kind": "blur", "srcId": "SRC-063", "file": SRC + "newton_opticks1704_p92.jpg", "size": [1600, 2321], "focus": [0.5, 0.6], "blurPx": 14, "brightness": 0.38},
     overlay=lambda r: {"chips": [{"size": 64, "chips": [
         {"text": "It's tidy.", "atSec": r(123.51), "x": 210, "y": 820, "dimSec": r(127.44)},
         {"text": "a little too tidy", "atSec": r(125.33), "x": 650, "y": 820, "accent": True, "dimSec": r(127.44)}]}]})
@@ -284,27 +287,30 @@ shot(B(56, 57, 58, 59, 60), "EyeDiagram", lambda r: {
 
 # --- P: the same plate closer; the guess; where it would be opened
 shot(B(61, 62, 63, 64), "EyeDiagram", lambda r: {
-    "mode": "plate", "startSec": -1, "card": PLATE, "zoom": {"scale": 1.15, "focus": [1250, 545]},
+    "mode": "plate", "startSec": -1, "card": PLATE, "zoom": {"scale": 1.35, "focus": [1250, 545]},
     "tints": [{"part": "vitreous", "color": "#3D6BD6", "atSec": -1.2, "opacity": 0.55}],
     "pulses": [{"part": "vitreous", "atSec": r(159.38), "to": 0.75, "sec": 1.6}],
     "captions": [{"text": "Vitreous humour", "atSec": -1, "at": [1240, 198], "anchor": [1300, 390], "size": 34},
                  dict(GUESS, atSec=-1, at=[720, 885], underline={"atSec": r(157.06), "fromCh": 9, "toCh": 14, "untilSec": r(162.80)})],
     "cutLine": {"atSec": r(162.80), "drawSec": 1.0}, "head": False,
-    "labels": [ILL(-1)]},
-    sid="P_open_it", transitionIn="cut")
+    "labels": [ILL(r(157.10))]},  # the tag takes the corner once O's carried chips have gone
+    sid="P_open_it", transitionIn="cut", extra=["TXT-024"],
+    overlay=lambda r: {"chips": [{"size": 52, "untilSec": r(157.01), "chips": [  # Gate 3: O's chips carried over the cut, off before the GUESS underline
+        {"text": "change the rays", "atSec": -1, "x": 120, "y": 760},
+        {"text": "change the colour", "atSec": -1, "x": 120, "y": 880, "accent": True}]}]})
 
 # Sounds (house levels: hero ~15-17 dB under the voice in a pause, texture 21-29 dB under). Paper foley is spent
 # (SFX-016 + SFX-028 paper at 10 of 10): page landings ride on SFX-006 CardstockSlide, its best use.
 K = "public/sfx/kit/"
 audio = [
     {"id": "SFX-001", "atSec": 0.02, "volumeDb": -24.0},  # the act-join match (music only)
-    {"id": "SFX-006", "atSec": 2.30, "volumeDb": -22.0},  # slide to the title page
-    {"id": "SFX-006", "atSec": 8.92, "volumeDb": -22.0},  # glide to p.90
-    {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": 23.66, "volumeDb": -22.0},  # band down
-    {"id": "SFX-021", "file": K + "whoosh/air_woosh.wav", "atSec": 32.08, "volumeDb": -22.0},  # slide out of the document
+    {"id": "SFX-006", "atSec": 2.10, "volumeDb": -22.0},  # slide to the title page (Sound review: peak off "More")
+    {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": 9.02, "volumeDb": -24.0},  # glide to p.90 (Sound S2: in the gap before "And")
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 23.73, "volumeDb": -21.0},  # band down (Sound S1: short swish, peak on the move)
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 32.09, "volumeDb": -21.0},  # slide out of the document
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": 40.33, "volumeDb": -24.0},  # the geranium settles
     {"id": "SFX-001", "atSec": 43.11, "volumeDb": -24.0},  # glide with the light
-    {"id": "SFX-021", "file": K + "whoosh/cloth_slide.wav", "atSec": 50.17, "volumeDb": -22.0},  # band up
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 50.25, "volumeDb": -21.0},  # band up
     {"id": "SFX-006", "atSec": 64.40, "volumeDb": -22.0},  # lens to p.3084
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v2.wav", "atSec": 76.35, "volumeDb": -24.0},  # the leaf settles
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v3.wav", "atSec": 82.65, "volumeDb": -23.0},  # push into the light
@@ -318,6 +324,12 @@ cues = json.load(open(os.path.join(G1, "act5_cues_v1.json")))
 cues["ids"] = {"cues": ["MUS-007", "MUS-012", "MUS-013", "MUS-014"], "events": []}
 # MUS-011 filter sweeps for the two transitions with no swish left (the brief: H slide, O push); mix-act-bed.py --sweep at Gate 3
 cues["sweeps"] = [[73.30, 0.8], [144.05, 0.7]]
+# Gate 3 Sound review: cue 1 settles before "More" (S taste); cue 4 dips under "to open it." and lifts after it (S3)
+for c in cues["cues"]:
+    if c["name"].startswith("1 "):
+        c["levels"] = [[0, -26], [1.6, -26], [2.5, -34], [c["until"], -34]]
+    if c["name"].startswith("4 "):
+        c["levels"] = [[130.49, -35], [162.2, -35], [162.6, -38.5], [163.3, -38.5], [163.5, -35], [164.54, -27], [166.34, -27]]
 for c in cues["cues"]:
     assert c["file"].startswith("public/music/")
 

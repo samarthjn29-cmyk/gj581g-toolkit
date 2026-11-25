@@ -46,6 +46,7 @@ export type SpectrumRow = {
   h?: number;
   atSec: number; // draws left to right over 0.9 s
   label?: string; // mono 22, above the strip's left end
+  labelTone?: "chip"; // the label on a dark chip, for a bright world behind it (Designer, act 5 Gate 3)
   labelAtSec?: number;
   under?: string; // mono 22, centred under the strip (e.g. SENT BACK), with the strip
   profile?: [number, number][]; // [nm, weight 0..1 in linear light]; none = all colours full
@@ -77,7 +78,7 @@ export const SpectrumRows: React.FC<{ rows: SpectrumRow[] }> = ({ rows }) => {
               <div style={{ position: "absolute", inset: 0, borderRadius: 4, background: profileGradient(r.profile, rev), ...FEATHER }} />
             </div>
             {r.label && pl > 0 ? (
-              <div style={{ position: "absolute", left: r.x, top: r.y - 34, fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 2, color: t.colors.ink, opacity: pl, whiteSpace: "nowrap" }}>{r.label}</div>
+              <div style={{ position: "absolute", left: r.x - (r.labelTone ? 8 : 0), top: r.y - (r.labelTone ? 42 : 34), fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 2, color: r.labelTone ? "#F2EDE4" : t.colors.ink, opacity: pl, whiteSpace: "nowrap", ...(r.labelTone ? { background: "rgba(24,21,19,0.82)", padding: "4px 8px", borderRadius: 3 } : {}) }}>{r.label}</div>
             ) : null}
             {r.under && p > 0 ? (
               <div style={{ position: "absolute", left: r.x, top: r.y + h + 14, width: r.w, textAlign: "center", fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 2, color: t.colors.secondary, opacity: p }}>{r.under}</div>
@@ -107,6 +108,8 @@ export type SpectrumDivisions = {
   drawAtSec?: number; // band wipes on left to right (0.9 s); omit = whole from the start
   dividersAtSec?: number;
   names?: { text: string; atSec: number }[];
+  nameSize?: number; // default 22
+  liftFrom?: number; // each segment starts at this opacity and comes up when its name lands (the colours named one by one)
   query?: { segment: number; atSec: number };
   chord?: { atSec: number; y?: number; notesAtSec?: number };
   brighten?: { atSec: number; from?: number }; // segments start at `from` brightness and come up one by one
@@ -149,7 +152,12 @@ export const Divisions: React.FC<{ d: SpectrumDivisions }> = ({ d }) => {
         {d.fractions.map((_, i) => {
           const b = d.brighten;
           const p = b ? interpolate(frame, [sec(b.atSec + i * 0.12, fps), sec(b.atSec + i * 0.12 + 0.4, fps)], [0, 1], ease) : 1;
-          const op = b ? (b.from ?? 0.35) + (1 - (b.from ?? 0.35)) * p : 1;
+          let op = b ? (b.from ?? 0.35) + (1 - (b.from ?? 0.35)) * p : 1;
+          const nm = d.names?.[i];
+          if (d.liftFrom !== undefined && nm) {
+            const pl = interpolate(frame, [sec(nm.atSec, fps), sec(nm.atSec + 0.4, fps)], [0, 1], ease);
+            op *= d.liftFrom + (1 - d.liftFrom) * pl;
+          }
           const l = edges[i] - x0;
           return (
             <div key={`s${i}`} style={{ position: "absolute", left: l, top: 0, width: edges[i + 1] - edges[i] + 0.5, height: h, opacity: op, background: `linear-gradient(90deg, ${stops.join(", ")})`, backgroundSize: `${w}px ${h}px`, backgroundPosition: `${-l}px 0` }} />
@@ -168,7 +176,7 @@ export const Divisions: React.FC<{ d: SpectrumDivisions }> = ({ d }) => {
       {(d.names ?? []).map((n, i) => {
         const p = interpolate(frame, [sec(n.atSec, fps), sec(n.atSec + 0.5, fps)], [0, 1], ease);
         return p > 0 ? (
-          <div key={`n${i}`} style={{ position: "absolute", left: (edges[i] + edges[i + 1]) / 2 - 100, top: y + h + 24 + 10 * (1 - p), width: 200, textAlign: "center", fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 2, color: t.colors.ink, opacity: p }}>
+          <div key={`n${i}`} style={{ position: "absolute", left: (edges[i] + edges[i + 1]) / 2 - 100, top: y + h + 24 + 10 * (1 - p), width: 200, textAlign: "center", fontFamily: t.fonts.mono, fontSize: d.nameSize ?? 22, letterSpacing: 2, color: t.colors.ink, opacity: p }}>
             {n.text}
           </div>
         ) : null;
