@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T06:23:18.542Z",
+ "generated": "2026-11-25T06:40:22.651Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -934,8 +934,8 @@
     "public/assets/sources/newton_opticks1704_p90.jpg"
    ],
    "status": "Active",
-   "use": "Best use: Newton's own words on p. 90 ('the Rays to speak properly are not coloured'), WCL-E01, highlighted as said. Limit: max 6 beats per episode. Not for: decoration or as a generic old book.",
-   "maxBeats": 6,
+   "use": "Best use: Newton's own words on p. 90 ('the Rays to speak properly are not coloured'), WCL-E01, highlighted as said. Limit: max 8 beats per episode. Not for: decoration or as a generic old book. (Raised to 8 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 8,
    "maxShare": null
   },
   "SRC-006": {
@@ -1007,8 +1007,8 @@
     "src/components/SpectrumStrip.tsx"
    ],
    "status": "Active",
-   "use": "Best use: a line that names wavelengths or the band of colours (Newton's spectrum, Dalton's six against his two). Limit: max 20 beats per episode (raised from 5, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: background colour or transitions.",
-   "maxBeats": 20,
+   "use": "Best use: a line that names wavelengths or the band of colours (Newton's spectrum, Dalton's six against his two). Limit: max 28 beats per episode (raised from 5, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: background colour or transitions. (Raised to 28 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 28,
    "maxShare": null
   },
   "PKG-005": {
@@ -1104,8 +1104,8 @@
     "public/assets/sources/candle_lighting_mixkit3458_rev.mp4"
    ],
    "status": "Active",
-   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 14 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: any other scene.",
-   "maxBeats": 14,
+   "use": "Best use: the candlelit evening in Kendal (episode 1's opening and its return in act 7). Limit: max 16 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: any other scene. (Raised to 16 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 16,
    "maxShare": null
   },
   "SRC-012": {
@@ -1129,8 +1129,8 @@
     "public/assets/sources/geranium_stang_flowerhead_cutout.png"
    ],
    "status": "Active",
-   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 20 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited.",
-   "maxBeats": 20,
+   "use": "Best use: Dalton's geranium (the flower he names in his paper). Limit: max 27 beats per episode (raised from 10, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: generic flowers. Licence CC BY-SA 4.0: shown unaltered except grade, credited. (Raised to 27 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 27,
    "maxShare": null
   },
   "SRC-014": {
@@ -1386,8 +1386,8 @@
     "src/components/SwatchRows.tsx"
    ],
    "status": "Active",
-   "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 12 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: data with numbers (MinimalDataChart).",
-   "maxBeats": 12,
+   "use": "Best use: comparing what different people see (by day against by candle; John, his friends, his brother). Limit: max 13 beats per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026). Not for: data with numbers (MinimalDataChart). (Raised to 13 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 13,
    "maxShare": null
   },
   "VIS-018": {
@@ -1410,8 +1410,8 @@
     "src/components/EyeDiagram.tsx"
    ],
    "status": "Active",
-   "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 30 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: lines about light or the brain with no eye in them.",
-   "maxBeats": 30,
+   "use": "Best use: lines about the eye itself (Dalton's tinted-jelly idea, the request, Ransome's examination). Limit: max 32 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: lines about light or the brain with no eye in them. (Raised to 32 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 32,
    "maxShare": null
   },
   "VIS-020": {
@@ -1494,8 +1494,8 @@
     "src/layers/RayParticles.ts"
    ],
    "status": "Active",
-   "use": "Best use: only where light physically travels: through Newton's shutter hole, the prism split, the second prism, a lens bringing rays back together, light entering the eye and reaching the back. Limit: max 20 beats per episode (raised from 6, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); max 5% of runtime; 40 dots on screen at most. Not for: decoration, data or money flows, or any line with no light in it.",
-   "maxBeats": 20,
+   "use": "Best use: only where light physically travels: through Newton's shutter hole, the prism split, the second prism, a lens bringing rays back together, light entering the eye and reaching the back. Limit: max 24 beats per episode (raised from 6, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026); max 5% of runtime; 40 dots on screen at most. Not for: decoration, data or money flows, or any line with no light in it. (Raised to 24 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 24,
    "maxShare": 5
   },
   "LOK-014": {
@@ -3541,8 +3541,8 @@
     "public/assets/sources/newton1672_p3083.jpg"
    ],
    "status": "Active",
-   "use": "Best use: Newton's own words and dates in WCL-E01 act 4 (his 1672 letter), each page held >= 4 s with the spoken words highlighted as said; p.3075 also for the act's Phil. Trans. line. Limit: max 34 beats per episode across its six pages (act 4 uses 32, as cards and one blur ground); never cropped to hide the page as a page; always tagged NEWTON · PHIL. TRANS. NO. 80 · 1672 with the page number. Not for: decoration, a generic old book, or Opticks (1704) lines (SRC-005/059).",
-   "maxBeats": 34,
+   "use": "Best use: Newton's own words and dates in WCL-E01 acts 4-5 (his 1672 letter), each page held >= 4 s with the spoken words highlighted as said; p.3075 also for act 4's Phil. Trans. line; p.3084 (¶13, 'variously qualified to reflect one sort of light in greater plenty then another') in act 5. Limit: max 36 beats per episode across its pages (act 4 uses 32, act 5 uses 4); never cropped to hide the page as a page; always tagged NEWTON · PHIL. TRANS. NO. 80 · 1672 with the page number. Not for: decoration, a generic old book, or Opticks (1704) lines (SRC-005/059/063). (Raised to 36 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
+   "maxBeats": 36,
    "maxShare": null
   },
   "SRC-059": {
