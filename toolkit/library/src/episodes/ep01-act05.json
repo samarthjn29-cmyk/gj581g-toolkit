@@ -1,0 +1,2650 @@
+{
+ "finish": {},
+ "motionBlur": true,
+ "episodeId": "WCL-E01-act05",
+ "themeId": "LOK-009",
+ "runningHead": {
+  "text": "5 · THE RAYS",
+  "fromSec": 2.4
+ },
+ "note": "Act 5 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 25 Nov 2026. Shots join beat-sheet beats; directed shots carry the brief's names. Cues from 05_rays_paced_149wpm_even + 2.4 s slate.",
+ "voice": {
+  "id": "NAR-005",
+  "atSec": 2.4,
+  "tailSec": 2.64,
+  "fadeOutSec": 0.03
+ },
+ "audio": [
+  {
+   "id": "SFX-001",
+   "atSec": 0.02,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 2.3,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 8.92,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-021",
+   "file": "public/sfx/kit/whoosh/cloth_slide.wav",
+   "atSec": 23.66,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-021",
+   "file": "public/sfx/kit/whoosh/air_woosh.wav",
+   "atSec": 32.08,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 40.33,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 43.11,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-021",
+   "file": "public/sfx/kit/whoosh/cloth_slide.wav",
+   "atSec": 50.17,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 64.4,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 76.35,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
+   "atSec": 82.65,
+   "volumeDb": -23.0
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 94.58,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 103.5,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 114.97,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 120.23,
+   "volumeDb": -22.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 130.4,
+   "volumeDb": -22.0
+  }
+ ],
+ "beats": [
+  {
+   "id": "A0_band_title",
+   "beats": [
+    "E01-A5-01"
+   ],
+   "start": 0.0,
+   "end": 2.4,
+   "component": "SpectrumStrip",
+   "assets": [
+    "VIS-014",
+    "TXT-009",
+    "MOT-002",
+    "TRN-015",
+    "LOK-009",
+    "LOK-010",
+    "LOK-029",
+    "SFX-001",
+    "SFX-006",
+    "MUS-007",
+    "MUS-008"
+   ],
+   "props": {
+    "fromNm": 400,
+    "toNm": 700,
+    "ticks": false,
+    "feather": true,
+    "startSec": -1,
+    "titleCue": {
+     "text": "5 · THE RAYS",
+     "atSec": 0.75,
+     "x": 210,
+     "y": 440
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-01",
+     0.0,
+     2.4
+    ]
+   ],
+   "transitionIn": "match",
+   "focus": [
+    960,
+    518
+   ],
+   "ground": {
+    "kind": "inset",
+    "act": 5
+   },
+   "joinFrom": {
+    "id": "TRN-015",
+    "file": "public/assets/joins/act4_end_215.66.jpg"
+   }
+  },
+  {
+   "id": "A_opticks_title",
+   "beats": [
+    "E01-A5-02",
+    "E01-A5-03"
+   ],
+   "start": 2.4,
+   "end": 9.02,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-007",
+    "SRC-064",
+    "TRN-001",
+    "SFX-006"
+   ],
+   "props": {
+    "srcId": "SRC-064",
+    "imgSize": [
+     1600,
+     2321
+    ],
+    "crop": [
+     110,
+     120,
+     1400,
+     2010
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · OPTICKS · LONDON, 1704",
+    "highlights": [
+     {
+      "box": [
+       760,
+       2045,
+       240,
+       58
+      ],
+      "atSec": 2.2
+     },
+     {
+      "box": [
+       615,
+       1878,
+       370,
+       62
+      ],
+      "atSec": 3.5
+     },
+     {
+      "box": [
+       150,
+       135,
+       1320,
+       195
+      ],
+      "atSec": 3.87
+     }
+    ],
+    "quote": "Opticks: or, a Treatise of the Reflexions, Refractions, Inflexions and Colours of Light",
+    "quoteMarks": false,
+    "quoteAtSec": 4.58,
+    "notes": [
+     {
+      "text": "1672 → 1704 · 32 YEARS",
+      "atSec": 0.76
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-02",
+     2.4,
+     5.64
+    ],
+    [
+     "E01-A5-03",
+     5.64,
+     9.02
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "B_p90_not_coloured",
+   "beats": [
+    "E01-A5-04",
+    "E01-A5-05",
+    "E01-A5-06",
+    "E01-A5-07",
+    "E01-A5-08"
+   ],
+   "start": 9.02,
+   "end": 23.74,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-004",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-007",
+    "TEX-008",
+    "SRC-005",
+    "TRN-001",
+    "SFX-021"
+   ],
+   "props": {
+    "srcId": "SRC-005",
+    "imgSize": [
+     1600,
+     2321
+    ],
+    "crop": [
+     240,
+     370,
+     1280,
+     1221
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 90",
+    "highlights": [
+     {
+      "box": [
+       384,
+       1316,
+       724,
+       64
+      ],
+      "atSec": 7.17
+     },
+     {
+      "box": [
+       1113,
+       1316,
+       391,
+       64
+      ],
+      "atSec": 8.63
+     }
+    ],
+    "callout": {
+     "atSec": 4.48,
+     "dim": 0.55,
+     "keep": [
+      [
+       384,
+       1316,
+       1120,
+       64
+      ]
+     ]
+    },
+    "quote": "For the rays to speak properly are not coloured.",
+    "quoteAtSec": 7.17,
+    "notes": [
+     {
+      "text": "P. 90",
+      "atSec": 1.08
+     },
+     {
+      "text": "IN PLAIN WORDS",
+      "atSec": 10.77
+     },
+     {
+      "text": "THE RAYS HAVE NO COLOUR",
+      "atSec": 13.03,
+      "accent": true
+     }
+    ],
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-04",
+     9.02,
+     12.51
+    ],
+    [
+     "E01-A5-05",
+     12.51,
+     15.73
+    ],
+    [
+     "E01-A5-06",
+     15.73,
+     18.35
+    ],
+    [
+     "E01-A5-07",
+     18.35,
+     20.63
+    ],
+    [
+     "E01-A5-08",
+     20.63,
+     23.74
+    ]
+   ],
+   "transitionIn": "canvas",
+   "transition": {
+    "dir": "right",
+    "pull": 0.86
+   },
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "C_power_quote",
+   "beats": [
+    "E01-A5-09",
+    "E01-A5-10",
+    "E01-A5-11"
+   ],
+   "start": 23.74,
+   "end": 32.16,
+   "component": "KeywordPanel",
+   "assets": [
+    "TXT-025",
+    "TXT-010",
+    "MOT-002",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-007",
+    "SRC-005",
+    "TRN-001",
+    "SFX-021"
+   ],
+   "props": {
+    "panel": {
+     "chips": []
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-09",
+     23.74,
+     26.25
+    ],
+    [
+     "E01-A5-10",
+     26.25,
+     29.57
+    ],
+    [
+     "E01-A5-11",
+     29.57,
+     32.16
+    ]
+   ],
+   "overlay": {
+    "quotes": [
+     {
+      "size": 52,
+      "source": {
+       "text": "ISAAC NEWTON · OPTICKS · 1704 · P. 90",
+       "atSec": 0.65,
+       "x": 860,
+       "y": 730
+      },
+      "lines": [
+       {
+        "x": 860,
+        "y": 300,
+        "words": [
+         {
+          "text": "a",
+          "atSec": 2.95
+         },
+         {
+          "text": "certain",
+          "atSec": 3.25
+         },
+         {
+          "text": "power",
+          "atSec": 3.63
+         }
+        ]
+       },
+       {
+        "x": 860,
+        "y": 400,
+        "words": [
+         {
+          "text": "and",
+          "atSec": 4.05
+         },
+         {
+          "text": "disposition",
+          "atSec": 4.31
+         }
+        ]
+       },
+       {
+        "x": 860,
+        "y": 500,
+        "words": [
+         {
+          "text": "to",
+          "atSec": 4.89
+         },
+         {
+          "text": "stir",
+          "atSec": 5.21
+         },
+         {
+          "text": "up",
+          "atSec": 5.49
+         },
+         {
+          "text": "a",
+          "atSec": 5.65
+         },
+         {
+          "text": "sensation",
+          "atSec": 5.83
+         }
+        ]
+       },
+       {
+        "x": 860,
+        "y": 600,
+        "words": [
+         {
+          "text": "of",
+          "atSec": 6.27
+         },
+         {
+          "text": "this",
+          "atSec": 6.61
+         },
+         {
+          "text": "or",
+          "atSec": 6.93
+         },
+         {
+          "text": "that",
+          "atSec": 7.19
+         },
+         {
+          "text": "Colour",
+          "atSec": 7.51
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "dark"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-005",
+    "file": "public/assets/sources/newton_opticks1704_p90.jpg",
+    "size": [
+     1600,
+     2321
+    ],
+    "focus": [
+     0.55,
+     0.62
+    ],
+    "brightness": 0.38
+   }
+  },
+  {
+   "id": "D_sunlight",
+   "beats": [
+    "E01-A5-12",
+    "E01-A5-13",
+    "E01-A5-14",
+    "E01-A5-15"
+   ],
+   "start": 32.16,
+   "end": 43.21,
+   "component": "KeywordPanel",
+   "assets": [
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-029",
+    "MUS-007",
+    "MUS-012",
+    "MUS-008",
+    "TRN-001",
+    "VIS-021",
+    "VIS-060",
+    "SRC-013",
+    "SFX-026",
+    "SFX-001"
+   ],
+   "props": {
+    "panel": {
+     "size": 64,
+     "untilSec": 4.84,
+     "chips": [
+      {
+       "text": "clashes with the prism",
+       "atSec": 1.83,
+       "x": 940,
+       "y": 560,
+       "dimSec": 3.94
+      },
+      {
+       "text": "It doesn't.",
+       "atSec": 3.94,
+       "x": 940,
+       "y": 680,
+       "accent": true
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "MANY KINDS OF RAY",
+      "atSec": 6.73,
+      "x": 360,
+      "y": 120,
+      "size": 26
+     },
+     {
+      "text": "ISN'T PINK",
+      "atSec": 9.66,
+      "x": 1260,
+      "y": 340,
+      "size": 26
+     },
+     {
+      "text": "ILLUSTRATION · RAYS DRAWN WITHOUT COLOUR",
+      "atSec": 5.44,
+      "x": 120,
+      "y": 960,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-12",
+     32.16,
+     34.77
+    ],
+    [
+     "E01-A5-13",
+     34.77,
+     36.95
+    ],
+    [
+     "E01-A5-14",
+     36.95,
+     40.08
+    ],
+    [
+     "E01-A5-15",
+     40.08,
+     43.21
+    ]
+   ],
+   "overlay": {
+    "rays": [
+     {
+      "path": [
+       [
+        -40,
+        40
+       ],
+       [
+        560,
+        500
+       ]
+      ],
+      "atSec": 5.25,
+      "color": "#FFF6DD",
+      "jitter": 16,
+      "kinds": [
+       {
+        "size": 5,
+        "speed": 560,
+        "count": 5
+       },
+       {
+        "size": 7,
+        "speed": 620,
+        "count": 5
+       },
+       {
+        "size": 9,
+        "speed": 680,
+        "count": 5
+       }
+      ]
+     },
+     {
+      "path": [
+       [
+        900,
+        520
+       ],
+       [
+        1980,
+        470
+       ]
+      ],
+      "atSec": 8.62,
+      "color": "#FFF6DD",
+      "jitter": 16,
+      "kinds": [
+       {
+        "size": 5,
+        "speed": 560,
+        "count": 5
+       },
+       {
+        "size": 7,
+        "speed": 620,
+        "count": 2
+       },
+       {
+        "size": 9,
+        "speed": 680,
+        "count": 5
+       }
+      ],
+      "seed": 5
+     }
+    ],
+    "stickers": [
+     {
+      "srcId": "SRC-013",
+      "file": "public/assets/sources/geranium_stang_flowerhead_cutout.png",
+      "size": [
+       1185,
+       769
+      ],
+      "at": [
+       680,
+       560
+      ],
+      "w": 460,
+      "atSec": 7.59,
+      "tilt": -2,
+      "tag": {
+       "text": "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT",
+       "untilSec": 10.44
+      }
+     }
+    ]
+   },
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "inset",
+    "act": 5
+   }
+  },
+  {
+   "id": "E_whoever_looks",
+   "beats": [
+    "E01-A5-16",
+    "E01-A5-17",
+    "E01-A5-18"
+   ],
+   "start": 43.21,
+   "end": 50.25,
+   "component": "EyeDiagram",
+   "assets": [
+    "VIS-019",
+    "VIS-021",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-004",
+    "LOK-009",
+    "LOK-010",
+    "MUS-012",
+    "TRN-001",
+    "SFX-021"
+   ],
+   "props": {
+    "mode": "plate",
+    "startSec": -1,
+    "card": {
+     "x": 680,
+     "y": 130,
+     "w": 1060,
+     "h": 830,
+     "tilt": 1.0
+    },
+    "captions": [
+     {
+      "text": "THE EYE · SIMPLIFIED",
+      "mono": true,
+      "atSec": -1,
+      "at": [
+       724,
+       176
+      ]
+     },
+     {
+      "text": "Cornea",
+      "atSec": -1,
+      "at": [
+       736,
+       360
+      ],
+      "anchor": [
+       915,
+       470
+      ]
+     },
+     {
+      "text": "Lens",
+      "atSec": -1,
+      "at": [
+       1090,
+       912
+      ],
+      "anchor": [
+       1050,
+       650
+      ]
+     },
+     {
+      "text": "Retina",
+      "atSec": 3.27,
+      "at": [
+       1560,
+       318
+      ],
+      "anchor": [
+       1428,
+       398
+      ]
+     },
+     {
+      "text": "seen as pink",
+      "atSec": 5.05,
+      "at": [
+       1180,
+       905
+      ],
+      "anchor": [
+       1595,
+       632
+      ],
+      "size": 34,
+      "swatch": "#E79AB9"
+     }
+    ],
+    "labels": [
+     {
+      "text": "A KIND OF PUSH",
+      "atSec": 1.69,
+      "untilSec": 6.69,
+      "x": 160,
+      "y": 380,
+      "size": 26
+     },
+     {
+      "text": "ILLUSTRATION",
+      "atSec": 0.19,
+      "x": 120,
+      "y": 960,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-16",
+     43.21,
+     45.87
+    ],
+    [
+     "E01-A5-17",
+     45.87,
+     48.04
+    ],
+    [
+     "E01-A5-18",
+     48.04,
+     50.25
+    ]
+   ],
+   "overlay": {
+    "rays": [
+     {
+      "path": [
+       [
+        -40,
+        545
+       ],
+       [
+        1478,
+        545
+       ]
+      ],
+      "atSec": -1,
+      "untilSec": 4.39,
+      "color": "#FFF6DD",
+      "stroke": "rgba(43,39,36,0.6)",
+      "jitter": 16,
+      "kinds": [
+       {
+        "size": 5,
+        "speed": 560,
+        "count": 5
+       },
+       {
+        "size": 7,
+        "speed": 620,
+        "count": 5
+       },
+       {
+        "size": 9,
+        "speed": 680,
+        "count": 5
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "canvas",
+   "transition": {
+    "dir": "right",
+    "pull": 0.86
+   }
+  },
+  {
+   "id": "F_newtons_view",
+   "beats": [
+    "E01-A5-19",
+    "E01-A5-20",
+    "E01-A5-21",
+    "E01-A5-22",
+    "E01-A5-23",
+    "E01-A5-24"
+   ],
+   "start": 50.25,
+   "end": 64.47,
+   "component": "KeywordPanel",
+   "assets": [
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "TRN-011",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-012",
+    "SRC-064",
+    "TRN-001",
+    "SFX-006"
+   ],
+   "props": {
+    "panel": {
+     "size": 64,
+     "chips": [
+      {
+       "text": "isn't really in the flower",
+       "atSec": 2.55,
+       "x": 480,
+       "y": 250,
+       "dimSec": 11.21,
+       "dimTo": 0.3
+      },
+      {
+       "text": "isn't in the light either",
+       "atSec": 5.22,
+       "x": 480,
+       "y": 380,
+       "dimSec": 11.21,
+       "dimTo": 0.3
+      },
+      {
+       "text": "where the light meets a person",
+       "atSec": 8.33,
+       "x": 480,
+       "y": 520,
+       "accent": true,
+       "dimSec": 11.21,
+       "dimTo": 0.3
+      },
+      {
+       "text": "a geranium and a leaf",
+       "atSec": 11.59,
+       "x": 480,
+       "y": 700
+      },
+      {
+       "text": "still look different",
+       "atSec": 12.57,
+       "x": 480,
+       "y": 830
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "ISAAC NEWTON · OPTICKS, 1704",
+      "atSec": 1.29,
+      "x": 1800,
+      "y": 980,
+      "align": "right",
+      "size": 22
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-19",
+     50.25,
+     52.44
+    ],
+    [
+     "E01-A5-20",
+     52.44,
+     54.8
+    ],
+    [
+     "E01-A5-21",
+     54.8,
+     56.98
+    ],
+    [
+     "E01-A5-22",
+     56.98,
+     59.84
+    ],
+    [
+     "E01-A5-23",
+     59.84,
+     62.42
+    ],
+    [
+     "E01-A5-24",
+     62.42,
+     64.47
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "dark"
+   },
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-064",
+    "file": "public/assets/sources/newton_opticks1704_title.jpg",
+    "size": [
+     1600,
+     2321
+    ],
+    "focus": [
+     0.5,
+     0.43
+    ],
+    "blurPx": 14,
+    "brightness": 0.38
+   }
+  },
+  {
+   "id": "G_p3084_reflect",
+   "beats": [
+    "E01-A5-25",
+    "E01-A5-26",
+    "E01-A5-27",
+    "E01-A5-28"
+   ],
+   "start": 64.47,
+   "end": 73.46,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-017",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-012",
+    "TEX-008",
+    "SRC-058",
+    "TRN-001",
+    "MUS-011"
+   ],
+   "props": {
+    "srcId": "SRC-058",
+    "file": "public/assets/sources/newton1672_p3084.jpg",
+    "imgSize": [
+     1555,
+     2488
+    ],
+    "crop": [
+     40,
+     1070,
+     1480,
+     1411
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3084",
+    "highlights": [
+     {
+      "box": [
+       785,
+       1768,
+       705,
+       52
+      ],
+      "atSec": 4.84
+     },
+     {
+      "box": [
+       62,
+       1826,
+       662,
+       64
+      ],
+      "atSec": 4.84
+     },
+     {
+      "box": [
+       745,
+       1824,
+       748,
+       64
+      ],
+      "atSec": 6.06
+     },
+     {
+      "box": [
+       62,
+       1883,
+       1190,
+       64
+      ],
+      "atSec": 6.06
+     }
+    ],
+    "quote": "variously qualified to reflect one sort of light in greater plenty then another",
+    "quoteAtSec": 6.98,
+    "notes": [
+     {
+      "text": "CAMBRIDGE · FEB 1672",
+      "atSec": 3.74
+     }
+    ],
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-25",
+     64.47,
+     67.08
+    ],
+    [
+     "E01-A5-26",
+     67.08,
+     69.31
+    ],
+    [
+     "E01-A5-27",
+     69.31,
+     71.45
+    ],
+    [
+     "E01-A5-28",
+     71.45,
+     73.46
+    ]
+   ],
+   "transitionIn": "lens",
+   "transition": {
+    "durSec": 0.7,
+    "blur": 14
+   },
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "H_choosing",
+   "beats": [
+    "E01-A5-29",
+    "E01-A5-30",
+    "E01-A5-31",
+    "E01-A5-32"
+   ],
+   "start": 73.46,
+   "end": 82.8,
+   "component": "SpectrumStrip",
+   "assets": [
+    "VIS-014",
+    "VIS-060",
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "MUS-012",
+    "SRC-013",
+    "TRN-001",
+    "SFX-026",
+    "SRC-014",
+    "SFX-020"
+   ],
+   "props": {
+    "rows": [
+     {
+      "x": 330,
+      "y": 150,
+      "w": 1260,
+      "atSec": -1,
+      "label": "DAYLIGHT",
+      "labelAtSec": -1
+     },
+     {
+      "x": 330,
+      "y": 680,
+      "w": 460,
+      "atSec": 0.98,
+      "under": "SENT BACK",
+      "profile": [
+       [
+        400,
+        0.45
+       ],
+       [
+        440,
+        0.5
+       ],
+       [
+        480,
+        0.3
+       ],
+       [
+        520,
+        0.12
+       ],
+       [
+        560,
+        0.1
+       ],
+       [
+        600,
+        0.55
+       ],
+       [
+        650,
+        0.85
+       ],
+       [
+        700,
+        0.9
+       ]
+      ]
+     },
+     {
+      "x": 1130,
+      "y": 680,
+      "w": 460,
+      "atSec": 3.46,
+      "under": "SENT BACK",
+      "profile": [
+       [
+        400,
+        0.05
+       ],
+       [
+        450,
+        0.06
+       ],
+       [
+        500,
+        0.12
+       ],
+       [
+        550,
+        0.45
+       ],
+       [
+        580,
+        0.3
+       ],
+       [
+        620,
+        0.08
+       ],
+       [
+        680,
+        0.12
+       ],
+       [
+        700,
+        0.3
+       ]
+      ]
+     }
+    ],
+    "labels": [
+     {
+      "text": "ILLUSTRATION · SIMPLIFIED, NOT MEASURED",
+      "atSec": 0.98,
+      "x": 1800,
+      "y": 960,
+      "align": "right",
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-29",
+     73.46,
+     76.05
+    ],
+    [
+     "E01-A5-30",
+     76.05,
+     78.32
+    ],
+    [
+     "E01-A5-31",
+     78.32,
+     80.49
+    ],
+    [
+     "E01-A5-32",
+     80.49,
+     82.8
+    ]
+   ],
+   "overlay": {
+    "stickers": [
+     {
+      "srcId": "SRC-013",
+      "file": "public/assets/sources/geranium_stang_flowerhead_cutout.png",
+      "size": [
+       1185,
+       769
+      ],
+      "at": [
+       560,
+       430
+      ],
+      "w": 400,
+      "atSec": -1,
+      "tilt": -2,
+      "tag": {
+       "text": "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT",
+       "untilSec": 5.14
+      }
+     },
+     {
+      "srcId": "SRC-014",
+      "file": "public/assets/sources/laurel_runicearth_leaf_cutout.png",
+      "size": [
+       800,
+       700
+      ],
+      "at": [
+       1360,
+       430
+      ],
+      "w": 250,
+      "atSec": 2.29,
+      "tilt": 3,
+      "tag": {
+       "text": "PHOTO TODAY · RUNIC EARTH",
+       "untilSec": 5.14
+      }
+     }
+    ],
+    "chips": [
+     {
+      "size": 64,
+      "inkStrike": true,
+      "chips": [
+       {
+        "text": "painting the light",
+        "atSec": 5.91,
+        "x": 330,
+        "y": 820,
+        "strikeSec": 7.21
+       },
+       {
+        "text": "choosing from it",
+        "atSec": 7.85,
+        "x": 1060,
+        "y": 820,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "slide"
+  },
+  {
+   "id": "I_by_candle",
+   "beats": [
+    "E01-A5-33",
+    "E01-A5-34",
+    "E01-A5-35",
+    "E01-A5-36",
+    "E01-A5-37"
+   ],
+   "start": 82.8,
+   "end": 94.68,
+   "component": "LayerStage",
+   "assets": [
+    "VIS-059",
+    "VIS-060",
+    "VIS-014",
+    "TXT-010",
+    "MOT-002",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "MUS-012",
+    "SRC-040",
+    "SRC-013",
+    "TRN-018",
+    "SRC-011",
+    "TRN-001",
+    "SFX-001"
+   ],
+   "props": {
+    "worlds": [
+     {
+      "atSec": 0,
+      "srcId": "SRC-040",
+      "kind": "video",
+      "size": [
+       1920,
+       1080
+      ],
+      "revFile": "public/assets/sources/sky_clouds_mixkit51102_rev.mp4",
+      "clipSec": 8.5,
+      "light": "day",
+      "haze": 0.12,
+      "blur": 2,
+      "rackSec": 0.3,
+      "lightFrom": "top-left",
+      "label": "DAYLIGHT",
+      "today": true,
+      "why": "The change itself: the same flower in the daylight the line compares the candle with."
+     },
+     {
+      "atSec": 2.9,
+      "srcId": "SRC-011",
+      "kind": "video",
+      "size": [
+       1080,
+       1920
+      ],
+      "focus": [
+       0.5,
+       0.5
+      ],
+      "clipStartSec": 7.6,
+      "change": "dissolve",
+      "sec": 1.4,
+      "light": "warm",
+      "blur": 1.5,
+      "lightFrom": "left",
+      "label": "CANDLELIGHT",
+      "today": true,
+      "why": "The change itself: Dalton's evening light, which has far less blue."
+     }
+    ],
+    "carry": [
+     {
+      "srcId": "SRC-013",
+      "file": "public/assets/sources/geranium_stang_flowerhead_cutout.png",
+      "size": [
+       1185,
+       769
+      ],
+      "at": [
+       640,
+       470
+      ],
+      "w": 640,
+      "atSec": -1,
+      "moves": [
+       {
+        "atSec": 2.95,
+        "to": [
+         1290,
+         430
+        ],
+        "w": 560,
+        "sec": 1.3,
+        "why": "Steps aside so the flame whose light it now gets is seen."
+       }
+      ]
+     }
+    ],
+    "caption": "PHOTO D. J. STANG, CC BY-SA 4.0 (CUT OUT)",
+    "camera": {
+     "pan": -60,
+     "push": 0.03
+    },
+    "labels": [
+     {
+      "text": "ILLUSTRATION · NOT MEASURED",
+      "atSec": 3.94,
+      "x": 140,
+      "y": 470,
+      "size": 18
+     }
+    ],
+    "overlay": {
+     "spectrum": {
+      "rows": [
+       {
+        "x": 140,
+        "y": 140,
+        "w": 560,
+        "h": 44,
+        "atSec": 0.77,
+        "label": "DAYLIGHT"
+       },
+       {
+        "x": 140,
+        "y": 260,
+        "w": 560,
+        "h": 44,
+        "atSec": 3.94,
+        "label": "CANDLELIGHT",
+        "profile": [
+         [
+          400,
+          0.01
+         ],
+         [
+          450,
+          0.025
+         ],
+         [
+          500,
+          0.07
+         ],
+         [
+          550,
+          0.17
+         ],
+         [
+          600,
+          0.36
+         ],
+         [
+          650,
+          0.63
+         ],
+         [
+          700,
+          1.0
+         ]
+        ],
+        "mark": {
+         "fromNm": 400,
+         "toNm": 470,
+         "text": "FAR LESS BLUE",
+         "atSec": 5.6
+        }
+       },
+       {
+        "x": 140,
+        "y": 400,
+        "w": 560,
+        "h": 44,
+        "atSec": 8.73,
+        "label": "THE GERANIUM'S MIX, BY CANDLE",
+        "labelAtSec": 9.83,
+        "profile": [
+         [
+          400,
+          0.0045
+         ],
+         [
+          425,
+          0.0084
+         ],
+         [
+          450,
+          0.0113
+         ],
+         [
+          475,
+          0.0154
+         ],
+         [
+          500,
+          0.0147
+         ],
+         [
+          525,
+          0.0141
+         ],
+         [
+          550,
+          0.0179
+         ],
+         [
+          575,
+          0.0712
+         ],
+         [
+          600,
+          0.198
+         ],
+         [
+          625,
+          0.3465
+         ],
+         [
+          650,
+          0.5355
+         ],
+         [
+          675,
+          0.7131
+         ],
+         [
+          700,
+          0.9
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-33",
+     82.8,
+     85.24
+    ],
+    [
+     "E01-A5-34",
+     85.24,
+     87.82
+    ],
+    [
+     "E01-A5-35",
+     87.82,
+     89.91
+    ],
+    [
+     "E01-A5-36",
+     89.91,
+     92.63
+    ],
+    [
+     "E01-A5-37",
+     92.63,
+     94.68
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    560,
+    430
+   ]
+  },
+  {
+   "id": "J_most_people",
+   "beats": [
+    "E01-A5-38",
+    "E01-A5-39",
+    "E01-A5-40"
+   ],
+   "start": 94.68,
+   "end": 103.61,
+   "component": "SwatchRows",
+   "assets": [
+    "VIS-017",
+    "TXT-010",
+    "MOT-002",
+    "TRN-009",
+    "LOK-009",
+    "LOK-010",
+    "MUS-012",
+    "TRN-001",
+    "MUS-010",
+    "SFX-024"
+   ],
+   "props": {
+    "columns": [
+     "BY DAY",
+     "BY CANDLE"
+    ],
+    "startSec": -1,
+    "rows": [
+     {
+      "name": "MOST PEOPLE",
+      "nameAtSec": 0.91,
+      "atSec": -1,
+      "cells": [
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": -1,
+        "fillSec": 0.91
+       },
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": -1,
+        "fillSec": 2.29
+       }
+      ],
+      "tag": {
+       "text": "NO REAL CHANGE",
+       "atSec": 5.31
+      }
+     },
+     {
+      "name": "DALTON",
+      "nameAtSec": 7.0,
+      "atSec": 6.22,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 6.22,
+        "fillSec": 7.0
+       },
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 6.22,
+        "fillSec": 7.5
+       }
+      ]
+     }
+    ],
+    "labels": [
+     {
+      "text": "REPORTED COLOURS · DALTON 1798, PP. 29-30",
+      "atSec": 7.92,
+      "x": 960,
+      "y": 830,
+      "align": "center",
+      "size": 22
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-38",
+     94.68,
+     97.85
+    ],
+    [
+     "E01-A5-39",
+     97.85,
+     101.21
+    ],
+    [
+     "E01-A5-40",
+     101.21,
+     103.61
+    ]
+   ],
+   "transitionIn": "morph",
+   "transition": {
+    "fromShape": [
+     140,
+     400,
+     560,
+     44,
+     6
+    ],
+    "toShape": [
+     1202,
+     374,
+     250,
+     150,
+     10
+    ],
+    "durSec": 0.75,
+    "holdSec": 1.0
+   }
+  },
+  {
+   "id": "K_seven",
+   "beats": [
+    "E01-A5-41",
+    "E01-A5-42",
+    "E01-A5-43",
+    "E01-A5-44"
+   ],
+   "start": 103.61,
+   "end": 115.05,
+   "component": "SpectrumStrip",
+   "assets": [
+    "VIS-014",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-012",
+    "LOK-009",
+    "LOK-010",
+    "LOK-029",
+    "MUS-013",
+    "MUS-008",
+    "TRN-001",
+    "SFX-006"
+   ],
+   "props": {
+    "divisions": {
+     "fractions": [
+      0.125,
+      0.075,
+      0.13333333333333333,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.1111111111111111,
+      0.2222222222222222
+     ],
+     "colorsNm": [
+      650,
+      605,
+      580,
+      530,
+      470,
+      445,
+      410
+     ],
+     "drawAtSec": 1.85,
+     "dividersAtSec": 5.46,
+     "names": [
+      {
+       "text": "RED",
+       "atSec": 6.8
+      },
+      {
+       "text": "ORANGE",
+       "atSec": 7.4
+      },
+      {
+       "text": "YELLOW",
+       "atSec": 8.04
+      },
+      {
+       "text": "GREEN",
+       "atSec": 8.6
+      },
+      {
+       "text": "BLUE",
+       "atSec": 9.2
+      },
+      {
+       "text": "INDIGO",
+       "atSec": 9.86
+      },
+      {
+       "text": "VIOLET",
+       "atSec": 10.52
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "ILLUSTRATION · AFTER NEWTON, OPTICKS, 1704",
+      "atSec": 0.79,
+      "x": 120,
+      "y": 960,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-41",
+     103.61,
+     107.07
+    ],
+    [
+     "E01-A5-42",
+     107.07,
+     109.94
+    ],
+    [
+     "E01-A5-43",
+     109.94,
+     112.05
+    ],
+    [
+     "E01-A5-44",
+     112.05,
+     115.05
+    ]
+   ],
+   "transitionIn": "block",
+   "transition": {
+    "color": "#C8402F",
+    "side": "right"
+   },
+   "ground": {
+    "kind": "inset",
+    "act": 5
+   }
+  },
+  {
+   "id": "L_p92_chord",
+   "beats": [
+    "E01-A5-45",
+    "E01-A5-46"
+   ],
+   "start": 115.05,
+   "end": 120.31,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-015",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-013",
+    "SRC-063",
+    "TRN-001",
+    "SFX-006"
+   ],
+   "props": {
+    "srcId": "SRC-063",
+    "imgSize": [
+     1600,
+     2321
+    ],
+    "crop": [
+     250,
+     1000,
+     1290,
+     1230
+    ],
+    "side": "left",
+    "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 92",
+    "highlights": [
+     {
+      "box": [
+       410,
+       1612,
+       1125,
+       66
+      ],
+      "atSec": -1
+     },
+     {
+      "box": [
+       520,
+       1100,
+       1000,
+       52
+      ],
+      "atSec": 1.89
+     },
+     {
+      "box": [
+       410,
+       1324,
+       530,
+       74
+      ],
+      "atSec": 2.51
+     }
+    ],
+    "quote": "divided after the manner of a musical Chord",
+    "quoteAtSec": 1.89
+   },
+   "beatTimes": [
+    [
+     "E01-A5-45",
+     115.05,
+     118.22
+    ],
+    [
+     "E01-A5-46",
+     118.22,
+     120.31
+    ]
+   ],
+   "transitionIn": "match",
+   "focus": [
+    622,
+    560
+   ],
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "M_seven_notes",
+   "beats": [
+    "E01-A5-47",
+    "E01-A5-48",
+    "E01-A5-49",
+    "E01-A5-50"
+   ],
+   "start": 120.31,
+   "end": 130.49,
+   "component": "SpectrumStrip",
+   "assets": [
+    "VIS-014",
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-007",
+    "LOK-009",
+    "LOK-010",
+    "LOK-028",
+    "MUS-013",
+    "SRC-063",
+    "TRN-001",
+    "SFX-006"
+   ],
+   "props": {
+    "divisions": {
+     "fractions": [
+      0.125,
+      0.075,
+      0.13333333333333333,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.1111111111111111,
+      0.2222222222222222
+     ],
+     "colorsNm": [
+      650,
+      605,
+      580,
+      530,
+      470,
+      445,
+      410
+     ],
+     "dividersAtSec": -1,
+     "names": [
+      {
+       "text": "RED",
+       "atSec": -1
+      },
+      {
+       "text": "ORANGE",
+       "atSec": -1
+      },
+      {
+       "text": "YELLOW",
+       "atSec": -1
+      },
+      {
+       "text": "GREEN",
+       "atSec": -1
+      },
+      {
+       "text": "BLUE",
+       "atSec": -1
+      },
+      {
+       "text": "INDIGO",
+       "atSec": -1
+      },
+      {
+       "text": "VIOLET",
+       "atSec": -1
+      }
+     ],
+     "chord": {
+      "atSec": 0.65,
+      "y": 400
+     },
+     "brighten": {
+      "atSec": 1.71,
+      "from": 0.55
+     },
+     "query": {
+      "segment": 5,
+      "atSec": 8.31
+     }
+    },
+    "labels": [
+     {
+      "text": "ILLUSTRATION · AFTER OPTICKS, 1704, P. 92",
+      "atSec": -1,
+      "x": 120,
+      "y": 960,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-47",
+     120.31,
+     123.05
+    ],
+    [
+     "E01-A5-48",
+     123.05,
+     126.12
+    ],
+    [
+     "E01-A5-49",
+     126.12,
+     128.28
+    ],
+    [
+     "E01-A5-50",
+     128.28,
+     130.49
+    ]
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "It's tidy.",
+        "atSec": 3.2,
+        "x": 210,
+        "y": 820,
+        "dimSec": 7.13
+       },
+       {
+        "text": "a little too tidy",
+        "atSec": 5.02,
+        "x": 650,
+        "y": 820,
+        "accent": true,
+        "dimSec": 7.13
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "blur",
+    "srcId": "SRC-063",
+    "file": "public/assets/sources/newton_opticks1704_p92.jpg",
+    "size": [
+     1600,
+     2321
+    ],
+    "focus": [
+     0.5,
+     0.6
+    ],
+    "brightness": 0.38
+   }
+  },
+  {
+   "id": "N_p29_acquainted",
+   "beats": [
+    "E01-A5-51",
+    "E01-A5-52",
+    "E01-A5-53",
+    "E01-A5-54",
+    "E01-A5-55"
+   ],
+   "start": 130.49,
+   "end": 144.19,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-001",
+    "MOT-003",
+    "TRN-017",
+    "LOK-009",
+    "LOK-010",
+    "LOK-027",
+    "MUS-013",
+    "MUS-014",
+    "MUS-008",
+    "TEX-008",
+    "SRC-001",
+    "TRN-001",
+    "MUS-011"
+   ],
+   "props": {
+    "srcId": "SRC-001",
+    "file": "public/assets/sources/dalton1798_p29.jpg",
+    "imgSize": [
+     1920,
+     2813
+    ],
+    "crop": [
+     380,
+     440,
+     1060,
+     1011
+    ],
+    "side": "left",
+    "source": "JOHN DALTON · 1798 · P. 29",
+    "highlights": [
+     {
+      "box": [
+       831,
+       992,
+       552,
+       56
+      ],
+      "atSec": 3.6,
+      "dimAtSec": 6.51,
+      "dimTo": 0.4
+     },
+     {
+      "box": [
+       430,
+       1055,
+       698,
+       58
+      ],
+      "atSec": 3.6,
+      "dimAtSec": 6.51,
+      "dimTo": 0.4
+     },
+     {
+      "box": [
+       428,
+       1108,
+       955,
+       62
+      ],
+      "atSec": 6.51
+     },
+     {
+      "box": [
+       430,
+       1172,
+       100,
+       46
+      ],
+      "atSec": 8.89
+     }
+    ],
+    "quote": "pretty well acquainted with the theory of light and colours",
+    "quoteAtSec": 6.51,
+    "notes": [
+     {
+      "text": "ON NEWTON'S TERMS",
+      "atSec": 10.55
+     },
+     {
+      "text": "HIS IDEA MAKES GOOD SENSE",
+      "atSec": 12.07,
+      "accent": true
+     }
+    ],
+    "strokes": {
+     "mode": "shadow",
+     "strength": 0.2
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A5-51",
+     130.49,
+     133.4
+    ],
+    [
+     "E01-A5-52",
+     133.4,
+     135.58
+    ],
+    [
+     "E01-A5-53",
+     135.58,
+     139.08
+    ],
+    [
+     "E01-A5-54",
+     139.08,
+     141.98
+    ],
+    [
+     "E01-A5-55",
+     141.98,
+     144.19
+    ]
+   ],
+   "transitionIn": "lens",
+   "transition": {
+    "durSec": 0.7,
+    "blur": 14
+   },
+   "ground": {
+    "kind": "paper",
+    "tone": "dark"
+   }
+  },
+  {
+   "id": "O_eye_jelly",
+   "beats": [
+    "E01-A5-56",
+    "E01-A5-57",
+    "E01-A5-58",
+    "E01-A5-59",
+    "E01-A5-60"
+   ],
+   "start": 144.19,
+   "end": 156.01,
+   "component": "EyeDiagram",
+   "assets": [
+    "VIS-019",
+    "TXT-024",
+    "TXT-010",
+    "MOT-002",
+    "MOT-013",
+    "TRN-006",
+    "LOK-009",
+    "LOK-010",
+    "MUS-014",
+    "VIS-021",
+    "TRN-001"
+   ],
+   "props": {
+    "mode": "plate",
+    "startSec": -1,
+    "card": {
+     "x": 680,
+     "y": 130,
+     "w": 1060,
+     "h": 830,
+     "tilt": 1.0
+    },
+    "captions": [
+     {
+      "text": "THE EYE · SIMPLIFIED",
+      "mono": true,
+      "atSec": -1,
+      "at": [
+       724,
+       176
+      ]
+     },
+     {
+      "text": "Cornea",
+      "atSec": -1,
+      "at": [
+       736,
+       360
+      ],
+      "anchor": [
+       915,
+       470
+      ]
+     },
+     {
+      "text": "Lens",
+      "atSec": -1,
+      "at": [
+       1090,
+       912
+      ],
+      "anchor": [
+       1050,
+       650
+      ]
+     },
+     {
+      "text": "Retina",
+      "atSec": -1,
+      "at": [
+       1560,
+       318
+      ],
+      "anchor": [
+       1428,
+       398
+      ]
+     },
+     {
+      "text": "Vitreous humour",
+      "atSec": 5.9,
+      "at": [
+       1240,
+       198
+      ],
+      "anchor": [
+       1300,
+       390
+      ],
+      "size": 34
+     },
+     {
+      "text": "DALTON'S GUESS · A BLUE VITREOUS",
+      "mono": true,
+      "at": [
+       1230,
+       930
+      ],
+      "anchor": [
+       1330,
+       700
+      ],
+      "atSec": 5.48
+     }
+    ],
+    "rays": {
+     "atSec": 2.51,
+     "untilSec": 7.51,
+     "speed": 700,
+     "count": 18,
+     "size": 10,
+     "colors": [
+      "#FF3B30",
+      "#30D158",
+      "#2F6BFF"
+     ],
+     "absorb": {
+      "atSec": 6.82,
+      "colors": [
+       "#FF3B30",
+       "#30D158"
+      ],
+      "from": 0.52,
+      "to": 0.7,
+      "keep": 0.3
+     }
+    },
+    "tints": [
+     {
+      "part": "vitreous",
+      "color": "#3D6BD6",
+      "atSec": 5.48,
+      "opacity": 0.55,
+      "brushSec": 0.7
+     }
+    ],
+    "labels": [
+     {
+      "text": "ILLUSTRATION",
+      "lines": [
+       "DOTS: 3 OF NEWTON'S MANY KINDS",
+       "RED-, GREEN-, BLUE-MAKING"
+      ],
+      "atSec": 2.51,
+      "x": 120,
+      "y": 250,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-56",
+     144.19,
+     146.7
+    ],
+    [
+     "E01-A5-57",
+     146.7,
+     148.76
+    ],
+    [
+     "E01-A5-58",
+     148.76,
+     150.81
+    ],
+    [
+     "E01-A5-59",
+     150.81,
+     152.86
+    ],
+    [
+     "E01-A5-60",
+     152.86,
+     156.01
+    ]
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 52,
+      "chips": [
+       {
+        "text": "change the rays",
+        "atSec": 9.13,
+        "x": 120,
+        "y": 760
+       },
+       {
+        "text": "change the colour",
+        "atSec": 10.51,
+        "x": 120,
+        "y": 880,
+        "accent": true
+       }
+      ],
+      "arrows": [
+       {
+        "atSec": 10.17,
+        "from": [
+         300,
+         840
+        ],
+        "to": [
+         320,
+         878
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "transitionIn": "push",
+   "focus": [
+    870,
+    700
+   ]
+  },
+  {
+   "id": "P_open_it",
+   "beats": [
+    "E01-A5-61",
+    "E01-A5-62",
+    "E01-A5-63",
+    "E01-A5-64"
+   ],
+   "start": 156.01,
+   "end": 166.34,
+   "component": "EyeDiagram",
+   "assets": [
+    "VIS-019",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-009",
+    "LOK-010",
+    "MUS-014"
+   ],
+   "props": {
+    "mode": "plate",
+    "startSec": -1,
+    "card": {
+     "x": 680,
+     "y": 130,
+     "w": 1060,
+     "h": 830,
+     "tilt": 1.0
+    },
+    "zoom": {
+     "scale": 1.15,
+     "focus": [
+      1250,
+      545
+     ]
+    },
+    "tints": [
+     {
+      "part": "vitreous",
+      "color": "#3D6BD6",
+      "atSec": -1.2,
+      "opacity": 0.55
+     }
+    ],
+    "pulses": [
+     {
+      "part": "vitreous",
+      "atSec": 3.37,
+      "to": 0.75,
+      "sec": 1.6
+     }
+    ],
+    "captions": [
+     {
+      "text": "Vitreous humour",
+      "atSec": -1,
+      "at": [
+       1240,
+       198
+      ],
+      "anchor": [
+       1300,
+       390
+      ],
+      "size": 34
+     },
+     {
+      "text": "DALTON'S GUESS · A BLUE VITREOUS",
+      "mono": true,
+      "at": [
+       720,
+       836
+      ],
+      "anchor": [
+       1330,
+       700
+      ],
+      "atSec": -1,
+      "underline": {
+       "atSec": 1.05,
+       "fromCh": 9,
+       "toCh": 14
+      }
+     }
+    ],
+    "cutLine": {
+     "atSec": 6.79,
+     "drawSec": 1.0
+    },
+    "labels": [
+     {
+      "text": "ILLUSTRATION",
+      "atSec": -1,
+      "x": 120,
+      "y": 960,
+      "size": 20
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A5-61",
+     156.01,
+     158.3
+    ],
+    [
+     "E01-A5-62",
+     158.3,
+     160.32
+    ],
+    [
+     "E01-A5-63",
+     160.32,
+     163.06
+    ],
+    [
+     "E01-A5-64",
+     163.06,
+     166.34
+    ]
+   ],
+   "transitionIn": "cut"
+  }
+ ]
+}

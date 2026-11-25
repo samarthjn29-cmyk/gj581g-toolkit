@@ -1,0 +1,135 @@
+{
+ "dur": 166.34,
+ "cues": [
+  {
+   "name": "1 the book",
+   "file": "public/music/wholesome_kevin_macleod.mp3",
+   "from": 30.0,
+   "at": 0,
+   "until": 32.559999999999995,
+   "fadeIn": 0.6,
+   "fadeOut": 1.0,
+   "lufs": -34,
+   "levels": [
+    [
+     0,
+     -26
+    ],
+    [
+     2.0,
+     -26
+    ],
+    [
+     2.9,
+     -34
+    ],
+    [
+     32.559999999999995,
+     -34
+    ]
+   ]
+  },
+  {
+   "name": "2 rays, things and candles",
+   "file": "public/music/thinking_music_kevin_macleod.mp3",
+   "from": 12.0,
+   "at": 32.16,
+   "until": 100.8,
+   "fadeIn": 0.6,
+   "fadeOut": 0.3,
+   "lufs": -35
+  },
+  {
+   "name": "3 seven colours",
+   "file": "public/music/long_note_two_kevin_macleod.mp3",
+   "from": 30.0,
+   "at": 103.61,
+   "until": 130.79000000000002,
+   "fadeIn": 0.6,
+   "fadeOut": 0.6,
+   "lufs": -41,
+   "filter": "dynaudnorm=f=3000:g=31"
+  },
+  {
+   "name": "4 Dalton's guess and the question",
+   "file": "public/music/at_rest_kevin_macleod.mp3",
+   "from": 40.0,
+   "at": 130.49,
+   "until": 166.34,
+   "fadeIn": 1.0,
+   "fadeOut": 1.0,
+   "lufs": -35,
+   "levels": [
+    [
+     130.49,
+     -35
+    ],
+    [
+     163.34,
+     -35
+    ],
+    [
+     164.54,
+     -27
+    ],
+    [
+     166.34,
+     -27
+    ]
+   ]
+  }
+ ],
+ "quiet": [
+  [
+   100.7,
+   103.03,
+   -60,
+   0.05
+  ],
+  [
+   16.04,
+   18.98,
+   -62,
+   0.3
+  ],
+  [
+   26.54,
+   31.76,
+   -62,
+   0.3
+  ],
+  [
+   123.36,
+   126.76,
+   -50,
+   0.2
+  ],
+  [
+   136.85,
+   140.01,
+   -62,
+   0.3
+  ]
+ ],
+ "events": [],
+ "note": "Gate 1 plan (25 Nov 2026). Cue 1 continues the series bed (Wholesome) under the book; cue 2 (Thinking Music) for the examples: rays, flower, leaf, candle; the break (MUS-010) before \"Dalton's eyes don't.\" lands the line dry; cue 3 (Long Note Two) under the seven colours; cue 4 (At Rest) from \"Here's why\", alone 3 s after \"it.\". Act join: act 4 ends on At Rest alone; cue 1 fades in under its tail at assembly.",
+ "ids": {
+  "cues": [
+   "MUS-007",
+   "MUS-012",
+   "MUS-013",
+   "MUS-014"
+  ],
+  "events": []
+ },
+ "sweeps": [
+  [
+   73.3,
+   0.8
+  ],
+  [
+   144.05,
+   0.7
+  ]
+ ]
+}

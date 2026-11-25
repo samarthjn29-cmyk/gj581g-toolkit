@@ -20,7 +20,7 @@ export type ArchivalScanCardProps = {
   side?: "left" | "right";
   // VIS-029 ContrastCallout (studied Chris Moran's short "How to guide your viewer's eye using contrast";
   // analysis only): from atSec the rest of the page dims and only the highlighted lines stay bright.
-  callout?: { atSec: number; dim?: number };
+  callout?: { atSec: number; dim?: number; keep?: Rect[] }; // keep: boxes that stay bright without a highlight (WCL-E01 act 5 B)
   quoteMarks?: boolean; // false for a book title (not a quote)
   notes?: { text: string; atSec: number; untilSec?: number; accent?: boolean }[]; // mono notes under the source tag, on their words
   quoteAtSec?: number; // the quote column comes in on its spoken word, not with the card (default: with the card)
@@ -129,6 +129,10 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
                         const r = map(h.box);
                         return <rect key={i} x={r.left - 10} y={r.top - 8} width={r.width + 20} height={r.height + 16} rx={4} fill="black" />;
                       })}
+                    {(callout.keep ?? []).map((b, i) => {
+                      const r = map(b);
+                      return <rect key={`k${i}`} x={r.left - 10} y={r.top - 8} width={r.width + 20} height={r.height + 16} rx={4} fill="black" />;
+                    })}
                   </mask>
                 </defs>
                 <rect

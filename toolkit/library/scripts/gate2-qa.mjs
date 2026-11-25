@@ -52,7 +52,7 @@ beats.forEach((b, i) => {
   if (!p) return;
   if (catalog[p.component]?.energy === "Peak" && catalog[b.component]?.energy === "Peak") crit.push(`${p.id}->${b.id}: peak after peak (needs a calm beat between)`);
   if (p.component === b.component) {
-    const key = (x) => JSON.stringify([x.props?.srcId ?? x.props?.bg, x.props?.backdrop, x.props?.file, x.props?.crop, x.props?.mode, x.props?.lines, x.props?.worlds?.map((w) => w.srcId), x.props?.depth, x.props?.vanishY]); // LayerStage: its worlds; PerspectiveGrid: its camera (a wide room and a close wall are different pictures)
+    const key = (x) => JSON.stringify([x.props?.srcId ?? x.props?.bg, x.props?.backdrop, x.props?.file, x.props?.crop, x.props?.mode, x.props?.lines, x.props?.worlds?.map((w) => w.srcId), x.props?.depth, x.props?.vanishY, x.ground?.kind, x.ground?.srcId, x.props?.zoom?.scale]); // act 5: a panel on a different ground, or an eye plate framed closer, is a different picture // LayerStage: its worlds; PerspectiveGrid: its camera (a wide room and a close wall are different pictures)
     const same = key(p) === key(b);
     (same ? crit : warn).push(`${p.id}->${b.id}: back-to-back ${b.component}${same ? " on the same picture (clone)" : ""}`);
   }

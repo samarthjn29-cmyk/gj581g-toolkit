@@ -22,6 +22,8 @@ export type PlateCaption = {
   size?: number; // default 30
   mono?: boolean; // a small caps mono tag (e.g. DALTON'S GUESS), else an italic serif caption
   underline?: { atSec: number; fromCh?: number; toCh?: number; untilSec?: number };
+  // a filled square in a data colour before the caption (WCL-E01 act 5 E: "seen as pink" with act 1's pink)
+  swatch?: string;
 };
 export type EyeDiagramProps = {
   mode: "simple" | "section" | "plate";
@@ -45,6 +47,10 @@ export type EyeDiagramProps = {
   // a tint pulse: the tint's opacity rises to `to` and settles back over `sec` (C: 'blue glass', 0.5 -> 0.6 -> 0.5)
   pulses?: { part: "vitreous" | "lens"; atSec: number; to: number; sec?: number }[];
   startSec?: number;
+  // plate mode, WCL-E01 act 5 (Director's P_open_it): a fixed closer framing (scale about a frame point), and a dashed
+  // accent line drawn top to bottom across the globe at x = centre + 0.35 R (where an eye would be opened; tagged ILLUSTRATION)
+  zoom?: { scale: number; focus: [number, number] };
+  cutLine?: { atSec: number; drawSec?: number };
 };
 
 export const EyeDiagram: React.FC<EyeDiagramProps> = ({
@@ -62,6 +68,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
   startSec = 0,
   captions = [],
   card,
+  zoom,
+  cutLine,
 }) => {
   useAssets(["VIS-019", "MOT-001", "MOT-002", ...(rays ? ["VIS-021"] : [])]);
   const t = useTheme();
@@ -170,7 +178,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
     const ny = ey + R * Math.sin(nerveA);
     return (
       <AbsoluteFill style={{ opacity: pIn2, transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
-        <svg width={1920} height={1080}>
+        {/* zoom (act 5 P): only the drawing is framed closer; labels and tags stay in frame px */}
+        <svg width={1920} height={1080} style={zoom ? { transform: `translate(${zoom.focus[0]}px, ${zoom.focus[1]}px) scale(${zoom.scale}) translate(${-zoom.focus[0]}px, ${-zoom.focus[1]}px)`, transformOrigin: "0 0", overflow: "visible" } : undefined}>
           <defs>
             <filter id={id("grain")} x="0" y="0" width="100%" height="100%">
               <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={4} result="n" />
@@ -284,6 +293,15 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
                 <circle key={q.k} cx={x0 + (x1 - x0) * q.u} cy={ey + q.side} r={rays.size ?? 6} fill={q.color ?? rays.color ?? P.ink} opacity={q.alpha} stroke={P.ink} strokeOpacity={0.25 * q.alpha} strokeWidth={1} />
               ))
             : null}
+          {cutLine
+            ? (() => {
+                const p = interpolate(frame, [sec(cutLine.atSec, fps), sec(cutLine.atSec + (cutLine.drawSec ?? 1), fps)], [0, 1], ease);
+                if (p <= 0) return null;
+                const cx = ex + 0.35 * R;
+                const hy = Math.sqrt(R * R - (0.35 * R) ** 2) + 14;
+                return <line x1={cx} y1={ey - hy} x2={cx} y2={ey - hy + 2 * hy * p} stroke={P.accent} strokeWidth={4} strokeDasharray="16 12" strokeLinecap="round" />;
+              })()
+            : null}
           {/* captions: italic serif on fine leaders (or a small mono tag), in the paper's ink */}
           {captions.map((c, i) => {
             const pin = interpolate(frame, [sec(c.atSec, fps), sec(c.atSec + 0.6, fps)], [0, 1], ease);
@@ -296,7 +314,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
             const chW = size * (c.mono ? 0.62 : 0.5);
             const f = c.underline?.fromCh ?? 0;
             const tch = c.underline?.toCh ?? c.text.length;
-            const tx = c.align === "end" ? c.at[0] - c.text.length * chW : c.at[0];
+            const sw = c.swatch ? size * 0.95 + 12 : 0; // the swatch sits before the text
+            const tx = (c.align === "end" ? c.at[0] - c.text.length * chW : c.at[0]) + sw;
             return (
               <g key={i} opacity={v}>
                 {c.anchor ? (
@@ -312,7 +331,8 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
                     <circle cx={c.anchor[0]} cy={c.anchor[1]} r={3} fill={P.ink} />
                   </>
                 ) : null}
-                <text x={c.at[0]} y={c.at[1]} fontFamily={c.mono ? t.fonts.mono : t.fonts.serif} fontStyle={c.mono ? "normal" : "italic"} fontSize={size} letterSpacing={c.mono ? 2.5 : 0.2} fill={P.ink} textAnchor={c.align === "end" ? "end" : "start"}>
+                {c.swatch ? <rect x={c.at[0]} y={c.at[1] - size * 0.8} width={size * 0.95} height={size * 0.95} fill={c.swatch} stroke={P.ink} strokeWidth={1} /> : null}
+                <text x={c.at[0] + sw} y={c.at[1]} fontFamily={c.mono ? t.fonts.mono : t.fonts.serif} fontStyle={c.mono ? "normal" : "italic"} fontSize={size} letterSpacing={c.mono ? 2.5 : 0.2} fill={P.ink} textAnchor={c.align === "end" ? "end" : "start"}>
                   {c.text}
                 </text>
                 {ul > 0 ? <line x1={tx + f * chW} y1={c.at[1] + 8} x2={tx + f * chW + (tch - f) * chW * ul} y2={c.at[1] + 8} stroke={P.accent} strokeWidth={3} /> : null}

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T06:40:22.651Z",
+ "generated": "2026-11-25T06:49:26.168Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2834,7 +2834,8 @@
    "folder": "4_Transitions",
    "name": "FocusMatchCut",
    "paths": [
-    "src/components/FocusMatchCut.tsx"
+    "src/components/FocusMatchCut.tsx",
+    "public/assets/joins/act4_end_215.66.jpg"
    ],
    "status": "Active",
    "use": "Best use: a scene change where the next picture relates to a point in the last one (a word to its page, a map to its town, a face to its portrait). Limit: max 1 in 3 scene changes in an act; never two in a row; 0.5-0.8 s; with its swish (SFX-024) in a pause.",
@@ -3538,7 +3539,8 @@
     "public/assets/sources/newton1672_p3078.jpg",
     "public/assets/sources/newton1672_p3081.jpg",
     "public/assets/sources/newton1672_p3082.jpg",
-    "public/assets/sources/newton1672_p3083.jpg"
+    "public/assets/sources/newton1672_p3083.jpg",
+    "public/assets/sources/newton1672_p3084.jpg"
    ],
    "status": "Active",
    "use": "Best use: Newton's own words and dates in WCL-E01 acts 4-5 (his 1672 letter), each page held >= 4 s with the spoken words highlighted as said; p.3075 also for act 4's Phil. Trans. line; p.3084 (¶13, 'variously qualified to reflect one sort of light in greater plenty then another') in act 5. Limit: max 36 beats per episode across its pages (act 4 uses 32, act 5 uses 4); never cropped to hide the page as a page; always tagged NEWTON · PHIL. TRANS. NO. 80 · 1672 with the page number. Not for: decoration, a generic old book, or Opticks (1704) lines (SRC-005/059/063). (Raised to 36 at WCL-E01 act 5 Gate 1, Sam approved 25 Nov 2026: \"Raise all\".)",
@@ -3619,7 +3621,7 @@
    "paths": [
     "public/assets/sources/newton_opticks1704_p92.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: Newton's own words where act 5 of WCL-E01 says he splits the band into seven and spaces them like a musical scale: 'divided after the manner of a musical Chord', the seven colours and the chord lengths highlighted as said; then as a LOK-028 blur ground under the drawn string. Limit: max 6 beats per episode (2 as a card, 4 as a blur ground); page held >= 4 s; tagged ISAAC NEWTON · OPTICKS · 1704 · P. 92. Not for: the rays-have-no-colour line (that is SRC-005, p. 90).",
    "maxBeats": 6,
    "maxShare": null
@@ -3631,7 +3633,7 @@
    "paths": [
     "public/assets/sources/newton_opticks1704_title.jpg"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the line that names Newton's book, Opticks, 1704 (WCL-E01 act 5 opening), with LONDON and MDCCIV highlighted as said; then as a LOK-028 blur ground standing for Newton's view (no Newton portrait left). Limit: max 8 beats per episode (2 as a card, 6 as a blur ground); never cropped to hide that it is a title page. Not for: Newton's own words (the pages are SRC-005, SRC-063).",
    "maxBeats": 8,
    "maxShare": null
@@ -3643,7 +3645,7 @@
    "paths": [
     "public/episodes/wcl-e01/05_rays_paced_149wpm_even.mp3"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: act 5 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say.",
    "maxBeats": null,
    "maxShare": null

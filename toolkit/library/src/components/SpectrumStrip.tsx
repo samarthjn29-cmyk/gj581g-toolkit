@@ -7,6 +7,7 @@ import { spectrumGradient, wavelengthRGB } from "../layers/spectrum";
 import { Label, type LabelSpec } from "../layers/Label";
 import { interpolate } from "remotion";
 import { sec, SLOW_OUT } from "../motion";
+import { Divisions, FEATHER, profileGradient, SpectrumRows, type SpectrumDivisions, type SpectrumRow } from "../layers/SpectrumParts";
 
 // VIS-014 SpectrumStrip: the visible spectrum with wavelength ticks and markers that lock on in turn.
 export type SpectrumStripProps = {
@@ -23,6 +24,14 @@ export type SpectrumStripProps = {
   // No nm ticks and no title in this mode; the track names are mono chips. `count`: a serif line typed in place.
   tracks?: TwoTrack;
   labels?: LabelSpec[];
+  // WCL-E01 act 5 (Director's brief, Builders 2-4): ticks off, feathered edges, red on the left, a cued title; labelled
+  // strips with brightness profiles (`rows`); Newton's seven divisions with names, a query and a divided string
+  ticks?: boolean;
+  feather?: boolean;
+  reverse?: boolean;
+  titleCue?: { text: string; atSec: number; x: number; y: number; size?: number };
+  rows?: SpectrumRow[];
+  divisions?: SpectrumDivisions;
   // transparent: no canvas of its own (drawn over another component's world, e.g. LayerStage's overlay plane)
 };
 export type TwoTrack = {
@@ -84,7 +93,7 @@ const TwoTracks: React.FC<{ tr: TwoTrack }> = ({ tr }) => {
   );
 };
 
-export const SpectrumStrip: React.FC<SpectrumStripProps> = ({ markers = [], title, caption, fromNm = 380, toNm = 700, startSec = 0, tracks, labels = [] }) => {
+export const SpectrumStrip: React.FC<SpectrumStripProps> = ({ markers = [], title, caption, fromNm = 380, toNm = 700, startSec = 0, tracks, labels = [], ticks = true, feather = false, reverse = false, titleCue, rows, divisions }) => {
   useAssets(["VIS-014", "MOT-001", "MOT-002", "MOT-003"]);
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -96,9 +105,19 @@ export const SpectrumStrip: React.FC<SpectrumStripProps> = ({ markers = [], titl
   const X = (nm: number) => x0 + ((nm - fromNm) / (toNm - fromNm)) * w;
   const pWipe = reveal(frame, fps, startSec + 0.1, 0.9);
   const pTitle = reveal(frame, fps, startSec, t.motion.enterSec);
-  const ticks = [];
-  for (let nm = Math.ceil(fromNm / 50) * 50; nm <= toNm; nm += 50) ticks.push(nm);
+  const tickList: number[] = [];
+  for (let nm = Math.ceil(fromNm / 50) * 50; nm <= toNm; nm += 50) tickList.push(nm);
 
+  if (rows || divisions)
+    return (
+      <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
+        {rows ? <SpectrumRows rows={rows} /> : null}
+        {divisions ? <Divisions d={divisions} /> : null}
+        {labels.map((l) => (
+          <Label key={`${l.text}${l.atSec}`} spec={l} />
+        ))}
+      </AbsoluteFill>
+    );
   if (tracks)
     return (
       <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
@@ -123,17 +142,23 @@ export const SpectrumStrip: React.FC<SpectrumStripProps> = ({ markers = [], titl
           width: w,
           height: h,
           borderRadius: 6,
-          background: spectrumGradient(fromNm, toNm),
+          background: reverse ? profileGradient(undefined, true, Math.max(400, fromNm), toNm) : spectrumGradient(fromNm, toNm),
+          ...(feather ? FEATHER : {}),
           clipPath: `inset(0 ${(1 - pWipe) * 100}% 0 0)`,
-          boxShadow: `0 0 60px rgba(0,0,0,0.35)`,
+          boxShadow: feather ? undefined : `0 0 60px rgba(0,0,0,0.35)`,
         }}
       />
-      {ticks.map((nm) => (
+      {titleCue ? (
+        <div style={{ position: "absolute", left: titleCue.x, top: titleCue.y - (titleCue.size ?? 76), fontFamily: t.fonts.headline, fontWeight: 600, fontSize: titleCue.size ?? 76, color: t.colors.ink, whiteSpace: "nowrap", ...rise(reveal(frame, fps, titleCue.atSec, 0.7)), clipPath: `inset(0 ${(1 - reveal(frame, fps, titleCue.atSec, 0.7)) * 100}% 0 0)` }}>
+          {titleCue.text}
+        </div>
+      ) : null}
+      {(ticks ? tickList : []).map((nm) => (
         <div key={nm} style={{ position: "absolute", left: X(nm) - 40, top: y + h + 16, width: 80, textAlign: "center", fontFamily: t.fonts.mono, fontSize: 20, color: t.colors.secondary, opacity: pWipe }}>
           {nm}
         </div>
       ))}
-      <div style={{ position: "absolute", left: x0 + w + 40, top: y + h + 16, fontFamily: t.fonts.mono, fontSize: 20, color: t.colors.secondary, opacity: pWipe }}>nm</div>
+      {ticks ? <div style={{ position: "absolute", left: x0 + w + 40, top: y + h + 16, fontFamily: t.fonts.mono, fontSize: 20, color: t.colors.secondary, opacity: pWipe }}>nm</div> : null}
       {markers.map((m, i) => {
         const p = lock(frame, fps, m.atSec ?? startSec + 1.2 + i * 0.6);
         return (

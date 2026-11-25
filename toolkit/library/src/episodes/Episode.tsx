@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Freeze, interpolate, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Freeze, Img, interpolate, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { CameraMotionBlur } from "@remotion/motion-blur";
 import { FocusMatchCut } from "../components/FocusMatchCut";
 import { LensSettle } from "../components/LensSettle";
@@ -48,6 +48,9 @@ export type Beat = {
   beats?: string[]; // the beat-sheet beats this shot covers (a shot may join beats whose picture carries on)
   // chips, quote chips and stickers over the component (layers/ShotOverlay.tsx); their IDs must be in `assets`
   overlay?: ShotOverlaySpec;
+  // act join (WCL-E01 act 5, Director's Builder 1): the first beat's match/slide/push starts from a still of the previous
+  // act's real last frame (a registered file of `id`, e.g. TRN-015), so the act boundary carries a designed transition
+  joinFrom?: { id: string; file: string };
   note?: string;
 };
 // Sound: every file is a registered asset (the narration take is an SRC row, the sounds SFX rows).
@@ -115,6 +118,15 @@ const Shot: React.FC<{ beat: Beat; built?: boolean }> = ({ beat, built }) => {
   );
 };
 
+const JoinStill: React.FC<{ id: string; file: string }> = ({ id, file }) => {
+  const e = useAsset(id);
+  return (
+    <AbsoluteFill>
+      <Img src={assetFile(e, file)} style={{ width: 1920, height: 1080 }} />
+    </AbsoluteFill>
+  );
+};
+
 const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motionBlur }) => {
   const { fps } = useVideoConfig();
   useAssets(Array.from(new Set(beats.flatMap((b) => [...b.assets, COMPONENTS[b.component]?.assetId ?? b.component]))));
@@ -158,6 +170,7 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
         if (b.transitionIn === "block" && prev) body = <ColourBlockWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "flash" && prev) body = <FlashFrame {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "match" && prev) body = <FocusMatchCut from={frozenPrev()} to={<Shot beat={b} built />} focus={b.focus ?? [960, 540]} />;
+        if (b.transitionIn === "match" && !prev && b.joinFrom) body = <FocusMatchCut from={<JoinStill {...b.joinFrom} />} to={<Shot beat={b} built />} focus={b.focus ?? [960, 540]} />;
         if (b.transitionIn === "lens" && prev) body = <LensSettle {...o}><Shot beat={b} built /></LensSettle>;
         if (b.transitionIn === "draft" && prev) body = <DraftingWipe {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;
         if (b.transitionIn === "photocard" && prev) body = <PhotoToCard {...o} from={frozenPrev()} to={<Shot beat={b} built />} />;

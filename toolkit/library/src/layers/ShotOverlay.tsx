@@ -4,12 +4,15 @@ import { useAssets } from "../registry";
 import { drift } from "../motion";
 import { KeywordChips, QuoteChips, type KeywordPanel, type QuotePanel } from "./Chips";
 import { Sticker, type StickerSpec } from "./Sticker";
+import { SpectrumRows, type SpectrumRow } from "./SpectrumParts";
+import { OverlayRays, type OverlayRaySpec } from "./OverlayRays";
 
 // A shot's overlay plane (Within Motion blend, act 3): keyword chips (TXT-024), quote chips (TXT-025) and stickers
 // (VIS-060, VIS-061 objects) laid over any component, in frame px and shot seconds. It belongs to the shot, so it
 // leaves with it (carried off by a glide, wiped by a drafting line, dropped by a cut on action, blurred by a match).
 // `drift`: stickers ride the component's own slow drift (EyeDiagram 0.02) so they stay with the drawing.
-export type ShotOverlaySpec = { chips?: KeywordPanel[]; quotes?: QuotePanel[]; stickers?: StickerSpec[]; drift?: number };
+// act 5 (Builders 3 and 5): `spectrum` labelled strips (VIS-014) and `rays` along paths (VIS-021) over any component
+export type ShotOverlaySpec = { chips?: KeywordPanel[]; quotes?: QuotePanel[]; stickers?: StickerSpec[]; drift?: number; spectrum?: SpectrumRow[]; rays?: OverlayRaySpec[] };
 
 export const ShotOverlay: React.FC<{ spec: ShotOverlaySpec }> = ({ spec }) => {
   const st = spec.stickers ?? [];
@@ -19,6 +22,8 @@ export const ShotOverlay: React.FC<{ spec: ShotOverlaySpec }> = ({ spec }) => {
     ...(st.length ? ["VIS-060"] : []),
     ...(st.some((s) => s.object) ? ["VIS-061"] : []),
     ...st.map((s) => s.srcId),
+    ...((spec.spectrum ?? []).length ? ["VIS-014"] : []),
+    ...((spec.rays ?? []).length ? ["VIS-021"] : []),
   ]);
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
@@ -28,6 +33,8 @@ export const ShotOverlay: React.FC<{ spec: ShotOverlaySpec }> = ({ spec }) => {
   for (let i = 1; i < starts.length; i++) if (starts[i] - starts[i - 1] < 0.6 - 1e-6) throw new Error("ShotOverlay: one sticker entrance at a time (0.6 s apart).");
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {(spec.rays ?? []).length ? <OverlayRays rays={spec.rays!} /> : null}
+      {(spec.spectrum ?? []).length ? <SpectrumRows rows={spec.spectrum!} /> : null}
       <AbsoluteFill style={{ transform: d ? `scale(${drift(frame, durationInFrames, d)})` : undefined }}>
         {st.map((s, i) => (
           <Sticker key={i} s={s} />
