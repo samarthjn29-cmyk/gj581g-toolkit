@@ -53,38 +53,38 @@
    "until": 49.1,
    "fadeIn": 0.6,
    "fadeOut": 0.6,
-   "lufs": -35,
+   "lufs": -37,
    "levels": [
     [
      26.15,
-     -35
+     -37
     ],
     [
      35.75,
-     -35
+     -37
     ],
     [
      35.95,
-     -31.5
+     -33
     ],
     [
-     37.2,
-     -31.5
+     37.45,
+     -33
     ],
     [
-     37.55,
-     -35
+     37.8,
+     -37
     ],
     [
      49.1,
-     -35
+     -37
     ]
    ]
   },
   {
    "name": "3 the question",
    "file": "public/music/long_note_two_kevin_macleod.mp3",
-   "from": 0.0,
+   "from": 2.4,
    "at": 48.7,
    "until": 78.75,
    "fadeIn": 0.4,
@@ -133,7 +133,7 @@
   {
    "name": "4 the wait",
    "file": "public/music/at_rest_kevin_macleod.mp3",
-   "from": 0.0,
+   "from": 0.55,
    "at": 80.8,
    "until": 104.6,
    "fadeIn": 0.5,

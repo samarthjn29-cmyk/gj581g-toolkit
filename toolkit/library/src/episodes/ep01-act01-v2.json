@@ -12,7 +12,7 @@
   {
    "id": "SFX-001",
    "atSec": 2.7,
-   "volumeDb": -20
+   "volumeDb": -14
   },
   {
    "id": "SFX-013",
@@ -22,7 +22,7 @@
   {
    "id": "SFX-014",
    "atSec": 3.45,
-   "volumeDb": 0,
+   "volumeDb": 5,
    "fadeInSec": 0.6,
    "fadeOutSec": 1.0,
    "endSec": 17.6
@@ -65,8 +65,8 @@
   {
    "id": "SFX-028",
    "file": "public/sfx/kit/pixabay/page_turn_book_v2.wav",
-   "atSec": 26.22,
-   "volumeDb": -18
+   "atSec": 25.78,
+   "volumeDb": -14
   },
   {
    "id": "SFX-026",
@@ -232,8 +232,8 @@
   },
   {
    "id": "MUS-015",
-   "atSec": 83.37,
-   "volumeDb": -18.0
+   "atSec": 84.7,
+   "volumeDb": -12.0
   },
   {
    "id": "SFX-015",
@@ -245,6 +245,11 @@
    "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
    "atSec": 87.2,
    "volumeDb": -12.0
+  },
+  {
+   "id": "SFX-005",
+   "atSec": 87.2,
+   "volumeDb": -14
   },
   {
    "id": "SFX-024",
@@ -283,7 +288,7 @@
    "id": "SFX-028",
    "file": "public/sfx/kit/pixabay/shutter_lock_v2.wav",
    "atSec": 94.64,
-   "volumeDb": -24
+   "volumeDb": -18
   },
   {
    "id": "SFX-024",
@@ -499,17 +504,18 @@
          ]
         }
        ],
-       "source": "KITCHIN · LAURIE & WHITTLE · 1794"
+       "source": "KITCHIN · 1794"
       }
      }
     ],
     "tag": {
      "at": "low-centre",
      "toCornerAtSec": 3.0,
+     "untilSec": 7.3,
      "parts": [
       {
        "text": "KENDAL",
-       "atSec": 1.6
+       "atSec": 1.76
       },
       {
        "text": "AUTUMN 1792",
@@ -521,6 +527,7 @@
      {
       "text": "JOHN DALTON · TEACHER",
       "atSec": 5.83,
+      "untilSec": 7.3,
       "x": 960,
       "y": 820,
       "align": "center"
@@ -634,7 +641,7 @@
        640
       ],
       "w": 680,
-      "atSec": 0.15,
+      "atSec": 0.45,
       "enter": "rise",
       "moves": [
        {
@@ -654,7 +661,7 @@
      {
       "text": "DALTON'S 'GERANIUM ZONALE'",
       "atSec": 2.79,
-      "untilSec": 5.5,
+      "untilSec": 4.95,
       "x": 1340,
       "y": 890,
       "align": "center"
@@ -696,16 +703,16 @@
         "text": "a geranium",
         "atSec": 2.79,
         "x": 140,
-        "y": 640
+        "y": 620
        },
        {
         "text": "nothing rare",
         "atSec": 3.89,
         "x": 140,
-        "y": 760
+        "y": 740
        }
       ],
-      "untilSec": 5.5
+      "untilSec": 4.95
      }
     ]
    }
@@ -934,7 +941,7 @@
         "x": 1100,
         "y": 660,
         "dimSec": 5.0,
-        "dimTo": 0.3
+        "dimTo": 0.15
        },
        {
         "text": "by the candle",
@@ -942,7 +949,7 @@
         "x": 1100,
         "y": 770,
         "dimSec": 5.0,
-        "dimTo": 0.3
+        "dimTo": 0.15
        }
       ]
      },
@@ -953,7 +960,7 @@
         "text": "astonishingly changed",
         "atSec": 5.15,
         "x": 360,
-        "y": 900,
+        "y": 835,
         "accent": true
        }
       ]
@@ -1490,7 +1497,7 @@
        {
         "text": "not a silly man",
         "atSec": 1.18,
-        "x": 1020,
+        "x": 960,
         "y": 820,
         "accent": true
        }
@@ -1541,7 +1548,7 @@
        972
       ],
       "x": 1420,
-      "y": 450,
+      "y": 490,
       "w": 600,
       "rot": -2.5,
       "atSec": -1,
@@ -1808,7 +1815,7 @@
      {
       "text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID",
       "atSec": 5.9,
-      "untilSec": 6.949999999999999
+      "untilSec": 7.05
      },
      {
       "text": "1844 · THE FLUID: CLEAR",

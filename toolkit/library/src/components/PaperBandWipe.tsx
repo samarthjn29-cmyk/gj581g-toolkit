@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAsset } from "../registry";
-import { useTheme } from "../themes";
+import { useTheme, lightTone, darkTone } from "../themes";
 import { PaperFibre } from "../layers/PaperFibre";
 import { sec } from "../motion";
 
@@ -48,7 +48,7 @@ export const PaperBandWipe: React.FC<{
   const oldClip = dir === "down" ? `inset(${Math.max(0, lead - m).toFixed(1)}px 0 0 0)` : `inset(0 0 ${Math.max(0, H - lead - m).toFixed(1)}px 0)`;
   const newClip = dir === "down" ? `inset(0 0 ${Math.max(0, H - trail - m).toFixed(1)}px 0)` : `inset(${Math.max(0, trail - m).toFixed(1)}px 0 0 0)`;
   const done = frame >= a + d;
-  const fill = tone === "dark" ? t.colors.panel : t.colors.ink;
+  const fill = tone === "dark" ? darkTone(t) : lightTone(t);
   return (
     <AbsoluteFill>
       {!done ? <AbsoluteFill style={{ clipPath: frame < a ? undefined : oldClip }}>{from}</AbsoluteFill> : null}

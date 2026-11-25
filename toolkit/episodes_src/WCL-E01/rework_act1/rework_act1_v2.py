@@ -68,10 +68,10 @@ scrap = {
                    "torn": True, "untilSec": round(4.85 - L, 2), "exit": "sink",
                    "route": {"from": [411, 346], "to": [411, 346], "atSec": 0.05, "drawSec": 0.1,
                              "circleSec": round(4.15 - L, 2), "chips": [{"text": "KENDAL", "at": [190, 300]}],
-                             "source": "KITCHIN · LAURIE & WHITTLE · 1794"}}],
-        "tag": {"at": "low-centre", "toCornerAtSec": round(6.70 - L, 2),
-                "parts": [{"text": "KENDAL", "atSec": round(5.30 - L, 2)}, {"text": "AUTUMN 1792", "atSec": round(5.47 - L, 2)}]},
-        "labels": [{"text": "JOHN DALTON · TEACHER", "atSec": round(9.53 - L, 2), "x": 960, "y": 820, "align": "center"}],
+                             "source": "KITCHIN · 1794"}}],
+        "tag": {"at": "low-centre", "toCornerAtSec": round(6.70 - L, 2), "untilSec": round(11.00 - L, 2),
+                "parts": [{"text": "KENDAL", "atSec": round(5.46 - L, 2)}, {"text": "AUTUMN 1792", "atSec": round(5.47 - L, 2)}]},
+        "labels": [{"text": "JOHN DALTON · TEACHER", "atSec": round(9.53 - L, 2), "untilSec": round(11.00 - L, 2), "x": 960, "y": 820, "align": "center"}],
         "camera": {"pan": 0, "push": 0.04},
     },
     "beatTimes": [["E01-A1-02", SPLIT, 6.4], ["E01-A1-03", 6.4, 8.6], ["E01-A1-04", 8.6, 11.1]],
@@ -95,16 +95,16 @@ g["props"] = {
          "why": "The change itself: the line turns to today ('walked past this week'), so the same flower in today's daylight, tagged TODAY."},
     ],
     "carry": [{"srcId": "SRC-013", "file": "public/assets/sources/geranium_stang_flowerhead_cutout.png",
-               "size": [1185, 769], "at": [1340, 640], "w": 680, "atSec": round(11.25 - S, 2), "enter": "rise",
+               "size": [1185, 769], "at": [1340, 640], "w": 680, "atSec": round(11.55 - S, 2), "enter": "rise",
                "moves": [{"atSec": round(16.75 - S, 2), "to": [960, 540], "w": 760, "sec": 1.4,
                           "why": "Comes to the centre as the line turns to the viewer: in today's daylight it is just a flower you walk past."}]}],
-    "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": round(13.89 - S, 2), "untilSec": round(16.60 - S, 2),
+    "labels": [{"text": "DALTON'S 'GERANIUM ZONALE'", "atSec": round(13.89 - S, 2), "untilSec": round(16.05 - S, 2),
                 "x": 1340, "y": 890, "align": "center"}],
     "camera": {"pan": -60, "push": 0.03},
 }
 panel = g["overlay"]["chips"][0]
-panel["untilSec"] = round(16.60 - S, 2)
-for c, y in zip(panel["chips"], (640, 760)):  # bottom-left on the dark wax, clear of the flame (frame check, v2 stills)
+panel["untilSec"] = round(16.05 - S, 2)  # before the daylight wipe reaches them (Gate 3 picture pass M5)
+for c, y in zip(panel["chips"], (620, 740)):  # bottom-left on the dark wax, clear of the flame (frame check, v2 stills)
     c["x"], c["y"] = 140, y
 assets(g, add=("VIS-059", "MOT-016", "TRN-018", "SRC-011", "SRC-040", "MOT-013", "SFX-014"),
        drop=("VIS-016", "MOT-001", "TRN-001"))
@@ -113,6 +113,16 @@ assets(g, add=("VIS-059", "MOT-016", "TRN-018", "SRC-011", "SRC-040", "MOT-013",
 for sid in ("08+09+10", "11+12+13"):
     B[sid]["ground"] = {"kind": "paper", "tex": {"file": PAPER_TEX, "strength": 0.2}}
     assets(B[sid], add=("TEX-009",))
+
+# --- Gate 3 picture pass (PICTURE_act1v2_v1.md) fixes outside the v2 shots
+p13 = B["11+12+13"]["overlay"]["chips"]
+for c in p13[0]["chips"]:
+    c["dimTo"] = 0.15
+p13[1]["chips"][0]["y"] = 835  # "astonishingly changed" inside the safe line (M7)
+B["24"]["overlay"]["chips"][0]["chips"][0]["x"] = 960  # inside the right safe line (M8)
+B["25+26"]["props"]["pieces"][1]["y"] = 490  # its caption below the top safe line (M9)
+lens = B["29+30+31"]["props"]
+lens["labels"][0]["untilSec"] = 7.05  # un-wiped by 7.55, when 1844 lands (S6)
 
 # --- sound ---
 au = a["audio"]
@@ -129,12 +139,16 @@ drop("SFX-020", 25.95, 26.05)
 drop("SFX-016", 26.0, 26.4)
 drop("SFX-001", 94.5, 94.7)
 au += [
-    {"id": "SFX-001", "atSec": 2.70, "volumeDb": -20},  # the globe's plunge onto Kendal
+    {"id": "SFX-001", "atSec": 2.70, "volumeDb": -14},  # the globe's plunge onto Kendal (Sound review: -20 too faint)
     {"id": "SFX-013", "atSec": 3.35, "volumeDb": 2},  # the match struck in the pause (J-cut into the candle)
-    {"id": "SFX-014", "atSec": 3.45, "volumeDb": 0, "fadeInSec": 0.6, "fadeOutSec": 1.0, "endSec": 17.6},
-    {"id": "SFX-028", "file": "public/sfx/kit/pixabay/page_turn_book_v2.wav", "atSec": 26.22, "volumeDb": -18},
-    {"id": "SFX-028", "file": "public/sfx/kit/pixabay/shutter_lock_v2.wav", "atSec": 94.64, "volumeDb": -24},
+    {"id": "SFX-014", "atSec": 3.45, "volumeDb": 5, "fadeInSec": 0.6, "fadeOutSec": 1.0, "endSec": 17.6},
+    {"id": "SFX-028", "file": "public/sfx/kit/pixabay/page_turn_book_v2.wav", "atSec": 25.78, "volumeDb": -14},  # peak (0.52 s in) on the 26.30 turn
+    {"id": "SFX-028", "file": "public/sfx/kit/pixabay/shutter_lock_v2.wav", "atSec": 94.64, "volumeDb": -18},
 ]
+for c in au:  # Sound review M1: the riser ends on the sub, and is heard
+    if c["id"] == "MUS-015":
+        c["atSec"], c["volumeDb"] = 84.70, -12.0
+au.append({"id": "SFX-005", "atSec": 87.20, "volumeDb": -14})  # M2: a thump a phone can play under the sub
 au.sort(key=lambda c: c["atSec"])
 a["audio"] = au
 assets(B["11+12+13"], add=("SFX-028",))
@@ -146,13 +160,13 @@ cues = [
      "at": 0.0, "until": 26.40, "fadeIn": 0.03, "fadeOut": 1.0, "lufs": -34,
      "levels": [[0, -26], [0.55, -26], [1.0, -34], [6.3, -34], [6.7, -30], [8.2, -30], [8.6, -34], [26.4, -34]]},
     {"id": "MUS-012", "name": "2 the evidence", "file": "public/music/thinking_music_kevin_macleod.mp3", "from": 0.0,
-     "at": 26.15, "until": 49.10, "fadeIn": 0.6, "fadeOut": 0.6, "lufs": -35,
-     "levels": [[26.15, -35], [35.75, -35], [35.95, -31.5], [37.2, -31.5], [37.55, -35], [49.1, -35]]},
-    {"id": "MUS-013", "name": "3 the question", "file": "public/music/long_note_two_kevin_macleod.mp3", "from": 0.0,
+     "at": 26.15, "until": 49.10, "fadeIn": 0.6, "fadeOut": 0.6, "lufs": -37,
+     "levels": [[26.15, -37], [35.75, -37], [35.95, -33], [37.45, -33], [37.8, -37], [49.1, -37]]},
+    {"id": "MUS-013", "name": "3 the question", "file": "public/music/long_note_two_kevin_macleod.mp3", "from": 2.4,
      "at": 48.70, "until": 78.75, "fadeIn": 0.4, "fadeOut": 0.4, "lufs": -41, "filter": "dynaudnorm=f=3000:g=31",
      "levels": [[48.7, -41], [56.8, -41], [57.0, -37.5], [58.0, -37.5], [58.25, -41], [77.1, -41], [77.3, -37.5],
                 [78.3, -37.5], [78.35, -41]]},
-    {"id": "MUS-014", "name": "4 the wait", "file": "public/music/at_rest_kevin_macleod.mp3", "from": 0.0,
+    {"id": "MUS-014", "name": "4 the wait", "file": "public/music/at_rest_kevin_macleod.mp3", "from": 0.55,
      "at": 80.80, "until": 104.60, "fadeIn": 0.5, "fadeOut": 0.03, "lufs": -35,
      "levels": [[80.8, -35], [87.15, -35], [87.2, -31], [88.2, -31], [88.45, -35], [101.5, -35], [101.7, -27],
                 [104.6, -27]]},

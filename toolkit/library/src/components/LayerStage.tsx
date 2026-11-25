@@ -2,7 +2,7 @@ import { Label, type LabelSpec } from "../layers/Label";
 import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, OffthreadVideo, Sequence, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAssets, useSourceFile } from "../registry";
-import { useTheme } from "../themes";
+import { useTheme, isLightTheme } from "../themes";
 import { sec, SLOW_OUT } from "../motion";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
 import { SpectrumStrip, type SpectrumStripProps } from "./SpectrumStrip";
@@ -318,7 +318,7 @@ const Carried: React.FC<{ c: StageCarry; light: NearLight; cam: XY; uid: string 
             </div>
           ))
         : null}
-      {rt?.source && pr > 0 ? <div style={{ position: "absolute", left: 10, bottom: -40, fontFamily: t.fonts.mono, fontSize: 16, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "4px 10px", borderRadius: 3, whiteSpace: "nowrap", opacity: Math.min(1, pr * 3), transform: c.tilt ? `rotate(${-c.tilt}deg)` : undefined }}>{rt.source}</div> : null}
+      {rt?.source && pr > 0 ? <div style={{ position: "absolute", left: 10, bottom: -40, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "4px 10px", borderRadius: 3, whiteSpace: "nowrap", opacity: Math.min(1, pr * 3), transform: c.tilt ? `rotate(${-c.tilt}deg)` : undefined }}>{rt.source}</div> : null}
       {states.map((st, i) => {
         if (!st.label) return null;
         const vin = interpolate(frame, [sec(st.atSec, fps), sec(st.atSec + 0.5, fps)], [0, 1], { ...clamp, easing: SLOW_OUT });
@@ -448,7 +448,7 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
           <Carried key={i} c={c} light={light} cam={[pan, 0]} uid={`${uid}-${i}`} />
         ))}
       </AbsoluteFill>
-      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, ${t.colors.dimMask} 100%)`, opacity: 0.55, pointerEvents: "none" }} />
+      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, ${isLightTheme(t) ? "rgba(22,21,20,0.8)" : t.colors.dimMask} 100%)`, opacity: 0.55, pointerEvents: "none" }} />
       {overlay?.spectrum ? <SpectrumStrip {...overlay.spectrum} startSec={-1} /> : null}
       {labels.map((l, i) => (
         <Label key={`t${i}`} spec={l} />
@@ -456,12 +456,12 @@ export const LayerStage: React.FC<LayerStageProps> = ({ worlds, mid, carry = [],
       {tag ? <DatelineTag {...tag} /> : null}
       {worlds.map((w, i) =>
         w.label && labelVis[i] > 0 ? (
-          <div key={`l${i}`} style={{ position: "absolute", right: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: `inset(0 ${((1 - labelVis[i]) * 100).toFixed(1)}% 0 0)`, opacity: Math.min(1, labelVis[i] * 2.5) }}>
+          <div key={`l${i}`} style={{ position: "absolute", right: t.safe.x, bottom: t.safe.y, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: `inset(0 ${((1 - labelVis[i]) * 100).toFixed(1)}% 0 0)`, opacity: Math.min(1, labelVis[i] * 2.5) }}>
             {w.today ? `TODAY · ${w.label}` : w.label}
           </div>
         ) : null,
       )}
-      {caption && capOut > 0 ? <div style={{ position: "absolute", left: t.safe.x, bottom: 60, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: capOut < 1 ? `inset(-4px -4px -4px ${((1 - capOut) * 100).toFixed(1)}%)` : undefined, opacity: Math.min(1, capOut * 2.5) }}>{caption}</div> : null}
+      {caption && capOut > 0 ? <div style={{ position: "absolute", left: t.safe.x, bottom: t.safe.y, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, clipPath: capOut < 1 ? `inset(-4px -4px -4px ${((1 - capOut) * 100).toFixed(1)}%)` : undefined, opacity: Math.min(1, capOut * 2.5) }}>{caption}</div> : null}
     </AbsoluteFill>
   );
 };

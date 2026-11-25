@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { useTheme } from "../themes";
+import { useTheme, isLightTheme, lightTone } from "../themes";
 import { useAssets, useSourceFile } from "../registry";
 import { drift, reveal, rise } from "../motion";
 import { DatelineTag, type DatelineTagProps } from "./DatelineTag";
@@ -64,7 +64,7 @@ const Ink: React.FC<{ srcId: string; file?: string; seed: number }> = ({ srcId, 
   return (
     <>
       <InkEdgeFilter id={fid} seed={seed} />
-      <div style={{ position: "absolute", inset: 0, background: t.colors.canvas, WebkitMaskImage: m, maskImage: m, WebkitMaskSize: "100% 100%", maskSize: "100% 100%", filter: `url(#${fid})` }} />
+      <div style={{ position: "absolute", inset: 0, background: isLightTheme(t) ? t.colors.ink : t.colors.canvas, WebkitMaskImage: m, maskImage: m, WebkitMaskSize: "100% 100%", maskSize: "100% 100%", filter: `url(#${fid})` }} />
     </>
   );
 };
@@ -76,7 +76,7 @@ const Piece: React.FC<{ p: CollagePiece; i: number }> = ({ p, i }) => {
   const h = p.h ?? (p.imgSize ? (p.w * p.imgSize[1]) / p.imgSize[0] : p.w);
   const k = reveal(frame, fps, p.atSec, t.motion.enterSec);
   const pc = reveal(frame, fps, p.atSec + 0.4, t.motion.enterSec);
-  const paper = p.color ?? t.colors.ink;
+  const paper = p.color ?? lightTone(t);
   return (
     <div
       style={{

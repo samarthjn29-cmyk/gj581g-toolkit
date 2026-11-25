@@ -14,6 +14,21 @@ export const DEFAULT_THEME = "LOK-009";
 const ThemeContext = createContext<Theme>(warmGraphite);
 export const useTheme = () => useContext(ThemeContext);
 
+// A light theme (LOK-033 Studio Cream and the other light grounds) flips ink and canvas: ink is dark, canvas/panel
+// are light. Components written for the dark graphite use these in fixed roles; they ask this instead (act 1 v2
+// Gate 3 picture pass, 25 Nov 2026: negatives in the collage, a cream band between dark shots, grey vignettes).
+const lum = (hex: string) => {
+  const m = /^#([0-9a-f]{6})$/i.exec(hex.trim());
+  if (!m) return 0.5;
+  const n = parseInt(m[1], 16);
+  const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => v / 255);
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+export const isLightTheme = (t: Theme) => lum(t.colors.canvas) > 0.5;
+// the light and dark tones of a theme, whichever way round ink and panel sit
+export const lightTone = (t: Theme) => (isLightTheme(t) ? t.colors.panel : t.colors.ink);
+export const darkTone = (t: Theme) => (isLightTheme(t) ? t.colors.ink : t.colors.panel);
+
 export const ThemeProvider: React.FC<{ themeId: string; children: React.ReactNode }> = ({ themeId, children }) => {
   const theme = THEMES[themeId];
   if (!theme) throw new Error(`Theme ${themeId} has no file in src/themes. Add it there and on the Theme_Library tab.`);

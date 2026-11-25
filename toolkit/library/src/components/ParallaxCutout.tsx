@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { useTheme } from "../themes";
+import { useTheme, lightTone } from "../themes";
 import { useAssets, useSource, useSourceFile } from "../registry";
 import { drift, reveal, rise, sec, slide, SLOW_OUT } from "../motion";
 import { interpolate } from "remotion";
@@ -94,7 +94,7 @@ export const ParallaxCutout: React.FC<ParallaxCutoutProps> = ({ bg, fg, kicker, 
             letterSpacing: t.fonts.headlineTracking,
             fontSize: 112,
             lineHeight: 1.02,
-            color: t.colors.ink,
+            color: lightTone(t), // the headline sits on the dark blurred portrait plate in every theme
             ...rise(pHead),
           }}
         >
