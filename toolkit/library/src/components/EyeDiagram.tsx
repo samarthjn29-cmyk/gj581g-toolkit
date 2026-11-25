@@ -311,7 +311,7 @@ export const EyeDiagram: React.FC<EyeDiagramProps> = ({
             const size = c.size ?? (c.mono ? 20 : 30);
             const ulOut = c.underline?.untilSec !== undefined ? interpolate(frame, [sec(c.underline.untilSec, fps), sec(c.underline.untilSec + 0.3, fps)], [1, 0], ease) : 1;
             const ul = c.underline ? interpolate(frame, [sec(c.underline.atSec, fps), sec(c.underline.atSec + 0.35, fps)], [0, 1], ease) * ulOut : 0;
-            const chW = size * (c.mono ? 0.62 : 0.5);
+            const chW = c.mono ? size * 0.6 + 2.5 : size * 0.5; // mono glyph advance + its letterSpacing (Designer M8)
             const f = c.underline?.fromCh ?? 0;
             const tch = c.underline?.toCh ?? c.text.length;
             const sw = c.swatch ? size * 0.95 + 12 : 0; // the swatch sits before the text

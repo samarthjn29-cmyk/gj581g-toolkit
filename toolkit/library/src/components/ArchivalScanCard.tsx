@@ -16,7 +16,8 @@ export type ArchivalScanCardProps = {
   crop: Rect;
   highlights: { box: Rect; atSec: number; dimAtSec?: number; dimTo?: number }[]; // dimAtSec: this highlight fades to dimTo (default 0.4) over 0.5 s
   quote: string;
-  source: string;
+  source: string; // '\n' breaks the tag onto a second line (act 5 G)
+  sourceSize?: number; // default 28 (act 5 B, L: 24 keeps the page number on the tag's line; Director M6)
   side?: "left" | "right";
   // VIS-029 ContrastCallout (studied Chris Moran's short "How to guide your viewer's eye using contrast";
   // analysis only): from atSec the rest of the page dims and only the highlighted lines stay bright.
@@ -36,6 +37,7 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
   highlights,
   quote,
   source,
+  sourceSize = 28,
   side = "left",
   callout,
   quoteMarks = true,
@@ -167,7 +169,8 @@ export const ArchivalScanCard: React.FC<ArchivalScanCardProps> = ({
             display: "inline-block",
             marginTop: 30,
             fontFamily: t.fonts.mono,
-            fontSize: 28,
+            fontSize: sourceSize,
+            whiteSpace: "pre-line",
             letterSpacing: 1.2,
             color: t.colors.secondary,
             background: t.colors.chip,

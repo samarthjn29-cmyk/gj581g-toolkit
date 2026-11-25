@@ -296,6 +296,7 @@
     ],
     "side": "left",
     "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 90",
+    "sourceSize": 24,
     "highlights": [
      {
       "box": [
@@ -408,7 +409,8 @@
     "MUS-007",
     "SRC-005",
     "TRN-001",
-    "SFX-021"
+    "SFX-021",
+    "TXT-024"
    ],
    "props": {
     "panel": {
@@ -433,6 +435,20 @@
     ]
    ],
    "overlay": {
+    "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "All they have",
+        "atSec": 0.65,
+        "x": 860,
+        "y": 190,
+        "dimSec": 2.95
+       }
+      ]
+     }
+    ],
     "quotes": [
      {
       "size": 52,
@@ -548,7 +564,8 @@
      0.55,
      0.62
     ],
-    "brightness": 0.38
+    "blurPx": 7,
+    "brightness": 0.42
    }
   },
   {
@@ -624,7 +641,8 @@
       "y": 960,
       "size": 20
      }
-    ]
+    ],
+    "head": true
    },
    "beatTimes": [
     [
@@ -664,21 +682,22 @@
       "atSec": 5.25,
       "color": "#FFF6DD",
       "jitter": 16,
+      "glow": 0.25,
       "kinds": [
        {
-        "size": 5,
+        "size": 10,
         "speed": 560,
-        "count": 5
+        "count": 6
        },
        {
-        "size": 7,
+        "size": 13,
         "speed": 620,
-        "count": 5
+        "count": 6
        },
        {
-        "size": 9,
+        "size": 16,
         "speed": 680,
-        "count": 5
+        "count": 6
        }
       ]
      },
@@ -696,21 +715,22 @@
       "atSec": 8.62,
       "color": "#FFF6DD",
       "jitter": 16,
+      "glow": 0.25,
       "kinds": [
        {
-        "size": 5,
+        "size": 10,
         "speed": 560,
-        "count": 5
+        "count": 6
        },
        {
-        "size": 7,
+        "size": 13,
         "speed": 620,
         "count": 2
        },
        {
-        "size": 9,
+        "size": 16,
         "speed": 680,
-        "count": 5
+        "count": 6
        }
       ],
       "seed": 5
@@ -803,7 +823,7 @@
       "text": "Lens",
       "atSec": -1,
       "at": [
-       1090,
+       880,
        912
       ],
       "anchor": [
@@ -827,8 +847,8 @@
       "text": "seen as pink",
       "atSec": 5.05,
       "at": [
-       1180,
-       905
+       1440,
+       820
       ],
       "anchor": [
        1595,
@@ -889,23 +909,24 @@
       "atSec": -1,
       "untilSec": 4.39,
       "color": "#FFF6DD",
-      "stroke": "rgba(43,39,36,0.6)",
+      "stroke": "rgba(43,39,36,0.95)",
+      "strokeWidth": 2.5,
       "jitter": 16,
       "kinds": [
        {
-        "size": 5,
+        "size": 10,
         "speed": 560,
-        "count": 5
+        "count": 6
        },
        {
-        "size": 7,
+        "size": 13,
         "speed": 620,
-        "count": 5
+        "count": 6
        },
        {
-        "size": 9,
+        "size": 16,
         "speed": 680,
-        "count": 5
+        "count": 6
        }
       ]
      }
@@ -947,6 +968,14 @@
     "panel": {
      "size": 64,
      "chips": [
+      {
+       "text": "on Newton's view",
+       "atSec": 1.29,
+       "x": 480,
+       "y": 130,
+       "dimSec": 11.21,
+       "dimTo": 0.3
+      },
       {
        "text": "isn't really in the flower",
        "atSec": 2.55,
@@ -991,11 +1020,12 @@
       "text": "ISAAC NEWTON · OPTICKS, 1704",
       "atSec": 1.29,
       "x": 1800,
-      "y": 980,
+      "y": 960,
       "align": "right",
       "size": 22
      }
-    ]
+    ],
+    "head": true
    },
    "beatTimes": [
     [
@@ -1091,7 +1121,7 @@
      1411
     ],
     "side": "left",
-    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3084",
+    "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80\n1672 · P. 3084",
     "highlights": [
      {
       "box": [
@@ -1207,7 +1237,7 @@
     "rows": [
      {
       "x": 330,
-      "y": 150,
+      "y": 175,
       "w": 1260,
       "atSec": -1,
       "label": "DAYLIGHT",
@@ -1275,11 +1305,11 @@
        ],
        [
         550,
-        0.45
+        0.3
        ],
        [
         580,
-        0.3
+        0.2
        ],
        [
         620,
@@ -1457,7 +1487,7 @@
        0.5,
        0.5
       ],
-      "clipStartSec": 7.6,
+      "clipStartSec": 0.5,
       "change": "dissolve",
       "sec": 1.4,
       "light": "warm",
@@ -1830,7 +1860,7 @@
       445,
       410
      ],
-     "drawAtSec": 1.85,
+     "drawAtSec": 0.65,
      "dividersAtSec": 5.46,
      "names": [
       {
@@ -1943,6 +1973,7 @@
     ],
     "side": "left",
     "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 92",
+    "sourceSize": 24,
     "highlights": [
      {
       "box": [
@@ -2156,7 +2187,8 @@
      0.5,
      0.6
     ],
-    "brightness": 0.38
+    "blurPx": 7,
+    "brightness": 0.42
    }
   },
   {
@@ -2362,7 +2394,7 @@
       "text": "Lens",
       "atSec": -1,
       "at": [
-       1090,
+       880,
        912
       ],
       "anchor": [
@@ -2411,7 +2443,7 @@
     ],
     "rays": {
      "atSec": 2.51,
-     "untilSec": 7.51,
+     "untilSec": 11.31,
      "speed": 700,
      "count": 18,
      "size": 10,
@@ -2421,7 +2453,7 @@
       "#2F6BFF"
      ],
      "absorb": {
-      "atSec": 6.82,
+      "atSec": 6.21,
       "colors": [
        "#FF3B30",
        "#30D158"
@@ -2594,7 +2626,7 @@
       "mono": true,
       "at": [
        720,
-       836
+       885
       ],
       "anchor": [
        1330,
@@ -2604,7 +2636,8 @@
       "underline": {
        "atSec": 1.05,
        "fromCh": 9,
-       "toCh": 14
+       "toCh": 14,
+       "untilSec": 6.79
       }
      }
     ],
@@ -2612,6 +2645,7 @@
      "atSec": 6.79,
      "drawSec": 1.0
     },
+    "head": false,
     "labels": [
      {
       "text": "ILLUSTRATION",

@@ -10,7 +10,9 @@ export type OverlayRaySpec = {
   atSec: number;
   untilSec?: number;
   color?: string;
-  stroke?: string; // a thin edge so white dots read on cream paper
+  stroke?: string; // an ink edge so white dots read on cream paper
+  strokeWidth?: number; // default 1.5
+  glow?: number; // a soft halo (0..1) so dots read on a dark ground (Designer M1)
   jitter?: number;
   kinds: { size: number; speed: number; count: number }[];
   seed?: number;
@@ -41,6 +43,15 @@ export const OverlayRays: React.FC<{ rays: OverlayRaySpec[] }> = ({ rays }) => {
   if (total > 40) throw new Error("OverlayRays: at most 40 dots on screen in a shot (calm limit)");
   return (
     <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, pointerEvents: "none" }}>
+      <defs>
+        <filter id="rayglow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
       {rays.map((r, ri) => {
         const L = r.path.slice(1).reduce((a, p, i) => a + Math.hypot(p[0] - r.path[i][0], p[1] - r.path[i][1]), 0);
         return r.kinds.map((k, ki) => {
@@ -48,7 +59,7 @@ export const OverlayRays: React.FC<{ rays: OverlayRaySpec[] }> = ({ rays }) => {
           return particles(spec, L, frame / fps).map((q) => {
             const p = along(r.path, q.u);
             return (
-              <circle key={`${ri}-${ki}-${q.k}`} cx={p.x + p.nx * q.side} cy={p.y + p.ny * q.side} r={k.size / 2} fill={r.color ?? "#FFF6DD"} opacity={q.alpha} stroke={r.stroke} strokeWidth={r.stroke ? 1.5 : 0} />
+              <circle key={`${ri}-${ki}-${q.k}`} cx={p.x + p.nx * q.side} cy={p.y + p.ny * q.side} r={k.size / 2} fill={r.color ?? "#FFF6DD"} opacity={q.alpha} stroke={r.stroke} strokeWidth={r.stroke ? r.strokeWidth ?? 1.5 : 0} filter={r.glow ? "url(#rayglow)" : undefined} />
             );
           });
         });

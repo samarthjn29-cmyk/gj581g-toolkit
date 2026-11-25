@@ -11,3 +11,4 @@ Read before every review, with `../REVIEW_SCORECARD.md`.
 - 2026-11-25 (act 5 G1): a caption for a sensation ("seen as pink") points past the retina (optic nerve or out of frame), never at the back wall.
 - 2026-11-25 (act 5 G1): coloured ray dots never come in exactly red/green/blue without saying "some of many": three belongs to the eye, not to light.
 - 2026-11-25 (act 5 G1): Newton's colours are the intervals between the string's stops, and his string is twice the band; notes go on the boundaries.
+- Dalton's blue-vitreous absorb lands with the tint (on "blue"), and the dots keep travelling until the guess line ends (act 5 Gate 2, 25 Nov 2026).

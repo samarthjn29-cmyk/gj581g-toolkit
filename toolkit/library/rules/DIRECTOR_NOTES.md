@@ -19,3 +19,9 @@ Format: `- YYYY-MM-DD | shot | note | decision`
 - 2026-11-25 | WCL-E01 act 4 O | A long credit tag in the corner ran off-frame and over the running head. | A credit tag over about 60 characters goes low-centre; DatelineTag parts never start with a separator; overlay chips keep 60 px from the running head.
 - 2026-11-25 | WCL-E01 act 4 F | A band wipe onto a flat panel gave 3 s of empty screen. | A flat-ground panel shows a spoken-word chip within about 1.5 s of its cut (a blur ground may wait up to 2 s).
 - 2026-11-25 | WCL-E01 act 4 M (Expert) | The lens was narrower than the band it gathered. | A lens is at least as wide as the band it gathers; check depth order and widths on the still.
+
+## WCL-E01 act 5 (Gate 2 frame review, 25 Nov 2026)
+- A candle clip starts where the flame is already lit; never open a candle world on a dark or guttering frame.
+- Rays on a cream plate are white dots with a dark 2.5 px edge; on graphite they are white with a soft glow, sizes 10-16 px.
+- A caption never shares a line with an ILLUSTRATION or GUESS tag; move the caption, not the tag.
+- A zoomed plate turns the running head off; panel shots of spoken argument (D, F) keep it on.

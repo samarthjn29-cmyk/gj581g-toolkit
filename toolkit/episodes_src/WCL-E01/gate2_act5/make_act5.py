@@ -71,12 +71,12 @@ GER = {"srcId": "SRC-013", "file": SRC + "geranium_stang_flowerhead_cutout.png",
 LEAF = {"srcId": "SRC-014", "file": SRC + "laurel_runicearth_leaf_cutout.png", "size": [800, 700]}
 GERTAG = "PHOTO TODAY · D. J. STANG, CC BY-SA 4.0 · CUT OUT"  # fact-check FIX 16
 WHITE = "#FFF6DD"
-KINDS = [{"size": 5, "speed": 560, "count": 5}, {"size": 7, "speed": 620, "count": 5}, {"size": 9, "speed": 680, "count": 5}]
+KINDS = [{"size": 10, "speed": 560, "count": 6}, {"size": 13, "speed": 620, "count": 6}, {"size": 16, "speed": 680, "count": 6}]  # Designer M1: read above the dust
 # the light leaving the geranium is a different mix (fewer of the middle kind; fact-check FIX 15, Expert S1)
-KINDS_OUT = [{"size": 5, "speed": 560, "count": 5}, {"size": 7, "speed": 620, "count": 2}, {"size": 9, "speed": 680, "count": 5}]
+KINDS_OUT = [{"size": 10, "speed": 560, "count": 6}, {"size": 13, "speed": 620, "count": 2}, {"size": 16, "speed": 680, "count": 6}]
 # illustrative reflectance and source shapes, [nm, weight in linear light] (tagged NOT MEASURED)
 PETAL = [[400, 0.45], [440, 0.5], [480, 0.3], [520, 0.12], [560, 0.1], [600, 0.55], [650, 0.85], [700, 0.9]]
-LEAFP = [[400, 0.05], [450, 0.06], [500, 0.12], [550, 0.45], [580, 0.3], [620, 0.08], [680, 0.12], [700, 0.3]]
+LEAFP = [[400, 0.05], [450, 0.06], [500, 0.12], [550, 0.3], [580, 0.2], [620, 0.08], [680, 0.12], [700, 0.3]]
 CANDLE = [[400, 0.01], [450, 0.025], [500, 0.07], [550, 0.17], [600, 0.36], [650, 0.63], [700, 1.0]]  # ~1,900 K (Expert S3)
 PETAL_BY_CANDLE = [[nm, round(w * dict(CANDLE)[nm], 4) if nm in dict(CANDLE) else None] for nm, w in PETAL]
 
@@ -97,7 +97,7 @@ SEVEN_NM = [650, 605, 580, 530, 470, 445, 410]
 PLATE = {"x": 680, "y": 130, "w": 1060, "h": 830, "tilt": 1.0}
 CAPS = [{"text": "THE EYE · SIMPLIFIED", "mono": True, "atSec": -1, "at": [724, 176]},
         {"text": "Cornea", "atSec": -1, "at": [736, 360], "anchor": [915, 470]},
-        {"text": "Lens", "atSec": -1, "at": [1090, 912], "anchor": [1050, 650]},
+        {"text": "Lens", "atSec": -1, "at": [880, 912], "anchor": [1050, 650]},
         {"text": "Retina", "atSec": -1, "at": [1560, 318], "anchor": [1428, 398]}]
 ILL = lambda at, text="ILLUSTRATION", until=None: dict({"text": text, "atSec": at, "x": 120, "y": 960, "size": 20}, **({"untilSec": until} if until is not None else {}))
 
@@ -118,7 +118,7 @@ shot(B(2, 3), "ArchivalScanCard", lambda r: {"srcId": "SRC-064", "imgSize": [160
 
 # --- B: p.90, the sentence that's easy to read past
 shot(B(4, 5, 6, 7, 8), "ArchivalScanCard", lambda r: {"srcId": "SRC-005", "imgSize": [1600, 2321], "crop": [240, 370, 1280, 1221], "side": "left",
-                                                      "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 90",
+                                                      "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 90", "sourceSize": 24,
                                                       "highlights": [{"box": [384, 1316, 724, 64], "atSec": r(16.19)}, {"box": [1113, 1316, 391, 64], "atSec": r(17.65)}],
                                                       "callout": {"atSec": r(13.50), "dim": 0.55, "keep": [[384, 1316, 1120, 64]]},
                                                       "quote": "For the rays to speak properly are not coloured.", "quoteAtSec": r(16.19),
@@ -131,12 +131,12 @@ shot(B(4, 5, 6, 7, 8), "ArchivalScanCard", lambda r: {"srcId": "SRC-005", "imgSi
 Q = lambda words, x, y: {"x": x, "y": y, "words": [{"text": w, "atSec": a} for w, a in words]}
 shot(B(9, 10, 11), "KeywordPanel", lambda r: {"panel": {"chips": []}},
      sid="C_power_quote", transitionIn="band", transition={"dir": "down", "tone": "dark"},
-     ground={"kind": "blur", "srcId": "SRC-005", "file": SRC + "newton_opticks1704_p90.jpg", "size": [1600, 2321], "focus": [0.55, 0.62], "brightness": 0.38},
-     overlay=lambda r: {"quotes": [{"size": 52, "source": {"text": "ISAAC NEWTON · OPTICKS · 1704 · P. 90", "atSec": r(24.39), "x": 860, "y": 730},
+     ground={"kind": "blur", "srcId": "SRC-005", "file": SRC + "newton_opticks1704_p90.jpg", "size": [1600, 2321], "focus": [0.55, 0.62], "blurPx": 7, "brightness": 0.42},
+     overlay=lambda r: {"chips": [{"size": 64, "chips": [{"text": "All they have", "atSec": r(24.39), "x": 860, "y": 190, "dimSec": r(26.69)}]}], "quotes": [{"size": 52, "source": {"text": "ISAAC NEWTON · OPTICKS · 1704 · P. 90", "atSec": r(24.39), "x": 860, "y": 730},
                                     "lines": [Q([("a", r(26.69)), ("certain", r(26.99)), ("power", r(27.37))], 860, 300),
                                               Q([("and", r(27.79)), ("disposition", r(28.05))], 860, 400),
                                               Q([("to", r(28.63)), ("stir", r(28.95)), ("up", r(29.23)), ("a", r(29.39)), ("sensation", r(29.57))], 860, 500),
-                                              Q([("of", r(30.01)), ("this", r(30.35)), ("or", r(30.67)), ("that", r(30.93)), ("Colour", r(31.25))], 860, 600)]}]})
+                                              Q([("of", r(30.01)), ("this", r(30.35)), ("or", r(30.67)), ("that", r(30.93)), ("Colour", r(31.25))], 860, 600)]}]}, extra=["TXT-024"])
 
 # --- D: the objection, then white sunlight onto the geranium and away, not pink
 shot(B(12, 13, 14, 15), "KeywordPanel", lambda r: {
@@ -145,36 +145,37 @@ shot(B(12, 13, 14, 15), "KeywordPanel", lambda r: {
         {"text": "It doesn't.", "atSec": r(36.10), "x": 940, "y": 680, "accent": True}]},
     "labels": [{"text": "MANY KINDS OF RAY", "atSec": r(38.89), "x": 360, "y": 120, "size": 26},
                {"text": "ISN'T PINK", "atSec": r(41.82), "x": 1260, "y": 340, "size": 26},
-               ILL(r(37.60), "ILLUSTRATION · RAYS DRAWN WITHOUT COLOUR")]},
+               ILL(r(37.60), "ILLUSTRATION · RAYS DRAWN WITHOUT COLOUR")], "head": True},
     sid="D_sunlight", transitionIn="slide", ground=INSET,
-    overlay=lambda r: {"rays": [{"path": [[-40, 40], [560, 500]], "atSec": r(37.41), "color": WHITE, "jitter": 16, "kinds": KINDS},
-                                {"path": [[900, 520], [1980, 470]], "atSec": r(40.78), "color": WHITE, "jitter": 16, "kinds": KINDS_OUT, "seed": 5}],
+    overlay=lambda r: {"rays": [{"path": [[-40, 40], [560, 500]], "atSec": r(37.41), "color": WHITE, "jitter": 16, "glow": 0.25, "kinds": KINDS},
+                                {"path": [[900, 520], [1980, 470]], "atSec": r(40.78), "color": WHITE, "jitter": 16, "glow": 0.25, "kinds": KINDS_OUT, "seed": 5}],
                        "stickers": [dict(GER, at=[680, 560], w=460, atSec=r(39.75), tilt=-2, tag={"text": GERTAG, "untilSec": r(42.60)})]})
 
 # --- E: whoever is looking (the plate; the pink belongs to the looker)
 shot(B(16, 17, 18), "EyeDiagram", lambda r: {"mode": "plate", "startSec": -1, "card": PLATE,
                                              "captions": CAPS[:3] + [{"text": "Retina", "atSec": r(46.48), "at": [1560, 318], "anchor": [1428, 398]},
-                                                                     {"text": "seen as pink", "atSec": r(48.26), "at": [1180, 905], "anchor": [1595, 632], "size": 34, "swatch": "#E79AB9"}],
+                                                                     {"text": "seen as pink", "atSec": r(48.26), "at": [1440, 820], "anchor": [1595, 632], "size": 34, "swatch": "#E79AB9"}],
                                              "labels": [{"text": "A KIND OF PUSH", "atSec": r(44.90), "untilSec": r(49.90), "x": 160, "y": 380, "size": 26},
                                                         ILL(r(43.40))]},
      sid="E_whoever_looks", transitionIn="canvas", transition={"dir": "right", "pull": 0.86},
-     overlay=lambda r: {"rays": [{"path": [[-40, 545], [1478, 545]], "atSec": -1, "untilSec": r(47.60), "color": WHITE, "stroke": "rgba(43,39,36,0.6)", "jitter": 16, "kinds": KINDS}]})
+     overlay=lambda r: {"rays": [{"path": [[-40, 545], [1478, 545]], "atSec": -1, "untilSec": r(47.60), "color": WHITE, "stroke": "rgba(43,39,36,0.95)", "strokeWidth": 2.5, "jitter": 16, "kinds": KINDS}]})
 
 # --- F: the verdict as chips on the blurred title page
 shot(B(19, 20, 21, 22, 23, 24), "KeywordPanel", lambda r: {
     "panel": {"size": 64, "chips": [
+        {"text": "on Newton's view", "atSec": r(51.54), "x": 480, "y": 130, "dimSec": r(61.46), "dimTo": 0.3},
         {"text": "isn't really in the flower", "atSec": r(52.80), "x": 480, "y": 250, "dimSec": r(61.46), "dimTo": 0.3},
         {"text": "isn't in the light either", "atSec": r(55.47), "x": 480, "y": 380, "dimSec": r(61.46), "dimTo": 0.3},
         {"text": "where the light meets a person", "atSec": r(58.58), "x": 480, "y": 520, "accent": True, "dimSec": r(61.46), "dimTo": 0.3},
         {"text": "a geranium and a leaf", "atSec": r(61.84), "x": 480, "y": 700},
         {"text": "still look different", "atSec": r(62.82), "x": 480, "y": 830}]},
-    "labels": [{"text": "ISAAC NEWTON · OPTICKS, 1704", "atSec": r(51.54), "x": 1800, "y": 980, "align": "right", "size": 22}]},
+    "labels": [{"text": "ISAAC NEWTON · OPTICKS, 1704", "atSec": r(51.54), "x": 1800, "y": 960, "align": "right", "size": 22}], "head": True},
     sid="F_newtons_view", transitionIn="band", transition={"dir": "up", "tone": "dark"},
     ground={"kind": "blur", "srcId": "SRC-064", "file": SRC + "newton_opticks1704_title.jpg", "size": [1600, 2321], "focus": [0.5, 0.43], "blurPx": 14, "brightness": 0.38})
 
 # --- G: 1672 letter p.3084, paragraph 13
 shot(B(25, 26, 27, 28), "ArchivalScanCard", lambda r: {"srcId": "SRC-058", "file": SRC + "newton1672_p3084.jpg", "imgSize": [1555, 2488], "crop": [40, 1070, 1480, 1411], "side": "left",
-                                                       "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80 · 1672 · P. 3084",
+                                                       "source": "ISAAC NEWTON · PHIL. TRANS. NO. 80\n1672 · P. 3084",
                                                        "highlights": [{"box": [785, 1768, 705, 52], "atSec": r(69.31)}, {"box": [62, 1826, 662, 64], "atSec": r(69.31)},
                                                                       {"box": [745, 1824, 748, 64], "atSec": r(70.53)}, {"box": [62, 1883, 1190, 64], "atSec": r(70.53)}],
                                                        "quote": "variously qualified to reflect one sort of light in greater plenty then another", "quoteAtSec": r(71.45),
@@ -184,7 +185,7 @@ shot(B(25, 26, 27, 28), "ArchivalScanCard", lambda r: {"srcId": "SRC-058", "file
 
 # --- H: same light in, two mixes out
 shot(B(29, 30, 31, 32), "SpectrumStrip", lambda r: {
-    "rows": [{"x": 330, "y": 150, "w": 1260, "atSec": -1, "label": "DAYLIGHT", "labelAtSec": -1},
+    "rows": [{"x": 330, "y": 175, "w": 1260, "atSec": -1, "label": "DAYLIGHT", "labelAtSec": -1},
              {"x": 330, "y": 680, "w": 460, "atSec": r(74.44), "under": "SENT BACK", "profile": PETAL},
              {"x": 1130, "y": 680, "w": 460, "atSec": r(76.92), "under": "SENT BACK", "profile": LEAFP}],
     "labels": [{"text": "ILLUSTRATION · SIMPLIFIED, NOT MEASURED", "atSec": r(74.44), "x": 1800, "y": 960, "align": "right", "size": 20}]},
@@ -200,7 +201,7 @@ shot(B(33, 34, 35, 36, 37), "LayerStage", lambda r: {
     "worlds": [{"atSec": 0, "srcId": "SRC-040", "kind": "video", "size": [1920, 1080], "revFile": SRC + "sky_clouds_mixkit51102_rev.mp4", "clipSec": 8.5,
                 "light": "day", "haze": 0.12, "blur": 2, "rackSec": 0.3, "lightFrom": "top-left", "label": "DAYLIGHT", "today": True,
                 "why": "The change itself: the same flower in the daylight the line compares the candle with."},
-               {"atSec": r(85.70), "srcId": "SRC-011", "kind": "video", "size": [1080, 1920], "focus": [0.5, 0.5], "clipStartSec": 7.6, "change": "dissolve", "sec": 1.4,
+               {"atSec": r(85.70), "srcId": "SRC-011", "kind": "video", "size": [1080, 1920], "focus": [0.5, 0.5], "clipStartSec": 0.5, "change": "dissolve", "sec": 1.4,
                 "light": "warm", "blur": 1.5, "lightFrom": "left", "label": "CANDLELIGHT", "today": True,
                 "why": "The change itself: Dalton's evening light, which has far less blue."}],
     "carry": [dict(GER, at=[640, 470], w=640, atSec=-1,
@@ -228,14 +229,14 @@ shot(B(38, 39, 40), "SwatchRows", lambda r: {
 
 # --- K: Newton's seven, at his own proportions
 shot(B(41, 42, 43, 44), "SpectrumStrip", lambda r: {
-    "divisions": {"fractions": SEVEN, "colorsNm": SEVEN_NM, "drawAtSec": r(105.46), "dividersAtSec": r(109.07),
+    "divisions": {"fractions": SEVEN, "colorsNm": SEVEN_NM, "drawAtSec": r(104.26), "dividersAtSec": r(109.07),
                   "names": [{"text": t, "atSec": r(a)} for t, a in [("RED", 110.41), ("ORANGE", 111.01), ("YELLOW", 111.65), ("GREEN", 112.21), ("BLUE", 112.81), ("INDIGO", 113.47), ("VIOLET", 114.13)]]},
     "labels": [ILL(r(104.40), "ILLUSTRATION · AFTER NEWTON, OPTICKS, 1704")]},
     sid="K_seven", transitionIn="block", transition={"color": "#C8402F", "side": "right"}, ground=INSET)
 
 # --- L: Opticks p.92 (the seven names become his printed list)
 shot(B(45, 46), "ArchivalScanCard", lambda r: {"srcId": "SRC-063", "imgSize": [1600, 2321], "crop": [250, 1000, 1290, 1230], "side": "left",
-                                               "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 92",
+                                               "source": "ISAAC NEWTON · OPTICKS · 1704 · P. 92", "sourceSize": 24,
                                                "highlights": [{"box": [410, 1612, 1125, 66], "atSec": -1}, {"box": [520, 1100, 1000, 52], "atSec": r(116.94)},
                                                               {"box": [410, 1324, 530, 74], "atSec": r(118.22)}],
                                                "quote": "divided after the manner of a musical Chord", "quoteAtSec": r(116.94)},
@@ -249,7 +250,7 @@ shot(B(47, 48, 49, 50), "SpectrumStrip", lambda r: {
                   "query": {"segment": 5, "atSec": r(128.62)}},
     "labels": [ILL(-1, "ILLUSTRATION · AFTER OPTICKS, 1704, P. 92")]},
     sid="M_seven_notes", transitionIn="slide",
-    ground={"kind": "blur", "srcId": "SRC-063", "file": SRC + "newton_opticks1704_p92.jpg", "size": [1600, 2321], "focus": [0.5, 0.6], "brightness": 0.38},
+    ground={"kind": "blur", "srcId": "SRC-063", "file": SRC + "newton_opticks1704_p92.jpg", "size": [1600, 2321], "focus": [0.5, 0.6], "blurPx": 7, "brightness": 0.42},
     overlay=lambda r: {"chips": [{"size": 64, "chips": [
         {"text": "It's tidy.", "atSec": r(123.51), "x": 210, "y": 820, "dimSec": r(127.44)},
         {"text": "a little too tidy", "atSec": r(125.33), "x": 650, "y": 820, "accent": True, "dimSec": r(127.44)}]}]})
@@ -271,8 +272,8 @@ shot(B(56, 57, 58, 59, 60), "EyeDiagram", lambda r: {
     "mode": "plate", "startSec": -1, "card": PLATE,
     "captions": CAPS + [{"text": "Vitreous humour", "atSec": r(150.09), "at": [1240, 198], "anchor": [1300, 390], "size": 34},
                         dict(GUESS, atSec=r(149.67))],
-    "rays": {"atSec": r(146.70), "untilSec": r(151.70), "speed": 700, "count": 18, "size": 10, "colors": ["#FF3B30", "#30D158", "#2F6BFF"],
-             "absorb": {"atSec": r(151.01), "colors": ["#FF3B30", "#30D158"], "from": 0.52, "to": 0.7, "keep": 0.3}},
+    "rays": {"atSec": r(146.70), "untilSec": r(155.50), "speed": 700, "count": 18, "size": 10, "colors": ["#FF3B30", "#30D158", "#2F6BFF"],
+             "absorb": {"atSec": r(150.40), "colors": ["#FF3B30", "#30D158"], "from": 0.52, "to": 0.7, "keep": 0.3}},
     "tints": [{"part": "vitreous", "color": "#3D6BD6", "atSec": r(149.67), "opacity": 0.55, "brushSec": 0.7}],
     "labels": [{"text": "ILLUSTRATION", "lines": ["DOTS: 3 OF NEWTON'S MANY KINDS", "RED-, GREEN-, BLUE-MAKING"], "atSec": r(146.70), "x": 120, "y": 250, "size": 20}]},
     sid="O_eye_jelly", transitionIn="push", focus=[870, 700],
@@ -287,8 +288,8 @@ shot(B(61, 62, 63, 64), "EyeDiagram", lambda r: {
     "tints": [{"part": "vitreous", "color": "#3D6BD6", "atSec": -1.2, "opacity": 0.55}],
     "pulses": [{"part": "vitreous", "atSec": r(159.38), "to": 0.75, "sec": 1.6}],
     "captions": [{"text": "Vitreous humour", "atSec": -1, "at": [1240, 198], "anchor": [1300, 390], "size": 34},
-                 dict(GUESS, atSec=-1, at=[720, 836], underline={"atSec": r(157.06), "fromCh": 9, "toCh": 14})],
-    "cutLine": {"atSec": r(162.80), "drawSec": 1.0},
+                 dict(GUESS, atSec=-1, at=[720, 885], underline={"atSec": r(157.06), "fromCh": 9, "toCh": 14, "untilSec": r(162.80)})],
+    "cutLine": {"atSec": r(162.80), "drawSec": 1.0}, "head": False,
     "labels": [ILL(-1)]},
     sid="P_open_it", transitionIn="cut")
 

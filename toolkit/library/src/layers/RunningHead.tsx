@@ -14,6 +14,9 @@ export const HEAD_ON = new Set([
 ]);
 type B = { start: number; end: number; component: string; props: Record<string, unknown>; ground?: { kind: string; tone?: string } };
 const allowed = (b: B) => {
+  // act 5 (Director M5, S4): a shot may switch the head off (a zoomed plate under it) or on (a keyword panel diagram)
+  if (b.props.head === false) return false;
+  if (b.props.head === true) return true;
   if (!HEAD_ON.has(b.component)) return false;
   const bd = b.props.backdrop as { layout?: string } | undefined;
   return !(bd && bd.layout === "full"); // a line over a full-frame picture counts as a full-frame picture

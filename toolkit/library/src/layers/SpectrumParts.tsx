@@ -73,7 +73,7 @@ export const SpectrumRows: React.FC<{ rows: SpectrumRow[] }> = ({ rows }) => {
         const mx1 = r.mark ? Math.max(X(r.mark.fromNm), X(r.mark.toNm)) : 0;
         return (
           <div key={i} style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: out }}>
-            <div style={{ position: "absolute", left: r.x, top: r.y, width: r.w, height: h, borderRadius: 4, background: "#0b0a09", clipPath: `inset(0 ${(1 - p) * 100}% 0 0)` }}>
+            <div style={{ position: "absolute", left: r.x, top: r.y, width: r.w, height: h, clipPath: `inset(0 ${(1 - p) * 100}% 0 0)` }}>
               <div style={{ position: "absolute", inset: 0, borderRadius: 4, background: profileGradient(r.profile, rev), ...FEATHER }} />
             </div>
             {r.label && pl > 0 ? (
@@ -129,7 +129,7 @@ export const Divisions: React.FC<{ d: SpectrumDivisions }> = ({ d }) => {
   d.fractions.forEach((f) => edges.push(edges[edges.length - 1] + (f / sum) * w));
   const cols = d.colorsNm.map((nm) => wavelengthRGB(nm));
   const stops: string[] = [];
-  const B = 20 / w;
+  const B = 40 / w; // blend +-40 px (Designer S3)
   d.fractions.forEach((_, i) => {
     const a = (edges[i] - x0) / w;
     const b = (edges[i + 1] - x0) / w;
@@ -144,15 +144,18 @@ export const Divisions: React.FC<{ d: SpectrumDivisions }> = ({ d }) => {
   const stopsX = edges.slice().reverse(); // violet end first: the whole chord G, then the stops towards red
   return (
     <>
-      <div style={{ position: "absolute", left: x0, top: y, width: w, height: h, borderRadius: 6, background: `linear-gradient(90deg, ${stops.join(", ")})`, clipPath: `inset(0 ${(1 - pDraw) * 100}% 0 0)`, ...FEATHER }} />
-      {d.brighten
-        ? d.fractions.map((_, i) => {
-            const b = d.brighten!;
-            const p = interpolate(frame, [sec(b.atSec + i * 0.12, fps), sec(b.atSec + i * 0.12 + 0.4, fps)], [0, 1], ease);
-            const dark = (1 - (b.from ?? 0.55)) * (1 - p);
-            return dark > 0 ? <div key={`b${i}`} style={{ position: "absolute", left: edges[i], top: y, width: edges[i + 1] - edges[i], height: h, background: `rgba(0,0,0,${dark})` }} /> : null;
-          })
-        : null}
+      {/* the band as seven slices of one gradient, each dimmed by its own opacity (Designer M5), one feather over all */}
+      <div style={{ position: "absolute", left: x0, top: y, width: w, height: h, clipPath: `inset(0 ${(1 - pDraw) * 100}% 0 0)`, ...FEATHER }}>
+        {d.fractions.map((_, i) => {
+          const b = d.brighten;
+          const p = b ? interpolate(frame, [sec(b.atSec + i * 0.12, fps), sec(b.atSec + i * 0.12 + 0.4, fps)], [0, 1], ease) : 1;
+          const op = b ? (b.from ?? 0.35) + (1 - (b.from ?? 0.35)) * p : 1;
+          const l = edges[i] - x0;
+          return (
+            <div key={`s${i}`} style={{ position: "absolute", left: l, top: 0, width: edges[i + 1] - edges[i] + 0.5, height: h, opacity: op, background: `linear-gradient(90deg, ${stops.join(", ")})`, backgroundSize: `${w}px ${h}px`, backgroundPosition: `${-l}px 0` }} />
+          );
+        })}
+      </div>
       {d.dividersAtSec !== undefined
         ? edges.slice(1, -1).map((ex, i) => {
             const p = interpolate(frame, [sec(d.dividersAtSec! + i * 0.08, fps), sec(d.dividersAtSec! + i * 0.08 + 0.35, fps)], [0, 1], ease);
@@ -180,7 +183,7 @@ export const Divisions: React.FC<{ d: SpectrumDivisions }> = ({ d }) => {
           {stopsX.map((sx, i) => {
             const p = interpolate(frame, [sec((c.notesAtSec ?? c.atSec + 0.3) + i * 0.08, fps), sec((c.notesAtSec ?? c.atSec + 0.3) + i * 0.08 + 0.35, fps)], [0, 1], ease);
             if (p <= 0) return null;
-            const hollow = i === stopsX.length - 1; // the red end (x 210): the stop past the band, drawn open
+            const hollow = i === stopsX.length - 1; // the band's red end (x 210): the octave of the whole chord, drawn open
             return (
               <g key={i} opacity={p} transform={`translate(${sx} ${cy}) scale(${0.7 + 0.3 * p})`}>
                 <line x1={0} y1={-14} x2={0} y2={14} stroke={t.colors.ink} strokeWidth={2} />

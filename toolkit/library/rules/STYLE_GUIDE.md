@@ -37,3 +37,4 @@ board and the locked acts 1-2 and act 3 v5. Each later line carries its date and
 - Drawn spectra and light patches are smooth gradients with feathered edges and fading ends, never stepped bands (PerspectiveGrid fan `smooth`; Designer, act 4, 25 Nov 2026).
 - Props in a drawn room (boards, screens, tables) are shaded objects with texture, thickness and a contact shadow, never flat panel rectangles; name and credit tags are dark chips, also on the rail (TimelineRail `labelTone: "chip"`; Designer, act 4, 25 Nov 2026).
 - Strike-throughs on keyword chips should be ink, keeping the accent for the one replacement chip (Designer SHOULD, act 4; not yet built).
+- Spectrum rows and divisions sit straight on the ground, no black backing; a dimmed division is the same gradient at lower opacity, never a dark box over it (Designer, act 5, 25 Nov 2026).
