@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T10:46:18.959Z",
+ "generated": "2026-11-25T10:51:09.002Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -2213,7 +2213,7 @@
     "public/sfx/kit/whoosh/air_swish_v3.wav"
    ],
    "status": "Active",
-   "use": "Best use: a paper band, colour block or panel wiping across (TRN-011/012/013, TRN-007 slide), starting 0.05-0.15 s before the wipe; rotate v1-v3. Limit: max 30 per episode (raised from 8, Sam approved at WCL-E01 act 2 Gate 1, 22 Nov 2026), 16-22 dB under the voice. Not for: camera pushes (SFX-020) or text appearing.",
+   "use": "Best use: a paper band, colour block or panel wiping across (TRN-011/012/013, TRN-007 slide), starting 0.05-0.15 s before the wipe; rotate v1-v3. Limit: max 45 per episode (raised from 8 at act 2 Gate 1, 22 Nov 2026, and from 30, Sam approved at WCL-E01 act 5 Gate 3, 25 Nov 2026: 'Raise to 45'), 16-22 dB under the voice. Not for: camera pushes (SFX-020) or text appearing.",
    "maxBeats": null,
    "maxShare": null
   },
