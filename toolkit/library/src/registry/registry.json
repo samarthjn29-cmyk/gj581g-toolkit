@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T03:39:33.293Z",
+ "generated": "2026-11-25T06:23:18.542Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3610,6 +3610,42 @@
    "status": "Active",
    "use": "Best use: the paper world behind and inside things: page and card grounds (placement ground), a paper or card hero (placement object), the dark room's plaster wall in WCL-E01 act 4 (7 room shots). Limit: max 40 beats per episode across the kit; each file at most 12 of them; strength as TEX-007 (inside pieces, low); never over text, lines or numbers (DIRECTOR rule 21), never on archival scans or TODAY photos (rule 25). Not for: one texture over the whole frame (TEX-007 rule).",
    "maxBeats": 40,
+   "maxShare": null
+  },
+  "SRC-063": {
+   "id": "SRC-063",
+   "folder": "11_Sources",
+   "name": "NewtonOpticks1704_p92_MusicalChord",
+   "paths": [
+    "public/assets/sources/newton_opticks1704_p92.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: Newton's own words where act 5 of WCL-E01 says he splits the band into seven and spaces them like a musical scale: 'divided after the manner of a musical Chord', the seven colours and the chord lengths highlighted as said; then as a LOK-028 blur ground under the drawn string. Limit: max 6 beats per episode (2 as a card, 4 as a blur ground); page held >= 4 s; tagged ISAAC NEWTON · OPTICKS · 1704 · P. 92. Not for: the rays-have-no-colour line (that is SRC-005, p. 90).",
+   "maxBeats": 6,
+   "maxShare": null
+  },
+  "SRC-064": {
+   "id": "SRC-064",
+   "folder": "11_Sources",
+   "name": "NewtonOpticks1704_TitlePage",
+   "paths": [
+    "public/assets/sources/newton_opticks1704_title.jpg"
+   ],
+   "status": "Planned",
+   "use": "Best use: the line that names Newton's book, Opticks, 1704 (WCL-E01 act 5 opening), with LONDON and MDCCIV highlighted as said; then as a LOK-028 blur ground standing for Newton's view (no Newton portrait left). Limit: max 8 beats per episode (2 as a card, 6 as a blur ground); never cropped to hide that it is a title page. Not for: Newton's own words (the pages are SRC-005, SRC-063).",
+   "maxBeats": 8,
+   "maxShare": null
+  },
+  "NAR-005": {
+   "id": "NAR-005",
+   "folder": "12_Narration",
+   "name": "WCL-E01_Act5_Narration",
+   "paths": [
+    "public/episodes/wcl-e01/05_rays_paced_149wpm_even.mp3"
+   ],
+   "status": "Planned",
+   "use": "Best use: act 5 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say.",
+   "maxBeats": null,
    "maxShare": null
   }
  }
