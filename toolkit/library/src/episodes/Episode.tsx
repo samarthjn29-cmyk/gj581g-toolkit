@@ -63,7 +63,7 @@ export type Beat = {
 export type Cue = { id: string; atSec: number; volumeDb?: number; fadeInSec?: number; fadeOutSec?: number; endSec?: number; file?: string };
 // finish: LOK-030 CinematicFinish over the whole act. motionBlur: LOK-031 on the moving transitions (slide, push,
 // match) for their first 0.8 s only, 6 samples at a 180-degree shutter (render cost stays inside those frames).
-export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number }; finish?: FinishSpec | false; motionBlur?: boolean };
+export type EpisodeProps = { episodeId: string; themeId: string; beats: Beat[]; voice?: Cue; audio?: Cue[]; note?: string; runningHead?: { text: string; fromSec?: number }; finish?: FinishSpec | false; motionBlur?: boolean; previewMode?: boolean };
 
 const MOVING = new Set(["slide", "push", "match", "canvas", "photocard"]);
 const BlurWindow: React.FC<{ frames: number; children: React.ReactNode }> = ({ frames, children }) => {
@@ -230,8 +230,9 @@ const Beats: React.FC<{ beats: Beat[]; motionBlur?: boolean }> = ({ beats, motio
   );
 };
 
-export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [], runningHead, finish, motionBlur }) => (
-  <RegistryModeProvider mode="render">
+export const Episode: React.FC<EpisodeProps> = ({ themeId, beats, voice, audio = [], runningHead, finish, motionBlur, previewMode }) => (
+  // previewMode: a test cut for Sam with candidate (Planned) pieces; frames carry BUILD PREVIEW. Never for a delivery.
+  <RegistryModeProvider mode={previewMode ? "build" : "render"}>
     <ThemeProvider themeId={themeId}>
       <AbsoluteFill>
         {finish ? (

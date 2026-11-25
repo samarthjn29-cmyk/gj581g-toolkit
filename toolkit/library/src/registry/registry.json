@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T10:51:09.002Z",
+ "generated": "2026-11-25T11:39:56.807Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3695,6 +3695,42 @@
    ],
    "status": "Active",
    "use": "Best use: a same-scene change that goes closer or inside, replacing a hard cut within a scene. Limit: max 2 per act, max 10 per episode; at most one in three scene changes of an act. Not for: a change of place or time (TRN-018, TRN-006), anything without a small round detail.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-033": {
+   "id": "LOK-033",
+   "folder": "5_Look_and_Color",
+   "name": "StudioCream",
+   "paths": [
+    "src/themes/studioColour.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: the series ground in place of graphite, if Sam picks it. Limit: the frame layer (no beat cap, as LOK-009). Not for: shots on paper (LOK-027) or photo grounds.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-034": {
+   "id": "LOK-034",
+   "folder": "5_Look_and_Color",
+   "name": "CobaltStudio",
+   "paths": [
+    "src/themes/studioColour.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: the series ground in place of graphite, if Sam picks it. Limit: the frame layer (no beat cap, as LOK-009). Not for: shots on paper (LOK-027) or photo grounds.",
+   "maxBeats": null,
+   "maxShare": null
+  },
+  "LOK-035": {
+   "id": "LOK-035",
+   "folder": "5_Look_and_Color",
+   "name": "SkyLilac",
+   "paths": [
+    "src/themes/studioColour.ts"
+   ],
+   "status": "Planned",
+   "use": "Best use: the series ground in place of graphite, if Sam picks it. Limit: the frame layer (no beat cap, as LOK-009). Not for: shots on paper (LOK-027) or photo grounds.",
    "maxBeats": null,
    "maxShare": null
   }

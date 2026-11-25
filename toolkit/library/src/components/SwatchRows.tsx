@@ -26,9 +26,11 @@ export type SwatchRowsProps = {
   caption?: { text: string; atSec: number; untilSec?: number };
   labels?: LabelSpec[];
   startSec?: number;
+  zoomAtX?: number; // the x the zoom grows from (keeps the right-hand tag inside the frame)
+  zoom?: number; // the whole table larger around the frame centre (stimulation test, 25 Nov 2026)
 };
 
-export const SwatchRows: React.FC<SwatchRowsProps> = ({ columns, rows, caption, labels = [], startSec = 0 }) => {
+export const SwatchRows: React.FC<SwatchRowsProps> = ({ columns, rows, caption, labels = [], startSec = 0, zoom = 1, zoomAtX = 960 }) => {
   useAssets(["VIS-017", "MOT-001", "MOT-002", "MOT-003"]);
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -57,7 +59,7 @@ export const SwatchRows: React.FC<SwatchRowsProps> = ({ columns, rows, caption, 
         });
 
   return (
-    <AbsoluteFill style={{ transform: `scale(${drift(frame, durationInFrames, 0.015)})` }}>
+    <AbsoluteFill style={{ transform: `scale(${zoom * drift(frame, durationInFrames, 0.015)})`, transformOrigin: `${zoomAtX}px 540px` }}>
       {columns.map((c, i) => (
         <div
           key={c}

@@ -35,6 +35,8 @@ export type Theme = {
     readonly grainStepFrames: number; // grain pattern changes every N frames
     readonly vignette: number; // 0-1 edge darkening
     readonly gridOpacity: number;
+    // Moving colour fields on a light ground (LOK-033..035 candidates, Sam 25 Nov 2026: "an illusion of energy and creativity")
+    readonly blobs?: { readonly colors: readonly string[]; readonly opacity: number; readonly size: number; readonly speed: number };
   };
   readonly motion: {
     readonly drift: number; // one slow move per shot: 1.00 -> 1 + drift (calm version: 0.03 at most)

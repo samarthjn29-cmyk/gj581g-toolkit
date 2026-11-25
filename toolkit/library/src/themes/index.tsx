@@ -2,12 +2,13 @@ import React, { createContext, useContext } from "react";
 import type { Theme } from "./types";
 import { warmGraphite } from "./warmGraphite";
 import { archivalDesk } from "./archivalDesk";
+import { studioCream, cobaltStudio, skyLilac } from "./studioColour";
 import { useAsset, useRegistryMode } from "../registry";
 import { ensureFonts } from "../fonts";
 
 export type { Theme };
 // One file per Theme_Library row in use. A theme may change from video to video; the episode overview records the pick.
-export const THEMES: Record<string, Theme> = { "LOK-009": warmGraphite, "LOK-001": archivalDesk };
+export const THEMES: Record<string, Theme> = { "LOK-009": warmGraphite, "LOK-001": archivalDesk, "LOK-033": studioCream, "LOK-034": cobaltStudio, "LOK-035": skyLilac };
 export const DEFAULT_THEME = "LOK-009";
 
 const ThemeContext = createContext<Theme>(warmGraphite);

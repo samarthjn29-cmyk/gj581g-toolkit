@@ -46,6 +46,17 @@ export const OpticalStack: React.FC<{
           <rect width="100%" height="100%" fill={`url(#grid${uid})`} />
         </svg>
       ) : null}
+      {t.optical.blobs
+        ? t.optical.blobs.colors.map((c, i) => {
+            const b = t.optical.blobs!;
+            const ph = (frame / 30) * b.speed + i * 2.1;
+            const cx = 960 + Math.cos(ph * 0.7 + i) * (520 + 120 * i) * (i % 2 ? -1 : 1);
+            const cy = 540 + Math.sin(ph * 0.9 + i * 1.7) * (300 + 40 * i);
+            return (
+              <div key={`b${i}`} style={{ position: "absolute", left: cx - b.size / 2, top: cy - b.size / 2, width: b.size, height: b.size, borderRadius: "50%", background: `radial-gradient(circle, ${c} 0%, transparent 68%)`, opacity: b.opacity, mixBlendMode: "multiply", filter: "blur(30px)" }} />
+            );
+          })
+        : null}
       {t.colors.leaks.map((c, i) => (
         <AbsoluteFill
           key={c}
