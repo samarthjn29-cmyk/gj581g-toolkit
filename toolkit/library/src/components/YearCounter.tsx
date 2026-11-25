@@ -15,9 +15,10 @@ export type YearCounterProps = {
   dimAtSec?: number;
   caption?: string; // small mono line under it
   startSec?: number;
+  hitSec?: number; // the big sound (sub / thump) lands here: the number pops 1 -> 1.06 -> 1 and a shadow blooms
 };
 
-export const YearCounter: React.FC<YearCounterProps> = ({ from = 0, to, unit, countFromSec, lockSec, dimAtSec, caption, startSec = 0 }) => {
+export const YearCounter: React.FC<YearCounterProps> = ({ from = 0, to, unit, countFromSec, lockSec, dimAtSec, caption, startSec = 0, hitSec }) => {
   useAssets(["VIS-018", "MOT-001", "MOT-002", "MOT-003"]);
   const t = useTheme();
   const frame = useCurrentFrame();
@@ -32,6 +33,11 @@ export const YearCounter: React.FC<YearCounterProps> = ({ from = 0, to, unit, co
   const pLock = lock(frame, fps, lockSec);
   const dim = dimAtSec !== undefined ? 0.35 + 0.65 * exit(frame, fps, dimAtSec, 0.9) : 1;
   const locked = frame >= sec(lockSec, fps);
+  // picture hit: fast up (0.1 s), slower settle (0.35 s), so the image lands with the sound
+  const hUp = hitSec !== undefined ? interpolate(frame, [sec(hitSec, fps), sec(hitSec + 0.1, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }) : 0;
+  const hDown = hitSec !== undefined ? interpolate(frame, [sec(hitSec + 0.1, fps), sec(hitSec + 0.45, fps)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) }) : 0;
+  const hit = hUp * (1 - hDown);
+  const bloom = hitSec !== undefined ? hUp * (1 - 0.6 * hDown) : 0;
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: dim, transform: `scale(${drift(frame, durationInFrames, 0.02)})` }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 36, ...rise(pIn, 24) }}>
@@ -43,6 +49,8 @@ export const YearCounter: React.FC<YearCounterProps> = ({ from = 0, to, unit, co
             lineHeight: 1,
             fontVariantNumeric: "tabular-nums",
             color: locked ? t.colors.accent : t.colors.ink,
+            transform: `scale(${1 + 0.06 * hit})`,
+            textShadow: bloom > 0 ? `0 ${10 * bloom}px ${50 * bloom}px rgba(22,21,20,${0.28 * bloom})` : undefined,
           }}
         >
           {Math.round(v)}

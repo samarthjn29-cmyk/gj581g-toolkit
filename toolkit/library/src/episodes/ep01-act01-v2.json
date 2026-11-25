@@ -2048,7 +2048,8 @@
     "to": 151,
     "unit": "YEARS",
     "countFromSec": 1.19,
-    "lockSec": 4.47
+    "lockSec": 4.47,
+    "hitSec": 5.8
    },
    "beatTimes": [
     [

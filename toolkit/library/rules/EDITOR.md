@@ -35,6 +35,11 @@ the colour check (`scripts/colour-check.py`). It steps frame by frame (1/30 s) a
 8. **Timing in frames:** sounds within 1 frame of their visual hit; pops and lands on the frame the thing settles.
 9. **Entrances and exits:** nothing pops in or out in one frame unless it is a hard cut; exits match their entrances.
 10. **Overlaps:** two things entering at once, a move fighting a camera drift, text moving while it must be read.
+11. **Picture hits (26 Nov 2026):** every impact sound (sub, thump, slam) has a picture event on its frame; a big
+    sound on a still picture is a MUST. Run `scripts/hit-check.py CLIP ACT.json` and read its result.
+12. **Moves finish (26 Nov 2026):** at the end of every opening, dive, wipe or reveal, check the last frames' four
+    edges for leftovers: a rim arc, a sliver of the old shot, a mask edge. Shapes that open must clear the
+    farthest corner, not a fixed radius.
 
 ## Output (`episodes_src/<EP>/gate3_<act>/EDITOR_<clip>.md`)
 A verdict line, then MUST / SHOULD / TASTE with times and exact fixes (seconds, frames, which prop to change). Fixes

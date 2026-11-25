@@ -248,6 +248,11 @@ for c in music["cues"]:
     c["levels"] = [[round(x + D, 2) if x >= 56.8 else x, v] for x, v in c.get("levels", [])]
 music["quiet"] = [[round(x + D, 2), round(y + D, 2), v, r] if x >= T0 else [x, y, v, r] for x, y, v, r in music["quiet"]]
 music["dur"] = round(music["dur"] + D, 2)
+# Picture hit on "151 years" (Gate 3 SHOULD, fixed 26 Nov 2026): the counter pops on the sub, read from the sub's own time
+_sub = next(x for x in a["audio"] if x["id"] == "SFX-025")
+_yc = next(b for b in a["beats"] if b["id"] == "32+33")
+_yc["props"]["hitSec"] = round(_sub["atSec"] - _yc["start"], 2)
+
 json.dump(a, open(OUT, "w"), indent=1, ensure_ascii=False)
 json.dump(music, open(MUSIC, "w"), indent=1)
 print("ok", OUT, len(a["beats"]), "shots,", len(a["audio"]), "sound cues; music", MUSIC)

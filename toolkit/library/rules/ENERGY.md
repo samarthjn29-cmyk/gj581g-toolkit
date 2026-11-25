@@ -18,7 +18,10 @@ These rules replace the calm limits of 22 Nov 2026 wherever they conflict. Accur
 5. **Camera moves you can feel.** LayerStage push up to its cap with pans of 150-250 px; drift on still shots may
    reach 6%.
 6. **Sound lands.** A sub impact (SFX-025) on the act's one big line; a riser (MUS-015) into the act's turn; ticks or
-   pops on items that count up or are named; the music swells 3-4 dB for 2-3 s at a reveal.
+   pops on items that count up or are named; the music swells 3-4 dB for 2-3 s at a reveal. **The picture hits with
+   the sound (26 Nov 2026):** a sub, thump or other impact lands on a visible picture event in the same frame (a
+   1.0 -> 1.06 -> 1.0 pop, a shadow bloom, a cut, a flash), never on a picture that settled earlier
+   (YearCounter `hitSec`; `scripts/hit-check.py` at Gate 3).
 7. **Ground: LOK-033 Studio Cream** (warm cream, slow colour fields) for diagram, chip and data shots; pages keep
    the paper desk; photos and footage keep their own frames.
 8. **The boredom pass.** At Gate 2 and Gate 3 the Editor also answers: "Where would a viewer reach for their phone?"

@@ -93,7 +93,9 @@ export const LensDive: React.FC<LensDiveProps> = ({
     // the view inside centres on the stage while the ring opens past the frame
     cx += (stage[0] - cx) * pOpen;
     cy += (stage[1] - cy) * pOpen;
-    cr = cr + (1250 - cr) * pOpen;
+    // open past the farthest corner (plus the ring's width), so no rim is ever left on a frame edge
+    const far = Math.max(...[[0, 0], [W, 0], [0, H], [W, H]].map(([x, y]) => Math.hypot(x - stage[0], y - stage[1])));
+    cr = cr + (far + 60 - cr) * pOpen;
   }
 
   // the portrait follows the zoom around the lens, so the lens stays under the circle as it travels
@@ -146,7 +148,7 @@ export const LensDive: React.FC<LensDiveProps> = ({
           </g>
         ) : null}
         {/* the lens rim */}
-        <circle cx={cx} cy={cy} r={Math.max(0, cr)} fill="none" stroke={t.colors.ink} strokeWidth={ringW} opacity={Math.min(1, 0.35 + pP + pOpen) * (1 - pOpen * 0.8)} />
+        <circle cx={cx} cy={cy} r={Math.max(0, cr)} fill="none" stroke={t.colors.ink} strokeWidth={ringW} opacity={Math.min(1, 0.35 + pP + pOpen) * (1 - pOpen)} />
         {/* brackets locking onto the lens (before the push) */}
         {pB > 0 && pP < 1
           ? [
