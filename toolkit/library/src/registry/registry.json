@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T18:58:07.068Z",
+ "generated": "2026-11-25T03:39:33.293Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3598,8 +3598,14 @@
    "folder": "8_Textures",
    "name": "TexturelabsPaperWorldKit",
    "paths": [
+    "public/assets/textures/texturelabs/Texturelabs_Concrete_197M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Concrete_198M.jpg",
     "public/assets/textures/texturelabs/Texturelabs_Concrete_202M.jpg",
-    "public/assets/textures/texturelabs/Texturelabs_Grunge_352M.jpg"
+    "public/assets/textures/texturelabs/Texturelabs_Grunge_352M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Grunge_353M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Paper_363M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Paper_367M.jpg",
+    "public/assets/textures/texturelabs/Texturelabs_Paper_373M.jpg"
    ],
    "status": "Active",
    "use": "Best use: the paper world behind and inside things: page and card grounds (placement ground), a paper or card hero (placement object), the dark room's plaster wall in WCL-E01 act 4 (7 room shots). Limit: max 40 beats per episode across the kit; each file at most 12 of them; strength as TEX-007 (inside pieces, low); never over text, lines or numbers (DIRECTOR rule 21), never on archival scans or TODAY photos (rule 25). Not for: one texture over the whole frame (TEX-007 rule).",
