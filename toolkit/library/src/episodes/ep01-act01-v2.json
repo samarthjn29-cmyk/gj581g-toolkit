@@ -6,7 +6,8 @@
  "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in. Energy rework (ENERGY.md, Sam 25 Nov 2026) on LOK-033 Studio Cream: rework_act1.py. v2 (Sam 25 Nov 2026, all four picks): rework_act1_v2.py per director/ep01-act01_v2_brief.md.",
  "voice": {
   "id": "NAR-001",
-  "atSec": 0.8
+  "atSec": 0.8,
+  "file": "public/episodes/wcl-e01/01_flower_screen_paced.wav"
  },
  "audio": [
   {
@@ -159,109 +160,145 @@
   },
   {
    "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 56.95,
+   "volumeDb": -19.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 57.85,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 63.3,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 64.09,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 64.67,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 66.68,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 56.9,
+   "atSec": 68.05,
    "volumeDb": -17.6
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
-   "atSec": 59.13,
+   "atSec": 69.93,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-017",
    "file": "public/sfx/kit/tactile/pencil_stroke.wav",
-   "atSec": 59.85,
+   "atSec": 70.65,
    "volumeDb": -31.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 59.9,
+   "atSec": 70.7,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
-   "atSec": 61.13,
+   "atSec": 71.93,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 62.7,
+   "atSec": 73.5,
    "volumeDb": -17.6
   },
   {
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/paper_move.wav",
-   "atSec": 64.75,
+   "atSec": 75.55,
    "volumeDb": -21.4
   },
   {
    "id": "SFX-020",
    "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
-   "atSec": 67.35,
+   "atSec": 78.15,
    "volumeDb": -21.6
   },
   {
    "id": "SFX-016",
    "file": "public/sfx/kit/tactile/pages_move.wav",
-   "atSec": 68.5,
-   "endSec": 69.3,
+   "atSec": 79.3,
+   "endSec": 80.1,
    "fadeOutSec": 0.15,
    "volumeDb": -18.5
   },
   {
    "id": "SFX-003",
    "file": "public/sfx/kit/mechanical/shutter_vintage.wav",
-   "atSec": 72.18,
+   "atSec": 82.98,
    "volumeDb": -24.0
   },
   {
    "id": "SFX-001",
-   "atSec": 77.15,
+   "atSec": 87.95,
    "volumeDb": -15
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
-   "atSec": 79.71,
+   "atSec": 90.51,
    "volumeDb": -20.0
   },
   {
    "id": "MUS-015",
-   "atSec": 84.7,
+   "atSec": 95.5,
    "volumeDb": -12.0
   },
   {
    "id": "SFX-015",
-   "atSec": 85.87,
+   "atSec": 96.67,
    "volumeDb": -22
   },
   {
    "id": "SFX-025",
    "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
-   "atSec": 87.2,
+   "atSec": 98.0,
    "volumeDb": -12.0
   },
   {
    "id": "SFX-005",
-   "atSec": 87.2,
+   "atSec": 98.0,
    "volumeDb": -14
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
-   "atSec": 87.85,
+   "atSec": 98.65,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-022",
    "file": "public/sfx/kit/ambience/projector_hum.wav",
-   "atSec": 89.9,
-   "endSec": 95.6,
+   "atSec": 100.7,
+   "endSec": 106.4,
    "volumeDb": -27.6,
    "fadeInSec": 0.4,
    "fadeOutSec": 0.6
@@ -269,48 +306,48 @@
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
-   "atSec": 90.28,
+   "atSec": 101.08,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
-   "atSec": 90.37,
+   "atSec": 101.17,
    "volumeDb": -21.0
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
-   "atSec": 92.98,
+   "atSec": 103.78,
    "volumeDb": -20.0
   },
   {
    "id": "SFX-028",
    "file": "public/sfx/kit/pixabay/shutter_lock_v2.wav",
-   "atSec": 94.64,
+   "atSec": 105.44,
    "volumeDb": -18
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 95.25,
+   "atSec": 106.05,
    "volumeDb": -19.0
   },
   {
    "id": "SFX-019",
    "file": "public/sfx/kit/mechanical/switch_click.wav",
-   "atSec": 95.88,
+   "atSec": 106.68,
    "volumeDb": -21.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 98.65,
+   "atSec": 109.45,
    "volumeDb": -18.0
   },
   {
    "id": "MUS-006",
-   "atSec": 98.75,
+   "atSec": 109.55,
    "volumeDb": -6
   }
  ],
@@ -1361,12 +1398,139 @@
    }
   },
   {
+   "id": "22b",
+   "beats": [
+    "E01-A1-22A",
+    "E01-A1-22B",
+    "E01-A1-22C",
+    "E01-A1-22D"
+   ],
+   "start": 57.0,
+   "end": 68.15,
+   "component": "FootagePlate",
+   "transitionIn": "push",
+   "focus": [
+    1480,
+    600
+   ],
+   "assets": [
+    "VIS-016",
+    "SRC-017",
+    "TRN-006",
+    "TXT-010",
+    "TXT-011",
+    "TXT-024",
+    "MOT-001",
+    "LOK-010",
+    "SFX-024",
+    "SFX-026",
+    "MUS-013"
+   ],
+   "props": {
+    "srcId": "SRC-017",
+    "kind": "video",
+    "size": [
+     1920,
+     1080
+    ],
+    "focus": 0.5,
+    "zoom": 1.15,
+    "clipStartSec": 0,
+    "playbackRate": 0.6,
+    "push": 0.03,
+    "labels": [],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "A SCREEN, UP CLOSE · TODAY",
+       "atSec": 0.85
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-22A",
+     57.0,
+     59.8
+    ],
+    [
+     "E01-A1-22B",
+     59.8,
+     62.9
+    ],
+    [
+     "E01-A1-22C",
+     62.9,
+     65.9
+    ],
+    [
+     "E01-A1-22D",
+     65.9,
+     68.15
+    ]
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 110,
+      "untilSec": 2.85,
+      "chips": [
+       {
+        "text": "your screen",
+        "atSec": 0.85,
+        "x": 140,
+        "y": 760
+       }
+      ]
+     },
+     {
+      "size": 120,
+      "untilSec": 9.18,
+      "chips": [
+       {
+        "text": "red",
+        "atSec": 6.3,
+        "x": 140,
+        "y": 520
+       },
+       {
+        "text": "green",
+        "atSec": 7.09,
+        "x": 140,
+        "y": 660
+       },
+       {
+        "text": "blue",
+        "atSec": 7.67,
+        "x": 140,
+        "y": 800
+       }
+      ]
+     },
+     {
+      "size": 130,
+      "chips": [
+       {
+        "text": "not one of them is pink.",
+        "atSec": 9.68,
+        "x": 140,
+        "y": 760,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
    "id": "23",
    "beats": [
     "E01-A1-23"
    ],
-   "start": 57.0,
-   "end": 59.95,
+   "start": 68.15,
+   "end": 70.75,
    "component": "FootagePlate",
    "assets": [
     "VIS-016",
@@ -1399,8 +1563,8 @@
    "beatTimes": [
     [
      "E01-A1-23",
-     57.0,
-     59.95
+     68.15,
+     70.75
     ]
    ],
    "transitionIn": "flash",
@@ -1411,7 +1575,7 @@
       "chips": [
        {
         "text": "a silly question?",
-        "atSec": 2.13,
+        "atSec": 1.78,
         "x": 120,
         "y": 800
        }
@@ -1425,8 +1589,8 @@
    "beats": [
     "E01-A1-24"
    ],
-   "start": 59.95,
-   "end": 62.6,
+   "start": 70.75,
+   "end": 73.4,
    "component": "ParallaxCutout",
    "assets": [
     "VIS-004",
@@ -1480,8 +1644,8 @@
    "beatTimes": [
     [
      "E01-A1-24",
-     59.95,
-     62.6
+     70.75,
+     73.4
     ]
    ],
    "transitionIn": "push",
@@ -1512,8 +1676,8 @@
     "E01-A1-25",
     "E01-A1-26"
    ],
-   "start": 62.6,
-   "end": 67.8,
+   "start": 73.4,
+   "end": 78.6,
    "component": "DuotoneCollage",
    "assets": [
     "VIS-028",
@@ -1587,13 +1751,13 @@
    "beatTimes": [
     [
      "E01-A1-25",
-     62.6,
-     65.2
+     73.4,
+     76.0
     ],
     [
      "E01-A1-26",
-     65.2,
-     67.8
+     76.0,
+     78.6
     ]
    ],
    "transitionIn": "band",
@@ -1608,8 +1772,8 @@
     "E01-A1-27",
     "E01-A1-28"
    ],
-   "start": 67.8,
-   "end": 72.2,
+   "start": 78.6,
+   "end": 83.0,
    "component": "DuotoneCollage",
    "assets": [
     "VIS-028",
@@ -1679,13 +1843,13 @@
    "beatTimes": [
     [
      "E01-A1-27",
-     67.8,
-     69.9
+     78.6,
+     80.7
     ],
     [
      "E01-A1-28",
-     69.9,
-     72.2
+     80.7,
+     83.0
     ]
    ],
    "transitionIn": "match"
@@ -1697,8 +1861,8 @@
     "E01-A1-30",
     "E01-A1-31"
    ],
-   "start": 72.2,
-   "end": 81.4,
+   "start": 83.0,
+   "end": 92.2,
    "component": "LensDive",
    "assets": [
     "VIS-032",
@@ -1826,18 +1990,18 @@
    "beatTimes": [
     [
      "E01-A1-29",
-     72.2,
-     75.0
+     83.0,
+     85.8
     ],
     [
      "E01-A1-30",
-     75.0,
-     78.0
+     85.8,
+     88.8
     ],
     [
      "E01-A1-31",
-     78.0,
-     81.4
+     88.8,
+     92.2
     ]
    ],
    "transitionIn": "lens",
@@ -1864,8 +2028,8 @@
     "E01-A1-32",
     "E01-A1-33"
    ],
-   "start": 81.4,
-   "end": 87.9,
+   "start": 92.2,
+   "end": 98.7,
    "component": "YearCounter",
    "assets": [
     "VIS-018",
@@ -1889,13 +2053,13 @@
    "beatTimes": [
     [
      "E01-A1-32",
-     81.4,
-     84.8
+     92.2,
+     95.6
     ],
     [
      "E01-A1-33",
-     84.8,
-     87.9
+     95.6,
+     98.7
     ]
    ],
    "ground": {
@@ -1908,8 +2072,8 @@
    "beats": [
     "E01-A1-34"
    ],
-   "start": 87.9,
-   "end": 90.25,
+   "start": 98.7,
+   "end": 101.05,
    "component": "FootagePlate",
    "assets": [
     "VIS-016",
@@ -1938,8 +2102,8 @@
    "beatTimes": [
     [
      "E01-A1-34",
-     87.9,
-     90.25
+     98.7,
+     101.05
     ]
    ],
    "transitionIn": "push",
@@ -1954,8 +2118,8 @@
     "E01-A1-35",
     "E01-A1-36"
    ],
-   "start": 90.25,
-   "end": 95.3,
+   "start": 101.05,
+   "end": 106.1,
    "component": "PerspectiveGrid",
    "assets": [
     "VIS-015",
@@ -2040,13 +2204,13 @@
    "beatTimes": [
     [
      "E01-A1-35",
-     90.25,
-     93.2
+     101.05,
+     104.0
     ],
     [
      "E01-A1-36",
-     93.2,
-     95.3
+     104.0,
+     106.1
     ]
    ],
    "transitionIn": "band",
@@ -2082,8 +2246,8 @@
    "beats": [
     "E01-A1-37"
    ],
-   "start": 95.3,
-   "end": 98.6,
+   "start": 106.1,
+   "end": 109.4,
    "component": "LensDive",
    "assets": [
     "VIS-032",
@@ -2164,8 +2328,8 @@
    "beatTimes": [
     [
      "E01-A1-37",
-     95.3,
-     98.6
+     106.1,
+     109.4
     ]
    ],
    "transitionIn": "dive",
@@ -2182,8 +2346,8 @@
    "beats": [
     "E01-A1-38"
    ],
-   "start": 98.6,
-   "end": 101.6,
+   "start": 109.4,
+   "end": 112.4,
    "component": "SeriesTitleCard",
    "assets": [
     "PKG-005",
@@ -2198,8 +2362,8 @@
    "beatTimes": [
     [
      "E01-A1-38",
-     98.6,
-     101.6
+     109.4,
+     112.4
     ]
    ],
    "transitionIn": "prism",
@@ -2213,8 +2377,8 @@
    "beats": [
     "E01-A1-39"
    ],
-   "start": 101.6,
-   "end": 104.6,
+   "start": 112.4,
+   "end": 115.4,
    "component": "EpisodeCard",
    "assets": [
     "PKG-006",
@@ -2230,8 +2394,8 @@
    "beatTimes": [
     [
      "E01-A1-39",
-     101.6,
-     104.6
+     112.4,
+     115.4
     ]
    ]
   }

@@ -184,6 +184,70 @@ music = {
     "sweeps": [[33.86, 0.8]],
     "ids": {"cues": [c["id"] for c in cues], "events": []},
 }
+# --- the viewer's screen (Sam, 25 Nov 2026 at act 1 v2 Gate 3: "What kind of hook can we introduce in our video which
+# a viewer can relate to? ... give the viewers an object ... make it personal"; picked "Your screen" and "I'll record a
+# line"). Sam's take 01_screen.mp3 ("Even on the screen in front of you. Look closely, and that pink is tiny red, green
+# and blue lights. Not one of them is pink."), paced to 149 wpm (pace_even.py) and spliced into the pause after
+# "...actually is." (gate3_act1v2/screen/insert.json): NAR-001 file 01_flower_screen_paced.wav. Everything from 57.0 on
+# moves by D; a new shot 22b (the real screen's sub-pixels, SRC-017) carries the line and plants act 7's keeper ending.
+K = "public/sfx/kit/"
+INS = json.load(open(os.path.join(HERE, "..", "gate3_act1v2", "screen", "insert.json")))
+D, T0 = INS["D"], 57.0
+TW = {w.strip(".,").lower() + str(i): round(INS["take_at"] + s0, 2) for i, (w, s0, e0) in enumerate(INS["words"])}
+tw = lambda word, i: TW[word + str(i)]
+a["voice"]["file"] = "public/episodes/wcl-e01/01_flower_screen_paced.wav"
+for b in a["beats"]:
+    if b["start"] >= T0 - 1e-6:
+        b["start"] = round(b["start"] + D, 2); b["end"] = round(b["end"] + D, 2)
+        b["beatTimes"] = [[i, round(x + D, 2), round(y + D, 2)] for i, x, y in b["beatTimes"]]
+for c in a["audio"]:
+    if c["atSec"] >= 56.85:
+        c["atSec"] = round(c["atSec"] + D, 2)
+        if "endSec" in c:
+            c["endSec"] = round(c["endSec"] + D, 2)
+S23 = 68.15  # the flash into the candle waits for the end of "pink." (67.82)
+b23 = next(b for b in a["beats"] if b["id"] == "23")
+shift23 = b23["start"] - S23
+b23["start"] = S23
+b23["beatTimes"][0][1] = S23
+for pnl in b23.get("overlay", {}).get("chips", []):
+    for ch in pnl["chips"]:
+        ch["atSec"] = round(ch["atSec"] + shift23, 2)
+for c in a["audio"]:
+    if c["id"] == "SFX-024" and abs(c["atSec"] - (56.9 + D)) < 0.06:
+        c["atSec"] = round(S23 - 0.1, 2)  # the flash's swish on the new cut
+L22 = T0
+new = {
+    "id": "22b", "beats": ["E01-A1-22A", "E01-A1-22B", "E01-A1-22C", "E01-A1-22D"], "start": T0, "end": S23,
+    "component": "FootagePlate", "transitionIn": "push", "focus": [1480, 600],
+    "assets": ["VIS-016", "SRC-017", "TRN-006", "TXT-010", "TXT-011", "TXT-024", "MOT-001", "LOK-010", "SFX-024", "SFX-026", "MUS-013"],
+    "props": {"srcId": "SRC-017", "kind": "video", "size": [1920, 1080], "focus": 0.5, "zoom": 1.15, "clipStartSec": 0, "playbackRate": 0.6,  # red and green sub-pixels lit on "red, green" (the clip turns blue after ~8 s)
+             
+              "push": 0.03, "labels": [],
+              "tag": {"at": "corner", "parts": [{"text": "A SCREEN, UP CLOSE · TODAY", "atSec": round(tw("screen", 3) - L22, 2)}]}},
+    "beatTimes": [["E01-A1-22A", T0, 59.8], ["E01-A1-22B", 59.8, 62.9], ["E01-A1-22C", 62.9, 65.9], ["E01-A1-22D", 65.9, S23]],
+    "overlay": {"chips": [
+        {"size": 110, "untilSec": round(tw("look", 8) - 0.6 - L22, 2), "chips": [{"text": "your screen", "atSec": round(tw("screen", 3) - L22, 2), "x": 140, "y": 760}]},
+        {"size": 120, "untilSec": round(tw("not", 20) - 0.5 - L22, 2), "chips": [
+            {"text": "red", "atSec": round(tw("red", 15) - L22, 2), "x": 140, "y": 520},
+            {"text": "green", "atSec": round(tw("green", 16) - L22, 2), "x": 140, "y": 660},
+            {"text": "blue", "atSec": round(tw("blue", 18) - L22, 2), "x": 140, "y": 800}]},
+        {"size": 130, "chips": [{"text": "not one of them is pink.", "atSec": round(tw("not", 20) - L22, 2), "x": 140, "y": 760, "accent": True}]}]},
+}
+i22 = next(i for i, b in enumerate(a["beats"]) if b["id"] == "22")
+a["beats"].insert(i22 + 1, new)
+for t in (tw("screen", 3), tw("red", 15), tw("green", 16), tw("blue", 18), tw("not", 20)):
+    a["audio"].append({"id": "SFX-026", "file": f"{K}tactile/soft_pop_v{1 + int(t * 10) % 3}.wav", "atSec": t, "volumeDb": -20.0})
+a["audio"].append({"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(T0 - 0.05, 2), "volumeDb": -19.0})  # the push into the screen
+a["audio"].sort(key=lambda c: c["atSec"])
+for c in music["cues"]:
+    if c["until"] > T0:
+        c["until"] = round(c["until"] + D, 2)
+    if c["at"] >= T0:
+        c["at"] = round(c["at"] + D, 2)
+    c["levels"] = [[round(x + D, 2) if x >= 56.8 else x, v] for x, v in c.get("levels", [])]
+music["quiet"] = [[round(x + D, 2), round(y + D, 2), v, r] if x >= T0 else [x, y, v, r] for x, y, v, r in music["quiet"]]
+music["dur"] = round(music["dur"] + D, 2)
 json.dump(a, open(OUT, "w"), indent=1, ensure_ascii=False)
 json.dump(music, open(MUSIC, "w"), indent=1)
 print("ok", OUT, len(a["beats"]), "shots,", len(a["audio"]), "sound cues; music", MUSIC)

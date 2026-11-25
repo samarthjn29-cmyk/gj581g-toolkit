@@ -1479,7 +1479,8 @@
    "folder": "12_Narration",
    "name": "WCL-E01_Act1_Narration",
    "paths": [
-    "public/episodes/wcl-e01/01_flower_paced_148wpm.wav"
+    "public/episodes/wcl-e01/01_flower_paced_148wpm.wav",
+    "public/episodes/wcl-e01/01_flower_screen_paced.wav"
    ],
    "status": "Active",
    "use": "Best use: act 1 of WCL-E01 only. Limit: this act's narration, once. Not for: any other act, episode, trailer or Short without Sam's say-so.",

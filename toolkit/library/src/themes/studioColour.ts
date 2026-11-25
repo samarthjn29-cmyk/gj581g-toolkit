@@ -23,7 +23,8 @@ export const studioCream: Theme = {
     dimMask: "rgba(244,236,221,0.82)",
     leaks: [],
   },
-  optical: { grain: 0.07, grainStepFrames: 2, vignette: 0.06, gridOpacity: 0, blobs: { colors: ["#FF7A59", "#FFC93C", "#5B8CFF", "#FF8FB8"], opacity: 0.55, size: 1100, speed: 0.35 } },
+  optical: { grain: 0.07, grainStepFrames: 2, vignette: 0.06, gridOpacity: 0, blobs: { colors: ["#FF7A59", "#FFC93C", "#5B8CFF", "#FF8FB8"], opacity: 0.55, size: 1100, speed: 0.35 } },  // page shots keep the paper palette but the series' one accent (Sam, 25 Nov 2026: "Tomato everywhere")
+  paper: { ...base.paper, accent: "#FF4F2E", accentSoft: "rgba(255,79,46,0.30)" },
 };
 
 // LOK-034 Cobalt Studio: saturated cobalt ground, white ink, sun-yellow accent, cyan and magenta fields.
