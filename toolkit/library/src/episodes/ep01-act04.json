@@ -18,7 +18,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 2.28,
+   "atSec": 2.68,
    "volumeDb": -21.0
   },
   {
@@ -30,13 +30,13 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
-   "atSec": 9.52,
+   "atSec": 9.91,
    "volumeDb": -21.0
   },
   {
    "id": "SFX-020",
    "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
-   "atSec": 24.1,
+   "atSec": 24.57,
    "volumeDb": -24.0
   },
   {
@@ -61,6 +61,24 @@
    "fadeOutSec": 0.4
   },
   {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_hum.wav",
+   "atSec": 44.6,
+   "endSec": 56.4,
+   "volumeDb": -30.0,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.4
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_hum.wav",
+   "atSec": 56.0,
+   "endSec": 60.7,
+   "volumeDb": -30.0,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.4
+  },
+  {
    "id": "SFX-028",
    "file": "public/sfx/kit/pixabay/glass_clink.wav",
    "atSec": 38.95,
@@ -69,13 +87,13 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 60.7,
-   "volumeDb": -21.0
+   "atSec": 60.78,
+   "volumeDb": -24.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 66.07,
+   "atSec": 66.41,
    "volumeDb": -21.0
   },
   {
@@ -88,18 +106,27 @@
    "id": "SFX-019",
    "file": "public/sfx/kit/mechanical/dial_turn.wav",
    "atSec": 86.85,
-   "volumeDb": -26.0
+   "volumeDb": -20.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 91.22,
+   "atSec": 91.42,
    "volumeDb": -21.0
   },
   {
    "id": "SFX-022",
    "file": "public/sfx/kit/ambience/projector_run.wav",
    "atSec": 91.0,
+   "endSec": 112.1,
+   "volumeDb": -30.0,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.4
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_run.wav",
+   "atSec": 102.7,
    "endSec": 112.1,
    "volumeDb": -30.0,
    "fadeInSec": 0.4,
@@ -132,7 +159,7 @@
   {
    "id": "SFX-003",
    "file": "public/sfx/kit/mechanical/shutter_click.wav",
-   "atSec": 146.2,
+   "atSec": 145.8,
    "volumeDb": -24.0
   },
   {
@@ -144,7 +171,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 164.78,
+   "atSec": 165.15,
    "volumeDb": -21.0
   },
   {
@@ -156,7 +183,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
-   "atSec": 189.28,
+   "atSec": 189.55,
    "volumeDb": -21.0
   },
   {
@@ -174,7 +201,7 @@
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
-   "atSec": 205.34,
+   "atSec": 205.61,
    "volumeDb": -21.0
   }
  ],
@@ -890,7 +917,7 @@
       ],
       "r": 100,
       "dashed": true,
-      "atSec": 14.02,
+      "atSec": 13.4,
       "untilSec": 15.5
      },
      {
@@ -902,7 +929,7 @@
       ],
       "r": 100,
       "dashed": true,
-      "atSec": 14.17,
+      "atSec": 13.52,
       "untilSec": 15.5
      },
      {
@@ -914,7 +941,7 @@
       ],
       "r": 100,
       "dashed": true,
-      "atSec": 14.32,
+      "atSec": 13.64,
       "untilSec": 15.5
      },
      {
@@ -926,7 +953,7 @@
       ],
       "r": 100,
       "dashed": true,
-      "atSec": 14.47,
+      "atSec": 13.76,
       "untilSec": 15.5
      },
      {
@@ -938,8 +965,38 @@
       ],
       "dy": -20,
       "text": "× 5",
-      "atSec": 14.7,
+      "atSec": 14.02,
       "untilSec": 15.5
+     },
+     {
+      "kind": "fan",
+      "from": [
+       -1400,
+       -100,
+       -250
+      ],
+      "x0": -582,
+      "x1": 418,
+      "y": 0,
+      "height": 200,
+      "z": 400,
+      "atSec": 12.2,
+      "coneAtSec": -1,
+      "smooth": true
+     },
+     {
+      "kind": "patch",
+      "at": [
+       -482,
+       0,
+       400
+      ],
+      "w": 200,
+      "h": 200,
+      "round": true,
+      "color": "#FFF6DD",
+      "atSec": 10.36,
+      "untilSec": 12.2
      }
     ]
    },
@@ -1042,7 +1099,7 @@
      }
     ],
     "quote": "which, according to the received laws of Refraction, I expected should have been circular",
-    "quoteAtSec": 2.95
+    "quoteAtSec": 0.52
    },
    "beatTimes": [
     [
@@ -1146,8 +1203,8 @@
       },
       {
        "text": "the other way round",
-       "atSec": 12.63,
-       "x": 800,
+       "atSec": 12.25,
+       "x": 850,
        "y": 830,
        "accent": true
       }
@@ -1238,7 +1295,7 @@
      }
     ],
     "quote": "Experimentum Crucis",
-    "quoteAtSec": 4.81,
+    "quoteAtSec": 2.93,
     "quoteMarks": false
    },
    "beatTimes": [
@@ -1375,7 +1432,9 @@
       ],
       "w": 600,
       "h": 520,
-      "atSec": -1
+      "atSec": -1,
+      "dimSec": 4.84,
+      "dimTo": 0.45
      },
      {
       "kind": "shutter",
@@ -1411,7 +1470,9 @@
        950
       ],
       "atSec": -1,
-      "width": 14
+      "width": 14,
+      "dimSec": 4.84,
+      "dimTo": 0.35
      },
      {
       "kind": "prism",
@@ -1439,6 +1500,8 @@
       "z": 1200,
       "atSec": -1,
       "coneAtSec": -1,
+      "dimSec": 4.84,
+      "dimTo": 0.35,
       "smooth": true
      },
      {
@@ -1597,7 +1660,7 @@
       "apex": "down",
       "atSec": -1,
       "turn": {
-       "atSec": 11.89,
+       "atSec": 11.55,
        "deg": 4
       },
       "glass": true
@@ -1617,7 +1680,7 @@
       "atSec": -1,
       "coneAtSec": -1,
       "shift": {
-       "atSec": 11.89,
+       "atSec": 11.55,
        "dx": -75
       },
       "smooth": true
@@ -1647,7 +1710,7 @@
       "atSec": -1,
       "width": 8,
       "color": "#3A6BFF",
-      "untilSec": 11.89
+      "untilSec": 11.55
      },
      {
       "kind": "prism",
@@ -1705,7 +1768,7 @@
       "drawSec": 0.9,
       "width": 8,
       "color": "#3A6BFF",
-      "dimSec": 11.89,
+      "dimSec": 11.55,
       "dimTo": 0.35
      },
      {
@@ -1719,7 +1782,7 @@
       "h": 30,
       "color": "#3A6BFF",
       "atSec": 8.37,
-      "dimSec": 11.89,
+      "dimSec": 11.55,
       "dimTo": 0.35
      },
      {
@@ -1746,7 +1809,7 @@
        -46,
        850
       ],
-      "atSec": 11.97,
+      "atSec": 11.63,
       "drawSec": 0.6,
       "width": 8,
       "color": "#FF3B30"
@@ -1763,7 +1826,7 @@
        -234,
        1200
       ],
-      "atSec": 12.32,
+      "atSec": 11.97,
       "drawSec": 0.6,
       "width": 8,
       "color": "#FF3B30"
@@ -1778,7 +1841,7 @@
       "w": 46,
       "h": 30,
       "color": "#FF3B30",
-      "atSec": 12.82
+      "atSec": 12.42
      }
     ]
    },
@@ -2417,7 +2480,7 @@
       "w": 70,
       "h": 46,
       "color": "#FFF6DD",
-      "atSec": 7.94
+      "atSec": 7.02
      },
      {
       "kind": "label",
@@ -2428,8 +2491,8 @@
       ],
       "dy": 30,
       "text": "WHITE AGAIN",
-      "atSec": 8.18,
-      "untilSec": 8.67
+      "atSec": 7.32,
+      "untilSec": 8.82
      },
      {
       "kind": "rays",
@@ -3207,7 +3270,7 @@
       },
       {
        "text": "says so",
-       "atSec": 9.12,
+       "atSec": 8.86,
        "x": 140,
        "y": 880,
        "accent": true
@@ -3375,6 +3438,7 @@
    "assets": [
     "VIS-015",
     "TXT-010",
+    "TXT-024",
     "MOT-002",
     "TRN-015",
     "LOK-009",
@@ -3491,6 +3555,28 @@
      215.7
     ]
    ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 64,
+      "chips": [
+       {
+        "text": "colour out of the glass",
+        "atSec": 4.81,
+        "x": 1060,
+        "y": 700
+       },
+       {
+        "text": "so where is it?",
+        "atSec": 6.62,
+        "x": 1060,
+        "y": 800,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   },
    "transitionIn": "match",
    "focus": [
     423,

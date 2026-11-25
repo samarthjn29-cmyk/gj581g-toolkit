@@ -147,7 +147,7 @@ S = [
   "Calm. TRN-007 slide between two documents (Hooke's book -> Newton's printed reply): SRC-061 p.5084, side left, crop [30, 60, 1420, 1354]; source tag ISAAC NEWTON · ANSWER TO HOOKE'S CONSIDERATIONS · PHIL. TRANS. NO. 88, 1672 · P. 5084; quote 'Answer to some Considerations upon his Doctrine of Light and Colors' from 200.61. Ground placement.",
   ["Slide lands; H1 'Answer to some Considerations' on 'arguments' (200.61) with the quote column.",
    "Note ABOUT 6 YEARS on 'six' (203.95); the eye ends on 'Light and Colors' (423, 222), the match point. SFX-024 at 205.34."]),
- (81, 84, "VIS-015", "TXT-010", "MOT-002", "TRN-015", L, "TEX-009", "", "MUS-014",
+ (81, 84, "VIS-015", "TXT-010, TXT-024", "MOT-002", "TRN-015", L, "TEX-009", "", "MUS-014",
   "Calm. Director T_where_is_it: TRN-015 focus match [423, 222]: 'Light' in his title to the hole of light (281, 373). The room wide (as D1: depth 2000, dark 0.85, fog 0), the full path lit on the cut: the act ends where it started, now explained. The prism dims instead of lifting out (without the prism the band would vanish); its outline stays at 0.3 or more and the bend is unchanged. Texture: ground (TEX-009 plaster, fading with the lines).",
   ["Match lands; tag " + TAG + " on 'Newton' (206.83); dolly 0.02, the one move.",
    "On 'out' (209.69) the prism dims to an empty outline (0.3): the glass is just glass; beam and band stay bright.",

@@ -30,8 +30,8 @@ cues = {"dur": END, "cues": [
   {"name": "3 sorting", "file": "/home/claude/wcl/ep01/cues/dl/Long Note Two.mp3", "from": 116.4, "at": c3, "until": c4 + 0.3,
    "fadeIn": 0.4, "fadeOut": 0.6, "lufs": -41, "filter": "dynaudnorm=f=3000:g=31"},
   {"name": "4 the letter and the question", "file": "/home/claude/wcl/ep01/cues/dl/At Rest.mp3", "from": 0, "at": c4, "until": END,
-   "fadeIn": 1.0, "fadeOut": 1.0, "lufs": -35, "levels": [[c4, -35], [round(W[-1][2], 2), -35], [round(W[-1][2] + 0.7, 2), -27], [END, -27]]}],
- "quiet": [[brk0 - 0.05, brk1 + 0.05, -60, 0.05], [q1[0], q1[1], -50, 0.3], [q2[0], q2[1], -50, 0.3], [q3[0], q3[1], -50, 0.4]],
+   "fadeIn": 1.0, "fadeOut": 1.0, "lufs": -35, "levels": [[c4, -35], [196.8, -35], [197.2, -39], [198.9, -39], [199.4, -35], [205.8, -35], [206.0, -38.5], [207.6, -38.5], [208.0, -35], [round(W[-1][2], 2), -35], [round(W[-1][2] + 1.2, 2), -27], [END, -27]]}],
+ "quiet": [[brk0 - 0.05, brk1 + 0.05, -60, 0.05], [q1[0], q1[1], -62, 0.3], [q2[0], q2[1], -62, 0.3], [q3[0], q3[1], -62, 0.4]],
  "events": [],
  "note": "Gate 1 plan (24 Nov 2026). Cue 1 continues the series bed (Wholesome); cues 2-4 are the act 3 tracks at new start points (Sam heard all four in the act 3 sampler). Break (MUS-010) = the quiet span before \"It doesn't.\". Act join: act 3 ends on At Rest; cue 1 fades in under act 3's tail at assembly."}
 json.dump(cues, open("act4_cues_v1.json", "w"), indent=1)

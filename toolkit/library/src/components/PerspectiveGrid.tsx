@@ -69,6 +69,7 @@ export type GridObject = (
       h: number;
       color: string;
       atSec?: number;
+      round?: boolean; // a round spot (Gate 3 act 4: the round image Newton expected)
     }
   | { kind: "ring"; at: V3; r: number; atSec?: number; dashed?: boolean }
   | {
@@ -587,7 +588,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             y={y - (o.h * sc) / 2}
             width={o.w * sc}
             height={o.h * sc}
-            rx={6 * sc}
+            rx={o.round ? (Math.min(o.w, o.h) * sc) / 2 : 6 * sc}
             fill={o.color}
             opacity={0.5}
             filter="url(#pg-glow)"
@@ -597,7 +598,7 @@ export const PerspectiveGrid: React.FC<PerspectiveGridProps> = ({
             y={y - (o.h * sc) / 2}
             width={o.w * sc}
             height={o.h * sc}
-            rx={6 * sc}
+            rx={o.round ? (Math.min(o.w, o.h) * sc) / 2 : 6 * sc}
             fill={o.color}
           />
         </g>

@@ -1,0 +1,263 @@
+1
+00:00:02,400 --> 00:00:04,350
+So let's go back to Isaac Newton.
+
+2
+00:00:04,974 --> 00:00:09,450
+It's the start of 1666, a hundred years
+before Dalton is born.
+
+3
+00:00:10,168 --> 00:00:14,460
+At least, that's the date Newton gives
+when he writes it up, six years later.
+
+4
+00:00:15,448 --> 00:00:16,720
+He's 23.
+
+5
+00:00:17,348 --> 00:00:20,250
+He has just bought a triangular glass
+prism.
+
+6
+00:00:20,881 --> 00:00:23,990
+People already know a prism can throw
+colours on a wall.
+
+7
+00:00:24,901 --> 00:00:29,870
+Newton wants to know where those colours
+come from, so he darkens his room.
+
+8
+00:00:30,595 --> 00:00:33,165
+He makes a small hole in his window
+shutter,
+
+9
+00:00:33,215 --> 00:00:36,210
+and he lets one thin beam of sunlight in.
+
+10
+00:00:37,215 --> 00:00:39,130
+He puts the prism in the beam.
+
+11
+00:00:39,809 --> 00:00:44,830
+The glass bends the light and on the far
+wall, a band of colours appears.
+
+12
+00:00:45,443 --> 00:00:49,380
+Red at one end, violet at the other, and
+everything in between.
+
+13
+00:00:50,243 --> 00:00:52,980
+The first thing that surprises him is its
+shape.
+
+14
+00:00:53,676 --> 00:00:56,440
+The beam came in through a small round
+hole,
+
+15
+00:00:56,860 --> 00:01:01,140
+but the band on the wall is long, about
+five times longer than it is wide.
+
+16
+00:01:02,340 --> 00:01:05,950
+By the rules he'd been taught, he says, it
+should have been round.
+
+17
+00:01:06,830 --> 00:01:10,410
+At the time, most people who thought about
+it believed something simple.
+
+18
+00:01:11,204 --> 00:01:12,790
+White light is pure.
+
+19
+00:01:13,498 --> 00:01:16,810
+The prism changes it, and that's what
+makes the colours.
+
+20
+00:01:17,698 --> 00:01:20,080
+Newton suspects it's the other way round.
+
+21
+00:01:20,871 --> 00:01:24,941
+So he sets up a test he will later call
+the Experimentum Crucis,
+
+22
+00:01:24,991 --> 00:01:26,490
+the crucial experiment.
+
+23
+00:01:27,451 --> 00:01:31,070
+He lets the band of colours fall on a
+board with a small hole in it.
+
+24
+00:01:31,865 --> 00:01:35,020
+Only one colour gets through, say, just
+the blue.
+
+25
+00:01:35,739 --> 00:01:38,520
+Then he sends that blue light through a
+second prism.
+
+26
+00:01:39,379 --> 00:01:40,929
+If the glass makes the colours,
+
+27
+00:01:40,979 --> 00:01:44,030
+the second prism should turn that blue
+into something else.
+
+28
+00:01:44,773 --> 00:01:45,773
+It doesn't.
+
+29
+00:01:46,426 --> 00:01:49,530
+The blue bends again, by its own fixed
+amount.
+
+30
+00:01:50,280 --> 00:01:51,950
+He tries the other colours too.
+
+31
+00:01:52,734 --> 00:01:57,324
+Once a colour is separated, he says, it
+"obstinately retained its colour".
+
+32
+00:01:57,374 --> 00:01:58,850
+whatever he did to it.
+
+33
+00:01:59,854 --> 00:02:03,350
+So the prism isn't making the colours,
+it's sorting them.
+
+34
+00:02:04,148 --> 00:02:08,170
+Every kind of ray was in the white
+sunlight all along, mixed together.
+
+35
+00:02:09,320 --> 00:02:11,280
+The glass just spreads them out.
+
+36
+00:02:12,281 --> 00:02:13,880
+He checks it the other way too.
+
+37
+00:02:14,675 --> 00:02:17,650
+He gathers the spread-out rays back
+together with a lens.
+
+38
+00:02:18,349 --> 00:02:20,490
+Where they meet, they make white again.
+
+39
+00:02:21,263 --> 00:02:25,520
+In his words, light "entirely and
+perfectly white".
+
+40
+00:02:26,383 --> 00:02:30,630
+Ever seen a little rainbow thrown on a
+wall by a window, or a glass of water?
+
+41
+00:02:31,356 --> 00:02:33,880
+Then you've seen the first half of his
+experiment.
+
+42
+00:02:34,796 --> 00:02:37,220
+In his letter, he puts it like this.
+
+43
+00:02:38,390 --> 00:02:42,140
+"Colours are not Qualifications of light
+derived from Refractions,
+
+44
+00:02:42,190 --> 00:02:44,630
+or Reflections of natural Bodies."
+
+45
+00:02:45,464 --> 00:02:48,340
+Put simply, glass doesn't create colour.
+
+46
+00:02:49,078 --> 00:02:51,720
+Light bouncing off things doesn't create
+it either.
+
+47
+00:02:52,491 --> 00:02:57,550
+Each kind of ray carries something fixed,
+and that decides which colour you'll see.
+
+48
+00:02:58,551 --> 00:03:03,110
+He sends all this in a letter from
+Cambridge, in February 1672.
+
+49
+00:03:03,825 --> 00:03:06,355
+It's printed in the Philosophical
+Transactions,
+
+50
+00:03:06,405 --> 00:03:09,140
+the journal run by the Royal Society's
+secretary.
+
+51
+00:03:10,025 --> 00:03:13,240
+Plenty of readers like it, but not all of
+them.
+
+52
+00:03:14,039 --> 00:03:17,740
+Robert Hooke, a leading London scientist,
+is not impressed.
+
+53
+00:03:18,239 --> 00:03:19,420
+And says so.
+
+54
+00:03:20,493 --> 00:03:25,230
+The arguments, with Hooke and others, drag
+on by letter for about six years.
+
+55
+00:03:26,093 --> 00:03:28,100
+But notice what Newton has done.
+
+56
+00:03:28,786 --> 00:03:31,130
+He's taken colour out of the glass.
+
+57
+00:03:31,840 --> 00:03:33,000
+So where is it?

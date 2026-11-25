@@ -13,3 +13,4 @@ the rule, whose call.
 - 2026-11-24 (act 3 v5): the 20 px floor applies to credits and PHOTOS TODAY tags too.
 - 2026-11-24 (act 3 v5): the same page twice in an act changes crop, side or camera.
 - 2026-11-24 (act 3 v5, Sam): a blurred portrait ground stays dark (brightness about 0.38), so the graphite stays warm.
+- 2026-11-25 (act 4 v1): chips placed by x on one row must clear the previous chip's measured width.

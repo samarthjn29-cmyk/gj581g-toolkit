@@ -153,15 +153,19 @@ shot(B(17, 18, 19, 20, 21, 22, 23), "PerspectiveGrid", lambda r: room(depth=400,
     {"kind": "label", "at": [-82, 100, 400], "dy": 30, "text": "EVERYTHING IN BETWEEN", "atSec": r(48.00), "untilSec": r(51.74)},
     {"kind": "ring", "at": [-482, 0, 400], "r": 100, "dashed": True, "atSec": r(55.26), "untilSec": r(60.40)},
     {"kind": "label", "at": [-482, 100, 400], "dy": 30, "text": "ROUND, LIKE THE HOLE", "atSec": r(55.66), "untilSec": r(60.40)},
-] + [{"kind": "ring", "at": [x, 0, 400], "r": 100, "dashed": True, "atSec": round(r(58.92) + 0.15 * k, 2), "untilSec": r(60.40)} for k, x in enumerate([-282, -82, 118, 318])]
-  + [{"kind": "label", "at": [507, 0, 400], "dy": -20, "text": "× 5", "atSec": r(59.60), "untilSec": r(60.40)}]),
+] + [{"kind": "ring", "at": [x, 0, 400], "r": 100, "dashed": True, "atSec": round(r(58.30) + 0.12 * k, 2), "untilSec": r(60.40)} for k, x in enumerate([-282, -82, 118, 318])]
+  + [{"kind": "label", "at": [507, 0, 400], "dy": -20, "text": "× 5", "atSec": r(58.92), "untilSec": r(60.40)},
+     # Gate 3 stillness (7.8 s with no visible change): the band re-lights at full strength on "the band on the wall"
+     {"kind": "fan", "from": [-1400, -100, -250], "x0": -582, "x1": 418, "y": 0, "height": 200, "z": 400, "atSec": r(57.10), "coneAtSec": -1},
+     # ... and the round spot he expected fills in under the ring on "round hole"
+     {"kind": "patch", "at": [-482, 0, 400], "w": 200, "h": 200, "round": True, "color": WHITE, "atSec": r(55.26), "untilSec": r(57.10)}]),
     sid="D2_far_wall", transitionIn="cut")
 
 # --- E: p.3076 again, "should have been circular."
 shot(B(24, 25), "ArchivalScanCard", lambda r: dict(PAGE("3076"), **{
     "imgSize": SIZE["3076"], "crop": [40, 120, 1480, 1411], "side": "right", "source": NEWT + "3076",
     "highlights": [{"box": [68, 516, 1414, 62], "atSec": r(61.30)}, {"box": [66, 573, 950, 62], "atSec": r(63.73)}],
-    "quote": "which, according to the received laws of Refraction, I expected should have been circular", "quoteAtSec": r(63.73)}),
+    "quote": "which, according to the received laws of Refraction, I expected should have been circular", "quoteAtSec": r(61.30)}),
     sid="E_p3076_oblong", transitionIn="slide", ground=PAPER)
 
 # --- F: the common view (keyword panel)
@@ -174,14 +178,14 @@ shot(B(26, 27, 28, 29, 30), "KeywordPanel", lambda r: {"panel": {"size": 64, "ch
     {"text": "changes it", "atSec": r(73.90), "x": 925, "y": 530, "dimSec": r(77.94)},
     {"text": "makes the colours", "atSec": r(75.68), "x": 560, "y": 670, "dimSec": r(77.94)},
     {"text": "Newton", "atSec": r(77.70), "x": 560, "y": 830},
-    {"text": "the other way round", "atSec": r(78.80), "x": 800, "y": 830, "accent": True}]}},
+    {"text": "the other way round", "atSec": r(78.42), "x": 850, "y": 830, "accent": True}]}},
     sid="F_common_view", transitionIn="band", transition={"dir": "down", "tone": "dark"})
 
 # --- G: p.3078, Experimentum Crucis
 shot(B(31, 32, 33), "ArchivalScanCard", lambda r: dict(PAGE("3078"), **{
     "imgSize": SIZE["3078"], "crop": [55, 968, 1460, 1383], "side": "right", "source": NEWT + "3078",
     "highlights": [{"box": [88, 1636, 460, 68], "atSec": r(83.25)}],
-    "quote": "Experimentum Crucis", "quoteAtSec": r(85.13), "quoteMarks": False}),
+    "quote": "Experimentum Crucis", "quoteAtSec": r(83.25), "quoteMarks": False}),
     sid="G_p3078_crucis", transitionIn="slide", ground=PAPER)
 
 # --- H: Opticks Plate IV, Fig. 18 isolated
@@ -192,10 +196,10 @@ shot(B(34, 35), "SpotlightIsolator", lambda r: {"srcId": "SRC-059", "imgSize": [
 # --- I1: the board, one colour through, the second prism (Expert MUST 3: one straight line prism 1 -> hole -> prism 2)
 P2 = [-34, -46, 1650]
 shot(B(36, 37, 38), "PerspectiveGrid", lambda r: room(tag=tag(r(92.00)), objects=[
-    {"kind": "board", "at": [-450, 120, 1200], "w": 600, "h": 520, "atSec": -1},
-    SHUT, HOLE, {"kind": "beam", "from": [-1050, -150, 600], "to": P1, "atSec": -1, "width": 14},
+    {"kind": "board", "at": [-450, 120, 1200], "w": 600, "h": 520, "atSec": -1, "dimSec": r(96.16), "dimTo": 0.45},
+    SHUT, HOLE, {"kind": "beam", "from": [-1050, -150, 600], "to": P1, "atSec": -1, "width": 14, "dimSec": r(96.16), "dimTo": 0.35},
     {"kind": "prism", "at": P1, "size": 160, "apex": "down", "atSec": -1},
-    {"kind": "fan", "from": P1, "x0": -422, "x1": -303, "y": -55, "height": 40, "z": 1200, "atSec": -1, "coneAtSec": -1},
+    {"kind": "fan", "from": P1, "x0": -422, "x1": -303, "y": -55, "height": 40, "z": 1200, "atSec": -1, "coneAtSec": -1, "dimSec": r(96.16), "dimTo": 0.35},
     {"kind": "hole", "at": [-398, -55, 1200], "r": 14, "atSec": -1},
     {"kind": "beam", "from": [-398, -55, 1200], "to": P2, "atSec": r(92.65), "drawSec": 0.8, "width": 8, "color": BLUE},
     {"kind": "label", "at": [-398, 70, 1200], "dy": 0, "text": "BLUE", "atSec": r(94.45)},
@@ -207,19 +211,19 @@ P1n, P2n, HOLEn = [-600, -60, 150], [-34, -46, 850], [-398, -55, 400]
 shot(B(39, 40, 41, 42, 43), "PerspectiveGrid", lambda r: room(depth=1200, tag=dict(tag(-1), untilSec=r(111.70)), objects=[
     {"kind": "board", "at": [-450, 120, 400], "w": 600, "h": 520, "atSec": -1},
     {"kind": "beam", "from": [-1850, -120, -250], "to": P1n, "atSec": -1, "width": 14},
-    {"kind": "prism", "at": P1n, "size": 160, "apex": "down", "atSec": -1, "turn": {"atSec": r(110.62), "deg": 4}},
-    {"kind": "fan", "from": P1n, "x0": -422, "x1": -303, "y": -55, "height": 40, "z": 400, "atSec": -1, "coneAtSec": -1, "shift": {"atSec": r(110.62), "dx": -75}},
+    {"kind": "prism", "at": P1n, "size": 160, "apex": "down", "atSec": -1, "turn": {"atSec": r(110.28), "deg": 4}},
+    {"kind": "fan", "from": P1n, "x0": -422, "x1": -303, "y": -55, "height": 40, "z": 400, "atSec": -1, "coneAtSec": -1, "shift": {"atSec": r(110.28), "dx": -75}},
     {"kind": "hole", "at": HOLEn, "r": 14, "atSec": -1},
-    {"kind": "beam", "from": HOLEn, "to": P2n, "atSec": -1, "width": 8, "color": BLUE, "untilSec": r(110.62)},
+    {"kind": "beam", "from": HOLEn, "to": P2n, "atSec": -1, "width": 8, "color": BLUE, "untilSec": r(110.28)},
     {"kind": "prism", "at": P2n, "size": 160, "apex": "down", "atSec": -1},
     {"kind": "label", "at": [369, -560, 1200], "dy": 0, "text": "IF THE GLASS MAKES THE COLOURS", "atSec": r(99.64), "untilSec": r(104.73)},
     {"kind": "fan", "from": P2n, "x0": 169, "x1": 569, "y": -339, "height": 120, "z": 1200, "ghost": True, "atSec": r(102.42), "untilSec": r(104.93)},
-    {"kind": "beam", "from": P2n, "to": [249, -339, 1200], "atSec": r(106.77), "drawSec": 0.9, "width": 8, "color": BLUE, "dimSec": r(110.62), "dimTo": 0.35},
-    {"kind": "patch", "at": [249, -339, 1200], "w": 46, "h": 30, "color": BLUE, "atSec": r(107.10), "dimSec": r(110.62), "dimTo": 0.35},
+    {"kind": "beam", "from": P2n, "to": [249, -339, 1200], "atSec": r(106.77), "drawSec": 0.9, "width": 8, "color": BLUE, "dimSec": r(110.28), "dimTo": 0.35},
+    {"kind": "patch", "at": [249, -339, 1200], "w": 46, "h": 30, "color": BLUE, "atSec": r(107.10), "dimSec": r(110.28), "dimTo": 0.35},
     {"kind": "label", "at": [-34, 106, 850], "dy": 0, "text": "ITS OWN FIXED AMOUNT", "atSec": r(108.41), "untilSec": r(111.70)},
-    {"kind": "beam", "from": HOLEn, "to": P2n, "atSec": r(110.70), "drawSec": 0.6, "width": 8, "color": RED},
-    {"kind": "beam", "from": P2n, "to": [249, -234, 1200], "atSec": r(111.05), "drawSec": 0.6, "width": 8, "color": RED},
-    {"kind": "patch", "at": [249, -234, 1200], "w": 46, "h": 30, "color": RED, "atSec": r(111.55)}]),
+    {"kind": "beam", "from": HOLEn, "to": P2n, "atSec": r(110.36), "drawSec": 0.6, "width": 8, "color": RED},
+    {"kind": "beam", "from": P2n, "to": [249, -234, 1200], "atSec": r(110.70), "drawSec": 0.6, "width": 8, "color": RED},
+    {"kind": "patch", "at": [249, -234, 1200], "w": 46, "h": 30, "color": RED, "atSec": r(111.15)}]),
     sid="I2_second_prism", transitionIn="cut")
 
 # --- J: p.3082, "obstinately retained its colour"
@@ -251,8 +255,8 @@ shot(B(52, 53, 54, 55), "PerspectiveGrid", lambda r: room(depth=1400, tag=dict(t
     {"kind": "fan", "from": P1m, "x0": -235, "x1": -165, "y": -51, "height": 50, "z": 800, "atSec": r(134.74), "coneAtSec": r(134.74)},
     {"kind": "lens", "at": LENS, "w": 80, "h": 500, "atSec": r(134.74)},
     {"kind": "label", "at": [-200, 260, 800], "dy": 0, "text": "LENS", "atSec": r(136.91), "untilSec": r(140.30)},
-    {"kind": "patch", "at": [600, -20, 1400], "w": 70, "h": 46, "color": WHITE, "atSec": r(139.57)},
-    {"kind": "label", "at": [600, 100, 1400], "dy": 30, "text": "WHITE AGAIN", "atSec": r(139.81), "untilSec": r(140.30)},
+    {"kind": "patch", "at": [600, -20, 1400], "w": 70, "h": 46, "color": WHITE, "atSec": r(138.65)},
+    {"kind": "label", "at": [600, 100, 1400], "dy": 30, "text": "WHITE AGAIN", "atSec": r(138.95), "untilSec": r(140.45)},
 ] + [{"kind": "rays", "from": [-235 + 70 * (nm - 400) / 300, -51, 800], "to": [600, -20, 1400], "atSec": r(135.64), "count": 5, "speed": 300, "jitter": 2, "size": 5, "color": c, "colors": [c]} for c, nm in SPEC6]),
     sid="M_lens", transitionIn="cut")
 
@@ -310,7 +314,7 @@ shot(B(71, 72, 73, 74), "ArchivalScanCard", lambda r: dict(PAGE("3075"), **{
 shot(B(75, 76, 77, 78), "KeywordPanel", lambda r: {"panel": {"size": 64, "chips": [
     {"text": "plenty of readers", "atSec": r(190.59), "x": 140, "y": 640},
     {"text": "not all of them", "atSec": r(192.00), "x": 140, "y": 760},
-    {"text": "says so", "atSec": r(198.50), "x": 140, "y": 880, "accent": True}]}},
+    {"text": "says so", "atSec": r(198.24), "x": 140, "y": 880, "accent": True}]}},
     sid="S1_hooke", transitionIn="band", transition={"dir": "up", "tone": "dark"},
     ground={"kind": "blur", "srcId": "SRC-060", "size": [1800, 2883], "focus": [0.5, 0.4], "blurPx": 14},
     overlay=lambda r: {"stickers": [{"srcId": "SRC-060", "size": [1800, 2883], "crop": [40, 280, 1490, 2340], "at": [1380, 520], "w": 420, "atSec": r(194.04), "tilt": 2, "edge": 6,
@@ -327,37 +331,43 @@ shot(B(79, 80), "ArchivalScanCard", lambda r: {"srcId": "SRC-061", "imgSize": [1
 # --- T: where is it? The room wide, the glass dims, the light stays
 shot(B(81, 82, 83, 84), "PerspectiveGrid", lambda r: room(tag=tag(r(206.83)), lineFadeSec=r(212.06), lineTo=0.4,
                                                           objects=lit_room(r, prism={"dimSec": r(209.69), "dimTo": 0.3})),
-     sid="T_where_is_it", transitionIn="match", focus=[423, 222])
+     sid="T_where_is_it", transitionIn="match", focus=[423, 222],
+     overlay=lambda r: {"chips": [{"size": 64, "chips": [
+         {"text": "colour out of the glass", "atSec": r(210.25), "x": 1060, "y": 700},
+         {"text": "so where is it?", "atSec": r(212.06), "x": 1060, "y": 800, "accent": True}]}]})
 
 # Sounds (house levels: hero ~15-17 dB under the voice in a pause, texture 21-29 dB under).
 K = "public/sfx/kit/"
 audio = [
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 2.28, "volumeDb": -21.0},  # band off the title
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 2.68, "volumeDb": -21.0},  # band off the title
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v1.wav", "atSec": 4.25, "volumeDb": -24.0},  # Newton settles on the rail
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 9.52, "volumeDb": -21.0},  # match into p.3075
-    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": 24.10, "volumeDb": -24.0},  # glide to p.3076
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 9.91, "volumeDb": -21.0},  # match into p.3075
+    {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v1.wav", "atSec": 24.57, "volumeDb": -24.0},  # glide to p.3076
     {"id": "SFX-020", "file": K + "whoosh/low_whoosh_v2.wav", "atSec": 32.93, "volumeDb": -22.0},  # push into the room
     {"id": "SFX-028", "file": K + "pixabay/shutter_lock_v1.wav", "atSec": 33.06, "volumeDb": -24.0},  # the wooden shutter
     {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": 32.70, "endSec": 60.70, "volumeDb": -30.0, "fadeInSec": 0.4, "fadeOutSec": 0.4},
+    {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": 44.60, "endSec": 56.40, "volumeDb": -30.0, "fadeInSec": 0.4, "fadeOutSec": 0.4},
+    {"id": "SFX-022", "file": K + "ambience/projector_hum.wav", "atSec": 56.00, "endSec": 60.70, "volumeDb": -30.0, "fadeInSec": 0.4, "fadeOutSec": 0.4},
     {"id": "SFX-028", "file": K + "pixabay/glass_clink.wav", "atSec": 38.95, "volumeDb": -26.0},  # prism 1 settles
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 60.70, "volumeDb": -21.0},  # slide to p.3076
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 66.07, "volumeDb": -21.0},  # band
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 60.78, "volumeDb": -24.0},  # slide to p.3076
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 66.41, "volumeDb": -21.0},  # band
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 80.22, "volumeDb": -21.0},  # slide to p.3078
-    {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": 86.85, "volumeDb": -26.0},  # focus set on Fig. 18
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 91.22, "volumeDb": -21.0},  # match into the room
+    {"id": "SFX-019", "file": K + "mechanical/dial_turn.wav", "atSec": 86.85, "volumeDb": -20.0},  # focus set on Fig. 18
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 91.42, "volumeDb": -21.0},  # match into the room
     {"id": "SFX-022", "file": K + "ambience/projector_run.wav", "atSec": 91.00, "endSec": 112.10, "volumeDb": -30.0, "fadeInSec": 0.4, "fadeOutSec": 0.4},
+    {"id": "SFX-022", "file": K + "ambience/projector_run.wav", "atSec": 102.70, "endSec": 112.10, "volumeDb": -30.0, "fadeInSec": 0.4, "fadeOutSec": 0.4},
     {"id": "SFX-028", "file": K + "pixabay/glass_clink_wine.wav", "atSec": 98.35, "volumeDb": -26.0},  # prism 2 settles
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 112.10, "volumeDb": -21.0},  # slide to p.3082
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 119.10, "volumeDb": -20.0},  # under the colour block
     {"id": "SFX-017", "file": K + "tactile/marker_stroke.wav", "atSec": 140.75, "volumeDb": -27.0},  # the drafting stroke
-    {"id": "SFX-003", "file": K + "mechanical/shutter_click.wav", "atSec": 146.20, "volumeDb": -24.0},  # the photo lands
+    {"id": "SFX-003", "file": K + "mechanical/shutter_click.wav", "atSec": 145.80, "volumeDb": -24.0},  # the photo lands
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 154.02, "volumeDb": -21.0},  # slide to p.3081
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 164.78, "volumeDb": -21.0},  # band
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 165.15, "volumeDb": -21.0},  # band
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 177.80, "volumeDb": -21.0},  # slide to p.3075
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 189.28, "volumeDb": -21.0},  # band up
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": 189.55, "volumeDb": -21.0},  # band up
     {"id": "SFX-026", "file": K + "tactile/soft_pop_v2.wav", "atSec": 194.64, "volumeDb": -24.0},  # Micrographia settles
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v1.wav", "atSec": 199.72, "volumeDb": -21.0},  # slide to p.5084
-    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 205.34, "volumeDb": -21.0},  # match into the room
+    {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": 205.61, "volumeDb": -21.0},  # match into the room
 ]
 cues = json.load(open(os.path.join(G1, "act4_cues_v1.json")))
 REMAP = {"Wholesome.mp3": "public/music/wholesome_kevin_macleod.mp3", "Thinking Music.mp3": "public/music/thinking_music_kevin_macleod.mp3",
