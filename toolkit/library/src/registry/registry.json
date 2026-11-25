@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T11:39:56.807Z",
+ "generated": "2026-11-25T13:17:52.390Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3705,7 +3705,7 @@
    "paths": [
     "src/themes/studioColour.ts"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: the series ground in place of graphite, if Sam picks it. Limit: the frame layer (no beat cap, as LOK-009). Not for: shots on paper (LOK-027) or photo grounds.",
    "maxBeats": null,
    "maxShare": null

@@ -3,6 +3,8 @@
 Sam: "the video is not as appealing as I would like it to be ... somewhere some kind of stimulation is missing";
 "Build the stimulated version"; on the test of act 5 shots I-K: "Yes, this direction" (make it the house style and
 rebuild act 5 this way); ground: "A · Studio Cream" (LOK-033) in place of the dark graphite.
+Sam then compared three cuts of the same 35 s (current / stimulated / more bursts) and chose the more-bursts version:
+"Do the more burst version ... i want to get it applied from Act 1 itself so will need to work on one act at a time".
 These rules replace the calm limits of 22 Nov 2026 wherever they conflict. Accuracy, tags and the registry stay.
 
 1. **Energy curve per act.** Every act plan draws its curve: quiet stretches, and 2-3 bursts at the act's turns
@@ -21,3 +23,13 @@ These rules replace the calm limits of 22 Nov 2026 wherever they conflict. Accur
    the paper desk; photos and footage keep their own frames.
 8. **The boredom pass.** At Gate 2 and Gate 3 the Editor also answers: "Where would a viewer reach for their phone?"
    Every stretch it names gets a change before Sam sees the clip.
+
+## The more-bursts patterns (the version Sam chose, act 5 shots I-K test, 25 Nov 2026)
+9. **Word-by-word stack.** A line whose words carry the idea lands as 2-3 big chips stacked in 3 s, one per key word,
+   each on its spoken word with a soft pop ("candlelight" / "much yellower" / "far less blue").
+10. **Set-up then punch.** Before a turn, 1-2 chips land fast ("hardly matters" / "still pink"), the music breaks, then
+    the punch word lands huge in the accent with the sub impact ("don't.").
+11. **Named items slam in.** When the narration names items in a list (colours, places, dates), each name slams in
+    big, one replacing the last, with a tick on each.
+12. **Order of work:** acts 1-5 of WCL-E01 are reworked to these rules one act at a time, from act 1, each through
+    Gate 2 (look sheet) and Gate 3 (clip) again; act 6 on are built this way from Gate 1.
