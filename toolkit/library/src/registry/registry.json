@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T10:24:34.846Z",
+ "generated": "2026-11-25T10:46:18.959Z",
  "source": "Library - Clip Tracker / Master_Asset_Registry (1r_YXrgUdbRgWtdKjFXHQwkrSV0NoqQOiBwWN-XkKBR0)",
  "assets": {
   "VIS-001": {
@@ -3657,7 +3657,7 @@
    "paths": [
     "src/components/PrismSplit.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: an act or chapter turn about light or colour. Limit: max 1 per act, max 4 per episode; never two acts running back to back at their joins. Not for: ordinary scene changes (TRN-007, TRN-011), anything not about light.",
    "maxBeats": null,
    "maxShare": null
@@ -3669,7 +3669,7 @@
    "paths": [
     "src/components/PageTurn.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: one page or document card to the next from the SAME source. Limit: max 3 per act, max 12 per episode; never two in a row. Not for: a jump between different sources or to a non-paper shot (TRN-007, TRN-004).",
    "maxBeats": null,
    "maxShare": null
@@ -3681,7 +3681,7 @@
    "paths": [
     "src/components/ColourFlood.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a change where one data colour carries the meaning into the next shot. Limit: max 2 per act, max 8 per episode; never the theme accent. Not for: shots with no colour on screen to grow from; colour-led act turns (TRN-012).",
    "maxBeats": null,
    "maxShare": null
@@ -3693,7 +3693,7 @@
    "paths": [
     "src/components/MacroDive.tsx"
    ],
-   "status": "Planned",
+   "status": "Active",
    "use": "Best use: a same-scene change that goes closer or inside, replacing a hard cut within a scene. Limit: max 2 per act, max 10 per episode; at most one in three scene changes of an act. Not for: a change of place or time (TRN-018, TRN-006), anything without a small round detail.",
    "maxBeats": null,
    "maxShare": null
