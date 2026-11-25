@@ -1,0 +1,2015 @@
+{
+ "finish": {},
+ "motionBlur": true,
+ "episodeId": "WCL-E01-act01",
+ "themeId": "LOK-033",
+ "note": "Act 1 of WCL-E01 'The Man Who Saw Pink'. Gate 1 approved by Sam 22 Nov 2026. Shots join beat-sheet beats (see 'beats'). Cues from 01_flower_paced_148wpm + 0.8 s lead-in. Energy rework (ENERGY.md, Sam 25 Nov 2026) on LOK-033 Studio Cream: rework_act1.py.",
+ "voice": {
+  "id": "NAR-001",
+  "atSec": 0.8
+ },
+ "audio": [
+  {
+   "id": "SFX-013",
+   "atSec": 0.0,
+   "volumeDb": 2
+  },
+  {
+   "id": "SFX-014",
+   "atSec": 0.0,
+   "volumeDb": 0,
+   "fadeInSec": 1.0,
+   "fadeOutSec": 1.0,
+   "endSec": 19.4
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 10.95,
+   "volumeDb": -21.6
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 13.89,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 14.99,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-006",
+   "atSec": 19.5,
+   "volumeDb": -12
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 21.16,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 24.66,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 26.0,
+   "volumeDb": -14.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 26.05,
+   "volumeDb": -21.4
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 26.35,
+   "volumeDb": -19.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 26.47,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 27.25,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 31.45,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v3.wav",
+   "atSec": 33.55,
+   "volumeDb": -14.6
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+   "atSec": 33.81,
+   "volumeDb": -18.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 35.18,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 39.2,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 43.39,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 47.12,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v2.wav",
+   "atSec": 48.7,
+   "volumeDb": -21.6
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 49.54,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 51.65,
+   "volumeDb": -19.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 53.94,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 54.2,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/dial_turn.wav",
+   "atSec": 54.72,
+   "volumeDb": -19.6
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 56.9,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 59.13,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-017",
+   "file": "public/sfx/kit/tactile/pencil_stroke.wav",
+   "atSec": 59.85,
+   "volumeDb": -31.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 59.9,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 61.13,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 62.7,
+   "volumeDb": -17.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/paper_move.wav",
+   "atSec": 64.75,
+   "volumeDb": -21.4
+  },
+  {
+   "id": "SFX-020",
+   "file": "public/sfx/kit/whoosh/low_whoosh_v1.wav",
+   "atSec": 67.35,
+   "volumeDb": -21.6
+  },
+  {
+   "id": "SFX-016",
+   "file": "public/sfx/kit/tactile/pages_move.wav",
+   "atSec": 68.5,
+   "endSec": 69.3,
+   "fadeOutSec": 0.15,
+   "volumeDb": -18.5
+  },
+  {
+   "id": "SFX-003",
+   "file": "public/sfx/kit/mechanical/shutter_vintage.wav",
+   "atSec": 72.18,
+   "volumeDb": -24.0
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 77.15,
+   "volumeDb": -15
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v1.wav",
+   "atSec": 79.71,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "MUS-015",
+   "atSec": 83.37,
+   "volumeDb": -18.0
+  },
+  {
+   "id": "SFX-015",
+   "atSec": 85.87,
+   "volumeDb": -22
+  },
+  {
+   "id": "SFX-025",
+   "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
+   "atSec": 87.2,
+   "volumeDb": -12.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 87.85,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-022",
+   "file": "public/sfx/kit/ambience/projector_hum.wav",
+   "atSec": 89.9,
+   "endSec": 95.6,
+   "volumeDb": -27.6,
+   "fadeInSec": 0.4,
+   "fadeOutSec": 0.6
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
+   "atSec": 90.28,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v2.wav",
+   "atSec": 90.37,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-026",
+   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
+   "atSec": 92.98,
+   "volumeDb": -20.0
+  },
+  {
+   "id": "SFX-001",
+   "atSec": 94.6,
+   "volumeDb": -14
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
+   "atSec": 95.25,
+   "volumeDb": -19.0
+  },
+  {
+   "id": "SFX-019",
+   "file": "public/sfx/kit/mechanical/switch_click.wav",
+   "atSec": 95.88,
+   "volumeDb": -21.0
+  },
+  {
+   "id": "SFX-024",
+   "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
+   "atSec": 98.65,
+   "volumeDb": -18.0
+  },
+  {
+   "id": "MUS-006",
+   "atSec": 98.75,
+   "volumeDb": -6
+  }
+ ],
+ "beats": [
+  {
+   "id": "01+02+03+04",
+   "beats": [
+    "E01-A1-01",
+    "E01-A1-02",
+    "E01-A1-03",
+    "E01-A1-04"
+   ],
+   "start": 0.0,
+   "end": 11.1,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-011",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "SFX-013",
+    "SFX-014",
+    "MUS-007",
+    "SRC-011",
+    "MOT-002",
+    "TXT-010"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458_rev.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "warmth": [
+     1,
+     1
+    ],
+    "tag": {
+     "at": "low-centre",
+     "toCornerAtSec": 6.7,
+     "parts": [
+      {
+       "text": "KENDAL",
+       "atSec": 0.8
+      },
+      {
+       "text": "NORTH OF ENGLAND",
+       "atSec": 1.9,
+       "untilSec": 4.16
+      },
+      {
+       "text": "AUTUMN 1792",
+       "atSec": 5.47
+      }
+     ]
+    },
+    "labels": [
+     {
+      "text": "JOHN DALTON · TEACHER",
+      "atSec": 9.53,
+      "x": 960,
+      "y": 820,
+      "align": "center"
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-01",
+     0.0,
+     2.95
+    ],
+    [
+     "E01-A1-02",
+     2.95,
+     6.4
+    ],
+    [
+     "E01-A1-03",
+     6.4,
+     8.6
+    ],
+    [
+     "E01-A1-04",
+     8.6,
+     11.1
+    ]
+   ]
+  },
+  {
+   "id": "05+06+07",
+   "beats": [
+    "E01-A1-05",
+    "E01-A1-06",
+    "E01-A1-07"
+   ],
+   "start": 11.1,
+   "end": 19.5,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-006",
+    "LOK-010",
+    "SFX-014",
+    "MUS-007",
+    "SRC-013",
+    "MOT-002",
+    "TRN-001",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     1,
+     0
+    ],
+    "warmthSec": [
+     5.5,
+     8.4
+    ],
+    "labels": [
+     {
+      "text": "DALTON'S 'GERANIUM ZONALE'",
+      "atSec": 2.79,
+      "x": 1240,
+      "y": 820,
+      "moveTo": {
+       "atSec": 5.5,
+       "x": 1200,
+       "y": 900,
+       "scale": 1
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-05",
+     11.1,
+     13.6
+    ],
+    [
+     "E01-A1-06",
+     13.6,
+     16.6
+    ],
+    [
+     "E01-A1-07",
+     16.6,
+     19.5
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    960,
+    560
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 96,
+      "chips": [
+       {
+        "text": "a geranium",
+        "atSec": 2.79,
+        "x": 140,
+        "y": 300
+       },
+       {
+        "text": "nothing rare",
+        "atSec": 3.89,
+        "x": 140,
+        "y": 420
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "08+09+10",
+   "beats": [
+    "E01-A1-08",
+    "E01-A1-09",
+    "E01-A1-10"
+   ],
+   "start": 19.5,
+   "end": 26.3,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-007",
+    "LOK-010",
+    "SFX-006",
+    "MUS-007",
+    "SRC-001",
+    "MOT-003",
+    "TRN-001",
+    "MOT-001",
+    "LOK-027",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-001",
+    "imgSize": [
+     1920,
+     2813
+    ],
+    "crop": [
+     380,
+     1220,
+     1100,
+     1050
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       1015,
+       2040,
+       375,
+       46
+      ],
+      "atSec": 0.6
+     },
+     {
+      "box": [
+       440,
+       2100,
+       700,
+       54
+      ],
+      "atSec": 1.5
+     },
+     {
+      "box": [
+       1090,
+       2158,
+       300,
+       46
+      ],
+      "atSec": 4.1
+     }
+    ],
+    "quote": "the Geranium zonale by candle-light, in the Autumn of 1792",
+    "source": "JOHN DALTON · 1798 · P. 29"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-08",
+     19.5,
+     22.0
+    ],
+    [
+     "E01-A1-09",
+     22.0,
+     24.2
+    ],
+    [
+     "E01-A1-10",
+     24.2,
+     26.3
+    ]
+   ],
+   "transitionIn": "slide",
+   "ground": {
+    "kind": "paper"
+   },
+   "overlay": {
+    "chips": [
+     {
+      "size": 110,
+      "chips": [
+       {
+        "text": "by day",
+        "atSec": 1.66,
+        "x": 1100,
+        "y": 690
+       },
+       {
+        "text": "sky blue",
+        "atSec": 5.16,
+        "x": 1100,
+        "y": 830,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "11+12+13",
+   "beats": [
+    "E01-A1-11",
+    "E01-A1-12",
+    "E01-A1-13"
+   ],
+   "start": 26.3,
+   "end": 33.86,
+   "component": "ArchivalScanCard",
+   "assets": [
+    "VIS-001",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-007",
+    "LOK-010",
+    "MUS-007",
+    "SRC-029",
+    "MOT-001",
+    "TRN-001",
+    "MOT-003",
+    "TRN-020",
+    "LOK-027",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-029",
+    "imgSize": [
+     1920,
+     2934
+    ],
+    "crop": [
+     500,
+     400,
+     1080,
+     1030
+    ],
+    "side": "left",
+    "highlights": [
+     {
+      "box": [
+       570,
+       588,
+       640,
+       56
+      ],
+      "atSec": 1.29
+     },
+     {
+      "box": [
+       570,
+       645,
+       430,
+       56
+      ],
+      "atSec": 4.75
+     }
+    ],
+    "quote": "in candle-light, however, it was astonishingly changed",
+    "source": "JOHN DALTON · 1798 · P. 30"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-11",
+     26.3,
+     29.0
+    ],
+    [
+     "E01-A1-12",
+     29.0,
+     31.4
+    ],
+    [
+     "E01-A1-13",
+     31.4,
+     33.86
+    ]
+   ],
+   "transitionIn": "pageturn",
+   "ground": {
+    "kind": "paper"
+   },
+   "overlay": {
+    "chips": [
+     {
+      "size": 84,
+      "chips": [
+       {
+        "text": "tonight",
+        "atSec": 0.17,
+        "x": 1100,
+        "y": 660,
+        "dimSec": 5.0,
+        "dimTo": 0.3
+       },
+       {
+        "text": "by the candle",
+        "atSec": 0.95,
+        "x": 1100,
+        "y": 770,
+        "dimSec": 5.0,
+        "dimTo": 0.3
+       }
+      ]
+     },
+     {
+      "size": 110,
+      "chips": [
+       {
+        "text": "astonishingly changed",
+        "atSec": 5.15,
+        "x": 360,
+        "y": 900,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "14+15+16+17+18+19",
+   "beats": [
+    "E01-A1-14",
+    "E01-A1-15",
+    "E01-A1-16",
+    "E01-A1-17",
+    "E01-A1-18",
+    "E01-A1-19"
+   ],
+   "start": 33.86,
+   "end": 49.1,
+   "component": "SwatchRows",
+   "assets": [
+    "VIS-017",
+    "TXT-010",
+    "MOT-003",
+    "LOK-010",
+    "MUS-007",
+    "SRC-029",
+    "MOT-002",
+    "TRN-001",
+    "MOT-001",
+    "TRN-021",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "columns": [
+     "BY DAY",
+     "BY CANDLE"
+    ],
+    "rows": [
+     {
+      "name": "JOHN",
+      "nameAtSec": 3.98,
+      "atSec": 0,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 0,
+        "fillSec": 0
+       },
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 0,
+        "fillSec": 1.32
+       }
+      ]
+     },
+     {
+      "name": "FRIENDS",
+      "atSec": 3.98,
+      "dimAtSec": 8.47,
+      "cells": [
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": 3.98,
+        "fillSec": 6.28
+       },
+       {
+        "color": "#E79AB9",
+        "name": "PINK",
+        "atSec": 3.98,
+        "fillSec": 7.12
+       }
+      ],
+      "tag": {
+       "text": "NO REAL CHANGE",
+       "atSec": 7.12
+      }
+     },
+     {
+      "name": "HIS BROTHER",
+      "nameAtSec": 12.44,
+      "atSec": 10.14,
+      "cells": [
+       {
+        "color": "#86B5E8",
+        "name": "SKY-BLUE",
+        "atSec": 10.14,
+        "fillSec": 12.44
+       },
+       {
+        "color": "#C8402F",
+        "name": "RED",
+        "atSec": 10.14,
+        "fillSec": 12.44
+       }
+      ],
+      "sub": {
+       "text": "JONATHAN",
+       "atSec": 13.26
+      }
+     }
+    ],
+    "caption": {
+     "text": "What he called red",
+     "atSec": 1.32,
+     "untilSec": 3.98
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-14",
+     33.86,
+     36.0
+    ],
+    [
+     "E01-A1-15",
+     36.0,
+     38.8
+    ],
+    [
+     "E01-A1-16",
+     38.8,
+     41.4
+    ],
+    [
+     "E01-A1-17",
+     41.4,
+     44.0
+    ],
+    [
+     "E01-A1-18",
+     44.0,
+     46.1
+    ],
+    [
+     "E01-A1-19",
+     46.1,
+     49.1
+    ]
+   ],
+   "transitionIn": "flood",
+   "transition": {
+    "color": "#C8402F",
+    "at": [
+     1240,
+     860
+    ],
+    "r0": 60
+   },
+   "overlay": {
+    "chips": [
+     {
+      "size": 150,
+      "chips": [
+       {
+        "text": "red.",
+        "atSec": 1.32,
+        "x": 140,
+        "y": 220,
+        "accent": true
+       }
+      ]
+     },
+     {
+      "size": 62,
+      "chips": [
+       {
+        "text": "much the same",
+        "atSec": 5.34,
+        "x": 120,
+        "y": 560,
+        "dimSec": 8.54,
+        "dimTo": 0.3
+       },
+       {
+        "text": "only one",
+        "atSec": 9.53,
+        "x": 120,
+        "y": 660,
+        "accent": true
+       },
+       {
+        "text": "Jonathan",
+        "atSec": 13.26,
+        "x": 120,
+        "y": 760
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "20",
+   "beats": [
+    "E01-A1-20"
+   ],
+   "start": 49.1,
+   "end": 51.7,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-006",
+    "LOK-010",
+    "MUS-007",
+    "SRC-013",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     380,
+     330,
+     1000,
+     562
+    ],
+    "warmth": [
+     0,
+     0
+    ],
+    "labels": []
+   },
+   "beatTimes": [
+    [
+     "E01-A1-20",
+     49.1,
+     51.7
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    1033,
+    552
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 150,
+      "chips": [
+       {
+        "text": "who's right?",
+        "atSec": 0.44,
+        "x": 560,
+        "y": 760,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "21",
+   "beats": [
+    "E01-A1-21"
+   ],
+   "start": 51.7,
+   "end": 54.2,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-013",
+    "TRN-022",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-013",
+    "kind": "image",
+    "size": [
+     1920,
+     1280
+    ],
+    "crop": [
+     640,
+     560,
+     520,
+     292
+    ],
+    "warmth": [
+     0,
+     0
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-21",
+     51.7,
+     54.2
+    ]
+   ],
+   "transitionIn": "dive",
+   "transition": {
+    "focus": [
+     1033,
+     552
+    ],
+    "r0": 40
+   },
+   "overlay": {
+    "chips": [
+     {
+      "size": 110,
+      "chips": [
+       {
+        "text": "not so sure",
+        "atSec": 2.24,
+        "x": 140,
+        "y": 780
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "22",
+   "beats": [
+    "E01-A1-22"
+   ],
+   "start": 54.2,
+   "end": 57.0,
+   "component": "HalftoneMoire",
+   "assets": [
+    "LOK-017",
+    "TXT-009",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "TRN-021"
+   ],
+   "props": {
+    "color": "#E79AB9",
+    "name": "PINK",
+    "loupe": {
+     "atSec": 0.15,
+     "from": [
+      1130,
+      470
+     ],
+     "to": [
+      1480,
+      600
+     ],
+     "moveSec": 2.6,
+     "r": 230,
+     "cell": 22
+    },
+    "moire": {
+     "opacity": 0.22,
+     "turnDeg": 4
+    },
+    "lines": [
+     {
+      "text": "Where is the pink?",
+      "atSec": 0.62,
+      "fill": {
+       "word": "pink",
+       "atSec": 1.2,
+       "color": "#E79AB9"
+      }
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-22",
+     54.2,
+     57.0
+    ]
+   ],
+   "transitionIn": "flood",
+   "transition": {
+    "color": "#E79AB9",
+    "at": [
+     1000,
+     540
+    ],
+    "r0": 80
+   }
+  },
+  {
+   "id": "23",
+   "beats": [
+    "E01-A1-23"
+   ],
+   "start": 57.0,
+   "end": 59.95,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "TXT-010",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-011",
+    "TRN-013",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "clipStartSec": 3,
+    "warmth": [
+     1,
+     1
+    ],
+    "labels": []
+   },
+   "beatTimes": [
+    [
+     "E01-A1-23",
+     57.0,
+     59.95
+    ]
+   ],
+   "transitionIn": "flash",
+   "overlay": {
+    "chips": [
+     {
+      "size": 110,
+      "chips": [
+       {
+        "text": "a silly question?",
+        "atSec": 2.13,
+        "x": 120,
+        "y": 800
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "24",
+   "beats": [
+    "E01-A1-24"
+   ],
+   "start": 59.95,
+   "end": 62.6,
+   "component": "ParallaxCutout",
+   "assets": [
+    "VIS-004",
+    "TXT-010",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-004",
+    "TRN-006",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "bg": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      0,
+      300,
+      996,
+      560
+     ]
+    },
+    "fg": {
+     "srcId": "SRC-004",
+     "imgSize": [
+      996,
+      1230
+     ],
+     "crop": [
+      110,
+      60,
+      790,
+      1010
+     ]
+    },
+    "kicker": "PORTRAIT · 1834",
+    "headline": "John Dalton",
+    "startSec": 0.2,
+    "trace": {
+     "file": "public/assets/sources/dalton_turner1834_trace.png",
+     "atSec": 0.0,
+     "drawSec": 0.9,
+     "fillSec": 0.6
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-24",
+     59.95,
+     62.6
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    700,
+    540
+   ],
+   "overlay": {
+    "chips": [
+     {
+      "size": 110,
+      "chips": [
+       {
+        "text": "not a silly man",
+        "atSec": 1.18,
+        "x": 1020,
+        "y": 820,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "25+26",
+   "beats": [
+    "E01-A1-25",
+    "E01-A1-26"
+   ],
+   "start": 62.6,
+   "end": 67.8,
+   "component": "DuotoneCollage",
+   "assets": [
+    "VIS-028",
+    "TXT-009",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-004",
+    "SRC-031",
+    "TXT-010",
+    "MOT-003",
+    "TRN-011"
+   ],
+   "props": {
+    "pieces": [
+     {
+      "color": "#86B5E8",
+      "x": 1660,
+      "y": 230,
+      "w": 320,
+      "h": 210,
+      "rot": 6,
+      "atSec": -1,
+      "seed": 7
+     },
+     {
+      "srcId": "SRC-004",
+      "file": "public/assets/sources/dalton_turner1834_halftone.png",
+      "imgSize": [
+       760,
+       972
+      ],
+      "x": 1420,
+      "y": 450,
+      "w": 600,
+      "rot": -2.5,
+      "atSec": -1,
+      "caption": "JOHN DALTON · 1834",
+      "captionAt": "top",
+      "seed": 3
+     },
+     {
+      "srcId": "SRC-031",
+      "file": "public/assets/sources/dalton1808_symbols_line.png",
+      "imgSize": [
+       1000,
+       705
+      ],
+      "x": 1240,
+      "y": 735,
+      "w": 620,
+      "rot": 2.5,
+      "atSec": 2.15,
+      "caption": "HIS ATOMS · PLATE 4, 1808",
+      "seed": 5
+     }
+    ],
+    "lines": [
+     {
+      "text": "A pioneer of atomic theory",
+      "atSec": 2.35
+     },
+     {
+      "text": "LATER · 1808, A NEW SYSTEM OF CHEMICAL PHILOSOPHY",
+      "atSec": 2.95,
+      "style": "mono"
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-25",
+     62.6,
+     65.2
+    ],
+    [
+     "E01-A1-26",
+     65.2,
+     67.8
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "down",
+    "tone": "paper"
+   }
+  },
+  {
+   "id": "27+28",
+   "beats": [
+    "E01-A1-27",
+    "E01-A1-28"
+   ],
+   "start": 67.8,
+   "end": 72.2,
+   "component": "DuotoneCollage",
+   "assets": [
+    "VIS-028",
+    "TXT-009",
+    "TXT-011",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-001",
+    "TRN-015"
+   ],
+   "props": {
+    "pieces": [
+     {
+      "srcId": "SRC-001",
+      "file": "public/assets/sources/dalton1798_p29_line.png",
+      "imgSize": [
+       1100,
+       240
+      ],
+      "x": 1340,
+      "y": 420,
+      "w": 980,
+      "rot": -1.5,
+      "atSec": -1,
+      "caption": "HIS OWN WORDS · P. 29",
+      "seed": 11
+     },
+     {
+      "color": "#86B5E8",
+      "x": 1150,
+      "y": 740,
+      "w": 340,
+      "h": 240,
+      "rot": 4,
+      "atSec": 0.7,
+      "seed": 13
+     },
+     {
+      "color": "#C8402F",
+      "x": 1540,
+      "y": 760,
+      "w": 340,
+      "h": 240,
+      "rot": -3,
+      "atSec": 1.1,
+      "seed": 17
+     }
+    ],
+    "lines": [
+     {
+      "text": "An answer.",
+      "atSec": 2.62
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "ABOUT TWO YEARS LATER",
+       "atSec": 0.1
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-27",
+     67.8,
+     69.9
+    ],
+    [
+     "E01-A1-28",
+     69.9,
+     72.2
+    ]
+   ],
+   "transitionIn": "match"
+  },
+  {
+   "id": "29+30+31",
+   "beats": [
+    "E01-A1-29",
+    "E01-A1-30",
+    "E01-A1-31"
+   ],
+   "start": 72.2,
+   "end": 81.4,
+   "component": "LensDive",
+   "assets": [
+    "VIS-032",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-004",
+    "SFX-001",
+    "TRN-017",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "srcId": "SRC-004",
+    "imgSize": [
+     996,
+     1230
+    ],
+    "crop": [
+     24,
+     180,
+     700,
+     394
+    ],
+    "lens": {
+     "x": 420,
+     "y": 377,
+     "r": 33
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0
+      }
+     ]
+    },
+    "bracketsAtSec": 2.68,
+    "push": {
+     "atSec": 4.95,
+     "sec": 1.1,
+     "to": [
+      1330,
+      500
+     ],
+     "r": 330
+    },
+    "inside": {
+     "scraps": [
+      {
+       "color": "#C8402F",
+       "x": -105,
+       "y": 0,
+       "w": 190,
+       "h": 250,
+       "rot": -4
+      },
+      {
+       "color": "#86B5E8",
+       "x": 105,
+       "y": 6,
+       "w": 190,
+       "h": 250,
+       "rot": 3
+      }
+     ],
+     "tint": {
+      "color": "#3D6BD6",
+      "opacity": 0.75
+     },
+     "clearAtSec": 7.55
+    },
+    "out": {
+     "atSec": 8.649999999999999,
+     "sec": 0.5,
+     "to": [
+      830,
+      525
+     ],
+     "r": 70
+    },
+    "lines": [
+     {
+      "text": "Tested",
+      "atSec": 0.72,
+      "untilSec": 4.9,
+      "row": 0
+     },
+     {
+      "text": "His own eyes",
+      "atSec": 2.68,
+      "untilSec": 4.9,
+      "row": 1
+     },
+     {
+      "text": "EXAMINED AFTER HE DIES · 1844",
+      "atSec": 3.62,
+      "untilSec": 4.9,
+      "row": 2,
+      "style": "mono"
+     },
+     {
+      "text": "His idea will fail the test.",
+      "atSec": 6.73,
+      "row": 0
+     }
+    ],
+    "labels": [
+     {
+      "text": "HIS GUESS · 1794 · A BLUE-TINTED FLUID",
+      "atSec": 5.9,
+      "untilSec": 6.949999999999999
+     },
+     {
+      "text": "1844 · THE FLUID: CLEAR",
+      "atSec": 7.55
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-29",
+     72.2,
+     75.0
+    ],
+    [
+     "E01-A1-30",
+     75.0,
+     78.0
+    ],
+    [
+     "E01-A1-31",
+     78.0,
+     81.4
+    ]
+   ],
+   "transitionIn": "lens",
+   "overlay": {
+    "chips": [
+     {
+      "size": 150,
+      "chips": [
+       {
+        "text": "fail.",
+        "atSec": 7.51,
+        "x": 140,
+        "y": 640,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "32+33",
+   "beats": [
+    "E01-A1-32",
+    "E01-A1-33"
+   ],
+   "start": 81.4,
+   "end": 87.9,
+   "component": "YearCounter",
+   "assets": [
+    "VIS-018",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "MOT-003",
+    "SFX-005",
+    "SFX-015",
+    "LOK-029",
+    "MUS-015"
+   ],
+   "props": {
+    "to": 151,
+    "unit": "YEARS",
+    "countFromSec": 1.19,
+    "lockSec": 4.47
+   },
+   "beatTimes": [
+    [
+     "E01-A1-32",
+     81.4,
+     84.8
+    ],
+    [
+     "E01-A1-33",
+     84.8,
+     87.9
+    ]
+   ],
+   "ground": {
+    "kind": "inset",
+    "act": 1
+   }
+  },
+  {
+   "id": "34",
+   "beats": [
+    "E01-A1-34"
+   ],
+   "start": 87.9,
+   "end": 90.25,
+   "component": "FootagePlate",
+   "assets": [
+    "VIS-016",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-011",
+    "TRN-006"
+   ],
+   "props": {
+    "srcId": "SRC-011",
+    "file": "public/assets/sources/candle_lighting_mixkit3458.mp4",
+    "kind": "video",
+    "size": [
+     1080,
+     1920
+    ],
+    "focus": 0.56,
+    "clipStartSec": 10.0,
+    "warmth": [
+     1,
+     1
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-34",
+     87.9,
+     90.25
+    ]
+   ],
+   "transitionIn": "push",
+   "focus": [
+    960,
+    600
+   ]
+  },
+  {
+   "id": "35+36",
+   "beats": [
+    "E01-A1-35",
+    "E01-A1-36"
+   ],
+   "start": 90.25,
+   "end": 95.3,
+   "component": "PerspectiveGrid",
+   "assets": [
+    "VIS-015",
+    "TXT-011",
+    "MOT-001",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "TXT-010",
+    "MOT-002",
+    "SFX-001",
+    "TRN-011",
+    "TXT-024",
+    "SFX-026"
+   ],
+   "props": {
+    "variant": "room",
+    "depth": 2000,
+    "dark": 1.4,
+    "dolly": 0.02,
+    "startSec": -0.17,
+    "objects": [
+     {
+      "kind": "shutter",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "w": 260,
+      "h": 360,
+      "atSec": 0.43000000000000005
+     },
+     {
+      "kind": "hole",
+      "at": [
+       -1050,
+       -150,
+       600
+      ],
+      "r": 22,
+      "atSec": 3.01
+     },
+     {
+      "kind": "label",
+      "at": [
+       -1050,
+       -380,
+       600
+      ],
+      "text": "A HOLE IN THE SHUTTER",
+      "atSec": 3.01
+     },
+     {
+      "kind": "beam",
+      "from": [
+       -1050,
+       -150,
+       600
+      ],
+      "to": [
+       -300,
+       120,
+       1400
+      ],
+      "width": 14,
+      "atSec": 3.97,
+      "drawSec": 0.7
+     }
+    ],
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "ISAAC NEWTON",
+       "atSec": 1.77
+      }
+     ]
+    }
+   },
+   "beatTimes": [
+    [
+     "E01-A1-35",
+     90.25,
+     93.2
+    ],
+    [
+     "E01-A1-36",
+     93.2,
+     95.3
+    ]
+   ],
+   "transitionIn": "band",
+   "transition": {
+    "dir": "up",
+    "tone": "dark"
+   },
+   "overlay": {
+    "chips": [
+     {
+      "size": 96,
+      "chips": [
+       {
+        "text": "a dark room",
+        "atSec": 0.03,
+        "x": 1180,
+        "y": 720
+       },
+       {
+        "text": "a small hole",
+        "atSec": 2.73,
+        "x": 1180,
+        "y": 840,
+        "accent": true
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "37",
+   "beats": [
+    "E01-A1-37"
+   ],
+   "start": 95.3,
+   "end": 98.6,
+   "component": "LensDive",
+   "assets": [
+    "VIS-032",
+    "TXT-009",
+    "TXT-010",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007",
+    "SRC-004",
+    "TRN-022"
+   ],
+   "props": {
+    "srcId": "SRC-004",
+    "imgSize": [
+     996,
+     1230
+    ],
+    "crop": [
+     24,
+     180,
+     700,
+     394
+    ],
+    "lens": {
+     "x": 420,
+     "y": 377,
+     "r": 33
+    },
+    "tag": {
+     "at": "corner",
+     "parts": [
+      {
+       "text": "JOHN DALTON · 1834",
+       "atSec": 0
+      }
+     ]
+    },
+    "bracketsAtSec": -1,
+    "inside": {
+     "scraps": [
+      {
+       "color": "#C8402F",
+       "x": -105,
+       "y": 0,
+       "w": 190,
+       "h": 250,
+       "rot": -4
+      },
+      {
+       "color": "#86B5E8",
+       "x": 105,
+       "y": 6,
+       "w": 190,
+       "h": 250,
+       "rot": 3
+      }
+     ]
+    },
+    "open": {
+     "atSec": 0.58,
+     "sec": 1.4
+    },
+    "lines": [
+     {
+      "text": "Open Dalton's eyes",
+      "atSec": 0.58,
+      "row": 0
+     },
+     {
+      "text": "AS HE ASKED",
+      "atSec": 1.08,
+      "row": 1,
+      "style": "mono"
+     }
+    ]
+   },
+   "beatTimes": [
+    [
+     "E01-A1-37",
+     95.3,
+     98.6
+    ]
+   ],
+   "transitionIn": "dive",
+   "transition": {
+    "focus": [
+     600,
+     640
+    ],
+    "r0": 30
+   }
+  },
+  {
+   "id": "38",
+   "beats": [
+    "E01-A1-38"
+   ],
+   "start": 98.6,
+   "end": 101.6,
+   "component": "SeriesTitleCard",
+   "assets": [
+    "PKG-005",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-006",
+    "MUS-007",
+    "TRN-019"
+   ],
+   "props": {},
+   "beatTimes": [
+    [
+     "E01-A1-38",
+     98.6,
+     101.6
+    ]
+   ],
+   "transitionIn": "prism",
+   "transition": {
+    "y": 540,
+    "splitX": 700
+   }
+  },
+  {
+   "id": "39",
+   "beats": [
+    "E01-A1-39"
+   ],
+   "start": 101.6,
+   "end": 104.6,
+   "component": "EpisodeCard",
+   "assets": [
+    "PKG-006",
+    "MOT-002",
+    "TRN-001",
+    "LOK-010",
+    "MUS-007"
+   ],
+   "props": {
+    "number": 1,
+    "title": "The Man Who Saw Pink"
+   },
+   "beatTimes": [
+    [
+     "E01-A1-39",
+     101.6,
+     104.6
+    ]
+   ]
+  }
+ ]
+}
