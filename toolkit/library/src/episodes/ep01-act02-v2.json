@@ -2274,39 +2274,39 @@
    "overlay": {
     "chips": [
      {
-      "size": 120,
+      "size": 96,
       "chips": [
        {
         "text": "8 in 100",
         "atSec": 6.42,
-        "x": 1384,
-        "y": 180,
+        "x": 1392,
+        "y": 190,
         "accent": true
        }
       ],
       "untilSec": 12.34
      },
      {
-      "size": 120,
+      "size": 96,
       "chips": [
        {
         "text": "4 in 1,000",
         "atSec": 14.39,
-        "x": 1260,
-        "y": 180,
+        "x": 1290,
+        "y": 190,
         "accent": true
        }
       ],
       "untilSec": 16.54
      },
      {
-      "size": 120,
+      "size": 96,
       "chips": [
        {
         "text": "4 in 50",
         "atSec": 18.73,
-        "x": 1446,
-        "y": 180,
+        "x": 1443,
+        "y": 190,
         "accent": true
        }
       ],
