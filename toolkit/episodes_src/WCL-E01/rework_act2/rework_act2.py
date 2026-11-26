@@ -118,7 +118,7 @@ trn("39+40+41+42+43+44", "slide", "TRN-007", drop=("TRN-012",))
 N = "45+46+47+48+49+50+51+52+53+54"
 trn(N, "sweep", "TRN-025", {"dir": "right"}, drop=("TRN-007",))
 for t, at, nxt in [("8 in 100", 121.48, 127.4), ("4 in 1,000", 129.45, 131.6), ("4 in 50", 133.79, 140.4)]:
-    chips(N, 120, [(t, at, 1880 - 62 * len(t), 250, ACC)], until=nxt, tick=True)  # top right, clear of the dot field
+    chips(N, 120, [(t, at, 1880 - 62 * len(t), 180, ACC)], until=nxt, tick=True)  # top right, clear of the dot field
 
 # --- intimate: from the inside
 trn("55+56", "iris", "TRN-023", drop=("TRN-011",))
