@@ -136,6 +136,13 @@ a["audio"] += [{"id": "SFX-026", "file": f"{K}tactile/soft_pop_v{1 + i % 3}.wav"
 tk = sorted(set(round(t, 2) for t in ticks))
 a["audio"] += [{"id": "SFX-018", "file": f"{K}mechanical/stopwatch_tick_v{1 + i % 2}.wav", "atSec": t, "volumeDb": -19.0} for i, t in enumerate(tk)]
 RED_AT = 82.10
+# one sub per act (SFX-025: never two in one act): v1's sub after "brothers." (114.87) becomes the phone thump alone
+for c in a["audio"]:
+    if c["id"] == "SFX-025":
+        c.update({"id": "SFX-005", "file": "public/sfx/muted-thump.wav", "volumeDb": -13.0})
+        for b in a["beats"]:
+            if b["start"] <= c["atSec"] < b["end"]:
+                b["assets"] = [x for x in b["assets"] if x != "SFX-025"]; add(b, "SFX-005")
 a["audio"] += [
     {"id": "SFX-025", "file": K + "mechanical/sub_impact_v1.wav", "atSec": RED_AT, "volumeDb": -12.0},
     {"id": "SFX-005", "file": "public/sfx/muted-thump.wav", "atSec": RED_AT, "volumeDb": -14.0},
@@ -148,6 +155,24 @@ a["audio"] += [
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v3.wav", "atSec": round(B["55+56"]["start"] - 0.05, 2), "volumeDb": -20.0},  # iris
     {"id": "SFX-024", "file": K + "whoosh/air_swish_v2.wav", "atSec": round(B["59+60+61+62"]["start"] - 0.08, 2), "volumeDb": -22.0},  # slide into the rows, texture under 'colour' (sound pass M)
 ]
+# Sound review, Gate 3 (gate3_act2v2/SOUND_act2v2_v1.md, 26 Nov 2026): the thump file peaks 0.16 s in, so a thump
+# starts 0.16 s before its word; hits kept clear of the voice's 1-4 kHz; no kit sound three times running.
+def fix(cid, at, **ch):
+    for c in a["audio"]:
+        if c["id"] == cid and abs(c["atSec"] - at) < 0.006:
+            if ch.get("drop"):
+                a["audio"].remove(c)
+            else:
+                c.update(ch)
+            return
+    raise SystemExit(f"sound fix: no {cid} at {at}")
+fix("SFX-005", 82.10, atSec=81.94, volumeDb=-22.0); fix("SFX-026", 82.10, volumeDb=-26.0)
+fix("SFX-016", 104.03, drop=True)
+fix("MUS-015", 79.6, volumeDb=-6.0)
+fix("SFX-005", 114.87, atSec=114.71); fix("SFX-024", 115.01, drop=True)
+fix("SFX-018", 129.45, volumeDb=-26.0); fix("SFX-018", 133.79, volumeDb=-27.0)
+fix("SFX-005", 50.19, volumeDb=-22.0)
+fix("SFX-026", 94.79, drop=True)
 a["audio"].sort(key=lambda c: c["atSec"])
 for c in a["audio"]:
     for b in a["beats"]:

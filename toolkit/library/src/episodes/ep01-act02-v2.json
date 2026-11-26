@@ -126,7 +126,7 @@
    "id": "SFX-005",
    "file": "public/sfx/muted-thump.wav",
    "atSec": 50.19,
-   "volumeDb": -16.0
+   "volumeDb": -22.0
   },
   {
    "id": "SFX-020",
@@ -169,25 +169,25 @@
   {
    "id": "MUS-015",
    "atSec": 79.6,
-   "volumeDb": -12.0
+   "volumeDb": -6.0
+  },
+  {
+   "id": "SFX-005",
+   "file": "public/sfx/muted-thump.wav",
+   "atSec": 81.94,
+   "volumeDb": -22.0
   },
   {
    "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
    "atSec": 82.1,
-   "volumeDb": -20.0
+   "volumeDb": -26.0
   },
   {
    "id": "SFX-025",
    "file": "public/sfx/kit/mechanical/sub_impact_v1.wav",
    "atSec": 82.1,
    "volumeDb": -12.0
-  },
-  {
-   "id": "SFX-005",
-   "file": "public/sfx/muted-thump.wav",
-   "atSec": 82.1,
-   "volumeDb": -14.0
   },
   {
    "id": "SFX-016",
@@ -215,12 +215,6 @@
   },
   {
    "id": "SFX-026",
-   "file": "public/sfx/kit/tactile/soft_pop_v3.wav",
-   "atSec": 94.79,
-   "volumeDb": -27.0
-  },
-  {
-   "id": "SFX-026",
    "file": "public/sfx/kit/tactile/soft_pop_v2.wav",
    "atSec": 94.96,
    "volumeDb": -20.0
@@ -239,35 +233,21 @@
   },
   {
    "id": "SFX-016",
-   "file": "public/sfx/kit/tactile/pages_move.wav",
-   "atSec": 104.03,
-   "endSec": 104.48,
-   "fadeOutSec": 0.1,
-   "volumeDb": -18.0
-  },
-  {
-   "id": "SFX-016",
    "file": "public/sfx/kit/tactile/paper_move.wav",
    "atSec": 106.25,
    "volumeDb": -23.0
   },
   {
-   "id": "SFX-025",
-   "file": "public/sfx/kit/mechanical/sub_impact_v2.wav",
-   "atSec": 114.87,
-   "volumeDb": -12.0
+   "id": "SFX-005",
+   "file": "public/sfx/muted-thump.wav",
+   "atSec": 114.71,
+   "volumeDb": -13.0
   },
   {
    "id": "SFX-024",
    "file": "public/sfx/kit/whoosh/air_swish_v3.wav",
    "atSec": 114.98,
    "volumeDb": -17.6
-  },
-  {
-   "id": "SFX-024",
-   "file": "public/sfx/kit/whoosh/air_swish_v1.wav",
-   "atSec": 115.01,
-   "volumeDb": -19.0
   },
   {
    "id": "SFX-018",
@@ -287,7 +267,7 @@
    "id": "SFX-018",
    "file": "public/sfx/kit/mechanical/stopwatch_tick_v2.wav",
    "atSec": 129.45,
-   "volumeDb": -19.0
+   "volumeDb": -26.0
   },
   {
    "id": "SFX-018",
@@ -299,7 +279,7 @@
    "id": "SFX-018",
    "file": "public/sfx/kit/mechanical/stopwatch_tick_v1.wav",
    "atSec": 133.79,
-   "volumeDb": -19.0
+   "volumeDb": -27.0
   },
   {
    "id": "SFX-018",
@@ -1465,8 +1445,8 @@
     "TXT-024",
     "SFX-026",
     "MUS-015",
-    "SFX-025",
-    "SFX-005"
+    "SFX-005",
+    "SFX-025"
    ],
    "props": {
     "page": {
@@ -1958,10 +1938,10 @@
     "SRC-037",
     "TRN-001",
     "MOT-005",
-    "SFX-025",
     "MUS-010",
     "LOK-033",
-    "TRN-007"
+    "TRN-007",
+    "SFX-005"
    ],
    "props": {
     "panels": [
