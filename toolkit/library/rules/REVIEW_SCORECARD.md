@@ -47,6 +47,7 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
 | E01 act 3 | v4 | 3: drawn eye "not looking good"; blurred Newton wanted behind 'what is colour?'; end at 208.1 | 0 | drawn eye (Director: no design check yet); end hold (reviewer flagged it as T1, left to Sam) | none |
 | E01 act 3 | v5 | 0 own notes: Sam took the roles' fixes ("Apply all (Recommended)"; "Show it earlier" for the Newton tag) | Designer: the two other drawn eyes, 16 px tags; Editor: frozen half-erased label, late pop, early swishes; Sound: act-join holes; Expert: prism red end, 'DALTON'S SIX' label; Viewer: 'By Kendal' caption (act 2), empty quote card | none | none |
 | E01 act 3 | v6 | 0 notes: "Approve"; the picture pass's 8 polish SHOULDs accepted ("Apply them") | Picture pass (Designer + Editor): 8 SHOULDs; Sound: bed 2.2 dB louder than v5 (Claude's mix level), fixed before Sam | none | none |
+| E01 act 2 v2 | v2 -> v3 | 1: voice glitches at 1:38 and 1:58 (pauses spliced into a phrase in the narration file) | Sound: thump masking 'red', three paper sounds running, inaudible cue 3 and lifts; Picture pass: 10 MUST (safe-area chips, overlapping tags, dark text on the dark blur ground, open iris, a library credit, a chip over the wrong data) | voice splices (Sound: no scan of the narration for zero runs inside sound; now a check) | none |
 
 ## Misses by role (read yours before reviewing)
 - **Director / Designer:** a drawn diagram that a real picture could show, drawn as bare lines on graphite (act 3 v4,
@@ -54,3 +55,5 @@ Each review agent starts cold and re-reads files and frames, so they run only wh
   cannot? If yes, is it drawn as a designed plate (paper, engraving, captions), not a default outline?
 - **Editor:** a hold after the last word that has nothing to look at (act 3 v4 end, 5.6 s; Sam: "end at 208.1").
   Judge every end hold by what the next act does with it; if nothing yet, keep it under 2 s.
+- **Sound:** two pauses spliced into a phrase in the narration (act 2 v2, Sam: "the audio stops for a milisecond and then continues"). Scan the narration wav for digital-zero runs over 50 ms with sound over -50 dBFS in the 10 ms either side; every hit is a MUST.
+- **Designer (Gate 2):** the look sheet's one settled still per shot missed 10 defects found at Gate 3 (act 2 v2). Ask for stills at every chip, tag and label landing and each transition's middle frame.
