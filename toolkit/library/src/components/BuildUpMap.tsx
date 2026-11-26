@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useTheme } from "../themes";
+import { isLightTheme } from "../themes";
 import { useAssets } from "../registry";
 import { drift, reveal, sec, SLOW_OUT } from "../motion";
 import { chapterColour } from "../themes/chapterKey";
@@ -102,8 +103,9 @@ export const BuildUpMap: React.FC<BuildUpMapProps> = ({ title, nodes, focus, ass
   const t = useTheme();
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
-  const paper = t.colors.ink;
-  const ink = t.colors.canvas;
+  // light themes flip the roles (LESSONS 25 Nov 2026): the board is the light panel with dark ink; graphite unchanged
+  const paper = isLightTheme(t) ? t.colors.panel : t.colors.ink;
+  const ink = isLightTheme(t) ? t.colors.ink : t.colors.canvas;
   const n = nodes.length;
   // Nodes along a gentle wave across the board, alternating high and low so labels never collide.
   const pos = nodes.map((_, i) => ({
