@@ -1470,8 +1470,8 @@
     "public/assets/sources/dalton1798_p30.jpg"
    ],
    "status": "Active",
-   "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 13 beats per episode (raised from 10, Sam approved at WCL-E01 act 3 Gate 1, 24 Nov 2026). Not for: decoration.",
-   "maxBeats": 13,
+   "use": "Best use: the beats where Dalton's own words about the geranium and his brother are quoted. Limit: max 18 beats per episode (raised from 13 at WCL-E01 act 2 v2 Gate 3, Sam approved 26 Nov 2026: \"Raise both (Recommended)\"; acts 1 and 2 use 9 each). Not for: decoration.",
+   "maxBeats": 18,
    "maxShare": null
   },
   "NAR-001": {
@@ -2591,8 +2591,8 @@
     "public/sfx/kit/tactile/soft_pop_v3.wav"
    ],
    "status": "Active",
-   "use": "Best use: the one cut-out, map pin (MOT-012) or tag landing that matters in a shot, in the pause after its word, texture level (22-28 dB under the voice). Rotate v1-v3. Limit: one per shot; max 8 beats per episode; never on every entrance (our hierarchy rule). Not for: text cards or page highlights. (Raised to 30 at WCL-E01 act 1 v2 Gate 2, Sam approved 25 Nov 2026: \"Raise all (Recommended)\".)",
-   "maxBeats": 30,
+   "use": "Best use: the one cut-out, map pin (MOT-012) or tag landing that matters in a shot, in the pause after its word, texture level (22-28 dB under the voice); and, from the energy rules (ENERGY.md rule 9, 25 Nov 2026), each big key-word chip as it slams in. Rotate v1-v3. Limit: max 60 beats per episode (raised from 30 at WCL-E01 act 2 v2 Gate 3, Sam approved 26 Nov 2026: \"Raise both (Recommended)\"); one per chip or landing, never on every entrance. Not for: page highlights.",
+   "maxBeats": 60,
    "maxShare": null
   },
   "SFX-027": {
