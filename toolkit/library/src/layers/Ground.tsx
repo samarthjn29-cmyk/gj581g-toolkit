@@ -1,6 +1,6 @@
 import React, { useId } from "react";
 import { AbsoluteFill, Img, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
-import { useTheme } from "../themes";
+import { isLightTheme, useTheme } from "../themes";
 import { assetFile, useAsset, useAssets, useSourceFile } from "../registry";
 import { chapterColour } from "../themes/chapterKey";
 
@@ -133,7 +133,7 @@ export const Ground: React.FC<{ spec: GroundSpec }> = ({ spec }) => {
               filter: isMap ? "grayscale(0.85) sepia(0.25) contrast(1.1) brightness(0.42)" : `blur(${bl?.blurPx ?? 38}px) saturate(0.85) brightness(${bl?.brightness ?? 0.42})`,
             }}
           />
-          <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 46%, rgba(0,0,0,0) 30%, ${t.colors.dimMask} 100%)` }} />
+          <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 46%, rgba(0,0,0,0) 30%, rgba(22,21,20,0.8) 100%)" }} />{/* a darkened picture vignettes to dark on every theme (dimMask is cream on light themes; act 2 v2 Gate 3) */}
         </AbsoluteFill>
       );
     }
@@ -148,7 +148,7 @@ export const Ground: React.FC<{ spec: GroundSpec }> = ({ spec }) => {
       ];
       return (
         <AbsoluteFill style={{ background: t.colors.canvas, overflow: "hidden" }}>
-          <AbsoluteFill style={{ transform: `scale(${1.06 + 0.03 * p})`, filter: "blur(5px) brightness(0.5) saturate(0.6)" }}>
+          <AbsoluteFill style={{ transform: `scale(${1.06 + 0.03 * p})`, filter: isLightTheme(t) ? "blur(7px) brightness(0.95) saturate(0.5)" : "blur(5px) brightness(0.5) saturate(0.6)", opacity: isLightTheme(t) ? 0.5 : 1 }}>
             {spec.items.map((it, i) => {
               const h = 520 + random(`cg${seed}-${i}-h`) * 160;
               const w = (h * it.size[0]) / it.size[1];

@@ -476,7 +476,7 @@
      {
       "text": "NORTH-WEST ENGLAND",
       "atSec": 5.5,
-      "untilSec": 6.9,
+      "untilSec": 7.2,
       "x": 960,
       "y": 860,
       "align": "center"
@@ -700,7 +700,7 @@
     ],
     "quote": "Meteorological Observations and Essays",
     "quoteMarks": false,
-    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION · ETH-BIBLIOTHEK ZÜRICH",
+    "source": "JOHN DALTON · LONDON, 1793 · FIRST EDITION",
     "notes": [
      {
       "text": "HIS FIRST BOOK · 1793",
@@ -1042,8 +1042,7 @@
       "atSec": 3.8800000000000003,
       "x": 960,
       "y": 860,
-      "align": "center",
-      "accent": true
+      "align": "center"
      }
     ]
    },
@@ -1233,13 +1232,13 @@
       ]
      },
      {
-      "size": 96,
+      "size": 82,
       "chips": [
        {
         "text": "except his brother",
         "atSec": 11.85,
-        "x": 920,
-        "y": 870,
+        "x": 1040,
+        "y": 880,
         "accent": true
        }
       ]
@@ -1312,7 +1311,7 @@
       "atSec": 4.91
      }
     ],
-    "quote": "The Worthies of Cumberland: John Dalton",
+    "quote": "The Worthies of Cumberland",
     "quoteMarks": false,
     "source": "HENRY LONSDALE · LONDON, 1874",
     "strokes": {},
@@ -1688,7 +1687,7 @@
       "sec": 0.9
      },
      {
-      "atSec": 18.44,
+      "atSec": 17.92,
       "color": "#B3262E",
       "snap": true
      },
@@ -1706,8 +1705,7 @@
      {
       "atSec": 8.98,
       "untilSec": 10.94,
-      "kicker": "TO JOHN · AS THE STORY TELLS IT",
-      "text": "A sensible dark colour."
+      "kicker": "TO JOHN · AS THE STORY TELLS IT"
      },
      {
       "atSec": 11.54,
@@ -1722,7 +1720,7 @@
       "untilSec": 20.82,
       "kicker": "HIS MOTHER · AS THE STORY TELLS IT",
       "text": "'as red as a cherry'",
-      "textAtSec": 18.6
+      "textAtSec": 18.1
      }
     ],
     "tags": [
@@ -1732,23 +1730,23 @@
       "colorName": "DARK",
       "atSec": 21.61,
       "x": 1140,
-      "y": 800
+      "y": 770
      },
      {
       "name": "JONATHAN",
       "color": "#3B4250",
       "colorName": "DARK",
       "atSec": 23.47,
-      "x": 1190,
-      "y": 842
+      "x": 1140,
+      "y": 845
      },
      {
       "name": "MOTHER",
       "color": "#B3262E",
       "colorName": "RED",
       "atSec": 30.39,
-      "x": 1520,
-      "y": 830,
+      "x": 1505,
+      "y": 770,
       "hard": true
      }
     ],
@@ -1850,7 +1848,7 @@
        {
         "text": "a sensible dark colour",
         "atSec": 9.32,
-        "x": 1230,
+        "x": 1120,
         "y": 270
        }
       ],
@@ -1862,7 +1860,7 @@
        {
         "text": "red as a cherry",
         "atSec": 17.92,
-        "x": 1230,
+        "x": 1120,
         "y": 290,
         "color": "#B3262E"
        }
@@ -1875,7 +1873,7 @@
        {
         "text": "two grown men",
         "atSec": 28.32,
-        "x": 1230,
+        "x": 1120,
         "y": 280
        }
       ],
@@ -1887,7 +1885,7 @@
        {
         "text": "one pair of stockings",
         "atSec": 29.52,
-        "x": 1230,
+        "x": 1120,
         "y": 280
        }
       ],
@@ -1899,7 +1897,7 @@
        {
         "text": "a mother quite sure",
         "atSec": 30.78,
-        "x": 1230,
+        "x": 1120,
         "y": 280,
         "accent": true
        }
@@ -1963,7 +1961,8 @@
       "stamp": {
        "text": "SAME",
        "atSec": 4.97,
-       "tone": "paper"
+       "tone": "paper",
+       "untilSec": 14.5
       }
      },
      {
@@ -1986,7 +1985,8 @@
       "stamp": {
        "text": "SAME",
        "atSec": 5.4,
-       "tone": "paper"
+       "tone": "paper",
+       "untilSec": 14.5
       }
      },
      {
@@ -2008,7 +2008,8 @@
       "stamp": {
        "text": "SAME",
        "atSec": 7.62,
-       "tone": "paper"
+       "tone": "paper",
+       "untilSec": 14.5
       }
      }
     ],
@@ -2136,13 +2137,6 @@
       "atSec": 8.96,
       "untilSec": 12.71,
       "size": "small"
-     },
-     {
-      "text": "STILL THERE",
-      "atSec": 24.29,
-      "size": "small",
-      "row": 1,
-      "accent": true
      }
     ],
     "phases": [
@@ -2259,21 +2253,21 @@
        {
         "text": "8 in 100",
         "atSec": 6.42,
-        "x": 1392,
+        "x": 1380,
         "y": 190,
         "accent": true
        }
       ],
-      "untilSec": 12.34
+      "untilSec": 8.9
      },
      {
-      "size": 96,
+      "size": 84,
       "chips": [
        {
         "text": "4 in 1,000",
         "atSec": 14.39,
-        "x": 1290,
-        "y": 190,
+        "x": 1340,
+        "y": 165,
         "accent": true
        }
       ],
@@ -2285,12 +2279,24 @@
        {
         "text": "4 in 50",
         "atSec": 18.73,
-        "x": 1443,
+        "x": 1433,
         "y": 190,
         "accent": true
        }
       ],
-      "untilSec": 25.34
+      "untilSec": 22.5
+     },
+     {
+      "size": 96,
+      "chips": [
+       {
+        "text": "still there",
+        "atSec": 24.29,
+        "x": 1300,
+        "y": 190,
+        "accent": true
+       }
+      ]
      }
     ]
    }
@@ -2377,13 +2383,7 @@
     "SFX-026"
    ],
    "props": {
-    "lines": [
-     {
-      "text": "YOUR WHOLE LIFE",
-      "atSec": 0,
-      "style": "mono"
-     }
-    ]
+    "lines": []
    },
    "beatTimes": [
     [
@@ -2399,6 +2399,17 @@
    ],
    "overlay": {
     "chips": [
+     {
+      "size": 96,
+      "chips": [
+       {
+        "text": "your whole life",
+        "atSec": 0.0,
+        "x": 640,
+        "y": 300
+       }
+      ]
+     },
      {
       "size": 150,
       "chips": [
@@ -2479,31 +2490,30 @@
    ],
    "props": {
     "columns": [
-     "WHAT IT IS CALLED"
+     "CALLED"
     ],
     "labels": [
      {
       "text": "THE SAME COLOUR NAMES",
       "atSec": 1.16,
       "untilSec": 3.12,
-      "x": 960,
-      "y": 920,
+      "x": 1114,
+      "y": 790,
       "align": "center"
      },
      {
       "text": "NOBODY HAS EVER TOLD YOU",
       "atSec": 3.72,
       "untilSec": 6.76,
-      "x": 960,
-      "y": 920,
-      "align": "center",
-      "accent": true
+      "x": 1114,
+      "y": 790,
+      "align": "center"
      },
      {
       "text": "NOBODY ELSE CAN SEE WHAT YOU SEE",
       "atSec": 7.36,
-      "x": 960,
-      "y": 920,
+      "x": 1114,
+      "y": 790,
       "align": "center"
      }
     ],
@@ -2538,7 +2548,9 @@
        }
       ]
      }
-    ]
+    ],
+    "zoom": 1.4,
+    "zoomAtX": 1500
    },
    "beatTimes": [
     [
@@ -2629,8 +2641,7 @@
       "atSec": 2.75,
       "untilSec": 5.75,
       "x": 1240,
-      "y": 760,
-      "accent": true
+      "y": 760
      },
      {
       "text": "ALMOST NOBODY ELSE SEES IT",

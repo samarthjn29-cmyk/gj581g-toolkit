@@ -22,7 +22,7 @@ export type ComparisonPanel = {
   pingPong?: { revFile: string; endSec: number; clipLenSec: number };
   label: string;
   atSec: number;
-  stamp?: { text: string; atSec: number; tone?: "accent" | "paper" }; // paper: cream stamp on a dark wash, for photos whose own colour would clash with the accent (STYLE_GUIDE harmony 5, 26 Nov 2026)
+  stamp?: { text: string; atSec: number; untilSec?: number; tone?: "accent" | "paper" }; // paper: cream stamp on a dark wash, for photos whose own colour would clash with the accent (STYLE_GUIDE harmony 5, 26 Nov 2026)
   multiply?: string; // tint a pale object (e.g. stockings as reported), with mask
   mask?: string;
 };
@@ -44,6 +44,7 @@ const Panel: React.FC<{ p: ComparisonPanel; x: number; w: number; h: number; top
   const { fps } = useVideoConfig();
   const a = reveal(frame, fps, p.atSec, 0.75);
   const st = p.stamp ? lock(frame, fps, p.stamp.atSec) : 0;
+  const stOut = p.stamp?.untilSec !== undefined ? exit(frame, fps, p.stamp.untilSec, 0.35) : 1; // un-wipes before names arrive (act 2 v2 Gate 3)
   let pic: React.ReactNode;
   if (p.kind === "video") {
     const sc = Math.max(w / p.size[0], h / p.size[1]);
@@ -79,8 +80,8 @@ const Panel: React.FC<{ p: ComparisonPanel; x: number; w: number; h: number; top
     <div style={{ position: "absolute", left: x, top, width: w, ...rise(a, 30) }}>
       <div style={{ position: "relative", width: w, height: h, overflow: "hidden", borderRadius: 6, boxShadow: "0 30px 60px rgba(0,0,0,0.45)", filter: `brightness(${(1 - 0.55 * dim).toFixed(3)}) saturate(${(1 - 0.5 * dim).toFixed(3)})` }}>{pic}</div>
       <div style={{ marginTop: 18, fontFamily: t.fonts.mono, fontSize: 24, letterSpacing: 3, color: t.colors.secondary, textAlign: "center", opacity: 1 - 0.5 * dim }}>{p.label}</div>
-      {p.stamp && st > 0 ? (
-        <div style={{ position: "absolute", left: "50%", top: h * 0.42, transform: `translate(-50%, -50%) rotate(-7deg) scale(${(1.25 - 0.25 * st).toFixed(3)})`, opacity: st * (1 - 0.6 * dim), fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 54, letterSpacing: 8, color: p.stamp.tone === "paper" ? "#FFF8EC" : t.colors.accent, border: `4px solid ${p.stamp.tone === "paper" ? "#FFF8EC" : t.colors.accent}`, borderRadius: 6, padding: "6px 22px", background: p.stamp.tone === "paper" ? "rgba(22,21,20,0.45)" : "rgba(0,0,0,0.25)" }}>{p.stamp.text}</div>
+      {p.stamp && st > 0 && stOut > 0 ? (
+        <div style={{ clipPath: `inset(0 ${((1 - stOut) * 100).toFixed(1)}% 0 0)`, position: "absolute", left: "50%", top: h * 0.42, transform: `translate(-50%, -50%) rotate(-7deg) scale(${(1.25 - 0.25 * st).toFixed(3)})`, opacity: st * (1 - 0.6 * dim), fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 54, letterSpacing: 8, color: p.stamp.tone === "paper" ? "#FFF8EC" : t.colors.accent, border: `4px solid ${p.stamp.tone === "paper" ? "#FFF8EC" : t.colors.accent}`, borderRadius: 6, padding: "6px 22px", background: p.stamp.tone === "paper" ? "rgba(22,21,20,0.45)" : "rgba(0,0,0,0.25)" }}>{p.stamp.text}</div>
       ) : null}
     </div>
   );

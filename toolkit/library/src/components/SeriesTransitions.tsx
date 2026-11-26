@@ -25,7 +25,7 @@ export const IrisBlink: React.FC<T> = ({ from, to, atSec = 0, durSec = 0.9 }) =>
   if (frame < a) return <AbsoluteFill>{from}</AbsoluteFill>;
   if (frame >= e) return <AbsoluteFill>{to}</AbsoluteFill>;
   const close = p < 0.4 ? Easing.in(Easing.cubic)(p / 0.4) : p < 0.55 ? 1 : 1 - SLOW_OUT((p - 0.55) / 0.45);
-  const lid = 560 * close; // each lid's reach (the frame is 1080 high)
+  const lid = 640 * close; // each lid's reach (the frame is 1080 high)
   const curve = 220 * (1 - close * 0.6);
   const lidPath = (top: boolean) =>
     top

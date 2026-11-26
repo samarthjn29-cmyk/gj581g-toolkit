@@ -217,7 +217,7 @@ export const SourcePageStory: React.FC<SourcePageStoryProps> = ({ page, frames, 
         const out = exit(frame, fps, q.untilSec, 0.6);
         if (a * out <= 0) return null;
         return (
-          <div key={`${q.atSec}`} style={{ position: "absolute", left: 1130, top: 770, width: 680, opacity: a * out, transform: `translateY(${(1 - a) * 14}px)` }}>
+          <div key={`${q.atSec}`} style={{ position: "absolute", left: 1130, top: 770, width: 680, opacity: a, clipPath: `inset(0 ${((1 - out) * 100).toFixed(1)}% 0 0)`, transform: `translateY(${(1 - a) * 14}px)` }}>
             {q.kicker ? <div style={{ fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 3, color: t.colors.secondary, marginBottom: 16 }}>{q.kicker}</div> : null}
             {q.text ? <div style={{ fontFamily: t.fonts.serif, fontWeight: 600, fontSize: 62, lineHeight: 1.12, color: t.colors.ink, opacity: q.textAtSec !== undefined ? interpolate(frame, [sec(q.textAtSec, fps), sec(q.textAtSec, fps) + 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1 }}>{q.text}</div> : null}
             {q.by ? <div style={{ marginTop: 20, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 2, color: t.colors.secondary, opacity: q.byAtSec !== undefined ? reveal(frame, fps, q.byAtSec, 0.6) : 1 }}>{q.by}</div> : null}
@@ -225,8 +225,8 @@ export const SourcePageStory: React.FC<SourcePageStoryProps> = ({ page, frames, 
         );
       })}
 
-      <div style={{ position: "absolute", right: t.safe.x, top: t.safe.y, fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 3, color: t.colors.ink, background: t.colors.chip, padding: "8px 14px", borderRadius: 4, borderLeft: `3px solid ${t.colors.accent}` }}>REPORTED COLOURS</div>
-      <div style={{ position: "absolute", right: t.safe.x - 40, bottom: 36, fontFamily: t.fonts.mono, fontSize: 18, letterSpacing: 1.6, lineHeight: 1.6, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, whiteSpace: "pre", textAlign: "right" }}>{caption}</div>
+      <div style={{ clipPath: `inset(0 0 0 ${((1 - reveal(frame, fps, object.atSec, 0.6)) * 100).toFixed(1)}%)`, position: "absolute", right: t.safe.x, top: t.safe.y, fontFamily: t.fonts.mono, fontSize: 22, letterSpacing: 3, color: t.colors.ink, background: t.colors.chip, padding: "8px 14px", borderRadius: 4, borderLeft: `3px solid ${t.colors.accent}` }}>REPORTED COLOURS</div>
+      <div style={{ position: "absolute", right: t.safe.x, bottom: 36, fontFamily: t.fonts.mono, fontSize: 20, letterSpacing: 1.6, lineHeight: 1.6, color: t.colors.ink, background: t.colors.chip, padding: "6px 12px", borderRadius: 3, whiteSpace: "pre", textAlign: "right" }}>{caption}</div>
       {tag ? <DatelineTag {...tag} /> : null}
     </AbsoluteFill>
   );

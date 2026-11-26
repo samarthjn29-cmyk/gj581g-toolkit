@@ -64,7 +64,7 @@ const Chip: React.FC<{ text: string; atSec: number; accent?: boolean; color?: st
         padding: `${Math.round(size * 0.13)}px ${Math.round(size * 0.24)}px`,
         borderRadius: 4,
         background: color ?? (accent ? L.accent : L.white),
-        color: color ? "#FFF8EC" : accent ? L.accentInk : L.whiteInk,
+        color: color ? (((c) => 0.2126 * parseInt(c.slice(1, 3), 16) + 0.7152 * parseInt(c.slice(3, 5), 16) + 0.0722 * parseInt(c.slice(5, 7), 16))(color) > 150 ? "#1E1A17" : "#FFF8EC") : accent ? L.accentInk : L.whiteInk,
         fontFamily: L.font,
         fontWeight: L.weight,
         fontSize: size,

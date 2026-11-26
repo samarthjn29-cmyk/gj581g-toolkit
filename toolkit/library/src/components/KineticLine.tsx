@@ -104,7 +104,7 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
                 letterSpacing: mono ? 3 : t.fonts.headlineTracking,
                 fontSize: mono ? 32 : 96,
                 lineHeight: mono ? 1.4 : 1.05,
-                color: mono ? t.colors.secondary : t.colors.ink,
+                color: backdrop ? (mono ? "#D8CFC2" : "#FFF8EC") : mono ? t.colors.secondary : t.colors.ink,
                 marginTop: mono ? 30 : 0,
                 textShadow: backdrop?.layout === "full" ? "0 4px 30px rgba(0,0,0,0.6)" : undefined,
                 filter: ink && !mono ? "url(#klinkpress)" : undefined,
@@ -112,7 +112,7 @@ export const KineticLine: React.FC<KineticLineProps> = ({ lines, backdrop, align
               }}
             >
               {(() => {
-                const color = mono ? t.colors.secondary : t.colors.ink;
+                const color = backdrop ? (mono ? "#D8CFC2" : "#FFF8EC") : mono ? t.colors.secondary : t.colors.ink;
                 let body: React.ReactNode = l.type ? (
                   <Typed text={l.text} atSec={l.atSec} spec={l.type === true ? undefined : l.type} color={color} />
                 ) : (

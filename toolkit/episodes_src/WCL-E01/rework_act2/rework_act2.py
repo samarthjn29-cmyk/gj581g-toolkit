@@ -178,6 +178,39 @@ for c in a["audio"]:
     for b in a["beats"]:
         if b["start"] <= c["atSec"] < b["end"] and c["id"] in ("SFX-026", "SFX-018", "SFX-025", "SFX-005", "MUS-015", "SFX-028"):
             add(b, c["id"])
+# --- Gate 3 picture pass (gate3_act2v2/PICTURE_act2v2_v1.md, 26 Nov 2026): MUST 2-7, 9-10 and SHOULD 1-9, 12
+B = {b["id"]: b for b in a["beats"]}
+S_ = B["25+26+27+28+29+30+31+32+33+34+35+36+37+38"]
+for pnl in S_["overlay"]["chips"]:
+    for c in pnl["chips"]:
+        c["x"] = 1120  # right edges inside the safe area (x is the chip's left edge)
+tg = {x["name"]: x for x in S_["props"]["tags"]}
+tg["JOHN"].update(y=770); tg["JONATHAN"].update(x=1140, y=845); tg["MOTHER"].update(x=1505, y=770)  # clear of each other and of the source tag
+S_["props"]["quotes"][0].pop("text", None)  # the chip carries the words; the kicker stays
+S_["props"]["states"][1]["atSec"] = 17.92; S_["props"]["quotes"][2]["textAtSec"] = 18.1  # the stockings snap red on the sub's frame
+N_ = B["45+46+47+48+49+50+51+52+53+54"]; ch = N_["overlay"]["chips"]
+ch[0]["untilSec"] = 8.9; ch[0]["chips"][0]["x"] = 1380
+ch[1]["size"] = 84; ch[1]["chips"][0].update(x=1340, y=165)  # clear of the dots, the title and the safe edge
+ch[2]["untilSec"] = 22.5; ch[2]["chips"][0]["x"] = 1433
+N_["props"]["lines"] = [l for l in N_["props"]["lines"] if l["text"] != "STILL THERE"]
+ch.append({"size": 96, "chips": [{"text": "still there", "atSec": 24.29, "x": 1300, "y": 190, "accent": True}]})
+W_ = B["57+58"]; W_["props"]["lines"] = []
+W_["overlay"]["chips"].insert(0, {"size": 96, "chips": [{"text": "your whole life", "atSec": 0.0, "x": 640, "y": 300}]})
+B["08+09"]["props"]["source"] = "JOHN DALTON \u00b7 LONDON, 1793 \u00b7 FIRST EDITION"  # no credits on screen
+B["16+17+18+19+20+21"]["overlay"]["chips"][1].update(size=82); B["16+17+18+19+20+21"]["overlay"]["chips"][1]["chips"][0].update(x=1040, y=880)
+B["22+23+24"]["props"]["quote"] = "The Worthies of Cumberland"
+R_ = B["59+60+61+62"]["props"]; R_["zoom"] = 1.4; R_["zoomAtX"] = 1500;
+for l in R_["labels"]:
+    l.update(x=1114, y=790)  # the labels sit inside the zoomed table: these land at 960 x 890 on screen
+R_["columns"] = ["CALLED"]; R_["labels"][1].pop("accent", None)
+for sid, txt in (("14+15", "WHAT DO YOU SEE?"), ("63+64+65", "RED \u00b7 HIS WORDS")):
+    for l in B[sid]["props"]["labels"]:
+        if l["text"] == txt:
+            l.pop("accent", None)  # no tomato on the pink petals (harmony 5)
+for pn in B["39+40+41+42+43+44"]["props"]["panels"]:
+    if pn.get("stamp"):
+        pn["stamp"]["untilSec"] = 14.5  # SAME un-wipes before the names
+B["02+03+04+05"]["props"]["labels"][1]["untilSec"] = 7.2
 # the YearCounter-style picture hit: the cherry chip lands on the sub's own frame (ENERGY 6)
 json.dump(a, open(OUT, "w"), indent=1, ensure_ascii=False)
 print("ok", OUT, len(a["beats"]), "shots;", len(seen), "pops;", len(tk), "ticks")
