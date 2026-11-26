@@ -19,7 +19,7 @@ Energy curve (rule 1; times are act seconds, word times from NAR-002 + the 2.4 s
             one replacing the last (harmony: one story colour at a time)
   160-176   a warm light leak into "one evening, a flower changes colour"; "a scientist"; why?
 """
-import json, os, sys
+import json, os, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LIB = os.path.join(HERE, "..", "..", "..", "library")
@@ -211,6 +211,13 @@ for pn in B["39+40+41+42+43+44"]["props"]["panels"]:
     if pn.get("stamp"):
         pn["stamp"]["untilSec"] = 14.5  # SAME un-wipes before the names
 B["02+03+04+05"]["props"]["labels"][1]["untilSec"] = 7.2
+# highlighter boxes snapped to their words (Sam, 26 Nov 2026: "the highlighter is overshooting and going beyond the text";
+# fix_highlights/snap_highlights.py, boxes in fix_highlights/act2_boxes.json)
+_SN = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fix_highlights", "act2_boxes.json")))
+for b in a["beats"]:
+    if b["id"] in _SN:
+        for h, box in zip(b["props"]["highlights"], _SN[b["id"]]):
+            h["box"] = box
 # the YearCounter-style picture hit: the cherry chip lands on the sub's own frame (ENERGY 6)
 json.dump(a, open(OUT, "w"), indent=1, ensure_ascii=False)
 print("ok", OUT, len(a["beats"]), "shots;", len(seen), "pops;", len(tk), "ticks")

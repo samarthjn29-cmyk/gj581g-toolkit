@@ -20,3 +20,4 @@ the rule, whose call.
 - 2026-11-26 (act 2 v2 Gate 3): an overlay chip's x is its left edge: measure every chip's right edge on a still (safe edge 1800); long chips at x 1230 overran by up to 100 px.
 - 2026-11-26 (act 2 v2 Gate 3): SwatchRows labels sit inside the zoomed table; with `zoom` set, place them so they land on screen (x = origin + (target - origin) / zoom).
 - 2026-11-26 (act 2 v2 Gate 3): credits hide in ArchivalScanCard `source` strings too (a library name); search every act file for archive and library names when the no-credits rule is applied.
+- 2026-11-26 (act 2, Sam's miss): look at every highlighter box at full size against its words: it starts on the first letter and ends on the last mark of the phrase, never in the word before or after. snap_highlights.py does the first pass.
